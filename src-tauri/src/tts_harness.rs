@@ -10,22 +10,22 @@ pub struct TTSHarnessIdentity {
 
 #[derive(Debug, Clone)]
 pub struct TTSHarnessState {
-    pub mcts_budget_tokens: u64,
-    pub latent_value: f64,
-    pub harness_score: f64,
-    pub kv_cache_efficiency: f64,
-    pub pruning_rate: f64,
+    pub mcts_budget_tokens: [u64; 64],
+    pub latent_value: [f64; 64],
+    pub harness_score: [f64; 64],
+    pub kv_cache_efficiency: [f64; 64],
+    pub pruning_rate: [f64; 64],
     pub execution_count: u64,
 }
 
 impl TTSHarnessState {
     pub fn new() -> Self {
         Self {
-            mcts_budget_tokens: 0,
-            latent_value: 0.0,
-            harness_score: 0.0,
-            kv_cache_efficiency: 1.0,
-            pruning_rate: 0.0,
+            mcts_budget_tokens: [0; 64],
+            latent_value: [0.0; 64],
+            harness_score: [0.0; 64],
+            kv_cache_efficiency: [1.0; 64],
+            pruning_rate: [0.0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_tts_harness(d: u8, p: u8, m: u8, vec: &mut TTSHarnessState) -> R
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.mcts_budget_tokens += (code % 50) as u64 + 10;
-    vec.latent_value = (code as f64 * 0.001).tanh();
-    vec.harness_score = 0.5 + 0.5 * (code as f64).sin();
-    vec.kv_cache_efficiency = f64::min(1.0, 0.2 + (code % 10) as f64 * 0.08);
-    vec.pruning_rate = 1.0 - vec.kv_cache_efficiency * 0.5;
+    for i in 0..64 {
+            vec.mcts_budget_tokens[i] += ((code + i as u64) % 50) as u64 + 10;
+            vec.latent_value[i] = ((code as f64 + i as f64) * 0.001).tanh();
+            vec.harness_score[i] = 0.5 + 0.5 * (code as f64 + i as f64).sin();
+            vec.kv_cache_efficiency[i] = f64::min(1.0, 0.2 + ((code + i as u64) % 10) as f64 * 0.08);
+            vec.pruning_rate[i] = 1.0 - vec.kv_cache_efficiency[i] * 0.5;
+        }
     Ok(code)
 }

@@ -27,6 +27,7 @@ def execute_swarm_audit() -> None:
         sys.path.append(skill_path)
     try:
         from c5_swarm_compiler import ThermodynamicSwarmCompiler as _TSC  # type: ignore[import-not-found]
+
         ThermodynamicSwarmCompiler: Any = _TSC
     except ImportError:
         ThermodynamicSwarmCompiler = None

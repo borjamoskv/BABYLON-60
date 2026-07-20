@@ -10,22 +10,22 @@ pub struct HaskellIdentity {
 
 #[derive(Debug, Clone)]
 pub struct HaskellStateVector {
-    pub thunk_depth: f64,
-    pub monadic_depth: f64,
-    pub category_depth: f64,
-    pub concurrency: f64,
-    pub compile_cost: f64,
+    pub thunk_depth: [f64; 64],
+    pub monadic_depth: [f64; 64],
+    pub category_depth: [f64; 64],
+    pub concurrency: [f64; 64],
+    pub compile_cost: [f64; 64],
     pub execution_count: u64,
 }
 
 impl HaskellStateVector {
     pub fn new() -> Self {
         Self {
-            thunk_depth: 0.1,
-            monadic_depth: 0.0,
-            category_depth: 1.0,
-            concurrency: 1.0,
-            compile_cost: 0.0,
+            thunk_depth: [0.1; 64],
+            monadic_depth: [0.0; 64],
+            category_depth: [1.0; 64],
+            concurrency: [1.0; 64],
+            compile_cost: [0.0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_haskell(d: u8, p: u8, m: u8, vec: &mut HaskellStateVector) -> Re
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.thunk_depth = f64::max(0.01, vec.thunk_depth * 0.98 + 0.02 * (code as f64).cos());
-    vec.monadic_depth = ((code as f64).sin() * 0.1 - vec.thunk_depth * 0.05).abs();
-    vec.category_depth = 1.0 / (1.0 + vec.monadic_depth);
-    vec.concurrency = vec.category_depth * ((code % 10) as f64 + 1.0);
-    vec.compile_cost = (1.0 + vec.concurrency).log2();
+    for i in 0..64 {
+            vec.thunk_depth[i] = f64::max(0.01, vec.thunk_depth[i] * 0.98 + 0.02 * (code as f64 + i as f64).cos());
+            vec.monadic_depth[i] = ((code as f64 + i as f64).sin() * 0.1 - vec.thunk_depth[i] * 0.05).abs();
+            vec.category_depth[i] = 1.0 / (1.0 + vec.monadic_depth[i]);
+            vec.concurrency[i] = vec.category_depth[i] * (((code + i as u64) % 10) as f64 + 1.0);
+            vec.compile_cost[i] = (1.0 + vec.concurrency[i]).log2();
+        }
     Ok(code)
 }

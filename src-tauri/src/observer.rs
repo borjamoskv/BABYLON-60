@@ -10,10 +10,10 @@ pub struct StateObserverIdentity {
 
 #[derive(Debug, Clone)]
 pub struct StateVector {
-    pub states: [f64; 4],
-    pub covariance: [[f64; 4]; 4],
-    pub innovation: [f64; 4],
-    pub gain: [[f64; 4]; 4],
+    pub states: [f64; 64],
+    pub covariance: [[f64; 64]; 64],
+    pub innovation: [f64; 64],
+    pub gain: [[f64; 64]; 64],
     pub norm_error: f64,
     pub execution_count: u64,
 }
@@ -21,10 +21,10 @@ pub struct StateVector {
 impl StateVector {
     pub fn new() -> Self {
         Self {
-            states: [0.0; 4],
-            covariance: [[0.0; 4]; 4],
-            innovation: [0.0; 4],
-            gain: [[0.0; 4]; 4],
+            states: [0.0; 64],
+            covariance: [[0.0; 64]; 64],
+            innovation: [0.0; 64],
+            gain: [[0.0; 64]; 64],
             norm_error: 0.0,
             execution_count: 0,
         }
@@ -37,11 +37,11 @@ pub fn dispatch_state_observer(d: u8, p: u8, m: u8, vec: &mut StateVector) -> Re
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    for i in 0..4 {
+    for i in 0..64 {
             vec.states[i] += (code as f64 + i as f64).sin() * 0.01;
             vec.innovation[i] = ((code as f64).cos() - vec.states[i]) * 0.1;
             vec.covariance[i][i] = f64::max(0.001, vec.covariance[i][i] * 0.99 + 0.0001);
         }
-        vec.norm_error = (vec.innovation[0].powi(2) + vec.innovation[1].powi(2) + vec.innovation[2].powi(2) + vec.innovation[3].powi(2)).sqrt();
+        vec.norm_error = vec.innovation.iter().map(|x| x.powi(2)).sum::<f64>().sqrt();
     Ok(code)
 }

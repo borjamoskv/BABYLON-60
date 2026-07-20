@@ -2,6 +2,7 @@
 import unittest
 from cortex.kimi import dispatch_kimi, KimiStateVector
 
+
 class TestKimiKernel(unittest.TestCase):
     def test_kimi_coverage(self):
         vec = KimiStateVector()
@@ -10,10 +11,13 @@ class TestKimiKernel(unittest.TestCase):
             for p in range(10):
                 for m in range(10):
                     code, name, val = dispatch_kimi(d, p, m, vec)
-                    self.assertEqual(code, d*100 + p*10 + m)
+                    self.assertEqual(code, d * 100 + p * 10 + m)
                     count += 1
         self.assertEqual(count, 1000)
-        print('✅ Successfully verified 100% execution coverage for 1000 Python/Kimi Primitives.')
+        print(
+            f"✅ Successfully verified 100% execution coverage for 1000 Python/Kimi Primitives."
+        )
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

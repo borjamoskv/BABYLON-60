@@ -34,7 +34,11 @@ def sha3_256_hash(data: str) -> str:
 def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
     """Compose a unified post_draft.md from the 6 experiment files."""
     sections: list[tuple[str, str, str]] = [
-        ("01_experimento.yml", "EXPERIMENTO", "Condición inicial, hipótesis y restricciones."),
+        (
+            "01_experimento.yml",
+            "EXPERIMENTO",
+            "Condición inicial, hipótesis y restricciones.",
+        ),
         ("02_hallazgo.md", "HALLAZGO", "Datos crudos y métricas extraídas."),
         ("03_codigo.py", "CÓDIGO", "Implementación física."),
         ("04_demo.sh", "DEMO", "Transcripción de ejecución."),
@@ -56,7 +60,11 @@ def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
         lines.append(f"*{desc}*\n\n")
         if fpath.exists():
             content = fpath.read_text(encoding="utf-8").strip()
-            if filename.endswith(".py") or filename.endswith(".sh") or filename.endswith(".yml"):
+            if (
+                filename.endswith(".py")
+                or filename.endswith(".sh")
+                or filename.endswith(".yml")
+            ):
                 ext = filename.rsplit(".", 1)[-1]
                 lang = {"py": "python", "sh": "bash", "yml": "yaml"}.get(ext, ext)
                 lines.append(f"```{lang}\n{content}\n```\n")
@@ -67,7 +75,9 @@ def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
 
     lines.append("\n---\n")
     lines.append("\n⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):\n")
-    lines.append("- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)\n")
+    lines.append(
+        "- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)\n"
+    )
 
     return "\n".join(lines)
 
@@ -210,18 +220,14 @@ def run_validator(root_dir: str) -> int:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Substack Laboratory Compiler v2.0"
-    )
+    parser = argparse.ArgumentParser(description="Substack Laboratory Compiler v2.0")
     parser.add_argument(
         "experiment_name",
         type=str,
         nargs="?",
         help="Name of the experiment (e.g. mcts_audio_drift)",
     )
-    parser.add_argument(
-        "--root", type=str, default=".", help="Root of the workspace"
-    )
+    parser.add_argument("--root", type=str, default=".", help="Root of the workspace")
     parser.add_argument(
         "--validate-only",
         action="store_true",

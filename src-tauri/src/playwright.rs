@@ -10,22 +10,22 @@ pub struct PlaywrightIdentity {
 
 #[derive(Debug, Clone)]
 pub struct PlaywrightStateVector {
-    pub browser_active: bool,
-    pub page_count: u64,
-    pub last_load_time_ms: f64,
-    pub dom_stability_index: f64,
-    pub network_idle_state: bool,
+    pub browser_active: [bool; 64],
+    pub page_count: [u64; 64],
+    pub last_load_time_ms: [f64; 64],
+    pub dom_stability_index: [f64; 64],
+    pub network_idle_state: [bool; 64],
     pub execution_count: u64,
 }
 
 impl PlaywrightStateVector {
     pub fn new() -> Self {
         Self {
-            browser_active: false,
-            page_count: 0,
-            last_load_time_ms: 0.0,
-            dom_stability_index: 1.0,
-            network_idle_state: true,
+            browser_active: [false; 64],
+            page_count: [0; 64],
+            last_load_time_ms: [0.0; 64],
+            dom_stability_index: [1.0; 64],
+            network_idle_state: [true; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_playwright(d: u8, p: u8, m: u8, vec: &mut PlaywrightStateVector)
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.browser_active = d != 0 || p != 9;
-    if d == 0 && p == 0 { vec.page_count += 1; }
-    vec.last_load_time_ms = (code as f64).sin().abs() * 120.0;
-    vec.dom_stability_index = f64::max(0.0, f64::min(1.0, vec.dom_stability_index * 0.95 + 0.05 * (code as f64).cos()));
-    vec.network_idle_state = m == 3;
+    for i in 0..64 {
+            vec.browser_active[i] = d != 0 || p != 9;
+            if d == 0 && p == 0 { vec.page_count[i] += 1; }
+            vec.last_load_time_ms[i] = (code as f64 + i as f64).sin().abs() * 120.0;
+            vec.dom_stability_index[i] = f64::max(0.0, f64::min(1.0, vec.dom_stability_index[i] * 0.95 + 0.05 * (code as f64 + i as f64).cos()));
+            vec.network_idle_state[i] = m == 3;
+        }
     Ok(code)
 }

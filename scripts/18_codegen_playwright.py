@@ -42,10 +42,11 @@ ACTION_VERBS = [
 
 # 3 Domains * 10 Categories * 10 Verbs = 300 base archetypes.
 
+
 def generate_playwright_primitives() -> list[dict[str, str]]:
     primitives = []
     p_idx = 1
-    
+
     for domain in DOMAINS:
         for cat in CATEGORIES:
             for verb in ACTION_VERBS:
@@ -77,9 +78,7 @@ def generate_playwright_primitives() -> list[dict[str, str]]:
 def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
-        f.write(
-            "# █▄ PLAYWRIGHT MATRIX: 300 INTERNAL C5-REAL PRIMITIVES\n\n"
-        )
+        f.write("# █▄ PLAYWRIGHT MATRIX: 300 INTERNAL C5-REAL PRIMITIVES\n\n")
         f.write(
             "Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 operaciones APEX.\n\n"
         )

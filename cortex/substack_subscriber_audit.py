@@ -14,16 +14,42 @@ from typing import Any
 
 
 VIP_KEYWORDS: list[str] = [
-    "openai", "huggingface", "foundersfund", "microstrategy", "bittensor",
-    "sentient", "nillion", "dydx", "ninjatune", "mixmag", "ostgut", "sohoradio",
-    "hypebeast", "audaxrenovables", "berria", "media-attack", "audioshake",
-    "loudwomen", "convequity", "securebio"
+    "openai",
+    "huggingface",
+    "foundersfund",
+    "microstrategy",
+    "bittensor",
+    "sentient",
+    "nillion",
+    "dydx",
+    "ninjatune",
+    "mixmag",
+    "ostgut",
+    "sohoradio",
+    "hypebeast",
+    "audaxrenovables",
+    "berria",
+    "media-attack",
+    "audioshake",
+    "loudwomen",
+    "convequity",
+    "securebio",
 ]
 
 INFLUENCER_KEYWORDS: list[str] = [
-    "contacto@gmail.com", "elxokas", "wallstreetwolverine", "alxelmundo",
-    "pedritoviral", "davooxeneize", "kiddkeo", "dalasito", "trilineyt",
-    "moradcontacto", "lauraescanescontacto", "soyunapringadacontacto", "henaralvarezcontacto"
+    "contacto@gmail.com",
+    "elxokas",
+    "wallstreetwolverine",
+    "alxelmundo",
+    "pedritoviral",
+    "davooxeneize",
+    "kiddkeo",
+    "dalasito",
+    "trilineyt",
+    "moradcontacto",
+    "lauraescanescontacto",
+    "soyunapringadacontacto",
+    "henaralvarezcontacto",
 ]
 
 
@@ -40,7 +66,7 @@ class SubscriberRecord:
     def from_row(cls, row: dict[str, str]) -> SubscriberRecord:
         email = row.get("Email", "").strip()
         sub_type = row.get("Type", "Free").strip()
-        
+
         act_raw = row.get("Activity", "0").strip()
         try:
             activity = int(act_raw)
@@ -49,7 +75,7 @@ class SubscriberRecord:
 
         name = row.get("Name", "").strip()
         start_date = row.get("Start date", "").strip()
-        
+
         rev_str = row.get("Revenue", "0").replace("$", "").replace(",", "").strip()
         try:
             revenue = float(rev_str) if rev_str else 0.0
@@ -120,7 +146,11 @@ class SubstackSubscriberAuditor:
 
         vips = [s for s in self.subscribers if s.is_vip()]
         high_exergy = [s for s in self.subscribers if s.activity >= 3]
-        hazards = [s for s in self.subscribers if s.activity == 0 and s.subscriber_type == "Comp"]
+        hazards = [
+            s
+            for s in self.subscribers
+            if s.activity == 0 and s.subscriber_type == "Comp"
+        ]
 
         # Group by cohorts
         cohort_groups: dict[str, list[SubscriberRecord]] = {}
@@ -139,7 +169,9 @@ class SubstackSubscriberAuditor:
                 "comp": g_comp,
                 "active_ge_3": g_active,
                 "zombies_act_0": g_zombies,
-                "retention_rate": round((g_active / g_total) * 100, 2) if g_total > 0 else 0.0,
+                "retention_rate": round((g_active / g_total) * 100, 2)
+                if g_total > 0
+                else 0.0,
             }
 
         return AuditSummary(
@@ -187,13 +219,26 @@ class SubstackSubscriberAuditor:
         for tier_name, records in tiers.items():
             file_dest = out_path / f"{tier_name}.csv"
             # Atomic write via tempfile
-            with tempfile.NamedTemporaryFile("w", newline="", encoding="utf-8", dir=out_path, delete=False) as tf:
+            with tempfile.NamedTemporaryFile(
+                "w", newline="", encoding="utf-8", dir=out_path, delete=False
+            ) as tf:
                 tmp_name = tf.name
                 writer = csv.writer(tf)
-                writer.writerow(["Email", "Type", "Activity", "Name", "StartDate", "Revenue"])
+                writer.writerow(
+                    ["Email", "Type", "Activity", "Name", "StartDate", "Revenue"]
+                )
                 for r in records:
-                    writer.writerow([r.email, r.subscriber_type, r.activity, r.name, r.start_date, r.revenue])
-            
+                    writer.writerow(
+                        [
+                            r.email,
+                            r.subscriber_type,
+                            r.activity,
+                            r.name,
+                            r.start_date,
+                            r.revenue,
+                        ]
+                    )
+
             os.replace(tmp_name, file_dest)
             created_files[tier_name] = str(file_dest)
 

@@ -13,87 +13,120 @@ type HaskellPrimitive int
 type HaskellModifier int
 
 const (
-	HaskellDomainLazyeval HaskellDomain = 0
-	HaskellDomainMonadtrans HaskellDomain = 1
-	HaskellDomainTypeclass HaskellDomain = 2
-	HaskellDomainStmconcur HaskellDomain = 3
-	HaskellDomainFunctorcat HaskellDomain = 4
+	HaskellDomainLazyeval    HaskellDomain = 0
+	HaskellDomainMonadtrans  HaskellDomain = 1
+	HaskellDomainTypeclass   HaskellDomain = 2
+	HaskellDomainStmconcur   HaskellDomain = 3
+	HaskellDomainFunctorcat  HaskellDomain = 4
 	HaskellDomainParsermonad HaskellDomain = 5
-	HaskellDomainPuremath HaskellDomain = 6
+	HaskellDomainPuremath    HaskellDomain = 6
 	HaskellDomainFiberthread HaskellDomain = 7
-	HaskellDomainFfisystem HaskellDomain = 8
+	HaskellDomainFfisystem   HaskellDomain = 8
 	HaskellDomainCompilerghc HaskellDomain = 9
 
 	// Haskell Primitives
-	HaskellPrimitiveThunkforce HaskellPrimitive = 0
-	HaskellPrimitiveBindeval HaskellPrimitive = 1
-	HaskellPrimitiveMapapply HaskellPrimitive = 2
-	HaskellPrimitiveTxatomic HaskellPrimitive = 3
-	HaskellPrimitiveReducefold HaskellPrimitive = 4
-	HaskellPrimitiveParsetoken HaskellPrimitive = 5
+	HaskellPrimitiveThunkforce  HaskellPrimitive = 0
+	HaskellPrimitiveBindeval    HaskellPrimitive = 1
+	HaskellPrimitiveMapapply    HaskellPrimitive = 2
+	HaskellPrimitiveTxatomic    HaskellPrimitive = 3
+	HaskellPrimitiveReducefold  HaskellPrimitive = 4
+	HaskellPrimitiveParsetoken  HaskellPrimitive = 5
 	HaskellPrimitiveStatemutate HaskellPrimitive = 6
-	HaskellPrimitiveLifteffect HaskellPrimitive = 7
-	HaskellPrimitiveForkspark HaskellPrimitive = 8
-	HaskellPrimitiveFficall HaskellPrimitive = 9
+	HaskellPrimitiveLifteffect  HaskellPrimitive = 7
+	HaskellPrimitiveForkspark   HaskellPrimitive = 8
+	HaskellPrimitiveFficall     HaskellPrimitive = 9
 
 	// Haskell Modifiers
-	HaskellModifierRaw HaskellModifier = 0
-	HaskellModifierStrict HaskellModifier = 1
-	HaskellModifierLazy HaskellModifier = 2
+	HaskellModifierRaw       HaskellModifier = 0
+	HaskellModifierStrict    HaskellModifier = 1
+	HaskellModifierLazy      HaskellModifier = 2
 	HaskellModifierReaderenv HaskellModifier = 3
 	HaskellModifierWriterlog HaskellModifier = 4
 	HaskellModifierExcepterr HaskellModifier = 5
-	HaskellModifierStmretry HaskellModifier = 6
-	HaskellModifierParallel HaskellModifier = 7
-	HaskellModifierContcps HaskellModifier = 8
-	HaskellModifierIounsafe HaskellModifier = 9
+	HaskellModifierStmretry  HaskellModifier = 6
+	HaskellModifierParallel  HaskellModifier = 7
+	HaskellModifierContcps   HaskellModifier = 8
+	HaskellModifierIounsafe  HaskellModifier = 9
 )
 
 func (d HaskellDomain) String() string {
 	switch d {
-	case 0: return "LAZY_EVAL"
-	case 1: return "MONAD_TRANS"
-	case 2: return "TYPE_CLASS"
-	case 3: return "STM_CONCUR"
-	case 4: return "FUNCTOR_CAT"
-	case 5: return "PARSER_MONAD"
-	case 6: return "PURE_MATH"
-	case 7: return "FIBER_THREAD"
-	case 8: return "FFI_SYSTEM"
-	case 9: return "COMPILER_GHC"
-	default: return "UNKNOWN"
+	case 0:
+		return "LAZY_EVAL"
+	case 1:
+		return "MONAD_TRANS"
+	case 2:
+		return "TYPE_CLASS"
+	case 3:
+		return "STM_CONCUR"
+	case 4:
+		return "FUNCTOR_CAT"
+	case 5:
+		return "PARSER_MONAD"
+	case 6:
+		return "PURE_MATH"
+	case 7:
+		return "FIBER_THREAD"
+	case 8:
+		return "FFI_SYSTEM"
+	case 9:
+		return "COMPILER_GHC"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p HaskellPrimitive) String() string {
 	switch p {
-	case 0: return "THUNK_FORCE"
-	case 1: return "BIND_EVAL"
-	case 2: return "MAP_APPLY"
-	case 3: return "TX_ATOMIC"
-	case 4: return "REDUCE_FOLD"
-	case 5: return "PARSE_TOKEN"
-	case 6: return "STATE_MUTATE"
-	case 7: return "LIFT_EFFECT"
-	case 8: return "FORK_SPARK"
-	case 9: return "FFI_CALL"
-	default: return "UNKNOWN"
+	case 0:
+		return "THUNK_FORCE"
+	case 1:
+		return "BIND_EVAL"
+	case 2:
+		return "MAP_APPLY"
+	case 3:
+		return "TX_ATOMIC"
+	case 4:
+		return "REDUCE_FOLD"
+	case 5:
+		return "PARSE_TOKEN"
+	case 6:
+		return "STATE_MUTATE"
+	case 7:
+		return "LIFT_EFFECT"
+	case 8:
+		return "FORK_SPARK"
+	case 9:
+		return "FFI_CALL"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m HaskellModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "STRICT"
-	case 2: return "LAZY"
-	case 3: return "READER_ENV"
-	case 4: return "WRITER_LOG"
-	case 5: return "EXCEPT_ERR"
-	case 6: return "STM_RETRY"
-	case 7: return "PARALLEL"
-	case 8: return "CONT_CPS"
-	case 9: return "IO_UNSAFE"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "STRICT"
+	case 2:
+		return "LAZY"
+	case 3:
+		return "READER_ENV"
+	case 4:
+		return "WRITER_LOG"
+	case 5:
+		return "EXCEPT_ERR"
+	case 6:
+		return "STM_RETRY"
+	case 7:
+		return "PARALLEL"
+	case 8:
+		return "CONT_CPS"
+	case 9:
+		return "IO_UNSAFE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -106,11 +139,11 @@ type HaskellIdentity struct {
 }
 
 type HaskellStateVector struct {
-	ThunkDepth    float64
-	MonadicDepth  float64
-	CategoryDepth float64
-	Concurrency   float64
-	CompileCost   float64
+	ThunkDepth     [64]float64
+	MonadicDepth   [64]float64
+	CategoryDepth  [64]float64
+	Concurrency    [64]float64
+	CompileCost    [64]float64
 	ExecutionCount uint64
 }
 
@@ -132,7 +165,7 @@ func ResolveHaskellIdentity(d, p, m byte) (HaskellIdentity, error) {
 type HaskellHandler func(id HaskellIdentity, vec *HaskellStateVector) error
 
 var (
-	HaskellTable [1000]HaskellHandler
+	HaskellTable   [1000]HaskellHandler
 	HaskellMetrics [1000]uint64
 )
 
@@ -140,10001 +173,12001 @@ func InitHaskellKernel() {
 	HaskellTable[0] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[0], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[1] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[1], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[2] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[2], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[3] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[3], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[4] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[4], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[5] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[5], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[6] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[6], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[7] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[7], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[8] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[8], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[9] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[9], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[10] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[10], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[11] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[11], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[12] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[12], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[13] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[13], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[14] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[14], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[15] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[15], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[16] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[16], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[17] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[17], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[18] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[18], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[19] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[19], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[20] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[20], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[21] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[21], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[22] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[22], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[23] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[23], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[24] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[24], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[25] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[25], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[26] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[26], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[27] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[27], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[28] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[28], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[29] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[29], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[30] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[30], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[31] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[31], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[32] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[32], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[33] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[33], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[34] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[34], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[35] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[35], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[36] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[36], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[37] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[37], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[38] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[38], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[39] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[39], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[40] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[40], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[41] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[41], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[42] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[42], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[43] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[43], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[44] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[44], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[45] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[45], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[46] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[46], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[47] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[47], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[48] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[48], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[49] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[49], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[50] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[50], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[51] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[51], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[52] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[52], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[53] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[53], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[54] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[54], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[55] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[55], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[56] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[56], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[57] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[57], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[58] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[58], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[59] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[59], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[60] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[60], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[61] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[61], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[62] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[62], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[63] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[63], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[64] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[64], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[65] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[65], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[66] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[66], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[67] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[67], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[68] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[68], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[69] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[69], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[70] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[70], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[71] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[71], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[72] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[72], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[73] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[73], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[74] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[74], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[75] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[75], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[76] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[76], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[77] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[77], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[78] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[78], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[79] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[79], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[80] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[80], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[81] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[81], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[82] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[82], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[83] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[83], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[84] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[84], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[85] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[85], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[86] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[86], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[87] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[87], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[88] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[88], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[89] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[89], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[90] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[90], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[91] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[91], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[92] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[92], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[93] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[93], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[94] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[94], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[95] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[95], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[96] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[96], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[97] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[97], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[98] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[98], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[99] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[99], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[100] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[100], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[101] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[101], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[102] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[102], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[103] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[103], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[104] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[104], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[105] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[105], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[106] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[106], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[107] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[107], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[108] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[108], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[109] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[109], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[110] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[110], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[111] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[111], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[112] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[112], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[113] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[113], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[114] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[114], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[115] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[115], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[116] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[116], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[117] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[117], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[118] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[118], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[119] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[119], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[120] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[120], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[121] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[121], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[122] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[122], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[123] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[123], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[124] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[124], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[125] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[125], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[126] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[126], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[127] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[127], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[128] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[128], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[129] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[129], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[130] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[130], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[131] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[131], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[132] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[132], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[133] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[133], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[134] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[134], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[135] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[135], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[136] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[136], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[137] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[137], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[138] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[138], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[139] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[139], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[140] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[140], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[141] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[141], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[142] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[142], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[143] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[143], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[144] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[144], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[145] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[145], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[146] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[146], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[147] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[147], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[148] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[148], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[149] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[149], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[150] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[150], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[151] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[151], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[152] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[152], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[153] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[153], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[154] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[154], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[155] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[155], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[156] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[156], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[157] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[157], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[158] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[158], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[159] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[159], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[160] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[160], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[161] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[161], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[162] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[162], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[163] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[163], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[164] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[164], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[165] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[165], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[166] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[166], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[167] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[167], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[168] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[168], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[169] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[169], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[170] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[170], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[171] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[171], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[172] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[172], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[173] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[173], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[174] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[174], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[175] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[175], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[176] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[176], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[177] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[177], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[178] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[178], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[179] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[179], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[180] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[180], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[181] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[181], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[182] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[182], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[183] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[183], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[184] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[184], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[185] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[185], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[186] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[186], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[187] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[187], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[188] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[188], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[189] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[189], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[190] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[190], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[191] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[191], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[192] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[192], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[193] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[193], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[194] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[194], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[195] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[195], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[196] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[196], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[197] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[197], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[198] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[198], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[199] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[199], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[200] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[200], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[201] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[201], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[202] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[202], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[203] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[203], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[204] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[204], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[205] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[205], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[206] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[206], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[207] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[207], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[208] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[208], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[209] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[209], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[210] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[210], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[211] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[211], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[212] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[212], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[213] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[213], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[214] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[214], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[215] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[215], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[216] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[216], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[217] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[217], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[218] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[218], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[219] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[219], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[220] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[220], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[221] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[221], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[222] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[222], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[223] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[223], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[224] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[224], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[225] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[225], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[226] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[226], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[227] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[227], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[228] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[228], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[229] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[229], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[230] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[230], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[231] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[231], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[232] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[232], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[233] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[233], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[234] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[234], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[235] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[235], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[236] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[236], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[237] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[237], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[238] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[238], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[239] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[239], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[240] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[240], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[241] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[241], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[242] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[242], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[243] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[243], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[244] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[244], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[245] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[245], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[246] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[246], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[247] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[247], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[248] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[248], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[249] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[249], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[250] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[250], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[251] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[251], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[252] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[252], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[253] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[253], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[254] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[254], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[255] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[255], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[256] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[256], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[257] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[257], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[258] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[258], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[259] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[259], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[260] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[260], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[261] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[261], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[262] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[262], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[263] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[263], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[264] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[264], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[265] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[265], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[266] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[266], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[267] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[267], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[268] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[268], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[269] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[269], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[270] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[270], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[271] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[271], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[272] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[272], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[273] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[273], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[274] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[274], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[275] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[275], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[276] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[276], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[277] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[277], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[278] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[278], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[279] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[279], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[280] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[280], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[281] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[281], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[282] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[282], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[283] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[283], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[284] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[284], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[285] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[285], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[286] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[286], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[287] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[287], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[288] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[288], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[289] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[289], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[290] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[290], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[291] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[291], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[292] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[292], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[293] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[293], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[294] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[294], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[295] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[295], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[296] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[296], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[297] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[297], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[298] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[298], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[299] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[299], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[300] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[300], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[301] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[301], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[302] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[302], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[303] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[303], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[304] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[304], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[305] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[305], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[306] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[306], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[307] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[307], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[308] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[308], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[309] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[309], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[310] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[310], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[311] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[311], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[312] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[312], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[313] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[313], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[314] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[314], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[315] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[315], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[316] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[316], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[317] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[317], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[318] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[318], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[319] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[319], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[320] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[320], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[321] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[321], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[322] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[322], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[323] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[323], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[324] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[324], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[325] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[325], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[326] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[326], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[327] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[327], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[328] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[328], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[329] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[329], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[330] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[330], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[331] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[331], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[332] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[332], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[333] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[333], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[334] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[334], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[335] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[335], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[336] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[336], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[337] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[337], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[338] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[338], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[339] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[339], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[340] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[340], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[341] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[341], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[342] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[342], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[343] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[343], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[344] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[344], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[345] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[345], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[346] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[346], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[347] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[347], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[348] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[348], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[349] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[349], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[350] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[350], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[351] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[351], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[352] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[352], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[353] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[353], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[354] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[354], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[355] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[355], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[356] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[356], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[357] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[357], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[358] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[358], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[359] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[359], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[360] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[360], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[361] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[361], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[362] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[362], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[363] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[363], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[364] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[364], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[365] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[365], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[366] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[366], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[367] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[367], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[368] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[368], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[369] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[369], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[370] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[370], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[371] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[371], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[372] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[372], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[373] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[373], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[374] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[374], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[375] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[375], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[376] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[376], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[377] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[377], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[378] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[378], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[379] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[379], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[380] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[380], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[381] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[381], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[382] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[382], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[383] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[383], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[384] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[384], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[385] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[385], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[386] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[386], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[387] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[387], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[388] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[388], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[389] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[389], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[390] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[390], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[391] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[391], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[392] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[392], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[393] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[393], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[394] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[394], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[395] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[395], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[396] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[396], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[397] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[397], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[398] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[398], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[399] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[399], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[400] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[400], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[401] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[401], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[402] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[402], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[403] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[403], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[404] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[404], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[405] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[405], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[406] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[406], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[407] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[407], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[408] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[408], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[409] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[409], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[410] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[410], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[411] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[411], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[412] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[412], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[413] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[413], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[414] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[414], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[415] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[415], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[416] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[416], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[417] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[417], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[418] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[418], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[419] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[419], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[420] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[420], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[421] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[421], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[422] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[422], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[423] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[423], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[424] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[424], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[425] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[425], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[426] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[426], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[427] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[427], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[428] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[428], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[429] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[429], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[430] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[430], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[431] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[431], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[432] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[432], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[433] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[433], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[434] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[434], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[435] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[435], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[436] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[436], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[437] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[437], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[438] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[438], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[439] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[439], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[440] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[440], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[441] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[441], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[442] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[442], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[443] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[443], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[444] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[444], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[445] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[445], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[446] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[446], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[447] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[447], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[448] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[448], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[449] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[449], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[450] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[450], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[451] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[451], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[452] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[452], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[453] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[453], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[454] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[454], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[455] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[455], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[456] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[456], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[457] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[457], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[458] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[458], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[459] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[459], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[460] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[460], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[461] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[461], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[462] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[462], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[463] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[463], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[464] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[464], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[465] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[465], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[466] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[466], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[467] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[467], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[468] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[468], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[469] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[469], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[470] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[470], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[471] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[471], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[472] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[472], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[473] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[473], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[474] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[474], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[475] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[475], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[476] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[476], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[477] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[477], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[478] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[478], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[479] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[479], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[480] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[480], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[481] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[481], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[482] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[482], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[483] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[483], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[484] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[484], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[485] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[485], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[486] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[486], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[487] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[487], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[488] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[488], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[489] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[489], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[490] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[490], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[491] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[491], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[492] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[492], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[493] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[493], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[494] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[494], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[495] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[495], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[496] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[496], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[497] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[497], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[498] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[498], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[499] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[499], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[500] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[500], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[501] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[501], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[502] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[502], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[503] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[503], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[504] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[504], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[505] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[505], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[506] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[506], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[507] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[507], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[508] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[508], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[509] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[509], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[510] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[510], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[511] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[511], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[512] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[512], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[513] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[513], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[514] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[514], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[515] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[515], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[516] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[516], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[517] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[517], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[518] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[518], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[519] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[519], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[520] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[520], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[521] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[521], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[522] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[522], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[523] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[523], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[524] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[524], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[525] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[525], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[526] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[526], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[527] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[527], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[528] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[528], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[529] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[529], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[530] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[530], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[531] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[531], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[532] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[532], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[533] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[533], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[534] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[534], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[535] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[535], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[536] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[536], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[537] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[537], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[538] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[538], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[539] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[539], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[540] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[540], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[541] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[541], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[542] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[542], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[543] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[543], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[544] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[544], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[545] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[545], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[546] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[546], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[547] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[547], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[548] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[548], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[549] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[549], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[550] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[550], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[551] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[551], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[552] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[552], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[553] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[553], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[554] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[554], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[555] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[555], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[556] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[556], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[557] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[557], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[558] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[558], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[559] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[559], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[560] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[560], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[561] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[561], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[562] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[562], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[563] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[563], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[564] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[564], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[565] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[565], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[566] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[566], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[567] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[567], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[568] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[568], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[569] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[569], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[570] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[570], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[571] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[571], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[572] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[572], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[573] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[573], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[574] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[574], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[575] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[575], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[576] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[576], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[577] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[577], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[578] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[578], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[579] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[579], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[580] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[580], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[581] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[581], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[582] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[582], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[583] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[583], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[584] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[584], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[585] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[585], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[586] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[586], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[587] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[587], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[588] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[588], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[589] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[589], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[590] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[590], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[591] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[591], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[592] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[592], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[593] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[593], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[594] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[594], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[595] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[595], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[596] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[596], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[597] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[597], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[598] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[598], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[599] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[599], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[600] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[600], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[601] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[601], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[602] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[602], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[603] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[603], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[604] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[604], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[605] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[605], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[606] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[606], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[607] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[607], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[608] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[608], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[609] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[609], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[610] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[610], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[611] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[611], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[612] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[612], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[613] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[613], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[614] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[614], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[615] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[615], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[616] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[616], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[617] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[617], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[618] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[618], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[619] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[619], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[620] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[620], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[621] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[621], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[622] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[622], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[623] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[623], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[624] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[624], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[625] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[625], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[626] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[626], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[627] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[627], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[628] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[628], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[629] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[629], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[630] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[630], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[631] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[631], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[632] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[632], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[633] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[633], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[634] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[634], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[635] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[635], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[636] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[636], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[637] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[637], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[638] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[638], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[639] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[639], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[640] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[640], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[641] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[641], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[642] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[642], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[643] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[643], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[644] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[644], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[645] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[645], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[646] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[646], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[647] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[647], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[648] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[648], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[649] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[649], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[650] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[650], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[651] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[651], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[652] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[652], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[653] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[653], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[654] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[654], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[655] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[655], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[656] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[656], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[657] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[657], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[658] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[658], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[659] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[659], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[660] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[660], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[661] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[661], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[662] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[662], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[663] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[663], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[664] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[664], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[665] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[665], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[666] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[666], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[667] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[667], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[668] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[668], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[669] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[669], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[670] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[670], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[671] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[671], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[672] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[672], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[673] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[673], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[674] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[674], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[675] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[675], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[676] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[676], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[677] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[677], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[678] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[678], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[679] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[679], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[680] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[680], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[681] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[681], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[682] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[682], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[683] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[683], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[684] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[684], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[685] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[685], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[686] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[686], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[687] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[687], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[688] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[688], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[689] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[689], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[690] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[690], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[691] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[691], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[692] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[692], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[693] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[693], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[694] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[694], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[695] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[695], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[696] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[696], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[697] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[697], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[698] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[698], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[699] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[699], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[700] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[700], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[701] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[701], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[702] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[702], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[703] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[703], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[704] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[704], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[705] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[705], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[706] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[706], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[707] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[707], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[708] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[708], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[709] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[709], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[710] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[710], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[711] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[711], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[712] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[712], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[713] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[713], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[714] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[714], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[715] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[715], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[716] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[716], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[717] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[717], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[718] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[718], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[719] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[719], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[720] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[720], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[721] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[721], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[722] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[722], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[723] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[723], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[724] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[724], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[725] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[725], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[726] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[726], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[727] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[727], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[728] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[728], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[729] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[729], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[730] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[730], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[731] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[731], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[732] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[732], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[733] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[733], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[734] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[734], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[735] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[735], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[736] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[736], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[737] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[737], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[738] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[738], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[739] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[739], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[740] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[740], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[741] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[741], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[742] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[742], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[743] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[743], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[744] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[744], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[745] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[745], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[746] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[746], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[747] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[747], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[748] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[748], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[749] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[749], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[750] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[750], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[751] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[751], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[752] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[752], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[753] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[753], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[754] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[754], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[755] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[755], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[756] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[756], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[757] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[757], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[758] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[758], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[759] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[759], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[760] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[760], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[761] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[761], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[762] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[762], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[763] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[763], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[764] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[764], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[765] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[765], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[766] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[766], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[767] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[767], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[768] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[768], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[769] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[769], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[770] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[770], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[771] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[771], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[772] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[772], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[773] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[773], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[774] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[774], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[775] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[775], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[776] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[776], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[777] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[777], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[778] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[778], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[779] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[779], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[780] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[780], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[781] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[781], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[782] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[782], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[783] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[783], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[784] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[784], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[785] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[785], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[786] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[786], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[787] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[787], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[788] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[788], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[789] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[789], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[790] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[790], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[791] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[791], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[792] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[792], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[793] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[793], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[794] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[794], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[795] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[795], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[796] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[796], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[797] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[797], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[798] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[798], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[799] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[799], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[800] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[800], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[801] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[801], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[802] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[802], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[803] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[803], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[804] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[804], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[805] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[805], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[806] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[806], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[807] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[807], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[808] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[808], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[809] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[809], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[810] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[810], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[811] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[811], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[812] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[812], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[813] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[813], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[814] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[814], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[815] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[815], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[816] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[816], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[817] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[817], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[818] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[818], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[819] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[819], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[820] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[820], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[821] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[821], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[822] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[822], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[823] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[823], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[824] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[824], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[825] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[825], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[826] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[826], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[827] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[827], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[828] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[828], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[829] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[829], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[830] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[830], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[831] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[831], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[832] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[832], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[833] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[833], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[834] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[834], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[835] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[835], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[836] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[836], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[837] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[837], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[838] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[838], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[839] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[839], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[840] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[840], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[841] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[841], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[842] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[842], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[843] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[843], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[844] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[844], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[845] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[845], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[846] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[846], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[847] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[847], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[848] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[848], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[849] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[849], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[850] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[850], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[851] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[851], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[852] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[852], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[853] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[853], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[854] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[854], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[855] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[855], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[856] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[856], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[857] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[857], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[858] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[858], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[859] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[859], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[860] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[860], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[861] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[861], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[862] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[862], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[863] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[863], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[864] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[864], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[865] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[865], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[866] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[866], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[867] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[867], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[868] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[868], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[869] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[869], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[870] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[870], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[871] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[871], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[872] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[872], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[873] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[873], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[874] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[874], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[875] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[875], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[876] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[876], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[877] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[877], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[878] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[878], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[879] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[879], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[880] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[880], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[881] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[881], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[882] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[882], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[883] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[883], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[884] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[884], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[885] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[885], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[886] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[886], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[887] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[887], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[888] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[888], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[889] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[889], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[890] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[890], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[891] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[891], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[892] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[892], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[893] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[893], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[894] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[894], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[895] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[895], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[896] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[896], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[897] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[897], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[898] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[898], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[899] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[899], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[900] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[900], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[901] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[901], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[902] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[902], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[903] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[903], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[904] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[904], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[905] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[905], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[906] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[906], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[907] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[907], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[908] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[908], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[909] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[909], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[910] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[910], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[911] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[911], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[912] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[912], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[913] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[913], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[914] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[914], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[915] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[915], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[916] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[916], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[917] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[917], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[918] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[918], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[919] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[919], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[920] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[920], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[921] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[921], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[922] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[922], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[923] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[923], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[924] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[924], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[925] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[925], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[926] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[926], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[927] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[927], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[928] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[928], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[929] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[929], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[930] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[930], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[931] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[931], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[932] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[932], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[933] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[933], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[934] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[934], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[935] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[935], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[936] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[936], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[937] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[937], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[938] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[938], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[939] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[939], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[940] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[940], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[941] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[941], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[942] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[942], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[943] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[943], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[944] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[944], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[945] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[945], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[946] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[946], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[947] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[947], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[948] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[948], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[949] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[949], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[950] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[950], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[951] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[951], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[952] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[952], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[953] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[953], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[954] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[954], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[955] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[955], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[956] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[956], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[957] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[957], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[958] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[958], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[959] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[959], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[960] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[960], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[961] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[961], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[962] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[962], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[963] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[963], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[964] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[964], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[965] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[965], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[966] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[966], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[967] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[967], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[968] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[968], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[969] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[969], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[970] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[970], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[971] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[971], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[972] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[972], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[973] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[973], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[974] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[974], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[975] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[975], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[976] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[976], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[977] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[977], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[978] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[978], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[979] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[979], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[980] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[980], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[981] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[981], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[982] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[982], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[983] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[983], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[984] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[984], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[985] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[985], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[986] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[986], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[987] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[987], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[988] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[988], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[989] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[989], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[990] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[990], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[991] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[991], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[992] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[992], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[993] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[993], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[994] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[994], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[995] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[995], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[996] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[996], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[997] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[997], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[998] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[998], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 	HaskellTable[999] = func(id HaskellIdentity, vec *HaskellStateVector) error {
 		atomic.AddUint64(&HaskellMetrics[999], 1)
 		vec.ExecutionCount++
-		vec.ThunkDepth = math.Max(0.01, vec.ThunkDepth*0.98 + 0.02*math.Cos(float64(id.Code)))
-		vec.MonadicDepth = math.Abs(math.Sin(float64(id.Code))*0.1 - vec.ThunkDepth*0.05)
-		vec.CategoryDepth = 1.0 / (1.0 + vec.MonadicDepth)
-		vec.Concurrency = vec.CategoryDepth * (float64(id.Code%10) + 1.0)
-		vec.CompileCost = math.Log2(1.0 + vec.Concurrency)
+		for i := 0; i < 64; i++ {
+			vec.ThunkDepth[i] = math.Max(0.01, vec.ThunkDepth[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.MonadicDepth[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.ThunkDepth[i]*0.05)
+			vec.CategoryDepth[i] = 1.0 / (1.0 + vec.MonadicDepth[i])
+			vec.Concurrency[i] = vec.CategoryDepth[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.CompileCost[i] = math.Log2(1.0 + vec.Concurrency[i])
+		}
 		return nil
 	}
 }
@@ -10152,6 +12185,8 @@ func DispatchHaskell(d, p, m byte, vec *HaskellStateVector) error {
 }
 
 func GetHaskellExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&HaskellMetrics[code])
 }

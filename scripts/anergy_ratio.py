@@ -32,42 +32,62 @@ from typing import Any
 
 
 # Tools that mutate disk state
-EXERGY_TOOLS: frozenset[str] = frozenset({
-    "run_command",
-    "write_to_file",
-    "replace_file_content",
-    "multi_replace_file_content",
-    "call_mcp_tool",
-    "invoke_subagent",
-    "generate_image",
-})
+EXERGY_TOOLS: frozenset[str] = frozenset(
+    {
+        "run_command",
+        "write_to_file",
+        "replace_file_content",
+        "multi_replace_file_content",
+        "call_mcp_tool",
+        "invoke_subagent",
+        "generate_image",
+    }
+)
 
 # Tools that are read-only (no state mutation)
-ANERGY_TOOLS: frozenset[str] = frozenset({
-    "view_file",
-    "grep_search",
-    "list_dir",
-    "search_web",
-    "read_url_content",
-    "ask_question",
-    "ask_permission",
-    "list_permissions",
-    "list_resources",
-    "command_status",
-    "manage_subagents",
-    "manage_task",
-    "schedule",
-    "send_message",
-    "read_resource",
-})
+ANERGY_TOOLS: frozenset[str] = frozenset(
+    {
+        "view_file",
+        "grep_search",
+        "list_dir",
+        "search_web",
+        "read_url_content",
+        "ask_question",
+        "ask_permission",
+        "list_permissions",
+        "list_resources",
+        "command_status",
+        "manage_subagents",
+        "manage_task",
+        "schedule",
+        "send_message",
+        "read_resource",
+    }
+)
 
 # Commands that are read-only even via run_command
 READ_ONLY_COMMANDS: tuple[str, ...] = (
-    "cat ", "ls ", "find ", "head ", "tail ", "wc ",
-    "grep ", "stat ", "echo ", "which ", "type ",
-    "python3 -c", "vm_stat", "sysctl ", "top ",
-    "memory_pressure", "git log", "git status",
-    "git diff", "git branch", "git show",
+    "cat ",
+    "ls ",
+    "find ",
+    "head ",
+    "tail ",
+    "wc ",
+    "grep ",
+    "stat ",
+    "echo ",
+    "which ",
+    "type ",
+    "python3 -c",
+    "vm_stat",
+    "sysctl ",
+    "top ",
+    "memory_pressure",
+    "git log",
+    "git status",
+    "git diff",
+    "git branch",
+    "git show",
 )
 
 
@@ -228,19 +248,19 @@ def main() -> None:
     result = compute_anergy_ratio(transcript_path)
 
     # Summary to stdout
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print("  ANERGY RATIO INSTRUMENT — C5-REAL")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"  Transcript:    {result['transcript']}")
     print(f"  Total steps:   {result['total_steps']}")
     print(f"  Model steps:   {result['model_steps']}")
     print(f"  Exergy steps:  {result['exergy_steps']}")
     print(f"  Anergy steps:  {result['anergy_steps']}")
     print(f"  Loop repeats:  {result['loop_count']}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
     print(f"  ANERGY RATIO A(n) = {result['anergy_ratio']:.4f}")
     print(f"  EXERGY RATIO E(n) = {result['exergy_ratio']:.4f}")
-    print(f"{'='*60}")
+    print(f"{'=' * 60}")
 
     # Curve summary (last 10 points)
     curve = result["curve_A_n"]
@@ -254,7 +274,7 @@ def main() -> None:
         print(f"\n  A(n) curve ({len(curve)} points):")
         for i, val in enumerate(curve):
             bar = "█" * int(val * 40)
-            print(f"    n={i+1:4d}  A={val:.4f}  {bar}")
+            print(f"    n={i + 1:4d}  A={val:.4f}  {bar}")
 
     if output_path:
         # Write full results (exclude classified_steps for compact output)

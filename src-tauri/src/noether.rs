@@ -10,22 +10,22 @@ pub struct NoetherIdentity {
 
 #[derive(Debug, Clone)]
 pub struct NoetherStateVector {
-    pub action_variation: f64,
-    pub noether_current_div: f64,
-    pub conserved_charge: f64,
-    pub quantum_anomaly: f64,
-    pub entropy_generation: f64,
+    pub action_variation: [f64; 64],
+    pub noether_current_div: [f64; 64],
+    pub conserved_charge: [f64; 64],
+    pub quantum_anomaly: [f64; 64],
+    pub entropy_generation: [f64; 64],
     pub execution_count: u64,
 }
 
 impl NoetherStateVector {
     pub fn new() -> Self {
         Self {
-            action_variation: 0.0,
-            noether_current_div: 0.0,
-            conserved_charge: 1.0,
-            quantum_anomaly: 0.0,
-            entropy_generation: 0.0,
+            action_variation: [0.0; 64],
+            noether_current_div: [0.0; 64],
+            conserved_charge: [1.0; 64],
+            quantum_anomaly: [0.0; 64],
+            entropy_generation: [0.0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_noether(d: u8, p: u8, m: u8, vec: &mut NoetherStateVector) -> Re
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.action_variation = (code as f64).sin() * 0.01;
-    vec.quantum_anomaly = if m == 8 { 0.05 * (code as f64).cos() } else { 0.0 };
-    vec.noether_current_div = vec.action_variation * 0.1 + vec.quantum_anomaly;
-    vec.conserved_charge = (vec.conserved_charge * 0.99 + 0.1 * (code as f64).sin()).max(0.0);
-    vec.entropy_generation = vec.noether_current_div * vec.noether_current_div;
+    for i in 0..64 {
+            vec.action_variation[i] = (code as f64 + i as f64).sin() * 0.01;
+            vec.quantum_anomaly[i] = if m == 8 { 0.05 * (code as f64 + i as f64).cos() } else { 0.0 };
+            vec.noether_current_div[i] = vec.action_variation[i] * 0.1 + vec.quantum_anomaly[i];
+            vec.conserved_charge[i] = (vec.conserved_charge[i] * 0.99 + 0.1 * (code as f64 + i as f64).sin()).max(0.0);
+            vec.entropy_generation[i] = vec.noether_current_div[i] * vec.noether_current_div[i];
+        }
     Ok(code)
 }

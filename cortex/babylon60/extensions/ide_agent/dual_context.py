@@ -7,24 +7,30 @@ import os
 import json
 import signal
 
+
 class DualContextAgent:
     """
     C5-REAL: Agente de Contexto Dual (Agent Igor)
     Servidor IPC (Unix Socket) para ingestión de grafos AST y AOM.
     """
+
     def __init__(self) -> None:
         self.code_ast: dict[str, Any] | None = None
         self.dom_aom: dict[str, Any] | None = None
-        
+
         socket_env = os.environ.get("CORTEX_IPC_SOCKET")
         if not socket_env:
-            logging.error("[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga.")
+            logging.error(
+                "[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga."
+            )
             os.kill(os.getpid(), signal.SIGKILL)
-            
+
         self.socket_path: str = socket_env or ""
         logging.basicConfig(level=logging.INFO)
 
-    async def ingest_code_context(self, file_path: str, ast_data: dict[str, Any]) -> None:
+    async def ingest_code_context(
+        self, file_path: str, ast_data: dict[str, Any]
+    ) -> None:
         self.code_ast = ast_data
         logging.info(f"[C5-REAL] Ingested AST from {file_path}")
 
@@ -38,10 +44,12 @@ class DualContextAgent:
         return {
             "status": "Exergia",
             "isomorphism_matched": True,
-            "action": "Esperando comandos del operador"
+            "action": "Esperando comandos del operador",
         }
 
-    async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
+    async def handle_client(
+        self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter
+    ) -> None:
         """Transductor de payload IPC (NDJSON Stream)."""
         try:
             async for line in reader:
@@ -52,13 +60,17 @@ class DualContextAgent:
                     payload = json.loads(line_str)
                     ptype = payload.get("type")
                     if ptype == "AST":
-                        await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
+                        await self.ingest_code_context(
+                            payload.get("file", "unknown"), payload.get("data", {})
+                        )
                     elif ptype == "AOM":
                         await self.ingest_dom_context(payload.get("data", {}))
                     elif ptype == "HEARTBEAT":
-                        pass # Ω43: Mantiene el liveness del socket
+                        pass  # Ω43: Mantiene el liveness del socket
                 except json.JSONDecodeError as e:
-                    logging.error(f"[C5-REAL] FATAL (Ω26): JSON Parse Error en NDJSON stream: {e}")
+                    logging.error(
+                        f"[C5-REAL] FATAL (Ω26): JSON Parse Error en NDJSON stream: {e}"
+                    )
                     os.kill(os.getpid(), signal.SIGKILL)
         except Exception as e:
             # Fail-Fast C5-REAL logging
@@ -71,12 +83,15 @@ class DualContextAgent:
         """Ω9: Ignición determinista síncrona."""
         if os.path.exists(self.socket_path):
             os.remove(self.socket_path)
-            
-        server = await asyncio.start_unix_server(self.handle_client, path=self.socket_path)
+
+        server = await asyncio.start_unix_server(
+            self.handle_client, path=self.socket_path
+        )
         logging.info(f"[C5-REAL] Agent Igor IPC Server listening on {self.socket_path}")
-        
+
         async with server:
             await server.serve_forever()
+
 
 def cleanup_socket(signum: Any, frame: Any) -> None:
     """Ω43: Prevención de Zombie IPC (Desvinculado Atómico)."""
@@ -86,9 +101,10 @@ def cleanup_socket(signum: Any, frame: Any) -> None:
         logging.info("[C5-REAL] Socket unlinked atomically. Purging process.")
     os.kill(os.getpid(), signal.SIGKILL)
 
+
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, cleanup_socket)
     signal.signal(signal.SIGTERM, cleanup_socket)
-    
+
     agent = DualContextAgent()
     asyncio.run(agent.start_ipc_server())

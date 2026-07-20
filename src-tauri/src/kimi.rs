@@ -10,22 +10,22 @@ pub struct KimiIdentity {
 
 #[derive(Debug, Clone)]
 pub struct KimiStateVector {
-    pub daimon_latency: f64,
-    pub taint_score: f64,
-    pub prompt_size: f64,
-    pub cache_hits: f64,
-    pub bft_validation_count: u64,
+    pub daimon_latency: [f64; 64],
+    pub taint_score: [f64; 64],
+    pub prompt_size: [f64; 64],
+    pub cache_hits: [f64; 64],
+    pub bft_validation_count: [u64; 64],
     pub execution_count: u64,
 }
 
 impl KimiStateVector {
     pub fn new() -> Self {
         Self {
-            daimon_latency: 0.0,
-            taint_score: 0.0,
-            prompt_size: 0.0,
-            cache_hits: 0.0,
-            bft_validation_count: 0,
+            daimon_latency: [0.0; 64],
+            taint_score: [0.0; 64],
+            prompt_size: [0.0; 64],
+            cache_hits: [0.0; 64],
+            bft_validation_count: [0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_kimi(d: u8, p: u8, m: u8, vec: &mut KimiStateVector) -> Result<u
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.daimon_latency = f64::max(0.001, vec.daimon_latency * 0.95 + 0.05 * (code as f64).sin().abs());
-    vec.taint_score = f64::max(0.0, f64::min(100.0, vec.taint_score + (code as f64).cos() * 5.0));
-    vec.prompt_size = f64::max(0.0, vec.prompt_size + (code % 50) as f64 - 25.0);
-    vec.cache_hits = vec.cache_hits * 0.99 + 0.01 * (code % 2) as f64;
-    vec.bft_validation_count += (code % 5) as u64;
+    for i in 0..64 {
+            vec.daimon_latency[i] = f64::max(0.001, vec.daimon_latency[i] * 0.95 + 0.05 * (code as f64 + i as f64).sin().abs());
+            vec.taint_score[i] = f64::max(0.0, f64::min(100.0, vec.taint_score[i] + (code as f64 + i as f64).cos() * 5.0));
+            vec.prompt_size[i] = f64::max(0.0, vec.prompt_size[i] + ((code + i as u64) % 50) as f64 - 25.0);
+            vec.cache_hits[i] = vec.cache_hits[i] * 0.99 + 0.01 * ((code + i as u64) % 2) as f64;
+            vec.bft_validation_count[i] += ((code + i as u64) % 5) as u64;
+        }
     Ok(code)
 }

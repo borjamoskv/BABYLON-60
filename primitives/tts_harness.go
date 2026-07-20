@@ -13,87 +13,120 @@ type TTSHarnessPrimitive int
 type TTSHarnessModifier int
 
 const (
-	TTSHarnessDomainEntropyalloc TTSHarnessDomain = 0
-	TTSHarnessDomainLatentlookahead TTSHarnessDomain = 1
-	TTSHarnessDomainPolicyimprove TTSHarnessDomain = 2
+	TTSHarnessDomainEntropyalloc     TTSHarnessDomain = 0
+	TTSHarnessDomainLatentlookahead  TTSHarnessDomain = 1
+	TTSHarnessDomainPolicyimprove    TTSHarnessDomain = 2
 	TTSHarnessDomainHarnessdiscovery TTSHarnessDomain = 3
-	TTSHarnessDomainProgrammaticjit TTSHarnessDomain = 4
-	TTSHarnessDomainSwarmgraph TTSHarnessDomain = 5
-	TTSHarnessDomainTritiermemory TTSHarnessDomain = 6
-	TTSHarnessDomainInfokveviction TTSHarnessDomain = 7
-	TTSHarnessDomainStagedecouple TTSHarnessDomain = 8
-	TTSHarnessDomainVectorquant TTSHarnessDomain = 9
+	TTSHarnessDomainProgrammaticjit  TTSHarnessDomain = 4
+	TTSHarnessDomainSwarmgraph       TTSHarnessDomain = 5
+	TTSHarnessDomainTritiermemory    TTSHarnessDomain = 6
+	TTSHarnessDomainInfokveviction   TTSHarnessDomain = 7
+	TTSHarnessDomainStagedecouple    TTSHarnessDomain = 8
+	TTSHarnessDomainVectorquant      TTSHarnessDomain = 9
 
 	// TTSHarness Primitives
-	TTSHarnessPrimitiveInit TTSHarnessPrimitive = 0
-	TTSHarnessPrimitiveExpand TTSHarnessPrimitive = 1
-	TTSHarnessPrimitiveEvaluate TTSHarnessPrimitive = 2
-	TTSHarnessPrimitiveBackprop TTSHarnessPrimitive = 3
-	TTSHarnessPrimitivePrune TTSHarnessPrimitive = 4
-	TTSHarnessPrimitiveQuantize TTSHarnessPrimitive = 5
-	TTSHarnessPrimitiveAssertbft TTSHarnessPrimitive = 6
-	TTSHarnessPrimitiveExecutesandbox TTSHarnessPrimitive = 7
+	TTSHarnessPrimitiveInit             TTSHarnessPrimitive = 0
+	TTSHarnessPrimitiveExpand           TTSHarnessPrimitive = 1
+	TTSHarnessPrimitiveEvaluate         TTSHarnessPrimitive = 2
+	TTSHarnessPrimitiveBackprop         TTSHarnessPrimitive = 3
+	TTSHarnessPrimitivePrune            TTSHarnessPrimitive = 4
+	TTSHarnessPrimitiveQuantize         TTSHarnessPrimitive = 5
+	TTSHarnessPrimitiveAssertbft        TTSHarnessPrimitive = 6
+	TTSHarnessPrimitiveExecutesandbox   TTSHarnessPrimitive = 7
 	TTSHarnessPrimitiveReconstructstate TTSHarnessPrimitive = 8
-	TTSHarnessPrimitiveFlushledger TTSHarnessPrimitive = 9
+	TTSHarnessPrimitiveFlushledger      TTSHarnessPrimitive = 9
 
 	// TTSHarness Modifiers
-	TTSHarnessModifierRaw TTSHarnessModifier = 0
-	TTSHarnessModifierAtomic TTSHarnessModifier = 1
-	TTSHarnessModifierAdaptivecot TTSHarnessModifier = 2
-	TTSHarnessModifierRetroattention TTSHarnessModifier = 3
+	TTSHarnessModifierRaw              TTSHarnessModifier = 0
+	TTSHarnessModifierAtomic           TTSHarnessModifier = 1
+	TTSHarnessModifierAdaptivecot      TTSHarnessModifier = 2
+	TTSHarnessModifierRetroattention   TTSHarnessModifier = 3
 	TTSHarnessModifierForwardinfluence TTSHarnessModifier = 4
-	TTSHarnessModifierTurboquant TTSHarnessModifier = 5
-	TTSHarnessModifierMetaproposer TTSHarnessModifier = 6
-	TTSHarnessModifierFeedforwardopen TTSHarnessModifier = 7
-	TTSHarnessModifierSlidingwindow TTSHarnessModifier = 8
-	TTSHarnessModifierEpidemicpurge TTSHarnessModifier = 9
+	TTSHarnessModifierTurboquant       TTSHarnessModifier = 5
+	TTSHarnessModifierMetaproposer     TTSHarnessModifier = 6
+	TTSHarnessModifierFeedforwardopen  TTSHarnessModifier = 7
+	TTSHarnessModifierSlidingwindow    TTSHarnessModifier = 8
+	TTSHarnessModifierEpidemicpurge    TTSHarnessModifier = 9
 )
 
 func (d TTSHarnessDomain) String() string {
 	switch d {
-	case 0: return "ENTROPY_ALLOC"
-	case 1: return "LATENT_LOOKAHEAD"
-	case 2: return "POLICY_IMPROVE"
-	case 3: return "HARNESS_DISCOVERY"
-	case 4: return "PROGRAMMATIC_JIT"
-	case 5: return "SWARM_GRAPH"
-	case 6: return "TRI_TIER_MEMORY"
-	case 7: return "INFO_KV_EVICTION"
-	case 8: return "STAGE_DECOUPLE"
-	case 9: return "VECTOR_QUANT"
-	default: return "UNKNOWN"
+	case 0:
+		return "ENTROPY_ALLOC"
+	case 1:
+		return "LATENT_LOOKAHEAD"
+	case 2:
+		return "POLICY_IMPROVE"
+	case 3:
+		return "HARNESS_DISCOVERY"
+	case 4:
+		return "PROGRAMMATIC_JIT"
+	case 5:
+		return "SWARM_GRAPH"
+	case 6:
+		return "TRI_TIER_MEMORY"
+	case 7:
+		return "INFO_KV_EVICTION"
+	case 8:
+		return "STAGE_DECOUPLE"
+	case 9:
+		return "VECTOR_QUANT"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p TTSHarnessPrimitive) String() string {
 	switch p {
-	case 0: return "INIT"
-	case 1: return "EXPAND"
-	case 2: return "EVALUATE"
-	case 3: return "BACKPROP"
-	case 4: return "PRUNE"
-	case 5: return "QUANTIZE"
-	case 6: return "ASSERT_BFT"
-	case 7: return "EXECUTE_SANDBOX"
-	case 8: return "RECONSTRUCT_STATE"
-	case 9: return "FLUSH_LEDGER"
-	default: return "UNKNOWN"
+	case 0:
+		return "INIT"
+	case 1:
+		return "EXPAND"
+	case 2:
+		return "EVALUATE"
+	case 3:
+		return "BACKPROP"
+	case 4:
+		return "PRUNE"
+	case 5:
+		return "QUANTIZE"
+	case 6:
+		return "ASSERT_BFT"
+	case 7:
+		return "EXECUTE_SANDBOX"
+	case 8:
+		return "RECONSTRUCT_STATE"
+	case 9:
+		return "FLUSH_LEDGER"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m TTSHarnessModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "ATOMIC"
-	case 2: return "ADAPTIVE_COT"
-	case 3: return "RETRO_ATTENTION"
-	case 4: return "FORWARD_INFLUENCE"
-	case 5: return "TURBO_QUANT"
-	case 6: return "META_PROPOSER"
-	case 7: return "FEEDFORWARD_OPEN"
-	case 8: return "SLIDING_WINDOW"
-	case 9: return "EPIDEMIC_PURGE"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "ATOMIC"
+	case 2:
+		return "ADAPTIVE_COT"
+	case 3:
+		return "RETRO_ATTENTION"
+	case 4:
+		return "FORWARD_INFLUENCE"
+	case 5:
+		return "TURBO_QUANT"
+	case 6:
+		return "META_PROPOSER"
+	case 7:
+		return "FEEDFORWARD_OPEN"
+	case 8:
+		return "SLIDING_WINDOW"
+	case 9:
+		return "EPIDEMIC_PURGE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -106,12 +139,12 @@ type TTSHarnessIdentity struct {
 }
 
 type TTSHarnessState struct {
-	MCTSBudgetTokens uint64
-	LatentValue      float64
-	HarnessScore     float64
-	KVCacheEfficiency float64
-	PruningRate      float64
-	ExecutionCount uint64
+	MCTSBudgetTokens  [64]uint64
+	LatentValue       [64]float64
+	HarnessScore      [64]float64
+	KVCacheEfficiency [64]float64
+	PruningRate       [64]float64
+	ExecutionCount    uint64
 }
 
 func ResolveTTSHarnessIdentity(d, p, m byte) (TTSHarnessIdentity, error) {
@@ -132,7 +165,7 @@ func ResolveTTSHarnessIdentity(d, p, m byte) (TTSHarnessIdentity, error) {
 type TTSHarnessHandler func(id TTSHarnessIdentity, vec *TTSHarnessState) error
 
 var (
-	TTSHarnessTable [1000]TTSHarnessHandler
+	TTSHarnessTable   [1000]TTSHarnessHandler
 	TTSHarnessMetrics [1000]uint64
 )
 
@@ -140,10001 +173,12001 @@ func InitTTSHarnessKernel() {
 	TTSHarnessTable[0] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[0], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[1] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[1], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[2] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[2], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[3] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[3], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[4] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[4], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[5] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[5], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[6] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[6], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[7] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[7], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[8] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[8], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[9] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[9], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[10] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[10], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[11] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[11], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[12] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[12], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[13] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[13], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[14] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[14], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[15] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[15], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[16] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[16], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[17] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[17], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[18] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[18], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[19] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[19], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[20] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[20], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[21] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[21], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[22] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[22], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[23] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[23], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[24] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[24], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[25] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[25], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[26] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[26], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[27] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[27], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[28] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[28], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[29] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[29], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[30] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[30], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[31] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[31], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[32] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[32], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[33] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[33], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[34] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[34], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[35] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[35], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[36] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[36], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[37] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[37], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[38] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[38], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[39] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[39], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[40] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[40], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[41] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[41], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[42] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[42], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[43] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[43], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[44] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[44], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[45] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[45], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[46] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[46], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[47] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[47], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[48] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[48], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[49] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[49], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[50] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[50], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[51] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[51], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[52] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[52], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[53] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[53], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[54] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[54], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[55] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[55], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[56] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[56], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[57] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[57], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[58] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[58], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[59] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[59], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[60] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[60], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[61] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[61], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[62] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[62], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[63] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[63], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[64] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[64], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[65] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[65], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[66] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[66], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[67] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[67], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[68] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[68], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[69] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[69], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[70] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[70], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[71] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[71], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[72] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[72], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[73] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[73], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[74] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[74], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[75] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[75], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[76] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[76], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[77] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[77], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[78] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[78], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[79] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[79], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[80] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[80], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[81] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[81], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[82] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[82], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[83] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[83], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[84] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[84], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[85] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[85], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[86] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[86], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[87] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[87], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[88] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[88], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[89] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[89], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[90] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[90], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[91] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[91], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[92] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[92], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[93] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[93], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[94] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[94], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[95] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[95], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[96] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[96], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[97] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[97], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[98] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[98], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[99] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[99], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[100] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[100], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[101] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[101], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[102] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[102], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[103] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[103], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[104] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[104], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[105] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[105], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[106] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[106], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[107] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[107], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[108] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[108], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[109] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[109], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[110] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[110], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[111] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[111], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[112] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[112], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[113] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[113], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[114] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[114], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[115] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[115], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[116] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[116], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[117] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[117], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[118] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[118], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[119] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[119], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[120] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[120], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[121] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[121], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[122] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[122], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[123] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[123], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[124] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[124], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[125] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[125], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[126] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[126], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[127] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[127], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[128] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[128], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[129] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[129], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[130] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[130], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[131] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[131], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[132] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[132], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[133] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[133], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[134] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[134], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[135] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[135], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[136] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[136], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[137] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[137], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[138] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[138], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[139] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[139], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[140] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[140], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[141] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[141], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[142] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[142], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[143] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[143], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[144] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[144], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[145] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[145], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[146] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[146], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[147] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[147], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[148] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[148], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[149] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[149], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[150] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[150], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[151] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[151], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[152] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[152], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[153] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[153], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[154] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[154], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[155] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[155], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[156] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[156], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[157] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[157], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[158] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[158], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[159] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[159], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[160] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[160], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[161] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[161], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[162] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[162], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[163] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[163], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[164] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[164], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[165] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[165], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[166] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[166], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[167] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[167], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[168] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[168], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[169] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[169], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[170] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[170], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[171] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[171], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[172] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[172], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[173] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[173], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[174] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[174], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[175] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[175], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[176] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[176], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[177] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[177], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[178] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[178], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[179] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[179], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[180] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[180], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[181] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[181], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[182] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[182], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[183] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[183], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[184] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[184], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[185] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[185], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[186] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[186], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[187] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[187], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[188] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[188], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[189] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[189], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[190] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[190], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[191] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[191], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[192] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[192], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[193] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[193], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[194] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[194], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[195] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[195], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[196] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[196], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[197] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[197], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[198] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[198], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[199] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[199], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[200] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[200], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[201] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[201], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[202] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[202], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[203] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[203], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[204] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[204], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[205] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[205], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[206] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[206], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[207] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[207], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[208] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[208], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[209] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[209], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[210] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[210], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[211] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[211], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[212] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[212], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[213] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[213], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[214] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[214], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[215] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[215], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[216] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[216], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[217] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[217], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[218] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[218], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[219] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[219], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[220] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[220], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[221] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[221], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[222] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[222], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[223] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[223], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[224] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[224], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[225] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[225], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[226] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[226], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[227] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[227], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[228] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[228], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[229] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[229], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[230] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[230], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[231] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[231], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[232] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[232], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[233] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[233], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[234] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[234], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[235] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[235], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[236] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[236], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[237] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[237], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[238] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[238], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[239] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[239], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[240] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[240], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[241] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[241], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[242] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[242], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[243] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[243], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[244] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[244], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[245] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[245], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[246] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[246], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[247] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[247], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[248] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[248], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[249] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[249], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[250] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[250], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[251] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[251], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[252] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[252], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[253] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[253], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[254] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[254], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[255] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[255], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[256] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[256], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[257] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[257], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[258] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[258], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[259] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[259], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[260] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[260], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[261] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[261], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[262] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[262], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[263] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[263], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[264] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[264], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[265] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[265], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[266] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[266], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[267] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[267], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[268] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[268], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[269] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[269], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[270] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[270], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[271] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[271], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[272] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[272], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[273] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[273], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[274] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[274], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[275] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[275], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[276] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[276], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[277] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[277], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[278] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[278], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[279] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[279], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[280] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[280], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[281] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[281], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[282] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[282], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[283] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[283], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[284] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[284], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[285] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[285], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[286] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[286], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[287] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[287], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[288] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[288], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[289] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[289], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[290] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[290], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[291] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[291], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[292] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[292], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[293] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[293], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[294] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[294], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[295] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[295], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[296] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[296], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[297] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[297], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[298] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[298], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[299] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[299], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[300] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[300], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[301] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[301], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[302] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[302], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[303] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[303], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[304] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[304], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[305] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[305], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[306] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[306], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[307] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[307], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[308] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[308], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[309] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[309], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[310] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[310], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[311] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[311], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[312] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[312], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[313] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[313], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[314] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[314], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[315] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[315], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[316] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[316], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[317] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[317], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[318] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[318], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[319] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[319], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[320] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[320], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[321] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[321], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[322] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[322], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[323] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[323], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[324] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[324], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[325] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[325], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[326] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[326], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[327] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[327], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[328] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[328], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[329] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[329], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[330] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[330], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[331] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[331], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[332] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[332], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[333] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[333], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[334] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[334], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[335] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[335], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[336] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[336], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[337] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[337], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[338] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[338], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[339] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[339], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[340] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[340], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[341] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[341], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[342] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[342], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[343] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[343], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[344] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[344], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[345] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[345], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[346] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[346], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[347] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[347], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[348] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[348], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[349] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[349], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[350] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[350], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[351] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[351], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[352] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[352], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[353] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[353], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[354] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[354], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[355] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[355], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[356] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[356], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[357] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[357], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[358] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[358], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[359] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[359], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[360] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[360], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[361] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[361], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[362] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[362], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[363] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[363], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[364] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[364], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[365] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[365], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[366] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[366], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[367] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[367], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[368] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[368], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[369] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[369], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[370] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[370], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[371] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[371], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[372] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[372], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[373] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[373], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[374] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[374], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[375] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[375], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[376] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[376], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[377] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[377], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[378] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[378], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[379] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[379], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[380] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[380], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[381] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[381], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[382] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[382], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[383] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[383], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[384] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[384], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[385] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[385], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[386] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[386], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[387] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[387], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[388] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[388], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[389] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[389], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[390] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[390], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[391] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[391], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[392] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[392], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[393] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[393], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[394] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[394], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[395] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[395], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[396] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[396], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[397] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[397], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[398] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[398], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[399] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[399], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[400] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[400], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[401] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[401], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[402] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[402], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[403] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[403], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[404] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[404], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[405] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[405], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[406] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[406], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[407] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[407], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[408] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[408], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[409] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[409], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[410] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[410], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[411] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[411], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[412] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[412], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[413] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[413], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[414] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[414], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[415] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[415], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[416] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[416], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[417] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[417], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[418] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[418], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[419] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[419], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[420] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[420], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[421] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[421], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[422] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[422], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[423] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[423], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[424] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[424], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[425] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[425], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[426] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[426], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[427] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[427], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[428] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[428], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[429] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[429], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[430] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[430], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[431] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[431], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[432] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[432], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[433] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[433], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[434] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[434], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[435] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[435], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[436] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[436], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[437] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[437], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[438] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[438], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[439] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[439], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[440] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[440], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[441] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[441], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[442] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[442], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[443] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[443], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[444] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[444], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[445] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[445], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[446] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[446], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[447] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[447], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[448] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[448], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[449] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[449], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[450] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[450], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[451] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[451], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[452] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[452], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[453] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[453], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[454] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[454], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[455] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[455], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[456] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[456], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[457] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[457], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[458] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[458], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[459] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[459], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[460] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[460], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[461] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[461], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[462] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[462], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[463] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[463], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[464] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[464], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[465] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[465], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[466] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[466], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[467] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[467], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[468] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[468], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[469] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[469], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[470] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[470], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[471] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[471], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[472] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[472], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[473] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[473], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[474] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[474], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[475] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[475], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[476] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[476], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[477] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[477], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[478] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[478], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[479] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[479], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[480] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[480], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[481] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[481], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[482] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[482], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[483] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[483], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[484] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[484], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[485] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[485], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[486] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[486], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[487] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[487], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[488] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[488], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[489] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[489], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[490] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[490], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[491] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[491], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[492] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[492], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[493] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[493], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[494] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[494], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[495] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[495], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[496] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[496], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[497] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[497], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[498] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[498], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[499] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[499], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[500] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[500], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[501] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[501], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[502] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[502], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[503] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[503], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[504] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[504], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[505] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[505], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[506] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[506], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[507] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[507], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[508] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[508], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[509] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[509], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[510] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[510], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[511] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[511], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[512] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[512], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[513] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[513], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[514] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[514], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[515] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[515], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[516] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[516], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[517] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[517], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[518] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[518], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[519] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[519], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[520] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[520], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[521] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[521], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[522] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[522], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[523] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[523], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[524] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[524], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[525] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[525], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[526] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[526], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[527] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[527], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[528] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[528], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[529] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[529], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[530] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[530], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[531] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[531], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[532] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[532], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[533] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[533], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[534] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[534], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[535] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[535], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[536] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[536], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[537] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[537], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[538] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[538], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[539] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[539], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[540] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[540], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[541] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[541], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[542] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[542], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[543] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[543], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[544] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[544], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[545] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[545], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[546] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[546], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[547] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[547], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[548] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[548], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[549] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[549], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[550] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[550], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[551] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[551], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[552] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[552], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[553] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[553], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[554] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[554], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[555] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[555], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[556] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[556], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[557] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[557], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[558] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[558], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[559] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[559], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[560] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[560], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[561] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[561], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[562] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[562], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[563] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[563], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[564] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[564], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[565] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[565], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[566] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[566], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[567] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[567], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[568] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[568], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[569] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[569], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[570] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[570], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[571] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[571], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[572] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[572], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[573] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[573], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[574] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[574], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[575] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[575], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[576] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[576], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[577] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[577], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[578] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[578], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[579] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[579], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[580] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[580], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[581] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[581], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[582] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[582], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[583] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[583], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[584] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[584], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[585] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[585], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[586] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[586], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[587] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[587], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[588] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[588], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[589] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[589], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[590] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[590], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[591] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[591], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[592] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[592], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[593] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[593], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[594] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[594], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[595] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[595], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[596] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[596], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[597] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[597], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[598] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[598], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[599] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[599], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[600] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[600], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[601] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[601], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[602] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[602], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[603] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[603], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[604] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[604], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[605] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[605], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[606] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[606], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[607] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[607], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[608] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[608], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[609] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[609], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[610] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[610], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[611] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[611], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[612] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[612], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[613] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[613], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[614] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[614], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[615] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[615], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[616] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[616], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[617] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[617], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[618] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[618], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[619] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[619], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[620] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[620], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[621] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[621], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[622] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[622], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[623] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[623], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[624] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[624], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[625] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[625], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[626] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[626], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[627] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[627], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[628] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[628], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[629] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[629], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[630] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[630], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[631] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[631], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[632] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[632], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[633] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[633], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[634] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[634], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[635] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[635], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[636] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[636], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[637] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[637], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[638] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[638], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[639] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[639], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[640] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[640], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[641] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[641], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[642] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[642], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[643] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[643], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[644] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[644], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[645] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[645], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[646] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[646], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[647] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[647], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[648] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[648], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[649] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[649], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[650] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[650], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[651] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[651], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[652] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[652], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[653] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[653], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[654] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[654], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[655] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[655], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[656] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[656], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[657] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[657], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[658] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[658], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[659] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[659], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[660] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[660], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[661] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[661], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[662] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[662], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[663] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[663], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[664] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[664], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[665] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[665], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[666] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[666], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[667] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[667], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[668] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[668], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[669] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[669], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[670] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[670], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[671] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[671], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[672] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[672], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[673] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[673], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[674] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[674], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[675] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[675], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[676] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[676], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[677] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[677], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[678] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[678], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[679] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[679], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[680] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[680], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[681] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[681], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[682] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[682], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[683] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[683], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[684] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[684], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[685] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[685], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[686] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[686], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[687] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[687], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[688] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[688], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[689] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[689], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[690] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[690], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[691] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[691], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[692] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[692], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[693] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[693], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[694] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[694], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[695] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[695], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[696] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[696], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[697] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[697], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[698] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[698], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[699] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[699], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[700] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[700], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[701] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[701], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[702] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[702], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[703] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[703], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[704] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[704], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[705] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[705], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[706] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[706], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[707] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[707], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[708] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[708], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[709] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[709], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[710] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[710], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[711] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[711], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[712] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[712], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[713] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[713], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[714] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[714], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[715] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[715], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[716] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[716], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[717] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[717], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[718] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[718], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[719] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[719], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[720] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[720], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[721] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[721], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[722] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[722], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[723] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[723], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[724] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[724], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[725] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[725], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[726] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[726], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[727] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[727], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[728] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[728], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[729] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[729], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[730] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[730], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[731] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[731], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[732] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[732], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[733] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[733], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[734] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[734], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[735] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[735], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[736] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[736], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[737] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[737], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[738] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[738], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[739] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[739], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[740] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[740], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[741] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[741], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[742] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[742], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[743] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[743], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[744] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[744], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[745] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[745], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[746] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[746], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[747] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[747], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[748] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[748], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[749] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[749], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[750] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[750], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[751] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[751], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[752] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[752], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[753] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[753], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[754] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[754], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[755] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[755], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[756] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[756], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[757] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[757], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[758] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[758], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[759] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[759], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[760] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[760], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[761] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[761], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[762] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[762], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[763] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[763], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[764] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[764], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[765] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[765], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[766] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[766], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[767] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[767], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[768] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[768], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[769] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[769], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[770] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[770], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[771] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[771], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[772] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[772], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[773] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[773], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[774] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[774], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[775] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[775], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[776] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[776], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[777] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[777], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[778] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[778], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[779] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[779], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[780] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[780], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[781] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[781], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[782] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[782], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[783] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[783], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[784] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[784], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[785] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[785], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[786] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[786], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[787] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[787], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[788] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[788], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[789] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[789], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[790] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[790], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[791] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[791], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[792] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[792], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[793] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[793], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[794] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[794], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[795] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[795], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[796] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[796], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[797] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[797], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[798] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[798], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[799] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[799], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[800] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[800], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[801] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[801], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[802] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[802], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[803] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[803], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[804] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[804], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[805] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[805], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[806] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[806], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[807] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[807], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[808] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[808], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[809] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[809], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[810] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[810], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[811] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[811], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[812] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[812], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[813] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[813], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[814] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[814], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[815] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[815], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[816] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[816], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[817] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[817], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[818] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[818], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[819] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[819], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[820] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[820], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[821] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[821], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[822] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[822], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[823] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[823], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[824] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[824], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[825] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[825], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[826] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[826], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[827] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[827], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[828] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[828], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[829] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[829], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[830] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[830], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[831] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[831], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[832] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[832], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[833] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[833], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[834] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[834], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[835] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[835], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[836] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[836], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[837] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[837], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[838] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[838], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[839] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[839], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[840] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[840], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[841] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[841], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[842] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[842], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[843] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[843], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[844] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[844], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[845] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[845], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[846] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[846], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[847] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[847], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[848] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[848], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[849] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[849], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[850] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[850], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[851] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[851], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[852] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[852], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[853] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[853], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[854] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[854], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[855] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[855], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[856] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[856], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[857] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[857], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[858] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[858], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[859] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[859], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[860] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[860], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[861] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[861], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[862] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[862], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[863] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[863], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[864] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[864], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[865] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[865], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[866] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[866], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[867] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[867], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[868] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[868], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[869] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[869], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[870] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[870], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[871] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[871], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[872] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[872], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[873] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[873], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[874] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[874], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[875] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[875], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[876] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[876], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[877] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[877], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[878] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[878], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[879] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[879], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[880] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[880], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[881] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[881], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[882] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[882], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[883] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[883], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[884] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[884], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[885] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[885], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[886] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[886], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[887] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[887], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[888] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[888], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[889] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[889], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[890] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[890], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[891] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[891], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[892] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[892], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[893] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[893], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[894] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[894], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[895] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[895], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[896] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[896], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[897] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[897], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[898] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[898], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[899] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[899], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[900] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[900], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[901] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[901], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[902] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[902], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[903] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[903], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[904] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[904], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[905] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[905], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[906] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[906], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[907] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[907], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[908] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[908], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[909] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[909], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[910] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[910], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[911] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[911], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[912] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[912], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[913] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[913], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[914] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[914], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[915] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[915], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[916] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[916], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[917] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[917], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[918] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[918], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[919] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[919], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[920] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[920], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[921] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[921], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[922] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[922], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[923] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[923], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[924] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[924], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[925] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[925], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[926] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[926], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[927] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[927], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[928] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[928], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[929] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[929], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[930] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[930], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[931] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[931], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[932] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[932], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[933] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[933], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[934] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[934], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[935] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[935], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[936] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[936], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[937] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[937], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[938] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[938], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[939] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[939], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[940] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[940], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[941] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[941], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[942] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[942], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[943] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[943], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[944] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[944], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[945] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[945], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[946] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[946], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[947] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[947], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[948] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[948], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[949] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[949], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[950] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[950], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[951] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[951], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[952] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[952], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[953] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[953], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[954] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[954], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[955] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[955], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[956] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[956], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[957] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[957], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[958] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[958], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[959] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[959], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[960] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[960], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[961] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[961], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[962] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[962], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[963] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[963], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[964] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[964], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[965] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[965], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[966] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[966], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[967] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[967], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[968] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[968], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[969] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[969], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[970] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[970], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[971] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[971], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[972] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[972], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[973] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[973], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[974] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[974], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[975] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[975], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[976] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[976], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[977] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[977], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[978] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[978], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[979] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[979], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[980] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[980], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[981] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[981], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[982] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[982], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[983] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[983], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[984] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[984], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[985] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[985], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[986] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[986], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[987] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[987], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[988] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[988], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[989] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[989], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[990] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[990], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[991] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[991], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[992] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[992], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[993] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[993], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[994] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[994], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[995] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[995], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[996] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[996], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[997] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[997], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[998] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[998], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 	TTSHarnessTable[999] = func(id TTSHarnessIdentity, vec *TTSHarnessState) error {
 		atomic.AddUint64(&TTSHarnessMetrics[999], 1)
 		vec.ExecutionCount++
-		vec.MCTSBudgetTokens += uint64(id.Code%50) + 10
-		vec.LatentValue = math.Tanh(float64(id.Code) * 0.001)
-		vec.HarnessScore = 0.5 + 0.5*math.Sin(float64(id.Code))
-		vec.KVCacheEfficiency = math.Min(1.0, 0.2 + float64(id.Code%10)*0.08)
-		vec.PruningRate = 1.0 - vec.KVCacheEfficiency*0.5
+		for i := 0; i < 64; i++ {
+			vec.MCTSBudgetTokens[i] += uint64((id.Code+uint64(i))%50) + 10
+			vec.LatentValue[i] = math.Tanh(float64(id.Code+uint64(i)) * 0.001)
+			vec.HarnessScore[i] = 0.5 + 0.5*math.Sin(float64(id.Code+uint64(i)))
+			vec.KVCacheEfficiency[i] = math.Min(1.0, 0.2+float64((id.Code+uint64(i))%10)*0.08)
+			vec.PruningRate[i] = 1.0 - vec.KVCacheEfficiency[i]*0.5
+		}
 		return nil
 	}
 }
@@ -10152,6 +12185,8 @@ func DispatchTTSHarness(d, p, m byte, vec *TTSHarnessState) error {
 }
 
 func GetTTSHarnessExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&TTSHarnessMetrics[code])
 }

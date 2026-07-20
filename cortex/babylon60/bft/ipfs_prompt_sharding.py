@@ -9,6 +9,7 @@ from typing import Dict
 # El LLM utiliza herramientas (Tool calls) para hacer fetch JIT (Just-In-Time) de los invariantes,
 # o el Orquestador aprovecha el Context Caching si el CID coincide con la caché caliente de Gemini/Claude.
 
+
 class IPFS_Prompt_Ledger:
     def __init__(self, vault_path: str = ".cortex/ipfs_vault"):
         self.vault_path = vault_path
@@ -23,14 +24,14 @@ class IPFS_Prompt_Ledger:
         """Cristaliza un bloque de reglas en el vault inmutable."""
         content_bytes = markdown_content.encode("utf-8")
         cid = self._compute_cid(content_bytes)
-        
+
         file_path = os.path.join(self.vault_path, cid)
         tmp_path = file_path + ".tmp"
         if not os.path.exists(file_path):
             with open(tmp_path, "wb") as f:
                 f.write(content_bytes)
             os.replace(tmp_path, file_path)
-                
+
         self.cid_index[domain] = cid
         logging.info(f"[C5-REAL] Pinned {domain} -> {cid}")
         return cid
@@ -39,8 +40,10 @@ class IPFS_Prompt_Ledger:
         """Tool call endpoint para el agente. Fallo estricto si no existe."""
         file_path = os.path.join(self.vault_path, cid)
         if not os.path.exists(file_path):
-            raise KeyError(f"[C5-REAL] FATAL: CID {cid} no existe en el Vault físico. Posible alucinación o corrupción de estado.")
-            
+            raise KeyError(
+                f"[C5-REAL] FATAL: CID {cid} no existe en el Vault físico. Posible alucinación o corrupción de estado."
+            )
+
         with open(file_path, "rb") as f:
             return f.read().decode("utf-8")
 
@@ -65,10 +68,15 @@ class IPFS_Prompt_Ledger:
         )
         return prompt
 
+
 if __name__ == "__main__":
     ledger = IPFS_Prompt_Ledger()
     # Simulación de cristalización
-    ledger.pin_invariant("FRONTEND_REACT", "Regla React: Prohibido useEffect sin dependencias físicas.")
-    ledger.pin_invariant("BFT_CONSENSUS", "Regla BFT: Mutar el estado exige quorum de 3 subagentes.")
-    
+    ledger.pin_invariant(
+        "FRONTEND_REACT", "Regla React: Prohibido useEffect sin dependencias físicas."
+    )
+    ledger.pin_invariant(
+        "BFT_CONSENSUS", "Regla BFT: Mutar el estado exige quorum de 3 subagentes."
+    )
+
     print(ledger.generate_bootstrap_prompt())

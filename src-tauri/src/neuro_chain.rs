@@ -10,22 +10,22 @@ pub struct NeuroChainIdentity {
 
 #[derive(Debug, Clone)]
 pub struct CognitiveChainVector {
-    pub homeostasis_energy: f64,
-    pub prediction_error: f64,
-    pub attention_weight: f64,
-    pub action_torque: f64,
-    pub language_entropy: f64,
+    pub homeostasis_energy: [f64; 64],
+    pub prediction_error: [f64; 64],
+    pub attention_weight: [f64; 64],
+    pub action_torque: [f64; 64],
+    pub language_entropy: [f64; 64],
     pub execution_count: u64,
 }
 
 impl CognitiveChainVector {
     pub fn new() -> Self {
         Self {
-            homeostasis_energy: 1.0,
-            prediction_error: 0.0,
-            attention_weight: 1.0,
-            action_torque: 0.0,
-            language_entropy: 0.0,
+            homeostasis_energy: [1.0; 64],
+            prediction_error: [0.0; 64],
+            attention_weight: [1.0; 64],
+            action_torque: [0.0; 64],
+            language_entropy: [0.0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_neuro_chain(d: u8, p: u8, m: u8, vec: &mut CognitiveChainVector)
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.homeostasis_energy = f64::max(0.01, vec.homeostasis_energy * 0.98 + 0.02 * (code as f64).cos());
-    vec.prediction_error = ((code as f64).sin() * 0.1 - vec.homeostasis_energy * 0.05).abs();
-    vec.attention_weight = 1.0 / (1.0 + vec.prediction_error);
-    vec.action_torque = vec.attention_weight * ((code % 10) as f64 + 1.0);
-    vec.language_entropy = (1.0 + vec.action_torque).log2();
+    for i in 0..64 {
+            vec.homeostasis_energy[i] = f64::max(0.01, vec.homeostasis_energy[i] * 0.98 + 0.02 * (code as f64 + i as f64).cos());
+            vec.prediction_error[i] = ((code as f64 + i as f64).sin() * 0.1 - vec.homeostasis_energy[i] * 0.05).abs();
+            vec.attention_weight[i] = 1.0 / (1.0 + vec.prediction_error[i]);
+            vec.action_torque[i] = vec.attention_weight[i] * (((code + i as u64) % 10) as f64 + 1.0);
+            vec.language_entropy[i] = (1.0 + vec.action_torque[i]).log2();
+        }
     Ok(code)
 }

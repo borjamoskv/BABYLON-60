@@ -80,7 +80,9 @@ def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
 
 
 def main() -> None:
-    target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    target_dir = os.environ.get(
+        "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    )
     internal_namespaces = ["babylon60", "causal_isomorphism", "strike_rs", "cortex"]
 
     stats = {}
@@ -160,10 +162,12 @@ def main() -> None:
     sccs = tarjan(module_graph)
 
     # 4. Generar reporte
-    top_loc = sorted(stats.items(), key=lambda x: int(str(x[1]["loc"])), reverse=True)[:50]
-    top_complex = sorted(stats.items(), key=lambda x: int(str(x[1]["complexity"])), reverse=True)[
+    top_loc = sorted(stats.items(), key=lambda x: int(str(x[1]["loc"])), reverse=True)[
         :50
     ]
+    top_complex = sorted(
+        stats.items(), key=lambda x: int(str(x[1]["complexity"])), reverse=True
+    )[:50]
 
     # Hotspots: top_complex + top_fan_in + top_fan_out
     # Aproximamos calculando un "Hotspot Score"
@@ -171,7 +175,9 @@ def main() -> None:
     for rel_path, s in stats.items():
         base_module = rel_path.replace(".py", "").replace("/", ".")
         score = (
-            int(str(s["complexity"])) + fan_in.get(base_module, 0) * 2 + fan_out.get(rel_path, 0)
+            int(str(s["complexity"]))
+            + fan_in.get(base_module, 0) * 2
+            + fan_out.get(rel_path, 0)
         )
         hotspots.append(
             {

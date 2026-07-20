@@ -2,33 +2,74 @@
 import math
 from typing import Tuple
 
-DOMAINS = {0: 'BROWSER_NAV', 1: 'DOM_INTERACT', 2: 'ASSERT_EXTRACT', 3: 'RESERVED_3', 4: 'RESERVED_4', 5: 'RESERVED_5', 6: 'RESERVED_6', 7: 'RESERVED_7', 8: 'RESERVED_8', 9: 'RESERVED_9'}
-PRIMITIVES = {0: 'INIT', 1: 'NAVIGATE', 2: 'CLICK', 3: 'TYPE', 4: 'WAIT', 5: 'QUERY', 6: 'CAPTURE', 7: 'MUTATE', 8: 'EVALUATE', 9: 'CLOSE'}
-MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'FORCE', 3: 'WAIT_IDLE', 4: 'STEALTH', 5: 'SYNC', 6: 'ASYNC', 7: 'SECURE', 8: 'RETRY', 9: 'SHADOW'}
+DOMAINS = {
+    0: "BROWSER_NAV",
+    1: "DOM_INTERACT",
+    2: "ASSERT_EXTRACT",
+    3: "RESERVED_3",
+    4: "RESERVED_4",
+    5: "RESERVED_5",
+    6: "RESERVED_6",
+    7: "RESERVED_7",
+    8: "RESERVED_8",
+    9: "RESERVED_9",
+}
+PRIMITIVES = {
+    0: "INIT",
+    1: "NAVIGATE",
+    2: "CLICK",
+    3: "TYPE",
+    4: "WAIT",
+    5: "QUERY",
+    6: "CAPTURE",
+    7: "MUTATE",
+    8: "EVALUATE",
+    9: "CLOSE",
+}
+MODIFIERS = {
+    0: "RAW",
+    1: "ATOMIC",
+    2: "FORCE",
+    3: "WAIT_IDLE",
+    4: "STEALTH",
+    5: "SYNC",
+    6: "ASYNC",
+    7: "SECURE",
+    8: "RETRY",
+    9: "SHADOW",
+}
+
 
 class PlaywrightStateVector:
     def __init__(self):
-        self.browser_active = False
-        self.page_count = 0
-        self.last_load_time_ms = 0.0
-        self.dom_stability_index = 1.0
-        self.network_idle_state = True
+        self.browser_active = [False] * 64
+        self.page_count = [0] * 64
+        self.last_load_time_ms = [0.0] * 64
+        self.dom_stability_index = [1.0] * 64
+        self.network_idle_state = [True] * 64
         self.execution_count = 0
+
 
 def resolve_playwright_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
-        raise ValueError('Index out of range [0-9]')
+        raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
-    name = f'PW-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}'
+    name = f"PW-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
 
-def dispatch_playwright(d: int, p: int, m: int, vec: PlaywrightStateVector) -> Tuple[int, str, float]:
+
+def dispatch_playwright(
+    d: int, p: int, m: int, vec: PlaywrightStateVector
+) -> Tuple[int, str, float]:
     code, name = resolve_playwright_identity(d, p, m)
     vec.execution_count += 1
-    vec.browser_active = d != 0 or p != 9
-    if d == 0 and p == 0:
-        vec.page_count += 1
-    vec.last_load_time_ms = abs(math.sin(code)) * 120.0
-    vec.dom_stability_index = max(0.0, min(1.0, vec.dom_stability_index * 0.95 + 0.05 * math.cos(code)))
-    vec.network_idle_state = m == 3
+    for i in range(64):
+        vec.browser_active[i] = d != 0 or p != 9
+        if d == 0 and p == 0:
+            vec.page_count[i] += 1
+        vec.last_load_time_ms[i] = abs(math.sin(code + i)) * 120.0
+        vec.dom_stability_index[i] = max(
+            0.0, min(1.0, vec.dom_stability_index[i] * 0.95 + 0.05 * math.cos(code + i))
+        )
+        vec.network_idle_state[i] = m == 3
     return code, name, vec.dom_stability_index

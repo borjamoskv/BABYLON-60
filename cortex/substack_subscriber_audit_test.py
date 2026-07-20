@@ -17,15 +17,46 @@ class TestSubstackSubscriberAuditor(unittest.TestCase):
     def setUp(self) -> None:
         self.test_dir = tempfile.TemporaryDirectory()
         self.csv_path = Path(self.test_dir.name) / "test_subscribers.csv"
-        
+
         # Write dummy CSV for testing
         with open(self.csv_path, "w", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["Email", "Type", "Activity", "Name", "Start date", "Revenue"])
-            writer.writerow(["clement@huggingface.co", "Comp", "4", "Clement Delangue", "2026-05-30", "$0.00"])
-            writer.writerow(["peter@foundersfund.com", "Comp", "5", "Peter Thiel", "2026-04-30", "$0.00"])
-            writer.writerow(["random_zombie@gmail.com", "Comp", "0", "", "2026-07-09", "$0.00"])
-            writer.writerow(["casual_reader@domain.com", "Free", "2", "Casual", "2026-06-15", "$0.00"])
+            writer.writerow(
+                ["Email", "Type", "Activity", "Name", "Start date", "Revenue"]
+            )
+            writer.writerow(
+                [
+                    "clement@huggingface.co",
+                    "Comp",
+                    "4",
+                    "Clement Delangue",
+                    "2026-05-30",
+                    "$0.00",
+                ]
+            )
+            writer.writerow(
+                [
+                    "peter@foundersfund.com",
+                    "Comp",
+                    "5",
+                    "Peter Thiel",
+                    "2026-04-30",
+                    "$0.00",
+                ]
+            )
+            writer.writerow(
+                ["random_zombie@gmail.com", "Comp", "0", "", "2026-07-09", "$0.00"]
+            )
+            writer.writerow(
+                [
+                    "casual_reader@domain.com",
+                    "Free",
+                    "2",
+                    "Casual",
+                    "2026-06-15",
+                    "$0.00",
+                ]
+            )
 
     def tearDown(self) -> None:
         self.test_dir.cleanup()

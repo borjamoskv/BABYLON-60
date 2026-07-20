@@ -137,7 +137,7 @@ def main() -> None:
         if not report["valid"]:
             all_valid = False
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' * 60}")
         print(f"[{status}] {report['experiment']}")
         print(f"  Path: {report['path']}")
         print(f"  Total Bytes: {report['total_bytes']}")
@@ -154,7 +154,9 @@ def main() -> None:
         assert isinstance(files, dict)
         for fname, fdata in files.items():
             assert isinstance(fdata, dict)
-            print(f"  {fname}: {fdata['bytes']}B | H={fdata['entropy_bits_per_char']} bits/char | lines={fdata['lines']}")
+            print(
+                f"  {fname}: {fdata['bytes']}B | H={fdata['entropy_bits_per_char']} bits/char | lines={fdata['lines']}"
+            )
 
     if not all_valid:
         print("\n[SIGKILL] One or more experiments contain placeholder stubs.")

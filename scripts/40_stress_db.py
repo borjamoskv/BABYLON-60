@@ -10,6 +10,7 @@ sys.path.append(PROJECT_ROOT)
 
 from cortex.swarm.memory_store import AgentMemory  # noqa: E402
 
+
 def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
     try:
         memory = AgentMemory()

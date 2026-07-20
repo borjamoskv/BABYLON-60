@@ -21,7 +21,9 @@ def main() -> None:
         if env_path:
             csv_path = Path(env_path)
         else:
-            default_downloads = Path.home() / "Downloads" / "subscriber-export-2026-07-20-02-35-19.csv"
+            default_downloads = (
+                Path.home() / "Downloads" / "subscriber-export-2026-07-20-02-35-19.csv"
+            )
             if default_downloads.exists():
                 csv_path = default_downloads
             else:
@@ -35,16 +37,24 @@ def main() -> None:
     print("\n--- MACRO ESTRUCTURAL ---")
     print(f"Total Subscribers: {summary.total_subscribers}")
     print(f"Total Revenue: ${summary.total_revenue:.2f}")
-    print(f"Comp: {summary.comp_count} | Free: {summary.free_count} | Author: {summary.author_count}")
+    print(
+        f"Comp: {summary.comp_count} | Free: {summary.free_count} | Author: {summary.author_count}"
+    )
     print(f"Activity Distribution: {summary.activity_distribution}")
     print(f"VIP Institutional Accounts: {summary.vip_count}")
     print(f"High Exergy Audience (Activity >= 3): {summary.high_exergy_count}")
-    print(f"Deliverability Hazard Candidates (Comp & Act 0): {summary.deliverability_hazard_count}")
+    print(
+        f"Deliverability Hazard Candidates (Comp & Act 0): {summary.deliverability_hazard_count}"
+    )
 
     print("\n--- COHORT RETENTION & DECAY BREAKDOWN ---")
-    sorted_cohorts = sorted(summary.cohorts.items(), key=lambda x: x[1]["total"], reverse=True)[:8]
+    sorted_cohorts = sorted(
+        summary.cohorts.items(), key=lambda x: x[1]["total"], reverse=True
+    )[:8]
     for date_key, data in sorted_cohorts:
-        print(f"Date: {date_key:10s} | Total: {data['total']:3d} | Comp: {data['comp']:3d} | Active(>=3): {data['active_ge_3']:2d} | Retention: {data['retention_rate']:5.1f}% | Zombies(0): {data['zombies_act_0']:3d}")
+        print(
+            f"Date: {date_key:10s} | Total: {data['total']:3d} | Comp: {data['comp']:3d} | Active(>=3): {data['active_ge_3']:2d} | Retention: {data['retention_rate']:5.1f}% | Zombies(0): {data['zombies_act_0']:3d}"
+        )
 
     # Export Segmented CSVs
     output_dir = Path("artifacts") / "substack_segmented_subscribers"
@@ -65,7 +75,7 @@ def main() -> None:
             "Confidence": "C5-REAL",
         },
     }
-    
+
     report_file = Path("artifacts") / "substack_subscriber_audit_report.yml"
     report_file.parent.mkdir(parents=True, exist_ok=True)
     with open(report_file, "w", encoding="utf-8") as f:

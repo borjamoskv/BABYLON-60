@@ -10,22 +10,22 @@ pub struct ConstantsIdentity {
 
 #[derive(Debug, Clone)]
 pub struct ConstantsStateVector {
-    pub planck_scale_ratio: f64,
-    pub gravitational_coupling: f64,
-    pub electromagnetic_shielding: f64,
-    pub quantum_entropy: f64,
-    pub singularity_density: f64,
+    pub planck_scale_ratio: [f64; 64],
+    pub gravitational_coupling: [f64; 64],
+    pub electromagnetic_shielding: [f64; 64],
+    pub quantum_entropy: [f64; 64],
+    pub singularity_density: [f64; 64],
     pub execution_count: u64,
 }
 
 impl ConstantsStateVector {
     pub fn new() -> Self {
         Self {
-            planck_scale_ratio: 1.616255e-35,
-            gravitational_coupling: 6.67430e-11,
-            electromagnetic_shielding: 1.602176634e-19,
-            quantum_entropy: 1.054571817e-34,
-            singularity_density: 0.0,
+            planck_scale_ratio: [1.616255e-35; 64],
+            gravitational_coupling: [6.67430e-11; 64],
+            electromagnetic_shielding: [1.602176634e-19; 64],
+            quantum_entropy: [1.054571817e-34; 64],
+            singularity_density: [0.0; 64],
             execution_count: 0,
         }
     }
@@ -37,10 +37,12 @@ pub fn dispatch_constants(d: u8, p: u8, m: u8, vec: &mut ConstantsStateVector) -
     }
     let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
     vec.execution_count += 1;
-    vec.planck_scale_ratio = (code as f64).sin().abs() * 1.616255e-35;
-    vec.gravitational_coupling = 6.67430e-11 * (1.0 + 0.01 * (code as f64).cos());
-    vec.electromagnetic_shielding = 1.602176634e-19 * ((code % 10) as f64 + 1.0);
-    vec.quantum_entropy = f64::max(0.0, vec.quantum_entropy * 0.99 + 1.054571817e-34 * code as f64);
-    vec.singularity_density = vec.gravitational_coupling / f64::max(1e-100, vec.planck_scale_ratio * vec.planck_scale_ratio);
+    for i in 0..64 {
+            vec.planck_scale_ratio[i] = (code as f64 + i as f64).sin().abs() * 1.616255e-35;
+            vec.gravitational_coupling[i] = 6.67430e-11 * (1.0 + 0.01 * (code as f64 + i as f64).cos());
+            vec.electromagnetic_shielding[i] = 1.602176634e-19 * ((code % 10) as f64 + i as f64 + 1.0);
+            vec.quantum_entropy[i] = f64::max(0.0, vec.quantum_entropy[i] * 0.99 + 1.054571817e-34 * (code as f64 + i as f64));
+            vec.singularity_density[i] = vec.gravitational_coupling[i] / f64::max(1e-100, vec.planck_scale_ratio[i] * vec.planck_scale_ratio[i]);
+        }
     Ok(code)
 }
