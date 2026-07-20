@@ -1,78 +1,61 @@
-# Theory of Architectural Normal Forms: Geometric Foundations of Functional Mixing
+# Geometric Embedding of Software Architectures: Information Geometry and Functional Mixing
 
 ## 1. Abstract
-Proponemos una representación funcional de arquitecturas basada en operadores ortogonales y formulamos la hipótesis de que dicha representación permite cuantificar la mezcla funcional y orientar la compresión arquitectónica. Evaluar la universalidad de esta representación queda como trabajo futuro.
-
-Este documento formaliza matemáticamente la deconstrucción de arquitecturas de software. Se descartan las métricas tradicionales de deuda técnica basadas en recuentos estáticos (ej. *LOC*, *God Objects*) en favor de una **distancia geométrica en un Simplex funcional**, sentando las bases teóricas para la existencia de una *Forma Normal Arquitectónica*.
+Este documento formaliza matemáticamente la deconstrucción de arquitecturas de software. Se descartan las métricas tradicionales de deuda técnica (ej. *LOC*, *God Objects*) en favor de un **embedding geométrico sobre un Simplex probabilístico**. Esta formulación permite cuantificar la mezcla funcional mediante métricas de geometría de la información y orientar la optimización arquitectónica utilizando técnicas de transporte óptimo, homología persistente y teoría espectral de grafos.
 
 ---
 
-## 2. Modelado Geométrico: El Simplex Funcional
-Toda arquitectura induce una distribución sobre una base de operadores fundamentales $B = \{b_1, b_2, \dots, b_n\}$. Toda implementación (un módulo, un archivo, una clase) es, en consecuencia, una combinación lineal sobre dicha base.
+## 2. Modelado Geométrico: El Simplex Probabilístico
+Toda arquitectura induce una distribución de probabilidad sobre una base de operadores fundamentales puros $V = \{e_1, e_2, \dots, e_n\}$.
+Formalmente, definimos un embedding:
+$$ \Phi : M \rightarrow \Delta^{n-1} $$
+donde $M$ es el conjunto de implementaciones (módulos, archivos, clases), y
+$$ \Delta^{n-1} = \left\{ x \in \mathbb{R}^n : x_i \ge 0, \sum_i x_i = 1 \right\} $$
+es el simplex estándar. Cada módulo $m \in M$ no es una combinación lineal arbitraria, sino una **distribución probabilística** sobre el espacio de invariantes.
 
-Para visualizar la teoría, si tomamos $n=4$ (ej. Observe, Transform, Verify, Commit), el espacio se define como un Simplex tridimensional:
-```text
-          b1
-         /  \
-        /    \
-      b2------b3
-        \    /
-         \  /
-          b4
-```
-*   Los **vértices ($\Delta$)** representan los componentes "puros" ortogonales.
-*   El **centro** del Simplex (baricentro) representa el anti-patrón supremo de mezcla funcional máxima.
-*   Cada módulo de software $m_i$ es una coordenada dentro del Simplex.
+*   Los **vértices ($V$)** del Simplex representan los operadores puros y ortogonales.
+*   Bajo la asunción estricta de ortogonalidad, el **centro** del Simplex (baricentro) representa el anti-patrón de mezcla funcional máxima.
 
 ---
 
-## 3. Métrica de Distancia: Functional Mixing
-Abandona la semántica teórica de la información (Entropía de Shannon) para no colisionar con definiciones de predictibilidad del código. Definimos la mezcla funcional como una distancia puramente geométrica respecto a la pureza estructural.
+## 3. Métrica de Distancia: Functional Mixing en Geometría de la Información
+Abandonamos la distancia euclidiana ingenua, carente de justificación en un espacio probabilístico. Definimos la mezcla funcional como la distancia de un módulo respecto al conjunto de vértices de operadores puros, empleando métricas propias de la **Geometría de la Información** (e.g., Divergencia de Jensen-Shannon, métrica de Wasserstein, o Fisher-Rao).
 
-La "Deuda Arquitectónica" inducida por un clasificador estático $\Phi$ sobre una arquitectura $A$ se formula formalmente como la dispersión topológica respecto a los vértices del Simplex:
-$$ D_\Phi(A) = \sum_{m \in A} d(\Phi(m), \Delta) $$
-Donde:
-*   $\Phi(m)$ devuelve el vector posicional del módulo en el Simplex.
-*   $d(v, \Delta)$ es la distancia euclidiana o de Manhattan del vector $v$ al vértice puro más cercano en el Simplex $\Delta$.
+La "Deuda Topológica" o mezcla funcional global $D_\Phi(A)$ sobre una arquitectura $A$ se define formalmente como:
+$$ D_\Phi(A) = \sum_{m \in A} \min_{e \in V} d_{IG}(\Phi(m), e) $$
+Donde $d_{IG}$ es una métrica de información geométrica que cuantifica la divergencia de la distribución inducida por el módulo respecto al estado puro.
 
 ---
 
-## 4. Función de Energía Objetiva
-El objetivo de la refactorización arquitectónica ya no es la "búsqueda del Kernel", sino la resolución de un problema de minimización continua de la Función de Energía $E(A)$:
+## 4. Funcional de Optimización Arquitectónica
+El problema de refactorización arquitectónica se abstrae a un problema de **Optimización Convexa Constreñida** sobre el simplex probabilístico. Se construye un funcional $E: \mathcal{A} \rightarrow \mathbb{R}$ similar al modelado en *Spectral Clustering* o *Graph Drawing*:
+
 $$ E(A) = \lambda_1 D_\Phi(A) + \lambda_2 C(A) + \lambda_3 L(A) $$
+
 Donde:
-*   **$D_\Phi(A)$:** Functional Mixing (Impureza topológica).
-*   **$C(A)$:** Coupling (Acoplamiento estructural o Fan-In/Fan-Out).
-*   **$L(A)$:** Latency (Coste físico de delegación entre nodos separados).
-*   **$\lambda_i$:** Hiperparámetros de tensión arquitectónica (Trade-offs de diseño).
+*   **$D_\Phi(A)$:** Mezcla Funcional evaluada en el simplex.
+*   **$C(A)$:** Acoplamiento estructural (divergencia causal entre distribuciones).
+*   **$L(A)$:** Latencia u overhead topológico.
+*   **$\lambda_i$:** Multiplicadores de Lagrange para trade-offs de optimización.
+
+Este funcional puede poseer cientos de mínimos locales y degeneraciones, descartando la presunción de una "única Forma Normal" universal en favor de familias de arquitecturas topológicamente equivalentes (isotópicas).
 
 ---
 
-## 5. El Horizonte Teórico: Forma Normal Arquitectónica
-El impacto de esta teoría se concentra en responder a una única y profunda pregunta científica:
-> **¿Existe una representación canónica de una arquitectura que minimice la mezcla funcional $D_\Phi(A)$ preservando el conjunto subyacente de invariantes causales?**
-
-Si la respuesta es afirmativa, habremos descubierto la **Forma Normal Arquitectónica**. Esto implicaría que para cualquier problema computacional existe una única estructura topológica de mínima fricción hacia la que el software, como un fluido termodinámico, debería tender naturalmente.
-
----
-
-## 6. Prerrequisitos Formales (Soundness & Completeness)
-Para que el cálculo de $D_\Phi(A)$ posea validez formal, la base de operadores $B$ y el clasificador $\Phi$ utilizado empíricamente deben satisfacer y demostrar matemáticamente dos axiomas inquebrantables:
-
-1.  **Soundness (Solidez):** $\Phi(m) = b_i \implies m$ realmente implementa la semántica estricta del operador $b_i$.
-2.  **Completeness (Completitud):** Todo módulo expresable en el lenguaje debe pertenecer a la distribución. Formalmente, para todo módulo $m$:
-    $$ \sum_{i=1}^{n} P_i(m) = 1 $$
-
-La demostración universal de ambas propiedades excede el alcance del modelo inicial y se delega a la futura literatura de lenguajes formales.
+## 5. El Horizonte Científico: El Espacio Geométrico del Software
+La aportación fundamental de este modelo no es la búsqueda de un óptimo absoluto, sino la formulación formal del **espacio geométrico sobre el que se pueden definir operaciones, distancias y algoritmos para comparar arquitecturas**.
+Una vez establecido el embedding $Software \rightarrow \Delta^{n-1}$, emergen analíticas estructurales profundas:
+*   Cálculo de distancias de Gromov-Hausdorff entre repositorios completos.
+*   Transporte Óptimo (Optimal Transport) para trazar el coste mínimo de refactorización.
+*   Flujo de Ricci (Ricci Flow) sobre grafos de llamadas para mitigar cuellos de botella.
+*   Homología Persistente para detectar vacíos funcionales o ciclos circulares en arquitecturas heredadas.
 
 ---
 
-## 7. Apéndice: Teorema de Intratabilidad de la Forma Normal (NP-Hardness)
-Siguiendo los principios deductivos, hemos sometido la existencia de la Forma Normal a demostración topológica.
+## 6. Prerrequisitos Formales (Soundness, Completeness & Stability)
+Para que el embedding $\Phi$ sea matemáticamente válido y empíricamente útil como clasificador, debe satisfacer tres axiomas inquebrantables:
 
-*   **Existencia:** Confirmada por la finitud del conjunto topológico y el Teorema de Weierstrass discreto.
-*   **Unicidad:** Falsada. Dos configuraciones pueden alcanzar la misma energía global, requiriendo normas de desempate (tie-breaking).
-*   **Computabilidad:** Falsada en tiempo polinómico. La reducción algebraica demuestra que hallar la partición óptima que cubra el espacio $\Omega$ minimizando la Energía Topológica es matemáticamente isomorfo al **Minimum Weight Set Cover Problem (MWSCP)**, un problema intrínsecamente NP-Hard.
-
-**Axioma de Intratabilidad:** 
-Dado que el refactoring perfecto hacia la Forma Normal es incomputable, se rechaza formalmente la viabilidad de compiladores automáticos perfectos. La ingeniería de software estructural debe basarse en aproximaciones heurísticas termodinámicas (e.g. MCTS, Simulated Annealing).
+1.  **Soundness:** $\Phi(m) = e_i \implies m$ realmente implementa la semántica estricta del operador puro $e_i$.
+2.  **Completeness:** Todo módulo expresable en el lenguaje induce una distribución probabilística válida: $\sum_{i=1}^{n} P_i(m) = 1$.
+3.  **Stability:** Pequeñas variaciones sintácticas o semánticas en el código deben traducirse en pequeñas desviaciones en el embedding. Sin continuidad lipschitziana, el clasificador es ciego a la evolución incremental:
+    $$ d_{AST}(m_1, m_2) \ll 1 \implies |\Phi(m_1) - \Phi(m_2)|_{IG} \ll 1 $$
