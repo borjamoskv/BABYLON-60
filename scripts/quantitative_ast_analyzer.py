@@ -135,7 +135,7 @@ def main():
 
                 except SyntaxError:
                     pass
-                except Exception as e:
+                except (OSError, RuntimeError, ValueError, TypeError) as e:
                     print(f"Error parseando {rel_path}: {e}")
 
     # 2. Calcular Fan-in

@@ -65,7 +65,7 @@ def main():
                             "functions": serializable_cg,
                             "module_level_calls": list(visitor.module_calls),
                         }
-                except Exception:
+                except (OSError, ValueError, TypeError, SyntaxError):
                     pass
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)

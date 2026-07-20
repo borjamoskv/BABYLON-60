@@ -88,7 +88,7 @@ def classify_omega_theorem(target_dir):
                         {"file": rel_path, "reason": reason, "matches": matches}
                     )
 
-            except Exception:
+            except (OSError, ValueError, TypeError, SyntaxError):
                 pass
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

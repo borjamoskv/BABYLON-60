@@ -219,6 +219,6 @@ if __name__ == "__main__":
         except EpistemicHalt as e:
             print(f"EPISTEMIC HALT: {e}", file=sys.stderr)
             sys.exit(1)
-        except Exception as e:
+        except (OSError, RuntimeError, ValueError) as e:
             print(f"UNEXPECTED ERROR: {e}", file=sys.stderr)
             sys.exit(1)

@@ -53,7 +53,7 @@ def extract_state_machine_graphs(target_dir):
                     ):
                         graphs["EvidenceGraph"].append(rel_path)
 
-                except Exception:
+                except (OSError, ValueError, SyntaxError, TypeError):
                     pass
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

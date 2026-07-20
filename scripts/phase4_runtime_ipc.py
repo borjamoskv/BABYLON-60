@@ -72,7 +72,7 @@ def analyze_ipc_and_runtime(target_dir):
                             {"file": rel_path, "type": "Concurrency primitive"}
                         )
 
-                except Exception:
+                except (OSError, ValueError, TypeError, SyntaxError):
                     pass
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

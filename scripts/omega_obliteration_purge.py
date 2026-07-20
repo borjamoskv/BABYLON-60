@@ -33,7 +33,7 @@ def obliterate_zero_operators(target_dir):
                 os.remove(abs_path)
                 logging.info(f"PURGED: {rel_path}")
                 purged += 1
-            except Exception as e:
+            except (OSError, RuntimeError, ValueError) as e:
                 logging.error(f"Failed to purge {rel_path}: {e}")
 
     logging.info(f"OBLITERATION COMPLETE. Terminated {purged} inert nodes.")
