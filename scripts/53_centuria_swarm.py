@@ -81,10 +81,11 @@ def deploy_centuria_swarm() -> None:
     print(f"✅ Swarm Centuria compilado: {total_agents} nodos paralelos registrados.")
 
     # Cognitive Audit Integration
-    home = os.path.expanduser("~")
+    brain_dir = os.environ.get("CORTEX_BRAIN_DIR")
+    if not brain_dir:
+        raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
+        
     import glob
-
-    brain_dir = os.path.join(home, ".gemini", "antigravity", "brain")
     transcripts = glob.glob(
         os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
     )
@@ -98,9 +99,9 @@ def deploy_centuria_swarm() -> None:
         )
 
     print(f"⚡ [LEA_OMEGA] Auditando logs de sesión en: {transcript_path}")
-    audit_script = os.path.join(
-        home, ".gemini/config/skills/Anergy_Token_Purge/scripts/cognitive_audit.py"
-    )
+    audit_script = os.environ.get("CORTEX_AUDIT_SCRIPT")
+    if not audit_script:
+        raise RuntimeError("CORTEX_AUDIT_SCRIPT env var is required (Ω23).")
 
     try:
         res = subprocess.run(

@@ -5,7 +5,10 @@ import json
 import glob
 import datetime
 
-BRAIN_DIR = os.path.expanduser("~/.gemini/antigravity/brain")
+BRAIN_DIR = os.environ.get("CORTEX_BRAIN_DIR")
+if not BRAIN_DIR:
+    raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
+
 ARTIFACT_DIR = os.path.join(os.getcwd(), "artifacts")
 
 

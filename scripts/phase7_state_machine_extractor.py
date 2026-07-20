@@ -53,8 +53,10 @@ def extract_state_machine_graphs(target_dir):
                     ):
                         graphs["EvidenceGraph"].append(rel_path)
 
-                except (OSError, ValueError, SyntaxError, TypeError):
-                    pass
+                except (OSError, ValueError, SyntaxError, TypeError) as e:
+                    import signal
+                    print(f"Error parsing {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26).")
+                    os.kill(os.getpid(), signal.SIGKILL)
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_json = os.path.join(
@@ -67,4 +69,8 @@ def extract_state_machine_graphs(target_dir):
 
 
 if __name__ == "__main__":
-    extract_state_machine_graphs(os.path.expanduser("~/BABYLON-60"))
+    target = os.environ.get("CORTEX_TARGET_DIR")
+    if not target:
+        raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
+    extract_state_machine_graphs(target)
+
