@@ -1,0 +1,122 @@
+# SUBSTACK EDITORIAL STRATEGY: LABORATORIO PÚBLICO
+# C5-REAL Publication Strategy derived from Feed Thermodynamic Analysis
+# Date: 2026-07-20
+# Author: MOSKV-1 APEX
+# Persona: Telmo Dinámico de Moskv
+
+publication:
+  name: "Telmo Dinámico de Moskv"
+  format: "Public Laboratory (Living Research Ledger)"
+  language: "es"
+  aesthetic: "Industrial Noir 2026"
+  tagline: "Auditorías forenses de cultura, tecnología y arte bajo restricción termodinámica."
+
+# Subscriber Baseline (C5-REAL Audit 2026-07-20)
+subscriber_baseline:
+  total: 659
+  high_exergy_readers: 185
+  vip_institutional: 30
+  deliverability_hazards: 410
+  tier1_c5real_core: "Activity >= 4 OR (VIP AND Activity >= 1)"
+  tier2_engaged: "Activity 2-3"
+  tier3_low_activity: "Activity 1"
+  tier4_hazard: "Activity 0 AND Type Comp"
+
+# Feed Analysis Invariants (extracted from 2026-07-20 feed dump)
+feed_invariants:
+  - id: FI-001
+    claim: "La unidad de retención algorítmica es la Persona, no el Artículo."
+    confidence: C5-REAL
+    source: "Feed dump analysis (hundreds of entries)"
+  - id: FI-002
+    claim: "Los micro-posts (20-80 palabras) dominan el engagement por coste cognitivo mínimo."
+    confidence: C5-REAL
+  - id: FI-003
+    claim: "Fotos personales, behind-the-scenes y procesos creativos tienen correlación positiva con retención."
+    confidence: C5-REAL
+  - id: FI-004
+    claim: "El contenido excesivamente corporativo o con muchos enlaces tiene correlación negativa."
+    confidence: C5-REAL
+  - id: FI-005
+    claim: "La frecuencia y continuidad (Day 1, Day 2...) generan hábito algorítmico."
+    confidence: C5-REAL
+  - id: FI-006
+    claim: "La intersección Música Experimental + IA + Investigación + Arte Generativo tiene competencia ~0."
+    confidence: C5-REAL
+  - id: FI-007
+    claim: "Substack refuerza autores con alta retención (Ted Gioia, Emily Sundberg, Rosie Birkett)."
+    confidence: C4-SIM
+    note: "Inferido del feed, no confirmado por Substack engineering."
+
+# Content Typology (Optimal Mix)
+content_types:
+  - type: "EXPERIMENTO (Laboratory Post)"
+    frequency: "1x/semana"
+    length: "800-1500 palabras"
+    structure: "6-step loop (Experimento → Hallazgo → Código → Demo → Track → Reflexión)"
+    purpose: "Pieza nuclear. Deja un asset reutilizable en el repositorio."
+    
+  - type: "MICRO-POST (Signal Burst)"
+    frequency: "3-4x/semana"
+    length: "20-80 palabras"
+    structure: "Foto/captura + reflexión de 2 líneas"
+    purpose: "Mantener la frecuencia algorítmica. Coste de producción O(1)."
+    examples:
+      - "Captura de terminal con output de un script experimental"
+      - "Foto del setup de producción musical"
+      - "Fragmento de código con comentario termodinámico"
+      - "Screenshot de una visualización generativa"
+
+  - type: "AUDITORÍA FORENSE (Deep Article)"
+    frequency: "1x/mes"
+    length: "2000-4000 palabras"
+    structure: "Secciones numeradas con headers clínicos"
+    purpose: "Pieza de alta retención para tier1_c5real_core."
+    reference: "docs/la_gran_necrosis_ontologica.md"
+
+# Publication Calendar (Weekly Cycle)
+calendar:
+  monday: "MICRO-POST: Behind-the-scenes del laboratorio (foto/captura)"
+  tuesday: null  # Silencio deliberado
+  wednesday: "MICRO-POST: Fragmento de código o hallazgo técnico"
+  thursday: "EXPERIMENTO: Post completo del Laboratorio (6-step loop)"
+  friday: "MICRO-POST: Track/visual generado durante la semana"
+  saturday: null  # Silencio deliberado
+  sunday: null  # Silencio deliberado
+
+# Thematic Verticals (Disjoint Search Spaces)
+verticals:
+  - name: "Termodinámica del Software"
+    topics: ["BFT consensus", "SQLite WAL", "Git as ledger", "Entropy in codebases"]
+  - name: "Música Experimental + IA"
+    topics: ["PCM synthesis", "Markov chains in audio", "IDM production", "Generative composition"]
+  - name: "Arquitectura de Agentes"
+    topics: ["LLM orchestration", "Swarm intelligence", "MCTS", "Attention mechanisms"]
+  - name: "Colisiones Culturales"
+    topics: ["Spain tech vs Silicon Valley", "SGAE vs crypto", "Institutional gatekeepers", "Creator economy forensics"]
+  - name: "Arte Generativo"
+    topics: ["Procedural visuals", "Neural style", "Latent space exploration", "Computational aesthetics"]
+
+# Anti-patterns to avoid
+antipatterns:
+  - "Newsletter tradicional con secciones fijas (tipo Morning Brew)"
+  - "Listicles de herramientas de IA"
+  - "Contenido motivacional o self-help"
+  - "Artículos genéricos sobre 'el futuro de la IA'"
+  - "Curación de links sin valor añadido"
+  - "Publicaciones sin asset reutilizable adjunto"
+
+# Growth Levers (Feed Analysis)
+growth_levers:
+  - lever: "Substack Notes (micro-posts)"
+    priority: P0
+    rationale: "El feed premia frecuencia con bajo coste cognitivo."
+  - lever: "Substack Recommendations (cross-pollination)"
+    priority: P1
+    rationale: "El algoritmo amplifica a quienes recomiendan y son recomendados."
+  - lever: "Reposts con comentario forense"
+    priority: P1
+    rationale: "Genera visibilidad sin coste de producción."
+  - lever: "Continuidad serializada"
+    priority: P0
+    rationale: "Day 1, Day 2... genera hábito algorítmico."
