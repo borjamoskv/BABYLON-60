@@ -1,0 +1,8 @@
+Claim: Invariante Termodinámico Ω30 - PYO3 FORWARD ABI INVARIANT:
+Proof: 
+  Base: "Queda estrictamente prohibido ejecutar validaciones `cargo check` o compilaciones `cargo build` en r..."
+  Confidence: C5
+Isomorphisms:
+  - "Rule Ω30" -> "C5-REAL Axiom"
+
+CORTEX_TAINT: taint:borjamoskv:batch_crystallize:1784582428.0328739:2e9eee37440cd457aa9c7c41e5597a915fa7c08fb508e7376a63295a83d33962
