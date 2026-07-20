@@ -1,0 +1,3 @@
+# Repercusión Termodinámica
+
+Consecuencias estructurales.

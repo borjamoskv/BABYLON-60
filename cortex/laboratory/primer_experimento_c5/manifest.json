@@ -1,0 +1,30 @@
+{
+  "experiment": "primer_experimento_c5",
+  "timestamp": "2026-07-20T04:37:57.778937Z",
+  "files": [
+    {
+      "name": "01_experimento.yml",
+      "sha3_256": "4fa6e087636296e5477d2d40d44be2522c754a8d7169f53d22f6785785760650"
+    },
+    {
+      "name": "02_hallazgo.md",
+      "sha3_256": "7d3f7c6723c487da9a7ceb3707dd80e5ea76c1d159fc6bda25fb5349e081232c"
+    },
+    {
+      "name": "03_codigo.py",
+      "sha3_256": "5e93a01fce6935f69149e6a67400c7fa587ed33fec639a163269d4a918799aec"
+    },
+    {
+      "name": "04_demo.sh",
+      "sha3_256": "dd707880f45819eb7895f276b2c6d398decd69c3b07f5ae0571e51aa0dddb61a"
+    },
+    {
+      "name": "05_track.md",
+      "sha3_256": "27de460ad90a8af4d85cd003ee0432fd7a1e0710e08dc9a38d6b3222a9c97f55"
+    },
+    {
+      "name": "06_reflexion.md",
+      "sha3_256": "4c58fbe3b988c87460ea3d7d660c643ab8952bddf2e94fddb53416be01f68436"
+    }
+  ]
+}

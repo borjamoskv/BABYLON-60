@@ -1,0 +1,5 @@
+claim_id: "LAB_PRIMER_EXPERIMENTO_C5"
+hypothesis: "[INJECT HYPOTHESIS HERE]"
+constraints:
+  - "C5-REAL"
+  - "Zero Anergy"
