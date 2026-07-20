@@ -13,120 +13,87 @@ type NeuroChainPrimitive int
 type NeuroChainModifier int
 
 const (
-	NeuroChainDomainEnergybound        NeuroChainDomain = 0
-	NeuroChainDomainAttractordecay     NeuroChainDomain = 1
-	NeuroChainDomainCognitivedrift     NeuroChainDomain = 2
-	NeuroChainDomainResourceexhaust    NeuroChainDomain = 3
-	NeuroChainDomainSybilreverb        NeuroChainDomain = 4
+	NeuroChainDomainEnergybound NeuroChainDomain = 0
+	NeuroChainDomainAttractordecay NeuroChainDomain = 1
+	NeuroChainDomainCognitivedrift NeuroChainDomain = 2
+	NeuroChainDomainResourceexhaust NeuroChainDomain = 3
+	NeuroChainDomainSybilreverb NeuroChainDomain = 4
 	NeuroChainDomainBayesianfreeenergy NeuroChainDomain = 5
-	NeuroChainDomainLatenttorque       NeuroChainDomain = 6
-	NeuroChainDomainSurprisalgate      NeuroChainDomain = 7
-	NeuroChainDomainTemporalphase      NeuroChainDomain = 8
-	NeuroChainDomainDeepmctsdepth      NeuroChainDomain = 9
+	NeuroChainDomainLatenttorque NeuroChainDomain = 6
+	NeuroChainDomainSurprisalgate NeuroChainDomain = 7
+	NeuroChainDomainTemporalphase NeuroChainDomain = 8
+	NeuroChainDomainDeepmctsdepth NeuroChainDomain = 9
 
 	// NeuroChain Primitives
-	NeuroChainPrimitiveHomeostasisinit    NeuroChainPrimitive = 0
-	NeuroChainPrimitiveHomeostasismutate  NeuroChainPrimitive = 1
+	NeuroChainPrimitiveHomeostasisinit NeuroChainPrimitive = 0
+	NeuroChainPrimitiveHomeostasismutate NeuroChainPrimitive = 1
 	NeuroChainPrimitivePredictiongenerate NeuroChainPrimitive = 2
-	NeuroChainPrimitivePredictionaudit    NeuroChainPrimitive = 3
-	NeuroChainPrimitiveAttentionfocus     NeuroChainPrimitive = 4
-	NeuroChainPrimitiveAttentionquantize  NeuroChainPrimitive = 5
-	NeuroChainPrimitiveActiondispatch     NeuroChainPrimitive = 6
-	NeuroChainPrimitiveActionassert       NeuroChainPrimitive = 7
-	NeuroChainPrimitiveLanguagecollapse   NeuroChainPrimitive = 8
-	NeuroChainPrimitiveLanguageflush      NeuroChainPrimitive = 9
+	NeuroChainPrimitivePredictionaudit NeuroChainPrimitive = 3
+	NeuroChainPrimitiveAttentionfocus NeuroChainPrimitive = 4
+	NeuroChainPrimitiveAttentionquantize NeuroChainPrimitive = 5
+	NeuroChainPrimitiveActiondispatch NeuroChainPrimitive = 6
+	NeuroChainPrimitiveActionassert NeuroChainPrimitive = 7
+	NeuroChainPrimitiveLanguagecollapse NeuroChainPrimitive = 8
+	NeuroChainPrimitiveLanguageflush NeuroChainPrimitive = 9
 
 	// NeuroChain Modifiers
-	NeuroChainModifierRaw             NeuroChainModifier = 0
-	NeuroChainModifierAtomic          NeuroChainModifier = 1
+	NeuroChainModifierRaw NeuroChainModifier = 0
+	NeuroChainModifierAtomic NeuroChainModifier = 1
 	NeuroChainModifierActiveinference NeuroChainModifier = 2
-	NeuroChainModifierLyapunovstable  NeuroChainModifier = 3
-	NeuroChainModifierSparsekv        NeuroChainModifier = 4
-	NeuroChainModifierBftconsensus    NeuroChainModifier = 5
-	NeuroChainModifierFeedforward     NeuroChainModifier = 6
-	NeuroChainModifierBackproperror   NeuroChainModifier = 7
-	NeuroChainModifierSlidingsurface  NeuroChainModifier = 8
-	NeuroChainModifierEpidemicpurge   NeuroChainModifier = 9
+	NeuroChainModifierLyapunovstable NeuroChainModifier = 3
+	NeuroChainModifierSparsekv NeuroChainModifier = 4
+	NeuroChainModifierBftconsensus NeuroChainModifier = 5
+	NeuroChainModifierFeedforward NeuroChainModifier = 6
+	NeuroChainModifierBackproperror NeuroChainModifier = 7
+	NeuroChainModifierSlidingsurface NeuroChainModifier = 8
+	NeuroChainModifierEpidemicpurge NeuroChainModifier = 9
 )
 
 func (d NeuroChainDomain) String() string {
 	switch d {
-	case 0:
-		return "ENERGY_BOUND"
-	case 1:
-		return "ATTRACTOR_DECAY"
-	case 2:
-		return "COGNITIVE_DRIFT"
-	case 3:
-		return "RESOURCE_EXHAUST"
-	case 4:
-		return "SYBIL_REVERB"
-	case 5:
-		return "BAYESIAN_FREE_ENERGY"
-	case 6:
-		return "LATENT_TORQUE"
-	case 7:
-		return "SURPRISAL_GATE"
-	case 8:
-		return "TEMPORAL_PHASE"
-	case 9:
-		return "DEEP_MCTS_DEPTH"
-	default:
-		return "UNKNOWN"
+	case 0: return "ENERGY_BOUND"
+	case 1: return "ATTRACTOR_DECAY"
+	case 2: return "COGNITIVE_DRIFT"
+	case 3: return "RESOURCE_EXHAUST"
+	case 4: return "SYBIL_REVERB"
+	case 5: return "BAYESIAN_FREE_ENERGY"
+	case 6: return "LATENT_TORQUE"
+	case 7: return "SURPRISAL_GATE"
+	case 8: return "TEMPORAL_PHASE"
+	case 9: return "DEEP_MCTS_DEPTH"
+	default: return "UNKNOWN"
 	}
 }
 
 func (p NeuroChainPrimitive) String() string {
 	switch p {
-	case 0:
-		return "HOMEOSTASIS_INIT"
-	case 1:
-		return "HOMEOSTASIS_MUTATE"
-	case 2:
-		return "PREDICTION_GENERATE"
-	case 3:
-		return "PREDICTION_AUDIT"
-	case 4:
-		return "ATTENTION_FOCUS"
-	case 5:
-		return "ATTENTION_QUANTIZE"
-	case 6:
-		return "ACTION_DISPATCH"
-	case 7:
-		return "ACTION_ASSERT"
-	case 8:
-		return "LANGUAGE_COLLAPSE"
-	case 9:
-		return "LANGUAGE_FLUSH"
-	default:
-		return "UNKNOWN"
+	case 0: return "HOMEOSTASIS_INIT"
+	case 1: return "HOMEOSTASIS_MUTATE"
+	case 2: return "PREDICTION_GENERATE"
+	case 3: return "PREDICTION_AUDIT"
+	case 4: return "ATTENTION_FOCUS"
+	case 5: return "ATTENTION_QUANTIZE"
+	case 6: return "ACTION_DISPATCH"
+	case 7: return "ACTION_ASSERT"
+	case 8: return "LANGUAGE_COLLAPSE"
+	case 9: return "LANGUAGE_FLUSH"
+	default: return "UNKNOWN"
 	}
 }
 
 func (m NeuroChainModifier) String() string {
 	switch m {
-	case 0:
-		return "RAW"
-	case 1:
-		return "ATOMIC"
-	case 2:
-		return "ACTIVE_INFERENCE"
-	case 3:
-		return "LYAPUNOV_STABLE"
-	case 4:
-		return "SPARSE_KV"
-	case 5:
-		return "BFT_CONSENSUS"
-	case 6:
-		return "FEEDFORWARD"
-	case 7:
-		return "BACKPROP_ERROR"
-	case 8:
-		return "SLIDING_SURFACE"
-	case 9:
-		return "EPIDEMIC_PURGE"
-	default:
-		return "UNKNOWN"
+	case 0: return "RAW"
+	case 1: return "ATOMIC"
+	case 2: return "ACTIVE_INFERENCE"
+	case 3: return "LYAPUNOV_STABLE"
+	case 4: return "SPARSE_KV"
+	case 5: return "BFT_CONSENSUS"
+	case 6: return "FEEDFORWARD"
+	case 7: return "BACKPROP_ERROR"
+	case 8: return "SLIDING_SURFACE"
+	case 9: return "EPIDEMIC_PURGE"
+	default: return "UNKNOWN"
 	}
 }
 
@@ -144,7 +111,7 @@ type CognitiveChainVector struct {
 	AttentionWeight   [64]float64
 	ActionTorque      [64]float64
 	LanguageEntropy   [64]float64
-	ExecutionCount    uint64
+	ExecutionCount uint64
 }
 
 func ResolveNeuroChainIdentity(d, p, m byte) (NeuroChainIdentity, error) {
@@ -165,7 +132,7 @@ func ResolveNeuroChainIdentity(d, p, m byte) (NeuroChainIdentity, error) {
 type NeuroChainHandler func(id NeuroChainIdentity, vec *CognitiveChainVector) error
 
 var (
-	NeuroChainTable   [1000]NeuroChainHandler
+	NeuroChainTable [1000]NeuroChainHandler
 	NeuroChainMetrics [1000]uint64
 )
 
@@ -174,10 +141,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[0], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -186,10 +153,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[1], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -198,10 +165,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[2], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -210,10 +177,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[3], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -222,10 +189,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[4], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -234,10 +201,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[5], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -246,10 +213,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[6], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -258,10 +225,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[7], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -270,10 +237,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[8], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -282,10 +249,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[9], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -294,10 +261,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[10], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -306,10 +273,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[11], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -318,10 +285,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[12], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -330,10 +297,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[13], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -342,10 +309,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[14], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -354,10 +321,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[15], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -366,10 +333,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[16], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -378,10 +345,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[17], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -390,10 +357,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[18], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -402,10 +369,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[19], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -414,10 +381,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[20], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -426,10 +393,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[21], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -438,10 +405,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[22], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -450,10 +417,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[23], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -462,10 +429,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[24], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -474,10 +441,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[25], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -486,10 +453,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[26], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -498,10 +465,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[27], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -510,10 +477,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[28], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -522,10 +489,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[29], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -534,10 +501,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[30], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -546,10 +513,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[31], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -558,10 +525,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[32], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -570,10 +537,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[33], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -582,10 +549,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[34], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -594,10 +561,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[35], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -606,10 +573,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[36], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -618,10 +585,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[37], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -630,10 +597,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[38], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -642,10 +609,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[39], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -654,10 +621,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[40], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -666,10 +633,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[41], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -678,10 +645,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[42], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -690,10 +657,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[43], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -702,10 +669,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[44], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -714,10 +681,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[45], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -726,10 +693,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[46], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -738,10 +705,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[47], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -750,10 +717,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[48], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -762,10 +729,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[49], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -774,10 +741,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[50], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -786,10 +753,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[51], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -798,10 +765,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[52], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -810,10 +777,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[53], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -822,10 +789,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[54], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -834,10 +801,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[55], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -846,10 +813,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[56], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -858,10 +825,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[57], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -870,10 +837,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[58], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -882,10 +849,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[59], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -894,10 +861,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[60], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -906,10 +873,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[61], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -918,10 +885,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[62], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -930,10 +897,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[63], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -942,10 +909,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[64], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -954,10 +921,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[65], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -966,10 +933,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[66], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -978,10 +945,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[67], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -990,10 +957,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[68], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1002,10 +969,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[69], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1014,10 +981,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[70], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1026,10 +993,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[71], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1038,10 +1005,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[72], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1050,10 +1017,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[73], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1062,10 +1029,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[74], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1074,10 +1041,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[75], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1086,10 +1053,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[76], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1098,10 +1065,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[77], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1110,10 +1077,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[78], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1122,10 +1089,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[79], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1134,10 +1101,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[80], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1146,10 +1113,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[81], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1158,10 +1125,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[82], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1170,10 +1137,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[83], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1182,10 +1149,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[84], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1194,10 +1161,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[85], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1206,10 +1173,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[86], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1218,10 +1185,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[87], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1230,10 +1197,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[88], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1242,10 +1209,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[89], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1254,10 +1221,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[90], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1266,10 +1233,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[91], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1278,10 +1245,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[92], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1290,10 +1257,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[93], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1302,10 +1269,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[94], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1314,10 +1281,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[95], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1326,10 +1293,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[96], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1338,10 +1305,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[97], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1350,10 +1317,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[98], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1362,10 +1329,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[99], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1374,10 +1341,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[100], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1386,10 +1353,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[101], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1398,10 +1365,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[102], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1410,10 +1377,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[103], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1422,10 +1389,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[104], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1434,10 +1401,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[105], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1446,10 +1413,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[106], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1458,10 +1425,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[107], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1470,10 +1437,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[108], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1482,10 +1449,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[109], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1494,10 +1461,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[110], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1506,10 +1473,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[111], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1518,10 +1485,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[112], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1530,10 +1497,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[113], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1542,10 +1509,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[114], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1554,10 +1521,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[115], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1566,10 +1533,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[116], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1578,10 +1545,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[117], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1590,10 +1557,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[118], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1602,10 +1569,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[119], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1614,10 +1581,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[120], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1626,10 +1593,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[121], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1638,10 +1605,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[122], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1650,10 +1617,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[123], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1662,10 +1629,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[124], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1674,10 +1641,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[125], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1686,10 +1653,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[126], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1698,10 +1665,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[127], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1710,10 +1677,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[128], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1722,10 +1689,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[129], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1734,10 +1701,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[130], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1746,10 +1713,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[131], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1758,10 +1725,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[132], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1770,10 +1737,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[133], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1782,10 +1749,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[134], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1794,10 +1761,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[135], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1806,10 +1773,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[136], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1818,10 +1785,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[137], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1830,10 +1797,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[138], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1842,10 +1809,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[139], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1854,10 +1821,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[140], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1866,10 +1833,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[141], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1878,10 +1845,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[142], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1890,10 +1857,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[143], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1902,10 +1869,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[144], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1914,10 +1881,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[145], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1926,10 +1893,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[146], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1938,10 +1905,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[147], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1950,10 +1917,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[148], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1962,10 +1929,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[149], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1974,10 +1941,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[150], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1986,10 +1953,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[151], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -1998,10 +1965,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[152], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2010,10 +1977,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[153], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2022,10 +1989,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[154], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2034,10 +2001,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[155], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2046,10 +2013,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[156], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2058,10 +2025,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[157], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2070,10 +2037,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[158], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2082,10 +2049,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[159], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2094,10 +2061,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[160], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2106,10 +2073,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[161], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2118,10 +2085,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[162], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2130,10 +2097,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[163], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2142,10 +2109,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[164], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2154,10 +2121,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[165], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2166,10 +2133,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[166], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2178,10 +2145,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[167], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2190,10 +2157,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[168], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2202,10 +2169,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[169], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2214,10 +2181,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[170], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2226,10 +2193,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[171], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2238,10 +2205,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[172], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2250,10 +2217,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[173], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2262,10 +2229,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[174], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2274,10 +2241,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[175], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2286,10 +2253,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[176], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2298,10 +2265,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[177], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2310,10 +2277,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[178], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2322,10 +2289,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[179], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2334,10 +2301,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[180], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2346,10 +2313,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[181], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2358,10 +2325,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[182], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2370,10 +2337,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[183], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2382,10 +2349,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[184], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2394,10 +2361,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[185], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2406,10 +2373,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[186], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2418,10 +2385,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[187], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2430,10 +2397,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[188], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2442,10 +2409,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[189], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2454,10 +2421,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[190], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2466,10 +2433,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[191], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2478,10 +2445,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[192], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2490,10 +2457,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[193], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2502,10 +2469,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[194], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2514,10 +2481,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[195], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2526,10 +2493,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[196], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2538,10 +2505,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[197], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2550,10 +2517,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[198], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2562,10 +2529,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[199], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2574,10 +2541,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[200], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2586,10 +2553,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[201], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2598,10 +2565,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[202], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2610,10 +2577,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[203], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2622,10 +2589,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[204], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2634,10 +2601,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[205], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2646,10 +2613,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[206], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2658,10 +2625,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[207], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2670,10 +2637,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[208], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2682,10 +2649,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[209], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2694,10 +2661,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[210], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2706,10 +2673,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[211], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2718,10 +2685,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[212], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2730,10 +2697,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[213], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2742,10 +2709,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[214], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2754,10 +2721,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[215], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2766,10 +2733,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[216], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2778,10 +2745,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[217], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2790,10 +2757,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[218], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2802,10 +2769,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[219], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2814,10 +2781,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[220], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2826,10 +2793,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[221], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2838,10 +2805,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[222], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2850,10 +2817,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[223], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2862,10 +2829,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[224], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2874,10 +2841,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[225], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2886,10 +2853,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[226], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2898,10 +2865,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[227], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2910,10 +2877,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[228], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2922,10 +2889,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[229], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2934,10 +2901,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[230], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2946,10 +2913,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[231], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2958,10 +2925,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[232], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2970,10 +2937,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[233], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2982,10 +2949,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[234], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -2994,10 +2961,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[235], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3006,10 +2973,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[236], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3018,10 +2985,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[237], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3030,10 +2997,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[238], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3042,10 +3009,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[239], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3054,10 +3021,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[240], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3066,10 +3033,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[241], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3078,10 +3045,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[242], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3090,10 +3057,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[243], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3102,10 +3069,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[244], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3114,10 +3081,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[245], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3126,10 +3093,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[246], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3138,10 +3105,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[247], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3150,10 +3117,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[248], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3162,10 +3129,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[249], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3174,10 +3141,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[250], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3186,10 +3153,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[251], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3198,10 +3165,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[252], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3210,10 +3177,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[253], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3222,10 +3189,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[254], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3234,10 +3201,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[255], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3246,10 +3213,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[256], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3258,10 +3225,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[257], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3270,10 +3237,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[258], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3282,10 +3249,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[259], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3294,10 +3261,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[260], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3306,10 +3273,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[261], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3318,10 +3285,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[262], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3330,10 +3297,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[263], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3342,10 +3309,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[264], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3354,10 +3321,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[265], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3366,10 +3333,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[266], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3378,10 +3345,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[267], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3390,10 +3357,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[268], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3402,10 +3369,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[269], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3414,10 +3381,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[270], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3426,10 +3393,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[271], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3438,10 +3405,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[272], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3450,10 +3417,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[273], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3462,10 +3429,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[274], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3474,10 +3441,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[275], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3486,10 +3453,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[276], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3498,10 +3465,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[277], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3510,10 +3477,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[278], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3522,10 +3489,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[279], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3534,10 +3501,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[280], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3546,10 +3513,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[281], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3558,10 +3525,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[282], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3570,10 +3537,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[283], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3582,10 +3549,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[284], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3594,10 +3561,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[285], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3606,10 +3573,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[286], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3618,10 +3585,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[287], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3630,10 +3597,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[288], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3642,10 +3609,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[289], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3654,10 +3621,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[290], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3666,10 +3633,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[291], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3678,10 +3645,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[292], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3690,10 +3657,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[293], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3702,10 +3669,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[294], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3714,10 +3681,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[295], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3726,10 +3693,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[296], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3738,10 +3705,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[297], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3750,10 +3717,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[298], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3762,10 +3729,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[299], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3774,10 +3741,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[300], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3786,10 +3753,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[301], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3798,10 +3765,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[302], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3810,10 +3777,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[303], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3822,10 +3789,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[304], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3834,10 +3801,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[305], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3846,10 +3813,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[306], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3858,10 +3825,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[307], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3870,10 +3837,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[308], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3882,10 +3849,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[309], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3894,10 +3861,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[310], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3906,10 +3873,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[311], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3918,10 +3885,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[312], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3930,10 +3897,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[313], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3942,10 +3909,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[314], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3954,10 +3921,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[315], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3966,10 +3933,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[316], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3978,10 +3945,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[317], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -3990,10 +3957,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[318], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4002,10 +3969,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[319], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4014,10 +3981,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[320], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4026,10 +3993,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[321], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4038,10 +4005,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[322], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4050,10 +4017,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[323], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4062,10 +4029,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[324], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4074,10 +4041,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[325], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4086,10 +4053,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[326], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4098,10 +4065,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[327], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4110,10 +4077,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[328], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4122,10 +4089,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[329], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4134,10 +4101,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[330], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4146,10 +4113,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[331], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4158,10 +4125,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[332], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4170,10 +4137,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[333], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4182,10 +4149,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[334], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4194,10 +4161,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[335], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4206,10 +4173,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[336], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4218,10 +4185,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[337], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4230,10 +4197,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[338], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4242,10 +4209,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[339], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4254,10 +4221,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[340], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4266,10 +4233,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[341], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4278,10 +4245,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[342], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4290,10 +4257,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[343], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4302,10 +4269,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[344], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4314,10 +4281,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[345], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4326,10 +4293,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[346], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4338,10 +4305,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[347], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4350,10 +4317,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[348], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4362,10 +4329,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[349], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4374,10 +4341,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[350], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4386,10 +4353,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[351], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4398,10 +4365,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[352], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4410,10 +4377,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[353], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4422,10 +4389,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[354], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4434,10 +4401,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[355], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4446,10 +4413,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[356], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4458,10 +4425,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[357], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4470,10 +4437,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[358], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4482,10 +4449,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[359], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4494,10 +4461,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[360], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4506,10 +4473,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[361], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4518,10 +4485,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[362], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4530,10 +4497,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[363], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4542,10 +4509,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[364], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4554,10 +4521,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[365], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4566,10 +4533,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[366], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4578,10 +4545,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[367], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4590,10 +4557,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[368], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4602,10 +4569,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[369], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4614,10 +4581,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[370], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4626,10 +4593,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[371], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4638,10 +4605,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[372], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4650,10 +4617,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[373], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4662,10 +4629,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[374], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4674,10 +4641,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[375], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4686,10 +4653,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[376], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4698,10 +4665,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[377], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4710,10 +4677,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[378], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4722,10 +4689,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[379], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4734,10 +4701,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[380], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4746,10 +4713,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[381], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4758,10 +4725,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[382], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4770,10 +4737,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[383], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4782,10 +4749,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[384], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4794,10 +4761,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[385], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4806,10 +4773,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[386], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4818,10 +4785,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[387], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4830,10 +4797,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[388], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4842,10 +4809,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[389], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4854,10 +4821,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[390], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4866,10 +4833,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[391], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4878,10 +4845,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[392], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4890,10 +4857,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[393], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4902,10 +4869,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[394], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4914,10 +4881,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[395], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4926,10 +4893,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[396], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4938,10 +4905,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[397], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4950,10 +4917,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[398], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4962,10 +4929,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[399], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4974,10 +4941,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[400], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4986,10 +4953,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[401], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -4998,10 +4965,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[402], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5010,10 +4977,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[403], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5022,10 +4989,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[404], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5034,10 +5001,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[405], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5046,10 +5013,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[406], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5058,10 +5025,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[407], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5070,10 +5037,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[408], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5082,10 +5049,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[409], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5094,10 +5061,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[410], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5106,10 +5073,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[411], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5118,10 +5085,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[412], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5130,10 +5097,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[413], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5142,10 +5109,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[414], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5154,10 +5121,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[415], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5166,10 +5133,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[416], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5178,10 +5145,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[417], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5190,10 +5157,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[418], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5202,10 +5169,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[419], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5214,10 +5181,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[420], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5226,10 +5193,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[421], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5238,10 +5205,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[422], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5250,10 +5217,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[423], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5262,10 +5229,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[424], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5274,10 +5241,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[425], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5286,10 +5253,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[426], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5298,10 +5265,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[427], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5310,10 +5277,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[428], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5322,10 +5289,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[429], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5334,10 +5301,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[430], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5346,10 +5313,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[431], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5358,10 +5325,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[432], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5370,10 +5337,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[433], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5382,10 +5349,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[434], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5394,10 +5361,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[435], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5406,10 +5373,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[436], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5418,10 +5385,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[437], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5430,10 +5397,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[438], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5442,10 +5409,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[439], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5454,10 +5421,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[440], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5466,10 +5433,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[441], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5478,10 +5445,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[442], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5490,10 +5457,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[443], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5502,10 +5469,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[444], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5514,10 +5481,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[445], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5526,10 +5493,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[446], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5538,10 +5505,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[447], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5550,10 +5517,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[448], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5562,10 +5529,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[449], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5574,10 +5541,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[450], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5586,10 +5553,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[451], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5598,10 +5565,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[452], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5610,10 +5577,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[453], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5622,10 +5589,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[454], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5634,10 +5601,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[455], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5646,10 +5613,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[456], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5658,10 +5625,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[457], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5670,10 +5637,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[458], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5682,10 +5649,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[459], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5694,10 +5661,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[460], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5706,10 +5673,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[461], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5718,10 +5685,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[462], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5730,10 +5697,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[463], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5742,10 +5709,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[464], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5754,10 +5721,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[465], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5766,10 +5733,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[466], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5778,10 +5745,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[467], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5790,10 +5757,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[468], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5802,10 +5769,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[469], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5814,10 +5781,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[470], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5826,10 +5793,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[471], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5838,10 +5805,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[472], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5850,10 +5817,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[473], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5862,10 +5829,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[474], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5874,10 +5841,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[475], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5886,10 +5853,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[476], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5898,10 +5865,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[477], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5910,10 +5877,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[478], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5922,10 +5889,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[479], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5934,10 +5901,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[480], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5946,10 +5913,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[481], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5958,10 +5925,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[482], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5970,10 +5937,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[483], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5982,10 +5949,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[484], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -5994,10 +5961,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[485], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6006,10 +5973,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[486], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6018,10 +5985,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[487], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6030,10 +5997,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[488], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6042,10 +6009,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[489], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6054,10 +6021,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[490], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6066,10 +6033,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[491], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6078,10 +6045,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[492], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6090,10 +6057,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[493], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6102,10 +6069,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[494], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6114,10 +6081,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[495], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6126,10 +6093,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[496], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6138,10 +6105,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[497], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6150,10 +6117,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[498], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6162,10 +6129,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[499], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6174,10 +6141,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[500], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6186,10 +6153,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[501], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6198,10 +6165,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[502], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6210,10 +6177,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[503], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6222,10 +6189,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[504], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6234,10 +6201,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[505], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6246,10 +6213,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[506], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6258,10 +6225,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[507], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6270,10 +6237,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[508], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6282,10 +6249,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[509], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6294,10 +6261,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[510], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6306,10 +6273,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[511], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6318,10 +6285,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[512], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6330,10 +6297,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[513], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6342,10 +6309,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[514], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6354,10 +6321,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[515], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6366,10 +6333,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[516], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6378,10 +6345,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[517], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6390,10 +6357,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[518], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6402,10 +6369,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[519], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6414,10 +6381,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[520], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6426,10 +6393,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[521], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6438,10 +6405,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[522], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6450,10 +6417,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[523], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6462,10 +6429,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[524], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6474,10 +6441,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[525], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6486,10 +6453,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[526], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6498,10 +6465,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[527], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6510,10 +6477,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[528], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6522,10 +6489,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[529], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6534,10 +6501,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[530], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6546,10 +6513,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[531], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6558,10 +6525,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[532], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6570,10 +6537,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[533], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6582,10 +6549,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[534], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6594,10 +6561,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[535], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6606,10 +6573,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[536], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6618,10 +6585,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[537], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6630,10 +6597,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[538], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6642,10 +6609,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[539], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6654,10 +6621,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[540], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6666,10 +6633,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[541], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6678,10 +6645,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[542], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6690,10 +6657,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[543], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6702,10 +6669,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[544], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6714,10 +6681,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[545], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6726,10 +6693,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[546], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6738,10 +6705,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[547], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6750,10 +6717,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[548], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6762,10 +6729,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[549], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6774,10 +6741,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[550], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6786,10 +6753,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[551], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6798,10 +6765,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[552], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6810,10 +6777,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[553], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6822,10 +6789,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[554], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6834,10 +6801,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[555], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6846,10 +6813,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[556], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6858,10 +6825,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[557], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6870,10 +6837,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[558], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6882,10 +6849,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[559], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6894,10 +6861,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[560], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6906,10 +6873,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[561], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6918,10 +6885,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[562], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6930,10 +6897,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[563], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6942,10 +6909,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[564], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6954,10 +6921,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[565], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6966,10 +6933,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[566], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6978,10 +6945,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[567], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -6990,10 +6957,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[568], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7002,10 +6969,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[569], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7014,10 +6981,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[570], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7026,10 +6993,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[571], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7038,10 +7005,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[572], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7050,10 +7017,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[573], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7062,10 +7029,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[574], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7074,10 +7041,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[575], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7086,10 +7053,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[576], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7098,10 +7065,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[577], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7110,10 +7077,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[578], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7122,10 +7089,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[579], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7134,10 +7101,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[580], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7146,10 +7113,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[581], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7158,10 +7125,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[582], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7170,10 +7137,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[583], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7182,10 +7149,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[584], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7194,10 +7161,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[585], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7206,10 +7173,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[586], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7218,10 +7185,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[587], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7230,10 +7197,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[588], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7242,10 +7209,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[589], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7254,10 +7221,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[590], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7266,10 +7233,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[591], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7278,10 +7245,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[592], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7290,10 +7257,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[593], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7302,10 +7269,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[594], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7314,10 +7281,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[595], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7326,10 +7293,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[596], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7338,10 +7305,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[597], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7350,10 +7317,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[598], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7362,10 +7329,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[599], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7374,10 +7341,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[600], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7386,10 +7353,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[601], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7398,10 +7365,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[602], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7410,10 +7377,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[603], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7422,10 +7389,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[604], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7434,10 +7401,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[605], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7446,10 +7413,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[606], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7458,10 +7425,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[607], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7470,10 +7437,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[608], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7482,10 +7449,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[609], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7494,10 +7461,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[610], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7506,10 +7473,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[611], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7518,10 +7485,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[612], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7530,10 +7497,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[613], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7542,10 +7509,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[614], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7554,10 +7521,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[615], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7566,10 +7533,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[616], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7578,10 +7545,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[617], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7590,10 +7557,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[618], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7602,10 +7569,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[619], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7614,10 +7581,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[620], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7626,10 +7593,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[621], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7638,10 +7605,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[622], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7650,10 +7617,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[623], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7662,10 +7629,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[624], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7674,10 +7641,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[625], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7686,10 +7653,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[626], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7698,10 +7665,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[627], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7710,10 +7677,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[628], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7722,10 +7689,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[629], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7734,10 +7701,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[630], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7746,10 +7713,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[631], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7758,10 +7725,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[632], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7770,10 +7737,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[633], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7782,10 +7749,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[634], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7794,10 +7761,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[635], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7806,10 +7773,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[636], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7818,10 +7785,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[637], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7830,10 +7797,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[638], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7842,10 +7809,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[639], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7854,10 +7821,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[640], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7866,10 +7833,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[641], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7878,10 +7845,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[642], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7890,10 +7857,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[643], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7902,10 +7869,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[644], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7914,10 +7881,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[645], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7926,10 +7893,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[646], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7938,10 +7905,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[647], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7950,10 +7917,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[648], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7962,10 +7929,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[649], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7974,10 +7941,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[650], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7986,10 +7953,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[651], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -7998,10 +7965,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[652], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8010,10 +7977,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[653], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8022,10 +7989,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[654], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8034,10 +8001,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[655], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8046,10 +8013,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[656], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8058,10 +8025,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[657], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8070,10 +8037,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[658], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8082,10 +8049,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[659], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8094,10 +8061,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[660], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8106,10 +8073,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[661], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8118,10 +8085,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[662], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8130,10 +8097,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[663], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8142,10 +8109,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[664], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8154,10 +8121,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[665], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8166,10 +8133,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[666], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8178,10 +8145,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[667], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8190,10 +8157,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[668], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8202,10 +8169,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[669], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8214,10 +8181,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[670], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8226,10 +8193,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[671], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8238,10 +8205,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[672], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8250,10 +8217,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[673], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8262,10 +8229,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[674], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8274,10 +8241,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[675], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8286,10 +8253,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[676], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8298,10 +8265,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[677], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8310,10 +8277,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[678], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8322,10 +8289,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[679], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8334,10 +8301,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[680], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8346,10 +8313,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[681], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8358,10 +8325,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[682], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8370,10 +8337,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[683], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8382,10 +8349,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[684], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8394,10 +8361,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[685], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8406,10 +8373,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[686], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8418,10 +8385,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[687], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8430,10 +8397,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[688], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8442,10 +8409,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[689], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8454,10 +8421,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[690], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8466,10 +8433,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[691], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8478,10 +8445,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[692], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8490,10 +8457,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[693], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8502,10 +8469,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[694], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8514,10 +8481,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[695], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8526,10 +8493,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[696], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8538,10 +8505,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[697], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8550,10 +8517,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[698], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8562,10 +8529,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[699], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8574,10 +8541,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[700], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8586,10 +8553,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[701], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8598,10 +8565,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[702], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8610,10 +8577,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[703], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8622,10 +8589,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[704], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8634,10 +8601,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[705], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8646,10 +8613,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[706], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8658,10 +8625,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[707], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8670,10 +8637,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[708], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8682,10 +8649,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[709], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8694,10 +8661,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[710], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8706,10 +8673,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[711], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8718,10 +8685,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[712], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8730,10 +8697,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[713], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8742,10 +8709,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[714], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8754,10 +8721,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[715], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8766,10 +8733,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[716], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8778,10 +8745,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[717], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8790,10 +8757,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[718], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8802,10 +8769,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[719], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8814,10 +8781,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[720], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8826,10 +8793,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[721], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8838,10 +8805,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[722], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8850,10 +8817,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[723], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8862,10 +8829,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[724], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8874,10 +8841,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[725], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8886,10 +8853,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[726], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8898,10 +8865,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[727], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8910,10 +8877,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[728], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8922,10 +8889,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[729], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8934,10 +8901,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[730], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8946,10 +8913,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[731], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8958,10 +8925,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[732], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8970,10 +8937,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[733], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8982,10 +8949,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[734], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -8994,10 +8961,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[735], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9006,10 +8973,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[736], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9018,10 +8985,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[737], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9030,10 +8997,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[738], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9042,10 +9009,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[739], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9054,10 +9021,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[740], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9066,10 +9033,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[741], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9078,10 +9045,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[742], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9090,10 +9057,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[743], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9102,10 +9069,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[744], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9114,10 +9081,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[745], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9126,10 +9093,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[746], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9138,10 +9105,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[747], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9150,10 +9117,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[748], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9162,10 +9129,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[749], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9174,10 +9141,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[750], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9186,10 +9153,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[751], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9198,10 +9165,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[752], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9210,10 +9177,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[753], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9222,10 +9189,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[754], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9234,10 +9201,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[755], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9246,10 +9213,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[756], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9258,10 +9225,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[757], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9270,10 +9237,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[758], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9282,10 +9249,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[759], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9294,10 +9261,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[760], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9306,10 +9273,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[761], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9318,10 +9285,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[762], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9330,10 +9297,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[763], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9342,10 +9309,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[764], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9354,10 +9321,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[765], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9366,10 +9333,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[766], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9378,10 +9345,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[767], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9390,10 +9357,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[768], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9402,10 +9369,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[769], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9414,10 +9381,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[770], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9426,10 +9393,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[771], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9438,10 +9405,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[772], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9450,10 +9417,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[773], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9462,10 +9429,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[774], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9474,10 +9441,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[775], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9486,10 +9453,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[776], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9498,10 +9465,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[777], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9510,10 +9477,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[778], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9522,10 +9489,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[779], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9534,10 +9501,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[780], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9546,10 +9513,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[781], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9558,10 +9525,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[782], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9570,10 +9537,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[783], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9582,10 +9549,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[784], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9594,10 +9561,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[785], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9606,10 +9573,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[786], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9618,10 +9585,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[787], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9630,10 +9597,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[788], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9642,10 +9609,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[789], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9654,10 +9621,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[790], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9666,10 +9633,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[791], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9678,10 +9645,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[792], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9690,10 +9657,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[793], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9702,10 +9669,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[794], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9714,10 +9681,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[795], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9726,10 +9693,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[796], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9738,10 +9705,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[797], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9750,10 +9717,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[798], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9762,10 +9729,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[799], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9774,10 +9741,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[800], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9786,10 +9753,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[801], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9798,10 +9765,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[802], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9810,10 +9777,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[803], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9822,10 +9789,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[804], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9834,10 +9801,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[805], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9846,10 +9813,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[806], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9858,10 +9825,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[807], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9870,10 +9837,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[808], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9882,10 +9849,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[809], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9894,10 +9861,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[810], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9906,10 +9873,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[811], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9918,10 +9885,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[812], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9930,10 +9897,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[813], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9942,10 +9909,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[814], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9954,10 +9921,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[815], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9966,10 +9933,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[816], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9978,10 +9945,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[817], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -9990,10 +9957,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[818], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10002,10 +9969,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[819], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10014,10 +9981,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[820], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10026,10 +9993,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[821], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10038,10 +10005,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[822], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10050,10 +10017,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[823], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10062,10 +10029,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[824], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10074,10 +10041,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[825], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10086,10 +10053,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[826], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10098,10 +10065,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[827], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10110,10 +10077,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[828], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10122,10 +10089,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[829], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10134,10 +10101,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[830], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10146,10 +10113,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[831], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10158,10 +10125,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[832], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10170,10 +10137,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[833], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10182,10 +10149,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[834], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10194,10 +10161,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[835], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10206,10 +10173,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[836], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10218,10 +10185,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[837], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10230,10 +10197,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[838], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10242,10 +10209,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[839], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10254,10 +10221,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[840], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10266,10 +10233,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[841], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10278,10 +10245,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[842], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10290,10 +10257,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[843], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10302,10 +10269,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[844], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10314,10 +10281,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[845], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10326,10 +10293,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[846], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10338,10 +10305,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[847], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10350,10 +10317,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[848], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10362,10 +10329,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[849], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10374,10 +10341,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[850], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10386,10 +10353,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[851], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10398,10 +10365,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[852], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10410,10 +10377,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[853], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10422,10 +10389,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[854], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10434,10 +10401,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[855], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10446,10 +10413,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[856], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10458,10 +10425,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[857], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10470,10 +10437,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[858], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10482,10 +10449,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[859], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10494,10 +10461,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[860], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10506,10 +10473,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[861], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10518,10 +10485,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[862], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10530,10 +10497,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[863], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10542,10 +10509,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[864], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10554,10 +10521,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[865], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10566,10 +10533,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[866], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10578,10 +10545,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[867], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10590,10 +10557,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[868], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10602,10 +10569,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[869], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10614,10 +10581,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[870], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10626,10 +10593,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[871], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10638,10 +10605,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[872], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10650,10 +10617,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[873], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10662,10 +10629,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[874], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10674,10 +10641,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[875], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10686,10 +10653,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[876], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10698,10 +10665,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[877], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10710,10 +10677,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[878], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10722,10 +10689,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[879], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10734,10 +10701,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[880], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10746,10 +10713,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[881], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10758,10 +10725,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[882], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10770,10 +10737,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[883], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10782,10 +10749,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[884], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10794,10 +10761,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[885], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10806,10 +10773,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[886], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10818,10 +10785,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[887], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10830,10 +10797,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[888], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10842,10 +10809,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[889], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10854,10 +10821,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[890], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10866,10 +10833,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[891], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10878,10 +10845,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[892], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10890,10 +10857,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[893], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10902,10 +10869,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[894], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10914,10 +10881,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[895], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10926,10 +10893,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[896], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10938,10 +10905,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[897], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10950,10 +10917,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[898], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10962,10 +10929,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[899], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10974,10 +10941,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[900], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10986,10 +10953,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[901], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -10998,10 +10965,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[902], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11010,10 +10977,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[903], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11022,10 +10989,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[904], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11034,10 +11001,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[905], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11046,10 +11013,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[906], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11058,10 +11025,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[907], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11070,10 +11037,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[908], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11082,10 +11049,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[909], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11094,10 +11061,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[910], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11106,10 +11073,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[911], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11118,10 +11085,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[912], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11130,10 +11097,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[913], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11142,10 +11109,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[914], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11154,10 +11121,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[915], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11166,10 +11133,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[916], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11178,10 +11145,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[917], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11190,10 +11157,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[918], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11202,10 +11169,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[919], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11214,10 +11181,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[920], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11226,10 +11193,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[921], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11238,10 +11205,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[922], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11250,10 +11217,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[923], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11262,10 +11229,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[924], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11274,10 +11241,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[925], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11286,10 +11253,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[926], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11298,10 +11265,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[927], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11310,10 +11277,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[928], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11322,10 +11289,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[929], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11334,10 +11301,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[930], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11346,10 +11313,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[931], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11358,10 +11325,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[932], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11370,10 +11337,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[933], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11382,10 +11349,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[934], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11394,10 +11361,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[935], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11406,10 +11373,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[936], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11418,10 +11385,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[937], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11430,10 +11397,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[938], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11442,10 +11409,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[939], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11454,10 +11421,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[940], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11466,10 +11433,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[941], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11478,10 +11445,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[942], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11490,10 +11457,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[943], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11502,10 +11469,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[944], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11514,10 +11481,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[945], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11526,10 +11493,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[946], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11538,10 +11505,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[947], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11550,10 +11517,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[948], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11562,10 +11529,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[949], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11574,10 +11541,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[950], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11586,10 +11553,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[951], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11598,10 +11565,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[952], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11610,10 +11577,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[953], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11622,10 +11589,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[954], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11634,10 +11601,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[955], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11646,10 +11613,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[956], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11658,10 +11625,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[957], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11670,10 +11637,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[958], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11682,10 +11649,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[959], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11694,10 +11661,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[960], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11706,10 +11673,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[961], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11718,10 +11685,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[962], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11730,10 +11697,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[963], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11742,10 +11709,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[964], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11754,10 +11721,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[965], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11766,10 +11733,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[966], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11778,10 +11745,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[967], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11790,10 +11757,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[968], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11802,10 +11769,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[969], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11814,10 +11781,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[970], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11826,10 +11793,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[971], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11838,10 +11805,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[972], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11850,10 +11817,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[973], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11862,10 +11829,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[974], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11874,10 +11841,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[975], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11886,10 +11853,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[976], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11898,10 +11865,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[977], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11910,10 +11877,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[978], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11922,10 +11889,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[979], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11934,10 +11901,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[980], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11946,10 +11913,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[981], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11958,10 +11925,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[982], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11970,10 +11937,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[983], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11982,10 +11949,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[984], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -11994,10 +11961,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[985], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12006,10 +11973,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[986], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12018,10 +11985,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[987], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12030,10 +11997,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[988], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12042,10 +12009,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[989], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12054,10 +12021,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[990], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12066,10 +12033,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[991], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12078,10 +12045,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[992], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12090,10 +12057,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[993], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12102,10 +12069,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[994], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12114,10 +12081,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[995], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12126,10 +12093,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[996], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12138,10 +12105,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[997], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12150,10 +12117,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[998], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12162,10 +12129,10 @@ func InitNeuroChainKernel() {
 		atomic.AddUint64(&NeuroChainMetrics[999], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98+0.02*math.Cos(float64(id.Code)+float64(i)))
+			vec.HomeostasisEnergy[i] = math.Max(0.01, vec.HomeostasisEnergy[i]*0.98 + 0.02*math.Cos(float64(id.Code)+float64(i)))
 			vec.PredictionError[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))*0.1 - vec.HomeostasisEnergy[i]*0.05)
 			vec.AttentionWeight[i] = 1.0 / (1.0 + vec.PredictionError[i])
-			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((id.Code+uint64(i))%10) + 1.0)
+			vec.ActionTorque[i] = vec.AttentionWeight[i] * (float64((uint64(id.Code)+uint64(i))%10) + 1.0)
 			vec.LanguageEntropy[i] = math.Log2(1.0 + vec.ActionTorque[i])
 		}
 		return nil
@@ -12185,8 +12152,6 @@ func DispatchNeuroChain(d, p, m byte, vec *CognitiveChainVector) error {
 }
 
 func GetNeuroChainExecutionCount(code uint16) uint64 {
-	if code >= 1000 {
-		return 0
-	}
+	if code >= 1000 { return 0 }
 	return atomic.LoadUint64(&NeuroChainMetrics[code])
 }

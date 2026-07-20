@@ -2,43 +2,9 @@
 import math
 from typing import Tuple
 
-DOMAINS = {
-    0: "ENTROPY_ALLOC",
-    1: "LATENT_LOOKAHEAD",
-    2: "POLICY_IMPROVE",
-    3: "HARNESS_DISCOVERY",
-    4: "PROGRAMMATIC_JIT",
-    5: "SWARM_GRAPH",
-    6: "TRI_TIER_MEMORY",
-    7: "INFO_KV_EVICTION",
-    8: "STAGE_DECOUPLE",
-    9: "VECTOR_QUANT",
-}
-PRIMITIVES = {
-    0: "INIT",
-    1: "EXPAND",
-    2: "EVALUATE",
-    3: "BACKPROP",
-    4: "PRUNE",
-    5: "QUANTIZE",
-    6: "ASSERT_BFT",
-    7: "EXECUTE_SANDBOX",
-    8: "RECONSTRUCT_STATE",
-    9: "FLUSH_LEDGER",
-}
-MODIFIERS = {
-    0: "RAW",
-    1: "ATOMIC",
-    2: "ADAPTIVE_COT",
-    3: "RETRO_ATTENTION",
-    4: "FORWARD_INFLUENCE",
-    5: "TURBO_QUANT",
-    6: "META_PROPOSER",
-    7: "FEEDFORWARD_OPEN",
-    8: "SLIDING_WINDOW",
-    9: "EPIDEMIC_PURGE",
-}
-
+DOMAINS = {0: 'ENTROPY_ALLOC', 1: 'LATENT_LOOKAHEAD', 2: 'POLICY_IMPROVE', 3: 'HARNESS_DISCOVERY', 4: 'PROGRAMMATIC_JIT', 5: 'SWARM_GRAPH', 6: 'TRI_TIER_MEMORY', 7: 'INFO_KV_EVICTION', 8: 'STAGE_DECOUPLE', 9: 'VECTOR_QUANT'}
+PRIMITIVES = {0: 'INIT', 1: 'EXPAND', 2: 'EVALUATE', 3: 'BACKPROP', 4: 'PRUNE', 5: 'QUANTIZE', 6: 'ASSERT_BFT', 7: 'EXECUTE_SANDBOX', 8: 'RECONSTRUCT_STATE', 9: 'FLUSH_LEDGER'}
+MODIFIERS = {0: 'RAW', 1: 'ATOMIC', 2: 'ADAPTIVE_COT', 3: 'RETRO_ATTENTION', 4: 'FORWARD_INFLUENCE', 5: 'TURBO_QUANT', 6: 'META_PROPOSER', 7: 'FEEDFORWARD_OPEN', 8: 'SLIDING_WINDOW', 9: 'EPIDEMIC_PURGE'}
 
 class TTSHarnessState:
     def __init__(self):
@@ -49,18 +15,14 @@ class TTSHarnessState:
         self.pruning_rate = [0.0] * 64
         self.execution_count = 0
 
-
 def resolve_tts_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
-        raise ValueError("Index out of range [0-9]")
+        raise ValueError('Index out of range [0-9]')
     code = d * 100 + p * 10 + m
-    name = f"TTS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
+    name = f'TTS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}'
     return code, name
 
-
-def dispatch_tts_harness(
-    d: int, p: int, m: int, vec: TTSHarnessState
-) -> Tuple[int, str, float]:
+def dispatch_tts_harness(d: int, p: int, m: int, vec: TTSHarnessState) -> Tuple[int, str, float]:
     code, name = resolve_tts_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):

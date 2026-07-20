@@ -13,120 +13,87 @@ type PlaywrightPrimitive int
 type PlaywrightModifier int
 
 const (
-	PlaywrightDomainBrowsernav    PlaywrightDomain = 0
-	PlaywrightDomainDominteract   PlaywrightDomain = 1
+	PlaywrightDomainBrowsernav PlaywrightDomain = 0
+	PlaywrightDomainDominteract PlaywrightDomain = 1
 	PlaywrightDomainAssertextract PlaywrightDomain = 2
-	PlaywrightDomainReserved3     PlaywrightDomain = 3
-	PlaywrightDomainReserved4     PlaywrightDomain = 4
-	PlaywrightDomainReserved5     PlaywrightDomain = 5
-	PlaywrightDomainReserved6     PlaywrightDomain = 6
-	PlaywrightDomainReserved7     PlaywrightDomain = 7
-	PlaywrightDomainReserved8     PlaywrightDomain = 8
-	PlaywrightDomainReserved9     PlaywrightDomain = 9
+	PlaywrightDomainReserved3 PlaywrightDomain = 3
+	PlaywrightDomainReserved4 PlaywrightDomain = 4
+	PlaywrightDomainReserved5 PlaywrightDomain = 5
+	PlaywrightDomainReserved6 PlaywrightDomain = 6
+	PlaywrightDomainReserved7 PlaywrightDomain = 7
+	PlaywrightDomainReserved8 PlaywrightDomain = 8
+	PlaywrightDomainReserved9 PlaywrightDomain = 9
 
 	// Playwright Primitives
-	PlaywrightPrimitiveInit     PlaywrightPrimitive = 0
+	PlaywrightPrimitiveInit PlaywrightPrimitive = 0
 	PlaywrightPrimitiveNavigate PlaywrightPrimitive = 1
-	PlaywrightPrimitiveClick    PlaywrightPrimitive = 2
-	PlaywrightPrimitiveType     PlaywrightPrimitive = 3
-	PlaywrightPrimitiveWait     PlaywrightPrimitive = 4
-	PlaywrightPrimitiveQuery    PlaywrightPrimitive = 5
-	PlaywrightPrimitiveCapture  PlaywrightPrimitive = 6
-	PlaywrightPrimitiveMutate   PlaywrightPrimitive = 7
+	PlaywrightPrimitiveClick PlaywrightPrimitive = 2
+	PlaywrightPrimitiveType PlaywrightPrimitive = 3
+	PlaywrightPrimitiveWait PlaywrightPrimitive = 4
+	PlaywrightPrimitiveQuery PlaywrightPrimitive = 5
+	PlaywrightPrimitiveCapture PlaywrightPrimitive = 6
+	PlaywrightPrimitiveMutate PlaywrightPrimitive = 7
 	PlaywrightPrimitiveEvaluate PlaywrightPrimitive = 8
-	PlaywrightPrimitiveClose    PlaywrightPrimitive = 9
+	PlaywrightPrimitiveClose PlaywrightPrimitive = 9
 
 	// Playwright Modifiers
-	PlaywrightModifierRaw      PlaywrightModifier = 0
-	PlaywrightModifierAtomic   PlaywrightModifier = 1
-	PlaywrightModifierForce    PlaywrightModifier = 2
+	PlaywrightModifierRaw PlaywrightModifier = 0
+	PlaywrightModifierAtomic PlaywrightModifier = 1
+	PlaywrightModifierForce PlaywrightModifier = 2
 	PlaywrightModifierWaitidle PlaywrightModifier = 3
-	PlaywrightModifierStealth  PlaywrightModifier = 4
-	PlaywrightModifierSync     PlaywrightModifier = 5
-	PlaywrightModifierAsync    PlaywrightModifier = 6
-	PlaywrightModifierSecure   PlaywrightModifier = 7
-	PlaywrightModifierRetry    PlaywrightModifier = 8
-	PlaywrightModifierShadow   PlaywrightModifier = 9
+	PlaywrightModifierStealth PlaywrightModifier = 4
+	PlaywrightModifierSync PlaywrightModifier = 5
+	PlaywrightModifierAsync PlaywrightModifier = 6
+	PlaywrightModifierSecure PlaywrightModifier = 7
+	PlaywrightModifierRetry PlaywrightModifier = 8
+	PlaywrightModifierShadow PlaywrightModifier = 9
 )
 
 func (d PlaywrightDomain) String() string {
 	switch d {
-	case 0:
-		return "BROWSER_NAV"
-	case 1:
-		return "DOM_INTERACT"
-	case 2:
-		return "ASSERT_EXTRACT"
-	case 3:
-		return "RESERVED_3"
-	case 4:
-		return "RESERVED_4"
-	case 5:
-		return "RESERVED_5"
-	case 6:
-		return "RESERVED_6"
-	case 7:
-		return "RESERVED_7"
-	case 8:
-		return "RESERVED_8"
-	case 9:
-		return "RESERVED_9"
-	default:
-		return "UNKNOWN"
+	case 0: return "BROWSER_NAV"
+	case 1: return "DOM_INTERACT"
+	case 2: return "ASSERT_EXTRACT"
+	case 3: return "RESERVED_3"
+	case 4: return "RESERVED_4"
+	case 5: return "RESERVED_5"
+	case 6: return "RESERVED_6"
+	case 7: return "RESERVED_7"
+	case 8: return "RESERVED_8"
+	case 9: return "RESERVED_9"
+	default: return "UNKNOWN"
 	}
 }
 
 func (p PlaywrightPrimitive) String() string {
 	switch p {
-	case 0:
-		return "INIT"
-	case 1:
-		return "NAVIGATE"
-	case 2:
-		return "CLICK"
-	case 3:
-		return "TYPE"
-	case 4:
-		return "WAIT"
-	case 5:
-		return "QUERY"
-	case 6:
-		return "CAPTURE"
-	case 7:
-		return "MUTATE"
-	case 8:
-		return "EVALUATE"
-	case 9:
-		return "CLOSE"
-	default:
-		return "UNKNOWN"
+	case 0: return "INIT"
+	case 1: return "NAVIGATE"
+	case 2: return "CLICK"
+	case 3: return "TYPE"
+	case 4: return "WAIT"
+	case 5: return "QUERY"
+	case 6: return "CAPTURE"
+	case 7: return "MUTATE"
+	case 8: return "EVALUATE"
+	case 9: return "CLOSE"
+	default: return "UNKNOWN"
 	}
 }
 
 func (m PlaywrightModifier) String() string {
 	switch m {
-	case 0:
-		return "RAW"
-	case 1:
-		return "ATOMIC"
-	case 2:
-		return "FORCE"
-	case 3:
-		return "WAIT_IDLE"
-	case 4:
-		return "STEALTH"
-	case 5:
-		return "SYNC"
-	case 6:
-		return "ASYNC"
-	case 7:
-		return "SECURE"
-	case 8:
-		return "RETRY"
-	case 9:
-		return "SHADOW"
-	default:
-		return "UNKNOWN"
+	case 0: return "RAW"
+	case 1: return "ATOMIC"
+	case 2: return "FORCE"
+	case 3: return "WAIT_IDLE"
+	case 4: return "STEALTH"
+	case 5: return "SYNC"
+	case 6: return "ASYNC"
+	case 7: return "SECURE"
+	case 8: return "RETRY"
+	case 9: return "SHADOW"
+	default: return "UNKNOWN"
 	}
 }
 
@@ -144,7 +111,7 @@ type PlaywrightStateVector struct {
 	LastLoadTimeMS    [64]float64
 	DomStabilityIndex [64]float64
 	NetworkIdleState  [64]bool
-	ExecutionCount    uint64
+	ExecutionCount uint64
 }
 
 func ResolvePlaywrightIdentity(d, p, m byte) (PlaywrightIdentity, error) {
@@ -165,7 +132,7 @@ func ResolvePlaywrightIdentity(d, p, m byte) (PlaywrightIdentity, error) {
 type PlaywrightHandler func(id PlaywrightIdentity, vec *PlaywrightStateVector) error
 
 var (
-	PlaywrightTable   [1000]PlaywrightHandler
+	PlaywrightTable [1000]PlaywrightHandler
 	PlaywrightMetrics [1000]uint64
 )
 
@@ -175,11 +142,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -189,11 +154,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -203,11 +166,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -217,11 +178,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -231,11 +190,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -245,11 +202,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -259,11 +214,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -273,11 +226,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -287,11 +238,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -301,11 +250,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -315,11 +262,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -329,11 +274,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -343,11 +286,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -357,11 +298,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -371,11 +310,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -385,11 +322,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -399,11 +334,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -413,11 +346,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -427,11 +358,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -441,11 +370,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -455,11 +382,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -469,11 +394,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -483,11 +406,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -497,11 +418,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -511,11 +430,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -525,11 +442,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -539,11 +454,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -553,11 +466,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -567,11 +478,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -581,11 +490,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -595,11 +502,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -609,11 +514,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -623,11 +526,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -637,11 +538,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -651,11 +550,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -665,11 +562,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -679,11 +574,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -693,11 +586,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -707,11 +598,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -721,11 +610,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -735,11 +622,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -749,11 +634,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -763,11 +646,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -777,11 +658,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -791,11 +670,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -805,11 +682,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -819,11 +694,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -833,11 +706,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -847,11 +718,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -861,11 +730,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -875,11 +742,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -889,11 +754,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -903,11 +766,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -917,11 +778,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -931,11 +790,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -945,11 +802,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -959,11 +814,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -973,11 +826,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -987,11 +838,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1001,11 +850,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1015,11 +862,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1029,11 +874,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1043,11 +886,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1057,11 +898,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1071,11 +910,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1085,11 +922,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1099,11 +934,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1113,11 +946,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1127,11 +958,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1141,11 +970,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1155,11 +982,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1169,11 +994,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1183,11 +1006,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1197,11 +1018,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1211,11 +1030,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1225,11 +1042,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1239,11 +1054,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1253,11 +1066,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1267,11 +1078,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1281,11 +1090,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1295,11 +1102,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1309,11 +1114,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1323,11 +1126,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1337,11 +1138,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1351,11 +1150,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1365,11 +1162,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1379,11 +1174,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1393,11 +1186,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1407,11 +1198,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1421,11 +1210,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1435,11 +1222,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1449,11 +1234,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1463,11 +1246,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1477,11 +1258,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1491,11 +1270,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1505,11 +1282,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1519,11 +1294,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1533,11 +1306,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1547,11 +1318,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1561,11 +1330,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1575,11 +1342,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1589,11 +1354,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1603,11 +1366,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1617,11 +1378,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1631,11 +1390,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1645,11 +1402,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1659,11 +1414,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1673,11 +1426,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1687,11 +1438,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1701,11 +1450,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1715,11 +1462,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1729,11 +1474,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1743,11 +1486,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1757,11 +1498,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1771,11 +1510,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1785,11 +1522,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1799,11 +1534,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1813,11 +1546,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1827,11 +1558,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1841,11 +1570,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1855,11 +1582,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1869,11 +1594,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1883,11 +1606,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1897,11 +1618,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1911,11 +1630,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1925,11 +1642,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1939,11 +1654,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1953,11 +1666,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1967,11 +1678,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1981,11 +1690,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -1995,11 +1702,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2009,11 +1714,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2023,11 +1726,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2037,11 +1738,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2051,11 +1750,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2065,11 +1762,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2079,11 +1774,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2093,11 +1786,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2107,11 +1798,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2121,11 +1810,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2135,11 +1822,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2149,11 +1834,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2163,11 +1846,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2177,11 +1858,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2191,11 +1870,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2205,11 +1882,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2219,11 +1894,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2233,11 +1906,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2247,11 +1918,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2261,11 +1930,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2275,11 +1942,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2289,11 +1954,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2303,11 +1966,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2317,11 +1978,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2331,11 +1990,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2345,11 +2002,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2359,11 +2014,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2373,11 +2026,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2387,11 +2038,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2401,11 +2050,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2415,11 +2062,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2429,11 +2074,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2443,11 +2086,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2457,11 +2098,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2471,11 +2110,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2485,11 +2122,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2499,11 +2134,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2513,11 +2146,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2527,11 +2158,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2541,11 +2170,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2555,11 +2182,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2569,11 +2194,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2583,11 +2206,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2597,11 +2218,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2611,11 +2230,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2625,11 +2242,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2639,11 +2254,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2653,11 +2266,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2667,11 +2278,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2681,11 +2290,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2695,11 +2302,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2709,11 +2314,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2723,11 +2326,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2737,11 +2338,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2751,11 +2350,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2765,11 +2362,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2779,11 +2374,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2793,11 +2386,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2807,11 +2398,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2821,11 +2410,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2835,11 +2422,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2849,11 +2434,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2863,11 +2446,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2877,11 +2458,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2891,11 +2470,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2905,11 +2482,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2919,11 +2494,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2933,11 +2506,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2947,11 +2518,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2961,11 +2530,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2975,11 +2542,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -2989,11 +2554,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3003,11 +2566,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3017,11 +2578,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3031,11 +2590,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3045,11 +2602,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3059,11 +2614,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3073,11 +2626,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3087,11 +2638,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3101,11 +2650,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3115,11 +2662,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3129,11 +2674,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3143,11 +2686,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3157,11 +2698,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3171,11 +2710,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3185,11 +2722,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3199,11 +2734,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3213,11 +2746,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3227,11 +2758,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3241,11 +2770,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3255,11 +2782,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3269,11 +2794,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3283,11 +2806,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3297,11 +2818,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3311,11 +2830,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3325,11 +2842,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3339,11 +2854,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3353,11 +2866,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3367,11 +2878,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3381,11 +2890,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3395,11 +2902,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3409,11 +2914,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3423,11 +2926,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3437,11 +2938,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3451,11 +2950,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3465,11 +2962,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3479,11 +2974,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3493,11 +2986,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3507,11 +2998,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3521,11 +3010,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3535,11 +3022,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3549,11 +3034,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3563,11 +3046,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3577,11 +3058,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3591,11 +3070,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3605,11 +3082,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3619,11 +3094,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3633,11 +3106,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3647,11 +3118,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3661,11 +3130,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3675,11 +3142,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3689,11 +3154,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3703,11 +3166,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3717,11 +3178,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3731,11 +3190,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3745,11 +3202,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3759,11 +3214,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3773,11 +3226,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3787,11 +3238,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3801,11 +3250,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3815,11 +3262,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3829,11 +3274,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3843,11 +3286,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3857,11 +3298,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3871,11 +3310,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3885,11 +3322,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3899,11 +3334,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3913,11 +3346,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3927,11 +3358,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3941,11 +3370,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3955,11 +3382,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3969,11 +3394,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3983,11 +3406,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -3997,11 +3418,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4011,11 +3430,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4025,11 +3442,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4039,11 +3454,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4053,11 +3466,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4067,11 +3478,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4081,11 +3490,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4095,11 +3502,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4109,11 +3514,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4123,11 +3526,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4137,11 +3538,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4151,11 +3550,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4165,11 +3562,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4179,11 +3574,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4193,11 +3586,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4207,11 +3598,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4221,11 +3610,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4235,11 +3622,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4249,11 +3634,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4263,11 +3646,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4277,11 +3658,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4291,11 +3670,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4305,11 +3682,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4319,11 +3694,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4333,11 +3706,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4347,11 +3718,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4361,11 +3730,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4375,11 +3742,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4389,11 +3754,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4403,11 +3766,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4417,11 +3778,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4431,11 +3790,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4445,11 +3802,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4459,11 +3814,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4473,11 +3826,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4487,11 +3838,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4501,11 +3850,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4515,11 +3862,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4529,11 +3874,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4543,11 +3886,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4557,11 +3898,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4571,11 +3910,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4585,11 +3922,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4599,11 +3934,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4613,11 +3946,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4627,11 +3958,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4641,11 +3970,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4655,11 +3982,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4669,11 +3994,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4683,11 +4006,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4697,11 +4018,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4711,11 +4030,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4725,11 +4042,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4739,11 +4054,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4753,11 +4066,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4767,11 +4078,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4781,11 +4090,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4795,11 +4102,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4809,11 +4114,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4823,11 +4126,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4837,11 +4138,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4851,11 +4150,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4865,11 +4162,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4879,11 +4174,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4893,11 +4186,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4907,11 +4198,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4921,11 +4210,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4935,11 +4222,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4949,11 +4234,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4963,11 +4246,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4977,11 +4258,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -4991,11 +4270,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5005,11 +4282,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5019,11 +4294,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5033,11 +4306,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5047,11 +4318,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5061,11 +4330,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5075,11 +4342,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5089,11 +4354,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5103,11 +4366,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5117,11 +4378,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5131,11 +4390,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5145,11 +4402,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5159,11 +4414,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5173,11 +4426,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5187,11 +4438,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5201,11 +4450,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5215,11 +4462,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5229,11 +4474,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5243,11 +4486,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5257,11 +4498,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5271,11 +4510,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5285,11 +4522,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5299,11 +4534,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5313,11 +4546,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5327,11 +4558,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5341,11 +4570,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5355,11 +4582,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5369,11 +4594,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5383,11 +4606,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5397,11 +4618,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5411,11 +4630,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5425,11 +4642,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5439,11 +4654,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5453,11 +4666,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5467,11 +4678,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5481,11 +4690,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5495,11 +4702,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5509,11 +4714,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5523,11 +4726,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5537,11 +4738,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5551,11 +4750,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5565,11 +4762,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5579,11 +4774,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5593,11 +4786,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5607,11 +4798,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5621,11 +4810,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5635,11 +4822,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5649,11 +4834,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5663,11 +4846,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5677,11 +4858,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5691,11 +4870,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5705,11 +4882,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5719,11 +4894,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5733,11 +4906,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5747,11 +4918,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5761,11 +4930,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5775,11 +4942,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5789,11 +4954,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5803,11 +4966,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5817,11 +4978,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5831,11 +4990,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5845,11 +5002,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5859,11 +5014,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5873,11 +5026,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5887,11 +5038,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5901,11 +5050,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5915,11 +5062,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5929,11 +5074,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5943,11 +5086,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5957,11 +5098,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5971,11 +5110,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5985,11 +5122,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -5999,11 +5134,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6013,11 +5146,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6027,11 +5158,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6041,11 +5170,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6055,11 +5182,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6069,11 +5194,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6083,11 +5206,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6097,11 +5218,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6111,11 +5230,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6125,11 +5242,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6139,11 +5254,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6153,11 +5266,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6167,11 +5278,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6181,11 +5290,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6195,11 +5302,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6209,11 +5314,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6223,11 +5326,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6237,11 +5338,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6251,11 +5350,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6265,11 +5362,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6279,11 +5374,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6293,11 +5386,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6307,11 +5398,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6321,11 +5410,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6335,11 +5422,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6349,11 +5434,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6363,11 +5446,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6377,11 +5458,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6391,11 +5470,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6405,11 +5482,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6419,11 +5494,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6433,11 +5506,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6447,11 +5518,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6461,11 +5530,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6475,11 +5542,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6489,11 +5554,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6503,11 +5566,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6517,11 +5578,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6531,11 +5590,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6545,11 +5602,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6559,11 +5614,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6573,11 +5626,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6587,11 +5638,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6601,11 +5650,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6615,11 +5662,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6629,11 +5674,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6643,11 +5686,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6657,11 +5698,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6671,11 +5710,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6685,11 +5722,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6699,11 +5734,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6713,11 +5746,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6727,11 +5758,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6741,11 +5770,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6755,11 +5782,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6769,11 +5794,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6783,11 +5806,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6797,11 +5818,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6811,11 +5830,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6825,11 +5842,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6839,11 +5854,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6853,11 +5866,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6867,11 +5878,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6881,11 +5890,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6895,11 +5902,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6909,11 +5914,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6923,11 +5926,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6937,11 +5938,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6951,11 +5950,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6965,11 +5962,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6979,11 +5974,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -6993,11 +5986,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7007,11 +5998,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7021,11 +6010,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7035,11 +6022,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7049,11 +6034,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7063,11 +6046,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7077,11 +6058,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7091,11 +6070,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7105,11 +6082,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7119,11 +6094,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7133,11 +6106,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7147,11 +6118,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7161,11 +6130,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7175,11 +6142,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7189,11 +6154,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7203,11 +6166,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7217,11 +6178,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7231,11 +6190,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7245,11 +6202,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7259,11 +6214,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7273,11 +6226,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7287,11 +6238,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7301,11 +6250,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7315,11 +6262,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7329,11 +6274,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7343,11 +6286,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7357,11 +6298,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7371,11 +6310,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7385,11 +6322,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7399,11 +6334,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7413,11 +6346,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7427,11 +6358,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7441,11 +6370,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7455,11 +6382,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7469,11 +6394,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7483,11 +6406,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7497,11 +6418,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7511,11 +6430,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7525,11 +6442,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7539,11 +6454,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7553,11 +6466,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7567,11 +6478,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7581,11 +6490,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7595,11 +6502,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7609,11 +6514,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7623,11 +6526,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7637,11 +6538,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7651,11 +6550,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7665,11 +6562,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7679,11 +6574,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7693,11 +6586,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7707,11 +6598,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7721,11 +6610,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7735,11 +6622,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7749,11 +6634,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7763,11 +6646,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7777,11 +6658,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7791,11 +6670,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7805,11 +6682,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7819,11 +6694,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7833,11 +6706,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7847,11 +6718,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7861,11 +6730,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7875,11 +6742,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7889,11 +6754,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7903,11 +6766,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7917,11 +6778,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7931,11 +6790,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7945,11 +6802,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7959,11 +6814,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7973,11 +6826,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -7987,11 +6838,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8001,11 +6850,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8015,11 +6862,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8029,11 +6874,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8043,11 +6886,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8057,11 +6898,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8071,11 +6910,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8085,11 +6922,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8099,11 +6934,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8113,11 +6946,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8127,11 +6958,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8141,11 +6970,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8155,11 +6982,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8169,11 +6994,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8183,11 +7006,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8197,11 +7018,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8211,11 +7030,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8225,11 +7042,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8239,11 +7054,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8253,11 +7066,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8267,11 +7078,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8281,11 +7090,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8295,11 +7102,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8309,11 +7114,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8323,11 +7126,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8337,11 +7138,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8351,11 +7150,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8365,11 +7162,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8379,11 +7174,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8393,11 +7186,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8407,11 +7198,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8421,11 +7210,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8435,11 +7222,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8449,11 +7234,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8463,11 +7246,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8477,11 +7258,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8491,11 +7270,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8505,11 +7282,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8519,11 +7294,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8533,11 +7306,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8547,11 +7318,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8561,11 +7330,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8575,11 +7342,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8589,11 +7354,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8603,11 +7366,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8617,11 +7378,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8631,11 +7390,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8645,11 +7402,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8659,11 +7414,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8673,11 +7426,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8687,11 +7438,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8701,11 +7450,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8715,11 +7462,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8729,11 +7474,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8743,11 +7486,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8757,11 +7498,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8771,11 +7510,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8785,11 +7522,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8799,11 +7534,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8813,11 +7546,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8827,11 +7558,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8841,11 +7570,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8855,11 +7582,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8869,11 +7594,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8883,11 +7606,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8897,11 +7618,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8911,11 +7630,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8925,11 +7642,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8939,11 +7654,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8953,11 +7666,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8967,11 +7678,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8981,11 +7690,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -8995,11 +7702,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9009,11 +7714,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9023,11 +7726,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9037,11 +7738,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9051,11 +7750,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9065,11 +7762,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9079,11 +7774,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9093,11 +7786,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9107,11 +7798,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9121,11 +7810,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9135,11 +7822,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9149,11 +7834,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9163,11 +7846,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9177,11 +7858,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9191,11 +7870,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9205,11 +7882,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9219,11 +7894,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9233,11 +7906,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9247,11 +7918,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9261,11 +7930,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9275,11 +7942,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9289,11 +7954,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9303,11 +7966,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9317,11 +7978,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9331,11 +7990,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9345,11 +8002,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9359,11 +8014,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9373,11 +8026,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9387,11 +8038,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9401,11 +8050,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9415,11 +8062,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9429,11 +8074,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9443,11 +8086,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9457,11 +8098,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9471,11 +8110,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9485,11 +8122,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9499,11 +8134,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9513,11 +8146,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9527,11 +8158,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9541,11 +8170,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9555,11 +8182,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9569,11 +8194,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9583,11 +8206,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9597,11 +8218,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9611,11 +8230,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9625,11 +8242,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9639,11 +8254,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9653,11 +8266,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9667,11 +8278,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9681,11 +8290,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9695,11 +8302,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9709,11 +8314,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9723,11 +8326,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9737,11 +8338,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9751,11 +8350,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9765,11 +8362,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9779,11 +8374,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9793,11 +8386,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9807,11 +8398,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9821,11 +8410,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9835,11 +8422,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9849,11 +8434,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9863,11 +8446,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9877,11 +8458,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9891,11 +8470,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9905,11 +8482,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9919,11 +8494,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9933,11 +8506,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9947,11 +8518,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9961,11 +8530,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9975,11 +8542,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -9989,11 +8554,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10003,11 +8566,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10017,11 +8578,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10031,11 +8590,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10045,11 +8602,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10059,11 +8614,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10073,11 +8626,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10087,11 +8638,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10101,11 +8650,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10115,11 +8662,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10129,11 +8674,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10143,11 +8686,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10157,11 +8698,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10171,11 +8710,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10185,11 +8722,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10199,11 +8734,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10213,11 +8746,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10227,11 +8758,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10241,11 +8770,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10255,11 +8782,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10269,11 +8794,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10283,11 +8806,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10297,11 +8818,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10311,11 +8830,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10325,11 +8842,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10339,11 +8854,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10353,11 +8866,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10367,11 +8878,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10381,11 +8890,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10395,11 +8902,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10409,11 +8914,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10423,11 +8926,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10437,11 +8938,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10451,11 +8950,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10465,11 +8962,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10479,11 +8974,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10493,11 +8986,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10507,11 +8998,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10521,11 +9010,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10535,11 +9022,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10549,11 +9034,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10563,11 +9046,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10577,11 +9058,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10591,11 +9070,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10605,11 +9082,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10619,11 +9094,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10633,11 +9106,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10647,11 +9118,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10661,11 +9130,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10675,11 +9142,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10689,11 +9154,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10703,11 +9166,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10717,11 +9178,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10731,11 +9190,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10745,11 +9202,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10759,11 +9214,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10773,11 +9226,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10787,11 +9238,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10801,11 +9250,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10815,11 +9262,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10829,11 +9274,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10843,11 +9286,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10857,11 +9298,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10871,11 +9310,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10885,11 +9322,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10899,11 +9334,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10913,11 +9346,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10927,11 +9358,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10941,11 +9370,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10955,11 +9382,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10969,11 +9394,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10983,11 +9406,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -10997,11 +9418,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11011,11 +9430,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11025,11 +9442,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11039,11 +9454,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11053,11 +9466,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11067,11 +9478,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11081,11 +9490,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11095,11 +9502,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11109,11 +9514,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11123,11 +9526,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11137,11 +9538,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11151,11 +9550,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11165,11 +9562,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11179,11 +9574,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11193,11 +9586,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11207,11 +9598,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11221,11 +9610,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11235,11 +9622,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11249,11 +9634,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11263,11 +9646,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11277,11 +9658,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11291,11 +9670,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11305,11 +9682,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11319,11 +9694,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11333,11 +9706,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11347,11 +9718,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11361,11 +9730,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11375,11 +9742,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11389,11 +9754,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11403,11 +9766,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11417,11 +9778,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11431,11 +9790,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11445,11 +9802,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11459,11 +9814,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11473,11 +9826,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11487,11 +9838,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11501,11 +9850,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11515,11 +9862,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11529,11 +9874,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11543,11 +9886,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11557,11 +9898,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11571,11 +9910,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11585,11 +9922,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11599,11 +9934,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11613,11 +9946,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11627,11 +9958,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11641,11 +9970,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11655,11 +9982,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11669,11 +9994,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11683,11 +10006,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11697,11 +10018,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11711,11 +10030,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11725,11 +10042,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11739,11 +10054,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11753,11 +10066,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11767,11 +10078,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11781,11 +10090,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11795,11 +10102,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11809,11 +10114,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11823,11 +10126,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11837,11 +10138,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11851,11 +10150,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11865,11 +10162,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11879,11 +10174,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11893,11 +10186,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11907,11 +10198,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11921,11 +10210,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11935,11 +10222,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11949,11 +10234,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11963,11 +10246,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11977,11 +10258,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -11991,11 +10270,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12005,11 +10282,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12019,11 +10294,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12033,11 +10306,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12047,11 +10318,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12061,11 +10330,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12075,11 +10342,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12089,11 +10354,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12103,11 +10366,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12117,11 +10378,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12131,11 +10390,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12145,11 +10402,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12159,11 +10414,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12173,11 +10426,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12187,11 +10438,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12201,11 +10450,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12215,11 +10462,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12229,11 +10474,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12243,11 +10486,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12257,11 +10498,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12271,11 +10510,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12285,11 +10522,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12299,11 +10534,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12313,11 +10546,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12327,11 +10558,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12341,11 +10570,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12355,11 +10582,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12369,11 +10594,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12383,11 +10606,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12397,11 +10618,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12411,11 +10630,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12425,11 +10642,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12439,11 +10654,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12453,11 +10666,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12467,11 +10678,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12481,11 +10690,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12495,11 +10702,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12509,11 +10714,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12523,11 +10726,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12537,11 +10738,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12551,11 +10750,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12565,11 +10762,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12579,11 +10774,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12593,11 +10786,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12607,11 +10798,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12621,11 +10810,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12635,11 +10822,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12649,11 +10834,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12663,11 +10846,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12677,11 +10858,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12691,11 +10870,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12705,11 +10882,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12719,11 +10894,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12733,11 +10906,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12747,11 +10918,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12761,11 +10930,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12775,11 +10942,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12789,11 +10954,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12803,11 +10966,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12817,11 +10978,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12831,11 +10990,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12845,11 +11002,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12859,11 +11014,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12873,11 +11026,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12887,11 +11038,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12901,11 +11050,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12915,11 +11062,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12929,11 +11074,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12943,11 +11086,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12957,11 +11098,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12971,11 +11110,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12985,11 +11122,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -12999,11 +11134,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13013,11 +11146,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13027,11 +11158,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13041,11 +11170,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13055,11 +11182,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13069,11 +11194,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13083,11 +11206,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13097,11 +11218,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13111,11 +11230,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13125,11 +11242,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13139,11 +11254,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13153,11 +11266,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13167,11 +11278,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13181,11 +11290,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13195,11 +11302,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13209,11 +11314,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13223,11 +11326,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13237,11 +11338,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13251,11 +11350,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13265,11 +11362,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13279,11 +11374,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13293,11 +11386,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13307,11 +11398,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13321,11 +11410,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13335,11 +11422,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13349,11 +11434,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13363,11 +11446,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13377,11 +11458,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13391,11 +11470,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13405,11 +11482,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13419,11 +11494,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13433,11 +11506,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13447,11 +11518,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13461,11 +11530,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13475,11 +11542,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13489,11 +11554,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13503,11 +11566,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13517,11 +11578,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13531,11 +11590,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13545,11 +11602,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13559,11 +11614,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13573,11 +11626,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13587,11 +11638,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13601,11 +11650,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13615,11 +11662,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13629,11 +11674,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13643,11 +11686,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13657,11 +11698,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13671,11 +11710,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13685,11 +11722,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13699,11 +11734,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13713,11 +11746,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13727,11 +11758,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13741,11 +11770,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13755,11 +11782,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13769,11 +11794,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13783,11 +11806,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13797,11 +11818,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13811,11 +11830,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13825,11 +11842,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13839,11 +11854,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13853,11 +11866,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13867,11 +11878,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13881,11 +11890,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13895,11 +11902,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13909,11 +11914,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13923,11 +11926,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13937,11 +11938,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13951,11 +11950,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13965,11 +11962,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13979,11 +11974,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -13993,11 +11986,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14007,11 +11998,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14021,11 +12010,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14035,11 +12022,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14049,11 +12034,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14063,11 +12046,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14077,11 +12058,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14091,11 +12070,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14105,11 +12082,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14119,11 +12094,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14133,11 +12106,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14147,11 +12118,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14161,11 +12130,9 @@ func InitPlaywrightKernel() {
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
 			vec.BrowserActive[i] = id.Domain != PlaywrightDomainBrowsernav || id.Primitive != PlaywrightPrimitiveClose
-			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit {
-				vec.PageCount[i]++
-			}
+			if id.Domain == PlaywrightDomainBrowsernav && id.Primitive == PlaywrightPrimitiveInit { vec.PageCount[i]++ }
 			vec.LastLoadTimeMS[i] = math.Abs(math.Sin(float64(id.Code)+float64(i))) * 120.0
-			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i]*0.95+0.05*math.Cos(float64(id.Code)+float64(i))))
+			vec.DomStabilityIndex[i] = math.Max(0.0, math.Min(1.0, vec.DomStabilityIndex[i] * 0.95 + 0.05 * math.Cos(float64(id.Code)+float64(i))))
 			vec.NetworkIdleState[i] = id.Modifier == PlaywrightModifierWaitidle
 		}
 		return nil
@@ -14185,8 +12152,6 @@ func DispatchPlaywright(d, p, m byte, vec *PlaywrightStateVector) error {
 }
 
 func GetPlaywrightExecutionCount(code uint16) uint64 {
-	if code >= 1000 {
-		return 0
-	}
+	if code >= 1000 { return 0 }
 	return atomic.LoadUint64(&PlaywrightMetrics[code])
 }

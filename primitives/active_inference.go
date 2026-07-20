@@ -64,35 +64,39 @@ func (e *UnifiedActiveInferenceEngine) Step(d, p, m byte) error {
 	// D_KL = 0.5 * [ tr(Sigma_q) + mu_diff^T * mu_diff - 4 - ln(det(Sigma_q)) ]
 
 	trSigmaQ := 0.0
-	for i := 0; i < 4; i++ {
+	for i := 0; i < 64; i++ {
 		trSigmaQ += e.StateVector.Covariance[i][i]
 	}
 
-	muP := [4]float64{
-		e.CognitiveChainVector.HomeostasisEnergy,
-		e.CognitiveChainVector.AttentionWeight,
-		e.CognitiveChainVector.ActionTorque,
-		e.CognitiveChainVector.LanguageEntropy,
-	}
-
 	mahalanobis := 0.0
-	for i := 0; i < 4; i++ {
-		diff := e.StateVector.States[i] - muP[i]
-		mahalanobis += diff * diff // mu_diff^T * Sigma_p^-1 * mu_diff where Sigma_p = I
+	for i := 0; i < 64; i++ {
+		muPI := (e.CognitiveChainVector.HomeostasisEnergy[i] +
+			e.CognitiveChainVector.AttentionWeight[i] +
+			e.CognitiveChainVector.ActionTorque[i] +
+			e.CognitiveChainVector.LanguageEntropy[i]) / 4.0
+		diff := e.StateVector.States[i] - muPI
+		mahalanobis += diff * diff
 	}
 
 	// Determinant approximation of Sigma_q (diagonal product since it dominates)
 	detSigmaQ := 1.0
-	for i := 0; i < 4; i++ {
-		detSigmaQ *= math.Max(1e-5, e.StateVector.Covariance[i][i])
+	for i := 0; i < 64; i++ {
+		detSigmaQStep := math.Max(1e-5, e.StateVector.Covariance[i][i])
+		if detSigmaQ < 1e100 {
+			detSigmaQ *= detSigmaQStep
+		}
 	}
 
-	e.D_KL = 0.5 * (trSigmaQ + mahalanobis - 4.0 - math.Log(detSigmaQ))
+	e.D_KL = 0.5 * (trSigmaQ + mahalanobis - 64.0 - math.Log(detSigmaQ))
 	if e.D_KL < 0 {
 		e.D_KL = 0.0 // Numerical lower bound
 	}
 
-	ttsEfficiency := e.TTSHarnessState.KVCacheEfficiency
+	ttsSum := 0.0
+	for i := 0; i < 64; i++ {
+		ttsSum += e.TTSHarnessState.KVCacheEfficiency[i]
+	}
+	ttsEfficiency := ttsSum / 64.0
 	e.ExpectedLogLikelihood = math.Log(math.Max(0.001, ttsEfficiency))
 	e.FreeEnergy = e.D_KL - e.ExpectedLogLikelihood
 

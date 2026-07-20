@@ -13,120 +13,87 @@ type StateObserverPrimitive int
 type StateObserverModifier int
 
 const (
-	StateObserverDomainSource   StateObserverDomain = 0
-	StateObserverDomainMatrix   StateObserverDomain = 1
-	StateObserverDomainPulse    StateObserverDomain = 2
-	StateObserverDomainKinetic  StateObserverDomain = 3
-	StateObserverDomainLogic    StateObserverDomain = 4
-	StateObserverDomainVector   StateObserverDomain = 5
-	StateObserverDomainStorage  StateObserverDomain = 6
-	StateObserverDomainOsint    StateObserverDomain = 7
-	StateObserverDomainClock    StateObserverDomain = 8
+	StateObserverDomainSource StateObserverDomain = 0
+	StateObserverDomainMatrix StateObserverDomain = 1
+	StateObserverDomainPulse StateObserverDomain = 2
+	StateObserverDomainKinetic StateObserverDomain = 3
+	StateObserverDomainLogic StateObserverDomain = 4
+	StateObserverDomainVector StateObserverDomain = 5
+	StateObserverDomainStorage StateObserverDomain = 6
+	StateObserverDomainOsint StateObserverDomain = 7
+	StateObserverDomainClock StateObserverDomain = 8
 	StateObserverDomainCompiler StateObserverDomain = 9
 
 	// StateObserver Primitives
-	StateObserverPrimitiveInit         StateObserverPrimitive = 0
-	StateObserverPrimitivePredict      StateObserverPrimitive = 1
-	StateObserverPrimitiveUpdate       StateObserverPrimitive = 2
-	StateObserverPrimitiveInnovation   StateObserverPrimitive = 3
-	StateObserverPrimitiveGain         StateObserverPrimitive = 4
-	StateObserverPrimitiveCovariance   StateObserverPrimitive = 5
-	StateObserverPrimitiveDriftcheck   StateObserverPrimitive = 6
-	StateObserverPrimitiveReconstruct  StateObserverPrimitive = 7
+	StateObserverPrimitiveInit StateObserverPrimitive = 0
+	StateObserverPrimitivePredict StateObserverPrimitive = 1
+	StateObserverPrimitiveUpdate StateObserverPrimitive = 2
+	StateObserverPrimitiveInnovation StateObserverPrimitive = 3
+	StateObserverPrimitiveGain StateObserverPrimitive = 4
+	StateObserverPrimitiveCovariance StateObserverPrimitive = 5
+	StateObserverPrimitiveDriftcheck StateObserverPrimitive = 6
+	StateObserverPrimitiveReconstruct StateObserverPrimitive = 7
 	StateObserverPrimitiveSanityassert StateObserverPrimitive = 8
-	StateObserverPrimitiveFlushledger  StateObserverPrimitive = 9
+	StateObserverPrimitiveFlushledger StateObserverPrimitive = 9
 
 	// StateObserver Modifiers
-	StateObserverModifierRaw             StateObserverModifier = 0
-	StateObserverModifierAtomic          StateObserverModifier = 1
-	StateObserverModifierKalmanextended  StateObserverModifier = 2
+	StateObserverModifierRaw StateObserverModifier = 0
+	StateObserverModifierAtomic StateObserverModifier = 1
+	StateObserverModifierKalmanextended StateObserverModifier = 2
 	StateObserverModifierLuenbergerrigid StateObserverModifier = 3
-	StateObserverModifierParticlepf      StateObserverModifier = 4
-	StateObserverModifierSlidingmode     StateObserverModifier = 5
-	StateObserverModifierQuantized       StateObserverModifier = 6
-	StateObserverModifierAdaptiver       StateObserverModifier = 7
-	StateObserverModifierNeurallatent    StateObserverModifier = 8
-	StateObserverModifierBftconsensus    StateObserverModifier = 9
+	StateObserverModifierParticlepf StateObserverModifier = 4
+	StateObserverModifierSlidingmode StateObserverModifier = 5
+	StateObserverModifierQuantized StateObserverModifier = 6
+	StateObserverModifierAdaptiver StateObserverModifier = 7
+	StateObserverModifierNeurallatent StateObserverModifier = 8
+	StateObserverModifierBftconsensus StateObserverModifier = 9
 )
 
 func (d StateObserverDomain) String() string {
 	switch d {
-	case 0:
-		return "SOURCE"
-	case 1:
-		return "MATRIX"
-	case 2:
-		return "PULSE"
-	case 3:
-		return "KINETIC"
-	case 4:
-		return "LOGIC"
-	case 5:
-		return "VECTOR"
-	case 6:
-		return "STORAGE"
-	case 7:
-		return "OSINT"
-	case 8:
-		return "CLOCK"
-	case 9:
-		return "COMPILER"
-	default:
-		return "UNKNOWN"
+	case 0: return "SOURCE"
+	case 1: return "MATRIX"
+	case 2: return "PULSE"
+	case 3: return "KINETIC"
+	case 4: return "LOGIC"
+	case 5: return "VECTOR"
+	case 6: return "STORAGE"
+	case 7: return "OSINT"
+	case 8: return "CLOCK"
+	case 9: return "COMPILER"
+	default: return "UNKNOWN"
 	}
 }
 
 func (p StateObserverPrimitive) String() string {
 	switch p {
-	case 0:
-		return "INIT"
-	case 1:
-		return "PREDICT"
-	case 2:
-		return "UPDATE"
-	case 3:
-		return "INNOVATION"
-	case 4:
-		return "GAIN"
-	case 5:
-		return "COVARIANCE"
-	case 6:
-		return "DRIFT_CHECK"
-	case 7:
-		return "RECONSTRUCT"
-	case 8:
-		return "SANITY_ASSERT"
-	case 9:
-		return "FLUSH_LEDGER"
-	default:
-		return "UNKNOWN"
+	case 0: return "INIT"
+	case 1: return "PREDICT"
+	case 2: return "UPDATE"
+	case 3: return "INNOVATION"
+	case 4: return "GAIN"
+	case 5: return "COVARIANCE"
+	case 6: return "DRIFT_CHECK"
+	case 7: return "RECONSTRUCT"
+	case 8: return "SANITY_ASSERT"
+	case 9: return "FLUSH_LEDGER"
+	default: return "UNKNOWN"
 	}
 }
 
 func (m StateObserverModifier) String() string {
 	switch m {
-	case 0:
-		return "RAW"
-	case 1:
-		return "ATOMIC"
-	case 2:
-		return "KALMAN_EXTENDED"
-	case 3:
-		return "LUENBERGER_RIGID"
-	case 4:
-		return "PARTICLE_PF"
-	case 5:
-		return "SLIDING_MODE"
-	case 6:
-		return "QUANTIZED"
-	case 7:
-		return "ADAPTIVE_R"
-	case 8:
-		return "NEURAL_LATENT"
-	case 9:
-		return "BFT_CONSENSUS"
-	default:
-		return "UNKNOWN"
+	case 0: return "RAW"
+	case 1: return "ATOMIC"
+	case 2: return "KALMAN_EXTENDED"
+	case 3: return "LUENBERGER_RIGID"
+	case 4: return "PARTICLE_PF"
+	case 5: return "SLIDING_MODE"
+	case 6: return "QUANTIZED"
+	case 7: return "ADAPTIVE_R"
+	case 8: return "NEURAL_LATENT"
+	case 9: return "BFT_CONSENSUS"
+	default: return "UNKNOWN"
 	}
 }
 
@@ -139,11 +106,11 @@ type StateObserverIdentity struct {
 }
 
 type StateVector struct {
-	States         [64]float64
-	Covariance     [64][64]float64
-	Innovation     [64]float64
-	Gain           [64][64]float64
-	NormError      float64
+	States      [64]float64
+	Covariance  [64][64]float64
+	Innovation  [64]float64
+	Gain        [64][64]float64
+	NormError   float64
 	ExecutionCount uint64
 }
 
@@ -165,7 +132,7 @@ func ResolveStateObserverIdentity(d, p, m byte) (StateObserverIdentity, error) {
 type StateObserverHandler func(id StateObserverIdentity, vec *StateVector) error
 
 var (
-	StateObserverTable   [1000]StateObserverHandler
+	StateObserverTable [1000]StateObserverHandler
 	StateObserverMetrics [1000]uint64
 )
 
@@ -174,14 +141,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[0], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -189,14 +154,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[1], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -204,14 +167,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[2], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -219,14 +180,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[3], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -234,14 +193,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[4], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -249,14 +206,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[5], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -264,14 +219,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[6], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -279,14 +232,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[7], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -294,14 +245,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[8], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -309,14 +258,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[9], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -324,14 +271,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[10], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -339,14 +284,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[11], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -354,14 +297,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[12], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -369,14 +310,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[13], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -384,14 +323,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[14], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -399,14 +336,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[15], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -414,14 +349,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[16], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -429,14 +362,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[17], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -444,14 +375,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[18], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -459,14 +388,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[19], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -474,14 +401,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[20], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -489,14 +414,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[21], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -504,14 +427,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[22], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -519,14 +440,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[23], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -534,14 +453,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[24], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -549,14 +466,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[25], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -564,14 +479,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[26], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -579,14 +492,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[27], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -594,14 +505,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[28], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -609,14 +518,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[29], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -624,14 +531,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[30], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -639,14 +544,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[31], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -654,14 +557,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[32], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -669,14 +570,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[33], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -684,14 +583,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[34], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -699,14 +596,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[35], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -714,14 +609,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[36], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -729,14 +622,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[37], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -744,14 +635,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[38], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -759,14 +648,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[39], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -774,14 +661,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[40], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -789,14 +674,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[41], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -804,14 +687,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[42], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -819,14 +700,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[43], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -834,14 +713,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[44], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -849,14 +726,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[45], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -864,14 +739,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[46], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -879,14 +752,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[47], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -894,14 +765,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[48], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -909,14 +778,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[49], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -924,14 +791,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[50], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -939,14 +804,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[51], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -954,14 +817,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[52], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -969,14 +830,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[53], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -984,14 +843,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[54], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -999,14 +856,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[55], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1014,14 +869,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[56], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1029,14 +882,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[57], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1044,14 +895,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[58], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1059,14 +908,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[59], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1074,14 +921,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[60], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1089,14 +934,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[61], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1104,14 +947,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[62], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1119,14 +960,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[63], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1134,14 +973,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[64], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1149,14 +986,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[65], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1164,14 +999,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[66], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1179,14 +1012,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[67], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1194,14 +1025,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[68], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1209,14 +1038,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[69], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1224,14 +1051,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[70], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1239,14 +1064,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[71], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1254,14 +1077,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[72], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1269,14 +1090,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[73], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1284,14 +1103,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[74], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1299,14 +1116,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[75], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1314,14 +1129,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[76], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1329,14 +1142,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[77], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1344,14 +1155,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[78], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1359,14 +1168,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[79], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1374,14 +1181,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[80], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1389,14 +1194,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[81], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1404,14 +1207,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[82], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1419,14 +1220,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[83], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1434,14 +1233,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[84], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1449,14 +1246,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[85], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1464,14 +1259,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[86], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1479,14 +1272,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[87], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1494,14 +1285,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[88], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1509,14 +1298,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[89], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1524,14 +1311,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[90], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1539,14 +1324,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[91], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1554,14 +1337,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[92], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1569,14 +1350,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[93], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1584,14 +1363,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[94], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1599,14 +1376,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[95], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1614,14 +1389,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[96], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1629,14 +1402,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[97], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1644,14 +1415,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[98], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1659,14 +1428,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[99], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1674,14 +1441,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[100], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1689,14 +1454,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[101], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1704,14 +1467,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[102], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1719,14 +1480,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[103], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1734,14 +1493,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[104], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1749,14 +1506,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[105], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1764,14 +1519,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[106], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1779,14 +1532,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[107], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1794,14 +1545,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[108], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1809,14 +1558,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[109], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1824,14 +1571,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[110], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1839,14 +1584,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[111], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1854,14 +1597,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[112], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1869,14 +1610,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[113], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1884,14 +1623,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[114], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1899,14 +1636,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[115], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1914,14 +1649,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[116], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1929,14 +1662,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[117], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1944,14 +1675,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[118], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1959,14 +1688,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[119], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1974,14 +1701,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[120], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -1989,14 +1714,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[121], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2004,14 +1727,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[122], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2019,14 +1740,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[123], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2034,14 +1753,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[124], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2049,14 +1766,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[125], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2064,14 +1779,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[126], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2079,14 +1792,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[127], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2094,14 +1805,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[128], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2109,14 +1818,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[129], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2124,14 +1831,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[130], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2139,14 +1844,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[131], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2154,14 +1857,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[132], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2169,14 +1870,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[133], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2184,14 +1883,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[134], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2199,14 +1896,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[135], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2214,14 +1909,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[136], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2229,14 +1922,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[137], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2244,14 +1935,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[138], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2259,14 +1948,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[139], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2274,14 +1961,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[140], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2289,14 +1974,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[141], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2304,14 +1987,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[142], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2319,14 +2000,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[143], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2334,14 +2013,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[144], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2349,14 +2026,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[145], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2364,14 +2039,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[146], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2379,14 +2052,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[147], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2394,14 +2065,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[148], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2409,14 +2078,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[149], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2424,14 +2091,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[150], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2439,14 +2104,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[151], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2454,14 +2117,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[152], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2469,14 +2130,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[153], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2484,14 +2143,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[154], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2499,14 +2156,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[155], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2514,14 +2169,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[156], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2529,14 +2182,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[157], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2544,14 +2195,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[158], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2559,14 +2208,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[159], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2574,14 +2221,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[160], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2589,14 +2234,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[161], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2604,14 +2247,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[162], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2619,14 +2260,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[163], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2634,14 +2273,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[164], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2649,14 +2286,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[165], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2664,14 +2299,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[166], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2679,14 +2312,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[167], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2694,14 +2325,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[168], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2709,14 +2338,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[169], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2724,14 +2351,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[170], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2739,14 +2364,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[171], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2754,14 +2377,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[172], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2769,14 +2390,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[173], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2784,14 +2403,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[174], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2799,14 +2416,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[175], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2814,14 +2429,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[176], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2829,14 +2442,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[177], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2844,14 +2455,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[178], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2859,14 +2468,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[179], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2874,14 +2481,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[180], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2889,14 +2494,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[181], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2904,14 +2507,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[182], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2919,14 +2520,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[183], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2934,14 +2533,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[184], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2949,14 +2546,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[185], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2964,14 +2559,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[186], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2979,14 +2572,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[187], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -2994,14 +2585,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[188], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3009,14 +2598,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[189], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3024,14 +2611,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[190], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3039,14 +2624,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[191], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3054,14 +2637,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[192], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3069,14 +2650,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[193], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3084,14 +2663,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[194], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3099,14 +2676,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[195], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3114,14 +2689,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[196], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3129,14 +2702,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[197], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3144,14 +2715,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[198], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3159,14 +2728,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[199], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3174,14 +2741,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[200], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3189,14 +2754,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[201], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3204,14 +2767,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[202], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3219,14 +2780,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[203], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3234,14 +2793,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[204], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3249,14 +2806,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[205], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3264,14 +2819,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[206], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3279,14 +2832,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[207], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3294,14 +2845,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[208], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3309,14 +2858,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[209], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3324,14 +2871,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[210], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3339,14 +2884,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[211], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3354,14 +2897,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[212], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3369,14 +2910,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[213], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3384,14 +2923,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[214], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3399,14 +2936,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[215], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3414,14 +2949,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[216], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3429,14 +2962,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[217], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3444,14 +2975,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[218], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3459,14 +2988,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[219], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3474,14 +3001,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[220], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3489,14 +3014,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[221], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3504,14 +3027,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[222], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3519,14 +3040,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[223], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3534,14 +3053,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[224], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3549,14 +3066,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[225], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3564,14 +3079,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[226], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3579,14 +3092,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[227], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3594,14 +3105,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[228], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3609,14 +3118,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[229], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3624,14 +3131,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[230], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3639,14 +3144,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[231], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3654,14 +3157,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[232], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3669,14 +3170,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[233], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3684,14 +3183,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[234], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3699,14 +3196,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[235], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3714,14 +3209,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[236], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3729,14 +3222,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[237], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3744,14 +3235,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[238], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3759,14 +3248,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[239], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3774,14 +3261,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[240], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3789,14 +3274,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[241], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3804,14 +3287,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[242], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3819,14 +3300,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[243], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3834,14 +3313,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[244], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3849,14 +3326,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[245], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3864,14 +3339,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[246], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3879,14 +3352,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[247], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3894,14 +3365,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[248], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3909,14 +3378,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[249], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3924,14 +3391,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[250], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3939,14 +3404,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[251], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3954,14 +3417,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[252], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3969,14 +3430,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[253], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3984,14 +3443,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[254], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -3999,14 +3456,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[255], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4014,14 +3469,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[256], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4029,14 +3482,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[257], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4044,14 +3495,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[258], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4059,14 +3508,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[259], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4074,14 +3521,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[260], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4089,14 +3534,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[261], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4104,14 +3547,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[262], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4119,14 +3560,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[263], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4134,14 +3573,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[264], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4149,14 +3586,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[265], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4164,14 +3599,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[266], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4179,14 +3612,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[267], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4194,14 +3625,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[268], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4209,14 +3638,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[269], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4224,14 +3651,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[270], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4239,14 +3664,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[271], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4254,14 +3677,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[272], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4269,14 +3690,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[273], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4284,14 +3703,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[274], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4299,14 +3716,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[275], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4314,14 +3729,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[276], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4329,14 +3742,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[277], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4344,14 +3755,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[278], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4359,14 +3768,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[279], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4374,14 +3781,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[280], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4389,14 +3794,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[281], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4404,14 +3807,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[282], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4419,14 +3820,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[283], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4434,14 +3833,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[284], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4449,14 +3846,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[285], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4464,14 +3859,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[286], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4479,14 +3872,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[287], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4494,14 +3885,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[288], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4509,14 +3898,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[289], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4524,14 +3911,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[290], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4539,14 +3924,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[291], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4554,14 +3937,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[292], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4569,14 +3950,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[293], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4584,14 +3963,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[294], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4599,14 +3976,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[295], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4614,14 +3989,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[296], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4629,14 +4002,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[297], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4644,14 +4015,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[298], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4659,14 +4028,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[299], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4674,14 +4041,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[300], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4689,14 +4054,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[301], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4704,14 +4067,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[302], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4719,14 +4080,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[303], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4734,14 +4093,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[304], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4749,14 +4106,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[305], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4764,14 +4119,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[306], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4779,14 +4132,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[307], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4794,14 +4145,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[308], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4809,14 +4158,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[309], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4824,14 +4171,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[310], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4839,14 +4184,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[311], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4854,14 +4197,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[312], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4869,14 +4210,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[313], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4884,14 +4223,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[314], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4899,14 +4236,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[315], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4914,14 +4249,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[316], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4929,14 +4262,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[317], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4944,14 +4275,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[318], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4959,14 +4288,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[319], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4974,14 +4301,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[320], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -4989,14 +4314,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[321], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5004,14 +4327,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[322], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5019,14 +4340,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[323], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5034,14 +4353,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[324], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5049,14 +4366,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[325], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5064,14 +4379,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[326], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5079,14 +4392,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[327], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5094,14 +4405,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[328], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5109,14 +4418,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[329], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5124,14 +4431,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[330], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5139,14 +4444,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[331], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5154,14 +4457,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[332], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5169,14 +4470,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[333], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5184,14 +4483,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[334], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5199,14 +4496,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[335], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5214,14 +4509,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[336], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5229,14 +4522,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[337], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5244,14 +4535,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[338], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5259,14 +4548,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[339], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5274,14 +4561,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[340], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5289,14 +4574,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[341], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5304,14 +4587,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[342], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5319,14 +4600,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[343], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5334,14 +4613,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[344], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5349,14 +4626,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[345], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5364,14 +4639,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[346], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5379,14 +4652,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[347], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5394,14 +4665,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[348], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5409,14 +4678,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[349], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5424,14 +4691,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[350], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5439,14 +4704,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[351], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5454,14 +4717,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[352], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5469,14 +4730,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[353], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5484,14 +4743,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[354], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5499,14 +4756,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[355], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5514,14 +4769,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[356], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5529,14 +4782,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[357], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5544,14 +4795,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[358], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5559,14 +4808,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[359], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5574,14 +4821,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[360], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5589,14 +4834,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[361], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5604,14 +4847,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[362], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5619,14 +4860,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[363], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5634,14 +4873,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[364], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5649,14 +4886,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[365], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5664,14 +4899,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[366], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5679,14 +4912,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[367], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5694,14 +4925,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[368], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5709,14 +4938,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[369], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5724,14 +4951,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[370], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5739,14 +4964,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[371], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5754,14 +4977,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[372], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5769,14 +4990,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[373], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5784,14 +5003,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[374], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5799,14 +5016,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[375], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5814,14 +5029,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[376], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5829,14 +5042,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[377], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5844,14 +5055,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[378], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5859,14 +5068,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[379], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5874,14 +5081,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[380], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5889,14 +5094,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[381], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5904,14 +5107,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[382], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5919,14 +5120,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[383], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5934,14 +5133,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[384], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5949,14 +5146,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[385], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5964,14 +5159,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[386], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5979,14 +5172,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[387], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -5994,14 +5185,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[388], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6009,14 +5198,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[389], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6024,14 +5211,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[390], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6039,14 +5224,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[391], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6054,14 +5237,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[392], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6069,14 +5250,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[393], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6084,14 +5263,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[394], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6099,14 +5276,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[395], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6114,14 +5289,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[396], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6129,14 +5302,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[397], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6144,14 +5315,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[398], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6159,14 +5328,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[399], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6174,14 +5341,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[400], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6189,14 +5354,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[401], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6204,14 +5367,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[402], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6219,14 +5380,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[403], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6234,14 +5393,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[404], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6249,14 +5406,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[405], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6264,14 +5419,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[406], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6279,14 +5432,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[407], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6294,14 +5445,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[408], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6309,14 +5458,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[409], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6324,14 +5471,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[410], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6339,14 +5484,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[411], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6354,14 +5497,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[412], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6369,14 +5510,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[413], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6384,14 +5523,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[414], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6399,14 +5536,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[415], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6414,14 +5549,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[416], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6429,14 +5562,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[417], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6444,14 +5575,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[418], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6459,14 +5588,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[419], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6474,14 +5601,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[420], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6489,14 +5614,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[421], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6504,14 +5627,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[422], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6519,14 +5640,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[423], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6534,14 +5653,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[424], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6549,14 +5666,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[425], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6564,14 +5679,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[426], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6579,14 +5692,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[427], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6594,14 +5705,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[428], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6609,14 +5718,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[429], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6624,14 +5731,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[430], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6639,14 +5744,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[431], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6654,14 +5757,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[432], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6669,14 +5770,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[433], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6684,14 +5783,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[434], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6699,14 +5796,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[435], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6714,14 +5809,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[436], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6729,14 +5822,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[437], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6744,14 +5835,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[438], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6759,14 +5848,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[439], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6774,14 +5861,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[440], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6789,14 +5874,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[441], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6804,14 +5887,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[442], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6819,14 +5900,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[443], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6834,14 +5913,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[444], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6849,14 +5926,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[445], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6864,14 +5939,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[446], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6879,14 +5952,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[447], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6894,14 +5965,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[448], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6909,14 +5978,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[449], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6924,14 +5991,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[450], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6939,14 +6004,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[451], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6954,14 +6017,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[452], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6969,14 +6030,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[453], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6984,14 +6043,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[454], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -6999,14 +6056,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[455], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7014,14 +6069,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[456], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7029,14 +6082,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[457], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7044,14 +6095,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[458], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7059,14 +6108,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[459], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7074,14 +6121,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[460], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7089,14 +6134,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[461], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7104,14 +6147,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[462], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7119,14 +6160,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[463], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7134,14 +6173,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[464], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7149,14 +6186,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[465], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7164,14 +6199,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[466], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7179,14 +6212,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[467], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7194,14 +6225,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[468], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7209,14 +6238,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[469], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7224,14 +6251,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[470], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7239,14 +6264,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[471], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7254,14 +6277,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[472], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7269,14 +6290,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[473], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7284,14 +6303,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[474], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7299,14 +6316,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[475], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7314,14 +6329,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[476], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7329,14 +6342,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[477], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7344,14 +6355,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[478], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7359,14 +6368,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[479], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7374,14 +6381,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[480], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7389,14 +6394,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[481], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7404,14 +6407,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[482], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7419,14 +6420,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[483], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7434,14 +6433,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[484], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7449,14 +6446,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[485], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7464,14 +6459,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[486], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7479,14 +6472,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[487], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7494,14 +6485,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[488], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7509,14 +6498,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[489], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7524,14 +6511,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[490], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7539,14 +6524,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[491], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7554,14 +6537,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[492], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7569,14 +6550,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[493], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7584,14 +6563,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[494], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7599,14 +6576,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[495], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7614,14 +6589,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[496], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7629,14 +6602,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[497], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7644,14 +6615,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[498], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7659,14 +6628,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[499], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7674,14 +6641,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[500], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7689,14 +6654,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[501], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7704,14 +6667,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[502], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7719,14 +6680,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[503], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7734,14 +6693,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[504], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7749,14 +6706,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[505], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7764,14 +6719,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[506], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7779,14 +6732,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[507], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7794,14 +6745,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[508], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7809,14 +6758,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[509], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7824,14 +6771,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[510], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7839,14 +6784,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[511], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7854,14 +6797,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[512], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7869,14 +6810,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[513], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7884,14 +6823,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[514], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7899,14 +6836,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[515], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7914,14 +6849,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[516], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7929,14 +6862,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[517], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7944,14 +6875,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[518], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7959,14 +6888,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[519], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7974,14 +6901,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[520], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -7989,14 +6914,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[521], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8004,14 +6927,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[522], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8019,14 +6940,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[523], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8034,14 +6953,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[524], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8049,14 +6966,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[525], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8064,14 +6979,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[526], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8079,14 +6992,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[527], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8094,14 +7005,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[528], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8109,14 +7018,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[529], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8124,14 +7031,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[530], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8139,14 +7044,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[531], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8154,14 +7057,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[532], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8169,14 +7070,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[533], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8184,14 +7083,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[534], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8199,14 +7096,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[535], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8214,14 +7109,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[536], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8229,14 +7122,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[537], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8244,14 +7135,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[538], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8259,14 +7148,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[539], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8274,14 +7161,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[540], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8289,14 +7174,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[541], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8304,14 +7187,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[542], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8319,14 +7200,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[543], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8334,14 +7213,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[544], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8349,14 +7226,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[545], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8364,14 +7239,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[546], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8379,14 +7252,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[547], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8394,14 +7265,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[548], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8409,14 +7278,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[549], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8424,14 +7291,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[550], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8439,14 +7304,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[551], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8454,14 +7317,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[552], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8469,14 +7330,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[553], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8484,14 +7343,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[554], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8499,14 +7356,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[555], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8514,14 +7369,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[556], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8529,14 +7382,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[557], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8544,14 +7395,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[558], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8559,14 +7408,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[559], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8574,14 +7421,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[560], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8589,14 +7434,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[561], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8604,14 +7447,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[562], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8619,14 +7460,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[563], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8634,14 +7473,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[564], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8649,14 +7486,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[565], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8664,14 +7499,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[566], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8679,14 +7512,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[567], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8694,14 +7525,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[568], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8709,14 +7538,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[569], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8724,14 +7551,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[570], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8739,14 +7564,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[571], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8754,14 +7577,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[572], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8769,14 +7590,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[573], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8784,14 +7603,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[574], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8799,14 +7616,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[575], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8814,14 +7629,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[576], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8829,14 +7642,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[577], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8844,14 +7655,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[578], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8859,14 +7668,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[579], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8874,14 +7681,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[580], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8889,14 +7694,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[581], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8904,14 +7707,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[582], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8919,14 +7720,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[583], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8934,14 +7733,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[584], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8949,14 +7746,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[585], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8964,14 +7759,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[586], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8979,14 +7772,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[587], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -8994,14 +7785,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[588], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9009,14 +7798,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[589], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9024,14 +7811,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[590], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9039,14 +7824,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[591], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9054,14 +7837,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[592], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9069,14 +7850,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[593], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9084,14 +7863,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[594], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9099,14 +7876,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[595], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9114,14 +7889,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[596], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9129,14 +7902,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[597], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9144,14 +7915,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[598], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9159,14 +7928,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[599], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9174,14 +7941,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[600], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9189,14 +7954,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[601], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9204,14 +7967,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[602], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9219,14 +7980,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[603], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9234,14 +7993,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[604], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9249,14 +8006,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[605], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9264,14 +8019,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[606], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9279,14 +8032,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[607], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9294,14 +8045,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[608], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9309,14 +8058,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[609], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9324,14 +8071,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[610], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9339,14 +8084,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[611], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9354,14 +8097,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[612], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9369,14 +8110,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[613], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9384,14 +8123,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[614], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9399,14 +8136,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[615], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9414,14 +8149,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[616], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9429,14 +8162,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[617], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9444,14 +8175,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[618], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9459,14 +8188,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[619], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9474,14 +8201,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[620], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9489,14 +8214,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[621], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9504,14 +8227,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[622], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9519,14 +8240,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[623], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9534,14 +8253,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[624], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9549,14 +8266,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[625], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9564,14 +8279,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[626], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9579,14 +8292,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[627], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9594,14 +8305,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[628], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9609,14 +8318,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[629], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9624,14 +8331,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[630], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9639,14 +8344,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[631], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9654,14 +8357,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[632], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9669,14 +8370,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[633], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9684,14 +8383,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[634], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9699,14 +8396,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[635], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9714,14 +8409,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[636], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9729,14 +8422,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[637], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9744,14 +8435,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[638], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9759,14 +8448,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[639], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9774,14 +8461,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[640], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9789,14 +8474,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[641], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9804,14 +8487,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[642], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9819,14 +8500,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[643], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9834,14 +8513,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[644], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9849,14 +8526,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[645], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9864,14 +8539,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[646], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9879,14 +8552,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[647], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9894,14 +8565,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[648], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9909,14 +8578,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[649], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9924,14 +8591,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[650], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9939,14 +8604,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[651], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9954,14 +8617,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[652], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9969,14 +8630,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[653], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9984,14 +8643,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[654], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -9999,14 +8656,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[655], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10014,14 +8669,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[656], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10029,14 +8682,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[657], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10044,14 +8695,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[658], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10059,14 +8708,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[659], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10074,14 +8721,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[660], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10089,14 +8734,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[661], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10104,14 +8747,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[662], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10119,14 +8760,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[663], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10134,14 +8773,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[664], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10149,14 +8786,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[665], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10164,14 +8799,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[666], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10179,14 +8812,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[667], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10194,14 +8825,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[668], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10209,14 +8838,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[669], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10224,14 +8851,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[670], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10239,14 +8864,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[671], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10254,14 +8877,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[672], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10269,14 +8890,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[673], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10284,14 +8903,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[674], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10299,14 +8916,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[675], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10314,14 +8929,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[676], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10329,14 +8942,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[677], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10344,14 +8955,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[678], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10359,14 +8968,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[679], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10374,14 +8981,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[680], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10389,14 +8994,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[681], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10404,14 +9007,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[682], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10419,14 +9020,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[683], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10434,14 +9033,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[684], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10449,14 +9046,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[685], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10464,14 +9059,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[686], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10479,14 +9072,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[687], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10494,14 +9085,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[688], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10509,14 +9098,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[689], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10524,14 +9111,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[690], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10539,14 +9124,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[691], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10554,14 +9137,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[692], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10569,14 +9150,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[693], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10584,14 +9163,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[694], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10599,14 +9176,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[695], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10614,14 +9189,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[696], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10629,14 +9202,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[697], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10644,14 +9215,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[698], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10659,14 +9228,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[699], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10674,14 +9241,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[700], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10689,14 +9254,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[701], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10704,14 +9267,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[702], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10719,14 +9280,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[703], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10734,14 +9293,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[704], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10749,14 +9306,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[705], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10764,14 +9319,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[706], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10779,14 +9332,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[707], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10794,14 +9345,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[708], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10809,14 +9358,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[709], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10824,14 +9371,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[710], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10839,14 +9384,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[711], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10854,14 +9397,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[712], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10869,14 +9410,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[713], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10884,14 +9423,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[714], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10899,14 +9436,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[715], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10914,14 +9449,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[716], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10929,14 +9462,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[717], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10944,14 +9475,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[718], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10959,14 +9488,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[719], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10974,14 +9501,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[720], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -10989,14 +9514,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[721], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11004,14 +9527,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[722], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11019,14 +9540,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[723], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11034,14 +9553,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[724], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11049,14 +9566,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[725], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11064,14 +9579,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[726], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11079,14 +9592,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[727], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11094,14 +9605,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[728], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11109,14 +9618,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[729], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11124,14 +9631,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[730], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11139,14 +9644,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[731], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11154,14 +9657,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[732], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11169,14 +9670,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[733], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11184,14 +9683,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[734], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11199,14 +9696,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[735], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11214,14 +9709,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[736], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11229,14 +9722,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[737], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11244,14 +9735,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[738], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11259,14 +9748,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[739], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11274,14 +9761,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[740], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11289,14 +9774,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[741], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11304,14 +9787,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[742], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11319,14 +9800,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[743], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11334,14 +9813,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[744], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11349,14 +9826,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[745], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11364,14 +9839,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[746], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11379,14 +9852,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[747], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11394,14 +9865,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[748], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11409,14 +9878,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[749], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11424,14 +9891,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[750], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11439,14 +9904,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[751], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11454,14 +9917,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[752], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11469,14 +9930,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[753], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11484,14 +9943,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[754], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11499,14 +9956,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[755], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11514,14 +9969,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[756], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11529,14 +9982,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[757], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11544,14 +9995,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[758], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11559,14 +10008,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[759], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11574,14 +10021,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[760], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11589,14 +10034,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[761], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11604,14 +10047,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[762], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11619,14 +10060,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[763], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11634,14 +10073,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[764], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11649,14 +10086,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[765], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11664,14 +10099,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[766], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11679,14 +10112,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[767], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11694,14 +10125,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[768], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11709,14 +10138,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[769], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11724,14 +10151,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[770], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11739,14 +10164,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[771], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11754,14 +10177,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[772], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11769,14 +10190,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[773], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11784,14 +10203,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[774], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11799,14 +10216,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[775], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11814,14 +10229,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[776], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11829,14 +10242,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[777], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11844,14 +10255,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[778], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11859,14 +10268,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[779], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11874,14 +10281,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[780], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11889,14 +10294,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[781], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11904,14 +10307,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[782], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11919,14 +10320,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[783], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11934,14 +10333,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[784], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11949,14 +10346,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[785], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11964,14 +10359,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[786], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11979,14 +10372,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[787], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -11994,14 +10385,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[788], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12009,14 +10398,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[789], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12024,14 +10411,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[790], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12039,14 +10424,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[791], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12054,14 +10437,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[792], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12069,14 +10450,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[793], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12084,14 +10463,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[794], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12099,14 +10476,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[795], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12114,14 +10489,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[796], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12129,14 +10502,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[797], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12144,14 +10515,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[798], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12159,14 +10528,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[799], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12174,14 +10541,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[800], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12189,14 +10554,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[801], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12204,14 +10567,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[802], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12219,14 +10580,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[803], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12234,14 +10593,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[804], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12249,14 +10606,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[805], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12264,14 +10619,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[806], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12279,14 +10632,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[807], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12294,14 +10645,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[808], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12309,14 +10658,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[809], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12324,14 +10671,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[810], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12339,14 +10684,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[811], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12354,14 +10697,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[812], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12369,14 +10710,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[813], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12384,14 +10723,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[814], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12399,14 +10736,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[815], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12414,14 +10749,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[816], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12429,14 +10762,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[817], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12444,14 +10775,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[818], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12459,14 +10788,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[819], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12474,14 +10801,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[820], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12489,14 +10814,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[821], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12504,14 +10827,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[822], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12519,14 +10840,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[823], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12534,14 +10853,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[824], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12549,14 +10866,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[825], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12564,14 +10879,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[826], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12579,14 +10892,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[827], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12594,14 +10905,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[828], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12609,14 +10918,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[829], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12624,14 +10931,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[830], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12639,14 +10944,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[831], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12654,14 +10957,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[832], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12669,14 +10970,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[833], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12684,14 +10983,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[834], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12699,14 +10996,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[835], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12714,14 +11009,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[836], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12729,14 +11022,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[837], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12744,14 +11035,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[838], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12759,14 +11048,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[839], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12774,14 +11061,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[840], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12789,14 +11074,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[841], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12804,14 +11087,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[842], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12819,14 +11100,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[843], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12834,14 +11113,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[844], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12849,14 +11126,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[845], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12864,14 +11139,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[846], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12879,14 +11152,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[847], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12894,14 +11165,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[848], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12909,14 +11178,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[849], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12924,14 +11191,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[850], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12939,14 +11204,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[851], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12954,14 +11217,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[852], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12969,14 +11230,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[853], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12984,14 +11243,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[854], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -12999,14 +11256,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[855], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13014,14 +11269,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[856], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13029,14 +11282,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[857], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13044,14 +11295,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[858], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13059,14 +11308,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[859], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13074,14 +11321,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[860], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13089,14 +11334,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[861], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13104,14 +11347,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[862], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13119,14 +11360,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[863], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13134,14 +11373,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[864], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13149,14 +11386,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[865], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13164,14 +11399,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[866], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13179,14 +11412,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[867], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13194,14 +11425,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[868], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13209,14 +11438,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[869], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13224,14 +11451,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[870], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13239,14 +11464,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[871], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13254,14 +11477,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[872], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13269,14 +11490,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[873], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13284,14 +11503,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[874], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13299,14 +11516,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[875], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13314,14 +11529,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[876], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13329,14 +11542,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[877], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13344,14 +11555,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[878], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13359,14 +11568,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[879], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13374,14 +11581,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[880], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13389,14 +11594,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[881], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13404,14 +11607,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[882], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13419,14 +11620,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[883], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13434,14 +11633,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[884], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13449,14 +11646,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[885], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13464,14 +11659,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[886], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13479,14 +11672,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[887], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13494,14 +11685,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[888], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13509,14 +11698,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[889], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13524,14 +11711,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[890], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13539,14 +11724,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[891], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13554,14 +11737,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[892], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13569,14 +11750,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[893], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13584,14 +11763,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[894], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13599,14 +11776,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[895], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13614,14 +11789,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[896], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13629,14 +11802,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[897], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13644,14 +11815,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[898], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13659,14 +11828,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[899], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13674,14 +11841,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[900], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13689,14 +11854,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[901], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13704,14 +11867,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[902], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13719,14 +11880,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[903], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13734,14 +11893,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[904], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13749,14 +11906,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[905], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13764,14 +11919,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[906], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13779,14 +11932,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[907], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13794,14 +11945,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[908], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13809,14 +11958,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[909], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13824,14 +11971,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[910], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13839,14 +11984,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[911], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13854,14 +11997,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[912], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13869,14 +12010,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[913], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13884,14 +12023,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[914], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13899,14 +12036,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[915], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13914,14 +12049,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[916], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13929,14 +12062,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[917], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13944,14 +12075,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[918], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13959,14 +12088,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[919], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13974,14 +12101,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[920], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -13989,14 +12114,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[921], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14004,14 +12127,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[922], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14019,14 +12140,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[923], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14034,14 +12153,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[924], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14049,14 +12166,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[925], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14064,14 +12179,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[926], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14079,14 +12192,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[927], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14094,14 +12205,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[928], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14109,14 +12218,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[929], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14124,14 +12231,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[930], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14139,14 +12244,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[931], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14154,14 +12257,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[932], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14169,14 +12270,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[933], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14184,14 +12283,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[934], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14199,14 +12296,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[935], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14214,14 +12309,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[936], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14229,14 +12322,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[937], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14244,14 +12335,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[938], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14259,14 +12348,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[939], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14274,14 +12361,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[940], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14289,14 +12374,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[941], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14304,14 +12387,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[942], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14319,14 +12400,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[943], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14334,14 +12413,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[944], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14349,14 +12426,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[945], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14364,14 +12439,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[946], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14379,14 +12452,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[947], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14394,14 +12465,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[948], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14409,14 +12478,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[949], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14424,14 +12491,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[950], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14439,14 +12504,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[951], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14454,14 +12517,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[952], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14469,14 +12530,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[953], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14484,14 +12543,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[954], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14499,14 +12556,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[955], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14514,14 +12569,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[956], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14529,14 +12582,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[957], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14544,14 +12595,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[958], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14559,14 +12608,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[959], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14574,14 +12621,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[960], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14589,14 +12634,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[961], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14604,14 +12647,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[962], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14619,14 +12660,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[963], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14634,14 +12673,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[964], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14649,14 +12686,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[965], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14664,14 +12699,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[966], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14679,14 +12712,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[967], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14694,14 +12725,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[968], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14709,14 +12738,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[969], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14724,14 +12751,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[970], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14739,14 +12764,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[971], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14754,14 +12777,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[972], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14769,14 +12790,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[973], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14784,14 +12803,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[974], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14799,14 +12816,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[975], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14814,14 +12829,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[976], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14829,14 +12842,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[977], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14844,14 +12855,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[978], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14859,14 +12868,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[979], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14874,14 +12881,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[980], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14889,14 +12894,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[981], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14904,14 +12907,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[982], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14919,14 +12920,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[983], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14934,14 +12933,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[984], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14949,14 +12946,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[985], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14964,14 +12959,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[986], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14979,14 +12972,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[987], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -14994,14 +12985,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[988], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15009,14 +12998,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[989], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15024,14 +13011,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[990], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15039,14 +13024,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[991], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15054,14 +13037,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[992], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15069,14 +13050,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[993], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15084,14 +13063,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[994], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15099,14 +13076,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[995], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15114,14 +13089,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[996], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15129,14 +13102,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[997], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15144,14 +13115,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[998], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15159,14 +13128,12 @@ func InitStateObserverKernel() {
 		atomic.AddUint64(&StateObserverMetrics[999], 1)
 		vec.ExecutionCount++
 		for i := 0; i < 64; i++ {
-			vec.States[i] += math.Sin(float64(id.Code)+float64(i)) * 0.01
+			vec.States[i] += math.Sin(float64(id.Code)+float64(i))*0.01
 			vec.Innovation[i] = (math.Cos(float64(id.Code)) - vec.States[i]) * 0.1
-			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99+0.0001)
+			vec.Covariance[i][i] = math.Max(0.001, vec.Covariance[i][i]*0.99 + 0.0001)
 		}
 		sumSq := 0.0
-		for i := 0; i < 64; i++ {
-			sumSq += vec.Innovation[i] * vec.Innovation[i]
-		}
+		for i := 0; i < 64; i++ { sumSq += vec.Innovation[i]*vec.Innovation[i] }
 		vec.NormError = math.Sqrt(sumSq)
 		return nil
 	}
@@ -15185,8 +13152,6 @@ func DispatchStateObserver(d, p, m byte, vec *StateVector) error {
 }
 
 func GetStateObserverExecutionCount(code uint16) uint64 {
-	if code >= 1000 {
-		return 0
-	}
+	if code >= 1000 { return 0 }
 	return atomic.LoadUint64(&StateObserverMetrics[code])
 }

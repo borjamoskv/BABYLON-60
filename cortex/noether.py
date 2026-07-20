@@ -2,43 +2,9 @@
 import math
 from typing import Tuple
 
-DOMAINS = {
-    0: "SPACE_TRANS",
-    1: "TIME_TRANS",
-    2: "ROTATION_SO3",
-    3: "BOOST_LORENTZ",
-    4: "GAUGE_U1",
-    5: "GAUGE_SU2",
-    6: "GAUGE_SU3",
-    7: "CONFORMAL_SO42",
-    8: "DIFEOMORPH_GR",
-    9: "SUPER_SUSY",
-}
-PRIMITIVES = {
-    0: "INF_VARIATION",
-    1: "LAGRANGIAN_DERIV",
-    2: "ACTION_INTEGRAL",
-    3: "EULER_LAGRANGE",
-    4: "SYMMETRY_ASSERT",
-    5: "CURRENT_COMPUTE",
-    6: "DIVERGENCE_CHECK",
-    7: "CHARGE_INTEGRAL",
-    8: "COMMUTATOR_ALGEBRA",
-    9: "SECTOR_FLUSH",
-}
-MODIFIERS = {
-    0: "RAW",
-    1: "STRICT",
-    2: "QUANTUM_QFT",
-    3: "RELATIVISTIC",
-    4: "NON_RELATIVISTIC",
-    5: "COVARIANT",
-    6: "CHIRAL",
-    7: "SPONTANEOUS",
-    8: "ANOMALOUS",
-    9: "BFT_PERSISTENCE",
-}
-
+DOMAINS = {0: 'SPACE_TRANS', 1: 'TIME_TRANS', 2: 'ROTATION_SO3', 3: 'BOOST_LORENTZ', 4: 'GAUGE_U1', 5: 'GAUGE_SU2', 6: 'GAUGE_SU3', 7: 'CONFORMAL_SO42', 8: 'DIFEOMORPH_GR', 9: 'SUPER_SUSY'}
+PRIMITIVES = {0: 'INF_VARIATION', 1: 'LAGRANGIAN_DERIV', 2: 'ACTION_INTEGRAL', 3: 'EULER_LAGRANGE', 4: 'SYMMETRY_ASSERT', 5: 'CURRENT_COMPUTE', 6: 'DIVERGENCE_CHECK', 7: 'CHARGE_INTEGRAL', 8: 'COMMUTATOR_ALGEBRA', 9: 'SECTOR_FLUSH'}
+MODIFIERS = {0: 'RAW', 1: 'STRICT', 2: 'QUANTUM_QFT', 3: 'RELATIVISTIC', 4: 'NON_RELATIVISTIC', 5: 'COVARIANT', 6: 'CHIRAL', 7: 'SPONTANEOUS', 8: 'ANOMALOUS', 9: 'BFT_PERSISTENCE'}
 
 class NoetherStateVector:
     def __init__(self):
@@ -49,30 +15,20 @@ class NoetherStateVector:
         self.entropy_generation = [0.0] * 64
         self.execution_count = 0
 
-
 def resolve_noether_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
-        raise ValueError("Index out of range [0-9]")
+        raise ValueError('Index out of range [0-9]')
     code = d * 100 + p * 10 + m
-    name = f"NOETHER-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
+    name = f'NOETHER-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}'
     return code, name
 
-
-def dispatch_noether(
-    d: int, p: int, m: int, vec: NoetherStateVector
-) -> Tuple[int, str, float]:
+def dispatch_noether(d: int, p: int, m: int, vec: NoetherStateVector) -> Tuple[int, str, float]:
     code, name = resolve_noether_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
         vec.action_variation[i] = math.sin(code + i) * 0.01
         vec.quantum_anomaly[i] = 0.05 * math.cos(code + i) if m == 8 else 0.0
-        vec.noether_current_div[i] = (
-            vec.action_variation[i] * 0.1 + vec.quantum_anomaly[i]
-        )
-        vec.conserved_charge[i] = max(
-            0.0, vec.conserved_charge[i] * 0.99 + 0.1 * math.sin(code + i)
-        )
-        vec.entropy_generation[i] = (
-            vec.noether_current_div[i] * vec.noether_current_div[i]
-        )
+        vec.noether_current_div[i] = vec.action_variation[i] * 0.1 + vec.quantum_anomaly[i]
+        vec.conserved_charge[i] = max(0.0, vec.conserved_charge[i] * 0.99 + 0.1 * math.sin(code + i))
+        vec.entropy_generation[i] = vec.noether_current_div[i] * vec.noether_current_div[i]
     return code, name, vec.conserved_charge
