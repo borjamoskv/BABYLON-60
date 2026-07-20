@@ -1,0 +1,6 @@
+Claim: Inyección de payload C5-REAL en memoria RAM y colapso de script.
+Proof:
+  Base: /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scratch/reply_to_roberto.js
+  CORTEX_TAINT_SHA3_256: 2ad230408f1ee431837ea85871909292447c0b5564de18344db4612e5cff64ab
+  Timestamp: 2026-07-20T00:50:38Z
+  Confidence: C5-REAL
