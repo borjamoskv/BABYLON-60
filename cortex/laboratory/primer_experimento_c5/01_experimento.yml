@@ -1,5 +1,25 @@
 claim_id: "LAB_PRIMER_EXPERIMENTO_C5"
-hypothesis: "[INJECT HYPOTHESIS HERE]"
+title: "La Auditoría del Feed"
+date: "2026-07-20"
+hypothesis: >
+  Substack no es una plataforma de escritura. Es un mercado termodinámico
+  de atención donde la persona (avatar editorial recurrente) pesa más que
+  la prosa (calidad, profundidad o rigor del contenido publicado).
+  El algoritmo de recomendación refuerza la recurrencia de la persona
+  sobre la calidad del artículo individual.
+protocol:
+  - "A. Auditoría exergética de suscriptores via cortex/substack_subscriber_audit.py"
+  - "B. Análisis estructural manual del feed de Substack Home (~300 entradas)"
 constraints:
   - "C5-REAL"
   - "Zero Anergy"
+  - "Solo datos propios (zero scraping externo)"
+  - "Anti-sentimentalidad activa"
+  - "Registro público como primer experimento del Laboratorio"
+metrics:
+  total_subscribers: 659
+  high_exergy_readers: 185
+  vip_institutional: 30
+  deliverability_hazards: 410
+  exergy_ratio: "28.1%"
+  anergy_load: "62.2%"
