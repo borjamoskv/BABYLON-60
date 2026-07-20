@@ -5,9 +5,7 @@ Audits experiment directories for content density.
 Rejects placeholder stubs and measures exergy ratio.
 """
 
-import json
 import math
-import os
 import sys
 from collections import Counter
 from pathlib import Path
@@ -148,7 +146,7 @@ def main() -> None:
         violations = report["violations"]
         assert isinstance(violations, list)
         if violations:
-            print(f"  Violations:")
+            print("  Violations:")
             for v in violations:
                 print(f"    - {v}")
 
@@ -159,10 +157,10 @@ def main() -> None:
             print(f"  {fname}: {fdata['bytes']}B | H={fdata['entropy_bits_per_char']} bits/char | lines={fdata['lines']}")
 
     if not all_valid:
-        print(f"\n[SIGKILL] One or more experiments contain placeholder stubs.")
+        print("\n[SIGKILL] One or more experiments contain placeholder stubs.")
         sys.exit(1)
     else:
-        print(f"\n[C5-REAL] All experiments validated. Exergy confirmed.")
+        print("\n[C5-REAL] All experiments validated. Exergy confirmed.")
         sys.exit(0)
 
 

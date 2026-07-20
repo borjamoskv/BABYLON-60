@@ -7,1207 +7,1207 @@ Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 opera
 
 ### PLW-0001 | DOM_MUTATION::Transducir_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `e6314b1faf0cacbd3d5b95bcffc6297c4a4063a9ccc5888f5bc7fb2033bb5f41`
+- **CORTEX-TAINT**: `cfdd0885ebbf8b519cb705d191782ca2370ea596ead67eae71a78c7c60165e18`
 
 ### PLW-0002 | DOM_MUTATION::Aislar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `504dbde8ccb8815df6b3b92fb167953c31972ba0870e3b9a61be1cb062303c15`
+- **CORTEX-TAINT**: `198a4d10d0b20c6632608d9acac9dd8e17e54e491b5079e62e5473082bc76a4c`
 
 ### PLW-0003 | DOM_MUTATION::Forzar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `99d870e0d2d24e731f5317af8fddbe277dc6d98523bba75b57bf09194beb98a7`
+- **CORTEX-TAINT**: `ab4d0670c5d6251d39637d3acffbad21a6875b0ade99161c3eeebe224975aa3f`
 
 ### PLW-0004 | DOM_MUTATION::Inyectar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `fb54c0efe74c6cfc1fdb90083ac99edb1b80fb87c04ab3d1958dc13d93cdd2e1`
+- **CORTEX-TAINT**: `b52fc54a09ce3004d559d7b9a3aa66ae5afe57a0c16cbc70b3d94fbeeb1bd5eb`
 
 ### PLW-0005 | DOM_MUTATION::Destruir_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `f80f3f08624141db10ff72617d773eb6bcbce6191e2ad4b03e258e657ae9de37`
+- **CORTEX-TAINT**: `e4d905991e5197d881e30854ca2e6ad2cba8fbb80fbe1febc32e8f5bea49fbe4`
 
 ### PLW-0006 | DOM_MUTATION::Sincronizar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `4ca93cb35fbdded83059572354d5125fa6a53adbbc35c0dd4b2487eb819cba70`
+- **CORTEX-TAINT**: `04721810c9064ea1c30a4acd7bb2d8a0df42961a7c880291b84f9d140ac29628`
 
 ### PLW-0007 | DOM_MUTATION::Evaluar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `16b49d276406aa59c90f0d98649a222c784a66126d0287c62687deb82504d692`
+- **CORTEX-TAINT**: `d2690f21bf1b293f513cd31d47a159fc836822826f06703429cdeda5e60a2409`
 
 ### PLW-0008 | DOM_MUTATION::Purgar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `2f011bc8c17e67ffc08bebdab01dd29c651e6700d70aa3769a2c0cb71d879c7e`
+- **CORTEX-TAINT**: `8496ad0b18d2b2668c8ec0b603520009e7f35ac20a37f518fda6abefee7e57a4`
 
 ### PLW-0009 | DOM_MUTATION::Evadir_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `13122ee7856c9073fcec0a4060b88b457c82d66ac5be3fdc8021b0b50461c70d`
+- **CORTEX-TAINT**: `1db099ab32828d566904b573133f3ba728e0abe84b8c9dd2be73244eae252100`
 
 ### PLW-0010 | DOM_MUTATION::Cristalizar_Inyección_JS_Causal
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `e68fe26595a62d1e14a13db32879f30693fde3ff8000a65eadc5e90d2c43ced4`
+- **CORTEX-TAINT**: `a322f243addd9bf1c62446e52e751fb92bb3bcc3e435054f6b9a2354afbb5c69`
 
 ### PLW-0011 | DOM_MUTATION::Transducir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `7bce1aa8d7fa1ca24d07e97c68d75c75f7f3637e195f0db98d3cf0bad43f396f`
+- **CORTEX-TAINT**: `509fdb6b616d54d167b15f40b97a13d5401b22b14d015791060596c8306ba1f5`
 
 ### PLW-0012 | DOM_MUTATION::Aislar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `5e3f8b1647755141f07e19506dc405ea24996b0e0a545fc1c02054b82dbf9993`
+- **CORTEX-TAINT**: `ec62be59856bd0c8c7eda868e41b8a58f3dea191f07f6bc025fdf1c33aba0be3`
 
 ### PLW-0013 | DOM_MUTATION::Forzar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `f6082985c0c5490b9784f72df2947d370e29962995a07cde7158e14dbfb3ba8b`
+- **CORTEX-TAINT**: `0d5b6122a3c2d24c10a60626c37a721a8e61740aa062ae90536a098517ea343c`
 
 ### PLW-0014 | DOM_MUTATION::Inyectar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `5cbf343d8492a8e2fe1b6f5430a796265a041573b58c588116423b6eed89a66b`
+- **CORTEX-TAINT**: `a86101fad3f37f897efefe64d5713d4bb4a9f0f289e0049819cc43d47a06d0bb`
 
 ### PLW-0015 | DOM_MUTATION::Destruir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `17d306941e86470059ed279f836033b4c8499bd082cd49d89270588c8b60bea2`
+- **CORTEX-TAINT**: `917276f283a4bab329d601183e0c1749599e18c17f146b757a22711c4edd80b6`
 
 ### PLW-0016 | DOM_MUTATION::Sincronizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `f8073f14875ae7c51f127d601f319c0bd9dd5e68e86dc7177f2fd9c4468c4289`
+- **CORTEX-TAINT**: `846dcef6723af68f1c3e6eba483bc5ac3520f3984aeb6b9b100484898cd3a3ff`
 
 ### PLW-0017 | DOM_MUTATION::Evaluar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `9efb236674aa2215099a9b1ef7d36ddf0f4449fa51231cb7ae40dc5364743334`
+- **CORTEX-TAINT**: `ca6c39f6f8137acfcc44068e6e674bd70aa269c33a4f14ccb810fed23ffd2a57`
 
 ### PLW-0018 | DOM_MUTATION::Purgar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `2495eb175d746ff09c2149e8155b8998d451e48a468d699f611ae943dfccdc88`
+- **CORTEX-TAINT**: `856ceed6a41e190958ef364ea0a558d1c7c871ffee2f0eb3db6a445333568d3c`
 
 ### PLW-0019 | DOM_MUTATION::Evadir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `befecb50f5c4c179956b6ffe09b6dc2174d9451ec3ddc1294dc76805bb43bfa4`
+- **CORTEX-TAINT**: `73fd69b8a61d4620e65272d3effd62264f6ab7d2acfcee92e749ef8488c26d35`
 
 ### PLW-0020 | DOM_MUTATION::Cristalizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `6ad5b204690bdb9b67cb1f5bb7cbcd1e2e69d89acf139fd123fa5f9d2e0cc579`
+- **CORTEX-TAINT**: `5ae3a7dd3e6f17671ef8e0c99fba43135beb82503e93316b33f1187cf9f672f3`
 
 ### PLW-0021 | DOM_MUTATION::Transducir_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `9a9f23b5a20721e00f79d8927271751afac3410c098c3109c38d23ce1cfe947e`
+- **CORTEX-TAINT**: `2dc37d8208c39ff14f624aecaeee36597083bb0faa4d01176d9201c5549b15ad`
 
 ### PLW-0022 | DOM_MUTATION::Aislar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `9cfa91236600b4b7c202b32ceb9781d06d0c3f08db6fcb973e38e77e3333c5c0`
+- **CORTEX-TAINT**: `70e0f29db3d3bf63d92c50c8daccacdf3a3cb4722c2804557be8b53579815f66`
 
 ### PLW-0023 | DOM_MUTATION::Forzar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `869a82e802153eff01a3d96130266800d2a3bd0a136bf4c3658a93c89da8440f`
+- **CORTEX-TAINT**: `279e5d41183b8231e67452078ddba3ba4b3232f0ec2238ccc94888c6834350f6`
 
 ### PLW-0024 | DOM_MUTATION::Inyectar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `eba7913710f1713a0f3b2d85bfceae21614781f3a24b09489dd42eec13796d2b`
+- **CORTEX-TAINT**: `4f31f15be5fc9b5acc33b7ce06c0ae4a8e0bb650715c21ac1a289380203feeca`
 
 ### PLW-0025 | DOM_MUTATION::Destruir_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `2048cf5a36a6c574e6b7ccf1638bb1fbc7c2ee7f5506c8a8e94ce261260fea82`
+- **CORTEX-TAINT**: `4f68f6411d8cff5d59e599929a55569f75bfbb4150ffc14e81bc5f95d624d4b0`
 
 ### PLW-0026 | DOM_MUTATION::Sincronizar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `2f179430b59f2389fe2da11e62bf5b3bb01e377a30ad18758b30b81efa65f2e4`
+- **CORTEX-TAINT**: `fa0d06930f902b33d8ba8495948d886cb9265fb026f60c29602d9d3d3785e95a`
 
 ### PLW-0027 | DOM_MUTATION::Evaluar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `447abeb615fec5f05dbf67786bdbe9b30b7661dd343114af98bc3511c502a24c`
+- **CORTEX-TAINT**: `d23c84f984268970b993b3527167448b063ace73be5a8d48b29f5a351a1b2dbe`
 
 ### PLW-0028 | DOM_MUTATION::Purgar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `e179b509995edf2b1f54a03c5bd2e588aa330f97b9187a138a6d1a1d1eb535e7`
+- **CORTEX-TAINT**: `48002b9e4f4e72b71a6cf4920a0cdff0d4f51aec4ae650721cb65a3140b4846d`
 
 ### PLW-0029 | DOM_MUTATION::Evadir_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `c18bdca31edfb26e0532aaa775d151f33db38b880866c76f46e31bcc7015f438`
+- **CORTEX-TAINT**: `f84393c77fa4fd7e576bb964aa5177e857c42ab5ea8f31eeb3bdd79c8b46a9ad`
 
 ### PLW-0030 | DOM_MUTATION::Cristalizar_Validación_BFT_Visual
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `3dc47ec81a0fe37deb473b417cdee75b1ce0a88280883e66a2126bbbf21a5ae1`
+- **CORTEX-TAINT**: `8769fb8d6eb4c9098474ade1c7b568c219efb8555f4fbc77338de79af4326f46`
 
 ### PLW-0031 | DOM_MUTATION::Transducir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `20077e68cc6dbacc58f28b1026495a8c4ce9d0bfb48708ef9b46d44372186d21`
+- **CORTEX-TAINT**: `15457145c949ad8bfe9d87657ca4c4d9d394be905ef0677df1cd409268378470`
 
 ### PLW-0032 | DOM_MUTATION::Aislar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `9ed84f09e335f66709651dbd537cd609583b3121d2802897598e982e733f6e9b`
+- **CORTEX-TAINT**: `902494225f965fd2595cb889cc5dd33d09ac8ab1b6cd64d38e7bfa8959e3a52e`
 
 ### PLW-0033 | DOM_MUTATION::Forzar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `93f9e5f0bfbf736aaf0bc5e765ecfd7359dae54af6b3c04702c753603eab2f77`
+- **CORTEX-TAINT**: `045739a28538242f1545a3acb1937d168576aa3d1783ccf4f15efeb8a65c2ea7`
 
 ### PLW-0034 | DOM_MUTATION::Inyectar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `4b4f797c0c75a4bc201a99c123848a92e128aec5b52108be9cb9c88e69a66946`
+- **CORTEX-TAINT**: `7cd4dad53de96ba62dac9c2c1c2fbd9b454d7c995fbff2e3a0f668359bd53210`
 
 ### PLW-0035 | DOM_MUTATION::Destruir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `d76dfe3af273a57dd0479039971e885af8edd20113b52e3250c2174f76c4f22c`
+- **CORTEX-TAINT**: `23dc7b8eb01da166d05dcf88e4120ce23168366f298fea8a4c120feffbb5047f`
 
 ### PLW-0036 | DOM_MUTATION::Sincronizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `dd13c02f8d21633d5090d5699066bec3ab594fc84d48e5c58176e2e620179fd9`
+- **CORTEX-TAINT**: `85f66a9dfeb7b095513dfce53ae177118ceb611d8bc5874a92692a8ba746d5a3`
 
 ### PLW-0037 | DOM_MUTATION::Evaluar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `7e3e498417f1e5d3bccdcd2cad54f7b84165a377bae86c2730311ae3e58b2ed9`
+- **CORTEX-TAINT**: `28e76cc5d1ac2f78dfa54645ef0b23e6f1fa1ddcd4517fc8f3071c864844743a`
 
 ### PLW-0038 | DOM_MUTATION::Purgar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `2447391b656f89faaa13e56273e22694a9082647084571feb1d877e69bf352a0`
+- **CORTEX-TAINT**: `d32eb38ab49e94920432f0a8d8b3da9fc54bde017ad478b6befa7a62b07b52db`
 
 ### PLW-0039 | DOM_MUTATION::Evadir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `6caaff5c8431314b7604c9b17f2084c3aa31df0f7f5c28b4b96049a9cee3d2fc`
+- **CORTEX-TAINT**: `eb91d73eca0aef42fa3ba5e2ff28458b90d52a086b0d0dc1cebad1b9ede69a5c`
 
 ### PLW-0040 | DOM_MUTATION::Cristalizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `8dee3cf9e50bb1e6ed91f64cdcc0256ab9c593ed2064a41b395dd55bca39e986`
+- **CORTEX-TAINT**: `76e6f82e6e75cb9f8e7ba7cf2cf7aaf2ded63f143824b9e2b7eaf0b5b9d929a6`
 
 ### PLW-0041 | DOM_MUTATION::Transducir_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `bc20211ec8a9dfc602b54d29bc587a35e5e82324ead34ee4b02695bd130bd57c`
+- **CORTEX-TAINT**: `e9d15c0b8eca1500937b45a632cdf2cbf10678f33b307ece940c18587bbb70bd`
 
 ### PLW-0042 | DOM_MUTATION::Aislar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `9827175542b6f1619806e74f955e532ba7f6be976383c2423f0e01d5ea180ab1`
+- **CORTEX-TAINT**: `2eb5aa28e0d286d76aa30b65ff771edd3d0094905e02f9bfdd06e53c68fc3789`
 
 ### PLW-0043 | DOM_MUTATION::Forzar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `96d0e6e353e495d6923bad70ccdd679b89f0f4e2774513f7b7447ec8d0fc4767`
+- **CORTEX-TAINT**: `7ec4623c85d2b4f00eabd58deab45feeffcd8941c24f5e673a3f818940705007`
 
 ### PLW-0044 | DOM_MUTATION::Inyectar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `2711dfa3dfb15174bee696abd136713a51606b104de80d8e5c1f877ad71ccdd5`
+- **CORTEX-TAINT**: `48235016f6102c9bbb14f64674869cf606e1e8ff18122cacf1ea2870433e0c88`
 
 ### PLW-0045 | DOM_MUTATION::Destruir_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `e95a6d8c3711a6219140770ef32f19dbcf37026e90b6f11a388a0e63e8bb5704`
+- **CORTEX-TAINT**: `3726b4579fea0e6095ae95ebe5b07865974d24927d13d65f39ffacdc0aee8c87`
 
 ### PLW-0046 | DOM_MUTATION::Sincronizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `b8a35de61ab2972a35b287fe0fe9f68ff0f88376bcd53e570c11d9fac1350b2a`
+- **CORTEX-TAINT**: `c7b0bef21e8f890091a36afa5aec54d4d4cdfcd0ab41afc3984b16b5a4fd23eb`
 
 ### PLW-0047 | DOM_MUTATION::Evaluar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `eb55f11844bdec66b253cd98a614679d52dca6a159028e2c9f005165cd0f24c7`
+- **CORTEX-TAINT**: `6e0de87be5741a4efbd3a8d576f25a7a8d72760d91b550046a63e4a488cbce8a`
 
 ### PLW-0048 | DOM_MUTATION::Purgar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `ebd7a85f9a6cd307845bc526a7f03591d77b6d880a93b57b3dc191689ae59410`
+- **CORTEX-TAINT**: `50059c091e461f46b13434de3224b58cc256c8bd28caf1be2bc3e14a8d1bb252`
 
 ### PLW-0049 | DOM_MUTATION::Evadir_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `0c18ccf0803c7a7af905cf8c1babfe5cea38e97d88c63064c1a45b8758683434`
+- **CORTEX-TAINT**: `7e81ea59fe9d25be2aba5b73d973715e88bd93dbd42183d31c15ad74428c186b`
 
 ### PLW-0050 | DOM_MUTATION::Cristalizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `0a7b82451bb699e12de15e4a57b5a5b173fc59ba0a1d2ff56be657a7d027ae12`
+- **CORTEX-TAINT**: `8ebf0c8fbfa136a64449867533abb589bd6c76190c0b3536163f0033c19b9d3a`
 
 ### PLW-0051 | DOM_MUTATION::Transducir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `dcb5800d06deb7bc9e420365ccd3d9c276144ac4f1602d353df28cb9eefdd615`
+- **CORTEX-TAINT**: `5d77a24942524c083cc23e51f941644d28a0bdec40f6050b13452400f4aa387a`
 
 ### PLW-0052 | DOM_MUTATION::Aislar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `7356883bb7ea35355c4a181b19093b7a1da16b484f6f1f23fe7a0c2334a616ab`
+- **CORTEX-TAINT**: `83cb04b27221b12dbd022a9021e25e1924dab3027655433437c6ea931cb14a4a`
 
 ### PLW-0053 | DOM_MUTATION::Forzar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `55021af9163005a3c8a2837aefb490d1a7713751e095ef03991a89b696f6521c`
+- **CORTEX-TAINT**: `a1b63cc88fa0e5e9e09428b065fca5eb032b910b0627df992eba4cc1c3a99edc`
 
 ### PLW-0054 | DOM_MUTATION::Inyectar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `ac06a553aa16ba5df565d161c4bd7ff83c675f4f23bae4aa227585fb07bdb5ad`
+- **CORTEX-TAINT**: `1408c33ab0dd80afd47586eef6e01f4bd64b95ce77860177761582890c7d47d8`
 
 ### PLW-0055 | DOM_MUTATION::Destruir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `f6f7c812a26f01a068b6f3f8b18fc8a91bacbecd0b37dc0f7841fc60e5238b74`
+- **CORTEX-TAINT**: `f0f67d8aebfe83b4f81ed0e7da327e49ab5ac8ff3dd7ae8342e29029635cf97e`
 
 ### PLW-0056 | DOM_MUTATION::Sincronizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `a8eea0bd0963866b912155fb4d6517f9c1a093443be7282a2dbb0fcb2952d7d3`
+- **CORTEX-TAINT**: `a23129dead9c4609c6ea7cb951fff4ac57d64d21fac2193569f3248fb3f5a172`
 
 ### PLW-0057 | DOM_MUTATION::Evaluar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `6aa730e8e221c74d7c2dd0f06b3781f5cb1877b3748938b371436d1026696073`
+- **CORTEX-TAINT**: `d683d9e202ce729d0162db36f6e4309a52dd851e39c67f288167bc6ead5725ff`
 
 ### PLW-0058 | DOM_MUTATION::Purgar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `336715afe56e6ae2d9c5ef9a6e681d23bf1c3aa9c4a74deaa4b5e33585323144`
+- **CORTEX-TAINT**: `306e8b83da93b368a352d6dc42c06bce4ba40c2d0d990afe55ba0b1e212d54d0`
 
 ### PLW-0059 | DOM_MUTATION::Evadir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `e1049cbde53cf2bf742f9d9d2b4fa67588e98bc84724fa70d00cbde60bc2b082`
+- **CORTEX-TAINT**: `d2fbee47015a25e5163dc48f3055070ce36c936ec3ef0ff5231d0a0079cff73e`
 
 ### PLW-0060 | DOM_MUTATION::Cristalizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `e3e899b3bbe0f06229971d3f5ca10c1c81358dac2dce37f7850bae28218ea683`
+- **CORTEX-TAINT**: `21dc491b89d3836a3bd9cef8d1635132bdfe2f570c1672b68470cdde37d1722a`
 
 ### PLW-0061 | DOM_MUTATION::Transducir_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `b67ddcb4794798097b79ebca0f4189b4e1e85a66389573183fcd9293b88f4d53`
+- **CORTEX-TAINT**: `925e9c07e5a0def64d82563a1cc762d56dfc46327969d930941a7faff0e65cc9`
 
 ### PLW-0062 | DOM_MUTATION::Aislar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `947dbfdfe0269dad34060deb3ff54b21cda49c1a68d1231c2ee5d056b98a67e7`
+- **CORTEX-TAINT**: `49a19056dc4bf07049fc16b22ea9f5e3fa7ad3adc387b02322ffcd8bf3e3118b`
 
 ### PLW-0063 | DOM_MUTATION::Forzar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `288d93271b1194fe4cca5737399001a407098f710f8c6115c17cea4c2093f076`
+- **CORTEX-TAINT**: `00e79485d1889229bb4a67360535648d2d5e7f486cc7345a54335e973c9b80ed`
 
 ### PLW-0064 | DOM_MUTATION::Inyectar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `064ee240e54c15c2516186828c20bcfffb7ab51a7051ed060c1ce1a5255e0628`
+- **CORTEX-TAINT**: `f0e748e686d8d6a02e330afd91d7c4454d9991fbe3347884eac8ce02b48edf11`
 
 ### PLW-0065 | DOM_MUTATION::Destruir_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `0470c239781393db031573c9f076f09170773cbd2439e14ad2d9952aeb3e33c3`
+- **CORTEX-TAINT**: `250ed641a8c1094636a3edbf9eec067b1d162b9268ef896f52d720f96c2968b6`
 
 ### PLW-0066 | DOM_MUTATION::Sincronizar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `3f019841f906354d959fd23a2d5f33d90d9c67a48ff82c6bb61404cab704d246`
+- **CORTEX-TAINT**: `77f439238b1bebf7ff8a7cb02b3fe5b64d90a478c114a33609680ccc9a26ed24`
 
 ### PLW-0067 | DOM_MUTATION::Evaluar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `89481c45d8e6b15cc9b0cc05d84fa1ef7953714f9fee3e5c40527dd0e9f42b63`
+- **CORTEX-TAINT**: `25a2ace3852af7c7662efee1c36facb93b25b4df88d18fb21d17afe6df5fa951`
 
 ### PLW-0068 | DOM_MUTATION::Purgar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `14ba74519ba8177e33b4fd6335780ca405eb57f3c3bc5a0a55d6b4aa6be10e24`
+- **CORTEX-TAINT**: `957aca3d57f8f9487059e0de7c9bddb272eb57a797c243f98cab80df67d39b12`
 
 ### PLW-0069 | DOM_MUTATION::Evadir_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `b91258e12ebd0f9a9f53767964c579e05af9e31c7457caf26445405e6843ef69`
+- **CORTEX-TAINT**: `3251217230a1507417a5f48c4b59bcdfa08622b377a5d39217962f630da24ab9`
 
 ### PLW-0070 | DOM_MUTATION::Cristalizar_Profiling_Memoria_V8
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `fec936ea73b98d8d79753a65254fa406587081592e1bbcff0e5514d7a8aa9d35`
+- **CORTEX-TAINT**: `9c87302075174f2a713b0b2e3092ea191d1065c4196c94cf75a38d46de100848`
 
 ### PLW-0071 | DOM_MUTATION::Transducir_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `e700db3cf9dfa8df7f5a8fcd62799cd9e2490bc006535936b3a82b3ff241d4ca`
+- **CORTEX-TAINT**: `689ccd4438e79cb378a62ab787c75df72135eca08b71cf5f9b57a2bc629ff817`
 
 ### PLW-0072 | DOM_MUTATION::Aislar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `de057ae8d1db7b514119baea03f02cfe830ec01a6eb88bbd53db27eb2cd12260`
+- **CORTEX-TAINT**: `b68dd4eef68c5d89810f0a73b4d63fd7e9131c3332c0559c5894ac1017d8fbd2`
 
 ### PLW-0073 | DOM_MUTATION::Forzar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `529c985291bbfd9ff14cbfa882605f2ac710e723ed66ee0a12b1a3963f6858bd`
+- **CORTEX-TAINT**: `05d3890036f57b73c8b41626712411612058457d69db778284711ee861783cf2`
 
 ### PLW-0074 | DOM_MUTATION::Inyectar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `109b54b0a1bb3f231e7ca831ec63415dc7e2ac22ee27f8199e3901710cac4e62`
+- **CORTEX-TAINT**: `e79614971d7e36cde99e2c11ada3c7b9d9ffef07022ee9e7d828d385a3f02435`
 
 ### PLW-0075 | DOM_MUTATION::Destruir_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `11158c7cd1b020230e159daea6afbbe0a406ec708793b917aebc3071fac30003`
+- **CORTEX-TAINT**: `eabfba6d3138bb3703cc98d911dd475f6a47d43ea7edc7b5f7f104ebcf697345`
 
 ### PLW-0076 | DOM_MUTATION::Sincronizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `5dc77f891afd596826ce1f8429ba8aa9995f3924ab1fe20e73530346c2e7f9c2`
+- **CORTEX-TAINT**: `64f215ca260bbe5b807a6f57f735027a8f24d6ffef0c5dc7c65c06d595c23a71`
 
 ### PLW-0077 | DOM_MUTATION::Evaluar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `a2f2443db1c436ff6a2d22adeed07f2898e8085d371544e57d6d5f0630629a3e`
+- **CORTEX-TAINT**: `091129da589103b5f4a20b06879fa91b0d1c04275b3d505ee95e8596879d0d64`
 
 ### PLW-0078 | DOM_MUTATION::Purgar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `6347f6bf8262c47a060d8d95e8cf7941f12f0272a46f566ed4b732d02ac46c52`
+- **CORTEX-TAINT**: `8f352add66f42a9260bce9103b27a926d655e3a1522703b746cf776c8a67e537`
 
 ### PLW-0079 | DOM_MUTATION::Evadir_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `76383f9593012c6aa480b0b8ab00f531b5476514a640f8eeab3479825c5b90bd`
+- **CORTEX-TAINT**: `d637334ac09ce5de36b9a2de3f0dde6959a4f72ae008e10c0d1d194a6175d758`
 
 ### PLW-0080 | DOM_MUTATION::Cristalizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `a40700c43238590b99adaff33441e4d85e33f2bb404a2ab82bf05520a2bab29d`
+- **CORTEX-TAINT**: `c76d40b38712d771acaa5db647033c70b0141c19b39087ddb285d801b1f1ca0d`
 
 ### PLW-0081 | DOM_MUTATION::Transducir_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `c067ef838cda18505b9ee8b62a771ead5440349778ecd942a57e00ba1c3eec98`
+- **CORTEX-TAINT**: `aacfd48be4902cce64a06ac82c8c029e01a03ef3875d7d0f9081b9455bda944f`
 
 ### PLW-0082 | DOM_MUTATION::Aislar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `a2f11219a45cc39fa5f506f964ba5d5c7d4ffd8279daf97b9dbc9aff35e9f323`
+- **CORTEX-TAINT**: `f3c088bc42ab2903a16346da16db34615e5e8755c72356b437a12ab178ffe3bd`
 
 ### PLW-0083 | DOM_MUTATION::Forzar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `7f020f8e87a988b16096f6f7a1d9eebe1a8f1548e30c457a1315b2ca9401af17`
+- **CORTEX-TAINT**: `f0741cbdb110b0c50389be225c536d5aa3ba3c14501ceeb7c2129fca7149db47`
 
 ### PLW-0084 | DOM_MUTATION::Inyectar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `cb307dc4882dbccc71ad5d8be8b8d09609ea1dc7d764c80cfac7a36b4a72c7cf`
+- **CORTEX-TAINT**: `83fe2d87908ad4bbb56a166aa5092039e80dcb747a5a63489572d8bfbe248efb`
 
 ### PLW-0085 | DOM_MUTATION::Destruir_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `dff72dcc7e96336423df25aaf6be73a76159c4ff48bfeb20fe49f9ee5d75da95`
+- **CORTEX-TAINT**: `9a3d2bf2b40726e303c301391e472bc97d132b1493362a7fb13fc41c776c634a`
 
 ### PLW-0086 | DOM_MUTATION::Sincronizar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `28d309e554528b5d3ea3c482831d8e6417ae33217d0421a497d71e0d83d2234a`
+- **CORTEX-TAINT**: `b4ab7b71881657ccbbdfd28ba528f24bbf42a493751621dd810ac90619adad9b`
 
 ### PLW-0087 | DOM_MUTATION::Evaluar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `a2270640194050dfe5b652c316af0e56fa1e5ed2d8039b584f55c59e8f2a290c`
+- **CORTEX-TAINT**: `002fd8ffffe764e9d616ae069b5f6f154c5aa07b55d7f8f60a0451bb8a8c178e`
 
 ### PLW-0088 | DOM_MUTATION::Purgar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `898e3270cc0e63c23b5ce5b1d21cbbfdcdf0fc05d708879ba3e2b520259aef20`
+- **CORTEX-TAINT**: `384432c7ae1cd78381794c1cd50beb28f9c5773d40bb701a997849d910fdcbcc`
 
 ### PLW-0089 | DOM_MUTATION::Evadir_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `0dd20a144effbd29c1bb8cddb85e521c5c54a362a7ff7ae16e31d6166015e03b`
+- **CORTEX-TAINT**: `6bad85b099de7dc927b6599dc844e5c39c4087d0d76d129772479aac11edde22`
 
 ### PLW-0090 | DOM_MUTATION::Cristalizar_Aniquilación_Caché
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `7eca2d57e1f5853a06e712e1e32600e5c9b144f16341fe8f5f8fb9b5ddb842bc`
+- **CORTEX-TAINT**: `0384567b3f46e54507505fed667402ba54677a1dfac2a902937bbfda83d10884`
 
 ### PLW-0091 | DOM_MUTATION::Transducir_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, transducir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `961de18343cf9fae7fa0dd17c1c0933d17ffac4b7d94ac57774260f01e7cbc67`
+- **CORTEX-TAINT**: `7c76e9a8d8442eba0a6f169c557331809b33b2cfc2ca51916eaaf4de0d880f1a`
 
 ### PLW-0092 | DOM_MUTATION::Aislar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, aislar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `586e99bfe3a0043490935f2d8715bbfed2b4c70b4cb70d4c7c7d63d29c5991ed`
+- **CORTEX-TAINT**: `9eec7abda32404ad60c65d60a53b9dd063b6ea3177578715da318f739b8e91ed`
 
 ### PLW-0093 | DOM_MUTATION::Forzar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, forzar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `8c01ef31857d6dc9896fe12be89ba1168887b9c3a4757bbe5e1038c052962ec6`
+- **CORTEX-TAINT**: `c92960d1bf54513a6244d05849b5db548f48dbbfd431a5d409683d58ab4804db`
 
 ### PLW-0094 | DOM_MUTATION::Inyectar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, inyectar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `f48c801f4592df726e07433360054cc532f0ce86ec40db04deecf89a3fdebea6`
+- **CORTEX-TAINT**: `3d7d2322e531d720076ff2f1cbf653e8b9986f02c7bc386286bc8eb497e14815`
 
 ### PLW-0095 | DOM_MUTATION::Destruir_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, destruir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `bb14b6495e5eedc0fcaa1f72203250ba65479271ebbf6bf526cc00182be69c31`
+- **CORTEX-TAINT**: `3f0004562682add60bb4c118ce955d703c42ac10eabdfc734942384634911868`
 
 ### PLW-0096 | DOM_MUTATION::Sincronizar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, sincronizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `472990a127400afd69e080afa429ef6903445ca1a2c3b04dfb262fd54ce902f7`
+- **CORTEX-TAINT**: `3f412f4da7edcc807918ed424ea1b36cbe4c20ad4d4509252687da008d9861bc`
 
 ### PLW-0097 | DOM_MUTATION::Evaluar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, evaluar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `e0c64766f3c1d5ba7fa92d38d9e3a392a3bf1ba4fe6c7f31c94d005475993a88`
+- **CORTEX-TAINT**: `600455f223435d6303ae68fae94675e3ae5a8238d1efb17dd1e40c80b41f2708`
 
 ### PLW-0098 | DOM_MUTATION::Purgar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, purgar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `bd64a259738a3a5edbde908900223879b484f7fea61eecdc90431bdd6e49d6cd`
+- **CORTEX-TAINT**: `839563b862173a3df1fc6f3c8301eda5f375bd9a570025f4a2aeed13a467a365`
 
 ### PLW-0099 | DOM_MUTATION::Evadir_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, evadir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `487dd2a3c3449f65c96c5e6fe49694810702adbca48abcb050c7252e4107d250`
+- **CORTEX-TAINT**: `b3c16f636d0b2f10cd1b6966eaec5c8e489aae0a4a6e83846f059457921063d3`
 
 ### PLW-0100 | DOM_MUTATION::Cristalizar_Transducción_Proxy
 - **Regla**: Al operar en DOM_MUTATION, cristalizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `d4cbf7c4d1f97361a46f96512419dbc58bb26be4d3590197702ef564cde98dc7`
+- **CORTEX-TAINT**: `16ab00ac9d13e4c9143005249e970ca549f94188f42ee92d0882c40b77d73dcf`
 
 
 ## DOMINIO: EVENT_INTERCEPTION
 
 ### PLW-0101 | EVENT_INTERCEPTION::Transducir_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `7aa75f98f26ade56b19682583d5bedf4164ded4e9fd5d0ec5d9a04f9131639b8`
+- **CORTEX-TAINT**: `25a4f0a10b3a5bb0dad2de17f9be76b62ab22dc02a0547d8ef7353c651541d36`
 
 ### PLW-0102 | EVENT_INTERCEPTION::Aislar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `5365bd4285bc697b3cbab2c906824d3da11d99efe9c3ae9f5e243c3da5029995`
+- **CORTEX-TAINT**: `e9ae790d0e1b71814565ffc7683f21f8abec1010d63148ec781187d1952a0625`
 
 ### PLW-0103 | EVENT_INTERCEPTION::Forzar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `8227bc64b75660dcdac08de75522d039e6f235fe7863e0dc0e305bbaceef82c3`
+- **CORTEX-TAINT**: `812dc38f724d1c444b78a079469d1ac74560244312cb8f5f3fb6947001bf8158`
 
 ### PLW-0104 | EVENT_INTERCEPTION::Inyectar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `6e7f9ca0596d16806529125b19ac02fdab77d2fb7da58ddcee08b46de4cfb896`
+- **CORTEX-TAINT**: `637a529c4c73c1e902f292671da4c47e5a2e3e59c564401a97a7ecf040385257`
 
 ### PLW-0105 | EVENT_INTERCEPTION::Destruir_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `d0c600be6ac50b3c66573c7c1285cea7061a1c3598179e110dc997605b79a4e6`
+- **CORTEX-TAINT**: `9319ae0c4b5a4ce0072735b7f8d4ef25b6e037d6adcfc4d11489c485e768cfcc`
 
 ### PLW-0106 | EVENT_INTERCEPTION::Sincronizar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `d51c2e266c9764f550863224c0499832ca070d3082ee41d0ce57a20e87a952bd`
+- **CORTEX-TAINT**: `0d69f720698478ec3ecce952f8e92921c1fd3800b3eb322004520fa925ab6562`
 
 ### PLW-0107 | EVENT_INTERCEPTION::Evaluar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `35ea4aff5f8954b2c0777bb1148994b917bdf7112836bd4be2949f79e0f04cdb`
+- **CORTEX-TAINT**: `6c533edbd42bd075e531b2bf585292e138e3505540de3db103aa5101cec324b9`
 
 ### PLW-0108 | EVENT_INTERCEPTION::Purgar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `563cdf75627b180905851caa266bb4cea4fa734fe4aebbed273ca76e594252a8`
+- **CORTEX-TAINT**: `2b7e8d3e3ccfdc1b0165b0458c9d566d37d0f6cc91952a88499118b1b9c70f7f`
 
 ### PLW-0109 | EVENT_INTERCEPTION::Evadir_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `abd66b6bd90aca016e908253322c7b7fcc734fe438022cc11afc1e011cfb4c6b`
+- **CORTEX-TAINT**: `ef5c6702eaf27cd8505cb7d22d85d9d7eaab2a4b8db12767186e0f5cbe0c4a85`
 
 ### PLW-0110 | EVENT_INTERCEPTION::Cristalizar_Inyección_JS_Causal
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `299b9b79efc38f6fc21414a9019b322b5ee1f1944e50097975ff60eb2b9fa7af`
+- **CORTEX-TAINT**: `afdd4e9a24931538b4437d3fe8bbbb5fc9b9d03101496abd92297facdd5b41b5`
 
 ### PLW-0111 | EVENT_INTERCEPTION::Transducir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `f8af12619c7559d2dd9d537c366df9585503ff0be1904916c1e18ae4971ec28e`
+- **CORTEX-TAINT**: `38275bc3834029c810b50bd311931b23bfea8aecabb89f4468abc3163e6c32c2`
 
 ### PLW-0112 | EVENT_INTERCEPTION::Aislar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `2b6eb81190719b922f0652e0a91e638340301afd31c9c2370d4a077531c7cc6d`
+- **CORTEX-TAINT**: `4e06749a2ee3d76195b23bbc8c233756f0e65e367f1748cdbb7fa2e642e889a7`
 
 ### PLW-0113 | EVENT_INTERCEPTION::Forzar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `79cfccf9a88e6f945f13c25794f0c550a0a0aa38397f45d6c275083685f5f703`
+- **CORTEX-TAINT**: `ebfbfac8c29e54c162e5cdea8437c4426f694576cc34ca01280f3b48993aef6b`
 
 ### PLW-0114 | EVENT_INTERCEPTION::Inyectar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `7304edd1a6c1de903af98412a2004bf83756f3e4a37897e1a9d2f582aef40107`
+- **CORTEX-TAINT**: `a81e504e8e758d3c3aead75e177dcc773127ed1e8e5d36a337a150c9dccfb8f4`
 
 ### PLW-0115 | EVENT_INTERCEPTION::Destruir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `625f61803cc9e14da442d7627b4f2608cee9c4a840ec15c6fe1c9d04ecb51e87`
+- **CORTEX-TAINT**: `06fa070acc30867a24d8c84e185e522967924d2b9688a486857e90676b596eb9`
 
 ### PLW-0116 | EVENT_INTERCEPTION::Sincronizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `8da700cfc0bb3d0284b464287e1847c15726560717dd37d030d2372300457031`
+- **CORTEX-TAINT**: `59dd92536bb20b26380eae561acdcf5d819502af33ee75df73801b423db30a3f`
 
 ### PLW-0117 | EVENT_INTERCEPTION::Evaluar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `9973ea0ea3bf41df2f2acf1736543cbf6c7b76ae3a0eb5e6ff5497b64aa69e99`
+- **CORTEX-TAINT**: `427d00e3753459319b58f5c563931c71770e379862b5d919ca37441b684c9ea2`
 
 ### PLW-0118 | EVENT_INTERCEPTION::Purgar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `c0b183c1ab3ebf24795fda2217f06ed0660439fe1edc42962aefd2f6a8bfda17`
+- **CORTEX-TAINT**: `7e97901d1d89e60c57401530a0531ea81eda25995c702c90d74f7ea40378dbaa`
 
 ### PLW-0119 | EVENT_INTERCEPTION::Evadir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `6ed2af07336bf2e8d1812a8a487192f9a89889531ff516dc47940220fec75bbb`
+- **CORTEX-TAINT**: `e98114503b8d60e975cdde693814a4069b705926e1b24f971b14e1fedf997dab`
 
 ### PLW-0120 | EVENT_INTERCEPTION::Cristalizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `0646d7a53ddf242fad65565fdf0cb26069dfe95aa15d176d1e6861cb7ca9b623`
+- **CORTEX-TAINT**: `bb111017706a8b97add9cb2241863695fdb0d8494b36757342d6cb1ff3042cd9`
 
 ### PLW-0121 | EVENT_INTERCEPTION::Transducir_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `2894b1627542fba5d1e6be1a142327b8f1bbe58f9b92eb7f0a8c0046005e5bea`
+- **CORTEX-TAINT**: `a44b9ca2d749168eef5cb343e2576cac872e9a3a3c0d994d1507ab102fe08f9b`
 
 ### PLW-0122 | EVENT_INTERCEPTION::Aislar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `0b7c2c6813f38d6789ed0a12f1231e85795bf80b5b21d285cbc36bba990538a5`
+- **CORTEX-TAINT**: `dd7bf405cc25f562772445bd203bf097cc7907da5090374c287eba8e4d848ddd`
 
 ### PLW-0123 | EVENT_INTERCEPTION::Forzar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `0ea53ac2f304424c099f3ac7280ad7c8910305e7369713ca2565a015568b7456`
+- **CORTEX-TAINT**: `becbf1d3f2289555a8eb06800de07482a19c04ccb38a32ca341caab5e47e05a9`
 
 ### PLW-0124 | EVENT_INTERCEPTION::Inyectar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `5a82af5106cfb5e334afa5898774bdbbb4370173214327e0a0906ea5024dd03b`
+- **CORTEX-TAINT**: `2a19c01113e384efadc1baa5991fdba851559b9b48027b27b706822d9a0b32c1`
 
 ### PLW-0125 | EVENT_INTERCEPTION::Destruir_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `e5da4f85c5fbea51b5af172844a33930cd6a8f1226b7fbb32ce43614943b14ce`
+- **CORTEX-TAINT**: `dc4ce1e85ed58c5e521f86652728c88a0dffc28854b656a090fce6744fb78e6d`
 
 ### PLW-0126 | EVENT_INTERCEPTION::Sincronizar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `4234599b3b1bd4b8220b1690b5a921b0ef28e73c80e7d728954f0daa35bfc57b`
+- **CORTEX-TAINT**: `aa6d03e3f4395730d9832180b74e7ee4169545610870a1c94636953b941b8ebe`
 
 ### PLW-0127 | EVENT_INTERCEPTION::Evaluar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `26f34418cb1394562acd3fca03cd1a46ec397a67cc328bc3a0c8e2ddf09e9545`
+- **CORTEX-TAINT**: `a9adf502423ce1130cf681f08f2723acdc8b0e5fee57f1166449ca711b201238`
 
 ### PLW-0128 | EVENT_INTERCEPTION::Purgar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `31b4dea1ac1ff9c0aba4848e16cfe2d6457ac19039e3df5bd9610831f16127e7`
+- **CORTEX-TAINT**: `cf9eca01af99b950a32fb434f95978740e748fe3bc11a520d5bfca20c5209054`
 
 ### PLW-0129 | EVENT_INTERCEPTION::Evadir_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `404e72818534a5a403b13e52ad919bea09250fed181676b87dbf83ade428f06c`
+- **CORTEX-TAINT**: `e3821cb288e7a410caa002af3f661ecd334535e0a1d6ded8e20204ae1654c8a0`
 
 ### PLW-0130 | EVENT_INTERCEPTION::Cristalizar_Validación_BFT_Visual
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `b2ab114899bfb55344b05efda0e68450d7ca2e0f55abe4833119d4a0d38ea364`
+- **CORTEX-TAINT**: `4851bf6779382e6b58f464589424194222b7950c6541bc6a834566d810d725e4`
 
 ### PLW-0131 | EVENT_INTERCEPTION::Transducir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `5e1fcf45c40ed0035301fd3e7436c716fa3523ea694550095d2cea21b5955f10`
+- **CORTEX-TAINT**: `517f5b9aa0bd092a18ac97433913af83a6d3a74df31cdbbb5a797a2eb8c7e82d`
 
 ### PLW-0132 | EVENT_INTERCEPTION::Aislar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `00dc4e864e55bb49f57ffdb8020dd4dd65fb2e135c46052511464a4dc362bd21`
+- **CORTEX-TAINT**: `762873e029e5008f4e1e7d644104ec881bda07d83e5125469bf3e5964f7ce4bf`
 
 ### PLW-0133 | EVENT_INTERCEPTION::Forzar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `eddc33cbd8a94e45ba18e6861776d4362862b8e28b68d518f0c189ffbe74eb0c`
+- **CORTEX-TAINT**: `5fe571305192df6c2a1edf0c3c0950e8007c58fa2ef822e439694d02f92e04be`
 
 ### PLW-0134 | EVENT_INTERCEPTION::Inyectar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `7d8a01545b462477d6d45d76d22451c0561efdeef4fcf4721d270495c3144876`
+- **CORTEX-TAINT**: `4e3d5578f484cf833a56b689a20ec3dda492059b5f9b1e5f0089b53149e3c9bd`
 
 ### PLW-0135 | EVENT_INTERCEPTION::Destruir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `3ec34cc190e23144ebf1d0ac13177b4c266230bc273c8b67b34ddcbb4e130385`
+- **CORTEX-TAINT**: `79ee01cf949098e208163b87d3dd55b5645170449df48bd4df19f1ba339477ee`
 
 ### PLW-0136 | EVENT_INTERCEPTION::Sincronizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `ab96db707984484fbff6e9a05832704993361c4939f79a46b17e22f71fb9642b`
+- **CORTEX-TAINT**: `cba6d3d31c6b437ecc801e992f249e522c76674861a10e4801b6db126d30ea48`
 
 ### PLW-0137 | EVENT_INTERCEPTION::Evaluar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `3c7ddcffc196b157df391072c44a548c1862bc532e343cdf5499ba31451913f1`
+- **CORTEX-TAINT**: `7044e90560fb5350e4ecf43bc31d139819204ac4af5f3acf249ea9ec37a9c3d0`
 
 ### PLW-0138 | EVENT_INTERCEPTION::Purgar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `d2049c8d84ba42bc0f5367722ae662e579bd5e4195e60ea3983970a54fcb405e`
+- **CORTEX-TAINT**: `9abeb24d4bae0cf89ff1c9b7dca9f3bce0e64c4c942f2980c26641f08c56a43d`
 
 ### PLW-0139 | EVENT_INTERCEPTION::Evadir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `85bf80ab44b9aca268731c6d166d0aca8e6f1f636c09eb20e1c87977eb4b5dbf`
+- **CORTEX-TAINT**: `dcd4e51015bdcbfb062d9684da3ab3a07261cd8524d424cf1ef5392672596e11`
 
 ### PLW-0140 | EVENT_INTERCEPTION::Cristalizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `2aa80f08812011b583b935c45598d1c1551c6e46e78dfd7fec92738d45fbfc75`
+- **CORTEX-TAINT**: `b2b9642c9adda253aa7d3fe0cc726db0d709211d83e2212ad705e1529cc41825`
 
 ### PLW-0141 | EVENT_INTERCEPTION::Transducir_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `f19d9ab316fcbd6e14f1e672c9b7d7ee7afde207755d9a422d76c0ffe6009fbd`
+- **CORTEX-TAINT**: `8fab66c84905a579e9e50e696f89f79d1fe750290850cea847295c82f778f15c`
 
 ### PLW-0142 | EVENT_INTERCEPTION::Aislar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `524868e115df9fdba441b1d5235c3f16e32f9c984d11e8713965d7792613dfb1`
+- **CORTEX-TAINT**: `625faf13bcd353f522f03eda553f78598908db9299addf47f582ea57035c3329`
 
 ### PLW-0143 | EVENT_INTERCEPTION::Forzar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `6e327e1c1642b14d889346330273580402d6f0640a8db2733b0b2982bb77be72`
+- **CORTEX-TAINT**: `151163565398788f892072a815137cbdc7f706e669f0b4006e5f625a983ba389`
 
 ### PLW-0144 | EVENT_INTERCEPTION::Inyectar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `692cd80c4f019a2d9f2f34415fc7a8c4d4abc1bf0ad804a8431f236113b1d91e`
+- **CORTEX-TAINT**: `b4b03132fe26af40223c7bd9bb5e4462358a5811b5db629baae25e869562d874`
 
 ### PLW-0145 | EVENT_INTERCEPTION::Destruir_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `343f19265dda3bfb5f4be5aa2fa6dc686d248332b0d4df8d3b2fed86533efa84`
+- **CORTEX-TAINT**: `f31c726368aa2ad88526aed7a9ff477f2ce191e4077142ea46a6f8d8aff30236`
 
 ### PLW-0146 | EVENT_INTERCEPTION::Sincronizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `6b7907ab4d05bedade13a3ed63657a81b12276e8a32adc0c2c1c357ec42d5bd9`
+- **CORTEX-TAINT**: `e37ed47b16a0c14f6b58d131961155d2648eb1df0b1c764b2362bfb575e94779`
 
 ### PLW-0147 | EVENT_INTERCEPTION::Evaluar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `767a6f9b739fbb6b08b362285965edf24ad1b0a9c163bcd9a3373ebacdb08149`
+- **CORTEX-TAINT**: `d30198a6fcc487a56663455952fd24aadfc2331f9b20369e60a859544a97cf77`
 
 ### PLW-0148 | EVENT_INTERCEPTION::Purgar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `efc71d5ab1d0e91c3cbcf1772790680f2d62ce1e47022c1a817714732f43c8b1`
+- **CORTEX-TAINT**: `90a44d56e9f4655c11c1c6d1a88e8549596d6df523d03385272c5a0844739dd5`
 
 ### PLW-0149 | EVENT_INTERCEPTION::Evadir_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `3a2d4b9d7950ac1e4a42335d08eeb5a123072292efefe31ba4ac542bf9b11d33`
+- **CORTEX-TAINT**: `184f50dccd86ab8fcef50cd9e5c081f5a47f23cd07fa2ba00852d7812eb38a90`
 
 ### PLW-0150 | EVENT_INTERCEPTION::Cristalizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `9ad121b4a362a1ab561041d066cc92c795042ec1535395ae66bd78a899ed14be`
+- **CORTEX-TAINT**: `1c13b9bf352e16a547494122d58d44c75575e5f82dd20101b6202de8c56dc29a`
 
 ### PLW-0151 | EVENT_INTERCEPTION::Transducir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `1308ba40b03bc79b529370d60d43e14814797c4cf06645cd85f9c59b4869e0ac`
+- **CORTEX-TAINT**: `23876f80d0b31f9d4da3bdc1924e74b55acf922f9b74ad2d784682ae4c963959`
 
 ### PLW-0152 | EVENT_INTERCEPTION::Aislar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `4ad374a27ade0f9b456694a00468e4e01339bcbdcb18a3ab25fcad99ce5ec9ab`
+- **CORTEX-TAINT**: `908aa74c5383e2731c0104426c81a7e071a6546bc0a8f59dcaebfd8224b4f35a`
 
 ### PLW-0153 | EVENT_INTERCEPTION::Forzar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `fd968d85f37f7c2187493026913cb48e060a205cdc1c792a6ce2d889397b6fd0`
+- **CORTEX-TAINT**: `b39896194df4f612975a25e3fbf19a0df0a2a8f9487f1a358ddfd6ca108b0fd4`
 
 ### PLW-0154 | EVENT_INTERCEPTION::Inyectar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `b4569606e9250bdd5cb06a6d7bab20a96e3924d85ec3d51ccb89a6c220a4a962`
+- **CORTEX-TAINT**: `38fbdfd6844328856e2a21ff9482d845311fe705bd67c60139c53a2916018ddd`
 
 ### PLW-0155 | EVENT_INTERCEPTION::Destruir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `1b622a315c01fd3472e0a69bc90d2125e72b5745f6fc3ee508ee2f2f156eca2a`
+- **CORTEX-TAINT**: `7c2dcad95821ac1f6c636906a2a30ea2678a88d6049112d7f89ae52fab551a61`
 
 ### PLW-0156 | EVENT_INTERCEPTION::Sincronizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `05fcccfd22ccd977c2cb2354495de8e5bceb95a8fb551b26a058fffdb6aa22e3`
+- **CORTEX-TAINT**: `97603a2573815826ac3075b2cbdac37509bd45d506604e5a8404a85f7ca350e3`
 
 ### PLW-0157 | EVENT_INTERCEPTION::Evaluar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `e8c045441764fc897cb4f06f54766280088ba0217387fd98f9619cb1b97053c3`
+- **CORTEX-TAINT**: `edb9427a361be9d1505fb36e4dfd8e443d76b8c85efef34bdbb32e1c6784df2e`
 
 ### PLW-0158 | EVENT_INTERCEPTION::Purgar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `0c96f2296b9c4411bf69e8ae2443a22ba6ab6dd8f00def7cc92777fbeffbfa23`
+- **CORTEX-TAINT**: `085b7f8f53cf23de369078b6f237398e5374c49f84f68f57ec8b5f24fd1bc216`
 
 ### PLW-0159 | EVENT_INTERCEPTION::Evadir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `6f0377b24819cfeef9dd399373b56adf5a751833714830e5b15035e06f717bed`
+- **CORTEX-TAINT**: `1f359f24b6ffd74866fc4830e445c1962333599a25bed697a642de1026656efc`
 
 ### PLW-0160 | EVENT_INTERCEPTION::Cristalizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `8ce7e6df4a94a86954363701efc9eeccb4dcce33d874b87c434a6a8d7d150673`
+- **CORTEX-TAINT**: `9eaa3368d3eab592cddc4226e64089269d874b3669c0114be87781102b90f1ff`
 
 ### PLW-0161 | EVENT_INTERCEPTION::Transducir_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `69df3d221a68337e4e9791e5aeeed54466baa4975ad36a22cc667e7aa885a4eb`
+- **CORTEX-TAINT**: `eaf435c3d24a87767c623f868f38a286b021d11b4e6515496a88ecd58ac5e71e`
 
 ### PLW-0162 | EVENT_INTERCEPTION::Aislar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `52524f09a37ff2c4fa6ff110f4a752ae43eee5a91599b1ae1d30545e734d363c`
+- **CORTEX-TAINT**: `ddcad0bb1d4153d269be4602c0214a33f11c462afedd75ad3969a83ab57364b1`
 
 ### PLW-0163 | EVENT_INTERCEPTION::Forzar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `7788bc1f1e0abc9b9ddf4518d06d12b64c075bbf324d37115cb853202f15a66d`
+- **CORTEX-TAINT**: `ad9d3c0d33046bbaf0f72747f93bb4738e615a5cee5bf70865b69eb93c0d67c0`
 
 ### PLW-0164 | EVENT_INTERCEPTION::Inyectar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `af9ce52bdedecd9b6d870d38304c9406151ec9e119c83b4b15bd3973e5b9f447`
+- **CORTEX-TAINT**: `cba55709748e727591874e675858c5ecfed6666e17e2f5fb6d92bd5364bf73aa`
 
 ### PLW-0165 | EVENT_INTERCEPTION::Destruir_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `8a09664df12b4f625260d19fc5f217156bb0a383a9be1041487b149c6455c344`
+- **CORTEX-TAINT**: `6b5d6b7e1fba22c48057373eafd1e6c1872e1c856a0c4077d189e3a49ba6cb01`
 
 ### PLW-0166 | EVENT_INTERCEPTION::Sincronizar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `1fc5cd603790b5b155e269ac15992c8a658a177a308fcb773aed391cf6bd78f1`
+- **CORTEX-TAINT**: `aaba6f4515d11ed5fd5d4f5fbaa5267971ecb51554965c870c5b77d4f9be29c7`
 
 ### PLW-0167 | EVENT_INTERCEPTION::Evaluar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `d292707ca724a2a7ef6e2c206d1e0b5f71f99d12d4b11c709b2ef6325c21c232`
+- **CORTEX-TAINT**: `b09f960b96782dfa7733ea77de1e55416411d945d15762193c5d1c6a2caf8a38`
 
 ### PLW-0168 | EVENT_INTERCEPTION::Purgar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `82263e5ef86c6b4c003d8ce430ece137be6f03fb4cb37a6cb9acdfb4a1a037d0`
+- **CORTEX-TAINT**: `5ac829c3015b6b7ef849299c7f52d24f31c81fb348c5039c2ceb0e3dcaf49f26`
 
 ### PLW-0169 | EVENT_INTERCEPTION::Evadir_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `816d3118cf65f043463fdee2be2772a6c2d53b7f1c8d76ae6705164ca0003752`
+- **CORTEX-TAINT**: `af2e5cbe31680ba5b2d626a656e057514edf4b52813db5a811cd86eb03e04a16`
 
 ### PLW-0170 | EVENT_INTERCEPTION::Cristalizar_Profiling_Memoria_V8
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `ebe5a3bdd3b9347c57f08f8ea533ef680049aa286ea72969ea30df5df9afb802`
+- **CORTEX-TAINT**: `b5ca323690c9919242ff604ec5444413d0a3f4f697eec9adee96c7f9eb0d7b66`
 
 ### PLW-0171 | EVENT_INTERCEPTION::Transducir_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `60571988e8a9ac686321abf657c61345241dd8fc9a9999b62608dc54276cfd79`
+- **CORTEX-TAINT**: `b64a9f990c3a60d89b1afc62312b66c88ff203b0369b94304ad6a6a3a32b128f`
 
 ### PLW-0172 | EVENT_INTERCEPTION::Aislar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `a70e05de24ffa0a0e34b33696c038bb65084a33a04597be6acee8b6eb8414059`
+- **CORTEX-TAINT**: `9b362528781b4b6094c132e823ab82d5f381e8afdf1a548a3c4b4ca53d7dd5cb`
 
 ### PLW-0173 | EVENT_INTERCEPTION::Forzar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `48379f79fa138dc37c8db83d263edae71ba54b7850154464f25246140dbb4191`
+- **CORTEX-TAINT**: `3925347a2e06c79188b1b55c33f220bc9c006c225eb7a6da7fa10c3a6e8029d8`
 
 ### PLW-0174 | EVENT_INTERCEPTION::Inyectar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `5baa791710a91dcf9a72bcca6178d0f76899f8ebbdfe23615399f5d802d8e99f`
+- **CORTEX-TAINT**: `04229d221132004546d28d078fc3d82d93bde74a4d76486ed085339dfff0535f`
 
 ### PLW-0175 | EVENT_INTERCEPTION::Destruir_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `03f61570b27f1fc28c5617e44e08f65698e8dbbb27163761d1bdac3eeaecb7ff`
+- **CORTEX-TAINT**: `d46ea04e89ed65cdc2c6409a1015d6f0f7faf8f3e72a6174bed94d8e0f61a782`
 
 ### PLW-0176 | EVENT_INTERCEPTION::Sincronizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `28708328d980f2bfc8aed3a192c67ae19922984a611293ebad4de0f1c67057d0`
+- **CORTEX-TAINT**: `ac71a55429334babc2429065e0e9f9bbbe5fa600133350d745471f4bf435d618`
 
 ### PLW-0177 | EVENT_INTERCEPTION::Evaluar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `ea0e0a93aab37c70558c6b1c36b0dbc7eb516a80b1d33a260d3665e51db354f5`
+- **CORTEX-TAINT**: `270bcbefcc4371df34d7e9cbc4fffba0413a21b52b4b7815b4c9598f422e0d50`
 
 ### PLW-0178 | EVENT_INTERCEPTION::Purgar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `8a8d7f941a62103afaee51e00e4611a12eebefe672c964a2b0ef88900706e14f`
+- **CORTEX-TAINT**: `121ae3b0d9a8babf9e3325df51952c0e7f44b656b66ef48cf29cbcadc2745140`
 
 ### PLW-0179 | EVENT_INTERCEPTION::Evadir_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `472b839a34a2902b8c50e9b2abc457b1a5785a01860359890fc037e28a96366e`
+- **CORTEX-TAINT**: `32f4235f4b01221cb28d2c6b2f320739a9ba4194b27eacd967cf874dbaf203c4`
 
 ### PLW-0180 | EVENT_INTERCEPTION::Cristalizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `ec31c4b6165e2df3ef088003ddef7d8b720b3a58c77750a3d84d3f267b4815ec`
+- **CORTEX-TAINT**: `89fe47b48a1182be81ad0e0cd0177950ac3829c8517e4cc421d767b3d9304908`
 
 ### PLW-0181 | EVENT_INTERCEPTION::Transducir_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `48ba9e1282ee190bc0a17fe820915bde0d39e6590efd5a79b86abe2ae6de21bf`
+- **CORTEX-TAINT**: `fa162337f60f6e9bded8537b25853bdee901d0c2d0b524e0cab93ab80a3410fe`
 
 ### PLW-0182 | EVENT_INTERCEPTION::Aislar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `e3edceb2a938c84551eb0d53b8376f90a1975ae6d47a1df951a31d5de5940f64`
+- **CORTEX-TAINT**: `2889b24885da619091cd5c7d2eb6a4ab66bc958b87d5150557452573737ead82`
 
 ### PLW-0183 | EVENT_INTERCEPTION::Forzar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `16a54d49c31f5ee2147642a198061cc11188d823ed9a9385602936c2bd1c7275`
+- **CORTEX-TAINT**: `3223a8112e703ccbd393bfb72c76813ef5678f2633f5dc1e60a68e8119a1e943`
 
 ### PLW-0184 | EVENT_INTERCEPTION::Inyectar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `7cc1022276460992d06d4ccebe446427f5417da6686a11f1e52e97b9f5146c88`
+- **CORTEX-TAINT**: `9a7f88cdc51630a56441bd2b91147db632449e6f07893753601e745d8c3c728e`
 
 ### PLW-0185 | EVENT_INTERCEPTION::Destruir_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `8d350db24e07604f98f84fa68e62b6da4ce3f279091b272194648b4419bc8ab2`
+- **CORTEX-TAINT**: `734a3ebab713970f9de8c735819e8064bb2cb213376a125d518b2279080b7f41`
 
 ### PLW-0186 | EVENT_INTERCEPTION::Sincronizar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `a6dd39b1e37e2bde92882ee4357944126b10c530fad65ad3558a90f38ce6a1f9`
+- **CORTEX-TAINT**: `e45a53f55dc46871553dfe40cff8935aca18fe9263313db88b0c1773545d4f7b`
 
 ### PLW-0187 | EVENT_INTERCEPTION::Evaluar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `6e4bcd2b4b28eaf9df5ebefa63365b887c335413121545d595335849a18dddea`
+- **CORTEX-TAINT**: `7d404133f69f23b17ff58cfdcc0b9518de63a946e4d2fd0cbb28ec79be302e2e`
 
 ### PLW-0188 | EVENT_INTERCEPTION::Purgar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `77de4f71387f88f4050975b0015ba2dfdc8b8a6e628400e8603486e69e4f2f01`
+- **CORTEX-TAINT**: `5322b0e65c00bbdf4919e821d5a98e277f8f1adcd4dcd96638f5210e0b663782`
 
 ### PLW-0189 | EVENT_INTERCEPTION::Evadir_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `7b26391a3f8f967631b739b22f0a4a72819d55d7fecadeb5e4ee1a76c58f1d78`
+- **CORTEX-TAINT**: `3ece1b651073eeca96b26696c1904bb744e3eb5a0f1d070df048541303a3413c`
 
 ### PLW-0190 | EVENT_INTERCEPTION::Cristalizar_Aniquilación_Caché
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `bd862482aa1293ea012f7d797e92866bd009cfe92e72a68effa2ac1141845915`
+- **CORTEX-TAINT**: `06ba52054461ead921d05ab5fbd144df2d1f0fa5adb8c909523b7147b0055000`
 
 ### PLW-0191 | EVENT_INTERCEPTION::Transducir_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, transducir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `886363e11e9b8fee41f3b2950be250b9e0528d359259957b3e3fe860630c2005`
+- **CORTEX-TAINT**: `d96a55123e01bcaac394f5bed7ae7e12904126c3c756324492eda27707a183a1`
 
 ### PLW-0192 | EVENT_INTERCEPTION::Aislar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, aislar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `5f369dc21761c0a2120a8be89c78ce06b7fb242b0a4c38d9f5bfe1c07aa0a9a6`
+- **CORTEX-TAINT**: `6a21c7fcee618dd56fbbe57bd0c9d541083b76988f9dcdcda7c62fd270a2efd3`
 
 ### PLW-0193 | EVENT_INTERCEPTION::Forzar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, forzar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `831ae5b62df3789f25fd71537d48c51ec9ac767a39b51226629d10221a1c2615`
+- **CORTEX-TAINT**: `468e562cd8a792bb8dda3c03adc75d93c693b80300ad91c65239ebebbd443cc7`
 
 ### PLW-0194 | EVENT_INTERCEPTION::Inyectar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, inyectar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `071520442bd7c5c704d68c31a299a1eafc56fc25617faec520f85a613464e80b`
+- **CORTEX-TAINT**: `656a077d8b187f50c29605a49a843e719db5664e349ca630b81ea5ebcc62269e`
 
 ### PLW-0195 | EVENT_INTERCEPTION::Destruir_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, destruir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `1ae6755259cf9469767d14a2bbea7fcc56f99094aee221ee27f91ad890a0c2ac`
+- **CORTEX-TAINT**: `95322a31b084a8e6bd54f2cdbfb0baa84cbe8043e2d59d02b0c13ae2d6dae32b`
 
 ### PLW-0196 | EVENT_INTERCEPTION::Sincronizar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, sincronizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `e7e827478d96697711639a222c0ab60005e2fce9fdfbd7138f0b34ad9d9f9e30`
+- **CORTEX-TAINT**: `98e33a2baf6074f52e5e581ef197159bd2c57bf5489c34232dba2dacfc403b2b`
 
 ### PLW-0197 | EVENT_INTERCEPTION::Evaluar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, evaluar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `56304f5ae58ca3374fc7a2905f14417eb1cb8bdd989eb2fa85f80bee1af3684b`
+- **CORTEX-TAINT**: `0ea1aff03937d361937c90813a29773ad50d8438d35d98057356bc01b415f729`
 
 ### PLW-0198 | EVENT_INTERCEPTION::Purgar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, purgar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `cd3c4191ac7e5b7798571f30d25ba32fb77fe5e9a4b30783a684701d42d1dcaf`
+- **CORTEX-TAINT**: `0644edf9c77af71e10d2650a57c51ed85b4178b2d63938ce3ceff36d33aef1f6`
 
 ### PLW-0199 | EVENT_INTERCEPTION::Evadir_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, evadir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `95b08cf456aa889478ba7122b46ba2e00fb8f4a2baea7cc82973d4ae70ccc4b1`
+- **CORTEX-TAINT**: `715c727d17c36f42bf000bad345b689138a72f7f7c56ca74d7ebdf0ece571b98`
 
 ### PLW-0200 | EVENT_INTERCEPTION::Cristalizar_Transducción_Proxy
 - **Regla**: Al operar en EVENT_INTERCEPTION, cristalizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `2f01578708c5827925057a996e11dc35bb7bbe2c28b9b0235408f53a42d74346`
+- **CORTEX-TAINT**: `1ab6860270cf2c5789d0aed1e534d1fefbc32421dd773dbb43b517c724f1402c`
 
 
 ## DOMINIO: CONTEXT_ISOLATION
 
 ### PLW-0201 | CONTEXT_ISOLATION::Transducir_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `84776679f72bc2891015b6c4073401e34f795cf9158bf044ab7a776bc3eabf50`
+- **CORTEX-TAINT**: `d256c90649674801c3848dc92c2a1c5e675f24a1fdb31aa871ccd805dcbc903c`
 
 ### PLW-0202 | CONTEXT_ISOLATION::Aislar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `135a9d3ab79b538b4a19d254717cb8c62211ab401e04ab3ee63eec97e40aca6d`
+- **CORTEX-TAINT**: `59883cbf8999d9e9659f63bb8512bc77efa4c70b740d910871bb616ec0c89580`
 
 ### PLW-0203 | CONTEXT_ISOLATION::Forzar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `c48ba420f56cf01ca462f3d14e18662e7564b10172230397bf654e3569738d70`
+- **CORTEX-TAINT**: `3ead7f97256086dd20d9a809cb219845c692b3cb5b321cdce35ad62ddd11e121`
 
 ### PLW-0204 | CONTEXT_ISOLATION::Inyectar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `423571b268ec44468d1b6e4e289f125b3918a650e00299282222c35bb7e45f21`
+- **CORTEX-TAINT**: `41c518b81689508aa5097004d78c80b7e794727252bdea722267365b83ac7720`
 
 ### PLW-0205 | CONTEXT_ISOLATION::Destruir_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `a8813f97535810278301320db0b320a54f715b8a8698f6ed7d9df8496cba0eec`
+- **CORTEX-TAINT**: `3693e167069b386c44fd6791ef12f0a2790373bb2c3a344ce17db675188609d6`
 
 ### PLW-0206 | CONTEXT_ISOLATION::Sincronizar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `3a2f5736bb8a655f9a9705a9122f34fe2ae712999a98da69a71da4f8fb19fe0d`
+- **CORTEX-TAINT**: `3e4e1efbd0385ba86d4df94362b3f13cc2f00787b5ab19dead1a3f065ab213e6`
 
 ### PLW-0207 | CONTEXT_ISOLATION::Evaluar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `53ed0d96060b1c61c6266fc619c0e4e56e161fc5491217a5fef91d616a73d1b6`
+- **CORTEX-TAINT**: `5dce63b13b052909686e040c099e8841388b0146fded24e47e93993a217012df`
 
 ### PLW-0208 | CONTEXT_ISOLATION::Purgar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `c431e9307c191a9e142c4d73d2c061d97dae90f370b91d9b35c952b479285536`
+- **CORTEX-TAINT**: `2ce8f0645dc2f7b7f9471d5b4bfa6900bcf5bf7cf12df9e9c2e74a93857a7598`
 
 ### PLW-0209 | CONTEXT_ISOLATION::Evadir_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `a4547a21ed3d26e066e331f9bdb662c02cf094f985307763ccf714772eacb006`
+- **CORTEX-TAINT**: `bdbcee67c7c79aca37a6d6672353c21bafaceff638f0c63a74ca61534080bd48`
 
 ### PLW-0210 | CONTEXT_ISOLATION::Cristalizar_Inyección_JS_Causal
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de inyección js causal vía Playwright Core.
-- **CORTEX-TAINT**: `76a87acb18e1f5878f5ffb826112ecabe960d76dc59c4eb9e2756d8a56ff6c6e`
+- **CORTEX-TAINT**: `d78af28c96b474e3b27489b635715714476a960271a5145d5df6eeac5fd88400`
 
 ### PLW-0211 | CONTEXT_ISOLATION::Transducir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `90ffc5f78f2a31de78aef666906b8a817f0a2a8f813d8aa2d738ea111a05d443`
+- **CORTEX-TAINT**: `2940a4ec01a4dffe6948c3499d1ef0b4df5d08c9a8af9010aa25276054cac6a2`
 
 ### PLW-0212 | CONTEXT_ISOLATION::Aislar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `cef5231f780da10c4d3d8cc8810eb9298484fd4c9562b2b955fce541dbf4652d`
+- **CORTEX-TAINT**: `be73367a38bf5b1d2aded45a54e8d84072d93d8774a9fa75de5f2d1673348044`
 
 ### PLW-0213 | CONTEXT_ISOLATION::Forzar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `c7834a0693bffb2517e702afcbda0ee2c5c5bcfc3af21dd7504c6b9d03d3fb2a`
+- **CORTEX-TAINT**: `5ad70dbcc8b128769afb0c17a9d707f3e16422fc7dfc8f4ce189986582859d24`
 
 ### PLW-0214 | CONTEXT_ISOLATION::Inyectar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `ee7c3cf2d27df0285ce4343eb109e97a33347eb658d79f850edd18d96acdfa3c`
+- **CORTEX-TAINT**: `c6d2524c95c55bf6eaa0c63c8c7153e61ab9085e564c66b430fe7e79d4f819a6`
 
 ### PLW-0215 | CONTEXT_ISOLATION::Destruir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `5038f669b61c4a6b1aed122b265892b9dce98cf2349109202dce4485cf1a7ac9`
+- **CORTEX-TAINT**: `db83286c02dbbce8b31eed033fe92be1cd0ce0dd99862d5bf8a37bdd16f1b7da`
 
 ### PLW-0216 | CONTEXT_ISOLATION::Sincronizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `06cf675e7854028df627fa3bceeca35facb23b04ed58817fd8ed4fe907d837c5`
+- **CORTEX-TAINT**: `237804eb21bf6efc51b7c9012f5a1a2d91516b724b567554f614b20a778ad02b`
 
 ### PLW-0217 | CONTEXT_ISOLATION::Evaluar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `6c26a8c51b137751488e7dc90a993092ad530f673b974f851562f36973cd0bbb`
+- **CORTEX-TAINT**: `bf137f6dd26509b12316289b351f2cc9908ea01fdcc41185a51f55445f646994`
 
 ### PLW-0218 | CONTEXT_ISOLATION::Purgar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `295cd354d8a1541673f5a7018b141c62485178dc0190ca7bac1f52e78c81b5f0`
+- **CORTEX-TAINT**: `7e5e199aaba16efd10295971e14da8f5e12284229f38cf1f10e964a08bbf6239`
 
 ### PLW-0219 | CONTEXT_ISOLATION::Evadir_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `0549914a5aa53fd27363315a3c38df9d5245dc0280b167cac48abcaf1b12f971`
+- **CORTEX-TAINT**: `1f87cfa7dbb2e3fb84f9b13d24b99265dabb02c12656905c3906d203bff6259a`
 
 ### PLW-0220 | CONTEXT_ISOLATION::Cristalizar_Purga_de_Nodos_Fantasmas
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de purga de nodos fantasmas vía Playwright Core.
-- **CORTEX-TAINT**: `e7850f9150b74874b461dd2635af62057148100a7141ee290cda302a9484476c`
+- **CORTEX-TAINT**: `09fd8cbf1dd7faa2c0289b4fc7a8b5cf3edd53b9c4853185343987de39e4c740`
 
 ### PLW-0221 | CONTEXT_ISOLATION::Transducir_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `7b19196b4763c7b1e287741aec3b96cdac7a5dd6b17924cd8393ed9f85a2354e`
+- **CORTEX-TAINT**: `04958c4fef107395a417cb9f56aa1da1d128543680921ca8d26bbed4ba5a1c4b`
 
 ### PLW-0222 | CONTEXT_ISOLATION::Aislar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `1fe8b343bdb3ad1942c7657027f0642fa01d2af75fc011cba0d968eb80aa1d1d`
+- **CORTEX-TAINT**: `0adf1efd8127b31f0cd447a2b4f4cc3b4ba2e592f9e1b4f0d177987a375dc890`
 
 ### PLW-0223 | CONTEXT_ISOLATION::Forzar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `22108eb6176981db2532937839c3beee917629fee04a2fbd0e81c5ea1167ed39`
+- **CORTEX-TAINT**: `c634b5bd6f1e3baec456460844ba264058fbe27f293baef30d1f3ada44d1bf43`
 
 ### PLW-0224 | CONTEXT_ISOLATION::Inyectar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `ab44a33f70a5f89469713567236d24afe9927a763c38e3feb5a190453a776e6c`
+- **CORTEX-TAINT**: `bf1eca9db1818b14f89ff2ab7035c39f6211a321c88be24f0d5a215d2dd9cb62`
 
 ### PLW-0225 | CONTEXT_ISOLATION::Destruir_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `5e9f3749ff525b372e31e470ba8289955bf5852f53fba013e14b86fbec946476`
+- **CORTEX-TAINT**: `2510943d6f90f41aaed40cb4cf303bcd97b62669f09a96b55c00cec968806dde`
 
 ### PLW-0226 | CONTEXT_ISOLATION::Sincronizar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `ed95d3ad729afda6426b27aae0c54ac1a92b247e71b8b5ef3975faac55a771dc`
+- **CORTEX-TAINT**: `7aacf79f209b6c91eb582c7db9f2db043d9b41998116a838e19b531a669afc7f`
 
 ### PLW-0227 | CONTEXT_ISOLATION::Evaluar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `af5fa5f1156a90d3453d24c68091e212265a8ccda7fc46e815bc0558bbab774c`
+- **CORTEX-TAINT**: `3c2b8cf22489c0e5c8d8145cc7cf5619577e58fcdafe0f6184e69fae33921c5e`
 
 ### PLW-0228 | CONTEXT_ISOLATION::Purgar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `c9f58eee3677537a1388b983ddc2573dfdf3a35c3faf4b8fd40d233e91889b4c`
+- **CORTEX-TAINT**: `37226b9dfbb8f0c811d54272c27b2ef2048c70dab8e9fe03f8bc49c062c87cc7`
 
 ### PLW-0229 | CONTEXT_ISOLATION::Evadir_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `7bf4c1e3a21c0913b3d12780a593f860fc98e15316ce196619f2bfabc395c7fe`
+- **CORTEX-TAINT**: `cc2a7dbe72c27930822d6e86457b2f27a6118dce39a41a6f79c749ec427bec0f`
 
 ### PLW-0230 | CONTEXT_ISOLATION::Cristalizar_Validación_BFT_Visual
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de validación bft visual vía Playwright Core.
-- **CORTEX-TAINT**: `3caed941dc1130f8e8f578c522a82c879c2981cf7443dd0299acc11f210e933b`
+- **CORTEX-TAINT**: `13031083de8d0005a5cafda4de3b14e79c8b089812e2e4fc1ef6d003e8e1c5e5`
 
 ### PLW-0231 | CONTEXT_ISOLATION::Transducir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `7be939e92ccee46a0ffaac31b2b8a2b75b300f602e70310e696ff121c9d4e595`
+- **CORTEX-TAINT**: `21196eea3b772b84870de7bbae0b9e9884c68f9ad1981a3399a7593a795f0832`
 
 ### PLW-0232 | CONTEXT_ISOLATION::Aislar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `4911ac3ee7912fd81be210eeb8d77b52936c8b0d3d2f389769b8c7b4edf0a002`
+- **CORTEX-TAINT**: `dd0bc7f788ee6f3b66b8cbf22ce56e1fa581c0f2129f654bf5bc0b20109f401c`
 
 ### PLW-0233 | CONTEXT_ISOLATION::Forzar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `2c8d2b9189c4184ed0f3757c90c2183aa8611ef973cefd8eb2776aa15a4dbe62`
+- **CORTEX-TAINT**: `bdd22e1bc04155cbd041038a8a39d4b6304871cb43f1b7f45c1170d3f1a15d3c`
 
 ### PLW-0234 | CONTEXT_ISOLATION::Inyectar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `42606f236c2bd569b8215090f345825920ce12789217e8355e9d2838acb55f86`
+- **CORTEX-TAINT**: `fe61e085dceecb0756af113f4519d86af3fd9a7e3da11588ae62c126e79714b6`
 
 ### PLW-0235 | CONTEXT_ISOLATION::Destruir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `8b9a787a27a1c6fa6da4c0fcec3a3578024d78931cf4ab4e4f5477ddb0d1dee9`
+- **CORTEX-TAINT**: `6ddbc664e81457f68d8660edc236631e710ca80e734429bf48875f0084ef812a`
 
 ### PLW-0236 | CONTEXT_ISOLATION::Sincronizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `fdfd37408f87e1127e5fc80b8d2a60d56c4be7bf86879d1b52d17d43b687a3e2`
+- **CORTEX-TAINT**: `c859368eb0f7a74f92163db8e5dc5253e18ca9f1d5ff1af636459258ab776bf0`
 
 ### PLW-0237 | CONTEXT_ISOLATION::Evaluar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `d811b9ec49a31bbfb8d9aab4b4fa4cb11e7a9fe602939645e477214b75cb8abe`
+- **CORTEX-TAINT**: `54362be2cc306d6902e860e04fe6dfe60ea2a42b0676db16c5f4d8333e80632a`
 
 ### PLW-0238 | CONTEXT_ISOLATION::Purgar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `370726f6e58b8976cb44ca42046640668f422942433c40ea1a1e93df49a7555f`
+- **CORTEX-TAINT**: `859deb84d1ae4f3e476167e42d42aeb74175f2042f175448c1b79d7ca040124f`
 
 ### PLW-0239 | CONTEXT_ISOLATION::Evadir_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `6b1767e95b5e7838949169bf6de3a87658a2652e9df07fc430e9b28e980dbd28`
+- **CORTEX-TAINT**: `8bc50069aa0bef8c1c33a3fcfefda2dedba6dc14303da2c0ebcd2d1170a54e78`
 
 ### PLW-0240 | CONTEXT_ISOLATION::Cristalizar_Extracción_de_Exergía_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de extracción de exergía dom vía Playwright Core.
-- **CORTEX-TAINT**: `fe5e33c453b021e923db9e87fd040b3d83da66c69f4da07f1584d947c235f394`
+- **CORTEX-TAINT**: `ea4ebacd754aed25a74813a8b80c8422dab5236dd4bb8c5b54d146aa27325dfe`
 
 ### PLW-0241 | CONTEXT_ISOLATION::Transducir_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `eb9cb63f59420b7df98efda6b2d52c00c269dc400a70d90090e7c955d255c7cf`
+- **CORTEX-TAINT**: `eda38f87026f53ae75ea8b45916c8c4c42abb9bb1d430bbe8e4cb27e5f42da2c`
 
 ### PLW-0242 | CONTEXT_ISOLATION::Aislar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `5dcfebe39f13b654c4f59a416bfb3fd43360cc414a9683eeafcdcb79ff7dde8e`
+- **CORTEX-TAINT**: `3e3626aca7d3646952dc331c140a6eeb0e63ff462418b5e72c0ac2d5a36ecaec`
 
 ### PLW-0243 | CONTEXT_ISOLATION::Forzar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `ea8d565e879c30ee4f4040c64ed4923f49b59ce1559725865f93179853a3baaf`
+- **CORTEX-TAINT**: `9b1e36396fb8da7a4fd50b9b877fae14d243c307ad8b9a105f9ebacc77e394d2`
 
 ### PLW-0244 | CONTEXT_ISOLATION::Inyectar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `95186b947e3bb1f3464197760fd855c09a1427857486f881cd0e236587e670fe`
+- **CORTEX-TAINT**: `13b93816a9004989d3d87a887b9e59dee3836b357948a7eaf6d32d71b48b1c83`
 
 ### PLW-0245 | CONTEXT_ISOLATION::Destruir_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `7d593ec565c2e9723d03ad236702142f2037ad837ccda98cc69a111fef6a2905`
+- **CORTEX-TAINT**: `17a872ba7905e4577e1520cdcc288b77c01035a5322945ca7baf996a07a523b4`
 
 ### PLW-0246 | CONTEXT_ISOLATION::Sincronizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `5660e0aff8f70a0c1ead54d197b1903874f38e931e6aaff2a668acc3f326683a`
+- **CORTEX-TAINT**: `cf258fe2e6820705422ceead3df48305ae606ce25acfba9d017f6941e43a8d06`
 
 ### PLW-0247 | CONTEXT_ISOLATION::Evaluar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `c8ed3fda4a1222c84676069b5fe890e2e2bbff933dae1d0bdbc5ba45093e60b2`
+- **CORTEX-TAINT**: `4a90822c4598045d787c77f4a8ebb0daaa61d970f410d9a57fa97d2a026db29e`
 
 ### PLW-0248 | CONTEXT_ISOLATION::Purgar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `0697c63de0e7fc4bd3545be59a5d1d9af480fa61c0b4e481ced4c112998bd683`
+- **CORTEX-TAINT**: `66a7245a374f8a6e064e10e76659301f14b6e592e0ea6fab6cfa551ed60c467a`
 
 ### PLW-0249 | CONTEXT_ISOLATION::Evadir_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `985f0fdccb386cea3a357b80f562de9155e58cbdb77beac0c4c37017a11bbc97`
+- **CORTEX-TAINT**: `3c15dd5a24bb1d0b00d72ad3d42a4123d721531cde9bc53880318ee1a40bc51b`
 
 ### PLW-0250 | CONTEXT_ISOLATION::Cristalizar_Bypass_Shadow_DOM
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de bypass shadow dom vía Playwright Core.
-- **CORTEX-TAINT**: `5c5c8bfba0e0641efd76864f57186cbce849fc40bba6d0d7cb17855a1ffbeb4a`
+- **CORTEX-TAINT**: `a54045c33d84c819f1846d1d9ea0c9cfd8fd28be25887d3b2b1dae2723b6c528`
 
 ### PLW-0251 | CONTEXT_ISOLATION::Transducir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `b708906aaf19ff5cb5e189d2a9c4d9368f2176c7ce7790059e3e80c874dac216`
+- **CORTEX-TAINT**: `e13c6900aaccbc2b287b5632f1a635e555f1c5880c6d29529b99daa0f9521f50`
 
 ### PLW-0252 | CONTEXT_ISOLATION::Aislar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `0ac715b55ac2f24da4b9a06858a5aa436a7b3a1b4236185ed30c431b44a9e26d`
+- **CORTEX-TAINT**: `dc6bb520e9806adc50ac90a1261a4ca633679035684d1c60da12c2f57416750a`
 
 ### PLW-0253 | CONTEXT_ISOLATION::Forzar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `5b66b9961e4c13479991d0f5fde54ac0a107567624b7b3840acc7fd1bd559220`
+- **CORTEX-TAINT**: `c79f28ded680868db275fb9747a43b6c3079559e56f0fb1af14935cca7dd5ae8`
 
 ### PLW-0254 | CONTEXT_ISOLATION::Inyectar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `da06bb79e1c51ea476df09cdd3de4bf878c493d019883575e2cc5cd9adc76892`
+- **CORTEX-TAINT**: `95be3ea77fb00bff98594680bd45a37b61759e1ec188dfa6a99bf9e3fa702e90`
 
 ### PLW-0255 | CONTEXT_ISOLATION::Destruir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `955a34019f4748e6b76ef9c428c5d8147a368e563565b5f54853789ae54ae85a`
+- **CORTEX-TAINT**: `c0596e7edda7e4a428df0e759c436ccf9072685575ac048c4c064bb3af7a52b2`
 
 ### PLW-0256 | CONTEXT_ISOLATION::Sincronizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `af22f18e3706a859ef1396871a1ba7aaac92566c4ce6748b29c3c0da82e1acf8`
+- **CORTEX-TAINT**: `e929983cbf330837ba88c251642e59fb1ce6166a235edbfdf9358c5a0241694c`
 
 ### PLW-0257 | CONTEXT_ISOLATION::Evaluar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `a1f17518667acef8897ac7cc6bd40befe26a5624ad6284d4c39439bc916615f6`
+- **CORTEX-TAINT**: `7445de0d81dffda62997dd4aa5dda37ade656df8d9fb705b4cddfc96dfe19a4a`
 
 ### PLW-0258 | CONTEXT_ISOLATION::Purgar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `8af56f0eb373b66942282048291806739d06c534bce719f905fd2974e19d15e8`
+- **CORTEX-TAINT**: `14d934a03ba65ac8cebf32d74e4038ab7e5bf7bd0d114b576e129c7b136240a6`
 
 ### PLW-0259 | CONTEXT_ISOLATION::Evadir_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `26322881259905e2091981609e35d705fc342c1f532b70207a8e46b8bbe6b112`
+- **CORTEX-TAINT**: `ae8b7b001953d90c11ac2c14f61cb748d8f0d9ecab9d4a393198ba85e85f460b`
 
 ### PLW-0260 | CONTEXT_ISOLATION::Cristalizar_Extracción_de_Trazas_CDP
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de extracción de trazas cdp vía Playwright Core.
-- **CORTEX-TAINT**: `79fdb55f861ed03ccbe6592794f080836927a4557e840231073d24d8660e68e3`
+- **CORTEX-TAINT**: `9cd7d83b322fa854cc2f9fd7ffeb9ba508be697889ef3fa87bd656aea39461c7`
 
 ### PLW-0261 | CONTEXT_ISOLATION::Transducir_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `cb7f19665b89dd59fecfb927282346399e53286918de1624deb548fc4690da67`
+- **CORTEX-TAINT**: `ab69f5928320d72cfaecfc64de88eca3849a1013f19bace08d634d4d894fb6e7`
 
 ### PLW-0262 | CONTEXT_ISOLATION::Aislar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `2a485d9022d9ed2111a67285ba59f4407ce92c745d68e4961de327ecd59ab24f`
+- **CORTEX-TAINT**: `cb27baa658d7cf992456b1583c99e5e745620da4aa6ed2d878ac7987182a4d08`
 
 ### PLW-0263 | CONTEXT_ISOLATION::Forzar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `21e1f3122c6f93edfa487767eeed3cec2f0936a16bb0600ec1dff0ebcd307912`
+- **CORTEX-TAINT**: `279e2be918c11f7aeb9454afc365f9dfce2e2e89561b546cabe09b01f59f4392`
 
 ### PLW-0264 | CONTEXT_ISOLATION::Inyectar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `efca3180e1f04088f885bb10e67a97d68b4d13eff579fe577ca71d6d451282f4`
+- **CORTEX-TAINT**: `01e100ac3cfad1def7c2699ff9f01e288db9239bd8b3580e60b39ad8a356a921`
 
 ### PLW-0265 | CONTEXT_ISOLATION::Destruir_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `58a8790ac624133071d4b6737655cd5e98b86ea34b9edba93faedb54a84dd093`
+- **CORTEX-TAINT**: `002e7400d4c73a195d17b8defb182a061bb9f57d10f9ed8d72d29ace7ce821e2`
 
 ### PLW-0266 | CONTEXT_ISOLATION::Sincronizar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `077f5c3e7e533fc229aea55bde50cc4c229a6334d3fdc204e9eb9850521bad70`
+- **CORTEX-TAINT**: `3ad8fcbcb998690847b232bf957806433579a97eae53c966c984e082e93ddaab`
 
 ### PLW-0267 | CONTEXT_ISOLATION::Evaluar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `e954c49157eadfc3c122e9fb13d326c1862ea4e424970098b9d53195443d89a3`
+- **CORTEX-TAINT**: `66802111ce3dd8dbe4bc96fcc3e7e2184e4872a9c500f5727137297ec22300bd`
 
 ### PLW-0268 | CONTEXT_ISOLATION::Purgar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `d5e2514ff800f786ce010d4076d0054d62ab3c61a48329404534099b8f24bde0`
+- **CORTEX-TAINT**: `a5243534c2dc7dcc1db744fb4236d58801f53515403c262e7c4edf9401564eea`
 
 ### PLW-0269 | CONTEXT_ISOLATION::Evadir_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `6dd8a214c5358a2dd1f53c5b48798b69d8e29ba6b27c2ee995ee588370952658`
+- **CORTEX-TAINT**: `561ffb29dfada1cd97f0d653f05d03d16a14a6d40b9d4881abc8b4e856e9b21f`
 
 ### PLW-0270 | CONTEXT_ISOLATION::Cristalizar_Profiling_Memoria_V8
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de profiling memoria v8 vía Playwright Core.
-- **CORTEX-TAINT**: `20530bbb0268f9b84e2778ca4bc13ff250128821ab8cb95c492e5d29ceaca96a`
+- **CORTEX-TAINT**: `3529733f9ed3ce535090cb7f42064bc12a43f8a67c9d053719eb5239778bf13c`
 
 ### PLW-0271 | CONTEXT_ISOLATION::Transducir_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `161a1cb890b6944ac95e5f1551c3798d154dd00209abe12d52adfa11c668dde4`
+- **CORTEX-TAINT**: `8cecc621ecce91c4d95ad90c555fec416ab42a5edfb037d75faee45352213f9f`
 
 ### PLW-0272 | CONTEXT_ISOLATION::Aislar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `5919ceebee89d378be28e5626fff7e4a930cacf980016954e0e7e2253fd7e60f`
+- **CORTEX-TAINT**: `929e184b928840fafac1c4ecb65a6afece1b865eca6e339c27ef2d4224ec3e6f`
 
 ### PLW-0273 | CONTEXT_ISOLATION::Forzar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `c6e1836d2f514d1f656513e3d45ac0a928d143d3a6b807e8ba037f87db52715c`
+- **CORTEX-TAINT**: `bc1fe96772cacc20350af61208eb7ce4bfe2510ebf77050a9bedd6adb66efd55`
 
 ### PLW-0274 | CONTEXT_ISOLATION::Inyectar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `ee4c9a835e16f88a76506bca93a0a1a961e9a6d9c2f9f44e37dfa7f8d8632856`
+- **CORTEX-TAINT**: `49a3863267b4dfa6d94fa11736d759163235976be943f32504ddac6aacd5453f`
 
 ### PLW-0275 | CONTEXT_ISOLATION::Destruir_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `fac604e8a945f34886b420f568ab256d5863d8d5b9fe7acdf14e90724f863763`
+- **CORTEX-TAINT**: `eddc0535aa4c3beb40b1fc89a4bf63b2c9877e14eef5bd861925dada4312b5fd`
 
 ### PLW-0276 | CONTEXT_ISOLATION::Sincronizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `d089a3add146d6a8487149bc22ecbb68a3b1b0f0a6255b783b24b46cbe42129d`
+- **CORTEX-TAINT**: `91b2b55b540f849f02912e132681eccf402c3c7b30eaa2a7205123fdbffab289`
 
 ### PLW-0277 | CONTEXT_ISOLATION::Evaluar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `e16437f5a7f60786c09112844f152b15f8a0a9bf916a02501293918845563297`
+- **CORTEX-TAINT**: `2567449272e12c70e6e8f3451c34195d56f34440c44d4564eb607a8f42419e2f`
 
 ### PLW-0278 | CONTEXT_ISOLATION::Purgar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `53b489864745a6965fa6106288ec9d5dc2bd0a50d07c8422360ae6ac78e7f081`
+- **CORTEX-TAINT**: `073e7acc94d3b3bbe2e9862376fd178aa92848becb2c76973d8a85bb32cf4f4b`
 
 ### PLW-0279 | CONTEXT_ISOLATION::Evadir_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `3c1bce7288ba5a6b8d80b870a8fc8ff121e514a486a7d96eaa162e373d4d2ce6`
+- **CORTEX-TAINT**: `d5ff92bb36984d556717a6ff9163de696745077c27f37991d02e4e184fda4edc`
 
 ### PLW-0280 | CONTEXT_ISOLATION::Cristalizar_Bloqueo_Event_Loop
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de bloqueo event loop vía Playwright Core.
-- **CORTEX-TAINT**: `34752edec133d329745db58e046ed53ca25d848a6f716563754729d01e8e46f3`
+- **CORTEX-TAINT**: `a74e62f12bec0c3453070b982aea752cfecfa447f3a3cb474611666a68505c24`
 
 ### PLW-0281 | CONTEXT_ISOLATION::Transducir_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `c59c0b8dd69a200c2ddcfccbb0fe2861b1442f1bbd862bdb3c47768c6478c3a0`
+- **CORTEX-TAINT**: `0bf0a3215e149e0c9400845de0217f2313f54c97a2783ddd127ed05d47f44411`
 
 ### PLW-0282 | CONTEXT_ISOLATION::Aislar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `0934813c7e15bc587f4c398ecfd8e662e4d2d2267dd5ae30c944ab0bbeeb2607`
+- **CORTEX-TAINT**: `0c3cfe5cd662bbd5fa27c7a94d29c9e181180591c2c3d5f1f818db9755c6cdcc`
 
 ### PLW-0283 | CONTEXT_ISOLATION::Forzar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `3ea78ed0c6d3840b9689e0e630dc59be570fc1b57fca98d8244762ee4304f186`
+- **CORTEX-TAINT**: `a2b46c258bf0e9cc2a33d5daeda80d89c1d5776ad1c4171284ea47f1f0959794`
 
 ### PLW-0284 | CONTEXT_ISOLATION::Inyectar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `4bdd6b9f553e4b9072e02efcce2351f143a24f3006068dca379a1df366e1a07a`
+- **CORTEX-TAINT**: `768cf4ecd2ca3171898427eeb4d6e34eae5bc1ef871188d577db45060d825f05`
 
 ### PLW-0285 | CONTEXT_ISOLATION::Destruir_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `c9ad51eeece6b00b4c3ec300e7bfe9c8e1de04b69ed3b81fdece94a8d9c17417`
+- **CORTEX-TAINT**: `dd64fe774e62a1cdc4ba8987fc8d68d0dafc616e8f7544ca7b6c7f5b05d5167a`
 
 ### PLW-0286 | CONTEXT_ISOLATION::Sincronizar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `19041f493cfa767f4ab560ef4fb1fd4b0e8bddaef206df199c83153f40f6aa24`
+- **CORTEX-TAINT**: `eb3c2436dd44869ddd01d2bf61eb5b9798f372ed28d02dc8674af38abe13ccf6`
 
 ### PLW-0287 | CONTEXT_ISOLATION::Evaluar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `5fdef57743cc757c05e0e99446f7ca4d6cd402586b070a5c5ca01f31a9e72cfa`
+- **CORTEX-TAINT**: `858c780dabf0219468e3b2eae9adf4711aacdf0b10d0ae2d2704d381b3140835`
 
 ### PLW-0288 | CONTEXT_ISOLATION::Purgar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `fce89d2a015b538509a4300caa31f3900b9eed648f088fb276e218411af719c8`
+- **CORTEX-TAINT**: `4fbdd74febd6666c1e4f05c30261ebef11b634fa3ebea54e4cc76829c9f63bf8`
 
 ### PLW-0289 | CONTEXT_ISOLATION::Evadir_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `72047d4abe14e559eee41beb8c4d511d8b3716b6a86c432e6284af05e7dc87f5`
+- **CORTEX-TAINT**: `a4711a4cf7b1511e1ecd6cb2e4d692897f66327e6d2adeb7e40cdd677472231e`
 
 ### PLW-0290 | CONTEXT_ISOLATION::Cristalizar_Aniquilación_Caché
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de aniquilación caché vía Playwright Core.
-- **CORTEX-TAINT**: `8eed4115b82e4dfc02edbcbf6c78639c36d50999d945315b67f7de410e918a56`
+- **CORTEX-TAINT**: `c93b3d183e33f93fe2f6d999893ff911753e377450bd5198b3ad3d18177a5482`
 
 ### PLW-0291 | CONTEXT_ISOLATION::Transducir_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, transducir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `d1362b5f585ed5b5087920786e10d3f511aee8adb37c83c34182019bb63e136b`
+- **CORTEX-TAINT**: `908aa54446d1954521ebc153462f092f75b44cfbfd93f337ec83e04c06eabe33`
 
 ### PLW-0292 | CONTEXT_ISOLATION::Aislar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, aislar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `65d1d1b0eb9b6988f4b15cdbd6de4c5cd7450df4baf30519a2966bc664a1504a`
+- **CORTEX-TAINT**: `09fe97ac76b3f3f3a165a1f5c37ec3f20dfa27c5871d8c7ef5a150bb65af370a`
 
 ### PLW-0293 | CONTEXT_ISOLATION::Forzar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, forzar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `df6fba7ee6de0fb4f524d21675dcdf0d5f4535e22d489ae74d23a0e25fc5277f`
+- **CORTEX-TAINT**: `c7504f73b91f69b07302f151348ad0e8e34e02ddc3b26723f4987f3eaf04a933`
 
 ### PLW-0294 | CONTEXT_ISOLATION::Inyectar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, inyectar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `e21828803b2f433f9d52a513f269a4c03c83bc2e0135b1c2da6b5064ce1ed21d`
+- **CORTEX-TAINT**: `663797635ad5ca24f499a4b14b10fc5f408b7bce5ea612146c2046162713e77b`
 
 ### PLW-0295 | CONTEXT_ISOLATION::Destruir_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, destruir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `fd2560d35bcddf5c5e1ef71e219e980e4111247a319625be99000f7332ea3f85`
+- **CORTEX-TAINT**: `8917f5efb59a6e1027e5e9bfa33c33cc88cd58ee3a473f1295f98ef84dc574c4`
 
 ### PLW-0296 | CONTEXT_ISOLATION::Sincronizar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, sincronizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `bf6a0bce09f2e7a0cee0bc9cbcca75aa187fb6d70963e6088550451a6f05ae86`
+- **CORTEX-TAINT**: `8e8baaa9f5a67a71bb60e86872ab3c10e6620baa1363cd9d60e321740dd0d9f6`
 
 ### PLW-0297 | CONTEXT_ISOLATION::Evaluar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, evaluar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `9a7aea987c39c653ed6ce8cf0e63c21762ebfba0615194a2539746549e5cbaa0`
+- **CORTEX-TAINT**: `611a5ae36ff3266f7169f6b6648024bc44a50c48f40f57ee6e479d16cfddbfb2`
 
 ### PLW-0298 | CONTEXT_ISOLATION::Purgar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, purgar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `efb0b8653a4018b9acfde8d73f8ef9076854a15671d6e053869c18495231c117`
+- **CORTEX-TAINT**: `658d62817f46354b8573ad35df296fe40ca16b9a9af024339ba7a79fb8f57307`
 
 ### PLW-0299 | CONTEXT_ISOLATION::Evadir_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, evadir vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `1feb7b8ed42b222cb11b038820d6417edb2eda6abe467109b8186d4cd9811d70`
+- **CORTEX-TAINT**: `32fb6263bdea8a033f8e14ee7cebef76b23c79c78f9e5901b6a9905ee05c960f`
 
 ### PLW-0300 | CONTEXT_ISOLATION::Cristalizar_Transducción_Proxy
 - **Regla**: Al operar en CONTEXT_ISOLATION, cristalizar vectores de transducción proxy vía Playwright Core.
-- **CORTEX-TAINT**: `8589685f433f228003d8b01557b744c8b64caf00d6d2ca81a096c2200b723856`
+- **CORTEX-TAINT**: `4b0ddfb85a08e5b238dadbe573001c84da357d07a3ccfb35c77714f347136296`
 

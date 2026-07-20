@@ -3,14 +3,13 @@ import time
 import sys
 import os
 import sqlite3
+from typing import Union
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
 
 from cortex.swarm.memory_store import AgentMemory  # noqa: E402
 
-
-from typing import Union
 def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
     try:
         memory = AgentMemory()

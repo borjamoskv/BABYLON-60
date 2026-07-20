@@ -4,7 +4,6 @@ CORTEX OMEGA PURGE (C5-REAL)
 Vector de Aniquilación Entrópica para Repositorios Locales y de Nube.
 """
 import os
-import sys
 import subprocess
 import shutil
 import hashlib
@@ -84,7 +83,7 @@ def main() -> None:
     for repo in repos:
         total_purged_bytes += obliterate_repo_entropy(repo)
         
-    print(f"\n[RESULTADO C5-REAL] Operación completada.")
+    print("\n[RESULTADO C5-REAL] Operación completada.")
     print(f"Total de entropía (cachés) evaporada físicamente: {total_purged_bytes / (1024*1024):.2f} MB")
     
     # Escribir reporte anclado

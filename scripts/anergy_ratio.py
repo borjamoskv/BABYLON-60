@@ -229,7 +229,7 @@ def main() -> None:
 
     # Summary to stdout
     print(f"{'='*60}")
-    print(f"  ANERGY RATIO INSTRUMENT — C5-REAL")
+    print("  ANERGY RATIO INSTRUMENT — C5-REAL")
     print(f"{'='*60}")
     print(f"  Transcript:    {result['transcript']}")
     print(f"  Total steps:   {result['total_steps']}")

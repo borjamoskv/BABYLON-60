@@ -26,7 +26,8 @@ def dispatch_playwright(d: int, p: int, m: int, vec: PlaywrightStateVector) -> T
     code, name = resolve_playwright_identity(d, p, m)
     vec.execution_count += 1
     vec.browser_active = d != 0 or p != 9
-    if d == 0 and p == 0: vec.page_count += 1
+    if d == 0 and p == 0:
+        vec.page_count += 1
     vec.last_load_time_ms = abs(math.sin(code)) * 120.0
     vec.dom_stability_index = max(0.0, min(1.0, vec.dom_stability_index * 0.95 + 0.05 * math.cos(code)))
     vec.network_idle_state = m == 3
