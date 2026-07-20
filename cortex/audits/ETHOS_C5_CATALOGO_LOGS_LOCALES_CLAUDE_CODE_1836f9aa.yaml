@@ -1,0 +1,6 @@
+Claim: Inyectar ancla criptográfica y cosechar logs de Claude para purga de entropía
+Proof:
+  Base: /Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/cortex/legal_dossier/claude_code_local_logs/C5_CATALOGO_LOGS_LOCALES_CLAUDE_CODE.md
+  CORTEX_TAINT_SHA3_256: 1836f9aa2b5e1a469add1eed1340bb6ab2be2b733a73a799f846e50ace279733
+  Timestamp: 2026-07-20T09:06:05Z
+  Confidence: C5-REAL
