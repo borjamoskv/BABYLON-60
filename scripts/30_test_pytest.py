@@ -17,10 +17,14 @@ def main() -> None:
     print("🧪 Running Pytest Suite...")
 
     # Intentar ejecutar con el intérprete de la .venv aislada (Ω29)
+    # y asegurar sincronización JIT (uv sync --all-extras)
     venv_pytest = os.path.join(PROJECT_ROOT, ".venv", "bin", "pytest")
     cmd = [venv_pytest] if os.path.exists(venv_pytest) else ["pytest"]
 
     try:
+        # Sincronización requerida por Ω29
+        subprocess.run(["uv", "sync", "--all-extras"], cwd=PROJECT_ROOT, check=True)
+
         subprocess.run(cmd, cwd=PROJECT_ROOT, check=True)
         elapsed = time.perf_counter() - start_time
         print(f"✅ Pytest completado con éxito en {elapsed:.4f}s.")
