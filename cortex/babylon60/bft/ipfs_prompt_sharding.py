@@ -25,9 +25,11 @@ class IPFS_Prompt_Ledger:
         cid = self._compute_cid(content_bytes)
         
         file_path = os.path.join(self.vault_path, cid)
+        tmp_path = file_path + ".tmp"
         if not os.path.exists(file_path):
-            with open(file_path, "wb") as f:
+            with open(tmp_path, "wb") as f:
                 f.write(content_bytes)
+            os.replace(tmp_path, file_path)
                 
         self.cid_index[domain] = cid
         logging.info(f"[C5-REAL] Pinned {domain} -> {cid}")

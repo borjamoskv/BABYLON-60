@@ -18,3 +18,5 @@
 ## [D4] MP & TS MATRIX
 - **Ψ10 (No-Deadlock):** Prohibido `return` prematuro en `multiprocessing.Pool()`.
 - **Ψ11 (T&S Strike):** URLs 404 = `OFFLINE_REMOVED`. Paginación = 3 Nodos (Landauer). 0% colisión de operador.
+
+- **Ω41 · ATOMIC CRYSTALLIZATION INVARIANT (WAL/FS COMMIT):** Todo volcado de conocimiento, bloques IPFS, o ledgers hacia el sistema de archivos físico DEBE realizarse mediante escritura atómica (escritura en archivo `.tmp` y posterior `os.replace`), garantizando que la lectura concurrente jamás extraiga un bloque termodinámico a medio colapsar (Corrupción de Estado BFT).
