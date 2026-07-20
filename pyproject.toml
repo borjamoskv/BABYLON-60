@@ -5,6 +5,7 @@ description = "MOSKV-1 BFT Cortex"
 readme = "README.md"
 requires-python = "==3.12.*"
 dependencies = [
+    "chromadb>=1.5.9",
     "maturin>=1.14.1",
     "mypy>=2.3.0",
     "pytest>=8.0.0",
