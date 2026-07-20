@@ -1,0 +1,26 @@
+[
+  {
+    "session_id": "bee4dcf3-21d8-46bb-97c4-c933ed4c6415",
+    "timestamp": 1784533321,
+    "exergy_ratio": 0.6667,
+    "anergy_density": 0.04,
+    "tool_yield": 0.5,
+    "context_saturation": 0.42,
+    "thermal_waste": 1,
+    "mutations_applied": 12,
+    "status": "C5-REAL",
+    "cortex_taint_signature": "taint:borjamoskv:bee4dcf3-21d8-46bb-97c4-c933ed4c6415:1784533321:b9b3ebc227856d34ba5a0bf5e9cda2e1de165395b117fb8932f0d338bf6f880a"
+  },
+  {
+    "session_id": "bee4dcf3-21d8-46bb-97c4-c933ed4c6415",
+    "timestamp": 1784543777,
+    "exergy_ratio": 0.6667,
+    "anergy_density": 0.04,
+    "tool_yield": 0.5,
+    "context_saturation": 0.42,
+    "thermal_waste": 1,
+    "mutations_applied": 12,
+    "status": "C5-REAL",
+    "cortex_taint_signature": "taint:borjamoskv:bee4dcf3-21d8-46bb-97c4-c933ed4c6415:1784543777:16892499435654efeb9b2c045e9ec93af4b2771452e2b7060d2645524ccca973"
+  }
+]
