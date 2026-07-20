@@ -13,8 +13,7 @@ Causal contract (STATUS.md · P0):
 
 from __future__ import annotations
 
-import os
-import subprocess
+import asyncio
 from pathlib import Path
 from typing import Any
 
@@ -31,41 +30,50 @@ def _get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent.parent
 
 
-def _git(root: Path, *args: str) -> str | None:
-    """Run a read-only git command. Returns stdout or None on failure."""
+async def _git_async(root: Path, *args: str) -> str | None:
+    """Run a read-only git command concurrently. Returns stdout or None on failure."""
     try:
-        proc = subprocess.run(
-            ["git", *args],
+        proc = await asyncio.create_subprocess_exec(
+            "git", *args,
             cwd=str(root),
-            capture_output=True,
-            text=True,
-            timeout=5,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
         )
-    except (OSError, subprocess.TimeoutExpired):
+        stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=5.0)
+    except (OSError, asyncio.TimeoutError):
         return None
     if proc.returncode != 0:
         return None
-    return proc.stdout.strip()
+    return stdout.decode("utf-8").strip()
 
 
 @router.get("/status")
-def sentinel_status() -> dict[str, Any]:
+async def sentinel_status() -> dict[str, Any]:
     """Repo identity, dirty state, remotes and lineage warnings (read-only)."""
     root = _get_project_root()
     repo_name = root.name
-    is_git = (root / ".git").is_dir()
+    is_git = (root / ".git").is_dir() or (root / ".git").is_file()
 
-    branch = _git(root, "rev-parse", "--abbrev-ref", "HEAD") if is_git else None
-    head = _git(root, "rev-parse", "--short", "HEAD") if is_git else None
-    head_subject = _git(root, "log", "-1", "--pretty=%s") if is_git else None
-    head_time = _git(root, "log", "-1", "--pretty=%cI") if is_git else None
-    commit_count_raw = _git(root, "rev-list", "--count", "HEAD") if is_git else None
+    branch = head = head_subject = head_time = commit_count_raw = porcelain = remotes_raw = None
 
-    porcelain = _git(root, "status", "--porcelain") if is_git else None
+    if is_git:
+        results = await asyncio.gather(
+            _git_async(root, "rev-parse", "--abbrev-ref", "HEAD"),
+            _git_async(root, "log", "-1", "--format=%h%x00%cI%x00%s"),
+            _git_async(root, "rev-list", "--count", "HEAD"),
+            _git_async(root, "status", "--porcelain"),
+            _git_async(root, "remote", "-v"),
+        )
+        branch, log_out, commit_count_raw, porcelain, remotes_raw = results
+        
+        if log_out:
+            parts = log_out.split('\x00', 2)
+            if len(parts) == 3:
+                head, head_time, head_subject = parts
+
     dirty_files = len([ln for ln in porcelain.splitlines() if ln.strip()]) if porcelain else 0
 
     remotes: list[dict[str, str]] = []
-    remotes_raw = _git(root, "remote", "-v") if is_git else None
     if remotes_raw:
         seen: set[str] = set()
         for line in remotes_raw.splitlines():
@@ -127,7 +135,7 @@ def sentinel_status() -> dict[str, Any]:
 def get_exergy_history() -> dict[str, Any]:
     """Retrieve exergy audit history from the SQLite ledger."""
     import sqlite3
-    db_path = Path(os.path.expanduser("~")) / ".babylon60" / "exergy_agent_ledger.db"
+    db_path = Path.home() / ".babylon60" / "exergy_agent_ledger.db"
     if not db_path.exists():
         return {"history": []}
     try:

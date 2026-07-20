@@ -8,10 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="/assets/index-Cr8lMZ3k.js"></script>
+  <style>
+    .bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; }
+    .cursor-magnet { position: fixed; top: 0; left: 0; width: 20px; height: 20px; border: 1px solid var(--dust-ghost); border-radius: 50%; pointer-events: none; z-index: 9999; transition: width 0.2s, height 0.2s, background-color 0.2s; }
+    .cursor-magnet.hover { width: 40px; height: 40px; background-color: rgba(245,158,11,0.1); border-color: var(--gold); }
+  </style>
+  <script type="module" crossorigin src="/assets/index-mlBcix2l.js"></script>
   <link rel="stylesheet" crossorigin href="/assets/index-Djj78j8X.css">
 </head>
 <body>
+  <canvas id="bg-canvas" class="bg-canvas"></canvas>
+  <div id="cursor-magnet" class="cursor-magnet"></div>
 
   <!-- ══════════════════════════════════════════
        COGNITIVE TACHOMETER
@@ -162,5 +169,7 @@
     </div>
   </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
 </body>
 </html>

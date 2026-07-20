@@ -1,0 +1,10 @@
+objectives:
+- id: OBJ-001
+  title: Consolidación de Exergía
+  description: Refactor Algebraic Membrane (Ultrathink) y Purga de Entropía
+  exergy_score: 1000.0
+  status: PENDING
+  milestones: []
+cortex_meta:
+  version: 1.0.0
+CORTEX_TAINT: 9f081283d2f4cc8c121f14b2d84cf0018fe9f5f1e8c209f4dfec40fecd39fcc0
