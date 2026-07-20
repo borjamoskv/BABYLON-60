@@ -8,7 +8,6 @@ import pathlib
 from io import BytesIO
 from unittest.mock import patch, MagicMock
 
-import pytest
 
 # Patching DB path before importing module
 os.environ.setdefault("CORTEX_GITHUB_SECRET", "test-secret-key")
