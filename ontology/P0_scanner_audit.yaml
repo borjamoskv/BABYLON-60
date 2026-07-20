@@ -1,0 +1,14 @@
+Claim: [Colapso Estructural: C5-REAL (KINETIC) vs C4-SIM (SLOP)]
+Proof: 
+  Base: Scanner de Singularidad P0 (ultrathink_scanner.py) ejecutado sobre /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv
+  Range: [0, 15]
+  Confidence: C5-REAL
+Isomorphisms:
+  - "Starvation de WindowServer" -> "14 Procesos Fantasma (Brave/Electron) ejecutados en background con SIGKILL_State_Purge = TRUE"
+  - "Falla de AST Formatter" -> "oxfmt command not found -> anergía en CI/CD local"
+Blast_Radius_Matrix:
+  Vector: OS Level Zombie Starvation
+  Blast_Radius: Global Workspace
+  Target_Invariant: WindowServer_Entropy_Purge
+  Anergy_Risk: Low
+CORTEX_TAINT: taint:MOSKV-1:515eae47:1784524800:sha3_256
