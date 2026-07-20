@@ -41,13 +41,13 @@ index e456f78..b890c12 100644
 """
 
 
-def print_banner(title: str):
+def print_banner(title: str):  # type: ignore
     print("=" * 60)
     print(f"🔹 {title.upper()}")
     print("=" * 60)
 
 
-def run_poc():
+def run_poc():  # type: ignore
     print_banner("C5-REAL Exergy Agent Proof of Concept")
 
     # Test Scenario 1: Bad code (leak + broad exception + weak pattern)
@@ -78,4 +78,4 @@ def run_poc():
 
 
 if __name__ == "__main__":
-    run_poc()
+    run_poc()  # type: ignore

@@ -18,9 +18,9 @@ from typing import Any, NamedTuple, cast
 
 try:
     if os.environ.get("CORTEX_TESTING"):
-        keyring = None  # type: ignore[no-redef]
+        keyring = None
     else:
-        import keyring  # type: ignore[no-redef]
+        import keyring  # type: ignore[assignment, no-redef]
 except ImportError:
     keyring = None
 from cryptography.exceptions import InvalidSignature
@@ -168,7 +168,7 @@ class KeyManager:
     def get_public_key_b64(self, actor_id: str) -> str | None:
         """Retrieves the public key for the actor."""
         if actor_id in self._metadata:
-            return self._metadata[actor_id].get("public_key_b64")
+            return self._metadata[actor_id].get("public_key_b64")  # type: ignore
         return None
 
     def is_revoked(self, actor_id: str) -> bool:

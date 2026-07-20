@@ -209,7 +209,6 @@ def test_inv_c5_16_terminal_seal_protocol():
 
 def test_inv_c5_17_autodidact_omega_bypass():
     """INV_C5_17 — Autodidact Omega & Ultrathink Bypass."""
-    import pathlib
     local_agents = ROOT / ".agents/AGENTS.md"
     found = False
     if local_agents.exists():

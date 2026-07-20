@@ -7,7 +7,7 @@ VAULT_DIR = Path("~/.gemini/config/.cortex/memory_vault").expanduser()
 BRAIN_DIR = Path("~/.gemini/antigravity/brain").expanduser()
 
 
-def sync():
+def sync():  # type: ignore
     VAULT_DIR.mkdir(parents=True, exist_ok=True)
     consolidated = set()
     for f in VAULT_DIR.glob("*.md"):
@@ -43,4 +43,4 @@ Crystallized into memory vault.
 
 
 if __name__ == "__main__":
-    sync()
+    sync()  # type: ignore

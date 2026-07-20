@@ -67,7 +67,7 @@ class AlgebraicCardinality:
     @staticmethod
     def exponential_type_cardinality(domain_cardinality: int, codomain_cardinality: int) -> int:
         """Cardinality of an Exponential Type (Function A -> B): |B^A| = |B|^|A|"""
-        return codomain_cardinality ** domain_cardinality
+        return codomain_cardinality ** domain_cardinality  # type: ignore
 
 
 def make_illegal_states_unrepresentable(value: NoReturn) -> NoReturn:

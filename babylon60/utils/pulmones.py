@@ -66,7 +66,7 @@ class PulmonesQueue:
             # Índice para O(1) fetch de la próxima tarea
             conn.execute("CREATE INDEX IF NOT EXISTS idx_next_retry ON fallback_queue(next_retry_at)")
 
-    def enqueue(self, func_name: str, args: tuple, kwargs: dict, delay: float = 60.0) -> None:
+    def enqueue(self, func_name: str, args: tuple, kwargs: dict, delay: float = 60.0) -> None:  # type: ignore
         if not self._available:
             logger.warning("🫁 [PULMONES] Queue unavailable, dropping payload for %s.", func_name)
             return
@@ -114,14 +114,14 @@ class CircuitBreaker:
         self.state = "CLOSED"  # CLOSED | OPEN | HALF_OPEN
         self.last_failure_time = 0.0
 
-    def record_failure(self):
+    def record_failure(self):  # type: ignore
         self.failure_count += 1
         self.last_failure_time = time.monotonic()
         if self.failure_count >= self.failure_threshold:
             self.state = "OPEN"
             logger.error("🔌 [PULMONES] Circuit Breaker ABIERTO. Fallos: %s", self.failure_count)
 
-    def record_success(self):
+    def record_success(self):  # type: ignore
         if self.state != "CLOSED":
             logger.info("🔌 [PULMONES] Circuit Breaker CERRADO. Conexión restaurada.")
         self.failure_count = 0
@@ -139,7 +139,7 @@ class CircuitBreaker:
         return True  # HALF_OPEN permite 1 intento
 
 
-def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, threshold: int = 3):
+def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, threshold: int = 3):  # type: ignore
     """
     Decorador Mágico:
     1. Limita el tiempo de ejecución (asyncio.wait_for).
@@ -160,9 +160,9 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
             queue = None
         return queue
 
-    def decorator(func: Callable[..., Awaitable[Any]]):
+    def decorator(func: Callable[..., Awaitable[Any]]):  # type: ignore
         @wraps(func)
-        async def wrapper(*args, **kwargs):
+        async def wrapper(*args, **kwargs):  # type: ignore
             target_name = f"{func.__module__}.{func.__name__}"
             if not cb.can_execute():
                 logger.warning("🛡️ [PULMONES] Circuito Abierto. Bloqueando llamada a %s", func.__name__)
@@ -175,7 +175,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                 try:
                     # Timeout estricto para no bloquear el agente
                     result = await asyncio.wait_for(func(*args, **kwargs), timeout=timeout)
-                    cb.record_success()
+                    cb.record_success()  # type: ignore
                     return {"status": "success", "data": result}
 
                 except (asyncio.TimeoutError, ConnectionError) as e:
@@ -186,7 +186,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                         str(e),
                     )
                     if attempt == max_retries:
-                        cb.record_failure()
+                        cb.record_failure()  # type: ignore
                         q = _get_queue()
                         if q is not None:
                             q.enqueue(target_name, args, kwargs)

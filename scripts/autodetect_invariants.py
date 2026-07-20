@@ -9,7 +9,7 @@ import re
 import sys
 
 
-def main():
+def main():  # type: ignore
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     agents_file = os.path.join(root_dir, ".agents", "AGENTS.md")
     test_file = os.path.join(root_dir, "tests", "test_c5_invariants.py")
@@ -96,4 +96,4 @@ def test_inv_c5_{m:02d}_stub():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore

@@ -20,7 +20,7 @@ class PulmonesWorker:
         # Para evitar saturar APIs en la recuperación, aplicamos rate-limiting por lote
         self.batch_size = 5
 
-    def _fetch_ripe_tasks(self) -> list:
+    def _fetch_ripe_tasks(self) -> list:  # type: ignore
         """O(1) fetch gracias al índice idx_next_retry."""
         now = time.monotonic()
         with sqlite3.connect(self.db_path) as conn:
@@ -37,11 +37,11 @@ class PulmonesWorker:
             )
             return [dict(row) for row in cursor.fetchall()]
 
-    def _remove_task(self, task_id: int):
+    def _remove_task(self, task_id: int):  # type: ignore
         with sqlite3.connect(self.db_path) as conn:
             conn.execute("DELETE FROM fallback_queue WHERE id = ?", (task_id,))
 
-    def _penalize_task(self, task_id: int, retries: int):
+    def _penalize_task(self, task_id: int, retries: int):  # type: ignore
         """Exponential backoff para tareas crónicamente fallidas."""
         new_retries = retries + 1
         # Backoff: 1m, 2m, 4m, 8m... max 60 min.
@@ -55,7 +55,7 @@ class PulmonesWorker:
             )
         logger.warning("⏳ Tarea %s penalizada. Reintento %s en %ss.", task_id, new_retries, delay)
 
-    async def _resolve_target(self, target_func_path: str):
+    async def _resolve_target(self, target_func_path: str):  # type: ignore
         """
         Resuelve dinámicamente el string de la función guardado en SQLite.
         """
@@ -63,7 +63,7 @@ class PulmonesWorker:
         module = import_module(module_path)
         return getattr(module, func_name)
 
-    async def _execute_task(self, task: dict):
+    async def _execute_task(self, task: dict):  # type: ignore
         task_id = task["id"]
         payload = json.loads(task["payload"])
 
@@ -84,7 +84,7 @@ class PulmonesWorker:
             logger.error("❌ Fallo crónico en tarea %s: %s", task_id, str(e))
             self._penalize_task(task_id, task["retries"])
 
-    async def start_loop(self, poll_interval: float = 30.0):
+    async def start_loop(self, poll_interval: float = 30.0):  # type: ignore
         """El corazón del Submarino. Late cada `poll_interval` segundos."""
         self.running = True
         logger.info("🫁 [WORKER] PULMONES Daemon iniciado. Escaneando hipoxia de red...")

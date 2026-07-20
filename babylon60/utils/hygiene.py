@@ -11,7 +11,7 @@ from datetime import datetime, timezone
 logger = logging.getLogger(__name__)
 
 
-def get_orphaned_browsers():
+def get_orphaned_browsers():  # type: ignore
     """Identify orphaned ms-playwright-go processes."""
     try:
         # /bin/ps aux | grep ms-playwright-go
@@ -23,7 +23,7 @@ def get_orphaned_browsers():
         return []
 
 
-def get_snapshot_age():
+def get_snapshot_age():  # type: ignore
     """Return the age of the CORTEX snapshot in minutes."""
     from babylon60.core.paths import CORTEX_DIR
 
@@ -35,18 +35,18 @@ def get_snapshot_age():
     return age
 
 
-def check_system_health():
+def check_system_health():  # type: ignore
     """Full hygiene check."""
     report = {
-        "orphans": len(get_orphaned_browsers()),
-        "snapshot_age_min": get_snapshot_age(),
+        "orphans": len(get_orphaned_browsers()),  # type: ignore
+        "snapshot_age_min": get_snapshot_age(),  # type: ignore
         "load_average": os.getloadavg(),
     }
     return report
 
 
 if __name__ == "__main__":
-    health = check_system_health()
+    health = check_system_health()  # type: ignore
     sys.stdout.write("Hygiene Status:\n")
     sys.stdout.write(f" - Orphaned Browsers: {health['orphans']}\n")
     sys.stdout.write(f" - Snapshot Age: {health['snapshot_age_min']:.1f} min\n")

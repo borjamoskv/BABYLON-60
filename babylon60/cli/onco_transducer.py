@@ -21,8 +21,8 @@ try:
     import pandas as pd
 except ImportError as _exc:  # extra 'onco' no instalado
     np = None  # type: ignore[assignment]
-    nx = None  # type: ignore[assignment]
-    pd = None  # type: ignore[assignment]
+    nx = None
+    pd = None
     _ONCO_IMPORT_ERROR = _exc
 else:
     _ONCO_IMPORT_ERROR = None

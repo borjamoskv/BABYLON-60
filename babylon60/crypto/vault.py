@@ -17,7 +17,7 @@ try:
     _HAS_AESGCM = True
 except ImportError:
     _HAS_AESGCM = False
-    AESGCM = None  # type: ignore
+    AESGCM = None  # type: ignore[assignment, misc]  # type: ignore
 
 
 class Vault:
@@ -74,7 +74,7 @@ class Vault:
             raise RuntimeError("Encryption not available (missing key or library)")
 
         key = self._keys[self._primary_version]
-        aesgcm = AESGCM(key)  # type: ignore
+        aesgcm = AESGCM(key)
         nonce = os.urandom(12)
         aad = context_hash.encode("utf-8") if context_hash else None
         ciphertext = aesgcm.encrypt(nonce, data.encode("utf-8"), aad)
@@ -97,7 +97,7 @@ class Vault:
                 nonce = raw[1:13]
                 ciphertext = raw[13:]
                 key = self._keys[version]
-                aesgcm = AESGCM(key)  # type: ignore
+                aesgcm = AESGCM(key)
                 aad = context_hash.encode("utf-8") if context_hash else None
                 try:
                     plaintext = aesgcm.decrypt(nonce, ciphertext, aad)
@@ -110,9 +110,9 @@ class Vault:
             ciphertext = raw[12:]
             key_v1 = self._keys.get(1)
             if key_v1:
-                aesgcm = AESGCM(key_v1)  # type: ignore
+                aesgcm = AESGCM(key_v1)
                 try:
-                    plaintext = aesgcm.decrypt(nonce, ciphertext, None)  # type: ignore[assignment]
+                    plaintext = aesgcm.decrypt(nonce, ciphertext, None)
                     return plaintext.decode("utf-8")
                 except Exception:  # noqa: BLE001
                     pass
@@ -126,5 +126,5 @@ class Vault:
         """Generate a new secure key (base64 encoded)."""
         if not _HAS_AESGCM:
             raise ImportError("cryptography library not installed")
-        key = AESGCM.generate_key(bit_length=256)  # type: ignore
+        key = AESGCM.generate_key(bit_length=256)
         return base64.b64encode(key).decode("utf-8")

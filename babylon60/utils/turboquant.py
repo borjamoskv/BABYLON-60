@@ -53,7 +53,7 @@ def optimize_vector_qjl(
 
         # Stage 1: Fast Walsh-Hadamard Transform O(D log D)
         try:
-            from scipy.fft import fwht  # type: ignore[reportAttributeAccessIssue]
+            from scipy.fft import fwht
 
             rotated = fwht(arr, norm="ortho")
         except ImportError:
@@ -91,7 +91,7 @@ def optimize_vector_qjl(
 
         if not is_2d:
             return [float(x) for x in int8_scaled[0]]
-        return int8_scaled.tolist()
+        return int8_scaled.tolist()  # type: ignore[no-any-return]
 
     except Exception as e:  # noqa: BLE001
         logger.error("TurboQuant failure (Exergy Shield bypassed): %s", e)
@@ -112,7 +112,7 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
         dim = arr.shape[1]
         # Stage 1 Query Match: FWHT O(D log D)
         try:
-            from scipy.fft import fwht  # type: ignore[reportAttributeAccessIssue]
+            from scipy.fft import fwht
 
             rotated = fwht(arr, norm="ortho")
         except ImportError:
@@ -121,7 +121,7 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
 
         if not is_2d:
             return [float(x) for x in rotated[0]]
-        return rotated.tolist()
+        return rotated.tolist()  # type: ignore[no-any-return]
     except Exception as e:  # noqa: BLE001
         logger.error("TurboQuant query encoding failure: %s", e)
         return vector

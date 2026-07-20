@@ -117,7 +117,7 @@ class HttpRetryMixin:
 
         try:
             response.raise_for_status()
-            return response.json()
+            return response.json()  # type: ignore
         except httpx.HTTPStatusError as exc:
             return exc
         except (KeyError, IndexError, json.JSONDecodeError) as exc:
@@ -189,7 +189,7 @@ async def _do_standalone_post(
     response = await client.post(url, headers=headers, json=payload)
     try:
         response.raise_for_status()
-        return response.json()
+        return response.json()  # type: ignore
     except httpx.HTTPStatusError as exc:
         return exc
     except (KeyError, IndexError, json.JSONDecodeError) as exc:

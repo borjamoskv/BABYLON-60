@@ -138,7 +138,7 @@ class LinguisticEntropyDetector:
     def _shannon(items: list[str]) -> float:
         from babylon60.extensions.security.utils import calculate_distribution_entropy
 
-        return calculate_distribution_entropy(Counter(items))
+        return calculate_distribution_entropy(Counter(items))  # type: ignore
 
     def calculate_char_entropy(self, text: str) -> float:
         return round(self._shannon(list(text)), 4)

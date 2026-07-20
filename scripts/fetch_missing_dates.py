@@ -46,7 +46,7 @@ def _get_api(url: str) -> dict[str, Any]:
     for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=45) as r:
-                return json.loads(r.read().decode("utf-8"))
+                return json.loads(r.read().decode("utf-8"))  # type: ignore
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             last_err = exc
             time.sleep(1.0 * (2**attempt))

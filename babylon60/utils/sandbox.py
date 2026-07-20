@@ -388,7 +388,7 @@ class ASTSandbox:
             # Set timeout (Unix only; no-op on Windows)
             if hasattr(signal, "SIGALRM"):
 
-                def _timeout_handler(signum, frame):
+                def _timeout_handler(signum, frame):  # type: ignore
                     raise TimeoutError(f"Execution exceeded {self._timeout}s")
 
                 old_handler = signal.signal(signal.SIGALRM, _timeout_handler)

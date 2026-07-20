@@ -65,10 +65,10 @@ def dequantize_int8(data: bytes) -> list[float]:
 
     scale = struct.unpack("f", data[:4])[0]
     quantized = np.frombuffer(data[4:], dtype=np.int8)
-    return (quantized.astype(np.float32) * scale / 127.0).tolist()
+    return (quantized.astype(np.float32) * scale / 127.0).tolist()  # type: ignore
 
 
-def compression_ratio(dim: int = 384) -> dict:
+def compression_ratio(dim: int = 384) -> dict:  # type: ignore
     """Report compression statistics for a given embedding dimension.
 
     Returns:

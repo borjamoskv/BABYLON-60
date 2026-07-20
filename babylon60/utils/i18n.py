@@ -188,7 +188,7 @@ def _report_missing_key(key: str, lang: Lang) -> None:
 def _report_as_ghost_fact(key: str, lang: Lang) -> None:
     """Report as Ghost Fact for permanent resolution."""
     try:
-        from babylon60.facts import store_fact  # type: ignore[reportAttributeAccessIssue]
+        from babylon60.facts import store_fact
 
         store_fact("cortex", f"MISSING_I18N: Key '{key}' missing for lang '{lang.value}'", type="ghost")
     except ImportError:
@@ -212,7 +212,7 @@ def _trigger_adaptive_repair(key: str, lang: Lang) -> None:
 
     import asyncio
 
-    async def _repair():
+    async def _repair() -> None:
         logger.info("I18N: Adaptive repair triggered for [%s] in [%s]", key, lang.value)
         prompt = (
             f"Translate the following I18N key to {lang.name} ({lang.value}). "

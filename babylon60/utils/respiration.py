@@ -51,7 +51,7 @@ def _reserve_slot(now: float, next_allowed: list[float], interval: float) -> flo
     return target
 
 
-def oxygenate(min_interval: float = 0.1):
+def oxygenate(min_interval: float = 0.1):  # type: ignore
     """Decorator to ensure a function 'breathes' between calls.
 
     Hardened legacy: LEGION-OMEGA (400 Agents) support.

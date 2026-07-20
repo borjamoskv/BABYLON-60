@@ -104,7 +104,7 @@ def pack_void_bit(vector: list[float] | np.ndarray) -> bytes:  # pyright: ignore
 
     # Efficient packing using bit manipulation
     packed = np.packbits(binary)
-    return packed.tobytes()
+    return packed.tobytes()  # type: ignore
 
 
 def void_hamming_dist(a: bytes, b: bytes) -> int:

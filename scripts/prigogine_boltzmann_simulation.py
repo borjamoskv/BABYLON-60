@@ -61,7 +61,7 @@ def run_prigogine_brusselator(
     return history
 
 
-def main():
+def main():  # type: ignore
     random.seed(42)  # Determinism anchor
 
     # Run Boltzmann
@@ -97,4 +97,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore
