@@ -1,0 +1,6 @@
+Claim: Ejecución determinista del motor LOGOS+ETHOS+SHIP
+Proof:
+  Base: /Users/borjafernandezangulo/30_BABYLON-60/scripts/c5_logos_ethos_ship_engine.py
+  CORTEX_TAINT_SHA3_256: 679b30861b30019e1f75ab18924a8de1db8111ceb13c72e3cf0f5b921a904643
+  Timestamp: 2026-07-20T09:07:17.539253Z
+  Confidence: C5-REAL
