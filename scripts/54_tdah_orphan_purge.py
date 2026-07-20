@@ -17,7 +17,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "cortex.db")
 
 
-def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5"):
+def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5") -> None:
     """Registra la purga en el Master Ledger (Ω11, Ω12)."""
     if not os.path.exists(DB_PATH):
         print(f"[Ledger] WARNING: No se encuentra la BD {DB_PATH}")

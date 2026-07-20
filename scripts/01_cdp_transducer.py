@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 import hashlib
 import os
 import sys
+from typing import Any, cast
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -30,11 +31,11 @@ def init_ledger() -> sqlite3.Connection:
     return conn
 
 
-def fetch_cdp_status() -> dict[str, str]:
+def fetch_cdp_status() -> dict[str, Any]:
     try:
         req = urllib.request.Request(CDP_URL)
         with urllib.request.urlopen(req, timeout=2.0) as response:
-            return json.loads(response.read().decode())
+            return cast(dict[str, Any], json.loads(response.read().decode()))
     except (urllib.error.URLError, urllib.error.HTTPError) as e:
         print(f"FAILED: No CDP endpoint at {CDP_URL}. Error: {e}")
         # Simulamos payload para C5-REAL testing si no hay sandbox activo

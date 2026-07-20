@@ -3,6 +3,7 @@ import sys
 import json
 import subprocess
 import time
+from typing import Any
 
 
 def run_ruff_fix() -> None:
@@ -25,9 +26,10 @@ def execute_swarm_audit() -> None:
     if skill_path not in sys.path:
         sys.path.append(skill_path)
     try:
-        from c5_swarm_compiler import ThermodynamicSwarmCompiler  # type: ignore[import-not-found]
+        from c5_swarm_compiler import ThermodynamicSwarmCompiler as _TSC  # type: ignore[import-not-found]
+        ThermodynamicSwarmCompiler: Any = _TSC
     except ImportError:
-        ThermodynamicSwarmCompiler = None  # type: ignore[assignment]
+        ThermodynamicSwarmCompiler = None
 
     print("⚡ [LEGION-10K] Deploying 100 agents (10 blocks x 10 nodes)...")
     if ThermodynamicSwarmCompiler:

@@ -10,7 +10,8 @@ sys.path.append(PROJECT_ROOT)
 from cortex.swarm.memory_store import AgentMemory  # noqa: E402
 
 
-def worker(worker_id: int):
+from typing import Union
+def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
     try:
         memory = AgentMemory()
         start = time.perf_counter()
@@ -23,7 +24,7 @@ def worker(worker_id: int):
         return ("ERROR", worker_id, str(e))
 
 
-def run_stress_test(num_requests=1000, max_workers=100):
+def run_stress_test(num_requests: int = 1000, max_workers: int = 100) -> None:
     print(
         f"Iniciando asedio C5-REAL SQLite WAL BFT | Requests: {num_requests} | Concurrency: {max_workers}"
     )
@@ -41,10 +42,11 @@ def run_stress_test(num_requests=1000, max_workers=100):
 
     success = sum(1 for r in results if r[0] == "OK")
     errors = sum(1 for r in results if r[0] == "ERROR")
-    error_types = {}
+    error_types: dict[str, int] = {}
     for r in results:
         if r[0] == "ERROR":
-            error_types[r[2]] = error_types.get(r[2], 0) + 1
+            e_msg = str(r[2])
+            error_types[e_msg] = error_types.get(e_msg, 0) + 1
 
     print("\n=== RESULTADOS DEL ASEDIO ===")
     print(f"Tiempo Total: {total_time:.4f}s")
