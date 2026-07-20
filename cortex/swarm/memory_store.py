@@ -111,4 +111,5 @@ class AgentMemory:
             query_texts=[issue_text],
             n_results=10
         )
-        return results.get("documents", [[]])[0]
+        docs = results.get("documents")
+        return docs[0] if docs else []

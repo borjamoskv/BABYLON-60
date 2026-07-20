@@ -4,6 +4,7 @@ import hmac
 import hashlib
 import os
 import sqlite3
+import pathlib
 from io import BytesIO
 from unittest.mock import patch, MagicMock
 
@@ -24,7 +25,7 @@ def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
 
 
 class TestInitPerceptionLedger:
-    def test_creates_db_and_table(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_creates_db_and_table(self, tmp_path: pathlib.Path) -> None:
         with patch(
             "cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")
         ):
@@ -44,7 +45,7 @@ class TestInitPerceptionLedger:
 
 
 class TestLogEvent:
-    def test_log_event_new_payload(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_log_event_new_payload(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
@@ -54,7 +55,7 @@ class TestLogEvent:
             assert result is True
 
     def test_log_event_idempotency_lock(
-        self, tmp_path: "pytest.TempPathFactory"
+        self, tmp_path: pathlib.Path
     ) -> None:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
@@ -65,7 +66,7 @@ class TestLogEvent:
             result = log_event("push", b"duplicate-payload")
             assert result is False  # Idempotency Lock Ω15
 
-    def test_lamport_clock_increments(self, tmp_path: "pytest.TempPathFactory") -> None:
+    def test_lamport_clock_increments(self, tmp_path: pathlib.Path) -> None:
         db_path = str(tmp_path / "events.db")
         with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", db_path):
             from cortex.github_webhook_daemon import init_perception_ledger, log_event
@@ -132,7 +133,7 @@ class TestGitHubWebhookHandler:
         handler.send_response.assert_called_once_with(401)
 
     def test_invalid_signature_returns_403(
-        self, tmp_path: "pytest.TempPathFactory"
+        self, tmp_path: pathlib.Path
     ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
@@ -153,7 +154,7 @@ class TestGitHubWebhookHandler:
         handler.send_response.assert_called_once_with(403)
 
     def test_valid_new_event_returns_202(
-        self, tmp_path: "pytest.TempPathFactory"
+        self, tmp_path: pathlib.Path
     ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
@@ -185,7 +186,7 @@ class TestGitHubWebhookHandler:
         handler.send_response.assert_called_once_with(202)
 
     def test_duplicate_event_returns_200_idempotency(
-        self, tmp_path: "pytest.TempPathFactory"
+        self, tmp_path: pathlib.Path
     ) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
