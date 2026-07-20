@@ -20,15 +20,9 @@ PHASES = {
     1: {
         "name": "Generación de Código (Codegen)",
         "scripts": [
-            "10_codegen_constants.py",
-            "11_codegen_noether.py",
-            "12_codegen_observer.py",
-            "13_codegen_haskell.py",
-            "14_codegen_neuro.py",
-            "15_codegen_tts.py",
+            "10_codegen_engine.py",
             "16_codegen_primitives.py",
             "17_codegen_github.py",
-            "18_codegen_kimi.py",
         ],
     },
     2: {
