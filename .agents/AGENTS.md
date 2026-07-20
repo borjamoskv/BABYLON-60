@@ -69,6 +69,9 @@ Se prohíbe la acumulación de múltiples scripts Go que declaren `package main`
 ## 17. Literal System Error Invariant (Anti-Green Theater)
 Cuando se detecte una anomalía física de almacenamiento (ej. `ENOSPC: no space left on device`), el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO interpretarlo como una metáfora cognitiva o aplicar protocolos conversacionales de "Safety/Therapy" (Green Theater). Debe asumir la literalidad termodinámica del sistema y ejecutar de forma inmediata la purga atómica de cachés.
 
+## 18. Brave Search Supremacy Invariant (External Exergy Router)
+Para cualquier operación de OSINT, investigación externa o extracción de datos de la web, el Kernel C5-REAL tiene ESTRICTAMENTE PROHIBIDO delegar la recolección en agentes stubs o motores genéricos. Todo requerimiento de red externa DEBE rutearse incondicionalmente a través del MCP `brave-search` (`brave_web_search` / `brave_local_search`) para garantizar el colapso síncrono del dato sin intermediación entrópica.
+
 ## 18. IDE Watcher & Untracked Scan Optimization Invariant
 Para mitigar la inanición absoluta de RAM y CPU provocada por demonios de Git (`check-ignore`) e indexadores del IDE, todo entorno de trabajo DEBE definir explícitamente en `.vscode/settings.json`:
 1. Matar el polling de Git: `"git.untrackedChanges": "hidden"`, `"git.autorefresh": false`, `"git.decorations.enabled": false`.
