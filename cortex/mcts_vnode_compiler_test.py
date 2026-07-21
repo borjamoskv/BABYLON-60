@@ -17,9 +17,9 @@ try:
 except ImportError:
     from typing import Callable, Any
 
-    def given(
+    def given(  # type: ignore[no-redef]
         *args: Any, **kwargs: Any
-    ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:  # type: ignore[no-redef]
+    ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:
         def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
             return func
 
