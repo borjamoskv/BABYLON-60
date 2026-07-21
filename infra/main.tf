@@ -38,10 +38,22 @@ resource "google_alloydb_instance" "c5_ledger_primary" {
 }
 
 # 2. Orquestador de Enjambre en Cloud Run (Escalado a Cero, Serverless)
+resource "google_secret_manager_secret" "cortex_bft_key_secret" {
+  secret_id = "cortex-bft-key"
+  replication {
+    auto {}
+  }
+}
+
+resource "google_secret_manager_secret_version" "cortex_bft_key_version" {
+  secret      = google_secret_manager_secret.cortex_bft_key_secret.id
+  secret_data = var.cortex_bft_key
+}
+
 resource "google_cloud_run_v2_service" "swarm_dispatcher" {
   name     = "c5-swarm-dispatcher"
   location = var.region
-  ingress  = "INGRESS_TRAFFIC_ALL"
+  ingress  = "INGRESS_TRAFFIC_INTERNAL_LOAD_BALANCER"
 
   template {
     containers {
@@ -49,7 +61,12 @@ resource "google_cloud_run_v2_service" "swarm_dispatcher" {
       
       env {
         name  = "CORTEX_BFT_KEY"
-        value = var.cortex_bft_key
+        value_source {
+          secret_key_ref {
+            secret  = google_secret_manager_secret.cortex_bft_key_secret.secret_id
+            version = "latest"
+          }
+        }
       }
       
       resources {
