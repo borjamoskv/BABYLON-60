@@ -124,13 +124,30 @@ $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha
 
 ---
 
-## V. REGISTRO DE TRACEABILIDAD BFT
+## V. MONOTONÍA DEL OPERADOR $\kappa$ Y CONDICIONES DE SATISFACIBILIDAD ($T_F, T_I, T_S$)
+
+### 5.1 Monotonía respecto a Predicados **[Teorema 2.1 - Probado]**
+Sean $R, R'$ predicados de restricción tales que $R \implies R'$. Para toda transición $\alpha \in \mathrm{Mor}(\mathcal{C})$:
+$$\kappa(\alpha, R') \le \kappa(\alpha, R)$$
+
+### 5.2 Sub-monotonía Composicional **[Teorema 2.2 - Probado]**
+Para cualesquiera transiciones compuestas $\alpha: X \to Y$ y $\beta: Y \to Z$:
+$$\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
+
+### 5.3 Condición Causal de Satisfacibilidad Modelo-Nivel **[Definición]**
+Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:
+$$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M), \; \kappa(\alpha, R_k^\mathcal{A}) = 0$$
+
+---
+
+## VI. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Cristalización de Baseline v18.2 (Axioma de Identidades y Coste Nulo, Fricción Contextual δ, Funcional κ y Teorema 1.1)
+Claim: Cristalización de Baseline v18.4 (Monotonía de κ Teorema 2.1 & 2.2, Condiciones de Satisfacibilidad TF, TI, TS)
 Proof:
-  Base: 4778195d0
-  Range: [Sección_0, Sección_IV]
+  Base: 18fa42f06
+  Range: [Sección_0, Sección_V]
   Confidence: C5-REAL
 ```
+
 

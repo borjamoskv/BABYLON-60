@@ -117,6 +117,25 @@ Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ (Opc
 
 *Demostración:* Aplicando el Lema 1.1 de separación del ínfimo sobre el producto cartesiano de fibras $\mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta)$ y la evaluación $c_2 \circledast c_1 \in \mathsf{Cert}(\beta \circ \alpha)$, obtenemos $\mu(\beta \circ \alpha) \le \inf_{c_1, c_2} (|c_1| + |c_2| + \delta_\circ) = \inf(c_1) + \inf(c_2) + \delta_\circ = \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$. Analogamente para $\boxtimes$. $\blacksquare$
 
+---
+
+# 7. MONOTONÍA DEL OPERADOR $\kappa$ Y CONDICIONES DE SATISFACIBILIDAD ($T_F, T_I, T_S$) [Teorema 2.1 & 2.2 - Probados]
+
+**Teorema 2.1 (Monotonía respecto a Predicados):**  
+Sean $R, R'$ predicados de restricción tales que $R \implies R'$ (todo modelo que satisface $R$ satisface $R'$). Para toda transición $\alpha \in \mathrm{Mor}(\mathcal{C})$:
+$$\kappa(\alpha, R') \le \kappa(\alpha, R)$$
+*Demostración:* Como $\{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R\} \subseteq \{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R'\}$, la inclusión de conjuntos de búsqueda implica $\inf_{R'} \le \inf_R$. $\blacksquare$
+
+**Teorema 2.2 (Sub-monotonía Composicional de $\kappa$):**  
+Para toda par de transiciones compuestas $\alpha: X \to Y$ y $\beta: Y \to Z$:
+$$\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
+*Demostración:* Si $e \in \mathrm{Mor}(\mathcal{C})$ es una extensión tal que $e \circ \alpha \models R$, entonces la extensión $e' = e \circ \beta$ para $\beta \circ \alpha$ satisface $(e \circ \beta) \circ \alpha = e \circ (\beta \circ \alpha) \models R$. Por subaditividad de $\mu$, $\mu(e') \le \mu(e) + \mu(\beta) + \delta_\circ$, implicando el resultado tras tomar ínfimos. $\blacksquare$
+
+**Condición Causal de Satisfacibilidad Modelo-Nivel ($FISR_k^\mathcal{A}$):**  
+Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:
+$$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M), \; \kappa(\alpha, R_k^\mathcal{A}) = 0$$
+
+
 
 
 

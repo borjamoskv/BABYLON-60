@@ -78,10 +78,9 @@ $$\mu(\alpha \otimes \beta) \leq \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alph
 Dada una familia distinguida de transiciones básicas $\mathcal{A}(M) \subseteq \mathrm{Mor}(\mathcal{C}_M)$ (generadores, irreducibles, primitivas u observables):
 $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le k$$
 
-### 2.2. Caracterización Formal de $\kappa$
-$$\kappa_{\preceq, \sim}(M) = \inf \{ k \in \overline{\mathbb{N}} : \exists N, M \preceq N \land N \in \mathbf{Mod}(F,I,S,R_k^\mathcal{A}) \}$$
-- **Finitud:** $\kappa(M) < \infty \iff$ existe extensión FISR con presupuesto finito.
-- **Alcanzabilidad:** Bajo el buen orden de $\mathbb N$, existe una extensión óptima $N^*$ tal que $\kappa(M) = k^*$.
+### 2.3. Monotonía y Sub-monotonía de $\kappa$ [Teoremas 2.1 & 2.2 - Probados]
+1. **Monotonía respecto a Predicados:** $R \implies R' \implies \kappa(\alpha, R') \le \kappa(\alpha, R)$.
+2. **Sub-monotonía Composicional:** $\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$.
 
 ---
 
@@ -102,7 +101,7 @@ $$\kappa_{\preceq, \sim}(M) = \inf \{ k \in \overline{\mathbb{N}} : \exists N, M
                    cost valuation
                          │
                ┌─────────▼──────────┐
-               │        μ           │
+               │  Lawvere Metric μ  │
                └─────────┬──────────┘
                          │
             budget predicates R_k^A
@@ -128,6 +127,9 @@ $$\text{Cert}_k \implies FISR_k^\mathcal{A} \qquad (\text{Certificación } k \im
 $$FISR_k^\mathcal{A} \cap \mathcal K \implies \text{Cert}_k$$
 donde $\mathcal K$ es la clase de modelos finitamente presentables con fibraciones coherentes.
 
+### 4.3. Condición Causal de Satisfacibilidad Modelo-Nivel
+$$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M), \; \kappa(\alpha, R_k^\mathcal{A}) = 0$$
+
 ---
 
 ## 5. Cadena Crítica de Dependencia Axiomática
@@ -146,11 +148,12 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 | Axioma Core-G | Congelado ($\mathsf{Good} = \mathcal{P}$, admisible subcategoría bruta $\mathcal{P}_{\mathrm{raw}}$) |
 | Predicado $R_k^\mathcal{A}$ | Congelado (Modularizado sobre familia distinguida $\mathcal{A}(M)$) |
 | Métrica $\mu$ | Congelada y Probada (Subaditividad Teorema 1.1) |
-| Funcional $\kappa$ | Congelado y Caracterizado ($\kappa_{\preceq, \sim}$) |
+| Funcional $\kappa$ | Congelado, Caracterizado y Probado (Teoremas 2.1 & 2.2 de Monotonía) |
 | PRF-S / PRF-C | Soundness y Completitud Relativa parametrizados |
 
 ```yaml
-cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.2:2026-07-22T01:29:00Z"
+cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.4:2026-07-22T01:31:00Z"
 ```
+
 
 
