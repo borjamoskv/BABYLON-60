@@ -63,7 +63,7 @@ def query_substance_db() -> List[Dict[str, Any]]:
     return rows
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="CORTEX Escohotado Unified CLI Transducer (C5-REAL)"
     )

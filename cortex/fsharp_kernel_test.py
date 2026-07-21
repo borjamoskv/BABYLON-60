@@ -7,7 +7,7 @@ import subprocess
 from pathlib import Path
 
 
-def test_fsharp_kernel_compilation_and_ontology():
+def test_fsharp_kernel_compilation_and_ontology() -> None:
     project_dir = Path(__file__).resolve().parent.parent / "fsharp_kernel"
     fsproj = project_dir / "fsharp_kernel.fsproj"
 

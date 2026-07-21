@@ -16,7 +16,7 @@ TEST_DB = str(
 )
 
 
-def test_simulation_bounds_and_monotonies():
+def test_simulation_bounds_and_monotonies() -> None:
     # Legal market & full property rights -> zero risk premium above 1, 100% purity, zero violence, zero info loss
     res_free = simulate_prohibition_and_property(enforcement=0.0, property_rights=1.0)
     assert res_free["risk_premium_multiplier"] == 1.0
@@ -35,7 +35,7 @@ def test_simulation_bounds_and_monotonies():
     assert res_totalitarian["information_loss_index"] == 1.0
 
 
-def test_grid_execution_and_persistence():
+def test_grid_execution_and_persistence() -> None:
     if os.path.exists(TEST_DB):
         os.remove(TEST_DB)
 

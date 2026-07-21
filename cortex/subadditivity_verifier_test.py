@@ -9,7 +9,7 @@ from hypothesis import given, strategies as st
 from cortex.subadditivity_verifier import CertificateCategoryP, Morphism, Certificate
 
 
-def test_identity_zero_cost_axiom():
+def test_identity_zero_cost_axiom() -> None:
     cat = CertificateCategoryP()
     cat.add_identity_certificate("A")
 
@@ -18,7 +18,7 @@ def test_identity_zero_cost_axiom():
     assert mu_id == 0.0
 
 
-def test_infimum_empty_convention():
+def test_infimum_empty_convention() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha_uncertified", "A", "B")
 
@@ -26,8 +26,8 @@ def test_infimum_empty_convention():
     assert mu_val == float('inf')
 
 
-def test_subadditivity_sequential_with_contextual_delta():
-    def friction_fn(m1, m2):
+def test_subadditivity_sequential_with_contextual_delta() -> None:
+    def friction_fn(m1, m2) -> None:
         if m1.src == "A" and m2.tgt == "C":
             return 0.5
         return 0.0
@@ -45,7 +45,7 @@ def test_subadditivity_sequential_with_contextual_delta():
     assert rhs == 6.5
 
 
-def test_kappa_repair_operator():
+def test_kappa_repair_operator() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "X", "Y")
     cat.add_certificate(Certificate("c_alpha", alpha, 10.0))
@@ -56,14 +56,14 @@ def test_kappa_repair_operator():
     e2 = Morphism("e2", "Y", "W")
     cat.add_certificate(Certificate("c_e2", e2, 1.5))
 
-    def predicate_R(comp_morphism, comp_cost):
+    def predicate_R(comp_morphism, comp_cost) -> None:
         return comp_cost <= 12.0
 
     kappa_val = cat.compute_kappa_repair_operator(alpha, predicate_R)
     assert kappa_val == 1.5
 
 
-def test_kappa_monotonicity_theorem_2_1():
+def test_kappa_monotonicity_theorem_2_1() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "X", "Y")
     cat.add_certificate(Certificate("c_alpha", alpha, 10.0))
@@ -74,10 +74,10 @@ def test_kappa_monotonicity_theorem_2_1():
     e2 = Morphism("e2", "Y", "W")
     cat.add_certificate(Certificate("c_e2", e2, 2.0))
 
-    def R_strict(m, cost):
+    def R_strict(m, cost) -> None:
         return cost <= 12.5
 
-    def R_weak(m, cost):
+    def R_weak(m, cost) -> None:
         return cost <= 15.0
 
     kappa_strict = cat.compute_kappa_repair_operator(alpha, R_strict)
@@ -88,7 +88,7 @@ def test_kappa_monotonicity_theorem_2_1():
     assert kappa_weak <= kappa_strict
 
 
-def test_prf_s_soundness_and_prf_c_completeness():
+def test_prf_s_soundness_and_prf_c_completeness() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "B", "C")
@@ -113,7 +113,7 @@ def test_prf_s_soundness_and_prf_c_completeness():
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_sequential_subadditivity(cost1, cost2):
+def test_property_sequential_subadditivity(cost1, cost2) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "B", "C")
@@ -127,7 +127,7 @@ def test_property_sequential_subadditivity(cost1, cost2):
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_monoidal_subadditivity(cost1, cost2):
+def test_property_monoidal_subadditivity(cost1, cost2) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "C", "D")
@@ -141,7 +141,7 @@ def test_property_monoidal_subadditivity(cost1, cost2):
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_lawvere_triangle_inequality(cost1, cost2):
+def test_property_lawvere_triangle_inequality(cost1, cost2) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "B", "C")
@@ -152,7 +152,7 @@ def test_property_lawvere_triangle_inequality(cost1, cost2):
 
 
 @given(dummy=st.integers(min_value=0, max_value=100))
-def test_property_identity_cost(dummy):
+def test_property_identity_cost(dummy) -> None:
     cat = CertificateCategoryP()
     cat.add_identity_certificate("A")
     id_morphism = Morphism("id_A", "A", "A")

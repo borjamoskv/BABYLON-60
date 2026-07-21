@@ -16,7 +16,7 @@ SUBSTACK_FILES = [
 
 
 @pytest.mark.parametrize("filepath", SUBSTACK_FILES)
-def test_substack_publication_formatting_invariants(filepath: Path):
+def test_substack_publication_formatting_invariants(filepath: Path) -> None:
     assert filepath.exists(), f"Publication file missing: {filepath}"
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()

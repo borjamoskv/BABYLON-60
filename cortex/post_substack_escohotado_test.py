@@ -13,7 +13,7 @@ SUBSTACK_POST_PATH = str(
 )
 
 
-def test_substack_post_formatting_invariants():
+def test_substack_post_formatting_invariants() -> None:
     assert os.path.exists(SUBSTACK_POST_PATH)
     with open(SUBSTACK_POST_PATH, "r", encoding="utf-8") as f:
         content = f.read()

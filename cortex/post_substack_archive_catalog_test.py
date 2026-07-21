@@ -9,7 +9,7 @@ from pathlib import Path
 ARCHIVE_DIR = Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive"
 
 
-def get_archive_files():
+def get_archive_files() -> None:
     if not ARCHIVE_DIR.exists():
         return []
     return sorted(list(ARCHIVE_DIR.glob("*.md")))
@@ -18,14 +18,14 @@ def get_archive_files():
 ARCHIVE_FILES = get_archive_files()
 
 
-def test_archive_count():
+def test_archive_count() -> None:
     assert len(ARCHIVE_FILES) == 23, (
         f"Expected 23 archive files, found {len(ARCHIVE_FILES)}"
     )
 
 
 @pytest.mark.parametrize("filepath", ARCHIVE_FILES)
-def test_substack_archive_article_invariants(filepath: Path):
+def test_substack_archive_article_invariants(filepath: Path) -> None:
     assert filepath.exists(), f"Missing file: {filepath}"
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()

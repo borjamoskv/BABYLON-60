@@ -93,7 +93,7 @@ def render_post_html(post_filename: str) -> str:
 
 
 class PreviewHandler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
+    def do_GET(self) -> None:
         if self.path == "/" or self.path == "/index.html":
             files = sorted(list(ARCHIVE_DIR.glob("*.md")))
             list_items = "".join(
@@ -116,7 +116,7 @@ class PreviewHandler(http.server.SimpleHTTPRequestHandler):
             self.send_error(404, "Not Found")
 
 
-def run_server(port: int = 8085):
+def run_server(port: int = 8085) -> None:
     with socketserver.TCPServer(("", port), PreviewHandler) as httpd:
         print(f"CORTEX Substack Preview Server running at http://localhost:{port}/")
         httpd.serve_forever()

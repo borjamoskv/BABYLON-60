@@ -22,7 +22,7 @@ class Certificate:
     target_morphism: Morphism
     cost: float  # In N_bar (float('inf') for non-certifiable)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.cost < 0:
             raise ValueError(f"Cost valuation must be non-negative, got {self.cost}")
 
@@ -189,7 +189,7 @@ class CertificateCategoryP:
                 return False
             # Self-repair check with identity morphism
             self.add_identity_certificate(alpha.tgt)
-            def budget_R_k(m, cost):
+            def budget_R_k(m, cost) -> None:
                 return self.compute_mu(alpha) <= k
             kappa_val = self.compute_kappa_repair_operator(alpha, budget_R_k)
             if kappa_val > 0.0:

@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class PlaywrightStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.browser_active = [False] * 64
         self.page_count = [0] * 64
         self.last_load_time_ms = [0.0] * 64

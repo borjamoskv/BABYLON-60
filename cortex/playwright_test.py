@@ -4,7 +4,7 @@ from cortex.playwright import dispatch_playwright, PlaywrightStateVector
 
 
 class TestPlaywrightKernel(unittest.TestCase):
-    def test_playwright_coverage(self):
+    def test_playwright_coverage(self) -> None:
         vec = PlaywrightStateVector()
         count = 0
         for d in range(10):

@@ -37,7 +37,7 @@ class GeminiProTelemetry:
 
     _instance = None
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.total_requests = 0
         self.successes = 0
         self.failures = 0
@@ -45,12 +45,12 @@ class GeminiProTelemetry:
         self.per_key_counts = {}
 
     @classmethod
-    def get_instance(cls):
+    def get_instance(cls) -> None:
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance
 
-    def record(self, key: str, success: bool, latency: float):
+    def record(self, key: str, success: bool, latency: float) -> None:
         self.total_requests += 1
         self.latency_sum += latency
         self.per_key_counts.setdefault(key, 0)

@@ -4,7 +4,7 @@ from cortex.fundamental_constants import dispatch_constants, ConstantsStateVecto
 
 
 class TestConstantsKernel(unittest.TestCase):
-    def test_constants_coverage(self):
+    def test_constants_coverage(self) -> None:
         vec = ConstantsStateVector()
         count = 0
         for d in range(10):

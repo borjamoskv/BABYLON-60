@@ -4,7 +4,7 @@ from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
 
 class TestTtsKernel(unittest.TestCase):
-    def test_tts_coverage(self):
+    def test_tts_coverage(self) -> None:
         vec = TTSHarnessState()
         count = 0
         for d in range(10):

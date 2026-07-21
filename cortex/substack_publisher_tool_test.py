@@ -11,7 +11,7 @@ from cortex.substack_publisher_tool import (
 )
 
 
-def test_format_signature_block():
+def test_format_signature_block() -> None:
     sig = format_signature_block(count=3)
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in sig
     assert (
@@ -21,7 +21,7 @@ def test_format_signature_block():
     assert sig.count("https://borjamoskv.substack.com/p/") >= 4
 
 
-def test_purge_latex_math():
+def test_purge_latex_math() -> None:
     raw = "The entropy is $S = -\\sum p_i \\ln p_i$ and growth rate $r$"
     purged = purge_latex_math(raw)
     assert "$S = " not in purged
@@ -29,14 +29,14 @@ def test_purge_latex_math():
     assert "S = -∑ p_i ln(p_i)" in purged
 
 
-def test_convert_tables_to_lists():
+def test_convert_tables_to_lists() -> None:
     table_md = "| Header1 | Header2 |\n|---|---|\n| Val1 | Val2 |"
     converted = convert_tables_to_lists(table_md)
     assert "|---| " not in converted
     assert "* **Val1:**" in converted
 
 
-def test_full_process():
+def test_full_process() -> None:
     raw = "# Test Post\n\nSome text with $r$ rate.\n"
     res = process_markdown_for_substack(raw)
     assert "$r$" not in res

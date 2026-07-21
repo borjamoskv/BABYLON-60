@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class ConstantsStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.planck_scale_ratio = [1.616255e-35] * 64
         self.gravitational_coupling = [6.67430e-11] * 64
         self.electromagnetic_shielding = [1.602176634e-19] * 64

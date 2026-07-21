@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class TTSHarnessState:
-    def __init__(self):
+    def __init__(self) -> None:
         self.mcts_budget_tokens = [0] * 64
         self.latent_value = [0.0] * 64
         self.harness_score = [0.0] * 64

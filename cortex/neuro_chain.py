@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class CognitiveChainVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.homeostasis_energy = [1.0] * 64
         self.prediction_error = [0.0] * 64
         self.attention_weight = [1.0] * 64

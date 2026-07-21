@@ -11,7 +11,7 @@ ARCHIVE_200_DIR = (
 )
 
 
-def get_200_archive_files():
+def get_200_archive_files() -> None:
     if not ARCHIVE_200_DIR.exists():
         return []
     return sorted(list(ARCHIVE_200_DIR.glob("*.md")))
@@ -20,12 +20,12 @@ def get_200_archive_files():
 FILES_200 = get_200_archive_files()
 
 
-def test_200_archive_count():
+def test_200_archive_count() -> None:
     assert len(FILES_200) == 200, f"Expected 200 archive files, found {len(FILES_200)}"
 
 
 @pytest.mark.parametrize("filepath", FILES_200)
-def test_substack_200_article_invariants(filepath: Path):
+def test_substack_200_article_invariants(filepath: Path) -> None:
     assert filepath.exists(), f"Missing file: {filepath}"
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()

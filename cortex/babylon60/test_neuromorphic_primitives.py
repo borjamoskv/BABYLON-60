@@ -6,7 +6,7 @@ from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 
 
 @pytest.mark.anyio
-async def test_neuromorphic_v2():
+async def test_neuromorphic_v2() -> None:
     print("[C5-REAL] Inicializando Malla Neuromórfica V2 (STDP + LIF)...")
     import uuid
 
@@ -24,7 +24,7 @@ async def test_neuromorphic_v2():
         synapse = mesh.synapses[("SensorA", "MotorB")]
 
         # MotorB waits for a spike
-        async def motor_waiter():
+        async def motor_waiter() -> None:
             start_time = time.time()
             energy = await motor.wait_and_fire()
             elapsed = time.time() - start_time

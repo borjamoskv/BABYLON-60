@@ -4,7 +4,7 @@ from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 
 
 class TestNeuroKernel(unittest.TestCase):
-    def test_neuro_coverage(self):
+    def test_neuro_coverage(self) -> None:
         vec = CognitiveChainVector()
         count = 0
         for d in range(10):

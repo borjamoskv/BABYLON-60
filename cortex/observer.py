@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class StateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.states = [0.0] * 64
         self.covariance = [
             [1.0 if i == j else 0.0 for j in range(64)] for i in range(64)

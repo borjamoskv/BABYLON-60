@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class NoetherStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.action_variation = [0.0] * 64
         self.noether_current_div = [0.0] * 64
         self.conserved_charge = [1.0] * 64

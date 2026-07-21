@@ -36,6 +36,13 @@ class ThermodynamicState:
     cortex_taint: str
 
 
+try:
+    import strike_rs  # type: ignore
+    RUST_ENGINE_AVAILABLE = True
+except ImportError:
+    RUST_ENGINE_AVAILABLE = False
+
+
 class ThermodynamicEntropyEngine:
     """
     Physical simulation engine for computing exact thermodynamic entropy mapping
@@ -44,6 +51,12 @@ class ThermodynamicEntropyEngine:
 
     def __init__(self, temperature_kelvin: float = T_REF) -> None:
         self.temperature = temperature_kelvin
+        self.rust_engine = None
+        if RUST_ENGINE_AVAILABLE:
+            try:
+                self.rust_engine = strike_rs.RustCategoricalEngine()
+            except Exception:
+                self.rust_engine = None
 
     def compute_shannon_entropy(self, probabilities: List[float]) -> float:
         """
@@ -52,6 +65,9 @@ class ThermodynamicEntropyEngine:
         """
         if not probabilities:
             return 0.0
+
+        if self.rust_engine is not None:
+            return float(self.rust_engine.compute_shannon_entropy_fast(probabilities))
 
         total_p = sum(probabilities)
         if total_p <= 0.0:

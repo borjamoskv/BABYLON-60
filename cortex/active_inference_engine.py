@@ -17,7 +17,7 @@ class ActiveInferenceResult:
     d_kl: float
     expected_log_likelihood: float
 
-    def __iter__(self):
+    def __iter__(self) -> None:
         return iter((self.free_energy, self.d_kl, self.expected_log_likelihood))
 
 
@@ -101,7 +101,7 @@ class UnifiedActiveInferenceEngine:
 
         return res
 
-    def __iter__(self):
+    def __iter__(self) -> None:
         """Permite unpacking (free_energy, d_kl, expected_log_likelihood) para compatibilidad."""
         yield self.free_energy
         yield self.d_kl

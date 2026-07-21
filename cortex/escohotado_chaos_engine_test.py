@@ -17,7 +17,7 @@ TEST_DB = str(
 )
 
 
-def test_entropy_computation():
+def test_entropy_computation() -> None:
     # Monotonic constant sequence -> Zero entropy
     seq_constant = [0.5] * 100
     assert compute_entropy(seq_constant) == 0.0
@@ -28,7 +28,7 @@ def test_entropy_computation():
     assert s > 1.0
 
 
-def test_simulation_system_regimes():
+def test_simulation_system_regimes() -> None:
     # Coercive collapse case
     res_freeze = simulate_system(r=2.5, c=0.5)
     assert res_freeze["regime"] in ["SYSTEMIC_COLLAPSE", "STAGNANT_COERCIVE_FREEZE"]
@@ -38,7 +38,7 @@ def test_simulation_system_regimes():
     assert res_chaos["entropy_s"] > 1.0
 
 
-def test_grid_execution_and_db_persistence():
+def test_grid_execution_and_db_persistence() -> None:
     if os.path.exists(TEST_DB):
         os.remove(TEST_DB)
 

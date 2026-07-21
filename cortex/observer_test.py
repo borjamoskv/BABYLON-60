@@ -4,7 +4,7 @@ from cortex.observer import dispatch_state_observer, StateVector
 
 
 class TestObserverKernel(unittest.TestCase):
-    def test_observer_coverage(self):
+    def test_observer_coverage(self) -> None:
         vec = StateVector()
         count = 0
         for d in range(10):

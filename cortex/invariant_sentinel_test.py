@@ -78,7 +78,7 @@ class TestInvariantSentinel(unittest.TestCase):
 
         mock_exists.side_effect = mock_exists_side_effect
 
-        def custom_open(file, mode="r", encoding=None, **kwargs):
+        def custom_open(file, mode="r", encoding=None, **kwargs) -> None:
             if "tainted.py" in str(file):
                 return mock_open(read_data=f"# Tainted with {user_home}")()
             elif "unreadable.py" in str(file):
@@ -99,7 +99,7 @@ class TestInvariantSentinel(unittest.TestCase):
     ) -> None:
         mock_exists.return_value = True
 
-        def custom_open(file, mode="r", encoding=None, **kwargs):
+        def custom_open(file, mode="r", encoding=None, **kwargs) -> None:
             if file == RULES_FILE:
                 raise OSError("Permission denied")
             return mock_open(read_data="")()

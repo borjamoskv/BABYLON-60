@@ -4,7 +4,7 @@ from cortex.haskell import dispatch_haskell, HaskellStateVector
 
 
 class TestHaskellKernel(unittest.TestCase):
-    def test_haskell_coverage(self):
+    def test_haskell_coverage(self) -> None:
         vec = HaskellStateVector()
         count = 0
         for d in range(10):

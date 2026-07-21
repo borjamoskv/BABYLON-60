@@ -20,7 +20,7 @@ class STDPMemristor:
         self.post_id = post_id
         self._init_db()
 
-    def _init_db(self):
+    def _init_db(self) -> None:
         conn = sqlite3.connect(self.db_path, timeout=5.0)
         try:
             with conn:
@@ -105,7 +105,7 @@ class LeakySpikingNode:
         self.last_update_ts = time.time()
         self._fire_event = asyncio.Event()
 
-    def _apply_leak(self):
+    def _apply_leak(self) -> None:
         """Aplica la caída termodinámica basada en el tiempo transcurrido."""
         now = time.time()
         delta_t = now - self.last_update_ts
@@ -119,7 +119,7 @@ class LeakySpikingNode:
         self._apply_leak()
         return self._current_potential
 
-    async def accumulate(self, energy: float):
+    async def accumulate(self, energy: float) -> None:
         """Acumulación asíncrona de Iones (Tokens/Señales)."""
         self._apply_leak()
         self._current_potential += energy
@@ -156,19 +156,19 @@ class SelfHealingMesh:
             self.nodes[node_id] = LeakySpikingNode(node_id)
         return self.nodes[node_id]
 
-    def connect(self, pre: str, post: str):
+    def connect(self, pre: str, post: str) -> None:
         edge = (pre, post)
         if edge not in self.synapses:
             self.synapses[edge] = STDPMemristor(self.db_path, pre, post)
 
-    def kill_node(self, node_id: str):
+    def kill_node(self, node_id: str) -> None:
         """Simula fallo catastrófico (radiación térmica/kernel panic)."""
         print(
             f"[SelfHealingMesh] FALLO FÍSICO DETECTADO en nodo {node_id}. Ejecutando Apoptosis."
         )
         self.dead_nodes.add(node_id)
 
-    async def route_pulse(self, start_node: str, end_node: str, energy: float):
+    async def route_pulse(self, start_node: str, end_node: str, energy: float) -> None:
         """Enrutamiento tolerante a fallos buscando atajos (Plasticidad Topológica)."""
         if start_node in self.dead_nodes or end_node in self.dead_nodes:
             print(

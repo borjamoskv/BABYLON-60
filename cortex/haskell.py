@@ -41,7 +41,7 @@ MODIFIERS = {
 
 
 class HaskellStateVector:
-    def __init__(self):
+    def __init__(self) -> None:
         self.thunk_depth = [0.1] * 64
         self.monadic_depth = [0.0] * 64
         self.category_depth = [1.0] * 64
