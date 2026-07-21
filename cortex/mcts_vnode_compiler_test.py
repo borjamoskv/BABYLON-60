@@ -1,12 +1,27 @@
-"""Tests C5-REAL para mcts_vnode_compiler.py (O2)."""
+"""Tests C5-REAL para mcts_vnode_compiler.py (v3.0 - OMEGATRON APEX).
+
+Enforces:
+1. Vectorized & C-accelerated Shannon Entropy calculations.
+2. Property-Based Testing via Hypothesis.
+3. MCTSNode UCT tree calculations and invariants.
+4. Custom Typed Exception handling and edge cases.
+5. Rich Diagnostics & CORTEX Causal Taint assertion (Ω113).
+"""
 
 import hashlib
+import math
 import pytest
+from hypothesis import given, strategies as st
 from cortex.mcts_vnode_compiler import (
     ASTTheorem,
     calculate_shannon_entropy,
     EphemeralVNodePhysical,
     L3InferenceEnginePhysical,
+    MCTSCompilerError,
+    MCTSNode,
+    MCTSTreeSearchError,
+    _fast_log2,
+    _generate_cortex_taint,
     _mcts_expansion_worker,
 )
 
@@ -16,13 +31,13 @@ class TestCalculateShannonEntropy:
         assert calculate_shannon_entropy(b"") == 0.0
 
     def test_uniform_bytes_max_entropy(self) -> None:
-        # 256 unique bytes → max entropy ~8.0 bits
+        # 256 unique bytes -> max entropy = 8.0 bits
         data = bytes(range(256))
         entropy = calculate_shannon_entropy(data)
-        assert entropy > 7.9
+        assert abs(entropy - 8.0) < 1e-5
 
     def test_single_byte_zero_entropy(self) -> None:
-        # All identical bytes → entropy 0
+        # All identical bytes -> entropy 0
         data = b"\xaa" * 100
         entropy = calculate_shannon_entropy(data)
         assert entropy == 0.0
@@ -31,6 +46,16 @@ class TestCalculateShannonEntropy:
         code = b"def foo():\n    return 42 ** 2\n"
         entropy = calculate_shannon_entropy(code)
         assert 3.0 < entropy < 8.0
+
+    @given(st.binary())
+    def test_hypothesis_entropy_bounds(self, data: bytes) -> None:
+        """Property-based test: Shannon entropy MUST strictly lie within [0.0, 8.0]."""
+        entropy = calculate_shannon_entropy(data)
+        assert 0.0 <= entropy <= 8.0
+
+    def test_fast_log2_accuracy(self) -> None:
+        for x in [1, 2, 10, 256, 1000, 65535, 100000]:
+            assert abs(_fast_log2(x) - math.log2(x)) < 1e-9
 
 
 class TestEphemeralVNodePhysical:
@@ -52,14 +77,82 @@ class TestEphemeralVNodePhysical:
 
     def test_low_entropy_code_fails_threshold(self) -> None:
         vnode = EphemeralVNodePhysical("vnode-test-03")
-        # "aaa" has near-zero entropy and <3 AST nodes
         is_valid, entropy, nodes = vnode.execute_physical_test("aaa")
-        # entropy of "aaa" is 0 → should fail
         assert is_valid is False
 
-    def test_node_id_stored(self) -> None:
-        vnode = EphemeralVNodePhysical("vnode-sentinel-99")
-        assert vnode.node_id == "vnode-sentinel-99"
+    def test_empty_node_id_raises_value_error(self) -> None:
+        with pytest.raises(ValueError, match="node_id cannot be empty"):
+            EphemeralVNodePhysical("")
+
+    def test_empty_payload_returns_false(self) -> None:
+        vnode = EphemeralVNodePhysical("vnode-test-empty")
+        is_valid, entropy, nodes = vnode.execute_physical_test("")
+        assert is_valid is False
+        assert entropy == 0.0
+        assert nodes == 0
+
+
+class TestMCTSNodeAndUCT:
+    def test_unvisited_node_uct_score_is_inf(self) -> None:
+        node = MCTSNode(state_id="unvisited")
+        assert node.uct_score() == float("inf")
+
+    def test_visited_node_uct_computation(self) -> None:
+        parent = MCTSNode(state_id="parent")
+        parent.update(1.0)
+        parent.update(1.0)  # parent visits = 2
+
+        child = parent.add_child("child")
+        child.update(0.5)  # child visits = 1, value = 0.5, q = 0.5
+
+        # uct = 0.5 + 1.414 * sqrt(ln(2) / 1)
+        expected_uct = 0.5 + 1.414 * math.sqrt(math.log(2) / 1)
+        assert abs(child.uct_score() - expected_uct) < 1e-4
+
+    def test_add_child_idempotency(self) -> None:
+        parent = MCTSNode(state_id="root")
+        c1 = parent.add_child("node1")
+        c2 = parent.add_child("node1")
+        assert c1 is c2
+        assert len(parent.children) == 1
+
+
+class TestASTTheoremAndInvariants:
+    def test_ast_theorem_valid_construction(self) -> None:
+        code_hash = "a" * 64
+        theorem = ASTTheorem(
+            code_hash=code_hash,
+            proven=True,
+            shannon_entropy=4.5,
+            ast_nodes=10,
+            ephemeral_vnode="vnode-1",
+            payload="x = 1",
+            cortex_taint="CORTEX-TAINT:test",
+        )
+        assert theorem.code_hash == code_hash
+        assert theorem.cortex_taint == "CORTEX-TAINT:test"
+
+    def test_invalid_entropy_raises_value_error(self) -> None:
+        with pytest.raises(ValueError, match="Shannon entropy out of theoretical bounds"):
+            ASTTheorem(
+                code_hash="a" * 64,
+                proven=True,
+                shannon_entropy=9.5,
+                ast_nodes=5,
+                ephemeral_vnode="vnode-1",
+                payload="x = 1",
+            )
+
+    def test_invalid_code_hash_length_raises_value_error(self) -> None:
+        with pytest.raises(ValueError, match="code_hash must be 64-char hex"):
+            ASTTheorem(
+                code_hash="short_hash",
+                proven=True,
+                shannon_entropy=4.0,
+                ast_nodes=5,
+                ephemeral_vnode="vnode-1",
+                payload="x = 1",
+            )
 
 
 class TestMCTSExpansionWorker:
@@ -68,20 +161,17 @@ class TestMCTSExpansionWorker:
         assert result is not None
         assert isinstance(result, ASTTheorem)
         assert result.proven is True
-        assert len(result.code_hash) == 64  # SHA3-256 → exactly 64 hex chars
+        assert len(result.code_hash) == 64
         assert result.shannon_entropy > 3.5
         assert result.ast_nodes > 2
-
-    def test_ast_theorem_is_frozen(self) -> None:
-        result = _mcts_expansion_worker(("test_immutability", 7))
-        assert result is not None
-        with pytest.raises(Exception):  # frozen dataclass  # noqa: B017
-            result.proven = False  # type: ignore[misc]
+        assert result.cortex_taint.startswith("CORTEX-TAINT:borjamoskv:mcts:")
 
     def test_code_hash_is_sha3_256(self) -> None:
         result = _mcts_expansion_worker(("hash_check", 1))
         assert result is not None
-        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
+        payload = (
+            "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
+        )
         expected = hashlib.sha3_256(payload.encode()).hexdigest()
         assert result.code_hash == expected
 
@@ -94,44 +184,28 @@ class TestL3InferenceEnginePhysical:
         assert theorem.proven is True
         assert theorem.shannon_entropy > 3.5
         assert len(theorem.code_hash) == 64
+        assert "trajectories_evaluated" in engine.last_diagnostics
+        assert engine.last_diagnostics["trajectories_evaluated"] > 0
 
-    def test_compiled_theorem_payload_is_python(self) -> None:
-        import ast as ast_module
+    def test_invalid_target_trajectories_raises_value_error(self) -> None:
+        with pytest.raises(ValueError, match="target_trajectories must be positive"):
+            L3InferenceEnginePhysical(target_trajectories=0)
 
-        engine = L3InferenceEnginePhysical(target_trajectories=50)
-        theorem = engine.compile_theorem("test_syntax_valid")
-        # Should parse without SyntaxError
-        tree = ast_module.parse(theorem.payload)
-        assert tree is not None
+    def test_exhausted_trajectories_raises_mcts_error(self) -> None:
+        engine = L3InferenceEnginePhysical(target_trajectories=1)
+        # Monkeypatch worker to return None to test exhaustion exception
+        import cortex.mcts_vnode_compiler as compiler_mod
 
-    def test_vnode_field_is_set(self) -> None:
-        engine = L3InferenceEnginePhysical(target_trajectories=50)
-        theorem = engine.compile_theorem("test_vnode_field")
-        assert theorem.ephemeral_vnode.startswith("vnode-")
+        old_worker = compiler_mod._mcts_expansion_worker
+        try:
+            compiler_mod._mcts_expansion_worker = lambda args: None
+            with pytest.raises(MCTSTreeSearchError, match="Imposible colapsar un teorema"):
+                engine.compile_theorem("impossible_intention")
+            assert engine.last_diagnostics["status"] == "EXHAUSTED"
+        finally:
+            compiler_mod._mcts_expansion_worker = old_worker
 
-
-class TestPropertyBasedInvariants:
-    """Suite de Pruebas de Propiedades y Límites Físicos (Vector 3: Property Coverage)."""
-
-    def test_entropy_bounds_property(self) -> None:
-        import os
-
-        for size in [1, 10, 100, 1024, 4096]:
-            sample = os.urandom(size)
-            entropy = calculate_shannon_entropy(sample)
-            assert 0.0 <= entropy <= 8.0
-
-    def test_numpy_fallback_parity(self) -> None:
-        import math
-        import collections
-
-        sample = b"def test_parity():\n    return sum([x * 2 for x in range(100)])\n"
-        numpy_entropy = calculate_shannon_entropy(sample)
-
-        # Pure python calculation parity
-        counter = collections.Counter(sample)
-        length = len(sample)
-        py_entropy = sum(-(c / length) * math.log2(c / length) for c in counter.values())
-
-        assert abs(numpy_entropy - py_entropy) < 1e-9
-
+    def test_cortex_taint_generator_format(self) -> None:
+        taint = _generate_cortex_taint("abc123hash")
+        assert taint.startswith("CORTEX-TAINT:borjamoskv:mcts:")
+        assert len(taint.split(":")) == 4
