@@ -6,9 +6,10 @@ Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 import pytest
 import os
 import sqlite3
+from pathlib import Path
 from cortex.escohotado_substance_ontology import compute_substance_state, run_substance_grid
 
-TEST_DB = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scratch/test_escohotado_substance.db"
+TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_substance.db")
 
 def test_substance_state_monism():
     # C5-REAL Monistic Process Reality: Low dualism, high actuality and potentiality

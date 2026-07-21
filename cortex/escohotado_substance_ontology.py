@@ -13,9 +13,10 @@ import sqlite3
 import os
 import hashlib
 import datetime
+from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/ledgers/escohotado_substance.db"
+DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db")
 
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)

@@ -6,9 +6,10 @@ Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 import pytest
 import os
 import sqlite3
+from pathlib import Path
 from cortex.escohotado_market_prohibition_engine import simulate_prohibition_and_property, run_economic_grid
 
-TEST_DB = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scratch/test_escohotado_econ.db"
+TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_econ.db")
 
 def test_simulation_bounds_and_monotonies():
     # Legal market & full property rights -> zero risk premium above 1, 100% purity, zero violence, zero info loss

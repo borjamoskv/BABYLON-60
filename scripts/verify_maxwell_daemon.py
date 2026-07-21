@@ -4,7 +4,7 @@ import time
 import hashlib
 
 # C5-REAL Thermodynamic Token Governor script for Maxwell Daemon Verification
-# Path: /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scripts/verify_maxwell_daemon.py
+# Script: scripts/verify_maxwell_daemon.py
 
 CONV_ID = "bee4dcf3-21d8-46bb-97c4-c933ed4c6415"
 WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

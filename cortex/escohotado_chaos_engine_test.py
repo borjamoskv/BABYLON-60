@@ -6,9 +6,10 @@ Rule Compliance: Ω31 (Entropy Verification), Ω26 (Specific Exception Handling)
 import pytest
 import os
 import sqlite3
+from pathlib import Path
 from cortex.escohotado_chaos_engine import compute_entropy, compute_lyapunov, simulate_system, run_simulation_grid
 
-TEST_DB = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/scratch/test_escohotado_chaos.db"
+TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_chaos.db")
 
 def test_entropy_computation():
     # Monotonic constant sequence -> Zero entropy
