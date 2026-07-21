@@ -187,6 +187,8 @@ class AgentMemory:
         try:
             results = self.collection.query(query_texts=[issue_text], n_results=10)
             docs = results.get("documents")
-            return docs[0] if docs else []
+            if docs and isinstance(docs, list) and len(docs) > 0 and isinstance(docs[0], list):
+                return list(docs[0])
+            return []
         except (AttributeError, ValueError, RuntimeError, OSError, TypeError, KeyError):
             return []
