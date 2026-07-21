@@ -1,40 +1,43 @@
-# Ultimate Arena Adjudication Ledger: The Q1–Q5 Bifurcation Theorem
+# The Fibrated Synchronous M-Act Research Program Specification
 
-**Classification:** C5 Definitive Theoretical Adjudication  
-**Target:** Dynamic Topology vs Static Netlists ($CAM^{\text{restricted}}$ vs $CAM^{\text{full}}$)  
-**Status:** Unified Boundary Theorem (5 Discriminator Questions)
-
----
-
-# 1. THE Q1–Q5 BIFURCATION MATRIX
-
-The equivalence boundary between **Verdict D** ($\text{BSP} \oplus \text{Mealy} \oplus \text{Monitors}$) and **Verdict B** ($\pi\text{-calculus} / \text{Actor}$) is uniquely resolved by five structural questions:
-
-| Question | Discriminator | If NO | If YES |
-|---|---|---|---|
-| **Q1: Link Creation** | Can CAM create new links at runtime? | **Verdict D** ($\text{BSP} \oplus \text{Netlist}$) | **Verdict B** ($\pi$-calculus Mobility) |
-| **Q2: Observation** | Does capability change observable state? | Metadata Annotation | Real Security Calculus |
-| **Q3: Determinism** | $S_a = S_b \implies \text{Future}(S_a) = \text{Future}(S_b)$? | Non-Markovian Causal History | Markovian Transition |
-| **Q4: History** | Does history alter transition rules? | Event Sourcing (`scanl`) | Semantic Memory Mutation |
-| **Q5: Topology** | Is network topology data or law? | Static Configuration ($D$) | Dynamic Computation ($B$) |
+**Title:** Fibrated Synchronous M-Actions over Persistent States ($\mathbf{FibSyncMAct}$)  
+**Classification:** C5 Mathematical Research Program & Compound Categorical Object  
+**Status:** Open Institutional Formalization Target
 
 ---
 
-# 2. THE BIFURCATION THEOREM
+# 1. FORMAL DEFINITION OF THE COMPOUND OBJECT
 
-$$\mathbf{CAM}_{6.0} = \begin{cases} \mathbf{CAM}^{\text{restricted}} \cong \text{BSP}_{\text{static}} \oplus \text{Mealy} \oplus \text{Monitors} & \text{si } \mathbf{Q1} = \text{NO} \text{ (Topología Estática)} \\ \mathbf{CAM}^{\text{full}} \subseteq \pi\text{-calculus} \mathbin{/} \text{Actor Model} & \text{si } \mathbf{Q1} = \text{YES} \text{ (Movilidad de Enlaces)} \end{cases}$$
+Let $(\Delta, +, 0)$ be a Monoid of syntactic deltas.  
+Let $\mathcal{S}$ be a state space equipped with an M-action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.  
+Let $\Phi$ be a language of assertions over states.  
+Let $\text{Cert} \subseteq \text{Pf} \times \Delta \times \Phi$ be a verification relation.
 
-### Formal Proof:
-1. Under $\mathbf{Q1} = \text{NO}$ (static ports/wiring), the communication graph $G = (V, E)$ is time-invariant ($G_t = G_0$). The step evaluation maps isomophically to a network of Mealy machines operating under Leslie Valiant's BSP superstep barrier with Schneider pre-commit safety monitors.
-2. Under $\mathbf{Q1} = \text{YES}$ (dynamic port generation and capability transfer), $G_t \neq G_{t+1}$. This introduces scope extrusion $(\nu x)P$ and channel mobility $\bar{a}\langle b \rangle$, elevating CAM from static netlists to the full $\pi$-calculus / Actor model.
+### Soundness Invariant (Hoare Fibration)
+$$\forall (p, \delta, \phi) \in \text{Cert}, \quad \forall s \in \mathcal{S}, \quad \phi(s) \implies \phi(\alpha(\delta, s))$$
+
+The compound object $\mathbf{FibSyncMAct}$ is defined by the simultaneous conjunction of four structural constraints:
+1. **Denotational M-Act State Action**: $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
+2. **Hoare Predicate Fibration**: $\mathcal{F} \to \mathcal{S}$ certifying $\phi(s) \Rightarrow \phi(\alpha(\delta, s))$.
+3. **Sub-System Isolation**: Factorization into tensor components $\mathcal{S}_1 \otimes \mathcal{S}_2$.
+4. **Synchronous Barrier Preservation**: The `tick` natural transformation $\tau: \text{Id} \Rightarrow \text{Id}$.
 
 ---
 
-# 3. FINAL DEFINITIVE ADJUDICATION
+# 2. THE 6 FUNDAMENTAL QUESTIONS OF THE CATEGORICAL PROGRAM
 
-- **$\text{CAM}^{\text{restricted}}$ (Static Ports / Immutable Topology)**:
-  Collapsed isomophically into BSP supersteps over fixed flow graphs with Schneider security monitors.
-- **$\text{CAM}^{\text{full}}$ (Dynamic Ports / Capability Mobility)**:
-  Strict subtype of $\pi$-calculus / Actor Model with global barrier synchronization.
+1. **Existence of Initial/Terminal Objects**: Does $\mathbf{FibSyncMAct}$ possess an initial object $0$ and terminal object $1$?
+2. **Cartesian Closed Property**: Is $\mathbf{FibSyncMAct}$ a Cartesian Closed Category (CCC)?
+3. **Orthogonal Factorization of Isolation**: Does sub-system isolation induce a formal Orthogonal Factorization System $(\mathcal{E}, \mathcal{M})$?
+4. **Pullback Preservation by Barrier Tick**: Does the synchronous `tick` natural transformation preserve limits (pullbacks)?
+5. **Adjunction between Syntax and Semantics**: Does the denotational map $\llbracket \cdot \rrbracket: \Delta \to \mathcal{S}^{\mathcal{S}}$ form a Galois Connection or Adjunction $F \dashv G$?
+6. **Novelty vs Literature Mapping**: Does $\mathbf{FibSyncMAct}$ map isomophically to a known construction in:
+   - Leifer-Milner Reactive Systems
+   - Lawvere Theories with Guards
+   - Fibrated Security Institutions (Goguen-Burstall)
 
-$$\mathbf{Q.E.D.}$$
+---
+
+# 3. CONSOLIDATED ROADMAP FOR FORMALIZATION
+
+Instead of claiming a novel computational calculus, the formalization target is shifted to characterizing the categorical properties of **Fibrated Synchronous M-Actions**.
