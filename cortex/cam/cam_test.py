@@ -1,12 +1,12 @@
 """
-Unit test suite for CAM 1.0 Abstract Machine Engine.
+Unit test suite for CAM 1.0 / CAM 2.0 Abstract Machine Engine.
 """
 
 import pytest
 from cortex.cam.dag import TypedDAGKnowledgeGraph
 from cortex.cam.effects import EffectsAlgebra, EffectType
 from cortex.cam.machine import CAMAbstractMachine
-from cortex.cam.types import EdgeType, EpistemicState, KGNode, NodeType
+from cortex.cam.types import EdgeType, Epistemic5D, EpistemicState, KGNode, NodeType
 
 
 def test_cam_dag_acyclicity_and_states() -> None:
@@ -59,16 +59,16 @@ def test_cam_abstract_machine_verify_transition() -> None:
     ev_node = KGNode(
         node_type=NodeType.EVIDENCE,
         state=EpistemicState.MEASURED,
-        confidence=0.9,
+        epistemic_5d=Epistemic5D(truth=1.0, confidence=0.9, authority=0.8),
     )
     cl_node = KGNode(
         node_type=NodeType.CLAIM,
         state=EpistemicState.ESTIMATED,
-        confidence=0.7,
+        epistemic_5d=Epistemic5D(truth=1.0, confidence=0.7, authority=0.8),
     )
 
-    ev_id = machine.state.kg.add_node(ev_node)
-    cl_id = machine.state.kg.add_node(cl_node)
+    ev_id = machine.state.graph.add_node(ev_node)
+    cl_id = machine.state.graph.add_node(cl_node)
 
     declared_fx = EffectsAlgebra(
         is_pure=False,
@@ -86,6 +86,6 @@ def test_cam_abstract_machine_verify_transition() -> None:
     )
 
     assert success is True
-    assert machine.state.kg.nodes[cl_id].state == EpistemicState.VERIFIED
+    assert machine.state.graph.nodes[cl_id].state == EpistemicState.VERIFIED
     assert len(machine.state.ledger) == 1
     assert "entry_hash" in machine.state.ledger[0]

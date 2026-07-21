@@ -1,156 +1,108 @@
-# CAM 1.0 (C5 Abstract Machine Specification)
-## Normative & Informative Specification for Cognitive Runtimes
+# CAM 2.0 (C5 Abstract Machine of Cognitive Evolution)
+## Specification for Evolutionary Runtimes, 5D Epistemology & Adjudication
 
-**Classification:** C5 Formal Specification  
-**Status:** Living Abstract Machine Specification  
-**Conformance Target:** CAM Standard / CAM Verified
+**Classification:** C5 Formal Evolutionary Specification  
+**Status:** Living Evolutionary Machine  
+**Core Paradigm:** Machine of Evolution · 5D Epistemology · Dissidence Preservation · Effect Cascades
 
 ---
 
 ```text
-┌─────────────────────────────────────────────────────┐
-│                   CAM Specification                 │
-├─────────────────────────────────────────────────────┤
-│  Core          Syntax · Type System · Interfaces    │  NORMATIVE
-│  Semantics     Operational · Effects · Purezza      │  NORMATIVE
-│  Machine       State · Transitions · Scheduler      │  NORMATIVE
-│  Models        Exergy · Entropy · Cost Vectors      │  INFORMATIVE
-│  Conformance   Minimal · Standard · Verified        │  NORMATIVE
-└─────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────────┐
+│                          CAM 2.0 ARCHITECTURE                           │
+├─────────────────────────────────────────────────────────────────────────┤
+│ Core          Syntax · 5D Epistemology · Non-Commutative Caps           │
+│ Semantics     Hypergraph (1st/2nd Order) · Operational · Effects        │
+│ Machine       Adjudication Engine · Half-Life Decay · Effect Cascades   │
+│ Evolution     Fitness Competition · Exergy Maximization · Self-Selection│
+│ Conformance   Multidimensional Matrix (Semantics, Crypto, Decay, Adj)   │
+└─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-# 1. EPISTEMIC LAYERS & TRUST INVARIANT (NORMATIVE)
+# 1. THE 5-DIMENSIONAL EPISTEMIC VECTOR (5D EPISTEMOLOGY)
 
-The epistemic pipeline is unidirectional:
+Knowledge is no longer a scalar trust value. It is defined by the tuple $E_5$:
 
-$$\text{World} \longrightarrow \text{Observation} \longrightarrow \text{Evidence} \longrightarrow \text{Inference} \longrightarrow \text{Confidence} \longrightarrow \text{Policy} \longrightarrow \text{Trust}$$
+$$E_5 = \langle \text{Truth}, \text{Confidence}, \text{Authority}, \text{Relevance}, \text{Freshness}(t) \rangle$$
 
-## Trust Inequality Invariant
-For any agent $a$ and target assertion $x$:
+Where:
+- **Truth**: World-grounded physical property.
+- **Confidence**: Reasoning certainty interval $[0, 1] \in \mathbb{R}$.
+- **Authority**: Provenance domain weight of origin agent.
+- **Relevance**: Contextual alignment with active goal.
+- **Freshness($t$)**: Exponential half-life decay function:
 
-$$\text{Trust}(a, x) \le \text{Policy}(a, \text{Confidence}(x))$$
+$$\text{Freshness}(t) = e^{-\lambda (t - t_0)}$$
 
-A runtime MUST reject any transition where an agent attempts to grant $\text{Trust} > \text{Policy}(\text{Confidence}(x))$.
-
----
-
-# 2. EPISTEMIC STATES (10-STATE SPECTRUM) (NORMATIVE)
-
-Every node in the Knowledge Graph MUST occupy exactly one of the following 10 states:
-
-| State | Semantic Definition |
-|---|---|
-| `Undefined` | Unspecified or uninitialized (Accessing produces Undefined Behaviour) |
-| `Unknown` | Unexplored domain node |
-| `KnownUnknown` | Identified boundary, unmeasured |
-| `Measured` | Observed value with empirical variance |
-| `Estimated` | Inferred value with confidence interval $[0, 1] \in \mathbb{R}$ |
-| `Verified` | Independently reproduced via empirical evidence |
-| `Refuted` | Falsified by contradictory evidence |
-| `Superseded` | Replaced by subsequent verified version |
-| `ImplDefined` | Delegated to backend implementation |
-| `Impossible` | Proven logically or physically contradictory |
+## CAM 2.0 Trust Invariant
+$$\text{Trust}(a, x, t) \le \text{Policy}_f\Big(\text{Confidence}(x), \text{Authority}(x), \text{Relevance}(x), \text{Freshness}(x, t)\Big)$$
 
 ---
 
-# 3. KNOWLEDGE GRAPH AS A TYPED DAG (NORMATIVE)
+# 2. HYPERGRAPH WITH 2ND-ORDER FEEDBACK LOOPS
 
-The Knowledge Graph $\mathcal{KG} = (\mathcal{V}, \mathcal{E})$ is a Directed Acyclic Graph:
+The state space is a **Hypergraph** $\mathcal{H} = (\mathcal{V}, \mathcal{E}_1, \mathcal{E}_2)$:
 
-## Node Types ($\mathcal{V}$)
-`Observation`, `Evidence`, `Claim`, `Inference`, `Decision`, `Artifact`, `Incident`, `Policy`.
+- **1st-Order Causal Edges ($\mathcal{E}_1$)**: Unidirectional acyclic dependencies ($E \to C$, $I \to E$).
+- **2nd-Order Feedback Edges ($\mathcal{E}_2$)**: Cyclical metadata feedback ($P \to \text{ObservedRelevance} \to \text{PolicyMutation}$).
 
-## Edge Types ($\mathcal{E}$)
-`supports` ($E \to C$), `refutes` ($E \to C$), `derives_from` ($I \to E$), `supersedes` ($A \to A$), `depends_on` ($C \to C$), `invalidates` ($Inc \to A$), `implements` ($A \to Dec$).
-
-## Invariants
-1. $\mathcal{KG}$ MUST remain strictly acyclic. Cycle detection failure is **Undefined Behaviour**.
-2. Lamport timestamps MUST strictly increase along directed edges.
+Cycles containing exclusively 2nd-order feedback edges are **VALID** and represent system adaptation loops. Cycles in $\mathcal{E}_1$ trigger **Undefined Behaviour (UB)**.
 
 ---
 
-# 4. EFFECTS ALGEBRA (NORMATIVE)
+# 3. CONFLICT MODEL & DISSIDENCE PRESERVATION
 
-Every transition MUST declare its exact effect footprint:
+Contradictory evidence is **NEVER MERGED OR OVERWRITTEN**. It is adjudicated:
 
-```yaml
-effects:
-  pure:       bool                       # true if zero side effects
-  knowledge:  [read, write]              # Graph mutations
-  ledger:     [append]                   # Append-only ledger updates
-  filesystem: [read, write, delete]
-  network:    [send, recv]
-  memory:     [alloc, free]
-  external:   [call_api, emit_event]
-```
+$$\frac{\text{Claim}_A \quad \text{Claim}_B \quad \text{Contradiction}}{\text{AdjudicationRecord} \quad \land \quad \text{PreservedDissentBranch}(\text{Claim}_B)}$$
 
-## Undefined Behaviour Rule
-Executing any effect not contained within the declared effect set $\text{Effects}_{\text{actual}} \not\subseteq \text{Effects}_{\text{declared}}$ constitutes **Undefined Behaviour (UB)** and causes immediate process termination (`SIGKILL`).
+Dissenting branches are preserved in the hypergraph as alternative evolutionary paths, preventing epistemic fragility.
 
 ---
 
-# 5. TRAITS & INTERFACES (NORMATIVE)
+# 4. EFFECT CASCADE PROPAGATION
 
-## Primitive Traits
-- `Traceable`: `{ lamport_t: Int, created_at: Timestamp, created_by: AgentId }`
-- `Versioned`: `{ version: SemVer, supersedes: NodeId? }`
-- `Verifiable`: `{ verify() -> bool }`
-- `Identifiable`: `{ id: UUIDv5 }`
-- `Signed`: `{ signature: Bytes, public_key: Bytes }`
-- `HashLinked`: `{ prev_hash: Hash256, entry_hash: Hash256 }`
+Transitions declare direct and transitive effect cascades:
 
-## Standard Interfaces
-- `KnowledgeStore`: Methods `get_node`, `add_node`, `add_edge`, `check_acyclic`.
-- `Scheduler`: Methods `enqueue`, `next`, `can_parallel`.
-- `Reasoner`: Methods `infer`, `detect_contradictions`.
+$$\text{Cascade}(T) = \text{DirectEffects}(T) \cup \bigcup_{n \in \text{ImpactedNodes}} \text{PropagatedEffects}(n)$$
+
+The scheduler evaluates the full transitive cascade. Executing an unpredicted effect cascade constitutes **Undefined Behaviour (UB)**.
 
 ---
 
-# 6. CAPABILITY ALGEBRA (NORMATIVE)
+# 5. NON-COMMUTATIVE CAPABILITY ALGEBRA
 
-Capabilities are compositional sets:
+Capabilities are ordered temporal chains ($\circ$):
 
-$$\text{CapabilitySet} = \text{Set}[\text{Capability}]$$
-$$\text{Auditor} = \text{Read} \cup \text{Verify}$$
-$$\text{Collector} = \text{Observe} \cup \text{Write}$$
-$$\text{Analyst} = \text{Collect} \cup \text{Infer}$$
+$$\text{Cap}_A \circ \text{Cap}_B \neq \text{Cap}_B \circ \text{Cap}_A$$
 
-Privilege checking requires set containment:
-$$\text{TransitionAllowed} \iff \text{RequiredCaps} \subseteq \text{AgentCaps}$$
+Revocation of a capability is distinct from never having been granted. Capability chains encode temporal grant history.
 
 ---
 
-# 7. UNDEFINED BEHAVIOUR VS IMPLEMENTATION DEFINED (NORMATIVE)
+# 6. MULTIDIMENSIONAL CONFORMANCE MATRIX
 
-## Undefined Behaviour (UB)
-- Deleting a KnowledgeNode without migration.
-- Appending to Ledger with broken `prev_hash` chain.
-- $\text{Trust} > \text{Policy}_{\max}(\text{Confidence})$.
-- Introducing a cyclic edge into $\mathcal{KG}$.
-- Executing undeclared side-effects.
+A runtime declares conformance across an 8-dimensional matrix:
 
-## Implementation Defined (ImplDefined)
-- Scheduler algorithm (FIFO, Priority Queue, Min-Latency).
-- Storage engine (SQLite WAL, Postgres, S3, Memory).
-- Hash primitive (Default: SHA3-256 / BLAKE3).
-- Concurrency backend (Asyncio, Threads, Actors).
-
----
-
-# 8. CONFORMANCE PROFILES (NORMATIVE)
-
-- **CAM Minimal**: Core Syntax + Epistemic States + KnowledgeStore Interface.
-- **CAM Standard**: Minimal + Effects Algebra + Purity Scheduler.
-- **CAM Enterprise**: Standard + Cryptographic Signatures + Ledger Audit.
-- **CAM Verified**: Enterprise + Formal Proofs (Lean4 / Coq).
+| Dimension | Minimal | Standard | Enterprise | Verified |
+|---|:---:|:---:|:---:|:---:|
+| **Core Semantics** | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **Effects Cascade** | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **5D Epistemology** | $\mathbf{x}$ | $\mathbf{\frac{1}{2}}$ | $\checkmark$ | $\checkmark$ |
+| **Half-Life Decay** | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **Adjudication** | $\mathbf{x}$ | $\mathbf{\frac{1}{2}}$ | $\checkmark$ | $\checkmark$ |
+| **Crypto Attestation** | $\mathbf{x}$ | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ |
+| **Storage WAL** | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
+| **Formal Proofs** | $\mathbf{x}$ | $\mathbf{x}$ | $\mathbf{x}$ | $\checkmark$ |
 
 ---
 
-# 9. ABSTRACT MACHINE STATE (NORMATIVE)
+# TERMINATION & EVOLUTION EQUILIBRIUM
 
-$$\text{CAM\_State} = \langle \mathcal{KG}, \text{Ledger}, \text{Queue}, \text{Caps}, \text{Clock}, \text{EffectsLog}, \text{ConformanceProfile} \rangle$$
+CAM 2.0 does not ask *"Is this transition correct?"*. It asks:
 
-Atomic Transition Step:
-$$\text{step}: \text{CAM\_State} \times \text{Transition} \longrightarrow \text{CAM\_State}' \times \text{Effects}$$
+$$\text{Does } \Delta E_{\text{system}} = \frac{\text{UsefulKnowledge}}{\text{TotalCognitiveCost}} \text{ monotonically increase over time?}$$
+
+If $\frac{d \Delta E}{dt} \le 0$, **the system initiates self-reconfiguration.**
