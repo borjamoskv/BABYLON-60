@@ -65,7 +65,7 @@ class IdentityBootstrap:
         from babylon60.crypto.hash_registry import cortex_hash
         from babylon60.crypto.serialization import canonical_serialize
 
-        timestamp = str(time.time())
+        timestamp = str(int(time.time()))
 
         payload_dict = {"type": "GENESIS", "tenant_id": tenant_id, "timestamp": timestamp}
         payload = canonical_serialize(payload_dict)
