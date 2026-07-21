@@ -10,11 +10,23 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 
 
+def _check_no_floats(data: Any) -> None:
+    if isinstance(data, float):
+        raise ValueError("Flotantes (float) están estrictamente prohibidos en el payload BFT (IEEE 754 no-determinismo).")
+    elif isinstance(data, dict):
+        for v in data.values():
+            _check_no_floats(v)
+    elif isinstance(data, (list, tuple)):
+        for v in data:
+            _check_no_floats(v)
+
+
 def canonicalize_cbor(data: Dict[str, Any]) -> bytes:
     """
     Serialización canónica determinista usando CBOR.
     Las claves del diccionario se ordenan lexicográficamente para asegurar BFT.
     """
+    _check_no_floats(data)
     return cbor2.dumps(data, canonical=True)
 
 

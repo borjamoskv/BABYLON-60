@@ -54,7 +54,7 @@ def _quorum_fixture(tmp_path: Path, n: int = 4):  # type: ignore
     signers = {f"node_{i}": Ed25519Signer() for i in range(n)}
     node_keys = {nid: s.public_key_hex for nid, s in signers.items()}
     ledger = BFT_Ledger(str(tmp_path / "consensus.db"), node_keys=node_keys)
-    mutation = StateMutation(agent_id="legion", payload={"op": "advance", "n": 60}, timestamp=1000.0, signature="")
+    mutation = StateMutation(agent_id="legion", payload={"op": "advance", "n": 60}, timestamp=1000, signature="")
     m_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
     return ledger, mutation, m_hash, signers
 
@@ -81,7 +81,7 @@ def test_consensus_fail_closed_sin_registro_de_claves(tmp_path: Path) -> None:
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
     ledger = BFT_Ledger(str(tmp_path / "c2.db"))  # sin node_keys
-    mutation = StateMutation(agent_id="x", payload={"a": 1}, timestamp=1.0, signature="")
+    mutation = StateMutation(agent_id="x", payload={"a": 1}, timestamp=1, signature="")
     m_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
     with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
         ledger.invoke_subagent(mutation, f=0, swarm_signatures={"ghost": Ed25519Signer().sign(m_hash)})

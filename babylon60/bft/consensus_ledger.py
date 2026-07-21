@@ -20,7 +20,7 @@ _UNDECODABLE = object()
 class StateMutation:
     agent_id: str
     payload: Dict[str, Any]
-    timestamp: float
+    timestamp: int
     signature: str
     causal_taint: str = "BFT_Consensus_Init"
 
@@ -42,7 +42,7 @@ class BFT_Ledger:
 
     def _init_tables(self) -> None:
         self.conn.execute(
-            "\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                mutation_hash TEXT UNIQUE NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts REAL NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            "
+            "\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                mutation_hash TEXT UNIQUE NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts INTEGER NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            "
         )
 
     def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: Dict[str, str]) -> bool:
