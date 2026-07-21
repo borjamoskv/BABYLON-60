@@ -81,7 +81,7 @@ class TestMCTSExpansionWorker:
     def test_code_hash_is_sha3_256(self) -> None:
         result = _mcts_expansion_worker(("hash_check", 1))
         assert result is not None
-        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1 ** 2"
+        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
         expected = hashlib.sha3_256(payload.encode()).hexdigest()
         assert result.code_hash == expected
 
