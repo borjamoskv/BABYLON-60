@@ -81,10 +81,10 @@ class DualContextAgent:
                     elif ptype == "HEARTBEAT":
                         pass  # Ω43: Mantiene el liveness del socket
                 except json.JSONDecodeError as e:
-                    logging.error(
-                        f"[C5-REAL] FATAL (Ω26): JSON Parse Error en NDJSON stream: {e}"
+                    logging.warning(
+                        f"[C5-REAL] NDJSON Stream Warning: Chunk ignorado por error de formato: {e}"
                     )
-                    os.kill(os.getpid(), signal.SIGKILL)
+                    continue
         except Exception as e:
             # Fail-Fast C5-REAL logging
             logging.error(f"[C4-SIM] IPC Stream Fatal Error: {e}")

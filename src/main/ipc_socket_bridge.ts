@@ -125,8 +125,7 @@ export class IpcSocketBridge {
               console.warn('[C5-REAL] Anergía: WebContents inyectado no existe o fue destruido. Payload descartado.');
             }
           } catch (e) {
-            console.error(`[C5-REAL] FATAL (Ω26): JSON Parse Error en IPC Payload. ${e instanceof Error ? e.message : 'Unknown'}`);
-            process.kill(process.pid, 'SIGKILL');
+            console.warn(`[C5-REAL] NDJSON Stream Warning: Ignored malformed payload chunk. ${e instanceof Error ? e.message : 'Unknown'}`);
           }
         }
       }
