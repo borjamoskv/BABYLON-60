@@ -11,6 +11,7 @@ import { preview } from 'vite';
   
   await page.goto('http://localhost:3000');
   await page.waitForTimeout(2000);
+  await page.screenshot({ path: 'render-check.png' });
   
   await browser.close();
   server.httpServer.close();
