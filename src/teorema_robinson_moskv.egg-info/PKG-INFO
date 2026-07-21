@@ -1,0 +1,18 @@
+Metadata-Version: 2.4
+Name: teorema-robinson-moskv
+Version: 0.1.0
+Summary: MOSKV-1 BFT Cortex
+Requires-Python: ==3.12.*
+Description-Content-Type: text/markdown
+Requires-Dist: chromadb==0.4.20
+Requires-Dist: maturin==1.14.1
+Requires-Dist: mypy==1.11.0
+Requires-Dist: pytest==8.0.0
+Requires-Dist: pytest-cov==7.1.0
+Requires-Dist: pyyaml==6.0.3
+Requires-Dist: strike-rs
+Requires-Dist: websocket-client==1.9.0
+Requires-Dist: fastapi==0.111.0
+
+# Teorema-Robinson-Moskv
+MOSKV-1 BFT Cortex.

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install dependencies
+        run: |
+          python -m venv .venv
+          source .venv/bin/activate
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install ruff black mypy pytest-cov pip-audit mkdocstrings[python] mkdocs-material
+      - name: Lint with ruff
+        run: |
+          source .venv/bin/activate
+          ruff check .
+      - name: Formatting check with black
+        run: |
+          source .venv/bin/activate
+          black --check .
+      - name: Type check with mypy
+        run: |
+          source .venv/bin/activate
+          mypy --strict .
+      - name: Run tests with coverage
+        run: |
+          source .venv/bin/activate
+          pytest -q --cov=cortex
+      - name: Security audit
+        run: |
+          source .venv/bin/activate
+          pip-audit
+      - name: Build documentation
+        run: |
+          source .venv/bin/activate
+          mkdocs build

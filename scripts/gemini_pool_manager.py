@@ -38,9 +38,17 @@ class GeminiAccountSlot:
     def is_available(self) -> bool:
         return time.time() >= self.cooldown_until
 
-    def set_cooldown(self, seconds: float = 60.0) -> None:
-        self.cooldown_until = time.time() + seconds
+    def set_cooldown(self, base_seconds: float = 60.0) -> None:
+        """Aplica enfriamiento con backoff exponencial basado en errores acumulados (Ω27)."""
+        factor = min(2 ** (self.errors_count), 16)
+        cooldown_time = base_seconds * factor
+        self.cooldown_until = time.time() + cooldown_time
         self.errors_count += 1
+
+    def reset_stats(self) -> None:
+        """Reinicia el contador de errores al completar exitosamente una petición."""
+        if self.errors_count > 0:
+            self.errors_count = 0
 
 
 class GeminiProPoolManager:
@@ -87,7 +95,7 @@ class GeminiProPoolManager:
     def dispatch_generate_content(
         self, prompt: str, model: str = "gemini-1.5-pro"
     ) -> str:
-        """Dispara una inferencia rotando entre las cuentas disponibles."""
+        """Dispara una inferencia rotando entre las cuentas disponibles con tolerancia BFT."""
         attempts = 0
         max_attempts = len(self.slots) if self.slots else 1
 
@@ -116,11 +124,12 @@ class GeminiProPoolManager:
                     if candidates and "content" in candidates[0]:
                         parts = candidates[0]["content"].get("parts", [])
                         if parts:
+                            slot.reset_stats()
                             return str(parts[0].get("text", ""))
                     return ""
             except urllib.error.HTTPError as e:
                 if e.code == 429 or e.code == 503:
-                    # Enfriar esta cuenta por 60s
+                    # Enfriar esta cuenta con Backoff Exponencial
                     slot.set_cooldown(60.0)
                     last_error = e
                     attempts += 1
