@@ -24,6 +24,12 @@ import yaml
 import os
 import math
 
+try:
+    import strike_rs  # type: ignore
+    RUST_ENGINE_AVAILABLE = True
+except ImportError:
+    RUST_ENGINE_AVAILABLE = False
+
 
 # ═══════════════════════════════════════════════════════════════
 # 1. DOMAIN TYPES & PRIMITIVE STRUCTURE
@@ -236,6 +242,13 @@ class Categorical896Engine:
         self.domain_index: Dict[str, List[CategoricalPrimitive]] = {}
         self.compat_complex = CompatComplex()
 
+        self.rust_engine: Optional[Any] = None
+        if RUST_ENGINE_AVAILABLE:
+            try:
+                self.rust_engine = strike_rs.RustCategoricalEngine()
+            except Exception:
+                self.rust_engine = None
+
         self._load_yaml()
         self._sync_sqlite_ledger()
 
@@ -331,6 +344,11 @@ class Categorical896Engine:
         eff_friction = friction_delta if friction_delta != 0.0 else friction
         if not primitive_ids:
             return float("inf")
+
+        if self.rust_engine is not None:
+            cost = self.rust_engine.calculate_morphism_cost(primitive_ids, eff_friction)
+            if cost != float("inf"):
+                return cost
 
         valid_ids = [pid for pid in primitive_ids if pid in self.primitives]
         if len(valid_ids) != len(primitive_ids):

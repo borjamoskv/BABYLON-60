@@ -80,10 +80,25 @@ mod tests {
     }
 
     #[test]
+    fn test_rust_categorical_engine_oob_cost() {
+        let engine = RustCategoricalEngine::new();
+        let cost = engine.calculate_morphism_cost(vec![0, 2, 3], 0.5);
+        assert_eq!(cost, f64::INFINITY);
+        let cost_high = engine.calculate_morphism_cost(vec![897], 0.0);
+        assert_eq!(cost_high, f64::INFINITY);
+    }
+
+    #[test]
     fn test_rust_categorical_engine_collisions() {
         let engine = RustCategoricalEngine::new();
         let cols = engine.detect_collisions_fast(vec![561, 673]);
         assert_eq!(cols.len(), 1);
         assert_eq!(cols[0], (561, 673));
+    }
+
+    #[test]
+    fn test_rust_categorical_engine_subadditivity() {
+        let engine = RustCategoricalEngine::new();
+        assert!(engine.verify_sequential_subadditivity_fast(3, 4, 0.5));
     }
 }
