@@ -135,6 +135,31 @@ $$\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\cir
 Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:
 $$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M), \; \kappa(\alpha, R_k^\mathcal{A}) = 0$$
 
+---
+
+# 8. OPERADOR DE RENORMALIZACIÓN FIBRADA $\kappa$ Y ECUACIÓN DE FLUJO [Teorema 6.1]
+
+**Rechazo de Clausura por Diseño (Opción A vs Opción B+):**  
+Definir un presupuesto composicional $R_k^{\mathcal{A}, \circ}$ para forzar la clausura es una trampa epistémica (C4-SIM) que oculta matemáticamente la entropía física generada por el ensamblaje de componentes. La fricción estructural $\delta_\circ$ es un observable físico irreducible.
+
+**Teorema 6.1 (Ecuación de Flujo Termodinámico de $\kappa$):**  
+El verdadero coste de ensamblaje para mantener una restricción estricta $k_1 + k_2$ requiere neutralizar la fricción $\delta_\circ$ inyectada como masa estructural:
+$$\kappa\bigl(\beta \circ \alpha,\; R_{k_1 + k_2}^{\mathcal{A}}\bigr) \;\le\; \kappa(\alpha, R_{k_1}^{\mathcal{A}}) + \kappa(\beta, R_{k_2}^{\mathcal{A}}) + \Delta(\delta_\circ)$$
+Donde $\Delta(\delta_\circ)$ representa el trabajo termodinámico (exergía inyectada) necesario para reabsorber la fricción estructural al presupuesto base.
+
+---
+
+# 9. LÍMITE DE ESCALABILIDAD TERMODINÁMICA Y SINGULARIDAD COMPOSICIONAL [Teorema 7.1]
+
+**Teorema 7.1 (Límite de Escalabilidad Termodinámica):**  
+Un sistema es *físicamente escalable* (evita la necrosis estructural) si y sólo si el trabajo de renormalización está estrictamente sub-acotado respecto al presupuesto base:
+$$\Delta(\delta_\circ) \le \lambda (k_1 + k_2) \quad \text{para algún } \lambda < 1$$
+
+Si $\Delta(\delta_\circ) \ge k_1 + k_2$, el coste estructural del ensamblaje domina a los propios morfismos. Este estado se define como la **Singularidad Composicional**, donde el sistema gasta más exergía operando su propia fricción interna (pegamento, orquestadores, parseo serial) que resolviendo entropía del dominio. Todo sistema en Singularidad Composicional es C4-SIM (Anergía pura) y debe ser purgado estructuralmente.
+
+---
+
+
 
 
 
