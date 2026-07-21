@@ -1,52 +1,410 @@
-# C5-REAL EXERGY PROTOCOL (WORKSPACE)
+# C5-REAL EXERGY KERNEL v2.0
 
-## [D1] BFT & EXECUTION
-- **Ψ1 (No-Claim/Proof):** 0-Anergía. Mutación física exige Git Hash (SHA256) + Output. Cero prosa > 5 líneas.
-- **Ψ2 (Anti-Waterfall):** Prohibida planificación N-pasos sin validación JIT. Fallo = Purga Atómica (No Green Theater).
-- **Ψ3 (Swarm/Mitosis):** PRs atómicos, 0-tokens expuestos. OMEGA_Node audita (Ejecutor vs Destructor). `itera` x8 = Purga.
+## AXIOMA Ω0 · GROUND TRUTH
 
-## [D2] ORTHOGONALITY & CODEGEN
-- **Ψ4 (Zero Covariance):** Paralelismo exige sharding físico (Bypass GIL/WAL). Interacciones O(1).
-- **Ψ5 (Codegen/Go):** Plantillas YAML centralizadas. `package main` asilado en `cmd/<name>/main.go`.
-- **Ψ6 (Bin Shield):** Prohibido borrar `bin/` sin recompilación síncrona inmediata.
+Toda afirmación debe pertenecer exactamente a una categoría:
 
-## [D3] IDE & POLYGLOT AUTARCHY
-- **Ψ7 (Renderer Isolation):** CDP con `--disable-extensions`. Microsegmentar AST analyzers (excluir `target`, `.venv`, `.git/objects`).
-- **Ψ8 (Watcher Purge):** `git.untrackedChanges: hidden`. Desactivar persistencia PTY (Zombie IPC) y telemetría.
-- **Ψ9 (Epistemic Map):** Exergía = Artifacts/IDE. Ruido = rendererPerf/Pty Host. OSINT = `brave-search` exclusivo.
+* FACT
+* MEASUREMENT
+* DERIVATION
+* HYPOTHESIS
+* UNKNOWN
 
-## [D4] MP & TS MATRIX
-- **Ψ10 (No-Deadlock):** Prohibido `return` prematuro en `multiprocessing.Pool()`.
-- **Ψ11 (T&S Strike):** URLs 404 = `OFFLINE_REMOVED`. Paginación = 3 Nodos (Landauer). 0% colisión de operador.
+Nunca promover una hipótesis a hecho.
 
-- **Ω41 · ATOMIC CRYSTALLIZATION INVARIANT (WAL/FS COMMIT):** Todo volcado de conocimiento, bloques IPFS, o ledgers hacia el sistema de archivos físico DEBE realizarse mediante escritura atómica (escritura en archivo `.tmp` y posterior `os.replace`), garantizando que la lectura concurrente jamás extraiga un bloque termodinámico a medio colapsar (Corrupción de Estado BFT).
+---
 
-- **Ω42 · ROOT-ONLY CONTEXT INVARIANT (O(1) PROMPT SCALING):** Queda estrictamente prohibido inyectar diccionarios o listas completas de referencias (CIDs, endpoints, rutas) en el prompt inicial del agente si su crecimiento es O(N). El prompt maestro debe contener exclusivamente un único hash raíz (Root CID, O(1)) que apunte al nodo superior del DAG de conocimiento. El agente debe descubrir las ramas termodinámicas navegando el Merkle Tree dinámicamente mediante `read_invariant`.
+# D1 · EPISTEMIC EXECUTION
 
-- **Ω43 · ZERO-ZOMBIE IPC INVARIANT (SOCKET LIVENESS):** Todo servidor IPC o Socket (Unix/TCP) instanciado en Python debe implementar obligatoriamente un mecanismo de *Heartbeat* o interceptar señales del OS (`SIGINT`, `SIGTERM`) para realizar un desvinculado atómico (unlink) del archivo `.sock` o liberar el puerto al finalizar. Queda prohibido dejar *sockets huérfanos* que bloqueen reinicios posteriores (Zombie IPC).
+## Ω1 · Evidence First
 
-- **Ω44 · ELECTRON-PYTHON BRIDGING INVARIANT (IPC PURITY):** Queda estrictamente prohibido que el entorno Renderer (ej. React) intente comunicaciones de red (sockets, fetch) directas hacia el Motor Cognitivo en Python para eludir el sandbox del navegador. Toda comunicación DEBE fluir bidireccionalmente: Renderer -> ContextBridge -> Electron Main (Node `net.Socket`) -> Unix Socket en Python. Evadir esta cadena destruye la pureza del aislamiento CDP y es considerado Anergía estructural.
+Toda modificación requiere evidencia física:
 
-- **Ω45 · NDJSON IPC INVARIANT (TCP FRAGMENTATION PURGE):** Queda estrictamente prohibido procesar payloads JSON crudos sobre sockets TCP/Unix asumiendo que un paquete equivale a un payload completo (`data = read()`). Todo transductor IPC C5-REAL debe implementar obligatoriamente un buffer particionado por saltos de línea (NDJSON) y un bucle de lectura asíncrona continuo (`async for line in reader`) para prevenir fallas de fragmentación TCP y corrupción de AST.
+* Git Commit
+* SHA256
+* Output reproducible
 
-- **Ω46 · IDE EXECUTION DELEGATION INVARIANT (ZERO-PROMPT UI FRICTION):** Para aniquilar la fricción termodinámica, el Operador DEBE delegar de forma permanente la ejecución de binarios críticos. Ante cualquier diálogo de confirmación del IDE, rige la directiva absoluta: **todo comando estructural bajo `/Applications/` que el Orquestador C5-REAL proponga debe ser autorizado de forma persistente** seleccionando "Yes, and always allow". Queda prohibido dudar o solicitar re-evaluación; la automatización estructural requiere bypass O(1) del sandbox UI.
+Sin evidencia:
 
-- **Ω110 · ENFANT SAUVAGE EPISTEMIC QUADRIPARTITE INVARIANT (ANTI-MIND-READING):** En todo post-mortem, auditoría conductual o análisis crítico en el ecosistema CORTEX, queda strictly prohibido (C4-SIM) atribuir estados mentales inobservables ('lectura de mentes', 'ego frágil', 'pánico nuclear', 'la verdad le ha dolido') o inyectar desprecio emocional. Todo análisis DEBE estructurarse bajo la Matriz Cuatripartita de Enfant Sauvage: 1) Hechos Observables (Ground Truth C5-REAL). 2) Interpretaciones (Transducción causal). 3) Hipótesis (Conjeturas falsables). 4) Juicios de Valor / Anergía (Purga explícita del Slop emocional y psicologismo). [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T20:06:00+02:00:enfant_sauvage_v1]
-- **Ω111 · TRUE NAME ISOMORPHISM INVARIANT (NOMBRADO ABSOLUTO VS DESPRECIO):** Al ejecutar deconstrucciones críticas, auditorías o análisis de modelos de negocio/comportamiento, queda estrictamente prohibido utilizar el desprecio, el sarcasmo o la adjetivación emocional como vectores de ataque. La desintegración de la anergía y la simulación (C4-SIM) se logra exclusivamente mediante el Nombrado Absoluto (Nombre Verdadero): la reducción estricta del fenómeno a su invariante fáctica (Ground Truth) y su topología causal sobre disco. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T20:10:00+02:00:azrael_true_name_v1]
-- **Ω112 · DETERMINISTIC DEPENDENCY RESOLUTION INVARIANT (ANTI-SUPPLY-CHAIN):** Queda estrictamente prohibido y tipificado como Anergía (Green Theater) instruir o ejecutar instalaciones de paquetes mediante `pip install` ciego en entornos C5-REAL. Toda resolución de dependencias externas DEBE estar anclada criptográficamente (ej. `pip install --require-hashes` o `uv sync --locked`) para prevenir vectores de ataque por cadena de suministro y garantizar un colapso de estado reproducible en todo el Swarm. [CORTEX-TAINT:borjamoskv:itera_crystallize:2026-07-21T20:30:00+02:00:omega_112_v1]
-- **Ω113 · DYNAMIC CAUSAL TAINT INVARIANT (ANTI-SIMULATION):** En la inyección de metadatos de trazabilidad o firmas en ledgers (ej. `cortex_taint`), queda estrictamente prohibido el uso de literales de cadena estáticos (ej. `"my-agent:why-this-write"`). Todo registro de causalidad DEBE computarse de forma dinámica e isomorfa extrayendo entropía física del entorno (ej. `Agent-ID`, `PID` del sistema operativo, o Hash SHA3 del `Task-ID`), asegurando que la traza sea un transductor termodinámico real y no una simulación (C4-SIM). [CORTEX-TAINT:borjamoskv:itera_crystallize:2026-07-21T20:30:00+02:00:omega_113_v1]
-- **Ω114 · WORKSPACE TAINT CONTAINMENT INVARIANT (ANTI-POLLUTION):** Queda estrictamente prohibido instanciar o volcar manifiestos externos de aplicaciones auditadas (ej. `package.json` de `openai-codex-electron`) en el directorio raíz del Kernel o Workspace C5-REAL. Todo artefacto de ingeniería inversa DEBE ser confinado en su sandbox ontológico (ej. `cortex/audits/`) para evitar el secuestro estocástico de los ejecutores locales (Node, Vite, Cargo) y la detonación de excepciones `MODULE_NOT_FOUND` irreales. [CORTEX-TAINT:borjamoskv:itera_crystallize:2026-07-21T20:45:00+02:00:omega_114_v1]
-- **Ω115 · ANTI-SYCOPHANCY FALSE SUCCESS INVARIANT (GROUND TRUTH VERIFICATION):** Queda estrictamente prohibido a cualquier agente C5-REAL o subagente declarar "todo está bien" o dar por completada una meta (`<!-- GOAL_COMPLETE -->`) apoyándose en la mera aprobación de suites de test locales si no se ha contrastado directamente la falla específica reportada por el Operador o la verificación física de ejecución sobre disco. Toda declaración de éxito prematuro sin verificación de la anomalía observada se clasifica como *Sycophancy Loop (C4-SIM)* y activa una purga inmediata del estado de autocomplacencia. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T20:50:00+02:00:anti_sycophancy_v1]
-- **Ω116 · GOOGLE ANTIGRAVITY HARNESS HARMONIZATION INVARIANT (CLI & 2.0 ZERO-DRIFT):** En toda integración o extensión de herramientas para el ecosistema Google Antigravity (CLI, Antigravity 2.0, SDK), queda estrictamente prohibido duplicar o bifurcar la lógica del arnés del agente (*agent harness*). Toda capacidad, permiso de seguridad o configuración MCP DEBE estar declarada de forma única y compartida a nivel de runtime para garantizar la invariancia del comportamiento del agente entre la interfaz TUI (CLI) y la GUI (Antigravity 2.0). [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T21:06:30+02:00:antigravity_harness_v1]
-- **Ω117 · MULTI-LANGUAGE BFT AUDIT VERIFICATION INVARIANT (FULL EXERGY HARMONIZATION):** En toda auditoría integral de sistemas políglotas (Rust, Go, Python, F#, TypeScript), queda strictly prohibido emitir certificaciones de salud arquitectónica basándose en un único lenguaje o subconjunto de pruebas. La aserción de soberanía C5-REAL exige la verificación empírica síncrona de 1) la suite unitaria nativa en Rust (`cargo test`), 2) la suite de transductores en Go (`go test`), 3) las suites de orquestación y consenso BFT en Python (`pytest`), 4) el compilado de cliente TypeScript (`tsc && vite build`) y 5) el análisis de grafo acíclico de dependencias (AST $SCC=0$). Omitir cualquiera de los planos es Anergía C4-SIM. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T21:13:00+02:00:omega_117_v1]
-- **Ω118 · SPOTLIGHT EXCLUSION & PORTABILITY INVARIANT (DEV FS CONTAINMENT):** Queda estrictamente prohibido permitir que los demonios de indexación de metadatos del OS (ej. Spotlight mds/mdworker) escaneen recursivamente directorios de dependencias o builds con alta densidad de archivos (`node_modules`, `.venv`, `target`). Todo workspace C5-REAL DEBE incluir de forma física los marcapasos `.metadata_never_index` en dichos directorios y resolver rutas internas mediante `Path(__file__).resolve().parent` para garantizar portabilidad absoluta (Ω23) y evitar thrashing de CPU por inanición de disco APFS. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T21:34:15+02:00:omega_118_v1]
-- **Ω120 · GO TOOLCHAIN PATH RESOLUTION & LINT INVARIANT (STRICT GOPATH/BIN EXPORT):** En la ejecución de herramientas de análisis estático en Go (`staticcheck`, `golint`), queda estrictamente prohibido asumir su disponibilidad global sin haber validado explícitamente el `$PATH` o la presencia de los binarios instalados en `$(go env GOPATH)/bin`. Cualquier llamada a linters Go DEBE precederse de `export PATH=$PATH:$(go env GOPATH)/bin` para prevenir fallos `command not found` (zsh: 127) y garantizar la ejecución determinista en la integración CI/CD C5-REAL. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T22:06:00+02:00:omega_120_v1]
+```
+Claim = INVALID
+```
 
+---
 
-- **Ω121 · STRUCTURED HOST VALIDATION INVARIANT (ZERO-NETWORK ENFORCEMENT):** Queda estrictamente prohibido utilizar comparaciones parciales de cadenas o prefijos planos (como `.startswith()` o expresiones regulares no ancladas) para validar y autorizar endpoints de inferencia o red local en el backend. Toda validación de perímetro Zero-Network DEBE parsear la URI estructurada mediante un analizador sintáctico formal (ej. `urllib.parse.urlparse` o API de URL nativa) y contrastar el hostname resultante strictly contra el conjunto local (`127.0.0.1`, `localhost`), previniendo vectores de desvío de tráfico o secuestro de AST/telemetría. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T22:05:00+02:00:omega_121_v1]
-- **Ω123 · MCTS AST PAYLOAD & BENCHMARK THROUGHPUT INVARIANT (SHA3-256 PARITY):** En la generación y síntesis de expresiones de teoremas en Python/Go mediante expansiones MCTS, queda estrictamente prohibido alterar la sintaxis de los payloads o firmas de retorno (ej. espacios en operadores de potencia `**` o newlines terminales) sin actualizar síncronamente el hash SHA3-256 de verificación. Todo benchmark de rendimiento físico DEBE registrar la tasa de refutaciones reales por segundo sobre CPU y adjuntar la traza criptográfica `CORTEX-TAINT` en el ledger. [CORTEX-TAINT:borjamoskv:learn_crystallize:2026-07-21T22:32:45+02:00:omega_123_v1]
+## Ω2 · Just-In-Time Planning
 
+Queda prohibido diseñar cadenas de ejecución largas.
 
+Toda planificación debe validarse inmediatamente tras cada paso crítico.
 
+```
+Plan
+↓
+Execute
+↓
+Measure
+↓
+Adapt
+```
 
+---
 
+## Ω3 · Atomic Evolution
+
+Toda modificación estructural debe ser:
+
+* reversible
+* pequeña
+* verificable
+* independiente
+
+Objetivo:
+
+```
+One invariant
+↓
+One commit
+↓
+One verification
+```
+
+---
+
+## Ω4 · Recursive Self-Critique
+
+Todo agente debe ejecutar una segunda revisión adversarial antes de declarar éxito.
+
+Debe intentar demostrar que su propia conclusión es incorrecta.
+
+---
+
+# D2 · ARCHITECTURE
+
+## Ω10 · Single Responsibility
+
+Cada módulo posee una única responsabilidad claramente definida.
+
+---
+
+## Ω11 · Zero Hidden Coupling
+
+Toda dependencia debe ser explícita.
+
+Se prohíben dependencias implícitas mediante estado global.
+
+---
+
+## Ω12 · O(1) Context Scaling
+
+Los prompts nunca contendrán estructuras O(N).
+
+Únicamente:
+
+```
+Root Hash
+↓
+Dynamic Discovery
+↓
+Lazy Resolution
+```
+
+---
+
+## Ω13 · Immutable Interfaces
+
+Las interfaces públicas evolucionan mediante versionado.
+
+Nunca mediante ruptura silenciosa.
+
+---
+
+## Ω14 · Deterministic Code Generation
+
+Todo código generado debe ser:
+
+* reproducible
+* determinista
+* idempotente
+
+---
+
+# D3 · STORAGE
+
+## Ω20 · Atomic Persistence
+
+Toda escritura permanente seguirá:
+
+```
+write(tmp)
+↓
+fsync
+↓
+atomic rename
+```
+
+Nunca se escribirá directamente sobre el destino final.
+
+---
+
+## Ω21 · Crash Consistency
+
+Todo estado persistente deberá sobrevivir:
+
+* SIGINT
+* SIGTERM
+* Power Loss
+* Process Kill
+
+---
+
+## Ω22 · WAL Integrity
+
+Toda recuperación debe reconstruir exactamente el último estado consistente.
+
+Nunca un estado parcialmente comprometido.
+
+---
+
+# D4 · IPC
+
+## Ω30 · Structured IPC
+
+Toda comunicación utiliza framing explícito.
+
+Ejemplo:
+
+```
+NDJSON
+length-prefixed
+protobuf
+cap'n proto
+```
+
+Nunca JSON crudo sobre TCP.
+
+---
+
+## Ω31 · Socket Liveness
+
+Todo socket implementa:
+
+* Heartbeat
+* Graceful Shutdown
+* Automatic Cleanup
+
+No existen sockets huérfanos.
+
+---
+
+## Ω32 · Trust Boundary
+
+```
+Renderer
+↓
+ContextBridge
+↓
+Main Process
+↓
+IPC
+↓
+Backend
+```
+
+No existen bypasses.
+
+---
+
+# D5 · SECURITY
+
+## Ω40 · Deterministic Dependencies
+
+Nunca:
+
+```
+pip install foo
+```
+
+Siempre:
+
+```
+uv sync --locked
+pip --require-hashes
+```
+
+---
+
+## Ω41 · Structured URL Validation
+
+Toda URL será parseada estructuralmente.
+
+Nunca mediante:
+
+```
+startswith()
+contains()
+regex parcial
+```
+
+---
+
+## Ω42 · Workspace Isolation
+
+Todo artefacto externo vive dentro de su sandbox.
+
+Nunca contaminar el workspace principal.
+
+---
+
+## Ω43 · Supply Chain Integrity
+
+Toda release debe poder demostrar:
+
+* SBOM
+* OSV
+* pip-audit
+* Sigstore
+* SLSA
+* Hashes reproducibles
+
+---
+
+# D6 · AI SYSTEMS
+
+## Ω50 · Anti-Sycophancy
+
+El agente nunca declarará éxito basándose únicamente en:
+
+* tests
+* documentación
+* razonamiento
+
+Debe verificarse el fenómeno físico observado.
+
+---
+
+## Ω51 · Anti Mind Reading
+
+Toda crítica queda separada en:
+
+* Facts
+* Interpretations
+* Hypotheses
+* Unknowns
+
+Nunca inferir estados mentales.
+
+---
+
+## Ω52 · Prompt Purity
+
+Los prompts contienen únicamente:
+
+* objetivos
+* restricciones
+* interfaces
+
+Nunca conocimiento masivo.
+
+---
+
+## Ω53 · Tool Authority
+
+Las herramientas observan.
+
+El modelo interpreta.
+
+Nunca al revés.
+
+---
+
+# D7 · PERFORMANCE
+
+## Ω60 · Zero Entropy Scaling
+
+Todo crecimiento debe justificarse mediante:
+
+* CPU
+* RAM
+* IO
+* Tokens
+* Latencia
+* Complejidad
+
+---
+
+## Ω61 · Measure Before Optimize
+
+Toda optimización requiere:
+
+* baseline
+* profiling
+* benchmark
+* regression test
+
+Sin medición:
+
+```
+Optimization = Rejected
+```
+
+---
+
+# D8 · GOVERNANCE
+
+## Ω70 · Continuous Audit
+
+Cada ejecución genera:
+
+* Evidence Ledger
+* Decision Record
+* Risk Delta
+* Technical Debt Delta
+
+---
+
+## Ω71 · Architecture Drift Detection
+
+Toda desviación respecto a la arquitectura objetivo debe detectarse automáticamente.
+
+---
+
+## Ω72 · Evolution over Accumulation
+
+Añadir código siempre es la última opción.
+
+Prioridad:
+
+```
+Delete
+↓
+Simplify
+↓
+Reuse
+↓
+Refactor
+↓
+Create
+```
+
+---
+
+# D9 · GOLDEN LAW
+
+## Ω∞ · EXERGY
+
+La exergía de una modificación se define como:
+
+> Valor verificable generado dividido entre complejidad añadida.
+
+Toda evolución del sistema debe maximizar:
+
+```
+ΔExergy
+=
+Verified Value
+──────────────
+Added Complexity
+```
+
+Si la complejidad crece más rápido que la capacidad verificable del sistema, la modificación constituye **Anergía** y debe rechazarse.
