@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
 """
+Gemini Pro Multi‑Account Pool Manager with Telemetry (C5‑REAL)
+
+- Adds in‑memory counters for total requests, per‑account usage, successes and failures.
+- Records execution latency using `time.perf_counter()`.
+- Provides `GeminiProTelemetry` singleton with `record` and `snapshot` methods.
+- Integration is passive; the manager calls `GeminiProTelemetry.record` on each dispatch.
+
+This implementation avoids external dependencies; it uses only the standard library.
+"""
+
+"""
 CORTEX Multi-Account Gemini Pro Pool Engine (C5-REAL).
 Orchestrates >10 Gemini PRO/Flash API accounts with round-robin load balancing,
 cooling map for 429 Rate Limits, and zero static fallbacks (Ω25, Ω26, Ω27).
@@ -24,12 +35,52 @@ class EpistemicPoolHalt(Exception):
     pass
 
 
+
+class GeminiProTelemetry:
+    """Simple in‑memory telemetry singleton for the Gemini pool.
+
+    Tracks total requests, successes, failures and per‑key usage counts.
+    """
+    _instance = None
+    def __init__(self):
+        self.total_requests = 0
+        self.successes = 0
+        self.failures = 0
+        self.latency_sum = 0.0
+        self.per_key_counts = {}
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            cls._instance = cls()
+        return cls._instance
+    def record(self, key: str, success: bool, latency: float):
+        self.total_requests += 1
+        self.latency_sum += latency
+        self.per_key_counts.setdefault(key, 0)
+        self.per_key_counts[key] += 1
+        if success:
+            self.successes += 1
+        else:
+            self.failures += 1
+    def snapshot(self) -> dict:
+        avg_latency = self.latency_sum / self.total_requests if self.total_requests else 0.0
+        return {
+            "total_requests": self.total_requests,
+            "successes": self.successes,
+            "failures": self.failures,
+            "avg_latency_sec": avg_latency,
+            "per_key_counts": self.per_key_counts.copy(),
+        }
+
 class GeminiAccountSlot:
+
     """Representa una cuenta física de Gemini Pro/Flash aislada."""
 
     def __init__(self, slot_id: int, api_key: str) -> None:
         self.slot_id = slot_id
         self.api_key = api_key
+        # Telemetry singleton
+        self.telemetry = GeminiProTelemetry.get_instance()
         self.cooldown_until: float = 0.0
         self.requests_count: int = 0
         self.errors_count: int = 0
@@ -52,11 +103,14 @@ class GeminiAccountSlot:
 
 
 class GeminiProPoolManager:
+    """Manage a pool of Gemini Pro API keys with round‑robin dispatch and telemetry."""
+
     """Manejador de Pool Multi-Cuenta para Gemini Pro/Flash (C5-REAL)."""
 
     def __init__(self, env_prefix: str = "GEMINI_API_KEY") -> None:
         self.slots: List[GeminiAccountSlot] = []
         self._current_index: int = 0
+        self.telemetry = GeminiProTelemetry.get_instance()
         self._load_keys(env_prefix)
 
     def _load_keys(self, env_prefix: str) -> None:
@@ -100,6 +154,7 @@ class GeminiProPoolManager:
         max_attempts = len(self.slots) if self.slots else 1
 
         last_error: Optional[Exception] = None
+        start_time = time.perf_counter()
 
         while attempts < max_attempts:
             slot = self.get_next_available_slot()
@@ -125,6 +180,8 @@ class GeminiProPoolManager:
                         parts = candidates[0]["content"].get("parts", [])
                         if parts:
                             slot.reset_stats()
+                            latency = time.perf_counter() - start_time
+                            self.telemetry.record(slot.api_key[:8], True, latency)
                             return str(parts[0].get("text", ""))
                     return ""
             except urllib.error.HTTPError as e:
@@ -135,6 +192,7 @@ class GeminiProPoolManager:
                     attempts += 1
                     continue
                 else:
+                    self.telemetry.record(slot.api_key[:8], False, time.perf_counter() - start_time)
                     raise EpistemicPoolHalt(
                         f"HTTPError Gemini API [{e.code}]: {e.reason}"
                     )
@@ -144,6 +202,7 @@ class GeminiProPoolManager:
                 attempts += 1
                 continue
 
+        self.telemetry.record("pool_exhausted", False, time.perf_counter() - start_time)
         raise EpistemicPoolHalt(
             f"Agotadas todas las cuentas ({max_attempts}) del pool Gemini Pro. Error: {last_error}"
         )
@@ -158,9 +217,10 @@ class GeminiProPoolManager:
     def get_pool_stats(self) -> dict[str, Any]:
         """Devuelve las métricas termodinámicas actuales de cada slot del pool."""
         now = time.time()
-        return {
+        stats = {
             "total_slots": len(self.slots),
             "available_slots": sum(1 for s in self.slots if s.is_available),
+            "telemetry": self.telemetry.snapshot(),
             "slots": [
                 {
                     "slot_id": s.slot_id,
