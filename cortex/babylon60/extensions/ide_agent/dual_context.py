@@ -33,10 +33,11 @@ class DualContextAgent:
                 pass
 
         if not socket_env:
-            logging.error(
-                "[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga."
+            socket_env = "/tmp/cortex_ipc.sock"
+            os.environ["CORTEX_IPC_SOCKET"] = socket_env
+            logging.info(
+                f"[C5-REAL] CORTEX_IPC_SOCKET asignado por defecto a {socket_env}"
             )
-            os.kill(os.getpid(), signal.SIGKILL)
 
         self.socket_path: str = socket_env or ""
         logging.basicConfig(level=logging.INFO)

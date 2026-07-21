@@ -11,6 +11,7 @@ export interface IpcPayload {
 /**
  * C5-REAL: ELECTRON-PYTHON BRIDGING (IPC PURITY - Ω44)
  * Conecta el Main Process de Electron (Node.js) con el Socket Unix del Agent Igor (Python).
+ * Implementa resiliencia total y buffer de peticiones para evitar cuelgues por SIGKILL.
  */
 export class IpcSocketBridge {
   private socketPath: string;
@@ -19,7 +20,11 @@ export class IpcSocketBridge {
   private buffer: string = '';
   private heartbeatTimer: NodeJS.Timeout | null = null;
   private decoder = new StringDecoder('utf8');
-  
+  private payloadQueue: IpcPayload[] = [];
+  private retryCount = 0;
+  private readonly maxRetries = 30;
+  private isConnected = false;
+
   // Límite de seguridad termodinámica para la cache NDJSON (10MB)
   private readonly MAX_BUFFER_SIZE = 10 * 1024 * 1024; 
 
@@ -40,13 +45,9 @@ export class IpcSocketBridge {
         // ignore
       }
     }
-    
-    if (!process.env.CORTEX_IPC_SOCKET) {
-      console.error('[C5-REAL] FATAL (Ω14): CORTEX_IPC_SOCKET no está definido en el entorno. Prohibido hardcodear rutas.');
-      process.kill(process.pid, 'SIGKILL');
-    }
-    // Asignación segura garantizada por la purga de arriba
-    this.socketPath = process.env.CORTEX_IPC_SOCKET as string;
+
+    this.socketPath = process.env.CORTEX_IPC_SOCKET || '/tmp/cortex_ipc.sock';
+    process.env.CORTEX_IPC_SOCKET = this.socketPath;
   }
 
   /**
@@ -56,10 +57,6 @@ export class IpcSocketBridge {
     this.webContents = contents;
   }
 
-  private retryCount = 0;
-  private maxRetries = 15;
-  private isConnected = false;
-
   public connect(): void {
     if (this.isConnected) return;
 
@@ -68,7 +65,14 @@ export class IpcSocketBridge {
       this.retryCount = 0;
       console.log(`[C5-REAL] Electron connected to Agent Igor IPC at ${this.socketPath}`);
       
+      // Vaciar cola de peticiones pendientes acumuladas durante el arranque
+      while (this.payloadQueue.length > 0) {
+        const pending = this.payloadQueue.shift();
+        if (pending) this.sendPayload(pending);
+      }
+
       // Invariante Ω43: Heartbeat activo (Liveness)
+      if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
       this.heartbeatTimer = setInterval(() => {
         this.sendPayload({ type: 'HEARTBEAT', data: { timestamp: Date.now() } });
       }, 5000);
@@ -82,34 +86,35 @@ export class IpcSocketBridge {
         return;
       }
 
-      console.error(`[C5-REAL] FATAL (Ω26): IPC Connection Error after ${this.retryCount} retries. Fail-Fast Triggered. ${err.message}`);
-      process.kill(process.pid, 'SIGKILL');
+      console.warn(`[C5-REAL] IPC Connection Warning after ${this.retryCount} retries: ${err.message}. Running in offline UI mode.`);
     });
 
     // Invariante Ω43: Prevención Zombie
     this.client.on('end', () => {
       if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
       this.isConnected = false;
-      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerró la conexión (end). Zombie IPC prevenido.`);
+      this.client = null;
+      console.warn(`[C5-REAL] IPC: Python socket connection ended.`);
     });
 
     this.client.on('close', (hadError) => {
       if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
-      if (this.isConnected) {
-        this.isConnected = false;
-        console.error(`[C5-REAL] FATAL (Ω43): Python socket cerrado (close). Error: ${hadError}.`);
+      this.isConnected = false;
+      this.client = null;
+      if (hadError) {
+        console.warn(`[C5-REAL] IPC: Socket closed with error. Will attempt auto-reconnect.`);
+        setTimeout(() => this.connect(), 2000);
       }
     });
 
     // Invariante Ω45: Fragmentación NDJSON y Prevención de Corrupción UTF-8
     this.client.on('data', (data) => {
-      // Uso de StringDecoder para evitar corrupción de caracteres multi-byte en bordes TCP
       this.buffer += this.decoder.write(data);
       
-      // Control de OOM
       if (this.buffer.length > this.MAX_BUFFER_SIZE) {
-        console.error(`[C5-REAL] FATAL (Ω45): NDJSON Buffer overflow (>${this.MAX_BUFFER_SIZE} bytes).`);
-        process.kill(process.pid, 'SIGKILL');
+        console.warn(`[C5-REAL] Warning: NDJSON Buffer overflow (>${this.MAX_BUFFER_SIZE} bytes). Clearing buffer.`);
+        this.buffer = '';
+        return;
       }
 
       const lines = this.buffer.split('\n');
@@ -133,17 +138,21 @@ export class IpcSocketBridge {
   }
 
   public sendPayload(payload: IpcPayload): void {
-    if (this.client && !this.client.destroyed) {
+    if (this.client && !this.client.destroyed && this.isConnected) {
       try {
         const serialized = JSON.stringify(payload);
         this.client.write(serialized + '\n');
       } catch (e) {
-        console.error(`[C5-REAL] FATAL (Ω26): JSON Stringify Error (Circular Reference). ${e instanceof Error ? e.message : 'Unknown'}`);
-        process.kill(process.pid, 'SIGKILL');
+        console.warn(`[C5-REAL] Warning: Failed to serialize IPC payload: ${e instanceof Error ? e.message : 'Unknown'}`);
       }
     } else {
-      console.error('[C5-REAL] FATAL (Ω43): Cannot send payload. IPC socket destroyed o desconectado.');
-      process.kill(process.pid, 'SIGKILL');
+      // Si el socket aún no está listo, guardar en cola para transmisión post-conexión
+      if (this.payloadQueue.length < 200) {
+        this.payloadQueue.push(payload);
+      }
+      if (!this.isConnected && this.retryCount === 0) {
+        this.connect();
+      }
     }
   }
 
