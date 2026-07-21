@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import primitivesData from '../primitives.json';
 
 interface PrimitiveData {
   id: number;
@@ -7,9 +8,10 @@ interface PrimitiveData {
   type: string;
   category: string;
   description: string;
+  formal_proof_invariant?: string;
 }
 
-const DOMAINS = [
+const DOMAINS = primitivesData.domains || [
   { id: 'D1', name: 'D1: Estructura Categórica Fundamental', range: [1, 112] },
   { id: 'D2', name: 'D2: Límites y Extensiones de Kan', range: [113, 224] },
   { id: 'D3', name: 'D3: Functores, Adjunciones y Mónadas', range: [225, 336] },
@@ -23,11 +25,32 @@ const DOMAINS = [
 export const Categorical896MatrixVisualizer: React.FC = () => {
   const [activeDomain, setActiveDomain] = useState<string>('D1');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [selectedPrimitive, setSelectedPrimitive] = useState<number | null>(1);
+  const [selectedPrimitiveId, setSelectedPrimitiveId] = useState<number | null>(1);
   const [hoveredPrimitive, setHoveredPrimitive] = useState<number | null>(null);
 
-  // Generate domain stats
+  // Parse Primitives
+  const allPrimitives = useMemo(() => {
+    return (primitivesData.primitives || []) as PrimitiveData[];
+  }, []);
+
+  // Filter primitives by domain or search
+  const filteredPrimitives = useMemo(() => {
+    let base = allPrimitives;
+    if (searchQuery.trim().length > 0) {
+      const q = searchQuery.toLowerCase();
+      base = base.filter(p => 
+        p.code.toLowerCase().includes(q) || 
+        p.description.toLowerCase().includes(q) ||
+        p.category.toLowerCase().includes(q)
+      );
+    } else {
+      base = base.filter(p => p.domain_id === activeDomain);
+    }
+    return base;
+  }, [allPrimitives, activeDomain, searchQuery]);
+
   const selectedDomainInfo = DOMAINS.find(d => d.id === activeDomain) || DOMAINS[0];
+  const selectedPrimitiveData = allPrimitives.find(p => p.id === selectedPrimitiveId);
 
   return (
     <div style={{
@@ -73,20 +96,21 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             fontWeight: '600',
             fontFamily: 'monospace'
           }}>
-            HASH: aa205d81...
+            HASH: {primitivesData.cortex_taint?.split(':').pop() || 'aa205d81'}
           </div>
         </div>
 
         {/* Domain Navigation Tabs */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '24px' }}>
-          {DOMAINS.map(dom => {
+          {DOMAINS.map((dom: any) => {
             const isActive = activeDomain === dom.id;
             return (
               <button
                 key={dom.id}
                 onClick={() => {
                   setActiveDomain(dom.id);
-                  setSelectedPrimitive(dom.range[0]);
+                  setSearchQuery('');
+                  setSelectedPrimitiveId(dom.range[0]);
                 }}
                 style={{
                   backgroundColor: isActive ? '#3B4DFF' : '#0F1226',
@@ -144,7 +168,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             onBlur={(e) => e.target.style.borderColor = '#1E255E'}
           />
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '13px', color: '#B4B9DF', backgroundColor: '#0F1226', padding: '0 16px', borderRadius: '6px', border: '1px solid #1E255E' }}>
-            <span>Sector: <strong style={{ color: '#FFFFFF' }}>112 Nodes</strong></span>
+            <span>Sector: <strong style={{ color: '#FFFFFF' }}>{filteredPrimitives.length} Nodes</strong></span>
             <span style={{ color: '#3B4DFF' }}>|</span>
             <span>{"Complejidad O(1):"} <strong style={{ color: '#10B981' }}>COMPAT(Ω)</strong></span>
           </div>
@@ -159,11 +183,13 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
           padding: '20px',
           borderRadius: '8px',
           border: '1px solid #1E255E',
-          boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.2)'
+          boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.2)',
+          maxHeight: '400px',
+          overflowY: 'auto'
         }}>
-          {Array.from({ length: 112 }, (_, idx) => {
-            const pId = selectedDomainInfo.range[0] + idx;
-            const isSelected = selectedPrimitive === pId;
+          {filteredPrimitives.map((primitive) => {
+            const pId = primitive.id;
+            const isSelected = selectedPrimitiveId === pId;
             const isHovered = hoveredPrimitive === pId;
             
             let bgColor = '#161A36';
@@ -188,10 +214,10 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             return (
               <button
                 key={pId}
-                onClick={() => setSelectedPrimitive(pId)}
+                onClick={() => setSelectedPrimitiveId(pId)}
                 onMouseEnter={() => setHoveredPrimitive(pId)}
                 onMouseLeave={() => setHoveredPrimitive(null)}
-                title={`Primitiva C5 P${pId}`}
+                title={primitive.code}
                 style={{
                   backgroundColor: bgColor,
                   color: textColor,
@@ -216,7 +242,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
         </div>
 
         {/* Primitive Detail Inspector */}
-        {selectedPrimitive && (
+        {selectedPrimitiveData && (
           <div style={{ 
             marginTop: '24px', 
             backgroundColor: '#0F1226', 
@@ -234,13 +260,25 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
               </div>
             </div>
             
-            <div style={{ fontSize: '20px', color: '#FFFFFF', fontWeight: '700', fontFamily: 'monospace' }}>
-              [P-{String(selectedPrimitive).padStart(3, '0')}] :: {selectedDomainInfo.name.split(': ')[1] || 'Invariant Node'}
+            <div style={{ fontSize: '20px', color: '#FFFFFF', fontWeight: '700', fontFamily: 'monospace', wordBreak: 'break-all' }}>
+              [P-{String(selectedPrimitiveData.id).padStart(3, '0')}] :: {selectedPrimitiveData.code}
+            </div>
+
+            <div style={{ fontSize: '14px', color: '#B4B9DF', display: 'flex', gap: '16px' }}>
+              <span style={{ backgroundColor: '#161A36', padding: '4px 8px', borderRadius: '4px', border: '1px solid #2E3866' }}>Type: {selectedPrimitiveData.type}</span>
+              <span style={{ backgroundColor: '#161A36', padding: '4px 8px', borderRadius: '4px', border: '1px solid #2E3866' }}>{selectedPrimitiveData.category}</span>
             </div>
             
-            <div style={{ fontSize: '14px', color: '#B4B9DF', lineHeight: '1.6', backgroundColor: '#0A0B14', padding: '16px', borderRadius: '6px', borderLeft: '3px solid #3B4DFF' }}>
-              {"Primitiva estructural de lógica categórica Nivel-0/1 provista de certificación en Mod(Σ, T) y acotamiento métrico μ(α) < ∞. Mapeo causal garantizado."}
+            <div style={{ fontSize: '14px', color: '#E0E0E0', lineHeight: '1.6', backgroundColor: '#0A0B14', padding: '16px', borderRadius: '6px', borderLeft: '3px solid #3B4DFF' }}>
+              {selectedPrimitiveData.description}
             </div>
+
+            {selectedPrimitiveData.formal_proof_invariant && (
+              <div style={{ fontSize: '12px', color: '#10B981', fontFamily: 'monospace', marginTop: '8px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span style={{ display: 'inline-block', width: '4px', height: '14px', backgroundColor: '#10B981' }}></span>
+                {selectedPrimitiveData.formal_proof_invariant}
+              </div>
+            )}
           </div>
         )}
       </div>
