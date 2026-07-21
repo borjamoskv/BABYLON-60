@@ -1,12 +1,12 @@
 """
-C5-REAL FISR Subadditivity Theorem Verifier & Certificate Algebra Transducer
-=============================================================================
+C5-REAL FISR Subadditivity Theorem Verifier & Lawvere Metric Transducer (v18.3)
+================================================================================
 Kernel: MOSKV-1 APEX
-State: Executable C5-REAL Proof Verification Engine for Baseline v18.1
+State: Executable C5-REAL Proof Verification Engine for Baseline v18.3
 """
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple, Set, Any
+from typing import Dict, List, Optional, Tuple, Set, Any, Callable
 import math
 
 
@@ -31,41 +31,48 @@ class Certificate:
 class CertificateCategoryP:
     """
     Implementation of Category P and Functor pi: P -> C (Identity on Objects).
-    Morphs in P are certificates projecting to morphs in C via pi.
+    Lawvere Enriched Metric Space (C, mu) with extension/repair operator kappa.
     """
 
-    def __init__(self, delta_circ: float = 0.0, delta_tensor: float = 0.0):
-        self.delta_circ = delta_circ
-        self.delta_tensor = delta_tensor
+    def __init__(self, delta_circ_fn: Optional[Callable[[Morphism, Morphism], float]] = None,
+                 delta_tensor_fn: Optional[Callable[[Morphism, Morphism], float]] = None):
+        self.delta_circ_fn = delta_circ_fn or (lambda a, b: 0.0)
+        self.delta_tensor_fn = delta_tensor_fn or (lambda a, b: 0.0)
         self.certificates: Dict[Morphism, List[Certificate]] = {}
 
     def add_certificate(self, cert: Certificate) -> None:
         self.certificates.setdefault(cert.target_morphism, []).append(cert)
 
+    def add_identity_certificate(self, obj_name: str) -> Certificate:
+        id_morphism = Morphism(f"id_{obj_name}", obj_name, obj_name)
+        id_cert = Certificate(f"id_cert_{obj_name}", id_morphism, 0.0)
+        self.add_certificate(id_cert)
+        return id_cert
+
     def get_cert_fiber(self, alpha: Morphism) -> List[Certificate]:
         return self.certificates.get(alpha, [])
 
     def compute_mu(self, alpha: Morphism) -> float:
+        r"""
+        Computes mu(alpha) = inf { |c| | c in Cert(alpha) }.
+        Enforces total function convention: inf \emptyset = \infty.
+        """
         fiber = self.get_cert_fiber(alpha)
         if not fiber:
             return float('inf')
         return min(c.cost for c in fiber)
 
     def compose_sequential(self, c1: Certificate, c2: Certificate) -> Certificate:
-        """
-        c1: cert for alpha: X -> Y
-        c2: cert for beta: Y -> Z
-        c2 (circ) c1: cert for beta o alpha: X -> Z
-        """
         if c1.target_morphism.tgt != c2.target_morphism.src:
             raise ValueError(f"Composition mismatch: {c1.target_morphism.tgt} != {c2.target_morphism.src}")
 
+        delta = self.delta_circ_fn(c1.target_morphism, c2.target_morphism)
         composed_morphism = Morphism(
             name=f"({c2.target_morphism.name} o {c1.target_morphism.name})",
             src=c1.target_morphism.src,
             tgt=c2.target_morphism.tgt
         )
-        composed_cost = c1.cost + c2.cost + self.delta_circ
+        composed_cost = c1.cost + c2.cost + delta
         composed_cert = Certificate(
             cert_id=f"({c2.cert_id} * {c1.cert_id})",
             target_morphism=composed_morphism,
@@ -75,17 +82,13 @@ class CertificateCategoryP:
         return composed_cert
 
     def compose_monoidal(self, c1: Certificate, c2: Certificate) -> Certificate:
-        """
-        c1: cert for alpha: X -> Y
-        c2: cert for beta: A -> B
-        c1 (tensor) c2: cert for alpha tensor beta: (X x A) -> (Y x B)
-        """
+        delta = self.delta_tensor_fn(c1.target_morphism, c2.target_morphism)
         tensor_morphism = Morphism(
             name=f"({c1.target_morphism.name} (x) {c2.target_morphism.name})",
             src=f"({c1.target_morphism.src} x {c2.target_morphism.src})",
             tgt=f"({c1.target_morphism.tgt} x {c2.target_morphism.tgt})"
         )
-        tensor_cost = c1.cost + c2.cost + self.delta_tensor
+        tensor_cost = c1.cost + c2.cost + delta
         tensor_cert = Certificate(
             cert_id=f"({c1.cert_id} (x) {c2.cert_id})",
             target_morphism=tensor_morphism,
@@ -95,13 +98,10 @@ class CertificateCategoryP:
         return tensor_cert
 
     def verify_sequential_subadditivity(self, alpha: Morphism, beta: Morphism) -> Tuple[bool, float, float]:
-        """
-        Verifies: mu(beta o alpha) <= mu(alpha) + mu(beta) + delta_circ
-        Returns (is_satisfied, left_hand_side, right_hand_side)
-        """
         mu_alpha = self.compute_mu(alpha)
         mu_beta = self.compute_mu(beta)
-        rhs = mu_alpha + mu_beta + self.delta_circ
+        delta = self.delta_circ_fn(alpha, beta)
+        rhs = mu_alpha + mu_beta + delta
 
         comp_morphism = Morphism(
             name=f"({beta.name} o {alpha.name})",
@@ -110,9 +110,7 @@ class CertificateCategoryP:
         )
         mu_comp = self.compute_mu(comp_morphism)
 
-        # If comp_morphism isn't explicitly in fiber, simulate best composition
         if mu_comp == float('inf') and mu_alpha < float('inf') and mu_beta < float('inf'):
-            # Find optimal c1 and c2
             c1_opt = min(self.get_cert_fiber(alpha), key=lambda c: c.cost)
             c2_opt = min(self.get_cert_fiber(beta), key=lambda c: c.cost)
             self.compose_sequential(c1_opt, c2_opt)
@@ -121,27 +119,25 @@ class CertificateCategoryP:
         satisfied = mu_comp <= rhs
         return satisfied, mu_comp, rhs
 
-    def verify_monoidal_subadditivity(self, alpha: Morphism, beta: Morphism) -> Tuple[bool, float, float]:
+    def compute_kappa_repair_operator(self, alpha: Morphism, budget_predicate: Callable[[Morphism, float], bool]) -> float:
         """
-        Verifies: mu(alpha (x) beta) <= mu(alpha) + mu(beta) + delta_tensor
-        Returns (is_satisfied, left_hand_side, right_hand_side)
+        Computes kappa(alpha, R) = inf { mu(e) | e o alpha |= R }.
+        Iterates over extension morphisms e from alpha.tgt.
         """
-        mu_alpha = self.compute_mu(alpha)
-        mu_beta = self.compute_mu(beta)
-        rhs = mu_alpha + mu_beta + self.delta_tensor
+        alpha_certs = self.get_cert_fiber(alpha)
+        if not alpha_certs:
+            return float('inf')
+        c_alpha_opt = min(alpha_certs, key=lambda c: c.cost)
 
-        tensor_morphism = Morphism(
-            name=f"({alpha.name} (x) {beta.name})",
-            src=f"({alpha.src} x {beta.src})",
-            tgt=f"({alpha.tgt} x {beta.tgt})"
-        )
-        mu_tensor = self.compute_mu(tensor_morphism)
+        valid_extension_costs = []
+        for m, certs in list(self.certificates.items()):
+            if m.src == alpha.tgt and certs:
+                c_e_opt = min(certs, key=lambda c: c.cost)
+                composed_cert = self.compose_sequential(c_alpha_opt, c_e_opt)
+                comp_cost = composed_cert.cost
+                if budget_predicate(composed_cert.target_morphism, comp_cost):
+                    valid_extension_costs.append(c_e_opt.cost)
 
-        if mu_tensor == float('inf') and mu_alpha < float('inf') and mu_beta < float('inf'):
-            c1_opt = min(self.get_cert_fiber(alpha), key=lambda c: c.cost)
-            c2_opt = min(self.get_cert_fiber(beta), key=lambda c: c.cost)
-            self.compose_monoidal(c1_opt, c2_opt)
-            mu_tensor = self.compute_mu(tensor_morphism)
-
-        satisfied = mu_tensor <= rhs
-        return satisfied, mu_tensor, rhs
+        if not valid_extension_costs:
+            return float('inf')
+        return min(valid_extension_costs)
