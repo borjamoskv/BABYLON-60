@@ -4,7 +4,6 @@ Rule Compliance: Ω11 (AST / HTML syntax invariant).
 """
 
 import os
-import pytest
 from pathlib import Path
 
 DASHBOARD_PATH = str(Path(__file__).resolve().parent / "escohotado_dashboard.html")

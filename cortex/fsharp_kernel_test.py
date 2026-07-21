@@ -4,7 +4,6 @@ Rule Compliance: Ω117 (Multi-Language BFT Audit).
 """
 
 import subprocess
-import os
 from pathlib import Path
 
 def test_fsharp_kernel_compilation_and_ontology():

@@ -4,7 +4,6 @@ Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy).
 """
 
 import os
-import pytest
 from pathlib import Path
 
 SUBSTACK_POST_PATH = str(Path(__file__).resolve().parent.parent / "artifacts" / "post_substack_escohotado_ultrathink.md")

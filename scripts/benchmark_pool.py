@@ -8,13 +8,13 @@ en tiempo real para el Pool Multi-Cuenta de Gemini PRO.
 import os
 import sys
 import time
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
-from scripts.gemini_pool_manager import GeminiProPoolManager, GeminiAccountSlot  # noqa: E402
+from scripts.gemini_pool_manager import GeminiProPoolManager  # noqa: E402
 
 
 def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 50) -> None:

@@ -3,11 +3,10 @@ Pytest unit tests for CORTEX Escohotado Chaos & Thermodynamic Engine.
 Rule Compliance: Ω31 (Entropy Verification), Ω26 (Specific Exception Handling).
 """
 
-import pytest
 import os
 import sqlite3
 from pathlib import Path
-from cortex.escohotado_chaos_engine import compute_entropy, compute_lyapunov, simulate_system, run_simulation_grid
+from cortex.escohotado_chaos_engine import compute_entropy, simulate_system, run_simulation_grid
 
 TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_chaos.db")
 

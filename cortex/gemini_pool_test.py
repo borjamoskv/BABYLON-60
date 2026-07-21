@@ -2,10 +2,9 @@
 
 import os
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 from scripts.gemini_pool_manager import (
     GeminiProPoolManager,
-    GeminiAccountSlot,
     EpistemicPoolHalt,
 )
 

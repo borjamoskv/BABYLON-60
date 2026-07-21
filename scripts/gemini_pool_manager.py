@@ -11,7 +11,7 @@ import json
 import time
 import urllib.request
 import urllib.error
-from typing import List, Dict, Optional, Any
+from typing import List, Optional
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:

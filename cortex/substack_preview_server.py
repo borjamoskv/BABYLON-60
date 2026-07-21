@@ -5,8 +5,6 @@ Serves and renders all 23 Substack markdown posts locally with the Industrial No
 Rule Compliance: Ω10 (No-deadlock socket binding), Ω23 (Relative Paths), Ω43 (Zero-zombie socket liveness).
 """
 
-import os
-import sys
 import argparse
 import http.server
 import socketserver

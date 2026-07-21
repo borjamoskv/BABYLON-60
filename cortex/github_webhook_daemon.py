@@ -13,9 +13,14 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 # C5-REAL Invariant: Zero External Dependencies for perception.
 CORTEX_DB_PATH = ".cortex/cortex.db"
 SECRET_KEY = os.environ.get("CORTEX_GITHUB_SECRET")
-if not SECRET_KEY:
-    raise RuntimeError("CORTEX_GITHUB_SECRET env var is required (Ω25).")
 TRIGGER_PATH = ".cortex/.trigger_swarm"
+
+
+def get_secret_key() -> str:
+    key = os.environ.get("CORTEX_GITHUB_SECRET") or SECRET_KEY
+    if not key:
+        raise RuntimeError("CORTEX_GITHUB_SECRET env var is required (Ω25).")
+    return key
 
 
 def init_perception_ledger() -> None:
@@ -88,7 +93,7 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             return
 
         expected_mac = hmac.new(
-            (SECRET_KEY or "").encode("utf-8"), payload_bytes, hashlib.sha3_256
+            get_secret_key().encode("utf-8"), payload_bytes, hashlib.sha3_256
         ).hexdigest()
 
         expected_sig = f"sha3-256={expected_mac}"

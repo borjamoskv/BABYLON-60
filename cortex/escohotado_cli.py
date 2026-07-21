@@ -9,7 +9,6 @@ Command-line interface to query and inspect all 3 Escohotado SQLite Ledgers:
 Rule Compliance: Ω10 (SQLite WAL query), Ω14 (Environment Parametrization).
 """
 
-import sys
 import os
 import sqlite3
 import json

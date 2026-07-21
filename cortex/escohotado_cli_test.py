@@ -3,7 +3,6 @@ Pytest unit tests for Escohotado Unified CLI Transducer.
 Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 """
 
-import pytest
 from cortex.escohotado_cli import query_chaos_db, query_econ_db, query_substance_db
 
 def test_cli_ledger_queries():

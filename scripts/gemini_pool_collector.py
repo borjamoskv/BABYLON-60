@@ -55,7 +55,7 @@ def append_keys_to_env(keys: list[str]) -> int:
             idx += 1
             valid_added += 1
         else:
-            print(f"❌ Clave inválida o sin acceso a Gemini API.")
+            print("❌ Clave inválida o sin acceso a Gemini API.")
 
     if new_lines:
         with open(env_path, "a", encoding="utf-8") as f:

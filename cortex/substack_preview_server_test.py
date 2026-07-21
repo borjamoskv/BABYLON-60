@@ -3,7 +3,6 @@ Pytest unit tests for CORTEX Substack Preview Server & Renderer Engine.
 Rule Compliance: Ω11 (Rich-Text Compatibility), Ω23 (Relative Paths).
 """
 
-import pytest
 from cortex.substack_preview_server import render_post_html, HTML_TEMPLATE
 
 def test_render_post_html_valid_file():

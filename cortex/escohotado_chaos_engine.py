@@ -10,11 +10,10 @@ Rule Compliance: Ω10 (SQLite WAL + busy_timeout), Ω31 (Physical Entropy Calcul
 import math
 import sqlite3
 import os
-import json
 import hashlib
 import datetime
 from pathlib import Path
-from typing import Dict, List, Tuple, Any
+from typing import Dict, List, Any
 
 DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db")
 

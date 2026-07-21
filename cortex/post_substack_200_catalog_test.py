@@ -3,7 +3,6 @@ Pytest unit test suite for Complete 200 Substack Archive Catalog Transduction.
 Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy), Ω23 (Relative Paths).
 """
 
-import os
 import pytest
 from pathlib import Path
 

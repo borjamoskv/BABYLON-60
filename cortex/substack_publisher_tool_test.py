@@ -3,13 +3,11 @@ Pytest unit tests for Substack Publisher & Formatting Transducer Tool.
 Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy).
 """
 
-import pytest
 from cortex.substack_publisher_tool import (
     format_signature_block,
     purge_latex_math,
     convert_tables_to_lists,
-    process_markdown_for_substack,
-    SUBSTACK_CATALOG
+    process_markdown_for_substack
 )
 
 def test_format_signature_block():

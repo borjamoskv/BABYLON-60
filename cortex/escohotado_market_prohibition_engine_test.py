@@ -3,7 +3,6 @@ Pytest unit tests for Escohotado Market & Prohibition Economics Engine.
 Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 """
 
-import pytest
 import os
 import sqlite3
 from pathlib import Path
