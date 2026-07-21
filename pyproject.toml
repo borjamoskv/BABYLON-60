@@ -28,7 +28,8 @@ dev = [
 ]
 
 [tool.mypy]
-namespace_packages = false
+namespace_packages = true
+explicit_package_bases = true
 exclude = [
     "^scratch/",
 ]

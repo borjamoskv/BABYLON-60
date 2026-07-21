@@ -31,7 +31,6 @@ from cortex.mcts_vnode_compiler import (
     calculate_shannon_entropy,
     EphemeralVNodePhysical,
     L3InferenceEnginePhysical,
-    MCTSCompilerError,
     MCTSNode,
     MCTSTreeSearchError,
     _fast_log2,

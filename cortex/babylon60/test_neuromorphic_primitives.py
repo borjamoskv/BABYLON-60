@@ -8,7 +8,8 @@ from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 @pytest.mark.anyio
 async def test_neuromorphic_v2():
     print("[C5-REAL] Inicializando Malla Neuromórfica V2 (STDP + LIF)...")
-    db_path = "memristor_v2_test.db"
+    import uuid
+    db_path = f"memristor_v2_test_{uuid.uuid4().hex}.db"
     for suffix in ["", "-wal", "-shm"]:
         p = f"{db_path}{suffix}"
         if os.path.exists(p):

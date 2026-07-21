@@ -1,5 +1,4 @@
 import ast
-import collections
 import dataclasses
 import functools
 import hashlib
@@ -7,9 +6,8 @@ import logging
 import math
 import os
 import pathlib
-import sys
 import time
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 try:
     import numpy as np

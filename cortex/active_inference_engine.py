@@ -1,7 +1,6 @@
 import math
 import logging
 import dataclasses
-from typing import Tuple, Optional
 
 from cortex.observer import dispatch_state_observer, StateVector
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
