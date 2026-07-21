@@ -9,13 +9,12 @@ import sys
 import time
 import json
 import sqlite3
-import threading
 from concurrent.futures import ThreadPoolExecutor
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 sys.path.append(PROJECT_ROOT)
 
-from cortex.babylon60.neuromorphic_primitives import STDPMemristor
+from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
 
 DB_PATH = "memristor_stress_test.db"
 
@@ -55,7 +54,7 @@ def execute() -> None:
                 pass  # Clean-up fallback
 
     # Inicializar memristores primarios
-    mem_init = STDPMemristor(DB_PATH, "SensorA", "MotorB")
+    STDPMemristor(DB_PATH, "SensorA", "MotorB")
     
     start_time = time.time()
     results = []

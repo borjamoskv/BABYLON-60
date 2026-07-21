@@ -5,7 +5,6 @@ import unittest
 from unittest.mock import patch
 from scripts.gemini_pool_manager import (
     GeminiProPoolManager,
-    EpistemicPoolHalt,
 )
 
 
