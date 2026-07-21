@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -10,12 +9,20 @@ import (
 	"strings"
 )
 
+func toTitle(s string) string {
+	s = strings.ToLower(s)
+	if s == "" {
+		return ""
+	}
+	return strings.ToUpper(s[:1]) + s[1:]
+}
+
 func main() {
 	yamlPath := "cortex/ontology/10000_space_taxonomy.yaml"
 	primitivesDir := "primitives"
 	reportPath := "AUDITORIA_TAXONOMIA_REPORT.md"
 
-	content, err := ioutil.ReadFile(yamlPath)
+	content, err := os.ReadFile(yamlPath)
 	if err != nil {
 		fmt.Printf("Error reading taxonomy file: %v\n", err)
 		os.Exit(1)
@@ -113,20 +120,21 @@ type Target int
 const (
 `)
 	for i := 0; i < 10; i++ {
-		goCode.WriteString(fmt.Sprintf("\tDomain%s Domain = %d\n", strings.Title(strings.ToLower(domains[i])), i))
+		goCode.WriteString(fmt.Sprintf("\tDomain%s Domain = %d\n", toTitle(domains[i]), i))
 	}
 	goCode.WriteString("\n\t// Primitives\n")
 	for i := 0; i < 10; i++ {
-		goCode.WriteString(fmt.Sprintf("\tPrimitive%s Primitive = %d\n", strings.Title(strings.ToLower(primitives[i])), i))
+		goCode.WriteString(fmt.Sprintf("\tPrimitive%s Primitive = %d\n", toTitle(primitives[i]), i))
 	}
 	goCode.WriteString("\n\t// Modifiers\n")
 	for i := 0; i < 10; i++ {
-		goCode.WriteString(fmt.Sprintf("\tModifier%s Modifier = %d\n", strings.Title(strings.ToLower(modifiers[i])), i))
+		goCode.WriteString(fmt.Sprintf("\tModifier%s Modifier = %d\n", toTitle(modifiers[i]), i))
 	}
 	goCode.WriteString("\n\t// Targets\n")
 	for i := 0; i < 10; i++ {
-		goCode.WriteString(fmt.Sprintf("\tTarget%s Target = %d\n", strings.Title(strings.ToLower(targets[i])), i))
+		goCode.WriteString(fmt.Sprintf("\tTarget%s Target = %d\n", toTitle(targets[i]), i))
 	}
+
 	goCode.WriteString(`)
 
 func (d Domain) String() string {
