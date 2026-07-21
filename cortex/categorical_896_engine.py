@@ -180,27 +180,20 @@ class CompatComplex:
         self._build_default_complex()
 
     def _build_default_complex(self) -> None:
-        """Build the default compatibility complex from FISR theory."""
-        v = list(self.vertices)
-        # All singletons are faces (0-simplices)
-        for prop in v:
-            self.faces.append(CompatFace(frozenset({prop})))
-        # Pairwise compatible faces (1-simplices)
-        compatible_pairs = [
-            (CompatProperty.F, CompatProperty.S),
-            (CompatProperty.F, CompatProperty.R_k),
-            (CompatProperty.S, CompatProperty.R_k),
-            (CompatProperty.F, CompatProperty.I),
-            (CompatProperty.I, CompatProperty.R_k),
-            (CompatProperty.I, CompatProperty.S),
+        """Build the default compatibility complex from FISR theory (closed under non-empty subsets)."""
+        from itertools import combinations
+        # Maximal faces of the FISR simplicial complex
+        maximal_faces = [
+            frozenset({CompatProperty.F, CompatProperty.I, CompatProperty.S, CompatProperty.R_k})
         ]
-        for p1, p2 in compatible_pairs:
-            self.faces.append(CompatFace(frozenset({p1, p2})))
-        # Triple faces (2-simplices)
-        self.faces.append(CompatFace(frozenset({CompatProperty.F, CompatProperty.S, CompatProperty.R_k})))
-        self.faces.append(CompatFace(frozenset({CompatProperty.F, CompatProperty.I, CompatProperty.R_k})))
-        # Full simplex (3-simplex) — the maximal face
-        self.faces.append(CompatFace(frozenset({CompatProperty.F, CompatProperty.I, CompatProperty.S, CompatProperty.R_k})))
+        face_sets: set[frozenset[CompatProperty]] = set()
+        for max_face in maximal_faces:
+            props = list(max_face)
+            for k in range(1, len(props) + 1):
+                for sub in combinations(props, k):
+                    face_sets.add(frozenset(sub))
+
+        self.faces = [CompatFace(f) for f in face_sets]
 
     def verify_downset_invariant(self) -> bool:
         """Verify the simplicial (down-set/hereditary) condition."""
