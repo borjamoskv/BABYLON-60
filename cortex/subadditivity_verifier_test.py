@@ -293,7 +293,7 @@ def test_separation_empty_fiber() -> None:
         assert cat.compute_mu(alpha) > k
 
     # kappa = infinity (no valid extension exists)
-    def budget_any_k(m, cost) -> None:
+    def budget_any_k(m: Morphism, cost: float) -> bool:
         return cost <= 1000.0
     kappa = cat.compute_kappa_repair_operator(alpha, budget_any_k)
     assert kappa == float('inf')

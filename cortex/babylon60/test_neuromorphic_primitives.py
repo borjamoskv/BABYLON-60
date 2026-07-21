@@ -24,7 +24,7 @@ async def test_neuromorphic_v2() -> None:
         synapse = mesh.synapses[("SensorA", "MotorB")]
 
         # MotorB waits for a spike
-        async def motor_waiter() -> None:
+        async def motor_waiter() -> float:
             start_time = time.time()
             energy = await motor.wait_and_fire()
             elapsed = time.time() - start_time

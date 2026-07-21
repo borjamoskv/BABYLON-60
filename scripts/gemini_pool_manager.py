@@ -35,17 +35,17 @@ class GeminiProTelemetry:
     Tracks total requests, successes, failures and per‑key usage counts.
     """
 
-    _instance = None
+    _instance: Optional["GeminiProTelemetry"] = None
 
     def __init__(self) -> None:
         self.total_requests = 0
         self.successes = 0
         self.failures = 0
         self.latency_sum = 0.0
-        self.per_key_counts = {}
+        self.per_key_counts: dict[str, int] = {}
 
     @classmethod
-    def get_instance(cls) -> None:
+    def get_instance(cls) -> "GeminiProTelemetry":
         if cls._instance is None:
             cls._instance = cls()
         return cls._instance

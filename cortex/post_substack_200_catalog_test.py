@@ -11,7 +11,7 @@ ARCHIVE_200_DIR = (
 )
 
 
-def get_200_archive_files() -> None:
+def get_200_archive_files() -> list[Path]:
     if not ARCHIVE_200_DIR.exists():
         return []
     return sorted(list(ARCHIVE_200_DIR.glob("*.md")))

@@ -10,7 +10,7 @@ then applies it to the desktop.
 import os
 import subprocess
 import sys
-import psutil
+import psutil  # type: ignore[import-untyped]
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')

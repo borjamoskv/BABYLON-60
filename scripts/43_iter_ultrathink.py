@@ -4,6 +4,7 @@ import sys
 import hashlib
 import subprocess
 from datetime import datetime, timezone
+from typing import Any
 
 os.environ["ANONYMIZED_TELEMETRY"] = "False"
 os.environ["CHROMA_SERVER_NO_TELEMETRY"] = "1"

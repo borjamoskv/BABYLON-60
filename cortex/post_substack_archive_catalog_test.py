@@ -9,7 +9,7 @@ from pathlib import Path
 ARCHIVE_DIR = Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive"
 
 
-def get_archive_files() -> None:
+def get_archive_files() -> list[Path]:
     if not ARCHIVE_DIR.exists():
         return []
     return sorted(list(ARCHIVE_DIR.glob("*.md")))
