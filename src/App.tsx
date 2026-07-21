@@ -88,15 +88,6 @@ interface FileItem {
   trigger?: string;
 }
 
-interface SkillItem {
-  id: string;
-  name: string;
-  type: string;
-  exergy: string;
-  desc: string;
-  status: 'active' | 'idle' | 'locked';
-}
-
 interface DatabaseTable {
   name: string;
   rows: number;
@@ -320,8 +311,9 @@ export default function BabylonCompleteIDE() {
   const [cursorPos, setCursorPos] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'architecture' | 'swarm' | 'ledger' | 'inference' | 'settings'>('architecture');
   
-  // Terminal drawer & Command Palette state
+  // Terminal drawer & Command Palette & Shortcuts state
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [shortcutsModalOpen, setShortcutsModalOpen] = useState(false);
   const [terminalLogs, setTerminalLogs] = useState<string[]>([
     '[SYSTEM] Ignition sequence completed. C5-REAL Kernel active.',
     '[BFT] Initialized N=5 node consensus matrix. Lamport clock t=104.',
@@ -347,6 +339,7 @@ export default function BabylonCompleteIDE() {
   const [tokensPerSecond, setTokensPerSecond] = useState(48.2);
   const [latencyMs, setLatencyMs] = useState(14);
   const [exergyLevel, setExergyLevel] = useState(99.8);
+  const [freeEnergyHistory, setFreeEnergyHistory] = useState<number[]>([0.84, 0.62, 0.41, 0.28, 0.15, 0.08, 0.004]);
 
   // Database / SQL Playground
   const [selectedTable, setSelectedTable] = useState<DatabaseTable | null>(MOCK_TABLES[0]);
@@ -363,7 +356,7 @@ export default function BabylonCompleteIDE() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
 
-  // Keyboard Event Listeners for ⌘K, ⌘`, ⌘⇧E, ⌘S
+  // Keyboard Event Listeners for ⌘K, ⌘`, ⌘⇧E, ⌘S, ?
   useEffect(() => {
     setIsLoaded(true);
 
@@ -383,6 +376,10 @@ export default function BabylonCompleteIDE() {
       if ((e.metaKey || e.ctrlKey) && e.key === 's') {
         e.preventDefault();
         triggerSave();
+      }
+      if (e.key === '?' && !['textarea', 'input'].includes((e.target as HTMLElement).tagName.toLowerCase())) {
+        e.preventDefault();
+        setShortcutsModalOpen(prev => !prev);
       }
     };
 
@@ -548,6 +545,9 @@ export default function BabylonCompleteIDE() {
     setTokensPerSecond(48.2);
     setLatencyMs(12);
 
+    // Simulate active inference convergence steps
+    setFreeEnergyHistory([0.9, 0.72, 0.48, 0.31, 0.14, 0.05, 0.001]);
+
     const start = performance.now();
     try {
       const res = await invoke('dispatch', { d: 4, p: 3, m: 1, t: 9 });
@@ -601,6 +601,25 @@ export default function BabylonCompleteIDE() {
       setTerminalLogs(prev => [`[BFT SWARM] Unconditional Consensus Achieved. Hash sealed.`, ...prev]);
       setTimeout(() => setAgentState('idle'), 2000);
     }, 1200);
+  };
+
+  // Export JSON Attestation Certificate
+  const exportAttestationJSON = () => {
+    const cert = {
+      reality_level: "C5-REAL",
+      lamport_clock: lamportClock,
+      ledger_root_hash: "8a339ceb0565c1918c0f6bd32ccf301c05060aaae2ec84e73aa281daa4493fb5",
+      free_energy_divergence: 0.000412,
+      bft_nodes: swarmNodes.map(n => ({ id: n.id, hash: n.hash, status: n.status })),
+      timestamp: new Date().toISOString()
+    };
+    const blob = new Blob([JSON.stringify(cert, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `bft_attestation_t${lamportClock}.json`;
+    a.click();
+    setTerminalLogs(prev => [`[ATTESTATION] Certificate exported: bft_attestation_t${lamportClock}.json`, ...prev]);
   };
 
   const lineCount = editorContent.split('\n').length;
@@ -718,6 +737,32 @@ export default function BabylonCompleteIDE() {
 
       <div className="grain" />
 
+      {/* SHORTCUTS HELP MODAL */}
+      {shortcutsModalOpen && (
+        <div 
+          className="fixed inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-6"
+          onClick={() => setShortcutsModalOpen(false)}
+        >
+          <div 
+            className="w-[460px] bg-[#0A0D1F] border border-white/15 rounded-xl shadow-2xl p-6 flex flex-col gap-4 font-mono text-xs"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex justify-between items-center border-b border-white/10 pb-3">
+              <span className="text-sm font-bold text-white uppercase tracking-wider">Keyboard Shortcuts</span>
+              <button onClick={() => setShortcutsModalOpen(false)} className="text-white/40 hover:text-white bg-transparent border-0 cursor-pointer">✕</button>
+            </div>
+            <div className="flex flex-col gap-2 text-white/80">
+              <div className="flex justify-between py-1 border-b border-white/5"><span>Command Palette</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">⌘K</kbd></div>
+              <div className="flex justify-between py-1 border-b border-white/5"><span>Toggle Terminal Drawer</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">⌘`</kbd></div>
+              <div className="flex justify-between py-1 border-b border-white/5"><span>Cognitive Mode (NT/2E)</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">⌘⇧E</kbd></div>
+              <div className="flex justify-between py-1 border-b border-white/5"><span>Save & Verify File</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">⌘S</kbd></div>
+              <div className="flex justify-between py-1 border-b border-white/5"><span>Jump to Inference</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">⌘8</kbd></div>
+              <div className="flex justify-between py-1"><span>Show Shortcuts</span><kbd className="bg-white/10 px-2 py-0.5 rounded text-[10px]">?</kbd></div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* COMMAND PALETTE POPUP */}
       {commandPaletteOpen && (
         <div 
@@ -774,6 +819,13 @@ export default function BabylonCompleteIDE() {
               >
                 <span>🛡 Trigger BFT Consensus Vote</span>
                 <span className="text-white/30">Vote</span>
+              </button>
+              <button 
+                onClick={() => { exportAttestationJSON(); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>📄 Export JSON Attestation Certificate</span>
+                <span className="text-white/30">Export</span>
               </button>
               <button 
                 onClick={() => { setIsTerminalOpen(prev => !prev); setCommandPaletteOpen(false); }}
@@ -964,6 +1016,13 @@ export default function BabylonCompleteIDE() {
                   </div>
                 ))}
               </div>
+
+              <button 
+                onClick={exportAttestationJSON}
+                className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all mt-2"
+              >
+                📄 Export Attestation
+              </button>
             </div>
           )}
 
@@ -1038,7 +1097,6 @@ export default function BabylonCompleteIDE() {
 
                 <div className="flex-1 bg-black/40 border border-white/10 rounded-xl relative overflow-hidden p-4 flex flex-col">
                   <svg className="w-full h-full absolute inset-0 pointer-events-none">
-                    {/* Connect leader node-0 to other nodes */}
                     {swarmNodes.slice(1).map(node => (
                       <line 
                         key={`line-${node.id}`}
@@ -1054,7 +1112,6 @@ export default function BabylonCompleteIDE() {
                     ))}
                   </svg>
 
-                  {/* Render node visual cards */}
                   {swarmNodes.map(node => (
                     <div 
                       key={node.id}
@@ -1133,18 +1190,30 @@ export default function BabylonCompleteIDE() {
               </div>
 
               <div className="w-72 border-l border-white/5 pl-6 flex flex-col gap-6 shrink-0">
-                <span className="text-[10px] font-mono uppercase text-white/30">Local Attestation Metrics</span>
+                <span className="text-[10px] font-mono uppercase text-white/30">Active Inference Convergence</span>
                 
+                <div className="border border-white/10 bg-white/5 rounded-md p-4 flex flex-col gap-2">
+                  <span className="text-[10px] font-mono uppercase text-white/40 tracking-wider">Free Energy D_KL</span>
+                  <div className="flex items-end gap-1.5 h-16 pt-2">
+                    {freeEnergyHistory.map((val, idx) => (
+                      <div 
+                        key={idx}
+                        className="flex-1 rounded-t transition-all duration-500"
+                        style={{ 
+                          height: `${Math.max(val * 100, 5)}%`,
+                          backgroundColor: theme.accent
+                        }}
+                        title={`Iter ${idx}: D_KL = ${val}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-[10px] font-mono text-emerald-400 mt-1">D_KL = 0.000412 (Optimal)</div>
+                </div>
+
                 <div className="border border-white/10 bg-white/5 rounded-md p-4 flex flex-col gap-2">
                   <span className="text-[10px] font-mono uppercase text-white/40 tracking-wider">Silicon Throughput</span>
                   <div className="text-2xl font-light">{tokensPerSecond} <span className="text-[11px] font-mono text-white/50">tok/s</span></div>
                   <div className="text-[11px] font-mono text-white/40">Latency: {latencyMs} ms</div>
-                </div>
-
-                <div className="border border-white/10 bg-white/5 rounded-md p-4 flex flex-col gap-2">
-                  <span className="text-[10px] font-mono uppercase text-white/40 tracking-wider">Exergy Rating</span>
-                  <div className="text-2xl font-light text-emerald-400">{exergyLevel}%</div>
-                  <div className="text-[11px] font-mono text-white/40">State: Zero-Anergy</div>
                 </div>
               </div>
             </div>
@@ -1326,6 +1395,12 @@ export default function BabylonCompleteIDE() {
                     className="text-white/60 hover:text-white bg-transparent border-0 cursor-pointer font-mono text-[10px] uppercase"
                   >
                     {isTerminalOpen ? '▼ Hide Logs' : '▲ System Terminal (⌘`)'}
+                  </button>
+                  <button 
+                    onClick={() => setShortcutsModalOpen(true)}
+                    className="text-white/40 hover:text-white bg-transparent border-0 cursor-pointer font-mono text-[10px] uppercase"
+                  >
+                    ? Hotkeys
                   </button>
                 </div>
                 <div className="flex items-center gap-6">
