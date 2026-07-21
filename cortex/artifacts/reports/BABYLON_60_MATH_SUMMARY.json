@@ -1,131 +1,131 @@
 {
-  "V": 752,
-  "E": 16370,
+  "V": 1095,
+  "E": 40036,
   "top_fan_in": [
     [
-      "logging.getLogger",
-      452
-    ],
-    [
       "len",
-      355
-    ],
-    [
-      "str",
-      253
-    ],
-    [
-      "logger.info",
-      252
-    ],
-    [
-      "logger.warning",
-      222
-    ],
-    [
-      "logger.error",
-      204
+      464
     ],
     [
       "join",
-      165
-    ],
-    [
-      "get",
-      162
-    ],
-    [
-      "Path",
-      156
+      400
     ],
     [
       "isinstance",
-      142
+      353
     ],
     [
-      "logger.debug",
-      138
+      "str",
+      248
     ],
     [
-      "time.monotonic",
-      126
+      "print",
+      243
     ],
     [
-      "max",
-      125
-    ],
-    [
-      "list",
-      108
-    ],
-    [
-      "append",
-      108
-    ],
-    [
-      "sum",
-      104
-    ],
-    [
-      "field",
-      101
-    ],
-    [
-      "round",
-      96
+      "ValueError",
+      235
     ],
     [
       "range",
-      95
+      223
     ],
     [
-      "json.dumps",
-      94
+      "getattr",
+      213
+    ],
+    [
+      "get",
+      206
+    ],
+    [
+      "hasattr",
+      205
+    ],
+    [
+      "list",
+      196
+    ],
+    [
+      "append",
+      192
+    ],
+    [
+      "open",
+      186
+    ],
+    [
+      "super",
+      181
+    ],
+    [
+      "int",
+      179
+    ],
+    [
+      "set",
+      176
+    ],
+    [
+      "format",
+      163
+    ],
+    [
+      "type",
+      156
+    ],
+    [
+      "__init__",
+      147
+    ],
+    [
+      "TypeError",
+      142
     ]
   ],
   "top_fan_out": [
     [
-      "babylon60/extensions/training/moskv1_dataset_compiler.py",
-      121
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
+      401
     ],
     [
-      "babylon60/extensions/training/moskv1_core.py",
-      97
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
+      346
     ],
     [
-      "anvil_yung/lib/forge-std/scripts/vm.py",
-      93
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/turtle.py",
+      344
     ],
     [
-      "causal_isomorphism/parser_fsharp.py",
-      90
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
+      323
     ],
     [
-      "babylon60/extensions/llm/provider.py",
-      86
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tarfile.py",
+      314
     ],
     [
-      "babylon60/extensions/mejoralo/scan.py",
-      79
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/editor.py",
+      302
     ],
     [
-      "babylon60/extensions/swarm/manager.py",
-      77
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
+      301
     ],
     [
-      "babylon60/extensions/speculative/apotheosis.py",
-      74
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/configdialog.py",
+      283
     ],
     [
-      "babylon60/extensions/evolution/ouroboros_omega.py",
-      71
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/pyshell.py",
+      277
     ],
     [
-      "babylon60/crypto/keys.py",
-      69
+      ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
+      266
     ]
   ],
-  "ffi_nodes": 7,
-  "wal_nodes": 115,
-  "network_nodes": 71
+  "ffi_nodes": 24,
+  "wal_nodes": 86,
+  "network_nodes": 120
 }

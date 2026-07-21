@@ -1,893 +1,1245 @@
 {
   "network_endpoints": [
     {
-      "file": "run_backend.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "apex_trials/ctgov.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "tests/test_ide_inference.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "tests/test_inference_security.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "tests/apex/test_integration.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/crypto/rekor_client.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/crypto/rfc3161.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/utils/http.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/scraper/extractors.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/scraper/engine.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/mejoralo/antipatterns.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/mejoralo/_scanner_visitors.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/fable_poc.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/fable_stress_test.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/provider.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/client.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/fable_steerability_poc.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/_backoff.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/fable_ffi.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/_resilience.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/raw_client.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/_provider_fable.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/_provider_gemini.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/router.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/_provider_stream.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/llm/gemini_cache.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/sap/client.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/agents/apis_omega.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/mcp/comfyui_tool.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/mcp/server.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/mcp/claude_tool.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/aether/github_ingestor.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/aether/tools.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/aether/sovereign_apis.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/thinking/pool.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/daemon/t_cell_ihelp_purge.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/daemon/ccr_proxy.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/daemon/ccr_proxy.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/daemon/monitors/dependency_health.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/daemon/monitors/cert.py",
+      "file": "cortex/deliverability_validator.py",
       "type": "Raw Socket"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/network.py",
+      "file": "cortex/llm_router.py",
       "type": "HTTP Client"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+      "file": "cortex/llm_router_test.py",
       "type": "HTTP Client"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/telemetry/network_void_oracle.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/nntplib.py",
       "type": "Raw Socket"
     },
     {
-      "file": "babylon60/extensions/kapso/gateway.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_compat_pickle.py",
       "type": "HTTP Client"
     },
     {
-      "file": "babylon60/extensions/kapso/webhook.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/sovereign/dashboard.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/langbase/client.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/hive/main.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/music_engine/adapters.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/skills/autodidact/fetchers.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/edge_cloudflare/edge_bridge.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/sync/github_bridge.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60/extensions/genesis/templates.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/genesis/renderers/api.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60/extensions/notifications/adapters/telegram.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "scripts/verify_captures.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "scripts/fetch_missing_dates.py",
-      "type": "HTTP Client"
-    },
-    {
-      "file": "babylon60-ide/backend/main.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/query.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/ledger.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/telemetry.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/telemetry.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/hashlib.py",
       "type": "Raw Socket"
     },
     {
-      "file": "babylon60-ide/backend/routes/ontology.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/inference.py",
-      "type": "FastAPI Router"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/inference.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/nturl2path.py",
       "type": "HTTP Client"
     },
     {
-      "file": "babylon60-ide/backend/routes/inference.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
       "type": "Raw Socket"
     },
     {
-      "file": "babylon60-ide/backend/routes/analytics.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/socketserver.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ftplib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/platform.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/poplib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/telnetlib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/stat.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/imaplib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/smtplib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ssl.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/socket.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/uuid.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/reduction.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/forkserver.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/connection.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/resource_sharer.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/robotparser.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/exceptions.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/auth.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/download.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/session.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/cache.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/utils.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/network/lazy_wheel.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/utils/urls.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/models/link.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/cli/index_command.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/vcs/git.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/index/collector.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/commands/install.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/distributions/sdist.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/__init__.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/truststore/_api.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/compat.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/serialize.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/wrapper.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/controller.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/adapter.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/_cmd.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/cookies.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/auth.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/sessions.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/hooks.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/compat.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/models.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/certs.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/__init__.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/status_codes.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/packages.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/__version__.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/api.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/_internal_utils.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/utils.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/utils.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/exceptions.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/structures.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/adapters.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/poolmanager.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/connection.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/ssltransport.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/wait.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/timeout.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/timeout.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/ssl_.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/connection.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/pyopenssl.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/_securetransport/low_level.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/packages/six.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/packages/backports/makefile.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/sax/saxutils.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/dom/xmlbuilder.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/wsgiref/simple_server.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/json/encoder.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/server.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/client.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/client.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/cookiejar.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xmlrpc/server.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xmlrpc/server.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/lib2to3/fixes/fix_urllib.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/pyshell.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/run.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/rpc.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/tasks.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/selector_events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/base_events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/proactor_events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/trsock.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/windows_events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/unix_events.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/config.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/handlers.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/utils.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/feedparser.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": "scripts/phase_omega_theorem_prover.py",
       "type": "FastAPI Router"
     },
     {
-      "file": "babylon60-ide/backend/routes/delegation.py",
+      "file": "scripts/phase3_call_graph.py",
       "type": "FastAPI Router"
     },
     {
-      "file": "babylon60-ide/backend/routes/sentinel.py",
+      "file": "scripts/phase4_runtime_ipc.py",
       "type": "FastAPI Router"
     },
     {
-      "file": "babylon60-ide/backend/routes/arena.py",
+      "file": "scripts/phase4_runtime_ipc.py",
+      "type": "HTTP Client"
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
+      "type": "Raw Socket"
+    },
+    {
+      "file": "scripts/phase7_state_machine_extractor.py",
       "type": "FastAPI Router"
     },
     {
-      "file": "babylon60-ide/backend/services/cortex_ledger.py",
-      "type": "FastAPI Router"
+      "file": "scripts/01_cdp_transducer.py",
+      "type": "HTTP Client"
     }
   ],
   "ffi_bindings": [
     {
-      "file": "babylon60/core/c5_memory_shield.py",
+      "file": "cortex/bft_orchestrator.py",
+      "type": "Rust PyO3"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pkgutil.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/utils/void_vec.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_sysconfigdata__darwin_darwin.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/extensions/swarm/ast_validator.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/os.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/extensions/llm/vllm_edge.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/_aix.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/extensions/agents/neural.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/wintypes.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/monitor.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/util.py",
       "type": "C-FFI"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/memory_wrapper.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/__init__.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/_endian.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ctypes/macholib/dyld.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/context.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/sharedctypes.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/utils/glibc.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/packaging/_manylinux.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/truststore/_macos.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/truststore/_windows.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/_windows.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/_win32_console.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/_securetransport/low_level.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/_securetransport/bindings.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/platformdirs/windows.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/util.py",
+      "type": "C-FFI"
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
       "type": "C-FFI"
     }
   ],
   "database_locks": [
     {
-      "file": "io_persist_ledger.py",
+      "file": "cortex/github_webhook_daemon.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "cortex/agents/arsenal_896/registry.py",
+      "file": "cortex/invariant_sentinel.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "cortex/agents/arsenal_896/centuria_meta_transducer.py",
+      "file": "cortex/kimi.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/transducer.py",
+      "file": "cortex/substack_subscriber_audit.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/ctgov.py",
+      "file": "cortex/mcts_vnode_compiler.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/copilot.py",
+      "file": "cortex/bft_orchestrator.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/ledger.py",
+      "file": "cortex/swarm/architect_agent.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/features.py",
+      "file": "cortex/swarm/memory_store.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "apex_trials/report.py",
+      "file": "cortex/swarm/orchestrator_test.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_io_persist_ledger.py",
+      "file": "cortex/swarm/orchestrator.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_itera2_invariants.py",
+      "file": "cortex/babylon60/neuromorphic_primitives.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_bittensor_yuma_consensus.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/shutil.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_ast_sandbox_evasion.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pyio.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_atms_hardening.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/crypt.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "tests/test_re_drm_rust.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pkgutil.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "scratch/map_primitives_thermodynamics.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/copyreg.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "scratch/improved_map_primitives.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/traceback.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/database/core.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_sysconfigdata__darwin_darwin.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/crypto/identity.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/os.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/core/moskv_kernel.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/utils/turboquant.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pdb.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/utils/sandbox.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/turtle.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/utils/landauer.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/platform.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/temporal/chronos_roi.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/inspect.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/causality/taint.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/compileall.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/swarm/swarm_heartbeat.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydatetime.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/swarm/josu_daemon.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/swarm/ast_validator.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/locale.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mac_maestro/security_control.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ast.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/swarm.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/deps.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zoneinfo/_common.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/heal.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zoneinfo/_zoneinfo.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/antipatterns.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zoneinfo/_tzpath.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/scan.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/runner.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/_scanner_import_graph.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/case.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/ship.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/utils/egg_link.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/mejoralo/_scanner_visitors.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/utils/filesystem.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/zkortex/test_integration.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/req/req_install.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/llm/fable_stress_test.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/req/req_uninstall.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/llm/quota.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/resolution/resolvelib/resolver.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/llm/_result_cache.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/vcs/subversion.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/llm/_models.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/metadata/base.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/evo/autopoiesis.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/evo/evolution_metrics.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/tree.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/context/collector.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_codes.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/security/t_cell.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/traceback.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/training/run_daemon.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/pretty.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/training/moskv1_dataset_compiler.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/table.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/health/models.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/__main__.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/health/invariants.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/response.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/health/scorer.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/connectionpool.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/health/collectors/db.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/util/timeout.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/health/collectors/__init__.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/web3/oracle.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/resolvelib/providers.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/aether/queue.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/dom/expatbuilder.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/aether/cdp_agentkit.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/server.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/aether/sovereign_apis.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/venv/__init__.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/nexus/db.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/resources/_common.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/nexus/model.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/metadata/__init__.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/immune/error_boundary.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/lib2to3/refactor.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/alerts.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/lib2to3/fixes/fix_import.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/models.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/grep.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/core_support.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/format_helpers.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/gmail_magic_link.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/__init__.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/zero_toil.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/message.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/scheduler.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/generator.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/substack_publisher_bot.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/iterators.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/hot_state.py",
+      "file": "scratch/compress_agents.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/centaur/queue.py",
+      "file": "scratch/compress_agents_v2.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/signals.py",
+      "file": "scripts/50_audit_loop.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/disk.py",
+      "file": "scripts/phase_omega_theorem_prover.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/epistemic.py",
+      "file": "scripts/phase3_call_graph.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/security.py",
+      "file": "scripts/phase4_runtime_ipc.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/drift.py",
+      "file": "scripts/00_init_ledger.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/agy2_planner.py",
+      "file": "scripts/17_codegen_github.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/monitors/workflow.py",
+      "file": "scripts/epistemic_forensics_prober.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/compaction_monitor/circuit_breaker.py",
+      "file": "scripts/54_tdah_orphan_purge.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/sentinel_monitor/monitor.py",
+      "file": "scripts/quantitative_ast_analyzer.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py",
+      "file": "scripts/53_centuria_swarm.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/ha/crdt.py",
+      "file": "scripts/cortex-omega-purge.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/evolution/ast_mutators.py",
+      "file": "scripts/phase7_state_machine_extractor.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/evolution/engine.py",
+      "file": "scripts/generate_math_model.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/evolution/ledger_db.py",
+      "file": "scripts/42_iter_5000.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/songlines/sensor.py",
+      "file": "scripts/40_stress_db.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/metering/tracker.py",
+      "file": "scripts/01_cdp_transducer.py",
       "type": "SQLite WAL/Timeout"
     },
     {
-      "file": "babylon60/extensions/sync/hlc.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/extensions/forensic/forensic_strike_config.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/extensions/notifications/adapters/base.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/extensions/billing/metering.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/bft/master_ledger_queue.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/bft/consensus_ledger.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60/bft/ledger_actor.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/exergy_optimizer_agent.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/verify_Anergy_Token_Purge.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/ejemplo_logos_ethos_ship.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/automejora_1000_cache.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/consolidate_babylon_vault.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/quadrilingual_enforcer.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/c5_logos_ethos_ship_engine.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/bootstrap_cortex_memory.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/centuria_swarm_commander.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/opsec_sentinel_c5.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/c5_mejoralo_monitor.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/exergy_arbitrage_engine.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/secret_swarm_auditor.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/benchmark_ledger_throughput.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/c5_isomorphism_sabu_agent.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/ouroboros_infinity.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "scripts/bittensor_yuma_consensus_c5.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "causal_isomorphism/linear_checker.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60-ide/backend/mcp_symbol_helper.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/telemetry.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60-ide/backend/routes/sentinel.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60-ide/backend/services/cortex_ledger.py",
-      "type": "SQLite WAL/Timeout"
-    },
-    {
-      "file": "babylon60-ide/backend/services/db_pool.py",
+      "file": "scripts/18_codegen_playwright.py",
       "type": "SQLite WAL/Timeout"
     }
   ],
   "multiprocessing_ipc": [
     {
-      "file": "babylon60/crypto/aes.py",
+      "file": "cortex/mcts_vnode_compiler.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/core/shadow_router.py",
+      "file": "cortex/bft_orchestrator.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/core/moskv_kernel.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/queue.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/utils/respiration.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pyio.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/utils/i18n.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/trace.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/ui/swarm_board.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/webbrowser.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/swarm/swarm_heartbeat.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_compat_pickle.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/swarm/autodidact_actuator.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_threading_local.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/swarm/error_ghost_pipeline.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/subprocess.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/swarm/sortu_jit_executor.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_sysconfigdata__darwin_darwin.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/wealth/risk.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/axioms/topological_id.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/socketserver.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/training/moskv1_core.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/random.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/signals/trigger_engine.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/threading.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/aether/daemon.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/compileall.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/timing/tracker.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/sched.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/nexus/db.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/imaplib.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/core.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/sysconfig.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/loops_mixin.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/uuid.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/event_loop.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/mock.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/trends_oracle/oracle.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/queues.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/telemetry/ast_oracle.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/heap.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/daemon/sidecar/telemetry/fiat_oracle.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/resource_tracker.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/gate/core.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/reduction.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/speculative/apotheosis.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/util.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/extensions/notifications/bus.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/__init__.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/bft/master_ledger_queue.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/forkserver.py",
       "type": "Concurrency primitive"
     },
     {
-      "file": "babylon60/bft/ledger_actor.py",
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/connection.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/context.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/spawn.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/synchronize.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/process.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/sharedctypes.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/popen_fork.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/pool.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/popen_forkserver.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/managers.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/resource_sharer.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/dummy/__init__.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/multiprocessing/dummy/connection.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zipfile/__init__.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_internal/utils/logging.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/packaging/tags.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/truststore/_api.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/cachecontrol/cache.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/cookies.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/requests/auth.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/console.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/layout.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/traceback.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/live.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/progress.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/_collections.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/urllib3/contrib/securetransport.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/cookiejar.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/concurrent/futures/process.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/util.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/_bootstrap.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/lib2to3/refactor.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/pyshell.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/run.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/rpc.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/mixins.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/events.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/base_events.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/proactor_events.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/locks.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/runners.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/__main__.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/unix_events.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/config.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/handlers.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/__init__.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": "scratch/compress_agents.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": "scratch/compress_agents_v2.py",
+      "type": "Concurrency primitive"
+    },
+    {
+      "file": "scripts/phase4_runtime_ipc.py",
       "type": "Concurrency primitive"
     }
   ]
