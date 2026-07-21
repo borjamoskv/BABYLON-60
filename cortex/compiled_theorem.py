@@ -1,3 +1,3 @@
 def synthesized_theorem_0():
-    # Intention: ULTRATHINK_PHYSICAL_COLLAPSE_ITER_10_1784667080.315574
+    # Intention: test_cli_execution_intention
     return 0**2

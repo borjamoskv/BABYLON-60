@@ -225,3 +225,32 @@ class TestL3InferenceEnginePhysical:
         taint = _generate_cortex_taint("abc123hash")
         assert taint.startswith("CORTEX-TAINT:borjamoskv:mcts:")
         assert len(taint.split(":")) == 4
+
+
+class TestCoverageEdgeCases:
+    def test_shannon_entropy_without_numpy_fallback(self, monkeypatch: pytest.MonkeyPatch) -> None:
+        import cortex.mcts_vnode_compiler as comp
+        monkeypatch.setattr(comp, "_HAS_NUMPY", False)
+        # Test empty
+        assert comp.calculate_shannon_entropy(b"") == 0.0
+        # Test bytes calculation with lookup table
+        entropy = comp.calculate_shannon_entropy(b"hello world")
+        assert 2.0 < entropy < 5.0
+
+    def test_ast_theorem_computed_hash_mismatch_raises_value_error(self) -> None:
+        payload = "x = 1"
+        fake_hash = "a" * 64
+        with pytest.raises(ValueError, match="Ω123 Invariant Violation"):
+            ASTTheorem(
+                code_hash=fake_hash,
+                proven=True,
+                shannon_entropy=4.0,
+                ast_nodes=5,
+                ephemeral_vnode="vnode-1",
+                payload=payload,
+            )
+
+    def test_enforce_ide_theorem_physical_execution(self, tmp_path: pytest.TempPathFactory) -> None:
+        from cortex.mcts_vnode_compiler import enforce_ide_theorem_physical
+        enforce_ide_theorem_physical("test_cli_execution_intention")
+

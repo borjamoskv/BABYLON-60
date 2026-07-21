@@ -50,9 +50,6 @@ cortex/artifacts/
 *.mp4
 
 # Temporary build/test output
-coverage.out
-go_deps.json
-
 go_deps.json
 
 # Spotlight exclusion markers
