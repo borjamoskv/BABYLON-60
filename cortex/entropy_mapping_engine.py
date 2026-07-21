@@ -13,8 +13,19 @@ Implements:
 
 import math
 import hashlib
+import logging
+import os
+import time
 from dataclasses import dataclass
 from typing import Dict, List
+
+logger = logging.getLogger("entropy_engine")
+if not logger.handlers:
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+    logger.setLevel(logging.INFO)
 
 # Fundamental Physical Constants (SI Units)
 K_B = 1.380649e-23     # Boltzmann constant (J/K)
@@ -123,8 +134,10 @@ class ThermodynamicEntropyEngine:
         landauer_joules = s_bits * K_B * self.temperature * LN_2
 
         raw_payload = f"total:{total}:s_nats:{s_nats:.6f}:eff:{efficiency:.6f}".encode("utf-8")
-        h_val = hashlib.sha256(raw_payload).hexdigest()
-        taint = f"CORTEX-TAINT:borjamoskv:ultrathink_entropy:2026-07-22T01:44:00Z:{h_val[:16]}"
+        h_val = hashlib.sha3_256(raw_payload).hexdigest()
+        taint_seed = f"{raw_payload!r}:{os.getpid()}:{time.time_ns()}"
+        taint_hash = hashlib.sha3_256(taint_seed.encode("utf-8")).hexdigest()[:16]
+        taint = f"CORTEX-TAINT:borjamoskv:ultrathink_entropy:{taint_hash}"
 
         return ThermodynamicState(
             domain_counts=domain_counts,
@@ -143,4 +156,4 @@ if __name__ == "__main__":
     engine = ThermodynamicEntropyEngine()
     counts = {"D0": 112, "D1": 112, "D2": 112, "D3": 112, "D4": 112, "D5": 112, "D6": 112, "D7": 112}
     state = engine.map_domain_entropy(counts)
-    print(f"✅ ULTRATHINK Thermodynamic State Mapping: S = {state.shannon_entropy:.4f} nats, Eta = {state.exergy_efficiency:.4f}")
+    logger.info(f"ULTRATHINK Thermodynamic State Mapping: S = {state.shannon_entropy:.4f} nats, Eta = {state.exergy_efficiency:.4f}")

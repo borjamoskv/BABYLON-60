@@ -27,7 +27,7 @@ def test_infimum_empty_convention() -> None:
 
 
 def test_subadditivity_sequential_with_contextual_delta() -> None:
-    def friction_fn(m1, m2) -> None:
+    def friction_fn(m1: Morphism, m2: Morphism) -> float:
         if m1.src == "A" and m2.tgt == "C":
             return 0.5
         return 0.0
@@ -56,7 +56,7 @@ def test_kappa_repair_operator() -> None:
     e2 = Morphism("e2", "Y", "W")
     cat.add_certificate(Certificate("c_e2", e2, 1.5))
 
-    def predicate_R(comp_morphism, comp_cost) -> None:
+    def predicate_R(m: Morphism, comp_cost: float) -> bool:
         return comp_cost <= 12.0
 
     kappa_val = cat.compute_kappa_repair_operator(alpha, predicate_R)
@@ -74,10 +74,10 @@ def test_kappa_monotonicity_theorem_2_1() -> None:
     e2 = Morphism("e2", "Y", "W")
     cat.add_certificate(Certificate("c_e2", e2, 2.0))
 
-    def R_strict(m, cost) -> None:
+    def R_strict(m: Morphism, cost: float) -> bool:
         return cost <= 12.5
 
-    def R_weak(m, cost) -> None:
+    def R_weak(m: Morphism, cost: float) -> bool:
         return cost <= 15.0
 
     kappa_strict = cat.compute_kappa_repair_operator(alpha, R_strict)

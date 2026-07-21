@@ -140,14 +140,92 @@ $$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M),
 
 ---
 
-## VI. REGISTRO DE TRACEABILIDAD BFT
+## VI. ESTRUCTURA DE LAWVERE PREMETRIC FORMAL **[Teorema 3 - Demostrado]**
+
+### 6.1 Enunciado
+
+**Teorema 3 (Lawvere Premetric):** Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ con $\delta_\circ \equiv 0$, el par $(\mathcal{C}, \mu)$ constituye una $(\overline{\mathbb{N}}, +, 0, \le)$-categoría enriquecida laxa (Lawvere Premetric Space). Concretamente:
+
+1. **Reflexividad:** $\mu(\mathrm{id}_X) = 0$ para todo $X \in \mathrm{Ob}(\mathcal{C})$.
+2. **Desigualdad Triangular:** $\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta)$ para todo par composible $\alpha: X \to Y$, $\beta: Y \to Z$.
+
+### 6.2 Demostración
+
+**(1) Reflexividad.** Por el Axioma Id-1 y Id-2, $\mathrm{id}_X^\mathcal{P} \in \mathsf{Cert}(\mathrm{id}_X^\mathcal{C})$ con $|\mathrm{id}_X^\mathcal{P}| = 0$. Por definición, $\mu(\mathrm{id}_X^\mathcal{C}) = \inf_{c \in \mathsf{Cert}(\mathrm{id}_X^\mathcal{C})} |c| \le |\mathrm{id}_X^\mathcal{P}| = 0$. Como $|c| \ge 0$ para todo $c$, se sigue $\mu(\mathrm{id}_X^\mathcal{C}) = 0$. $\blacksquare$
+
+**(2) Desigualdad Triangular.** Es el caso particular del Teorema 1.1 (Subaditividad Secuencial) con $\delta_\circ(\alpha, \beta) = 0$:
+$$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha,\beta) = \mu(\alpha) + \mu(\beta)$$
+$\blacksquare$
+
+> **Nota:** $(\mathcal{C}, \mu)$ es un *espacio premétrico de Lawvere* y no una métrica en sentido clásico: no se exige simetría ($\mu(\alpha) \ne \mu(\alpha^{-1})$ en general, si $\alpha^{-1}$ existe) ni separación ($\mu(\alpha) = 0 \not\Rightarrow \alpha = \mathrm{id}$). Esto es intencionado, ya que los costes de certificación son inherentemente asimétricos y dirigidos.
+
+---
+
+## VII. SOUNDNESS ESTRUCTURAL (PRF-S) **[Teorema 4 - Demostrado]**
+
+### 7.1 Enunciado
+
+**Teorema 4 (PRF-S Soundness):** Sea $\mathcal{A}(M) \subseteq \mathrm{Mor}(\mathcal{C}_M)$ la familia de transiciones básicas del modelo $\mathcal{M}$. Si para cada $\alpha \in \mathcal{A}(M)$ existe un certificado $c_\alpha \in \mathsf{Cert}(\alpha)$ con $|c_\alpha| \le k$, entonces:
+$$\mathcal{M} \models FISR_k^\mathcal{A}$$
+
+### 7.2 Demostración
+
+Sea $\alpha \in \mathcal{A}(M)$ arbitraria. Por hipótesis, existe $c_\alpha \in \mathsf{Cert}(\alpha)$ con $|c_\alpha| \le k$.
+
+**Paso 1.** Por definición de $\mu$:
+$$\mu(\alpha) = \inf_{c \in \mathsf{Cert}(\alpha)} |c| \le |c_\alpha| \le k$$
+Luego $R_k^\mathcal{A}(M)$ se satisface: $\forall \alpha \in \mathcal{A}(M), \mu(\alpha) \le k$.
+
+**Paso 2.** Para verificar que $\kappa(\alpha, R_k^\mathcal{A}) = 0$, consideremos la extensión trivial $e = \mathrm{id}_Y$ donde $Y = \mathrm{tgt}(\alpha)$. Entonces $e \circ \alpha = \alpha$, y ya hemos mostrado $\mu(\alpha) \le k$, por lo que $e \circ \alpha \models R_k^\mathcal{A}$. Como $\mu(\mathrm{id}_Y) = 0$ (por Proposición Id-3):
+$$\kappa(\alpha, R_k^\mathcal{A}) = \inf\{\mu(e) \mid e \circ \alpha \models R_k^\mathcal{A}\} \le \mu(\mathrm{id}_Y) = 0$$
+Dado que $\kappa \ge 0$ por construcción, $\kappa(\alpha, R_k^\mathcal{A}) = 0$.
+
+**Conclusión.** $\forall \alpha \in \mathcal{A}(M), \kappa(\alpha, R_k^\mathcal{A}) = 0$, lo que equivale a $\mathcal{M} \models FISR_k^\mathcal{A}$ por la Condición de Satisfacibilidad (Sección 5.3). $\blacksquare$
+
+---
+
+## VIII. TEOREMA DE SEPARACIÓN **[Teorema 5 - Demostrado]**
+
+### 8.1 Enunciado
+
+**Teorema 5 (Separación / Existencia de Modelo No-FISR):** Existe un sistema de certificados $(\mathcal{P}, \mathcal{C}, \pi)$ y una familia de transiciones básicas $\mathcal{A}(M)$ tal que para todo $k < \infty$:
+$$\mathcal{M} \not\models FISR_k^\mathcal{A}$$
+Es decir, $\exists \alpha \in \mathcal{A}(M)$ con $\kappa(\alpha, R_k^\mathcal{A}) > 0$.
+
+### 8.2 Construcción del Contraejemplo
+
+**Categoría Base $\mathcal{C}$:** Sea $\mathcal{C}$ la categoría libre generada por un único morfismo $\alpha: A \to B$ (con identidades $\mathrm{id}_A, \mathrm{id}_B$).
+
+**Categoría de Certificados $\mathcal{P}$:** Sea $\mathcal{P}$ la categoría con los mismos objetos $\{A, B\}$ y los mismos morfismos identidad (con coste 0), pero con $\mathsf{Cert}(\alpha) = \varnothing$.
+
+**Funtor $\pi$:** Identidad sobre objetos y morfismos identidad; $\alpha$ no tiene preimagen en $\mathcal{P}$ (fibra vacía).
+
+### 8.3 Demostración
+
+**Paso 1.** $\mathcal{A}(M) = \{\alpha\}$ es la familia de transiciones básicas.
+
+**Paso 2.** $\mu(\alpha) = \inf \varnothing = \infty$ (por convención de función total).
+
+**Paso 3.** Para cualquier $k < \infty$: $\mu(\alpha) = \infty > k$, luego $R_k^\mathcal{A}(M)$ falla.
+
+**Paso 4.** Puesto que no existe ninguna extensión $e$ tal que $e \circ \alpha \models R_k^\mathcal{A}$ (ya que la única forma de certificar $e \circ \alpha$ sería a través de un certificado de $\alpha$, cuya fibra es vacía, y la composición con la fibra vacía es vacía por la álgebra de composición):
+$$\kappa(\alpha, R_k^\mathcal{A}) = \inf \varnothing = \infty > 0$$
+
+**Conclusión.** El modelo $\mathcal{M}$ no satisface $FISR_k^\mathcal{A}$ para ningún $k$ finito: $\kappa(\alpha, R_k^\mathcal{A}) = \infty \ne 0$. $\blacksquare$
+
+> **Observación.** El contraejemplo es mínimo (un único generador) y revela que la condición de fibra no vacía ($\mathsf{Cert}(\alpha) \ne \varnothing$) es la frontera exacta entre modelos FISR y no-FISR.
+
+---
+
+## IX. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Cristalización de Baseline v18.5 (Thm 2.2 dirección corregida, verificador monoidal, Property-Based Testing, Lawvere Triangle Inequality)
+Claim: Cristalización de Baseline v18.3 (Thm 3 Lawvere Premetric, Thm 4 PRF-S Soundness, Thm 5 Separation, Motor Verificación Completo)
 Proof:
-  Base: 18fa42f06
-  Range: [Sección_0, Sección_V]
+  Base: v18.3
+  Range: [Sección_0, Sección_VIII]
   Confidence: C5-REAL
+  Theorems_Proved: [1.1_Subadditivity, 2.1_Monotonicity, 2.2_Submonotonicity, 3_Lawvere, 4_PRF_S, 5_Separation]
 ```
 
 

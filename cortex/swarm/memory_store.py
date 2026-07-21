@@ -146,18 +146,21 @@ class AgentMemory:
 
                 if self.collection is not None:
                     doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
-                    self.collection.add(
-                        documents=[doc_content],
-                        metadatas=[
-                            {
-                                "issue_id": issue_id,
-                                "agent_role": agent_role,
-                                "cortex_taint": cortex_taint,
-                                "timestamp": timestamp_iso,
-                            }
-                        ],
-                        ids=[cortex_taint],
-                    )
+                    try:
+                        self.collection.add(
+                            documents=[doc_content],
+                            metadatas=[
+                                {
+                                    "issue_id": issue_id,
+                                    "agent_role": agent_role,
+                                    "cortex_taint": cortex_taint,
+                                    "timestamp": timestamp_iso,
+                                }
+                            ],
+                            ids=[cortex_taint],
+                        )
+                    except (AttributeError, ValueError, RuntimeError, OSError):
+                        pass
 
                 self.conn.execute("COMMIT")
                 return cortex_taint

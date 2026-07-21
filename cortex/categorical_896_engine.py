@@ -167,7 +167,7 @@ class CompatProperty(Enum):
 @dataclass
 class CompatFace:
     """A face (simplex) in Compat(Omega)."""
-    properties: frozenset[str]
+    properties: frozenset[CompatProperty]
 
     @property
     def dimension(self) -> int:
@@ -294,7 +294,10 @@ class Categorical896Engine:
 
     def _sync_sqlite_ledger(self) -> None:
         conn = sqlite3.connect(self.db_path)
-        conn.execute("PRAGMA journal_mode=WAL;")
+        try:
+            conn.execute("PRAGMA journal_mode=WAL;")
+        except sqlite3.OperationalError:
+            pass
         conn.execute("PRAGMA busy_timeout=5000;")
 
         cursor = conn.cursor()
