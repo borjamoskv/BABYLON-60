@@ -1,0 +1,36 @@
+{
+  "experiment": "tercer_experimento_c5",
+  "version": "3.0",
+  "timestamp": "2026-07-21T22:43:00.000000+00:00",
+  "status": "completed",
+  "files": [
+    {
+      "name": "01_experimento.yml",
+      "sha3_256": "8d78bcdd0033675e3bb5ab6c8ec89bfaf0be8c9af4ecf79989939ddb4ceb58e6"
+    },
+    {
+      "name": "02_hallazgo.md",
+      "sha3_256": "f292072ba565979dca82af2a61b1d070b937eb140a61b8e0ac009a90c19b4071"
+    },
+    {
+      "name": "03_codigo.py",
+      "sha3_256": "e9e41c91ed156b4bcbc1042879a4b66835db2de04d7fd15c7bb2d67ff8da575a"
+    },
+    {
+      "name": "04_demo.sh",
+      "sha3_256": "74d2c1e0cca0b7ccd8673bb34b66c2b7db2c5b0e9ecf88f675a5092782be0f59"
+    },
+    {
+      "name": "05_track.md",
+      "sha3_256": "59e5d9d70ca8790a26feb25d48ba748d0ce8fc9383acc6e90972041571e73b09"
+    },
+    {
+      "name": "06_reflexion.md",
+      "sha3_256": "c46dc0015aa66711ef55d3f3203fe98990b0441e58d9a3430c7c9e6c73aa2f84"
+    },
+    {
+      "name": "post_draft.md",
+      "sha3_256": "4504ba67f62ecd7468b692bde32ed3ae30187e7d9f94fb6fb223eeff92714b74"
+    }
+  ]
+}

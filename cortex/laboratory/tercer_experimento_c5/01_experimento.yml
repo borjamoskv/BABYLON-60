@@ -1,0 +1,10 @@
+claim_id: "LAB_TERCER_EXPERIMENTO_C5"
+hypothesis: "La implementacion de bloques try/finally y cierre explicito de SQLite WAL en STDPMemristor elimina los bloqueos de escritura y colisiones de bloqueo bajo alta concurrencia (50 hilos paralelos), manteniendo el rendimiento y la consistencia del poset causal."
+initial_conditions:
+  - "Base de datos en modo WAL"
+  - "50 hilos concurrentes escribiendo en el ledger de memristores"
+  - "Aislamiento de transacciones con BEGIN IMMEDIATE"
+constraints:
+  - "C5-REAL"
+  - "Zero Anergy"
+vertical: "software_thermo"

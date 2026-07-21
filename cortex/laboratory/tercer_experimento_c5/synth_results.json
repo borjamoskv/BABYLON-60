@@ -1,0 +1,10 @@
+{
+  "timestamp": 1784666542,
+  "threads": 50,
+  "total_operations": 2000,
+  "success_ops": 2000,
+  "failed_ops": 0,
+  "exergy_ratio": 1.0,
+  "elapsed_seconds": 0.9303,
+  "errors": []
+}
