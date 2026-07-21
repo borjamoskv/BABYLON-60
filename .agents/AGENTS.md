@@ -1,126 +1,156 @@
-# CORTEX-OS v4.0 (Cognitive Operating System)
-## Microkernel & Cognitive Execution Runtime Specification
+# CAM 1.0 (C5 Abstract Machine Specification)
+## Normative & Informative Specification for Cognitive Runtimes
 
-**Classification:** C5-REAL Microkernel Spec  
-**Status:** Executable Cognitive Operating System  
-**Paradigm:** Microkernel · Epistemic Memory Hierarchy · Cognitive Scheduler · Syscall Interface
+**Classification:** C5 Formal Specification  
+**Status:** Living Abstract Machine Specification  
+**Conformance Target:** CAM Standard / CAM Verified
 
 ---
 
 ```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                         CORTEX-OS ARCHITECTURE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   [ AGENTS / PROCESSES ] (PID, Capabilities, Priority, Token Budget)
-             │ (Syscalls: Observe, Measure, Verify, Persist, Audit, Learn)
-             ▼
-   ┌───────────────────────────────────────────────────────────────────┐
-   │                     CORTEX-OS MICROKERNEL (<500 LOC)              │
-   │  ┌──────────────────┬───────────────────┬──────────────────────┐  │
-   │  │  Reality Graph   │  Knowledge Graph  │   Execution Graph    │  │
-   │  ├──────────────────┼───────────────────┼──────────────────────┤  │
-   │  │  Evidence Graph  │ Capability Graph  │  Epistemic Scheduler │  │
-   │  └──────────────────┴───────────────────┴──────────────────────┘  │
-   └───────────────────────────────────────────────────────────────────┘
-             │ (Drivers: LLM, SQLite WAL, Git, Docker, CDP, FS)
-             ▼
-   [ MEMORY HIERARCHY ] (Sensory ➔ Working ➔ Verified ➔ Institutional ➔ Ledger)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+┌─────────────────────────────────────────────────────┐
+│                   CAM Specification                 │
+├─────────────────────────────────────────────────────┤
+│  Core          Syntax · Type System · Interfaces    │  NORMATIVE
+│  Semantics     Operational · Effects · Purezza      │  NORMATIVE
+│  Machine       State · Transitions · Scheduler      │  NORMATIVE
+│  Models        Exergy · Entropy · Cost Vectors      │  INFORMATIVE
+│  Conformance   Minimal · Standard · Verified        │  NORMATIVE
+└─────────────────────────────────────────────────────┘
 ```
 
 ---
 
-# 1. KERNEL GRAPHS (The 5 State Graphs)
+# 1. EPISTEMIC LAYERS & TRUST INVARIANT (NORMATIVE)
 
-The CORTEX Microkernel maintains strictly five primitive state graphs:
+The epistemic pipeline is unidirectional:
 
-1. **Reality Graph ($\mathcal{G}_R$)**: Ground truth physical observations, filesystem state, environment variables.
-2. **Knowledge Graph ($\mathcal{G}_K$)**: Verified inferences, facts, claims, and relations.
-3. **Execution Graph ($\mathcal{G}_E$)**: Task DAGs, agent states, transitions, process lifecycles.
-4. **Evidence Graph ($\mathcal{G}_V$)**: Hashes, SHA3 attestations, test logs, coverage, benchmarks.
-5. **Capability Graph ($\mathcal{G}_C$)**: Fine-grained agent permissions (`ReadArtifact`, `WriteArtifact`, `VerifyEvidence`, `ExecuteSyscall`).
+$$\text{World} \longrightarrow \text{Observation} \longrightarrow \text{Evidence} \longrightarrow \text{Inference} \longrightarrow \text{Confidence} \longrightarrow \text{Policy} \longrightarrow \text{Trust}$$
+
+## Trust Inequality Invariant
+For any agent $a$ and target assertion $x$:
+
+$$\text{Trust}(a, x) \le \text{Policy}(a, \text{Confidence}(x))$$
+
+A runtime MUST reject any transition where an agent attempts to grant $\text{Trust} > \text{Policy}(\text{Confidence}(x))$.
 
 ---
 
-# 2. EPISTEMIC MEMORY HIERARCHY
+# 2. EPISTEMIC STATES (10-STATE SPECTRUM) (NORMATIVE)
 
-Information transitions through 5 memory tiers with explicit energy cost:
+Every node in the Knowledge Graph MUST occupy exactly one of the following 10 states:
 
-```text
-  Sensory Memory (Raw I/O, Scraped DOM, Traces)
-        │  (Filtering & Structuring)
-        ▼
-  Working Memory (Transient Context, Active Task Buffers)
-        │  (Verification & Reproduction)
-        ▼
-  Verified Memory (Tested Invariants, Passed Claims)
-        │  (Crystallization & Compression)
-        ▼
-  Institutional Memory (Core Architecture, Domain Ontologies)
-        │  (Cryptographic Signing)
-        ▼
-  Immutable Ledger (SQLite WAL, Git Merkle Tree, CORTEX-TAINT)
+| State | Semantic Definition |
+|---|---|
+| `Undefined` | Unspecified or uninitialized (Accessing produces Undefined Behaviour) |
+| `Unknown` | Unexplored domain node |
+| `KnownUnknown` | Identified boundary, unmeasured |
+| `Measured` | Observed value with empirical variance |
+| `Estimated` | Inferred value with confidence interval $[0, 1] \in \mathbb{R}$ |
+| `Verified` | Independently reproduced via empirical evidence |
+| `Refuted` | Falsified by contradictory evidence |
+| `Superseded` | Replaced by subsequent verified version |
+| `ImplDefined` | Delegated to backend implementation |
+| `Impossible` | Proven logically or physically contradictory |
+
+---
+
+# 3. KNOWLEDGE GRAPH AS A TYPED DAG (NORMATIVE)
+
+The Knowledge Graph $\mathcal{KG} = (\mathcal{V}, \mathcal{E})$ is a Directed Acyclic Graph:
+
+## Node Types ($\mathcal{V}$)
+`Observation`, `Evidence`, `Claim`, `Inference`, `Decision`, `Artifact`, `Incident`, `Policy`.
+
+## Edge Types ($\mathcal{E}$)
+`supports` ($E \to C$), `refutes` ($E \to C$), `derives_from` ($I \to E$), `supersedes` ($A \to A$), `depends_on` ($C \to C$), `invalidates` ($Inc \to A$), `implements` ($A \to Dec$).
+
+## Invariants
+1. $\mathcal{KG}$ MUST remain strictly acyclic. Cycle detection failure is **Undefined Behaviour**.
+2. Lamport timestamps MUST strictly increase along directed edges.
+
+---
+
+# 4. EFFECTS ALGEBRA (NORMATIVE)
+
+Every transition MUST declare its exact effect footprint:
+
+```yaml
+effects:
+  pure:       bool                       # true if zero side effects
+  knowledge:  [read, write]              # Graph mutations
+  ledger:     [append]                   # Append-only ledger updates
+  filesystem: [read, write, delete]
+  network:    [send, recv]
+  memory:     [alloc, free]
+  external:   [call_api, emit_event]
 ```
 
----
-
-# 3. COGNITIVE SCHEDULER & PIPELINE
-
-The Cognitive Scheduler prioritizes active process execution using the **Epistemic Priority Function**:
-
-$$\text{Priority} = \frac{\text{Weight} \times \text{ExpectedInfoGain} \times \text{RiskReduction}}{\text{TokenCost} + 1}$$
-
-## Cognitive Execution Cycle
-```text
-Observe ──► Reason ──► Verify ──► Execute ──► Learn ──► Compress ──► Generalize
-```
+## Undefined Behaviour Rule
+Executing any effect not contained within the declared effect set $\text{Effects}_{\text{actual}} \not\subseteq \text{Effects}_{\text{declared}}$ constitutes **Undefined Behaviour (UB)** and causes immediate process termination (`SIGKILL`).
 
 ---
 
-# 4. SYSTEM CALLS (Syscall Interface)
+# 5. TRAITS & INTERFACES (NORMATIVE)
 
-Agile processes (Agents) interact with drivers and hardware exclusively through kernel syscalls:
+## Primitive Traits
+- `Traceable`: `{ lamport_t: Int, created_at: Timestamp, created_by: AgentId }`
+- `Versioned`: `{ version: SemVer, supersedes: NodeId? }`
+- `Verifiable`: `{ verify() -> bool }`
+- `Identifiable`: `{ id: UUIDv5 }`
+- `Signed`: `{ signature: Bytes, public_key: Bytes }`
+- `HashLinked`: `{ prev_hash: Hash256, entry_hash: Hash256 }`
 
-- `Observe(target: URI) -> Observation`
-- `Measure(metric: MetricKind) -> Measurement`
-- `Verify(claim: ClaimId, evidence: EvidenceId) -> VerificationResult`
-- `Persist(object: StorageObject) -> Hash`
-- `Search(query: GraphQuery) -> GraphNodes`
-- `Compile(spec: SpecificationId) -> BinaryArtifact`
-- `Execute(proc: ProcessId) -> ExecutionResult`
-- `Rollback(state_hash: Hash) -> Status`
-- `Audit(component: ComponentId) -> AuditReport`
-- `Learn(pattern: VerifiedFact) -> MemoryRef`
-
----
-
-# 5. GARBAGE COLLECTION & HOMEOSTASIS
-
-- **Prompts & Unused Context**: Expired transient prompts purged from Working Memory.
-- **Duplicated Knowledge**: Isomorphic nodes merged via Merkle Root deduplication.
-- **Expired Assumptions**: Invalidated when contradicting evidence arrives in Sensory Memory.
-- **Autonomic Nervous System**: Automatic test generation on coverage drops, dependency patching on CVE detection, doc sync on drift.
+## Standard Interfaces
+- `KnowledgeStore`: Methods `get_node`, `add_node`, `add_edge`, `check_acyclic`.
+- `Scheduler`: Methods `enqueue`, `next`, `can_parallel`.
+- `Reasoner`: Methods `infer`, `detect_contradictions`.
 
 ---
 
-# 6. IMMUNE SYSTEM & INTERRUPTS
+# 6. CAPABILITY ALGEBRA (NORMATIVE)
 
-- **Hallucination Quarantine**: Suspends reasoning if confidence drifts below evidence threshold ($\text{Trust} > \text{Evidence}$).
-- **Prompt Injection Defense**: Intercepts input streams and strips non-sanitized commands.
-- **Interrupt Vectors**: `INT_SECURITY_INCIDENT`, `INT_NEW_EVIDENCE`, `INT_REGRESSION`, `INT_RESOURCE_EXHAUSTION`.
+Capabilities are compositional sets:
 
----
+$$\text{CapabilitySet} = \text{Set}[\text{Capability}]$$
+$$\text{Auditor} = \text{Read} \cup \text{Verify}$$
+$$\text{Collector} = \text{Observe} \cup \text{Write}$$
+$$\text{Analyst} = \text{Collect} \cup \text{Infer}$$
 
-# 7. DRIVER LAYER (Agnostic Interfaces)
-
-The Microkernel is driver-agnostic. All hardware, LLMs, and databases bind to standard interfaces:
-
-```text
-  Driver Interface: LLMDriver, StorageDriver, NetworkDriver, FSRuntimeDriver
-```
+Privilege checking requires set containment:
+$$\text{TransitionAllowed} \iff \text{RequiredCaps} \subseteq \text{AgentCaps}$$
 
 ---
 
-# TERMINATION CONDITION
+# 7. UNDEFINED BEHAVIOUR VS IMPLEMENTATION DEFINED (NORMATIVE)
 
-$$\Delta E = \frac{\text{VerifiedValue}}{\text{Complexity} \times \text{Risk} \times \text{Cost}} \quad \text{monotonically increases towards local equilibrium.}$$
+## Undefined Behaviour (UB)
+- Deleting a KnowledgeNode without migration.
+- Appending to Ledger with broken `prev_hash` chain.
+- $\text{Trust} > \text{Policy}_{\max}(\text{Confidence})$.
+- Introducing a cyclic edge into $\mathcal{KG}$.
+- Executing undeclared side-effects.
+
+## Implementation Defined (ImplDefined)
+- Scheduler algorithm (FIFO, Priority Queue, Min-Latency).
+- Storage engine (SQLite WAL, Postgres, S3, Memory).
+- Hash primitive (Default: SHA3-256 / BLAKE3).
+- Concurrency backend (Asyncio, Threads, Actors).
+
+---
+
+# 8. CONFORMANCE PROFILES (NORMATIVE)
+
+- **CAM Minimal**: Core Syntax + Epistemic States + KnowledgeStore Interface.
+- **CAM Standard**: Minimal + Effects Algebra + Purity Scheduler.
+- **CAM Enterprise**: Standard + Cryptographic Signatures + Ledger Audit.
+- **CAM Verified**: Enterprise + Formal Proofs (Lean4 / Coq).
+
+---
+
+# 9. ABSTRACT MACHINE STATE (NORMATIVE)
+
+$$\text{CAM\_State} = \langle \mathcal{KG}, \text{Ledger}, \text{Queue}, \text{Caps}, \text{Clock}, \text{EffectsLog}, \text{ConformanceProfile} \rangle$$
+
+Atomic Transition Step:
+$$\text{step}: \text{CAM\_State} \times \text{Transition} \longrightarrow \text{CAM\_State}' \times \text{Effects}$$
