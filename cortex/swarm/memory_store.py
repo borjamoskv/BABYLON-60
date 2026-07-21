@@ -31,7 +31,8 @@ class AgentMemory:
 
         # Silenciar desajuste de argumentos en telemetría interna de chromadb
         try:
-            import chromadb.telemetry.posthog
+            import chromadb.telemetry.posthog  # type: ignore[import-not-found]
+
             chromadb.telemetry.posthog.Posthog.capture = lambda *args, **kwargs: None
         except Exception:
             pass
