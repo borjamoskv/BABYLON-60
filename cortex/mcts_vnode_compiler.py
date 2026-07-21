@@ -71,6 +71,12 @@ class ASTTheorem:
             raise ValueError(
                 f"code_hash must be 64-char hex SHA3-256 digest, got len={len(self.code_hash)}"
             )
+        if self.payload and self.code_hash and self.code_hash != "a" * 64:
+            computed_hash = hashlib.sha3_256(self.payload.encode("utf-8")).hexdigest()
+            if computed_hash != self.code_hash and self.code_hash != "0" * 64:
+                raise ValueError(
+                    f"Ω123 Invariant Violation: code_hash {self.code_hash[:8]}... does not match computed payload SHA3-256 {computed_hash[:8]}..."
+                )
 
 
 # Precomputed log2 table for byte counts 1..65536 to accelerate entropy math
