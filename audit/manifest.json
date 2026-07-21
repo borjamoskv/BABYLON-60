@@ -1,0 +1,35 @@
+{
+  "manifest_version": "1.0",
+  "git_commit": "fb1bc3f32b2a6f238b7d953931123a31c51b2fb4",
+  "timestamp_utc": "2026-07-21T21:59:55Z",
+  "artifacts": {
+    "sbom.cdx.json": {
+      "sha256": "af09b9f3ed8b79903cd8483853bf371dbf8f490daafae7b48b87cde5cdb9202b",
+      "size_bytes": 2290
+    },
+    "benchmark.csv": {
+      "sha256": "beaa2380f83ff7278dcb0d1c6f9437601920a486933707828c472a14c4fb1286",
+      "size_bytes": 286
+    },
+    "git-churn.csv": {
+      "sha256": "ed7e2926d75f298289bec1b8c1559d45da70cd3f57a2e778512a8a5e95c41a6b",
+      "size_bytes": 11335390
+    },
+    "evidence/pytest.log": {
+      "sha256": "f5b59b72972c9e88e66cdc8d4f56e129aba699152062ac502896c074128b0c57",
+      "size_bytes": 23264
+    },
+    "evidence/cargo-test.log": {
+      "sha256": "fb6370350e3db10cbdbe868c57b8aee8e46fbbccd68ee7f46d604459d5f8ade6",
+      "size_bytes": 3896
+    },
+    "evidence/mypy.log": {
+      "sha256": "c026d759699a83e460b720ac143772e130d433995f25b77e1143b1097728fcf2",
+      "size_bytes": 45
+    },
+    "evidence/ruff.log": {
+      "sha256": "98733c3446b52dc3e6b6943142b19a142025d9727521f6abc3783a20e4b6d3c6",
+      "size_bytes": 20
+    }
+  }
+}

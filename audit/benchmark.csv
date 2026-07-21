@@ -1,0 +1,4 @@
+workload,sample_size_n,p50_ms,p95_ms,p99_ms,mean_ms,stdev_ms,tps
+SQLite WAL synchronous=FULL,500,0.058,0.075,0.094,0.059,0.01,16880.3
+SQLite WAL Batch Transaction,10000,0.00113,0.0012,0.0015,0.00113,0.0001,882830.1
+BLAKE3/SHA256 Cryptographic Hash,10,5.31,5.8,6.1,5.32,0.25,1880.79
