@@ -167,7 +167,7 @@ class CompatProperty(Enum):
 @dataclass
 class CompatFace:
     """A face (simplex) in Compat(Omega)."""
-    properties: frozenset
+    properties: frozenset[str]
 
     @property
     def dimension(self) -> int:
@@ -349,7 +349,7 @@ class Categorical896Engine:
             return float("inf")
 
         if self.rust_engine is not None:
-            cost = self.rust_engine.calculate_morphism_cost(primitive_ids, eff_friction)
+            cost: float = float(self.rust_engine.calculate_morphism_cost(primitive_ids, eff_friction))
             if cost != float("inf"):
                 return cost
 

@@ -189,7 +189,7 @@ class CertificateCategoryP:
                 return False
             # Self-repair check with identity morphism
             self.add_identity_certificate(alpha.tgt)
-            def budget_R_k(m, cost) -> None:
+            def budget_R_k(m: Morphism, cost: float) -> bool:
                 return self.compute_mu(alpha) <= k
             kappa_val = self.compute_kappa_repair_operator(alpha, budget_R_k)
             if kappa_val > 0.0:
