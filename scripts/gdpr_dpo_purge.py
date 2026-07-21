@@ -5,8 +5,6 @@ C5-REAL Sovereign Privacy Transducer.
 """
 
 import os
-import sys
-import json
 import hashlib
 from datetime import datetime, timezone
 
