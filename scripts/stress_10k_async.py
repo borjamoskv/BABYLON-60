@@ -6,7 +6,7 @@ import time
 import os
 import sqlite3
 import numpy as np
-from typing import List, Tuple
+from typing import List
 
 from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 from cortex.active_inference_engine import UnifiedActiveInferenceEngine
@@ -137,8 +137,8 @@ async def main():
     print("\n╔══════════════════════════════════════════════════════════════╗")
     print("║  RESULTADO FINAL DE AUDITORÍA — 10,000 PRUEBAS ASÍNCRONAS    ║")
     print("╠══════════════════════════════════════════════════════════════╣")
-    print(f"║  Total Iteraciones : 10,000                                  ║")
-    print(f"║  Exitosas / Fallos : 10,000 / 0 (100% Éxito)                ║")
+    print("║  Total Iteraciones : 10,000                                  ║")
+    print("║  Exitosas / Fallos : 10,000 / 0 (100% Éxito)                ║")
     print(f"║  Tiempo Total      : {total_time*1000:.2f} ms                       ║")
     print(f"║  Throughput        : {10000 / total_time:.2f} ops/sec               ║")
     print("╠══════════════════════════════════════════════════════════════╣")
