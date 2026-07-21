@@ -1,7 +1,7 @@
 import os
 import yaml
 import hashlib
-from typing import TypedDict, Any
+from typing import TypedDict
 
 class DomainSpec(TypedDict):
     id: str
