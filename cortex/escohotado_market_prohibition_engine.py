@@ -104,8 +104,8 @@ def run_economic_grid(
             with conn:
                 conn.execute(
                     """
-                    INSERT OR REPLACE INTO prohibition_economics 
-                    (timestamp, enforcement_level, property_rights_index, risk_premium_multiplier, 
+                    INSERT OR REPLACE INTO prohibition_economics
+                    (timestamp, enforcement_level, property_rights_index, risk_premium_multiplier,
                      purity_index, black_market_violence_index, information_loss_index, systemic_exergy_loss, cortex_taint)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,

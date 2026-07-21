@@ -103,7 +103,7 @@ def run_substance_grid(
                 with conn:
                     conn.execute(
                         """
-                        INSERT OR REPLACE INTO substance_ontology 
+                        INSERT OR REPLACE INTO substance_ontology
                         (timestamp, potentiality_phi, actuality_phi, dualism_index, substance_exergy_density, ontological_regime, cortex_taint)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
                     """,

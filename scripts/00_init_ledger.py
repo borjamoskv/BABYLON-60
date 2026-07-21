@@ -52,7 +52,7 @@ def init_ledger() -> None:
     if cursor.fetchone()[0] == 0:
         print("[IGNICIÓN] Inicializando Bloque Génesis del Master Ledger...")
         cursor.execute(
-            """INSERT INTO bft_ledger (agent_id, lamport_t, payload_hash, prev_hash, cortex_taint) 
+            """INSERT INTO bft_ledger (agent_id, lamport_t, payload_hash, prev_hash, cortex_taint)
                VALUES (?, ?, ?, ?, ?)""",
             (
                 "ROOT_OPERATOR_UID0",

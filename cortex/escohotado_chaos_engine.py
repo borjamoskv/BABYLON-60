@@ -148,7 +148,7 @@ def run_simulation_grid(
             with conn:
                 conn.execute(
                     """
-                    INSERT OR REPLACE INTO chaos_metrics 
+                    INSERT OR REPLACE INTO chaos_metrics
                     (timestamp, growth_r, coercion_c, entropy_s, lyapunov_exp, regime, cortex_taint)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
                 """,
