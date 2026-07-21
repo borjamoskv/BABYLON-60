@@ -99,9 +99,9 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente
             print(
                 "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
-            
+            )
             # Validation subprocess disabled — validation_proc set to None
-            validation_proc = None
+            validation_proc: Any = None
 
             # Ejecutar transiciones de estado de la FSM de manera concurrente con pytest
             state = "UNPROCESSED"
