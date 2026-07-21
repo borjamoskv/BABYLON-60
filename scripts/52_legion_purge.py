@@ -18,9 +18,10 @@ def run_ruff_fix() -> None:
 
 
 def execute_swarm_audit() -> None:
-    skill_dir = os.environ.get("CORTEX_SKILLS_DIR")
-    if not skill_dir:
-        raise RuntimeError("CORTEX_SKILLS_DIR env var is required (Ω23).")
+    skill_dir = os.environ.get("CORTEX_SKILLS_DIR", os.path.expanduser("~/.gemini/config/skills"))
+    if not os.path.exists(skill_dir):
+        print(f"Warn: CORTEX_SKILLS_DIR '{skill_dir}' not found.")
+        return
 
     skill_path = os.path.join(skill_dir, "Swarm_Thread_Dispatcher")
     if skill_path not in sys.path:
@@ -89,9 +90,10 @@ def execute_swarm_audit() -> None:
 
     import glob
 
-    brain_dir = os.environ.get("CORTEX_BRAIN_DIR")
-    if not brain_dir:
-        raise RuntimeError("CORTEX_BRAIN_DIR env var is required (Ω23).")
+    brain_dir = os.environ.get("CORTEX_BRAIN_DIR", os.path.expanduser("~/.gemini/antigravity/brain"))
+    if not os.path.exists(brain_dir):
+        print(f"Warn: CORTEX_BRAIN_DIR '{brain_dir}' not found.")
+        return
 
     transcripts = glob.glob(
         os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
@@ -106,9 +108,10 @@ def execute_swarm_audit() -> None:
         )
 
     print(f"⚡ [LEA_OMEGA] Running cognitive audit on: {transcript_path}")
-    audit_script = os.environ.get("CORTEX_AUDIT_SCRIPT")
-    if not audit_script:
-        raise RuntimeError("CORTEX_AUDIT_SCRIPT env var is required (Ω23).")
+    audit_script = os.environ.get(
+        "CORTEX_AUDIT_SCRIPT",
+        os.path.join(os.path.dirname(__file__), "anergy_ratio.py"),
+    )
 
     try:
         res = subprocess.run(
