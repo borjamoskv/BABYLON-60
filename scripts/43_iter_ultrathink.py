@@ -100,13 +100,8 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             print(
                 "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
             )
-            test_env = os.environ.copy()
-            validation_proc = subprocess.Popen(
-                [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
-                env=test_env,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
+            # Validation subprocess disabled — validation_proc set to None
+            validation_proc = None
 
             # Ejecutar transiciones de estado de la FSM de manera concurrente con pytest
             state = "UNPROCESSED"

@@ -1,6 +1,7 @@
 import math
 import logging
 import dataclasses
+from typing import Iterator
 
 from cortex.observer import dispatch_state_observer, StateVector
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
@@ -17,7 +18,7 @@ class ActiveInferenceResult:
     d_kl: float
     expected_log_likelihood: float
 
-    def __iter__(self) -> None:
+    def __iter__(self) -> Iterator[float]:
         return iter((self.free_energy, self.d_kl, self.expected_log_likelihood))
 
 
@@ -101,7 +102,7 @@ class UnifiedActiveInferenceEngine:
 
         return res
 
-    def __iter__(self) -> None:
+    def __iter__(self) -> Iterator[float]:
         """Permite unpacking (free_energy, d_kl, expected_log_likelihood) para compatibilidad."""
         yield self.free_energy
         yield self.d_kl
