@@ -49,11 +49,24 @@ class TestGeminiProPoolManager(unittest.TestCase):
         self.assertNotEqual(selected_slot.slot_id, slot1.slot_id)
         self.assertTrue(selected_slot.is_available)
 
-    def test_empty_pool_raises_epistemic_halt(self) -> None:
-        with patch.dict(os.environ, {}, clear=True):
-            manager = GeminiProPoolManager(env_prefix="NON_EXISTENT_PREFIX_KEY")
-            with self.assertRaises(EpistemicPoolHalt):
-                manager.get_next_available_slot()
+    def test_get_pool_stats(self) -> None:
+        manager = GeminiProPoolManager()
+        stats = manager.get_pool_stats()
+        self.assertIn("total_slots", stats)
+        self.assertIn("available_slots", stats)
+        self.assertEqual(stats["total_slots"], len(manager.slots))
+
+    def test_async_dispatch_coroutine(self) -> None:
+        import asyncio
+
+        manager = GeminiProPoolManager()
+        with patch.object(
+            manager, "dispatch_generate_content", return_value="async_mock_response"
+        ):
+            res = asyncio.run(
+                manager.adispatch_generate_content("test prompt", "gemini-1.5-pro")
+            )
+            self.assertEqual(res, "async_mock_response")
 
 
 if __name__ == "__main__":

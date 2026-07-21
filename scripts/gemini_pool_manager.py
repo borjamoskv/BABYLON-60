@@ -11,7 +11,7 @@ import json
 import time
 import urllib.request
 import urllib.error
-from typing import List, Optional
+from typing import List, Optional, Any
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -148,8 +148,35 @@ class GeminiProPoolManager:
             f"Agotadas todas las cuentas ({max_attempts}) del pool Gemini Pro. Error: {last_error}"
         )
 
+    async def adispatch_generate_content(
+        self, prompt: str, model: str = "gemini-1.5-pro"
+    ) -> str:
+        """Versión asíncrona no bloqueante de dispatch_generate_content (Ω45/Ω27)."""
+        import asyncio
+        return await asyncio.to_thread(self.dispatch_generate_content, prompt, model)
+
+    def get_pool_stats(self) -> dict[str, Any]:
+        """Devuelve las métricas termodinámicas actuales de cada slot del pool."""
+        now = time.time()
+        return {
+            "total_slots": len(self.slots),
+            "available_slots": sum(1 for s in self.slots if s.is_available),
+            "slots": [
+                {
+                    "slot_id": s.slot_id,
+                    "key_prefix": f"{s.api_key[:8]}...{s.api_key[-4:]}",
+                    "requests_count": s.requests_count,
+                    "errors_count": s.errors_count,
+                    "is_available": s.is_available,
+                    "cooldown_remaining_sec": max(0.0, round(s.cooldown_until - now, 2)),
+                }
+                for s in self.slots
+            ],
+        }
+
 
 if __name__ == "__main__":
     print("Gemini Pro Multi-Account Pool Manager (C5-REAL) cargado.")
     manager = GeminiProPoolManager()
     print(f"Cuentas activas en pool: {len(manager.slots)}")
+    print(json.dumps(manager.get_pool_stats(), indent=2))
