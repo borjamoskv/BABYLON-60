@@ -1,65 +1,108 @@
-# FibSyncMAct v0.2 — Clean Stratification Specification
+# Structural Constraint Theory (SCT) v9 — The Verifiable Architecture Lattice
 
-**Classification:** C5 Rigorous First-Order Logic & Turing Stratification Specification  
-**Language:** First-Order Logic $\mathcal{L}_A$ and Computational Extension $\mathcal{L}_B$  
-**Status:** Living Mathematical Paper Draft (v0.2 Stable Core)
-
----
-
-# LAYER A — ALGEBRA ($\Sigma_A$)
-
-### A.1 Language $\mathcal{L}_A$
-- **Sorts**: $M$ (Monoid), $S$ (States)
-- **Functions**: $\cdot: M \times M \to M$, $e \in M$, $\alpha: M \times S \to S$
-
-### A.2 Axioms $\Sigma_A$ (Theory of $M$-Acts)
-$$A_1: (\delta_1 \cdot \delta_2) \cdot \delta_3 = \delta_1 \cdot (\delta_2 \cdot \delta_3)$$
-$$A_2: e \cdot \delta = \delta \cdot e = \delta$$
-$$A_3: \alpha(e, s) = s$$
-$$A_4: \alpha(\delta_1 \cdot \delta_2, s) = \alpha(\delta_1, \alpha(\delta_2, s))$$
-
-*Compositionality $C(\delta_1, \delta_2)$*: $\alpha(\delta_1 \cdot \delta_2, s) = \alpha(\delta_1, \alpha(\delta_2, s))$ is identical to $A_4$. **Proven Redundant**.
+**Classification:** C5 Mathematical Constraint Theory & Sheaf of Theories Specification  
+**Target:** Poset Lattice $(\mathcal{P}(\Omega), \subseteq)$, Consistency $\chi$, Tension $\tau$, Metric $\mu$, Literature Matrix $\Phi(r)$  
+**Status:** Living Mathematical Formalization Target (SCT v9 Core Baseline)
 
 ---
 
-# LAYER B — COMPUTABILITY ($\mathcal{L}_B$)
+# 1. STRUCTURAL CONSTRAINT THEORY (SCT v9)
 
-### B.1 Stratified Definitions
-1. **Syntactic Stratum (Representation $P^+$)**:
-   $$P^+(\delta) \stackrel{\text{def}}{\iff} \exists \text{canonical enc}: M \to \{0,1\}^* \text{ injective, computable, with decidable image}$$
-2. **Operational Stratum (Computability $E$)**:
-   $$E(\delta) \stackrel{\text{def}}{\iff} \alpha(\delta, -): S \to S \text{ is a total computable function}$$
-3. **Metatheoretical Stratum (Verification $V$)**:
-   $$V(\delta, s, s') \stackrel{\text{def}}{\iff} \exists \text{cert}: \{0,1\}^* \times \{0,1\}^* \times \{0,1\}^* \to \{0,1\} \text{ in polynomial time in } |\delta| + |s|$$
+The fundamental unit of study is no longer a concrete category or runtime engine, but the **Structural Constraint Space**:
 
-### B.2 Proved Theorems
-- **Theorem B.1 ($E \not\vdash P^+$)**: Model $M = (\mathbb{R}_c, +)$ (computable reals). Addition is computable ($E \checkmark$), but checking valid bitstring encodings of computable reals is undecidable ($P^+ \times$). $\blacksquare$
-- **Theorem B.2 ($E \not\vdash V$ Unconditional)**: Model $M = \mathbb{N}, S = \{0,1\}^*, \alpha(n, s) = T_U^{(n)}(s)$. Verifying $T_U^{(n)}$ requires $\Omega(2^{|\delta|})$ steps in bit length $|\delta|$, which is superpolynomial. $\blacksquare$
-- **Theorem B.3 ($V \vdash E_{\text{existential}}$ and $V \not\vdash E_{\text{efficient}}$)**: Verifier $V$ proves existence of $s'$, but searching for $s'$ is non-efficient ($NP$ search vs verification gap). $\blacksquare$
+$$\mathfrak{C} \triangleq (\Sigma, \mathcal{M})$$
 
----
+where $\Sigma \subseteq \Omega$ is an axiomatic subset over the finite property set:
 
-# LAYER C — ARCHITECTURE
+$$\Omega \triangleq \{ F, I, S, A, M, \mu \}$$
 
-### C.1 Theorem C.1 — Non-Derivability of Invariant Decompositions
-*Theorem*: Let $\mathcal{M} = (M, S, \alpha)$ be a model of $\Sigma_A$ where the action is free and transitive. No non-trivial partition $S = \bigsqcup_{b \in B} S_b$ exists such that $\alpha(\delta, S_b) \subseteq S_{h(b)}$ for $|B| \ge 2$. $\blacksquare$
-
-### C.2 Category-Level Observation for $\otimes$
-$\otimes$ is a bifunctor over the category $\mathbf{MAct}$, not a first-order model property. Example $M = \mathbb{Z}/2\mathbb{Z}, S_1 = \mathbb{Z}/2\mathbb{Z}, S_2 = \mathbb{Z}/4\mathbb{Z}$ shows $\mathbf{MAct}$ is non-monoidal in general.
-
-### C.3 Formalization of $\text{Sync}_2$
-$$\text{Sync}_2 \stackrel{\text{def}}{=} \exists N \le M \text{ non-trivial commutative submonoid}$$
-- **Theorem ($\Sigma_A \not\vdash \text{Sync}_2$)**: Model $M = S_3$ (symmetric group on 3 elements acting on 6 permutations). $S_3 \models \Sigma_A$, but has no non-trivial commutative normal submonoid. $\blacksquare$
+- **$F$ (Hoare Fibration)**: Fibered logic of predicates over state transitions.
+- **$I$ (Tensor Isolation)**: Spatial isolation via symmetric monoidal product $\otimes$.
+- **$S$ (Synchronous Modality)**: Temporal modal synchrony $\bigcirc$.
+- **$A$ (Auditability)**: Finite certification artifact ($R \iff \mu(\alpha) < \infty$).
+- **$M$ (Dynamic Mobility)**: Channel link mobility $(\nu x)P$.
+- **$\mu$ (Verification Metric)**: Certificate complexity metric $\mu: \text{Obj} \to \mathbb{N}$.
 
 ---
 
-# HONEST RESULTS MATRIX & STABLE CORE v0.2
+# 2. THE POSET LATTICE & CONSISTENCY FUNCTION $\chi(T)$
 
-| Result | Status | Proof / Mechanism |
-|---|---|---|
-| $C$ is Redundant | $\checkmark$ Proved | $C \equiv A_4$ |
-| $E \not\vdash V$ (Unconditional) | $\checkmark$ Proved | Input length $|\delta|$ complexity |
-| $V \vdash E_{\text{exist}}$, $V \not\vdash E_{\text{effic}}$ | $\checkmark$ Proved | $NP$ search vs verification gap |
-| $\Sigma_A \not\vdash \text{Sync}_2$ | $\checkmark$ Proved | $M = S_3$ permutation model |
-| Invariant Decomposition Non-Derivability | $\checkmark$ Proved | Free & transitive action on $\mathbb{N}$ |
-| $E \not\vdash P^+$ | $\checkmark$ Proved | Computable reals $\mathbb{R}_c$ with $P^+$ |
+The design space is structured as a finite lattice over the power set $(\mathcal{P}(\Omega), \subseteq)$ under natural inclusion order:
+
+$$T_1 \le T_2 \iff T_1 \subseteq T_2$$
+
+```text
+               F I S A M
+              /    |    \
+          FISA   FISM  ISAM
+           │       │     │
+           FI      FS    IM
+            \      /    /
+               F  S    M
+```
+
+### Consistency Characteristic Function $\chi(T)$:
+$$\chi(T) \triangleq \begin{cases} 1 & \text{if theory } T \text{ is consistent (admits at least one non-trivial model } \mathcal{M}(T) \neq \emptyset) \\ 0 & \text{if theory } T \text{ is inconsistent (overdetermined structural contradiction)} \end{cases}$$
+
+---
+
+# 3. STRUCTURAL TENSION FUNCTION $\tau(T)$ & NO-GO IMPOSSIBILITY THEOREMS
+
+### Structural Tension $\tau(T)$:
+$$\tau(T) \triangleq \min \{ k \in \mathbb{N} \mid T \cup E_k \text{ is consistent} \}$$
+where $E_k$ represents additional structural mechanisms (e.g., global clock, versioned snapshot log).
+
+### No-Go Theorem I (Impossibility Boundary):
+$$\chi(\{ F, I, S, M, A \}) = 0$$
+*Interpretation*: No system exists where full Hoare verification ($F$), spatial isolation ($I$), modal synchrony ($S$), dynamic link mobility ($M$), and finite auditability ($A$) co-exist without structural contradiction.
+
+### No-Go Theorem II (Auditability Explosion):
+$$\exists T \subseteq \Omega \quad \text{such that} \quad \chi(T) = 1 \quad \land \quad \inf_{X \in \mathcal{M}(T)} \mu(X) = \infty$$
+
+---
+
+# 4. UNIVERSAL AUDITABILITY METRIC $\mu(T)$
+
+The metric is a property of the theory $T$, defined over its model class $\mathcal{M}(T)$:
+
+$$\mu(T) \triangleq \inf_{X \in \mathcal{M}(T)} \mu(X)$$
+
+### Non-Trivial Interaction Inequality:
+$$\mu(T_1 \cup T_2) \ge \max(\mu(T_1), \mu(T_2))$$
+
+---
+
+# 5. STRUCTURAL LITERATURE MATRIX $\Phi(r)$
+
+Every verified software architecture maps to a point $\Phi(r) \subseteq \Omega$ in the lattice:
+
+| Framework / Paper ($r$) | $F$ | $I$ | $S$ | $A$ | $M$ | Point in Lattice $\Phi(r)$ |
+|---|---|---|---|---|---|---|
+| **M-Acts** | $\checkmark$ | $\times$ | $\times$ | $\times$ | $\times$ | $\{F\}$ |
+| **Separation Logic** | $\checkmark$ | $\checkmark$ | $\times$ | $\times$ | $\times$ | $\{F, I\}$ |
+| **Session Types** | $\times$ | $\checkmark$ | $\checkmark$ | $\times$ | $\checkmark$ | $\{I, S, M\}$ |
+| **Event Structures** | $\times$ | $\checkmark$ | $\checkmark$ | $\times$ | $\checkmark$ | $\{I, S, M\}$ |
+| **Dynamic Logic** | $\checkmark$ | $\times$ | $\times$ | $\checkmark$ | $\times$ | $\{F, A\}$ |
+| **FibSync (Point)** | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\times$ | $\{F, I, S, A\}$ |
+
+---
+
+# 6. THE SHEAF OF THEORIES OVER THE RESTRICTION LATTICE
+
+The fundamental mathematical object of the program is the **Sheaf of Theories $\mathcal{H}$ over $(\mathcal{P}(\Omega), \subseteq)$**:
+
+Each consistent subset $T \in \mathcal{P}(\Omega)$ with $\chi(T) = 1$ assigns:
+1. A well-defined Model Class $\mathcal{M}(T)$.
+2. A Minimal Verification Metric $\mu(T)$.
+3. A Structural Reconciliation Cost $\tau(T)$.
+4. An Impossibility Restriction Boundary $\partial T$.
+
+---
+
+# 7. THE 5 FROZEN MATHEMATICAL DELIVERABLES OF SCT v9
+
+1. **Restriction Lattice $(\mathcal{P}(\Omega), \subseteq)$**: Formalize the finite property set $\Omega$ and its order topology.
+2. **Consistency Function $\chi(T)$**: Compute and decide $\chi(T)$ for all $T \in \mathcal{P}(\Omega)$.
+3. **Tension Function $\tau(T)$**: Measure minimal structural extension cost $E_k$ required for consistency.
+4. **Auditability Metric $\mu(T)$**: Define $\mu(T)$ invariantly under observational equivalence and prove interaction inequalities.
+5. **Structural Literature Matrix $\Phi(r)$**: Map all major concurrency and verification paradigms onto points of the lattice.
