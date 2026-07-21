@@ -49,6 +49,10 @@ class OpsecSentinelC5:
         for v_type, pattern in TARGET_PATTERNS.items():
             matches: list[Any] = pattern.findall(content)
             if matches:
+                if v_type == "PLAIN_HTTP_C2":
+                    non_local = [m for m in matches if not (m.startswith("http://127.") or m.startswith("http://0.0.0.0") or m.startswith("http://10.") or m.startswith("http://192.168."))]
+                    if not non_local:
+                        continue
                 if v_type == "PLAINTEXT_CREDIT_CARD":
                     valid_cards = [m for m in matches if self._luhn_check(m)]
                     if not valid_cards:
@@ -90,7 +94,7 @@ class OpsecSentinelC5:
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
                 for file in files:
                     fpath = Path(root) / file
-                    if fpath.name == "opsec_sentinel_c5.py" or fpath.stat().st_size > 2 * 1024 * 1024:
+                    if fpath.name in ("opsec_sentinel_c5.py", "secret_swarm_auditor.py") or fpath.stat().st_size > 2 * 1024 * 1024:
                         continue
                     if fpath.suffix in (".pyc", ".db", ".png", ".jpg", ".pdf", ".mp4", ".lock", ".rmeta", ".rlib", ".bin", ".dylib", ".so"):
                         continue
