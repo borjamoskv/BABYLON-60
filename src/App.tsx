@@ -107,16 +107,20 @@ export default function BabylonCompleteIDE() {
     };
   }, [activeFile, editorContent]);
 
-  // Swarm pulse timer
+  // Swarm pulse strict sync (C5-REAL)
   useEffect(() => {
-    const timer = setInterval(() => {
-      setLamportClock(prev => prev + 1);
-      setSwarmNodes(prev => prev.map(node => ({
-        ...node,
-        lamport: node.lamport + 1,
-        latency: +(Math.random() * 2 + 0.5).toFixed(1)
-      })));
-    }, 4000);
+    const strictSync = async () => {
+      try {
+        // Enforce physical state extraction, no mock data allowed.
+        const res: any = await invoke('dispatch', { d: 0, p: 0, m: 0, t: 0 });
+        if (res && res.includes('Dispatched')) {
+          setLamportClock(prev => prev + 1);
+        }
+      } catch (err) {
+        setTerminalLogs(prev => [`[C5-REAL] Sync failed: ${err}. Awaiting physical consensus.`, ...prev].slice(0, 50));
+      }
+    };
+    const timer = setInterval(strictSync, 10000);
     return () => clearInterval(timer);
   }, []);
 
@@ -270,11 +274,12 @@ export default function BabylonCompleteIDE() {
       setLatencyMs(Math.round(elapsed) || 15);
       setInferenceOutput(prev => prev + `\n[VERIFIED] Tauri Kernel Response: ${res}\nExecution successful. Proof receipt anchored to BFT Ledger (Lamport: ${lamportClock}).`);
       setTerminalLogs(prev => [`[INFERENCE] Prompt executed: "${promptText.slice(0, 30)}..."`, ...prev]);
+      setLamportClock(prev => prev + 1);
       setAgentState('done');
       setTimeout(() => setAgentState('idle'), 3000);
     } catch (err) {
-      setInferenceOutput(prev => prev + `\n[C5-REAL SILICON EMULATION] Dispatch completed.\nCalculated Free Energy D_KL = 0.000412\nProof Hash: 8a339ceb0565c1918c0f6bd32ccf301c05060aaae2ec84e73aa281daa4493fb5\nLamport Clock: t=${lamportClock}\nState: Unconditional BFT Consensus Achieved.`);
-      setTerminalLogs(prev => [`[INFERENCE] Emulated dispatch completed. t=${lamportClock}`, ...prev]);
+      setInferenceOutput(prev => prev + `\n[FATAL ERROR] C5-REAL execution failed: ${err}\nStrict failure mode enforced. No mock execution allowed.`);
+      setTerminalLogs(prev => [`[INFERENCE] Failed execution.`, ...prev]);
       setAgentState('done');
       setTimeout(() => setAgentState('idle'), 3000);
     }
@@ -290,16 +295,11 @@ export default function BabylonCompleteIDE() {
         { seq: 14503, entry_hash: String(res), lamport_t: lamportClock, created_at: new Date().toISOString() }
       ]);
       setTerminalLogs(prev => [`[SQL QUERY] Executed against ${selectedTable?.name}`, ...prev]);
+      setLamportClock(prev => prev + 1);
       setAgentState('idle');
     } catch (err) {
-      const mockNewRow = {
-        seq: queryResults.length > 0 ? queryResults[0].seq + 1 : 1,
-        entry_hash: `0x${Math.random().toString(16).slice(2)}${Math.random().toString(16).slice(2)}`.slice(0, 64),
-        lamport_t: lamportClock,
-        created_at: new Date().toISOString()
-      };
-      setQueryResults(prev => [mockNewRow, ...prev]);
-      setTerminalLogs(prev => [`[SQL QUERY] Evaluated: "${sqlQuery.slice(0, 30)}..."`, ...prev]);
+      setQueryResults([{ error: `[C5-REAL] Query failed: ${err}`, strict_mode: true }]);
+      setTerminalLogs(prev => [`[SQL QUERY] Failed execution. C5-REAL mode active.`, ...prev]);
       setAgentState('idle');
     }
   };
