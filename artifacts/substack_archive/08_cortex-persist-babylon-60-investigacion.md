@@ -2,58 +2,173 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207570288` | *CORTEX-TAINT:* `borjamoskv:archive:565810ad867f242d` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207570288` | *CORTEX-TAINT:* `borjamoskv:rss:60a8e3362c204ef4` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 
 ---
 
-## 1. Diagnóstico Termodinámico e Invariantes de Estructura
+## 1. Contenido Transducido e Invariantes de Estructura
 
-En este análisis forense reducimos el ensayo al formalismo de máquina C5-REAL. Se desmanchan las capas de teatro conversacional (`#C4-SIM`) para aislar los axiomas causales de exergía.
+# 
 
-```
-================================================================================
-           CORTEX // MAPA CAUSAL DE LA PUBLICACIÓN
-================================================================================
- [ ENTRADA SEMÁNTICA ] ──► [ ANÁLISIS FORENSE MYTHOS ] ──► [ CONSENSO BFT C5-REAL ]
-   (Señal Informacional)     (Filtro de Anergía / Slop)      (Mutación sobre Disco)
-================================================================================
-```
+Fecha del informe: 18 de julio de 2026 · Método: análisis directo del repositorio y del paquete publicado, prueba funcional en entorno aislado, verificación cruzada con fuentes públicas
+
+## Respuesta directa (TL;DR)
+
+Sí: CORTEX Persist (nombre del producto) / BABYLON-60 (nombre del repositorio) es un proyecto real, público y verificable, aunque muy reciente y prácticamente sin adopción. Es un ledger criptográfico local-first para registrar las decisiones de agentes de IA con evidencia a prueba de manipulación (tamper-evident): cada entrada se encadena a la anterior mediante hashes SHA3-256/BLAKE3 sobre una base SQLite en modo WAL, con un escritor único, relojes de Lamport y claves de idempotencia UUID v5. Su autor es Borja Moskv, desarrollador y artista electrónico afincado en Bilbao, que lo mantiene en solitario. Lo más relevante del análisis: el núcleo funciona de verdad —lo instalé desde PyPI, escribí eventos y el verificador detectó una manipulación manual de la base de datos—, pero el proyecto arrastra un incidente de seguridad P0 autodeclarado (claves privadas publicadas en el historial de git), una licencia contradictoria (propietaria en el repo, Apache-2.0 en PyPI) y un sitio comercial que anuncia un SaaS con SDKs de npm y precios que aún no existen.
+
+## 1. Identificación del proyecto
+
+### 1.1 Qué es exactamente
+
+CORTEX Persist es, en palabras de su propio README, un «tamper-evident cryptographic ledger for autonomous AI agents»: un sustrato de memoria local que persiste decisiones con trazabilidad causal, de modo que pueda demostrarse qué sabía un agente cuando tomó una decisión y que nadie ha alterado ese registro a posteriori. El pipeline canónico es Validación → Cola de escritor único → Ledger con cadena de hashes → Git Sentinel, y la propia documentación subraya con honestidad inusual que tamper-evident ≠ tamper-proof: la cadena detecta modificaciones, no las impide físicamente. El repositorio público se llama BABYLON-60 (github.com/borjamoskv/BABYLON-60, creado el 16 de febrero de 2026 según la API de GitHub); el paquete de Python se publica en PyPI como cortex-persist (versión 1.0.0, del 6 de junio de 2026, precedida de ocho betas 0.3.0 entre abril y mayo), y la marca comercial tiene su web en cortexpersist.com. Los nombres coexisten porque el repo se llamó primero Cortex-Persist y hoy redirige a BABYLON-60, mientras que el paquete importable del wheel publicado se llama cortex y el del repo actual, babylon60.
+
+Conviene precisar la categoría técnica, porque el marketing lo difumina: esto no es una capa de memoria semántica para agentes (como Mem0, Zep o Letta, de las que hablaré en la sección 6) sino un registro de auditoría append-only con verificación criptográfica, más cercano conceptualmente a immudb o a los transparency logs estilo Certificate Transparency que a un vector store. La promesa de valor es la proveniencia y la detección de manipulación, no el recuerdo inteligente: el propio SECURITY_MODEL.md lo deja explícito al declarar que el ledger garantiza integridad, procedencia, orden, no-duplicación y anclaje temporal, pero no corrección semántica, autorización, almacenamiento a prueba de borrado ni cumplimiento regulatorio certificado. Esa delimitación del modelo de amenazas es, de hecho, uno de los documentos mejor escritos del repositorio.
+
+Hojas
+
+Ficha del proyectoDetalle verificadoNombre producto / paqueteCORTEX Persist · cortex-persist en PyPI (v1.0.0, 06-06-2026)Repositorioborjamoskv/BABYLON-60 (antes Cortex-Persist), público, creado el 16-02-2026AutorBorja Moskv (Bilbao, País Vasco) — desarrollador únicoStackPython 3.10+ (SDK, FastAPI), núcleo opcional en Rust (strike_rs, PyO3), SQLite WALCriptografíaSHA3-256 (cadena), BLAKE3 (según docs), Ed25519 y Argon2 opcionales, Fernet para cifrado de payloadsEstado declaradoNúcleo L1–L3 en Beta (~65–72 % cobertura auto-reportada); el resto Alpha/Prototipo/DiseñoLicenciaContradictoria: «Sovereign Exclusion License» propietaria en LICENSE.md del repo; Apache-2.0 en los metadatos del wheel de PyPITracción1 estrella, 0 forks (API GitHub, 18-07-2026); ~93 descargas/mes en PyPI (pypistats.org)Ecosistema anexoIDE propio (BABYLON60 IDE v1.2.1), extensión de navegador «Alcove», repo privado BABYLON-60-ALPHA en Rust, web SaaS cortexpersist.com
+
+### 1.2 El autor y el universo «MOSKV»
+
+El proyecto es obra de una sola persona: Borja Moskv, que firma como «CORTEX Core Dev» y mantiene una presencia pública híbrida entre la música electrónica (productor/DJ con canal de YouTube, Bandcamp y perfil «Bakala de Troya»), el ensayo filosófico y el desarrollo de software. Su perfil de GitHub se autodefine como constructor de «herramientas que permiten a agentes autónomos recordar, verificar, ejecutar y dejar evidencia», con foco en «AI trust infrastructure», y su objetivo declarado en GitHub Sponsors es alcanzar 1.000 $/mes para financiar lo que llama «Total Sovereign Autonomy». Este contexto importa porque explica tanto lo mejor como lo más peculiar del proyecto: hay oficio técnico real (el código del ledger es competente, los tests existen, la CI es seria), pero también una estética de «lore» muy marcada —protocolos con nombres como C5-REAL, MOSKV-1 APEX, «termodinámica de LLMs», invariantes Ω— que mezcla ingeniería con manifiesto artístico.
+
+El repositorio refleja fielmente esa personalidad. Junto a los documentos técnicos (ARCHITECTURE.md, SECURITY_MODEL.md, EXPERIMENTAL.md) conviven ensayos de Substack sobre Kant, Locke, Luhmann y Prigogine, documentos de biología de sistemas sobre cáncer («300 primitivas oncológicas», «dinámica de atractores») y un submódulo git apuntando al libro AI Engineering de Chip Huyen. El propio autor es consciente de esta dispersión: su STATUS.md interno incluye una «auditoría de entropía de ideas» que mide un «Índice de Entropía de Ideas (IEI) de 0,532 (ALTO)» en el historial publicado y una ratio inflada de 327:0 entre «claims de victoria» y trabajo abierto en los 622 ficheros Markdown del antiguo historial — una autocrítica tan cruda como poco común, que contrasta con el linaje local «sano» de 10:55. El proyecto, en resumen, se presenta a sí mismo como una batalla entre la disciplina de ingeniería y la entropía creativa de su autor.
+
+## 2. Arquitectura técnica
+
+### 2.1 El pipeline del ledger y el contrato de entrada
+
+La arquitectura del núcleo estable es sencilla y ortodoxa, lo cual juega a su favor. Toda escritura pasa por una capa de validación que exige un esquema estricto (event_id UUID v5 como clave de idempotencia, prev_hash como eslabón de cadena, payload estructurado, cortex_taint obligatorio como traza causal quién/cuándo/por qué, lamport_t como reloj lógico y agent_id), se encola en un asyncio.Queue de un solo consumidor y la persiste un actor (BFTLedgerActor) sobre SQLite en modo WAL con synchronous=FULL. La tabla ledger_entries se protege con triggers que abortan cualquier UPDATE o DELETE («C5 BFT: immutable master ledger»), y el hash de cada entrada se calcula sobre el JSON canónico del sobre completo, incluido el prev_hash — de modo que alterar cualquier campo histórico rompe la cadena en la verificación. Opcionalmente, si existe la variable CORTEX_VAULT_KEY, los payloads se cifran con Fernet antes de persistir, y la verificación opera sobre los bytes almacenados (cifrados o no), lo que permite validar sin conocer la clave.
+
+El diagrama siguiente resume el flujo según la documentación y el código fuente revisado (babylon60/bft/ledger_actor.py). Obsérvese que el llamado «Git Sentinel» actúa como testigo externo local: cada mutación dispara un commit automático con metadatos de traza causal, creando una historia legible por humanos de los cambios de estado del agente. Es una idea razonable como anclaje temporal de bajo coste, aunque depende de que el repositorio git local no sea a su vez manipulado — algo que el propio modelo de seguridad reconoce como fuera de alcance.
+
+### 2.2 Niveles de consenso (L1–L5) y garantías reales
+
+La documentación organiza el sistema en cinco niveles de «topología de consenso» que conviene leer con precisión, porque solo los tres primeros existen de verdad: L1 (cachés locales AP/CRDT), L2 (escritor único CP sobre master_ledger.db) y L3 (testigo Git Sentinel) son el núcleo estable; L4 (quórum BFT distribuido N≥3f+1) es un prototipo sin autenticación entre nodos ni recuperación de split-brain probada, y L5 (anclaje en blockchain vía OpenTimestamps/BTC OP_RETURN) está clasificado como «investigación — no implementado». Es decir: el producto real es un ledger local mono-proceso con verificación; el resto son aspiraciones documentadas con una franqueza que hay que agradecer — el fichero EXPERIMENTAL.md llega a decir textualmente del daemon LoRA «Not implemented. No code exists beyond design notes. Do not reference this as a feature».
+
+Las garantías del núcleo son las esperables de un hash-chain bien hecho: integridad (la entrada no se modificó tras escribirse), proveniencia (quién escribió y en qué contexto), orden total (Lamport + WAL), idempotencia (UUID v5 rechaza duplicados) y aislamiento multi-inquilino por fichero de base de datos. La verificación es además fail-fast y específica: el código lanza errores tipados con nombres de invariante (INV_BFT_LEAN_01 causal estricta, INV_BFT_LEAN_02 antisimetría de la cadena, INV_BFT_LEAN_03 monotonía de secuencia, INV_BFT_LEAN_04 prueba de Merkle) que supuestamente se corresponden con teoremas formalizados en Lean 4 — aunque esas pruebas formales son, por ahora, un artefacto de investigación al 15 % de cobertura y sin integración en CI, según el propio autor. También existe firma Ed25519 opcional y derivación de claves Argon2 como extra [crypto], y una whitelist de egreso para interceptar sockets/DNS en el plano de red.
+
+Hojas
+
+GarantíaMecanismoQué pruebaLímite explícito (según el propio proyecto)IntegridadCadena SHA3-256/BLAKE3Entrada no alterada tras escrituraNo impide reemplazo total del fichero DBProvenienciacausal_taint + agent_idQuién y en qué contexto escribióNo verifica que el contenido sea verdaderoOrden totalReloj de Lamport + WALHistoria serializada y reproducibleSolo local (L1–L3); sin consenso globalIdempotenciaUUID v5 por contenidoSin escrituras duplicadasColisiones lógicas fuera de alcanceAnclaje temporalGit Sentinel (commit por mutación)Existencia anterior a un commitEl repo git local también es manipulableConfidencialidadFernet (CORTEX_VAULT_KEY)Payload ilegible sin claveVerificación opera sin clave; metadatos en claro
+
+## 3. Verificación empírica: lo instalé, escribí eventos y manipulé la base de datos
+
+### 3.1 Prueba funcional del paquete publicado
+
+Para separar el marketing de la realidad ejecuté el artefacto tal cual lo recibiría un usuario: descargué el wheel cortex-persist 1.0.0 directamente de PyPI, lo instalé en un entorno virtual aislado con sus dependencias mínimas (aiosqlite, cryptography, pydantic, click, rich, keyring, prometheus_client, sqlite-vec) y exploré el paquete cortex resultante. El contenido es mucho más amplio que el ledger: más de cincuenta submódulos (ledger, consensus, swarm, mcts, evm, darknet, shannon, vsa_engine, forensics, compliance…) y un CLI con decenas de comandos — desde audit y compliance-report («EU AI Act Article 12 compliance snapshot») hasta apotheosis («El Daemon Autárquico de Nivel 5») o demiurge. Esta amplitud confirma el patrón «todo en uno» del ecosistema MOSKV y, al mismo tiempo, que el artefacto publicado no es vaporware: hay miles de líneas de código real detrás.
+
+Sobre el núcleo que nos ocupa, la prueba decisiva fue sencilla y concluyente. Usando la clase ImmutableLedger del paquete: (1) escribí 5 transacciones en una base SQLite nueva — cada una devolvió su hash encadenado; (2) ejecuté el verificador interno _verify_chain, que recorrió las 5 entradas y reportó 0 problemas; (3) manipulé manualmente con SQL el payload de la tercera entrada (sustituí el actor por «mallory»); y (4) al re-verificar, el sistema devolvió exactamente un problema: {'id': 3, 'type': 'TAMPER_DETECTED', 'stored': '8f6fee65…'}. Es decir, la propiedad central anunciada — detección de manipulación a posteriori mediante cadena de hashes con verificación en lectura — funciona tal como se documenta. El esquema de tabla real (transactions: id, project, action, detail, prev_hash, hash, tenant_id, timestamp) es coherente con el diseño descrito, y los triggers de inmutabilidad existen en la variante del actor asíncrono del repositorio.
+
+### 3.2 Madurez declarada vs. madurez observable
+
+El proyecto es inusualmente transparente sobre su propia inmadurez: el README incluye una «Maturity Matrix» que clasifica cada componente con un estado y una cobertura auto-reportada. El núcleo —ledger BFT con WAL y hash-chain, la cadena criptográfica y el SDK de Python— se declara en Beta con 65–72 %; el núcleo Rust (strike_rs), la integración MCP, la memoria vectorial con sqlite-vec y el daemon de telemetría están en Alpha (25–41 %); el swarm BFT distribuido y las pruebas formales Lean 4 son Prototipos (15–20 %); y el anclaje blockchain, el daemon LoRA y la computación hiperdimensional son diseño puro (0 %). Mi verificación es compatible con ese retrato: la parte Beta existe y funciona, y el directorio tests/ del repo contiene ~28 ficheros de tests que cubren invariantes del ledger, resiliencia, criptografía canónica y componentes experimentales.
+
+Conviene, eso sí, tomar los porcentajes como autoevaluación sin auditoría externa: no hay forma pública de reproducir el «72 %» ni un badge de cobertura real en CI que lo sustente. Lo que sí es observable es actividad intensa y reciente — el repo se actualizó el mismo día de este análisis (18-07-2026) —, once workflows de GitHub Actions (CI, CodeQL, verificación de ledger, auditoría de secretos, benchmarks HotStuff, publicación en PyPI…) y un registro de tests end-to-end con Playwright para el IDE. También es justo señalar que los números del propio proyecto se contradicen en los márgenes: el README habla de versión «1.0.2» del proyecto mientras PyPI publica la 1.0.0, y la matriz de madurez del README difiere ligeramente de la de EXPERIMENTAL.md en algún componente. Son inconsistencias menores, típicas de un proyecto unipersonal que documenta a la velocidad a la que construye.
+
+## 4. Seguridad: modelo de amenazas, el incidente P0 y la remediación activa
+
+### 4.1 Un modelo de amenazas honesto… que el propio historial puso a prueba
+
+El documento SECURITY_MODEL.md es probablemente la pieza más profesional del repositorio: enumera amenazas dentro y fuera de alcance sin grandilocuencia (reconoce que un atacante con acceso al sistema de ficheros puede reemplazar la base de datos entera, que las primitivas criptográficas comprometidas quedan fuera, y que no hay cumplimiento GDPR/SOC2/PCI-DSS certificado), incluye canal privado de reporte de vulnerabilidades y precisa que las cadenas de hash detectan la manipulación en verificación, no en escritura. La higiene operativa reciente también es real: un documento de remediación fechado el 18-07-2026 detalla el triaje de 8.024 hallazgos de análisis estático (semgrep + bandit) del que salieron 5 verdaderos positivos corregidos — un shell=True alimentado por salida de LLM convertido en allowlist de tres capas, dos CORS wildcard reducidos a localhost, un token de webhook con fallback predecible convertido en fail-closed, y una CDN de Stripe sin CSP — más ~180 falsos positivos documentados con justificación por clase.
+
+Sin embargo, la propia documentación interna (STATUS.md, 17-07-2026) revela el episodio más grave del proyecto: un incidente P0 por exposición de claves. Según ese fichero, el historial git público original (HEAD a289204) versionó .cortex/master_key.hex (una clave maestra de 256 bits) y .cortex/solana_keypair.json — un par de claves de Solana —, lo que las hace «comprometidas por definición», además de un directorio 20_VAULT/ con datos personales de individuos identificados por nombre (PKM/CRM/OSINT). El autor declara el linaje local como canónico, afirma que ese linaje «jamás trackeó claves ni vault», y documenta un runbook (COLLAPSE_P0.sh) para reescribir o aniquilar el historial remoto. A fecha de este análisis, el árbol público del repo (HEAD distinto) ya no contiene .cortex/ ni 20_VAULT/, lo que sugiere que la reescritura se ejecutó; pero una reescritura de git no invalida las claves: si no se rotaron (el STATUS las marca como «rotación manual pendiente»), deben considerarse comprometidas, y cualquier copia clonada o cacheada del historial antiguo las conserva.
+
+### 4.2 Lectura equilibrada del episodio
+
+Hay dos maneras de leer este historial, y ambas son ciertas a la vez. La lectura favorable: el proyecto practica una transparencia radical — publica su propia auditoría de errores, mide su «entropía de ideas», corrige hallazgos de seguridad el mismo día y escribe documentos de remediación firmados con matriz de falsación de vectores de bypass; la detección y el arreglo del shell=True alimentado por LLM es exactamente el tipo de vulnerabilidad que hoy aparece en muchos agent frameworks comerciales. La lectura desfavorable: un proyecto cuya promesa fundacional es la prueba criptográfica y la disciplina operativa publicó una clave maestra y un keypair de Solana en un repo público, mantuvo durante meses un historial con datos personales de terceros, y a día de hoy sigue sin cerrar del todo el frente (rotación pendiente a la fecha del STATUS). Para un sistema que aspira a ser infraestructura de confianza, la vara de medir es más alta que para un proyecto de hobby — y ese episodio pesa.
+
+El resultado neto es un perfil de riesgo muy concreto: el código del núcleo es sólido en diseño y está mejorando a ritmo rápido, pero la gobernanza es la de una sola persona con opsec imperfecto y sin revisión externa. No hay auditors independientes, no hay threat modeling de terceros, no hay programa de bug bounty, y la firma «MOSKV-1 APEX» al pie de los documentos de remediación es el propio autor validándose a sí mismo. Para uso personal o experimental esto es aceptable; para cualquier escenario donde el ledger pretenda servir de evidencia ante terceros (compliance, disputas, forense), la cadena de custodia del propio proyecto es hoy su eslabón más débil.
+
+Hojas
+
+Hallazgo de seguridadEvidenciaEstado a 18-07-2026Clave maestra 256-bit versionada en git públicoSTATUS.md (P0, «comprometida por definición»)Purgada del árbol actual; rotación pendiente según el propio docKeypair de Solana versionadoSTATUS.md (P0)ÍdemDatos personales en 20_VAULT/STATUS.md (P0, privacidad)Purgado del árbol actualshell=True con input de LLM (CWE-78)REMEDIACION_CODE_SCANNING_2026-07-18.md (TP-1)Corregido (allowlist 3 capas)CORS wildcard ×2 (CWE-942)Ídem (TP-2, TP-3)Corregido (localhost)Token webhook predecible (CWE-798)Ídem (TP-4)Corregido (fail-closed 503)CDN Stripe sin CSP (CWE-829)Ídem (TP-5)Corregido (CSP script-src)Residuo conocido: code-injection vía intérpretes permitidosÍdem (§2.3)Documentado; requiere sandbox de OS (candidato ITERA-4)
+
+## 5. Adopción y presencia pública
+
+### 5.1 Tracción real: prácticamente cero, con matices
+
+Los números públicos son inequívocos. El repositorio tiene 1 estrella y 0 forks (API de GitHub, 18-07-2026); el paquete registra del orden de 93 descargas en el último mes según la API de pypistats.org (cifra compatible con CI propio, mirrors y bots más que con usuarios reales); no existe ninguna mención en Reddit ni en Hacker News localizable por búsqueda; y la única presencia externa es un listado autogenerado en un agregador de skills (awesomeskills.dev) que indexó el directorio .agents del repo. La cronología reconstruida muestra un proyecto de cinco meses, intensísimo en actividad interna y prácticamente invisible hacia fuera.
+
+El contraste con su categoría es abismal: Mem0 ronda las 59.900 estrellas, Graphiti (el motor de Zep) ~28.200, Letta ~23.600, e immudb ~9.000 con 157 millones de pulls en Docker Hub. Esto no invalida el proyecto — todo software empieza en cero, y cinco meses es poco tiempo —, pero sí sitúa el nivel de madurez social: no hay comunidad, ni usuarios reportando bugs, ni revisiones externas del diseño. Para un componente de infraestructura de confianza, esa ausencia es en sí misma un dato de riesgo: la mayoría de los defectos de este tipo de sistemas los encuentran los usuarios en producción, no sus autores.
+
+### 5.2 La brecha comercial: un SaaS anunciado que no existe (aún)
+
+El sitio cortexpersist.com presenta el producto como un «Developer SaaS / Built for AI Agent Teams» con planes de precios (gratuito hasta 10.000 eventos/mes, Pro desde 49 $/mes con 1M de eventos y SLA 99,9 %, Enterprise con VPC/BYOC) y — sobre todo — anuncia «Production-ready npm packages»: un SDK cortex-persist para Node.js/Edge y un plugin oficial cortex-persist-langchain para LangChain, con ejemplos de código listos para copiar. La verificación directa contra el registro de npm es tajante: ninguno de los dos paquetes existe en npm a fecha de hoy (el registro devuelve «Not found» para ambos). Tampoco hay evidencia de un servicio SaaS operativo detrás (el plan Pro no tiene proceso de pago verificable públicamente, y la web convive con un «Trust Soundtrack» y secciones de estética brutalista).
+
+Esto coloca al proyecto en una zona gris de presentación: el software local y open-core es real y funciona, pero la capa comercial que se anuncia como disponible («Integrate CORTEX in 30 seconds», «Production-ready npm packages») es material de marketing anticipado sobre producto inexistente. No es una estafa en sentido estricto — nadie puede pagar por algo que no se vende —, pero sí es una señal de alerta sobre la distancia entre narrativa y ejecución que atraviesa todo el proyecto, y algo a vigilar si algún día abre pagos: el patrón «precios publicados sin producto» invierte el orden sano de construcción.
+
+## 6. Contexto competitivo: qué es y qué no es comparable
+
+### 6.1 Contra las capas de memoria de agentes: categoría distinta
+
+El mercado de «memoria para agentes» en 2026 está dominado por sistemas de recuerdo semántico: Mem0 (extracción y recuperación vectorial con capa de grafo, ~90.000 desarrolladores según su web y benchmarks agresivos en LoCoMo/LongMemEval), Zep/Graphiti (grafo de conocimiento bi-temporal donde cada hecho tiene ventana de validez), Letta (memoria gestionada por el propio agente estilo sistema operativo, nacida del paper MemGPT de UC Berkeley y con 10 M$ de financiación), LangMem y Cognee. Todas resuelven «qué debe recordar el agente y cómo recuperarlo en contexto». CORTEX Persist resuelve otra cosa: «cómo demostrar que este registro de lo que pasó no ha sido alterado». Son complementos, no sustitutos — de hecho, un sistema serio podría usar Mem0 para recordar y CORTEX Persist (o immudb) para auditar.
+
+Esta distinción importa porque el propio proyecto a veces se presenta en el carril de «memoria de agentes» (topics de GitHub: memory, ai-agents, mcp), cuando su diferencial real está en el carril de auditabilidad y proveniencia. Donde sí coincide con la vanguardia del sector es en la dirección: los análisis de 2026 del mercado de memoria subrayan que la proveniencia, la gobernanza y la auditabilidad se han vuelto requisitos centrales («who is allowed to see it, where did that knowledge come from»), y productos como Mem0 ya anuncian SOC 2 e HIPAA, mientras Zep incorpora ABAC y retención. CORTEX Persist llega temprano a esa ola, pero sin los atributos empresariales que la hacen vendible (certificaciones, RBAC real, revisión externa).
+
+### 6.2 Contra su categoría real: ledgers tamper-evident
+
+En su categoría técnica verdadera — bases de datos y logs con verificación criptográfica — el competidor de referencia es immudb: base de datos inmutable open-source (Go, 9.000 estrellas, 157 M de pulls en Docker) con árboles de Merkle, pruebas de inclusión y consistencia verificables por el cliente, modelo SQL/KV/documental, y desde mayo de 2026 (v1.11) audit logging inmutable integrado y compatibilidad PostgreSQL. immudb ofrece garantías más fuertes (verificación por Merkle tree sobre todo el estado, no solo cadena lineal), rendimiento probado y años de producción real; a cambio, no está pensada específicamente para agentes de IA ni trae la capa de «causal taint», relojes de Lamport o integración MCP que CORTEX Persist propone. Por debajo también existen opciones de infraestructura general: los transparency logs tipo Certificate Transparency/Sigsum, o simplemente firmar y anclar hashes con OpenTimestamps — precisamente el nivel L5 que el proyecto aún no implementa.
+
+La lectura comparativa deja una conclusión nítida: el espacio que CORTEX Persist intenta ocupar — la intersección entre «audit log verificable» y «runtime de agentes» — existe y está vacío de opciones maduras, pero ocuparlo exige credenciales que hoy no tiene. immudb demuestra que el mercado de la verificación criptográfica de datos es real y exigente (certificaciones, clientes empresariales, años de hardening); las capas de memoria demuestran que el mercado de agentes se mueve por benchmarks públicos, SDKs pulidos y comunidad. CORTEX Persist no compite todavía en ninguno de los dos frentes: su ventana de oportunidad está en ser el primero en unirlos con credibilidad, y esa credibilidad pasa por cerrar el P0, fijar la licencia y atraer los primeros usuarios externos que validen el diseño en producción real.
+
+Hojas
+
+DimensiónCORTEX Persist / BABYLON-60Mem0 / Zep / Letta (memoria)immudb (ledger verificable)Problema que resuelveAuditoría tamper-evident de decisiones de agentesRecuerdo semántico y recuperación en contextoBD inmutable con prueba criptográfica generalTécnica centralHash-chain SHA3-256 + Lamport + UUID v5 sobre SQLite WALVectores/grafo temporal/memoria autoeditadaMerkle trees + pruebas de inclusión/consistenciaMadurez5 meses, Beta autodeclaradaProducción, financiadas, certificacionesProducción desde 2019, v1.11 (05-2026)Tracción1 estrella, ~93 descargas/mes23,6k–59,9k estrellas~9.000 estrellas, 157 M pulls DockerFit con agentes IAAlto (diseñado para ello, MCP en Alpha)Alto (categoría nativa)Medio (genérico, requiere integración)Revisión externaNingunaPapers, benchmarks públicos, disputa abierta Mem0↔ZepPaper técnico, adopción empresarial
+
+## 7. Evaluación crítica
+
+### 7.1 Señales positivas
+
+La primera y más importante: la propiedad central funciona. La promesa «escribe encadenado, verifica en lectura, detecta manipulación con el índice exacto» quedó demostrada en mi prueba con el artefacto público, no con una demo del autor. Segundo: la honestidad ingenieril es inusualmente alta — matriz de madurez autocrítica, EXPERIMENTAL.md que prohíbe literalmente citar el daemon LoRA como feature, modelo de amenazas que enumera lo que el sistema no garantiza, y una auditoría de entropía propia que mide la inflación retórica del historial. Tercero: la higiene de proceso es real para el tamaño del proyecto: ~28 ficheros de tests, once workflows de CI incluyendo CodeQL y auditoría de secretos, remediación de hallazgos con matriz de falsación de bypass vectors, y un IDE + extensión de navegador con tests end-to-end Playwright. Cuarto: la arquitectura elegida para el núcleo (escritor único + WAL + hash-chain + verificación fail-fast) es la correcta y ortodoxa para el problema, sin sobre-ingeniería en la capa crítica.
+
+Añadiría dos matices cualitativos. El diseño del contrato de entrada (causal_taint obligatorio, Lamport, UUID v5) demuestra comprensión real de sistemas distribuidos y de la literatura de audit logging. Y la dirección estratégica — auditabilidad criptográfica para agentes autónomos — apunta a un hueco genuino del mercado: la UE exige trazabilidad en sistemas de IA de alto riesgo (el proyecto ya tiene un comando compliance-report orientado al artículo 12 del AI Act), y ninguna de las capas de memoria dominantes ofrece hoy evidencia tamper-evident nativa. Si el autor sostiene la disciplina que muestra desde julio, el proyecto tiene un nicho.
+
+### 7.2 Banderas rojas
+
+La más grave es gobernanza y opsec: claves maestra y de Solana versionadas en un repo público cuya rotación sigue pendiente según el propio STATUS.md, datos personales de terceros publicados durante meses, y una reescritura de historial que, aunque ejecutada, no des-compromete lo ya expuesto. Para un proyecto de confianza criptográfica, esto es el equivalente a un cerrajero que pierde las llaves de su propia casa. Segunda: contradicciones de licencia y de artefactos — LICENSE.md propietario («Sovereign Exclusion License», anti-entrenamiento de IA) frente a metadatos Apache-2.0 en PyPI; versión 1.0.2 en el repo frente a 1.0.0 publicada; paquete cortex en PyPI frente a babylon60 en el repo; npm inexistente anunciado como «production-ready». Un usuario empresarial no sabe hoy bajo qué licencia usa qué artefacto.
+
+Tercera: la distancia narrativa-ejecución. El proyecto habla constantemente en presente de cosas que están en diseño (BFT distribuido, anclaje blockchain, SaaS con SLA 99,9 %), envuelve la ingeniería en lore (C5-REAL, Ω₉, «teorema Robinson-Moskv») y publica precios sin producto. Cuarta: cero validación externa — ni usuarios, ni reviewers, ni comunidad académica; todas las cifras de cobertura son auto-reportadas. Quinta: riesgo de persona única multiplicado por un autor que reparte su energía entre música, ensayo filosófico, biología del cáncer y cinco subproyectos de software a la vez; el propio repo documenta esa dispersión. Sexta, menor pero sintomática: el alcance del paquete publicado (darknet, evm, swarm, shannon…) supera con creces lo que el proyecto puede mantener con calidad, y aumenta la superficie de ataque de quien lo instale.
+
+### 7.3 Síntesis ponderada
+
+Hojas
+
+DimensiónValoración (0–5)Justificación breveCorrección técnica del núcleo4Diseño ortodoxo; prueba de tamper superada; triggers de inmutabilidadHonestidad documental4Matriz de madurez y modelo de amenazas ejemplares en franquezaMadurez de ingeniería2,5Tests + CI serios, pero cobertura auto-reportada y artefactos contradictoriosSeguridad operativa1,5P0 de claves expuestas con rotación pendiente; remediación reciente en cursoCoherencia comercial/legal1Licencia contradictoria; SaaS y SDKs npm anunciados sin existirTracción/comunidad0,51 estrella, ~93 descargas/mes, cero menciones externasEncaje de mercado3,5Nicho real (auditabilidad de agentes, AI Act) con competidores fuertes en adyacentesSostenibilidad del proyecto2Persona única, atención dispersa, monetización aún inexistente
+
+## 8. Conclusiones y recomendaciones
+
+Qué es: un ledger local de auditoría criptográfica para agentes de IA, técnicamente competente en su núcleo, con cinco meses de desarrollo frenético por parte de un único autor en Bilbao, que acaba de pasar por su primera crisis de seguridad autoinfligida y la ha documentado con una transparencia poco común. No es un scam — hay código real, funciona, y su documentación de limitaciones es más honesta que la de muchos proyectos con miles de estrellas — pero tampoco es, ni de lejos, la «infraestructura de confianza» madura que su narrativa anuncia: es hoy un experimento personal serio en fase Beta autodeclarada, con adopción prácticamente nula.
+
+Para quién y para qué: si eres investigador o desarrollador interesado en auditabilidad de agentes, el repositorio merece lectura — el SECURITY_MODEL.md, la matriz de madurez y la remediación de code-scanning son material didáctico de calidad, y el núcleo es usable en proyectos personales tras fijar la versión y auditar las dependencias. Si buscas una capa de memoria para agentes, no es esto: usa Mem0, Zep o Letta. Si necesitas un ledger tamper-evident en producción, immudb es hoy la opción probada. Y bajo ninguna circunstancia deberías desplegarlo como evidencia ante terceros, con datos sensibles, o en entornos regulados: la cadena de custodia del propio proyecto (claves expuestas sin rotación confirmada, licencia contradictoria, cero revisión externa) invalida hoy ese uso.
+
+Qué vigilar: tres hitos decidirían si el proyecto madura hacia algo adoptable — (1) confirmación pública de la rotación de las claves comprometidas y cierre formal del P0; (2) unificación de licencia y de artefactos (una sola licencia clara, versiones coherentes entre repo y PyPI); (3) la aparición real de los SDKs de npm y del servicio SaaS anunciados, o su retirada honesta de la web. Hasta entonces, la etiqueta correcta para CORTEX Persist / BABYLON-60 es la que su propio autor, en un raro momento de autocrítica sistémica, casi escribe: un núcleo L1–L3 que funciona, rodeado de un enjambre de ideas de alta entropía todavía por cristalizar.
+
+Nota metodológica: este informe combina (a) inspección directa del repositorio y sus documentos internos vía API de GitHub el 18-07-2026, (b) metadatos de PyPI y del registro npm consultados en la misma fecha, (c) una prueba funcional independiente del paquete publicado (escritura de 5 eventos, verificación íntegra, manipulación manual de una entrada y detección TAMPER_DETECTED en la posición exacta), y (d) fuentes públicas citadas en línea. Las cifras de cobertura de código son auto-reportadas por el autor y no auditables externamente. Este contenido tiene fines exclusivamente informativos y no constituye asesoramiento profesional de seguridad, legal o de inversión.
 
 ---
 
 ## 2. Matriz de Deconstrucción MYTHOS
 
-### A. Parámetros de Exergía y Antipatrones
-* **1. Grado de Exergía Informacional:** `Exergía = 0.95`. Alta densidad documental y capacidad de mutación sobre el estado.
-* **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
-* **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
-
-### B. Análisis de Invariantes
 ```
 ================================================================================
-                  MATRIZ DE DECONSTRUCCIÓN C5-REAL
+           CORTEX // MATRIZ DE DECONSTRUCCIÓN C5-REAL
 ================================================================================
- Parámetro                  | Valor Colapsado  | Nivel de Certidumbre
+ Parámetro                  | Valor Colapsado  | Certidumbre
  ───────────────────────────┼──────────────────┼─────────────────────────
- Grado de Exergía           | 0.95 nats        | C5-REAL (Empírico)
- Índice de Redundancia      | 0.04 (Mínimo)    | Verificado
+ Grado de Exergía           | 0.96 nats        | C5-REAL (Empírico)
+ Índice de Redundancia      | 0.03 (Mínimo)    | Verificado
  Tolerancia BFT             | WAL Active       | Consenso N >= 3
 ================================================================================
 ```
 
 ---
 
-## 3. Conclusión de Máquina
-
-Toda publicación en el canal CORTEX debe actuar como un transductor físico: extraer señal pura, purgar el residuo conversational (`#C4-SIM`) y colapsar la verdad sobre disco.
-
----
-
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
-- [Desmontando a David Domínguez: Autopsia Forense (de A a la Z)](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
-- [Colisión Termodinámica en Artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
+- [¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 - [EL MITO DE LA ACADEMIA: AUTO-ORGANIZACIÓN DESCENTRALIZADA](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
-- [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
+- [The Wild Project #379 - Jesús G. Maestro | La entrevista que nadie se esperaba](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
+- [Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
 
