@@ -1,51 +1,49 @@
-# The Formal Research Methodology & Emergence Criterion Specification for FibSyncMAct
+# The Decoupled 2-Category & Independence Specification
 
-**Classification:** C5 Mathematical Research Methodology & Emergence Criterion  
-**Target:** 3-Tier Property Taxonomy & Structural Emergence Proof  
-**Epistemic Baseline:** "Hasta donde alcanza la revisión bibliográfica realizada, no se ha identificado una construcción equivalente."
+**Classification:** C5 2-Categorical Formalization & Axiomatic Independence Target  
+**Provisional Label:** `FibSyncMAct` (Working Identifier)  
+**Status:** Decoupled 2-Category Framework with Independence Audit
 
 ---
 
-# 1. 3-TIER PROPERTY TAXONOMY
+# 1. DECOUPLED 2-CATEGORY AMBIENT STRUCTURE
 
-We partition all mathematical inquiries on $\mathbf{FibSyncMAct}$ into three strict methodological levels:
+To prevent morphism overdetermination, we decouple the structural requirements into a **2-Category / Double Category** $\mathbf{FibSyncMAct}_{\mathbf{2}}$:
 
 ```text
-       PROPERTY TAXONOMY
-      ┌─────────┼─────────┐
-      ▼         ▼         ▼
-  Level A    Level B   Level C
-(Inherited) (Induced) (Emergent)
+       2-CATEGORY DECOUPLING
+      ┌───────────┼───────────┐
+      ▼           ▼           ▼
+   0-Cells     1-Cells     2-Cells
+   (States)   (Actions)   (Fibrations)
 ```
 
-| Level | Definition | Publication Value | Example |
-|---|---|---|---|
-| **Level A (Inherited)** | Properties inherited directly from component structures | Verification of consistency only | Limits, colimits, initial objects |
-| **Level B (Induced)** | Properties arising from pairwise interaction of 2 structures | Secondary contribution | Action preserving certificates, Tensor preserving fibrations |
-| **Level C (Emergent)** | Properties requiring essential interaction of $\ge 3$ structures | **Primary Contribution** | Information-theoretic bound of Locality vs Global Coordination |
+1. **0-Cells (Objects)**: State spaces $(\mathcal{S}, \alpha)$ equipped with Monoid action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
+2. **1-Cells (Morphisms)**: Action-preserving state maps $f: \mathcal{S}_1 \to \mathcal{S}_2$ such that $f(\alpha_1(\delta, s)) = \alpha_2(\delta, f(s))$.
+3. **2-Cells (Flocks / Transformations)**: Cartesian reindexing maps $\alpha \Rightarrow \beta$ between predicate fibrations $\mathcal{F}_1 \Rightarrow \mathcal{F}_2$ preserving verification certificates $(p, \delta, \phi) \in \text{Cert}$.
+4. **Monoidal Structure**: Tensor product $\otimes$ acts on 0-cells and 1-cells.
+5. **Barrier Synchronization ($\mathbf{Sync}$)**: Enriched modal property on cell composition.
 
 ---
 
-# 2. THE ULTIMATE EMERGENCE CRITERION
+# 2. INTERNAL MATHEMATICAL PREDICATES OF THE UNIFYING PRINCIPLE
 
-$$\mathbf{\text{Emergence Criterion of } FibSyncMAct:}$$
-$$\exists \mathcal{P}_{\text{emergent}} \quad \text{such that} \quad \text{Proof}(\mathcal{P}_{\text{emergent}}) \text{ REQUIRES essential interaction of } \ge 3 \text{ structures}$$
-$$\text{and } \mathcal{P}_{\text{emergent}} \text{ is NOT reducible to the direct sum of independent component proofs.}$$
+$$\mathbf{\text{Unifying Axiom: }} \forall \delta \in \Delta, \quad E(\delta) \land P(\delta) \land V(\delta) \land C(\delta)$$
 
----
-
-# 3. INFORMATION-THEORETIC REFORMULATION OF LOCALITY VS GLOBAL COORDINATION
-
-Let $\mathcal{I}_i = f_i(\mathcal{S}_i, \Delta_i)$ be the observable information algebra of membrane $i$.  
-Locality requires strict spatial isolation: $\mathcal{I}_i \cap \mathcal{I}_j = \emptyset$ for $i \neq j$.  
-Global coordination requires synchronous barrier consensus: $\text{Ready} = \bigwedge_i \text{Ready}_i$.
-
-### Core Information-Flow Problem:
-*Is it possible to implement the global barrier condition $\text{Ready} = \bigwedge_i \text{Ready}_i$ without increasing the local observable $\sigma$-algebra $\mathcal{I}_i$ of any individual component?*
+1. **Executability $E(\delta)$**: $\exists \alpha(\delta, s) \in \mathcal{S}$ for all valid $s \in \mathcal{S}$.
+2. **Persistence $P(\delta)$**: $\delta \in \text{Serializable}(\Delta)$ with unique canonical binary representation.
+3. **Verifiability $V(\delta)$**: $\exists p \in \text{Pf}, \phi \in \Phi \quad \text{such that} \quad (p, \delta, \phi) \in \text{Cert} \land (\phi(s) \implies \phi(\alpha(\delta, s)))$.
+4. **Compositionality $C(\delta)$**: $\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s))$ and $(p_{1+2}, \delta_1 + \delta_2, \phi_1 \land \phi_2) \in \text{Cert}$.
 
 ---
 
-# 4. EXPANDED LITERATURE DOMAINS
+# 3. THE 8 FUNDAMENTAL QUESTIONS OF THE PROGRAM
 
-1. **Applied Category Theory (ACT)**: Structured cospans, decorated cospans, open dynamical systems, compositional systems (Brendan Fong, David Spivak, John Baez).
-2. **Categorical Cybernetics**: Lenses, optics, open games, compositional state machines.
+1. **Existence of Initial & Terminal Objects**: Does $\mathbf{FibSyncMAct}_{\mathbf{2}}$ possess an initial object $0$ and terminal object $1$?
+2. **Cartesian Closed Property**: Is $\mathbf{FibSyncMAct}_{\mathbf{2}}$ a Cartesian Closed 2-Category?
+3. **Orthogonal Factorization of Isolation**: Does tensor isolation $\otimes$ induce a 2-categorical Orthogonal Factorization System $(\mathcal{E}, \mathcal{M})$?
+4. **Categorical Formalization of Barrier Synchronization**: Is $\mathbf{Sync}$ best formalised as a Natural Transformation, an Endofunctor, or an Enriched Time Modality over 2-cells?
+5. **Adjunction between Syntax and Semantics**: Do denotation $\llbracket \cdot \rrbracket: \Delta \to \mathcal{S}^{\mathcal{S}}$ and extraction form a Galois Connection or Adjunction $F \dashv G$?
+6. **Exhaustive Literature Mapping**: Does $\mathbf{FibSyncMAct}_{\mathbf{2}}$ map isomophically to any construction in the 10 target literature domains?
+7. **Single Unifying Principle Derivation**: Can the 4 structures $(\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$ be derived from $E(\delta) \land P(\delta) \land V(\delta) \land C(\delta)$?
+8. **Axiomatic Independence Proof**: Are the 4 structural components ($\alpha, \mathcal{F}, \otimes, \mathbf{Sync}$) strictly independent? (Construct counter-models satisfying any proper 3-element subset).
