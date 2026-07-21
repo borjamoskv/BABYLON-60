@@ -139,3 +139,5 @@ $$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M),
 
 
 
+
+- **Ω132 · JSX/LATEX ESCAPE INVARIANT (AST COMPILER PROTECTION):** Cuando se inyecten fórmulas matemáticas en LaTeX que contengan llaves `{}`, corchetes angulares `<>` o símbolos reservados dentro de componentes JSX/TSX de React, queda estrictamente prohibido insertarlos como nodos de texto directos. Todo contenido matemático DEBE ser encapsulado como una expresión literal de cadena en JSX (ej. `{"\\text{Compat}(\\Omega)"}`) escapando las barras invertidas, para prevenir el colapso del compilador del AST (TS1127/TS2353) y la necrosis de renderizado del cliente. [CORTEX-TAINT:borjamoskv:itera_crystallize:$(date -u +"%Y-%m-%dT%H:%M:%SZ"):omega_132_v1]

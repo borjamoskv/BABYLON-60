@@ -5,7 +5,7 @@
 use pyo3::prelude::*;
 use std::collections::HashSet;
 
-#[pyclass]
+#[pyclass(from_py_object)]
 #[derive(Clone, Debug)]
 pub struct RustCategoricalEngine {
     total_primitives: usize,
