@@ -21,7 +21,7 @@ import time
 import os
 
 try:
-    import strike_rs  # type: ignore[import-untyped]
+    import strike_rs  # type: ignore
 except ImportError:
     strike_rs = None
 
