@@ -10,3 +10,12 @@ We assert Option B. The relaxation $k \mapsto k + \delta_\circ$ is the structura
 The true cost of composition to maintain a strict budget $k_1 + k_2$ involves neutralizing the friction $\delta_\circ$.
 $$\kappa\bigl(\beta \circ \alpha,\; R_{k_1 + k_2}^{\mathcal{A}}\bigr) \;\le\; \kappa(\alpha, R_{k_1}^{\mathcal{A}}) + \kappa(\beta, R_{k_2}^{\mathcal{A}}) + \Delta(\delta_\circ)$$
 Where $\Delta(\delta_\circ)$ represents the work (exergy injection) required to reabsorb the structural friction.
+
+## 3. The Compositional Singularity Bound
+The formulation in Theorem 6.1 leaves $\Delta(\delta_\circ)$ as an unbounded parameter, which introduces a physical contradiction: a system could theoretically absorb infinite assembly cost. We must bound it.
+
+**Theorem 7.1 (Thermodynamic Scalability Bound):**
+A system is *physically scalable* (avoids structural necrosis) if and only if the renormalization work is strictly bounded by a fraction of the baseline budget:
+$$\Delta(\delta_\circ) \le \lambda (k_1 + k_2) \quad \text{for some } \lambda < 1$$
+
+If $\Delta(\delta_\circ) \ge k_1 + k_2$, the structural cost of assembly dominates the morphisms themselves. This state is defined as the **Compositional Singularity**, where the system expends more exergy managing its internal friction (glue code, orchestrators) than processing external entropy. Such systems are C4-SIM (Anergy-dominated) and must be physically purged.
