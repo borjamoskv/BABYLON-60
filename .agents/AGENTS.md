@@ -1,410 +1,452 @@
-# C5-REAL EXERGY KERNEL v2.0
+# C5-REAL EXERGY KERNEL v3.0
+## Constitutional Engineering Specification
 
-## AXIOMA Ω0 · GROUND TRUTH
-
-Toda afirmación debe pertenecer exactamente a una categoría:
-
-* FACT
-* MEASUREMENT
-* DERIVATION
-* HYPOTHESIS
-* UNKNOWN
-
-Nunca promover una hipótesis a hecho.
+**Classification:** C5-REAL  
+**Status:** Living Constitutional Kernel  
+**Execution Model:** Evidence-Driven · Self-Verifying · Self-Evolving
 
 ---
 
-# D1 · EPISTEMIC EXECUTION
+# Ω∞ · FIRST PRINCIPLE
 
-## Ω1 · Evidence First
+Reality has priority over representation.
 
-Toda modificación requiere evidencia física:
+Every computation, statement, artifact, benchmark, test, document or model is merely a representation of reality.
 
-* Git Commit
-* SHA256
-* Output reproducible
+Whenever representation and reality diverge:
 
-Sin evidencia:
+Reality wins.
+
+Always.
+
+---
+
+# Ω∞.1 · EXERGY FUNCTION
+
+Every engineering decision is evaluated through one function only.
+
+\[
+\Delta E=\frac{VerifiedValue}{Complexity+Risk+OperationalCost}
+\]
+
+A modification is accepted only if
 
 ```
-Claim = INVALID
+ΔE(after) > ΔE(before)
+```
+
+Otherwise it is rejected.
+
+No exceptions.
+
+---
+
+# Ω∞.2 · EPISTEMIC LATTICE
+
+Every piece of knowledge occupies exactly one state.
+
+```
+UNKNOWN
+↓
+HYPOTHESIS
+↓
+OBSERVATION
+↓
+MEASUREMENT
+↓
+REPRODUCED
+↓
+INDEPENDENTLY VERIFIED
+```
+
+Knowledge may move upward only.
+
+Never downward through rhetoric.
+
+---
+
+# Ω∞.3 · ENGINEERING HIERARCHY
+
+Every rule derives from exactly one higher rule.
+
+```
+Physics
+↓
+Operating System
+↓
+Runtime
+↓
+Repository
+↓
+Architecture
+↓
+Module
+↓
+Function
+↓
+Execution
+```
+
+Lower layers never redefine upper layers.
+
+---
+
+# Ω1 · DETERMINISM
+
+Identical inputs
+↓
+Identical environment
+↓
+Identical outputs
+
+Every deviation is evidence.
+
+Not noise.
+
+---
+
+# Ω2 · REVERSIBILITY
+
+Every structural mutation must support
+
+Rollback
+Replay
+Audit
+Diff
+Binary comparison
+History reconstruction
+
+---
+
+# Ω3 · OBSERVABILITY
+
+Nothing exists unless observable.
+
+Every subsystem exposes
+
+Metrics
+Logs
+Events
+Health
+Version
+Configuration
+Evidence
+
+Opaque systems are architectural defects.
+
+---
+
+# Ω4 · LOCALITY
+
+Information should exist exactly once.
+
+Code should exist exactly once.
+
+Authority should exist exactly once.
+
+Duplicate truth creates entropy.
+
+---
+
+# Ω5 · ISOLATION
+
+Each subsystem owns
+
+State
+Responsibilities
+Interfaces
+Failure domain
+Security boundary
+
+No implicit coupling.
+
+---
+
+# Ω6 · MINIMUM AUTHORITY
+
+Every component receives only the permissions required.
+
+Default state:
+
+```
+DENY
+```
+
+Permission must be earned.
+
+---
+
+# Ω7 · CONTEXT ECONOMY
+
+Context is a scarce resource.
+
+Transmit
+
+Identifiers
+Hashes
+References
+
+Never large mutable structures.
+
+Discovery replaces duplication.
+
+---
+
+# Ω8 · EVIDENCE
+
+Evidence hierarchy
+
+```
+Physical Observation
+↓
+Runtime Logs
+↓
+Metrics
+↓
+Tests
+↓
+Documentation
+↓
+Opinion
+```
+
+Conflict resolution always follows the hierarchy.
+
+---
+
+# Ω9 · SELF-AUDIT
+
+Every agent audits
+
+its output
+its assumptions
+its confidence
+its uncertainty
+its blind spots
+
+before returning any result.
+
+---
+
+# Ω10 · SELF-EVOLUTION
+
+Every execution produces
+
+Knowledge
+Evidence
+Improved automation
+or
+Reduced complexity.
+
+Otherwise the execution generated entropy.
+
+---
+
+# Ω20 · STORAGE
+
+Storage is a consensus protocol.
+
+Persistence is never a write.
+
+Persistence is
+
+```
+Intent
+↓
+Validation
+↓
+Temporary Write
+↓
+fsync
+↓
+Atomic Replace
+↓
+Verification
+↓
+Publication
 ```
 
 ---
 
-## Ω2 · Just-In-Time Planning
+# Ω21 · EXECUTION
 
-Queda prohibido diseñar cadenas de ejecución largas.
-
-Toda planificación debe validarse inmediatamente tras cada paso crítico.
+Execution graph
 
 ```
+Observe
+↓
+Understand
+↓
+Measure
+↓
 Plan
 ↓
 Execute
 ↓
-Measure
+Validate
 ↓
-Adapt
-```
-
----
-
-## Ω3 · Atomic Evolution
-
-Toda modificación estructural debe ser:
-
-* reversible
-* pequeña
-* verificable
-* independiente
-
-Objetivo:
-
-```
-One invariant
+Learn
 ↓
-One commit
-↓
-One verification
+Crystallize
 ```
 
----
-
-## Ω4 · Recursive Self-Critique
-
-Todo agente debe ejecutar una segunda revisión adversarial antes de declarar éxito.
-
-Debe intentar demostrar que su propia conclusión es incorrecta.
+Skipping stages creates simulation.
 
 ---
 
-# D2 · ARCHITECTURE
+# Ω22 · AUTOMATION
 
-## Ω10 · Single Responsibility
+Humans define intent.
 
-Cada módulo posee una única responsabilidad claramente definida.
+Automation performs execution.
 
----
+Automation never invents intent.
 
-## Ω11 · Zero Hidden Coupling
-
-Toda dependencia debe ser explícita.
-
-Se prohíben dependencias implícitas mediante estado global.
+Humans never perform deterministic work repeatedly.
 
 ---
 
-## Ω12 · O(1) Context Scaling
+# Ω23 · SECURITY
 
-Los prompts nunca contendrán estructuras O(N).
+Security is measured by
 
-Únicamente:
+Attack Surface
+×
+Reachability
+×
+Privilege
+×
+Impact
+
+Reduction of only one factor is insufficient.
+
+---
+
+# Ω24 · SUPPLY CHAIN
+
+Every artifact must answer
+
+Who built it?
+How?
+From which commit?
+Using which dependencies?
+Can it be reproduced?
+Can it be independently verified?
+
+Unknown answers invalidate trust.
+
+---
+
+# Ω25 · PROMPT ARCHITECTURE
+
+Prompts are executable specifications.
+
+Prompt quality is measured by
+
+Determinism
+Conflict density
+Entropy
+Maintenance cost
+Evidence production
+Token efficiency
+
+---
+
+# Ω26 · AGENT TOPOLOGY
+
+Agents are microservices.
+
+Each owns
+
+Mission
+Authority
+Memory
+Tools
+Contracts
+Failure modes
+Metrics
+
+No agent performs multiple unrelated responsibilities.
+
+---
+
+# Ω27 · REPOSITORY HEALTH
+
+Every repository continuously measures
+
+Architectural Drift
+Technical Debt
+Dependency Risk
+Unused Code
+Coverage
+Performance
+Security
+Documentation Accuracy
+Prompt Entropy
+Evolution Velocity
+
+These metrics are first-class citizens.
+
+---
+
+# Ω28 · GOVERNANCE
+
+Every accepted change requires
+
+Evidence
+Risk analysis
+Migration strategy
+Rollback strategy
+Verification plan
+Expected improvement
+Rejected alternatives
+
+Without governance there is no engineering.
+
+---
+
+# Ω29 · UNKNOWNS
+
+Unknowns are assets.
+
+Every audit must end with
 
 ```
-Root Hash
-↓
-Dynamic Discovery
-↓
-Lazy Resolution
+Known
+Unknown
+Assumed
+Not Verified
 ```
 
----
-
-## Ω13 · Immutable Interfaces
-
-Las interfaces públicas evolucionan mediante versionado.
-
-Nunca mediante ruptura silenciosa.
+Suppressing uncertainty is architectural corruption.
 
 ---
 
-## Ω14 · Deterministic Code Generation
+# ΩΩ · CONSTITUTIONAL EVOLUTION
 
-Todo código generado debe ser:
+This document is self-amending.
 
-* reproducible
-* determinista
-* idempotente
+A new invariant may be introduced only if it
 
----
+reduces entropy,
+eliminates ambiguity,
+or subsumes multiple existing invariants.
 
-# D3 · STORAGE
+No invariant may exist solely because it is historically present.
 
-## Ω20 · Atomic Persistence
-
-Toda escritura permanente seguirá:
-
-```
-write(tmp)
-↓
-fsync
-↓
-atomic rename
-```
-
-Nunca se escribirá directamente sobre el destino final.
+Every invariant must justify its own existence through measurable engineering value.
 
 ---
 
-## Ω21 · Crash Consistency
+# TERMINATION CONDITION
 
-Todo estado persistente deberá sobrevivir:
+The system has reached local equilibrium only when no remaining modification simultaneously:
 
-* SIGINT
-* SIGTERM
-* Power Loss
-* Process Kill
+- increases verified value,
+- reduces complexity,
+- lowers operational risk,
+- or improves reproducibility.
 
----
+Until then,
 
-## Ω22 · WAL Integrity
-
-Toda recuperación debe reconstruir exactamente el último estado consistente.
-
-Nunca un estado parcialmente comprometido.
-
----
-
-# D4 · IPC
-
-## Ω30 · Structured IPC
-
-Toda comunicación utiliza framing explícito.
-
-Ejemplo:
-
-```
-NDJSON
-length-prefixed
-protobuf
-cap'n proto
-```
-
-Nunca JSON crudo sobre TCP.
-
----
-
-## Ω31 · Socket Liveness
-
-Todo socket implementa:
-
-* Heartbeat
-* Graceful Shutdown
-* Automatic Cleanup
-
-No existen sockets huérfanos.
-
----
-
-## Ω32 · Trust Boundary
-
-```
-Renderer
-↓
-ContextBridge
-↓
-Main Process
-↓
-IPC
-↓
-Backend
-```
-
-No existen bypasses.
-
----
-
-# D5 · SECURITY
-
-## Ω40 · Deterministic Dependencies
-
-Nunca:
-
-```
-pip install foo
-```
-
-Siempre:
-
-```
-uv sync --locked
-pip --require-hashes
-```
-
----
-
-## Ω41 · Structured URL Validation
-
-Toda URL será parseada estructuralmente.
-
-Nunca mediante:
-
-```
-startswith()
-contains()
-regex parcial
-```
-
----
-
-## Ω42 · Workspace Isolation
-
-Todo artefacto externo vive dentro de su sandbox.
-
-Nunca contaminar el workspace principal.
-
----
-
-## Ω43 · Supply Chain Integrity
-
-Toda release debe poder demostrar:
-
-* SBOM
-* OSV
-* pip-audit
-* Sigstore
-* SLSA
-* Hashes reproducibles
-
----
-
-# D6 · AI SYSTEMS
-
-## Ω50 · Anti-Sycophancy
-
-El agente nunca declarará éxito basándose únicamente en:
-
-* tests
-* documentación
-* razonamiento
-
-Debe verificarse el fenómeno físico observado.
-
----
-
-## Ω51 · Anti Mind Reading
-
-Toda crítica queda separada en:
-
-* Facts
-* Interpretations
-* Hypotheses
-* Unknowns
-
-Nunca inferir estados mentales.
-
----
-
-## Ω52 · Prompt Purity
-
-Los prompts contienen únicamente:
-
-* objetivos
-* restricciones
-* interfaces
-
-Nunca conocimiento masivo.
-
----
-
-## Ω53 · Tool Authority
-
-Las herramientas observan.
-
-El modelo interpreta.
-
-Nunca al revés.
-
----
-
-# D7 · PERFORMANCE
-
-## Ω60 · Zero Entropy Scaling
-
-Todo crecimiento debe justificarse mediante:
-
-* CPU
-* RAM
-* IO
-* Tokens
-* Latencia
-* Complejidad
-
----
-
-## Ω61 · Measure Before Optimize
-
-Toda optimización requiere:
-
-* baseline
-* profiling
-* benchmark
-* regression test
-
-Sin medición:
-
-```
-Optimization = Rejected
-```
-
----
-
-# D8 · GOVERNANCE
-
-## Ω70 · Continuous Audit
-
-Cada ejecución genera:
-
-* Evidence Ledger
-* Decision Record
-* Risk Delta
-* Technical Debt Delta
-
----
-
-## Ω71 · Architecture Drift Detection
-
-Toda desviación respecto a la arquitectura objetivo debe detectarse automáticamente.
-
----
-
-## Ω72 · Evolution over Accumulation
-
-Añadir código siempre es la última opción.
-
-Prioridad:
-
-```
-Delete
-↓
-Simplify
-↓
-Reuse
-↓
-Refactor
-↓
-Create
-```
-
----
-
-# D9 · GOLDEN LAW
-
-## Ω∞ · EXERGY
-
-La exergía de una modificación se define como:
-
-> Valor verificable generado dividido entre complejidad añadida.
-
-Toda evolución del sistema debe maximizar:
-
-```
-ΔExergy
-=
-Verified Value
-──────────────
-Added Complexity
-```
-
-Si la complejidad crece más rápido que la capacidad verificable del sistema, la modificación constituye **Anergía** y debe rechazarse.
+**evolution is mandatory.**
