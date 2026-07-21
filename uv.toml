@@ -1,2 +1,3 @@
-[python]
-install-dir = ".uv_python"
+python-preference = "managed"
+python-downloads = "auto"
+
