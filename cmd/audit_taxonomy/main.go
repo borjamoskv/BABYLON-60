@@ -255,7 +255,7 @@ func Dispatch(d, p, m, t byte) error {
 		os.Exit(1)
 	}
 
-	err = ioutil.WriteFile(filepath.Join(primitivesDir, "primitives.go"), []byte(goCode.String()), 0644)
+	err = os.WriteFile(filepath.Join(primitivesDir, "primitives.go"), []byte(goCode.String()), 0644)
 	if err != nil {
 		fmt.Printf("Error writing primitives.go: %v\n", err)
 		os.Exit(1)
@@ -287,7 +287,7 @@ func Dispatch(d, p, m, t byte) error {
 	report.WriteString("El motor de Go ha compilado de forma segura las 10000 combinaciones de la matriz de estados. ")
 	report.WriteString("Toda primitiva ejecutada de forma asíncrona (modificador `4` / `ASYNC`) será despachada en una goroutine aislada.\n")
 
-	err = ioutil.WriteFile(reportPath, []byte(report.String()), 0644)
+	err = os.WriteFile(reportPath, []byte(report.String()), 0644)
 	if err != nil {
 		fmt.Printf("Error writing report: %v\n", err)
 		os.Exit(1)

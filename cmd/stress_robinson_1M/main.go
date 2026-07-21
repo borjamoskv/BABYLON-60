@@ -25,9 +25,8 @@ type Literal struct {
 	Negated  bool
 }
 
-type Clause []Literal
-
-func complementary(a, b Literal) bool {
+// Complementary returns true if two literals are for the same atom but opposite polarity.
+func Complementary(a, b Literal) bool {
 	return a.Atom == b.Atom && a.Negated != b.Negated
 }
 

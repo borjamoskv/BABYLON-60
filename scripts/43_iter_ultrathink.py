@@ -153,7 +153,9 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
                     subprocess.run(
                         ["git", "add", "cortex/compiled_theorem.py"], check=True
                     )
-                    purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
+                    purge_staged = subprocess.run(
+                        ["git", "diff", "--cached", "--quiet"]
+                    )
                     if purge_staged.returncode != 0:
                         subprocess.run(
                             [
