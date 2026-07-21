@@ -25,7 +25,7 @@ def test_substack_post_formatting_invariants():
 
     # Invariant 3: Mandatory Footer Block
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert "https://substack.com/home/post/p-204785962" in content
+    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

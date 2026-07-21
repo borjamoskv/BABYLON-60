@@ -130,7 +130,7 @@ La lección de Antonio Escohotado es una lección de física de sistemas:
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
-- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
+- [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Análisis C5-REAL del Teorema de Robinson-Moskv: El Fin del Algoritmo Estocástico](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/artifacts/auditoria_escohotado_ultrathink.md)
-- [Desmontando la Anergía Burocrática: Del Prohibicionismo a la Entropía de Mercado](https://substack.com)
-- [La Termodinámica de Prigogine aplicada al Control de Masas](https://substack.com)
+- [Desmontando la Anergía Burocrática: Del Prohibicionismo a la Entropía de Mercado](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
+- [La Termodinámica de Prigogine aplicada al Control de Masas](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
