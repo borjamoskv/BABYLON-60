@@ -24,6 +24,8 @@ import yaml
 import os
 import math
 
+from cortex.entropy_mapping_engine import ThermodynamicEntropyEngine
+
 try:
     import strike_rs  # type: ignore
     RUST_ENGINE_AVAILABLE = True
@@ -241,6 +243,7 @@ class Categorical896Engine:
         self.code_index: Dict[str, CategoricalPrimitive] = {}
         self.domain_index: Dict[str, List[CategoricalPrimitive]] = {}
         self.compat_complex = CompatComplex()
+        self.entropy_engine = ThermodynamicEntropyEngine()
 
         self.rust_engine: Optional[Any] = None
         if RUST_ENGINE_AVAILABLE:
@@ -578,6 +581,8 @@ class Categorical896Engine:
         collision_count = sum(1 for p in self.primitives.values() if p.is_collision)
         antipattern_count = sum(1 for p in self.primitives.values() if p.is_antipattern)
 
+        thermo = self.entropy_engine.map_domain_entropy(self.get_domain_summary())
+
         return {
             "total_primitives": len(self.primitives),
             "domains": len(self.domain_index),
@@ -587,6 +592,14 @@ class Categorical896Engine:
             "antipattern_primitives": antipattern_count,
             "domain_breakdown": self.get_domain_summary(),
             "compat_complex": self.evaluate_compat_complex(),
+            "thermodynamic_state": {
+                "shannon_entropy_nats": thermo.shannon_entropy,
+                "shannon_entropy_bits": thermo.shannon_entropy_bits,
+                "exergy_efficiency": thermo.exergy_efficiency,
+                "landauer_energy_joules": thermo.landauer_energy_joules,
+                "blake3_hash": thermo.blake3_hash,
+                "cortex_taint": thermo.cortex_taint,
+            },
         }
 
 

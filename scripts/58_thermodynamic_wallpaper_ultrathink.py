@@ -15,7 +15,6 @@ import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from PIL import Image, ImageFilter
 
 def calculate_hardware_entropy() -> tuple[float, np.ndarray, np.ndarray]:
     """Calculates thermodynamic system entropy S = -sum(p * ln(p)) based on CPU per-core loads."""
@@ -100,7 +99,7 @@ def set_mac_wallpaper(image_path: str) -> None:
     end tell
     '''
     subprocess.run(["osascript", "-e", script], check=True)
-    print(f"[ULTRATHINK] Wallpaper physically injected.")
+    print("[ULTRATHINK] Wallpaper physically injected.")
 
 if __name__ == "__main__":
     out_img = os.path.abspath(os.path.expanduser("/tmp/c5_thermo_wallpaper_ultrathink.png"))
