@@ -11,21 +11,30 @@ Enforces:
 import hashlib
 import math
 import pytest
+
 try:
     from hypothesis import given, strategies as st
 except ImportError:
     from typing import Callable, Any
-    def given(*args: Any, **kwargs: Any) -> Callable[[Callable[..., Any]], Callable[..., Any]]:  # type: ignore[no-redef]
+
+    def given(
+        *args: Any, **kwargs: Any
+    ) -> Callable[[Callable[..., Any]], Callable[..., Any]]:  # type: ignore[no-redef]
         def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
             return func
+
         return decorator
+
     class st:  # type: ignore[no-redef]
         @staticmethod
         def binary() -> Any:
             class SimpleStrategy:
                 def example(self) -> bytes:
                     return b""
+
             return SimpleStrategy()
+
+
 from cortex.mcts_vnode_compiler import (
     ASTTheorem,
     calculate_shannon_entropy,
@@ -149,7 +158,9 @@ class TestASTTheoremAndInvariants:
     def test_invalid_entropy_raises_value_error(self) -> None:
         payload = "x = 1"
         code_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
-        with pytest.raises(ValueError, match="Shannon entropy out of theoretical bounds"):
+        with pytest.raises(
+            ValueError, match="Shannon entropy out of theoretical bounds"
+        ):
             ASTTheorem(
                 code_hash=code_hash,
                 proven=True,
@@ -185,9 +196,7 @@ class TestMCTSExpansionWorker:
     def test_code_hash_is_sha3_256(self) -> None:
         result = _mcts_expansion_worker(("hash_check", 1))
         assert result is not None
-        payload = (
-            "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
-        )
+        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
         expected = hashlib.sha3_256(payload.encode()).hexdigest()
         assert result.code_hash == expected
 
@@ -215,7 +224,9 @@ class TestL3InferenceEnginePhysical:
         old_worker = compiler_mod._mcts_expansion_worker
         try:
             compiler_mod._mcts_expansion_worker = lambda args: None
-            with pytest.raises(MCTSTreeSearchError, match="Imposible colapsar un teorema"):
+            with pytest.raises(
+                MCTSTreeSearchError, match="Imposible colapsar un teorema"
+            ):
                 engine.compile_theorem("impossible_intention")
             assert engine.last_diagnostics["status"] == "EXHAUSTED"
         finally:
@@ -228,8 +239,11 @@ class TestL3InferenceEnginePhysical:
 
 
 class TestCoverageEdgeCases:
-    def test_shannon_entropy_without_numpy_fallback(self, monkeypatch: pytest.MonkeyPatch) -> None:
+    def test_shannon_entropy_without_numpy_fallback(
+        self, monkeypatch: pytest.MonkeyPatch
+    ) -> None:
         import cortex.mcts_vnode_compiler as comp
+
         monkeypatch.setattr(comp, "_HAS_NUMPY", False)
         # Test empty
         assert comp.calculate_shannon_entropy(b"") == 0.0
@@ -250,7 +264,9 @@ class TestCoverageEdgeCases:
                 payload=payload,
             )
 
-    def test_enforce_ide_theorem_physical_execution(self, tmp_path: pytest.TempPathFactory) -> None:
+    def test_enforce_ide_theorem_physical_execution(
+        self, tmp_path: pytest.TempPathFactory
+    ) -> None:
         from cortex.mcts_vnode_compiler import enforce_ide_theorem_physical
-        enforce_ide_theorem_physical("test_cli_execution_intention")
 
+        enforce_ide_theorem_physical("test_cli_execution_intention")

@@ -226,9 +226,7 @@ class L3InferenceEnginePhysical:
     """Motor de Inferencia L3 acoplado a MCTS con árbol de decisión UCT y
     diagnósticos ricos."""
 
-    def __init__(
-        self, target_trajectories: int = 10000, c_puct: float = 1.414
-    ) -> None:
+    def __init__(self, target_trajectories: int = 10000, c_puct: float = 1.414) -> None:
         if target_trajectories <= 0:
             raise ValueError(
                 f"target_trajectories must be positive, got {target_trajectories}"

@@ -18,7 +18,9 @@ class ClaudeCodeBridge:
             self.binary_path = binary_path
         else:
             default_path = "/opt/homebrew/bin/claude"
-            self.binary_path = default_path if os.path.exists(default_path) else "claude"
+            self.binary_path = (
+                default_path if os.path.exists(default_path) else "claude"
+            )
 
     def is_available(self) -> bool:
         """Verifica la presencia física del ejecutable Claude Code."""
@@ -83,7 +85,10 @@ class ClaudeCodeBridge:
                     "fallback_required": False,
                 }
             except json.JSONDecodeError:
-                if "Credit balance is too low" in stderr or "Credit balance is too low" in stdout:
+                if (
+                    "Credit balance is too low" in stderr
+                    or "Credit balance is too low" in stdout
+                ):
                     return {
                         "status": "QUOTA_EXHAUSTED",
                         "kernel": "claude-code",

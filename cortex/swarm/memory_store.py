@@ -36,7 +36,9 @@ class AgentMemory:
             def _silent_capture(self: Any, event: Any = None) -> None:
                 pass
 
-            setattr(chromadb.telemetry.product.posthog.Posthog, "capture", _silent_capture)
+            setattr(
+                chromadb.telemetry.product.posthog.Posthog, "capture", _silent_capture
+            )
         except Exception:
             pass
 

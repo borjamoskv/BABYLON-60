@@ -12,6 +12,7 @@ logger = logging.getLogger("cortex.active_inference")
 @dataclasses.dataclass(frozen=True)
 class ActiveInferenceResult:
     """Representación inmutable de la energía libre variacional F = D_KL - E[ln p(O|S)]."""
+
     free_energy: float
     d_kl: float
     expected_log_likelihood: float
@@ -45,8 +46,12 @@ class UnifiedActiveInferenceEngine:
         # Vectorized calculation with NumPy fallback
         try:
             import numpy as np
+
             states = np.array(self.state_vector.states[:64], dtype=np.float64)
-            cov_diag = np.array([self.state_vector.covariance[i][i] for i in range(64)], dtype=np.float64)
+            cov_diag = np.array(
+                [self.state_vector.covariance[i][i] for i in range(64)],
+                dtype=np.float64,
+            )
             mu_p = (
                 np.array(self.cognitive_chain_vector.homeostasis_energy[:64])
                 + np.array(self.cognitive_chain_vector.attention_weight[:64])
@@ -73,7 +78,9 @@ class UnifiedActiveInferenceEngine:
                 if det_sigma_q < 1e100:
                     det_sigma_q *= det_sigma_q_step
 
-        self.d_kl = 0.5 * (tr_sigma_q + mahalanobis - 64.0 - math.log(max(1e-12, det_sigma_q)))
+        self.d_kl = 0.5 * (
+            tr_sigma_q + mahalanobis - 64.0 - math.log(max(1e-12, det_sigma_q))
+        )
         if self.d_kl < 0:
             self.d_kl = 0.0
 
@@ -99,4 +106,3 @@ class UnifiedActiveInferenceEngine:
         yield self.free_energy
         yield self.d_kl
         yield self.expected_log_likelihood
-
