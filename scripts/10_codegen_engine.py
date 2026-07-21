@@ -9,9 +9,9 @@ from scripts.codegen_utils import CODEGEN_CONFIGS, parse_yaml  # type: ignore[im
 def generate_go(
     domain_name: str,
     cfg: dict[str, Any],
-    domains: list[str],
-    primitives: list[str],
-    modifiers: list[str],
+    domains: dict[int, str],
+    primitives: dict[int, str],
+    modifiers: dict[int, str],
     output_path: str,
 ) -> None:
     prefix = cfg["go_ident"].replace("Identity", "")
@@ -171,9 +171,9 @@ def generate_go(
 def generate_rust(
     domain_name: str,
     cfg: dict[str, Any],
-    domains: list[str],
-    primitives: list[str],
-    modifiers: list[str],
+    domains: dict[int, str],
+    primitives: dict[int, str],
+    modifiers: dict[int, str],
     output_path: str,
 ) -> None:
     prefix = cfg["rust_ident"].replace("Identity", "")
@@ -204,9 +204,9 @@ def generate_rust(
             "        Self {",
         ]
     )
-    for new_line in cfg["rust_new"]:
-        lines.append(f"            {new_line}")
-    if "execution_count" not in "\n".join(cfg["rust_new"]):
+    for field_init in cfg["rust_init"]:
+        lines.append(f"            {field_init}")
+    if "execution_count" not in "\n".join(cfg["rust_init"]):
         lines.append("            execution_count: 0,")
     lines.extend(
         [
@@ -214,15 +214,19 @@ def generate_rust(
             "    }",
             "}",
             "",
-            f"pub fn {cfg['rust_dispatch']}(d: u8, p: u8, m: u8, vec: &mut {cfg['rust_state']}) -> Result<u16, String> {{",
-            "    if d > 9 || p > 9 || m > 9 {",
-            f'        return Err("{prefix} indices out of bounds [0-9]".to_string());',
+            f"pub fn {cfg['rust_resolve']}(d: u8, p: u8, m: u8) -> Result<{cfg['rust_ident']}, String> {{",
+            "    if d >= 10 || p >= 10 || m >= 10 {",
+            '        return Err("Invalid coordinates: values must be 0..9".into());',
             "    }",
             "    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);",
+            f"    Ok({cfg['rust_ident']} {{ domain: d, primitive: p, modifier: m, code }})",
+            "}",
+            "",
+            f"pub fn {cfg['rust_dispatch']}(d: u8, p: u8, m: u8, vec: &mut {cfg['rust_state']}) -> Result<u16, String> {{",
+            f"    let ident = {cfg['rust_resolve']}(d, p, m)?;",
+            "    vec.execution_count += 1;",
         ]
     )
-    if "execution_count += 1" not in "\n".join(cfg["rust_sim"]):
-        lines.append("    vec.execution_count += 1;")
     for sim_line in cfg["rust_sim"]:
         lines.append(f"    {sim_line}")
     lines.extend(
@@ -239,9 +243,9 @@ def generate_rust(
 def generate_python(
     domain_name: str,
     cfg: dict[str, Any],
-    domains: list[str],
-    primitives: list[str],
-    modifiers: list[str],
+    domains: dict[int, str],
+    primitives: dict[int, str],
+    modifiers: dict[int, str],
     output_path: str,
 ) -> None:
     lines = [

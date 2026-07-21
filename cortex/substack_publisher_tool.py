@@ -62,7 +62,7 @@ def convert_tables_to_lists(text: str) -> str:
     lines = text.split("\n")
     new_lines = []
     in_table = False
-    headers = []
+    headers: list[str] = []
 
     for line in lines:
         if line.strip().startswith("|") and line.strip().endswith("|"):
