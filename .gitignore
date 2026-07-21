@@ -54,3 +54,6 @@ coverage.out
 go_deps.json
 
 go_deps.json
+
+# Spotlight exclusion markers
+**/.metadata_never_index

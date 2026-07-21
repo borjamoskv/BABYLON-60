@@ -41,7 +41,9 @@ async def test_neuromorphic_v2():
         await mesh.route_pulse("SensorA", "MotorB", 5.0)
         print(f"[MotorB] Energía antes de leak: {motor.current_potential:.2f}")
 
-        await asyncio.sleep(2.0)  # Esperar para que se fugue (leak rate 2.0/s -> 4.0 leak)
+        await asyncio.sleep(
+            2.0
+        )  # Esperar para que se fugue (leak rate 2.0/s -> 4.0 leak)
 
         print(f"[MotorB] Energía tras Leak de 2s: {motor.current_potential:.2f}")
         assert motor.current_potential <= 2.0, (
