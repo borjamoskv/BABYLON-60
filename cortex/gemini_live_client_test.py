@@ -5,7 +5,6 @@ from cortex.gemini_live_client import (
     AudioFormatMismatchError,
     AudioStreamConfig,
     GeminiLiveClient,
-    GeminiLiveSession,
 )
 
 

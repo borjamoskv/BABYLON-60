@@ -67,7 +67,7 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     return float(time.perf_counter_ns() - t0)
 
 
-async def main():
+async def main() -> None:
     print("╔══════════════════════════════════════════════════════════════╗")
     print("║  10,000 ASYNCHRONOUS STRESS TEST SUITE — C5-REAL (N=10,000)  ║")
     print("╚══════════════════════════════════════════════════════════════╝\n")
