@@ -1,202 +1,212 @@
-# C5-REAL Engineering Specification Language (CESL v1.0)
-## Cognitive Operating System Kernel Specification
+# CESL 1.0 (C5 Engineering Specification Language)
+## Executable Constitutional Specification
 
 **Classification:** C5-REAL Formal Spec  
-**Status:** Living Execution Kernel  
-**Execution Paradigm:** Formal Semantics · Type System · Operational Logic
+**Status:** Executable Kernel Specification  
+**Execution Model:** Parsable · Validatable · Compilable · Self-Auditing
 
 ---
 
-```text
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-                 C5-REAL KERNEL LAYER STACK
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  L0  Mathematics      (Primitives, Calculus, Conservation)
-  L1  Ontology         (Types, Entities, Existence)
-  L2  Logic            (Inference Rules, Deductions)
-  L3  Type System      (Formal Structs, Schema Specifications)
-  L4  Runtime          (State Machine, Transitions, Pre/Post)
-  L5  Governance       (Metadata, Severity, Verification)
-  L6  Policies         (Implementation Bindings: Rust/Go/Py/CI)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+# 1. Meta-Modelo
+
+Toda especificación CESL contiene exactamente estos bloques:
+
+```cesl
+module
+types
+relations
+invariants
+transitions
+metrics
+policies
+verification
+capabilities
 ```
 
----
-
-# L0 · MATHEMATICS
-
-## Primitives & Dynamics
-Let $t \in \mathbb{R}^+$ represent operational time. System state is defined by the tuple:
-$$\mathcal{S}(t) = \langle \text{Reality}(t), \text{Representation}(t), \text{Knowledge}(t), \text{Evidence}(t), \text{Risk}(t), \text{Entropy}(t), \text{Complexity}(t), \text{Trust}(t) \rangle$$
-
-## Primary Operators
-
-### Exergy Operator ($\Delta E$)
-Every state mutation $\Delta \mathcal{S}: S(t) \to S(t+1)$ is evaluated via the Exergy Operator:
-$$\Delta E = \frac{\text{VerifiedValue}}{\text{Complexity} \times \text{Risk} \times \text{Cost}}$$
-
-Acceptance Criterion:
-$$\Delta E(\mathcal{S}(t+1)) > \Delta E(\mathcal{S}(t)) \quad \iff \quad \text{ACCEPT}$$
-
-### Entropy Operator ($H$)
-$$H(\mathcal{S}) = \text{Unknowns} + \text{Duplication} + \text{ImplicitAssumptions} + \text{ArchitecturalDrift}$$
-
-### Epistemic Trust Invariant
-$$\text{Trust}(\mathcal{S}) \le \text{Evidence}(\mathcal{S})$$
-
-### Information Gain
-$$\Delta I = H(\mathcal{S}(t)) - H(\mathcal{S}(t+1))$$
-
-### Conservation of Uncertainty
-Uncertainty ($\mathcal{U}$) cannot be destroyed without physical measurement.
-$$\mathcal{U}_{\text{total}} = \mathcal{U}_{\text{Measured}} + \mathcal{U}_{\text{Ignored}} + \mathcal{U}_{\text{Transferred}}$$
+Ningún bloque adicional puede existir en el núcleo.
 
 ---
 
-# L1 · ONTOLOGY
+# 2. Sistema de Tipos
 
-The domain of discourse $\mathcal{D}$ consists strictly of the following primitive types:
+## Tipos Primitivos
+- `Identifier`: Identificador único (UUID, Slug, Name)
+- `Hash`: Firma de contenido (SHA256, SHA3-256)
+- `Timestamp`: Estampa de tiempo UTC ISO8601
+- `Version`: SemVer (`x.y.z`)
+- `URI`: Localizador de recurso
+- `Signature`: Firma criptográfica
+- `Metric`: Valor cuantitativo de rendimiento
 
-```yaml
-Entities:
-  - Artifact
-  - Evidence
-  - Claim
-  - Knowledge
-  - Decision
-  - Protocol
-  - Specification
-  - Policy
-  - Agent
-  - Execution
-  - Observation
-  - Measurement
-  - Runtime
-  - Repository
-  - State
-  - Metric
-  - Risk
-  - Incident
-  - Bug
-  - Regression
-  - Debt
-```
-
-Any symbol $x \notin \mathcal{D}$ is semantically invalid.
-
----
-
-# L2 · LOGIC & INFERENCE
-
-$$\frac{\text{Claim} \quad \text{Evidence}}{\text{Knowledge}} \qquad \frac{\text{Knowledge} \quad \text{Reproduction}}{\text{Verified Knowledge}}$$
-
-$$\frac{\text{Evidence} \quad \neg \text{Verification}}{\text{Observation}} \qquad \frac{\text{Claim} \quad \neg \text{Evidence}}{\text{Hypothesis}}$$
-
-$$\frac{\text{Knowledge} \quad \text{Contradictory Evidence}}{\text{Revision}}$$
-
----
-
-# L3 · TYPE SYSTEM
-
-```rust
-type Claim {
-    id: UUID,
-    owner: AgentId,
-    confidence: ConfidenceLevel,
-    dependencies: Vec<ClaimId>,
-    evidence: Vec<EvidenceId>,
-    timestamp: Timestamp,
-    status: ClaimStatus,
-}
-
+## Tipos Compuestos
+```cesl
 type Evidence {
-    sha256: Hash256,
-    origin: OriginURI,
-    artifact: ArtifactId,
-    signature: CryptoSignature,
-    verified: bool,
-    reproducible: bool,
+    id: Identifier
+    hash: Hash
+    origin: URI
+    signature: Signature?
+    reproducible: bool
+    verified: bool
 }
 
-type Specification {
-    id: SpecId,
-    target: TargetKind, // CLI, LLM, Pipeline, FFI, RPC
-    preconditions: Vec<Condition>,
-    postconditions: Vec<Condition>,
-    invariants: Vec<InvariantId>,
+type Claim {
+    id: Identifier
+    author: Identifier
+    statement: String
+    status: Status
 }
 
-type Decision {
-    id: DecisionId,
-    alternatives: Vec<Alternative>,
-    selected: Alternative,
-    rollback: RollbackStrategy,
-    tradeoffs: Vec<Tradeoff>,
-    risk_delta: Float,
+type Artifact {
+    id: Identifier
+    path: URI
+    content_hash: Hash
+    size_bytes: Int
 }
 ```
 
 ---
 
-# L4 · RUNTIME STATE MACHINE
+# 3. Relaciones Tipadas
+
+Las relaciones poseen dominio y codominio estrictos:
+
+```cesl
+relation verifies : Evidence -> Claim
+relation produces : Execution -> Artifact
+relation invalidates : Evidence -> Claim
+relation depends_on : Artifact -> Artifact
+```
+
+---
+
+# 4. Invariantes Formales
+
+Invariantes expresadas como predicados cuantificados de primer orden:
+
+```cesl
+invariant EveryClaimHasEvidence {
+    forall c : Claim
+    exists e : Evidence
+    where verifies(e, c) && e.verified == true
+}
+
+invariant KernelCriterion {
+    forall i : Invariant
+    MUST justify_existence(i) == true
+}
+```
+
+---
+
+# 5. Transiciones
+
+Toda mutación de estado se realiza mediante transiciones explícitas:
+
+```cesl
+transition VerifyClaim {
+    input: Claim, Evidence
+    output: VerifiedClaim
+    pre: Claim.status == Pending && Evidence.verified == true
+    post: Claim.status == Verified
+}
+```
+
+---
+
+# 6. Sistema Normativo (RFC 2119)
+
+- `MUST`: Requisito absoluto e innegociable.
+- `SHALL`: Especificación de comportamiento obligatorio del motor.
+- `SHOULD`: Recomendación que solo admite excepción justificada.
+- `MAY`: Opción estrictamente permitida.
+
+---
+
+# 7. Verificación
+
+```cesl
+verify StaticLint {
+    method: static
+    tool: "cesl-lint"
+    severity: error
+}
+
+verify RuntimeHealth {
+    method: runtime
+    tool: "cesl-healthcheck"
+    severity: warning
+}
+```
+
+---
+
+# 8. Capacidad de Compilación & IR
+
+El compilador CESL transduce especificaciones hacia el Grafo de Representación Intermedia (IR):
 
 ```text
-  Observe ──► Measure ──► Model ──► Predict
-                                       │
-  Generalize ◄── Persist ◄── Validate ◄── Execute
-      │
-      └──► Institutionalize (State Collapse)
-```
-
-## Formal Semantics of Mutations
-
-### DELETE(x)
-$$\text{Delete}(x) \implies \text{KnowledgePreserved}(x) \land \text{ReferencesMigrated}(x) \land \text{ArtifactRemoved}(x) \land \text{HistoryRetained}(x)$$
-
-### REFACTOR(m)
-$$\text{Behavior}(m) = \text{Constant} \quad \land \quad \text{Implementation}(m) \to \text{Mutated}$$
-
-### OPTIMIZE(p)
-$$\text{Behavior}(p) = \text{Constant} \quad \land \quad \text{Resources}(p) \to \text{Decreased}$$
-
-### FIX(b)
-$$\text{ObservedReality}(b) \equiv \text{ExpectedReality}(b)$$
-
----
-
-# L5 · GOVERNANCE METADATA
-
-```yaml
-GovernanceSpec:
-  id: CESL-L5-SPEC
-  priority: CRITICAL
-  automatable: true
-  severity: BLOCKER
-  verification_methods:
-    - static_ast_analysis
-    - runtime_bft_attestation
-    - cryptographic_hash_check
-  owner: kernel
+  .cesl ──► Lexer ──► Parser ──► AST ──► Semantic Analyzer ──► IR
+                                                               │
+        ┌──────────────────┬──────────────────┬────────────────┴────────────────┐
+        ▼                  ▼                  ▼                                 ▼
+  [Markdown Doc]    [Mermaid Graph]    [CI/CD Validator]                [Agent Contracts]
 ```
 
 ---
 
-# L6 · POLICIES (Derived Implementation Bindings)
+# 9. Modelo de Capacidades
 
-Specific technology bindings (Rust `cargo audit`, Python `uv sync --locked`, Go `cmd/`, SQLite WAL, Vite/React, Github Actions) are isolated as L6 policy implementations compiled from L3 specifications.
+```cesl
+capability ReadArtifact
+capability WriteArtifact
+capability VerifyClaim
+capability ApproveTransition
+capability ModifyPolicy
+```
 
-```text
-               [ L3 Specification ]
-                        │
-         ┌──────────────┼──────────────┐
-         ▼              ▼              ▼
-    [ LLM Spec ]   [ FFI/Rust ]  [ CI Pipeline ]
+Los agentes reciben capacidades finitas explícitas; se prohíben privilegios difusos.
+
+---
+
+# 10. Trazabilidad Nativa
+
+```cesl
+trait Traceable {
+    created_at: Timestamp
+    updated_at: Timestamp
+    origin: URI
+    evidence: Evidence
+    parent: Identifier?
+}
 ```
 
 ---
 
-# TERMINATION & EQUILIBRIUM CONDITION
+# 11. Compatibilidad
 
-$$\lim_{t \to \infty} \frac{d H}{dt} = 0 \quad \text{and} \quad \Delta E(\mathcal{S}(t+1)) \le \Delta E(\mathcal{S}(t))$$
+```cesl
+compatible Policy v2.0 with Policy v1.0
+```
 
-Until physical equilibrium is attained, **recursive execution is mandatory.**
+---
+
+# 12. Evolución Controlada
+
+Estados de estabilidad de invariantes y políticas:
+`Experimental` $\rightarrow$ `Stable` $\rightarrow$ `LTS` $\rightarrow$ `Deprecated` $\rightarrow$ `Removed`
+
+---
+
+# 13. Verificación de la Propia Especificación
+
+Toda especificación CESL válida MUST contener:
+- Identificador único (`id`)
+- Justificación causal (`rationale`)
+- Método de verificación (`verification_method`)
+- Severidad (`severity`)
+
+---
+
+# 14. Límite del Núcleo (Kernel Criterion)
+
+> Un concepto pertenece a CESL únicamente si su eliminación imposibilitaría expresar una especificación de ingeniería válida. En caso contrario, pertenece a un paquete de políticas o librerías secundarias.

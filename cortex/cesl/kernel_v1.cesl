@@ -1,0 +1,47 @@
+module C5RealKernel
+
+type Evidence {
+    id: Identifier
+    hash: Hash
+    origin: URI
+    signature: Signature?
+    reproducible: bool
+    verified: bool
+}
+
+type Claim {
+    id: Identifier
+    author: Identifier
+    statement: String
+    status: Status
+}
+
+type Artifact {
+    id: Identifier
+    path: URI
+    content_hash: Hash
+    size_bytes: Int
+}
+
+relation verifies : Evidence -> Claim
+relation produces : Execution -> Artifact
+relation invalidates : Evidence -> Claim
+relation depends_on : Artifact -> Artifact
+
+invariant EveryClaimHasEvidence {
+    forall c : Claim exists e : Evidence where verifies(e,c)
+}
+
+transition VerifyClaim {
+    input: Claim
+    input: Evidence
+    output: VerifiedClaim
+    pre: Claim.status == Pending
+    post: Claim.status == Verified
+}
+
+capability ReadArtifact
+capability WriteArtifact
+capability VerifyClaim
+capability ApproveTransition
+capability ModifyPolicy
