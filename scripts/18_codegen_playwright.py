@@ -5,6 +5,7 @@ import sqlite3
 import datetime
 from typing import TypedDict
 
+
 class PlaywrightPrimitiveDict(TypedDict):
     id: str
     domain: str
@@ -14,6 +15,7 @@ class PlaywrightPrimitiveDict(TypedDict):
     description: str
     taint_hash: str
     timestamp: str
+
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)

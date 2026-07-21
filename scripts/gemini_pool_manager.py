@@ -98,13 +98,9 @@ class GeminiProPoolManager:
             slot.requests_count += 1
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={slot.api_key}"
 
-            payload = json.dumps(
-                {
-                    "contents": [
-                        {"parts": [{"text": prompt}]}
-                    ]
-                }
-            ).encode("utf-8")
+            payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode(
+                "utf-8"
+            )
 
             req = urllib.request.Request(
                 url,
@@ -130,7 +126,9 @@ class GeminiProPoolManager:
                     attempts += 1
                     continue
                 else:
-                    raise EpistemicPoolHalt(f"HTTPError Gemini API [{e.code}]: {e.reason}")
+                    raise EpistemicPoolHalt(
+                        f"HTTPError Gemini API [{e.code}]: {e.reason}"
+                    )
             except (urllib.error.URLError, TimeoutError, OSError) as e:
                 slot.set_cooldown(15.0)
                 last_error = e

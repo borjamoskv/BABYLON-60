@@ -16,7 +16,10 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db")
+DB_PATH = str(
+    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db"
+)
+
 
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -39,7 +42,10 @@ def init_db(db_path: str = DB_PATH) -> None:
         """)
     conn.close()
 
-def compute_substance_state(potentiality: float, actuality: float, dualism_separation: float) -> Dict[str, Any]:
+
+def compute_substance_state(
+    potentiality: float, actuality: float, dualism_separation: float
+) -> Dict[str, Any]:
     """
     potentiality (0.0 to 1.0): Virtual state options (Dynamis)
     actuality (0.0 to 1.0): Manifested physical structure (Energeia)
@@ -63,7 +69,7 @@ def compute_substance_state(potentiality: float, actuality: float, dualism_separ
 
     ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
     taint_raw = f"{pot}:{act}:{dual}:{exergy_density}:{regime}:{ts}"
-    cortex_taint = hashlib.sha3_256(taint_raw.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(taint_raw.encode("utf-8")).hexdigest()
 
     return {
         "timestamp": ts,
@@ -72,10 +78,16 @@ def compute_substance_state(potentiality: float, actuality: float, dualism_separ
         "dualism_index": dual,
         "substance_exergy_density": round(exergy_density, 4),
         "ontological_regime": regime,
-        "cortex_taint": f"borjamoskv:escohotado_substance:{cortex_taint[:16]}"
+        "cortex_taint": f"borjamoskv:escohotado_substance:{cortex_taint[:16]}",
     }
 
-def run_substance_grid(pot_range: List[float], act_range: List[float], dual_range: List[float], db_path: str = DB_PATH) -> List[Dict[str, Any]]:
+
+def run_substance_grid(
+    pot_range: List[float],
+    act_range: List[float],
+    dual_range: List[float],
+    db_path: str = DB_PATH,
+) -> List[Dict[str, Any]]:
     init_db(db_path)
     results = []
 
@@ -89,15 +101,26 @@ def run_substance_grid(pot_range: List[float], act_range: List[float], dual_rang
                 res = compute_substance_state(pot, act, dual)
                 results.append(res)
                 with conn:
-                    conn.execute("""
+                    conn.execute(
+                        """
                         INSERT OR REPLACE INTO substance_ontology 
                         (timestamp, potentiality_phi, actuality_phi, dualism_index, substance_exergy_density, ontological_regime, cortex_taint)
                         VALUES (?, ?, ?, ?, ?, ?, ?)
-                    """, (res["timestamp"], res["potentiality_phi"], res["actuality_phi"], 
-                          res["dualism_index"], res["substance_exergy_density"], res["ontological_regime"], res["cortex_taint"]))
+                    """,
+                        (
+                            res["timestamp"],
+                            res["potentiality_phi"],
+                            res["actuality_phi"],
+                            res["dualism_index"],
+                            res["substance_exergy_density"],
+                            res["ontological_regime"],
+                            res["cortex_taint"],
+                        ),
+                    )
 
     conn.close()
     return results
+
 
 if __name__ == "__main__":
     p_grid = [0.2, 0.8, 1.0]

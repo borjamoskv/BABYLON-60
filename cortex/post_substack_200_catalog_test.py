@@ -6,17 +6,23 @@ Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy), Ω23 (Re
 import pytest
 from pathlib import Path
 
-ARCHIVE_200_DIR = Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive_200"
+ARCHIVE_200_DIR = (
+    Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive_200"
+)
+
 
 def get_200_archive_files():
     if not ARCHIVE_200_DIR.exists():
         return []
     return sorted(list(ARCHIVE_200_DIR.glob("*.md")))
 
+
 FILES_200 = get_200_archive_files()
+
 
 def test_200_archive_count():
     assert len(FILES_200) == 200, f"Expected 200 archive files, found {len(FILES_200)}"
+
 
 @pytest.mark.parametrize("filepath", FILES_200)
 def test_substack_200_article_invariants(filepath: Path):
@@ -34,7 +40,10 @@ def test_substack_200_article_invariants(filepath: Path):
 
     # Invariant 3: Mandatory Footer Block & UTBH Anchor URL
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
+    assert (
+        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal"
+        in content
+    )
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

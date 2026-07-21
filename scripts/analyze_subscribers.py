@@ -17,7 +17,10 @@ def main() -> None:
     if len(sys.argv) > 1:
         csv_path = Path(sys.argv[1])
     else:
-        env_path = os.environ.get("SUBSTACK_CSV_PATH", str(Path.home() / "Downloads" / "subscriber-export.csv"))
+        env_path = os.environ.get(
+            "SUBSTACK_CSV_PATH",
+            str(Path.home() / "Downloads" / "subscriber-export.csv"),
+        )
         csv_path = Path(env_path)
         if not csv_path.exists():
             print("Usage: python analyze_subscribers.py <path_to_substack_csv>")

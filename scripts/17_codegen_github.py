@@ -5,6 +5,7 @@ import sqlite3
 import datetime
 from typing import TypedDict
 
+
 class PrimitiveDict(TypedDict):
     id: str
     domain: str
@@ -13,6 +14,7 @@ class PrimitiveDict(TypedDict):
     description: str
     taint_hash: str
     timestamp: str
+
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)

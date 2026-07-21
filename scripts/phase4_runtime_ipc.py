@@ -5,8 +5,10 @@ import logging
 import hashlib
 from typing import TypedDict
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 

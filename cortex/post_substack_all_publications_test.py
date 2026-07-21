@@ -14,6 +14,7 @@ SUBSTACK_FILES = [
     ARTIFACTS_DIR / "post_substack_necrosis_ontologica.md",
 ]
 
+
 @pytest.mark.parametrize("filepath", SUBSTACK_FILES)
 def test_substack_publication_formatting_invariants(filepath: Path):
     assert filepath.exists(), f"Publication file missing: {filepath}"
@@ -30,7 +31,10 @@ def test_substack_publication_formatting_invariants(filepath: Path):
 
     # Invariant 3: Mandatory Footer Block & UTBH Canonical URL
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
+    assert (
+        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal"
+        in content
+    )
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

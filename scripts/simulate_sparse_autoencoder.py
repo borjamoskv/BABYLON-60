@@ -1,4 +1,5 @@
 """C4-SIM: Synthetic mathematical simulation."""
+
 # Auto-generated Sparse Autoencoder (SAE) simulator for KIMI k3 feature superposition (C5-REAL Simulation)
 import json
 import math

@@ -1,6 +1,7 @@
 import os
 import subprocess
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 

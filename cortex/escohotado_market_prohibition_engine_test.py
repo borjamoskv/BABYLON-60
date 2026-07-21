@@ -6,9 +6,15 @@ Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 import os
 import sqlite3
 from pathlib import Path
-from cortex.escohotado_market_prohibition_engine import simulate_prohibition_and_property, run_economic_grid
+from cortex.escohotado_market_prohibition_engine import (
+    simulate_prohibition_and_property,
+    run_economic_grid,
+)
 
-TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_econ.db")
+TEST_DB = str(
+    Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_econ.db"
+)
+
 
 def test_simulation_bounds_and_monotonies():
     # Legal market & full property rights -> zero risk premium above 1, 100% purity, zero violence, zero info loss
@@ -20,11 +26,14 @@ def test_simulation_bounds_and_monotonies():
     assert res_free["systemic_exergy_loss"] == 0.0
 
     # Total prohibition & total property suppression -> Max violence, max info loss, high exergy loss
-    res_totalitarian = simulate_prohibition_and_property(enforcement=1.0, property_rights=0.0)
+    res_totalitarian = simulate_prohibition_and_property(
+        enforcement=1.0, property_rights=0.0
+    )
     assert res_totalitarian["risk_premium_multiplier"] > 9.0
     assert res_totalitarian["purity_index"] <= 0.15
     assert res_totalitarian["black_market_violence_index"] == 20.0
     assert res_totalitarian["information_loss_index"] == 1.0
+
 
 def test_grid_execution_and_persistence():
     if os.path.exists(TEST_DB):

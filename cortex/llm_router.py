@@ -116,12 +116,17 @@ class C5LLMRouter:
 
         # 3. Cascada a Gemini Pro Multi-Account Pool
         gemini_route = self.routes_by_name.get("Gemini Pro Multi-Account Cluster")
-        if gemini_route and (model.startswith("gemini") or "GEMINI_API_KEY" in os.environ):
+        if gemini_route and (
+            model.startswith("gemini") or "GEMINI_API_KEY" in os.environ
+        ):
             try:
                 from scripts.gemini_pool_manager import GeminiProPoolManager
+
                 pool = GeminiProPoolManager()
                 if pool.slots:
-                    target_model = model if model.startswith("gemini") else "gemini-1.5-pro"
+                    target_model = (
+                        model if model.startswith("gemini") else "gemini-1.5-pro"
+                    )
                     return pool.dispatch_generate_content(prompt, model=target_model)
             except Exception as e:
                 errors.append(f"Gemini Pro Multi-Account Pool falló: {e}")

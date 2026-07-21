@@ -67,6 +67,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+
 def render_post_html(post_filename: str) -> str:
     filepath = ARCHIVE_DIR / post_filename
     if not filepath.exists():
@@ -77,41 +78,49 @@ def render_post_html(post_filename: str) -> str:
 
     # Simple markdown to HTML conversion for preview
     import re
+
     html = md_text
-    html = re.sub(r'^# (.*?)$', r'<h1>\1</h1>', html, flags=re.MULTILINE)
-    html = re.sub(r'^## (.*?)$', r'## \1', html, flags=re.MULTILINE)
-    html = re.sub(r'^### (.*?)$', r'### \1', html, flags=re.MULTILINE)
-    html = re.sub(r'^> (.*?)$', r'<blockquote>\1</blockquote>', html, flags=re.MULTILINE)
-    html = re.sub(r'```(.*?)```', r'<pre>\1</pre>', html, flags=re.DOTALL)
-    html = re.sub(r'\[(.*?)\]\((.*?)\)', r'<a href="\2" target="_blank">\1</a>', html)
+    html = re.sub(r"^# (.*?)$", r"<h1>\1</h1>", html, flags=re.MULTILINE)
+    html = re.sub(r"^## (.*?)$", r"## \1", html, flags=re.MULTILINE)
+    html = re.sub(r"^### (.*?)$", r"### \1", html, flags=re.MULTILINE)
+    html = re.sub(
+        r"^> (.*?)$", r"<blockquote>\1</blockquote>", html, flags=re.MULTILINE
+    )
+    html = re.sub(r"```(.*?)```", r"<pre>\1</pre>", html, flags=re.DOTALL)
+    html = re.sub(r"\[(.*?)\]\((.*?)\)", r'<a href="\2" target="_blank">\1</a>', html)
 
     return HTML_TEMPLATE.format(body_content=html)
+
 
 class PreviewHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == "/" or self.path == "/index.html":
             files = sorted(list(ARCHIVE_DIR.glob("*.md")))
-            list_items = "".join([f'<li><a href="/view/{f.name}">{f.name}</a></li>' for f in files])
+            list_items = "".join(
+                [f'<li><a href="/view/{f.name}">{f.name}</a></li>' for f in files]
+            )
             content = f"<h1>CORTEX Substack Archive Catalog (23 Posts)</h1><ul>{list_items}</ul>"
             rendered = HTML_TEMPLATE.format(body_content=content)
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(rendered.encode('utf-8'))
+            self.wfile.write(rendered.encode("utf-8"))
         elif self.path.startswith("/view/"):
             filename = self.path.replace("/view/", "")
             rendered = render_post_html(filename)
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=utf-8")
             self.end_headers()
-            self.wfile.write(rendered.encode('utf-8'))
+            self.wfile.write(rendered.encode("utf-8"))
         else:
             self.send_error(404, "Not Found")
+
 
 def run_server(port: int = 8085):
     with socketserver.TCPServer(("", port), PreviewHandler) as httpd:
         print(f"CORTEX Substack Preview Server running at http://localhost:{port}/")
         httpd.serve_forever()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CORTEX Substack Preview Server")

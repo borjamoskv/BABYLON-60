@@ -72,4 +72,6 @@ if __name__ == "__main__":
         input_keys = sys.argv[1:]
         append_keys_to_env(input_keys)
     else:
-        print("Uso: python3 scripts/gemini_pool_collector.py <KEY_1> <KEY_2> ... <KEY_N>")
+        print(
+            "Uso: python3 scripts/gemini_pool_collector.py <KEY_1> <KEY_2> ... <KEY_N>"
+        )

@@ -69,7 +69,9 @@ def audit_and_align_invariants() -> bool:
                     user_home = os.path.expanduser("~")
                     with open(fpath, "r", encoding="utf-8") as f:
                         content = f.read()
-                        if user_home in content and fpath != os.path.join(".", "cortex", "invariant_sentinel.py"):
+                        if user_home in content and fpath != os.path.join(
+                            ".", "cortex", "invariant_sentinel.py"
+                        ):
                             print(
                                 f"[ALERT] Ruta absoluta detectada en {fpath} (Violación Ω23)."
                             )

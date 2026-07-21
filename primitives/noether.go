@@ -13,87 +13,120 @@ type NoetherPrimitive int
 type NoetherModifier int
 
 const (
-	NoetherDomainSpacetrans NoetherDomain = 0
-	NoetherDomainTimetrans NoetherDomain = 1
-	NoetherDomainRotationso3 NoetherDomain = 2
-	NoetherDomainBoostlorentz NoetherDomain = 3
-	NoetherDomainGaugeu1 NoetherDomain = 4
-	NoetherDomainGaugesu2 NoetherDomain = 5
-	NoetherDomainGaugesu3 NoetherDomain = 6
+	NoetherDomainSpacetrans    NoetherDomain = 0
+	NoetherDomainTimetrans     NoetherDomain = 1
+	NoetherDomainRotationso3   NoetherDomain = 2
+	NoetherDomainBoostlorentz  NoetherDomain = 3
+	NoetherDomainGaugeu1       NoetherDomain = 4
+	NoetherDomainGaugesu2      NoetherDomain = 5
+	NoetherDomainGaugesu3      NoetherDomain = 6
 	NoetherDomainConformalso42 NoetherDomain = 7
-	NoetherDomainDifeomorphgr NoetherDomain = 8
-	NoetherDomainSupersusy NoetherDomain = 9
+	NoetherDomainDifeomorphgr  NoetherDomain = 8
+	NoetherDomainSupersusy     NoetherDomain = 9
 
 	// Noether Primitives
-	NoetherPrimitiveInfvariation NoetherPrimitive = 0
-	NoetherPrimitiveLagrangianderiv NoetherPrimitive = 1
-	NoetherPrimitiveActionintegral NoetherPrimitive = 2
-	NoetherPrimitiveEulerlagrange NoetherPrimitive = 3
-	NoetherPrimitiveSymmetryassert NoetherPrimitive = 4
-	NoetherPrimitiveCurrentcompute NoetherPrimitive = 5
-	NoetherPrimitiveDivergencecheck NoetherPrimitive = 6
-	NoetherPrimitiveChargeintegral NoetherPrimitive = 7
+	NoetherPrimitiveInfvariation      NoetherPrimitive = 0
+	NoetherPrimitiveLagrangianderiv   NoetherPrimitive = 1
+	NoetherPrimitiveActionintegral    NoetherPrimitive = 2
+	NoetherPrimitiveEulerlagrange     NoetherPrimitive = 3
+	NoetherPrimitiveSymmetryassert    NoetherPrimitive = 4
+	NoetherPrimitiveCurrentcompute    NoetherPrimitive = 5
+	NoetherPrimitiveDivergencecheck   NoetherPrimitive = 6
+	NoetherPrimitiveChargeintegral    NoetherPrimitive = 7
 	NoetherPrimitiveCommutatoralgebra NoetherPrimitive = 8
-	NoetherPrimitiveSectorflush NoetherPrimitive = 9
+	NoetherPrimitiveSectorflush       NoetherPrimitive = 9
 
 	// Noether Modifiers
-	NoetherModifierRaw NoetherModifier = 0
-	NoetherModifierStrict NoetherModifier = 1
-	NoetherModifierQuantumqft NoetherModifier = 2
-	NoetherModifierRelativistic NoetherModifier = 3
+	NoetherModifierRaw             NoetherModifier = 0
+	NoetherModifierStrict          NoetherModifier = 1
+	NoetherModifierQuantumqft      NoetherModifier = 2
+	NoetherModifierRelativistic    NoetherModifier = 3
 	NoetherModifierNonrelativistic NoetherModifier = 4
-	NoetherModifierCovariant NoetherModifier = 5
-	NoetherModifierChiral NoetherModifier = 6
-	NoetherModifierSpontaneous NoetherModifier = 7
-	NoetherModifierAnomalous NoetherModifier = 8
-	NoetherModifierBftpersistence NoetherModifier = 9
+	NoetherModifierCovariant       NoetherModifier = 5
+	NoetherModifierChiral          NoetherModifier = 6
+	NoetherModifierSpontaneous     NoetherModifier = 7
+	NoetherModifierAnomalous       NoetherModifier = 8
+	NoetherModifierBftpersistence  NoetherModifier = 9
 )
 
 func (d NoetherDomain) String() string {
 	switch d {
-	case 0: return "SPACE_TRANS"
-	case 1: return "TIME_TRANS"
-	case 2: return "ROTATION_SO3"
-	case 3: return "BOOST_LORENTZ"
-	case 4: return "GAUGE_U1"
-	case 5: return "GAUGE_SU2"
-	case 6: return "GAUGE_SU3"
-	case 7: return "CONFORMAL_SO42"
-	case 8: return "DIFEOMORPH_GR"
-	case 9: return "SUPER_SUSY"
-	default: return "UNKNOWN"
+	case 0:
+		return "SPACE_TRANS"
+	case 1:
+		return "TIME_TRANS"
+	case 2:
+		return "ROTATION_SO3"
+	case 3:
+		return "BOOST_LORENTZ"
+	case 4:
+		return "GAUGE_U1"
+	case 5:
+		return "GAUGE_SU2"
+	case 6:
+		return "GAUGE_SU3"
+	case 7:
+		return "CONFORMAL_SO42"
+	case 8:
+		return "DIFEOMORPH_GR"
+	case 9:
+		return "SUPER_SUSY"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (p NoetherPrimitive) String() string {
 	switch p {
-	case 0: return "INF_VARIATION"
-	case 1: return "LAGRANGIAN_DERIV"
-	case 2: return "ACTION_INTEGRAL"
-	case 3: return "EULER_LAGRANGE"
-	case 4: return "SYMMETRY_ASSERT"
-	case 5: return "CURRENT_COMPUTE"
-	case 6: return "DIVERGENCE_CHECK"
-	case 7: return "CHARGE_INTEGRAL"
-	case 8: return "COMMUTATOR_ALGEBRA"
-	case 9: return "SECTOR_FLUSH"
-	default: return "UNKNOWN"
+	case 0:
+		return "INF_VARIATION"
+	case 1:
+		return "LAGRANGIAN_DERIV"
+	case 2:
+		return "ACTION_INTEGRAL"
+	case 3:
+		return "EULER_LAGRANGE"
+	case 4:
+		return "SYMMETRY_ASSERT"
+	case 5:
+		return "CURRENT_COMPUTE"
+	case 6:
+		return "DIVERGENCE_CHECK"
+	case 7:
+		return "CHARGE_INTEGRAL"
+	case 8:
+		return "COMMUTATOR_ALGEBRA"
+	case 9:
+		return "SECTOR_FLUSH"
+	default:
+		return "UNKNOWN"
 	}
 }
 
 func (m NoetherModifier) String() string {
 	switch m {
-	case 0: return "RAW"
-	case 1: return "STRICT"
-	case 2: return "QUANTUM_QFT"
-	case 3: return "RELATIVISTIC"
-	case 4: return "NON_RELATIVISTIC"
-	case 5: return "COVARIANT"
-	case 6: return "CHIRAL"
-	case 7: return "SPONTANEOUS"
-	case 8: return "ANOMALOUS"
-	case 9: return "BFT_PERSISTENCE"
-	default: return "UNKNOWN"
+	case 0:
+		return "RAW"
+	case 1:
+		return "STRICT"
+	case 2:
+		return "QUANTUM_QFT"
+	case 3:
+		return "RELATIVISTIC"
+	case 4:
+		return "NON_RELATIVISTIC"
+	case 5:
+		return "COVARIANT"
+	case 6:
+		return "CHIRAL"
+	case 7:
+		return "SPONTANEOUS"
+	case 8:
+		return "ANOMALOUS"
+	case 9:
+		return "BFT_PERSISTENCE"
+	default:
+		return "UNKNOWN"
 	}
 }
 
@@ -111,7 +144,7 @@ type NoetherStateVector struct {
 	ConservedCharge   [64]float64
 	QuantumAnomaly    [64]float64
 	EntropyGeneration [64]float64
-	ExecutionCount uint64
+	ExecutionCount    uint64
 }
 
 func ResolveNoetherIdentity(d, p, m byte) (NoetherIdentity, error) {
@@ -132,7 +165,7 @@ func ResolveNoetherIdentity(d, p, m byte) (NoetherIdentity, error) {
 type NoetherHandler func(id NoetherIdentity, vec *NoetherStateVector) error
 
 var (
-	NoetherTable [1000]NoetherHandler
+	NoetherTable   [1000]NoetherHandler
 	NoetherMetrics [1000]uint64
 )
 
@@ -148,7 +181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -164,7 +197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -180,7 +213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -196,7 +229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -212,7 +245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -228,7 +261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -244,7 +277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -260,7 +293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -276,7 +309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -292,7 +325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -308,7 +341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -324,7 +357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -340,7 +373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -356,7 +389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -372,7 +405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -388,7 +421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -404,7 +437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -420,7 +453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -436,7 +469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -452,7 +485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -468,7 +501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -484,7 +517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -500,7 +533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -516,7 +549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -532,7 +565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -548,7 +581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -564,7 +597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -580,7 +613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -596,7 +629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -612,7 +645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -628,7 +661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -644,7 +677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -660,7 +693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -676,7 +709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -692,7 +725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -708,7 +741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -724,7 +757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -740,7 +773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -756,7 +789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -772,7 +805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -788,7 +821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -804,7 +837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -820,7 +853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -836,7 +869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -852,7 +885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -868,7 +901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -884,7 +917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -900,7 +933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -916,7 +949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -932,7 +965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -948,7 +981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -964,7 +997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -980,7 +1013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -996,7 +1029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1012,7 +1045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1028,7 +1061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1044,7 +1077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1060,7 +1093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1076,7 +1109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1092,7 +1125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1108,7 +1141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1124,7 +1157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1140,7 +1173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1156,7 +1189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1172,7 +1205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1188,7 +1221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1204,7 +1237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1220,7 +1253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1236,7 +1269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1252,7 +1285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1268,7 +1301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1284,7 +1317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1300,7 +1333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1316,7 +1349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1332,7 +1365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1348,7 +1381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1364,7 +1397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1380,7 +1413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1396,7 +1429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1412,7 +1445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1428,7 +1461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1444,7 +1477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1460,7 +1493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1476,7 +1509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1492,7 +1525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1508,7 +1541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1524,7 +1557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1540,7 +1573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1556,7 +1589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1572,7 +1605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1588,7 +1621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1604,7 +1637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1620,7 +1653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1636,7 +1669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1652,7 +1685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1668,7 +1701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1684,7 +1717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1700,7 +1733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1716,7 +1749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1732,7 +1765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1748,7 +1781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1764,7 +1797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1780,7 +1813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1796,7 +1829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1812,7 +1845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1828,7 +1861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1844,7 +1877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1860,7 +1893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1876,7 +1909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1892,7 +1925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1908,7 +1941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1924,7 +1957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1940,7 +1973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1956,7 +1989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1972,7 +2005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -1988,7 +2021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2004,7 +2037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2020,7 +2053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2036,7 +2069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2052,7 +2085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2068,7 +2101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2084,7 +2117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2100,7 +2133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2116,7 +2149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2132,7 +2165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2148,7 +2181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2164,7 +2197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2180,7 +2213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2196,7 +2229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2212,7 +2245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2228,7 +2261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2244,7 +2277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2260,7 +2293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2276,7 +2309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2292,7 +2325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2308,7 +2341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2324,7 +2357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2340,7 +2373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2356,7 +2389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2372,7 +2405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2388,7 +2421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2404,7 +2437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2420,7 +2453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2436,7 +2469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2452,7 +2485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2468,7 +2501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2484,7 +2517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2500,7 +2533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2516,7 +2549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2532,7 +2565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2548,7 +2581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2564,7 +2597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2580,7 +2613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2596,7 +2629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2612,7 +2645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2628,7 +2661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2644,7 +2677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2660,7 +2693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2676,7 +2709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2692,7 +2725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2708,7 +2741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2724,7 +2757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2740,7 +2773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2756,7 +2789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2772,7 +2805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2788,7 +2821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2804,7 +2837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2820,7 +2853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2836,7 +2869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2852,7 +2885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2868,7 +2901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2884,7 +2917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2900,7 +2933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2916,7 +2949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2932,7 +2965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2948,7 +2981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2964,7 +2997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2980,7 +3013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -2996,7 +3029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3012,7 +3045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3028,7 +3061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3044,7 +3077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3060,7 +3093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3076,7 +3109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3092,7 +3125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3108,7 +3141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3124,7 +3157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3140,7 +3173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3156,7 +3189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3172,7 +3205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3188,7 +3221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3204,7 +3237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3220,7 +3253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3236,7 +3269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3252,7 +3285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3268,7 +3301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3284,7 +3317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3300,7 +3333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3316,7 +3349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3332,7 +3365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3348,7 +3381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3364,7 +3397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3380,7 +3413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3396,7 +3429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3412,7 +3445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3428,7 +3461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3444,7 +3477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3460,7 +3493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3476,7 +3509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3492,7 +3525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3508,7 +3541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3524,7 +3557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3540,7 +3573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3556,7 +3589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3572,7 +3605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3588,7 +3621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3604,7 +3637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3620,7 +3653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3636,7 +3669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3652,7 +3685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3668,7 +3701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3684,7 +3717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3700,7 +3733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3716,7 +3749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3732,7 +3765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3748,7 +3781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3764,7 +3797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3780,7 +3813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3796,7 +3829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3812,7 +3845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3828,7 +3861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3844,7 +3877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3860,7 +3893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3876,7 +3909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3892,7 +3925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3908,7 +3941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3924,7 +3957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3940,7 +3973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3956,7 +3989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3972,7 +4005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -3988,7 +4021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4004,7 +4037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4020,7 +4053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4036,7 +4069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4052,7 +4085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4068,7 +4101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4084,7 +4117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4100,7 +4133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4116,7 +4149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4132,7 +4165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4148,7 +4181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4164,7 +4197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4180,7 +4213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4196,7 +4229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4212,7 +4245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4228,7 +4261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4244,7 +4277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4260,7 +4293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4276,7 +4309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4292,7 +4325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4308,7 +4341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4324,7 +4357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4340,7 +4373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4356,7 +4389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4372,7 +4405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4388,7 +4421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4404,7 +4437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4420,7 +4453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4436,7 +4469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4452,7 +4485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4468,7 +4501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4484,7 +4517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4500,7 +4533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4516,7 +4549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4532,7 +4565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4548,7 +4581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4564,7 +4597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4580,7 +4613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4596,7 +4629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4612,7 +4645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4628,7 +4661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4644,7 +4677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4660,7 +4693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4676,7 +4709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4692,7 +4725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4708,7 +4741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4724,7 +4757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4740,7 +4773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4756,7 +4789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4772,7 +4805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4788,7 +4821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4804,7 +4837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4820,7 +4853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4836,7 +4869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4852,7 +4885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4868,7 +4901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4884,7 +4917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4900,7 +4933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4916,7 +4949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4932,7 +4965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4948,7 +4981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4964,7 +4997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4980,7 +5013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -4996,7 +5029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5012,7 +5045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5028,7 +5061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5044,7 +5077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5060,7 +5093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5076,7 +5109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5092,7 +5125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5108,7 +5141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5124,7 +5157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5140,7 +5173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5156,7 +5189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5172,7 +5205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5188,7 +5221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5204,7 +5237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5220,7 +5253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5236,7 +5269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5252,7 +5285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5268,7 +5301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5284,7 +5317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5300,7 +5333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5316,7 +5349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5332,7 +5365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5348,7 +5381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5364,7 +5397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5380,7 +5413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5396,7 +5429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5412,7 +5445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5428,7 +5461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5444,7 +5477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5460,7 +5493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5476,7 +5509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5492,7 +5525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5508,7 +5541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5524,7 +5557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5540,7 +5573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5556,7 +5589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5572,7 +5605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5588,7 +5621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5604,7 +5637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5620,7 +5653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5636,7 +5669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5652,7 +5685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5668,7 +5701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5684,7 +5717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5700,7 +5733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5716,7 +5749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5732,7 +5765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5748,7 +5781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5764,7 +5797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5780,7 +5813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5796,7 +5829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5812,7 +5845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5828,7 +5861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5844,7 +5877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5860,7 +5893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5876,7 +5909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5892,7 +5925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5908,7 +5941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5924,7 +5957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5940,7 +5973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5956,7 +5989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5972,7 +6005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -5988,7 +6021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6004,7 +6037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6020,7 +6053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6036,7 +6069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6052,7 +6085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6068,7 +6101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6084,7 +6117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6100,7 +6133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6116,7 +6149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6132,7 +6165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6148,7 +6181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6164,7 +6197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6180,7 +6213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6196,7 +6229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6212,7 +6245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6228,7 +6261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6244,7 +6277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6260,7 +6293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6276,7 +6309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6292,7 +6325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6308,7 +6341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6324,7 +6357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6340,7 +6373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6356,7 +6389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6372,7 +6405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6388,7 +6421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6404,7 +6437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6420,7 +6453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6436,7 +6469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6452,7 +6485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6468,7 +6501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6484,7 +6517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6500,7 +6533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6516,7 +6549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6532,7 +6565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6548,7 +6581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6564,7 +6597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6580,7 +6613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6596,7 +6629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6612,7 +6645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6628,7 +6661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6644,7 +6677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6660,7 +6693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6676,7 +6709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6692,7 +6725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6708,7 +6741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6724,7 +6757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6740,7 +6773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6756,7 +6789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6772,7 +6805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6788,7 +6821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6804,7 +6837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6820,7 +6853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6836,7 +6869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6852,7 +6885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6868,7 +6901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6884,7 +6917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6900,7 +6933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6916,7 +6949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6932,7 +6965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6948,7 +6981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6964,7 +6997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6980,7 +7013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -6996,7 +7029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7012,7 +7045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7028,7 +7061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7044,7 +7077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7060,7 +7093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7076,7 +7109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7092,7 +7125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7108,7 +7141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7124,7 +7157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7140,7 +7173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7156,7 +7189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7172,7 +7205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7188,7 +7221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7204,7 +7237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7220,7 +7253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7236,7 +7269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7252,7 +7285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7268,7 +7301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7284,7 +7317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7300,7 +7333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7316,7 +7349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7332,7 +7365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7348,7 +7381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7364,7 +7397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7380,7 +7413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7396,7 +7429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7412,7 +7445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7428,7 +7461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7444,7 +7477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7460,7 +7493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7476,7 +7509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7492,7 +7525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7508,7 +7541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7524,7 +7557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7540,7 +7573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7556,7 +7589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7572,7 +7605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7588,7 +7621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7604,7 +7637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7620,7 +7653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7636,7 +7669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7652,7 +7685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7668,7 +7701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7684,7 +7717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7700,7 +7733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7716,7 +7749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7732,7 +7765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7748,7 +7781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7764,7 +7797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7780,7 +7813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7796,7 +7829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7812,7 +7845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7828,7 +7861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7844,7 +7877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7860,7 +7893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7876,7 +7909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7892,7 +7925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7908,7 +7941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7924,7 +7957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7940,7 +7973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7956,7 +7989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7972,7 +8005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -7988,7 +8021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8004,7 +8037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8020,7 +8053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8036,7 +8069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8052,7 +8085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8068,7 +8101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8084,7 +8117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8100,7 +8133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8116,7 +8149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8132,7 +8165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8148,7 +8181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8164,7 +8197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8180,7 +8213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8196,7 +8229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8212,7 +8245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8228,7 +8261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8244,7 +8277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8260,7 +8293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8276,7 +8309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8292,7 +8325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8308,7 +8341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8324,7 +8357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8340,7 +8373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8356,7 +8389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8372,7 +8405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8388,7 +8421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8404,7 +8437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8420,7 +8453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8436,7 +8469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8452,7 +8485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8468,7 +8501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8484,7 +8517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8500,7 +8533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8516,7 +8549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8532,7 +8565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8548,7 +8581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8564,7 +8597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8580,7 +8613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8596,7 +8629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8612,7 +8645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8628,7 +8661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8644,7 +8677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8660,7 +8693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8676,7 +8709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8692,7 +8725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8708,7 +8741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8724,7 +8757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8740,7 +8773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8756,7 +8789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8772,7 +8805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8788,7 +8821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8804,7 +8837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8820,7 +8853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8836,7 +8869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8852,7 +8885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8868,7 +8901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8884,7 +8917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8900,7 +8933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8916,7 +8949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8932,7 +8965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8948,7 +8981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8964,7 +8997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8980,7 +9013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -8996,7 +9029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9012,7 +9045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9028,7 +9061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9044,7 +9077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9060,7 +9093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9076,7 +9109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9092,7 +9125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9108,7 +9141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9124,7 +9157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9140,7 +9173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9156,7 +9189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9172,7 +9205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9188,7 +9221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9204,7 +9237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9220,7 +9253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9236,7 +9269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9252,7 +9285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9268,7 +9301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9284,7 +9317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9300,7 +9333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9316,7 +9349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9332,7 +9365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9348,7 +9381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9364,7 +9397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9380,7 +9413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9396,7 +9429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9412,7 +9445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9428,7 +9461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9444,7 +9477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9460,7 +9493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9476,7 +9509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9492,7 +9525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9508,7 +9541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9524,7 +9557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9540,7 +9573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9556,7 +9589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9572,7 +9605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9588,7 +9621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9604,7 +9637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9620,7 +9653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9636,7 +9669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9652,7 +9685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9668,7 +9701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9684,7 +9717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9700,7 +9733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9716,7 +9749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9732,7 +9765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9748,7 +9781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9764,7 +9797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9780,7 +9813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9796,7 +9829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9812,7 +9845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9828,7 +9861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9844,7 +9877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9860,7 +9893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9876,7 +9909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9892,7 +9925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9908,7 +9941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9924,7 +9957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9940,7 +9973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9956,7 +9989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9972,7 +10005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -9988,7 +10021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10004,7 +10037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10020,7 +10053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10036,7 +10069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10052,7 +10085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10068,7 +10101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10084,7 +10117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10100,7 +10133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10116,7 +10149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10132,7 +10165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10148,7 +10181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10164,7 +10197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10180,7 +10213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10196,7 +10229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10212,7 +10245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10228,7 +10261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10244,7 +10277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10260,7 +10293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10276,7 +10309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10292,7 +10325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10308,7 +10341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10324,7 +10357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10340,7 +10373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10356,7 +10389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10372,7 +10405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10388,7 +10421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10404,7 +10437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10420,7 +10453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10436,7 +10469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10452,7 +10485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10468,7 +10501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10484,7 +10517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10500,7 +10533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10516,7 +10549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10532,7 +10565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10548,7 +10581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10564,7 +10597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10580,7 +10613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10596,7 +10629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10612,7 +10645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10628,7 +10661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10644,7 +10677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10660,7 +10693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10676,7 +10709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10692,7 +10725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10708,7 +10741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10724,7 +10757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10740,7 +10773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10756,7 +10789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10772,7 +10805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10788,7 +10821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10804,7 +10837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10820,7 +10853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10836,7 +10869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10852,7 +10885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10868,7 +10901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10884,7 +10917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10900,7 +10933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10916,7 +10949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10932,7 +10965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10948,7 +10981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10964,7 +10997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10980,7 +11013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -10996,7 +11029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11012,7 +11045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11028,7 +11061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11044,7 +11077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11060,7 +11093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11076,7 +11109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11092,7 +11125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11108,7 +11141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11124,7 +11157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11140,7 +11173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11156,7 +11189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11172,7 +11205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11188,7 +11221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11204,7 +11237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11220,7 +11253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11236,7 +11269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11252,7 +11285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11268,7 +11301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11284,7 +11317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11300,7 +11333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11316,7 +11349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11332,7 +11365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11348,7 +11381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11364,7 +11397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11380,7 +11413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11396,7 +11429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11412,7 +11445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11428,7 +11461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11444,7 +11477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11460,7 +11493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11476,7 +11509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11492,7 +11525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11508,7 +11541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11524,7 +11557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11540,7 +11573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11556,7 +11589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11572,7 +11605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11588,7 +11621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11604,7 +11637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11620,7 +11653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11636,7 +11669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11652,7 +11685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11668,7 +11701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11684,7 +11717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11700,7 +11733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11716,7 +11749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11732,7 +11765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11748,7 +11781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11764,7 +11797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11780,7 +11813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11796,7 +11829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11812,7 +11845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11828,7 +11861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11844,7 +11877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11860,7 +11893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11876,7 +11909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11892,7 +11925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11908,7 +11941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11924,7 +11957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11940,7 +11973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11956,7 +11989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11972,7 +12005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -11988,7 +12021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12004,7 +12037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12020,7 +12053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12036,7 +12069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12052,7 +12085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12068,7 +12101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12084,7 +12117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12100,7 +12133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12116,7 +12149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12132,7 +12165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12148,7 +12181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12164,7 +12197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12180,7 +12213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12196,7 +12229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12212,7 +12245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12228,7 +12261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12244,7 +12277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12260,7 +12293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12276,7 +12309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12292,7 +12325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12308,7 +12341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12324,7 +12357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12340,7 +12373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12356,7 +12389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12372,7 +12405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12388,7 +12421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12404,7 +12437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12420,7 +12453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12436,7 +12469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12452,7 +12485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12468,7 +12501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12484,7 +12517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12500,7 +12533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12516,7 +12549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12532,7 +12565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12548,7 +12581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12564,7 +12597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12580,7 +12613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12596,7 +12629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12612,7 +12645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12628,7 +12661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12644,7 +12677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12660,7 +12693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12676,7 +12709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12692,7 +12725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12708,7 +12741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12724,7 +12757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12740,7 +12773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12756,7 +12789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12772,7 +12805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12788,7 +12821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12804,7 +12837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12820,7 +12853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12836,7 +12869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12852,7 +12885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12868,7 +12901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12884,7 +12917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12900,7 +12933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12916,7 +12949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12932,7 +12965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12948,7 +12981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12964,7 +12997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12980,7 +13013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -12996,7 +13029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13012,7 +13045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13028,7 +13061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13044,7 +13077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13060,7 +13093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13076,7 +13109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13092,7 +13125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13108,7 +13141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13124,7 +13157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13140,7 +13173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13156,7 +13189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13172,7 +13205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13188,7 +13221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13204,7 +13237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13220,7 +13253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13236,7 +13269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13252,7 +13285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13268,7 +13301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13284,7 +13317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13300,7 +13333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13316,7 +13349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13332,7 +13365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13348,7 +13381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13364,7 +13397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13380,7 +13413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13396,7 +13429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13412,7 +13445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13428,7 +13461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13444,7 +13477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13460,7 +13493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13476,7 +13509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13492,7 +13525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13508,7 +13541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13524,7 +13557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13540,7 +13573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13556,7 +13589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13572,7 +13605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13588,7 +13621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13604,7 +13637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13620,7 +13653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13636,7 +13669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13652,7 +13685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13668,7 +13701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13684,7 +13717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13700,7 +13733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13716,7 +13749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13732,7 +13765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13748,7 +13781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13764,7 +13797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13780,7 +13813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13796,7 +13829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13812,7 +13845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13828,7 +13861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13844,7 +13877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13860,7 +13893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13876,7 +13909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13892,7 +13925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13908,7 +13941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13924,7 +13957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13940,7 +13973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13956,7 +13989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13972,7 +14005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -13988,7 +14021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14004,7 +14037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14020,7 +14053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14036,7 +14069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14052,7 +14085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14068,7 +14101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14084,7 +14117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14100,7 +14133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14116,7 +14149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14132,7 +14165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14148,7 +14181,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14164,7 +14197,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14180,7 +14213,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14196,7 +14229,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14212,7 +14245,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14228,7 +14261,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14244,7 +14277,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14260,7 +14293,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14276,7 +14309,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14292,7 +14325,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14308,7 +14341,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14324,7 +14357,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14340,7 +14373,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14356,7 +14389,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14372,7 +14405,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14388,7 +14421,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14404,7 +14437,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14420,7 +14453,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14436,7 +14469,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14452,7 +14485,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14468,7 +14501,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14484,7 +14517,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14500,7 +14533,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14516,7 +14549,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14532,7 +14565,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14548,7 +14581,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14564,7 +14597,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14580,7 +14613,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14596,7 +14629,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14612,7 +14645,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14628,7 +14661,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14644,7 +14677,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14660,7 +14693,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14676,7 +14709,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14692,7 +14725,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14708,7 +14741,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14724,7 +14757,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14740,7 +14773,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14756,7 +14789,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14772,7 +14805,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14788,7 +14821,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14804,7 +14837,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14820,7 +14853,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14836,7 +14869,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14852,7 +14885,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14868,7 +14901,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14884,7 +14917,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14900,7 +14933,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14916,7 +14949,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14932,7 +14965,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14948,7 +14981,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14964,7 +14997,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14980,7 +15013,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -14996,7 +15029,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15012,7 +15045,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15028,7 +15061,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15044,7 +15077,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15060,7 +15093,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15076,7 +15109,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15092,7 +15125,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15108,7 +15141,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15124,7 +15157,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15140,7 +15173,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15156,7 +15189,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15172,7 +15205,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15188,7 +15221,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15204,7 +15237,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15220,7 +15253,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15236,7 +15269,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15252,7 +15285,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15268,7 +15301,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15284,7 +15317,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15300,7 +15333,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15316,7 +15349,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15332,7 +15365,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15348,7 +15381,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15364,7 +15397,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15380,7 +15413,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15396,7 +15429,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15412,7 +15445,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15428,7 +15461,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15444,7 +15477,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15460,7 +15493,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15476,7 +15509,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15492,7 +15525,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15508,7 +15541,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15524,7 +15557,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15540,7 +15573,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15556,7 +15589,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15572,7 +15605,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15588,7 +15621,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15604,7 +15637,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15620,7 +15653,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15636,7 +15669,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15652,7 +15685,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15668,7 +15701,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15684,7 +15717,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15700,7 +15733,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15716,7 +15749,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15732,7 +15765,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15748,7 +15781,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15764,7 +15797,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15780,7 +15813,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15796,7 +15829,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15812,7 +15845,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15828,7 +15861,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15844,7 +15877,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15860,7 +15893,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15876,7 +15909,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15892,7 +15925,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15908,7 +15941,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15924,7 +15957,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15940,7 +15973,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15956,7 +15989,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15972,7 +16005,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -15988,7 +16021,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16004,7 +16037,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16020,7 +16053,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16036,7 +16069,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16052,7 +16085,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16068,7 +16101,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16084,7 +16117,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16100,7 +16133,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16116,7 +16149,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16132,7 +16165,7 @@ func InitNoetherKernel() {
 				vec.QuantumAnomaly[i] = 0.0
 			}
 			vec.NoetherCurrentDiv[i] = vec.ActionVariation[i]*0.1 + vec.QuantumAnomaly[i]
-			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99 + 0.1*math.Sin(float64(id.Code)+float64(i)))
+			vec.ConservedCharge[i] = math.Max(0.0, vec.ConservedCharge[i]*0.99+0.1*math.Sin(float64(id.Code)+float64(i)))
 			vec.EntropyGeneration[i] = vec.NoetherCurrentDiv[i] * vec.NoetherCurrentDiv[i]
 		}
 		return nil
@@ -16152,6 +16185,8 @@ func DispatchNoether(d, p, m byte, vec *NoetherStateVector) error {
 }
 
 func GetNoetherExecutionCount(code uint16) uint64 {
-	if code >= 1000 { return 0 }
+	if code >= 1000 {
+		return 0
+	}
 	return atomic.LoadUint64(&NoetherMetrics[code])
 }

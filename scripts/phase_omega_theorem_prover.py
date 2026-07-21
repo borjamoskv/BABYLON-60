@@ -5,8 +5,10 @@ import json
 
 from typing import Any
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 def classify_omega_theorem(target_dir: str) -> None:
     classification: dict[str, list[Any]] = {
@@ -94,7 +96,9 @@ def classify_omega_theorem(target_dir: str) -> None:
                     )
 
             except (OSError, ValueError, TypeError, SyntaxError) as e:
-                raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
+                raise EpistemicHalt(
+                    f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26)."
+                )
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_json = os.path.join(

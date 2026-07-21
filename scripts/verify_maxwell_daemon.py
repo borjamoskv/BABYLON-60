@@ -7,7 +7,9 @@ import hashlib
 # Script: scripts/verify_maxwell_daemon.py
 
 CONV_ID = "bee4dcf3-21d8-46bb-97c4-c933ed4c6415"
-WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+WORKSPACE_DIR = os.environ.get(
+    "WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+)
 LEDGER_PATH = os.path.join(WORKSPACE_DIR, "ledgers", "maxwell_daemon_ledger.json")
 
 

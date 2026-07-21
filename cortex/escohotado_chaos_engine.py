@@ -15,7 +15,10 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db")
+DB_PATH = str(
+    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db"
+)
+
 
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -38,11 +41,12 @@ def init_db(db_path: str = DB_PATH) -> None:
         """)
     conn.close()
 
+
 def compute_entropy(trajectory: List[float], num_bins: int = 50) -> float:
     """Computes exact Shannon/Gibbs entropy S = -sum(p_i * ln(p_i))."""
     if not trajectory:
         return 0.0
-    
+
     min_v, max_v = min(trajectory), max(trajectory)
     if max_v - min_v < 1e-9:
         return 0.0
@@ -65,11 +69,12 @@ def compute_entropy(trajectory: List[float], num_bins: int = 50) -> float:
 
     return entropy
 
+
 def compute_lyapunov(trajectory: List[float], r: float, c: float) -> float:
     """Computes the Lyapunov exponent to quantify chaos vs stability."""
     if len(trajectory) < 2:
         return 0.0
-    
+
     sum_log_deriv = 0.0
     valid_points = 0
 
@@ -81,7 +86,10 @@ def compute_lyapunov(trajectory: List[float], r: float, c: float) -> float:
 
     return sum_log_deriv / valid_points if valid_points > 0 else 0.0
 
-def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, transient: int = 500) -> Dict[str, Any]:
+
+def simulate_system(
+    r: float, c: float, x0: float = 0.4, steps: int = 2000, transient: int = 500
+) -> Dict[str, Any]:
     """
     Simulates x_{t+1} = max(0, r * x_t * (1 - x_t) - c * x_t)
     r: Spontaneous exchange growth rate
@@ -110,7 +118,7 @@ def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, tran
 
     ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
     taint_raw = f"{r}:{c}:{s_val}:{lyap_val}:{ts}"
-    cortex_taint = hashlib.sha3_256(taint_raw.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(taint_raw.encode("utf-8")).hexdigest()
 
     return {
         "timestamp": ts,
@@ -119,10 +127,13 @@ def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, tran
         "entropy_s": s_val,
         "lyapunov_exp": lyap_val,
         "regime": regime,
-        "cortex_taint": f"borjamoskv:escohotado_chaos:{cortex_taint[:16]}"
+        "cortex_taint": f"borjamoskv:escohotado_chaos:{cortex_taint[:16]}",
     }
 
-def run_simulation_grid(r_values: List[float], c_values: List[float], db_path: str = DB_PATH) -> List[Dict[str, Any]]:
+
+def run_simulation_grid(
+    r_values: List[float], c_values: List[float], db_path: str = DB_PATH
+) -> List[Dict[str, Any]]:
     init_db(db_path)
     results = []
 
@@ -135,14 +146,26 @@ def run_simulation_grid(r_values: List[float], c_values: List[float], db_path: s
             res = simulate_system(r, c)
             results.append(res)
             with conn:
-                conn.execute("""
+                conn.execute(
+                    """
                     INSERT OR REPLACE INTO chaos_metrics 
                     (timestamp, growth_r, coercion_c, entropy_s, lyapunov_exp, regime, cortex_taint)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
-                """, (res["timestamp"], res["growth_r"], res["coercion_c"], res["entropy_s"], res["lyapunov_exp"], res["regime"], res["cortex_taint"]))
-    
+                """,
+                    (
+                        res["timestamp"],
+                        res["growth_r"],
+                        res["coercion_c"],
+                        res["entropy_s"],
+                        res["lyapunov_exp"],
+                        res["regime"],
+                        res["cortex_taint"],
+                    ),
+                )
+
     conn.close()
     return results
+
 
 if __name__ == "__main__":
     r_range = [2.5, 3.2, 3.7, 3.9]

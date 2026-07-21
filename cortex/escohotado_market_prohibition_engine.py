@@ -14,7 +14,10 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_economics.db")
+DB_PATH = str(
+    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_economics.db"
+)
+
 
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -39,7 +42,10 @@ def init_db(db_path: str = DB_PATH) -> None:
         """)
     conn.close()
 
-def simulate_prohibition_and_property(enforcement: float, property_rights: float) -> Dict[str, Any]:
+
+def simulate_prohibition_and_property(
+    enforcement: float, property_rights: float
+) -> Dict[str, Any]:
     """
     enforcement (0.0 to 1.0): Legal Prohibition & Police Enforcement Level
     property_rights (0.0 to 1.0): Respect for Private Property Rights & Free Price Signals
@@ -64,7 +70,7 @@ def simulate_prohibition_and_property(enforcement: float, property_rights: float
 
     ts = datetime.datetime.now(datetime.timezone.utc).isoformat()
     taint_raw = f"{enforcement}:{property_rights}:{risk_premium}:{purity}:{violence_index}:{info_loss}:{ts}"
-    cortex_taint = hashlib.sha3_256(taint_raw.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(taint_raw.encode("utf-8")).hexdigest()
 
     return {
         "timestamp": ts,
@@ -75,10 +81,15 @@ def simulate_prohibition_and_property(enforcement: float, property_rights: float
         "black_market_violence_index": round(violence_index, 4),
         "information_loss_index": round(info_loss, 4),
         "systemic_exergy_loss": round(exergy_loss, 4),
-        "cortex_taint": f"borjamoskv:escohotado_econ:{cortex_taint[:16]}"
+        "cortex_taint": f"borjamoskv:escohotado_econ:{cortex_taint[:16]}",
     }
 
-def run_economic_grid(enforcement_levels: List[float], property_indices: List[float], db_path: str = DB_PATH) -> List[Dict[str, Any]]:
+
+def run_economic_grid(
+    enforcement_levels: List[float],
+    property_indices: List[float],
+    db_path: str = DB_PATH,
+) -> List[Dict[str, Any]]:
     init_db(db_path)
     results = []
 
@@ -91,17 +102,29 @@ def run_economic_grid(enforcement_levels: List[float], property_indices: List[fl
             res = simulate_prohibition_and_property(enf, pr)
             results.append(res)
             with conn:
-                conn.execute("""
+                conn.execute(
+                    """
                     INSERT OR REPLACE INTO prohibition_economics 
                     (timestamp, enforcement_level, property_rights_index, risk_premium_multiplier, 
                      purity_index, black_market_violence_index, information_loss_index, systemic_exergy_loss, cortex_taint)
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """, (res["timestamp"], res["enforcement_level"], res["property_rights_index"], 
-                      res["risk_premium_multiplier"], res["purity_index"], res["black_market_violence_index"], 
-                      res["information_loss_index"], res["systemic_exergy_loss"], res["cortex_taint"]))
+                """,
+                    (
+                        res["timestamp"],
+                        res["enforcement_level"],
+                        res["property_rights_index"],
+                        res["risk_premium_multiplier"],
+                        res["purity_index"],
+                        res["black_market_violence_index"],
+                        res["information_loss_index"],
+                        res["systemic_exergy_loss"],
+                        res["cortex_taint"],
+                    ),
+                )
 
     conn.close()
     return results
+
 
 if __name__ == "__main__":
     enf_grid = [0.0, 0.25, 0.50, 0.75, 1.0]
