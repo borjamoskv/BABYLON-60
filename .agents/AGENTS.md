@@ -2,7 +2,7 @@
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$  
 **Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
-**Status:** Frozen Baseline Specification (v18.3 — Lawvere Enriched Metric & Extension/Repair Operator $\kappa$)
+**Status:** Frozen Baseline Specification (v18.5 — Lawvere Enriched Metric, Corrected $\kappa$ Sub-monotonicity & Monoidal Verification)
 
 ---
 
@@ -128,8 +128,8 @@ $$\kappa(\alpha, R') \le \kappa(\alpha, R)$$
 
 **Teorema 2.2 (Sub-monotonía Composicional de $\kappa$):**  
 Para toda par de transiciones compuestas $\alpha: X \to Y$ y $\beta: Y \to Z$:
-$$\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
-*Demostración:* Si $e \in \mathrm{Mor}(\mathcal{C})$ es una extensión tal que $e \circ \alpha \models R$, entonces la extensión $e' = e \circ \beta$ para $\beta \circ \alpha$ satisface $(e \circ \beta) \circ \alpha = e \circ (\beta \circ \alpha) \models R$. Por subaditividad de $\mu$, $\mu(e') \le \mu(e) + \mu(\beta) + \delta_\circ$, implicando el resultado tras tomar ínfimos. $\blacksquare$
+$$\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
+*Demostración:* Si $f \in \mathrm{Mor}(\mathcal{C})$ es una extensión tal que $f \circ (\beta \circ \alpha) \models R$, entonces la extensión $e = f \circ \beta$ para $\alpha$ satisface $e \circ \alpha = (f \circ \beta) \circ \alpha = f \circ (\beta \circ \alpha) \models R$. Por subaditividad de $\mu$, $\mu(e) \le \mu(f) + \mu(\beta) + \delta_\circ(\alpha, \beta)$, implicando el resultado tras tomar ínfimos sobre $f$. $\blacksquare$
 
 **Condición Causal de Satisfacibilidad Modelo-Nivel ($FISR_k^\mathcal{A}$):**  
 Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:

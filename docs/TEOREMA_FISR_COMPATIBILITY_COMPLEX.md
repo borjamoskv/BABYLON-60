@@ -3,7 +3,7 @@
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
 **Clasificación:** C5-REAL Research Program Baseline Specification  
-**Estado:** Documento de Base Congelado (Baseline Spec v18.2 — Certificate Algebra, Metric Foundations & Extension Functional $\kappa$)  
+**Estado:** Documento de Base Congelado (Baseline Spec v18.5 — Certificate Algebra, Lawvere Metric, Extension/Repair $\kappa$ & Monoidal Verification)  
 
 ---
 
@@ -132,7 +132,7 @@ $$\kappa(\alpha, R') \le \kappa(\alpha, R)$$
 
 ### 5.2 Sub-monotonía Composicional **[Teorema 2.2 - Probado]**
 Para cualesquiera transiciones compuestas $\alpha: X \to Y$ y $\beta: Y \to Z$:
-$$\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
+$$\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
 
 ### 5.3 Condición Causal de Satisfacibilidad Modelo-Nivel **[Definición]**
 Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:
@@ -143,7 +143,7 @@ $$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M),
 ## VI. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Cristalización de Baseline v18.4 (Monotonía de κ Teorema 2.1 & 2.2, Condiciones de Satisfacibilidad TF, TI, TS)
+Claim: Cristalización de Baseline v18.5 (Thm 2.2 dirección corregida, verificador monoidal, Property-Based Testing, Lawvere Triangle Inequality)
 Proof:
   Base: 18fa42f06
   Range: [Sección_0, Sección_V]

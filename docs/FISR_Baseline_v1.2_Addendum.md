@@ -1,4 +1,4 @@
-# FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.2)
+# FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.5)
 
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
@@ -80,7 +80,7 @@ $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le 
 
 ### 2.3. Monotonía y Sub-monotonía de $\kappa$ [Teoremas 2.1 & 2.2 - Probados]
 1. **Monotonía respecto a Predicados:** $R \implies R' \implies \kappa(\alpha, R') \le \kappa(\alpha, R)$.
-2. **Sub-monotonía Composicional:** $\kappa(\beta \circ \alpha, R) \le \kappa(\alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$.
+2. **Sub-monotonía Composicional:** $\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$.
 
 ---
 
@@ -152,7 +152,7 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 | PRF-S / PRF-C | Soundness y Completitud Relativa parametrizados |
 
 ```yaml
-cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.4:2026-07-22T01:31:00Z"
+cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.5:2026-07-22T01:35:00Z"
 ```
 
 

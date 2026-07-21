@@ -6,6 +6,7 @@ State: Executable C5-REAL Test Suite for Baseline v18.4
 """
 
 import pytest
+from hypothesis import given, strategies as st
 from cortex.subadditivity_verifier import CertificateCategoryP, Morphism, Certificate
 
 
@@ -107,3 +108,55 @@ def test_prf_s_soundness_and_prf_c_completeness():
     # PRF-C: M |= FISR_k^A => Cert_k
     completeness_ok = cat.verify_prf_c_relative_completeness(basics, k)
     assert completeness_ok is True
+
+
+@given(
+    cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+)
+def test_property_sequential_subadditivity(cost1, cost2):
+    cat = CertificateCategoryP()
+    alpha = Morphism("alpha", "A", "B")
+    beta = Morphism("beta", "B", "C")
+    cat.add_certificate(Certificate("c1", alpha, cost1))
+    cat.add_certificate(Certificate("c2", beta, cost2))
+    ok, lhs, rhs = cat.verify_sequential_subadditivity(alpha, beta)
+    assert ok is True
+
+
+@given(
+    cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+)
+def test_property_monoidal_subadditivity(cost1, cost2):
+    cat = CertificateCategoryP()
+    alpha = Morphism("alpha", "A", "B")
+    beta = Morphism("beta", "C", "D")
+    cat.add_certificate(Certificate("c1", alpha, cost1))
+    cat.add_certificate(Certificate("c2", beta, cost2))
+    ok, lhs, rhs = cat.verify_monoidal_subadditivity(alpha, beta)
+    assert ok is True
+
+
+@given(
+    cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+)
+def test_property_lawvere_triangle_inequality(cost1, cost2):
+    cat = CertificateCategoryP()
+    alpha = Morphism("alpha", "A", "B")
+    beta = Morphism("beta", "B", "C")
+    cat.add_certificate(Certificate("c1", alpha, cost1))
+    cat.add_certificate(Certificate("c2", beta, cost2))
+    ok, lhs, rhs = cat.verify_lawvere_triangle_inequality(alpha, beta)
+    assert ok is True
+
+
+@given(dummy=st.integers(min_value=0, max_value=100))
+def test_property_identity_cost(dummy):
+    cat = CertificateCategoryP()
+    cat.add_identity_certificate("A")
+    id_morphism = Morphism("id_A", "A", "A")
+    mu_id = cat.compute_mu(id_morphism)
+    assert mu_id == 0.0
+

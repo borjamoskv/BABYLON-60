@@ -120,6 +120,41 @@ class CertificateCategoryP:
         satisfied = mu_comp <= rhs
         return satisfied, mu_comp, rhs
 
+    def verify_monoidal_subadditivity(self, alpha: Morphism, beta: Morphism) -> Tuple[bool, float, float]:
+        mu_alpha = self.compute_mu(alpha)
+        mu_beta = self.compute_mu(beta)
+        delta = self.delta_tensor_fn(alpha, beta)
+        rhs = mu_alpha + mu_beta + delta
+
+        tensor_morphism = Morphism(
+            name=f"({alpha.name} (x) {beta.name})",
+            src=f"({alpha.src} x {beta.src})",
+            tgt=f"({alpha.tgt} x {beta.tgt})"
+        )
+        mu_tensor = self.compute_mu(tensor_morphism)
+
+        if mu_tensor == float('inf') and mu_alpha < float('inf') and mu_beta < float('inf'):
+            c1_opt = min(self.get_cert_fiber(alpha), key=lambda c: c.cost)
+            c2_opt = min(self.get_cert_fiber(beta), key=lambda c: c.cost)
+            self.compose_monoidal(c1_opt, c2_opt)
+            mu_tensor = self.compute_mu(tensor_morphism)
+
+        satisfied = mu_tensor <= rhs
+        return satisfied, mu_tensor, rhs
+
+    def verify_lawvere_triangle_inequality(self, alpha: Morphism, beta: Morphism) -> Tuple[bool, float, float]:
+        """
+        Verifies Lawvere Triangle Inequality: mu(beta o alpha) <= mu(alpha) + mu(beta).
+        This applies when delta_circ = 0.
+        """
+        original_delta = self.delta_circ_fn
+        self.delta_circ_fn = lambda a, b: 0.0
+        try:
+            satisfied, lhs, rhs = self.verify_sequential_subadditivity(alpha, beta)
+            return satisfied, lhs, rhs
+        finally:
+            self.delta_circ_fn = original_delta
+
     def compute_kappa_repair_operator(self, alpha: Morphism, budget_predicate: Callable[[Morphism, float], bool]) -> float:
         """
         Computes kappa(alpha, R) = inf { mu(e) | e o alpha |= R }.
