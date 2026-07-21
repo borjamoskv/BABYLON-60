@@ -16,7 +16,7 @@ jobs:
       - name: Security lint (Bandit / Semgrep)
         run: |
           pip install bandit
-          bandit -r cortex -f json -o bandit.json || exit 0
+          bandit -r cortex -f json -o bandit.json
       - name: Check for secrets
         uses: trufflesecurity/trufflehog@main
         with:

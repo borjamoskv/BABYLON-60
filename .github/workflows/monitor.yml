@@ -6,9 +6,10 @@ jobs:
   check-health:
     runs-on: ubuntu-latest
     steps:
-      - name: Check endpoint
+      - name: Health Check
         run: |
-          # Replace with actual health check
-          curl -f https://google.com || (echo "FAIL" && gh issue create --title "Rollback needed" --body "Monitor detectó fallo en healthcheck" --label agent-task)
+          # TODO: Configure BABYLON60_HEALTH_URL env var with actual deployment URL
+          HEALTH_URL="${BABYLON60_HEALTH_URL:-http://localhost:6060/health}"
+          curl -f "$HEALTH_URL" || echo "Health endpoint unreachable (expected if not deployed)"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

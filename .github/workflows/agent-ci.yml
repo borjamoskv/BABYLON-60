@@ -26,11 +26,14 @@ jobs:
       - name: Instalar dependencias
         run: npm ci || echo "No package.json, skipping"
 
-      - name: Lint
-        run: npm run lint || echo "No lint script, skipping"
-
-      - name: Tests
-        run: npm test -- --coverage || echo "No test script, skipping"
+      - name: Python Lint
+        run: |
+          pip install ruff
+          ruff check .
+      - name: Python Tests
+        run: |
+          pip install pytest
+          python -m pytest cortex/ -x --tb=short
 
       - name: Build
         run: npm run build || echo "No build script, skipping"
