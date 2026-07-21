@@ -1,23 +1,19 @@
-import time
+"""
+C5-REAL Agent Memory Store with BFT SQLite Ledger and Chroma Vector Store.
+"""
+
+import hashlib
 import os
 import sqlite3
-import hashlib
-from typing import Any
+import time
 from datetime import datetime, timezone
+from typing import Any
 
-PROJECT_ROOT = os.path.dirname(
-    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-)
-DEFAULT_DB_PATH = os.path.join(PROJECT_ROOT, "db", "agent_memory.db")
-DEFAULT_CHROMA_PATH = os.path.join(PROJECT_ROOT, "db", "chroma_memory")
+DEFAULT_DB_PATH = os.path.join(os.path.dirname(__file__), "../../db/memory.db")
+DEFAULT_CHROMA_PATH = os.path.join(os.path.dirname(__file__), "../../db/chroma_memory")
 
 
 class AgentMemory:
-    """
-    Memoria persistente BFT (SQLite WAL) para agentes soberanos.
-    Cumple con Ω11: Ledger inmutable (RAISE ABORT), prev_hash, y CORTEX-TAINT obligatorio.
-    """
-
     def __init__(
         self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH
     ) -> None:
@@ -35,47 +31,55 @@ class AgentMemory:
         self.conn.execute("PRAGMA busy_timeout=10000;")
         self._init_table()
 
-        import chromadb
-        from chromadb.config import Settings
-
-        # Silenciar desajuste de argumentos en telemetría interna de chromadb/posthog
         try:
-            import posthog
-            posthog.disabled = True
-            def _silent_capture(*args: Any, **kwargs: Any) -> None:
-                pass
-            posthog.capture = _silent_capture
-            if hasattr(posthog, "Posthog"):
-                posthog.Posthog.capture = _silent_capture
-        except Exception:
-            pass
+            import chromadb
+            from chromadb.config import Settings
 
-        try:
-            import chromadb.telemetry.product.posthog
+            # Silenciar desajuste de argumentos en telemetría interna de chromadb/posthog
+            try:
+                import posthog
+                posthog.disabled = True
 
-            def _silent_product_capture(self: Any, event: Any = None) -> None:
+                def _silent_capture(*args: Any, **kwargs: Any) -> None:
+                    pass
+
+                posthog.capture = _silent_capture
+                if hasattr(posthog, "Posthog"):
+                    posthog.Posthog.capture = _silent_capture
+            except Exception:
                 pass
 
-            setattr(
-                chromadb.telemetry.product.posthog.Posthog, "capture", _silent_product_capture
-            )
-        except Exception:
-            pass
+            try:
+                import chromadb.telemetry.product.posthog
 
-        chroma_settings = Settings(anonymized_telemetry=False)
+                def _silent_product_capture(self: Any, event: Any = None) -> None:
+                    pass
 
-        if (
-            "PYTEST_CURRENT_TEST" in os.environ
-            or os.environ.get("CORTEX_TEST_MODE") == "1"
-        ):
-            self.chroma_client = chromadb.EphemeralClient(settings=chroma_settings)
-        else:
-            self.chroma_client = chromadb.PersistentClient(
-                path=chroma_path, settings=chroma_settings
+                setattr(
+                    chromadb.telemetry.product.posthog.Posthog,
+                    "capture",
+                    _silent_product_capture,
+                )
+            except Exception:
+                pass
+
+            chroma_settings = Settings(anonymized_telemetry=False)
+
+            if (
+                "PYTEST_CURRENT_TEST" in os.environ
+                or os.environ.get("CORTEX_TEST_MODE") == "1"
+            ):
+                self.chroma_client = chromadb.EphemeralClient(settings=chroma_settings)
+            else:
+                self.chroma_client = chromadb.PersistentClient(
+                    path=chroma_path, settings=chroma_settings
+                )
+            self.collection = self.chroma_client.get_or_create_collection(
+                name="agent_memory"
             )
-        self.collection = self.chroma_client.get_or_create_collection(
-            name="agent_memory"
-        )
+        except (ImportError, Exception):
+            self.chroma_client = None
+            self.collection = None
 
     def _init_table(self) -> None:
         self.conn.execute("""
@@ -137,19 +141,20 @@ class AgentMemory:
                     (issue_id, agent_role, action, result, prev_hash, cortex_taint),
                 )
 
-                doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
-                self.collection.add(
-                    documents=[doc_content],
-                    metadatas=[
-                        {
-                            "issue_id": issue_id,
-                            "agent_role": agent_role,
-                            "cortex_taint": cortex_taint,
-                            "timestamp": timestamp_iso,
-                        }
-                    ],
-                    ids=[cortex_taint],
-                )
+                if self.collection is not None:
+                    doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
+                    self.collection.add(
+                        documents=[doc_content],
+                        metadatas=[
+                            {
+                                "issue_id": issue_id,
+                                "agent_role": agent_role,
+                                "cortex_taint": cortex_taint,
+                                "timestamp": timestamp_iso,
+                            }
+                        ],
+                        ids=[cortex_taint],
+                    )
 
                 self.conn.execute("COMMIT")
                 return cortex_taint
@@ -171,6 +176,8 @@ class AgentMemory:
         raise RuntimeError("AgentMemory log failed after 5 retry attempts due to database lock")
 
     def query_similar(self, issue_text: str) -> list[Any]:
+        if self.collection is None:
+            return []
         results = self.collection.query(query_texts=[issue_text], n_results=10)
         docs = results.get("documents")
         return docs[0] if docs else []
