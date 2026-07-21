@@ -55,7 +55,7 @@ ACTION_VERBS = [
 
 
 def generate_playwright_primitives() -> list[PlaywrightPrimitiveDict]:
-    primitives = []
+    primitives: list[PlaywrightPrimitiveDict] = []
     p_idx = 1
 
     for domain in DOMAINS:

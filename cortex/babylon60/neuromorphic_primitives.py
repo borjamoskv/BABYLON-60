@@ -19,7 +19,7 @@ class STDPMemristor:
         self._init_db()
 
     def _init_db(self):
-        with sqlite3.connect(self.db_path, timeout=5000) as conn:
+        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS memristor_weights (
@@ -34,7 +34,7 @@ class STDPMemristor:
     def register_pre_spike(self) -> float:
         """Registra el pulso de la neurona origen y calcula STDP si la destino disparó recientemente."""
         now = time.time()
-        with sqlite3.connect(self.db_path, timeout=5000) as conn:
+        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute("BEGIN IMMEDIATE")
             cur = conn.execute("SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?", (self.synapse_id,))
             weight, last_post_ts = cur.fetchone()
@@ -49,7 +49,7 @@ class STDPMemristor:
     def register_post_spike(self) -> float:
         """Registra el pulso de la neurona destino y calcula STDP si la origen disparó recientemente."""
         now = time.time()
-        with sqlite3.connect(self.db_path, timeout=5000) as conn:
+        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             conn.execute("BEGIN IMMEDIATE")
             cur = conn.execute("SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?", (self.synapse_id,))
             weight, last_pre_ts = cur.fetchone()

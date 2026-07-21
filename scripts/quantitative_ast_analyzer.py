@@ -100,6 +100,7 @@ def main() -> None:
             or "node_modules" in root
             or "__pycache__" in root
             or ".git" in root
+            or ".uv_python" in root
         ):
             continue
         for file in files:

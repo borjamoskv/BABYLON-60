@@ -33,7 +33,7 @@ __all__ = [
 ]
 
 # DB Concurrency & Persist Configurations (R10)
-DB_PATH = "cortex_bft_ledger.db"
+DB_PATH = ".cortex/cortex.db"
 
 
 def init_bft_database() -> None:

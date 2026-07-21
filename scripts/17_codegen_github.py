@@ -76,7 +76,7 @@ def generate_centuria() -> list[PrimitiveDict]:
             )
             idx += 1
 
-    primitives = []
+    primitives: list[PrimitiveDict] = []
     p_idx = 1
     for domain in DOMAINS:
         for arch in base_archetypes:

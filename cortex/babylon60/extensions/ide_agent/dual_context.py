@@ -29,7 +29,7 @@ class DualContextAgent:
                                 socket_env = line.split("=")[1].strip()
                                 os.environ["CORTEX_IPC_SOCKET"] = socket_env
                                 break
-            except Exception:
+            except OSError:
                 pass
 
         if not socket_env:
@@ -86,7 +86,7 @@ class DualContextAgent:
                         f"[C5-REAL] NDJSON Stream Warning: Chunk ignorado por error de formato: {e}"
                     )
                     continue
-        except Exception as e:
+        except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as e:
             # Fail-Fast C5-REAL logging
             logging.error(f"[C4-SIM] IPC Stream Fatal Error: {e}")
         finally:
