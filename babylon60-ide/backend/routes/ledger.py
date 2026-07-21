@@ -17,9 +17,22 @@ from ..services.chain_verifier import verify_chain
 
 router = APIRouter(prefix="/api/ledger", tags=["ledger"])
 
+# Memoización: la raíz es constante en runtime y la DB no cambia de sitio.
+# Se revalida .exists() por petición (barato) y se re-descubre si desapareció.
+_LEDGER_DB_CACHE: Path | None = None
+
 
 def _find_ledger_db(project_root: Path) -> Path | None:
-    """Find the master ledger database."""
+    """Find the master ledger database (memoized)."""
+    global _LEDGER_DB_CACHE
+    if _LEDGER_DB_CACHE is not None and _LEDGER_DB_CACHE.exists():
+        return _LEDGER_DB_CACHE
+    _LEDGER_DB_CACHE = _discover_ledger_db(project_root)
+    return _LEDGER_DB_CACHE
+
+
+def _discover_ledger_db(project_root: Path) -> Path | None:
+    """Full discovery scan for the master ledger database."""
     candidates = [
         project_root / "master_ledger.db",
         project_root / "babylon60" / "bft" / "ultrathink_ledger.db",

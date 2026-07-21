@@ -13,7 +13,8 @@ Causal contract (STATUS.md · P0):
 
 from __future__ import annotations
 
-import asyncio
+import re
+import subprocess
 from pathlib import Path
 from typing import Any
 
@@ -30,57 +31,64 @@ def _get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent.parent
 
 
-async def _git_async(root: Path, *args: str) -> str | None:
-    """Run a read-only git command concurrently. Returns stdout or None on failure."""
+def _git(root: Path, *args: str) -> str | None:
+    """Run a read-only git command. Returns stdout or None on failure."""
     try:
-        proc = await asyncio.create_subprocess_exec(
-            "git", *args,
+        proc = subprocess.run(
+            ["git", *args],
             cwd=str(root),
-            stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE,
+            capture_output=True,
+            text=True,
+            timeout=5,
         )
-        stdout, _ = await asyncio.wait_for(proc.communicate(), timeout=5.0)
-    except (OSError, asyncio.TimeoutError):
+    except (OSError, subprocess.TimeoutExpired):
         return None
     if proc.returncode != 0:
         return None
-    return stdout.decode("utf-8").strip()
+    return proc.stdout.strip()
+
+
+_CRED_RE = re.compile(r"(://)([^/@\s]+)@")
+
+
+def _redact_url(url: str) -> str:
+    """Redacta credenciales embebidas (https://user:token@host/... → ***@).
+    Este repo tiene un P0 por claves filtradas: el sentinel jamás debe ser
+    un segundo canal de fuga."""
+    return _CRED_RE.sub(r"\1***@", url)
 
 
 @router.get("/status")
-async def sentinel_status() -> dict[str, Any]:
+def sentinel_status() -> dict[str, Any]:
     """Repo identity, dirty state, remotes and lineage warnings (read-only)."""
     root = _get_project_root()
     repo_name = root.name
-    is_git = (root / ".git").is_dir() or (root / ".git").is_file()
+    # .exists(): en worktrees/submódulos .git es un FICHERO (gitlink), no dir.
+    is_git = (root / ".git").exists()
 
-    branch = head = head_subject = head_time = commit_count_raw = porcelain = remotes_raw = None
-
+    branch = _git(root, "rev-parse", "--abbrev-ref", "HEAD") if is_git else None
+    # Una sola invocación para hash+asunto+fecha (antes eran 3 subprocess).
+    head = head_subject = head_time = None
     if is_git:
-        results = await asyncio.gather(
-            _git_async(root, "rev-parse", "--abbrev-ref", "HEAD"),
-            _git_async(root, "log", "-1", "--format=%h%x00%cI%x00%s"),
-            _git_async(root, "rev-list", "--count", "HEAD"),
-            _git_async(root, "status", "--porcelain"),
-            _git_async(root, "remote", "-v"),
-        )
-        branch, log_out, commit_count_raw, porcelain, remotes_raw = results
-        
-        if log_out:
-            parts = log_out.split('\x00', 2)
+        head_meta = _git(root, "log", "-1", "--pretty=%h%x1f%s%x1f%cI")
+        if head_meta:
+            parts = head_meta.split("\x1f")
             if len(parts) == 3:
-                head, head_time, head_subject = parts
+                head, head_subject, head_time = parts
+    commit_count_raw = _git(root, "rev-list", "--count", "HEAD") if is_git else None
 
+    porcelain = _git(root, "status", "--porcelain") if is_git else None
     dirty_files = len([ln for ln in porcelain.splitlines() if ln.strip()]) if porcelain else 0
 
     remotes: list[dict[str, str]] = []
+    remotes_raw = _git(root, "remote", "-v") if is_git else None
     if remotes_raw:
         seen: set[str] = set()
         for line in remotes_raw.splitlines():
             parts = line.split()
             if len(parts) >= 2 and parts[0] not in seen:
                 seen.add(parts[0])
-                remotes.append({"name": parts[0], "url": parts[1]})
+                remotes.append({"name": parts[0], "url": _redact_url(parts[1])})
 
     # ── Lineage warnings (RECALCAR repo actual + intuir repo incorrecto) ──
     warnings: list[dict[str, str]] = []
@@ -99,17 +107,22 @@ async def sentinel_status() -> dict[str, Any]:
             "level": "amber",
             "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
         })
+    # Detección case-insensitive: GitHub trata owner/repo sin distinguir mayúsculas.
+    marker = DEAD_FORK_MARKER.lower()
     for r in remotes:
-        if DEAD_FORK_MARKER in r["url"]:
+        if marker in r["url"].lower():
             warnings.append({
                 "level": "red",
                 "msg": f"Remoto '{r['name']}' apunta al fork muerto {DEAD_FORK_MARKER} (historia no relacionada, claves expuestas). Linaje NO canónico.",
             })
-    if remotes and not any(DEAD_FORK_MARKER in r["url"] for r in remotes):
+    if remotes and not any(marker in r["url"].lower() for r in remotes):
         warnings.append({
             "level": "amber",
             "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
         })
+
+    # Rojo primero: lo crítico entra a la fóvea antes que lo cautelar.
+    warnings.sort(key=lambda w: 0 if w["level"] == "red" else 1)
 
     return {
         "repo_root": str(root),
@@ -129,36 +142,3 @@ async def sentinel_status() -> dict[str, Any]:
         },
         "warnings": warnings,
     }
-
-
-@router.get("/exergy")
-def get_exergy_history() -> dict[str, Any]:
-    """Retrieve exergy audit history from the SQLite ledger."""
-    import sqlite3
-    db_path = Path.home() / ".babylon60" / "exergy_agent_ledger.db"
-    if not db_path.exists():
-        return {"history": []}
-    try:
-        conn = sqlite3.connect(str(db_path), timeout=5.0)
-        conn.execute("PRAGMA journal_mode=WAL;")
-        cursor = conn.cursor()
-        cursor.execute("SELECT timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml FROM ledger ORDER BY id DESC")
-        rows = cursor.fetchall()
-        conn.close()
-        
-        history = []
-        for r in rows:
-            history.append({
-                "timestamp": r[0],
-                "commit_hash": r[1],
-                "exergy_score": r[2],
-                "gradient": r[3],
-                "entropy": r[4],
-                "leverage": r[5],
-                "autoloop": r[6],
-                "bottleneck": r[7],
-                "verdict_yaml": r[8]
-            })
-        return {"history": history}
-    except sqlite3.Error as e:
-        return {"error": str(e), "history": []}

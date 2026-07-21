@@ -14,6 +14,7 @@ ranking léxico exacto y reproducible.
 
 from __future__ import annotations
 
+import contextlib
 import math
 import re
 import sqlite3
@@ -44,16 +45,17 @@ def _find_ledger_db(root: Path) -> Path | None:
     for c in candidates:
         if c.exists():
             return c
-    for db_file in root.glob("*.db"):
+    # sorted → determinista; closing → sin fuga si execute lanza;
+    # DatabaseError → cubre también "file is not a database".
+    for db_file in sorted(root.glob("*.db")):
         try:
-            conn = connect_readonly(db_file)
-            has = conn.execute(
-                "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-            ).fetchone()
-            conn.close()
-            if has:
-                return db_file
-        except sqlite3.OperationalError:
+            with contextlib.closing(connect_readonly(db_file)) as conn:
+                has = conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
+                ).fetchone()
+                if has:
+                    return db_file
+        except sqlite3.DatabaseError:
             continue
     return None
 
@@ -165,8 +167,11 @@ def ledger_search(
             for t in set(toks):
                 df[t] += 1
 
-        n = len(docs) or 1
-        avgdl = (total_len / n) if n else 1.0
+        # scanned = recuento REAL para el contrato; el divisor guardado (or 1)
+        # solo protege la división — no se filtra al cliente.
+        scanned = len(docs)
+        n = scanned or 1
+        avgdl = total_len / n
 
         idf: dict[str, float] = {}
         for t in set(q_terms):
@@ -206,10 +211,10 @@ def ledger_search(
             "query": q,
             "terms": q_terms,
             "results": scored[:limit],
-            "corpus_size": n,
-            "scanned": n,
+            "corpus_size": scanned,
+            "scanned": scanned,
             "total": total_rows,
-            "truncated": total_rows > n,
+            "truncated": total_rows > scanned,
             "method": "Okapi BM25 (léxico, no neuronal)",
         }
     finally:

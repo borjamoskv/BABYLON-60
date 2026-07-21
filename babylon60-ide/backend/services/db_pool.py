@@ -76,11 +76,22 @@ def get_table_rows(
     }
 
 
-def execute_readonly_query(conn: sqlite3.Connection, sql: str) -> dict[str, Any]:
-    """Execute a read-only SQL query and return results."""
+def execute_readonly_query(
+    conn: sqlite3.Connection,
+    sql: str,
+    max_rows: int = 1000,
+) -> dict[str, Any]:
+    """Execute a read-only SQL query, bounded.
+
+    fetchmany(max_rows+1) en vez de fetchall(): un SELECT sobre una tabla
+    enorme no puede materializar gigabytes en RAM ni cruzar el puente entero.
+    Truncado explícito (`truncated`), nunca silencioso.
+    """
     cursor = conn.execute(sql)
     if cursor.description:
         columns = [desc[0] for desc in cursor.description]
-        rows = [dict(zip(columns, row)) for row in cursor.fetchall()]
-        return {"columns": columns, "rows": rows, "row_count": len(rows)}
-    return {"columns": [], "rows": [], "row_count": 0}
+        raw = cursor.fetchmany(max_rows + 1)
+        truncated = len(raw) > max_rows
+        rows = [dict(zip(columns, row)) for row in raw[:max_rows]]
+        return {"columns": columns, "rows": rows, "row_count": len(rows), "truncated": truncated}
+    return {"columns": [], "rows": [], "row_count": 0, "truncated": False}

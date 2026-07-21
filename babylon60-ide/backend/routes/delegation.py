@@ -16,13 +16,34 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 
 from ..services import cortex_ledger
 
-router = APIRouter(prefix="/api/delegation", tags=["delegation"])
+
+def _guard_local_origin(request: Request) -> None:
+    """Defensa CSRF: si la petición mutante trae Origin, debe ser localhost
+    o la extensión Alcove. Una página web ajena no puede disparar commits
+    contra el motor de delegación (el navegador siempre adjunta su Origin)."""
+    origin = request.headers.get("origin")
+    if not origin:
+        return  # curl / misma-máquina sin navegador
+    host = urlparse(origin).hostname or ""
+    if origin.startswith(("chrome-extension://", "moz-extension://")):
+        return
+    if host in ("localhost", "127.0.0.1", "::1"):
+        return
+    raise HTTPException(403, f"Origin '{origin}' no autorizado para mutar (solo localhost/Alcove)")
+
+
+router = APIRouter(
+    prefix="/api/delegation",
+    tags=["delegation"],
+    dependencies=[Depends(_guard_local_origin)],
+)
 
 # ── Kind taxonomy ──────────────────────────────────────────────────────────
 # LOCAL ops mutate only the local lineage (allowed).
@@ -249,6 +270,11 @@ def cancel(delegation_id: str) -> dict[str, Any]:
     # terminal EXECUTED/BLOCKED/FAILED state in the projection.
     if deleg["state"] != "QUEUED":
         raise HTTPException(409, f"Delegation is '{deleg['state']}', cannot cancel")
+    # Mismo claim atómico que execute(): cancela SOLO quien gana la carrera.
+    # Cierra la ventana cancel-vs-execute (si execute ya tomó el claim, el
+    # cancel llega tarde → 409; si cancel lo gana, execute será el 409).
+    if not cortex_ledger.claim(root, f"exec:{delegation_id}"):
+        raise HTTPException(409, f"Delegation '{delegation_id}' ya está en ejecución — no cancelable")
     ev = cortex_ledger.append_event(
         root,
         event_type="DELEGATION_CANCELLED",

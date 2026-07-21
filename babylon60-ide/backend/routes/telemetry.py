@@ -55,17 +55,27 @@ def _collect_snapshot() -> dict[str, Any]:
         except OSError:
             continue
 
-    # Git status
+    # Git status — cada stat/read protegido: un fichero borrado a mitad de
+    # iteración (gc de git concurrente) no debe tumbar el snapshot entero.
     git_dir = root / ".git"
     git_info: dict[str, Any] = {"exists": git_dir.is_dir()}
     if git_dir.is_dir():
-        pack_dir = git_dir / "objects" / "pack"
-        if pack_dir.is_dir():
-            pack_size = sum(f.stat().st_size for f in pack_dir.iterdir() if f.is_file())
-            git_info["pack_size_mb"] = round(pack_size / (1024 * 1024), 2)
-        head_file = git_dir / "HEAD"
-        if head_file.exists():
-            git_info["head"] = head_file.read_text().strip()
+        try:
+            pack_dir = git_dir / "objects" / "pack"
+            if pack_dir.is_dir():
+                pack_size = 0
+                for f in pack_dir.iterdir():
+                    try:
+                        if f.is_file():
+                            pack_size += f.stat().st_size
+                    except OSError:
+                        continue
+                git_info["pack_size_mb"] = round(pack_size / (1024 * 1024), 2)
+            head_file = git_dir / "HEAD"
+            if head_file.exists():
+                git_info["head"] = head_file.read_text().strip()
+        except OSError:
+            git_info["head"] = "(no legible)"
 
     # Process info
     try:
@@ -100,14 +110,40 @@ def telemetry_snapshot() -> dict[str, Any]:
     return _collect_snapshot()
 
 
+def _snapshot_signature(snap: dict[str, Any]) -> str:
+    """Firma estable del snapshot excluyendo campos volátiles (timestamp,
+    tiempos de proceso) — para no empujar frames idénticos por el puente."""
+    stable = {
+        "databases": snap.get("databases"),
+        "total_db_size_mb": snap.get("total_db_size_mb"),
+        "wal_files": snap.get("wal_files"),
+        "git": snap.get("git"),
+    }
+    return json.dumps(stable, sort_keys=True)
+
+
 @router.websocket("/ws/telemetry")
 async def telemetry_ws(websocket: WebSocket) -> None:
-    """Live telemetry WebSocket — pushes snapshot every 2 seconds."""
+    """Live telemetry WebSocket — push cada 2s, solo si el contenido cambió.
+
+    INV (AGENTS.md): nada de I/O de disco síncrono dentro del event loop —
+    _collect_snapshot hace glob+stat, así que corre en threadpool.
+    Heartbeat: aunque no cambie nada, se fuerza un frame cada ~30s para que
+    el cliente sepa que la conexión vive.
+    """
     await websocket.accept()
+    last_sig = ""
+    beats_suppressed = 0
     try:
         while True:
-            snapshot = _collect_snapshot()
-            await websocket.send_text(json.dumps(snapshot))
+            snapshot = await asyncio.to_thread(_collect_snapshot)
+            sig = _snapshot_signature(snapshot)
+            if sig != last_sig or beats_suppressed >= 14:
+                await websocket.send_text(json.dumps(snapshot))
+                last_sig = sig
+                beats_suppressed = 0
+            else:
+                beats_suppressed += 1
             await asyncio.sleep(2)
     except WebSocketDisconnect:
         pass

@@ -6,6 +6,7 @@ Enforces PRAGMA query_only=ON to prevent any mutations via the IDE.
 from __future__ import annotations
 
 import contextlib
+import re
 import sqlite3
 import time
 from pathlib import Path
@@ -17,6 +18,9 @@ from pydantic import BaseModel, Field
 from ..services.db_pool import connect_readonly, execute_readonly_query
 
 router = APIRouter(prefix="/api/query", tags=["query"])
+
+# Tope de filas por consulta: acota RAM y payload por el puente.
+_MAX_ROWS = 1000
 
 
 class QueryRequest(BaseModel):
@@ -41,24 +45,19 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
     if not db_path.resolve().parent == root.resolve():
         raise HTTPException(403, "Path traversal denied")
 
-    # Block obvious write statements at the string level as defense-in-depth
-    sql_upper = req.sql.strip().upper()
-    blocked = (
-        "INSERT",
-        "UPDATE",
-        "DELETE",
-        "DROP",
-        "ALTER",
-        "CREATE",
-        "ATTACH",
-        "DETACH",
-        "PRAGMA",
-        "VACUUM",
-        "REINDEX",
-    )
-    for kw in blocked:
-        if sql_upper.startswith(kw):
-            raise HTTPException(403, f"Write operation '{kw}' blocked. IDE is read-only.")
+    # Lista BLANCA (más fuerte que la negra anterior): tras retirar
+    # comentarios de línea/bloque, la sentencia debe empezar por
+    # SELECT / WITH / EXPLAIN. El candado real sigue siendo
+    # PRAGMA query_only=ON a nivel de motor; esto es defensa en profundidad
+    # y un mensaje claro en vez de un error críptico del motor.
+    stripped = re.sub(r"/\*.*?\*/", " ", req.sql, flags=re.DOTALL)
+    stripped = re.sub(r"--[^\n]*", " ", stripped).strip()
+    first_word = (stripped.split(None, 1)[0].upper() if stripped else "")
+    if first_word not in ("SELECT", "WITH", "EXPLAIN"):
+        raise HTTPException(
+            403,
+            f"Solo lectura: la consola acepta SELECT/WITH/EXPLAIN (recibido: '{first_word or '∅'}').",
+        )
 
     try:
         # closing → la conexión se cierra aunque la query lance (antes solo
@@ -67,7 +66,7 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
         # muestra: es una consola SQL, el error es la señal útil.
         with contextlib.closing(connect_readonly(db_path)) as conn:
             t0 = time.monotonic()
-            result = execute_readonly_query(conn, req.sql)
+            result = execute_readonly_query(conn, req.sql, max_rows=_MAX_ROWS)
             elapsed_ms = (time.monotonic() - t0) * 1000
         result["elapsed_ms"] = round(elapsed_ms, 2)
         result["database"] = req.database
