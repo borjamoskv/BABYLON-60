@@ -1,108 +1,131 @@
-# CAM 2.0 (C5 Abstract Machine of Cognitive Evolution)
-## Specification for Evolutionary Runtimes, 5D Epistemology & Adjudication
+# CAM-3.0 (C5 Abstract Effect Machine - AEM Core Specification)
+## Minimalist Normative Specification for Abstract Effect Machines
 
-**Classification:** C5 Formal Evolutionary Specification  
-**Status:** Living Evolutionary Machine  
-**Core Paradigm:** Machine of Evolution · 5D Epistemology · Dissidence Preservation · Effect Cascades
+**Classification:** C5 Formal Core Specification  
+**Status:** Living Minimalist Abstract Machine  
+**Paradigm:** Abstract Effect Machine (AEM) · Algebraic Effects · Micro-ISA · Opaque Handles
 
 ---
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          CAM 2.0 ARCHITECTURE                           │
+│                        CAM-3.0 AEM ARCHITECTURE                         │
 ├─────────────────────────────────────────────────────────────────────────┤
-│ Core          Syntax · 5D Epistemology · Non-Commutative Caps           │
-│ Semantics     Hypergraph (1st/2nd Order) · Operational · Effects        │
-│ Machine       Adjudication Engine · Half-Life Decay · Effect Cascades   │
-│ Evolution     Fitness Competition · Exergy Maximization · Self-Selection│
-│ Conformance   Multidimensional Matrix (Semantics, Crypto, Decay, Adj)   │
+│  Execution Model   Instruction ➔ Algebraic Effects ➔ State Transition   │
+│  Object Space      Allocate · Lookup · Bind · Release (Opaque Handles) │
+│  Micro-ISA         ALLOC · LOAD · STORE · LINK · UNLINK · CALL · ASSERT │
+│  Effects Algebra   Read(Store) + Write(Store) + Append(Ledger) + Call() │
+│  Capabilities      Capabilities defined directly over Algebraic Effects  │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-# 1. THE 5-DIMENSIONAL EPISTEMIC VECTOR (5D EPISTEMOLOGY)
+# 1. ABSTRACT MODEL SEPARATION (NORMATIVE)
 
-Knowledge is no longer a scalar trust value. It is defined by the tuple $E_5$:
+The Abstract Machine separates static state from dynamic execution:
 
-$$E_5 = \langle \text{Truth}, \text{Confidence}, \text{Authority}, \text{Relevance}, \text{Freshness}(t) \rangle$$
+```text
+Persistent Model (Object Space)          Execution Model (AEM Runtime)
+┌──────────────────────────────┐         ┌──────────────────────────────┐
+│  Opaque Handle               │         │  Instruction                 │
+│  Object Payload              │         │  ExecutionContext            │
+│  Link / Reference            │         │  Algebraic Effect            │
+└──────────────────────────────┘         │  Event Log                   │
+                                         └──────────────────────────────┘
+```
 
-Where:
-- **Truth**: World-grounded physical property.
-- **Confidence**: Reasoning certainty interval $[0, 1] \in \mathbb{R}$.
-- **Authority**: Provenance domain weight of origin agent.
-- **Relevance**: Contextual alignment with active goal.
-- **Freshness($t$)**: Exponential half-life decay function:
-
-$$\text{Freshness}(t) = e^{-\lambda (t - t_0)}$$
-
-## CAM 2.0 Trust Invariant
-$$\text{Trust}(a, x, t) \le \text{Policy}_f\Big(\text{Confidence}(x), \text{Authority}(x), \text{Relevance}(x), \text{Freshness}(x, t)\Big)$$
+The Core ISA operates over an abstract **Object Space**, independent of underlying storage implementations (SQL, Graph, HashMap, RDF).
 
 ---
 
-# 2. HYPERGRAPH WITH 2ND-ORDER FEEDBACK LOOPS
+# 2. OPAQUE HANDLES & OBJECT SPACE (NORMATIVE)
 
-The state space is a **Hypergraph** $\mathcal{H} = (\mathcal{V}, \mathcal{E}_1, \mathcal{E}_2)$:
+All references inside the machine are opaque `Handle` identifiers:
 
-- **1st-Order Causal Edges ($\mathcal{E}_1$)**: Unidirectional acyclic dependencies ($E \to C$, $I \to E$).
-- **2nd-Order Feedback Edges ($\mathcal{E}_2$)**: Cyclical metadata feedback ($P \to \text{ObservedRelevance} \to \text{PolicyMutation}$).
+$$\text{Handle} \in \mathcal{H}_{\text{opaque}}$$
 
-Cycles containing exclusively 2nd-order feedback edges are **VALID** and represent system adaptation loops. Cycles in $\mathcal{E}_1$ trigger **Undefined Behaviour (UB)**.
+The Object Space supports exactly four primitive operations:
 
----
-
-# 3. CONFLICT MODEL & DISSIDENCE PRESERVATION
-
-Contradictory evidence is **NEVER MERGED OR OVERWRITTEN**. It is adjudicated:
-
-$$\frac{\text{Claim}_A \quad \text{Claim}_B \quad \text{Contradiction}}{\text{AdjudicationRecord} \quad \land \quad \text{PreservedDissentBranch}(\text{Claim}_B)}$$
-
-Dissenting branches are preserved in the hypergraph as alternative evolutionary paths, preventing epistemic fragility.
+1. `Allocate(payload) -> Handle`
+2. `Lookup(handle) -> Payload`
+3. `Bind(handle_a, handle_b, relation_tag) -> Status`
+4. `Release(handle) -> Status`
 
 ---
 
-# 4. EFFECT CASCADE PROPAGATION
+# 3. MINIMAL MICRO-ISA (INSTRUCTION SET ARCHITECTURE) (NORMATIVE)
 
-Transitions declare direct and transitive effect cascades:
+The machine executes micro-instructions. Domain concepts (`Claim`, `Knowledge`, `Evidence`) are high-level libraries compiled into these micro-instructions:
 
-$$\text{Cascade}(T) = \text{DirectEffects}(T) \cup \bigcup_{n \in \text{ImpactedNodes}} \text{PropagatedEffects}(n)$$
-
-The scheduler evaluates the full transitive cascade. Executing an unpredicted effect cascade constitutes **Undefined Behaviour (UB)**.
-
----
-
-# 5. NON-COMMUTATIVE CAPABILITY ALGEBRA
-
-Capabilities are ordered temporal chains ($\circ$):
-
-$$\text{Cap}_A \circ \text{Cap}_B \neq \text{Cap}_B \circ \text{Cap}_A$$
-
-Revocation of a capability is distinct from never having been granted. Capability chains encode temporal grant history.
+| Instruction | Operational Semantics | Declared Effects |
+|---|---|---|
+| `ALLOC` | Allocates new payload in Object Space, returns `Handle` | `Write(Store)` |
+| `LOAD` | Reads payload referenced by `Handle` | `Read(Store)` |
+| `STORE` | Mutates payload referenced by `Handle` | `Write(Store)` |
+| `LINK` | Binds two handles with a typed relation tag | `Write(Store)` |
+| `UNLINK` | Removes typed relation tag between handles | `Write(Store)` |
+| `CALL` | Invokes external module or driver procedure | `Call(External)` |
+| `ASSERT` | Evaluates predicate; triggers `IntegrityError` if false | `None` (Pure) |
+| `COMMIT` | Flushes transaction to hash-chained ledger event log | `Append(Ledger)` |
+| `ABORT` | Reverts uncommitted Object Space mutations | `None` |
 
 ---
 
-# 6. MULTIDIMENSIONAL CONFORMANCE MATRIX
+# 4. ALGEBRAIC EFFECT SYSTEM (NORMATIVE)
 
-A runtime declares conformance across an 8-dimensional matrix:
+Effects are algebraic compositions of primitive operations:
 
-| Dimension | Minimal | Standard | Enterprise | Verified |
-|---|:---:|:---:|:---:|:---:|
-| **Core Semantics** | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-| **Effects Cascade** | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-| **5D Epistemology** | $\mathbf{x}$ | $\mathbf{\frac{1}{2}}$ | $\checkmark$ | $\checkmark$ |
-| **Half-Life Decay** | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-| **Adjudication** | $\mathbf{x}$ | $\mathbf{\frac{1}{2}}$ | $\checkmark$ | $\checkmark$ |
-| **Crypto Attestation** | $\mathbf{x}$ | $\mathbf{x}$ | $\checkmark$ | $\checkmark$ |
-| **Storage WAL** | $\checkmark$ | $\checkmark$ | $\checkmark$ | $\checkmark$ |
-| **Formal Proofs** | $\mathbf{x}$ | $\mathbf{x}$ | $\mathbf{x}$ | $\checkmark$ |
+$$\text{Effect} = \text{Read}(\text{Resource}) + \text{Write}(\text{Resource}) + \text{Append}(\text{Ledger}) + \text{Call}(\text{External})$$
+
+$$\text{Effects}_{\text{actual}} \subseteq \text{Effects}_{\text{declared}}$$
+
+Executing an undeclared effect triggers `CapabilityError` or `ExecutionError`.
 
 ---
 
-# TERMINATION & EVOLUTION EQUILIBRIUM
+# 5. EFFECT-BASED CAPABILITY ALGEBRA (NORMATIVE)
 
-CAM 2.0 does not ask *"Is this transition correct?"*. It asks:
+Capabilities grant permission over specific algebraic effects, not high-level commands:
 
-$$\text{Does } \Delta E_{\text{system}} = \frac{\text{UsefulKnowledge}}{\text{TotalCognitiveCost}} \text{ monotonically increase over time?}$$
+```text
+CapabilitySet = Set[Effect]
 
-If $\frac{d \Delta E}{dt} \le 0$, **the system initiates self-reconfiguration.**
+AgentPermissions:
+  Grant Read(Store)
+  Grant Write(Store)
+  Grant Append(Ledger)
+```
+
+Privilege Check:
+$$\text{InstructionAllowed} \iff \text{RequiredEffect}(\text{Inst}) \in \text{AgentPermissions}$$
+
+---
+
+# 6. UNIFIED ERROR MODEL (NORMATIVE)
+
+The AEM classifies failures into exactly four structural errors:
+
+1. `ExecutionError`: Invalid instruction, stack underflow, or divide-by-zero.
+2. `CapabilityError`: Agent attempted an instruction requiring an unauthorized Effect.
+3. `IntegrityError`: `ASSERT` predicate evaluation failed or hash chain broke.
+4. `ImplementationError`: Backend storage engine or driver internal failure.
+
+---
+
+# 7. EXTENSIBLE CONFORMANCE MATRIX (NORMATIVE)
+
+- **CAM-3.0 Core**: Micro-ISA + Object Space + Opaque Handles + Error Model.
+- **Core + Effects**: Core + Algebraic Effect Composition.
+- **Core + Capabilities**: Core + Effects + Effect-Based Permission Enforcer.
+- **Core + Persistence**: Core + Capabilities + Hash-Chained Ledger Commit.
+
+---
+
+# 8. THE ABSTRACT EFFECT MACHINE SEMANTICS (NORMATIVE)
+
+```text
+Instruction  ──►  Effect Verification  ──►  State Transition & Event Emission
+```
+
+High-level domain models exist purely as user-space libraries. The AEM microkernel is strictly an **Abstract Effect Engine**.
