@@ -21,62 +21,74 @@ class STDPMemristor:
         self._init_db()
 
     def _init_db(self):
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("PRAGMA journal_mode=WAL;")
-            conn.execute("""
-                CREATE TABLE IF NOT EXISTS memristor_weights (
-                    synapse_id TEXT PRIMARY KEY,
-                    weight REAL NOT NULL,
-                    last_pre_spike_ts REAL,
-                    last_post_spike_ts REAL
+        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        try:
+            with conn:
+                conn.execute("PRAGMA journal_mode=WAL;")
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS memristor_weights (
+                        synapse_id TEXT PRIMARY KEY,
+                        weight REAL NOT NULL,
+                        last_pre_spike_ts REAL,
+                        last_post_spike_ts REAL
+                    )
+                """)
+                conn.execute(
+                    "INSERT OR IGNORE INTO memristor_weights VALUES (?, 1.0, 0.0, 0.0)",
+                    (self.synapse_id,),
                 )
-            """)
-            conn.execute(
-                "INSERT OR IGNORE INTO memristor_weights VALUES (?, 1.0, 0.0, 0.0)",
-                (self.synapse_id,),
-            )
+        finally:
+            conn.close()
 
     def register_pre_spike(self) -> float:
         """Registra el pulso de la neurona origen y calcula STDP si la destino disparó recientemente."""
         now = time.time()
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("BEGIN IMMEDIATE")
-            cur = conn.execute(
-                "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
-                (self.synapse_id,),
-            )
-            weight, last_post_ts = cur.fetchone()
+        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        try:
+            with conn:
+                conn.execute("BEGIN IMMEDIATE")
+                cur = conn.execute(
+                    "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
+                    (self.synapse_id,),
+                )
+                weight, last_post_ts = cur.fetchone()
 
-            # STDP Asimétrico: Si PRE dispara DESPUÉS de POST, la causalidad es inversa -> Atrofia (LTD)
-            if last_post_ts > 0 and (now - last_post_ts) < 1.0:
-                weight = max(0.1, weight - 0.2)  # Depresión a largo plazo
+                # STDP Asimétrico: Si PRE dispara DESPUÉS de POST, la causalidad es inversa -> Atrofia (LTD)
+                if last_post_ts > 0 and (now - last_post_ts) < 1.0:
+                    weight = max(0.1, weight - 0.2)  # Depresión a largo plazo
 
-            conn.execute(
-                "UPDATE memristor_weights SET weight = ?, last_pre_spike_ts = ? WHERE synapse_id = ?",
-                (weight, now, self.synapse_id),
-            )
-            return weight
+                conn.execute(
+                    "UPDATE memristor_weights SET weight = ?, last_pre_spike_ts = ? WHERE synapse_id = ?",
+                    (weight, now, self.synapse_id),
+                )
+                return weight
+        finally:
+            conn.close()
 
     def register_post_spike(self) -> float:
         """Registra el pulso de la neurona destino y calcula STDP si la origen disparó recientemente."""
         now = time.time()
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
-            conn.execute("BEGIN IMMEDIATE")
-            cur = conn.execute(
-                "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
-                (self.synapse_id,),
-            )
-            weight, last_pre_ts = cur.fetchone()
+        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        try:
+            with conn:
+                conn.execute("BEGIN IMMEDIATE")
+                cur = conn.execute(
+                    "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
+                    (self.synapse_id,),
+                )
+                weight, last_pre_ts = cur.fetchone()
 
-            # STDP Asimétrico: Si POST dispara DESPUÉS de PRE, la causalidad es correcta -> Fortalecimiento (LTP)
-            if last_pre_ts > 0 and (now - last_pre_ts) < 1.0:
-                weight += 0.5  # Potenciación a largo plazo
+                # STDP Asimétrico: Si POST dispara DESPUÉS de PRE, la causalidad es correcta -> Fortalecimiento (LTP)
+                if last_pre_ts > 0 and (now - last_pre_ts) < 1.0:
+                    weight += 0.5  # Potenciación a largo plazo
 
-            conn.execute(
-                "UPDATE memristor_weights SET weight = ?, last_post_spike_ts = ? WHERE synapse_id = ?",
-                (weight, now, self.synapse_id),
-            )
-            return weight
+                conn.execute(
+                    "UPDATE memristor_weights SET weight = ?, last_post_spike_ts = ? WHERE synapse_id = ?",
+                    (weight, now, self.synapse_id),
+                )
+                return weight
+        finally:
+            conn.close()
 
 
 class LeakySpikingNode:

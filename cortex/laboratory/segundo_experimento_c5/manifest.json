@@ -1,0 +1,36 @@
+{
+  "experiment": "segundo_experimento_c5",
+  "version": "2.0",
+  "timestamp": "2026-07-21T20:31:55.729114+00:00",
+  "status": "scaffold",
+  "files": [
+    {
+      "name": "01_experimento.yml",
+      "sha3_256": "28b39cf18117fe514d6959fca1915bd4090b20389adf5b32bc6925b92d524911"
+    },
+    {
+      "name": "02_hallazgo.md",
+      "sha3_256": "1102aaf30258141618bae09b5be3685c53c1e9b59c081bf1f2366de5966f7051"
+    },
+    {
+      "name": "03_codigo.py",
+      "sha3_256": "232c01032f200fe365ccabbfa7f3f6a3bcbe3c6f4530d58836e9668a4e2f7906"
+    },
+    {
+      "name": "04_demo.sh",
+      "sha3_256": "0e11ed4c32ffa9e91a13c64c75134ecf4a8f8d34272b0cfd114cdbbd33594ed5"
+    },
+    {
+      "name": "05_track.md",
+      "sha3_256": "ace6a0e90d277500c0782dde50e7582b7a4e29821e69efe28a80a5c830d76846"
+    },
+    {
+      "name": "06_reflexion.md",
+      "sha3_256": "50ab713b67d13967002fd3708fbfecde4d09917185466f42cba009c446363fc9"
+    },
+    {
+      "name": "post_draft.md",
+      "sha3_256": "f42a0d1b27b64b10ede5a9074c29230780e8e8c382878ec851e1594e6fc273a3"
+    }
+  ]
+}

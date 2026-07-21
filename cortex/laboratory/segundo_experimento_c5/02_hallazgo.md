@@ -1,10 +1,9 @@
-# Hallazgo del Experimento 2
+# Hallazgos Empíricos
 
-**Métricas iniciales**
-- Vistas: 0
-- Likes: 0
-- Asset reutilizable creado: false
+## Métricas observadas
 
-**Observaciones**
-- Se espera que la combinación de código ejecutable y visualizaciones aumente la *persona recurrence*.
-- Necesario medir después de la publicación.
+(Inyectar datos crudos, capturas de terminal, métricas cuantitativas.)
+
+## Fallas detectadas
+
+(Documentar qué rompió y por qué.)
