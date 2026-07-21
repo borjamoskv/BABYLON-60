@@ -84,7 +84,7 @@ class OpsecSentinelC5:
     def run_full_scan(self) -> dict[str, Any]:
         details: list[dict[str, str]] = []
         violations_found: int = 0
-        ignore_dirs: set[str] = {".git", ".venv", "node_modules", "scratch", "__pycache__", "target", "build", "dist"}
+        ignore_dirs: set[str] = {".git", ".venv", "node_modules", "scratch", "__pycache__", "target", "build", "dist", ".mypy_cache", "cortex_persist.egg-info"}
         with sqlite3.connect(self.db_path, timeout=5.0) as conn:
             for root, dirs, files in os.walk(self.workspace):
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
