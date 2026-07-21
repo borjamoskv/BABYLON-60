@@ -82,6 +82,28 @@ func verifyPhantomTargets(root string) error {
 	return nil
 }
 
+// execCommandWithIPC ensures CORTEX_IPC_SOCKET is always present in sub-process environment.
+func execCommandWithIPC(name string, arg ...string) *exec.Cmd {
+	cmd := exec.Command(name, arg...)
+	env := os.Environ()
+	hasIPC := false
+	for _, e := range env {
+		if strings.HasPrefix(e, "CORTEX_IPC_SOCKET=") {
+			hasIPC = true
+			break
+		}
+	}
+	if !hasIPC {
+		ipcSocket := os.Getenv("CORTEX_IPC_SOCKET")
+		if ipcSocket == "" {
+			ipcSocket = "/tmp/cortex_ipc.sock"
+		}
+		env = append(env, "CORTEX_IPC_SOCKET="+ipcSocket)
+	}
+	cmd.Env = env
+	return cmd
+}
+
 // runForge executes the forge transducer.
 func runForge(root string, args []string) {
 	prompt := "N/A"
@@ -120,7 +142,7 @@ func runForge(root string, args []string) {
 	if _, err := os.Stat(pythonBin); os.IsNotExist(err) {
 		pythonBin = "python3"
 	}
-	cmd := exec.Command(pythonBin, scriptPath, prompt, target, payload)
+	cmd := execCommandWithIPC(pythonBin, scriptPath, prompt, target, payload)
 	cmd.Dir = root
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
