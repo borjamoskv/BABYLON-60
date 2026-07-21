@@ -27,14 +27,19 @@ class AgentMemory:
         self._init_table()
 
         import chromadb
+        from chromadb.config import Settings
+
+        chroma_settings = Settings(anonymized_telemetry=False)
 
         if (
             "PYTEST_CURRENT_TEST" in os.environ
             or os.environ.get("CORTEX_TEST_MODE") == "1"
         ):
-            self.chroma_client = chromadb.EphemeralClient()
+            self.chroma_client = chromadb.EphemeralClient(settings=chroma_settings)
         else:
-            self.chroma_client = chromadb.PersistentClient(path=chroma_path)
+            self.chroma_client = chromadb.PersistentClient(
+                path=chroma_path, settings=chroma_settings
+            )
         self.collection = self.chroma_client.get_or_create_collection(
             name="agent_memory"
         )
