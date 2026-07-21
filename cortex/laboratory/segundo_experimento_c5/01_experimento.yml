@@ -1,9 +1,8 @@
 claim_id: "LAB_SEGUNDO_EXPERIMENTO_C5"
-hypothesis: "La síntesis sonora procedural mediante ondas PCM y cadenas de Markov de primer orden colapsa invariantes estocásticos en estructuras acústicas deterministas con 0% anergía."
+hypothesis: "Describe the hypothesis to test."
 initial_conditions:
-  - "Frecuencia de muestreo 44.1 kHz, 16-bit mono PCM."
-  - "Matriz de transición de Markov de 4 estados armónicos aislados."
+  - "Describe the boundary constraints."
 constraints:
   - "C5-REAL"
   - "Zero Anergy"
-vertical: "music_ai"
+vertical: "Select: software_thermo | music_ai | agent_arch | cultural_collisions | generative_art"

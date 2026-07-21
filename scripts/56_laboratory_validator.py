@@ -78,8 +78,8 @@ def validate_experiment(lab_dir: Path) -> dict[str, object]:
             continue
 
         try:
-            content = fpath.read_text(encoding="utf-8")
-        except OSError:
+            content = fpath.read_text(encoding="utf-8", errors="ignore")
+        except (OSError, UnicodeDecodeError):
             continue
 
         fbytes = len(content.encode("utf-8"))
