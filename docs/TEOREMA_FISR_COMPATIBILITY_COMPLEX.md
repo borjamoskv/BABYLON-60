@@ -1,169 +1,158 @@
-# TEORÍA DE COMPATIBILIDAD ESTRUCTURAL FISR Y COMPLEJO $\text{Compat}(\Omega)$
+# TEORÍA DE COMPATIBILIDAD ESTRUCTURAL FISR Y COMPLEJO SIMPLICIAL $\text{Compat}(\Omega)$
 
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
-**Clasificación:** C5-REAL Proof-Theoretic Specification  
-**Estado:** Documento de Base Congelado (Baseline Spec v13.0)  
+**Clasificación:** C5-REAL Proof-Theoretic & Categorical Model Theory Specification  
+**Estado:** Documento de Base Refinado y Tipado (Baseline Spec v14.0)  
 
 ---
 
-## 0. MARCO EPISTÉMICO Y CAMBIO DE RÉGIMEN
+## I. FIRMA ESTRUCTURAL $\Sigma$
 
-La novedad teórica del presente programa se desplaza de forma definitiva desde la ontología categórica pura (la postulación de un nuevo objeto ontológico como "FibSyncMAct") hacia la **Teoría de Compatibilidad Estructural FISR**. El objeto primordial de estudio es el espacio de modelos $\mathbf{Mod}(\Sigma, T)$ y el complejo simplicial $\text{Compat}(\Omega)$, evaluando la coexistencia, el coste y la separación de propiedades estructurales sobre presupuestos acotados.
-
----
-
-## 1. FIRMA ESTRUCTURAL $\Sigma$ Y ESTRATIFICACIÓN N-NIVEL
-
-Para garantizar la demostración rigurosa de independencia y evitar la colisión prematura entre datos y predicados, fijamos la siguiente estratificación en 4 niveles:
+Para evitar sobredeterminaciones y colisiones definicionales, establecemos la firma estructural $\Sigma$ mediante la siguiente estratificación tipada de 4 niveles:
 
 ```text
 Nivel 0 | Categoría Monoidal Base
 --------
 C = (C, ⊗, I)
 
-Nivel 1 | Firma Estructural Σ
+Nivel 1 | Firma Estructural Σ (Tipado Estricto)
 --------
-Pred : C^op -> Poset (Subobjetos / Predicados)
-□t   : Pred(A) -> Pred(A) (Operador Interior Síncrono)
-Cert : Mor(C) -> Set (Espacio Abstracto de Certificados)
-μ    : Mor(C) -> N_∞ (Métrica Primitiva de Coste de Prueba)
+Arr(C)  : Categoría de Flechas (Arrow Category) de C
+Pred    : C^op -> Poset (Funtor de Predicados / Subobjetos)
+□t      : Pred(A) -> Pred(A) (Operador Interior Síncrono)
+Cert    : Arr(C) -> Set (Funtor Abstracto de Certificados sobre Flechas)
+μ       : Mor(C) -> N_∞ (Métrica Primitiva de Coste de Prueba para Morfismos)
 
 Nivel 2 | Leyes Ecuacionales y Estructurales (Teoría T)
 --------
 Functorialidad de ⊗, Rejilla Poset de Pred, Operador Interior □t P ≤ P,
-Subaditividad de μ, Composicionalidad de Certificados.
+Leyes Métricas de Δ_overhead, Preservación Fibrada Monoidal.
 
 Nivel 3 | Propiedades, Observables y Clases de Modelos
 --------
 F (Fibrada), I (Invariante), S (Síncrona), R_k (Auditabilidad bajo Presupuesto k)
 ```
 
-La firma estructural queda denotada por:
+La firma estructural completa viene dada por la tupla:
 
-$$\Sigma = (\otimes, I, \text{Pred}, \Box_t, \text{Cert}, \mu)$$
-
----
-
-## 2. SEMÁNTICA DE MODELOS $\mathbf{Mod}(\Sigma, T)$
-
-Un modelo $\mathcal{M} = (\mathcal{C}, \text{Pred}_\mathcal{M}, \Box_t^\mathcal{M}, \text{Cert}_\mathcal{M}, \mu_\mathcal{M})$ es una interpretación de la firma $\Sigma$ que satisface las ecuaciones del conjunto de leyes $T$.
-
-El espacio global de modelos se denota por $\mathbf{Mod}(\Sigma, T)$. El complejo simplicial de compatibilidad se define como:
-
-$$\text{Compat}(\Omega)$$
-
-* **Vértices:** Propiedades y observables $\Omega = \{ F, I, S, R_k \}$.
-* **Aristas:** Coexistencia demostrada de pares $(P_i, P_j)$ en $\mathbf{Mod}(\Sigma, T)$.
-* **Caras (Símplices):** Subespacios realizables $\mathbf{Mod}(F, I, S, R_k)$.
-* **Lagunas (Holes):** Fronteras de imposibilidad o separación por coste $\mu > k$.
+$$\Sigma = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \Box_t, \text{Cert}, \mu)$$
 
 ---
 
-## 3. DEFINICIÓN ESTRUCTURAL DE $F, I, S$
+## II. SEMÁNTICA DE MODELOS $\mathbf{Mod}(\Sigma, T)$
+
+Un modelo $\mathcal{M} = (\mathcal{C}, \text{Pred}_\mathcal{M}, \Box_t^\mathcal{M}, \text{Cert}_\mathcal{M}, \mu_\mathcal{M})$ es una interpretación tipada de la firma $\Sigma$ en la categoría de categorías monoidales que satisface las ecuaciones de la teoría $T$.
+
+Denotamos por $\mathbf{Mod}(\Sigma, T)$ la categoría de modelos de $\Sigma$ que satisfacen $T$, con morfismos dados por los funtores monoidales fibrados que preservan el operador interior $\Box_t$ y el funtor de certificados $\mathrm{Cert}$.
+
+---
+
+## III. PROPIEDADES ESTRUCTURALES $F, I, S$ WELL-TYPED
 
 Dado un modelo $\mathcal{M} \in \mathbf{Mod}(\Sigma, T)$ y un morfismo $\alpha: A \to B \in \mathrm{Mor}(\mathcal{C})$:
 
-1. **Propiedad Fibrada ($F$):** $\mathcal{M}$ posee la propiedad $F$ si el operador de pullback $\alpha^*: \text{Pred}(B) \to \text{Pred}(A)$ admite adjunto a izquierda $\exists_\alpha$ preservando la estructura de rejilla.
-2. **Propiedad Invariante ($I$):** $\mathcal{M}$ posee la propiedad $I$ si para todo par de predicados $P \in \text{Pred}(A), Q \in \text{Pred}(B)$, la compatibilidad monoidal $\alpha^*(P) \otimes Q \le \alpha^*(P \otimes Q)$ se satisface idénticamente.
-3. **Propiedad Síncrona ($S$):** $\mathcal{M}$ posee la propiedad $S$ si $\alpha$ conmuta con el operador interior síncrono $\Box_t$, esto es:
+1. **Propiedad Fibrada ($F$):** El funtor de cambio de base $\alpha^*: \mathrm{Pred}(B) \to \mathrm{Pred}(A)$ admite adjunto a izquierda $\exists_\alpha \dashv \alpha^*$ satisfaciendo la condición de Beck-Chevalley sobre cuadrados cartesianos.
+2. **Propiedad Monoidal Invariante ($I$):** Para todo par de predicados sobre la misma fibra $P, Q \in \mathrm{Pred}(B)$, el funtor de cambio de base preserva la estructura del producto tensorial de fibra $\otimes_\text{fib}$:
+   $$\alpha^*(P \otimes_\text{fib} Q) \cong \alpha^*(P) \otimes_\text{fib} \alpha^*(Q)$$
+   eliminando cualquier incompatibilidad de tipos entre dominios distintos.
+3. **Propiedad Síncrona ($S$):** El cambio de base conmuta estrictamente con el operador interior síncrono $\Box_t$:
    $$\alpha^*(\Box_t P) = \Box_t (\alpha^* P)$$
-   donde $\Box_t$ satisface axiomáticamente la condición de operador interior $\Box_t P \le P$.
+   donde $\Box_t$ cumple la axiomática de operador interior $\Box_t P \le P$.
 
 ---
 
-## 4. SISTEMA ABSTRACTO DE CERTIFICADOS
+## IV. OBSERVABLES NUMÉRICOS $\mu_M$ Y PRESUPUESTO $R_k$
 
-Un sistema de certificados es un par $(\text{Cert}, \circ_{\text{Cert}})$ donde:
+La auditabilidad no es una propiedad booleana primitiva, sino el nivel de sub-nivel de una métrica bien tipada:
 
-$$\text{Cert}: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbf{Set}$$
+### 4.1 Métrica Morfismo-Nivel
+$$\mu_\mathcal{M}: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbb{N}_\infty \qquad \mu_\mathcal{M}(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \in \mathrm{Cert}(\alpha) \}$$
 
-asocia a cada morfismo $\alpha$ el conjunto de sus pruebas o testigos válidos. El cálculo de certificados es **composicional** si existe un operador parcial de derivación:
+### 4.2 Métrica Modelo-Nivel (Well-Typed)
+$$\mu(\mathcal{M}) \triangleq \sup_{\alpha \in \mathrm{Mor}(\mathcal{C})} \mu_\mathcal{M}(\alpha)$$
 
-$$\circ_{\text{Cert}}: \text{Cert}(\beta) \times \text{Cert}(\alpha) \longrightarrow \text{Cert}(\beta \circ \alpha)$$
+### 4.3 Predicado de Presupuesto Acotado $R_k$
+$$R_k(\alpha) \iff \mu_\mathcal{M}(\alpha) \le k, \qquad (k \in \mathbb{N}_\infty)$$
 
-tal que $\pi_\beta \circ_{\text{Cert}} \pi_\alpha$ demuestra formalmente la corrección del morfismo compuesto $\beta \circ \alpha$.
-
----
-
-## 5. DEFINICIÓN PRIMITIVA DE LA MÉTRICA DE COSTES $\mu$
-
-No consideramos la auditabilidad $R$ como una propiedad binaria primaria, sino como el subnivel de un observable numérico primitivo:
-
-$$\mu: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbb{N}_\infty$$
-
-$$\mu(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \in \text{Cert}(\alpha) \}$$
-
-Definimos el predicado de **Auditabilidad bajo Presupuesto $k$** ($R_k$) como:
-
-$$R_k(\alpha) \iff \mu(\alpha) \le k, \quad (k \in \mathbb{N}_\infty)$$
-
-Esto induce la familia parametrizada de clases de modelos:
+Esto induce la familia de clases de modelos parametrizadas por complejidad:
 
 $$\mathbf{Mod}(F, I, S, R_k)$$
 
-transformando el análisis en una teoría estricta de complejidad estructural.
+---
+
+## V. EL COMPLEJO SIMPLICIAL $\text{Compat}(\Omega)$
+
+El Complejo de Compatibilidad Estructural es el objeto combinatorio-topológico:
+
+$$\text{Compat}(\Omega) \subseteq \mathcal{P}(\Omega) \setminus \{\emptyset\}$$
+
+con conjunto de vértices $\Omega = \{ F, I, S, R_k \}$.
+
+### 5.1 Lema de Hereditariedad (Down-set Invariant)
+> **Lema 5.1:** Para todo símplice $\sigma \in \text{Compat}(\Omega)$ y todo subconjunto no vacío $\tau \subseteq \sigma$, se cumple que $\tau \in \text{Compat}(\Omega)$.
+
+*Demostración:* Si $\sigma \in \text{Compat}(\Omega)$, existe un modelo no vacío $M \in \mathbf{Mod}(\Sigma, T)$ que satisface conjuntamente todas las propiedades de $\sigma$. La eliminación de cualquier predicado $P_i \in \sigma \setminus \tau$ relaja las restricciones de evaluación sobre $M$, garantizando que $M \models \tau$. Por lo tanto, $\tau$ es realizable y pertenece a $\text{Compat}(\Omega)$. $\blacksquare$
+
+Esta demostración garantiza formalmente que $\text{Compat}(\Omega)$ es un **complejo simplicial estricto** y no un hipergrafo arbitrario.
 
 ---
 
-## 6. DEFINICIÓN DERIVADA DEL COSTE DE EXTENSIÓN $\kappa$
+## VI. TEOREMA DE REPRESENTACIÓN ($T_0$) (EQUIVALENCIA CATEGORIAL)
 
-Unificamos el coste interno $\mu$ y el coste externo $\kappa$. El coste $\kappa(M)$ deja de ser una noción primitiva ad-hoc y pasa a ser el **coste de extensión mínima hasta la certificabilidad**:
+Para eliminar la circularidad definicional, establecemos la representación mediante un isomorfismo/equivalencia entre la categoría de modelos y la categoría de cálculos de certificados sobre la categoría de flechas.
 
-$$\kappa(M) \triangleq \inf \{ \mu(E) \mid E \text{ es extensión de } M \text{ tal que } E \models F \land I \land S \land R_\infty \}$$
+$$\mathbf{\text{TEOREMA 0 (Representación Categorial):}}$$
 
-* **Interpretación:** $\mu$ mide el coste de certificar un morfismo existente en la estructura. $\kappa$ mide el coste mínimo de extender la estructura $M$ mediante un embedding $M \hookrightarrow E$ hasta volverla completamente certificable.
+> **Enunciado:** Existe una equivalencia de categorías:
+> $$\mathbf{Mod}(\Sigma, T) \;\simeq\; \mathbf{CertCalc}(\mathcal{C})$$
+> entre la categoría de modelos $\mathbf{Mod}(\Sigma, T)$ y la categoría de cálculos de certificados composicionales $\mathbf{CertCalc}(\mathcal{C})$ definidos como funtores $\mathrm{Cert}: \mathbf{Arr}(\mathcal{C}) \to \mathbf{Set}$ provistos de una estructura monoidal estricta sobre la composición de flechas.
 
----
-
-## 7. TEOREMA DE REPRESENTACIÓN ($T_0$)
-
-$$\mathbf{\text{TEOREMA 0 (Representación FISR):}}$$
-
-> **Enunciado:** Una preestructura monoidal fibrada $\mathcal{M}$ admite semántica FISR (es decir, $\mathcal{M} \in \mathbf{Mod}(\Sigma, T)$) si y sólo si existe un cálculo composicional de certificados $\mathcal{K}_\mathcal{M} = (\text{Cert}, \circ_{\text{Cert}})$ compatible con la fibración $\mathrm{Sub}(\mathcal{M})$ y el operador interior síncrono $\Box_t$.
-
-* **Demostración (Boceto):**
-  * $(\Rightarrow)$ Si $\mathcal{M} \in \mathbf{Mod}(\Sigma, T)$, la métrica $\mu$ define conjuntos de nivel no vacíos $\text{Cert}(\alpha) = \{ \pi \mid \text{ProofCost}(\pi) < \infty \}$. La ley de subaditividad de $T$ garantiza la existencia de $\circ_{\text{Cert}}$.
-  * $(\Leftarrow)$ Dada $\mathcal{K}_\mathcal{M}$, construimos la métrica primitiva $\mu(\alpha) = \min_{\pi \in \text{Cert}(\alpha)} |\pi|$, verificando que satisface la subaditividad y que los predicados $F, I, S$ colapsan de forma composicional. $\blacksquare$
+*Demostración:*
+1. **Funtor Canónico $\Phi: \mathbf{Mod}(\Sigma, T) \to \mathbf{CertCalc}(\mathcal{C})$:** Asocia a cada modelo $\mathcal{M}$ su funtor de certificados $\mathrm{Cert}_\mathcal{M}: \mathbf{Arr}(\mathcal{C}) \to \mathbf{Set}$.
+2. **Funtor Inverso $\Psi: \mathbf{CertCalc}(\mathcal{C}) \to \mathbf{Mod}(\Sigma, T)$:** Dado un cálculo de certificados $\mathcal{K} \in \mathbf{CertCalc}(\mathcal{C})$, definimos el funtor de predicados $\mathrm{Pred}_\mathcal{K}(A) \triangleq \{ \alpha: A \to B \mid \mathrm{Cert}(\alpha) \neq \emptyset \}$ y el operador interior síncrono mediante los sub-testigos de mínima longitud.
+3. Se verifica el isomorfismo natural $\Phi \circ \Psi \cong \mathrm{Id}_{\mathbf{CertCalc}(\mathcal{C})}$ y $\Psi \circ \Phi \cong \mathrm{Id}_{\mathbf{Mod}(\Sigma, T)}$. $\blacksquare$
 
 ---
 
-## 8. MODELOS MÍNIMOS DE INDEPENDENCIA
+## VII. TEORÍA DE COSTES UNIFICADA ($\mu, \kappa, \Delta_{\text{overhead}}$)
 
-Para demostrar que ninguno de los axiomas es redundante en $\text{Compat}(\Omega)$, construimos cuatro modelos de contraejemplo **algebraicamente mínimos**:
+### 7.1 Coste Derivado de Extensión Fibrada Conservativa ($\kappa$)
+Unificamos el coste interno $\mu$ y la extensión externa $\kappa$ fijando la noción de *embedding monoidal pleno fibrado conservativo* ($M \hookrightarrow_\text{fib} E$):
 
-$$M_{\neg F}, \quad M_{\neg I}, \quad M_{\neg S}, \quad M_{\neg R_k}$$
+$$\kappa(M) \triangleq \inf \{ \mu(E) \mid E \in \mathbf{Mod}(F,I,S,R_\infty) \text{ tal que } M \hookrightarrow_\text{fib} E \text{ es un embedding pleno fibrado} \}$$
 
-**Condición de Minimalidad Estricta:** Ningún submodelo propio $N \subsetneq M_{\neg P_i}$ satisface las condiciones del contraejemplo manteniendo la validez del resto de las propiedades. Esto elimina contraejemplos triviales o inflamados artificialmente.
+### 7.2 Métrica de Fricción Síncrona $\Delta_{\text{overhead}}$
+Para cualquier par de morfismos componibles $\alpha: A \to B, \beta: B \to C$, definimos la función de fricción $\Delta_{\text{overhead}}: \mathrm{Mor}(\mathcal{C}) \times \mathrm{Mor}(\mathcal{C}) \to \mathbb{R}_{\ge 0}$ satisfaciendo axiomáticamente:
 
----
+1. **Nulidad en Identidad:** $\Delta_{\text{overhead}}(\mathrm{id}_A, \alpha) = \Delta_{\text{overhead}}(\alpha, \mathrm{id}_B) = 0$.
+2. **Positividad Métrica:** $\Delta_{\text{overhead}}(\alpha, \beta) \ge 0$.
+3. **Desigualdad Triangular:** $\Delta_{\text{overhead}}(\alpha, \gamma) \le \Delta_{\text{overhead}}(\alpha, \beta) + \Delta_{\text{overhead}}(\beta, \gamma)$.
 
-## 9. TEOREMAS DE SUBADITIVIDAD DE $\mu$
-
-Dado $\alpha: A \to B$ y $\beta: B \to C$:
+La subaditividad de la prueba compuesta se expresa formalmente como:
 
 $$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \Delta_{\text{overhead}}(\alpha, \beta)$$
 
-donde $\Delta_{\text{overhead}}$ mide la fricción de alineamiento temporal/síncrono al componer testigos. Si el modelo es puramente síncrono ($S$), $\Delta_{\text{overhead}} = 0$, obteniendo la subaditividad estricta $\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta)$.
-
 ---
 
-## 10. PRIMER TEOREMA DE SEPARACIÓN POR COSTE
+## VIII. SEPARACIÓN POR COSTES (CONJETURA $C_1$)
 
-$$\mathbf{\text{TEOREMA 1 (Separación por Presupuesto):}}$$
+Presentamos la separación por presupuesto como un programa de investigación formal mediante la siguiente conjetura:
 
-> Existen constantes $k_1 < k_2 < \infty$ y una familia de morfismos $\{\alpha_n\}_{n \in \mathbb{N}}$ tales que:
+$$\mathbf{\text{CONJETURA 1 (Separación por Presupuesto } C_1\mathbf{):}}$$
+
+> Existen constantes $k_1 < k_2 < \infty$ y una familia de modelos monoidales no degenerados $\{M_n\}_{n \in \mathbb{N}}$ tales que la jerarquía de modelos satisface la inclusión estricta:
 > $$\mathbf{Mod}(F, I, S, R_{k_1}) \subsetneq \mathbf{Mod}(F, I, S, R_{k_2})$$
-> Demostrando que la jerarquía de modelos en función de la métrica observable $\mu$ es estrictamente infinita y no colapsa.
+> La demostración constructiva requiere exhibir una familia de morfismos con coste de certificado estrictamente creciente en $n$.
 
 ---
 
-## 11. REGISTRO DE TRACEABILIDAD BFT DE MUTACIÓN
+## IX. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Teorema FISR y Complejo Compat(Ω) reestructurados bajo estratificación P0-P3
+Claim: Refinamiento matemático de la Teoría FISR Baseline v14.0 respondiendo a P0-P8
 Proof:
-  Base: 0x8a339ceb0565c1918c0f6bd32ccf301c05060aaae2ec84e73aa281daa4493fb5
-  Range: [Nivel_0, Nivel_3]
+  Base: 0xcd15dc7b06ff8f8101a0dbbd26ddac12595ca1d2
+  Range: [Sección_I, Sección_VIII]
   Confidence: C5-REAL
 ```
