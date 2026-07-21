@@ -19,8 +19,8 @@ class FakeHeaders(dict[str, str]):
 
 
 def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
-    mac = hmac.new(secret.encode("utf-8"), payload, hashlib.sha256).hexdigest()
-    return f"sha256={mac}"
+    mac = hmac.new(secret.encode("utf-8"), payload, hashlib.sha3_256).hexdigest()
+    return f"sha3-256={mac}"
 
 
 class TestInitPerceptionLedger:
