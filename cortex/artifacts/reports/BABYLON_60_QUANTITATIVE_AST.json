@@ -1,5 +1,5 @@
 {
-  "files_analyzed": 136,
+  "files_analyzed": 140,
   "circular_dependencies": [],
   "hotspots": [
     {
@@ -59,6 +59,14 @@
       "loc": 289
     },
     {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "score": 28,
+      "complexity": 24,
+      "fan_in": 2,
+      "fan_out": 0,
+      "loc": 307
+    },
+    {
       "file": "scripts/phase4_runtime_ipc.py",
       "score": 25,
       "complexity": 25,
@@ -81,6 +89,14 @@
       "fan_in": 0,
       "fan_out": 0,
       "loc": 157
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
+      "score": 23,
+      "complexity": 23,
+      "fan_in": 0,
+      "fan_out": 0,
+      "loc": 245
     },
     {
       "file": "cortex/escohotado_chaos_engine.py",
@@ -115,10 +131,10 @@
       "loc": 125
     },
     {
-      "file": "scripts/gemini_pool_manager.py",
-      "score": 20,
-      "complexity": 20,
-      "fan_in": 0,
+      "file": "cortex/swarm/memory_store.py",
+      "score": 19,
+      "complexity": 7,
+      "fan_in": 6,
       "fan_out": 0,
       "loc": 147
     },
@@ -139,28 +155,12 @@
       "loc": 113
     },
     {
-      "file": "cortex/swarm/memory_store.py",
-      "score": 18,
-      "complexity": 6,
-      "fan_in": 6,
-      "fan_out": 0,
-      "loc": 131
-    },
-    {
-      "file": "cortex/escohotado_cli.py",
+      "file": "cortex/claude_bridge.py",
       "score": 17,
       "complexity": 15,
       "fan_in": 1,
       "fan_out": 0,
-      "loc": 127
-    },
-    {
-      "file": "cortex/swarm/sanitizer.py",
-      "score": 17,
-      "complexity": 9,
-      "fan_in": 4,
-      "fan_out": 0,
-      "loc": 68
+      "loc": 128
     }
   ],
   "top_50_complex": [
@@ -193,7 +193,15 @@
       "complexity": 25
     },
     {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "complexity": 24
+    },
+    {
       "file": "scripts/cortex-omega-purge.py",
+      "complexity": 23
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
       "complexity": 23
     },
     {
@@ -213,10 +221,6 @@
       "complexity": 20
     },
     {
-      "file": "scripts/gemini_pool_manager.py",
-      "complexity": 20
-    },
-    {
       "file": "scripts/codegen_utils.py",
       "complexity": 19
     },
@@ -233,6 +237,10 @@
       "complexity": 16
     },
     {
+      "file": "cortex/claude_bridge.py",
+      "complexity": 15
+    },
+    {
       "file": "cortex/escohotado_cli.py",
       "complexity": 15
     },
@@ -247,6 +255,10 @@
     {
       "file": "scripts/16_codegen_primitives.py",
       "complexity": 15
+    },
+    {
+      "file": "cortex/laboratory/tercer_experimento_c5/03_codigo.py",
+      "complexity": 14
     },
     {
       "file": "scripts/phase3_call_graph.py",
@@ -317,7 +329,7 @@
       "complexity": 11
     },
     {
-      "file": "cortex/mcts_vnode_compiler.py",
+      "file": "cortex/active_inference_engine.py",
       "complexity": 10
     },
     {
@@ -351,18 +363,6 @@
     {
       "file": "cortex/deliverability_validator.py",
       "complexity": 8
-    },
-    {
-      "file": "cortex/playwright.py",
-      "complexity": 8
-    },
-    {
-      "file": "cortex/active_inference_engine.py",
-      "complexity": 8
-    },
-    {
-      "file": "scratch/ingest_real_substack_bodies.py",
-      "complexity": 8
     }
   ],
   "top_50_loc": [
@@ -379,8 +379,16 @@
       "loc": 332
     },
     {
+      "file": "cortex/mcts_vnode_compiler.py",
+      "loc": 307
+    },
+    {
       "file": "scripts/anergy_ratio.py",
       "loc": 289
+    },
+    {
+      "file": "cortex/mcts_vnode_compiler_test.py",
+      "loc": 257
     },
     {
       "file": "scripts/55_substack_laboratory_compiler.py",
@@ -389,6 +397,10 @@
     {
       "file": "cortex/substack_subscriber_audit.py",
       "loc": 246
+    },
+    {
+      "file": "scripts/gemini_pool_manager.py",
+      "loc": 245
     },
     {
       "file": "scratch/parse_user_pasted_archive.py",
@@ -416,7 +428,7 @@
     },
     {
       "file": "scripts/43_iter_ultrathink.py",
-      "loc": 196
+      "loc": 199
     },
     {
       "file": "cortex/llm_router.py",
@@ -427,16 +439,16 @@
       "loc": 190
     },
     {
-      "file": "scripts/52_legion_purge.py",
-      "loc": 186
-    },
-    {
       "file": "scripts/stress_10k_async.py",
-      "loc": 184
+      "loc": 189
     },
     {
       "file": "cortex/babylon60/neuromorphic_primitives.py",
-      "loc": 176
+      "loc": 188
+    },
+    {
+      "file": "scripts/52_legion_purge.py",
+      "loc": 186
     },
     {
       "file": "scratch/improve_substack_post.py",
@@ -475,7 +487,7 @@
       "loc": 149
     },
     {
-      "file": "scripts/gemini_pool_manager.py",
+      "file": "cortex/swarm/memory_store.py",
       "loc": 147
     },
     {
@@ -499,10 +511,6 @@
       "loc": 131
     },
     {
-      "file": "cortex/swarm/memory_store.py",
-      "loc": 131
-    },
-    {
       "file": "cortex/bft_orchestrator_test.py",
       "loc": 130
     },
@@ -511,8 +519,8 @@
       "loc": 130
     },
     {
-      "file": "cortex/mcts_vnode_compiler.py",
-      "loc": 129
+      "file": "cortex/claude_bridge.py",
+      "loc": 128
     },
     {
       "file": "cortex/escohotado_cli.py",
@@ -547,8 +555,8 @@
       "loc": 113
     },
     {
-      "file": "cortex/mcts_vnode_compiler_test.py",
-      "loc": 111
+      "file": "cortex/laboratory/tercer_experimento_c5/03_codigo.py",
+      "loc": 110
     },
     {
       "file": "scripts/epistemic_forensics_prober.py",
@@ -557,14 +565,6 @@
     {
       "file": "cortex/substack_subscriber_audit_test.py",
       "loc": 107
-    },
-    {
-      "file": "scripts/phase3_call_graph.py",
-      "loc": 99
-    },
-    {
-      "file": "cortex/invariant_sentinel.py",
-      "loc": 98
     }
   ]
 }

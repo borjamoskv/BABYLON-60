@@ -111,6 +111,8 @@ interface SwarmNode {
   latency: number;
   lamport: number;
   hash: string;
+  x: number;
+  y: number;
 }
 
 const PROJECT_FILES: FileItem[] = [
@@ -157,7 +159,6 @@ Maintains state consistency across N>=3 agents via Lamport Clocks.
 """
 from typing import Any, Dict
 import hashlib
-import time
 
 class BFTOrchestrator:
     def __init__(self, num_nodes: int = 5):
@@ -265,20 +266,12 @@ jobs:
   }
 ];
 
-const PREDEFINED_SKILLS: SkillItem[] = [
-  { id: 'S1', name: 'DOM_CSS_Transducer', type: 'Visual Engine', exergy: '100%', desc: 'Industrial Noir 2026 SOTA UI Renderer', status: 'active' },
-  { id: 'S2', name: 'MCTS_Budget_Forcer', type: 'Logic Synthesizer', exergy: '99.4%', desc: 'Thermodynamic search bounds & proof MCTS', status: 'active' },
-  { id: 'S3', name: 'Swarm_Dispatcher', type: 'Orchestrator', exergy: '98.8%', desc: 'BFT parallel worker synchronization', status: 'active' },
-  { id: 'S4', name: 'OBLITERATOR_OMEGA', type: 'Purge Engine', exergy: '100%', desc: 'Entropy vector & zero-yield token purge', status: 'idle' },
-  { id: 'S5', name: 'FSharp_Rust_Enforcer', type: 'BFT Kernel', exergy: '99.9%', desc: 'Trilingual state & AST verification', status: 'active' }
-];
-
 const INITIAL_SWARM: SwarmNode[] = [
-  { id: 'node-0', name: 'MOSKV-1 APEX (Master)', role: 'Leader / Proposer', status: 'synced', latency: 0.4, lamport: 104, hash: '7a3f95b...e9' },
-  { id: 'node-1', name: 'Worker Alpha (Rust Core)', role: 'Execution Transducer', status: 'synced', latency: 1.2, lamport: 104, hash: '8a339ce...b5' },
-  { id: 'node-2', name: 'Worker Beta (Prolog Engine)', role: 'Unification Verifier', status: 'synced', latency: 1.8, lamport: 104, hash: '9b440df...c6' },
-  { id: 'node-3', name: 'Worker Gamma (Python Active Inf)', role: 'Free Energy Minimizer', status: 'synced', latency: 2.1, lamport: 104, hash: '1c551ea...d7' },
-  { id: 'node-4', name: 'Worker Delta (Go Transducer)', role: 'IPC Buffer & Wal', status: 'voting', latency: 3.4, lamport: 104, hash: '2d662fb...e8' }
+  { id: 'node-0', name: 'MOSKV-1 APEX (Leader)', role: 'Leader / Proposer', status: 'synced', latency: 0.4, lamport: 104, hash: '7a3f95b...e9', x: 200, y: 120 },
+  { id: 'node-1', name: 'Worker Alpha (Rust Core)', role: 'Execution Transducer', status: 'synced', latency: 1.2, lamport: 104, hash: '8a339ce...b5', x: 100, y: 220 },
+  { id: 'node-2', name: 'Worker Beta (Prolog Engine)', role: 'Unification Verifier', status: 'synced', latency: 1.8, lamport: 104, hash: '9b440df...c6', x: 300, y: 220 },
+  { id: 'node-3', name: 'Worker Gamma (Python Inf)', role: 'Free Energy Minimizer', status: 'synced', latency: 2.1, lamport: 104, hash: '1c551ea...d7', x: 80, y: 340 },
+  { id: 'node-4', name: 'Worker Delta (Go Transducer)', role: 'IPC Buffer & WAL', status: 'voting', latency: 3.4, lamport: 104, hash: '2d662fb...e8', x: 320, y: 340 }
 ];
 
 const MOCK_TABLES: DatabaseTable[] = [
@@ -327,16 +320,26 @@ export default function BabylonCompleteIDE() {
   const [cursorPos, setCursorPos] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'architecture' | 'swarm' | 'ledger' | 'inference' | 'settings'>('architecture');
   
+  // Terminal drawer & Command Palette state
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [terminalLogs, setTerminalLogs] = useState<string[]>([
+    '[SYSTEM] Ignition sequence completed. C5-REAL Kernel active.',
+    '[BFT] Initialized N=5 node consensus matrix. Lamport clock t=104.',
+    '[GIT] Git Sentinel active. Auto-commit hook bound to state mutation.'
+  ]);
+  const [commandPaletteOpen, setCommandPaletteOpen] = useState(false);
+  const [commandSearch, setCommandSearch] = useState('');
+
   // State indicators
   const [agentState, setAgentState] = useState<'idle' | 'indexing' | 'working' | 'done'>('idle');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [activeSkillId, setActiveSkillId] = useState<string | null>('S1');
   const [isHypervigilant, setIsHypervigilant] = useState(false);
   const [grainOverlay, setGrainOverlay] = useState(true);
 
   // Swarm State
   const [swarmNodes, setSwarmNodes] = useState<SwarmNode[]>(INITIAL_SWARM);
   const [lamportClock, setLamportClock] = useState<number>(104);
+  const [selectedSwarmNode, setSelectedSwarmNode] = useState<SwarmNode | null>(INITIAL_SWARM[0]);
 
   // Inference Console
   const [promptInput, setPromptInput] = useState('');
@@ -354,28 +357,28 @@ export default function BabylonCompleteIDE() {
     { seq: 14500, entry_hash: '9c440dfd0343a0108c0f6bd32ccf301c05060aaae2ec84e73aa281daa4493fb3', lamport_t: 102, created_at: '2026-07-21T22:48:30Z' }
   ]);
 
-  // Ecosystem status
-  const [cortexSync, setCortexSync] = useState(true);
-  const [moskv1Core, setMoskv1Core] = useState(true);
-
   // Dictation & Audio Canvas
   const [isDictating, setIsDictating] = useState(false);
   const recognitionRef = useRef<any>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number | null>(null);
 
-  // Keyboard Event Listeners for ⌘⇧E, ⌘8, ⌘S
+  // Keyboard Event Listeners for ⌘K, ⌘`, ⌘⇧E, ⌘S
   useEffect(() => {
     setIsLoaded(true);
 
     const handleKeyDownGlobal = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setCommandPaletteOpen(prev => !prev);
+      }
+      if ((e.metaKey || e.ctrlKey) && e.key === '`') {
+        e.preventDefault();
+        setIsTerminalOpen(prev => !prev);
+      }
       if ((e.metaKey || e.ctrlKey) && e.shiftKey && e.key.toLowerCase() === 'e') {
         e.preventDefault();
         setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'));
-      }
-      if ((e.metaKey || e.ctrlKey) && e.key === '8') {
-        e.preventDefault();
-        setSidebarTab('inference');
       }
       if ((e.metaKey || e.ctrlKey) && e.key === 's') {
         e.preventDefault();
@@ -463,6 +466,7 @@ export default function BabylonCompleteIDE() {
 
   const triggerSave = () => {
     setAgentState('working');
+    setTerminalLogs(prev => [`[STATE SAVE] ${activeFile.name} saved & verified to AST.`, ...prev]);
     setTimeout(() => {
       setAgentState('done');
       setTimeout(() => setAgentState('idle'), 1500);
@@ -477,7 +481,6 @@ export default function BabylonCompleteIDE() {
     } else {
       const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
       if (!SpeechRecognition) {
-        alert("Speech Recognition API non-native. Toggle simulated voice mode.");
         setIsDictating(true);
         return;
       }
@@ -542,7 +545,7 @@ export default function BabylonCompleteIDE() {
     if (!promptText.trim()) return;
     setAgentState('working');
     setInferenceOutput('C5-REAL Silicon Model Attestation Initialized...\n');
-    setTokensPerSecond(42.5);
+    setTokensPerSecond(48.2);
     setLatencyMs(12);
 
     const start = performance.now();
@@ -551,10 +554,12 @@ export default function BabylonCompleteIDE() {
       const elapsed = performance.now() - start;
       setLatencyMs(Math.round(elapsed) || 15);
       setInferenceOutput(prev => prev + `\n[VERIFIED] Tauri Kernel Response: ${res}\nExecution successful. Proof receipt anchored to BFT Ledger (Lamport: ${lamportClock}).`);
+      setTerminalLogs(prev => [`[INFERENCE] Prompt executed: "${promptText.slice(0, 30)}..."`, ...prev]);
       setAgentState('done');
       setTimeout(() => setAgentState('idle'), 3000);
     } catch (err) {
       setInferenceOutput(prev => prev + `\n[C5-REAL SILICON EMULATION] Dispatch completed.\nCalculated Free Energy D_KL = 0.000412\nProof Hash: 8a339ceb0565c1918c0f6bd32ccf301c05060aaae2ec84e73aa281daa4493fb5\nLamport Clock: t=${lamportClock}\nState: Unconditional BFT Consensus Achieved.`);
+      setTerminalLogs(prev => [`[INFERENCE] Emulated dispatch completed. t=${lamportClock}`, ...prev]);
       setAgentState('done');
       setTimeout(() => setAgentState('idle'), 3000);
     }
@@ -569,6 +574,7 @@ export default function BabylonCompleteIDE() {
       setQueryResults([
         { seq: 14503, entry_hash: String(res), lamport_t: lamportClock, created_at: new Date().toISOString() }
       ]);
+      setTerminalLogs(prev => [`[SQL QUERY] Executed against ${selectedTable?.name}`, ...prev]);
       setAgentState('idle');
     } catch (err) {
       const mockNewRow = {
@@ -578,8 +584,23 @@ export default function BabylonCompleteIDE() {
         created_at: new Date().toISOString()
       };
       setQueryResults(prev => [mockNewRow, ...prev]);
+      setTerminalLogs(prev => [`[SQL QUERY] Evaluated: "${sqlQuery.slice(0, 30)}..."`, ...prev]);
       setAgentState('idle');
     }
+  };
+
+  // Trigger consensus vote
+  const triggerBFTVote = () => {
+    setAgentState('working');
+    setSwarmNodes(prev => prev.map(n => ({ ...n, status: 'voting' })));
+    setTerminalLogs(prev => [`[BFT SWARM] Consensus vote initiated across N=5 nodes...`, ...prev]);
+    setTimeout(() => {
+      setSwarmNodes(prev => prev.map(n => ({ ...n, status: 'synced' })));
+      setLamportClock(prev => prev + 1);
+      setAgentState('done');
+      setTerminalLogs(prev => [`[BFT SWARM] Unconditional Consensus Achieved. Hash sealed.`, ...prev]);
+      setTimeout(() => setAgentState('idle'), 2000);
+    }, 1200);
   };
 
   const lineCount = editorContent.split('\n').length;
@@ -697,6 +718,75 @@ export default function BabylonCompleteIDE() {
 
       <div className="grain" />
 
+      {/* COMMAND PALETTE POPUP */}
+      {commandPaletteOpen && (
+        <div 
+          className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-start justify-center pt-24"
+          onClick={() => setCommandPaletteOpen(false)}
+        >
+          <div 
+            className="w-[540px] bg-[#0E1122] border border-white/15 rounded-xl shadow-2xl p-4 flex flex-col gap-4"
+            onClick={e => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+              <span className="text-white/40 font-mono text-sm">⌘</span>
+              <input 
+                type="text"
+                autoFocus
+                value={commandSearch}
+                onChange={e => setCommandSearch(e.target.value)}
+                placeholder="Type a command or search workspace..."
+                className="w-full bg-transparent border-0 text-white font-mono text-sm outline-none placeholder:text-white/30"
+              />
+            </div>
+            <div className="flex flex-col gap-1 max-h-64 overflow-y-auto">
+              <button 
+                onClick={() => { setSidebarTab('architecture'); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>◈ Open Architecture View</span>
+                <span className="text-white/30">Tab 1</span>
+              </button>
+              <button 
+                onClick={() => { setSidebarTab('swarm'); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>⎈ Open BFT Swarm Topology Graph</span>
+                <span className="text-white/30">Tab 2</span>
+              </button>
+              <button 
+                onClick={() => { setSidebarTab('ledger'); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>⌬ Open Ledger DB Console</span>
+                <span className="text-white/30">Tab 3</span>
+              </button>
+              <button 
+                onClick={() => { setSidebarTab('inference'); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>⚡ Open Local Silicon Inference Console</span>
+                <span className="text-white/30">⌘8</span>
+              </button>
+              <button 
+                onClick={() => { triggerBFTVote(); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>🛡 Trigger BFT Consensus Vote</span>
+                <span className="text-white/30">Vote</span>
+              </button>
+              <button 
+                onClick={() => { setIsTerminalOpen(prev => !prev); setCommandPaletteOpen(false); }}
+                className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
+              >
+                <span>💻 Toggle System Terminal Log Drawer</span>
+                <span className="text-white/30">⌘`</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* AMBIENT TACHOMETER */}
       {cognitiveMode === '2E' && (
         <div 
@@ -709,7 +799,7 @@ export default function BabylonCompleteIDE() {
         />
       )}
 
-      {/* ULTRA MINIMAL HEADER */}
+      {/* HEADER */}
       <header 
         className="h-14 flex items-center justify-between px-8 z-40 border-b border-white/5"
         style={{ WebkitAppRegion: 'drag' } as any}
@@ -743,6 +833,15 @@ export default function BabylonCompleteIDE() {
         </div>
         
         <div className="flex items-center gap-6" style={{ WebkitAppRegion: 'no-drag' } as any}>
+          {/* Quick Palette Hint */}
+          <button 
+            onClick={() => setCommandPaletteOpen(true)}
+            className="hidden lg:flex items-center gap-2 text-[10px] font-mono text-white/40 bg-white/5 border border-white/10 px-2.5 py-1 rounded cursor-pointer hover:bg-white/10"
+          >
+            <span>Search / Commands</span>
+            <kbd className="bg-white/10 px-1 py-0.2 rounded text-[9px]">⌘K</kbd>
+          </button>
+
           {/* Real-time Exergy & Lamport HUD */}
           <div className="hidden md:flex items-center gap-4 text-[10px] font-mono text-white/40 border-r border-white/10 pr-6">
             <span>Lamport: <strong className="text-white/80">{lamportClock}</strong></span>
@@ -818,24 +917,32 @@ export default function BabylonCompleteIDE() {
           {sidebarTab === 'swarm' && (
             <div className="flex flex-col gap-6">
               <div className="flex justify-between items-center">
-                <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">BFT Node Topology</span>
+                <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">Swarm Actions</span>
                 <span className="text-[9px] font-mono text-emerald-400">N=5 Synced</span>
               </div>
 
-              <div className="flex flex-col gap-3">
+              <button 
+                onClick={triggerBFTVote}
+                className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[11px] font-mono uppercase tracking-widest cursor-pointer transition-all"
+              >
+                🛡 Trigger Consensus Vote
+              </button>
+
+              <div className="flex flex-col gap-3 mt-2">
+                <span className="text-[10px] font-mono uppercase text-white/30">Node Roster</span>
                 {swarmNodes.map(node => (
-                  <div key={node.id} className="bg-white/5 border border-white/5 rounded p-3 flex flex-col gap-1.5">
+                  <div 
+                    key={node.id} 
+                    onClick={() => setSelectedSwarmNode(node)}
+                    className={`border rounded p-2.5 flex flex-col gap-1 cursor-pointer transition-all ${selectedSwarmNode?.id === node.id ? 'bg-white/10 border-white/30' : 'bg-white/5 border-white/5 hover:border-white/20'}`}
+                  >
                     <div className="flex justify-between items-center">
-                      <span className="text-[11.5px] font-medium text-white/90">{node.name}</span>
-                      <span className={`text-[9px] font-mono uppercase px-1.5 py-0.5 rounded ${node.status === 'synced' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                      <span className="text-[11px] font-medium text-white/90 truncate">{node.name}</span>
+                      <span className={`text-[8.5px] font-mono uppercase px-1 py-0.2 rounded ${node.status === 'synced' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
                         {node.status}
                       </span>
                     </div>
-                    <div className="text-[10px] font-mono text-white/40">{node.role}</div>
-                    <div className="flex justify-between items-center text-[9px] font-mono text-white/30 mt-1">
-                      <span>Latency: {node.latency}ms</span>
-                      <span>t={node.lamport}</span>
-                    </div>
+                    <div className="text-[9.5px] font-mono text-white/40">{node.role}</div>
                   </div>
                 ))}
               </div>
@@ -918,9 +1025,75 @@ export default function BabylonCompleteIDE() {
         </div>
 
         {/* EDITOR AND MAIN WORKSPACE AREA */}
-        <div className="flex-1 flex flex-col min-w-0">
+        <div className="flex-1 flex flex-col min-w-0 relative">
           
-          {sidebarTab === 'inference' ? (
+          {sidebarTab === 'swarm' ? (
+            /* BFT SWARM TOPOLOGY GRAPH VISUALIZER */
+            <div className="flex-1 flex gap-8 relative overflow-hidden">
+              <div className="flex-1 flex flex-col min-w-0">
+                <div className="flex justify-between items-center mb-4">
+                  <h1 className="text-2xl font-light tracking-tight m-0" style={{ color: theme.accent }}>BFT Swarm Topology & Consensus DAG</h1>
+                  <span className="text-[10px] font-mono text-white/40 uppercase">Mode: Decentralized Poset</span>
+                </div>
+
+                <div className="flex-1 bg-black/40 border border-white/10 rounded-xl relative overflow-hidden p-4 flex flex-col">
+                  <svg className="w-full h-full absolute inset-0 pointer-events-none">
+                    {/* Connect leader node-0 to other nodes */}
+                    {swarmNodes.slice(1).map(node => (
+                      <line 
+                        key={`line-${node.id}`}
+                        x1={swarmNodes[0].x}
+                        y1={swarmNodes[0].y}
+                        x2={node.x}
+                        y2={node.y}
+                        stroke={theme.accent}
+                        strokeWidth="1.5"
+                        strokeDasharray="4 4"
+                        opacity="0.5"
+                      />
+                    ))}
+                  </svg>
+
+                  {/* Render node visual cards */}
+                  {swarmNodes.map(node => (
+                    <div 
+                      key={node.id}
+                      onClick={() => setSelectedSwarmNode(node)}
+                      className={`absolute p-3 rounded-lg border cursor-pointer transition-all duration-300 flex flex-col gap-1 w-44 ${selectedSwarmNode?.id === node.id ? 'bg-white/15 border-white/40 shadow-xl' : 'bg-black/60 border-white/10 hover:border-white/30'}`}
+                      style={{ left: node.x - 85, top: node.y - 35 }}
+                    >
+                      <div className="flex justify-between items-center">
+                        <span className="text-[11px] font-bold text-white truncate">{node.name.split(' ')[0]}</span>
+                        <div className={`w-2 h-2 rounded-full ${node.status === 'synced' ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
+                      </div>
+                      <span className="text-[9px] font-mono text-white/40 truncate">{node.role}</span>
+                      <span className="text-[8.5px] font-mono text-emerald-400 mt-1">t={node.lamport} · {node.latency}ms</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Node Inspector */}
+              <div className="w-72 border-l border-white/5 pl-6 flex flex-col gap-6 shrink-0">
+                <span className="text-[10px] font-mono uppercase text-white/30">Node Telemetry Inspector</span>
+                {selectedSwarmNode ? (
+                  <div className="border border-white/10 bg-white/5 rounded-md p-4 flex flex-col gap-3 text-xs font-mono">
+                    <div className="text-sm font-medium text-white">{selectedSwarmNode.name}</div>
+                    <div className="text-white/50 text-[10px]">{selectedSwarmNode.role}</div>
+                    <div className="border-t border-white/10 pt-2 flex flex-col gap-1 text-[11px]">
+                      <div>Status: <span className="text-emerald-400">{selectedSwarmNode.status}</span></div>
+                      <div>Lamport: <span className="text-white">{selectedSwarmNode.lamport}</span></div>
+                      <div>Latency: <span className="text-white">{selectedSwarmNode.latency}ms</span></div>
+                      <div className="truncate mt-1 text-[9px] text-white/30" title={selectedSwarmNode.hash}>Hash: {selectedSwarmNode.hash}</div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-white/30 text-xs font-mono">Select a node to inspect telemetry.</div>
+                )}
+              </div>
+            </div>
+
+          ) : sidebarTab === 'inference' ? (
             <div className="flex-1 flex gap-8 relative overflow-hidden">
               <div className="flex-1 flex flex-col min-w-0">
                 <h1 className="text-2xl font-light tracking-tight mb-4" style={{ color: theme.accent }}>Local Silicon Inference Console</h1>
@@ -1148,11 +1321,37 @@ export default function BabylonCompleteIDE() {
                 <div className="flex items-center gap-6">
                   <span>Lines: {lineCount}</span>
                   <span>Chars: {editorContent.length}</span>
+                  <button 
+                    onClick={() => setIsTerminalOpen(prev => !prev)}
+                    className="text-white/60 hover:text-white bg-transparent border-0 cursor-pointer font-mono text-[10px] uppercase"
+                  >
+                    {isTerminalOpen ? '▼ Hide Logs' : '▲ System Terminal (⌘`)'}
+                  </button>
                 </div>
                 <div className="flex items-center gap-6">
                   <span>REALITY: C5-REAL</span>
                   <span>LANG: {activeFile.lang.toUpperCase()}</span>
                 </div>
+              </div>
+            </div>
+          )}
+
+          {/* SYSTEM TERMINAL LOG DRAWER */}
+          {isTerminalOpen && (
+            <div className="h-44 border-t border-white/10 bg-[#060812] p-3 flex flex-col font-mono text-xs z-30">
+              <div className="flex justify-between items-center border-b border-white/10 pb-1.5 mb-2">
+                <span className="text-[10px] uppercase tracking-widest text-white/50">C5-REAL System Log Stream</span>
+                <button 
+                  onClick={() => setIsTerminalOpen(false)}
+                  className="text-white/40 hover:text-white bg-transparent border-0 cursor-pointer text-xs"
+                >
+                  ✕
+                </button>
+              </div>
+              <div className="flex-1 overflow-y-auto flex flex-col gap-1 text-white/70 text-[11px]">
+                {terminalLogs.map((log, idx) => (
+                  <div key={idx} className="truncate">{log}</div>
+                ))}
               </div>
             </div>
           )}
