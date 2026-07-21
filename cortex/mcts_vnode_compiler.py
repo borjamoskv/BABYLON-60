@@ -66,7 +66,11 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
 
     # Generamos un AST válido estocásticamente basado en la iteración
     # Para simular una búsqueda real, inyectamos variaciones de código funcional.
-    branch_payload = f"def synthesized_theorem_{step}():\n    # Intention: {intention}\n    return {step} ** 2"
+    branch_payload = (
+        f"def synthesized_theorem_{step}():\n"
+        f"    # Intention: {intention}\n"
+        f"    return {step}**2\n"
+    )
 
     is_valid, entropy, nodes = vnode.execute_physical_test(branch_payload)
     if is_valid and entropy > 3.5:  # Filtro físico más estricto
