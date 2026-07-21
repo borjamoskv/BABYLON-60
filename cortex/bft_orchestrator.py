@@ -18,11 +18,15 @@ import asyncio
 import sqlite3
 import hashlib
 import time
+import os
 
 try:
     import strike_rs  # type: ignore[import-untyped]
 except ImportError:
     strike_rs = None
+
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 
 __all__ = [
     "BFTNode",
@@ -30,6 +34,7 @@ __all__ = [
     "init_bft_database",
     "DB_PATH",
     "strike_rs",
+    "EpistemicHalt",
 ]
 
 # DB Concurrency & Persist Configurations (R10)
@@ -277,9 +282,7 @@ class BFTOrchestrator:
             hash_votes[h] = hash_votes.get(h, 0) + 1
 
         if not hash_votes:
-            print("❌ Fatal: All nodes failed execution. Apoptosis triggered.")
-            self.is_running = False
-            return
+            raise EpistemicHalt("Fatal: All nodes failed execution. Apoptosis triggered.")
 
         majority_hash = max(hash_votes, key=lambda k: hash_votes[k])
         vote_count = hash_votes[majority_hash]
@@ -300,15 +303,17 @@ class BFTOrchestrator:
                     )
                     node.sync_from(leader_node)
         else:
-            print(
-                "❌ BFT consensus could not be reached! Splitting or fault limit exceeded."
-            )
+            raise EpistemicHalt("BFT consensus could not be reached! Splitting or fault limit exceeded.")
 
     def _write_to_ledger(
         self, d: int, p: int, m: int, prev_hash: str, current_hash: str
     ) -> None:
-        """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11)."""
-        taint = f"[CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{int(time.time())}]"
+        """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11, Ω113)."""
+        # Ω113: Dynamic Causal Taint
+        raw_payload = f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
+        dynamic_hash = hashlib.sha3_256(raw_payload).hexdigest()
+        taint = f"CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{dynamic_hash}"
+        
         with self._get_connection() as conn:
             try:
                 conn.execute(
@@ -317,10 +322,8 @@ class BFTOrchestrator:
                 )
                 conn.commit()
             except sqlite3.IntegrityError as e:
-                print(
-                    f"⚠️ Double write or uniqueness constraint violation on prev_hash: {e}"
-                )
                 conn.rollback()
+                raise EpistemicHalt(f"Double write or uniqueness constraint violation on prev_hash: {e}")
 
     def get_ledger_count(self) -> int:
         """Returns the current number of rows in the Master Ledger."""
