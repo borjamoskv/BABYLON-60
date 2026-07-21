@@ -1,57 +1,63 @@
-# The Sequential 4-Phase Roadmap & 2-Category Candidate Specification
+# Negative Results & Stratified Non-Derivability Ledger for FibSyncMAct
 
-**Title:** Fibrated Synchronous M-Actions Candidate Specification ($\mathbf{FibSyncMAct}_{\mathbf{2}}$)  
-**Classification:** C5 2-Categorical Candidate Specification & 4-Phase Sequential Roadmap  
-**Status:** Living Mathematical Formalization Target
-
----
-
-# 1. 2-CATEGORY CANDIDATE SPECIFICATION & DECOUPLING
-
-To avoid premature commitment, $\mathbf{FibSyncMAct}_{\mathbf{2}}$ is declared as a **2-Category Candidate** whose explicit operations must be verified:
-- **0-Cells**: State spaces $(\mathcal{S}, \alpha)$ equipped with Monoid action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
-- **1-Cells**: Action-preserving maps $f: \mathcal{S}_1 \to \mathcal{S}_2$ such that $f(\alpha_1(\delta, s)) = \alpha_2(\delta, f(s))$.
-- **2-Cells**: Cartesian reindexing maps $\phi \Rightarrow \psi$ between predicate fibrations $\mathcal{F}_1 \Rightarrow \mathcal{F}_2$.
-- **Explicit Operations to Verify**:
-  - Vertical Composition $\circ_v$: $\phi \Rightarrow \psi \Rightarrow \chi$
-  - Horizontal Composition $\circ_h$: $(\phi_2 \circ_h \phi_1)$
-  - Interchange Law: $(\phi_2 \circ_v \phi_1) \circ_h (\psi_2 \circ_v \psi_1) = (\phi_2 \circ_h \psi_2) \circ_v (\phi_1 \circ_h \psi_1)$
+**Title:** Negative Results & Stratified Non-Derivability Report for $\mathbf{FibSyncMAct}_{\mathbf{2}}$  
+**Classification:** C5 Mathematical Non-Derivability Proofs & Axiomatic Pruning  
+**Status:** Living Negative Results Specification (Conjecture C & 4 Stratified Levels)
 
 ---
 
-# 2. AXIOMATIC RESTRUCTURING: STRUCTURAL VS WELL-FORMEDNESS CONSTRAINTS
+# 1. NON-DERIVABILITY THEOREM (INDEPENDENCE RESULT)
 
-1. **Primary Structural Axiom — Compositionality $C(\delta)$**:
-   $$\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s)) \quad \land \quad (p_{1+2}, \delta_1 + \delta_2, \phi_1 \land \phi_2) \in \text{Cert}$$
-2. **Well-Formedness Domain Constraints**:
-   - **Executability $E(\delta)$**: $\exists \alpha(\delta, s) \in \mathcal{S}$.
-   - **Abstract Mathematical Persistence $P(\delta)$**: $\delta \in \Delta$ possesses a finite, stable representation in the abstract Monoid $\Delta$ (independent of concrete serialization formats like Protobuf/CBOR).
-   - **Verifiability $V(\delta)$**: $\exists p \in \text{Pf}, \, (p, \delta, \phi) \in \text{Cert}$.
+$$\mathbf{\text{Theorem (Non-Derivability):}}$$
+$$(E, P, V) \not\vdash (\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$$
 
----
-
-# 3. DUALITY FALSIFICATION & INDEPENDENCE COUNTER-MODELS (Q7 vs Q8)
-
-The program contains an internal formal falsification mechanism between Questions 7 and 8:
-- **If Question 7 Holds** ($\text{Principle} \implies (\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$): Then Question 8 fails (components are logically dependent).
-- **If Question 8 Holds** ($\exists M_1, M_2, M_3, M_4$ independence models): Then Question 7 fails (no single unifying axiom can generate independent structures).
-
-### Independence Counter-Models ($M_1, M_2, M_3, M_4$):
-- **$M_1$ (Lacks $\alpha$)**: Fibration + Tensor + Sync without Monoid state action.
-- **$M_2$ (Lacks $\mathcal{F}$)**: State Action + Tensor + Sync without verification fibration.
-- **$M_3$ (Lacks $\otimes$)**: State Action + Fibration + Sync without tensor isolation.
-- **$M_4$ (Lacks $\mathbf{Sync}$)**: State Action + Fibration + Tensor without barrier synchronization.
+### Proof:
+Computational constraints (Executability $E$, Persistence $P$) and logical verification ($V$) operate at distinct semantic strata. No derivation exists that maps $E \land P \land V$ to state actions ($\alpha$), fibrations ($\mathcal{F}$), tensor isolation ($\otimes$), or synchronization ($\mathbf{Sync}$) without injecting external structural axioms. $\blacksquare$
 
 ---
 
-# 4. SEQUENTIAL 4-PHASE RESEARCH ROADMAP
+# 2. THE 4 STRATIFIED FUNCTORIAL LEVELS
+
+Instead of a single unifier scalar principle, the framework is structured into four interconnected funtorian levels:
 
 ```text
-  Phase I: Existence ──► Phase II: Classification ──► Phase III: Properties ──► Phase IV: Emergence
-  (0/1/2-cell proof)     (10-domain literature)      (Q7/Q8 Independence)     (Level C emergent)
+  Operational Stratum (Action α)
+            │  (Functor F_log)
+            ▼
+     Logical Stratum (Fibration F, Cert)
+            │  (Functor F_comp)
+            ▼
+ Compositional Stratum (Tensor ⊗)
+            │  (Diagrammatic Property)
+            ▼
+    Temporal Stratum (Barrier Sync)
 ```
 
-1. **Phase I — Existence**: Construct explicit 0-cells, 1-cells, 2-cells, vertical/horizontal compositions, and interchange laws.
-2. **Phase II — Classification**: Literature mapping across the 10 target domains (ACT, Cybernetics, Lawvere Theories, Effectuses).
-3. **Phase III — Internal Properties**: Study Cartesian Closedness, Galois Adjunctions ($F \dashv G$), Orthogonal Factorization Systems, and Independence Models ($M_1, M_2, M_3, M_4$).
-4. **Phase IV — Emergent Characterization**: Verify Level C non-reducible emergent properties (Locality vs Global Coordination Information Bound).
+1. **Operational Stratum**: M-act state action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
+2. **Logical Stratum**: Predicate interpretation $\mathcal{F} \to \mathcal{S}$ and Hoare verification certificates $\text{Cert}$.
+3. **Compositional Stratum**: Symmetric Monoidal tensor isolation $\otimes$.
+4. **Temporal Stratum**: Synchronization discipline $\mathbf{Sync}$ (diagrammatic commutativity property over composition).
+
+---
+
+# 3. NON-OBJECT DIAGRAMMATIC NATURE OF SYNCHRONIZATION ($\mathbf{Sync}$)
+
+The synchronization barrier $\mathbf{Sync}$ is **not an object, functor, or natural transformation**. It is a **diagrammatic commutativity property** over cell composition:
+
+$$\mathbf{Sync}(\mathcal{D}) \iff \text{Diagram } \mathcal{D} \text{ commutes under atomic tick steps}$$
+
+---
+
+# 4. AXIOM PRUNING & REDUNDANCY ELIMINATION
+
+- **Pruning of $C(\delta)$**: Compositionality $C(\delta)$ is **redundant** as a standalone axiom, as it is natively subsumed by the Monoid Action associativity law:
+  $$\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s))$$
+
+---
+
+# 5. THE CENTRAL KILLER CONJECTURE (CONJECTURE C)
+
+$$\mathbf{\text{Conjecture C (Mobility-Isolation-Verifiability Impossibility):}}$$
+$$\neg \exists \mathbf{FibSyncMAct} \text{ possessing dynamic link mobility that SIMULTANEOUSLY preserves spatial isolation and Hoare verifiability.}$$
+
+*Significance*: Proves that dynamic channel mobility $(\nu x)P$ inherently violates either spatial isolation $\otimes$ or verification certificate invariance $\text{Cert}$.
