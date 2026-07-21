@@ -4,149 +4,142 @@ use pyo3::prelude::*;
 // STATIC ONTOLOGY DICTIONARIES (STRING MAPPINGS)
 // ==========================================
 
-fn get_domain_str(d: u8) -> &'static str {
-    match d {
-        0 => "SOURCE",
-        1 => "MATRIX",
-        2 => "PULSE",
-        3 => "KINETIC",
-        4 => "LOGIC",
-        5 => "VECTOR",
-        6 => "STORAGE",
-        7 => "OSINT",
-        8 => "CLOCK",
-        9 => "COMPILER",
-        _ => "UNKNOWN",
-    }
+macro_rules! define_ontology_lookup {
+    ($func_name:ident, $( $val:expr => $str:expr ),* $(,)?) => {
+        fn $func_name(val: u8) -> &'static str {
+            match val {
+                $( $val => $str, )*
+                _ => "UNKNOWN",
+            }
+        }
+    };
 }
 
-fn get_primitive_str(p: u8) -> &'static str {
-    match p {
-        0 => "INIT",
-        1 => "PREDICT",
-        2 => "UPDATE",
-        3 => "INNOVATION",
-        4 => "GAIN",
-        5 => "COVARIANCE",
-        6 => "DRIFT_CHECK",
-        7 => "RECONSTRUCT",
-        8 => "SANITY_ASSERT",
-        9 => "FLUSH_LEDGER",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_domain_str,
+    0 => "SOURCE",
+    1 => "MATRIX",
+    2 => "PULSE",
+    3 => "KINETIC",
+    4 => "LOGIC",
+    5 => "VECTOR",
+    6 => "STORAGE",
+    7 => "OSINT",
+    8 => "CLOCK",
+    9 => "COMPILER",
+);
 
-fn get_modifier_str(m: u8) -> &'static str {
-    match m {
-        0 => "RAW",
-        1 => "ATOMIC",
-        2 => "KALMAN_EXTENDED",
-        3 => "LUENBERGER_RIGID",
-        4 => "PARTICLE_PF",
-        5 => "SLIDING_MODE",
-        6 => "QUANTIZED",
-        7 => "ADAPTIVE_R",
-        8 => "NEURAL_LATENT",
-        9 => "BFT_CONSENSUS",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_primitive_str,
+    0 => "INIT",
+    1 => "PREDICT",
+    2 => "UPDATE",
+    3 => "INNOVATION",
+    4 => "GAIN",
+    5 => "COVARIANCE",
+    6 => "DRIFT_CHECK",
+    7 => "RECONSTRUCT",
+    8 => "SANITY_ASSERT",
+    9 => "FLUSH_LEDGER",
+);
 
-fn get_neuro_domain_str(d: u8) -> &'static str {
-    match d {
-        0 => "ENERGY_BOUND",
-        1 => "ATTRACTOR_DECAY",
-        2 => "COGNITIVE_DRIFT",
-        3 => "RESOURCE_EXHAUST",
-        4 => "SYBIL_REVERB",
-        5 => "BAYESIAN_FREE_ENERGY",
-        6 => "LATENT_TORQUE",
-        7 => "SURPRISAL_GATE",
-        8 => "TEMPORAL_PHASE",
-        9 => "DEEP_MCTS_DEPTH",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_modifier_str,
+    0 => "RAW",
+    1 => "ATOMIC",
+    2 => "KALMAN_EXTENDED",
+    3 => "LUENBERGER_RIGID",
+    4 => "PARTICLE_PF",
+    5 => "SLIDING_MODE",
+    6 => "QUANTIZED",
+    7 => "ADAPTIVE_R",
+    8 => "NEURAL_LATENT",
+    9 => "BFT_CONSENSUS",
+);
 
-fn get_neuro_primitive_str(p: u8) -> &'static str {
-    match p {
-        0 => "HOMEOSTASIS_INIT",
-        1 => "HOMEOSTASIS_MUTATE",
-        2 => "PREDICTION_GENERATE",
-        3 => "PREDICTION_AUDIT",
-        4 => "ATTENTION_FOCUS",
-        5 => "ATTENTION_QUANTIZE",
-        6 => "ACTION_DISPATCH",
-        7 => "ACTION_ASSERT",
-        8 => "LANGUAGE_COLLAPSE",
-        9 => "LANGUAGE_FLUSH",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_neuro_domain_str,
+    0 => "ENERGY_BOUND",
+    1 => "ATTRACTOR_DECAY",
+    2 => "COGNITIVE_DRIFT",
+    3 => "RESOURCE_EXHAUST",
+    4 => "SYBIL_REVERB",
+    5 => "BAYESIAN_FREE_ENERGY",
+    6 => "LATENT_TORQUE",
+    7 => "SURPRISAL_GATE",
+    8 => "TEMPORAL_PHASE",
+    9 => "DEEP_MCTS_DEPTH",
+);
 
-fn get_neuro_modifier_str(m: u8) -> &'static str {
-    match m {
-        0 => "RAW",
-        1 => "ATOMIC",
-        2 => "ACTIVE_INFERENCE",
-        3 => "LYAPUNOV_STABLE",
-        4 => "SPARSE_KV",
-        5 => "BFT_CONSENSUS",
-        6 => "FEEDFORWARD",
-        7 => "BACKPROP_ERROR",
-        8 => "SLIDING_SURFACE",
-        9 => "EPIDEMIC_PURGE",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_neuro_primitive_str,
+    0 => "HOMEOSTASIS_INIT",
+    1 => "HOMEOSTASIS_MUTATE",
+    2 => "PREDICTION_GENERATE",
+    3 => "PREDICTION_AUDIT",
+    4 => "ATTENTION_FOCUS",
+    5 => "ATTENTION_QUANTIZE",
+    6 => "ACTION_DISPATCH",
+    7 => "ACTION_ASSERT",
+    8 => "LANGUAGE_COLLAPSE",
+    9 => "LANGUAGE_FLUSH",
+);
 
-fn get_tts_domain_str(d: u8) -> &'static str {
-    match d {
-        0 => "ENTROPY_ALLOC",
-        1 => "LATENT_LOOKAHEAD",
-        2 => "POLICY_IMPROVE",
-        3 => "HARNESS_DISCOVERY",
-        4 => "PROGRAMMATIC_JIT",
-        5 => "SWARM_GRAPH",
-        6 => "TRI_TIER_MEMORY",
-        7 => "INFO_KV_EVICTION",
-        8 => "STAGE_DECOUPLE",
-        9 => "VECTOR_QUANT",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_neuro_modifier_str,
+    0 => "RAW",
+    1 => "ATOMIC",
+    2 => "ACTIVE_INFERENCE",
+    3 => "LYAPUNOV_STABLE",
+    4 => "SPARSE_KV",
+    5 => "BFT_CONSENSUS",
+    6 => "FEEDFORWARD",
+    7 => "BACKPROP_ERROR",
+    8 => "SLIDING_SURFACE",
+    9 => "EPIDEMIC_PURGE",
+);
 
-fn get_tts_primitive_str(p: u8) -> &'static str {
-    match p {
-        0 => "INIT",
-        1 => "EXPAND",
-        2 => "EVALUATE",
-        3 => "BACKPROP",
-        4 => "PRUNE",
-        5 => "QUANTIZE",
-        6 => "ASSERT_BFT",
-        7 => "EXECUTE_SANDBOX",
-        8 => "RECONSTRUCT_STATE",
-        9 => "FLUSH_LEDGER",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_tts_domain_str,
+    0 => "ENTROPY_ALLOC",
+    1 => "LATENT_LOOKAHEAD",
+    2 => "POLICY_IMPROVE",
+    3 => "HARNESS_DISCOVERY",
+    4 => "PROGRAMMATIC_JIT",
+    5 => "SWARM_GRAPH",
+    6 => "TRI_TIER_MEMORY",
+    7 => "INFO_KV_EVICTION",
+    8 => "STAGE_DECOUPLE",
+    9 => "VECTOR_QUANT",
+);
 
-fn get_tts_modifier_str(m: u8) -> &'static str {
-    match m {
-        0 => "RAW",
-        1 => "ATOMIC",
-        2 => "ADAPTIVE_COT",
-        3 => "RETRO_ATTENTION",
-        4 => "FORWARD_INFLUENCE",
-        5 => "TURBO_QUANT",
-        6 => "META_PROPOSER",
-        7 => "FEEDFORWARD_OPEN",
-        8 => "SLIDING_WINDOW",
-        9 => "EPIDEMIC_PURGE",
-        _ => "UNKNOWN",
-    }
-}
+define_ontology_lookup!(
+    get_tts_primitive_str,
+    0 => "INIT",
+    1 => "EXPAND",
+    2 => "EVALUATE",
+    3 => "BACKPROP",
+    4 => "PRUNE",
+    5 => "QUANTIZE",
+    6 => "ASSERT_BFT",
+    7 => "EXECUTE_SANDBOX",
+    8 => "RECONSTRUCT_STATE",
+    9 => "FLUSH_LEDGER",
+);
+
+define_ontology_lookup!(
+    get_tts_modifier_str,
+    0 => "RAW",
+    1 => "ATOMIC",
+    2 => "ADAPTIVE_COT",
+    3 => "RETRO_ATTENTION",
+    4 => "FORWARD_INFLUENCE",
+    5 => "TURBO_QUANT",
+    6 => "META_PROPOSER",
+    7 => "FEEDFORWARD_OPEN",
+    8 => "SLIDING_WINDOW",
+    9 => "EPIDEMIC_PURGE",
+);
 
 // ==========================================
 // 1. STATE OBSERVER VECTOR
