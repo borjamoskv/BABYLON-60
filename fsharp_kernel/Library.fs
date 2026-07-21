@@ -7,6 +7,34 @@ type ValidationError =
     | ByzantineCombination of string
 
 // ==========================================
+// 5. CATEGORICAL 896 PRIMITIVES MODULE
+// ==========================================
+module Categorical896 =
+    type CategoricalDomain =
+        | D1_Structure = 1
+        | D2_LimitsColimits = 2
+        | D3_FunctorsAdjunctions = 3
+        | D4_MonoidalEnriched = 4
+        | D5_CategoricalLogicTopos = 5
+        | D6_CollisionObstruction = 6
+        | D7_Antipatterns = 7
+        | D8_FiberedMetrics = 8
+
+    type MorphismCost =
+        | Finite of float
+        | Infinity
+
+    let calculateMorphismCost (seq: int list) (friction: float) : MorphismCost =
+        match seq with
+        | [] -> Infinity
+        | _ -> Finite (float seq.Length + friction)
+
+    let detectCollisions (activeIds: int list) : (int * int) list =
+        let d6 = activeIds |> List.filter (fun id -> id >= 561 && id <= 672)
+        let d7 = activeIds |> List.filter (fun id -> id >= 673 && id <= 784)
+        [ for c in d6 do for a in d7 -> (c, a) ]
+
+// ==========================================
 // 1. STATE OBSERVER ONTOLOGY
 // ==========================================
 type ObserverDomain =

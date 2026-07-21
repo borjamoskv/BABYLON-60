@@ -113,8 +113,9 @@ class Categorical896Engine:
         conn.commit()
         conn.close()
 
-    def evaluate_morphism_cost(self, primitive_ids: List[int], friction_delta: float = 0.0) -> float:
+    def evaluate_morphism_cost(self, primitive_ids: List[int], friction_delta: float = 0.0, friction: float = 0.0) -> float:
         """Computes mu(alpha) structural certificate cost over primitive sequence."""
+        eff_friction = friction_delta if friction_delta != 0.0 else friction
         if not primitive_ids:
             return float('inf')
         
@@ -124,7 +125,7 @@ class Categorical896Engine:
 
         # Base cost model: sum of discrete weight per primitive + friction delta
         base_cost = float(len(valid_ids))
-        return base_cost + friction_delta
+        return base_cost + eff_friction
 
     def detect_diagrammatic_collisions(self, active_primitive_ids: Set[int]) -> List[Dict[str, Any]]:
         """Detects categorical collisions (e.g. D6 collision primitives combined with D7 antipatterns)."""

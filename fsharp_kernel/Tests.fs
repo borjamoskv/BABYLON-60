@@ -57,9 +57,18 @@ module OntologyTests =
         | Choice2Of2 (ByzantineCombination _) -> ()
         | res -> failwithf "Expected Security breach error for raw sandbox execution, got %A" res
 
+    let testCategorical896 () =
+        match Categorical896.calculateMorphismCost [1; 2; 3] 0.5 with
+        | Categorical896.Finite c -> assertEqual 3.5 c "Cost calculation match"
+        | Categorical896.Infinity -> failwith "Expected Finite 3.5, got Infinity"
+
+        let cols = Categorical896.detectCollisions [561; 673]
+        assertEqual [(561, 673)] cols "Collision detection match"
+
     let runAll () =
         printfn "[F# C5-REAL] Running FSharpKernel Ontology Tests..."
         testObserverParsing ()
         testNeuroParsing ()
         testTtsParsing ()
-        printfn "[F# C5-REAL] All F# Ontology Invariants Verified (100%% PASSED)."
+        testCategorical896 ()
+        printfn "ALL F# KERNEL ONTOLOGY & CATEGORICAL 896 TESTS PASSED C5-REAL."
