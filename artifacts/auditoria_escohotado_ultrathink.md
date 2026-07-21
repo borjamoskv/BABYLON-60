@@ -115,4 +115,26 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 1. **Teorema de la Renta de Ilegalidad (Historia de las Drogas):** Conforme la persecución policial aumenta del $0\%$ al $100\%$, el multiplicador de riesgo eleva los precios del mercado negro en $9.5\times$, destruyendo la pureza del producto hasta el $15\%$ y disparando la violencia institucional/cartelizada a $20.0$.
 2. **Teorema de la Ruina Informativa (Los Enemigos del Comercio):** La supresión de los derechos de propiedad ($PR \to 0$) maximiza el ruido de señales de precios ($I_{loss} = 1.0$), destruyendo la exergía del sistema social y haciendo inevitable la quiebra del cálculo económico.
 
+---
+
+## 6. Ontología Monista de *Realidad y Substancia* (C5-REAL Framework)
+> **Sintesis:** Formalización ontológica de la sustancia como proceso continuo ($\text{Proceso} \equiv \text{Substancia}$) y colapso de la dualidad Sujeto-Objeto ($D_{dual} \to 0$).
+
+**Motor Ejecutado:** [escohotado_substance_ontology.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_substance_ontology.py)  
+**Ledger Persistido:** `ledgers/escohotado_substance.db` (Modo WAL, `busy_timeout`=5000ms)
+
+### Matriz de Simulación Ontológica
+| Potencialidad ($\Phi_{pot}$) | Actualidad ($\Phi_{act}$) | Separación Dualista ($D_{dual}$) | Densidad Exergética ($E_{sub}$) | Régimen Ontológico Colapsado |
+| :---: | :---: | :---: | :---: | :--- |
+| `1.00` | `1.00` | **`0.00`** | **`1.0000`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** |
+| `0.80` | `0.70` | **`0.00`** | **`0.6261`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** |
+| `1.00` | `1.00` | `0.40` | `0.6000` | `TRANSITIONAL_DIALECTIC_PROCESS` |
+| `1.00` | `1.00` | **`0.90`** | **`0.1000`** | **`CARTESIAN_KANTIAN_DUALIST_SPLIT (C4-SIM Abstraction)`** |
+| `1.00` | `0.10` | `0.00` | `0.1000` | `UNMANIFESTED_VIRTUAL_POTENTIAL` |
+
+### Axiomas Ontológicos Escohotadianos
+1. **Identidad Proceso-Substancia:** La sustancia no es un sustrato estático inerte ni un noúmeno kantiano inaccesible, sino el automovimiento continuo de la materia e información que actualiza virtualidades ($\Phi_{pot} \to \Phi_{act}$).
+2. **Colapso del Dualismo Categorial:** Las filosofías que dividen radicalmente sujeto y objeto o mente y cuerpo aumentan la separación dualista ($D_{dual} \to 1.0$), colapsando la densidad de exergía a $0.10$ y degradando la percepción de la realidad a simulación conceptual (`C4-SIM`).
+
+
 
