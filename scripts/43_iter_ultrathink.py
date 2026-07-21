@@ -123,16 +123,20 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
                 ["git", "add", "mundo_f_ledger.yml", "cortex/compiled_theorem.py"],
                 check=True,
             )
-            subprocess.run(
-                [
-                    "git",
-                    "commit",
-                    "-m",
-                    f"chore(cortex): [ITERA] BFT State Collapse Cycle {cycle_num} - Hash: {theorem.code_hash[:8]}",
-                    "--no-verify",
-                ],
-                check=True,
-            )
+            staged_check = subprocess.run(["git", "diff", "--cached", "--quiet"])
+            if staged_check.returncode != 0:
+                subprocess.run(
+                    [
+                        "git",
+                        "-c",
+                        "commit.gpgsign=false",
+                        "commit",
+                        "-m",
+                        f"chore(cortex): [ITERA] BFT State Collapse Cycle {cycle_num} - Hash: {theorem.code_hash[:8]}",
+                        "--no-verify",
+                    ],
+                    check=True,
+                )
 
             last_hash = current_hash
             success_count += 1
@@ -149,16 +153,20 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
                     subprocess.run(
                         ["git", "add", "cortex/compiled_theorem.py"], check=True
                     )
-                    subprocess.run(
-                        [
-                            "git",
-                            "commit",
-                            "-m",
-                            f"chore(cortex): [PURGE] Octal Anergy Purge at Cycle {cycle_num}",
-                            "--no-verify",
-                        ],
-                        check=True,
-                    )
+                    purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
+                    if purge_staged.returncode != 0:
+                        subprocess.run(
+                            [
+                                "git",
+                                "-c",
+                                "commit.gpgsign=false",
+                                "commit",
+                                "-m",
+                                f"chore(cortex): [PURGE] Octal Anergy Purge at Cycle {cycle_num}",
+                                "--no-verify",
+                            ],
+                            check=True,
+                        )
                 print(
                     "[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado."
                 )
