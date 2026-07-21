@@ -2,7 +2,7 @@
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$  
 **Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
-**Status:** Frozen Baseline Specification (v19.0 APEX Singularity — Lawvere Enriched Metric, Corrected $\kappa$ Sub-monotonicity, Renormalization Operator & Compositional Singularity Bound)
+**Status:** Frozen Baseline Specification (v18.3 — Lawvere Enriched Metric & Extension/Repair Operator $\kappa$)
 
 ---
 

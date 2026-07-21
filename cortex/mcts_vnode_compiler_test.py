@@ -138,6 +138,22 @@ class TestMCTSNodeAndUCT:
         assert c1 is c2
         assert len(parent.children) == 1
 
+    def test_prune_if_anergy(self) -> None:
+        node = MCTSNode(state_id="test_prune")
+        payload = "x = 1"
+        theorem = ASTTheorem(
+            code_hash=hashlib.sha3_256(payload.encode("utf-8")).hexdigest(),
+            proven=True,
+            shannon_entropy=2.5,
+            ast_nodes=5,
+            ephemeral_vnode="vnode-1",
+            payload=payload,
+        )
+        node.theorem = theorem
+        assert node.prune_if_anergy(entropy_threshold=3.0) is True
+        assert node.is_pruned is True
+        assert node.uct_score() == -float("inf")
+
 
 class TestASTTheoremAndInvariants:
     def test_ast_theorem_valid_construction(self) -> None:
@@ -181,6 +197,30 @@ class TestASTTheoremAndInvariants:
                 payload="",
             )
 
+    def test_exergy_ratio_and_pruned_bounds_raise_value_error(self) -> None:
+        payload = "x = 1"
+        code_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
+        with pytest.raises(ValueError, match="exergy_ratio out of theoretical bounds"):
+            ASTTheorem(
+                code_hash=code_hash,
+                proven=True,
+                shannon_entropy=4.0,
+                ast_nodes=5,
+                ephemeral_vnode="vnode-1",
+                payload=payload,
+                exergy_ratio=15.0,
+            )
+        with pytest.raises(ValueError, match="pruned_branches cannot be negative"):
+            ASTTheorem(
+                code_hash=code_hash,
+                proven=True,
+                shannon_entropy=4.0,
+                ast_nodes=5,
+                ephemeral_vnode="vnode-1",
+                payload=payload,
+                pruned_branches=-1,
+            )
+
 
 class TestMCTSExpansionWorker:
     def test_worker_returns_ast_theorem_for_valid_step(self) -> None:
@@ -196,9 +236,9 @@ class TestMCTSExpansionWorker:
     def test_code_hash_is_sha3_256(self) -> None:
         result = _mcts_expansion_worker(("hash_check", 1))
         assert result is not None
-        payload = "def synthesized_theorem_1():\n    # Intention: hash_check\n    return 1**2\n"
-        expected = hashlib.sha3_256(payload.encode()).hexdigest()
+        expected = hashlib.sha3_256(result.payload.encode("utf-8")).hexdigest()
         assert result.code_hash == expected
+        assert 0.0 <= result.exergy_ratio <= 10.0
 
 
 class TestL3InferenceEnginePhysical:
@@ -211,6 +251,8 @@ class TestL3InferenceEnginePhysical:
         assert len(theorem.code_hash) == 64
         assert "trajectories_evaluated" in engine.last_diagnostics
         assert engine.last_diagnostics["trajectories_evaluated"] > 0
+        assert "pruned_branches" in engine.last_diagnostics
+        assert theorem.pruned_branches >= 0
 
     def test_invalid_target_trajectories_raises_value_error(self) -> None:
         with pytest.raises(ValueError, match="target_trajectories must be positive"):

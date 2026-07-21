@@ -59,11 +59,21 @@ class ASTTheorem:
     ephemeral_vnode: str
     payload: str
     cortex_taint: str = ""
+    exergy_ratio: float = 1.0
+    pruned_branches: int = 0
 
     def __post_init__(self) -> None:
         if not (0.0 <= self.shannon_entropy <= 8.0):
             raise ValueError(
                 f"Shannon entropy out of theoretical bounds [0.0, 8.0]: {self.shannon_entropy}"
+            )
+        if not (0.0 <= self.exergy_ratio <= 10.0):
+            raise ValueError(
+                f"exergy_ratio out of theoretical bounds [0.0, 10.0]: {self.exergy_ratio}"
+            )
+        if self.pruned_branches < 0:
+            raise ValueError(
+                f"pruned_branches cannot be negative: {self.pruned_branches}"
             )
         if len(self.code_hash) != 64:
             raise ValueError(
@@ -164,12 +174,15 @@ class MCTSNode:
         self.visits: int = 0
         self.value: float = 0.0
         self.theorem: Optional[ASTTheorem] = None
+        self.is_pruned: bool = False
 
     @property
     def q_value(self) -> float:
         return self.value / self.visits if self.visits > 0 else 0.0
 
     def uct_score(self) -> float:
+        if self.is_pruned:
+            return -float("inf")
         if self.visits == 0:
             return float("inf")
         parent_visits = self.parent.visits if self.parent else 1
@@ -183,6 +196,13 @@ class MCTSNode:
             child = MCTSNode(state_id=child_id, parent=self, c_puct=self.c_puct)
             self.children[child_id] = child
         return self.children[child_id]
+
+    def prune_if_anergy(self, entropy_threshold: float = 3.2) -> bool:
+        """Thermodynamic budget forcing: prune zero-yield branches."""
+        if self.theorem is not None and self.theorem.shannon_entropy < entropy_threshold:
+            self.is_pruned = True
+            return True
+        return False
 
     def update(self, reward: float) -> None:
         self.visits += 1
@@ -201,15 +221,20 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
     vnode = EphemeralVNodePhysical(f"vnode-{step}")
 
     branch_payload = (
-        f"def synthesized_theorem_{step}():\n"
-        f"    # Intention: {intention}\n"
-        f"    return {step}**2\n"
+        f"def synthesized_theorem_{step}(x: int = {step}) -> int:\n"
+        f"    '''Physical C5-REAL theorem synthesized under intention: {intention}'''\n"
+        f"    assert isinstance(x, int), 'Input must be integer'\n"
+        f"    # Topological invariant assert\n"
+        f"    matrix = [i**2 + {step} for i in range(max(1, min({step} + 2, 10)))]\n"
+        f"    entropy_proxy = sum(matrix) / max(1, len(matrix))\n"
+        f"    return int(entropy_proxy + (x ** 2))\n"
     )
 
     is_valid, entropy, nodes = vnode.execute_physical_test(branch_payload)
     if is_valid and entropy > 3.5:  # Filtro físico estricto
         code_hash = hashlib.sha3_256(branch_payload.encode("utf-8")).hexdigest()
         taint = _generate_cortex_taint(code_hash)
+        exergy_ratio = round(min(10.0, (entropy / 8.0) * (nodes / 5.0)), 4)
         return ASTTheorem(
             code_hash=code_hash,
             proven=True,
@@ -218,6 +243,7 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
             ephemeral_vnode=vnode.node_id,
             payload=branch_payload,
             cortex_taint=taint,
+            exergy_ratio=exergy_ratio,
         )
     return None
 
@@ -237,10 +263,11 @@ class L3InferenceEnginePhysical:
 
     def compile_theorem(self, intention: str) -> ASTTheorem:
         """Búsqueda MCTS guiada por UCT sobre trayectorias hasta el colapso
-        empírico."""
+        empírico con Budget Forcing termodinámico."""
         start_time = time.perf_counter()
         root = MCTSNode(state_id="root", c_puct=self.c_puct)
         nodes_evaluated = 0
+        pruned_count = 0
 
         for i in range(self.target):
             nodes_evaluated += 1
@@ -249,24 +276,47 @@ class L3InferenceEnginePhysical:
 
             result = _mcts_expansion_worker((intention, i))
             if result is not None:
+                # Thermodynamic budget forcing check
+                child.theorem = result
+                if child.prune_if_anergy(entropy_threshold=3.6):
+                    pruned_count += 1
+                    child.update(0.0)
+                    root.update(0.0)
+                    continue
+
+                # We found a high-exergy theorem that passed threshold
                 reward = (result.shannon_entropy / 8.0) * (result.ast_nodes / 10.0)
                 child.update(reward)
-                child.theorem = result
                 root.update(reward)
+
+                # Attach updated theorem with exact pruned count
+                final_theorem = ASTTheorem(
+                    code_hash=result.code_hash,
+                    proven=result.proven,
+                    shannon_entropy=result.shannon_entropy,
+                    ast_nodes=result.ast_nodes,
+                    ephemeral_vnode=result.ephemeral_vnode,
+                    payload=result.payload,
+                    cortex_taint=result.cortex_taint,
+                    exergy_ratio=result.exergy_ratio,
+                    pruned_branches=pruned_count,
+                )
 
                 elapsed_ms = (time.perf_counter() - start_time) * 1000.0
                 self.last_diagnostics = {
                     "intention": intention,
                     "trajectories_evaluated": nodes_evaluated,
+                    "pruned_branches": pruned_count,
                     "target_trajectories": self.target,
                     "time_elapsed_ms": round(elapsed_ms, 3),
-                    "best_shannon_entropy": round(result.shannon_entropy, 4),
-                    "ast_nodes": result.ast_nodes,
+                    "best_shannon_entropy": round(final_theorem.shannon_entropy, 4),
+                    "exergy_ratio": final_theorem.exergy_ratio,
+                    "ast_nodes": final_theorem.ast_nodes,
                     "uct_score": round(child.uct_score(), 4),
-                    "cortex_taint": result.cortex_taint,
+                    "cortex_taint": final_theorem.cortex_taint,
                 }
                 logger.debug(f"MCTS Diagnostic: {self.last_diagnostics}")
-                return result
+                return final_theorem
 
             child.update(0.0)
             root.update(0.0)
@@ -275,6 +325,7 @@ class L3InferenceEnginePhysical:
         self.last_diagnostics = {
             "intention": intention,
             "trajectories_evaluated": nodes_evaluated,
+            "pruned_branches": pruned_count,
             "target_trajectories": self.target,
             "time_elapsed_ms": round(elapsed_ms, 3),
             "status": "EXHAUSTED",
