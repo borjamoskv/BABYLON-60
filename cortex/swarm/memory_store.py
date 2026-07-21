@@ -31,6 +31,9 @@ class AgentMemory:
         self.conn.execute("PRAGMA busy_timeout=10000;")
         self._init_table()
 
+        self.chroma_client: Any = None
+        self.collection: Any = None
+
         try:
             import chromadb
             from chromadb.config import Settings
@@ -43,9 +46,9 @@ class AgentMemory:
                 def _silent_capture(*args: Any, **kwargs: Any) -> None:
                     pass
 
-                posthog.capture = _silent_capture
+                setattr(posthog, "capture", _silent_capture)
                 if hasattr(posthog, "Posthog"):
-                    posthog.Posthog.capture = _silent_capture
+                    setattr(posthog.Posthog, "capture", _silent_capture)
             except Exception:
                 pass
 
