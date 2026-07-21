@@ -84,7 +84,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             from cortex.swarm.engine_fsm import SwarmFSM
 
             fsm = SwarmFSM()
-            issue_payload = {
+            issue_payload: dict[str, Any] = {
                 "body": f"Analyze and prove theorem for iteration {cycle_num}",
                 "code": theorem.payload,
                 "diff": f"+++ cortex/compiled_theorem.py\n+ {theorem.payload}",
@@ -97,12 +97,23 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                 },
             }
 
-            # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente
-            print(
-                "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
-            )
-            # Validation subprocess disabled — validation_proc set to None
-            validation_proc: Any = None
+            # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente o Desactivado por defecto
+            validation_proc: subprocess.Popen[Any] | None = None
+            if os.getenv("CORTEX_PARALLEL_VALIDATION") == "1":
+                print(
+                    "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
+                )
+                test_env = os.environ.copy()
+                validation_proc = subprocess.Popen(
+                    [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
+                    env=test_env,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL,
+                )
+            else:
+                print(
+                    "[ITERA-ULTRATHINK] BM-Ω // Parallel validation bypassed (CORTEX_PARALLEL_VALIDATION!=1). Fast path active."
+                )
 
             # Ejecutar transiciones de estado de la FSM de manera concurrente con pytest
             state = "UNPROCESSED"

@@ -78,5 +78,40 @@ async def test_neuromorphic_v2() -> None:
                     pass
 
 
+@pytest.mark.anyio
+async def test_auto_healing_mesh() -> None:
+    import uuid
+
+    db_path = f"memristor_heal_test_{uuid.uuid4().hex}.db"
+    try:
+        mesh = SelfHealingMesh(db_path)
+        mesh.connect("NodeA", "NodeB")
+        mesh.connect("NodeB", "NodeC")
+        mesh.connect("NodeA", "SurrogateX")
+        mesh.connect("SurrogateX", "NodeC")
+
+        # Kill intermediate NodeB
+        mesh.kill_node("NodeB")
+
+        # Check surrogate path finding
+        path = mesh.find_surrogate_path("NodeA", "NodeC")
+        assert path == ["NodeA", "SurrogateX", "NodeC"], f"Unexpected surrogate path: {path}"
+
+        # Route pulse through auto-healing
+        success = await mesh.route_pulse_with_auto_healing("NodeA", "NodeC", 12.0)
+        assert success is True
+        node_c = mesh.get_node("NodeC")
+        assert node_c.current_potential >= 10.0
+    finally:
+        for suffix in ["", "-wal", "-shm"]:
+            p = f"{db_path}{suffix}"
+            if os.path.exists(p):
+                try:
+                    os.remove(p)
+                except OSError:
+                    pass
+
+
 if __name__ == "__main__":
     asyncio.run(test_neuromorphic_v2())
+

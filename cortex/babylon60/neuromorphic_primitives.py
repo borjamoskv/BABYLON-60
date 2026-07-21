@@ -25,6 +25,7 @@ class STDPMemristor:
         try:
             with conn:
                 conn.execute("PRAGMA journal_mode=WAL;")
+                conn.execute("PRAGMA busy_timeout=5000;")
                 conn.execute("""
                     CREATE TABLE IF NOT EXISTS memristor_weights (
                         synapse_id TEXT PRIMARY KEY,
@@ -46,6 +47,7 @@ class STDPMemristor:
         conn = sqlite3.connect(self.db_path, timeout=5.0)
         try:
             with conn:
+                conn.execute("PRAGMA busy_timeout=5000;")
                 conn.execute("BEGIN IMMEDIATE")
                 cur = conn.execute(
                     "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
@@ -71,6 +73,7 @@ class STDPMemristor:
         conn = sqlite3.connect(self.db_path, timeout=5.0)
         try:
             with conn:
+                conn.execute("PRAGMA busy_timeout=5000;")
                 conn.execute("BEGIN IMMEDIATE")
                 cur = conn.execute(
                     "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
@@ -168,6 +171,26 @@ class SelfHealingMesh:
         )
         self.dead_nodes.add(node_id)
 
+    def find_surrogate_path(self, start_node: str, end_node: str) -> list[str]:
+        """Búsqueda BFS de ruta sustituta que evite nodos muertos (Métrica de Lawvere)."""
+        if start_node in self.dead_nodes or end_node in self.dead_nodes:
+            return []
+        
+        queue = [[start_node]]
+        visited = {start_node}
+        
+        while queue:
+            path = queue.pop(0)
+            curr = path[-1]
+            if curr == end_node:
+                return path
+            
+            for (pre, post) in self.synapses.keys():
+                if pre == curr and post not in visited and post not in self.dead_nodes:
+                    visited.add(post)
+                    queue.append(path + [post])
+        return []
+
     async def route_pulse(self, start_node: str, end_node: str, energy: float) -> None:
         """Enrutamiento tolerante a fallos buscando atajos (Plasticidad Topológica)."""
         if start_node in self.dead_nodes or end_node in self.dead_nodes:
@@ -185,3 +208,16 @@ class SelfHealingMesh:
 
         target = self.get_node(end_node)
         await target.accumulate(delivered_energy)
+
+    async def route_pulse_with_auto_healing(self, start_node: str, end_node: str, energy: float) -> bool:
+        """Enrutamiento con auto-sanación dinámica de Malla Neuromórfica en caso de bypass."""
+        path = self.find_surrogate_path(start_node, end_node)
+        if not path or len(path) < 2:
+            print(f"[SelfHealingMesh] Imposible reparar ruta {start_node}->{end_node}. Métrica Lawvere = inf.")
+            return False
+        
+        current_energy = energy
+        for i in range(len(path) - 1):
+            hop_pre, hop_post = path[i], path[i+1]
+            await self.route_pulse(hop_pre, hop_post, current_energy)
+        return True
