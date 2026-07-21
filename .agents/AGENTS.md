@@ -95,5 +95,19 @@ $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le 
 
 - **Soundness Estructural [Objetivo 5.1 / PRF-S]:** $\text{Certificación } k \implies M \models FISR_k^\mathcal{A}$.
 - **Completitud Relativa [Objetivo 5.2 / PRF-C]:** $M \models FISR_k^\mathcal{A} \implies \text{Existe certificación } k$ bajo hipótesis de fibra completas.
-- **Teorema Objetivo Inmediato:** Demostración formal de la subaditividad estricta de $\mu$ a partir del álgebra en $\mathcal{P}$.
+
+---
+
+# 6. TEOREMA DE SUBADITIVIDAD DE LA MÉTRICA $\mu$ [Teorema 1.1 - Probado]
+
+**Teorema 1.1 (Subaditividad de $\mu$):**  
+Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ (Opción A), la valoración laxa $|\cdot|$ y el Axioma Core-G ($\mathsf{Good} = \mathcal{P}$), para todo par de transiciones compuestas se verifica:
+
+1. **Subaditividad Secuencial:**  
+   $$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ$$
+2. **Subaditividad Monoidal:**  
+   $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes$$
+
+*Demostración:* Si $\mu(\alpha) = \infty$ o $\mu(\beta) = \infty$, el resultado es trivial. Si $\mu(\alpha), \mu(\beta) < \infty$, por alcanzabilidad existen $c_1^* \in \mathsf{Cert}(\alpha)$ y $c_2^* \in \mathsf{Cert}(\beta)$ con $|c_1^*| = \mu(\alpha)$ y $|c_2^*| = \mu(\beta)$. Los operadores $\circledast$ y $\boxtimes$ producen $c_2^* \circledast c_1^* \in \mathsf{Cert}(\beta \circ \alpha)$ y $c_1^* \boxtimes c_2^* \in \mathsf{Cert}(\alpha \otimes \beta)$. Al aplicar los axiomas de coste $|c_2^* \circledast c_1^*| \le \mu(\alpha) + \mu(\beta) + \delta_\circ$ y $|c_1^* \boxtimes c_2^*| \le \mu(\alpha) + \mu(\beta) + \delta_\otimes$, el ínfimo $\mu$ satisface ambas acotaciones superiores. $\blacksquare$
+
 
