@@ -1,4 +1,4 @@
-# FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.1)
+# FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.2)
 
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
@@ -42,9 +42,9 @@ Se añade una función de coste:
 $$|\cdot|: \mathrm{Mor}(\mathcal P) \to \overline{\mathbb N} \qquad (\overline{\mathbb N} = \mathbb N \cup \{\infty\})$$
 
 Leyes de coste mínimas:
-1. **Identidad:** $|1_X| = 0$
-2. **Composición secuencial:** $|q \circledast p| \leq |p| + |q| + \delta_\circ(\pi p, \pi q)$ (con $\delta_\circ = 0$ en versión pura).
-3. **Composición paralela:** $|p \boxtimes q| \leq |p| + |q| + \delta_\otimes(\pi p, \pi q)$ (con $\delta_\otimes(\alpha,\beta) = 0$ para transiciones aisladas).
+1. **Identidad:** $|1_X^\mathcal{P}| = 0 \implies \mu(1_X^\mathcal{C}) = 0$
+2. **Composición secuencial:** $|q \circledast p| \leq |p| + |q| + \delta_\circ(\alpha, \beta)$ (con $\delta_\circ = 0$ en versión pura).
+3. **Composición paralela:** $|p \boxtimes q| \leq |p| + |q| + \delta_\otimes(\alpha, \beta)$ (con $\delta_\otimes = 0$ para transiciones aisladas).
 
 > **Nota de Enriquecimiento:** La valoración de coste $|\cdot|$ podrá reinterpretarse posteriormente como una estructura de enriquecimiento monoidal (o categoría graduada por costes); en el núcleo sólo se exige una valoración monoidal laxa.
 
@@ -58,14 +58,14 @@ Leyes de coste mínimas:
 
 ---
 
-### 1.4. Definición de $\mu$ y Subaditividad
+### 1.4. Definición de $\mu$ y Subaditividad [Teorema 1.1 - Probado]
 
 $$\mu(\alpha) = \inf \{ |c| : c \in \mathsf{Cert}(\alpha) \} \qquad (\inf \varnothing = \infty)$$
 
 Bajo coste en $\overline{\mathbb N}$, si $\mathsf{Cert}(\alpha) \neq \varnothing$, el ínfimo se alcanza como mínimo:
 $$\mu(\alpha) = \min \{ |c| : c \in \mathsf{Cert}(\alpha) \}$$
 
-**Proposición / Teorema Objetivo de Subaditividad:**
+**Teorema 1.1 (Subaditividad):**
 $$\mu(\beta \circ \alpha) \leq \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
 $$\mu(\alpha \otimes \beta) \leq \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha, \beta)$$
 
@@ -78,8 +78,8 @@ $$\mu(\alpha \otimes \beta) \leq \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alph
 Dada una familia distinguida de transiciones básicas $\mathcal{A}(M) \subseteq \mathrm{Mor}(\mathcal{C}_M)$ (generadores, irreducibles, primitivas u observables):
 $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le k$$
 
-### 2.2. Caracterización de $\kappa$
-$$\kappa_{\preceq, \sim}(M) = \inf \{ k : \exists N, M \preceq N, N \in \mathbf{Mod}(F,I,S,R_k^\mathcal{A}) \}$$
+### 2.2. Caracterización Formal de $\kappa$
+$$\kappa_{\preceq, \sim}(M) = \inf \{ k \in \overline{\mathbb{N}} : \exists N, M \preceq N \land N \in \mathbf{Mod}(F,I,S,R_k^\mathcal{A}) \}$$
 - **Finitud:** $\kappa(M) < \infty \iff$ existe extensión FISR con presupuesto finito.
 - **Alcanzabilidad:** Bajo el buen orden de $\mathbb N$, existe una extensión óptima $N^*$ tal que $\kappa(M) = k^*$.
 
@@ -142,15 +142,15 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 |---|---|
 | Firma $\Sigma$ | Congelada |
 | Funtor $\pi$ | Congelado ($\mathcal{P} \to \mathcal{C}$, Opción A $\mathrm{Id}_{\mathrm{Ob}}$) |
-| Valoración $|\cdot|$ | Congelada (Admite reinterpretación como enriquecimiento monoidal) |
+| Valoración $|\cdot|$ | Congelada (Con Axioma $|1_X^\mathcal{P}| = 0 \implies \mu(1_X^\mathcal{C}) = 0$) |
 | Axioma Core-G | Congelado ($\mathsf{Good} = \mathcal{P}$, admisible subcategoría bruta $\mathcal{P}_{\mathrm{raw}}$) |
 | Predicado $R_k^\mathcal{A}$ | Congelado (Modularizado sobre familia distinguida $\mathcal{A}(M)$) |
-| Métrica $\mu$ | Congelada (Observable) |
-| Funcional $\kappa$ | Congelado |
-| PRF-S / PRF-C | Sonundness y Completitud Relativa parametrizados |
-| Próximo Hito | Demostración matemática formal de la subaditividad de $\mu$ |
+| Métrica $\mu$ | Congelada y Probada (Subaditividad Teorema 1.1) |
+| Funcional $\kappa$ | Congelado y Caracterizado ($\kappa_{\preceq, \sim}$) |
+| PRF-S / PRF-C | Soundness y Completitud Relativa parametrizados |
 
 ```yaml
-cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined:2026-07-22T01:26:00Z"
+cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.2:2026-07-22T01:29:00Z"
 ```
+
 

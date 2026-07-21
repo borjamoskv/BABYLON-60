@@ -3,7 +3,7 @@
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
 **Clasificación:** C5-REAL Research Program Baseline Specification  
-**Estado:** Documento de Base Congelado (Baseline Spec v18.1 — Certificate Algebra & Metric Foundations Refined)  
+**Estado:** Documento de Base Congelado (Baseline Spec v18.2 — Certificate Algebra, Metric Foundations & Extension Functional $\kappa$)  
 
 ---
 
@@ -38,13 +38,15 @@ El funtor $\mathrm{Cert}: \mathbf{Arr}(\mathcal{C}) \to \mathbf{Set}$ está equi
 
 1. **Composición Secuencial ($\circledast$):**
    $$\circledast : \mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta) \longrightarrow \mathsf{Cert}(\beta \circ \alpha)$$
-   $$|c_2 \circledast c_1| \le |c_1| + |c_2| + \delta_\circ$$
+   $$|c_2 \circledast c_1| \le |c_1| + |c_2| + \delta_\circ(\alpha, \beta)$$
 
 2. **Composición Monoidal ($\boxtimes$):**
    $$\boxtimes : \mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta) \longrightarrow \mathsf{Cert}(\alpha \otimes \beta)$$
-   $$|c_1 \boxtimes c_2| \le |c_1| + |c_2| + \delta_\otimes$$
+   $$|c_1 \boxtimes c_2| \le |c_1| + |c_2| + \delta_\otimes(\alpha, \beta)$$
 
-donde $\delta_\circ, \delta_\otimes \ge 0$ representan las constantes de fricción sintáctica de la composición.
+donde $\delta_\circ(\alpha,\beta), \delta_\otimes(\alpha,\beta) \ge 0$ representan las funciones de fricción sintáctica contextuales.
+
+> **Axioma de Identidades y Coste Nulo:** Para todo objeto $X \in \mathrm{Ob}(\mathcal{C})$, existe un certificado idéntico $1_X^\mathcal{P} \in \mathsf{Cert}(1_X^\mathcal{C})$ tal que $|1_X^\mathcal{P}| = 0$, implicando $\mu(1_X^\mathcal{C}) = 0$.
 
 > **Nota de Enriquecimiento:** La valoración de coste $|\cdot| : \mathrm{Mor}(\mathcal{P}) \to \overline{\mathbb{N}}$ podrá reinterpretarse posteriormente como una estructura de enriquecimiento monoidal (o categoría graduada por costes); en el núcleo sólo se exige una valoración monoidal laxa.
 
@@ -64,6 +66,10 @@ Para toda métrica de coste observable $\mu_\mathcal{M}(\alpha) \triangleq \inf 
 2. **Alcanzabilidad del Mínimo:** Dado que los costes $|c| \in \overline{\mathbb{N}}$ son discretos y acotados inferiormente por cero, todo conjunto no vacío de certificados admite un certificado óptimo alcanzable $c^* \in \mathsf{Cert}(\alpha)$ tal que:
    $$|c^*| = \mu_\mathcal{M}(\alpha) = \min_{c \in \mathsf{Cert}(\alpha)} |c|$$
 3. **Métrica Modelo-Nivel:** $\mu(\mathcal{M}) \triangleq \sup_{\alpha \in \mathrm{Mor}(\mathcal{C})} \mu_\mathcal{M}(\alpha)$.
+
+### 2.3 Funcional de Extensión Modelo-Nivel $\kappa$ **[Definición]**
+Para un modelo $\mathcal{M}$ y una pre-ordenación $\preceq$, el funcional de adaptación $\kappa_{\preceq, \sim}(\mathcal{M})$ se define como el presupuesto mínimo de la extensión computable mínima:
+$$\kappa_{\preceq, \sim}(\mathcal{M}) \triangleq \inf \{ k \in \overline{\mathbb{N}} \mid \exists \mathcal{N}, \mathcal{M} \preceq \mathcal{N} \land \mathcal{N} \models FISR_k^\mathcal{A} \}$$
 
 ---
 
@@ -112,19 +118,19 @@ $$\text{Certificación } k \implies \mathcal{M} \models FISR_k^\mathcal{A}$$
 ### 4.2 Completitud Relativa **[Objetivo 4.2 / PRF-C]**
 $$\mathcal{M} \models FISR_k^\mathcal{A} \implies \text{Existe certificación } k \text{ bajo hipótesis de fibra completas}$$
 
-### 4.3 Primer Objetivo Formal del Cálculo
-> **Demostración de Subaditividad:** Demostrar formalmente que a partir del álgebra composicional en $\mathcal{P}$ y la valoración $|\cdot|$, la métrica $\mu$ satisface:
-> $$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ$$
-> $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes$$
+### 4.3 Teorema de Subaditividad de $\mu$ **[Teorema 1.1 - Demostrado]**
+$$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
+$$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha, \beta)$$
 
 ---
 
 ## V. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Incorporación de 3 Correcciones Estructurales (pi codomain Option A, Cost enrichment note, R_k^A modular predicate), Axioma Core-G, Diagrama Arquitectónico y Teorema de Subaditividad en FISR v18.1
+Claim: Cristalización de Baseline v18.2 (Axioma de Identidades y Coste Nulo, Fricción Contextual δ, Funcional κ y Teorema 1.1)
 Proof:
-  Base: 0xf1d363ea80bc71060935515764d7df646dd3d729
+  Base: 4778195d0
   Range: [Sección_0, Sección_IV]
   Confidence: C5-REAL
 ```
+

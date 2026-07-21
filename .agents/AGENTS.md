@@ -2,7 +2,7 @@
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$  
 **Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
-**Status:** Frozen Baseline Specification (v18.1 — Refined Certificate Calculus & Metric Foundations)
+**Status:** Frozen Baseline Specification (v18.2 — Refined Certificate Calculus, Metric Foundations & Extension Functional $\kappa$)
 
 ---
 
@@ -29,13 +29,15 @@ El funtor $\mathrm{Cert}: \mathbf{Arr}(\mathcal{C}) \to \mathbf{Set}$ está equi
 
 1. **Composición Secuencial ($\circledast$):**
    $$\circledast : \mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta) \longrightarrow \mathsf{Cert}(\beta \circ \alpha)$$
-   $$|c_2 \circledast c_1| \le |c_1| + |c_2| + \delta_\circ$$
+   $$|c_2 \circledast c_1| \le |c_1| + |c_2| + \delta_\circ(\alpha, \beta)$$
 
 2. **Composición Monoidal ($\boxtimes$):**
    $$\boxtimes : \mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta) \longrightarrow \mathsf{Cert}(\alpha \otimes \beta)$$
-   $$|c_1 \boxtimes c_2| \le |c_1| + |c_2| + \delta_\otimes$$
+   $$|c_1 \boxtimes c_2| \le |c_1| + |c_2| + \delta_\otimes(\alpha, \beta)$$
 
-donde $|\cdot| : \mathrm{Mor}(\mathcal{P}) \to \overline{\mathbb{N}}$ es la valoración de coste monoidal laxa.
+donde $|\cdot| : \mathrm{Mor}(\mathcal{P}) \to \overline{\mathbb{N}}$ es la valoración de coste monoidal laxa y $\delta_\circ(\alpha,\beta), \delta_\otimes(\alpha,\beta) \ge 0$ son las funciones de fricción sintáctica contextuales.
+
+> **Axioma de Identidades y Coste Nulo:** Para todo objeto $X \in \mathrm{Ob}(\mathcal{C})$, existe un certificado idéntico $1_X^\mathcal{P} \in \mathsf{Cert}(1_X^\mathcal{C})$ tal que $|1_X^\mathcal{P}| = 0$, implicando $\mu(1_X^\mathcal{C}) = 0$.
 
 > **Nota de Enriquecimiento:** La valoración de coste $|\cdot|$ podrá reinterpretarse posteriormente como una estructura de enriquecimiento monoidal (o categoría graduada por costes); en el núcleo sólo se exige una valoración monoidal laxa.
 
@@ -51,6 +53,10 @@ Para toda métrica de coste observable $\mu(\alpha) \triangleq \inf \{ |c| \mid 
 
 - **Finitud:** Distinción estricta entre $\mu(\alpha) < \infty$ (certificable) y $\mu(\alpha) = \infty$ (intratable).
 - **Alcanzabilidad:** En $\overline{\mathbb{N}}$, todo conjunto no vacío de costes admite un mínimo alcanzable $c^* \in \mathsf{Cert}(\alpha)$ tal que $|c^*| = \mu(\alpha)$.
+
+### Funcional de Extensión Modelo-Nivel $\kappa$
+Para un modelo $\mathcal{M}$ y una pre-ordenación $\preceq$, el funcional de adaptación $\kappa_{\preceq, \sim}(\mathcal{M})$ se define como el presupuesto mínimo de la extensión computable mínima:
+$$\kappa_{\preceq, \sim}(\mathcal{M}) \triangleq \inf \{ k \in \overline{\mathbb{N}} \mid \exists \mathcal{N}, \mathcal{M} \preceq \mathcal{N} \land \mathcal{N} \models FISR_k^\mathcal{A} \}$$
 
 ---
 
@@ -104,10 +110,11 @@ $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le 
 Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ (Opción A), la valoración laxa $|\cdot|$ y el Axioma Core-G ($\mathsf{Good} = \mathcal{P}$), para todo par de transiciones compuestas se verifica:
 
 1. **Subaditividad Secuencial:**  
-   $$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ$$
+   $$\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
 2. **Subaditividad Monoidal:**  
-   $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes$$
+   $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha, \beta)$$
 
-*Demostración:* Si $\mu(\alpha) = \infty$ o $\mu(\beta) = \infty$, el resultado es trivial. Si $\mu(\alpha), \mu(\beta) < \infty$, por alcanzabilidad existen $c_1^* \in \mathsf{Cert}(\alpha)$ y $c_2^* \in \mathsf{Cert}(\beta)$ con $|c_1^*| = \mu(\alpha)$ y $|c_2^*| = \mu(\beta)$. Los operadores $\circledast$ y $\boxtimes$ producen $c_2^* \circledast c_1^* \in \mathsf{Cert}(\beta \circ \alpha)$ y $c_1^* \boxtimes c_2^* \in \mathsf{Cert}(\alpha \otimes \beta)$. Al aplicar los axiomas de coste $|c_2^* \circledast c_1^*| \le \mu(\alpha) + \mu(\beta) + \delta_\circ$ y $|c_1^* \boxtimes c_2^*| \le \mu(\alpha) + \mu(\beta) + \delta_\otimes$, el ínfimo $\mu$ satisface ambas acotaciones superiores. $\blacksquare$
+*Demostración:* Si $\mu(\alpha) = \infty$ o $\mu(\beta) = \infty$, el resultado es trivial. Si $\mu(\alpha), \mu(\beta) < \infty$, por alcanzabilidad existen $c_1^* \in \mathsf{Cert}(\alpha)$ y $c_2^* \in \mathsf{Cert}(\beta)$ con $|c_1^*| = \mu(\alpha)$ y $|c_2^*| = \mu(\beta)$. Los operadores $\circledast$ y $\boxtimes$ producen $c_2^* \circledast c_1^* \in \mathsf{Cert}(\beta \circ \alpha)$ y $c_1^* \boxtimes c_2^* \in \mathsf{Cert}(\alpha \otimes \beta)$. Al aplicar los axiomas de coste $|c_2^* \circledast c_1^*| \le \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$ y $|c_1^* \boxtimes c_2^*| \le \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha, \beta)$, el ínfimo $\mu$ satisface ambas acotaciones superiores. $\blacksquare$
+
 
 
