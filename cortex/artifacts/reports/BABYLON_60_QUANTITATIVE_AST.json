@@ -1,570 +1,570 @@
 {
-  "files_analyzed": 1188,
+  "files_analyzed": 136,
   "circular_dependencies": [],
   "hotspots": [
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydecimal.py",
-      "score": 819,
-      "complexity": 819,
-      "fan_in": 0,
+      "file": "cortex/llm_router.py",
+      "score": 37,
+      "complexity": 33,
+      "fan_in": 2,
       "fan_out": 0,
-      "loc": 6340
+      "loc": 192
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/inspect.py",
-      "score": 588,
-      "complexity": 588,
-      "fan_in": 0,
-      "fan_out": 0,
-      "loc": 3434
+      "file": "cortex/swarm/engine_fsm.py",
+      "score": 34,
+      "complexity": 18,
+      "fan_in": 6,
+      "fan_out": 4,
+      "loc": 133
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
-      "score": 582,
-      "complexity": 582,
-      "fan_in": 0,
-      "fan_out": 0,
-      "loc": 2951
+      "file": "cortex/bft_orchestrator.py",
+      "score": 31,
+      "complexity": 28,
+      "fan_in": 1,
+      "fan_out": 1,
+      "loc": 332
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/_header_value_parser.py",
-      "score": 556,
-      "complexity": 556,
+      "file": "scripts/10_codegen_engine.py",
+      "score": 31,
+      "complexity": 31,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 3096
+      "loc": 395
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tarfile.py",
-      "score": 496,
-      "complexity": 496,
+      "file": "scripts/run_pipeline.py",
+      "score": 31,
+      "complexity": 31,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 3032
+      "loc": 229
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/mock.py",
-      "score": 442,
-      "complexity": 442,
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "score": 30,
+      "complexity": 30,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 3055
+      "loc": 224
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
-      "score": 440,
-      "complexity": 440,
+      "file": "scripts/anergy_ratio.py",
+      "score": 30,
+      "complexity": 30,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2812
+      "loc": 289
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/subprocess.py",
-      "score": 404,
-      "complexity": 404,
+      "file": "scripts/phase4_runtime_ipc.py",
+      "score": 25,
+      "complexity": 25,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2217
+      "loc": 149
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pyio.py",
-      "score": 394,
-      "complexity": 394,
-      "fan_in": 0,
+      "file": "cortex/substack_subscriber_audit.py",
+      "score": 23,
+      "complexity": 17,
+      "fan_in": 3,
       "fan_out": 0,
-      "loc": 2699
+      "loc": 246
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
-      "score": 394,
-      "complexity": 394,
+      "file": "scripts/cortex-omega-purge.py",
+      "score": 23,
+      "complexity": 23,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2154
+      "loc": 157
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/enum.py",
-      "score": 389,
-      "complexity": 389,
-      "fan_in": 0,
+      "file": "cortex/escohotado_chaos_engine.py",
+      "score": 22,
+      "complexity": 20,
+      "fan_in": 1,
       "fan_out": 0,
-      "loc": 2109
+      "loc": 175
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/turtle.py",
-      "score": 385,
-      "complexity": 385,
+      "file": "scripts/50_audit_loop.py",
+      "score": 22,
+      "complexity": 21,
       "fan_in": 0,
-      "fan_out": 0,
-      "loc": 4208
+      "fan_out": 1,
+      "loc": 223
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zipfile/__init__.py",
-      "score": 382,
-      "complexity": 382,
+      "file": "scripts/56_laboratory_validator.py",
+      "score": 22,
+      "complexity": 22,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2341
+      "loc": 171
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/cookiejar.py",
-      "score": 367,
-      "complexity": 367,
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "score": 20,
+      "complexity": 20,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2122
+      "loc": 125
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/typing.py",
-      "score": 362,
-      "complexity": 362,
+      "file": "scripts/gemini_pool_manager.py",
+      "score": 20,
+      "complexity": 20,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 3495
+      "loc": 147
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/base_events.py",
-      "score": 359,
-      "complexity": 359,
+      "file": "scripts/codegen_utils.py",
+      "score": 19,
+      "complexity": 19,
       "fan_in": 0,
       "fan_out": 0,
-      "loc": 2025
+      "loc": 690
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
-      "score": 351,
-      "complexity": 351,
-      "fan_in": 0,
-      "fan_out": 0,
-      "loc": 1985
+      "file": "cortex/swarm/architect_agent.py",
+      "score": 18,
+      "complexity": 13,
+      "fan_in": 2,
+      "fan_out": 1,
+      "loc": 113
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/argparse.py",
-      "score": 342,
-      "complexity": 342,
-      "fan_in": 0,
+      "file": "cortex/swarm/memory_store.py",
+      "score": 18,
+      "complexity": 6,
+      "fan_in": 6,
       "fan_out": 0,
-      "loc": 2651
+      "loc": 131
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydatetime.py",
-      "score": 339,
-      "complexity": 339,
-      "fan_in": 0,
+      "file": "cortex/escohotado_cli.py",
+      "score": 17,
+      "complexity": 15,
+      "fan_in": 1,
       "fan_out": 0,
-      "loc": 2644
+      "loc": 127
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
-      "score": 338,
-      "complexity": 338,
-      "fan_in": 0,
+      "file": "cortex/swarm/sanitizer.py",
+      "score": 17,
+      "complexity": 9,
+      "fan_in": 4,
       "fan_out": 0,
-      "loc": 3677
+      "loc": 68
     }
   ],
   "top_50_complex": [
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydecimal.py",
-      "complexity": 819
+      "file": "cortex/llm_router.py",
+      "complexity": 33
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/inspect.py",
-      "complexity": 588
+      "file": "scripts/10_codegen_engine.py",
+      "complexity": 31
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
-      "complexity": 582
+      "file": "scripts/run_pipeline.py",
+      "complexity": 31
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/_header_value_parser.py",
-      "complexity": 556
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "complexity": 30
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tarfile.py",
-      "complexity": 496
+      "file": "scripts/anergy_ratio.py",
+      "complexity": 30
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/mock.py",
-      "complexity": 442
+      "file": "cortex/bft_orchestrator.py",
+      "complexity": 28
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
-      "complexity": 440
+      "file": "scripts/phase4_runtime_ipc.py",
+      "complexity": 25
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/subprocess.py",
-      "complexity": 404
+      "file": "scripts/cortex-omega-purge.py",
+      "complexity": 23
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pyio.py",
-      "complexity": 394
+      "file": "scripts/56_laboratory_validator.py",
+      "complexity": 22
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
-      "complexity": 394
+      "file": "scripts/50_audit_loop.py",
+      "complexity": 21
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/enum.py",
-      "complexity": 389
+      "file": "cortex/escohotado_chaos_engine.py",
+      "complexity": 20
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/turtle.py",
-      "complexity": 385
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "complexity": 20
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zipfile/__init__.py",
-      "complexity": 382
+      "file": "scripts/gemini_pool_manager.py",
+      "complexity": 20
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/cookiejar.py",
-      "complexity": 367
+      "file": "scripts/codegen_utils.py",
+      "complexity": 19
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/typing.py",
-      "complexity": 362
+      "file": "cortex/swarm/engine_fsm.py",
+      "complexity": 18
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/base_events.py",
-      "complexity": 359
+      "file": "cortex/substack_subscriber_audit.py",
+      "complexity": 17
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
-      "complexity": 351
+      "file": "scripts/55_substack_laboratory_compiler.py",
+      "complexity": 16
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/argparse.py",
-      "complexity": 342
+      "file": "cortex/escohotado_cli.py",
+      "complexity": 15
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydatetime.py",
-      "complexity": 339
+      "file": "scripts/phase_omega_theorem_prover.py",
+      "complexity": 15
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
-      "complexity": 338
+      "file": "scripts/54_tdah_orphan_purge.py",
+      "complexity": 15
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tkinter/__init__.py",
-      "complexity": 318
+      "file": "scripts/16_codegen_primitives.py",
+      "complexity": 15
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/dom/minidom.py",
-      "complexity": 306
+      "file": "scripts/phase3_call_graph.py",
+      "complexity": 14
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/etree/ElementTree.py",
-      "complexity": 306
+      "file": "scripts/phase7_state_machine_extractor.py",
+      "complexity": 14
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/re/_parser.py",
-      "complexity": 295
+      "file": "fix_mypy.py",
+      "complexity": 13
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/doctest.py",
-      "complexity": 294
+      "file": "cortex/swarm/architect_agent.py",
+      "complexity": 13
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/shutil.py",
-      "complexity": 280
+      "file": "scripts/ultrathink_sweep.py",
+      "complexity": 13
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ast.py",
-      "complexity": 268
+      "file": "scripts/52_legion_purge.py",
+      "complexity": 13
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pdb.py",
-      "complexity": 253
+      "file": "scripts/43_iter_ultrathink.py",
+      "complexity": 13
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/editor.py",
-      "complexity": 248
+      "file": "cortex/github_webhook_daemon.py",
+      "complexity": 12
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pickle.py",
-      "complexity": 245
+      "file": "cortex/invariant_sentinel.py",
+      "complexity": 12
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/pyshell.py",
-      "complexity": 245
+      "file": "cortex/substack_publisher_tool.py",
+      "complexity": 12
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/selector_events.py",
-      "complexity": 239
+      "file": "scripts/epistemic_forensics_prober.py",
+      "complexity": 12
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ipaddress.py",
-      "complexity": 235
+      "file": "scripts/51_autoconsolidate.py",
+      "complexity": 12
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/client.py",
-      "complexity": 234
+      "file": "cortex/babylon60/neuromorphic_primitives.py",
+      "complexity": 11
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/console.py",
-      "complexity": 229
+      "file": "scripts/omega_obliteration_purge.py",
+      "complexity": 11
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/__init__.py",
-      "complexity": 217
+      "file": "scripts/gemini_pool_collector.py",
+      "complexity": 11
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/_bootstrap.py",
-      "complexity": 210
+      "file": "scripts/20_format_all.py",
+      "complexity": 11
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/difflib.py",
-      "complexity": 208
+      "file": "scripts/arm64_mem_filter.py",
+      "complexity": 11
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/unix_events.py",
-      "complexity": 207
+      "file": "cortex/mcts_vnode_compiler.py",
+      "complexity": 10
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pathlib.py",
-      "complexity": 206
+      "file": "cortex/vibe_ide_engine.py",
+      "complexity": 10
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/traceback.py",
-      "complexity": 203
+      "file": "cortex/escohotado_substance_ontology.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/optparse.py",
-      "complexity": 191
+      "file": "cortex/swarm/sanitizer.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/case.py",
-      "complexity": 183
+      "file": "cortex/swarm/cli.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/_bootstrap_external.py",
-      "complexity": 183
+      "file": "scripts/17_codegen_github.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/msgpack/fallback.py",
-      "complexity": 182
+      "file": "scripts/53_centuria_swarm.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/re/_compiler.py",
-      "complexity": 179
+      "file": "scripts/generate_math_model.py",
+      "complexity": 9
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/config.py",
-      "complexity": 172
+      "file": "cortex/deliverability_validator.py",
+      "complexity": 8
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/imaplib.py",
-      "complexity": 170
+      "file": "cortex/playwright.py",
+      "complexity": 8
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/message.py",
-      "complexity": 168
+      "file": "cortex/active_inference_engine.py",
+      "complexity": 8
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/configparser.py",
-      "complexity": 167
+      "file": "scratch/ingest_real_substack_bodies.py",
+      "complexity": 8
     }
   ],
   "top_50_loc": [
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc_data/topics.py",
-      "loc": 12501
+      "file": "scripts/codegen_utils.py",
+      "loc": 690
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/idna/uts46data.py",
-      "loc": 8682
+      "file": "scripts/10_codegen_engine.py",
+      "loc": 395
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydecimal.py",
-      "loc": 6340
+      "file": "cortex/bft_orchestrator.py",
+      "loc": 332
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tkinter/__init__.py",
-      "loc": 4683
+      "file": "scripts/anergy_ratio.py",
+      "loc": 289
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/idna/idnadata.py",
-      "loc": 4244
+      "file": "scripts/55_substack_laboratory_compiler.py",
+      "loc": 252
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/turtle.py",
-      "loc": 4208
+      "file": "cortex/substack_subscriber_audit.py",
+      "loc": 246
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/pkg_resources/__init__.py",
-      "loc": 3677
+      "file": "scratch/parse_user_pasted_archive.py",
+      "loc": 230
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/_emoji_codes.py",
-      "loc": 3611
+      "file": "scripts/run_pipeline.py",
+      "loc": 229
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/typing.py",
-      "loc": 3495
+      "file": "scripts/quantitative_ast_analyzer.py",
+      "loc": 224
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/inspect.py",
-      "loc": 3434
+      "file": "scripts/50_audit_loop.py",
+      "loc": 223
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/email/_header_value_parser.py",
-      "loc": 3096
+      "file": "scratch/audit_escohotado.py",
+      "loc": 211
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/unittest/mock.py",
-      "loc": 3055
+      "file": "cortex/github_webhook_daemon_test.py",
+      "loc": 207
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tarfile.py",
-      "loc": 3032
+      "file": "scripts/43_iter_ultrathink.py",
+      "loc": 196
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pydoc.py",
-      "loc": 2951
+      "file": "cortex/llm_router.py",
+      "loc": 192
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pickletools.py",
-      "loc": 2905
+      "file": "scripts/17_codegen_github.py",
+      "loc": 190
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/doctest.py",
-      "loc": 2846
+      "file": "scripts/52_legion_purge.py",
+      "loc": 186
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/urllib/request.py",
-      "loc": 2812
+      "file": "scripts/stress_10k_async.py",
+      "loc": 184
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pyio.py",
-      "loc": 2699
+      "file": "cortex/babylon60/neuromorphic_primitives.py",
+      "loc": 176
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/console.py",
-      "loc": 2681
+      "file": "scratch/improve_substack_post.py",
+      "loc": 176
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/argparse.py",
-      "loc": 2651
+      "file": "cortex/escohotado_chaos_engine.py",
+      "loc": 175
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/_pydatetime.py",
-      "loc": 2644
+      "file": "scripts/53_centuria_swarm.py",
+      "loc": 175
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/html/entities.py",
-      "loc": 2514
+      "file": "scratch/build_all_substack_posts.py",
+      "loc": 174
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ipaddress.py",
-      "loc": 2431
+      "file": "scripts/56_laboratory_validator.py",
+      "loc": 171
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/configdialog.py",
-      "loc": 2409
+      "file": "scripts/18_codegen_playwright.py",
+      "loc": 168
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/__init__.py",
-      "loc": 2346
+      "file": "scratch/ingest_real_substack_bodies.py",
+      "loc": 158
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/zipfile/__init__.py",
-      "loc": 2341
+      "file": "scripts/cortex-omega-purge.py",
+      "loc": 157
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/subprocess.py",
-      "loc": 2217
+      "file": "scripts/phase4_runtime_ipc.py",
+      "loc": 149
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/mailbox.py",
-      "loc": 2154
+      "file": "scripts/gemini_pool_manager.py",
+      "loc": 147
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/http/cookiejar.py",
-      "loc": 2122
+      "file": "cortex/github_webhook_daemon.py",
+      "loc": 143
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/enum.py",
-      "loc": 2109
+      "file": "cortex/substack_publisher_tool.py",
+      "loc": 135
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/etree/ElementTree.py",
-      "loc": 2086
+      "file": "cortex/escohotado_market_prohibition_engine.py",
+      "loc": 134
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/difflib.py",
-      "loc": 2057
+      "file": "cortex/swarm/engine_fsm.py",
+      "loc": 133
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/asyncio/base_events.py",
-      "loc": 2025
+      "file": "cortex/escohotado_substance_ontology.py",
+      "loc": 131
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/xml/dom/minidom.py",
-      "loc": 2014
+      "file": "cortex/swarm/memory_store.py",
+      "loc": 131
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pdb.py",
-      "loc": 1988
+      "file": "cortex/bft_orchestrator_test.py",
+      "loc": 130
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/distlib/util.py",
-      "loc": 1985
+      "file": "cortex/substack_preview_server.py",
+      "loc": 130
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tkinter/tix.py",
-      "loc": 1949
+      "file": "cortex/mcts_vnode_compiler.py",
+      "loc": 129
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/pickle.py",
-      "loc": 1867
+      "file": "cortex/escohotado_cli.py",
+      "loc": 127
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/ast.py",
-      "loc": 1841
+      "file": "cortex/babylon60/extensions/ide_agent/dual_context.py",
+      "loc": 125
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/locale.py",
-      "loc": 1780
+      "file": "scripts/54_tdah_orphan_purge.py",
+      "loc": 122
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/editor.py",
-      "loc": 1768
+      "file": "scratch/improve_entire_substack_archive.py",
+      "loc": 120
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/importlib/_bootstrap_external.py",
-      "loc": 1750
+      "file": "scripts/phase_omega_theorem_prover.py",
+      "loc": 120
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/site-packages/pip/_vendor/rich/progress.py",
-      "loc": 1716
+      "file": "cortex/vibe_ide_engine.py",
+      "loc": 116
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/threading.py",
-      "loc": 1709
+      "file": "scratch/transduce_all_200_substack_posts.py",
+      "loc": 116
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/idlelib/pyshell.py",
-      "loc": 1695
+      "file": "cortex/swarm/architect_agent.py",
+      "loc": 113
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/optparse.py",
-      "loc": 1682
+      "file": "cortex/mcts_vnode_compiler_test.py",
+      "loc": 111
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/imaplib.py",
-      "loc": 1642
+      "file": "scripts/epistemic_forensics_prober.py",
+      "loc": 108
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/tkinter/ttk.py",
-      "loc": 1641
+      "file": "cortex/substack_subscriber_audit_test.py",
+      "loc": 107
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/logging/handlers.py",
-      "loc": 1625
+      "file": "scripts/phase3_call_graph.py",
+      "loc": 99
     },
     {
-      "file": ".uv_python/cpython-3.12.12-macos-aarch64-none/lib/python3.12/collections/__init__.py",
-      "loc": 1593
+      "file": "cortex/invariant_sentinel.py",
+      "loc": 98
     }
   ]
 }
