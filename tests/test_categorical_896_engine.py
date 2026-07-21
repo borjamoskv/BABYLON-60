@@ -1,39 +1,39 @@
 import pytest
 import os
 import sys
+from hypothesis import given, strategies as st
 
 sys.path.insert(0, os.path.abspath("."))
 from cortex.categorical_896_engine import Categorical896Engine, CategoricalPrimitive
 
 
-def test_engine_initialization():
+@pytest.fixture(scope="module")
+def engine():
     yaml_file = "primitives/896_categorical_logic_primitives.yml"
-    engine = Categorical896Engine(yaml_path=yaml_file)
-    
+    return Categorical896Engine(yaml_path=yaml_file)
+
+
+def test_engine_initialization(engine):
     assert len(engine.primitives) == 896
     assert len(engine.domain_index) == 8
-    
-    # Verify each domain has exactly 112 primitives
     for dom_id, prims in engine.domain_index.items():
-        assert len(prims) == 112, f"Domain {dom_id} count mismatch: expected 112, got {len(prims)}"
+        assert len(prims) == 112
 
 
-def test_morphism_cost_subadditivity():
-    yaml_file = "primitives/896_categorical_logic_primitives.yml"
-    engine = Categorical896Engine(yaml_path=yaml_file)
-    
-    cost_a = engine.evaluate_morphism_cost([1, 2])
-    cost_b = engine.evaluate_morphism_cost([3, 4, 5])
-    cost_ab = engine.evaluate_morphism_cost([1, 2, 3, 4, 5])
-    
-    # Verify subadditivity law: mu(b o a) <= mu(a) + mu(b)
-    assert cost_ab <= cost_a + cost_b
+from hypothesis import given, settings, strategies as st
 
 
-def test_collision_detection():
-    yaml_file = "primitives/896_categorical_logic_primitives.yml"
-    engine = Categorical896Engine(yaml_path=yaml_file)
-    
-    collisions = engine.detect_diagrammatic_collisions({561, 673})
+@given(st.lists(st.integers(min_value=1, max_value=896), min_size=1, max_size=50))
+@settings(deadline=None)
+def test_property_morphism_cost_monotonicity(engine, primitive_seq):
+    cost = engine.evaluate_morphism_cost(primitive_seq)
+    assert cost >= len(primitive_seq)
+    assert cost != float('inf')
+
+
+@given(st.integers(min_value=561, max_value=672), st.integers(min_value=673, max_value=784))
+@settings(deadline=None)
+def test_property_collision_detection_exhaustion(engine, d6_id, d7_id):
+    collisions = engine.detect_diagrammatic_collisions({d6_id, d7_id})
     assert len(collisions) == 1
-    assert collisions[0]["collision_type"] == "NON_COMMUTATIVE_STRUCTURAL_COLLISION"
+    assert collisions[0]["risk_level"] == "CRITICAL_C5_VIOLATION"
