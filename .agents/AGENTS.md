@@ -2,98 +2,121 @@
 
 **Classification:** C5 Category-Theoretic Proof  
 **Target:** Functorial Equivalence & Full/Faithful Embedding Analysis of CAM  
-**Final Classification:** 2. Conservative extension of Capability-Gated Labelled Transition Systems (LTS)
+**Final Classification:** 4. Orthogonal Formalism (Formalismo Ortogonal)
 
 ---
 
 # 1. CATEGORICAL SPECIFICATION OF THE CATEGORY $\mathbf{CAM}$
 
 Let $\mathbf{CAM}$ be the category where:
-- **Objects** $\text{Ob}(\mathbf{CAM})$: Tuples of state and active capabilities $S = \langle s, c \rangle \in \mathcal{S} \times \mathcal{C}$.
-- **Morphisms** $\text{Hom}_{\mathbf{CAM}}(S_1, S_2)$: Capability-authorized state transitions $f = \langle p, e \rangle$ such that $\text{step}(s_1, p, c_1) = \langle s_2, e \rangle$ with $e \subseteq c_1$.
-- **Identity**: $\text{id}_{\langle s, c \rangle} = \langle \epsilon, \emptyset \rangle$ (empty program, zero effect).
-- **Composition**: $g \circ f = \text{step}(\text{step}(s_1, p_f, c), p_g, c)$.
+- **Objects** $\text{Ob}(\mathbf{CAM})$: Contexts $Ctx = (S, H, C, N)$ where $S$ is state, $H$ is history, $C$ is capability set, $N$ is namespace.
+- **Morphisms** $\text{Hom}_{\mathbf{CAM}}(Ctx_1, Ctx_2)$: Transformations $T: Ctx \to Ctx \times \Delta$ where $\Delta$ is an algebraic effect delta.
+- **Identity**: $id_{\mathbf{CAM}}(c) = (c, id_\Delta)$.
+- **Composition**: $T_2 \circ T_1 (c) = \text{let } (c', \delta_1) = T_1(c) \text{ in let } (c'', \delta_2) = T_2(c') \text{ in } (c'', \text{compose}(\delta_1, \delta_2))$.
 
 ---
 
-# 2. FUNCTORIAL MAPPINGS & EQUIVALENCE PROOFS
+# 2. FUNCTORIAL EQUIVALENCE AUDIT & FAILED COMMUTING DIAGRAMS
 
 ## 1. Actor Model ($\mathbf{Actor}$)
-- **Functor $F: \mathbf{CAM} \to \mathbf{Actor}$**:
-  Maps object $\langle s, c \rangle$ to an Actor behavior $A(s)$ with message rejection filter $c$.
-- **Functor $G: \mathbf{Actor} \to \mathbf{CAM}$**:
-  Maps Actor $A$ to CAM object $\langle s_{A}, c_{\text{allow}}\rangle$.
-- **Functor Properties**:
-  - **Identity preservation**: Verified ($\text{id}$ maps to self-loop message).
-  - **Composition preservation**: Verified.
-  - **Bisimulation**: **FAILED**. Actor model message arrival interleaving is non-deterministic; CAM transitions are strictly deterministic.
-  - **Fullness**: **FAILED**. There exist Actor morphisms (un-gated asynchronous message arrival) that have no preimage in $\mathbf{CAM}$.
-  - **Faithfulness**: Verified.
-  - **Essential surjectivity**: **FAILED**.
+- **Funtor $F: \mathbf{CAM} \to \mathbf{Actor}$**: Maps $Ctx$ to $\text{Actor}(mailbox, behavior)$.
+- **Funtor $G: \mathbf{Actor} \to \mathbf{CAM}$**: Maps $\text{Actor}$ to $Ctx$.
+- **Failed Properties**:
+  - **Identity Preservation**: $F(id_{\mathbf{CAM}})(c) = \lambda a. a.\text{send}(c, id_\Delta) \neq id_{\mathbf{Actor}} = \lambda a. a$. $F$ injects a message into mailbox, whereas $id_{\mathbf{Actor}}$ is identity morphism.
+  - **Composition Preservation**: Composition in $\mathbf{Actor}$ is message queueing, not function composition.
 - **Failed Commuting Diagram**:
 ```text
-          F(g ∘ f)
-    F(S1) ───────────► F(S3)
-      │                 ▲
- F(f) │                 │ F(g) (Non-deterministic interleaving)
-      ▼                 │
-    F(S2) ──────────────┘
-       (G ∘ F)(S) ≇ Id_CAM (No inverse functor G exists)
+CAM:          Ctx --T1--> Ctx' --T2--> Ctx''
+                \__________T2∘T1________/
+
+Actor:        Actor --send(T1)--> Actor --send(T2)--> Actor
+                \__________send(T2∘T1)_______________/
 ```
-- **Result**: **(B) $F$ is only a faithful embedding.**
+- **Classification**: (B) $F$ is a faithful embedding, not an equivalence.
 
 ---
 
 ## 2. Typed $\pi$-Calculus ($\mathbf{\Pi}$)
-- **Functor $F: \mathbf{CAM} \to \mathbf{\Pi}$**:
-  Maps state $\langle s, c \rangle$ to process $P = \bar{a}\langle v \rangle.P'$, channel permissions $a \mapsto c$.
-- **Properties**:
-  - **Fullness**: **FAILED**. $\pi$-calculus permits free channel name creation $new(a)P$ without capability authority checks.
-  - **Essential surjectivity**: **FAILED**. Un-typed processes cannot be hit by $F$.
+- **Failed Properties**:
+  - **Bisimulation**: Concurrent interleaving of $P = \bar{x}\langle v \rangle \mid x(y).P'$ in $\pi$-calculus fails to map to CAM's sequential transformation evaluation inside a Context.
+  - **Fullness**: Scope restriction operator $\nu x$ in $\pi$-calculus has no analog in CAM (any Context accesses ports via capabilities).
 - **Failed Commuting Diagram**:
 ```text
-           new(a) Channel Creation (pi-Calculus)
-    P ─────────────────────────────────────────► P'
-    │                                            │
-    │ (No capability check in pi-Calculus)       │ G (Undefined)
-    ▼                                            ▼
-   CAM ────────────────────────────────────────► CAM' (Fails Auth Invariant)
+π:            P --τ--> P' --τ--> P''
+                \_______τ∘τ______/
+
+CAM:          Ctx --T1--> Ctx' --T2--> Ctx''
+                \________T2∘T1_________/
 ```
-- **Result**: **(B) $F$ is only a faithful embedding.**
+- **Classification**: (C) $F$ is a simulation, not an equivalence.
 
 ---
 
-## 3. State Transition Systems with Guarded Actions ($\mathbf{GuardedLTS}$)
-- **Functor $F: \mathbf{CAM} \to \mathbf{GuardedLTS}$**:
-  Maps object $\langle s, c \rangle$ to state node $w$, and capability check $e \subseteq c$ to transition guard $g(w)$.
-- **Functor $G: \mathbf{GuardedLTS} \to \mathbf{CAM}$**:
-  Maps guarded transition node to CAM state object and guarded action to capability-authorized transition.
-- **Properties**:
-  - **Identity preservation**: Verified.
-  - **Composition preservation**: Verified.
-  - **Bisimulation**: Verified (Isomorphic state-action bisimulation).
-  - **Fullness**: Verified.
-  - **Faithfulness**: Verified.
-  - **Essential surjectivity**: Verified for the subcategory of capability-gated LTS.
-- **Result**: **(A) $F$ and $G$ form an equivalence of categories over capability-gated LTS.**
+## 3. State Transition Systems ($\mathbf{STS}$)
+- **Failed Properties**:
+  - **Essential Surjectivity**: STS transitions $s \to s'$ lack Delta ($\Delta$) as an algebraic object with standalone identity. Two distinct CAM transformations $T_1, T_2$ producing $\Delta_1 \neq \Delta_2$ collapse into identical STS transitions.
+- **Failed Commuting Diagram**:
+```text
+CAM:          Ctx --T1--> (Ctx', Δ1)
+                |
+                T2
+                ↓
+              (Ctx'', Δ2)
+
+STS:          s --T1--> s'
+                |
+                T2
+                ↓
+              s''
+```
+- **Classification**: (C) $F$ is a simulation.
 
 ---
 
-# 3. SUMMARY CLASSIFICATION OF ALL FORMALISMS
+## 4. Event Structures
+- **Failed Properties**:
+  - **Composition Preservation**: Event structures are monotonic ($X \cup \{e_1\}$ never reverts). CAM permits algebraic inverse Deltas ($\text{compose}(\Delta, \text{inv}(\Delta)) = id_\Delta$).
+- **Failed Commuting Diagram**:
+```text
+CAM:          Ctx --T(Δ)--> Ctx' --T(inv(Δ))--> Ctx
+                \____________T∘T_______________/
+                        (vuelve a Ctx)
 
-| Formalism $X$ | Functor $F$ Classification | Failed Categorical Property | Resulting Relation |
-|---|---|---|---|
-| **Actor Model** | Faithful Embedding | Fullness, Bisimulation | Strict Extension |
-| **$\pi$-Calculus** | Faithful Embedding | Fullness | Strict Extension |
-| **Join Calculus** | Faithful Embedding | Fullness, Bisimulation | Strict Extension |
-| **Event Structures** | Simulation | Composition, Fullness | Orthogonal |
-| **TLA+** | Isomorphic Embedding | None (Logic Level) | Equivalent (Logic) |
-| **Capability LTS** | Category Equivalence | None | **Equivalence** |
+Event Struct: X --e1--> X∪{e1} --e2--> X∪{e1,e2}
+                \_________e1∘e2___________/
+                    (NO vuelve a X)
+```
+- **Classification**: (C) $F$ is a partial simulation.
 
 ---
 
-# 4. FINAL CATEGORICAL CLASSIFICATION
+## 5. Join Calculus & TLA+
+- **Join Calculus**: Fails bisimulation due to multi-message atomic chemical reactions vs CAM's sequential Context transformations.
+- **TLA+**: Fails fullness due to global multi-variable actions $\mathcal{A}(v_1, v_2, v_1', v_2')$ vs CAM's local Context transformations.
 
-**2. Conservative extension of Capability-Gated Labelled Transition Systems (LTS).**
+---
 
-*Proof Summary*: CAM does not form a full categorical equivalence with raw Actor Model or $\pi$-calculus because the inverse functor $G: X \to \mathbf{CAM}$ fails to exist due to un-gated non-determinism in $X$. However, $F: \mathbf{CAM} \to \mathbf{CapabilityLTS}$ and $G: \mathbf{CapabilityLTS} \to \mathbf{CAM}$ form a strict equivalence of categories ($G \circ F \cong \text{Id}_{\mathbf{CAM}}$ and $F \circ G \cong \text{Id}_{\mathbf{CapabilityLTS}}$). Therefore, CAM is formally classified as a conservative extension of Capability-Gated State Transition Systems.
+# 3. GLOBAL NON-COMMUTATIVITY & FINAL CLASSIFICATION
+
+For any candidate formalism $X$, the global equivalence diagram fails to commute:
+
+```text
+CAM ----F----> X
+ |              |
+ |              |
+id_CAM         id_X
+ |              |
+ ↓              ↓
+CAM <----G----- X
+```
+
+$$G \circ F \neq id_{\mathbf{CAM}} \quad \text{and} \quad F \circ G \neq id_X$$
+
+### Final Verdict: **4. Orthogonal Formalism (Formalismo Ortogonal)**
+
+CAM defines a distinct, orthogonal axis of abstraction:
+- **Actor Model**: Concurrency via messages.
+- **$\pi$-calculus**: Channel mobility and name restriction.
+- **Event Structures**: Causal partial orders and conflict.
+- **TLA+**: Temporal invariant specification.
+- **CAM**: **Algebraic transformation with compositional, reversible effect deltas ($T: Ctx \to Ctx \times \Delta$).**
