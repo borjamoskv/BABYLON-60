@@ -1,0 +1,19 @@
+DE: Borja Moskv <operator@cortex.local>
+PARA: DPO / Data Protection Officer - X_Twitter (privacy@x.com)
+FECHA: 2026-07-21T00:07:24.534335+00:00
+ASUNTO: Solicitud formal de Supresión de Datos Personales (Art. 17 RGPD / Ejercicio de Derecho al Olvido)
+
+Estimado Delegado de Protección de Datos:
+
+Por la presente, ejerzo formalmente mi derecho de supresión y eliminación absoluta de datos personales previsto en el Artículo 17 del Reglamento General de Protección de Datos (RGPD - Reglamento UE 2016/679).
+
+Solicito la eliminación inmediata e irreversible de:
+1. Todas las cuentas, perfiles de usuario y credenciales asociadas a la identidad: Borja Moskv / operator@cortex.local.
+2. Todo contenido, publicaciones, imágenes, mensajes, registros de actividad (logs), metadatos, direcciones IP e identificadores persistentes almacenados en sus sistemas primarios y copias de seguridad.
+3. Notificación y propagación del borrado a cualquier encargado del tratamiento o tercero al que hayan sido transmitidos mis datos (Art. 17.2 RGPD).
+
+Requiero confirmación por escrito de la efectividad de esta eliminación en el plazo máximo de 30 días fijado por el Art. 12.3 del RGPD.
+
+Firma e Identificador Causal:
+CORTEX-TAINT Provenance: CORTEX-TAINT:borjamoskv:gdpr_purge:X_Twitter:b27939cccab66ec2
+Sha256 Signature Proof: 6d6c1276823d2b212da758746ff40b7510fffc2f955f2966b742b7fe15358681

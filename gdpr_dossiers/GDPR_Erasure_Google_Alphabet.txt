@@ -1,0 +1,19 @@
+DE: Borja Moskv <operator@cortex.local>
+PARA: DPO / Data Protection Officer - Google_Alphabet (data-protection-office@google.com)
+FECHA: 2026-07-21T00:07:24.534335+00:00
+ASUNTO: Solicitud formal de Supresión de Datos Personales (Art. 17 RGPD / Ejercicio de Derecho al Olvido)
+
+Estimado Delegado de Protección de Datos:
+
+Por la presente, ejerzo formalmente mi derecho de supresión y eliminación absoluta de datos personales previsto en el Artículo 17 del Reglamento General de Protección de Datos (RGPD - Reglamento UE 2016/679).
+
+Solicito la eliminación inmediata e irreversible de:
+1. Todas las cuentas, perfiles de usuario y credenciales asociadas a la identidad: Borja Moskv / operator@cortex.local.
+2. Todo contenido, publicaciones, imágenes, mensajes, registros de actividad (logs), metadatos, direcciones IP e identificadores persistentes almacenados en sus sistemas primarios y copias de seguridad.
+3. Notificación y propagación del borrado a cualquier encargado del tratamiento o tercero al que hayan sido transmitidos mis datos (Art. 17.2 RGPD).
+
+Requiero confirmación por escrito de la efectividad de esta eliminación en el plazo máximo de 30 días fijado por el Art. 12.3 del RGPD.
+
+Firma e Identificador Causal:
+CORTEX-TAINT Provenance: CORTEX-TAINT:borjamoskv:gdpr_purge:Google_Alphabet:5c7491f4c5f7234f
+Sha256 Signature Proof: 52bc508bcffe4881e823f8cde0fdc78b1ae21f5e09ebb9c2720b8289ffbd5e95
