@@ -49,7 +49,7 @@ def fetch_cdp_status() -> dict[str, Any]:
         }
 
 
-def commit_to_ledger(conn: sqlite3.Connection, data: dict[str, str]) -> None:
+def commit_to_ledger(conn: sqlite3.Connection, data: dict[str, Any]) -> None:
     ts = datetime.now(timezone.utc).isoformat()
     raw = json.dumps(data, sort_keys=True)
     h = hashlib.sha3_256(raw.encode()).hexdigest()

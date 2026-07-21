@@ -159,7 +159,7 @@ def save_to_sqlite(primitives: list[dict[str, str]], db_path: str) -> None:
     conn.close()
 
 
-if __name__ == "__main__":
+def main() -> None:
     primitives = generate_centuria()
 
     md_path = os.path.join(os.getcwd(), "docs", "CENTURIA_GITHUB_WEBHOOKS.md")
@@ -171,3 +171,7 @@ if __name__ == "__main__":
     print(f"✅ Generadas {len(primitives)} primitivas C5-REAL.")
     print(f"📄 Markdown: {md_path}")
     print(f"💽 Database: {db_path}")
+
+
+if __name__ == "__main__":
+    main()
