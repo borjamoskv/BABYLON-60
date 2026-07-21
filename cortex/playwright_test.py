@@ -13,7 +13,7 @@ class TestPlaywrightKernel(unittest.TestCase):
                     self.assertEqual(code, d*100 + p*10 + m)
                     count += 1
         self.assertEqual(count, 1000)
-        print(f'✅ Successfully verified 100% execution coverage for 1000 Python/Playwright Primitives.')
+        print('✅ Successfully verified 100% execution coverage for 1000 Python/Playwright Primitives.')
 
 if __name__ == '__main__':
     unittest.main()

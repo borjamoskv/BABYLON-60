@@ -2,7 +2,7 @@ import asyncio
 import os
 import time
 import pytest
-from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh, STDPMemristor, LeakySpikingNode
+from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 
 @pytest.mark.anyio
 async def test_neuromorphic_v2():
@@ -14,7 +14,6 @@ async def test_neuromorphic_v2():
     mesh = SelfHealingMesh(db_path)
     mesh.connect("SensorA", "MotorB")
     
-    sensor = mesh.get_node("SensorA")
     motor = mesh.get_node("MotorB")
     synapse = mesh.synapses[("SensorA", "MotorB")]
     

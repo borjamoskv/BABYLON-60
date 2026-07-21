@@ -1,7 +1,7 @@
 import asyncio
 import sqlite3
 import time
-from typing import Dict, Optional, Tuple, Set
+from typing import Dict, Tuple, Set
 
 # C5-REAL NEUROMORPHIC PRIMITIVES (V2 - STDP & LEAKY INTEGRATE-AND-FIRE)
 # Bypass Von Neumann CPU/Memory segregation. Memory (SQLite WAL) dictates routing weights in real-time.

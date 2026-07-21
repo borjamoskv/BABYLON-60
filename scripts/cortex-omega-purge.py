@@ -11,7 +11,7 @@ import shutil
 import hashlib
 from datetime import datetime, timezone
 import concurrent.futures
-from typing import List, Tuple
+from typing import List
 
 TARGET_DIRS: List[str] = [
     os.path.expanduser("~/borjamoskv"),
