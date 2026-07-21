@@ -377,12 +377,15 @@ use arm64_re::{dispatch_arm64_re, Arm64ReMatrix};
 // PYMOD PYFUNCTION SIGNATURE
 // ==========================================
 
+pub mod categorical_896;
+
 #[pymodule]
 fn strike_rs(_py: Python, m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<StateVector>()?;
     m.add_class::<CognitiveChainVector>()?;
     m.add_class::<TTSHarnessState>()?;
     m.add_class::<Arm64ReMatrix>()?;
+    m.add_class::<categorical_896::RustCategoricalEngine>()?;
     m.add_function(wrap_pyfunction!(dispatch_state_observer, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_neuro_chain, m)?)?;
     m.add_function(wrap_pyfunction!(dispatch_tts_harness, m)?)?;
