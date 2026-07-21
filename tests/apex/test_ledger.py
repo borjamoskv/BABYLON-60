@@ -13,7 +13,7 @@ def _payload(score: int) -> dict[str, object]:
     return {"nct_id": "NCT00000001", "score": score, "features": {"a": 1, "b": [1, 2, 3]}}
 
 
-def test_genesis_and_chain_linkage(tmp_path):
+def test_genesis_and_chain_linkage(tmp_path) -> None:  # type: ignore
     db = tmp_path / "l.db"
     with AmendmentLedger(db) as led:
         e0 = led.append(_payload(10), "agent:t0")
@@ -25,14 +25,14 @@ def test_genesis_and_chain_linkage(tmp_path):
         assert v.valid and v.entries == 2 and v.broken_at is None
 
 
-def test_determinism_same_inputs_same_hash(tmp_path):
+def test_determinism_same_inputs_same_hash(tmp_path) -> None:  # type: ignore
     with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
         ha = a.append(_payload(42), "agent:x").entry_hash
         hb = b.append(_payload(42), "agent:x").entry_hash
         assert ha == hb  # byte-for-byte reproducible across fresh ledgers
 
 
-def test_key_order_independence(tmp_path):
+def test_key_order_independence(tmp_path) -> None:  # type: ignore
     """Canonical serialization => payload key order does not change the hash."""
     with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
         p1 = {"score": 5, "nct_id": "X", "z": 1}
@@ -40,7 +40,7 @@ def test_key_order_independence(tmp_path):
         assert a.append(p1, "agent:x").entry_hash == b.append(p2, "agent:x").entry_hash
 
 
-def test_idempotency(tmp_path):
+def test_idempotency(tmp_path) -> None:  # type: ignore
     with AmendmentLedger(tmp_path / "l.db") as led:
         first = led.append(_payload(7), "agent:same")
         again = led.append(_payload(7), "agent:same")
@@ -48,7 +48,7 @@ def test_idempotency(tmp_path):
         assert led.count() == 1  # duplicate not appended
 
 
-def test_causal_taint_mandatory(tmp_path):
+def test_causal_taint_mandatory(tmp_path) -> None:  # type: ignore
     with AmendmentLedger(tmp_path / "l.db") as led:
         with pytest.raises(ValueError):
             led.append(_payload(1), "")
@@ -56,7 +56,7 @@ def test_causal_taint_mandatory(tmp_path):
             led.append(_payload(1), "no-colon-here")
 
 
-def test_tamper_detection(tmp_path):
+def test_tamper_detection(tmp_path) -> None:  # type: ignore
     db = tmp_path / "l.db"
     with AmendmentLedger(db) as led:
         led.append(_payload(10), "agent:t0")
@@ -75,16 +75,16 @@ def test_tamper_detection(tmp_path):
         assert not v.valid and v.broken_at == 1 and "Hash mismatch" in (v.reason or "")
 
 
-def test_babylon_bft_ledger_adapter():
+def test_babylon_bft_ledger_adapter() -> None:
     class MockActor:
-        def __init__(self):
+        def __init__(self):  # type: ignore
             self.events = []
 
-        def append(self, event):
+        def append(self, event):  # type: ignore
             self.events.append(event)
             return "mock-future"
 
-    mock = MockActor()
+    mock = MockActor()  # type: ignore
     adapter = BabylonBFTLedgerAdapter(mock)
     res = adapter.append({"nct_id": "NCT99999999", "score": 42}, "apex:test")
     assert res == "mock-future"

@@ -10,7 +10,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 DB_PATH = os.path.join(PROJECT_ROOT, "cortex/agents/ontology/re_drm_bft_ledger.db")
 
 
-def test_re_drm_rust_bft_verification():
+def test_re_drm_rust_bft_verification() -> None:
     """
     Test suite validating that the strike_rs Rust binary compiles and runs,
     completing P2P BFT consensus across 896 RE/DRM primitives in < 150ms

@@ -20,7 +20,7 @@ try:
     if os.environ.get("CORTEX_TESTING"):
         keyring = None
     else:
-        import keyring  # type: ignore[assignment, no-redef]
+        import keyring  # type: ignore
 except ImportError:
     keyring = None
 from cryptography.exceptions import InvalidSignature

@@ -2,7 +2,7 @@ import pytest
 from babylon60.utils import base60
 
 
-def test_base60_integer():
+def test_base60_integer() -> None:
     assert base60.encode_base60(0) == "0"
     assert base60.decode_base60("0") == 0
 
@@ -16,14 +16,14 @@ def test_base60_integer():
     assert base60.decode_base60(encoded) == num
 
 
-def test_base60_bytes():
+def test_base60_bytes() -> None:
     b = b"C5-REAL"
     encoded = base60.bytes_to_base60(b)
     decoded = base60.base60_to_bytes(encoded, len(b))
     assert decoded == b
 
 
-def test_base60_validation():
+def test_base60_validation() -> None:
     with pytest.raises(ValueError):
         base60.decode_base60("invalid_char_I")  # 'I' is excluded
     with pytest.raises(ValueError):

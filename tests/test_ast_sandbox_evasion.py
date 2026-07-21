@@ -35,32 +35,32 @@ def validate_ast_sandbox(source_code: str) -> bool:
 
 
 class TestASTSandboxEvasion:
-    def test_basic_dunder_blocking(self):
+    def test_basic_dunder_blocking(self) -> None:
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_sandbox("().__class__")
 
-    def test_string_concatenation_bypass(self):
+    def test_string_concatenation_bypass(self) -> None:
         with pytest.raises(SecurityError):
             validate_ast_sandbox("getattr((), '__' + 'class' + '__')")
 
-    def test_exception_based_type_extraction(self):
+    def test_exception_based_type_extraction(self) -> None:
         payload = "try:\n    1 / 0\nexcept Exception as e:\n    t = e.__class__.__base__"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_sandbox(payload)
 
-    def test_subclass_hunting_comprehension(self):
+    def test_subclass_hunting_comprehension(self) -> None:
         payload = "[c for c in ().__class__.__base__.__subclasses__() if c.__name__ == 'BuiltinImporter']"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_sandbox(payload)
 
-    def test_fstring_attribute_bypass(self):
+    def test_fstring_attribute_bypass(self) -> None:
         with pytest.raises(SecurityError):
             validate_ast_sandbox("getattr((), f'__{'class'}__')")
 
-    def test_import_star_evasion(self):
+    def test_import_star_evasion(self) -> None:
         with pytest.raises(SecurityError, match="Importación no permitida"):
             validate_ast_sandbox("from os import *")
 
-    def test_lambda_and_exec_bypass(self):
+    def test_lambda_and_exec_bypass(self) -> None:
         with pytest.raises(SecurityError):
             validate_ast_sandbox("(lambda: __import__('os').system('id'))()")

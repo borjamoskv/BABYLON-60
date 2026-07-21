@@ -32,18 +32,18 @@ def _mk(**over: object) -> StudyFeatures:
     return StudyFeatures(**base)  # type: ignore[arg-type]
 
 
-def test_minimal_protocol_is_low():
+def test_minimal_protocol_is_low() -> None:
     a = assess(_mk())
     assert a.score == 0 and a.tier == "LOW"
 
 
-def test_contributions_sum_to_approx_score():
+def test_contributions_sum_to_approx_score() -> None:
     a = assess(_mk(n_eligibility_criteria=25, enrollment=1200, n_countries=10))
     if a.mode == "hand-tuned" and a.contributions:
         assert abs(sum(a.contributions) - a.score) < 1.0
 
 
-def test_rich_nlp_and_oversight_features():
+def test_rich_nlp_and_oversight_features() -> None:
     f = _mk(
         has_dmc=True,
         is_fda_regulated=True,
@@ -63,17 +63,17 @@ def test_rich_nlp_and_oversight_features():
     assert assess(f).score >= 0
 
 
-def test_score_is_deterministic():
+def test_score_is_deterministic() -> None:
     f = _mk(n_eligibility_criteria=33, phase="PHASE3", is_oncology=True, enrollment=1600, n_countries=20)
     assert assess(f).as_dict() == assess(f).as_dict()
 
 
-def test_eligibility_monotonic():
+def test_eligibility_monotonic() -> None:
     scores = [assess(_mk(n_eligibility_criteria=n)).raw_score for n in (5, 15, 25, 40, 60)]
     assert scores == sorted(scores) and scores[0] == 0 and scores[-1] == 30
 
 
-def test_complex_oncology_phase3_is_high_or_critical():
+def test_complex_oncology_phase3_is_high_or_critical() -> None:
     f = _mk(
         n_eligibility_criteria=50,
         n_primary_endpoints=4,
@@ -92,7 +92,7 @@ def test_complex_oncology_phase3_is_high_or_critical():
     assert a.raw_score <= RAW_MAX  # never exceeds documented maximum
 
 
-def test_tier_boundaries():
+def test_tier_boundaries() -> None:
     # normalized thresholds: 25 / 50 / 75
     assert assess(_mk()).tier == "LOW"
     # construct a mid protocol
@@ -102,7 +102,7 @@ def test_tier_boundaries():
     assert 0 <= a.score <= 100 and a.tier in ("LOW", "MODERATE", "HIGH", "CRITICAL")
 
 
-def test_every_driver_reports_a_rule():
+def test_every_driver_reports_a_rule() -> None:
     a = assess(_mk(n_eligibility_criteria=40))
     assert len(a.fired_rules) == 9  # all 9 drivers always present (transparency)
     elig = next(r for r in a.fired_rules if r.driver == "Eligibility complexity")

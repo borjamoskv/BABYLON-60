@@ -10,7 +10,7 @@ if backend_dir not in sys.path:
 from routes.inference import generate_mamba, MambaInferenceRequest  # noqa: E402
 
 
-def test_mamba_route_handler():
+def test_mamba_route_handler() -> None:
     """Verify that the FastAPI inference route correctly drives the Mamba Ledger Engine."""
     req = MambaInferenceRequest(prompt="Verification of local execution", max_tokens=3)
     res = generate_mamba(req)

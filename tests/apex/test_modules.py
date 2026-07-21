@@ -36,13 +36,13 @@ def _mk(**over: object) -> StudyFeatures:
     return StudyFeatures(**base)  # type: ignore[arg-type]
 
 
-def test_models_present():
+def test_models_present() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    assert set(_MODELS["modules"]) == {"elig", "design", "outcomes", "arms", "conditions", "descr"}
+    assert set(_MODELS["modules"]) == {"elig", "design", "outcomes", "arms", "conditions", "descr"}  # type: ignore
 
 
-def test_predictions_valid_and_sorted():
+def test_predictions_valid_and_sorted() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
     risks = predict_module_risks(_mk())
@@ -52,7 +52,7 @@ def test_predictions_valid_and_sorted():
     assert probs == sorted(probs, reverse=True)  # ranked high -> low
 
 
-def test_deterministic():
+def test_deterministic() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
     a = [r.as_dict() for r in predict_module_risks(_mk())]
@@ -60,10 +60,10 @@ def test_deterministic():
     assert a == b
 
 
-def test_leakage_mitigation_drops_self_features():
+def test_leakage_mitigation_drops_self_features() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    mods = _MODELS["modules"]
+    mods = _MODELS["modules"]  # type: ignore
     assert "n_eligibility_criteria" not in mods["elig"]["used_features"]
     assert "n_endpoints" not in mods["outcomes"]["used_features"]
     assert "n_arms" not in mods["arms"]["used_features"]
@@ -73,21 +73,21 @@ def test_leakage_mitigation_drops_self_features():
         assert f not in mods["conditions"]["used_features"]
 
 
-def test_models_beat_chance_on_record():
+def test_models_beat_chance_on_record() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    for m in _MODELS["modules"].values():
+    for m in _MODELS["modules"].values():  # type: ignore
         assert m["auc"] > 0.55  # every module carries real held-out signal
 
 
-def test_no_models_returns_empty(monkeypatch):
+def test_no_models_returns_empty(monkeypatch) -> None:  # type: ignore
     import apex_trials.modules as mod
 
     monkeypatch.setattr(mod, "_MODELS", None)
     assert mod.predict_module_risks(_mk()) == ()
 
 
-def test_text_features_inference():
+def test_text_features_inference() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
 
@@ -107,7 +107,7 @@ def test_text_features_inference():
     assert [r.probability for r in r_no_text] != [r.probability for r in r_text_1]
 
 
-def test_tfidf_pure_sklearn_equivalence():
+def test_tfidf_pure_sklearn_equivalence() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
 
@@ -120,7 +120,7 @@ def test_tfidf_pure_sklearn_equivalence():
     from apex_trials.modules import _transform_pure
 
     # Take a sample module's vocab and idf
-    elig_model = _MODELS["modules"]["elig"]
+    elig_model = _MODELS["modules"]["elig"]  # type: ignore
     vocab = elig_model["tfidf_vocab"]
     idf = elig_model["tfidf_idf"]
 

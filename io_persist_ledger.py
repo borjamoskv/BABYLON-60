@@ -95,7 +95,7 @@ class LedgerPersist:
     def io_node_count(self) -> int:
         """Pre: conn open -> Exec: COUNT(*) -> Post: int."""
         cursor = self.conn.execute("SELECT COUNT(*) FROM dag_nodes")
-        return cursor.fetchone()[0]
+        return cursor.fetchone()[0]  # type: ignore
 
     def close(self) -> None:
         self.conn.close()

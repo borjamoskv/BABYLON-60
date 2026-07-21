@@ -15,6 +15,7 @@ E = TypeVar("E")
 @dataclass(frozen=True)
 class Ok(Generic[T]):
     """Algebraic Sum Variant: Success state carrying a typed payload T."""
+
     value: T
     causal_taint: str = "borjamoskv:adt_ok_c5"
 
@@ -22,6 +23,7 @@ class Ok(Generic[T]):
 @dataclass(frozen=True)
 class Err(Generic[E]):
     """Algebraic Sum Variant: Error state carrying a typed payload E."""
+
     error: E
     causal_taint: str = "borjamoskv:adt_err_c5"
 
@@ -33,6 +35,7 @@ Result = Union[Ok[T], Err[E]]
 @dataclass(frozen=True)
 class Some(Generic[T]):
     """Algebraic Sum Variant: Presence state carrying a typed payload T."""
+
     value: T
     causal_taint: str = "borjamoskv:adt_some_c5"
 
@@ -40,6 +43,7 @@ class Some(Generic[T]):
 @dataclass(frozen=True)
 class Nothing:
     """Algebraic Sum Variant: Absence state (Unit type, |Nothing| = 1)."""
+
     causal_taint: str = "borjamoskv:adt_nothing_c5"
 
 
@@ -51,6 +55,7 @@ class AlgebraicCardinality:
     """
     Mathematical evaluator for algebraic data types cardinality and thermodynamic bounds.
     """
+
     @staticmethod
     def sum_type_cardinality(*sub_cardinalities: int) -> int:
         """Cardinality of a Sum Type: |A + B + ...| = |A| + |B| + ..."""
@@ -67,7 +72,7 @@ class AlgebraicCardinality:
     @staticmethod
     def exponential_type_cardinality(domain_cardinality: int, codomain_cardinality: int) -> int:
         """Cardinality of an Exponential Type (Function A -> B): |B^A| = |B|^|A|"""
-        return codomain_cardinality ** domain_cardinality  # type: ignore
+        return codomain_cardinality**domain_cardinality  # type: ignore
 
 
 def make_illegal_states_unrepresentable(value: NoReturn) -> NoReturn:

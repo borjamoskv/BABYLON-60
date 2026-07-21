@@ -37,16 +37,16 @@ def _mk(**over: object) -> StudyFeatures:
     return StudyFeatures(**base)  # type: ignore[arg-type]
 
 
-def test_fitted_weights_are_valid_distribution():
+def test_fitted_weights_are_valid_distribution() -> None:
     if not _HAS_FITTED:
         pytest.skip("no fitted_weights.json baked")
-    imp = _FITTED["importances"]
+    imp = _FITTED["importances"]  # type: ignore
     assert len(imp) == 9
     assert all(w >= 0 for w in imp)  # non-negative: drivers only add risk
     assert abs(sum(imp) - 1.0) < 1e-3  # normalized (JSON stores 6-dp rounded)
 
 
-def test_hand_mode_matches_raw_band_normalization():
+def test_hand_mode_matches_raw_band_normalization() -> None:
     f = _mk(n_eligibility_criteria=40, phase="PHASE3")
     a = assess(f, mode="hand")
     assert a.mode == "hand-tuned"
@@ -54,7 +54,7 @@ def test_hand_mode_matches_raw_band_normalization():
     assert a.score == round(a.raw_score / RAW_MAX * 100)
 
 
-def test_fitted_mode_is_deterministic_and_calibrated():
+def test_fitted_mode_is_deterministic_and_calibrated() -> None:
     if not _HAS_FITTED:
         pytest.skip("no fitted_weights.json baked")
     f = _mk(n_eligibility_criteria=50, phase="PHASE3", enrollment=2000, n_countries=25, is_oncology=True)
@@ -69,12 +69,12 @@ def test_fitted_mode_is_deterministic_and_calibrated():
     assert abs(sum(a1.contributions) - a1.score) <= 1.0
 
 
-def test_minimal_protocol_zero_in_both_modes():
+def test_minimal_protocol_zero_in_both_modes() -> None:
     assert assess(_mk(), mode="hand").score == 0
     assert assess(_mk(), mode="fitted").score == 0
 
 
-def test_auto_uses_fitted_when_available():
+def test_auto_uses_fitted_when_available() -> None:
     a = assess(_mk(n_eligibility_criteria=30), mode="auto")
     expected_mode = "fitted" if _HAS_FITTED else "hand-tuned"
     assert a.mode == expected_mode

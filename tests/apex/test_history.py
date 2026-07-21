@@ -9,7 +9,7 @@ def _hist(*versions: dict[str, object]) -> dict[str, object]:
     return {"changes": list(versions)}
 
 
-def test_v0_is_not_an_amendment():
+def test_v0_is_not_an_amendment() -> None:
     h = classify_history(
         "NCT1",
         _hist(
@@ -19,7 +19,7 @@ def test_v0_is_not_an_amendment():
     assert h.n_substantive == 0 and h.n_administrative == 0 and h.n_versions == 1
 
 
-def test_substantive_modules_counted():
+def test_substantive_modules_counted() -> None:
     h = classify_history(
         "NCT1",
         _hist(
@@ -33,7 +33,7 @@ def test_substantive_modules_counted():
     assert h.substantive_dates == ("2020-06-01", "2021-01-01", "2021-06-01")
 
 
-def test_administrative_not_counted_as_substantive():
+def test_administrative_not_counted_as_substantive() -> None:
     h = classify_history(
         "NCT1",
         _hist(
@@ -45,7 +45,7 @@ def test_administrative_not_counted_as_substantive():
     assert h.n_substantive == 0 and h.n_administrative == 2
 
 
-def test_results_sections_excluded_entirely():
+def test_results_sections_excluded_entirely() -> None:
     h = classify_history(
         "NCT1",
         _hist(
@@ -59,7 +59,7 @@ def test_results_sections_excluded_entirely():
     assert not h.unknown_labels
 
 
-def test_unknown_label_surfaced():
+def test_unknown_label_surfaced() -> None:
     h = classify_history(
         "NCT1",
         _hist(

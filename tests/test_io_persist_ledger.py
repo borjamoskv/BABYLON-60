@@ -11,7 +11,7 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     Verifica que el ledger sobrevive al ciclo:
     create in-memory -> persist to disk -> destroy RAM -> reload from disk -> assert path identity.
     """
-    db_file = str(tmp_path) + "/test_ledger.db"  # type: ignore[operator]
+    db_file = str(tmp_path) + "/test_ledger.db"
 
     # Phase 1: Build in-memory DAG and persist
     ledger = GraphLedger()
@@ -55,7 +55,7 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
 
 def test_idempotent_persist(tmp_path: object) -> None:
     """Verifica que persistir dos veces el mismo ledger no duplica filas (INSERT OR IGNORE)."""
-    db_file = str(tmp_path) + "/test_idempotent.db"  # type: ignore[operator]
+    db_file = str(tmp_path) + "/test_idempotent.db"
 
     ledger = GraphLedger()
     ledger.mut_append_node(parent_id=ledger.genesis_id, claim="Only node", payload_hash=core_calc_sha256("data"))
@@ -72,7 +72,7 @@ def test_idempotent_persist(tmp_path: object) -> None:
 
 def test_orphan_detection(tmp_path: object) -> None:
     """Verifica que io_load_ledger rechaza un DAG con nodos huérfanos (parent inexistente)."""
-    db_file = str(tmp_path) + "/test_orphan.db"  # type: ignore[operator]
+    db_file = str(tmp_path) + "/test_orphan.db"
 
     conn_raw = __import__("sqlite3").connect(db_file)
     conn_raw.execute("PRAGMA journal_mode=WAL")

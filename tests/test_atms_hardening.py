@@ -14,7 +14,7 @@ except ImportError:
     )
 
 
-def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path):
+def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path) -> None:  # type: ignore
     """
     Test suite verifying that CortexKernel exposed via PyO3 to Python correctly:
     1. Asserts empirical knowledge and checks ATMS fixpoint beliefs.
