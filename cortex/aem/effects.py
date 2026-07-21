@@ -1,27 +1,25 @@
 """
-CAM-3.0 Algebraic Effect System & Effect Capabilities.
+CAM-5.0 Effect Programs & Family Capabilities.
 """
 
 from dataclasses import dataclass, field
-import enum
-
-
-class EffectCategory(enum.Enum):
-    READ_STORE = "Read(Store)"
-    WRITE_STORE = "Write(Store)"
-    APPEND_LEDGER = "Append(Ledger)"
-    CALL_EXTERNAL = "Call(External)"
+from cortex.aem.isa import InstructionFamily
 
 
 @dataclass(frozen=True)
 class AlgebraicEffect:
-    category: EffectCategory
+    family: InstructionFamily
     target: str = ""
 
 
 @dataclass
 class CapabilitySet:
-    allowed_effects: set[EffectCategory] = field(default_factory=set)
+    allowed_families: set[InstructionFamily] = field(default_factory=set)
 
     def is_authorized(self, effect: AlgebraicEffect) -> bool:
-        return effect.category in self.allowed_effects
+        return effect.family in self.allowed_families
+
+
+@dataclass
+class EffectProgram:
+    operations: list[tuple[InstructionFamily, dict]] = field(default_factory=list)

@@ -1,131 +1,94 @@
-# CAM-3.0 (C5 Abstract Effect Machine - AEM Core Specification)
-## Minimalist Normative Specification for Abstract Effect Machines
+# CAM-5.0 (Abstract Effect Observation Machine Specification)
+## Minimalist Operational Semantics for Cognitive Runtimes
 
 **Classification:** C5 Formal Core Specification  
-**Status:** Living Minimalist Abstract Machine  
-**Paradigm:** Abstract Effect Machine (AEM) · Algebraic Effects · Micro-ISA · Opaque Handles
+**Status:** Minimal Living Kernel Specification  
+**Paradigm:** Abstract Effect Observation Machine · 4-Axiom Kernel · Effect Programs
 
 ---
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                        CAM-3.0 AEM ARCHITECTURE                         │
+│                    CAM-5.0 OPERATIONAL SEMANTICS                        │
 ├─────────────────────────────────────────────────────────────────────────┤
-│  Execution Model   Instruction ➔ Algebraic Effects ➔ State Transition   │
-│  Object Space      Allocate · Lookup · Bind · Release (Opaque Handles) │
-│  Micro-ISA         ALLOC · LOAD · STORE · LINK · UNLINK · CALL · ASSERT │
-│  Effects Algebra   Read(Store) + Write(Store) + Append(Ledger) + Call() │
-│  Capabilities      Capabilities defined directly over Algebraic Effects  │
+│ Axiom 1   Abstract State (S) exists.                                   │
+│ Axiom 2   Effect Program requesting algebraic effects exists.           │
+│ Axiom 3   Runtime authorizes effects via Capability Sets.              │
+│ Axiom 4   Observable output: step(S, Program) ➔ (S', ObservedEffects). │
 └─────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-# 1. ABSTRACT MODEL SEPARATION (NORMATIVE)
+# 1. THE 4 CORE AXIOMS (NORMATIVE)
 
-The Abstract Machine separates static state from dynamic execution:
+The Abstract Machine is fully defined by four operational axioms:
 
-```text
-Persistent Model (Object Space)          Execution Model (AEM Runtime)
-┌──────────────────────────────┐         ┌──────────────────────────────┐
-│  Opaque Handle               │         │  Instruction                 │
-│  Object Payload              │         │  ExecutionContext            │
-│  Link / Reference            │         │  Algebraic Effect            │
-└──────────────────────────────┘         │  Event Log                   │
-                                         └──────────────────────────────┘
-```
+1. **Abstract State ($\mathcal{S}$)**: An opaque, non-deterministic state space containing allocated references ($h \in \mathcal{H}_{\text{opaque}}$).
+2. **Effect Program ($\mathcal{P}$)**: A sequence of operations from three instruction families (`READ`, `WRITE`, `CONTROL`).
+3. **Capability Authorization**: The runtime validates that $\text{ObservedEffects} \subseteq \text{AuthorizedCapabilities}$.
+4. **State Transition Function**: The single transition step:
 
-The Core ISA operates over an abstract **Object Space**, independent of underlying storage implementations (SQL, Graph, HashMap, RDF).
+$$\text{step}: \mathcal{S} \times \mathcal{P} \longrightarrow (\mathcal{S}', \text{ObservedEffects})$$
+
+Everything else (Knowledge Graphs, BFT Ledgers, Ontologies, AI Prompts) exists as extension modules compiled onto this minimal semantics.
 
 ---
 
-# 2. OPAQUE HANDLES & OBJECT SPACE (NORMATIVE)
+# 2. INSTRUCTION FAMILIES (NORMATIVE)
 
-All references inside the machine are opaque `Handle` identifiers:
+Instructions are strictly classified into three fundamental families:
+
+```text
+       Instruction Family
+      ┌─────────┼─────────┐
+      ▼         ▼         ▼
+   [ READ ]  [ WRITE ] [ CONTROL ]
+```
+
+| Family | Operational Semantics | Effect Category |
+|---|---|---|
+| `READ` | Inspects state payload at opaque `Handle` | `Read(State)` (Pure) |
+| `WRITE` | Allocates, mutates, or releases opaque `Handle` state | `Write(State)` (Impure) |
+| `CONTROL` | Evaluates predicate assertion or loads extension module | `Control(Runtime)` (Pure / Extension) |
+
+---
+
+# 3. EFFECT PROGRAMS (NORMATIVE)
+
+An Effect Program $\mathcal{P}$ is a list of family operations:
+
+$$\mathcal{P} = [o_1, o_2, \dots, o_n], \quad o_i \in \{\text{READ}, \text{WRITE}, \text{CONTROL}\}$$
+
+Execution of an undeclared effect or unauthorized effect family constitutes **Undefined Behaviour (UB)** and causes immediate termination (`CapabilityError`).
+
+---
+
+# 4. OPAQUE HANDLES & EXTENSION BINDING (NORMATIVE)
+
+All state references are opaque handles:
 
 $$\text{Handle} \in \mathcal{H}_{\text{opaque}}$$
 
-The Object Space supports exactly four primitive operations:
-
-1. `Allocate(payload) -> Handle`
-2. `Lookup(handle) -> Payload`
-3. `Bind(handle_a, handle_b, relation_tag) -> Status`
-4. `Release(handle) -> Status`
+Modularity is extended via a single instruction: `LOAD_EXTENSION(ModuleURI)`.
 
 ---
 
-# 3. MINIMAL MICRO-ISA (INSTRUCTION SET ARCHITECTURE) (NORMATIVE)
+# 5. ERROR MODEL (NORMATIVE)
 
-The machine executes micro-instructions. Domain concepts (`Claim`, `Knowledge`, `Evidence`) are high-level libraries compiled into these micro-instructions:
+The kernel recognizes exactly four structural errors:
 
-| Instruction | Operational Semantics | Declared Effects |
-|---|---|---|
-| `ALLOC` | Allocates new payload in Object Space, returns `Handle` | `Write(Store)` |
-| `LOAD` | Reads payload referenced by `Handle` | `Read(Store)` |
-| `STORE` | Mutates payload referenced by `Handle` | `Write(Store)` |
-| `LINK` | Binds two handles with a typed relation tag | `Write(Store)` |
-| `UNLINK` | Removes typed relation tag between handles | `Write(Store)` |
-| `CALL` | Invokes external module or driver procedure | `Call(External)` |
-| `ASSERT` | Evaluates predicate; triggers `IntegrityError` if false | `None` (Pure) |
-| `COMMIT` | Flushes transaction to hash-chained ledger event log | `Append(Ledger)` |
-| `ABORT` | Reverts uncommitted Object Space mutations | `None` |
+1. `ExecutionError`: Stack underflow or invalid handle dereference.
+2. `CapabilityError`: Attempted effect family not authorized by active Capability Set.
+3. `IntegrityError`: Predicate assertion failure in `CONTROL` instruction.
+4. `ImplementationError`: Engine or extension runtime failure.
 
 ---
 
-# 4. ALGEBRAIC EFFECT SYSTEM (NORMATIVE)
+# 6. MINIMAL SEMANTICS CONFORMANCE (NORMATIVE)
 
-Effects are algebraic compositions of primitive operations:
+A runtime is **CAM-5.0 Conforming** if and only if it implements the step function:
 
-$$\text{Effect} = \text{Read}(\text{Resource}) + \text{Write}(\text{Resource}) + \text{Append}(\text{Ledger}) + \text{Call}(\text{External})$$
+$$\text{step}(\mathcal{S}, \mathcal{P}) \longrightarrow (\mathcal{S}', \text{ObservedEffects})$$
 
-$$\text{Effects}_{\text{actual}} \subseteq \text{Effects}_{\text{declared}}$$
-
-Executing an undeclared effect triggers `CapabilityError` or `ExecutionError`.
-
----
-
-# 5. EFFECT-BASED CAPABILITY ALGEBRA (NORMATIVE)
-
-Capabilities grant permission over specific algebraic effects, not high-level commands:
-
-```text
-CapabilitySet = Set[Effect]
-
-AgentPermissions:
-  Grant Read(Store)
-  Grant Write(Store)
-  Grant Append(Ledger)
-```
-
-Privilege Check:
-$$\text{InstructionAllowed} \iff \text{RequiredEffect}(\text{Inst}) \in \text{AgentPermissions}$$
-
----
-
-# 6. UNIFIED ERROR MODEL (NORMATIVE)
-
-The AEM classifies failures into exactly four structural errors:
-
-1. `ExecutionError`: Invalid instruction, stack underflow, or divide-by-zero.
-2. `CapabilityError`: Agent attempted an instruction requiring an unauthorized Effect.
-3. `IntegrityError`: `ASSERT` predicate evaluation failed or hash chain broke.
-4. `ImplementationError`: Backend storage engine or driver internal failure.
-
----
-
-# 7. EXTENSIBLE CONFORMANCE MATRIX (NORMATIVE)
-
-- **CAM-3.0 Core**: Micro-ISA + Object Space + Opaque Handles + Error Model.
-- **Core + Effects**: Core + Algebraic Effect Composition.
-- **Core + Capabilities**: Core + Effects + Effect-Based Permission Enforcer.
-- **Core + Persistence**: Core + Capabilities + Hash-Chained Ledger Commit.
-
----
-
-# 8. THE ABSTRACT EFFECT MACHINE SEMANTICS (NORMATIVE)
-
-```text
-Instruction  ──►  Effect Verification  ──►  State Transition & Event Emission
-```
-
-High-level domain models exist purely as user-space libraries. The AEM microkernel is strictly an **Abstract Effect Engine**.
+without adding hardcoded domain assumptions into Level 0.

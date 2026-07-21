@@ -1,96 +1,65 @@
 """
-Unit test suite for CAM-3.0 Abstract Effect Machine (AEM).
+Unit test suite for CAM-5.0 Abstract Effect Observation Machine Core.
 """
 
 import pytest
-from cortex.aem.effects import EffectCategory
-from cortex.aem.isa import CapabilityError, IntegrityError, InstructionType
+from cortex.aem.effects import EffectProgram
+from cortex.aem.isa import CapabilityError, Handle, InstructionFamily, IntegrityError
 from cortex.aem.machine import AbstractEffectMachine
 
 
-def test_aem_object_space_alloc_load_bind() -> None:
+def test_cam5_step_function_and_families() -> None:
     machine = AbstractEffectMachine()
     machine.grant_agent_capabilities(
         "agent_01",
-        {
-            EffectCategory.READ_STORE,
-            EffectCategory.WRITE_STORE,
-            EffectCategory.APPEND_LEDGER,
-        },
+        {InstructionFamily.READ, InstructionFamily.WRITE, InstructionFamily.CONTROL},
     )
 
-    # Alloc payloads
-    h1 = machine.execute(
-        agent_id="agent_01",
-        instruction=InstructionType.ALLOC,
-        payload={"claim": "System is stable"},
-    )
-    h2 = machine.execute(
-        agent_id="agent_01",
-        instruction=InstructionType.ALLOC,
-        payload={"evidence": "All 366 unit tests passed"},
-    )
+    alloc_params = {"op": "ALLOC", "payload": "Minimal State Object"}
+    prog = EffectProgram(operations=[(InstructionFamily.WRITE, alloc_params)])
 
-    assert h1 != h2
+    space, effects = machine.step("agent_01", prog)
+    assert len(effects) == 1
+    assert effects[0].family == InstructionFamily.WRITE
+    h = alloc_params["result_handle"]
+    assert isinstance(h, Handle)
 
-    # Load payloads
-    val1 = machine.execute(
-        agent_id="agent_01", instruction=InstructionType.LOAD, handle_a=h1
-    )
-    assert val1 == {"claim": "System is stable"}
-
-    # Bind handles
-    machine.execute(
-        agent_id="agent_01",
-        instruction=InstructionType.LINK,
-        handle_a=h2,
-        handle_b=h1,
-        relation_tag="supports",
-    )
-
-    assert machine.space.bindings[(h2, h1)] == "supports"
+    # Read back payload
+    read_params = {"handle": h}
+    prog_read = EffectProgram(operations=[(InstructionFamily.READ, read_params)])
+    _, read_effects = machine.step("agent_01", prog_read)
+    assert len(read_effects) == 1
+    assert read_params["result_val"] == "Minimal State Object"
 
 
-def test_aem_capability_error_enforcement() -> None:
+def test_cam5_capability_denial() -> None:
     machine = AbstractEffectMachine()
-    # Agent only has READ capability
-    machine.grant_agent_capabilities("agent_read_only", {EffectCategory.READ_STORE})
+    # Read-only agent
+    machine.grant_agent_capabilities("agent_read", {InstructionFamily.READ})
 
-    # Alloc requires WRITE_STORE -> CapabilityError expected
-    with pytest.raises(CapabilityError, match="lacks effect Write\\(Store\\)"):
-        machine.execute(
-            agent_id="agent_read_only",
-            instruction=InstructionType.ALLOC,
-            payload={"data": "write_attempt"},
-        )
-
-
-def test_aem_assert_and_commit() -> None:
-    machine = AbstractEffectMachine()
-    machine.grant_agent_capabilities(
-        "agent_full",
-        {
-            EffectCategory.READ_STORE,
-            EffectCategory.WRITE_STORE,
-            EffectCategory.APPEND_LEDGER,
-        },
+    prog_write = EffectProgram(
+        operations=[(InstructionFamily.WRITE, {"op": "ALLOC", "payload": "fail"})]
     )
 
-    # Valid ASSERT
-    assert machine.execute(
-        agent_id="agent_full", instruction=InstructionType.ASSERT, predicate=True
-    ) is True
+    with pytest.raises(CapabilityError, match="lacks instruction family WRITE"):
+        machine.step("agent_read", prog_write)
 
-    # Failed ASSERT -> IntegrityError expected
+
+def test_cam5_control_assert_and_extension() -> None:
+    machine = AbstractEffectMachine()
+    machine.grant_agent_capabilities("agent_ctrl", {InstructionFamily.CONTROL})
+
+    # Failed ASSERT
+    prog_fail_assert = EffectProgram(
+        operations=[(InstructionFamily.CONTROL, {"op": "ASSERT", "predicate": False})]
+    )
     with pytest.raises(IntegrityError, match="ASSERT Predicate evaluation failed"):
-        machine.execute(
-            agent_id="agent_full", instruction=InstructionType.ASSERT, predicate=False
-        )
+        machine.step("agent_ctrl", prog_fail_assert)
 
-    # Commit event log
-    entry_hash = machine.execute(
-        agent_id="agent_full", instruction=InstructionType.COMMIT
+    # Load extension
+    prog_ext = EffectProgram(
+        operations=[(InstructionFamily.CONTROL, {"op": "LOAD_EXTENSION", "uri": "cesl://ledger"})]
     )
-    assert isinstance(entry_hash, str)
-    assert len(entry_hash) == 64
-    assert len(machine.event_ledger) == 1
+    _, effects = machine.step("agent_ctrl", prog_ext)
+    assert len(effects) == 1
+    assert "cesl://ledger" in machine.loaded_extensions

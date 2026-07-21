@@ -1,5 +1,6 @@
 """
-CAM-3.0 Micro-ISA & Structural Error Model.
+CAM-5.0 Minimal Instruction Families & Structural Error Model.
+Instruction Families: READ, WRITE, CONTROL.
 """
 
 from dataclasses import dataclass, field
@@ -16,23 +17,17 @@ class CapabilityError(Exception):
 
 
 class IntegrityError(Exception):
-    """Raised when an ASSERT predicate evaluation fails or hash chain integrity is violated."""
+    """Raised when an ASSERT predicate evaluation fails in CONTROL family."""
 
 
 class ImplementationError(Exception):
     """Raised when an underlying backend storage engine or driver internal fails."""
 
 
-class InstructionType(enum.Enum):
-    ALLOC = "ALLOC"
-    LOAD = "LOAD"
-    STORE = "STORE"
-    LINK = "LINK"
-    UNLINK = "UNLINK"
-    CALL = "CALL"
-    ASSERT = "ASSERT"
-    COMMIT = "COMMIT"
-    ABORT = "ABORT"
+class InstructionFamily(enum.Enum):
+    READ = "READ"
+    WRITE = "WRITE"
+    CONTROL = "CONTROL"
 
 
 @dataclass(frozen=True)

@@ -1,127 +1,72 @@
 """
-CAM-3.0 Abstract Effect Machine (AEM) Microkernel.
-Executes micro-instructions over Object Space under algebraic effect capabilities.
+CAM-5.0 Abstract Effect Observation Machine Core Engine.
+Implements single step transition: step(S, Program) -> (S', ObservedEffects)
 """
 
-from dataclasses import dataclass, field
-import hashlib
-import time
-from typing import Any
-
-from cortex.aem.effects import AlgebraicEffect, CapabilitySet, EffectCategory
+from cortex.aem.effects import AlgebraicEffect, CapabilitySet, EffectProgram
 from cortex.aem.isa import (
     CapabilityError,
     Handle,
-    InstructionType,
+    InstructionFamily,
     IntegrityError,
 )
 from cortex.aem.space import ObjectSpace
-
-
-@dataclass
-class Event:
-    instruction: InstructionType
-    handle: Handle | None
-    effect: AlgebraicEffect
-    timestamp: float = field(default_factory=time.time)
 
 
 class AbstractEffectMachine:
     def __init__(self) -> None:
         self.space = ObjectSpace()
         self.capabilities: dict[str, CapabilitySet] = {}
-        self.event_ledger: list[dict[str, Any]] = []
+        self.loaded_extensions: set[str] = set()
 
     def grant_agent_capabilities(
-        self, agent_id: str, allowed_effects: set[EffectCategory]
+        self, agent_id: str, allowed_families: set[InstructionFamily]
     ) -> None:
-        self.capabilities[agent_id] = CapabilitySet(allowed_effects=allowed_effects)
+        self.capabilities[agent_id] = CapabilitySet(allowed_families=allowed_families)
 
-    def execute(
-        self,
-        agent_id: str,
-        instruction: InstructionType,
-        payload: Any = None,
-        handle_a: Handle | None = None,
-        handle_b: Handle | None = None,
-        relation_tag: str = "",
-        predicate: bool = True,
-    ) -> Handle | Any:
-        # 1. Map Instruction to Required Algebraic Effect
-        effect = self._map_instruction_to_effect(instruction)
-
-        # 2. Enforce Capability Permissions
+    def step(
+        self, agent_id: str, program: EffectProgram
+    ) -> tuple[ObjectSpace, list[AlgebraicEffect]]:
+        observed_effects: list[AlgebraicEffect] = []
         caps = self.capabilities.get(agent_id)
-        if not caps or not caps.is_authorized(effect):
-            raise CapabilityError(
-                f"Capability Denied: Agent '{agent_id}' lacks effect {effect.category.value}"
-            )
 
-        # 3. Micro-ISA Dispatcher
-        if instruction == InstructionType.ALLOC:
-            h = self.space.allocate(payload)
-            self._log_event(instruction, h, effect)
-            return h
+        for family, params in program.operations:
+            effect = AlgebraicEffect(family=family)
+            if not caps or not caps.is_authorized(effect):
+                raise CapabilityError(
+                    f"Capability Denied: Agent '{agent_id}' lacks instruction family {family.value}"
+                )
 
-        elif instruction == InstructionType.LOAD:
-            if not handle_a:
-                raise ValueError("LOAD requires handle_a")
-            val = self.space.lookup(handle_a)
-            self._log_event(instruction, handle_a, effect)
-            return val
+            if family == InstructionFamily.WRITE:
+                op_type = params.get("op", "ALLOC")
+                if op_type == "ALLOC":
+                    payload = params.get("payload")
+                    allocated_handle = self.space.allocate(payload)
+                    params["result_handle"] = allocated_handle
+                elif op_type == "MUTATE":
+                    target_h = params.get("handle")
+                    if isinstance(target_h, Handle):
+                        self.space.lookup(target_h)
+                        self.space.objects[target_h] = params.get("payload")
+                elif op_type == "RELEASE":
+                    target_h = params.get("handle")
+                    if isinstance(target_h, Handle):
+                        self.space.release(target_h)
 
-        elif instruction == InstructionType.STORE:
-            if not handle_a:
-                raise ValueError("STORE requires handle_a")
-            self.space.lookup(handle_a)  # Verify exists
-            self.space.objects[handle_a] = payload
-            self._log_event(instruction, handle_a, effect)
-            return handle_a
+            elif family == InstructionFamily.READ:
+                target_h = params.get("handle")
+                if isinstance(target_h, Handle):
+                    params["result_val"] = self.space.lookup(target_h)
 
-        elif instruction == InstructionType.LINK:
-            if not handle_a or not handle_b:
-                raise ValueError("LINK requires handle_a and handle_b")
-            self.space.bind(handle_a, handle_b, relation_tag)
-            self._log_event(instruction, handle_a, effect)
-            return handle_a
+            elif family == InstructionFamily.CONTROL:
+                op_type = params.get("op", "ASSERT")
+                if op_type == "ASSERT":
+                    if not params.get("predicate", True):
+                        raise IntegrityError("ASSERT Predicate evaluation failed: False")
+                elif op_type == "LOAD_EXTENSION":
+                    ext_uri = str(params.get("uri", ""))
+                    self.loaded_extensions.add(ext_uri)
 
-        elif instruction == InstructionType.ASSERT:
-            if not predicate:
-                raise IntegrityError("ASSERT Predicate evaluation failed: False")
-            self._log_event(instruction, None, effect)
-            return True
+            observed_effects.append(effect)
 
-        elif instruction == InstructionType.COMMIT:
-            prev_hash = (
-                self.event_ledger[-1]["entry_hash"]
-                if self.event_ledger
-                else "00000000000000000000000000000000"
-            )
-            raw = f"{prev_hash}:{time.time()}:{len(self.space.objects)}"
-            entry_hash = hashlib.sha3_256(raw.encode("utf-8")).hexdigest()
-            self.event_ledger.append(
-                {"prev_hash": prev_hash, "entry_hash": entry_hash, "ts": time.time()}
-            )
-            self._log_event(instruction, None, effect)
-            return entry_hash
-
-        return None
-
-    def _map_instruction_to_effect(
-        self, instruction: InstructionType
-    ) -> AlgebraicEffect:
-        if instruction in (InstructionType.ALLOC, InstructionType.STORE, InstructionType.LINK, InstructionType.UNLINK):
-            return AlgebraicEffect(category=EffectCategory.WRITE_STORE)
-        elif instruction == InstructionType.LOAD:
-            return AlgebraicEffect(category=EffectCategory.READ_STORE)
-        elif instruction == InstructionType.COMMIT:
-            return AlgebraicEffect(category=EffectCategory.APPEND_LEDGER)
-        elif instruction == InstructionType.CALL:
-            return AlgebraicEffect(category=EffectCategory.CALL_EXTERNAL)
-        else:  # ASSERT, ABORT (Pure)
-            return AlgebraicEffect(category=EffectCategory.READ_STORE)
-
-    def _log_event(
-        self, instruction: InstructionType, handle: Handle | None, effect: AlgebraicEffect
-    ) -> None:
-        Event(instruction=instruction, handle=handle, effect=effect)
+        return self.space, observed_effects

@@ -1,21 +1,22 @@
 """
-CAM-3.0 (C5 Abstract Effect Machine) Package.
+CAM-5.0 (C5 Abstract Effect Observation Machine) Package.
 """
 
-from cortex.aem.isa import Handle, InstructionType, ExecutionError, CapabilityError, IntegrityError, ImplementationError
-from cortex.aem.effects import AlgebraicEffect, EffectCategory
+from cortex.aem.isa import Handle, InstructionFamily, ExecutionError, CapabilityError, IntegrityError, ImplementationError
+from cortex.aem.effects import AlgebraicEffect, EffectProgram, CapabilitySet
 from cortex.aem.space import ObjectSpace
 from cortex.aem.machine import AbstractEffectMachine
 
 __all__ = [
     "Handle",
-    "InstructionType",
+    "InstructionFamily",
     "ExecutionError",
     "CapabilityError",
     "IntegrityError",
     "ImplementationError",
     "AlgebraicEffect",
-    "EffectCategory",
+    "EffectProgram",
+    "CapabilitySet",
     "ObjectSpace",
     "AbstractEffectMachine",
 ]
