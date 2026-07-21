@@ -20,6 +20,19 @@ class DualContextAgent:
 
         socket_env = os.environ.get("CORTEX_IPC_SOCKET")
         if not socket_env:
+            try:
+                env_path = os.path.join(os.getcwd(), ".env")
+                if os.path.exists(env_path):
+                    with open(env_path, "r") as f:
+                        for line in f:
+                            if line.startswith("CORTEX_IPC_SOCKET="):
+                                socket_env = line.split("=")[1].strip()
+                                os.environ["CORTEX_IPC_SOCKET"] = socket_env
+                                break
+            except Exception:
+                pass
+
+        if not socket_env:
             logging.error(
                 "[C5-REAL] FATAL (Ω14/Ω25): CORTEX_IPC_SOCKET no está definido. Prohibido hardcodear rutas. Purga."
             )

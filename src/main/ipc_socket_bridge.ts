@@ -25,6 +25,23 @@ export class IpcSocketBridge {
 
   constructor() {
     if (!process.env.CORTEX_IPC_SOCKET) {
+      try {
+        const fs = require('fs');
+        const path = require('path');
+        const envPath = path.join(process.cwd(), '.env');
+        if (fs.existsSync(envPath)) {
+          const envContent = fs.readFileSync(envPath, 'utf8');
+          const match = envContent.match(/^CORTEX_IPC_SOCKET=(.*)$/m);
+          if (match) {
+            process.env.CORTEX_IPC_SOCKET = match[1].trim();
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+    
+    if (!process.env.CORTEX_IPC_SOCKET) {
       console.error('[C5-REAL] FATAL (Ω14): CORTEX_IPC_SOCKET no está definido en el entorno. Prohibido hardcodear rutas.');
       process.kill(process.pid, 'SIGKILL');
     }

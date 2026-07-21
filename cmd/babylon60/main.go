@@ -318,13 +318,13 @@ func runServe(port string) {
 			return
 		}
 		resp := ActionResponse{Status: "error", Message: "Fallo"}
-		cmd := exec.Command("open", "-a", "Brave Browser")
+		cmd := exec.Command("open", "-a", "Brave Browser", "--args", "--remote-debugging-port=9222")
 		if err := cmd.Start(); err != nil {
 			resp.Message = fmt.Sprintf("Fallo al lanzar Brave: %v", err)
 			log.Printf("[ERROR] /launch-brave: %v", err)
 		} else {
 			resp.Status = "ok"
-			resp.Message = "Brave Browser lanzado"
+			resp.Message = "Brave Browser lanzado con CDP en el puerto 9222"
 		}
 		writeJSON(w, http.StatusOK, resp)
 	}))
