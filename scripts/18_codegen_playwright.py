@@ -3,6 +3,17 @@ import sys
 import hashlib
 import sqlite3
 import datetime
+from typing import TypedDict
+
+class PlaywrightPrimitiveDict(TypedDict):
+    id: str
+    domain: str
+    verb: str
+    category: str
+    name: str
+    description: str
+    taint_hash: str
+    timestamp: str
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -43,7 +54,7 @@ ACTION_VERBS = [
 # 3 Domains * 10 Categories * 10 Verbs = 300 base archetypes.
 
 
-def generate_playwright_primitives() -> list[dict[str, str]]:
+def generate_playwright_primitives() -> list[PlaywrightPrimitiveDict]:
     primitives = []
     p_idx = 1
 
@@ -75,7 +86,7 @@ def generate_playwright_primitives() -> list[dict[str, str]]:
     return primitives
 
 
-def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
+def save_to_markdown(primitives: list[PlaywrightPrimitiveDict], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write("# █▄ PLAYWRIGHT MATRIX: 300 INTERNAL C5-REAL PRIMITIVES\n\n")
@@ -94,7 +105,7 @@ def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
             f.write(f"- **CORTEX-TAINT**: `{p['taint_hash']}`\n\n")
 
 
-def save_to_sqlite(primitives: list[dict[str, str]], db_path: str) -> None:
+def save_to_sqlite(primitives: list[PlaywrightPrimitiveDict], db_path: str) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)
 

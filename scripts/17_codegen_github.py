@@ -3,6 +3,16 @@ import sys
 import hashlib
 import sqlite3
 import datetime
+from typing import TypedDict
+
+class PrimitiveDict(TypedDict):
+    id: str
+    domain: str
+    archetype_id: str
+    name: str
+    description: str
+    taint_hash: str
+    timestamp: str
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -51,7 +61,7 @@ ACTION_VERBS = [
 # We will generate 10 categories * 10 verbs = 100 base archetypes.
 
 
-def generate_centuria() -> list[dict[str, str]]:
+def generate_centuria() -> list[PrimitiveDict]:
     base_archetypes = []
     idx = 1
     for cat in CATEGORIES:
@@ -94,7 +104,7 @@ def generate_centuria() -> list[dict[str, str]]:
     return primitives
 
 
-def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
+def save_to_markdown(primitives: list[PrimitiveDict], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w") as f:
         f.write(
@@ -115,7 +125,7 @@ def save_to_markdown(primitives: list[dict[str, str]], filepath: str) -> None:
             f.write(f"- **CORTEX-TAINT**: `{p['taint_hash']}`\n\n")
 
 
-def save_to_sqlite(primitives: list[dict[str, str]], db_path: str) -> None:
+def save_to_sqlite(primitives: list[PrimitiveDict], db_path: str) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path)
 

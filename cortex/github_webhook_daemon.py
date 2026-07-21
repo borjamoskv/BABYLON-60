@@ -50,7 +50,7 @@ def log_event(event_type: str, payload_bytes: bytes) -> bool:
     last_lamport = row[0] if row and row[0] is not None else 0
     new_lamport = last_lamport + 1
 
-    payload_hash = hashlib.sha256(payload_bytes).hexdigest()
+    payload_hash = hashlib.sha3_256(payload_bytes).hexdigest()
     taint = (
         f"CORTEX-TAINT:webhook:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{payload_hash[:8]}"
     )
@@ -88,10 +88,10 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             return
 
         expected_mac = hmac.new(
-            (SECRET_KEY or "").encode("utf-8"), payload_bytes, hashlib.sha256
+            (SECRET_KEY or "").encode("utf-8"), payload_bytes, hashlib.sha3_256
         ).hexdigest()
 
-        expected_sig = f"sha256={expected_mac}"
+        expected_sig = f"sha3-256={expected_mac}"
         if not hmac.compare_digest(expected_sig, signature_header):
             self.send_response(403)
             self.end_headers()
@@ -103,7 +103,7 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
         if log_event(event_type, payload_bytes):
             # Ignición determinista: Notificar al Swarm Dispatcher (Ω9)
             with open(TRIGGER_PATH, "w") as f:
-                f.write(f"{event_type}:{hashlib.sha256(payload_bytes).hexdigest()}")
+                f.write(f"{event_type}:{hashlib.sha3_256(payload_bytes).hexdigest()}")
 
             self.send_response(202)
             self.send_header("Content-type", "application/json")

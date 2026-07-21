@@ -1,3 +1,4 @@
+"""C4-SIM: Synthetic mathematical simulation."""
 # Auto-generated entropy profiler for KIMI k3 layers (C5-REAL Physical Simulation)
 import json
 from typing import Any
