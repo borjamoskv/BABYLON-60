@@ -2,7 +2,7 @@
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$  
 **Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
-**Status:** Frozen Baseline Specification (v16.0 — Pruned Core & Inclusion Chain)
+**Status:** Frozen Baseline Specification (v17.0 — Pruned Core & Inclusion Chain)
 
 ---
 
@@ -22,21 +22,29 @@
 
 # 1. CADENA PRINCIPAL DE INCLUSIÓN CATEGORIAL
 
-$$\mathbf{CompMAct}_M^{\mathcal{F}} \;\hookrightarrow\; \mathbf{CompMAct}_M \;\hookrightarrow\; \mathbf{MAct}_M$$
+$$\mathbf{CompMAct}_M^{\mathcal{F}} \;\hookrightarrow\; \mathbf{CompMAct}_M \;\hookrightarrow\; \mathbf{MAct}_M \;\xrightarrow{U}\; \mathbf{Mon}$$
 
 - **$\mathbf{MAct}_M$ [Definición]:** Categoría base de $M$-actos para un monoide $M$ dado (o la fibración $U: \mathbf{MAct} \to \mathbf{Mon}$ si $M$ varía).
-- **$\mathbf{CompMAct}_M$ [Definición]:** Subcategoría de $M$-actos con morfismos computables y restricciones de estado.
-- **$\mathbf{CompMAct}_M^{\mathcal{F}}$ [Definición]:** Subcategoría restringida con estructura fibrada de predicados $F$ e invarianza monoidal $I$.
+- **$\mathbf{CompMAct}_M$ [Definición]:** Subcategoría de $M$-actos con morfismos computables y restricciones de estado ($E, P^+$).
+- **$\mathbf{CompMAct}_M^{\mathcal{F}}$ [Definición]:** Subcategoría restringida con estructura de descomposición invariante no trivial $\mathcal{F}$.
 
 ---
 
-# 2. FIRMA ESTRUCTURAL CORE $\Sigma_{\text{Core}}$ (PODA ESTRUCTURAL)
+# 2. CAPAS AXIOMÁTICAS CORE
 
-$$\Sigma_{\text{Core}} = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \Box_t, \text{Cert}, \mu)$$
+### Capa A — Álgebra ($\Sigma_A$) [Axioma]
+- $A_1$: $(\delta_1 \cdot \delta_2) \cdot \delta_3 = \delta_1 \cdot (\delta_2 \cdot \delta_3)$
+- $A_2$: $e \cdot \delta = \delta \cdot e = \delta$
+- $A_3$: $\alpha(e, s) = s$
+- $A_4$: $\alpha(\delta_1 \cdot \delta_2, s) = \alpha(\delta_1, \alpha(\delta_2, s))$
 
-### Poda de Primitivas:
-- **`Sync` Purgado del Núcleo:** La sincronía temporal no es una primitiva del núcleo; las regiones conmutativas locales ($\mathrm{CommRegion}$) o protocolos de barrera se posponen al **Apéndice A**.
-- **Doble Categoría Aplazada:** La estructura de doble categoría se aplaza hasta la demostración de 2-celdas cuadradas no degeneradas.
+### Capa B — Restricciones Computacionales [Definición]
+- $E(S, \alpha)$: Acción total computable.
+- $V(\delta, s, s')$: Verificador en $\text{PTIME}$.
+- $P^+(S, \alpha)$: Representación inyectiva computable con imagen decidible.
+
+### Capa C — Descomposición Invariante ($\mathcal{F}$) [Definición]
+- Proyección $\pi: S \to B$ ($|B| \ge 2$) tal que $\pi(\alpha(\delta, s)) = h_\delta(\pi(s))$.
 
 ---
 
@@ -48,16 +56,17 @@ $$\Sigma_{\text{Core}} = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \B
 
 ---
 
-# 4. RESULTADOS Y PREGUNTAS ABIERTAS
+# 4. TEOREMAS DEMOSTRADOS EN C5-REAL
 
-- **Proposición 1.1 (Estabilidad Computacional):** Las restricciones computacionales inducen una subcategoría propia $\mathbf{CompMAct}_M$ estable bajo isomorfismos computables.
-- **Objetivo 0 (Representación):** $\mathbf{CompMAct}_M^{\mathcal{F}} \simeq \mathbf{CertCalc}(\mathcal{C})$.
-- **Conjetura T (Separación Computacional):** $\mathbf{CompMAct}_M \not\simeq \mathbf{MAct}_M$.
-- **Pregunta Abierta S:** Construcción explícita del funtor $F$ para equivalencia estricta.
+- **Teorema 1 (Redundancia de $C$):** $C \equiv A_4$.
+- **Teorema 2 (Separación Incondicional $E \not\vdash V$):** Verificación exponencial $O(2^{|\delta|} \cdot |s|)$ via Turing Machine execution step counter $T_U^{(n)}$.
+- **Teorema 3 (Existencia vs Eficiencia $V \vdash E_{\text{exist}}, V \not\vdash E_{\text{efic}}$):** Demostrada la separación NP vs Búsqueda.
+- **Teorema 4 (No-Descomposición Invariante):** Las acciones libres y transitivas rompen $\mathcal{F}(S, \alpha)$.
+- **Teorema 5 (Estratificación Tripartita B):** Independencia mutua de $P^+$, $E$, y $V$.
 
 ---
 
 # 5. ESTRUCTURA DEL DOCUMENTO (CON APÉNDICE A)
 
-1. **Secciones I–VIII:** Núcleo de $M$-actos, subcategorías computables, costes $\mu, \kappa$ y conjeturas.
-2. **Apéndice A — Posibles Nociones de Sincronía:** Comparación entre conmutatividad local, convergencia, causalidad y disciplinas temporales.
+1. **Secciones I–VIII:** Núcleo de $M$-actos, subcategorías computables, teoremas 1-5, costes $\mu, \kappa$ y Conjetura T.
+2. **Apéndice A — Posibles Nociones de Sincronía:** Comparación entre S1 ($\mathrm{CommRegion}$), S2 (Convergencia / Church-Rosser), S3 (Causalidad / Poset), y S4 (Disciplina Temporal / Reloj).

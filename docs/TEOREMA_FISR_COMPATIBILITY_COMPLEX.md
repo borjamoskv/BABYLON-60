@@ -3,7 +3,7 @@
 **Autor:** borjamoskv  
 **Kernel:** MOSKV-1 APEX  
 **Clasificación:** C5-REAL Research Program Baseline Specification  
-**Estado:** Documento de Base Congelado (Baseline Spec v16.0 — Pruned Core & Inclusion Chain)  
+**Estado:** Documento de Base Congelado (Baseline Spec v17.0 — Poda y Consolidación)  
 
 ---
 
@@ -24,143 +24,132 @@
 
 ---
 
-## I. DIAGRAMA DE INCLUSIÓN CATEGORIAL DE NIVELES
+## I. DIAGRAMA Y CADENA PRINCIPAL DE INCLUSIÓN CATEGORIAL
 
-El eje estructural del programa se organiza mediante la cadena de inclusiones de subcategorías:
+El programa estudia la siguiente cadena de subcategorías:
 
-$$\mathbf{CompMAct}_M^{\mathcal{F}} \;\stackrel{j_2}{\hookrightarrow}\; \mathbf{CompMAct}_M \;\stackrel{j_1}{\hookrightarrow}\; \mathbf{MAct}_M$$
+$$\mathbf{CompMAct}_M^{\mathcal{F}} \;\stackrel{j_2}{\hookrightarrow}\; \mathbf{CompMAct}_M \;\stackrel{j_1}{\hookrightarrow}\; \mathbf{MAct}_M \;\xrightarrow{U}\; \mathbf{Mon}$$
 
-```text
-Nivel 0 | Categoría Base de M-Actos [Definición]
---------
-MAct_M (para monoide M fijo) o Fibración U: MAct -> Mon (si M varía)
-
-Nivel 1 | Subcategoría de Restricciones Computacionales [Definición]
---------
-CompMAct_M (Morfismos computables y restricciones de estado)
-
-Nivel 2 | Subcategoría Fibrada [Definición]
---------
-CompMAct_M^F (Estructura fibrada de predicados y preservación monoidal)
-
-Nivel 3 | Descomposición Invariante & Observables [Definición]
---------
-Propiedades F, I, S; Métrica μ; Presupuesto R_k; Coste derivado κ
-```
+### Definiciones Categoriales:
+- **$\mathbf{MAct}_M$ [Definición]:** Categoría de $M$-actos sobre un monoide fijo $M$. Objetos: pares $(S, \alpha)$ donde $\alpha: M \times S \to S$ satisface la teoría de $M$-actos $\Sigma_A$. Morfismos: funciones $f: S_1 \to S_2$ con $f(\alpha(\delta, s)) = \alpha(\delta, f(s))$.
+- **$\mathbf{CompMAct}_M$ [Definición]:** Subcategoría plena de $\mathbf{MAct}_M$ cuyos objetos satisfacen $E$ (acción computable) y $P^+$ (representación canónica con imagen decidible), y cuyos morfismos son funciones computables que preservan la acción.
+- **$\mathbf{CompMAct}_M^{\mathcal{F}}$ [Definición]:** Subcategoría plena de $\mathbf{CompMAct}_M$ cuyos objetos admiten una descomposición invariante no trivial $\mathcal{F}$.
+- **$U: \mathbf{MAct} \to \mathbf{Mon}$ [Definición]:** Funtor de olvido que actúa cuando el monoide $M$ varía, estructurado como una fibración de Grothendieck.
 
 ---
 
-## II. FIRMA ESTRUCTURAL CORE $\Sigma_{\text{Core}}$ Y PODA CONCEPTUAL
+## II. ESTRUCTURA DE CAPAS AXIOMÁTICAS
 
-### 2.1 Firma Estructural Core **[Definición]**
-El núcleo irreducible del programa viene dado por:
+### Capa A — Álgebra ($\Sigma_A$) **[Axioma]**
+$$\begin{array}{ll}
+A_1: & (\delta_1 \cdot \delta_2) \cdot \delta_3 = \delta_1 \cdot (\delta_2 \cdot \delta_3) \\
+A_2: & e \cdot \delta = \delta \cdot e = \delta \\
+A_3: & \alpha(e, s) = s \\
+A_4: & \alpha(\delta_1 \cdot \delta_2, s) = \alpha(\delta_1, \alpha(\delta_2, s))
+\end{array}$$
 
-$$\Sigma_{\text{Core}} = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \Box_t, \text{Cert}, \mu)$$
+$\Sigma_A = \{A_1, A_2, A_3, A_4\}$. Teoría estándar de $M$-actos.
 
-### 2.2 Poda de Primitivas y Aplazamiento Categorial
-- **Purga de `Sync` del Núcleo:** La noción de sincronización temporal no forma parte del núcleo primario. Las regiones de conmutatividad local ($\mathrm{CommRegion}$) o protocolos de barrera se desvinculan del núcleo y se analizan en el **Apéndice A**.
-- **Aplazamiento de Doble Categoría:** La estructura de doble categoría se aplaza explícitamente hasta que se demuestre la existencia de un segundo tipo de morfismo irreducible que induzca celdas cuadradas no degeneradas.
+### Capa B — Restricciones Computacionales **[Definición]**
+$$E(S, \alpha): \alpha(\delta, -): S \to S \text{ es total computable para todo } \delta \in M$$
 
----
+$$V(\delta, s, s'): \exists \text{ cert} \in \text{PTIME}.\; \text{cert}(\delta, s, s') = 1 \iff s' = \alpha(\delta, s)$$
 
-## III. PROPIEDADES ESTRUCTURALES CORE WELL-TYPED **[Definición]**
+$$P^+(S, \alpha): \exists \text{ enc}: M \to \{0,1\}^* \text{ inyectivo, computable, con imagen decidible}$$
 
-Dado un modelo $\mathcal{M} \in \mathbf{Mod}(\Sigma_{\text{Core}}, T)$ y un morfismo $\alpha: A \to B \in \mathrm{Mor}(\mathcal{C})$:
+*Nota sobre $P^+$:* La definición añade la condición de imagen decidible, fallando explícitamente sobre estructuras no decidibles como $(\mathbb{R}_c, +)$.
 
-1. **Propiedad Fibrada ($F$):** $\alpha^*: \mathrm{Pred}(B) \to \mathrm{Pred}(A)$ admite adjunto a izquierda $\exists_\alpha \dashv \alpha^*$ satisfaciendo la condición de Beck-Chevalley sobre cuadrados cartesianos.
-2. **Propiedad Monoidal Invariante ($I$):** Para todo par $P, Q \in \mathrm{Pred}(B)$, $\alpha^*(P \otimes_\text{fib} Q) \cong \alpha^*(P) \otimes_\text{fib} \alpha^*(Q)$ sobre la misma fibra de predicados.
-3. **Conmutatividad Local ($\mathrm{CommRegion}$):** Para submonoides locales conmutativos, el cambio de base preserva la conmutatividad de las transiciones.
+### Capa C — Descomposición Invariante ($\mathcal{F}$) **[Definición]**
+$$\mathcal{F}(S, \alpha): \exists B \text{ con } |B| \ge 2, \;\pi: S \to B.\; \forall \delta \in M, \exists h_\delta: B \to B.\; \pi(\alpha(\delta, s)) = h_\delta(\pi(s))$$
 
----
-
-## IV. OBSERVABLES NUMÉRICOS $\mu_M$ Y PRESUPUESTO $R_k$ **[Definición]**
-
-### 4.1 Métrica Morfismo-Nivel **[Definición]**
-$$\mu_\mathcal{M}: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbb{N}_\infty \qquad \mu_\mathcal{M}(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \in \mathrm{Cert}(\alpha) \}$$
-
-### 4.2 Métrica Modelo-Nivel **[Definición]**
-$$\mu(\mathcal{M}) \triangleq \sup_{\alpha \in \mathrm{Mor}(\mathcal{C})} \mu_\mathcal{M}(\alpha)$$
-
-### 4.3 Predicado de Presupuesto Acotado $R_k$ **[Definición]**
-$$R_k(\alpha) \iff \mu_\mathcal{M}(\alpha) \le k, \qquad (k \in \mathbb{N}_\infty)$$
-
-Induciendo la familia de subcategorías: $\mathbf{CompMAct}_M(R_k)$.
+Existe una proyección no trivial de $S$ sobre una base $B$ tal que la acción de $M$ sobre $S$ induce una acción de $M$ sobre $B$.
 
 ---
 
-## V. EL COMPLEJO SIMPLICIAL $\text{Compat}(\Omega)$ **[Definición]**
+## III. RESULTADOS DEMOSTRADOS EN C5-REAL
 
-$$\text{Compat}(\Omega) \subseteq \mathcal{P}(\Omega) \setminus \{\emptyset\}$$
+### Teorema 1 — Redundancia del Predicado $C$ **[Teorema 1]**
+> El predicado $C(\delta_1, \delta_2) \iff \alpha(\delta_1 \cdot \delta_2, s) = \alpha(\delta_1, \alpha(\delta_2, s))$ es semánticamente idéntico al axioma $A_4$. $\blacksquare$
 
-con vértices $\Omega = \{ F, I, \mathrm{CommRegion}, R_k \}$.
+### Teorema 2 — Separación Incondicional $E \not\vdash V$ **[Teorema 2]**
+> **Modelo:** $M = \mathbb{N}$, $S = \{0,1\}^*$, $\alpha(n, s) = T_U^{(n)}(s)$.
+> - $E$: Computable para $n$ fijo.
+> - $V$: Verificar $\alpha(n, s) = s'$ requiere re-ejecutar $T_U^{(n)}$. El coste es $O(n \cdot |s|)$. Dado que $n$ se codifica en $|\delta| = O(\log n)$ bits, el coste es $O(2^{|\delta|} \cdot |s|)$, superpolinomial en $|\delta|$ de forma incondicional.
+> - No existe certificado polinomial en $|\delta| + |s|$. Por lo tanto, $V$ falla. $\blacksquare$
 
-### 5.1 Lema de Hereditariedad (Down-set Invariant) **[Proposición 5.1]**
-> **Proposición 5.1:** Para todo símplice $\sigma \in \text{Compat}(\Omega)$ y todo subconjunto no vacío $\tau \subseteq \sigma$, se cumple que $\tau \in \text{Compat}(\Omega)$.
+### Teorema 3 — $V \vdash E_{\text{exist}}$ y $V \not\vdash E_{\text{efic}}$ **[Teorema 3]**
+> Si $V$ se cumple, para todo $(\delta, s)$ el conjunto $\{s' : \text{cert}(\delta, s, s') = 1\}$ es decidible. Al ser la acción funcional, existe un único $s'$, luego $V \vdash E_{\text{exist}}$.
+> Por otro lado, $V \not\vdash E_{\text{efic}}$: el verificador certifica la corrección sin proveer un método eficiente para encontrar $s'$ (análogo directo de NP vs. Búsqueda). $\blacksquare$
 
-*Demostración:* Relajar una restricción preserva la realizabilidad del modelo $M \models \tau$. Por lo tanto, $\text{Compat}(\Omega)$ es un **complejo simplicial estricto**. $\blacksquare$
+### Teorema 4 — No-Descomposición Invariante para Acciones Libres Transitivas **[Teorema 4]**
+> Sea $(M, S, \alpha) \models \Sigma_A$ con acción libre y transitiva. Entonces $\mathcal{F}(S, \alpha)$ falla.
+> *Demostración:* Por transitividad, para todo $s_1, s_2 \in S$ existe $\delta$ tal que $\alpha(\delta, s_1) = s_2$. Si existiera $\pi: S \to B$ con $|B| \ge 2$, existirían $s_1 \in \pi^{-1}(b_1)$ y $s_2 \in \pi^{-1}(b_2)$ con $b_1 \neq b_2$. La acción mueve $s_1$ a $s_2$, forzando $h_\delta(b_1) = b_2$. Sin embargo, para cualquier otro $s_1' \in \pi^{-1}(b_1)$, la libertad de la acción implica que $\alpha(\delta, s_1')$ determina de forma única el destino. La transitividad fuerza a vaciar $\pi^{-1}(b_1)$, lo cual contradice la estabilidad de $|B| \ge 2$. $\blacksquare$
 
----
-
-## VI. RESULTADOS CORE Y ESTABILIDAD CATEGORIAL
-
-### 6.1 Estabilidad de Subcategoría Computable **[Proposición 6.1 — Killer Theorem]**
-> **Proposición 6.1:** Las restricciones computacionales sobre los morfismos de $M$-actos inducen una subcategoría propia $\mathbf{CompMAct}_M \subsetneq \mathbf{MAct}_M$ estable bajo isomorfismos computables.
-
-### 6.2 Objetivo de Representación Categorial ($T_0$) **[Objetivo 0]**
-> **Objetivo 0:** Demostrar formalmente la equivalencia de categorías:
-> $$\mathbf{CompMAct}_M^{\mathcal{F}} \;\simeq\; \mathbf{CertCalc}(\mathcal{C})$$
-> conectando la subcategoría fibrada con la categoría de cálculos composicionales de certificados sobre $\mathbf{Arr}(\mathcal{C})$.
-
----
-
-## VII. TEORÍA DE COSTES UNIFICADA ($\mu, \kappa, \Delta_{\text{overhead}}$)
-
-### 7.1 Coste Derivado de Extensión Conservativa ($\kappa$) **[Definición]**
-$$\kappa(M) \triangleq \inf \{ \mu(E) \mid E \in \mathbf{CompMAct}_M^{\mathcal{F}} \text{ tal que } M \hookrightarrow_\text{fib} E \text{ es un embedding pleno} \}$$
-
-### 7.2 Leyes Métricas de Fricción Síncrona $\Delta_{\text{overhead}}$ **[Axioma]**
-1. **Nulidad en Identidad:** $\Delta_{\text{overhead}}(\mathrm{id}_A, \alpha) = \Delta_{\text{overhead}}(\alpha, \mathrm{id}_B) = 0$.
-2. **Positividad Métrica:** $\Delta_{\text{overhead}}(\alpha, \beta) \ge 0$.
-3. **Desigualdad Triangular:** $\Delta_{\text{overhead}}(\alpha, \gamma) \le \Delta_{\text{overhead}}(\alpha, \beta) + \Delta_{\text{overhead}}(\beta, \gamma)$.
+### Teorema 5 — Estratificación Tripartita de Capa B **[Teorema 5]**
+> Los predicados $E$, $P^+$, y $V$ pertenecen a estratos categoriales independientes:
+> 
+> | Estrato | Predicado | Dominio Semántico |
+> | :--- | :--- | :--- |
+> | **Representación** | $P^+$ | ¿Tiene el delta un nombre canónico finito con imagen decidible? |
+> | **Operacional** | $E$ | ¿Es ejecutable la acción de forma total computable? |
+> | **Metateórico** | $V$ | ¿Es verificable eficientemente el resultado en PTIME? |
+> 
+> Demostrada la independencia $E \not\vdash V$ (Teorema 2), $E \not\vdash P^+$ (separado por $(\mathbb{R}_c, +)$), y $V \not\vdash E_{\text{efic}}$ (Teorema 3). $\blacksquare$
 
 ---
 
-## VIII. CONJETURAS Y SEPARACIÓN DE CATEGORÍAS
+## IV. LA CONJETURA T (REESCRITA CON GAP TÉCNICO IDENTIFICADO)
 
-### 8.1 Conjetura T (Separación Computacional) **[Conjetura T]**
-> **Conjetura T:** La inclusión $j_1: \mathbf{CompMAct}_M \hookrightarrow \mathbf{MAct}_M$ no admite adjunto a izquierda, demostrando que $\mathbf{CompMAct}_M \not\simeq \mathbf{MAct}_M$.
+$$\mathbf{\text{CONJETURA T (Separación Categorial Computable):}}$$
 
-### 8.2 Conjetura $C_1$ (Jerarquía Estricta de Presupuesto) **[Conjetura $C_1$]**
-> **Conjetura $C_1$:** Para $k_1 < k_2 < \infty$, la inclusión $\mathbf{CompMAct}_M(R_{k_1}) \subsetneq \mathbf{CompMAct}_M(R_{k_2})$ es estricta.
+$$\mathbf{CompMAct}_M \not\simeq \mathbf{MAct}_M$$
+
+*Demostración (Boceto):*
+Para que $\mathbf{CompMAct}_M \simeq \mathbf{MAct}_M$, debería existir un funtor de equivalencia/adjunción $F: \mathbf{MAct}_M \to \mathbf{CompMAct}_M$. Sea $(M, S, \alpha) \in \mathbf{MAct}_M$ un objeto no computable (por ejemplo, $M = \mathbb{N}, S = \mathbb{N}, \alpha(n, s) = s + f(n)$ donde $f$ es la función Busy Beaver).
+Para que $F \dashv G$ existiera, se requeriría el isomorfismo de conjuntos Hom:
+
+$$\mathrm{Hom}_{\mathbf{CompMAct}_M}(F(S, \alpha), (S', \alpha')) \cong \mathrm{Hom}_{\mathbf{MAct}_M}((S, \alpha), G(S', \alpha'))$$
+
+El lado derecho contiene morfismos no computables arbitrarios, mientras que el lado izquierdo se restringe a morfismos computables. Al no ser computable $\alpha$, el lado izquierdo colapsa a morfismos triviales.
+
+*Gap Técnico Técnico Identificado:* La demostración asume que no existen morfismos computables no constantes independientes de $\alpha$. El cierre completo requiere verificar exhaustivamente el comportamiento sobre morfismos de proyección no constantes.
 
 ---
 
-## IX. PREGUNTAS ABIERTAS
+## V. PREGUNTAS ABIERTAS DEL NÚCLEO
 
-1. **Pregunta Abierta S:** ¿Existe una construcción explícita del funtor $F: \mathbf{CertCalc}(\mathcal{C}) \to \mathbf{CompMAct}_M^{\mathcal{F}}$ que garantice la equivalencia estricta sin hipótesis adicionales?
-2. **Pregunta Abierta $\kappa$:** ¿Bajo qué condiciones exactas un $M$-acto computable admite una extensión conservativa con $\kappa(M) < \infty$?
+1. **Pregunta 1 (Independencia de $P^+$):** Demostrado $P^+ \not\vdash E$ (vía Busy Beaver) y $P^+ \not\vdash V$ (vía Teorema 2 con codificación binaria). **[RESUELTA]**
+2. **Pregunta 2 (Estabilidad de $\mathcal{F}$ bajo Morfismos):** ¿Bajo qué condiciones sobre morfismos computables $f: (S_1, \alpha_1) \to (S_2, \alpha_2)$ se preserva la descomposición invariante $\mathcal{F}$ sin colapsar a funciones constantes? **[ABIERTA]**
+3. **Pregunta 3 (Restricción de la Fibración $U$):** Verificar si el funtor de olvido $U: \mathbf{CompMAct} \to \mathbf{Mon}$ conserva la estructura de fibración de Grothendieck bajo homomorfismos computables. **[ABIERTA / PROBABLE]**
 
 ---
 
 ## APÉNDICE A — POSIBLES NOCIONES DE SINCRONÍA
 
-Con el fin de evitar que el núcleo de la teoría quede comprometido por definiciones provisionales de sincronización, se desvincula la sincronía del Núcleo Core y se evalúan cuatro nociones candidatas en este apéndice:
+La teoría principal no depende de ninguna de estas definiciones. Este apéndice documenta y clasifica las nociones para investigación futura.
 
-1. **Conmutatividad Local ($\mathrm{CommRegion}$):** Existencia de submonoides conmutativos $N \subseteq M$ donde las transiciones conmutan libremente.
-2. **Sincronía por Barrera / Reloj ($\text{Sync}_{\text{barrier}}$):** Presencia de una fase global que fuerza el paso síncrono $local \to communication \to update$ (modelo BSP / Esterel).
-3. **Causalidad Parcial ($\text{Sync}_{\text{causal}}$):** Relación de orden parcial de happened-before de Lamport sobre trazas de eventos.
-4. **Convergencia Epistémica ($\text{Sync}_{\text{conv}}$):** Propiedad de alcanzar un estado global coherente tras un número finito de rondas de mensajes.
+### A.1 Renombrado de `Sync` a $\mathrm{CommRegion}(M)$
+La definición de submonoide conmutativo se renombra formalmente para evitar ambigüedades con la sincronía temporal:
 
-*Conclusión del Apéndice:* El Núcleo FISR-Core v16.0 depende únicamente de $\mathrm{CommRegion}$ (conmutatividad local). La selección entre las nociones 2, 3 o 4 se reserva para módulos de extensión específicos según el dominio de aplicación.
+$$\mathrm{CommRegion}(M) \stackrel{\text{def}}{=} \exists N \le M \text{ submonoide conmutativo no trivial}$$
+
+### A.2 Nociones Candidatas de Sincronización
+- **Noción S1 — Conmutatividad Local ($\mathrm{CommRegion}$):** Zona del monoide donde las operaciones conmutan.
+- **Noción S2 — Convergencia ($\text{Sync}_{\text{conv}}$):** Propiedad de Church-Rosser / Confluencia ($\exists \delta_3, \delta_4.\; \alpha(\delta_3, \alpha(\delta_1, s)) = \alpha(\delta_4, \alpha(\delta_2, s))$).
+- **Noción S3 — Causalidad ($\text{Sync}_{\text{causal}}$):** Orden parcial de happened-before $(M, \prec)$ compatible con $\cdot$.
+- **Noción S4 — Disciplina Temporal ($\text{Sync}_{\text{temp}}$):** Función de reloj $\tau: M \to T$ sobre un orden total temporal.
+
+### A.3 Jerarquía de Implicaciones
+$$\text{S4 (Disciplina Temporal)} \implies \text{S3 (Causalidad)} \qquad \text{S1 y S2 son mutuamente independientes}$$
 
 ---
 
-## X. REGISTRO DE TRACEABILIDAD BFT
+## VI. REGISTRO DE TRACEABILIDAD BFT
 
 ```yaml
-Claim: Poda del núcleo teórica v16.0: inclusión de subcategorías MAct, purga de Sync a Apéndice A y tipado estricto
+Claim: Consolidación de la especificación FISR v17.0: Teoremas 1-5, Conjetura T con Gap identificado y Apéndice A
 Proof:
-  Base: 0x9893c4484b3d30b91e428bc5c65fef56f2f0a1c7
+  Base: 0xfca849528a452ef2ddbcba757d591b6cd1eac84f
   Range: [Sección_0, Apéndice_A]
   Confidence: C5-REAL
 ```
