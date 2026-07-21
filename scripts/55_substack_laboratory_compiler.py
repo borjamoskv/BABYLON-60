@@ -20,11 +20,12 @@ import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 
 
 def fail_fast(msg: str) -> None:
-    print(f"[FATAL] {msg}", file=sys.stderr)
-    os.kill(os.getpid(), 9)  # SIGKILL
+    raise EpistemicHalt(f"[FATAL] {msg}")
 
 
 def sha3_256_hash(data: str) -> str:

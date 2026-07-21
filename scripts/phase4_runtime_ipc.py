@@ -1,10 +1,12 @@
 import os
 import json
 import re
-import signal
 import logging
 import hashlib
 from typing import TypedDict
+
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
@@ -24,8 +26,7 @@ def sha3_256_payload(payload: str) -> str:
 
 def analyze_ipc_and_runtime(target_dir: str) -> None:
     if not os.path.exists(target_dir):
-        logging.error(f"Ruta objetivo inalcanzable: {target_dir}")
-        os.kill(os.getpid(), signal.SIGKILL)
+        raise EpistemicHalt(f"Ruta objetivo inalcanzable: {target_dir}")
 
     report: IPCReport = {
         "network_endpoints": [],
@@ -110,10 +111,7 @@ def analyze_ipc_and_runtime(target_dir: str) -> None:
 
             except (OSError, ValueError, TypeError, UnicodeDecodeError) as e:
                 # Invariante Ω26: Fail-Fast. Cero pass mudo. Purga Inmediata.
-                logging.error(
-                    f"Error estructural parseando {rel_path}: {e}. Ejecutando purga SIGKILL."
-                )
-                os.kill(os.getpid(), signal.SIGKILL)
+                raise EpistemicHalt(f"Error estructural parseando {rel_path}: {e}")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_json = os.path.join(

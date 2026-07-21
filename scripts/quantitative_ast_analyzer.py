@@ -4,6 +4,9 @@ import json
 from collections import defaultdict
 from typing import Any
 
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 class ComplexityVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
@@ -137,12 +140,7 @@ def main() -> None:
                     fan_out[rel_path] = len(internal_imports)
 
                 except (SyntaxError, OSError, RuntimeError, ValueError, TypeError) as e:
-                    import signal
-
-                    print(
-                        f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
-                    )
-                    os.kill(os.getpid(), signal.SIGKILL)
+                    raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     # 2. Calcular Fan-in
     for node, imports in import_graph.items():

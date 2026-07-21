@@ -4,6 +4,9 @@ import json
 from collections import defaultdict
 from typing import Any
 
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 class CallGraphVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
@@ -71,12 +74,7 @@ def main() -> None:
                             "module_level_calls": list(visitor.module_calls),
                         }
                 except (OSError, ValueError, TypeError, SyntaxError) as e:
-                    import signal
-
-                    print(
-                        f"Error parseando {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
-                    )
-                    os.kill(os.getpid(), signal.SIGKILL)
+                    raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)
     # 1. Routes mapping

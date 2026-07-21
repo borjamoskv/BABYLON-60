@@ -13,10 +13,10 @@ from datetime import datetime, timezone
 import concurrent.futures
 from typing import List
 
-TARGET_DIRS: List[str] = [
-    os.path.expanduser("~/borjamoskv"),
-    os.path.expanduser("~/10_PROJECTS")
-]
+workspace_dirs = os.environ.get("CORTEX_WORKSPACE_DIRS", "").split(":")
+if not workspace_dirs or workspace_dirs == [""]:
+    workspace_dirs = [os.getcwd()]
+TARGET_DIRS: List[str] = workspace_dirs
 
 
 def find_git_repos(base_dirs: List[str]) -> List[str]:

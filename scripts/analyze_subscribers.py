@@ -17,18 +17,11 @@ def main() -> None:
     if len(sys.argv) > 1:
         csv_path = Path(sys.argv[1])
     else:
-        env_path = os.environ.get("SUBSTACK_CSV_PATH")
-        if env_path:
-            csv_path = Path(env_path)
-        else:
-            default_downloads = (
-                Path.home() / "Downloads" / "subscriber-export-2026-07-20-02-35-19.csv"
-            )
-            if default_downloads.exists():
-                csv_path = default_downloads
-            else:
-                print("Usage: python analyze_subscribers.py <path_to_substack_csv>")
-                sys.exit(1)
+        env_path = os.environ.get("SUBSTACK_CSV_PATH", str(Path.home() / "Downloads" / "subscriber-export.csv"))
+        csv_path = Path(env_path)
+        if not csv_path.exists():
+            print("Usage: python analyze_subscribers.py <path_to_substack_csv>")
+            sys.exit(1)
 
     print(f"Executing C5-REAL Audit on: {csv_path}")
     auditor = SubstackSubscriberAuditor.from_csv(csv_path)

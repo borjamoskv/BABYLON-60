@@ -1,7 +1,8 @@
 import os
 import json
 import re
-
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 
 def extract_state_machine_graphs(target_dir: str) -> None:
     graphs: dict[str, list[str]] = {
@@ -54,12 +55,7 @@ def extract_state_machine_graphs(target_dir: str) -> None:
                         graphs["EvidenceGraph"].append(rel_path)
 
                 except (OSError, ValueError, SyntaxError, TypeError) as e:
-                    import signal
-
-                    print(
-                        f"Error parsing {rel_path}: {e}. Ejecutando purga SIGKILL (Ω26)."
-                    )
-                    os.kill(os.getpid(), signal.SIGKILL)
+                    raise EpistemicHalt(f"Error parsing {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     out_json = os.path.join(

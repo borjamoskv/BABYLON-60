@@ -1,6 +1,9 @@
 import os
 import subprocess
 
+class EpistemicHalt(Exception):
+    """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 def ultrathink_sweep() -> None:
     print("[ULTRATHINK P0] Iniciando Barrido Termodinámico Profundo (C5-REAL)...")
@@ -22,10 +25,7 @@ def ultrathink_sweep() -> None:
         else:
             print("Cero zombies detectados. El host de extensión está esterilizado.")
     except (subprocess.CalledProcessError, OSError) as e:
-        import signal
-
-        print(f"Error en Fase 1: {e}. Ejecutando purga SIGKILL (Ω26).")
-        os.kill(os.getpid(), signal.SIGKILL)
+        raise EpistemicHalt(f"Error en Fase 1: {e}. Ejecutando purga (Ω26).")
 
     # 2. Validar consistencia del Master Ledger
     print("\n--- Fase 2: Consistencia BFT Ledger ---")
@@ -41,10 +41,7 @@ def ultrathink_sweep() -> None:
             print(f"BFT Ledger Integrity: {result[0]}")
             conn.close()
         except (sqlite3.Error, OSError) as e:
-            import signal
-
-            print(f"Falla en Ledger: {e}. Ejecutando purga SIGKILL (Ω26).")
-            os.kill(os.getpid(), signal.SIGKILL)
+            raise EpistemicHalt(f"Falla en Ledger: {e}. Ejecutando purga (Ω26).")
     else:
         print("Master Ledger no inicializado en este shard.")
 
