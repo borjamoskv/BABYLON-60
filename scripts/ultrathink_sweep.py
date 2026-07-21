@@ -64,6 +64,16 @@ def ultrathink_sweep() -> None:
             else:
                 print("❌ Fuga detectada en Ω20/Ω18.")
 
+    # 4. Verificación Física del Motor MCTS y Exergía (ULTRATHINK P0)
+    print("\n--- Fase 4: Auditoría MCTS Physical Compiler & Exergía ---")
+    try:
+        from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical
+        engine = L3InferenceEnginePhysical(target_trajectories=20)
+        theorem = engine.compile_theorem("ULTRATHINK_SWEEP_AUDIT")
+        print(f"✔️  MCTS Physical Compiler Operativo. Entropía={theorem.shannon_entropy:.4f}, Exergía={theorem.exergy_ratio:.4f}, Nodos={theorem.ast_nodes}, Poda={theorem.pruned_branches}")
+    except Exception as e:
+        raise EpistemicHalt(f"Falla en Motor MCTS Physical Compiler: {e}. Ejecutando purga (Ω26).")
+
     print("\n[ULTRATHINK P0] Barrido Termodinámico Completado. Estado: CERO ANERGÍA.")
 
 

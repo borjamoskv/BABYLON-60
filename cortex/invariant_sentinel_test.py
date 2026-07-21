@@ -7,7 +7,8 @@ import os
 import sys
 import unittest
 import subprocess
-from unittest.mock import patch, mock_open
+from typing import Any
+from unittest.mock import patch, mock_open, MagicMock
 
 from cortex.invariant_sentinel import (
     get_current_branch,
@@ -19,14 +20,14 @@ from cortex.invariant_sentinel import (
 
 class TestInvariantSentinel(unittest.TestCase):
     @patch("subprocess.check_output")
-    def test_get_current_branch_success(self, mock_check_output: patch) -> None:
+    def test_get_current_branch_success(self, mock_check_output: MagicMock) -> None:
         mock_check_output.return_value = b"feature/bft-fix\n"
         branch = get_current_branch()
         self.assertEqual(branch, "feature/bft-fix")
 
     @patch("subprocess.check_output")
     def test_get_current_branch_called_process_error(
-        self, mock_check_output: patch
+        self, mock_check_output: MagicMock
     ) -> None:
         mock_check_output.side_effect = subprocess.CalledProcessError(1, ["git"])
         branch = get_current_branch()
@@ -34,14 +35,14 @@ class TestInvariantSentinel(unittest.TestCase):
 
     @patch("subprocess.check_output")
     def test_get_current_branch_file_not_found_error(
-        self, mock_check_output: patch
+        self, mock_check_output: MagicMock
     ) -> None:
         mock_check_output.side_effect = FileNotFoundError()
         branch = get_current_branch()
         self.assertEqual(branch, "master")
 
     @patch("subprocess.check_output")
-    def test_get_current_branch_os_error(self, mock_check_output: patch) -> None:
+    def test_get_current_branch_os_error(self, mock_check_output: MagicMock) -> None:
         mock_check_output.side_effect = OSError()
         branch = get_current_branch()
         self.assertEqual(branch, "master")
@@ -58,7 +59,7 @@ class TestInvariantSentinel(unittest.TestCase):
     @patch("os.walk")
     @patch("os.path.exists")
     def test_audit_and_align_invariants_mocked_walk_and_rules(
-        self, mock_exists: patch, mock_walk: patch
+        self, mock_exists: MagicMock, mock_walk: MagicMock
     ) -> None:
         user_home = os.path.expanduser("~")
         
@@ -78,7 +79,7 @@ class TestInvariantSentinel(unittest.TestCase):
 
         mock_exists.side_effect = mock_exists_side_effect
 
-        def custom_open(file, mode="r", encoding=None, **kwargs) -> None:
+        def custom_open(file: Any, mode: str = "r", encoding: Any = None, **kwargs: Any) -> Any:
             if "tainted.py" in str(file):
                 return mock_open(read_data=f"# Tainted with {user_home}")()
             elif "unreadable.py" in str(file):
@@ -95,11 +96,11 @@ class TestInvariantSentinel(unittest.TestCase):
 
     @patch("os.path.exists")
     def test_audit_and_align_invariants_rules_file_os_error(
-        self, mock_exists: patch
+        self, mock_exists: MagicMock
     ) -> None:
         mock_exists.return_value = True
 
-        def custom_open(file, mode="r", encoding=None, **kwargs) -> None:
+        def custom_open(file: Any, mode: str = "r", encoding: Any = None, **kwargs: Any) -> Any:
             if file == RULES_FILE:
                 raise OSError("Permission denied")
             return mock_open(read_data="")()

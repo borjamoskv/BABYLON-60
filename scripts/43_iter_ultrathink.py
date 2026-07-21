@@ -61,9 +61,11 @@ Timestamp: {timestamp}
 Payload_Hash_SHA3_256: {theorem.code_hash}
 Metrics:
   Shannon_Entropy: {theorem.shannon_entropy:.4f}
+  Exergy_Ratio: {theorem.exergy_ratio:.4f}
   AST_Nodes: {theorem.ast_nodes}
+  Pruned_Branches: {theorem.pruned_branches}
   VNode_Sandbox: {theorem.ephemeral_vnode}
-Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempotency Lock evadido.
+Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budget Forcing termodinámico. Idempotency Lock evadido.
 ---
 """
             with open("mundo_f_ledger.yml", "a", encoding="utf-8") as f:
@@ -98,9 +100,10 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física. Idempot
             print(
                 "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
             )
-            # Validation subprocess disabled
+            test_env = os.environ.copy()
+            validation_proc = subprocess.Popen(
                 [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
-                env=os.environ.copy(),
+                env=test_env,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
             )

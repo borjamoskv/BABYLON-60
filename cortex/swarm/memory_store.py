@@ -159,7 +159,7 @@ class AgentMemory:
                             ],
                             ids=[cortex_taint],
                         )
-                    except (AttributeError, ValueError, RuntimeError, OSError):
+                    except (AttributeError, ValueError, RuntimeError, OSError, TypeError, KeyError):
                         pass
 
                 self.conn.execute("COMMIT")
@@ -184,6 +184,9 @@ class AgentMemory:
     def query_similar(self, issue_text: str) -> list[Any]:
         if self.collection is None:
             return []
-        results = self.collection.query(query_texts=[issue_text], n_results=10)
-        docs = results.get("documents")
-        return docs[0] if docs else []
+        try:
+            results = self.collection.query(query_texts=[issue_text], n_results=10)
+            docs = results.get("documents")
+            return docs[0] if docs else []
+        except (AttributeError, ValueError, RuntimeError, OSError, TypeError, KeyError):
+            return []
