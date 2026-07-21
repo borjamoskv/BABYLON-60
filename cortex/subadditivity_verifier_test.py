@@ -5,7 +5,6 @@ Kernel: MOSKV-1 APEX
 State: Executable C5-REAL Test Suite for Baseline v18.4
 """
 
-import pytest
 from hypothesis import given, strategies as st
 from cortex.subadditivity_verifier import CertificateCategoryP, Morphism, Certificate
 

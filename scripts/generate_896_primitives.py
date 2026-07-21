@@ -1,6 +1,5 @@
 import yaml
 import hashlib
-import json
 import os
 
 domains = [

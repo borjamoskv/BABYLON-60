@@ -5,7 +5,6 @@ Achieves >90% coverage for Invariant Sentinel module.
 
 import os
 import sys
-import tempfile
 import unittest
 import subprocess
 from unittest.mock import patch, mock_open

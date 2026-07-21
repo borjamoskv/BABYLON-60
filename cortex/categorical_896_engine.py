@@ -15,7 +15,7 @@ Implements:
   - Simplicial compatibility complex Compat(Omega)
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Dict, List, Optional, Set, Any, Tuple
 from enum import Enum, auto
 import hashlib
@@ -151,7 +151,7 @@ class MorphismCert:
 class CompatProperty(Enum):
     """Vertices of Compat(Omega) = {F, I, S, R_k}"""
     F = "Fibered"           # alpha* admits left adjoint exists_alpha
-    I = "MonoidalInvariant"  # alpha*(P otimes Q) ~= alpha*(P) otimes alpha*(Q)
+    I = "MonoidalInvariant"  # alpha*(P otimes Q) ~= alpha*(P) otimes alpha*(Q)  # noqa: E741
     S = "Synchronous"        # alpha*(Box_t P) = Box_t(alpha* P)
     R_k = "BudgetBound"     # forall alpha in A(M), mu(alpha) <= k
 
@@ -170,7 +170,7 @@ class CompatFace:
 
 
 class CompatComplex:
-    """
+    r"""
     Simplicial complex Compat(Omega) subset P(Omega) \ {empty}.
     Down-set invariant: sigma in Compat and tau subset sigma => tau in Compat.
     """

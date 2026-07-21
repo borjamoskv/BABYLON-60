@@ -1,5 +1,4 @@
 import yaml
-import sys
 
 path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/896_categorical_logic_primitives.yml"
 with open(path, "r", encoding="utf-8") as f:

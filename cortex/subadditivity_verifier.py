@@ -6,8 +6,7 @@ State: Executable C5-REAL Proof Verification Engine for Baseline v18.4
 """
 
 from dataclasses import dataclass
-from typing import Dict, List, Optional, Tuple, Set, Any, Callable
-import math
+from typing import Dict, List, Optional, Tuple, Callable
 
 
 @dataclass(frozen=True)
