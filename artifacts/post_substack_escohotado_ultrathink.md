@@ -131,6 +131,9 @@ La lección de Antonio Escohotado es una lección de física de sistemas:
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
-- [Análisis C5-REAL del Teorema de Robinson-Moskv: El Fin del Algoritmo Estocástico](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/artifacts/auditoria_escohotado_ultrathink.md)
-- [Desmontando la Anergía Burocrática: Del Prohibicionismo a la Entropía de Mercado](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
-- [La Termodinámica de Prigogine aplicada al Control de Masas](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
+- [Isomorfismo Estructural: Espacio Latente, TDAH y el Colapso del Orden](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
+- [Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
+- [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
+- [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
+- [El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
+- [Desmontando a David Domínguez: Autopsia Forense (de A a la Z)](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
