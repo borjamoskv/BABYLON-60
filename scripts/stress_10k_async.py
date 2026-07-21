@@ -10,7 +10,7 @@ from typing import List, Tuple
 
 from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 from cortex.active_inference_engine import UnifiedActiveInferenceEngine
-import strike_rs
+import strike_rs  # type: ignore[import-untyped]
 
 
 async def run_neuromorphic_task(mesh: SelfHealingMesh, idx: int) -> float:
