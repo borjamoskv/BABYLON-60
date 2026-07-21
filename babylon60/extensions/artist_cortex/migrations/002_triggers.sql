@@ -5,6 +5,7 @@
 CREATE TRIGGER IF NOT EXISTS trg_cortex_artifacts_touch
 AFTER UPDATE ON cortex_artifacts
 FOR EACH ROW
+WHEN OLD.updated_at IS NEW.updated_at OR OLD.updated_at IS NULL
 BEGIN
   UPDATE cortex_artifacts
   SET updated_at = datetime('now')
@@ -69,7 +70,8 @@ END;
 CREATE TRIGGER IF NOT EXISTS trg_cortex_reject_on_missing_hash
 AFTER INSERT ON cortex_artifacts
 FOR EACH ROW
-WHEN NEW.aesthetic_hash IS NULL OR length(trim(NEW.aesthetic_hash)) = 0
+WHEN (NEW.aesthetic_hash IS NULL OR length(trim(NEW.aesthetic_hash)) = 0)
+  AND (NEW.status IS NOT 'rejected')
 BEGIN
   UPDATE cortex_artifacts
   SET status = 'rejected'
@@ -83,3 +85,12 @@ WHEN OLD.locked = 1 AND OLD.anchor_value <> NEW.anchor_value
 BEGIN
   SELECT RAISE(ABORT, 'Anchor locked: mutation denied.');
 END;
+
+CREATE TRIGGER IF NOT EXISTS trg_cortex_lock_anchor_delete_guard
+BEFORE DELETE ON cortex_anchors
+FOR EACH ROW
+WHEN OLD.locked = 1
+BEGIN
+  SELECT RAISE(ABORT, 'Anchor locked: deletion denied.');
+END;
+
