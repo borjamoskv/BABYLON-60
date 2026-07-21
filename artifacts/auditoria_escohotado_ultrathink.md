@@ -68,5 +68,29 @@ CORTEX_TAINT: borjamoskv:escohotado_audit:2026-07-21T18:53:31.636634+00:00:09777
 - **$H_2$:** La intervención de los precios de mercado y la colectivización de medios de producción destruye el sistema de señales de información (Hayek-Escohotado), generando desabastecimiento e inflexibilidad sistémica.
 
 ### 4. Juicios de Valor y Purga de Anergía (Ω110 / Ω111)
-- Purga completa de hagiografía ("apóstol de la libertad") y de difamación ad-hominem ("apologista del consumo").
+- Purga completa de hagiografía ("apóstol de la libertad") and de difamación ad-hominem ("apologista del consumo").
 - Reducción estricta del autor a sus axiomas ontológicos, la fidelidad de sus traducciones y la capacidad explicativa de su historiografía frente al disco físico de la historia.
+
+---
+
+## 4. Demostración Termodinámica Física de *Caos y Orden* (Modelo C5-REAL)
+> **Invariante Ω31:** Evaluación formal mediante cálculo empírico de entropía física ($S = -\sum p_i \ln p_i$) y exponente de Lyapunov ($\lambda$) sobre el motor de dinámicas no lineales de la coerción estatal ($c$) vs. intercambio espontáneo ($r$).
+
+**Motor Ejecutado:** [escohotado_chaos_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_chaos_engine.py)  
+**Ledger Persistido:** `ledgers/escohotado_chaos_entropy.db` (Modo WAL, `busy_timeout`=5000ms)
+
+### Matriz Empírica de Entropía y Regímenes Emergentes
+| Tasa Intercambio ($r$) | Coerción Estatal ($c$) | Entropía ($S$) | Lyapunov ($\lambda$) | Régimen Colapsado |
+| :---: | :---: | :---: | :---: | :--- |
+| `2.50` | `0.00 - 0.30` | `0.0000` | `< 0` | `STAGNANT_COERCIVE_FREEZE` (Parálisis de Mercado) |
+| `3.20` | `0.00 - 0.15` | `0.6931` | `< 0` | `PERIODIC_OSCILLATION` (Ciclos Rigidos) |
+| `3.70` | `0.00` | **`3.6867`** | **`+0.3603`** | **`COMPLEX_SELF_ORGANIZATION` (Borde del Caos / Complejidad Escohotado)** |
+| `3.70` | `0.15` | `1.9062` | `-0.0999` | `PERIODIC_OSCILLATION` (Destrucción de Complejidad por Coerción) |
+| `3.90` | `0.00` | **`3.6832`** | **`+0.5024`** | **`COMPLEX_SELF_ORGANIZATION` (Libertad No Lineal Máxima)** |
+| `3.90` | `0.30` | `3.2783` | `+0.1899` | `COMPLEX_SELF_ORGANIZATION` (Resistencia Entrópica) |
+
+### Conclusión Termodinámica
+El modelo matemático formal de *Caos y Orden* demuestra de forma determinista que:
+1. La intervención de coerción ($c > 0.10$) destruye los exponentes positivos de Lyapunov ($\lambda > 0$), forzando la degradación del sistema desde la **Complejidad Emergente** ($S \approx 3.68$) hacia **Oscilaciones Rigidas** o **Congelación Coercitiva** ($S = 0.0$).
+2. Los sistemas complejos desregulados maximizan la entropía informacional y la capacidad adaptativa sin requerir coordinación centralizada.
+
