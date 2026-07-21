@@ -88,7 +88,7 @@ class DualContextAgent:
                     continue
         except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as e:
             # Fail-Fast C5-REAL logging
-            logging.error(f"[C4-SIM] IPC Stream Fatal Error: {e}")
+            logging.error(f"[C5-REAL] IPC Stream Fatal Error: {e}")
         finally:
             writer.close()
             await writer.wait_closed()
