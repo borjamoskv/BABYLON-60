@@ -81,7 +81,7 @@ class AgentMemory:
         )
         row = cursor.fetchone()
         return (
-            row[0]
+            str(row[0])
             if row
             else "GENESIS_BLOCK_00000000000000000000000000000000000000000000000000"
         )
