@@ -24,6 +24,7 @@ dev = [
     "pip-audit",
     "mkdocstrings[python]",
     "mkdocs-material",
+    "hypothesis>=6.158.1",
 ]
 
 [tool.mypy]

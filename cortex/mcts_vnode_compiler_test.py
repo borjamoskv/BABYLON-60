@@ -14,16 +14,16 @@ import pytest
 try:
     from hypothesis import given, strategies as st
 except ImportError:
-    # Minimal fallback for hypothesis when not installed
-    def given(*args, **kwargs):
-        def decorator(func):
+    from typing import Callable, Any
+    def given(*args: Any, **kwargs: Any) -> Callable[[Callable[..., Any]], Callable[..., Any]]:  # type: ignore[no-redef]
+        def decorator(func: Callable[..., Any]) -> Callable[..., Any]:
             return func
         return decorator
-    class st:
+    class st:  # type: ignore[no-redef]
         @staticmethod
-        def binary():
+        def binary() -> Any:
             class SimpleStrategy:
-                def example(self):
+                def example(self) -> bytes:
                     return b""
             return SimpleStrategy()
 from cortex.mcts_vnode_compiler import (
@@ -133,14 +133,15 @@ class TestMCTSNodeAndUCT:
 
 class TestASTTheoremAndInvariants:
     def test_ast_theorem_valid_construction(self) -> None:
-        code_hash = "a" * 64
+        payload = "x = 1"
+        code_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
         theorem = ASTTheorem(
             code_hash=code_hash,
             proven=True,
             shannon_entropy=4.5,
             ast_nodes=10,
             ephemeral_vnode="vnode-1",
-            payload="x = 1",
+            payload=payload,
             cortex_taint="CORTEX-TAINT:test",
         )
         assert theorem.code_hash == code_hash
