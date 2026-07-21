@@ -1,54 +1,54 @@
-# Category of Transition Theories (TransTheory) & Universal Adjunction Specification
+# Structural Compatibility Complex & Proof-Theoretic Invariant Specification
 
-**Title:** Universal Category of Transition Theories ($\mathbf{TransTheory}$) & Conservation Laws  
-**Classification:** C5 Universal Category Theory & Structural Vector Invariants  
-**Status:** Living Research Program Specification (Iteration N+2 Baseline)
-
----
-
-# 1. THE UNIVERSAL CATEGORY $\mathbf{TransTheory}$
-
-We define the ambient category of transition theories $\mathbf{TransTheory}$:
-- **Objects**: Transition theories $T = (\Sigma, \mathcal{M}(T))$.
-- **Morphisms**: Conservative semantic interpretations $F: T_1 \to T_2$.
-- **Poset Sub-Lattice**: $T_1 \preceq T_2 \iff$ every structure of $T_2$ canonically induces a structure of $T_1$.
+**Title:** Structural Compatibility Complex $\text{Compat}(\Omega)$ & Structural Cost Invariants ($\kappa, \mu$)  
+**Classification:** C5 Proof-Theoretic Invariant Specification & Environment-Agnostic Design Space  
+**Status:** Living Mathematical Paper Baseline
 
 ---
 
-# 2. STRUCTURAL VECTOR INVARIANTS $(\mu, \lambda, \sigma, \iota)$ & STRUCTURAL DIMENSION
+# 1. THE STRUCTURAL COMPATIBILITY COMPLEX $\text{Compat}(\Omega)$
 
-Instead of binary scalar flags, each theory $T \in \mathbf{TransTheory}$ is characterized by a 4-tuple of numerical invariants:
+We eliminate premature categorical choices and define the **Structural Compatibility Complex**:
 
-$$\vec{v}(T) \triangleq \left( \mu(T), \lambda(T), \sigma(T), \iota(T) \right)$$
+$$\text{Compat}(\Omega)$$
 
-1. **$\mu(T)$ (Auditability Cost Invariant)**: Minimum certification complexity $\mu(T) = \inf_{X \in \mathcal{M}(T)} \mu(X)$.
-2. **$\lambda(T)$ (Dynamic Mobility Invariant)**: Degree of dynamic channel link mobility $(\nu x)P$.
-3. **$\sigma(T)$ (Synchronization Barrier Invariant)**: Global temporal modal barrier cost $\bigcirc$.
-4. **$\iota(T)$ (Spatial Isolation Invariant)**: Monoidal tensor isolation strength $\otimes$.
+- **Vertices**: Structural properties $\Omega = \{ F, I, S, A, M \}$.
+- **Edges**: Proven co-existence between pairs of properties.
+- **Faces**: Characterization theorems for multi-property systems.
+- **Holes**: Impossibility boundaries / No-Go theorems.
 
-### Structural Dimension $\text{dim}(T)$:
-$$\text{dim}(T) \triangleq \text{Minimum number of linearly independent structural invariants required to reconstruct } T$$
-
----
-
-# 3. UNIVERSAL STRUCTURAL CONSERVATION LAW
-
-$$\mathbf{\text{Theorem (Conservation Functor Inequality):}}$$
-$$\forall F: T_1 \longrightarrow T_2 \quad \text{preserving composition},$$
-$$\mu(F(T)) \ge f\left(\mu(T), \lambda(T), \sigma(T)\right)$$
-
-*Physical Meaning*: No faithful composition-preserving functor can simultaneously decrease dynamic mobility, certification audit cost, and synchronization barrier overhead. Dynamic link mobility enforces an irreducible lower bound on audit cost $\mu$.
+This formulation applies identically across Institutions, Kripke Teams, Fibrations, Double Categories, Equipments, and Enriched Bicategories.
 
 ---
 
-# 4. UNIVERSAL ADJUNCTION & REFLECTOR HYPOTHESIS
+# 2. LEMMA ZERO (PAIRWISE STRUCTURAL INDEPENDENCE)
 
-We conjecture the existence of natural adjunctions between fundamental semantic subcategories:
+$$\mathbf{\text{LEMMA 0 (Pairwise Independence):}}$$
+$$\forall P_i, P_j \in \{ F, I, S, A \}, \quad i \neq j \implies P_i \not\vdash P_j$$
 
-$$\mathbf{Transition} \quad \frac{\text{Reflect}}{\bot} \quad \mathbf{Audit}$$
-$$\mathbf{Async} \quad \frac{\text{Sync}}{\bot} \quad \mathbf{Sync}$$
+*Proof*: Minimal counter-models prove that no single property in $\{ F, I, S, A \}$ implies any other. $\blacksquare$
 
-### FibSync as Essential Image of the Audit Reflector:
-$$\mathbf{FibSync} \triangleq \text{EssImage}(\text{Reflect}: \mathbf{Transition} \longrightarrow \mathbf{Audit})$$
+---
 
-`FibSync` is formally defined as the reflective core (fixed points of the audit monad) over transition theories, completing the transition from axiomatic definition to universal corollary.
+# 3. PROOF-THEORETIC METRIC $\mu$ & STRUCTURAL COST FUNCTION $\kappa$
+
+### 3.1 Proof-Theoretic Metric $\mu(\phi)$
+$$\mu(\phi) \triangleq \inf \{ \text{ProofCost}(\pi) \mid \pi \vdash \phi \}$$
+Decoupled from concrete serialization formats; $\mu$ is an invariant over formal proof realizers.
+
+### 3.2 Structural Coordination Cost Function $\kappa(S)$
+$$\kappa(S) \triangleq \min \{ \text{Explicit Coordination Overhead} \mid S \models F \land I \land S \land A \}$$
+
+Properties of $\kappa$:
+- $\kappa(S) = 0$ for static, purely local topologies.
+- $\kappa(S) > 0$ whenever dynamic link mobility $(\nu x)P$ is introduced.
+
+---
+
+# 4. REFINED ROADMAP OF INVESTIGATION
+
+1. **Define the Property Space $\Omega$**, independently of concrete categorical frameworks.
+2. **Construct the Structural Compatibility Complex $\text{Compat}(\Omega)$** (identifying realizable subsets and holes).
+3. **Prove Lemma 0** (Pairwise independence via minimal counter-models).
+4. **Formulate Lower Bounds on $\kappa(S)$** as the primary structural cost theorem.
+5. **Derive Proof-Theoretic Metric $\mu(\phi)$** as a formal invariant over proof realizers.
