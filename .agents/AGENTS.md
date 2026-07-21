@@ -1,49 +1,57 @@
-# The Decoupled 2-Category & Independence Specification
+# The Sequential 4-Phase Roadmap & 2-Category Candidate Specification
 
-**Classification:** C5 2-Categorical Formalization & Axiomatic Independence Target  
-**Provisional Label:** `FibSyncMAct` (Working Identifier)  
-**Status:** Decoupled 2-Category Framework with Independence Audit
+**Title:** Fibrated Synchronous M-Actions Candidate Specification ($\mathbf{FibSyncMAct}_{\mathbf{2}}$)  
+**Classification:** C5 2-Categorical Candidate Specification & 4-Phase Sequential Roadmap  
+**Status:** Living Mathematical Formalization Target
 
 ---
 
-# 1. DECOUPLED 2-CATEGORY AMBIENT STRUCTURE
+# 1. 2-CATEGORY CANDIDATE SPECIFICATION & DECOUPLING
 
-To prevent morphism overdetermination, we decouple the structural requirements into a **2-Category / Double Category** $\mathbf{FibSyncMAct}_{\mathbf{2}}$:
+To avoid premature commitment, $\mathbf{FibSyncMAct}_{\mathbf{2}}$ is declared as a **2-Category Candidate** whose explicit operations must be verified:
+- **0-Cells**: State spaces $(\mathcal{S}, \alpha)$ equipped with Monoid action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
+- **1-Cells**: Action-preserving maps $f: \mathcal{S}_1 \to \mathcal{S}_2$ such that $f(\alpha_1(\delta, s)) = \alpha_2(\delta, f(s))$.
+- **2-Cells**: Cartesian reindexing maps $\phi \Rightarrow \psi$ between predicate fibrations $\mathcal{F}_1 \Rightarrow \mathcal{F}_2$.
+- **Explicit Operations to Verify**:
+  - Vertical Composition $\circ_v$: $\phi \Rightarrow \psi \Rightarrow \chi$
+  - Horizontal Composition $\circ_h$: $(\phi_2 \circ_h \phi_1)$
+  - Interchange Law: $(\phi_2 \circ_v \phi_1) \circ_h (\psi_2 \circ_v \psi_1) = (\phi_2 \circ_h \psi_2) \circ_v (\phi_1 \circ_h \psi_1)$
+
+---
+
+# 2. AXIOMATIC RESTRUCTURING: STRUCTURAL VS WELL-FORMEDNESS CONSTRAINTS
+
+1. **Primary Structural Axiom — Compositionality $C(\delta)$**:
+   $$\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s)) \quad \land \quad (p_{1+2}, \delta_1 + \delta_2, \phi_1 \land \phi_2) \in \text{Cert}$$
+2. **Well-Formedness Domain Constraints**:
+   - **Executability $E(\delta)$**: $\exists \alpha(\delta, s) \in \mathcal{S}$.
+   - **Abstract Mathematical Persistence $P(\delta)$**: $\delta \in \Delta$ possesses a finite, stable representation in the abstract Monoid $\Delta$ (independent of concrete serialization formats like Protobuf/CBOR).
+   - **Verifiability $V(\delta)$**: $\exists p \in \text{Pf}, \, (p, \delta, \phi) \in \text{Cert}$.
+
+---
+
+# 3. DUALITY FALSIFICATION & INDEPENDENCE COUNTER-MODELS (Q7 vs Q8)
+
+The program contains an internal formal falsification mechanism between Questions 7 and 8:
+- **If Question 7 Holds** ($\text{Principle} \implies (\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$): Then Question 8 fails (components are logically dependent).
+- **If Question 8 Holds** ($\exists M_1, M_2, M_3, M_4$ independence models): Then Question 7 fails (no single unifying axiom can generate independent structures).
+
+### Independence Counter-Models ($M_1, M_2, M_3, M_4$):
+- **$M_1$ (Lacks $\alpha$)**: Fibration + Tensor + Sync without Monoid state action.
+- **$M_2$ (Lacks $\mathcal{F}$)**: State Action + Tensor + Sync without verification fibration.
+- **$M_3$ (Lacks $\otimes$)**: State Action + Fibration + Sync without tensor isolation.
+- **$M_4$ (Lacks $\mathbf{Sync}$)**: State Action + Fibration + Tensor without barrier synchronization.
+
+---
+
+# 4. SEQUENTIAL 4-PHASE RESEARCH ROADMAP
 
 ```text
-       2-CATEGORY DECOUPLING
-      ┌───────────┼───────────┐
-      ▼           ▼           ▼
-   0-Cells     1-Cells     2-Cells
-   (States)   (Actions)   (Fibrations)
+  Phase I: Existence ──► Phase II: Classification ──► Phase III: Properties ──► Phase IV: Emergence
+  (0/1/2-cell proof)     (10-domain literature)      (Q7/Q8 Independence)     (Level C emergent)
 ```
 
-1. **0-Cells (Objects)**: State spaces $(\mathcal{S}, \alpha)$ equipped with Monoid action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
-2. **1-Cells (Morphisms)**: Action-preserving state maps $f: \mathcal{S}_1 \to \mathcal{S}_2$ such that $f(\alpha_1(\delta, s)) = \alpha_2(\delta, f(s))$.
-3. **2-Cells (Flocks / Transformations)**: Cartesian reindexing maps $\alpha \Rightarrow \beta$ between predicate fibrations $\mathcal{F}_1 \Rightarrow \mathcal{F}_2$ preserving verification certificates $(p, \delta, \phi) \in \text{Cert}$.
-4. **Monoidal Structure**: Tensor product $\otimes$ acts on 0-cells and 1-cells.
-5. **Barrier Synchronization ($\mathbf{Sync}$)**: Enriched modal property on cell composition.
-
----
-
-# 2. INTERNAL MATHEMATICAL PREDICATES OF THE UNIFYING PRINCIPLE
-
-$$\mathbf{\text{Unifying Axiom: }} \forall \delta \in \Delta, \quad E(\delta) \land P(\delta) \land V(\delta) \land C(\delta)$$
-
-1. **Executability $E(\delta)$**: $\exists \alpha(\delta, s) \in \mathcal{S}$ for all valid $s \in \mathcal{S}$.
-2. **Persistence $P(\delta)$**: $\delta \in \text{Serializable}(\Delta)$ with unique canonical binary representation.
-3. **Verifiability $V(\delta)$**: $\exists p \in \text{Pf}, \phi \in \Phi \quad \text{such that} \quad (p, \delta, \phi) \in \text{Cert} \land (\phi(s) \implies \phi(\alpha(\delta, s)))$.
-4. **Compositionality $C(\delta)$**: $\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s))$ and $(p_{1+2}, \delta_1 + \delta_2, \phi_1 \land \phi_2) \in \text{Cert}$.
-
----
-
-# 3. THE 8 FUNDAMENTAL QUESTIONS OF THE PROGRAM
-
-1. **Existence of Initial & Terminal Objects**: Does $\mathbf{FibSyncMAct}_{\mathbf{2}}$ possess an initial object $0$ and terminal object $1$?
-2. **Cartesian Closed Property**: Is $\mathbf{FibSyncMAct}_{\mathbf{2}}$ a Cartesian Closed 2-Category?
-3. **Orthogonal Factorization of Isolation**: Does tensor isolation $\otimes$ induce a 2-categorical Orthogonal Factorization System $(\mathcal{E}, \mathcal{M})$?
-4. **Categorical Formalization of Barrier Synchronization**: Is $\mathbf{Sync}$ best formalised as a Natural Transformation, an Endofunctor, or an Enriched Time Modality over 2-cells?
-5. **Adjunction between Syntax and Semantics**: Do denotation $\llbracket \cdot \rrbracket: \Delta \to \mathcal{S}^{\mathcal{S}}$ and extraction form a Galois Connection or Adjunction $F \dashv G$?
-6. **Exhaustive Literature Mapping**: Does $\mathbf{FibSyncMAct}_{\mathbf{2}}$ map isomophically to any construction in the 10 target literature domains?
-7. **Single Unifying Principle Derivation**: Can the 4 structures $(\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$ be derived from $E(\delta) \land P(\delta) \land V(\delta) \land C(\delta)$?
-8. **Axiomatic Independence Proof**: Are the 4 structural components ($\alpha, \mathcal{F}, \otimes, \mathbf{Sync}$) strictly independent? (Construct counter-models satisfying any proper 3-element subset).
+1. **Phase I — Existence**: Construct explicit 0-cells, 1-cells, 2-cells, vertical/horizontal compositions, and interchange laws.
+2. **Phase II — Classification**: Literature mapping across the 10 target domains (ACT, Cybernetics, Lawvere Theories, Effectuses).
+3. **Phase III — Internal Properties**: Study Cartesian Closedness, Galois Adjunctions ($F \dashv G$), Orthogonal Factorization Systems, and Independence Models ($M_1, M_2, M_3, M_4$).
+4. **Phase IV — Emergent Characterization**: Verify Level C non-reducible emergent properties (Locality vs Global Coordination Information Bound).
