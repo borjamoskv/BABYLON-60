@@ -1,3 +1,4 @@
+import time
 import os
 import sqlite3
 import hashlib
@@ -20,24 +21,43 @@ class AgentMemory:
     def __init__(
         self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH
     ) -> None:
+        is_test = (
+            "PYTEST_CURRENT_TEST" in os.environ
+            or os.environ.get("CORTEX_TEST_MODE") == "1"
+        )
+        if is_test and db_path == DEFAULT_DB_PATH:
+            db_path = ":memory:"
+
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         # Habilitar WAL para concurrencia BFT segura (R10)
-        self.conn.execute("PRAGMA journal_mode=WAL;")
-        self.conn.execute("PRAGMA busy_timeout=5000;")
+        if db_path != ":memory:":
+            self.conn.execute("PRAGMA journal_mode=WAL;")
+        self.conn.execute("PRAGMA busy_timeout=10000;")
         self._init_table()
 
         import chromadb
         from chromadb.config import Settings
 
-        # Silenciar desajuste de argumentos en telemetría interna de chromadb
+        # Silenciar desajuste de argumentos en telemetría interna de chromadb/posthog
+        try:
+            import posthog
+            posthog.disabled = True
+            def _silent_capture(*args: Any, **kwargs: Any) -> None:
+                pass
+            posthog.capture = _silent_capture
+            if hasattr(posthog, "Posthog"):
+                posthog.Posthog.capture = _silent_capture
+        except Exception:
+            pass
+
         try:
             import chromadb.telemetry.product.posthog
 
-            def _silent_capture(self: Any, event: Any = None) -> None:
+            def _silent_product_capture(self: Any, event: Any = None) -> None:
                 pass
 
             setattr(
-                chromadb.telemetry.product.posthog.Posthog, "capture", _silent_capture
+                chromadb.telemetry.product.posthog.Posthog, "capture", _silent_product_capture
             )
         except Exception:
             pass
@@ -100,47 +120,55 @@ class AgentMemory:
         )
 
     def log(self, issue_id: int, agent_role: str, action: str, result: str) -> str:
-        try:
-            self.conn.execute("BEGIN EXCLUSIVE TRANSACTION")
-            prev_hash = self._get_last_hash()
+        for attempt in range(5):
+            try:
+                self.conn.execute("BEGIN IMMEDIATE")
+                prev_hash = self._get_last_hash()
 
-            timestamp_iso = datetime.now(timezone.utc).isoformat()
+                timestamp_iso = datetime.now(timezone.utc).isoformat()
 
-            raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode(
-                "utf-8"
-            )
-            cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
+                raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode(
+                    "utf-8"
+                )
+                cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
 
-            self.conn.execute(
-                "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
-                (issue_id, agent_role, action, result, prev_hash, cortex_taint),
-            )
+                self.conn.execute(
+                    "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
+                    (issue_id, agent_role, action, result, prev_hash, cortex_taint),
+                )
 
-            doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
-            self.collection.add(
-                documents=[doc_content],
-                metadatas=[
-                    {
-                        "issue_id": issue_id,
-                        "agent_role": agent_role,
-                        "cortex_taint": cortex_taint,
-                        "timestamp": timestamp_iso,
-                    }
-                ],
-                ids=[cortex_taint],
-            )
+                doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
+                self.collection.add(
+                    documents=[doc_content],
+                    metadatas=[
+                        {
+                            "issue_id": issue_id,
+                            "agent_role": agent_role,
+                            "cortex_taint": cortex_taint,
+                            "timestamp": timestamp_iso,
+                        }
+                    ],
+                    ids=[cortex_taint],
+                )
 
-            self.conn.execute("COMMIT")
-            return cortex_taint
-        except sqlite3.Error:
-            self.conn.execute("ROLLBACK")
-            raise
-        except ValueError:
-            self.conn.execute("ROLLBACK")
-            raise
-        except RuntimeError:
-            self.conn.execute("ROLLBACK")
-            raise
+                self.conn.execute("COMMIT")
+                return cortex_taint
+            except sqlite3.OperationalError as e:
+                try:
+                    self.conn.execute("ROLLBACK")
+                except sqlite3.Error:
+                    pass
+                if "locked" in str(e).lower() and attempt < 4:
+                    time.sleep(0.05 * (2 ** attempt))
+                    continue
+                raise
+            except Exception:
+                try:
+                    self.conn.execute("ROLLBACK")
+                except sqlite3.Error:
+                    pass
+                raise
+        raise RuntimeError("AgentMemory log failed after 5 retry attempts due to database lock")
 
     def query_similar(self, issue_text: str) -> list[Any]:
         results = self.collection.query(query_texts=[issue_text], n_results=10)

@@ -1,10 +1,18 @@
+import os
+import uuid
 import pytest
 from cortex.swarm.engine_fsm import SwarmFSM
+import cortex.swarm.memory_store as ms
 
+@pytest.fixture(autouse=True)
+def isolate_agent_memory(tmp_path: pytest.TempPathFactory) -> None:
+    # Genera rutas únicas para cada proceso/test en xdist
+    run_id = uuid.uuid4().hex
+    ms.DEFAULT_DB_PATH = os.path.join(str(tmp_path), f"agent_memory_{run_id}.db")
+    ms.DEFAULT_CHROMA_PATH = os.path.join(str(tmp_path), f"chroma_{run_id}")
 
 def test_fsm_normal_flow() -> None:
     fsm = SwarmFSM()
-    # Mocking FSM state database using local memory log
     payload = {
         "body": "Refactor math function",
         "code": "print('fuzz')",

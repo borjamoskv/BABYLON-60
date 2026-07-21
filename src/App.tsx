@@ -299,6 +299,40 @@ const MOCK_TABLES: DatabaseTable[] = [
   }
 ];
 
+// Lightweight Lexer for Syntax Highlighting
+function renderSyntaxHighlight(code: string, lang: string, accentColor: string) {
+  const lines = code.split('\n');
+  const keywords = ['def', 'class', 'import', 'from', 'return', 'raise', 'if', 'else', 'self', 'pub', 'fn', 'struct', 'impl', 'use', 'let', 'mut', 'SELECT', 'FROM', 'WHERE', 'ORDER', 'BY', 'LIMIT', 'name', 'on', 'jobs', 'steps', 'runs-on'];
+
+  return lines.map((line, lIdx) => {
+    let formatted = line;
+
+    // Highlight comments
+    if (line.trim().startsWith('#') || line.trim().startsWith('//') || line.trim().startsWith('%')) {
+      return <div key={lIdx} className="text-emerald-500/60 italic">{line}</div>;
+    }
+
+    // Basic tokenization
+    const tokens = line.split(/(\s+|[(),:=.{}[\]"])/);
+    return (
+      <div key={lIdx}>
+        {tokens.map((token, tIdx) => {
+          if (keywords.includes(token)) {
+            return <span key={tIdx} style={{ color: accentColor, fontWeight: 500 }}>{token}</span>;
+          }
+          if (token.startsWith('"') || token.endsWith('"') || token.startsWith("'") || token.endsWith("'")) {
+            return <span key={tIdx} className="text-amber-300">{token}</span>;
+          }
+          if (/^\d+$/.test(token)) {
+            return <span key={tIdx} className="text-cyan-400">{token}</span>;
+          }
+          return <span key={tIdx}>{token}</span>;
+        })}
+      </div>
+    );
+  });
+}
+
 export default function BabylonCompleteIDE() {
   const [themeKey, setThemeKey] = useState<string>('awwwards');
   const theme = THEMES[themeKey] || THEMES.awwwards;
@@ -545,7 +579,6 @@ export default function BabylonCompleteIDE() {
     setTokensPerSecond(48.2);
     setLatencyMs(12);
 
-    // Simulate active inference convergence steps
     setFreeEnergyHistory([0.9, 0.72, 0.48, 0.31, 0.14, 0.05, 0.001]);
 
     const start = performance.now();
@@ -589,7 +622,7 @@ export default function BabylonCompleteIDE() {
     }
   };
 
-  // Trigger consensus vote
+  // Swarm Controls
   const triggerBFTVote = () => {
     setAgentState('working');
     setSwarmNodes(prev => prev.map(n => ({ ...n, status: 'voting' })));
@@ -601,6 +634,16 @@ export default function BabylonCompleteIDE() {
       setTerminalLogs(prev => [`[BFT SWARM] Unconditional Consensus Achieved. Hash sealed.`, ...prev]);
       setTimeout(() => setAgentState('idle'), 2000);
     }, 1200);
+  };
+
+  const injectFault = () => {
+    setSwarmNodes(prev => prev.map((n, i) => i === 4 ? { ...n, status: 'fault' } : n));
+    setTerminalLogs(prev => [`[BFT SWARM] Simulated Byzantine fault on Node Delta. Active mitigation engaged.`, ...prev]);
+  };
+
+  const healSwarm = () => {
+    setSwarmNodes(prev => prev.map(n => ({ ...n, status: 'synced' })));
+    setTerminalLogs(prev => [`[BFT SWARM] Swarm healed. 100% nodes synced.`, ...prev]);
   };
 
   // Export JSON Attestation Certificate
@@ -973,12 +1016,28 @@ export default function BabylonCompleteIDE() {
                 <span className="text-[9px] font-mono text-emerald-400">N=5 Synced</span>
               </div>
 
-              <button 
-                onClick={triggerBFTVote}
-                className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[11px] font-mono uppercase tracking-widest cursor-pointer transition-all"
-              >
-                🛡 Trigger Consensus Vote
-              </button>
+              <div className="flex flex-col gap-2">
+                <button 
+                  onClick={triggerBFTVote}
+                  className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all"
+                >
+                  🛡 Consensus Vote
+                </button>
+                <div className="flex gap-2">
+                  <button 
+                    onClick={injectFault}
+                    className="flex-1 py-1.5 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-300 rounded text-[9.5px] font-mono uppercase cursor-pointer transition-all"
+                  >
+                    Inject Fault
+                  </button>
+                  <button 
+                    onClick={healSwarm}
+                    className="flex-1 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 rounded text-[9.5px] font-mono uppercase cursor-pointer transition-all"
+                  >
+                    Heal Swarm
+                  </button>
+                </div>
+              </div>
 
               <div className="flex flex-col gap-3 mt-2">
                 <span className="text-[10px] font-mono uppercase text-white/30">Node Roster</span>
@@ -990,7 +1049,7 @@ export default function BabylonCompleteIDE() {
                   >
                     <div className="flex justify-between items-center">
                       <span className="text-[11px] font-medium text-white/90 truncate">{node.name}</span>
-                      <span className={`text-[8.5px] font-mono uppercase px-1 py-0.2 rounded ${node.status === 'synced' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                      <span className={`text-[8.5px] font-mono uppercase px-1 py-0.2 rounded ${node.status === 'synced' ? 'bg-emerald-500/20 text-emerald-300' : node.status === 'fault' ? 'bg-red-500/20 text-red-300' : 'bg-amber-500/20 text-amber-300'}`}>
                         {node.status}
                       </span>
                     </div>
@@ -1104,10 +1163,10 @@ export default function BabylonCompleteIDE() {
                         y1={swarmNodes[0].y}
                         x2={node.x}
                         y2={node.y}
-                        stroke={theme.accent}
+                        stroke={node.status === 'fault' ? '#EF4444' : theme.accent}
                         strokeWidth="1.5"
-                        strokeDasharray="4 4"
-                        opacity="0.5"
+                        strokeDasharray={node.status === 'fault' ? '2 2' : '4 4'}
+                        opacity="0.6"
                       />
                     ))}
                   </svg>
@@ -1121,7 +1180,7 @@ export default function BabylonCompleteIDE() {
                     >
                       <div className="flex justify-between items-center">
                         <span className="text-[11px] font-bold text-white truncate">{node.name.split(' ')[0]}</span>
-                        <div className={`w-2 h-2 rounded-full ${node.status === 'synced' ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
+                        <div className={`w-2 h-2 rounded-full ${node.status === 'synced' ? 'bg-emerald-400 animate-pulse' : node.status === 'fault' ? 'bg-red-500 animate-ping' : 'bg-amber-400'}`} />
                       </div>
                       <span className="text-[9px] font-mono text-white/40 truncate">{node.role}</span>
                       <span className="text-[8.5px] font-mono text-emerald-400 mt-1">t={node.lamport} · {node.latency}ms</span>
@@ -1138,7 +1197,7 @@ export default function BabylonCompleteIDE() {
                     <div className="text-sm font-medium text-white">{selectedSwarmNode.name}</div>
                     <div className="text-white/50 text-[10px]">{selectedSwarmNode.role}</div>
                     <div className="border-t border-white/10 pt-2 flex flex-col gap-1 text-[11px]">
-                      <div>Status: <span className="text-emerald-400">{selectedSwarmNode.status}</span></div>
+                      <div>Status: <span className={selectedSwarmNode.status === 'fault' ? 'text-red-400' : 'text-emerald-400'}>{selectedSwarmNode.status}</span></div>
                       <div>Lamport: <span className="text-white">{selectedSwarmNode.lamport}</span></div>
                       <div>Latency: <span className="text-white">{selectedSwarmNode.latency}ms</span></div>
                       <div className="truncate mt-1 text-[9px] text-white/30" title={selectedSwarmNode.hash}>Hash: {selectedSwarmNode.hash}</div>
@@ -1293,7 +1352,7 @@ export default function BabylonCompleteIDE() {
             </div>
 
           ) : (
-            // MULTI-TAB CODE EDITOR
+            // MULTI-TAB CODE EDITOR WITH AST SYNTAX HIGHLIGHTING OVERLAY
             <div className="flex-1 flex flex-col min-w-0">
               
               {/* FILE TABS */}
@@ -1340,7 +1399,7 @@ export default function BabylonCompleteIDE() {
                 </div>
               </div>
 
-              {/* CODE EDITOR TEXTAREA WITH LINE NUMBERS */}
+              {/* CODE EDITOR TEXTAREA WITH AST HIGHLIGHTING & LINE NUMBERS */}
               <div className="flex-1 relative border border-white/10 rounded-md bg-black/40 overflow-hidden flex">
                 
                 {/* Line Numbers Gutter */}
@@ -1352,17 +1411,21 @@ export default function BabylonCompleteIDE() {
 
                 {/* Editor Surface */}
                 <div className="flex-1 relative p-3 overflow-auto">
+                  {/* Syntax Highlighted Background Overlay */}
+                  <pre className="editor-text absolute inset-0 p-3 pointer-events-none z-10 whitespace-pre-wrap leading-[1.8] font-mono text-white/90">
+                    {renderSyntaxHighlight(editorContent, activeFile.lang, theme.accent)}
+                  </pre>
+
                   <textarea
                     value={editorContent}
                     onChange={handleTextChange}
                     onKeyDown={handleKeyDown}
                     spellCheck={false}
-                    className="editor-text absolute inset-0 w-full h-full p-3 bg-transparent border-0 resize-none outline-none focus:ring-0 z-20"
-                    style={{ color: theme.text }}
+                    className="editor-text absolute inset-0 w-full h-full p-3 bg-transparent border-0 resize-none outline-none focus:ring-0 z-20 text-transparent caret-white selection:bg-white/20 leading-[1.8]"
                   />
                   
                   {ghostText && (
-                    <pre className="editor-text absolute inset-0 p-3 pointer-events-none z-10 whitespace-pre-wrap">
+                    <pre className="editor-text absolute inset-0 p-3 pointer-events-none z-15 whitespace-pre-wrap leading-[1.8]">
                       <span className="opacity-0">{editorContent.slice(0, cursorPos)}</span>
                       <span className="opacity-40 transition-opacity duration-500" style={{ color: theme.muted }}>{ghostText}</span>
                     </pre>
