@@ -2,74 +2,62 @@
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$  
 **Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
-**Status:** Frozen Baseline Specification (v15.0 — Frozen Research Program)
+**Status:** Frozen Baseline Specification (v16.0 — Pruned Core & Inclusion Chain)
 
 ---
 
 # 0. ALCANCE Y TAXONOMÍA LÓGICA
 
-> **Alcance:** La teoría FISR no pretende caracterizar todas las categorías monoidales, todos los sistemas concurrentes ni todas las lógicas de programas. Su objetivo es estudiar el espacio de modelos que admiten simultáneamente una estructura fibrada de predicados, una disciplina de aislamiento composicional, una modalidad síncrona y un cálculo composicional de certificados con coste observable.
+> **Alcance:** La teoría FISR no pretende caracterizar todas las categorías monoidales ni la totalidad de los sistemas concurrentes. Su objetivo es estudiar el espacio de modelos de acciones monoidales con predicados fibrados y certificabilidad observable bajo restricciones computacionales.
 
 ### Taxonomía de Estatus Lógico:
-- **[Definición]**: Introducción de un concepto formal o signatura.
+- **[Definición]**: Concepto formal, firma o categoría.
 - **[Axioma]**: Hipótesis adoptada axiomáticamente en la teoría $T$.
-- **[Proposición]**: Consecuencia directa demostrable de los axiomas.
-- **[Teorema]**: Resultado formalmente demostrado en el entorno C5-REAL.
-- **[Objetivo]**: Meta de representación o construcción de modelos del programa.
-- **[Conjetura]**: Resultado cuantitativo o de separación esperado, aún no probado.
+- **[Proposición]**: Consecuencia directa de los axiomas.
+- **[Teorema]**: Resultado formalmente demostrado en C5-REAL.
+- **[Objetivo]**: Meta de representación o construcción de subcategorías.
+- **[Conjetura]**: Resultado de separación esperado, aún no probado.
 
 ---
 
-# 1. NÚCLEO FISR-CORE VS EXTENSIONES (ESTRATIFICACIÓN P0)
+# 1. CADENA PRINCIPAL DE INCLUSIÓN CATEGORIAL
 
-$$\begin{array}{rll}
-\mathbf{Nivel\;0 \; [Definición]} & \text{Categoría Monoidal Base} & \mathcal{C} = (\mathcal{C}, \otimes, I) \\
-\mathbf{Nivel\;1 \; [Definición]} & \text{Firma Estructural Core } \Sigma & \Sigma = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \Box_t, \text{Cert}, \mu) \\
-\mathbf{Nivel\;2 \; [Axioma]} & \text{Leyes / Ecuaciones } T & \text{Preservación Monoidal, Beck-Chevalley, Operador Interior } \Box_t P \le P \\
-\mathbf{Nivel\;3 \; [Definición]} & \text{Propiedades / Observables } \Omega & F, I, S \text{ (Propiedades); } \mu, R_k \text{ (Observables / Presupuestos)}
-\end{array}$$
+$$\mathbf{CompMAct}_M^{\mathcal{F}} \;\hookrightarrow\; \mathbf{CompMAct}_M \;\hookrightarrow\; \mathbf{MAct}_M$$
 
-### 1.1 Funtor de Certificados Core [Definición]
-$$\mathrm{Cert}: \mathbf{Arr}(\mathcal{C}) \longrightarrow \mathbf{Set}$$
+- **$\mathbf{MAct}_M$ [Definición]:** Categoría base de $M$-actos para un monoide $M$ dado (o la fibración $U: \mathbf{MAct} \to \mathbf{Mon}$ si $M$ varía).
+- **$\mathbf{CompMAct}_M$ [Definición]:** Subcategoría de $M$-actos con morfismos computables y restricciones de estado.
+- **$\mathbf{CompMAct}_M^{\mathcal{F}}$ [Definición]:** Subcategoría restringida con estructura fibrada de predicados $F$ e invarianza monoidal $I$.
 
 ---
 
-# 2. PROPIEDADES ESTRUCTURALES CORE [Definición]
+# 2. FIRMA ESTRUCTURAL CORE $\Sigma_{\text{Core}}$ (PODA ESTRUCTURAL)
 
-- **Propiedad Fibrada ($F$):** $\alpha^*: \mathrm{Pred}(B) \to \mathrm{Pred}(A)$ admite adjunto a izquierda $\exists_\alpha \dashv \alpha^*$.
-- **Propiedad Monoidal Invariante ($I$):** Para todo $P, Q \in \mathrm{Pred}(B)$, $\alpha^*(P \otimes_\text{fib} Q) \cong \alpha^*(P) \otimes_\text{fib} \alpha^*(Q)$.
-- **Propiedad Síncrona ($S$):** $\alpha^*(\Box_t P) = \Box_t (\alpha^* P)$ con $\Box_t P \le P$.
+$$\Sigma_{\text{Core}} = (\otimes, I, \mathbf{Arr}(\mathcal{C}), \text{Pred}, \Box_t, \text{Cert}, \mu)$$
 
----
-
-# 3. COMPLEJO SIMPLICIAL $\text{Compat}(\Omega)$ Y FILTRACIÓN $k$ [Definición & Objetivo]
-
-$$\text{Compat}(\Omega) \subseteq \mathcal{P}(\Omega) \setminus \{\emptyset\}$$
-
-- **Lema Simplicial (Down-set Invariant) [Proposición 3.1]:**
-  $$\sigma \in \text{Compat}(\Omega) \land \tau \subseteq \sigma \implies \tau \in \text{Compat}(\Omega)$$
-- **Filtración Topológica por Presupuesto [Línea Futura]:**
-  $$\operatorname{Compat}_0(\Omega) \subseteq \operatorname{Compat}_1(\Omega) \subseteq \operatorname{Compat}_2(\Omega) \subseteq \cdots \subseteq \operatorname{Compat}_\infty(\Omega)$$
+### Poda de Primitivas:
+- **`Sync` Purgado del Núcleo:** La sincronía temporal no es una primitiva del núcleo; las regiones conmutativas locales ($\mathrm{CommRegion}$) o protocolos de barrera se posponen al **Apéndice A**.
+- **Doble Categoría Aplazada:** La estructura de doble categoría se aplaza hasta la demostración de 2-celdas cuadradas no degeneradas.
 
 ---
 
-# 4. OBSERVABLE PRIMITIVO $\mu$ Y COSTE DERIVADO $\kappa$ [Definición]
+# 3. OBSERVABLES $\mu$ Y COSTE DERIVADO $\kappa$ WELL-TYPED
 
-### 4.1 Métrica Morfismo-Nivel [Definición]
-$$\mu: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbb{N}_\infty \qquad \mu(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \in \mathrm{Cert}(\alpha) \}$$
-
-### 4.2 Métrica Modelo-Nivel [Definición]
-$$\mu(M) \triangleq \sup_{\alpha \in \mathrm{Mor}(M)} \mu_M(\alpha)$$
-
-### 4.3 Coste Derivado de Extensión Conservativa $\kappa$ [Definición]
-$$\kappa(M) \triangleq \inf \{ \mu(E) \mid E \in \mathbf{Mod}(F,I,S,R_\infty), \; M \hookrightarrow_\text{fib} E \text{ es embedding pleno fibrado conservativo} \}$$
+- **Métrica Morfismo-Nivel [Definición]:** $\mu_\mathcal{M}: \mathrm{Mor}(\mathcal{C}) \to \mathbb{N}_\infty$, $\mu_\mathcal{M}(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \in \mathrm{Cert}(\alpha) \}$.
+- **Métrica Modelo-Nivel [Definición]:** $\mu(\mathcal{M}) \triangleq \sup_{\alpha \in \mathrm{Mor}(\mathcal{C})} \mu_\mathcal{M}(\alpha)$.
+- **Coste de Extensión Conservativa ($\kappa$) [Definición]:** $\kappa(M) \triangleq \inf \{ \mu(E) \mid E \in \mathbf{CompMAct}_M^{\mathcal{F}}, \; M \hookrightarrow_\text{fib} E \}$.
 
 ---
 
-# 5. ESTATUS LÓGICO DE LOS RESULTADOS DEL PROGRAMA
+# 4. RESULTADOS Y PREGUNTAS ABIERTAS
 
-- **Objetivo 0 (Representación Categorial):** $\mathbf{Mod}(\Sigma, T) \simeq \mathbf{CertCalc}(\mathcal{C})$.
-- **Objetivo 1 (Modelos Mínimos de Independencia):** Construcción explícita de $M_{\neg F}, M_{\neg I}, M_{\neg S}, M_{\neg R_k}$.
-- **Proposición 1 (Subaditividad con Overhead):** $\mu(\beta \circ \alpha) \le \mu(\alpha) + \mu(\beta) + \Delta_{\text{overhead}}(\alpha, \beta)$.
-- **Conjetura 1 ($C_1$ - Jerarquía Estricta $R_k$):** $\mathbf{Mod}(F, I, S, R_{k_1}) \subsetneq \mathbf{Mod}(F, I, S, R_{k_2})$ para $k_1 < k_2$.
-- **Conjetura 2 ($C_2$ - Separación por Coste $\kappa$):** Existen estructuras no certificables $M$ con $\kappa(M) = \infty$.
+- **Proposición 1.1 (Estabilidad Computacional):** Las restricciones computacionales inducen una subcategoría propia $\mathbf{CompMAct}_M$ estable bajo isomorfismos computables.
+- **Objetivo 0 (Representación):** $\mathbf{CompMAct}_M^{\mathcal{F}} \simeq \mathbf{CertCalc}(\mathcal{C})$.
+- **Conjetura T (Separación Computacional):** $\mathbf{CompMAct}_M \not\simeq \mathbf{MAct}_M$.
+- **Pregunta Abierta S:** Construcción explícita del funtor $F$ para equivalencia estricta.
+
+---
+
+# 5. ESTRUCTURA DEL DOCUMENTO (CON APÉNDICE A)
+
+1. **Secciones I–VIII:** Núcleo de $M$-actos, subcategorías computables, costes $\mu, \kappa$ y conjeturas.
+2. **Apéndice A — Posibles Nociones de Sincronía:** Comparación entre conmutatividad local, convergencia, causalidad y disciplinas temporales.
