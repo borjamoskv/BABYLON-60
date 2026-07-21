@@ -48,3 +48,8 @@ cortex/artifacts/
 *_meta.json
 *_transcript.txt
 *.mp4
+
+# Temporary build/test output
+coverage.out
+go_deps.json
+
