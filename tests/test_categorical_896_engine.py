@@ -1,4 +1,3 @@
-import pytest
 import os
 import sys
 from hypothesis import given, settings, strategies as st
