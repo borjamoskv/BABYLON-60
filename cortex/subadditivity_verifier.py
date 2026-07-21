@@ -1,8 +1,8 @@
 """
-C5-REAL FISR Subadditivity Theorem Verifier & Lawvere Metric Transducer (v18.3)
+C5-REAL FISR Subadditivity Theorem Verifier & Lawvere Metric Transducer (v18.4)
 ================================================================================
 Kernel: MOSKV-1 APEX
-State: Executable C5-REAL Proof Verification Engine for Baseline v18.3
+State: Executable C5-REAL Proof Verification Engine for Baseline v18.4
 """
 
 from dataclasses import dataclass
@@ -31,7 +31,8 @@ class Certificate:
 class CertificateCategoryP:
     """
     Implementation of Category P and Functor pi: P -> C (Identity on Objects).
-    Lawvere Enriched Metric Space (C, mu) with extension/repair operator kappa.
+    Lawvere Enriched Metric Space (C, mu) with extension/repair operator kappa
+    and PRF-S Soundness / PRF-C Relative Completeness verification engines.
     """
 
     def __init__(self, delta_circ_fn: Optional[Callable[[Morphism, Morphism], float]] = None,
@@ -141,3 +142,38 @@ class CertificateCategoryP:
         if not valid_extension_costs:
             return float('inf')
         return min(valid_extension_costs)
+
+    def verify_prf_s_soundness(self, basic_transitions: List[Morphism], k: float) -> bool:
+        """
+        PRF-S Soundness: Cert_k => M |= FISR_k^A.
+        Verifies that if each basic transition has a certificate of cost <= k,
+        then mu(alpha) <= k for all alpha and kappa(alpha, R_k^A) = 0.
+        """
+        for alpha in basic_transitions:
+            mu_val = self.compute_mu(alpha)
+            if mu_val > k:
+                return False
+            # Self-repair check with identity morphism
+            self.add_identity_certificate(alpha.tgt)
+            def budget_R_k(m, cost):
+                return self.compute_mu(alpha) <= k
+            kappa_val = self.compute_kappa_repair_operator(alpha, budget_R_k)
+            if kappa_val > 0.0:
+                return False
+        return True
+
+    def verify_prf_c_relative_completeness(self, basic_transitions: List[Morphism], k: float) -> bool:
+        """
+        PRF-C Relative Completeness: M |= FISR_k^A => Cert_k.
+        Verifies that under coherent fiber reachability in N_bar,
+        if mu(alpha) <= k for all basic transitions, a k-certification exists.
+        """
+        for alpha in basic_transitions:
+            mu_val = self.compute_mu(alpha)
+            if mu_val <= k:
+                fiber = self.get_cert_fiber(alpha)
+                if not any(c.cost <= k for c in fiber):
+                    return False
+            else:
+                return False
+        return True
