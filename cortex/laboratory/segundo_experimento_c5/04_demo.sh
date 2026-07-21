@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Experiment: segundo_experimento_c5
-# Execution transcript / demo runner.
+# Experimento 2: Transcripción de Ejecución DEMO
 set -euo pipefail
 
-echo "Running experiment: segundo_experimento_c5"
-python3 03_codigo.py
+echo "🧪 Ejecutando Síntesis Sonora PCM con Cadenas de Markov..."
+python3 cortex/laboratory/segundo_experimento_c5/03_codigo.py
+ls -lh cortex/laboratory/segundo_experimento_c5/synth.wav
