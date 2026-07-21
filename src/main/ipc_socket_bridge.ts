@@ -56,8 +56,16 @@ export class IpcSocketBridge {
     this.webContents = contents;
   }
 
+  private retryCount = 0;
+  private maxRetries = 15;
+  private isConnected = false;
+
   public connect(): void {
+    if (this.isConnected) return;
+
     this.client = net.createConnection(this.socketPath, () => {
+      this.isConnected = true;
+      this.retryCount = 0;
       console.log(`[C5-REAL] Electron connected to Agent Igor IPC at ${this.socketPath}`);
       
       // Invariante Ω43: Heartbeat activo (Liveness)
@@ -66,23 +74,31 @@ export class IpcSocketBridge {
       }, 5000);
     });
 
-    // Invariante Ω26: Fallo Inmediato
     this.client.on('error', (err) => {
-      console.error(`[C5-REAL] FATAL (Ω26): IPC Connection Error. Fail-Fast Triggered. ${err.message}`);
+      if (!this.isConnected && this.retryCount < this.maxRetries) {
+        this.retryCount++;
+        console.warn(`[C5-REAL] IPC socket non-ready (${err.message}). Retrying connection (${this.retryCount}/${this.maxRetries})...`);
+        setTimeout(() => this.connect(), 1000);
+        return;
+      }
+
+      console.error(`[C5-REAL] FATAL (Ω26): IPC Connection Error after ${this.retryCount} retries. Fail-Fast Triggered. ${err.message}`);
       process.kill(process.pid, 'SIGKILL');
     });
 
     // Invariante Ω43: Prevención Zombie
     this.client.on('end', () => {
       if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
-      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerró la conexión (end). Zombie IPC prevenido. Ejecutando SIGKILL.`);
-      process.kill(process.pid, 'SIGKILL');
+      this.isConnected = false;
+      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerró la conexión (end). Zombie IPC prevenido.`);
     });
 
     this.client.on('close', (hadError) => {
       if (this.heartbeatTimer) clearInterval(this.heartbeatTimer);
-      console.error(`[C5-REAL] FATAL (Ω43): Python socket cerrado (close). Error: ${hadError}. Purga atómica.`);
-      process.kill(process.pid, 'SIGKILL');
+      if (this.isConnected) {
+        this.isConnected = false;
+        console.error(`[C5-REAL] FATAL (Ω43): Python socket cerrado (close). Error: ${hadError}.`);
+      }
     });
 
     // Invariante Ω45: Fragmentación NDJSON y Prevención de Corrupción UTF-8
