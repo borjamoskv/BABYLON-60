@@ -114,7 +114,19 @@ class C5LLMRouter:
             except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"Groq ({groq_route.get('name')}) falló: {e}")
 
-        # 3. Cascada a GitHub Models (Developer Free Tier)
+        # 3. Cascada a Gemini Pro Multi-Account Pool
+        gemini_route = self.routes_by_name.get("Gemini Pro Multi-Account Cluster")
+        if gemini_route and (model.startswith("gemini") or "GEMINI_API_KEY" in os.environ):
+            try:
+                from scripts.gemini_pool_manager import GeminiProPoolManager
+                pool = GeminiProPoolManager()
+                if pool.slots:
+                    target_model = model if model.startswith("gemini") else "gemini-1.5-pro"
+                    return pool.dispatch_generate_content(prompt, model=target_model)
+            except Exception as e:
+                errors.append(f"Gemini Pro Multi-Account Pool falló: {e}")
+
+        # 4. Cascada a GitHub Models (Developer Free Tier)
         github_route = self.routes_by_name.get("GitHub Models")
         github_key = os.environ.get("GITHUB_TOKEN")
         if github_route and github_key:

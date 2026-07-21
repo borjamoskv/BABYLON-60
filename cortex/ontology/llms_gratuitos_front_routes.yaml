@@ -45,3 +45,10 @@ routes:
     auth: "API Key (Créditos Gratuitos Iniciales)"
     models: ["deepseek-chat", "deepseek-reasoner"]
     description: "Punto de acceso API para DeepSeek-V3 y DeepSeek-R1 con créditos de bienvenida gratuitos."
+
+  - name: "Gemini Pro Multi-Account Cluster"
+    url: "https://generativelanguage.googleapis.com"
+    auth: "Gemini API Keys Pool (Round-Robin Sharding)"
+    models: ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-1.5-flash"]
+    description: "Pool multi-cuenta con rotación automática de claves y tolerancia a fallos 429."
+
