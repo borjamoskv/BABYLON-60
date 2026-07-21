@@ -1,8 +1,16 @@
+import os
 import yaml
 import hashlib
-import os
+from typing import TypedDict, Any
 
-domains = [
+class DomainSpec(TypedDict):
+    id: str
+    name: str
+    range: list[int]
+    type: str
+    categories: list[str]
+
+domains: list[DomainSpec] = [
     {
         "id": "D1",
         "name": "Estructura Categórica Fundamental (112 Primitivas)",
