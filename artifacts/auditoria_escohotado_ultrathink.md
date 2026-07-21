@@ -94,3 +94,25 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 1. La intervención de coerción ($c > 0.10$) destruye los exponentes positivos de Lyapunov ($\lambda > 0$), forzando la degradación del sistema desde la **Complejidad Emergente** ($S \approx 3.68$) hacia **Oscilaciones Rigidas** o **Congelación Coercitiva** ($S = 0.0$).
 2. Los sistemas complejos desregulados maximizan la entropía informacional y la capacidad adaptativa sin requerir coordinación centralizada.
 
+---
+
+## 5. Modelo Económico-Histórico de Prohibición y Propiedad Privada (C5-REAL)
+> **Sintesis:** Formalización computacional de la *Renta de Ilegalidad* (*Historia General de las Drogas*) y de la *Pérdida de Información Económica* (*Los Enemigos del Comercio*).
+
+**Motor Ejecutado:** [escohotado_market_prohibition_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_market_prohibition_engine.py)  
+**Ledger Persistido:** `ledgers/escohotado_economics.db` (Modo WAL, `busy_timeout`=5000ms)
+
+### Matriz de Simulación Económica
+| Nivel Coerción ($E_{enf}$) | Índice Propiedad ($PR$) | Prima de Riesgo ($\alpha_{risk}$) | Pureza / Calidad ($Q_{pur}$) | Índice Violencia ($V_{black}$) | Pérdida Info ($I_{loss}$) | Pérdida Exergía ($E_{loss}$) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `0.00` | `1.00` | **`1.00x`** | **`1.000`** | **`0.00`** | **`0.00`** | **`0.00`** (Mercado Libre Transparente) |
+| `0.25` | `1.00` | `1.70x` | `0.788` | `0.63` | `0.00` | `0.17` |
+| `0.50` | `0.50` | `3.44x` | `0.575` | `3.75` | `0.50` | `1.72` |
+| `0.75` | `0.00` | `6.06x` | `0.363` | `11.25` | `1.00` | `5.46` |
+| **`1.00`** | **`0.00`** | **`9.50x`** | **`0.150`** | **`20.00`** | **`1.00`** | **`9.50`** (Prohibición Totalitaria) |
+
+### Deducciones de Causalidad Económica
+1. **Teorema de la Renta de Ilegalidad (Historia de las Drogas):** Conforme la persecución policial aumenta del $0\%$ al $100\%$, el multiplicador de riesgo eleva los precios del mercado negro en $9.5\times$, destruyendo la pureza del producto hasta el $15\%$ y disparando la violencia institucional/cartelizada a $20.0$.
+2. **Teorema de la Ruina Informativa (Los Enemigos del Comercio):** La supresión de los derechos de propiedad ($PR \to 0$) maximiza el ruido de señales de precios ($I_{loss} = 1.0$), destruyendo la exergía del sistema social y haciendo inevitable la quiebra del cálculo económico.
+
+
