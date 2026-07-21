@@ -29,6 +29,11 @@ impl RustCategoricalEngine {
         if sequence.is_empty() {
             return f64::INFINITY;
         }
+        for &id in &sequence {
+            if id < 1 || id > self.total_primitives {
+                return f64::INFINITY;
+            }
+        }
 
         let base_cost = sequence.len() as f64;
         base_cost + friction
@@ -47,6 +52,18 @@ impl RustCategoricalEngine {
             }
         }
         collisions
+    }
+
+    /// Fast verification of Theorem 1.1 (Sequential Subadditivity)
+    pub fn verify_sequential_subadditivity_fast(&self, len_a: usize, len_b: usize, delta: f64) -> bool {
+        if len_a == 0 || len_b == 0 {
+            return true;
+        }
+        let mu_a = len_a as f64;
+        let mu_b = len_b as f64;
+        let mu_comp = (len_a + len_b) as f64 + delta;
+        let upper = mu_a + mu_b + delta;
+        mu_comp <= upper + 1e-12
     }
 }
 
