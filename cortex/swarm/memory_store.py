@@ -29,6 +29,13 @@ class AgentMemory:
         import chromadb
         from chromadb.config import Settings
 
+        # Silenciar desajuste de argumentos en telemetría interna de chromadb
+        try:
+            import chromadb.telemetry.posthog
+            chromadb.telemetry.posthog.Posthog.capture = lambda *args, **kwargs: None
+        except Exception:
+            pass
+
         chroma_settings = Settings(anonymized_telemetry=False)
 
         if (
