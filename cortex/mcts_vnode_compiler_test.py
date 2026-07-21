@@ -148,14 +148,16 @@ class TestASTTheoremAndInvariants:
         assert theorem.cortex_taint == "CORTEX-TAINT:test"
 
     def test_invalid_entropy_raises_value_error(self) -> None:
+        payload = "x = 1"
+        code_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
         with pytest.raises(ValueError, match="Shannon entropy out of theoretical bounds"):
             ASTTheorem(
-                code_hash="a" * 64,
+                code_hash=code_hash,
                 proven=True,
                 shannon_entropy=9.5,
                 ast_nodes=5,
                 ephemeral_vnode="vnode-1",
-                payload="x = 1",
+                payload=payload,
             )
 
     def test_invalid_code_hash_length_raises_value_error(self) -> None:
@@ -166,7 +168,7 @@ class TestASTTheoremAndInvariants:
                 shannon_entropy=4.0,
                 ast_nodes=5,
                 ephemeral_vnode="vnode-1",
-                payload="x = 1",
+                payload="",
             )
 
 
