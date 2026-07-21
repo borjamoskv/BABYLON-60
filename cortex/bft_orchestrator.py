@@ -190,9 +190,10 @@ class BFTOrchestrator:
         self._conn: sqlite3.Connection | None = None
 
     def _get_connection(self) -> sqlite3.Connection:
-        if self._conn is None:
-            self._conn = sqlite3.connect(DB_PATH, timeout=5.0)
-        return self._conn
+        conn = sqlite3.connect(DB_PATH, timeout=5.0)
+        conn.execute("PRAGMA journal_mode=WAL;")
+        conn.execute("PRAGMA busy_timeout=5000;")
+        return conn
 
     async def enqueue_task(self, d: int, p: int, m: int) -> None:
         """Enqueues an action tuple (domain, primitive, modifier) for asynchronous BFT processing.
@@ -308,18 +309,18 @@ class BFTOrchestrator:
     ) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11)."""
         taint = f"[CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{int(time.time())}]"
-        conn = self._get_connection()
-        try:
-            conn.execute(
-                "INSERT INTO bft_ledger (step_index, domain, primitive, modifier, prev_hash, current_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?, ?);",
-                (self.step_index, d, p, m, prev_hash, current_hash, taint),
-            )
-            conn.commit()
-        except sqlite3.IntegrityError as e:
-            print(
-                f"⚠️ Double write or uniqueness constraint violation on prev_hash: {e}"
-            )
-            conn.rollback()
+        with self._get_connection() as conn:
+            try:
+                conn.execute(
+                    "INSERT INTO bft_ledger (step_index, domain, primitive, modifier, prev_hash, current_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?, ?);",
+                    (self.step_index, d, p, m, prev_hash, current_hash, taint),
+                )
+                conn.commit()
+            except sqlite3.IntegrityError as e:
+                print(
+                    f"⚠️ Double write or uniqueness constraint violation on prev_hash: {e}"
+                )
+                conn.rollback()
 
     def get_ledger_count(self) -> int:
         """Returns the current number of rows in the Master Ledger."""
