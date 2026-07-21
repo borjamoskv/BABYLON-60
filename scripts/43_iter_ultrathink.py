@@ -5,6 +5,9 @@ import hashlib
 import subprocess
 from datetime import datetime, timezone
 
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+os.environ["CHROMA_SERVER_NO_TELEMETRY"] = "1"
+
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
