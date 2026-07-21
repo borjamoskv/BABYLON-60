@@ -2,15 +2,20 @@
 
 import asyncio
 import hashlib
+import sqlite3
 import time
 import os
-import sqlite3
+import sys
 import numpy as np
 from typing import List
 
-from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
-from cortex.active_inference_engine import UnifiedActiveInferenceEngine
-import strike_rs  # type: ignore[import-untyped]
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh  # noqa: E402
+from cortex.active_inference_engine import UnifiedActiveInferenceEngine  # noqa: E402
+import strike_rs  # type: ignore[import-untyped]  # noqa: E402
 
 
 async def run_neuromorphic_task(mesh: SelfHealingMesh, idx: int) -> float:
