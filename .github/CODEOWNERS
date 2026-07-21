@@ -1,0 +1,9 @@
+# Global Code Owners
+* @borjamoskv
+
+# Core Architecture & Ledger
+/babylon60/ @borjamoskv
+/cortex/ @borjamoskv
+/contracts/ @borjamoskv
+/strike_rs/ @borjamoskv
+/.github/ @borjamoskv

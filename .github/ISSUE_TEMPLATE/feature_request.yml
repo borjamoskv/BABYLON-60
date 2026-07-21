@@ -1,0 +1,19 @@
+name: Feature Request / RFC
+description: Propose an architectural enhancement or new primitive
+title: "[RFC]: "
+labels: ["enhancement", "proposal"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement / Causal Need
+      description: What limitation or thermodynamic inefficiency does this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Architecture / Solution
+      description: Detailed description of proposed primitives or changes.
+    validations:
+      required: true

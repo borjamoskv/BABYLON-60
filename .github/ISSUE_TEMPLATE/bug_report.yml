@@ -1,0 +1,34 @@
+name: Bug Report
+description: Report a reproducible bug or defect in BABYLON-60 / CORTEX
+title: "[BUG]: "
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue in BABYLON-60. Please ensure zero-anergy detail.
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: Clear description of the unexpected behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction Steps
+      description: Exact steps to reproduce.
+      placeholder: |
+        1. Run `python -m babylon60...`
+        2. Execute step...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: System Environment
+      description: OS, Python version, Rust version, Commit Hash.
+      placeholder: "macOS 15.x / Python 3.12 / Rust 1.80 / Commit hash..."
+    validations:
+      required: true
