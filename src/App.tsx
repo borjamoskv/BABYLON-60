@@ -361,6 +361,10 @@ export default function BabylonCompleteIDE() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isHypervigilant, setIsHypervigilant] = useState(false);
   const [grainOverlay, setGrainOverlay] = useState(true);
+  const [wallpaperEnabled, setWallpaperEnabled] = useState(true);
+  const [wallpaperPreset, setWallpaperPreset] = useState('/assets/yinmn_blue_ide.jpg');
+  const [wallpaperOpacity, setWallpaperOpacity] = useState(0.45);
+
 
   // Swarm State
   const [swarmNodes, setSwarmNodes] = useState<SwarmNode[]>(INITIAL_SWARM);
@@ -670,9 +674,21 @@ export default function BabylonCompleteIDE() {
 
   return (
     <div 
-      className={`w-screen h-screen flex flex-col overflow-hidden select-none transition-all duration-[800ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 scale-[0.99]'}`}
+      className={`w-screen h-screen flex flex-col overflow-hidden select-none relative transition-all duration-[800ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 scale-[0.99]'}`}
       style={{ backgroundColor: theme.bg, color: theme.text, fontFamily: '"Inter", sans-serif' }}
     >
+      {/* PHYSICAL WALLPAPER BACKGROUND LAYER */}
+      {wallpaperEnabled && (
+        <div 
+          className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-700 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url('${wallpaperPreset}')`,
+            opacity: wallpaperOpacity,
+            filter: 'contrast(1.1) brightness(0.95)'
+          }}
+        />
+      )}
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
         
@@ -1127,7 +1143,7 @@ export default function BabylonCompleteIDE() {
                 ))}
               </div>
 
-              <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono mt-4">Visual FX</span>
+              <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono mt-4">Visual FX & Wallpaper</span>
               <div className="flex justify-between items-center text-[12px] text-white/70">
                 <span>Grain Overlay</span>
                 <button 
@@ -1138,6 +1154,51 @@ export default function BabylonCompleteIDE() {
                   {grainOverlay ? 'ON' : 'OFF'}
                 </button>
               </div>
+
+              <div className="flex justify-between items-center text-[12px] text-white/70 mt-2">
+                <span>Wallpaper Layer</span>
+                <button 
+                  onClick={() => setWallpaperEnabled(!wallpaperEnabled)}
+                  className="text-[10px] font-mono border bg-transparent px-2 py-0.5 rounded cursor-pointer text-white/80"
+                  style={{ borderColor: wallpaperEnabled ? theme.accent : '#555' }}
+                >
+                  {wallpaperEnabled ? 'ON' : 'OFF'}
+                </button>
+              </div>
+
+              {wallpaperEnabled && (
+                <div className="flex flex-col gap-3 mt-1 p-2.5 bg-white/5 border border-white/10 rounded">
+                  <div className="flex flex-col gap-1">
+                    <span className="text-[11px] text-white/60 font-mono">Wallpaper Preset</span>
+                    <select
+                      value={wallpaperPreset}
+                      onChange={(e) => setWallpaperPreset(e.target.value)}
+                      className="bg-[#090B19] border border-white/15 text-white/90 rounded p-1.5 text-[11px] font-mono outline-none cursor-pointer"
+                    >
+                      <option value="/assets/yinmn_blue_ide.jpg">YInMn Noir IDE</option>
+                      <option value="/assets/cover_c5_vs_c4.png">C5 vs C4 Singularity</option>
+                      <option value="/assets/thermo_decay_anergy.png">Thermo Decay Matrix</option>
+                    </select>
+                  </div>
+
+                  <div className="flex flex-col gap-1">
+                    <div className="flex justify-between text-[11px] text-white/60 font-mono">
+                      <span>Opacity</span>
+                      <span>{Math.round(wallpaperOpacity * 100)}%</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min="0.05" 
+                      max="1.0" 
+                      step="0.05"
+                      value={wallpaperOpacity}
+                      onChange={(e) => setWallpaperOpacity(parseFloat(e.target.value))}
+                      className="w-full cursor-pointer"
+                    />
+                  </div>
+                </div>
+              )}
+
             </div>
           )}
         </div>
