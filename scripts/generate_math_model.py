@@ -26,7 +26,7 @@ def summarize_graphs() -> None:
         for item in cat:
             modules.add(item["file"])
 
-    fan_out = defaultdict(int)
+    fan_out: dict[str, int] = defaultdict(int)
     fan_in: dict[str, int] = defaultdict(int)
 
     # Build a simple dependency edge list (module -> called functions)

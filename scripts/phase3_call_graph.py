@@ -2,6 +2,7 @@ import os
 import ast
 import json
 from collections import defaultdict
+from typing import Any
 
 
 class CallGraphVisitor(ast.NodeVisitor):
@@ -10,13 +11,13 @@ class CallGraphVisitor(ast.NodeVisitor):
         self.module_calls: set[str] = set()
         self.current_function: str | None = None
 
-    def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
+    def visit_FunctionDef(self, node: ast.FunctionDef) -> Any:
         prev_function = self.current_function
         self.current_function = node.name
         self.generic_visit(node)
         self.current_function = prev_function
 
-    def visit_Call(self, node: ast.Call) -> None:
+    def visit_Call(self, node: ast.Call) -> Any:
         if isinstance(node.func, ast.Name):
             func_name = node.func.id
         elif isinstance(node.func, ast.Attribute):
