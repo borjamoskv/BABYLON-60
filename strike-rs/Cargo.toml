@@ -8,7 +8,7 @@ name = "strike_rs"
 crate-type = ["cdylib"]
 
 [dependencies]
-pyo3 = { version = "0.21", features = ["extension-module"] }
+pyo3 = { version = "0.29.0", features = ["extension-module"] }
 
 # PyO3 requires Python ≤3.12 at this version. Point to the isolated venv.
 # Run tests with: PYO3_PYTHON=.venv/bin/python3 cargo test --lib

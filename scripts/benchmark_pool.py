@@ -14,10 +14,10 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
-from scripts.gemini_pool_manager import GeminiProPoolManager  # noqa: E402
+from scripts.gemini_pool_manager import GeminiProPoolManager, EpistemicPoolHalt  # noqa: E402
 
 
-def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 50) -> None:
+def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> None:
     print("============================================================")
     print(
         f"  BENCHMARK SIMULATION: {num_slots} CUENTAS PRO | {total_requests} PETICIONES"
@@ -40,14 +40,23 @@ def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 50) -> No
         dispatched_counts = {slot.slot_id: 0 for slot in manager.slots}
         rate_limits_simulated = 0
 
-        # Simular 50 peticiones concurrentes con inyección aleatoria de 429
+        # Simular peticiones concurrentes con inyección de 429 cada 3 peticiones por slot
         for req_id in range(1, total_requests + 1):
-            slot = manager.get_next_available_slot()
+            try:
+                slot = manager.get_next_available_slot()
+            except EpistemicPoolHalt:
+                # Todos los slots en cooldown -> esperar a que expire el mas proximo
+                earliest = min(s.cooldown_until for s in manager.slots)
+                sleep_needed = max(0.0, earliest - time.time()) + 0.01
+                print(f" ⏳ Todos los slots en cooldown. Conmutando... Esperando {sleep_needed:.2f}s para recuperacion.")
+                time.sleep(sleep_needed)
+                slot = manager.get_next_available_slot()
+
             dispatched_counts[slot.slot_id] += 1
 
-            # Simular 429 cada 7 peticiones por slot
-            if dispatched_counts[slot.slot_id] % 7 == 0:
-                slot.set_cooldown(1.0)  # Cooldown corto para el test
+            # Simular 429 cada 3 peticiones por slot para validar conmutacion en cooldown
+            if dispatched_counts[slot.slot_id] % 3 == 0:
+                slot.set_cooldown(0.2)  # Cooldown corto de 0.2s para la simulacion
                 rate_limits_simulated += 1
                 print(
                     f" ⚠️  Request #{req_id:02d} -> Slot #{slot.slot_id:02d} | Inyectado 429 Rate-Limit -> Cooldown Activo"

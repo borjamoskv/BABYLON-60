@@ -145,7 +145,7 @@ define_ontology_lookup!(
 // 1. STATE OBSERVER VECTOR
 // ==========================================
 
-#[pyclass]
+#[pyclass(from_py_object)]
 #[derive(Clone, Debug)]
 pub struct StateVector {
     #[pyo3(get, set)]
@@ -188,7 +188,7 @@ impl Default for StateVector {
 // 2. COGNITIVE CHAIN VECTOR
 // ==========================================
 
-#[pyclass]
+#[pyclass(from_py_object)]
 #[derive(Clone, Debug)]
 pub struct CognitiveChainVector {
     #[pyo3(get, set)]
@@ -229,7 +229,7 @@ impl Default for CognitiveChainVector {
 // 3. TTS HARNESS STATE
 // ==========================================
 
-#[pyclass]
+#[pyclass(from_py_object)]
 #[derive(Clone, Debug)]
 pub struct TTSHarnessState {
     #[pyo3(get, set)]
