@@ -44,3 +44,7 @@ db/chroma_memory/
 mypy_errors.txt
 fix_mypy.py
 cortex/artifacts/
+*.srt
+*_meta.json
+*_transcript.txt
+*.mp4
