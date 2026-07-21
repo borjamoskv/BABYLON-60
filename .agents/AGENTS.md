@@ -1,63 +1,71 @@
-# Negative Results & Stratified Non-Derivability Ledger for FibSyncMAct
+# The Class Characterization & Epistemic Separation Specification
 
-**Title:** Negative Results & Stratified Non-Derivability Report for $\mathbf{FibSyncMAct}_{\mathbf{2}}$  
-**Classification:** C5 Mathematical Non-Derivability Proofs & Axiomatic Pruning  
-**Status:** Living Negative Results Specification (Conjecture C & 4 Stratified Levels)
-
----
-
-# 1. NON-DERIVABILITY THEOREM (INDEPENDENCE RESULT)
-
-$$\mathbf{\text{Theorem (Non-Derivability):}}$$
-$$(E, P, V) \not\vdash (\alpha, \mathcal{F}, \otimes, \mathbf{Sync})$$
-
-### Proof:
-Computational constraints (Executability $E$, Persistence $P$) and logical verification ($V$) operate at distinct semantic strata. No derivation exists that maps $E \land P \land V$ to state actions ($\alpha$), fibrations ($\mathcal{F}$), tensor isolation ($\otimes$), or synchronization ($\mathbf{Sync}$) without injecting external structural axioms. $\blacksquare$
+**Title:** Formal Class Characterization & No-Go Separation Theorems for $\mathbf{FibSync}$ Runtimes  
+**Classification:** C5 Mathematical Class Characterization & Quantitative Metric Spec  
+**Status:** Living Class Specification (Theorems T1, T2, T3 & Metric $\mu$)
 
 ---
 
-# 2. THE 4 STRATIFIED FUNCTORIAL LEVELS
+# 1. CLASS CHARACTERIZATION THEOREM (THE SHIFT)
 
-Instead of a single unifier scalar principle, the framework is structured into four interconnected funtorian levels:
+Instead of defining a single concrete object, we define the formal **Class of Fibrated Synchronous Systems ($\mathcal{K}_{\mathbf{FibSync}}$)**:
 
-```text
-  Operational Stratum (Action α)
-            │  (Functor F_log)
-            ▼
-     Logical Stratum (Fibration F, Cert)
-            │  (Functor F_comp)
-            ▼
- Compositional Stratum (Tensor ⊗)
-            │  (Diagrammatic Property)
-            ▼
-    Temporal Stratum (Barrier Sync)
-```
-
-1. **Operational Stratum**: M-act state action $\alpha: \Delta \times \mathcal{S} \to \mathcal{S}$.
-2. **Logical Stratum**: Predicate interpretation $\mathcal{F} \to \mathcal{S}$ and Hoare verification certificates $\text{Cert}$.
-3. **Compositional Stratum**: Symmetric Monoidal tensor isolation $\otimes$.
-4. **Temporal Stratum**: Synchronization discipline $\mathbf{Sync}$ (diagrammatic commutativity property over composition).
+$$\mathcal{K}_{\mathbf{FibSync}} = \{ \mathcal{A} = \langle \mathcal{S}, \mathcal{P}, \bigcirc, \mu \rangle \mid \mathcal{A} \models \text{T1} \land \text{T2} \land \text{T3} \}$$
 
 ---
 
-# 3. NON-OBJECT DIAGRAMMATIC NATURE OF SYNCHRONIZATION ($\mathbf{Sync}$)
+# 2. THE THREE CORE STRUCTURAL THEOREMS
 
-The synchronization barrier $\mathbf{Sync}$ is **not an object, functor, or natural transformation**. It is a **diagrammatic commutativity property** over cell composition:
+## TEOREMA T1 (Teorema de Separación e Imposibilidad - No-Go Theorem)
+*No existe un funtor fiel $F: \mathcal{C} \to \mathcal{D}$ que preserve simultáneamente sincronía por modalidad temporal $\bigcirc$, aislamiento espacial tensorial $\otimes$ y verificabilidad fibrada $\mathcal{F}$ cuando se permite la movilidad dinámica de enlaces $(\nu x)P$.*
 
-$$\mathbf{Sync}(\mathcal{D}) \iff \text{Diagram } \mathcal{D} \text{ commutes under atomic tick steps}$$
-
----
-
-# 4. AXIOM PRUNING & REDUNDANCY ELIMINATION
-
-- **Pruning of $C(\delta)$**: Compositionality $C(\delta)$ is **redundant** as a standalone axiom, as it is natively subsumed by the Monoid Action associativity law:
-  $$\alpha(\delta_1 + \delta_2, s) = \alpha(\delta_2, \alpha(\delta_1, s))$$
+$$\neg \exists F: \mathcal{C} \xrightarrow{\text{fiel}} \mathcal{D} \quad \text{tal que} \quad F(\bigcirc) = \bigcirc_{\mathcal{D}} \land F(\otimes) = \otimes_{\mathcal{D}} \land F(\mathcal{F}) = \mathcal{F}_{\mathcal{D}} \quad \text{bajo movilidad dynamic } \nu x$$
 
 ---
 
-# 5. THE CENTRAL KILLER CONJECTURE (CONJECTURE C)
+## TEOREMA T2 (Teorema de Caracterización de Clase)
+*Un runtime pertenece a la clase $\mathcal{K}_{\mathbf{FibSync}}$ si y solo si satisface cuatro propiedades independientes derivadas del Axioma de Reproducibilidad Artefactual.*
 
-$$\mathbf{\text{Conjecture C (Mobility-Isolation-Verifiability Impossibility):}}$$
-$$\neg \exists \mathbf{FibSyncMAct} \text{ possessing dynamic link mobility that SIMULTANEOUSLY preserves spatial isolation and Hoare verifiability.}$$
+$$\mathcal{A} \in \mathcal{K}_{\mathbf{FibSync}} \iff \text{Artifact}(\delta) \implies E(\delta) \land P(\delta) \land V(\delta) \land C(\delta)$$
 
-*Significance*: Proves that dynamic channel mobility $(\nu x)P$ inherently violates either spatial isolation $\otimes$ or verification certificate invariance $\text{Cert}$.
+---
+
+## TEOREMA T3 (Teorema de Minimalidad e Independencia por Contramodelos)
+*Ninguna de las cuatro propiedades puede ser eliminada sin colapsar el runtime en una clase degenerada. La independencia es absoluta y se verifica mediante cuatro contramodelos $M_1, M_2, M_3, M_4$.*
+
+- $M_1$ (Sin $E$): Lógica pura sin evaluabilidad de estado.
+- $M_2$ (Sin $P$): Efímero puro (LTS no persistente sin traza binaria).
+- $M_3$ (Sin $V$): Sistema de transición no verificado sin predicados de Hoare.
+- $M_4$ (Sin $C$): Conjunto discreto no asociativo sin composición de deltas.
+
+---
+
+# 3. LA SINCRONÍA COMO MODALIDAD TEMPORAL ($\bigcirc$)
+
+Se despoja a `Sync` de toda interpretación como objeto de categoría. La sincronización se formaliza como un **operador modal temporal de paso de instante ($\bigcirc$)**:
+
+$$\bigcirc \phi(s) \iff \text{La propiedad } \phi \text{ se satisface estrictamente en el siguiente instante de barrera}$$
+
+---
+
+# 4. EL AXIOMA DE REPRODUCIBILIDAD ARTEFACTUAL
+
+$$\mathbf{\text{Axioma de Reproducibilidad Artefactual:}}$$
+$$\forall \delta \in \Delta, \quad \delta \text{ es un Artefacto Reproducible}$$
+
+Demostración de Consecuencias:
+1. **Ejecutabilidad $E(\delta)$**: $\delta$ induce un estado $\alpha(\delta, s)$.
+2. **Persistencia $P(\delta)$**: $\delta$ posee una traza estable serializable.
+3. **Verificabilidad $V(\delta)$**: $\delta$ porta un certificado de Hoare $(p, \delta, \phi) \in \text{Cert}$.
+4. **Composicionalidad $C(\delta)$**: $\delta_1 + \delta_2$ preserva la reproducible idempotencia.
+
+---
+
+# 5. LA MÉTRICA CUANTITATIVA ($\mu$)
+
+Definimos la función de métrica cuantitativa de complejidad de verificación y distancia causal:
+
+$$\mu: \text{Obj}(\mathcal{K}_{\mathbf{FibSync}}) \longrightarrow \mathbb{N}$$
+$$\mu(S) = \text{CosteCertificado}(S) + \text{ProfundidadCausal}(S) + \text{PasosReplay}(S)$$
+
+Propiedad: $\mu(S_1 \otimes S_2) = \mu(S_1) + \mu(S_2)$ (Aditividad sobre aislamiento).
