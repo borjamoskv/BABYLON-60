@@ -1,15 +1,11 @@
-import os
-import uuid
 import pytest
+from unittest.mock import MagicMock
 from cortex.swarm.engine_fsm import SwarmFSM
-import cortex.swarm.memory_store as ms
 
 @pytest.fixture(autouse=True)
-def isolate_agent_memory(tmp_path: pytest.TempPathFactory) -> None:
-    # Genera rutas únicas para cada proceso/test en xdist
-    run_id = uuid.uuid4().hex
-    ms.DEFAULT_DB_PATH = os.path.join(str(tmp_path), f"agent_memory_{run_id}.db")
-    ms.DEFAULT_CHROMA_PATH = os.path.join(str(tmp_path), f"chroma_{run_id}")
+def mock_agent_memory(monkeypatch: pytest.MonkeyPatch) -> None:
+    # Evitar OOM por ChromaDB en xdist y deadlocks de SQLite
+    monkeypatch.setattr("cortex.swarm.engine_fsm.AgentMemory", MagicMock)
 
 def test_fsm_normal_flow() -> None:
     fsm = SwarmFSM()
