@@ -216,3 +216,13 @@ def test_inv_c5_17_autodidact_omega_bypass() -> None:
         if "INV_C5_17" in text and "Ultrathink Bypass" in text:
             found = True
     assert found, "INV_C5_17 missing in local AGENTS.md"
+
+
+def test_inv_c5_18_bft_float_exclusion() -> None:
+    """INV_C5_18 — BFT Float Exclusion in canonicalize_cbor and BFT_Ledger."""
+    from babylon60.core.crypto import canonicalize_cbor
+    import pytest
+
+    with pytest.raises(ValueError, match="Flotantes"):
+        canonicalize_cbor({"data": 12.34})
+

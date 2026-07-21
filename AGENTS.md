@@ -104,3 +104,7 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### PyO3 Forward ABI Compatibility (Anti-Deadlock)
 - **Ω30 · PYO3 FORWARD ABI INVARIANT:** Queda estrictamente prohibido ejecutar validaciones `cargo check` o compilaciones `cargo build` en repositorios mixtos Rust/Python sin la declaración explícita de `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1`. La omisión causa necrosis de compilación al resolver contra intérpretes 3.14+ o sandboxes de `uv`, considerándose Anergía clase C4-SIM.
 
+### BFT Deterministic Float Exclusion
+- **INV_C5_18:** Floating-point numbers (`float`) are strictly prohibited in BFT consensus payloads, state mutation timestamps, and cryptographic serialization due to IEEE 754 non-determinism. Timestamps must use `int` or `INTEGER` columns, and `canonicalize_cbor` must recursively enforce float exclusion.
+
+
