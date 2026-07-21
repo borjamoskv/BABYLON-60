@@ -24,6 +24,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
   const [activeDomain, setActiveDomain] = useState<string>('D1');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedPrimitive, setSelectedPrimitive] = useState<number | null>(1);
+  const [hoveredPrimitive, setHoveredPrimitive] = useState<number | null>(null);
 
   // Generate domain stats
   const selectedDomainInfo = DOMAINS.find(d => d.id === activeDomain) || DOMAINS[0];
@@ -32,127 +33,217 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
     <div style={{
       backgroundColor: '#0A0A0A',
       color: '#E0E0E0',
-      fontFamily: 'Inter, system-ui, sans-serif',
+      fontFamily: '"Inter", "Roboto", system-ui, sans-serif',
       padding: '24px',
-      borderRadius: '8px',
-      border: '1px solid #2B3BE5',
-      boxShadow: '0 8px 32px rgba(43, 59, 229, 0.15)'
+      borderRadius: '12px',
+      border: '1px solid #1E255E',
+      boxShadow: '0 12px 48px rgba(43, 59, 229, 0.2)',
+      position: 'relative',
+      overflow: 'hidden'
     }}>
-      {/* Header */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '20px', borderBottom: '1px solid #1A1A1A', paddingBottom: '16px' }}>
-        <div>
-          <h2 style={{ margin: 0, fontSize: '20px', color: '#FFFFFF', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ display: 'inline-block', width: '10px', height: '10px', backgroundColor: '#2B3BE5', borderRadius: '50%' }}></span>
-            MATRIZ CANÓNICA DE 896 PRIMITIVAS CATEGÓRICAS
-          </h2>
-          <span style={{ fontSize: '12px', color: '#888888' }}>C5-REAL Transducer Engine · Industrial Noir 2026</span>
-        </div>
-        <div style={{ backgroundColor: '#141414', padding: '6px 12px', borderRadius: '4px', border: '1px solid #222222', fontSize: '12px', color: '#2B3BE5', fontWeight: 'bold' }}>
-          SHA256: aa205d81...
-        </div>
-      </div>
-
-      {/* Domain Navigation Tabs */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '8px', marginBottom: '20px' }}>
-        {DOMAINS.map(dom => (
-          <button
-            key={dom.id}
-            onClick={() => setActiveDomain(dom.id)}
-            style={{
-              backgroundColor: activeDomain === dom.id ? '#2B3BE5' : '#141414',
-              color: activeDomain === dom.id ? '#FFFFFF' : '#AAAAAA',
-              border: activeDomain === dom.id ? '1px solid #4F5EFE' : '1px solid #222222',
-              padding: '10px 12px',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              fontSize: '12px',
-              textAlign: 'left',
-              fontWeight: activeDomain === dom.id ? '600' : '400',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            <div>{dom.name}</div>
-            <div style={{ fontSize: '10px', opacity: 0.7, marginTop: '2px' }}>P{dom.range[0]} - P{dom.range[1]}</div>
-          </button>
-        ))}
-      </div>
-
-      {/* Search and Metrics Bar */}
-      <div style={{ display: 'flex', gap: '16px', marginBottom: '20px' }}>
-        <input
-          type="text"
-          placeholder="Buscar primitiva por código, ID o concepto..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{
-            flex: 1,
-            backgroundColor: '#141414',
-            border: '1px solid #2B2B2B',
-            color: '#FFFFFF',
-            padding: '10px 14px',
-            borderRadius: '4px',
-            fontSize: '13px',
-            outline: 'none'
-          }}
-        />
-        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '13px', color: '#888888' }}>
-          <span>Capacidad: <strong style={{ color: '#FFFFFF' }}>112 / 112</strong></span>
-          <span>•</span>
-          <span>{"Complejidad $\\text{Compat}(\\Omega)$:"} <strong style={{ color: '#2B3BE5' }}>$O(1)$</strong></span>
-        </div>
-      </div>
-
-      {/* Interactive Matrix Grid */}
+      {/* Background glow artifact */}
       <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(16, 1fr)',
-        gap: '6px',
-        backgroundColor: '#141414',
-        padding: '16px',
-        borderRadius: '6px',
-        border: '1px solid #222222'
-      }}>
-        {Array.from({ length: 112 }, (_, idx) => {
-          const pId = selectedDomainInfo.range[0] + idx;
-          const isSelected = selectedPrimitive === pId;
-          return (
-            <button
-              key={pId}
-              onClick={() => setSelectedPrimitive(pId)}
-              title={`Primitiva P${pId}`}
-              style={{
-                backgroundColor: isSelected ? '#2B3BE5' : '#1A1A1A',
-                color: isSelected ? '#FFFFFF' : '#888888',
-                border: isSelected ? '1px solid #FFFFFF' : '1px solid #2A2A2A',
-                borderRadius: '3px',
-                padding: '8px 0',
-                fontSize: '11px',
-                fontWeight: '600',
-                cursor: 'pointer',
-                textAlign: 'center',
-                transition: 'all 0.1s ease'
-              }}
-            >
-              {pId}
-            </button>
-          );
-        })}
-      </div>
+        position: 'absolute',
+        top: '-10%',
+        right: '-5%',
+        width: '300px',
+        height: '300px',
+        background: 'radial-gradient(circle, rgba(43,59,229,0.1) 0%, rgba(10,10,10,0) 70%)',
+        zIndex: 0,
+        pointerEvents: 'none'
+      }}></div>
 
-      {/* Primitive Detail Inspector */}
-      {selectedPrimitive && (
-        <div style={{ marginTop: '20px', backgroundColor: '#111111', padding: '16px', borderRadius: '6px', border: '1px solid #222222' }}>
-          <div style={{ fontSize: '11px', color: '#2B3BE5', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-            INSPECTOR DE PRIMITIVA CANÓNICA
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        {/* Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', borderBottom: '1px solid #1A1C29', paddingBottom: '16px' }}>
+          <div>
+            <h2 style={{ margin: 0, fontSize: '22px', color: '#FFFFFF', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '10px', fontWeight: '700' }}>
+              <span style={{ display: 'inline-block', width: '12px', height: '12px', backgroundColor: '#3B4DFF', borderRadius: '2px', boxShadow: '0 0 10px rgba(59, 77, 255, 0.5)' }}></span>
+              MATRIZ CANÓNICA DE 896 PRIMITIVAS
+            </h2>
+            <span style={{ fontSize: '13px', color: '#B4B9DF', marginTop: '4px', display: 'block' }}>C5-REAL Transducer Engine · Mapeo Topológico</span>
           </div>
-          <div style={{ fontSize: '16px', color: '#FFFFFF', fontWeight: '600', marginTop: '4px' }}>
-            P{selectedPrimitive} — {selectedDomainInfo.id} Categorical Primitive #{selectedPrimitive}
-          </div>
-          <div style={{ fontSize: '13px', color: '#AAAAAA', marginTop: '8px', lineHeight: '1.5' }}>
-            {"Primitiva estructural de lógica categórica Nivel-0/1 provista de certificación en $\\mathbf{{Mod}}(\\Sigma, T)$ y acotamiento métrico $\\mu(\\alpha) < \\infty$."}
+          <div style={{ 
+            backgroundColor: 'rgba(59, 77, 255, 0.1)', 
+            padding: '6px 12px', 
+            borderRadius: '6px', 
+            border: '1px solid rgba(59, 77, 255, 0.3)', 
+            fontSize: '12px', 
+            color: '#3B4DFF', 
+            fontWeight: '600',
+            fontFamily: 'monospace'
+          }}>
+            HASH: aa205d81...
           </div>
         </div>
-      )}
+
+        {/* Domain Navigation Tabs */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '24px' }}>
+          {DOMAINS.map(dom => {
+            const isActive = activeDomain === dom.id;
+            return (
+              <button
+                key={dom.id}
+                onClick={() => {
+                  setActiveDomain(dom.id);
+                  setSelectedPrimitive(dom.range[0]);
+                }}
+                style={{
+                  backgroundColor: isActive ? '#3B4DFF' : '#0F1226',
+                  color: isActive ? '#FFFFFF' : '#B4B9DF',
+                  border: isActive ? '1px solid #4F5EFE' : '1px solid #1E255E',
+                  padding: '12px 14px',
+                  borderRadius: '6px',
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  textAlign: 'left',
+                  fontWeight: isActive ? '600' : '500',
+                  transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: isActive ? '0 4px 12px rgba(59, 77, 255, 0.25)' : 'none',
+                  outline: 'none'
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.backgroundColor = '#161A36';
+                    e.currentTarget.style.borderColor = '#2E3866';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.backgroundColor = '#0F1226';
+                    e.currentTarget.style.borderColor = '#1E255E';
+                  }
+                }}
+              >
+                <div style={{ marginBottom: '4px' }}>{dom.name}</div>
+                <div style={{ fontSize: '11px', opacity: isActive ? 0.9 : 0.6, fontFamily: 'monospace' }}>[{dom.range[0]} - {dom.range[1]}]</div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Search and Metrics Bar */}
+        <div style={{ display: 'flex', gap: '16px', marginBottom: '24px' }}>
+          <input
+            type="text"
+            placeholder="Buscar primitiva por firma lógica..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{
+              flex: 1,
+              backgroundColor: '#0F1226',
+              border: '1px solid #1E255E',
+              color: '#FFFFFF',
+              padding: '12px 16px',
+              borderRadius: '6px',
+              fontSize: '14px',
+              outline: 'none',
+              transition: 'border-color 0.2s ease'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#3B4DFF'}
+            onBlur={(e) => e.target.style.borderColor = '#1E255E'}
+          />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '16px', fontSize: '13px', color: '#B4B9DF', backgroundColor: '#0F1226', padding: '0 16px', borderRadius: '6px', border: '1px solid #1E255E' }}>
+            <span>Sector: <strong style={{ color: '#FFFFFF' }}>112 Nodes</strong></span>
+            <span style={{ color: '#3B4DFF' }}>|</span>
+            <span>{"Complejidad O(1):"} <strong style={{ color: '#10B981' }}>COMPAT(Ω)</strong></span>
+          </div>
+        </div>
+
+        {/* Interactive Matrix Grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(16, 1fr)',
+          gap: '8px',
+          backgroundColor: '#0F1226',
+          padding: '20px',
+          borderRadius: '8px',
+          border: '1px solid #1E255E',
+          boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.2)'
+        }}>
+          {Array.from({ length: 112 }, (_, idx) => {
+            const pId = selectedDomainInfo.range[0] + idx;
+            const isSelected = selectedPrimitive === pId;
+            const isHovered = hoveredPrimitive === pId;
+            
+            let bgColor = '#161A36';
+            let textColor = '#888888';
+            let borderColor = '#1E255E';
+            let shadow = 'none';
+            let transform = 'scale(1)';
+
+            if (isSelected) {
+              bgColor = '#3B4DFF';
+              textColor = '#FFFFFF';
+              borderColor = '#4F5EFE';
+              shadow = '0 0 12px rgba(59, 77, 255, 0.6)';
+              transform = 'scale(1.05)';
+            } else if (isHovered) {
+              bgColor = '#2E3866';
+              textColor = '#E0E0E0';
+              borderColor = '#3B4DFF';
+              transform = 'scale(1.02)';
+            }
+
+            return (
+              <button
+                key={pId}
+                onClick={() => setSelectedPrimitive(pId)}
+                onMouseEnter={() => setHoveredPrimitive(pId)}
+                onMouseLeave={() => setHoveredPrimitive(null)}
+                title={`Primitiva C5 P${pId}`}
+                style={{
+                  backgroundColor: bgColor,
+                  color: textColor,
+                  border: `1px solid ${borderColor}`,
+                  borderRadius: '4px',
+                  padding: '10px 0',
+                  fontSize: '12px',
+                  fontWeight: isSelected ? '700' : '600',
+                  fontFamily: 'monospace',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  transition: 'all 0.15s cubic-bezier(0.4, 0, 0.2, 1)',
+                  boxShadow: shadow,
+                  transform: transform,
+                  zIndex: isSelected ? 10 : 1
+                }}
+              >
+                {String(pId).padStart(3, '0')}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Primitive Detail Inspector */}
+        {selectedPrimitive && (
+          <div style={{ 
+            marginTop: '24px', 
+            backgroundColor: '#0F1226', 
+            padding: '20px', 
+            borderRadius: '8px', 
+            border: '1px solid #1E255E',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '12px'
+          }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div style={{ width: '8px', height: '8px', backgroundColor: '#10B981', borderRadius: '50%', boxShadow: '0 0 8px rgba(16, 185, 129, 0.6)' }}></div>
+              <div style={{ fontSize: '12px', color: '#10B981', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
+                CERTIFICACIÓN C5-REAL ACTIVA
+              </div>
+            </div>
+            
+            <div style={{ fontSize: '20px', color: '#FFFFFF', fontWeight: '700', fontFamily: 'monospace' }}>
+              [P-{String(selectedPrimitive).padStart(3, '0')}] :: {selectedDomainInfo.name.split(': ')[1] || 'Invariant Node'}
+            </div>
+            
+            <div style={{ fontSize: '14px', color: '#B4B9DF', lineHeight: '1.6', backgroundColor: '#0A0B14', padding: '16px', borderRadius: '6px', borderLeft: '3px solid #3B4DFF' }}>
+              {"Primitiva estructural de lógica categórica Nivel-0/1 provista de certificación en Mod(Σ, T) y acotamiento métrico μ(α) < ∞. Mapeo causal garantizado."}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
