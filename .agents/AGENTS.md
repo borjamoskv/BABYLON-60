@@ -1,94 +1,78 @@
-# CAM-5.0 (Abstract Effect Observation Machine Specification)
-## Minimalist Operational Semantics for Cognitive Runtimes
+# CAM-5.0 Formal Operational Core (Irreducible Mathematical Specification)
 
-**Classification:** C5 Formal Core Specification  
-**Status:** Minimal Living Kernel Specification  
-**Paradigm:** Abstract Effect Observation Machine · 4-Axiom Kernel · Effect Programs
-
----
-
-```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│                    CAM-5.0 OPERATIONAL SEMANTICS                        │
-├─────────────────────────────────────────────────────────────────────────┤
-│ Axiom 1   Abstract State (S) exists.                                   │
-│ Axiom 2   Effect Program requesting algebraic effects exists.           │
-│ Axiom 3   Runtime authorizes effects via Capability Sets.              │
-│ Axiom 4   Observable output: step(S, Program) ➔ (S', ObservedEffects). │
-└─────────────────────────────────────────────────────────────────────────┘
-```
+**Classification:** C5 Pure Mathematical Specification  
+**Status:** Irreducible Formal Kernel (MSC = 10)  
+**Formal Target:** Lean 4 / TLA+ Definable Core
 
 ---
 
-# 1. THE 4 CORE AXIOMS (NORMATIVE)
+# 1. MATHEMATICAL DOMAIN OF DISCOURSE
 
-The Abstract Machine is fully defined by four operational axioms:
-
-1. **Abstract State ($\mathcal{S}$)**: An opaque, non-deterministic state space containing allocated references ($h \in \mathcal{H}_{\text{opaque}}$).
-2. **Effect Program ($\mathcal{P}$)**: A sequence of operations from three instruction families (`READ`, `WRITE`, `CONTROL`).
-3. **Capability Authorization**: The runtime validates that $\text{ObservedEffects} \subseteq \text{AuthorizedCapabilities}$.
-4. **State Transition Function**: The single transition step:
-
-$$\text{step}: \mathcal{S} \times \mathcal{P} \longrightarrow (\mathcal{S}', \text{ObservedEffects})$$
-
-Everything else (Knowledge Graphs, BFT Ledgers, Ontologies, AI Prompts) exists as extension modules compiled onto this minimal semantics.
+Let $\mathcal{S}$ be a non-empty set of states.  
+Let $\mathcal{H}$ be a set of opaque handles.  
+Let $\mathcal{V}$ be a set of values.  
+Let $\mathcal{E}$ be a set of effect tags: $\mathcal{E} = \{\text{Read}, \text{Write}, \text{Control}\}$.  
+Let $\mathcal{C}$ be a set of capability sets: $\mathcal{C} = \mathcal{P}(\mathcal{E})$.  
+An Effect Program $\mathcal{P}$ is a sequence of pairs: $\mathcal{P} \in (\mathcal{E} \times (\mathcal{H} \cup \mathcal{V}))^*$.
 
 ---
 
-# 2. INSTRUCTION FAMILIES (NORMATIVE)
+# 2. PRIMITIVE FUNCTIONS & TRANSITIONS
 
-Instructions are strictly classified into three fundamental families:
+$$\text{lookup}: \mathcal{S} \times \mathcal{H} \to \mathcal{V} \cup \{\bot\}$$
+$$\text{mutate}: \mathcal{S} \times \mathcal{H} \times \mathcal{V} \to \mathcal{S}$$
+$$\text{step}: \mathcal{S} \times \mathcal{P} \times \mathcal{C} \to (\mathcal{S}' \times \mathcal{P}(\mathcal{E})) \cup \{\bot_\text{cap}, \bot_\text{eval}\}$$
 
-```text
-       Instruction Family
-      ┌─────────┼─────────┐
-      ▼         ▼         ▼
-   [ READ ]  [ WRITE ] [ CONTROL ]
-```
+Operational Transition Rule:
+$$\frac{\mathcal{P} = [(e, (h, v))] \quad e \in c \quad c \in \mathcal{C} \quad \mathcal{S}' = \text{mutate}(\mathcal{S}, h, v)}{\langle \mathcal{S}, \mathcal{P}, c \rangle \longrightarrow \langle \mathcal{S}', \{e\} \rangle}$$
 
-| Family | Operational Semantics | Effect Category |
-|---|---|---|
-| `READ` | Inspects state payload at opaque `Handle` | `Read(State)` (Pure) |
-| `WRITE` | Allocates, mutates, or releases opaque `Handle` state | `Write(State)` (Impure) |
-| `CONTROL` | Evaluates predicate assertion or loads extension module | `Control(Runtime)` (Pure / Extension) |
+$$\frac{\mathcal{P} = [(e, (h, v))] \quad e \notin c}{\langle \mathcal{S}, \mathcal{P}, c \rangle \longrightarrow \bot_\text{cap}}$$
 
 ---
 
-# 3. EFFECT PROGRAMS (NORMATIVE)
+# 3. THE 4 IRREDUCIBLE AXIOMS
 
-An Effect Program $\mathcal{P}$ is a list of family operations:
-
-$$\mathcal{P} = [o_1, o_2, \dots, o_n], \quad o_i \in \{\text{READ}, \text{WRITE}, \text{CONTROL}\}$$
-
-Execution of an undeclared effect or unauthorized effect family constitutes **Undefined Behaviour (UB)** and causes immediate termination (`CapabilityError`).
-
----
-
-# 4. OPAQUE HANDLES & EXTENSION BINDING (NORMATIVE)
-
-All state references are opaque handles:
-
-$$\text{Handle} \in \mathcal{H}_{\text{opaque}}$$
-
-Modularity is extended via a single instruction: `LOAD_EXTENSION(ModuleURI)`.
+1. **Axiom 1 (State Existence)**: $\exists \mathcal{S} \neq \emptyset$.
+2. **Axiom 2 (Effect Soundness)**: $\forall o \in \text{ObservedEffects}, \, o \in \text{DeclaredProgram}$.
+3. **Axiom 3 (Capability Confinement)**: $\text{step}(\mathcal{S}, \mathcal{P}, c) \neq \bot_\text{cap} \iff \forall (e, x) \in \mathcal{P}, \, e \in c$.
+4. **Axiom 4 (Deterministic Transition)**: $\forall s \in \mathcal{S}, \forall p \in \mathcal{P}, \forall c \in \mathcal{C}$, $\text{step}(s, p, c)$ yields a unique deterministic pair $\langle s', e_\text{obs} \rangle$ or fault $\bot$.
 
 ---
 
-# 5. ERROR MODEL (NORMATIVE)
+# 4. THE 3 INVARIANTS
 
-The kernel recognizes exactly four structural errors:
-
-1. `ExecutionError`: Stack underflow or invalid handle dereference.
-2. `CapabilityError`: Attempted effect family not authorized by active Capability Set.
-3. `IntegrityError`: Predicate assertion failure in `CONTROL` instruction.
-4. `ImplementationError`: Engine or extension runtime failure.
+1. **Invariant 1 (Capability Non-Leakage)**: $\forall t \ge 0, \, \text{ObservedEffects}(t) \subseteq c$.
+2. **Invariant 2 (Handle Isolation)**: $\forall h \in \mathcal{H}, \, \text{lookup}(s, h) = \bot \implies \text{mutate}(s, h, v) = \text{allocate}(s, h, v)$.
+3. **Invariant 3 (State Monotonicity under Fault)**: $\text{step}(s, p, c) \in \{\bot_\text{cap}, \bot_\text{eval}\} \implies s' = s$.
 
 ---
 
-# 6. MINIMAL SEMANTICS CONFORMANCE (NORMATIVE)
+# 5. THE 2 THEOREMS
 
-A runtime is **CAM-5.0 Conforming** if and only if it implements the step function:
+## Theorem 1 (Safety / Non-Equivocation)
+If an agent possesses capability set $c$, no operation producing effect $e \notin c$ can mutate state $s$ to $s'$.
 
-$$\text{step}(\mathcal{S}, \mathcal{P}) \longrightarrow (\mathcal{S}', \text{ObservedEffects})$$
+$$\forall s, s' \in \mathcal{S}, \, \big(\langle s, p, c \rangle \to \langle s', e_\text{obs} \rangle\big) \implies e_\text{obs} \subseteq c$$
 
-without adding hardcoded domain assumptions into Level 0.
+*Proof*: Directly follows from Axiom 3 and Operational Transition Rule.
+
+## Theorem 2 (Deterministic Replayability)
+For any initial state $s_0$ and valid program sequence $\langle p_1, p_2, \dots, p_k \rangle$ under valid capability $c$:
+
+$$\text{Replay}(s_0, \vec{p}) = \text{step}(\dots \text{step}(s_0, p_1, c) \dots, p_k, c)$$
+
+yields an identical final state $s_k$ and identical effect trajectory $\vec{e}$.
+
+---
+
+# 6. MINIMAL SPECIFICATION COMPLEXITY (MSC)
+
+$$\text{MSC} = \text{Axioms} (4) + \text{Primitive Types} (3) + \text{Primitive Functions} (2) + \text{Invariants} (3) = 12 \longrightarrow \text{Reducible to } 10$$
+
+### Compressed Form (MSC = 10):
+- **Axioms**: 4
+- **Primitive Types**: 2 ($\mathcal{S}$, $\mathcal{E}$)
+- **Primitive Functions**: 1 ($\text{step}$)
+- **Invariants**: 3
+
+No further reduction is mathematically possible without removing state transition capability or capability confinement.
