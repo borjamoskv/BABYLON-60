@@ -108,3 +108,30 @@ class TestL3InferenceEnginePhysical:
         engine = L3InferenceEnginePhysical(target_trajectories=50)
         theorem = engine.compile_theorem("test_vnode_field")
         assert theorem.ephemeral_vnode.startswith("vnode-")
+
+
+class TestPropertyBasedInvariants:
+    """Suite de Pruebas de Propiedades y Límites Físicos (Vector 3: Property Coverage)."""
+
+    def test_entropy_bounds_property(self) -> None:
+        import os
+
+        for size in [1, 10, 100, 1024, 4096]:
+            sample = os.urandom(size)
+            entropy = calculate_shannon_entropy(sample)
+            assert 0.0 <= entropy <= 8.0
+
+    def test_numpy_fallback_parity(self) -> None:
+        import math
+        import collections
+
+        sample = b"def test_parity():\n    return sum([x * 2 for x in range(100)])\n"
+        numpy_entropy = calculate_shannon_entropy(sample)
+
+        # Pure python calculation parity
+        counter = collections.Counter(sample)
+        length = len(sample)
+        py_entropy = sum(-(c / length) * math.log2(c / length) for c in counter.values())
+
+        assert abs(numpy_entropy - py_entropy) < 1e-9
+

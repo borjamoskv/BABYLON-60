@@ -230,6 +230,7 @@ class GeminiProPoolManager:
                     "is_available": s.is_available,
                     "cooldown_remaining_sec": max(0.0, round(s.cooldown_until - now, 2)),
                 }
+        return stats
                 for s in self.slots
             ],
         }
