@@ -1,54 +1,72 @@
 # Structural Compatibility Complex & Proof-Theoretic Invariant Specification
 
 **Title:** Structural Compatibility Complex $\text{Compat}(\Omega)$ & Structural Cost Invariants ($\kappa, \mu$)  
-**Classification:** C5 Proof-Theoretic Invariant Specification & Environment-Agnostic Design Space  
-**Status:** Living Mathematical Paper Baseline
+**Classification:** C5 Proof-Theoretic Invariant Specification & Categorical Model Theory  
+**Status:** Frozen Baseline Specification (v13.0)
 
 ---
 
-# 1. THE STRUCTURAL COMPATIBILITY COMPLEX $\text{Compat}(\Omega)$
+# 1. ESTRATIFICACIÓN N-NIVEL DE FISR (P0)
 
-We eliminate premature categorical choices and define the **Structural Compatibility Complex**:
+$$\begin{array}{rll}
+\mathbf{Nivel\;0} & \text{Categoría Monoidal Base} & \mathcal{C} = (\mathcal{C}, \otimes, I) \\
+\mathbf{Nivel\;1} & \text{Firma Estructural } \Sigma & \Sigma = (\otimes, I, \text{Pred}, \Box_t, \text{Cert}, \mu) \\
+\mathbf{Nivel\;2} & \text{Leyes / Ecuaciones } T & \text{Functorialidad, Subaditividad, Operador Interior } \Box_t P \le P \\
+\mathbf{Nivel\;3} & \text{Propiedades / Observables } \Omega & F, I, S \text{ (Propiedades); } \mu, R_k \text{ (Observables / Presupuestos)}
+\end{array}$$
+
+---
+
+# 2. EL COMPLEJO DE COMPATIBILIDAD ESTRUCTURAL $\text{Compat}(\Omega)$
+
+El objeto central de estudio es el complejo simplicial $\text{Compat}(\Omega)$ en el espacio de modelos $\mathbf{Mod}(\Sigma, T)$:
 
 $$\text{Compat}(\Omega)$$
 
-- **Vertices**: Structural properties $\Omega = \{ F, I, S, A, M \}$.
-- **Edges**: Proven co-existence between pairs of properties.
-- **Faces**: Characterization theorems for multi-property systems.
-- **Holes**: Impossibility boundaries / No-Go theorems.
-
-This formulation applies identically across Institutions, Kripke Teams, Fibrations, Double Categories, Equipments, and Enriched Bicategories.
+- **Vértices**: Propiedades estructurales $\Omega = \{ F, I, S, R_k \}$.
+- **Aristas**: Coexistencia demostrada entre pares de propiedades.
+- **Caras**: Teoremas de caracterización para familias $\mathbf{Mod}(F, I, S, R_k)$.
+- **Lagunas (Holes)**: Fronteras de imposibilidad / Teoremas de separación por coste.
 
 ---
 
-# 2. LEMMA ZERO (PAIRWISE STRUCTURAL INDEPENDENCE)
+# 3. UNIFICACIÓN DE COSTES ($\mu$ Y $\kappa$) (P1 & P2)
 
-$$\mathbf{\text{LEMMA 0 (Pairwise Independence):}}$$
-$$\forall P_i, P_j \in \{ F, I, S, A \}, \quad i \neq j \implies P_i \not\vdash P_j$$
+### 3.1 Métrica Primitiva de Certificación $\mu(\alpha)$
+$$\mu: \mathrm{Mor}(\mathcal{C}) \longrightarrow \mathbb{N}_\infty$$
+$$\mu(\alpha) \triangleq \inf \{ \mathrm{ProofCost}(\pi) \mid \pi \vdash \text{Cert}(\alpha) \}$$
 
-*Proof*: Minimal counter-models prove that no single property in $\{ F, I, S, A \}$ implies any other. $\blacksquare$
+Predicado de auditabilidad acotada:
+$$R_k(\alpha) \iff \mu(\alpha) \le k$$
 
----
-
-# 3. PROOF-THEORETIC METRIC $\mu$ & STRUCTURAL COST FUNCTION $\kappa$
-
-### 3.1 Proof-Theoretic Metric $\mu(\phi)$
-$$\mu(\phi) \triangleq \inf \{ \text{ProofCost}(\pi) \mid \pi \vdash \phi \}$$
-Decoupled from concrete serialization formats; $\mu$ is an invariant over formal proof realizers.
-
-### 3.2 Structural Coordination Cost Function $\kappa(S)$
-$$\kappa(S) \triangleq \min \{ \text{Explicit Coordination Overhead} \mid S \models F \land I \land S \land A \}$$
-
-Properties of $\kappa$:
-- $\kappa(S) = 0$ for static, purely local topologies.
-- $\kappa(S) > 0$ whenever dynamic link mobility $(\nu x)P$ is introduced.
+### 3.2 Coste Derivado de Extensión Estructural $\kappa(M)$
+$$\kappa(M) \triangleq \inf \{ \mu(E) \mid E \text{ es extensión de } M \text{ tal que } E \models F \land I \land S \land R_\infty \}$$
 
 ---
 
-# 4. REFINED ROADMAP OF INVESTIGATION
+# 4. TEOREMA ZERO (TEOREMA DE REPRESENTACIÓN $T_0$) (P3)
 
-1. **Define the Property Space $\Omega$**, independently of concrete categorical frameworks.
-2. **Construct the Structural Compatibility Complex $\text{Compat}(\Omega)$** (identifying realizable subsets and holes).
-3. **Prove Lemma 0** (Pairwise independence via minimal counter-models).
-4. **Formulate Lower Bounds on $\kappa(S)$** as the primary structural cost theorem.
-5. **Derive Proof-Theoretic Metric $\mu(\phi)$** as a formal invariant over proof realizers.
+$$\mathbf{\text{TEOREMA 0 (Representación FISR):}}$$
+$$\text{Una preestructura } \mathcal{M} \text{ admite semántica FISR } (\mathcal{M} \in \mathbf{Mod}(\Sigma, T)) \iff \exists \, \mathcal{K}_\mathcal{M} \text{ (cálculo composicional de certificados)}$$
+$$\text{compatible con la fibración } \mathrm{Sub}(\mathcal{M}) \text{ y el operador interior síncrono } \Box_t.$$
+
+---
+
+# 5. INDEPENDENCIA MÍNIMA DE AXIOMAS
+
+$$\forall P_i \in \{ F, I, S, R_k \}, \quad \exists \, M_{\neg P_i} \in \mathbf{Mod}(\Sigma \setminus \{ P_i \}, T) \text{ tal que } M_{\neg P_i} \text{ es estricta y algebraicamente mínimo.}$$
+
+---
+
+# 6. HOJA DE RUTA CONGELADA (10 SECCIONES)
+
+1. **Firma estructural** $\Sigma$.
+2. **Semántica de modelos** $\mathbf{Mod}(\Sigma, T)$.
+3. **Definición de F, I y S**.
+4. **Sistema abstracto de certificados**.
+5. **Definición primitiva de $\mu$**.
+6. **Definición derivada de $\kappa$**.
+7. **Teorema de representación ($T_0$)**.
+8. **Modelos mínimos de independencia**.
+9. **Teoremas de subaditividad de $\mu$**.
+10. **Primer teorema de separación por coste**.
