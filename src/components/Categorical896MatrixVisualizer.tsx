@@ -98,7 +98,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontSize: '13px', color: '#888888' }}>
           <span>Capacidad: <strong style={{ color: '#FFFFFF' }}>112 / 112</strong></span>
           <span>•</span>
-          <span>Complejidad $\text{{Compat}}(\Omega)$: <strong style={{ color: '#2B3BE5' }}>$O(1)$</strong></span>
+          <span>{"Complejidad $\\text{Compat}(\\Omega)$:"} <strong style={{ color: '#2B3BE5' }}>$O(1)$</strong></span>
         </div>
       </div>
 
@@ -149,7 +149,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             P{selectedPrimitive} — {selectedDomainInfo.id} Categorical Primitive #{selectedPrimitive}
           </div>
           <div style={{ fontSize: '13px', color: '#AAAAAA', marginTop: '8px', lineHeight: '1.5' }}>
-            Primitiva estructural de lógica categórica Nivel-0/1 provista de certificación en $\mathbf{{Mod}}(\Sigma, T)$ y acotamiento métrico $\mu(\alpha) < \infty$.
+            {"Primitiva estructural de lógica categórica Nivel-0/1 provista de certificación en $\\mathbf{{Mod}}(\\Sigma, T)$ y acotamiento métrico $\\mu(\\alpha) < \\infty$."}
           </div>
         </div>
       )}
