@@ -470,6 +470,28 @@ func verifyPhantomTargets(root string) error <span class="cov0" title="0">{
         <span class="cov0" title="0">return nil</span>
 }
 
+// execCommandWithIPC ensures CORTEX_IPC_SOCKET is always present in sub-process environment.
+func execCommandWithIPC(name string, arg ...string) *exec.Cmd <span class="cov0" title="0">{
+        cmd := exec.Command(name, arg...)
+        env := os.Environ()
+        hasIPC := false
+        for _, e := range env </span><span class="cov0" title="0">{
+                if strings.HasPrefix(e, "CORTEX_IPC_SOCKET=") </span><span class="cov0" title="0">{
+                        hasIPC = true
+                        break</span>
+                }
+        }
+        <span class="cov0" title="0">if !hasIPC </span><span class="cov0" title="0">{
+                ipcSocket := os.Getenv("CORTEX_IPC_SOCKET")
+                if ipcSocket == "" </span><span class="cov0" title="0">{
+                        ipcSocket = "/tmp/cortex_ipc.sock"
+                }</span>
+                <span class="cov0" title="0">env = append(env, "CORTEX_IPC_SOCKET="+ipcSocket)</span>
+        }
+        <span class="cov0" title="0">cmd.Env = env
+        return cmd</span>
+}
+
 // runForge executes the forge transducer.
 func runForge(root string, args []string) <span class="cov0" title="0">{
         prompt := "N/A"
@@ -508,7 +530,7 @@ func runForge(root string, args []string) <span class="cov0" title="0">{
         if _, err := os.Stat(pythonBin); os.IsNotExist(err) </span><span class="cov0" title="0">{
                 pythonBin = "python3"
         }</span>
-        <span class="cov0" title="0">cmd := exec.Command(pythonBin, scriptPath, prompt, target, payload)
+        <span class="cov0" title="0">cmd := execCommandWithIPC(pythonBin, scriptPath, prompt, target, payload)
         cmd.Dir = root
         cmd.Stdout = os.Stdout
         cmd.Stderr = os.Stderr
