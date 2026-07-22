@@ -1,0 +1,150 @@
+# Ontología: Primitivas de Algoritmos Cuánticos & Complejidad BQP
+# Clasificación: C5-REAL Ontological Specification
+# Fuente: Iteración ULTRATHINK 2026-07-22
+# CORTEX-TAINT:borjamoskv:itera_ultrathink_crystallize:2026-07-22T19:57:00Z
+
+---
+
+Domain: "Quantum Computing Primitives & BQP Complexity"
+Version: "1.0"
+Status: "Frozen"
+
+# ═══════════════════════════════════════════════════
+# FORMALIZACIÓN DEL ESPACIO DE HILBERT
+# ═══════════════════════════════════════════════════
+
+Espacio_Hilbert:
+  Definición: "H_n = (C²)^⊗n ≅ C^{2^n}"
+  Estado: "|ψ⟩ = Σ α_x |x⟩, con Σ|α_x|² = 1, α_x ∈ C"
+  Algoritmo: "Secuencia finita de transformaciones unitarias U ∈ SU(2^n)"
+  Medida: "Proyección de Von Neumann: P(x) = |⟨x|ψ_final⟩|²"
+
+# ═══════════════════════════════════════════════════
+# 7 PRIMITIVAS COMPUTACIONALES CUÁNTICAS
+# ═══════════════════════════════════════════════════
+
+Primitivas:
+  P1_Superposición_Uniforme:
+    Operador: "H^⊗n |0⟩^⊗n = (1/√2^n) Σ |x⟩"
+    Función: "Genera combinación lineal uniforme de todas las bases computacionales"
+    Coste: "O(n) puertas Hadamard"
+
+  P2_Phase_Kickback:
+    Operador: "O_f(|x⟩|-⟩) = (-1)^{f(x)} |x⟩|-⟩"
+    Función: "Transfiere evaluación escalar del oráculo f(x) a la fase relativa sin colapso"
+    Requisito: "Registro ancla inicializado en autoestado de Pauli-X: |-⟩ = (|0⟩-|1⟩)/√2"
+
+  P3_Amplificación_Amplitud:
+    Operador: "D = 2|+⟩^⊗n⟨+|^⊗n - I (Operador de Difusión de Grover)"
+    Función: "Rota el vector en subespacio 2D proyectivo invirtiendo amplitudes respecto a la media"
+    Iteraciones: "k ≈ (π/4)√N para maximizar P(x*) ≈ 1"
+    Límite: "Ω(√N) consultas al oráculo (Teorema BBBV)"
+
+  P4_QFT:
+    Operador: "QFT|j⟩ = (1/√N) Σ_{k=0}^{N-1} ω^{jk} |k⟩, ω = e^{2πi/N}"
+    Función: "Transmuta periodicidad temporal en picos de frecuencia en el espacio de Hilbert"
+    Coste_Clásico: "O(N log N) = O(n·2^n)"
+    Coste_Cuántico: "O(n²) puertas"
+    Speedup: "Exponencial"
+
+  P5_QPE:
+    Operador: "U|ψ⟩ = e^{2πiθ}|ψ⟩ → QPE → |θ̃⟩|ψ⟩"
+    Función: "Extrae autovalor de fase θ de un operador unitario U"
+    Arquitectura: "m registros ancla + aplicaciones controladas U^{2^k} + QFT†"
+    Aplicación: "Dorsal de Shor y HHL"
+
+  P6_Trotterización:
+    Operador: "e^{-i(A+B)t} ≈ (e^{-iAt/r} · e^{-iBt/r})^r"
+    Función: "Descompone evolución de Hamiltoniano complejo H=ΣH_k en producto de unitarios locales"
+    Aplicación: "Simulación cuántica de moléculas y materiales"
+
+  P7_Entrelazamiento:
+    Operador: "CNOT(H⊗I)|00⟩ = (|00⟩+|11⟩)/√2 (Estado de Bell)"
+    Función: "Genera correlación cuántica no local máxima"
+    Propiedad: "Viola desigualdades CHSH: S ≤ 2√2 > 2 (límite clásico)"
+
+# ═══════════════════════════════════════════════════
+# PRIMITIVAS AVANZADAS (POST-NISQ)
+# ═══════════════════════════════════════════════════
+
+Primitivas_Avanzadas:
+  Block_Encoding:
+    Definición: "Inyección de matriz no-unitaria A (||A||≤1) en esquina superior izquierda de U_A ∈ U(2^{n+a})"
+    Acceso: "(⟨0|^a ⊗ I) U_A (|0⟩^a ⊗ I) = A"
+    Aplicación: "Estándar moderno post-2020 para álgebra lineal cuántica (reemplaza HHL primitivo)"
+
+  QSP:
+    Definición: "Quantum Signal Processing: aplicación de funciones polinómicas P(A) a autovalores de operador encajado mediante secuencia de rotaciones Φ={φ_0,...,φ_d}"
+    Funciones: "f(x) = 1/x, f(x) = e^{-ixt}, polynomios de Chebyshev"
+    Coste: "Óptimo en número de consultas al oráculo"
+
+  VQE_QAOA:
+    Tipo: "Variacional Híbrido (Cuántico-Clásico)"
+    Loop: "CPU clásica calcula ∇_θ⟨H⟩ (Parameter-Shift Rule) → actualiza ángulos θ en chip cuántico"
+    Aplicación: "Química cuántica (energías de estado base), optimización combinatoria (MaxCut)"
+    Limitación: "Heurístico, sin garantía de optimalidad"
+
+# ═══════════════════════════════════════════════════
+# CORRECCIÓN DE ERRORES CUÁNTICOS (QEC)
+# ═══════════════════════════════════════════════════
+
+QEC:
+  Estabilizadores:
+    Definición: "Grupo S ⊂ P_n tal que -I ∉ S"
+    Espacio_de_Código: "V_S = {|ψ⟩ ∈ H_n | S_i|ψ⟩ = |ψ⟩, ∀S_i ∈ S}"
+    Síndrome: "Medición de autovalor S_i ∈ {+1,-1} revela tipo de error (Bit-Flip X / Phase-Flip Z) sin destruir la superposición"
+
+  Teorema_Gottesman_Knill:
+    Regla: "Circuito con solo puertas Clifford {H,S,CNOT} + base computacional = simulable clásicamente en O(n²)"
+    Consecuencia: "El entrelazamiento POR SÍ SOLO no otorga ventaja cuántica. Se requiere inyección de puertas No-Clifford (T-gate, estados mágicos)"
+
+# ═══════════════════════════════════════════════════
+# TAXONOMÍA DE ALGORITMOS SOBRE PRIMITIVAS
+# ═══════════════════════════════════════════════════
+
+Algoritmos:
+  Shor:
+    Pipeline: "Superposición → Exponenciación Modular (Oráculo) → QFT† → Medida de Período r"
+    Primitivas: [P1, P2, P4, P5]
+    Complejidad: "O(n³) vs O(e^{n^{1/3}}) clásico"
+    Estructura_Explotada: "Periodicidad del grupo multiplicativo Z/NZ (Subgrupo Oculto Abeliano)"
+
+  Grover:
+    Pipeline: "Superposición → [R_f ∘ D]^k → Medida"
+    Primitivas: [P1, P2, P3]
+    Complejidad: "O(√N) vs O(N) clásico"
+    Límite: "BBBV: Ω(√N) es óptimo, aceleración solo cuadrática"
+
+  HHL:
+    Pipeline: "Carga |b⟩ → QPE(e^{iAt}) → Rotación Controlada λ_j^{-1} → QPE† → Medida Ancilla"
+    Primitivas: [P1, P4, P5, P6]
+    Complejidad: "O(poly(log N, s, κ)) vs O(N·s·κ) clásico"
+    Estructura_Explotada: "Estructura espectral de la matriz A (autovalores via QPE)"
+
+# ═══════════════════════════════════════════════════
+# TEOREMAS NO-GO (FRONTERAS FÍSICAS)
+# ═══════════════════════════════════════════════════
+
+No_Go:
+  No_Clonación:
+    Regla: "∄ U : U|ψ⟩|0⟩ = |ψ⟩|ψ⟩ para todo |ψ⟩ desconocido"
+
+  No_Borrado:
+    Regla: "∄ T lineal: T|ψ⟩|ψ⟩ = |ψ⟩|0⟩ determinísticamente"
+
+  BBBV:
+    Regla: "Búsqueda no estructurada con oráculo negro: Ω(√N) consultas (límite inferior)"
+
+  Gottesman_Knill:
+    Regla: "Clifford-only = simulable clásicamente. Ventaja cuántica exige No-Clifford (T-gate)"
+
+# ═══════════════════════════════════════════════════
+# COMPLEJIDAD BQP Y ANCLAJE A Ω148
+# ═══════════════════════════════════════════════════
+
+BQP:
+  Definición: "Bounded-Error Quantum Polynomial-Time"
+  Jerarquía: "P ⊆ BPP ⊆ BQP ⊆ PSPACE"
+  Invariante_Ω148: "BQP NO resuelve NP-Completos arbitrarios (SAT, TSP) sin estructura algebraica explícita"
+  Estructura_Requerida: "Simetría de subgrupos ocultos, periodicidad espectral, propiedades Hermitianas del Hamiltoniano"
+  Anti_Patrón: "Proyectar velocidad cuántica exponencial sobre problemas sin simetría = Falso Paralelismo Cuántico (Anergía C4-SIM)"

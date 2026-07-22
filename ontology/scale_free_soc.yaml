@@ -1,0 +1,125 @@
+# Ontología: Leyes de Potencias y Criticalidad Autoorganizada (SOC)
+# Clasificación: C5-REAL Ontological Specification
+# Fuente: Veritasium (GEpJdHMfe7c) + Iteración ULTRATHINK
+# CORTEX-TAINT:borjamoskv:itera_ultrathink_crystallize:2026-07-22T19:56:00Z
+
+---
+
+Domain: "Scale-Free Systems & Self-Organized Criticality"
+Version: "1.0"
+Status: "Frozen"
+
+# ═══════════════════════════════════════════════════
+# TAXONOMÍA DE DISTRIBUCIONES
+# ═══════════════════════════════════════════════════
+
+Distribuciones:
+  Normal:
+    Mecanismo: "Efectos aleatorios aditivos (CLT)"
+    Varianza: "Finita (σ² < ∞)"
+    Cola: "Exponencialmente delgada (e^{-x²})"
+    Ejemplo: "Altura humana, CI, tamaño de manzanas"
+    Estrategia_Óptima: "Consistencia sobre el promedio"
+    Propiedad_Clave: "95% de datos dentro de 2σ de la media"
+
+  Log_Normal:
+    Mecanismo: "Efectos aleatorios multiplicativos (producto de variables)"
+    Varianza: "Finita pero asimétrica"
+    Cola: "Pesada a la derecha, acotada a cero por la izquierda"
+    Ejemplo: "Rendimientos de inversión, riqueza con factores multiplicativos"
+    Propiedad_Clave: "log(X) ~ N(μ, σ²): el logaritmo sigue distribución normal"
+
+  Ley_de_Potencias:
+    Mecanismo: "Competición de dos exponenciales subyacentes O criticalidad autoorganizada"
+    Distribución: "P(X ≥ x) ~ x^{-α}"
+    Varianza: "Infinita cuando α ≤ 2 (no convergencia del segundo momento)"
+    Cola: "Pesada (fat-tailed), scale-free"
+    Ejemplo: "Ingresos (Pareto α≈1.5), terremotos, incendios, guerras, ciudades, redes"
+    Estrategia_Óptima: "Persistencia de eventos extremos (Ω141)"
+    Propiedades_Clave:
+      - "Gráfica log-log = línea recta con pendiente -α"
+      - "La media muestral no converge: cuanto más mides, más crece el promedio"
+      - "Un solo valor atípico domina la sumatoria del resto"
+
+# ═══════════════════════════════════════════════════
+# MECANISMOS GENERADORES DE LEYES DE POTENCIAS
+# ═══════════════════════════════════════════════════
+
+Mecanismos_Generadores:
+  Competición_Exponencial:
+    Descripción: "Dos procesos exponenciales opuestos (frecuencia vs magnitud) conspiran para producir una ley de potencias al eliminar la variable intermedia"
+    Ejemplo_Terremotos:
+      Frecuencia: "Decaimiento exponencial de la frecuencia con la magnitud"
+      Energía: "Crecimiento exponencial de la energía con la magnitud"
+      Resultado: "Ley de potencias en energía vs frecuencia"
+    Ejemplo_San_Petersburgo:
+      Ganancia: "X = 2^n (crecimiento exponencial)"
+      Probabilidad: "P = (1/2)^n (decaimiento exponencial)"
+      Resultado: "P(X=x) = 1/x (ley de potencias α=1)"
+
+  Criticalidad_Autoorganizada:
+    Descripción: "El sistema evoluciona autónomamente hacia un punto crítico fractal sin ajuste externo de parámetros"
+    Sistemas:
+      - Tipo: "Incendios Forestales"
+        Mecanismo: "Crecimiento de árboles llena el bosque → incendio purga → recrecimiento → ciclo"
+        Retroalimentación: "Densidad alta → incendios grandes → densidad baja → recrecimiento"
+      - Tipo: "Terremotos"
+        Mecanismo: "Acumulación lenta de tensión en placas tectónicas → ruptura → propagación por franjas de inestabilidad"
+        Retroalimentación: "Tensión acumulada → liberación por avalancha → relajación"
+      - Tipo: "Pilas de Arena (Bak-Tang-Wiesenfeld)"
+        Mecanismo: "Adición grano a grano → avalanchas de todos los tamaños"
+        Nota: "Pilas de arena reales NO cumplen la ley de potencias. Per Bak: 'La SOC solo se aplica a los sistemas a los que se aplica.'"
+
+  Conexión_Preferencial:
+    Descripción: "Barabási-Albert: nodos nuevos se enlazan preferentemente a nodos ya densamente conectados"
+    Resultado: "Distribución de grado P(k) ~ k^{-2} (ley de potencias)"
+    Ejemplos: "Internet (páginas web), redes sociales, citas académicas"
+
+# ═══════════════════════════════════════════════════
+# TRANSICIONES DE FASE Y UNIVERSALIDAD
+# ═══════════════════════════════════════════════════
+
+Transición_de_Fase:
+  Definición: "Punto crítico donde el sistema transita entre dos estados macroscópicos (orden ↔ desorden)"
+  Ejemplo_Canónico:
+    Sistema: "Imán ferromagnético (Modelo de Ising)"
+    Parámetro: "Temperatura"
+    Estado_Ordenado: "T < T_Curie: dominios magnéticos alineados, campo neto"
+    Estado_Desordenado: "T > T_Curie: momentos aleatorios, campo neto cero"
+    Punto_Crítico: "T = T_Curie: dominios de TODOS los tamaños, auto-similitud fractal, correlación de alcance infinito"
+  Propiedades_en_Criticidad:
+    - "Ausencia de escala intrínseca (Scale-Free)"
+    - "Geometría fractal (auto-similitud en todas las escalas)"
+    - "Distribución de tamaños de dominio → ley de potencias"
+    - "Longitud de correlación → infinita"
+    - "Pequeñas causas → efectos de cualquier tamaño (avalanchas)"
+    - "Máxima impredecibilidad del sistema"
+
+Universalidad:
+  Definición: "En el punto crítico, los detalles microscópicos del sistema son irrelevantes. Sistemas superficialmente distintos exhiben el mismo comportamiento (mismos exponentes críticos)"
+  Implicación: "Un modelo rudimentario (ej. simulación de pila de arena) captura el comportamiento esencial de sistemas masivamente complejos (ej. terremotos reales)"
+  Clases_de_Universalidad:
+    - "Sistemas que necesitan ajuste externo al punto crítico (imanes, fluidos)"
+    - "Sistemas que se auto-organizan hacia la criticalidad (incendios, terremotos, pilas de arena)"
+
+# ═══════════════════════════════════════════════════
+# IMPLICACIONES ESTRATÉGICAS (ANCLAJE A INVARIANTES)
+# ═══════════════════════════════════════════════════
+
+Implicaciones:
+  Dominio_Normal:
+    Estrategia: "Consistencia sobre el promedio"
+    Ejemplos: "Restaurantes (llenar mesas cada noche), aerolíneas (llenar asientos cada vuelo)"
+    Propiedad: "Fluctuaciones se cancelan, el promedio converge"
+
+  Dominio_Ley_de_Potencias:
+    Estrategia: "Persistencia ante eventos extremos (Ω141)"
+    Ejemplos: "Capital de riesgo (6% top genera 60% de retornos), editorial (Harry Potter sostiene Bloomsbury), YouTube (<4% videos = >93% vistas)"
+    Propiedad: "Un solo cisne negro domina la sumatoria del resto"
+    Riesgo: "Falsa sensación de seguridad al observar solo eventos pequeños frecuentes"
+
+  Falacia_de_Supresión:
+    Descripción: "Política de las 10am del Servicio Forestal EEUU (1935): suprimir todo incendio antes de las 10am del día siguiente"
+    Resultado: "Acumulación de material combustible → megaincendios inevitables"
+    Isomorfismo: "Suprimir la volatilidad natural de un sistema en estado crítico no elimina el riesgo; lo acumula hasta una liberación catastrófica"
+    Invariante: "Ω142 (Purist Fallacy): la fricción innecesaria es Anergía"
