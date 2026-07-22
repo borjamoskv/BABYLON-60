@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from typing import Any
-from scripts.codegen_utils import CODEGEN_CONFIGS, parse_yaml  # type: ignore[import-not-found]
+from scripts.codegen_utils import CODEGEN_CONFIGS, parse_yaml
 
 
 def generate_go(

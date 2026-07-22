@@ -9,7 +9,7 @@ from pathlib import Path
 # Add project root to sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-import yaml  # type: ignore[import-untyped]
+import yaml
 from cortex.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary
 
 

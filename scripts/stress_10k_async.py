@@ -53,7 +53,7 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     taint = f"CORTEX-TAINT:stress:{idx}:{payload_hash[:8]}"
 
     # Execute non-blocking SQLite transaction with WAL mode
-    def _db_op():
+    def _db_op() -> None:
         conn = sqlite3.connect(db_path, timeout=5.0)
         cursor = conn.cursor()
         cursor.execute(

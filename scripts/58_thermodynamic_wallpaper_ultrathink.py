@@ -1,3 +1,4 @@
+from typing import Any
 #!/usr/bin/env python3
 """
 C5-REAL ULTRATHINK: Physical Thermodynamic Fractal Wallpaper Synthesizer.
@@ -10,13 +11,13 @@ then applies it to the desktop.
 import os
 import subprocess
 import sys
-import psutil  # type: ignore[import-untyped]
+import psutil
 import numpy as np
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-def calculate_hardware_entropy() -> tuple[float, np.ndarray, np.ndarray]:
+def calculate_hardware_entropy() -> tuple[float, np.ndarray[Any, Any], np.ndarray[Any, Any]]:
     """Calculates thermodynamic system entropy S = -sum(p * ln(p)) based on CPU per-core loads."""
     cpu_pcts = psutil.cpu_percent(interval=0.5, percpu=True)
     mem = psutil.virtual_memory()
