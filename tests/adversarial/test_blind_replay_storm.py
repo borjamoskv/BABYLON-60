@@ -23,7 +23,7 @@ def reset_db() -> sqlite3.Connection:
     conn.execute("CREATE TABLE kv_store (key TEXT PRIMARY KEY, value INTEGER)")
     return conn
 
-def apply_event(conn: sqlite3.Connection, event: dict[str, int]) -> None:
+def apply_event(conn: sqlite3.Connection, event: dict[str, Any]) -> None:
     # A simple deterministic mutator
     cursor = conn.cursor()
     cursor.execute("INSERT OR REPLACE INTO kv_store (key, value) VALUES (?, ?)", 
@@ -35,7 +35,7 @@ def extract_state(conn: sqlite3.Connection) -> dict[str, int]:
     cursor.execute("SELECT key, value FROM kv_store ORDER BY key")
     return {row[0]: row[1] for row in cursor.fetchall()}
 
-def run_sequence(events: list[dict[str, int]]) -> list[StateCheckpoint]:
+def run_sequence(events: list[dict[str, Any]]) -> list[StateCheckpoint]:
     conn = reset_db()
     checkpoints = []
     parent_hash = "0"*64
@@ -62,7 +62,7 @@ def run_c6_3_experiment() -> None:
     print("╚══════════════════════════════════════════════════════════════════╝")
     
     # 1. Master Generation
-    master_events: list[dict[str, int]] = [{"k": f"key_{i%50}", "v": i} for i in range(1000)]
+    master_events: list[dict[str, Any]] = [{"k": f"key_{i%50}", "v": i} for i in range(1000)]
     print("\n[C6-REAL] Extrayendo Historia Maestra (1000 eventos)...")
     master_checkpoints = run_sequence(master_events)
     
