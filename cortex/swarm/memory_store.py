@@ -38,7 +38,6 @@ class AgentMemory:
             import chromadb
             from chromadb.config import Settings
 
-            # Silenciar desajuste de argumentos en telemetría interna de chromadb/posthog
             try:
                 import posthog  # type: ignore[import-not-found]
                 posthog.disabled = True
