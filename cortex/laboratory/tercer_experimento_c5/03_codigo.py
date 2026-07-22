@@ -22,16 +22,16 @@ from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
 DB_PATH = "memristor_stress_test.db"
 
 
-def run_single_thread(thread_id: int, db_path: str, pre: str, post: str) -> dict[str, Any]:
+def run_single_thread(thread_id: int, db_path: str, pre: str, post: str, n_iters: int) -> dict[str, Any]:
     mem = STDPMemristor(db_path, pre, post)
     success = 0
     failures = 0
     errors = []
 
-    for i in range(20):
+    for i in range(n_iters):
         try:
             mem.register_pre_spike()
-            time.sleep(0.01)
+            time.sleep(0.001)
             mem.register_post_spike()
             success += 2
         except sqlite3.OperationalError as e:
@@ -50,7 +50,16 @@ def run_single_thread(thread_id: int, db_path: str, pre: str, post: str) -> dict
 
 
 def execute() -> None:
-    print("[C5-REAL] Iniciando estrés de concurrencia en STDPMemristor (50 hilos)...")
+    target_ops = 100000
+    if len(sys.argv) > 1:
+        target_ops = int(sys.argv[1])
+        
+    threads = 50
+    ops_per_iter = 2
+    n_iters = target_ops // (threads * ops_per_iter)
+    if n_iters == 0: n_iters = 1
+
+    print(f"[C5-REAL] Iniciando estrés de concurrencia en STDPMemristor ({threads} hilos, {target_ops} operaciones target)...")
 
     # Limpiar base de datos previa
     for suffix in ["", "-wal", "-shm"]:
@@ -67,12 +76,12 @@ def execute() -> None:
     start_time = time.time()
     results = []
 
-    with ThreadPoolExecutor(max_workers=50) as executor:
+    with ThreadPoolExecutor(max_workers=threads) as executor:
         futures = [
             executor.submit(
-                run_single_thread, idx, DB_PATH, f"Sensor_{idx}", f"Motor_{idx}"
+                run_single_thread, idx, DB_PATH, f"Sensor_{idx}", f"Motor_{idx}", n_iters
             )
-            for idx in range(50)
+            for idx in range(threads)
         ]
         for fut in futures:
             results.append(fut.result())

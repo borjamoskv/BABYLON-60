@@ -153,7 +153,12 @@ func percentile(sorted []int64, p float64) int64 {
 }
 
 func main() {
-	const N = 1_000_000
+	N := 1_000_000
+	if len(os.Args) > 1 {
+		if parsedN, err := strconv.Atoi(os.Args[1]); err == nil {
+			N = parsedN
+		}
+	}
 	rng := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	fmt.Printf("╔══════════════════════════════════════════════════════╗\n")
