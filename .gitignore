@@ -51,6 +51,14 @@ cortex/artifacts/
 
 # Temporary build/test output
 go_deps.json
+mypy_report.txt
+coverage.html
+coverage.out
+clean_subs*.txt
+transcript_*.txt
+cortex_audit_report.yml
+test-render.js
+render-check.png
 
 # Spotlight exclusion markers
 **/.metadata_never_index
