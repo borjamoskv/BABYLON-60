@@ -8,7 +8,9 @@ import json
 import math
 import numpy as np
 
-def simulate_btw_sandpile(grid_size=32, total_grains=5000):
+from typing import Any
+
+def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict[str, Any]:
     """
     Simulación determinista del modelo de pila de arena Bak-Tang-Wiesenfeld (BTW 2D).
     Mide la distribución de tamaños de avalanchas (SOC).
@@ -66,7 +68,7 @@ def simulate_btw_sandpile(grid_size=32, total_grains=5000):
         "empirical_power_law_tau": float(tau)
     }
 
-def verify_lawvere_premetric_and_bqp():
+def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
     """
     Verifica las desigualdades de subaditividad de Lawvere y el límite BQP de Grover.
     """
@@ -100,7 +102,7 @@ def verify_lawvere_premetric_and_bqp():
         "quantum_speedup_ratio": round(speedup_ratio, 2)
     }
 
-def main():
+def main() -> None:
     print("=== INICIANDO AUDITORÍA TERMODINÁMICA C5-REAL: TRI-DUALIDAD FISR-SOC-BQP ===")
     
     soc_data = simulate_btw_sandpile(grid_size=24, total_grains=3000)

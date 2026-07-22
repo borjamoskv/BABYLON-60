@@ -34,7 +34,7 @@ def init_db() -> None:
     conn.commit()
     conn.close()
 
-def target_worker(shared_phase: Any) -> None: # type: ignore
+def target_worker(shared_phase: Any) -> None:
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
     conn.execute("PRAGMA wal_autocheckpoint = 10;") 
     

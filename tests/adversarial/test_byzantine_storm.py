@@ -9,6 +9,8 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
+from typing import Any
+
 from cortex.c6_harness.invariant import ByzantineResult
 from cortex.c6_harness.auditor import generate_attestation
 
@@ -42,7 +44,7 @@ def init_ledger() -> None:
     conn.commit()
     conn.close()
 
-def ledger_validator(tx: dict) -> None:
+def ledger_validator(tx: dict[str, Any]) -> None:
     """The strict C5-REAL core validator."""
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
     cursor = conn.cursor()

@@ -23,19 +23,19 @@ def reset_db() -> sqlite3.Connection:
     conn.execute("CREATE TABLE kv_store (key TEXT PRIMARY KEY, value INTEGER)")
     return conn
 
-def apply_event(conn: sqlite3.Connection, event: dict) -> None:
+def apply_event(conn: sqlite3.Connection, event: dict[str, int]) -> None:
     # A simple deterministic mutator
     cursor = conn.cursor()
     cursor.execute("INSERT OR REPLACE INTO kv_store (key, value) VALUES (?, ?)", 
                    (event["k"], event["v"]))
     conn.commit()
 
-def extract_state(conn: sqlite3.Connection) -> dict:
+def extract_state(conn: sqlite3.Connection) -> dict[str, int]:
     cursor = conn.cursor()
     cursor.execute("SELECT key, value FROM kv_store ORDER BY key")
     return {row[0]: row[1] for row in cursor.fetchall()}
 
-def run_sequence(events: list) -> list[StateCheckpoint]:
+def run_sequence(events: list[dict[str, int]]) -> list[StateCheckpoint]:
     conn = reset_db()
     checkpoints = []
     parent_hash = "0"*64
