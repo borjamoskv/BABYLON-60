@@ -63,7 +63,7 @@ class STDPMemristor:
                     "UPDATE memristor_weights SET weight = ?, last_pre_spike_ts = ? WHERE synapse_id = ?",
                     (weight, now, self.synapse_id),
                 )
-                return weight
+                return float(weight)
         finally:
             conn.close()
 
@@ -89,7 +89,7 @@ class STDPMemristor:
                     "UPDATE memristor_weights SET weight = ?, last_post_spike_ts = ? WHERE synapse_id = ?",
                     (weight, now, self.synapse_id),
                 )
-                return weight
+                return float(weight)
         finally:
             conn.close()
 
