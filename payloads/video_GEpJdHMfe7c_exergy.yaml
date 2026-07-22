@@ -1,0 +1,15 @@
+Target: "https://www.youtube.com/watch?v=GEpJdHMfe7c"
+PPI_Reality_Score: 4
+Exergy_Payload:
+  Primitivas_Extraidas: 
+    - "Distribución Normal: Consecuencia de efectos aleatorios aditivos. Varianza finita. Cola delgada."
+    - "Distribución Log-Normal: Consecuencia de efectos aleatorios multiplicativos. Crecimiento asimétrico con límite inferior en cero."
+    - "Ley de Potencias (Pareto, P(x) ~ x^-α): Distribución scale-free con varianza infinita. Resulta de la competición de dos exponenciales subyacentes o criticidad autoorganizada."
+    - "Criticalidad Autoorganizada (SOC): Mecanismo universal donde los sistemas complejos (bosques, placas tectónicas, redes) evolucionan de forma autónoma hacia un punto crítico fractal sin necesidad de ajuste de parámetros externos."
+    - "Universalidad y Transición de Fase: En el punto crítico (e.g. Temperatura de Curie), las correlaciones son de alcance infinito, exhiben auto-similitud fractal, y la topología subyacente domina ignorando el sustrato físico (Clases de Universalidad)."
+    - "Conexión Preferencial (Barabási-Albert): Nodos nuevos se enlazan con mayor probabilidad a nodos densamente conectados, generando topologías de red que obedecen a leyes de potencias."
+  Invariantes_Detectadas:
+    - "Invariante de Singularidad Fractal: En el estado de máxima inestabilidad (punto crítico), la escala geométrica se anula (Scale-Free)."
+    - "Invariante de Riesgo Asimétrico: En dominios regidos por ley de potencias, la estrategia óptima muta de 'consistencia sobre el promedio' a 'persistencia de eventos extremos' (frecuencia estocástica vs. asimetría masiva)."
+  Ruido_Purgado_Porcentaje: "96%"
+Handoff_Status: "AUTODIDACT-OMEGA (Triggered)"
