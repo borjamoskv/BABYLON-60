@@ -3,6 +3,7 @@ CAM-5.0 Effect Programs & Family Capabilities.
 """
 
 from dataclasses import dataclass, field
+from typing import Any
 from cortex.aem.isa import InstructionFamily
 
 
@@ -22,4 +23,4 @@ class CapabilitySet:
 
 @dataclass
 class EffectProgram:
-    operations: list[tuple[InstructionFamily, dict]] = field(default_factory=list)
+    operations: list[tuple[InstructionFamily, dict[str, Any]]] = field(default_factory=list)

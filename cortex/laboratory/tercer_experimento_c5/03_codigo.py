@@ -16,12 +16,13 @@ PROJECT_ROOT = os.path.abspath(
 )
 sys.path.append(PROJECT_ROOT)
 
+from typing import Any
 from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
 
 DB_PATH = "memristor_stress_test.db"
 
 
-def run_single_thread(thread_id: int, db_path: str, pre: str, post: str) -> dict:
+def run_single_thread(thread_id: int, db_path: str, pre: str, post: str) -> dict[str, Any]:
     mem = STDPMemristor(db_path, pre, post)
     success = 0
     failures = 0

@@ -40,7 +40,7 @@ class AgentMemory:
 
             # Silenciar desajuste de argumentos en telemetría interna de chromadb/posthog
             try:
-                import posthog
+                import posthog  # type: ignore[import-not-found]
                 posthog.disabled = True
 
                 def _silent_capture(*args: Any, **kwargs: Any) -> None:

@@ -113,7 +113,7 @@ def test_prf_s_soundness_and_prf_c_completeness() -> None:
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_sequential_subadditivity(cost1, cost2) -> None:
+def test_property_sequential_subadditivity(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "B", "C")
@@ -127,7 +127,7 @@ def test_property_sequential_subadditivity(cost1, cost2) -> None:
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_monoidal_subadditivity(cost1, cost2) -> None:
+def test_property_monoidal_subadditivity(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "C", "D")
@@ -141,7 +141,7 @@ def test_property_monoidal_subadditivity(cost1, cost2) -> None:
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
 )
-def test_property_lawvere_triangle_inequality(cost1, cost2) -> None:
+def test_property_lawvere_triangle_inequality(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
     beta = Morphism("beta", "B", "C")
@@ -152,7 +152,7 @@ def test_property_lawvere_triangle_inequality(cost1, cost2) -> None:
 
 
 @given(dummy=st.integers(min_value=0, max_value=100))
-def test_property_identity_cost(dummy) -> None:
+def test_property_identity_cost(dummy: int) -> None:
     cat = CertificateCategoryP()
     cat.add_identity_certificate("A")
     id_morphism = Morphism("id_A", "A", "A")
@@ -210,7 +210,7 @@ def test_lawvere_premetric_triangle_3chain() -> None:
     cost2=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
     cost3=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False)
 )
-def test_property_lawvere_transitivity(cost1, cost2, cost3) -> None:
+def test_property_lawvere_transitivity(cost1: float, cost2: float, cost3: float) -> None:
     """Property-based: mu(gamma o beta o alpha) <= sum of individual mu's."""
     cat = CertificateCategoryP(delta_circ_fn=lambda a, b: 0.0)
     alpha = Morphism("a", "A", "B")

@@ -60,7 +60,7 @@ class GeminiProTelemetry:
         else:
             self.failures += 1
 
-    def snapshot(self) -> dict:
+    def snapshot(self) -> dict[str, Any]:
         avg_latency = (
             self.latency_sum / self.total_requests if self.total_requests else 0.0
         )

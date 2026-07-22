@@ -9,7 +9,7 @@ from cortex.categorical_896_engine import Categorical896Engine
 _engine_instance = None
 
 
-def get_engine():
+def get_engine() -> Categorical896Engine:
     global _engine_instance
     if _engine_instance is None:
         yaml_file = "primitives/896_categorical_logic_primitives.yml"
@@ -17,7 +17,7 @@ def get_engine():
     return _engine_instance
 
 
-def test_engine_initialization():
+def test_engine_initialization() -> None:
     engine = get_engine()
     assert len(engine.primitives) == 896
     assert len(engine.domain_index) == 8
@@ -27,7 +27,7 @@ def test_engine_initialization():
 
 @settings(deadline=None)
 @given(st.lists(st.integers(min_value=1, max_value=896), min_size=1, max_size=50))
-def test_property_morphism_cost_monotonicity(primitive_seq):
+def test_property_morphism_cost_monotonicity(primitive_seq: list[int]) -> None:
     engine = get_engine()
     cost = engine.evaluate_morphism_cost(primitive_seq)
     assert cost >= len(primitive_seq)
@@ -36,7 +36,7 @@ def test_property_morphism_cost_monotonicity(primitive_seq):
 
 @settings(deadline=None)
 @given(st.integers(min_value=561, max_value=672), st.integers(min_value=673, max_value=784))
-def test_property_collision_detection_exhaustion(d6_id, d7_id):
+def test_property_collision_detection_exhaustion(d6_id: int, d7_id: int) -> None:
     engine = get_engine()
     collisions = engine.detect_diagrammatic_collisions({d6_id, d7_id})
     assert len(collisions) == 1
@@ -49,7 +49,7 @@ def test_property_collision_detection_exhaustion(d6_id, d7_id):
     st.lists(st.integers(min_value=1, max_value=896), min_size=1, max_size=20),
     st.floats(min_value=0.0, max_value=10.0),
 )
-def test_theorem_1_1_subadditivity_sequential(seq_a, seq_b, delta):
+def test_theorem_1_1_subadditivity_sequential(seq_a: list[int], seq_b: list[int], delta: float) -> None:
     engine = get_engine()
     res = engine.evaluate_sequential_composition(seq_a, seq_b, delta_circ=delta)
     assert res["theorem_1_1_sequential_holds"] is True
@@ -62,7 +62,7 @@ def test_theorem_1_1_subadditivity_sequential(seq_a, seq_b, delta):
     st.lists(st.integers(min_value=1, max_value=896), min_size=1, max_size=20),
     st.floats(min_value=0.0, max_value=10.0),
 )
-def test_theorem_1_1_subadditivity_monoidal(seq_a, seq_b, delta):
+def test_theorem_1_1_subadditivity_monoidal(seq_a: list[int], seq_b: list[int], delta: float) -> None:
     engine = get_engine()
     res = engine.evaluate_monoidal_composition(seq_a, seq_b, delta_otimes=delta)
     assert res["theorem_1_1_monoidal_holds"] is True
@@ -75,14 +75,14 @@ def test_theorem_1_1_subadditivity_monoidal(seq_a, seq_b, delta):
     st.floats(min_value=1.0, max_value=10.0),
     st.floats(min_value=10.1, max_value=20.0),
 )
-def test_theorem_2_1_kappa_monotonicity(morphism, k_strong, k_weak):
+def test_theorem_2_1_kappa_monotonicity(morphism: list[int], k_strong: float, k_weak: float) -> None:
     engine = get_engine()
     extensions = [[1, 2], [3, 4, 5], [6]]
     res = engine.verify_kappa_monotonicity(morphism, k_strong, k_weak, extensions)
     assert res["theorem_2_1_holds"] is True
 
 
-def test_simplicial_complex_compat_omega():
+def test_simplicial_complex_compat_omega() -> None:
     engine = get_engine()
     audit = engine.get_structural_audit()
     compat = audit["compat_complex"]
@@ -91,7 +91,7 @@ def test_simplicial_complex_compat_omega():
     assert compat["maximal_dimension"] == 3
 
 
-def test_multi_domain_collision_audit():
+def test_multi_domain_collision_audit() -> None:
     engine = get_engine()
     # D4 (337..448), D5 (449..560), D6 (561..672), D7 (673..784)
     active_set = {340, 450, 570, 680}
