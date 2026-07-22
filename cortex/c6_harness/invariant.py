@@ -19,6 +19,12 @@ class ByzantineResult:
     history_preserved: int
 
 @dataclass
+class ReplayResult:
+    total_replays: int
+    intermediate_identity_pass: bool
+    causal_alignment_pass: bool
+
+@dataclass
 class C6Attestation:
     experiment_id: str
     environment: Dict[str, str]

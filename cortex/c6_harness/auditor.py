@@ -1,7 +1,7 @@
 """C6-REAL Orchestrator and Auditor."""
 import hashlib
 from typing import Dict, Optional
-from .invariant import C6Attestation, RecoveryResult, ByzantineResult
+from .invariant import C6Attestation, RecoveryResult, ByzantineResult, ReplayResult
 
 def generate_witness_hash(data: Dict[str, str]) -> str:
     m = hashlib.sha3_256()
@@ -16,7 +16,7 @@ def generate_attestation(
     attacks_injected: int, 
     storage_recovery: Optional[RecoveryResult] = None,
     byzantine_result: Optional[ByzantineResult] = None,
-    replay_deterministic: bool = True
+    replay_result: Optional[ReplayResult] = None
 ) -> C6Attestation:
     """Synthesizes the execution results into the final Temporal Identity C6 Attestation."""
     
@@ -43,6 +43,12 @@ def generate_attestation(
         )
     else:
         byzantine_pass = True
+
+    # Evaluate Replay
+    if replay_result:
+        replay_deterministic = replay_result.intermediate_identity_pass and replay_result.causal_alignment_pass
+    else:
+        replay_deterministic = True
         
     # Witness hash computation based on results
     witness_data = {
