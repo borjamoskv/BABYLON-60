@@ -1,0 +1,13 @@
+{
+  "protocol": "C5-REAL",
+  "regime": "ULTRATHINK",
+  "cycle": 11,
+  "git_commit": "71aab69d1",
+  "entropy_shannon_bits": 0.000224,
+  "entropy_boltzmann_nats": 0.000155,
+  "table_distribution": {
+    "stress_log": 79087,
+    "sqlite_sequence": 1
+  },
+  "sha3_256": "6e62cb3182399d66ebf470fe92e0e95cb2235434e124c880c75f0f1d9646b9d3"
+}

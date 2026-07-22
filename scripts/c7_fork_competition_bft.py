@@ -13,10 +13,13 @@ class BranchValidator:
         last_lamport = chain[0]["lamport_t"] - 1 if chain else 0
         
         for entry in chain:
-            if entry["lamport_t"] <= last_lamport: return False
-            if entry["prev_hash"] != expected_prev: return False
+            if entry["lamport_t"] <= last_lamport:
+                return False
+            if entry["prev_hash"] != expected_prev:
+                return False
             calc_hash = self.verify_hash(entry["lamport_t"], entry["nonce"], entry["payload"], entry["prev_hash"])
-            if calc_hash != entry["block_hash"]: return False
+            if calc_hash != entry["block_hash"]:
+                return False
             
             expected_prev = entry["block_hash"]
             last_lamport = entry["lamport_t"]

@@ -46,3 +46,15 @@ members = [
 
 [tool.uv.sources]
 strike-rs = { workspace = true }
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+extend-exclude = [
+    "cortex/laboratory",
+]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E743", "E402", "E701"]
+

@@ -33,10 +33,14 @@ def simulate_btw_sandpile(grid_size=32, total_grains=5000):
             topple_indices = np.argwhere(topple_mask)
             for r, c in topple_indices:
                 grid[r, c] -= 4
-                if r > 0: grid[r - 1, c] += 1
-                if r < grid_size - 1: grid[r + 1, c] += 1
-                if c > 0: grid[r, c - 1] += 1
-                if c < grid_size - 1: grid[r, c + 1] += 1
+                if r > 0:
+                    grid[r - 1, c] += 1
+                if r < grid_size - 1:
+                    grid[r + 1, c] += 1
+                if c > 0:
+                    grid[r, c - 1] += 1
+                if c < grid_size - 1:
+                    grid[r, c + 1] += 1
                 
         if avalanche_size > 0:
             avalanche_sizes.append(avalanche_size)

@@ -171,10 +171,14 @@ def run_c7_4_tournament():
         name = res[0]
         fit = res[1]
         reason = ""
-        if "Compressed" in name: reason = "RC explosion due to E(H) >> L(H) (Unexplained Jumps)"
-        elif "Spammer" in name: reason = "PP collapse due to Trivial Predictions / Zero Surprise"
-        elif "Patch" in name: reason = "CD explosion due to Exception Accumulation"
-        elif "C7.5" in name: reason = "C7.5 Defeated: High CD penalty due to lack of Causal Context (Magical Anomalies without transitions)"
+        if "Compressed" in name:
+            reason = "RC explosion due to E(H) >> L(H) (Unexplained Jumps)"
+        elif "Spammer" in name:
+            reason = "PP collapse due to Trivial Predictions / Zero Surprise"
+        elif "Patch" in name:
+            reason = "CD explosion due to Exception Accumulation"
+        elif "C7.5" in name:
+            reason = "C7.5 Defeated: High CD penalty due to lack of Causal Context (Magical Anomalies without transitions)"
         
         print(f"    - id: {name}")
         print(f"      fitness: {fit['fitness']:.2f} (PP:{fit['PP']:.2f}, RC:{fit['RC']:.2f}, CD:{fit['CD']:.2f})")
