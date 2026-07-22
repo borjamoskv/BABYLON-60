@@ -142,6 +142,7 @@ class AgentMemory:
                     "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
                     (issue_id, agent_role, action, result, prev_hash, cortex_taint),
                 )
+                self.conn.execute("COMMIT")
 
                 if self.collection is not None:
                     doc_content = f"Issue: {issue_id}. Role: {agent_role}. Action: {action}. Result: {result}."
@@ -161,15 +162,14 @@ class AgentMemory:
                     except (AttributeError, ValueError, RuntimeError, OSError, TypeError, KeyError):
                         pass
 
-                self.conn.execute("COMMIT")
                 return cortex_taint
             except sqlite3.OperationalError as e:
                 try:
                     self.conn.execute("ROLLBACK")
                 except sqlite3.Error:
                     pass
-                if "locked" in str(e).lower() and attempt < 4:
-                    time.sleep(0.05 * (2 ** attempt))
+                if "locked" in str(e).lower() and attempt < 9:
+                    time.sleep(0.05 * (1.5 ** attempt))
                     continue
                 raise
             except Exception:
@@ -178,7 +178,7 @@ class AgentMemory:
                 except sqlite3.Error:
                     pass
                 raise
-        raise RuntimeError("AgentMemory log failed after 5 retry attempts due to database lock")
+        raise RuntimeError("AgentMemory log failed after 10 retry attempts due to database lock")
 
     def query_similar(self, issue_text: str) -> list[Any]:
         if self.collection is None:
