@@ -9,6 +9,7 @@ import sys
 import time
 import json
 import sqlite3
+from typing import Any
 from concurrent.futures import ThreadPoolExecutor
 
 PROJECT_ROOT = os.path.abspath(
@@ -16,7 +17,6 @@ PROJECT_ROOT = os.path.abspath(
 )
 sys.path.append(PROJECT_ROOT)
 
-from typing import Any
 from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
 
 DB_PATH = "memristor_stress_test.db"
