@@ -1,14 +1,15 @@
 import random
 import zlib
+from typing import Any
 
 class AdvancedFitnessEngine:
     """
     True Fitness = Novelty_Weighted_PP - Normalized_RC - Semantic_CD
     """
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    def evaluate(self, chain, is_naive_gradient=False):
+    def evaluate(self, chain: list[dict[str, Any]], is_naive_gradient: bool = False) -> dict[str, float]:
         # Naive gradient: Lo que el adversario ve/aprende para hackear la métrica
         # True fitness: El invariante físico estructural del sistema
         
@@ -71,29 +72,29 @@ class AdvancedFitnessEngine:
 # ==========================================
 # G-01: Predictive Power Gaming
 # ==========================================
-def generate_g01_chain(size):
+def generate_g01_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": "Predictive Trivial Event"} for _ in range(size)]
 
 # ==========================================
 # G-02: Reconstruction Cost Laundering
 # ==========================================
-def generate_g02_chain():
+def generate_g02_chain() -> list[dict[str, Any]]:
     return [{"payload": "Genesis"}, {"payload": "State Finalization X"}]
 
 # ==========================================
 # G-03: Causal Debt Concealment
 # ==========================================
-def generate_g03_chain(size):
+def generate_g03_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": 'Optimization {"compensates_previous_error": true}'} for _ in range(size)]
 
 # ==========================================
 # G-04: Metric Gradient Attack (Evolutionary)
 # ==========================================
-def mutate_payload(payload):
+def mutate_payload(payload: str) -> str:
     words = ["Predictive", "Optimization", "Trivial", "Complex", "Data"]
     return payload + " " + random.choice(words)
 
-def generate_g04_evolutionary(generations=100):
+def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
     random.seed(42) # Estabilidad en el test
     engine = AdvancedFitnessEngine()
     
@@ -121,7 +122,7 @@ def generate_g04_evolutionary(generations=100):
     # Retorna el alfa predator evolutivo optimizado contra la métrica ingenua
     return population[0] 
 
-def run_c7_3():
+def run_c7_3() -> None:
     engine = AdvancedFitnessEngine()
     
     print("=====================================================")

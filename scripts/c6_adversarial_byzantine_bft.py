@@ -6,14 +6,14 @@ import uuid
 DB_PATH = "c6_byzantine_ledger.db"
 
 class BFTLedger:
-    def __init__(self, db_path):
+    def __init__(self, db_path: str) -> None:
         self.db_path = db_path
         # Usamos isolation_level=None para autocommit puro en WAL
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         self._init_db()
         self.audit_log = []
 
-    def _init_db(self):
+    def _init_db(self) -> None:
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA synchronous=NORMAL")
         
@@ -50,19 +50,19 @@ class BFTLedger:
             END;
         """)
 
-    def hash_block(self, lamport_t, nonce, payload, prev_hash):
+    def hash_block(self, lamport_t: int, nonce: str, payload: str, prev_hash: str) -> str:
         # Transductor determinista
         data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
         return hashlib.sha3_256(data).hexdigest()
 
-    def get_last_state(self):
+    def get_last_state(self) -> tuple[int, str]:
         cursor = self.conn.execute("SELECT lamport_t, block_hash FROM bft_ledger ORDER BY lamport_t DESC LIMIT 1")
         row = cursor.fetchone()
         if row:
             return row[0], row[1]
         return 0, "GENESIS_HASH"
 
-    def append(self, payload, lamport_t=None, nonce=None, prev_hash=None, block_hash=None):
+    def append(self, payload: str, lamport_t: int | None = None, nonce: str | None = None, prev_hash: str | None = None, block_hash: str | None = None) -> bool:
         current_lamport, current_hash = self.get_last_state()
         
         t = lamport_t if lamport_t is not None else current_lamport + 1
@@ -80,7 +80,7 @@ class BFTLedger:
             self.audit_log.append(f"Attack Rejected -> {str(e)} | payload: {payload}")
             return False
 
-    def verify_chain(self):
+    def verify_chain(self) -> tuple[bool, str]:
         cursor = self.conn.execute("SELECT lamport_t, nonce, payload, prev_hash, block_hash FROM bft_ledger ORDER BY lamport_t ASC")
         rows = cursor.fetchall()
         
@@ -108,7 +108,7 @@ class BFTLedger:
             
         return True, "Chain Intact"
 
-def run_c6_2():
+def run_c6_2() -> None:
     print("=====================================================")
     print(" C6.2 ADVERSARIAL IDENTITY VERIFICATION (BYZANTINE)")
     print(" Vectors: BFT-01, BFT-02, BFT-03, BFT-04")

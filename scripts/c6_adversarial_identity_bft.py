@@ -8,7 +8,7 @@ import uuid
 DB_PATH = "c6_adversarial_ledger.db"
 WAL_TARGET_SIZE_MB = 25  # Force a large WAL to widen the checkpoint window
 
-def writer_process(db_path, ready_event):
+def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event) -> None:
     """
     Inyecta entropía masiva sin hacer checkpoint explícito para inflar el WAL.
     """
@@ -40,7 +40,7 @@ def writer_process(db_path, ready_event):
         except sqlite3.Error:
             pass
 
-def checkpointer_process(db_path, start_checkpoint_event):
+def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.synchronize.Event) -> None:
     """
     Fuerza el vaciado del WAL al archivo DB principal.
     """
@@ -52,7 +52,7 @@ def checkpointer_process(db_path, start_checkpoint_event):
     except Exception:
         pass
 
-def c6_adversarial_orchestrator():
+def c6_adversarial_orchestrator() -> None:
     print("=====================================================")
     print(" C6 ADVERSARIAL IDENTITY VERIFICATION (BFT/WAL)")
     print(" Vector: kill_during_checkpoint")
@@ -93,8 +93,9 @@ def c6_adversarial_orchestrator():
     
     print("\n[!] [T3] === INYECTANDO SIGKILL MASIVO (OS.KILL) ===")
     try:
-        os.kill(writer.pid, signal.SIGKILL)
-        os.kill(checkpointer.pid, signal.SIGKILL)
+        if writer.pid is not None and checkpointer.pid is not None:
+            os.kill(writer.pid, signal.SIGKILL)
+            os.kill(checkpointer.pid, signal.SIGKILL)
         print("[!] Procesos decapitados a nivel de Kernel.")
     except ProcessLookupError:
         print("[-] Procesos ya terminaron antes del SIGKILL.")
