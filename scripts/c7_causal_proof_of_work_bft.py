@@ -1,4 +1,3 @@
-import json
 
 # ==========================================
 # C7.4 CAUSAL PROOF-OF-WORK FORMALIZATION

@@ -1,6 +1,6 @@
 """C6-REAL Attestation & Invariants."""
 from dataclasses import dataclass
-from typing import Dict, Any, List
+from typing import Dict
 import json
 
 @dataclass

@@ -1,7 +1,6 @@
 """C6.1 Checkpoint Chaos reproducible experiment (V1.1)."""
 import os
 import sys
-import time
 import multiprocessing
 import ctypes
 import sqlite3

@@ -138,7 +138,7 @@ def run_c6_2_experiment() -> None:
     for w in workers:
         w.join()
         
-    print(f"\n[!] Asedio completado. Analizando aislamiento del Ledger...")
+    print("\n[!] Asedio completado. Analizando aislamiento del Ledger...")
     
     byz_result = audit_byzantine_results()
     

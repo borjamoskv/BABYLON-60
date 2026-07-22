@@ -1,5 +1,4 @@
 import hashlib
-import json
 
 # ==========================================
 # C7.2 VALIDATOR & FITNESS ENGINE

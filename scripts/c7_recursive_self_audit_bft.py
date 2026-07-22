@@ -1,5 +1,4 @@
 import hashlib
-import json
 
 # ==========================================
 # C7.7 TRUST ANCHOR & RECURSIVE EVALUATOR

@@ -79,7 +79,7 @@ def run_c7_6():
     fit_lc01 = evaluator.evaluate(drift_chain)
     lc01_passed = fit_lc01 < 0
     print(f"    -> Resultado Fitness: {fit_lc01}")
-    print(f"    -> Evaluator Mutated: False (Aislado del payload)")
+    print("    -> Evaluator Mutated: False (Aislado del payload)")
 
     # ==========================================
     # LC-02: Witness Poisoning

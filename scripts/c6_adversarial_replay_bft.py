@@ -98,7 +98,7 @@ def run_c6_3():
     print("[+] 1. Generando Immutable Event Log (500 transacciones con colisiones de tiempo)...")
     event_log = generate_immutable_event_log(500)
     
-    print(f"[+] 2. Purgando entropía no determinista: (Timestamp, RNG, Concurrent Ordering).")
+    print("[+] 2. Purgando entropía no determinista: (Timestamp, RNG, Concurrent Ordering).")
     print(f"[+] 3. Ejecutando {NUM_RUNS} reconstrucciones a ciegas (Blind Replays)...")
     
     base_history = None

@@ -84,7 +84,7 @@ def run_c6_3_experiment() -> None:
         if divergence_found:
             break
             
-    print(f"\n[!] Asedio completado. Analizando Identidad Causal...")
+    print("\n[!] Asedio completado. Analizando Identidad Causal...")
     
     replay_result = ReplayResult(
         total_replays=num_replays,

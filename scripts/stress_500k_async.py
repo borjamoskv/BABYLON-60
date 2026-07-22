@@ -73,7 +73,6 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
 async def run_categorical_engine_task(idx: int) -> float:
     """Stress the FISR categorical engine — morphism cost + collision detection."""
     t0 = time.perf_counter_ns()
-    from cortex.categorical_896_engine import Categorical896Engine
 
     def _cat_op() -> None:
         engine = _get_cat_engine()
@@ -216,24 +215,24 @@ async def main() -> None:
 
     exergy_ratio = (success_count / N_TOTAL) * 100.0
 
-    print(f"\n╔══════════════════════════════════════════════════════════════════╗")
+    print("\n╔══════════════════════════════════════════════════════════════════╗")
     print(f"║  RESULTADO FINAL — {N_TOTAL:,} PRUEBAS ASÍNCRONAS (5 MOTORES)          ║")
-    print(f"╠══════════════════════════════════════════════════════════════════╣")
+    print("╠══════════════════════════════════════════════════════════════════╣")
     print(f"║  Total Iteraciones : {N_TOTAL:>10,}                                    ║")
     print(f"║  Exitosas          : {success_count:>10,}                                    ║")
     print(f"║  Fallos            : {failures:>10,}                                    ║")
     print(f"║  Exergía           : {exergy_ratio:>10.4f}%                                  ║")
     print(f"║  Tiempo Total      : {total_time * 1000:>10.2f} ms                              ║")
     print(f"║  Throughput        : {success_count / total_time:>10.2f} ops/sec                       ║")
-    print(f"╠══════════════════════════════════════════════════════════════════╣")
-    print(f"║  DISTRIBUCIÓN DE LATENCIAS POR OPERACIÓN                        ║")
+    print("╠══════════════════════════════════════════════════════════════════╣")
+    print("║  DISTRIBUCIÓN DE LATENCIAS POR OPERACIÓN                        ║")
     print(f"║  p50 (Mediana)     : {p50:>12.2f} µs                                  ║")
     print(f"║  p90               : {p90:>12.2f} µs                                  ║")
     print(f"║  p95               : {p95:>12.2f} µs                                  ║")
     print(f"║  p99               : {p99:>12.2f} µs                                  ║")
     print(f"║  p100 (Max)        : {p100:>12.2f} µs                                  ║")
     print(f"║  Promedio (avg)    : {avg_lat:>12.2f} µs                                  ║")
-    print(f"╚══════════════════════════════════════════════════════════════════╝")
+    print("╚══════════════════════════════════════════════════════════════════╝")
 
     summary = f"{N_TOTAL}|{success_count}|{failures}|{p50:.2f}|{p99:.2f}|{total_time:.4f}".encode("utf-8")
     cortex_hash = hashlib.sha3_256(summary).hexdigest()

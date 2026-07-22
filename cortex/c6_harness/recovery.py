@@ -2,7 +2,6 @@
 import sqlite3
 import os
 import hashlib
-from typing import Tuple
 from .invariant import RecoveryResult
 
 def _get_db_hash(db_path: str) -> str:

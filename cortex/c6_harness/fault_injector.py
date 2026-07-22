@@ -1,7 +1,6 @@
 """C6-REAL Deterministic Fault Injector (Chaos Monkey)."""
 import os
 import signal
-import multiprocessing
 import time
 from typing import Dict, Any
 
