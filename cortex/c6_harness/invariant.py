@@ -1,6 +1,6 @@
 """C6-REAL Attestation & Invariants."""
 from dataclasses import dataclass
-from typing import Dict, Any
+from typing import Dict, Any, List
 import json
 
 @dataclass
@@ -12,6 +12,13 @@ class RecoveryResult:
     state_hash_stable: bool
 
 @dataclass
+class ByzantineResult:
+    reachable_invalid_state: int
+    attacks_detected: int
+    attacks_isolated: int
+    history_preserved: int
+
+@dataclass
 class C6Attestation:
     experiment_id: str
     environment: Dict[str, str]
@@ -21,6 +28,7 @@ class C6Attestation:
     safety_pass: bool
     durability_pass: bool
     recovery_pass: bool
+    byzantine_pass: bool
     
     # Specifics
     committed_tx_loss: int
@@ -43,6 +51,7 @@ class C6Attestation:
                     "durability": "PASS" if self.durability_pass else "FAIL",
                     "recovery": "PASS" if self.recovery_pass else "FAIL",
                     "safety": "PASS" if self.safety_pass else "FAIL",
+                    "byzantine": "PASS" if self.byzantine_pass else "FAIL",
                     "committed_tx_loss": self.committed_tx_loss,
                     "corruption": self.corruption_detected,
                     "replay": "deterministic" if self.replay_deterministic else "divergent"
