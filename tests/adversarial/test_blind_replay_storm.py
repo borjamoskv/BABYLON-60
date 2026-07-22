@@ -3,6 +3,7 @@ import os
 import sys
 import sqlite3
 import platform
+from typing import Any
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if PROJECT_ROOT not in sys.path:
