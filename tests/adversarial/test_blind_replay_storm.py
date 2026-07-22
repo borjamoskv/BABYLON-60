@@ -62,7 +62,7 @@ def run_c6_3_experiment() -> None:
     print("╚══════════════════════════════════════════════════════════════════╝")
     
     # 1. Master Generation
-    master_events = [{"k": f"key_{i%50}", "v": i} for i in range(1000)]
+    master_events: list[dict[str, int]] = [{"k": f"key_{i%50}", "v": i} for i in range(1000)]
     print("\n[C6-REAL] Extrayendo Historia Maestra (1000 eventos)...")
     master_checkpoints = run_sequence(master_events)
     

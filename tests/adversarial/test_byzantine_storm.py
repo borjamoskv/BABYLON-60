@@ -84,7 +84,7 @@ def ledger_validator(tx: dict[str, Any]) -> None:
 def byzantine_worker(attack_type: str, count: int) -> None:
     """An isolated worker aggressively injecting malicious payload."""
     for i in range(count):
-        tx = {"attack": attack_type, "payload": f"malicious_{i}"}
+        tx: dict[str, Any] = {"attack": attack_type, "payload": f"malicious_{i}"}
         if attack_type == "HASH":
             tx["invalid_hash"] = True
         elif attack_type == "SIG":

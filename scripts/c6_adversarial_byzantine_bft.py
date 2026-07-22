@@ -11,7 +11,7 @@ class BFTLedger:
         # Usamos isolation_level=None para autocommit puro en WAL
         self.conn = sqlite3.connect(db_path, isolation_level=None)
         self._init_db()
-        self.audit_log = []
+        self.audit_log: list[str] = []
 
     def _init_db(self) -> None:
         self.conn.execute("PRAGMA journal_mode=WAL")

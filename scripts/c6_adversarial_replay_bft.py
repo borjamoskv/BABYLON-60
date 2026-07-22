@@ -103,7 +103,7 @@ def run_c6_3() -> None:
     print("[+] 2. Purgando entropía no determinista: (Timestamp, RNG, Concurrent Ordering).")
     print(f"[+] 3. Ejecutando {NUM_RUNS} reconstrucciones a ciegas (Blind Replays)...")
     
-    base_history = None
+    base_history: list[str] = []
     divergence_final = 0
     divergence_intermediate = 0
     divergence_order = 0

@@ -28,7 +28,7 @@ def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict
             if not np.any(topple_mask):
                 break
             
-            num_topples = np.sum(topple_mask)
+            num_topples = int(np.sum(topple_mask))
             avalanche_size += num_topples
             
             # Distribuir granos a los 4 vecinos
