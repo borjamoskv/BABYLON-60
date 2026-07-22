@@ -1,0 +1,78 @@
+# Ontología: Puente Formal FISR ↔ SOC ↔ BQP
+# Clasificación: C5-REAL Ontological Bridge Specification
+# CORTEX-TAINT:borjamoskv:itera_ultrathink_crystallize:2026-07-22T19:58:00Z
+
+---
+
+Domain: "FISR-SOC-BQP Structural Bridge"
+Version: "1.0"
+Status: "Frozen"
+
+# ═══════════════════════════════════════════════════
+# ISOMORFISMO 1: SINGULARIDAD COMPOSICIONAL ↔ SOC
+# ═══════════════════════════════════════════════════
+
+Bridge_1_FISR_SOC:
+  FISR_Side:
+    Teorema: "7.1 (Límite de Escalabilidad Termodinámica)"
+    Condición_Crítica: "Δ(δ_○) ≥ k₁ + k₂"
+    Significado: "El coste de fricción interna domina al presupuesto base → Singularidad Composicional"
+
+  SOC_Side:
+    Mecanismo: "Criticalidad Autoorganizada (Bak-Tang-Wiesenfeld)"
+    Condición_Crítica: "Densidad del bosque → umbral de percolación"
+    Significado: "La probabilidad de propagación de avalanchas diverge → eventos de todos los tamaños"
+
+  Isomorfismo:
+    Mapa: "δ_○ (fricción composicional) ↔ Tensión acumulada (SOC)"
+    Punto_Crítico: "Δ(δ_○) = k₁+k₂ ↔ T = T_Curie ↔ Densidad = percolación"
+    Consecuencia: "En ambos sistemas, al cruzar el punto crítico, la escala del fallo se vuelve scale-free (ley de potencias)"
+    Invariante_Ancla: "Ω140 (Fractal Singularity) + Teorema 7.1"
+
+  Implicación_Arquitectónica:
+    - "Un sistema software cuya fricción composicional δ_○ crece linealmente con el número de componentes alcanzará inevitablemente la Singularidad Composicional"
+    - "La distribución de bugs/fallos en ese sistema seguirá una ley de potencias: muchos bugs menores, pocos catastróficos, con varianza infinita"
+    - "La supresión artificial de fallos pequeños (análogo a Política de las 10am) ACUMULA tensión para megafallos"
+
+# ═══════════════════════════════════════════════════
+# ISOMORFISMO 2: CERTIFICABILIDAD ↔ BQP
+# ═══════════════════════════════════════════════════
+
+Bridge_2_FISR_BQP:
+  FISR_Side:
+    Métrica: "μ(α) = inf{|c| : c ∈ Cert(α)} (Lawvere Premetric)"
+    Pregunta: "¿Cuál es el coste mínimo de certificar una transición α?"
+
+  BQP_Side:
+    Métrica: "T(f) = min puertas cuánticas para evaluar f con error ≤ 1/3"
+    Pregunta: "¿Cuál es la complejidad mínima de resolver f en un circuito cuántico?"
+
+  Isomorfismo:
+    Mapa: "μ(α) ↔ T(f)"
+    Certificable: "μ(α) < ∞ ↔ f ∈ BQP"
+    Intratable: "μ(α) = ∞ ↔ f ∉ BQP"
+    Subaditividad: "μ(β∘α) ≤ μ(α)+μ(β)+δ ↔ T(g∘f) ≤ T(f)+T(g)+overhead"
+    Invariante_Ancla: "Ω148 (BQP Algebraic Structure)"
+
+  Consecuencia:
+    - "La ventaja cuántica (speedup exponencial) ocurre cuando μ_clásico(α) = ∞ pero μ_cuántico(α) < ∞"
+    - "Esto exige estructura algebraica explotable en α (Subgrupo Oculto, periodicidad espectral)"
+    - "La transición de μ=∞ a μ<∞ al cambiar de computación clásica a cuántica es una 'transición de fase computacional'"
+
+# ═══════════════════════════════════════════════════
+# ISOMORFISMO 3: OPERADOR κ ↔ CORRECCIÓN DE ERRORES
+# ═══════════════════════════════════════════════════
+
+Bridge_3_Kappa_QEC:
+  FISR_Side:
+    Operador: "κ(α, R) = inf{μ(e) | e∘α ⊨ R}"
+    Significado: "Coste óptimo de reparación para que la composición satisfaga la restricción R"
+
+  QEC_Side:
+    Operador: "Código Estabilizador S: detectar síndrome → aplicar corrección X/Z sin colapsar |ψ⟩"
+    Significado: "Coste de redundancia (qubits físicos por qubit lógico) para satisfacer la restricción de fidelidad"
+
+  Isomorfismo:
+    Mapa: "κ(α, R) ↔ Overhead de QEC (ratio qubits físicos/lógicos)"
+    Monotonía: "Restricciones más estrictas R → mayor κ ↔ Mayor fidelidad exigida → más qubits de corrección"
+    Satisfacibilidad: "κ=0 ⟺ el sistema ya satisface R sin reparación ↔ Código sin errores detectados (síndrome trivial)"
