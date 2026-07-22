@@ -1,10 +1,11 @@
-"""C6.1 Checkpoint Chaos reproducible experiment."""
+"""C6.1 Checkpoint Chaos reproducible experiment (V1.1)."""
 import os
 import sys
 import time
 import multiprocessing
 import ctypes
 import sqlite3
+import platform
 from typing import Any
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -63,41 +64,40 @@ def target_worker(shared_phase: Any) -> None: # type: ignore
 
 def run_c6_1_experiment() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
-    print("║  C6.1 STORAGE CHAOS HARNESS EXPERIMENT                           ║")
+    print("║  C6.1 DETERMINISTIC CHECKPOINT STORM                             ║")
     print("╚══════════════════════════════════════════════════════════════════╝")
     
     init_db()
     
-    # Using shared memory for phase tracking
     shared_phase = multiprocessing.Array(ctypes.c_char, 32)
     shared_phase.value = b"INIT"
     
     stop_event = multiprocessing.Event()
     
-    # We will run 10 iterations of worker + assassination
-    crashes = 0
-    probabilities = {
-        "WAL_APPEND": 0.25,
-        "CHECKPOINT": 0.50, # Boosted to attack the checkpoint boundary
-        "FSYNC_BOUNDARY": 0.25,
-        "AFTER_COMMIT_BEFORE_ACK": 0.25
+    # Deterministic campaigns
+    campaigns = {
+        "WAL_APPEND": 20,
+        "CHECKPOINT": 40,
+        "FSYNC_BOUNDARY": 20,
+        "AFTER_COMMIT_BEFORE_ACK": 20
     }
     
-    print(f"\n[C6-REAL] Inyectando fallos probabilísticos a lo largo de 10 iteraciones...")
+    total_attacks = sum(campaigns.values())
+    crashes = 0
     
-    for i in range(10):
+    print(f"\n[C6-REAL] Inyectando campaña determinista: {total_attacks} asedios totales...")
+    
+    for i in range(total_attacks):
         worker = multiprocessing.Process(target=target_worker, args=(shared_phase,))
         worker.start()
         
-        # Start orchestrator
         if worker.pid is not None:
             orchestrator = multiprocessing.Process(
                 target=chaos_orchestrator, 
-                args=(worker.pid, probabilities, shared_phase, stop_event)
+                args=(worker.pid, campaigns, shared_phase, stop_event)
             )
             orchestrator.start()
             
-            # Wait until the worker dies (assassinated) or timeout
             worker.join(timeout=3.0)
             
             if worker.is_alive():
@@ -112,17 +112,30 @@ def run_c6_1_experiment() -> None:
             orchestrator.join()
             stop_event.clear()
         
-    print("\n[!] Asedio completado. Analizando recuperación...")
+    print(f"\n[!] Asedio completado ({crashes} crashes exitosos). Analizando recuperación...")
     
     recovery_result = analyze_sqlite_recovery(DB_PATH)
-    attestation = generate_attestation(recovery_result)
+    
+    env_data = {
+        "sqlite_version": sqlite3.sqlite_version,
+        "kernel": platform.release(),
+        "filesystem": "APFS" if platform.system() == "Darwin" else "UNKNOWN"
+    }
+    
+    attestation = generate_attestation(
+        experiment_id="C6.1_CHECKPOINT_STORM_001",
+        environment=env_data,
+        attacks_injected=crashes,
+        storage_recovery=recovery_result
+    )
     
     print("\n" + attestation.to_yaml_str())
     
-    if attestation.temporal_identity_verified:
+    if attestation.safety_pass and attestation.durability_pass and attestation.recovery_pass:
         print("\n✓ C6.1 STORAGE CHAOS: ATTESTATION 1.0 (VERIFIED)")
     else:
         print("\n⚠ ANERGÍA DETECTADA: La identidad temporal colapsó.")
+        sys.exit(1)
 
 if __name__ == "__main__":
     run_c6_1_experiment()

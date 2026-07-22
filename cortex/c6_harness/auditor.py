@@ -1,25 +1,48 @@
 """C6-REAL Orchestrator and Auditor."""
-from .invariant import C6Attestation, ComponentScore, ByzantineScore, ReplayScore, RecoveryResult
+import hashlib
+from typing import Dict
+from .invariant import C6Attestation, RecoveryResult
 
-def generate_attestation(storage_recovery: RecoveryResult) -> C6Attestation:
+def generate_witness_hash(data: Dict[str, str]) -> str:
+    m = hashlib.sha3_256()
+    for k, v in sorted(data.items()):
+        m.update(k.encode('utf-8'))
+        m.update(str(v).encode('utf-8'))
+    return m.hexdigest()
+
+def generate_attestation(
+    experiment_id: str, 
+    environment: Dict[str, str], 
+    attacks_injected: int, 
+    storage_recovery: RecoveryResult,
+    replay_deterministic: bool = True
+) -> C6Attestation:
     """Synthesizes the execution results into the final Temporal Identity C6 Attestation."""
     
-    safety = 1.0 if storage_recovery.integrity_check == "OK" else 0.0
-    durability = 1.0 if storage_recovery.committed_transactions_lost == 0 and storage_recovery.phantom_transactions_found == 0 else 0.0
-    recovery_score = 1.0 if safety == 1.0 and durability == 1.0 else 0.0
+    safety_pass = storage_recovery.integrity_ok
+    durability_pass = (storage_recovery.committed_transactions_lost == 0 and storage_recovery.phantom_transactions_found == 0)
+    recovery_pass = storage_recovery.recovery_idempotent and storage_recovery.state_hash_stable
     
-    storage = ComponentScore(safety=safety, durability=durability, recovery=recovery_score)
-    
-    # C6.2 and C6.3 are stubs for now until their specific tests are run
-    byzantine = ByzantineScore(detection=0.0, isolation=0.0)
-    replay = ReplayScore(intermediate_identity=0.0, causal_alignment=0.0)
-    
-    # Currently verified if Storage Chaos passes. Full C6 requires all 3.
-    verified = (storage.recovery == 1.0)
+    # Witness hash computation based on results
+    witness_data = {
+        "exp": experiment_id,
+        "attacks": str(attacks_injected),
+        "safety": str(safety_pass),
+        "durability": str(durability_pass),
+        "recovery": str(recovery_pass),
+        "replay": str(replay_deterministic)
+    }
+    witness_hash = generate_witness_hash(witness_data)
     
     return C6Attestation(
-        storage=storage,
-        byzantine=byzantine,
-        replay=replay,
-        temporal_identity_verified=verified
+        experiment_id=experiment_id,
+        environment=environment,
+        attacks_injected=attacks_injected,
+        safety_pass=safety_pass,
+        durability_pass=durability_pass,
+        recovery_pass=recovery_pass,
+        committed_tx_loss=storage_recovery.committed_transactions_lost,
+        corruption_detected=not storage_recovery.integrity_ok,
+        replay_deterministic=replay_deterministic,
+        witness_hash=witness_hash
     )

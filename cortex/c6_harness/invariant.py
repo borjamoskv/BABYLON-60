@@ -5,60 +5,49 @@ import json
 
 @dataclass
 class RecoveryResult:
-    integrity_check: str
+    integrity_ok: bool
     committed_transactions_lost: int
     phantom_transactions_found: int
-    replay_deterministic: bool
-
-@dataclass
-class ComponentScore:
-    safety: float
-    durability: float
-    recovery: float
-
-@dataclass
-class ByzantineScore:
-    detection: float
-    isolation: float
-
-@dataclass
-class ReplayScore:
-    intermediate_identity: float
-    causal_alignment: float
+    recovery_idempotent: bool
+    state_hash_stable: bool
 
 @dataclass
 class C6Attestation:
-    storage: ComponentScore
-    byzantine: ByzantineScore
-    replay: ReplayScore
-    temporal_identity_verified: bool
+    experiment_id: str
+    environment: Dict[str, str]
+    attacks_injected: int
+    
+    # Booleans replace scores
+    safety_pass: bool
+    durability_pass: bool
+    recovery_pass: bool
+    
+    # Specifics
+    committed_tx_loss: int
+    corruption_detected: bool
+    replay_deterministic: bool
+    
+    witness_hash: str
 
     def to_yaml_str(self) -> str:
         data = {
             "C6_Attestation": {
-                "Storage": {
-                    "score": {
-                        "safety": self.storage.safety,
-                        "durability": self.storage.durability,
-                        "recovery": self.storage.recovery
-                    }
+                "experiment": {
+                    "id": self.experiment_id
                 },
-                "Byzantine": {
-                    "score": {
-                        "detection": self.byzantine.detection,
-                        "isolation": self.byzantine.isolation
-                    }
+                "environment": self.environment,
+                "attacks": {
+                    "injected": self.attacks_injected
                 },
-                "Replay": {
-                    "score": {
-                        "intermediate_identity": self.replay.intermediate_identity,
-                        "causal_alignment": self.replay.causal_alignment
-                    }
+                "results": {
+                    "durability": "PASS" if self.durability_pass else "FAIL",
+                    "recovery": "PASS" if self.recovery_pass else "FAIL",
+                    "safety": "PASS" if self.safety_pass else "FAIL",
+                    "committed_tx_loss": self.committed_tx_loss,
+                    "corruption": self.corruption_detected,
+                    "replay": "deterministic" if self.replay_deterministic else "divergent"
                 },
-                "Temporal_Identity": {
-                    "verified": self.temporal_identity_verified
-                }
+                "witness_hash": self.witness_hash
             }
         }
-        # Dump as formatted JSON (YAML compatible subset)
         return json.dumps(data, indent=2)
