@@ -1,5 +1,5 @@
 def synthesized_theorem_0(x: int = 0) -> int:
-    '''Physical C5-REAL theorem synthesized under intention: ULTRATHINK_PHYSICAL_COLLAPSE_ITER_10_1784749861.495593'''
+    '''Physical C5-REAL theorem synthesized under intention: ULTRATHINK_PHYSICAL_COLLAPSE_ITER_1_1784749941.853301'''
     assert isinstance(x, int), 'Input must be integer'
     # Topological invariant assert
     matrix = [i**2 + 0 for i in range(max(1, min(0 + 2, 10)))]
