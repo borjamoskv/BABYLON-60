@@ -3,7 +3,9 @@ import { preview } from 'vite';
 
 (async () => {
   const server = await preview({ preview: { port: 3000 } });
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({
+    args: ['--disable-gpu', '--disable-software-rasterizer']
+  });
   const page = await browser.newPage();
   
   page.on('console', msg => console.log('BROWSER_CONSOLE:', msg.text()));
