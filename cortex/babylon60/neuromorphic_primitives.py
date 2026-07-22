@@ -21,11 +21,14 @@ class STDPMemristor:
         self._init_db()
 
     def _init_db(self) -> None:
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        conn = sqlite3.connect(self.db_path, timeout=10.0)
         try:
-            with conn:
+            conn.execute("PRAGMA busy_timeout=5000;")
+            try:
                 conn.execute("PRAGMA journal_mode=WAL;")
-                conn.execute("PRAGMA busy_timeout=5000;")
+            except sqlite3.OperationalError:
+                pass
+            with conn:
                 conn.execute("""
                     CREATE TABLE IF NOT EXISTS memristor_weights (
                         synapse_id TEXT PRIMARY KEY,
@@ -44,11 +47,10 @@ class STDPMemristor:
     def register_pre_spike(self) -> float:
         """Registra el pulso de la neurona origen y calcula STDP si la destino disparó recientemente."""
         now = time.time()
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        conn = sqlite3.connect(self.db_path, timeout=10.0)
         try:
+            conn.execute("PRAGMA busy_timeout=5000;")
             with conn:
-                conn.execute("PRAGMA busy_timeout=5000;")
-                conn.execute("BEGIN IMMEDIATE")
                 cur = conn.execute(
                     "SELECT weight, last_post_spike_ts FROM memristor_weights WHERE synapse_id = ?",
                     (self.synapse_id,),
@@ -70,11 +72,10 @@ class STDPMemristor:
     def register_post_spike(self) -> float:
         """Registra el pulso de la neurona destino y calcula STDP si la origen disparó recientemente."""
         now = time.time()
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
+        conn = sqlite3.connect(self.db_path, timeout=10.0)
         try:
+            conn.execute("PRAGMA busy_timeout=5000;")
             with conn:
-                conn.execute("PRAGMA busy_timeout=5000;")
-                conn.execute("BEGIN IMMEDIATE")
                 cur = conn.execute(
                     "SELECT weight, last_pre_spike_ts FROM memristor_weights WHERE synapse_id = ?",
                     (self.synapse_id,),
@@ -201,7 +202,7 @@ class SelfHealingMesh:
 
         # Pre-spike
         if (start_node, end_node) in self.synapses:
-            weight = self.synapses[(start_node, end_node)].register_pre_spike()
+            weight = await asyncio.to_thread(self.synapses[(start_node, end_node)].register_pre_spike)
             delivered_energy = energy * weight
         else:
             delivered_energy = energy  # Baseline if no synapse recorded
