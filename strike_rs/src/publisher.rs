@@ -55,7 +55,7 @@ impl<'a> Publisher<'a> {
                 serde_json::to_string_pretty(&subgraph).map_err(|e| e.to_string())
             }
             ExportFormat::Markdown => {
-                let mut out = format!("# C5-REAL KNOWLEDGE ARTIFACT\n");
+                let mut out = "# C5-REAL KNOWLEDGE ARTIFACT\n".to_string();
                 out.push_str(&format!("**Environment**: `{}`\n", environment_id));
                 out.push_str("**Status**: VERIFIED & SECURED (BFT)\n\n");
                 out.push_str("## CAUSAL SUBGRAPH\n");

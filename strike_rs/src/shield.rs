@@ -3,7 +3,6 @@
 /// Implements early process isolation (Anti-debugging via PT_DENY_ATTACH, 
 /// Anti-coredump via RLIMIT_CORE) to protect keys and sensitive structs in RAM.
 /// Translates the C5-REAL Python doctrine into safe Rust bindings for macOS.
-
 #[cfg(target_os = "macos")]
 pub fn ignite_memory_shield() {
     use std::process;

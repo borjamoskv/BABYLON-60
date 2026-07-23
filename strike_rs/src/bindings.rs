@@ -164,7 +164,7 @@ impl CortexKernel {
         let inner = self.inner.clone();
         py.allow_threads(move || {
             let ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
-            let publisher = Publisher::new(&*ledger);
+            let publisher = Publisher::new(&ledger);
             let export_format = match format.to_lowercase().as_str() {
                 "json" => ExportFormat::Json,
                 "markdown" | "md" => ExportFormat::Markdown,
@@ -172,7 +172,7 @@ impl CortexKernel {
             };
 
             publisher.publish(&environment_id, export_format)
-                .map_err(|e| PyRuntimeError::new_err(e))
+                .map_err(PyRuntimeError::new_err)
         })
     }
 }

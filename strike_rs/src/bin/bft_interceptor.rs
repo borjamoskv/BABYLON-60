@@ -1,3 +1,6 @@
+#![allow(dead_code, unused_imports)]
+#![allow(clippy::items_after_test_module)]
+
 #[cfg(target_os = "linux")]
 use inotify::{Inotify, WatchMask};
 use ring::hmac;
