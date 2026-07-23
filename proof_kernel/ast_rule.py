@@ -12,7 +12,9 @@ class ASTRule:
     def __init__(self, func: Callable[[CRDTMap], CRDTMap]):
         self.name = func.__name__
         try:
+            import textwrap
             source = inspect.getsource(func)
+            source = textwrap.dedent(source)
         except (TypeError, OSError):
             source = f"def {self.name}(state):\n    pass"
             

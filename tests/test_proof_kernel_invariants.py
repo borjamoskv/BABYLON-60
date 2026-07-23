@@ -1,11 +1,9 @@
 import pytest
-from typing import Any
 from proof_kernel.inference import compute_information_gain, dag_inference
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.certificates import ClosureCertificate
-from proof_kernel.crdt import CRDTMap, LWWRegister
+from proof_kernel.crdt import CRDTMap
 from proof_kernel.ast_rule import ASTRule
-from proof_kernel.replay import replay
 
 def test_canonicalization():
     """Ω168 · Canonical Representation Executable Test"""

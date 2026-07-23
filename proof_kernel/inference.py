@@ -20,7 +20,7 @@ def topological_sort(dag: dict[str, list[str]]) -> list[str]:
             if in_degree[v] == 0:
                 queue.append(v)
                 
-    if len(order) != len(dag):
+    if len(order) != len(in_degree):
         raise ValueError("Ω159 Violated: Graph has cycles, topological sort failed.")
     return order
 
