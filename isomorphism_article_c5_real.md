@@ -72,7 +72,7 @@ import hashlib
 import threading
 import platform
 
-def compute_shannon_entropy(data_points: list, num_bins: int = 25) -> float:
+def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> float:
     if not data_points:
         return 0.0
     min_val, max_val = min(data_points), max(data_points)
@@ -221,7 +221,8 @@ def main():
     res_hw = bench.run_gicv4_apic_simulation()
     res_div = bench.run_antipattern_divergence_test()
 
-    telemetry = {
+    from typing import Any
+    telemetry: dict[str, Any] = {
         "metadata": {"system": platform.system(), "architecture": platform.machine()},
         "metrics": {"microglial_adaptive_gate": res_bio, "gicv4_apic_hardware_gate": res_hw, "antipattern_divergence": res_div}
     }

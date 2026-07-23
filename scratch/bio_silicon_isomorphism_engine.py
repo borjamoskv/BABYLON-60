@@ -26,7 +26,7 @@ import threading
 import queue
 import platform
 
-def compute_shannon_entropy(data_points: list, num_bins: int = 25) -> float:
+def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> float:
     if not data_points:
         return 0.0
     min_val, max_val = min(data_points), max(data_points)
@@ -203,7 +203,8 @@ def main():
     print(f"  -> Linear Control Entropy: {res_div['linear_control_entropy']:.4f}")
     print(f"  -> Non-Linear Bio Entropy: {res_div['nonlinear_bio_entropy']:.4f}")
 
-    telemetry = {
+    from typing import Any
+    telemetry: dict[str, Any] = {
         "metadata": {
             "system": platform.system(),
             "architecture": platform.machine(),
