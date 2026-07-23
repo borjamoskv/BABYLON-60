@@ -10,6 +10,10 @@ class BFT_Ledger:
         self.validator = BFT_Validator(node_keys or {})
         self.committer = BFT_Committer(db_path)
 
+    @property
+    def conn(self):
+        return self.committer.conn
+
     def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: Dict[str, str]) -> bool:
         # V: Validar Atacantes Bizantinos
         mutation_hash = self.validator.validate_votes(mutation.payload, f, swarm_signatures)
