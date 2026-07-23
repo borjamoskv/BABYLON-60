@@ -24,7 +24,7 @@ class ASTRule:
         
         # Compile it back into an executable object to verify we can run it
         code_obj = compile(self.ast_tree, filename="<ast>", mode="exec")
-        namespace = {}
+        namespace = {"CRDTMap": CRDTMap}
         exec(code_obj, namespace)
         self.executable = namespace[self.name]
 
