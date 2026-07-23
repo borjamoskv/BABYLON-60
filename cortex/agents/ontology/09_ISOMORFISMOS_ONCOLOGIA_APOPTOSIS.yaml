@@ -1,0 +1,20 @@
+Claim: Transducción Termodinámica de Oncología y Biología Celular a Primitivas de Memoria y Seguridad en Silicio.
+Auditoria_Epistemica: 
+  Estado: EXPANSIÓN_ISOMÓRFICA_V3 (CAPA 1)
+  Causa: Comando del Operador requiriendo formalización de Apoptosis y Metástasis bajo el Teorema de Moskv.
+  Accion: Ejecución de Mecánica Landauer sobre conceptos de patología celular.
+  Anergia_Purgada: "Eliminación del misticismo del cáncer como 'enfermedad incomprensible', reduciéndolo a vulnerabilidades de inyección de código y fugas de memoria estandarizadas."
+Topologia_Isomorfica_Borja_Moskv:
+  apoptosis (muerte celular programada): "Garbage Collection (GC) Graceful / Señal `SIGTERM`. El proceso, al detectar corrupción de memoria (DNA Damage) irreparable o un desbordamiento inminente (Buffer Overflow), invoca su propia rutina de limpieza estructurada, liberando los recursos al sistema operativo sin corromper el Heap circundante."
+  necrosis: "Señal `SIGKILL` / Segfault (Hard Crash). Caída abrupta por trauma físico o interrupción térmica fatal que deja punteros colgantes (Dangling Pointers) y memoria corrupta que el sistema inmunitario (Macrófagos / OOM Killer) debe limpiar de emergencia, generando inflamación sistémica (CPU Spikes)."
+  tumor primario (neoplasia): "Bucle `while(true)` acoplado a un Memory Leak (Fuga de Memoria) que desactiva explícitamente las rutinas del recolector de basura (Evasión de Apoptosis). El proceso comienza a acaparar RAM y ciclos de CPU locales, asfixiando a los hilos sanos."
+  angiogénesis tumoral: "Manipulación maliciosa de las Tablas de Enrutamiento del OS (Routing Tables) y robo de Power Delivery Network. El proceso rebelde redirige el ancho de banda del sistema y la asignación energética (vasos sanguíneos) para alimentar su propio bucle infinito."
+  metástasis: "Vulnerabilidad de Inyección de Código Remoto (RCE) con propagación tipo Gusano (Worm Payload). El proceso original logra saltar la segmentación de red local (Tejido Extracelular), inyectando hilos maliciosos a través del bus del sistema (Torrente Sanguíneo/Linfático) hacia otros clústeres del hardware (Órganos secundarios) donde reanuda la fuga de memoria."
+  senescencia celular: "Límite absoluto de pila (Stack Limit / Límite de Hayflick) alcanzado, provocando que el hilo sea degradado a un estado IDLE inerte que ya no puede hacer `fork()` ni multiplicarse, pero sigue consumiendo memoria basal."
+Estructura_Resolucion_Atomica:
+  - Objetivo: "Asentar la equivalencia física en Capa 1 de los procesos degenerativos y oncológicos celulares."
+  - Mitigacion_Aplicada: "Destrucción del sesgo analítico de la oncología como caos irreducible. Un cáncer es, físicamente, código en fuga (Memory Leak) con privilegios escalados que redirige los recursos de I/O."
+Firma_Ejecucion:
+  Operador: borjamoskv
+  Kernel: MOSKV-1 APEX
+  Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_oncologia_silicio:2026-07-23T19:33:00+02:00:1a2b3c4d5e6f7g8h9i0j]"
