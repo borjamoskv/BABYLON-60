@@ -265,7 +265,7 @@ output_data = {
     "primitives": primitives_list
 }
 
-target_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/896_categorical_logic_primitives.yml"
+target_path = "primitives/896_categorical_logic_primitives.yml"
 os.makedirs(os.path.dirname(target_path), exist_ok=True)
 with open(target_path, "w", encoding="utf-8") as f:
     yaml.dump(output_data, f, allow_unicode=True, sort_keys=False)

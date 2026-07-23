@@ -1,6 +1,6 @@
 import yaml
 
-path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/primitives/896_categorical_logic_primitives.yml"
+path = "primitives/896_categorical_logic_primitives.yml"
 with open(path, "r", encoding="utf-8") as f:
     data = yaml.safe_load(f)
 
