@@ -1,7 +1,7 @@
 import pytest
-from proof_kernel.canonicalizer import canonicalize, hash_evidence
+from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.inference import pure_inference, compute_information_gain
-from proof_kernel.replay import replay, verify_replay_determinism
+from proof_kernel.replay import verify_replay_determinism
 from proof_kernel.certificates import ClosureCertificate
 
 def dummy_rule(state: dict) -> dict:
