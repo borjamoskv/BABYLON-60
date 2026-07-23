@@ -95,3 +95,23 @@ El invariante declara que las premisas redundantes "se destruyen algorítmicamen
 ### Resolución Requerida (Refactor Axiomático)
 - **Ejecución basada en AST/WASM:** Las reglas de inferencia no pueden ser punteros a memoria en Python (`Callable`). Deben compilarse a representaciones puras (como binarios WASM o AST serializable) que se almacenen inmutablemente en el Ledger para garantizar el Replay Histórico (Ω165).
 - **Semántica CRDT (Conflict-Free Replicated Data Types):** El estado de evidencia debe abandonar el `dict` plano y adoptar estructuras CRDT que garanticen que cualquier orden de evaluación topológica en un DAG produzca matemáticamente el mismo estado determinista.
+
+---
+
+## 4. Prueba de Insuficiencia: Vulnerabilidad de Encapsulamiento de Complejidad (Falsación de Ω173)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El cálculo de la Trusted Computing Base (TCB) para garantizar el Invariante de Minimidad del Kernel (Ω173) es estructuralmente vulnerable a la ofuscación por encapsulamiento de funciones. Un agente puede violar la regla de minimidad sin alterar el umbral superficial, quebrando el teorema.
+
+### Demostración Destructiva
+
+**1. Encapsulamiento (Falsación de Ω173)**
+La directiva Ω173 establece empíricamente que el verificador debe ser estrictamente más simple que el generador. En su forma inicial, el Kernel evaluaba esto contando el número de reglas/funciones en cada pipeline (`len(verifier_rules) < len(generator_rules)`).
+**Consecuencia:** Un agente malicioso o anérgico puede ofuscar 1,000 reglas de validación complejas colapsándolas en una única regla monstruosa (ej. `lambda state: rule1000(rule999(...rule1(state)))`). El evaluador devolverá un conteo de $1$, aprobando falsamente que el verificador es más simple que el generador (ej. conteo de $2$). Esto destruye la aserción formal sobre la TCB, volviendo trivial la elusión del control termodinámico de complejidad.
+
+### Resolución Requerida (Refactor Axiomático)
+- **Cálculo Topológico de Complejidad AST:** La minimidad ya no puede descansar en variables superficiales (contadores de objetos `Callable`). Debe apoyarse obligatoriamente en la Complejidad de Kolmogorov, aproximada en este entorno mediante el **conteo estricto de nodos del Árbol de Sintaxis Abstracta (AST)** (`ast_node_count`) extraído dinámicamente de cada regla física. El umbral pasará de ser $C(R_{verificador}) < C(R_{generador})$ evaluado topológicamente en lugar de referencialmente.

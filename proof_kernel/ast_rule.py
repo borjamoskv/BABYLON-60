@@ -20,6 +20,7 @@ class ASTRule:
             
         self.ast_tree = ast.parse(source)
         self.ast_dump = ast.dump(self.ast_tree)
+        self.ast_node_count = len(list(ast.walk(self.ast_tree)))
         self.ruleset_hash = hash_evidence({"ast": self.ast_dump})
         
         # Compile it back into an executable object to verify we can run it

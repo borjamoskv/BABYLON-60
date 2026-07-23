@@ -25,12 +25,16 @@ def execute_with_versioned_semantics(
         }
     }
 
-def verify_kernel_minimality(verifier_rules_count: int, generator_rules_count: int) -> bool:
+def verify_kernel_minimality(verifier_ast_nodes: int, generator_ast_nodes: int) -> bool:
     """
-    Ω173 · Kernel Minimality (Trusted Computing Base) Invariant
-    El conjunto de reglas de verificación debe ser estrictamente menor
-    al de generación para evitar colapsos de auto-legitimación.
+    Ω173 · Kernel Minimality Invariant
+    El núcleo de verificación (TCB) debe ser estrictamente más simple 
+    (en complejidad de AST / Kolmogorov) que el motor generador.
     """
-    if verifier_rules_count >= generator_rules_count:
-        raise ValueError("Ω173 Violated: Verifier TCB is larger than or equal to the Generator.")
+    if verifier_ast_nodes >= generator_ast_nodes:
+        raise ValueError(
+            f"Ω173 Violated: Verifier complexity ({verifier_ast_nodes} AST nodes) "
+            f"exceeds or equals Generator complexity ({generator_ast_nodes} AST nodes). "
+            "The TCB is too large."
+        )
     return True

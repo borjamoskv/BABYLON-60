@@ -82,4 +82,15 @@ def test_closure_certificate():
     with pytest.raises(ValueError, match="Residual entropy"):
         ClosureCertificate(e_hash, r_hash, state, residual_microbits=1500, epsilon_threshold=1000)
 
-# We remove test_replay_determinism and test_semantic_preservation for now since they depended on the old proof_pipeline
+from proof_kernel.semantics import verify_kernel_minimality
+
+def test_kernel_minimality():
+    """Ω173 · Kernel Minimality AST-based Test"""
+    # Verifier must be strictly simpler than Generator
+    assert verify_kernel_minimality(verifier_ast_nodes=50, generator_ast_nodes=100) is True
+    
+    with pytest.raises(ValueError, match="TCB is too large"):
+        verify_kernel_minimality(verifier_ast_nodes=150, generator_ast_nodes=100)
+        
+    with pytest.raises(ValueError, match="TCB is too large"):
+        verify_kernel_minimality(verifier_ast_nodes=100, generator_ast_nodes=100)
