@@ -252,7 +252,7 @@ class CentauroEngine:
             async with sem:
                 try:
                     return (a_id, await a.execute("M-01", mission))
-                except Exception as exc:  # noqa: BLE001
+                except (RuntimeError, ValueError, TypeError, asyncio.TimeoutError, ConnectionError, OSError) as exc:
                     import logging
 
                     logging.getLogger(__name__).exception(
@@ -383,7 +383,7 @@ class CentauroEngine:
                         "formation": f"{formation}+ALEPH",
                         "reason": f"Paradigm Shift: {leap['paradigm_shift']}",
                     }
-                except Exception as leap_e:  # noqa: BLE001
+                except (RuntimeError, ValueError, TypeError, asyncio.TimeoutError, ConnectionError, OSError) as leap_e:
                     import logging
 
                     logging.getLogger(__name__).exception(
@@ -403,7 +403,7 @@ class CentauroEngine:
             mission_future.set_result(result)
             return result
 
-        except Exception as e:  # noqa: BLE001
+        except (RuntimeError, ValueError, TypeError, asyncio.TimeoutError, ConnectionError, OSError) as e:
             import logging
 
             logging.getLogger(__name__).exception(

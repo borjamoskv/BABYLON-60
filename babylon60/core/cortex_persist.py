@@ -32,7 +32,7 @@ class CortexOntologyLedger:
         self.project_id = project_id
 
         # Rutas físicas inmutables
-        self.base_dir = str(Path.home() / ".agent/memory")
+        self.base_dir = str(Path.home() / ".gemini/config/.cortex/memory_vault")
         self.projects_dir = os.path.join(self.base_dir, "projects")
         self.ghosts_file = os.path.join(self.base_dir, "ghosts.json")
         self.system_file = os.path.join(self.base_dir, "system.json")
@@ -56,9 +56,10 @@ class CortexOntologyLedger:
         return dt.strftime("%Y-%m-%dT%H:%M:%S+02:00")
 
     def _read_json(self, path: str) -> Dict[str, Any]:
+        from typing import cast
         try:
             with open(path, "r", encoding="utf-8") as f:
-                return dict(json.load(f))
+                return cast(Dict[str, Any], dict(json.load(f)))
         except (json.JSONDecodeError, OSError):
             os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError(f"FAIL-FAST: Corrupción en vector de memoria {path}")

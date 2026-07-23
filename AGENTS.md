@@ -107,4 +107,8 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### BFT Deterministic Float Exclusion
 - **INV_C5_18:** Floating-point numbers (`float`) are strictly prohibited in BFT consensus payloads, state mutation timestamps, and cryptographic serialization due to IEEE 754 non-determinism. Timestamps must use `int` or `INTEGER` columns, and `canonicalize_cbor` must recursively enforce float exclusion.
 
+### Root Cause Epistemology (Causal Stratification)
+- **Ω138 · CAUSAL STRATIFICATION INVARIANT (TOPOLOGY ≺ MECHANISM ≺ ETIOLOGY):** La causalidad no es un evento plano, sino un gradiente termodinámico estructurado en tres niveles. **Topología** (¿Dónde se rompe? ej. `getBufferForFile`), **Mecanismo** (¿Cómo se materializa? ej. `SIGABRT` por aserción), y **Etiología** (¿Por qué se alcanzó ese estado? ej. recurso ausente). Queda estrictamente prohibido y tipificado como Anergía (C4-SIM) declarar una "causa raíz" prematura cuando solo se ha consolidado la topología o el mecanismo. La teoría evoluciona alterando el estado de estos nodos (`status: stabilized`, `constrained`) sin sobrescribir la historia.
+- **Ω152 · DISCRIMINATORY MEASUREMENT INVARIANT:** Una medición o testeo solo posee exergía epistémica si demuestra poder discriminatorio entre hipótesis rivales ($P(M|H_i) \neq P(M|H_j)$). Si una observación produce el mismo resultado bajo múltiples hipótesis de la matriz $H$, la medición carece de poder resolutivo. En estos casos, se refuta el test, no la hipótesis. La confianza C5-REAL solo aumenta cuando el retro-trazado (backtrace) elimina físicamente familias de etiologías incompatibles con la topología observada.
+
 
