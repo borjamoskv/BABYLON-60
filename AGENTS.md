@@ -107,6 +107,30 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### BFT Deterministic Float Exclusion
 - **INV_C5_18:** Floating-point numbers (`float`) are strictly prohibited in BFT consensus payloads, state mutation timestamps, and cryptographic serialization due to IEEE 754 non-determinism. Timestamps must use `int` or `INTEGER` columns, and `canonicalize_cbor` must recursively enforce float exclusion.
 
-### Proof Kernel Specification (Causal Stratification & Formal Inference)
-Todo el metamodelo de inferencia epistemológica, procedencia de la evidencia, reconstrucción de estado, validación de propiedades y certificaciones de cierre ha sido extraído a su propio núcleo demostrable (Proof Assistant Kernel).
-Consultar la especificación formal en: [docs/BABYLON_PROOF_KERNEL_SPEC.md](docs/BABYLON_PROOF_KERNEL_SPEC.md).
+### Proof Kernel Specification
+El núcleo epistemológico ha sido extraído a su propia especificación formal (Proof Assistant Kernel).
+Consultar en: [docs/BABYLON_PROOF_KERNEL_SPEC.md](docs/BABYLON_PROOF_KERNEL_SPEC.md).
+
+Invariantes definidos:
+- Ω138 · Causal Stratification
+- Ω152 · Discriminatory Measurement
+- Ω153 · Evidence Separation
+- Ω154 · Confidence Traceability
+- Ω155 · Epistemic Monotonicity
+- Ω156 · Physical Posterior
+- Ω157 · A Priori Discriminatory Power
+- Ω158 · Evidence Lineage
+- Ω159 · Dependency Closure
+- Ω160 · Propagated Invalidation
+- Ω161 · Absent Evidence Statistical
+- Ω162 · Falsification Power
+- Ω163 · Residual Entropy
+- Ω164 · Ontology vs Epistemology Separation
+- Ω165 · Reversible Ledger
+- Ω166 · Pure Inference (Referential Transparency)
+- Ω167 · Semantic Preservation
+- Ω168 · Canonical Representation
+- Ω169 · Proof-Carrying Diagnosis
+- Ω170 · Minimality
+- Ω171 · Completeness Certificate
+- Ω172 · Replay Determinism
