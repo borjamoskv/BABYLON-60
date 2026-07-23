@@ -51,9 +51,14 @@ impl TaintEngine {
         })
     }
 
-    /// Conecta dos nodos asegurando direccionalidad.
-    pub fn add_edge(&mut self, from: petgraph::graph::NodeIndex, to: petgraph::graph::NodeIndex) {
-        self.graph.add_edge(from, to, ());
+    /// Conecta dos nodos asegurando direccionalidad, con Rollback si se detecta un ciclo (OP-1).
+    pub fn add_edge(&mut self, from: petgraph::graph::NodeIndex, to: petgraph::graph::NodeIndex) -> Result<(), TaintError> {
+        let edge_idx = self.graph.add_edge(from, to, ());
+        if is_cyclic_directed(&self.graph) {
+            self.graph.remove_edge(edge_idx);
+            return Err(TaintError::CycleDetected);
+        }
+        Ok(())
     }
 
     /// Verifica la Invariante de Kahn (INV-GCM-003): El poset debe ser acíclico.
@@ -69,14 +74,19 @@ impl TaintEngine {
     pub fn compute_cortex_taint(&self) -> Result<String, TaintError> {
         self.verify_kahn_invariant()?;
 
-        let sorted_indices = match toposort(&self.graph, None) {
+        let mut sorted_indices = match toposort(&self.graph, None) {
             Ok(indices) => indices,
             Err(_) => return Err(TaintError::TopologicalSortFailed),
         };
 
+        // Orden canónico (OP-2): entre nodos sin relación causal, ordenar por ID lexicográfico
+        sorted_indices.sort_by(|a, b| {
+            self.graph[*a].id.cmp(&self.graph[*b].id)
+        });
+
         let mut hasher = Hasher::new();
         
-        // Hashing secuencial determinista basado en el orden topológico
+        // Hashing secuencial determinista basado en el orden topológico y lexicográfico
         for idx in sorted_indices {
             let node = &self.graph[idx];
             hasher.update(node.id.as_bytes());
@@ -98,7 +108,7 @@ mod tests {
         let n1 = engine.add_node("commit_A", b"payload_A");
         let n2 = engine.add_node("commit_B", b"payload_B");
         
-        engine.add_edge(n1, n2); // A -> B
+        let _ = engine.add_edge(n1, n2); // A -> B
 
         assert!(engine.verify_kahn_invariant().is_ok());
         let taint = engine.compute_cortex_taint().expect("[C5-REAL] FATAL: Taint computation failed in test");
@@ -111,9 +121,11 @@ mod tests {
         let n1 = engine.add_node("A", b"data");
         let n2 = engine.add_node("B", b"data");
         
-        engine.add_edge(n1, n2);
-        engine.add_edge(n2, n1); // Ciclo: Violación de la invariante
+        let _ = engine.add_edge(n1, n2);
+        let res = engine.add_edge(n2, n1); // Ciclo: Violación de la invariante detectada en la inserción
 
-        assert_eq!(engine.verify_kahn_invariant(), Err(TaintError::CycleDetected));
+        assert_eq!(res, Err(TaintError::CycleDetected));
+        // Verificamos que el grafo no quedó contaminado
+        assert!(engine.verify_kahn_invariant().is_ok());
     }
 }
