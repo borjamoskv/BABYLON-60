@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `175/200` | *CORTEX-TAINT:* `borjamoskv:200archive:bb01d0ee7431039a` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `175/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/se-dice-se-comence-se-viche](https://borjamoskv.substack.com/p/se-dice-se-comence-se-viche)
 
 ---

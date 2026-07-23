@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207236133` | *CORTEX-TAINT:* `borjamoskv:rss:8a25b2368a209b0f` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207236133` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
 
 ---

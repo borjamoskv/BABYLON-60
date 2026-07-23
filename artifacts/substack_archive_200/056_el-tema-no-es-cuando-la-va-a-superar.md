@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `56/200` | *CORTEX-TAINT:* `borjamoskv:200archive:6be978b182b0d501` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `56/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-tema-no-es-cuando-la-va-a-superar](https://borjamoskv.substack.com/p/el-tema-no-es-cuando-la-va-a-superar)
 
 ---

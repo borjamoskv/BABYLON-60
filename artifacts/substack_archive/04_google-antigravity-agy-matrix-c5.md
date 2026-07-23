@@ -4,7 +4,7 @@
 
 **  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207723433` | *CORTEX-TAINT:* `borjamoskv:rss:6a5d7d4ad9dda665` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207723433` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
 
 ---

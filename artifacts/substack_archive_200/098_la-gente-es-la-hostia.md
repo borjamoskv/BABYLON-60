@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `98/200` | *CORTEX-TAINT:* `borjamoskv:200archive:094b4c1869d78cb5` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `98/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-gente-es-la-hostia](https://borjamoskv.substack.com/p/la-gente-es-la-hostia)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `36/200` | *CORTEX-TAINT:* `borjamoskv:200archive:58464f9260ed1eb4` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `36/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/deftones-coherencia-rara-1](https://borjamoskv.substack.com/p/deftones-coherencia-rara-1)
 
 ---

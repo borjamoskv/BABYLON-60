@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `2/200` | *CORTEX-TAINT:* `borjamoskv:200archive:51cd8242b55f3279` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `2/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/afro-house-de-coworking-premium](https://borjamoskv.substack.com/p/afro-house-de-coworking-premium)
 
 ---

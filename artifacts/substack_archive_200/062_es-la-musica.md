@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `62/200` | *CORTEX-TAINT:* `borjamoskv:200archive:7e2249d69bcc4c5c` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `62/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/es-la-musica](https://borjamoskv.substack.com/p/es-la-musica)
 
 ---

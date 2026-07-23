@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206265200` | *CORTEX-TAINT:* `borjamoskv:rss:cbd650fcb69166d7` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206265200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `133/200` | *CORTEX-TAINT:* `borjamoskv:200archive:59e53369452a9882` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `133/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/los-raveros-la-elite-absoluta](https://borjamoskv.substack.com/p/los-raveros-la-elite-absoluta)
 
 ---

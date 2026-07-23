@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `159/200` | *CORTEX-TAINT:* `borjamoskv:200archive:f8c4c22d2007c9b3` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `159/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/pesadilla-en-el-parque-de-atracciones](https://borjamoskv.substack.com/p/pesadilla-en-el-parque-de-atracciones)
 
 ---

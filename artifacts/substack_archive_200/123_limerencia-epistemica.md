@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `123/200` | *CORTEX-TAINT:* `borjamoskv:200archive:90e22e22dd78bec5` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `123/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/limerencia-epistemica](https://borjamoskv.substack.com/p/limerencia-epistemica)
 
 ---

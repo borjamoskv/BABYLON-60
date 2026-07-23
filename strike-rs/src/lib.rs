@@ -270,104 +270,37 @@ impl Default for TTSHarnessState {
 // DISPATCH ENGINE FUNCTION IMPLEMENTATIONS
 // ==========================================
 
-/// Dispatches an observation step on the StateVector given domain d, primitive p, and modifier m.
+/// [SIMULACRO PURGADO (Ω150)] Dispatches an observation step on the StateVector given domain d, primitive p, and modifier m.
 #[pyfunction]
 pub fn dispatch_state_observer(
-    d: u8,
-    p: u8,
-    m: u8,
-    mut state: PyRefMut<StateVector>,
+    _d: u8,
+    _p: u8,
+    _m: u8,
+    mut _state: PyRefMut<StateVector>,
 ) -> PyResult<(u16, String, f64)> {
-    if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err(
-            "Index out of range [0-9]",
-        ));
-    }
-    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!(
-        "OBS-{}-{}-{}",
-        get_domain_str(d),
-        get_primitive_str(p),
-        get_modifier_str(m)
-    );
-
-    state.execution_count += 1;
-    let mut sum_sq = 0.0;
-    if state.states.len() < 4 || state.innovation.len() < 4 {
-        return Err(pyo3::exceptions::PyValueError::new_err(
-            "StateVector arrays states/innovation must have length >= 4",
-        ));
-    }
-    for i in 0..4 {
-        state.states[i] += ((code as f64) + (i as f64)).sin() * 0.01;
-        state.innovation[i] = ((code as f64).cos() - state.states[i]) * 0.1;
-        sum_sq += state.innovation[i] * state.innovation[i];
-    }
-    state.norm_error = sum_sq.sqrt();
-    Ok((code, name, state.norm_error))
+    unimplemented!("C4-SIM THEATER PURGED (Ω150): El cálculo estocástico (sin/cos) ha sido amputado por constituir Anergía decorativa. Proyecte una función termodinámica real o asuma el SIGKILL.");
 }
 
-/// Dispatches a neuro-chain mutation step on the CognitiveChainVector.
+/// [SIMULACRO PURGADO (Ω150)] Dispatches a neuro-chain mutation step on the CognitiveChainVector.
 #[pyfunction]
 pub fn dispatch_neuro_chain(
-    d: u8,
-    p: u8,
-    m: u8,
-    mut vec: PyRefMut<CognitiveChainVector>,
+    _d: u8,
+    _p: u8,
+    _m: u8,
+    mut _vec: PyRefMut<CognitiveChainVector>,
 ) -> PyResult<(u16, String, f64)> {
-    if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err(
-            "Index out of range [0-9]",
-        ));
-    }
-    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!(
-        "NEURO-{}-{}-{}",
-        get_neuro_domain_str(d),
-        get_neuro_primitive_str(p),
-        get_neuro_modifier_str(m)
-    );
-
-    vec.execution_count += 1;
-    let cos_val = (code as f64).cos();
-    vec.homeostasis_energy = f64::max(0.01, vec.homeostasis_energy * 0.98 + 0.02 * cos_val);
-    vec.prediction_error = ((code as f64).sin() * 0.1 - vec.homeostasis_energy * 0.05).abs();
-    vec.attention_weight = 1.0 / (1.0 + vec.prediction_error);
-    vec.action_torque = vec.attention_weight * (((code % 10) as f64) + 1.0);
-    vec.language_entropy = (1.0 + vec.action_torque).log2();
-
-    Ok((code, name, vec.language_entropy))
+    unimplemented!("C4-SIM THEATER PURGED (Ω150): La homeostasis termodinámica simulada ha sido amputada. Green Theater detectado y destruido.");
 }
 
-/// Dispatches a TTS harness evaluation step on the TTSHarnessState.
+/// [SIMULACRO PURGADO (Ω150)] Dispatches a TTS harness evaluation step on the TTSHarnessState.
 #[pyfunction]
 pub fn dispatch_tts_harness(
-    d: u8,
-    p: u8,
-    m: u8,
-    mut state: PyRefMut<TTSHarnessState>,
+    _d: u8,
+    _p: u8,
+    _m: u8,
+    mut _state: PyRefMut<TTSHarnessState>,
 ) -> PyResult<(u16, String, f64)> {
-    if d > 9 || p > 9 || m > 9 {
-        return Err(pyo3::exceptions::PyValueError::new_err(
-            "Index out of range [0-9]",
-        ));
-    }
-    let code = (d as u16) * 100 + (p as u16) * 10 + (m as u16);
-    let name = format!(
-        "TTS-{}-{}-{}",
-        get_tts_domain_str(d),
-        get_tts_primitive_str(p),
-        get_tts_modifier_str(m)
-    );
-
-    state.execution_count += 1;
-    state.mcts_budget_tokens += ((code % 50) as i64) + 10;
-    state.latent_value = ((code as f64) * 0.001).tanh();
-    state.harness_score = 0.5 + 0.5 * ((code as f64).sin());
-    state.kv_cache_efficiency = f64::min(1.0, 0.2 + ((code % 10) as f64) * 0.08);
-    state.pruning_rate = 1.0 - state.kv_cache_efficiency * 0.5;
-
-    Ok((code, name, state.harness_score))
+    unimplemented!("C4-SIM THEATER PURGED (Ω150): Evaluaciones mcts_budget_tokens simuladas han sido amputadas.");
 }
 
 mod arm64_re;

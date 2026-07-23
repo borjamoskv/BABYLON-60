@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `72/200` | *CORTEX-TAINT:* `borjamoskv:200archive:a8524e210597f054` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `72/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
 
 ---

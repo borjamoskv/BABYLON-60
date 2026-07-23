@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207729420` | *CORTEX-TAINT:* `borjamoskv:rss:86d1c59e67e58589` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207729420` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `106/200` | *CORTEX-TAINT:* `borjamoskv:200archive:06a984c4b5e00b1d` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `106/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
 
 ---

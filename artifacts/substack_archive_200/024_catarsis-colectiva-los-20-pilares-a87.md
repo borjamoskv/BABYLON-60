@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `24/200` | *CORTEX-TAINT:* `borjamoskv:200archive:d86129be3ec2cf30` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `24/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/catarsis-colectiva-los-20-pilares-a87](https://borjamoskv.substack.com/p/catarsis-colectiva-los-20-pilares-a87)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207570288` | *CORTEX-TAINT:* `borjamoskv:rss:60a8e3362c204ef4` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207570288` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 
 ---

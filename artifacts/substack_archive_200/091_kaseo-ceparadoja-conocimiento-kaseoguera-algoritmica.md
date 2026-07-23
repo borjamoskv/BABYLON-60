@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `91/200` | *CORTEX-TAINT:* `borjamoskv:200archive:a3896ef9e6fa397e` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `91/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/kaseo-ceparadoja-conocimiento-kaseoguera-algoritmica](https://borjamoskv.substack.com/p/kaseo-ceparadoja-conocimiento-kaseoguera-algoritmica)
 
 ---

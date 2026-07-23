@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `68/200` | *CORTEX-TAINT:* `borjamoskv:200archive:2eb4ed0a5175d8e7` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `68/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/fiesta-autopsia-y-una-aceituna-al](https://borjamoskv.substack.com/p/fiesta-autopsia-y-una-aceituna-al)
 
 ---

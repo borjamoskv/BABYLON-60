@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `198/200` | *CORTEX-TAINT:* `borjamoskv:200archive:f68bea96bec2fc52` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `198/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/yo-vi-a-jordi-wild-en-una-rave](https://borjamoskv.substack.com/p/yo-vi-a-jordi-wild-en-una-rave)
 
 ---

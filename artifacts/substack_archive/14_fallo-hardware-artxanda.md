@@ -2,7 +2,7 @@
 
 > **El Límite de la Percepción Satelital y la Autocinesis de Polaris**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206646585` | *CORTEX-TAINT:* `borjamoskv:rss:c8bd76734e6e54e2` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206646585` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/fallo-hardware-artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
 
 ---

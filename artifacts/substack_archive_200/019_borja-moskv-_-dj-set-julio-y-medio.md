@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `19/200` | *CORTEX-TAINT:* `borjamoskv:200archive:994bd41e37df4e53` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `19/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/borja-moskv-_-dj-set-julio-y-medio](https://borjamoskv.substack.com/p/borja-moskv-_-dj-set-julio-y-medio)
 
 ---

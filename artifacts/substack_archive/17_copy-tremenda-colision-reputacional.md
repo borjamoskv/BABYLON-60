@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206316134` | *CORTEX-TAINT:* `borjamoskv:rss:1001662a4b7b4e60` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206316134` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
 
 ---

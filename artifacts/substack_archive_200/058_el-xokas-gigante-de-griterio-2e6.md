@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `58/200` | *CORTEX-TAINT:* `borjamoskv:200archive:05ec342fc49d054b` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `58/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-xokas-gigante-de-griterio-2e6](https://borjamoskv.substack.com/p/el-xokas-gigante-de-griterio-2e6)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `101/200` | *CORTEX-TAINT:* `borjamoskv:200archive:1937a353eb321bb6` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `101/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-inteligencia-de-el-risitas-4a1](https://borjamoskv.substack.com/p/la-inteligencia-de-el-risitas-4a1)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `161/200` | *CORTEX-TAINT:* `borjamoskv:200archive:4e8ba288a2108d1f` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `161/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/por-que-el-arte-no-se-puede-ensenar](https://borjamoskv.substack.com/p/por-que-el-arte-no-se-puede-ensenar)
 
 ---

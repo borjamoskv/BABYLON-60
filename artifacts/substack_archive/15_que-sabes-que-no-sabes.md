@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206485710` | *CORTEX-TAINT:* `borjamoskv:rss:5eb3cb0bcbe79a9c` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206485710` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/que-sabes-que-no-sabes](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
 
 ---

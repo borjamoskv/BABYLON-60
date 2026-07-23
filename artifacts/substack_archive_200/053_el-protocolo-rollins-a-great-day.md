@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `53/200` | *CORTEX-TAINT:* `borjamoskv:200archive:d2113798feb810ce` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `53/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-protocolo-rollins-a-great-day](https://borjamoskv.substack.com/p/el-protocolo-rollins-a-great-day)
 
 ---

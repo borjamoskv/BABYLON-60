@@ -35,5 +35,4 @@ El módulo `LEA_OMEGA` de la división Centuria ha extraído las siguientes mét
 ## 3. Estado de Consolidación
 ```yaml
 Status: CENTURIA_COLLAPSE_SUCCESS
-CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:centuria_swarm_333:2026-07-18T18:35:00+02:00]
 ```

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `192/200` | *CORTEX-TAINT:* `borjamoskv:200archive:b08323b672f65b78` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `192/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/thinking-mode-vs-normal-analisis](https://borjamoskv.substack.com/p/thinking-mode-vs-normal-analisis)
 
 ---

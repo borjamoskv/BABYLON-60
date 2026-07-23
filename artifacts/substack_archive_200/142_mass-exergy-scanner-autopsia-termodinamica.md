@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `142/200` | *CORTEX-TAINT:* `borjamoskv:200archive:8b84ecd9d4af0053` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `142/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/mass-exergy-scanner-autopsia-termodinamica](https://borjamoskv.substack.com/p/mass-exergy-scanner-autopsia-termodinamica)
 
 ---

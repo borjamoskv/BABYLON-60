@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `90/200` | *CORTEX-TAINT:* `borjamoskv:200archive:c109c4f4718c40af` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `90/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 
 ---

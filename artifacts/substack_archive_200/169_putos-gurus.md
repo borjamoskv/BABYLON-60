@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `169/200` | *CORTEX-TAINT:* `borjamoskv:200archive:0b58bdb727a5142d` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `169/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/putos-gurus](https://borjamoskv.substack.com/p/putos-gurus)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206292039` | *CORTEX-TAINT:* `borjamoskv:rss:7961c222ff3993c7` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206292039` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 
 ---

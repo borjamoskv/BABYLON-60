@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `149/200` | *CORTEX-TAINT:* `borjamoskv:200archive:b1e4e487cac2bae4` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `149/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/ni-lo-buenos-son-tan-buenos](https://borjamoskv.substack.com/p/ni-lo-buenos-son-tan-buenos)
 
 ---

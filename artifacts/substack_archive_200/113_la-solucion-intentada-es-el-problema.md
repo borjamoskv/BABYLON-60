@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `113/200` | *CORTEX-TAINT:* `borjamoskv:200archive:f65cb3758732b2f3` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `113/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-solucion-intentada-es-el-problema](https://borjamoskv.substack.com/p/la-solucion-intentada-es-el-problema)
 
 ---

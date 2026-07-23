@@ -2,7 +2,7 @@
 
 > **Monismo de proceso, atractores no lineales y la renta de ilegalidad del prohibicionismo.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Ledger Hash:* `a59ec8be3` | *CORTEX-TAINT:* `borjamoskv:escohotado:2aaa7186ce03721f` | *Realidad:* `#C5-REAL`
+> *Ledger Hash:* `a59ec8be3`| *Realidad:* `#C5-REAL`
 
 ---
 

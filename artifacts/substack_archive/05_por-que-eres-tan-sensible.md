@@ -2,7 +2,7 @@
 
 > **(tócate los huevos)**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207683313` | *CORTEX-TAINT:* `borjamoskv:rss:d9dae61e9f748aa1` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207683313` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/por-que-eres-tan-sensible](https://borjamoskv.substack.com/p/por-que-eres-tan-sensible)
 
 ---

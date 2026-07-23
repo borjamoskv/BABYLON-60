@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207760887` | *CORTEX-TAINT:* `borjamoskv:rss:d8a0f3b89d0843ca` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207760887` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/no-son-chemstrails](https://borjamoskv.substack.com/p/no-son-chemstrails)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `205138878` | *CORTEX-TAINT:* `borjamoskv:rss:6b60ca141db02c73` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `205138878` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 
 ---

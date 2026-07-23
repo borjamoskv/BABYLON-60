@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `191/200` | *CORTEX-TAINT:* `borjamoskv:200archive:2ed8a00b301896a1` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `191/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 
 ---

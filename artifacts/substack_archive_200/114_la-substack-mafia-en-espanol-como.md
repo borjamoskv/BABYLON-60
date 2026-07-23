@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `114/200` | *CORTEX-TAINT:* `borjamoskv:200archive:f36c7a4d6ac0c3bf` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `114/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-substack-mafia-en-espanol-como](https://borjamoskv.substack.com/p/la-substack-mafia-en-espanol-como)
 
 ---

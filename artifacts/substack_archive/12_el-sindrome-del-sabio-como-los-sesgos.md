@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207230231` | *CORTEX-TAINT:* `borjamoskv:rss:e2cb8ad89a4f988c` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207230231` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos](https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos)
 
 ---

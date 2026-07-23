@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `92/200` | *CORTEX-TAINT:* `borjamoskv:200archive:d41e1aaa4f8f91a4` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `92/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-arquitectura-memetica-del-cristianismo](https://borjamoskv.substack.com/p/la-arquitectura-memetica-del-cristianismo)
 
 ---

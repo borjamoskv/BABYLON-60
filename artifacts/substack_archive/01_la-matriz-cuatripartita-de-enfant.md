@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207954280` | *CORTEX-TAINT:* `borjamoskv:rss:2bd5b656e8066780` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207954280` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
 
 ---

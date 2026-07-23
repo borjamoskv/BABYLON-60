@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `33/200` | *CORTEX-TAINT:* `borjamoskv:200archive:947434ed67712881` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `33/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/cortex-persist-vs-minimax-m27](https://borjamoskv.substack.com/p/cortex-persist-vs-minimax-m27)
 
 ---

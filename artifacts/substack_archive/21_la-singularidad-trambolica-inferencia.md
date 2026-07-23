@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206118789` | *CORTEX-TAINT:* `borjamoskv:rss:c179aebb2de3d45a` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206118789` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 
 ---

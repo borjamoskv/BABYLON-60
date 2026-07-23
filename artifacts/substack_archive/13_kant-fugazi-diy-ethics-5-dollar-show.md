@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206724716` | *CORTEX-TAINT:* `borjamoskv:rss:c58f6399b708dbc3` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `206724716` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 
 ---

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `5/200` | *CORTEX-TAINT:* `borjamoskv:200archive:5e6da9daaf67d76f` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `5/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/alcala-norte-we-need-to-talk-3f7](https://borjamoskv.substack.com/p/alcala-norte-we-need-to-talk-3f7)
 
 ---

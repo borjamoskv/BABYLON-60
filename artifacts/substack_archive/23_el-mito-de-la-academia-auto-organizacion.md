@@ -2,7 +2,7 @@
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `205136381` | *CORTEX-TAINT:* `borjamoskv:rss:6258e7fe73d886f8` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `205136381` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
 
 ---

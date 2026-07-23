@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `94/200` | *CORTEX-TAINT:* `borjamoskv:200archive:eb4bc8b566ac6c4e` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `94/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-economia-de-la-mentira-los-influencers](https://borjamoskv.substack.com/p/la-economia-de-la-mentira-los-influencers)
 
 ---

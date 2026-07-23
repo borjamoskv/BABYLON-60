@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `26/200` | *CORTEX-TAINT:* `borjamoskv:200archive:1b51023559575d7d` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `26/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 
 ---

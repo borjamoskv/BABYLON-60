@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `107/200` | *CORTEX-TAINT:* `borjamoskv:200archive:b2ef8d3dbad4677d` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `107/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-mayor-paradoja-de-la-economia](https://borjamoskv.substack.com/p/la-mayor-paradoja-de-la-economia)
 
 ---

@@ -2,7 +2,7 @@
 
 > **La necrosis ontológica del juguete virtual en el silicio real AUDITORÍA C5-REAL | C4-SIM | Meta-Iteración 03**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207672076` | *CORTEX-TAINT:* `borjamoskv:rss:e55280232de6b0f6` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `207672076` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 
 ---

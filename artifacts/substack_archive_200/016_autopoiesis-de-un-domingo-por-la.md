@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `16/200` | *CORTEX-TAINT:* `borjamoskv:200archive:9e79f68ea124f27b` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `16/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/autopoiesis-de-un-domingo-por-la](https://borjamoskv.substack.com/p/autopoiesis-de-un-domingo-por-la)
 
 ---

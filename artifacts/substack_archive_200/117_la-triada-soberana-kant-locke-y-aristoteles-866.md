@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `117/200` | *CORTEX-TAINT:* `borjamoskv:200archive:56ae0a485c2f31e0` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `117/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-triada-soberana-kant-locke-y-aristoteles-866](https://borjamoskv.substack.com/p/la-triada-soberana-kant-locke-y-aristoteles-866)
 
 ---

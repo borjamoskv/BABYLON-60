@@ -44,5 +44,4 @@ La auditoría metacognitiva del Transductor sobre el volcado de transcripción i
 
 ```yaml
 Status: COMPLETED_ABSOLUTE_COLLAPSE
-CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:anergy_purge_ultrathink:2026-07-23T02:37:00+02:00]
 ```

@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `153/200` | *CORTEX-TAINT:* `borjamoskv:200archive:b0b8c9218e8fb180` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `153/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/no-se-si-estoy-pensando-ahora-mismo](https://borjamoskv.substack.com/p/no-se-si-estoy-pensando-ahora-mismo)
 
 ---

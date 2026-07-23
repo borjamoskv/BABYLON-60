@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `10/200` | *CORTEX-TAINT:* `borjamoskv:200archive:956ea4c564a90e41` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `10/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/antuan-cant-stop](https://borjamoskv.substack.com/p/antuan-cant-stop)
 
 ---

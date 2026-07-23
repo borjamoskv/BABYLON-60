@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `6/200` | *CORTEX-TAINT:* `borjamoskv:200archive:c44b41a47577d53f` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `6/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/alpha-vs-smoke-v054](https://borjamoskv.substack.com/p/alpha-vs-smoke-v054)
 
 ---

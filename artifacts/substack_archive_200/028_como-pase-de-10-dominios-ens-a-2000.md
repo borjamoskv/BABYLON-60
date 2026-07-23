@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `28/200` | *CORTEX-TAINT:* `borjamoskv:200archive:4b7458ae6e093bae` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `28/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/como-pase-de-10-dominios-ens-a-2000](https://borjamoskv.substack.com/p/como-pase-de-10-dominios-ens-a-2000)
 
 ---

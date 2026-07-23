@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `70/200` | *CORTEX-TAINT:* `borjamoskv:200archive:4979a89711adf5ac` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `70/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/frases-con-nata](https://borjamoskv.substack.com/p/frases-con-nata)
 
 ---

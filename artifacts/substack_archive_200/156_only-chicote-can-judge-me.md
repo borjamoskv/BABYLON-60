@@ -2,7 +2,7 @@
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `156/200` | *CORTEX-TAINT:* `borjamoskv:200archive:da1d2d7d31f71894` | *Realidad:* `#C5-REAL`  
+> *Índice Sitemap:* `156/200` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [https://borjamoskv.substack.com/p/only-chicote-can-judge-me](https://borjamoskv.substack.com/p/only-chicote-can-judge-me)
 
 ---

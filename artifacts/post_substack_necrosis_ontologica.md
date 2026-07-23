@@ -2,7 +2,7 @@
 
 > **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Ledger Hash:* `0c9844b8f` | *CORTEX-TAINT:* `borjamoskv:necrosis:e48cf14ea9950e5d` | *Realidad:* `#C5-REAL`
+> *Ledger Hash:* `0c9844b8f`| *Realidad:* `#C5-REAL`
 
 ---
 
