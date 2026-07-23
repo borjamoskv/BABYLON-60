@@ -177,10 +177,20 @@ def git_sentinel_commit(status_hash: str) -> str:
     return _git(["rev-parse", "--short", "HEAD"])
 
 
+def kinetic_purge_protocol() -> None:
+    print("[KINETIC PURGE] Ejecutando Brutalismo Cinético (INV_C5_20)...")
+    subprocess.run("""osascript -e 'do shell script "purge"'""", shell=True, capture_output=True)
+    subprocess.run("kill -9 $(pgrep studentd mediaanalysisd) 2>/dev/null || true", shell=True, capture_output=True)
+    subprocess.run(["rm", "-rf", "target", "__pycache__"], capture_output=True)
+
+
 def c5_real_colapso() -> None:
     print("=" * 60)
     print(" MOSKV-1 APEX — C5-REAL STATE MONITOR (MEJORALO)")
     print("=" * 60)
+
+    # Brutalismo Cinético
+    kinetic_purge_protocol()
 
     # Phase 1: Git
     git_report = audit_git_entropy()
