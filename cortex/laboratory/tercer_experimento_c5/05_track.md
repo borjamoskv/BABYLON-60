@@ -5,4 +5,3 @@ Se registran las métricas termodinámicas del experimento de concurrencia sobre
 - **JSON File Hash:** `cf15a226c96d00f9052b83f61589ecf3e61202e2d1624ce22082fe6c50b031a9` (SHA3-256)
 - **Latencia media por transacción:** ~0.46 ms.
 - **Rendimiento global:** 2150 ops/seg.
-- **CORTEX-TAINT Signature:** `taint:borjamoskv:tercer_experimento:1784666542:cf15a226c96d`

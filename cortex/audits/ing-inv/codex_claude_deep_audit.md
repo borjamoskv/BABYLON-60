@@ -127,7 +127,7 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 178. **Update Feed**: Update manifest feeds must contain valid public signatures.
 179. **Access Logs**: Sentry trace uploads cannot contain local environment credentials.
 180. **Browser Use Claims**: Remote tabs must be claimed by the local active window.
-181. **CLI Commands**: CLI execution must block commands containing command chaining (`&&`, `||`, `;`).
+181. **CLI Commands**: CLI execution must block commands containing command chaining (`&&`, `|`, `;`).
 182. **MSAL Token Expiry**: Client auth tokens expire in exactly 3600 seconds.
 183. **Sky Client args**: Arguments to `SkyComputerUseClient` must be prefixed by `mcp`.
 184. **Secure Keychain**: User configuration must be written to encrypted macOS keychain.

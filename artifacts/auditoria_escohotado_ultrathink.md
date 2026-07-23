@@ -37,15 +37,12 @@ CORTEX_TAINT: borjamoskv:escohotado_audit:2026-07-21T18:53:31.636634+00:00:09777
 2. **Exégesis Teológica Extensa en *Enemigos del Comercio* (Vol. 1):** Acumulación de referencias a textos patrísticos que reiteran el mismo principio soteriológico con gasto atencional prescindible.
 
 ### [Δ3] Medición de Exergía Informacional ($E_x$)
-| Obra / Corpus | Exergía ($E_x$) | Transducción Causal |
-| :--- | :---: | :--- |
-| **Historia General de las Drogas** | `0.94` | Rigor documental masivo; desmontaje del prohibicionismo como distorsión estatal y generador de renta de ilegalidad. |
-| **Los Enemigos del Comercio** | `0.89` | Arqueología documental de la moral antipropiedad y del pensamiento comunista desde la Antigüedad hasta el Siglo XX. |
-| **Realidad y Substancia** | `0.82` | Ontología monista de la sustancia y el proceso; intento de superación de los dualismos cartesiano y kantiano. |
-| **Traducciones de Clásicos (Newton, Hobbes, Locke, Hegel)** | `0.96` | Máxima exergía de transferencia: traducción directa de fuentes primarias al español con aparatos críticos rigurosos. |
+| Obra / Corpus | Exergía ($E_x$) | Transducción Causal | :--- | :---: | :--- | **Historia General de las Drogas** | `0.94` | Rigor documental masivo; desmontaje del prohibicionismo como distorsión estatal y generador de renta de ilegalidad. | **Los Enemigos del Comercio** | `0.89` | Arqueología documental de la moral antipropiedad y del pensamiento comunista desde la Antigüedad hasta el Siglo XX. | **Realidad y Substancia** | `0.82` | Ontología monista de la sustancia y el proceso; intento de superación de los dualismos cartesiano y kantiano. | **Traducciones de Clásicos (Newton, Hobbes, Locke, Hegel)** | `0.96` | Máxima exergía de transferencia: traducción directa de fuentes primarias al español con aparatos críticos rigurosos. |
 
 ### [Δ4] Rigor Estructural y Topología Causal
-- **Isomorfismo Interno:** Monismo Ontológico (*Realidad y Substancia*) $ightarrow$ Orden Espontáneo No Lineal (*Caos y Orden*) $ightarrow$ Soberanía Individual y Desregulación Coercitiva (*Historia de las Drogas* / *Enemigos del Comercio*).
+- **Isomorfismo Interno:** Monismo Ontológico (*Realidad y Substancia*) $
+ightarrow$ Orden Espontáneo No Lineal (*Caos y Orden*) $
+ightarrow$ Soberanía Individual y Desregulación Coercitiva (*Historia de las Drogas* / *Enemigos del Comercio*).
 - **Evaluación:** Existe una estructura acíclica coherente. El rechazo al dualismo sujeto-objeto fundamenta la visión de la sociedad como sistema complejo sin diseñador central, lo que valida empíricamente la autonomía individual sobre el propio cuerpo y los bienes.
 
 ---
@@ -80,14 +77,7 @@ CORTEX_TAINT: borjamoskv:escohotado_audit:2026-07-21T18:53:31.636634+00:00:09777
 **Ledger Persistido:** `ledgers/escohotado_chaos_entropy.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz Empírica de Entropía y Regímenes Emergentes
-| Tasa Intercambio ($r$) | Coerción Estatal ($c$) | Entropía ($S$) | Lyapunov ($\lambda$) | Régimen Colapsado |
-| :---: | :---: | :---: | :---: | :--- |
-| `2.50` | `0.00 - 0.30` | `0.0000` | `< 0` | `STAGNANT_COERCIVE_FREEZE` (Parálisis de Mercado) |
-| `3.20` | `0.00 - 0.15` | `0.6931` | `< 0` | `PERIODIC_OSCILLATION` (Ciclos Rigidos) |
-| `3.70` | `0.00` | **`3.6867`** | **`+0.3603`** | **`COMPLEX_SELF_ORGANIZATION` (Borde del Caos / Complejidad Escohotado)** |
-| `3.70` | `0.15` | `1.9062` | `-0.0999` | `PERIODIC_OSCILLATION` (Destrucción de Complejidad por Coerción) |
-| `3.90` | `0.00` | **`3.6832`** | **`+0.5024`** | **`COMPLEX_SELF_ORGANIZATION` (Libertad No Lineal Máxima)** |
-| `3.90` | `0.30` | `3.2783` | `+0.1899` | `COMPLEX_SELF_ORGANIZATION` (Resistencia Entrópica) |
+| Tasa Intercambio ($r$) | Coerción Estatal ($c$) | Entropía ($S$) | Lyapunov ($\lambda$) | Régimen Colapsado | :---: | :---: | :---: | :---: | :--- | `2.50` | `0.00 - 0.30` | `0.0000` | `< 0` | `STAGNANT_COERCIVE_FREEZE` (Parálisis de Mercado) | `3.20` | `0.00 - 0.15` | `0.6931` | `< 0` | `PERIODIC_OSCILLATION` (Ciclos Rigidos) | `3.70` | `0.00` | **`3.6867`** | **`+0.3603`** | **`COMPLEX_SELF_ORGANIZATION` (Borde del Caos / Complejidad Escohotado)** | `3.70` | `0.15` | `1.9062` | `-0.0999` | `PERIODIC_OSCILLATION` (Destrucción de Complejidad por Coerción) | `3.90` | `0.00` | **`3.6832`** | **`+0.5024`** | **`COMPLEX_SELF_ORGANIZATION` (Libertad No Lineal Máxima)** | `3.90` | `0.30` | `3.2783` | `+0.1899` | `COMPLEX_SELF_ORGANIZATION` (Resistencia Entrópica) |
 
 ### Conclusión Termodinámica
 El modelo matemático formal de *Caos y Orden* demuestra de forma determinista que:
@@ -103,13 +93,7 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 **Ledger Persistido:** `ledgers/escohotado_economics.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz de Simulación Económica
-| Nivel Coerción ($E_{enf}$) | Índice Propiedad ($PR$) | Prima de Riesgo ($\alpha_{risk}$) | Pureza / Calidad ($Q_{pur}$) | Índice Violencia ($V_{black}$) | Pérdida Info ($I_{loss}$) | Pérdida Exergía ($E_{loss}$) |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `0.00` | `1.00` | **`1.00x`** | **`1.000`** | **`0.00`** | **`0.00`** | **`0.00`** (Mercado Libre Transparente) |
-| `0.25` | `1.00` | `1.70x` | `0.788` | `0.63` | `0.00` | `0.17` |
-| `0.50` | `0.50` | `3.44x` | `0.575` | `3.75` | `0.50` | `1.72` |
-| `0.75` | `0.00` | `6.06x` | `0.363` | `11.25` | `1.00` | `5.46` |
-| **`1.00`** | **`0.00`** | **`9.50x`** | **`0.150`** | **`20.00`** | **`1.00`** | **`9.50`** (Prohibición Totalitaria) |
+| Nivel Coerción ($E_{enf}$) | Índice Propiedad ($PR$) | Prima de Riesgo ($\alpha_{risk}$) | Pureza / Calidad ($Q_{pur}$) | Índice Violencia ($V_{black}$) | Pérdida Info ($I_{loss}$) | Pérdida Exergía ($E_{loss}$) | :---: | :---: | :---: | :---: | :---: | :---: | :---: | `0.00` | `1.00` | **`1.00x`** | **`1.000`** | **`0.00`** | **`0.00`** | **`0.00`** (Mercado Libre Transparente) | `0.25` | `1.00` | `1.70x` | `0.788` | `0.63` | `0.00` | `0.17` | `0.50` | `0.50` | `3.44x` | `0.575` | `3.75` | `0.50` | `1.72` | `0.75` | `0.00` | `6.06x` | `0.363` | `11.25` | `1.00` | `5.46` | **`1.00`** | **`0.00`** | **`9.50x`** | **`0.150`** | **`20.00`** | **`1.00`** | **`9.50`** (Prohibición Totalitaria) |
 
 ### Deducciones de Causalidad Económica
 1. **Teorema de la Renta de Ilegalidad (Historia de las Drogas):** Conforme la persecución policial aumenta del $0\%$ al $100\%$, el multiplicador de riesgo eleva los precios del mercado negro en $9.5\times$, destruyendo la pureza del producto hasta el $15\%$ y disparando la violencia institucional/cartelizada a $20.0$.
@@ -124,13 +108,7 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 **Ledger Persistido:** `ledgers/escohotado_substance.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz de Simulación Ontológica
-| Potencialidad ($\Phi_{pot}$) | Actualidad ($\Phi_{act}$) | Separación Dualista ($D_{dual}$) | Densidad Exergética ($E_{sub}$) | Régimen Ontológico Colapsado |
-| :---: | :---: | :---: | :---: | :--- |
-| `1.00` | `1.00` | **`0.00`** | **`1.0000`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** |
-| `0.80` | `0.70` | **`0.00`** | **`0.6261`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** |
-| `1.00` | `1.00` | `0.40` | `0.6000` | `TRANSITIONAL_DIALECTIC_PROCESS` |
-| `1.00` | `1.00` | **`0.90`** | **`0.1000`** | **`CARTESIAN_KANTIAN_DUALIST_SPLIT (C4-SIM Abstraction)`** |
-| `1.00` | `0.10` | `0.00` | `0.1000` | `UNMANIFESTED_VIRTUAL_POTENTIAL` |
+| Potencialidad ($\Phi_{pot}$) | Actualidad ($\Phi_{act}$) | Separación Dualista ($D_{dual}$) | Densidad Exergética ($E_{sub}$) | Régimen Ontológico Colapsado | :---: | :---: | :---: | :---: | :--- | `1.00` | `1.00` | **`0.00`** | **`1.0000`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** | `0.80` | `0.70` | **`0.00`** | **`0.6261`** | **`MONISTIC_PROCESS_REALITY (C5-REAL Escohotado)`** | `1.00` | `1.00` | `0.40` | `0.6000` | `TRANSITIONAL_DIALECTIC_PROCESS` | `1.00` | `1.00` | **`0.90`** | **`0.1000`** | **`CARTESIAN_KANTIAN_DUALIST_SPLIT (C4-SIM Abstraction)`** | `1.00` | `0.10` | `0.00` | `0.1000` | `UNMANIFESTED_VIRTUAL_POTENTIAL` |
 
 ### Axiomas Ontológicos Escohotadianos
 1. **Identidad Proceso-Substancia:** La sustancia no es un sustrato estático inerte ni un noúmeno kantiano inaccesible, sino el automovimiento continuo de la materia e información que actualiza virtualidades ($\Phi_{pot} \to \Phi_{act}$).

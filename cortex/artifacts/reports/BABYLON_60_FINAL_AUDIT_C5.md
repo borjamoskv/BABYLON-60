@@ -29,15 +29,7 @@ En lugar de contar archivos, definimos la arquitectura por los 5 Invariantes Fun
 
 A través de la *Invariant Preservation Matrix*, clasificamos algorítmicamente cada módulo del repositorio bajo tres estados lógicos: `[Preserves, Violates, Requires]`.
 
-| Component / Module Cluster | Preserves (Garantiza) | Violates (Rompe) | Requires (Asume) |
-| :--- | :--- | :--- | :--- |
-| `babylon60/bft/*` | **Ω1, Ω3, Ω5** | Ninguno | Ω2, Ω4 |
-| `babylon60/crypto/*` | **Ω1, Ω3, Ω5** | Ninguno | Ninguno |
-| `babylon60/database/*` | **Ω2, Ω4** | Ninguno | Ω1, Ω3, Ω5 |
-| `strike_rs/src/*` (FFI) | **Ω1, Ω3, Ω5** | Ninguno | Ninguno |
-| `babylon60/extensions/ide/*` | Ninguno | **Ω1, Ω3** | Ω2 |
-| `babylon60/extensions/swarm/*` | Ninguno | Ninguno | Ω1, Ω2, Ω3, Ω4, Ω5 |
-| `babylon60/cli/*` | Ninguno | Ninguno | Ω1, Ω2, Ω3, Ω4, Ω5 |
+| Component / Module Cluster | Preserves (Garantiza) | Violates (Rompe) | Requires (Asume) | :--- | :--- | :--- | :--- | `babylon60/bft/*` | **Ω1, Ω3, Ω5** | Ninguno | Ω2, Ω4 | `babylon60/crypto/*` | **Ω1, Ω3, Ω5** | Ninguno | Ninguno | `babylon60/database/*` | **Ω2, Ω4** | Ninguno | Ω1, Ω3, Ω5 | `strike_rs/src/*` (FFI) | **Ω1, Ω3, Ω5** | Ninguno | Ninguno | `babylon60/extensions/ide/*` | Ninguno | **Ω1, Ω3** | Ω2 | `babylon60/extensions/swarm/*` | Ninguno | Ninguno | Ω1, Ω2, Ω3, Ω4, Ω5 | `babylon60/cli/*` | Ninguno | Ninguno | Ω1, Ω2, Ω3, Ω4, Ω5 |
 
 ---
 
@@ -73,13 +65,7 @@ La matriz de preservación exhibe que $\forall x \in (A - K)$, el conjunto de in
 
 Al evaluar el sistema completo, registramos el estatus de las propiedades fundamentales, separando rigurosamente qué está probado y qué es una ilusión estocástica.
 
-| Claim (Invariante) | Status | Evidence | Confidence | Counterexample (Falsación) |
-| :--- | :--- | :--- | :--- | :--- |
-| **Deterministic Transition** | **Proven** | Formal / Rust FFI | C5 | N/A |
-| **Immutable History** | **Proven** | Formal (SQLite WAL) | C5 | N/A |
-| **Verifiable Transition** | **Broken** | Runtime Trace | Falsified | Cientos de extensiones mutan estado sin pasar por BFT. |
-| **Execution graph acyclic** | **Broken** | Static ($G_d$ SCC) | Falsified | El algoritmo SCC halló ciclos masivos en `extensions/`. |
-| **Network Isolation** | **Broken** | Dynamic ($G_a$) | Falsified | Nodos estocásticos (`swarm`, `llm`) ejecutan llamadas externas. |
+| Claim (Invariante) | Status | Evidence | Confidence | Counterexample (Falsación) | :--- | :--- | :--- | :--- | :--- | **Deterministic Transition** | **Proven** | Formal / Rust FFI | C5 | N/A | **Immutable History** | **Proven** | Formal (SQLite WAL) | C5 | N/A | **Verifiable Transition** | **Broken** | Runtime Trace | Falsified | Cientos de extensiones mutan estado sin pasar por BFT. | **Execution graph acyclic** | **Broken** | Static ($G_d$ SCC) | Falsified | El algoritmo SCC halló ciclos masivos en `extensions/`. | **Network Isolation** | **Broken** | Dynamic ($G_a$) | Falsified | Nodos estocásticos (`swarm`, `llm`) ejecutan llamadas externas. |
 
 ### Architectural Temperature
 La dispersión de la arquitectura se cuantifica:

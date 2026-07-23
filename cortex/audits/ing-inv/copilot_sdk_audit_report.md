@@ -88,15 +88,7 @@ tools: [
 ### Lifecycle Hooks
 Hooks intercept agent activity at critical execution states. All hooks receive the target `invocation` context and standard environments (`timestamp`, `workingDirectory`).
 
-| Hook Name | Input Payload | Output Properties / Effects |
-| :--- | :--- | :--- |
-| `onUserPromptSubmitted` | `{ prompt: string }` | `modifiedPrompt` (rewrites user prompt), `additionalContext` (injects hidden system context) |
-| `onPreToolUse` | `{ toolName, toolArgs }` | `permissionDecision` (`"allow" \| "deny" \| "ask"`), `permissionDecisionReason` (denial explanation), `modifiedArgs` (overrides tool arguments), `additionalContext` |
-| `onPostToolUse` | `{ toolName, toolArgs, toolResult }` | `modifiedResult` (replaces tool output), `additionalContext` (appends context block) |
-| `onPostToolUseFailure` | `{ toolName, toolArgs, error }` | `additionalContext` (hidden context guidance appended only on `"failure"` outcomes) |
-| `onSessionStart` | `{ source: "startup" \| "resume" \| "new", initialPrompt }` | `additionalContext` (appends initial context configuration) |
-| `onSessionEnd` | `{ reason: "complete" \| "error" \| "abort" \| "timeout" \| "user_exit", finalMessage, error }` | `sessionSummary` (session state), `cleanupActions` (cleanup strings) |
-| `onErrorOccurred` | `{ error, errorContext, recoverable }` | `errorHandling` (`"retry" \| "skip" \| "abort"`), `retryCount`, `userNotification` |
+| Hook Name | Input Payload | Output Properties / Effects | :--- | :--- | :--- | `onUserPromptSubmitted` | `{ prompt: string }` | `modifiedPrompt` (rewrites user prompt), `additionalContext` (injects hidden system context) | `onPreToolUse` | `{ toolName, toolArgs }` | `permissionDecision` (`"allow" \| "deny" \| "ask"`), `permissionDecisionReason` (denial explanation), `modifiedArgs` (overrides tool arguments), `additionalContext` | `onPostToolUse` | `{ toolName, toolArgs, toolResult }` | `modifiedResult` (replaces tool output), `additionalContext` (appends context block) | `onPostToolUseFailure` | `{ toolName, toolArgs, error }` | `additionalContext` (hidden context guidance appended only on `"failure"` outcomes) | `onSessionStart` | `{ source: "startup" \| "resume" \| "new", initialPrompt }` | `additionalContext` (appends initial context configuration) | `onSessionEnd` | `{ reason: "complete" \| "error" \| "abort" \| "timeout" \| "user_exit", finalMessage, error }` | `sessionSummary` (session state), `cleanupActions` (cleanup strings) | `onErrorOccurred` | `{ error, errorContext, recoverable }` | `errorHandling` (`"retry" \| "skip" \| "abort"`), `retryCount`, `userNotification` |
 
 ---
 

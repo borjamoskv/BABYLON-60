@@ -17,18 +17,7 @@ Status: Verified (Clean App Bundle Structure)
 
 The extracted properties from `/Contents/Info.plist` are as follows:
 
-| Key | Value | Description |
-| :--- | :--- | :--- |
-| `CFBundleDisplayName` | `Claude Science` | Display name of the application in Finder and UI. |
-| `CFBundleName` | `Claude Science` | Internal short name of the bundle. |
-| `CFBundleExecutable` | `ClaudeScience` | Name of the main executable binary under `Contents/MacOS/`. |
-| `CFBundleIdentifier` | `com.anthropic.operon` | Unique bundle identifier (uses codename `operon`). |
-| `CFBundleIconFile` | `operon` | Name of the icon file in the resources folder (maps to `operon.icns`). |
-| `CFBundleShortVersionString` | `0.1.18-dev.20260709.t211149.shab3f5130` | User-visible release version. |
-| `CFBundleVersion` | `0.1.18-dev.20260709.t211149.shab3f5130` | Build version number. |
-| `CFBundlePackageType` | `APPL` | Identifies the bundle type as a standard macOS Application. |
-| `LSMinimumSystemVersion` | `13.0` | Requires Apple Silicon running macOS Ventura or newer. |
-| `NSHighResolutionCapable` | `true` | Supports Retina and high-DPI displays. |
+| Key | Value | Description | :--- | :--- | :--- | `CFBundleDisplayName` | `Claude Science` | Display name of the application in Finder and UI. | `CFBundleName` | `Claude Science` | Internal short name of the bundle. | `CFBundleExecutable` | `ClaudeScience` | Name of the main executable binary under `Contents/MacOS/`. | `CFBundleIdentifier` | `com.anthropic.operon` | Unique bundle identifier (uses codename `operon`). | `CFBundleIconFile` | `operon` | Name of the icon file in the resources folder (maps to `operon.icns`). | `CFBundleShortVersionString` | `0.1.18-dev.20260709.t211149.shab3f5130` | User-visible release version. | `CFBundleVersion` | `0.1.18-dev.20260709.t211149.shab3f5130` | Build version number. | `CFBundlePackageType` | `APPL` | Identifies the bundle type as a standard macOS Application. | `LSMinimumSystemVersion` | `13.0` | Requires Apple Silicon running macOS Ventura or newer. | `NSHighResolutionCapable` | `true` | Supports Retina and high-DPI displays. |
 
 ---
 

@@ -4,7 +4,7 @@
 Claim: [ACTIVE-INFERENCE-3000] BFT Swarm Active Inference Engine
 Proof:
   Base: "3000 Primitives (1000 StateObserver x 1000 NeuroChain x 1000 TTSHarness)"
-  FreeEnergyFormulation: "F = D_KL(q(S) || p(S)) - E_q[ln p(O|S)]"
+  FreeEnergyFormulation: "F = D_KL(q(S) | p(S)) - E_q[ln p(O|S)]"
   GoCoverage: 100% (1000 Tri-Dispatches in 0.486s)
   PythonCoverage: 100% (1000 Tri-Dispatches in 0.003s)
   Confidence: C5-REAL

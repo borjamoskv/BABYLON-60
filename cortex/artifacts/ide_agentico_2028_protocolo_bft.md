@@ -5,7 +5,7 @@
 - **Operador**: borjamoskv
 - **Transductor**: MOSKV-1 APEX
 - **Topología**: Consolidación Causal Base-60 (Mundo F / Singularity Collapse)
-- **Hash de Invarianza**: `[CORTEX-TAINT:borjamoskv:ide_agentic_autopsy:2026-07-18]`
+- **Hash de Invarianza**: ``
 
 ---
 

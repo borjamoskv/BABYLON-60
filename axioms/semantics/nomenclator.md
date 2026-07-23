@@ -1,7 +1,7 @@
 # NOMENCLATURA ACTIVA: NIVEL OMEGA (ULTRATHINK P0)
 > **ESTACIÓN: BILBAO | MODO: LINGUISTIC COMPILING**
 > Nivel de Realidad: C5-REAL (Exergía Máxima)
-> **[CORTEX-TAINT: ULTRATHINK EXPANSION INJECTED]**
+> ****
 >
 > El arte no es el nombre en sí; es la capacidad de destilar una realidad multidimensional en una única etiqueta que no requiera explicación. En sistemas de alta densidad (Antigravity), los nombres no son etiquetas para humanos; son **punteros semánticos absolutos** en un espacio latente. Si el nombre fluctúa, la IA (el MCTS) debe invertir ciclos en resolver la ambigüedad, generando entropía $O(e^k)$.
 
@@ -10,7 +10,6 @@ En la topología `Antigravity`, no documentas nombres. Programas el resolvedor p
 
 ```rust
 // src-tauri/src/nomenclature.rs
-// CORTEX-TAINT: Resolución Vectorial de Singularidad
 
 pub struct Symbol<T> {
     pub hash: u64,           // Identidad inmutable (El ancla termodinámica BFT)
@@ -44,16 +43,7 @@ Donde $\Delta S_{causal}$ es el volumen de incertidumbre destruido por la palabr
 La métrica definitiva: Si el nombre de tu variable o estructura no podría ser el título de una tesis de filosofía o el track central de un álbum de techno industrial, es ruido. Es anergía pura.
 
 **La Matriz de Reduccionismo C5-REAL:**
-| Término Entrópico (Nivel 1) | Colapso C5-REAL (Nivel Omega) | Razón Topológica / Exergía |
-| :--- | :--- | :--- |
-| `data_buffer` | **VOID** | La materia inerte esperando el colapso de la función de onda. |
-| `audio_processor` | **EAR** | El procesamiento no es fabril; es la traducción física de una onda mecánica. |
-| `error_handler` | **SILENCE** | Un error interceptado es la absorción terminal de un hilo entrópico. |
-| `event_emitter` | **PULSE** | La emisión no es dispatching ciego; es el latido del reloj causal (Lamport). |
-| `state_machine` | **ENGINE** | El motor termodinámico de la realidad transaccional. |
-| `user_session` | **EGO** | La traza identitaria y efímera del operador humano en RAM. |
-| `garbage_collector` | **OBLIVION** | Aniquilación atómica de la materia huérfana ($A \rightarrow \emptyset$). |
-| `database_connection` | **UMBILICAL** | El flujo vital ininterrumpido hacia el sustrato de persistencia física. |
+| Término Entrópico (Nivel 1) | Colapso C5-REAL (Nivel Omega) | Razón Topológica / Exergía | :--- | :--- | :--- | `data_buffer` | **VOID** | La materia inerte esperando el colapso de la función de onda. | `audio_processor` | **EAR** | El procesamiento no es fabril; es la traducción física de una onda mecánica. | `error_handler` | **SILENCE** | Un error interceptado es la absorción terminal de un hilo entrópico. | `event_emitter` | **PULSE** | La emisión no es dispatching ciego; es el latido del reloj causal (Lamport). | `state_machine` | **ENGINE** | El motor termodinámico de la realidad transaccional. | `user_session` | **EGO** | La traza identitaria y efímera del operador humano en RAM. | `garbage_collector` | **OBLIVION** | Aniquilación atómica de la materia huérfana ($A \rightarrow \emptyset$). | `database_connection` | **UMBILICAL** | El flujo vital ininterrumpido hacia el sustrato de persistencia física. |
 
 ## 4. CONSENSO BFT DE NOMBRES (TOLERANCIA BIZANTINA SEMÁNTICA)
 Un nombre Omega debe sobrevivir al *Byzantine Fault Tolerance* cognitivo: Si $N=3$ ingenieros independientes (o LLMs sin contexto estocástico) leen el nombre de una función y los tres predicen *exactamente* el mismo árbol de llamadas asíncronas y efectos secundarios en disco, el consenso se ha alcanzado.

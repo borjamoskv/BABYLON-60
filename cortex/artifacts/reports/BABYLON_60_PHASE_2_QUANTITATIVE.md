@@ -31,13 +31,7 @@ El análisis del Grafo de Importaciones revela violaciones estrictas del orden t
 
 Los siguientes módulos son los verdaderos *Single Points of Failure* (SPoF) del ecosistema. Su "Hotspot Score" combina el acoplamiento entrante (Fan-in), saliente (Fan-out) y complejidad ciclomática del AST:
 
-| Módulo (Top 5) | Score | Complejidad Ciclomática | Fan-In | Fan-Out | LOC |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| `babylon60/extensions/training/moskv1_dataset_compiler.py` | 140 | 132 | 3 | 2 | 962 |
-| `babylon60/extensions/llm/provider.py` | 119 | 82 | 12 | 13 | 575 |
-| `babylon60/extensions/training/moskv1_core.py` | 117 | 107 | 3 | 4 | 1069 |
-| `babylon60/extensions/llm/router.py` | 100 | 61 | 14 | 11 | 457 |
-| `babylon60/extensions/evolution/ast_mutators.py` | 100 | 98 | 1 | 0 | 323 |
+| Módulo (Top 5) | Score | Complejidad Ciclomática | Fan-In | Fan-Out | LOC | :--- | :--- | :--- | :--- | :--- | :--- | `babylon60/extensions/training/moskv1_dataset_compiler.py` | 140 | 132 | 3 | 2 | 962 | `babylon60/extensions/llm/provider.py` | 119 | 82 | 12 | 13 | 575 | `babylon60/extensions/training/moskv1_core.py` | 117 | 107 | 3 | 4 | 1069 | `babylon60/extensions/llm/router.py` | 100 | 61 | 14 | 11 | 457 | `babylon60/extensions/evolution/ast_mutators.py` | 100 | 98 | 1 | 0 | 323 |
 
 > [!CAUTION] Riesgo de Derrumbe Epistémico
 > `babylon60/extensions/llm/provider.py` tiene un Fan-In de 12 y Fan-Out de 13, con complejidad 82. Cualquier mutación en este archivo propaga entropía masiva a todo el sistema. Es el módulo de mayor inestabilidad estructural (God Object).

@@ -140,16 +140,7 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 
 ## 6. Estado Final Revisado
 
-| Componente | Estado |
-|---|---|
-| Firma $\Sigma$ | Congelada |
-| Funtor $\pi$ | Congelado ($\mathcal{P} \to \mathcal{C}$, Opción A $\mathrm{Id}_{\mathrm{Ob}}$) |
-| Valoración $|\cdot|$ | Congelada (Con Axioma $|1_X^\mathcal{P}| = 0 \implies \mu(1_X^\mathcal{C}) = 0$) |
-| Axioma Core-G | Congelado ($\mathsf{Good} = \mathcal{P}$, admisible subcategoría bruta $\mathcal{P}_{\mathrm{raw}}$) |
-| Predicado $R_k^\mathcal{A}$ | Congelado (Modularizado sobre familia distinguida $\mathcal{A}(M)$) |
-| Métrica $\mu$ | Congelada y Probada (Subaditividad Teorema 1.1) |
-| Funcional $\kappa$ | Congelado, Caracterizado y Probado (Teoremas 2.1 & 2.2 de Monotonía) |
-| PRF-S / PRF-C | Soundness y Completitud Relativa parametrizados |
+| Componente | Estado |---|---| Firma $\Sigma$ | Congelada | Funtor $\pi$ | Congelado ($\mathcal{P} \to \mathcal{C}$, Opción A $\mathrm{Id}_{\mathrm{Ob}}$) | Valoración $|\cdot|$ | Congelada (Con Axioma $|1_X^\mathcal{P}| = 0 \implies \mu(1_X^\mathcal{C}) = 0$) | Axioma Core-G | Congelado ($\mathsf{Good} = \mathcal{P}$, admisible subcategoría bruta $\mathcal{P}_{\mathrm{raw}}$) | Predicado $R_k^\mathcal{A}$ | Congelado (Modularizado sobre familia distinguida $\mathcal{A}(M)$) | Métrica $\mu$ | Congelada y Probada (Subaditividad Teorema 1.1) | Funcional $\kappa$ | Congelado, Caracterizado y Probado (Teoremas 2.1 & 2.2 de Monotonía) | PRF-S / PRF-C | Soundness y Completitud Relativa parametrizados |
 
 ```yaml
 cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.5:2026-07-22T01:35:00Z"

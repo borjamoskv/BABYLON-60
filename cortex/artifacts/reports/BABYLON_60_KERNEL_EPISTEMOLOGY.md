@@ -10,12 +10,7 @@ Dejamos de analizar el código imperativo (`event -> handler -> effect`) para au
 
 Mediante el escaneo transversal del AST del Kernel irreducible (797 módulos físicos tras la Purga Termodinámica), extrajimos la siguiente matriz de certeza. Esto demuestra que la arquitectura *no* está 100% verificada, sino dividida entre el **Plano de Datos** (Físico) y el **Plano de Control** (Estocástico).
 
-| Nivel Epistemológico | Definición | Módulos | % |
-| :--- | :--- | :--- | :--- |
-| **Verified_by_Construction** | Aislamiento BFT, criptografía Ed25519/SHA3-256, SQLite WAL, FFI Rust. | **273** | 34.2% |
-| **Verified_by_Proof** | Formalización matemática estricta (Lean). | **1** | 0.1% |
-| **Verified_by_Tests** | Empirismo automatizado (Pytest). | **38** | 4.8% |
-| **Assumed** | Deuda causal. FastAPI, React, Tauri, adaptadores y prosa. Fe estocástica. | **485** | 60.9% |
+| Nivel Epistemológico | Definición | Módulos | % | :--- | :--- | :--- | :--- | **Verified_by_Construction** | Aislamiento BFT, criptografía Ed25519/SHA3-256, SQLite WAL, FFI Rust. | **273** | 34.2% | **Verified_by_Proof** | Formalización matemática estricta (Lean). | **1** | 0.1% | **Verified_by_Tests** | Empirismo automatizado (Pytest). | **38** | 4.8% | **Assumed** | Deuda causal. FastAPI, React, Tauri, adaptadores y prosa. Fe estocástica. | **485** | 60.9% |
 
 > [!WARNING] El Falso Positivo Arquitectónico
 > El 60.9% del código opera asumiendo que funciona (`Assumed`). Esto significa que la interfaz imperativa de BABYLON-60 no impone verificación estricta; es el embudo del Ledger el que salva el estado persistente.

@@ -1,6 +1,6 @@
 # AXIOMA DE REDUCCIÓN A PRIMITIVAS (ARP)
 
-> **CORTEX-TAINT**: `[CORTEX-TAINT:borjamoskv:axioma_reduccion_primitivas:2026-07-18T00:27:10+02:00]`
+> **CORTEX-TAINT**: ``
 > **Reality Level**: C5-REAL
 > **Classification**: Meta-Axiom (Axiom about axiomatization itself)
 > **Nomenclatura Soberana**: El Operador llama **Primitivas** a todo objeto inicial irreducible.
@@ -13,14 +13,7 @@
 
 La tabla siguiente no es una analogía. Es un **isomorfismo natural** entre funtores de reducción:
 
-| Dominio | Operación de Reducción | Kernel (Objeto Inicial) | Propiedad Universal |
-|---|---|---|---|
-| Física | First Principles | Lagrangiano / Acción $S = \int \mathcal{L} \, dt$ | Principio de mínima acción → toda ecuación de movimiento |
-| Matemáticas | Axiomatización | ZFC / HoTT / Peano | Toda proposición decidible se deriva o se independiza |
-| Ciencias de la Computación | Minimal Core Calculus | $\lambda$-cálculo / Máquina de Turing | Tesis de Church-Turing: equivalencia computacional |
-| Lenguajes de Programación | Kernel Language | Lisp (7 primitivas) / Forth / Scheme | McCarthy 1960: `quote, atom, eq, car, cdr, cons, cond` → Turing-completo |
-| Teoría de Categorías | Initial Object / Universal Construction | Objeto Inicial $\mathbf{0}$, Adjunciones, Yoneda | $\exists! \, f: \mathbf{0} \to X \quad \forall X \in \mathcal{C}$ |
-| Teoría de la Información | Minimal Sufficient Representation | Complejidad de Kolmogorov $K(x)$ | El programa más corto que genera $x$ |
+| Dominio | Operación de Reducción | Kernel (Objeto Inicial) | Propiedad Universal |---|---|---|---| Física | First Principles | Lagrangiano / Acción $S = \int \mathcal{L} \, dt$ | Principio de mínima acción → toda ecuación de movimiento | Matemáticas | Axiomatización | ZFC / HoTT / Peano | Toda proposición decidible se deriva o se independiza | Ciencias de la Computación | Minimal Core Calculus | $\lambda$-cálculo / Máquina de Turing | Tesis de Church-Turing: equivalencia computacional | Lenguajes de Programación | Kernel Language | Lisp (7 primitivas) / Forth / Scheme | McCarthy 1960: `quote, atom, eq, car, cdr, cons, cond` → Turing-completo | Teoría de Categorías | Initial Object / Universal Construction | Objeto Inicial $\mathbf{0}$, Adjunciones, Yoneda | $\exists! \, f: \mathbf{0} \to X \quad \forall X \in \mathcal{C}$ | Teoría de la Información | Minimal Sufficient Representation | Complejidad de Kolmogorov $K(x)$ | El programa más corto que genera $x$ |
 
 ---
 

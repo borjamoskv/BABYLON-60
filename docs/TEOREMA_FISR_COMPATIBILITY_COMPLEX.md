@@ -13,14 +13,7 @@
 > **Alcance:** La teoría FISR no pretende caracterizar todas las categorías monoidales ni la totalidad de los sistemas concurrentes. Su objetivo es estudiar el espacio de modelos de acciones monoidales con predicados fibrados y certificabilidad observable bajo restricciones computacionales.
 
 ### 0.2 Taxonomía de Estatus Lógico
-| Etiqueta | Significado Semántico |
-| :--- | :--- |
-| **[Definición]** | Introducción de un concepto formal, firma o categoría. |
-| **[Axioma]** | Hipótesis fundamental adoptada axiomáticamente en la teoría $T$. |
-| **[Proposición]** | Consecuencia matemática directa y demostrable de los axiomas. |
-| **[Teorema]** | Resultado formalmente probado y verificado en C5-REAL. |
-| **[Objetivo]** | Meta fundamental de representación o construcción de subcategorías. |
-| **[Conjetura]** | Resultado cuantitativo o de separación esperado, aún pendiente de prueba formal. |
+| Etiqueta | Significado Semántico | :--- | :--- | **[Definición]** | Introducción de un concepto formal, firma o categoría. | **[Axioma]** | Hipótesis fundamental adoptada axiomáticamente en la teoría $T$. | **[Proposición]** | Consecuencia matemática directa y demostrable de los axiomas. | **[Teorema]** | Resultado formalmente probado y verificado en C5-REAL. | **[Objetivo]** | Meta fundamental de representación o construcción de subcategorías. | **[Conjetura]** | Resultado cuantitativo o de separación esperado, aún pendiente de prueba formal. |
 
 ---
 

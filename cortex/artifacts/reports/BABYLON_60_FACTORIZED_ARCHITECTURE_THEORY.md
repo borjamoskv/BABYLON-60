@@ -35,12 +35,7 @@ La mezcla de operadores (ej. una misma función que muta un estado y lo escribe 
 ## 4. Métricas Científicas Observadas
 Para caracterizar a BABYLON-60 bajo esta teoría, hemos utilizado un clasificador AST (Abstract Syntax Tree) que actúa como *proxy* observacional. El analizador ha extraído las siguientes métricas exactas del repositorio en su commit actual:
 
-| Metric | Definition | Observed Value |
-| :--- | :--- | :--- |
-| **API (Architectural Purity Index)** | $Pure Operators / Total Operators$ | **0.4917** (49.17%) |
-| **OI (Orthogonality Index)** | $Pure Modules / Total Modules$ | **0.5323** (53.23%) |
-| **ID (Invariant Density)** | $Preserved Invariants / Kernel Size$ | **5.00** |
-| **CR (Compression Ratio)** | $Repository Size / Minimal Kernel$ | **588.00** |
+| Metric | Definition | Observed Value | :--- | :--- | :--- | **API (Architectural Purity Index)** | $Pure Operators / Total Operators$ | **0.4917** (49.17%) | **OI (Orthogonality Index)** | $Pure Modules / Total Modules$ | **0.5323** (53.23%) | **ID (Invariant Density)** | $Preserved Invariants / Kernel Size$ | **5.00** | **CR (Compression Ratio)** | $Repository Size / Minimal Kernel$ | **588.00** |
 
 ### Análisis Empírico de los Resultados:
 1.  **Índices de Pureza (API y OI):** El clasificador observó que sólo el 49.17% de las transiciones de estado son "operadores puros" (se dedican de forma aislada a $\Gamma$, $\Pi$, o $\Lambda$). El restante 50.83% de los operadores exhibe un acoplamiento híbrido.
