@@ -23,11 +23,24 @@ class ASTRule:
         self.ast_node_count = len(list(ast.walk(self.ast_tree)))
         self.ruleset_hash = hash_evidence({"ast": self.ast_dump})
         
+        self._audit_purity()
+        
         # Compile it back into an executable object to verify we can run it
         code_obj = compile(self.ast_tree, filename="<ast>", mode="exec")
         namespace: dict[str, Any] = {"CRDTMap": CRDTMap}
         exec(code_obj, namespace)
         self.executable = namespace[self.name]
+
+    def _audit_purity(self):
+        """Ω166 · Pure Inference: Static AST Analysis for Side Effects"""
+        banned_calls = {'eval', 'exec', 'open', 'print', 'input', '__import__', 'getattr', 'setattr', 'delattr', 'globals', 'locals', 'compile'}
+        
+        for node in ast.walk(self.ast_tree):
+            if isinstance(node, (ast.Import, ast.ImportFrom)):
+                raise ValueError("Ω166 Violated: Imports are prohibited in pure inference rules.")
+            elif isinstance(node, ast.Call):
+                if isinstance(node.func, ast.Name) and node.func.id in banned_calls:
+                    raise ValueError(f"Ω166 Violated: Call to impure function '{node.func.id}' is prohibited.")
 
     def execute(self, state: CRDTMap) -> CRDTMap:
         return self.executable(state)

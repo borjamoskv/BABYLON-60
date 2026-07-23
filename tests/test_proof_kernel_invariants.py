@@ -41,6 +41,23 @@ def test_ast_rule():
     result = rule.execute(initial)
     assert result.get("mutated") is True
 
+def test_ast_purity_auditor():
+    """Ω166 · Pure Inference Impurity Escape Test"""
+    def impure_import(state: CRDTMap) -> CRDTMap:
+        import time
+        state.set("time", time.time(), 1)
+        return state
+        
+    with pytest.raises(ValueError, match="Imports are prohibited"):
+        ASTRule(impure_import)
+        
+    def impure_eval(state: CRDTMap) -> CRDTMap:
+        eval("1 + 1")
+        return state
+        
+    with pytest.raises(ValueError, match="Call to impure function 'eval'"):
+        ASTRule(impure_eval)
+
 def test_proof_derivation():
     """Ω169 · Proof-Carrying Diagnosis Executable Test (DAG Mode)"""
     def r1(s: CRDTMap) -> CRDTMap:

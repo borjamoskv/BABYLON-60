@@ -115,3 +115,23 @@ La directiva Ω173 establece empíricamente que el verificador debe ser estricta
 
 ### Resolución Requerida (Refactor Axiomático)
 - **Cálculo Topológico de Complejidad AST:** La minimidad ya no puede descansar en variables superficiales (contadores de objetos `Callable`). Debe apoyarse obligatoriamente en la Complejidad de Kolmogorov, aproximada en este entorno mediante el **conteo estricto de nodos del Árbol de Sintaxis Abstracta (AST)** (`ast_node_count`) extraído dinámicamente de cada regla física. El umbral pasará de ser $C(R_{verificador}) < C(R_{generador})$ evaluado topológicamente en lugar de referencialmente.
+
+---
+
+## 5. Prueba de Insuficiencia: Fuga de Impureza AST (Falsación de Ω166 y Ω172)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El motor de reglas basado en Árboles de Sintaxis Abstracta (`ASTRule`) carece de un verificador estático de pureza. Permite inyectar funciones de Python arbitrarias en el motor de inferencia, abriendo un vector donde las reglas pueden eludir la Transparencia Referencial y quebrar la Reversibilidad Determinista.
+
+### Demostración Destructiva
+
+**1. Escape al Determinismo (Falsación de Ω166 y Ω172)**
+Actualmente, `ASTRule` extrae el código fuente, calcula el hash, y lo ejecuta mediante `exec(code_obj, namespace)`. Sin embargo, el intérprete retiene acceso implícito a `__builtins__` y a la capacidad de importar módulos. 
+**Consecuencia:** Una regla puede incluir la instrucción `import random` o `import time`, introduciendo variables estocásticas en el estado de evidencia; o utilizar `eval()` y llamadas de red (`urllib`). Esto destruye instantáneamente el determinismo exigido por Ω172 (Replay Determinism) y la Transparencia Referencial exigida por Ω166 (Inferencia Pura), volviendo inservible cualquier certificado de cierre emitido bajo ese pipeline.
+
+### Resolución Requerida (Refactor Axiomático)
+- **Auditoría Estática de Pureza (Static Purity Auditor):** `ASTRule` debe atravesar el AST antes de compilarlo (`ast.walk`) y abortar con excepción si detecta nodos de tipo `ast.Import`, `ast.ImportFrom`, o el uso de llamadas a funciones nativas termodinámicamente impuras o volátiles (`eval`, `exec`, `open`, `__import__`, `globals`). Esto confina matemáticamente la ejecución a una transformación pura del estado en memoria, cristalizando Ω166 a nivel de intérprete.
