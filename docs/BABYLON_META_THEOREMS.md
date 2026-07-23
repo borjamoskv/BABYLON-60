@@ -39,3 +39,31 @@ El Kernel no puede parchearse; debe re-fundarse sobre estas correcciones matemá
 - **Epsilon de Certeza:** Reemplazar $H_{residual} = 0$ por $H_{residual} < \epsilon_{threshold}$ (Límite Termodinámico de Cierre).
 - **Representación Microbit:** La entropía de Shannon debe almacenarse y operarse en enteros de punto fijo (`microbits = int(H * 10^6)`) para preservar el determinismo BFT sin destruir exergía fraccional.
 - **Canónicamente Isomórfico (Hex):** Todo valor no-JSON en la topología de evidencia debe ser obligatoriamente hex-codificado o base64 previo a su paso al `canonicalizer`.
+
+---
+
+## 2. Prueba de Insuficiencia: Ataque de Injerto Criptográfico (Falsación de Ω158 y Ω171)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+La estructura criptográfica del `ClosureCertificate` implementada en el Proof Kernel adolece de un defecto de desprendimiento topológico (Detachment Flaw), permitiendo un "Ataque de Injerto" (Grafting Attack) que quiebra la invariabilidad del Linaje de Evidencia (Ω158) y la Transparencia Referencial (Ω166).
+
+### Demostración Destructiva
+
+**1. Desprendimiento de Evidencia (Falsación de Ω158)**
+El `ClosureCertificate` actual almacena y firma la entropía residual, el `state_hash` ($H_S$) y el `proof_hash`. Sin embargo, **omite la inclusión del hash canónico de la evidencia original ($H_E$)**.
+Esto significa que el certificado certifica que "se alcanzó un estado $S$ con entropía $<\epsilon$", pero no especifica *a partir de qué evidencia*. 
+**Consecuencia:** Un atacante (o agente anérgico) puede generar un certificado válido para un `Crash_A` real, y adjuntarlo a un `Crash_B` fabricado. Dado que el certificado no contiene $H_E$, `cert.verify()` devolverá `True` para el `Crash_B`, legitimando un diagnóstico falso y quebrando el Linaje de Evidencia (Ω158).
+
+**2. Desprendimiento de Reglas (Falsación de Ω166)**
+El `proof_hash` se inyecta como un string estático. No existe un mecanismo formal en el Kernel para calcular el hash determinista del AST o bytecode de las funciones de inferencia (`Callable`). Si el $H_R$ (Hash de las Reglas) no es intrínsecamente derivable del código en ejecución, el pipeline de inferencia puede ser sustituido maliciosamente en tiempo de ejecución (ej. monkey-patching) sin invalidar el certificado.
+**Consecuencia:** Se viola la Transparencia Referencial (Ω166), ya que el estado resultante ya no es una función pura inmutable $Result = Inference(Artifacts, Rules)$.
+
+### Resolución Requerida (Refactor Axiomático)
+Para sellar el Proof Kernel contra ataques de injerto, el `ClosureCertificate` debe reconstruirse bajo un **Triple Enlace Criptográfico**:
+$$ C_{hash} = SHA3( H_E \parallel H_R \parallel H_S \parallel \text{microbits} ) $$
+1. **$H_E$ (Evidence Root):** Todo certificado debe instanciarse obligatoriamente pasando la evidencia canónica original.
+2. **$H_R$ (Ruleset Merkle Root):** El motor debe requerir un hash criptográfico de los módulos de inferencia, anclado al `kernel_version` de Ω174.
