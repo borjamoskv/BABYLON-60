@@ -2,11 +2,13 @@
 # Execution Protocol: Exergy-Optimized Ontology & DAG Ledger Integration
 # Prefix: net_ (network/inference orchestration layer with strict DAG tracking)
 
-from typing import List, Tuple
-from core_graph_ledger import GraphLedger, StateNode, core_calc_sha256
+from typing import List, Tuple, Any
+from core_graph_ledger import GraphLedger, StateNode
 from cortex_bpe_tokenizer import BPETokenizer
 from cortex_mamba_inference import MambaGenerator
 from cortex_mamba_network import MambaNetwork
+from proof_kernel.canonicalizer import hash_evidence
+from proof_kernel.certificates import ClosureCertificate
 
 class MambaLedgerEngine:
     """
@@ -29,11 +31,11 @@ class MambaLedgerEngine:
         max_new_tokens: int = 10,
         temperature: float = 1.0,
         k: int = 5
-    ) -> Tuple[str, List[StateNode]]:
+    ) -> Tuple[str, ClosureCertificate]:
         """
         Pre: prompt non-empty str && max_new_tokens > 0
-        Exec: encode prompt -> step-by-step Mamba generation -> append node to DAG ledger
-        Post: returns (decoded text, list of generated StateNodes in DAG)
+        Exec: encode prompt -> step-by-step Mamba generation -> append node to DAG ledger -> emit Certificate
+        Post: returns (decoded text, ClosureCertificate)
         """
         assert isinstance(prompt, str) and len(prompt) > 0, "Fail-fast: prompt must be non-empty str"
         assert max_new_tokens > 0, "Fail-fast: max_new_tokens must be positive"
@@ -43,8 +45,8 @@ class MambaLedgerEngine:
         assert len(prompt_ids) > 0, "Fail-fast: encoded prompt cannot be empty"
 
         # 2. Record prompt genesis in ledger if not already anchored
-        prompt_payload = f"prompt:{prompt}:{prompt_ids}"
-        prompt_hash = core_calc_sha256(prompt_payload)
+        prompt_payload = {"type": "prompt", "text": prompt, "ids": prompt_ids}
+        prompt_hash = hash_evidence(prompt_payload)
         
         # Check if parent is genesis or latest head
         parent_id = self.ledger.genesis_id
@@ -74,8 +76,9 @@ class MambaLedgerEngine:
 
             # Append state node to DAG ledger
             step_claim = f"Step {step+1}: token {next_token_id}"
-            step_payload = f"step:{step}:token:{next_token_id}:str:{token_str}:probs_hash:{core_calc_sha256(str(probs[:5]))}"
-            step_hash = core_calc_sha256(step_payload)
+            micro_probs = [int(float(p) * 1_000_000) for p in probs[:5]]
+            step_payload = {"step": step, "token": next_token_id, "str": token_str, "probs_hash": hash_evidence(micro_probs)}
+            step_hash = hash_evidence(step_payload)
 
             node = self.ledger.mut_append_node(
                 parent_id=current_parent_id,
@@ -87,4 +90,16 @@ class MambaLedgerEngine:
 
         # 4. Decode full sequence
         final_text = self.tokenizer.decode(current_tokens)
-        return final_text, generated_nodes
+        
+        # 5. Generate ClosureCertificate (Thermodynamic Proof)
+        crdt_entropy = self.ledger.crdt.measure_entropy()
+        cert = ClosureCertificate(
+            evidence_hash=prompt_hash,
+            ruleset_hash=hash_evidence({"model": "mamba", "temperature_milli": int(temperature * 1000), "k": k}),
+            final_state=self.ledger.crdt.to_dict(),
+            residual_microbits=crdt_entropy,
+            epsilon_threshold=1_000_000 # Configurable
+        )
+        cert.verify() # Fail-fast if cert is corrupted
+        
+        return final_text, cert

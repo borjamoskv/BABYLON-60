@@ -16,15 +16,8 @@ def test_mamba_route_handler() -> None:
     res = generate_mamba(req)
 
     assert "text" in res
-    assert "nodes" in res
-    assert len(res["nodes"]) == 4  # 1 prompt node + 3 token nodes
+    assert "certificate" in res
+    assert res["certificate"]["nodes_count"] == 4  # 1 prompt node + 3 token nodes
     assert res["provider"] == "NATIVE_MAMBA_SSM_LEDGER_ENGINE"
 
-    # Verify node structure
-    for node in res["nodes"]:
-        assert "node_id" in node
-        assert "parent_id" in node
-        assert "claim" in node
-        assert "payload_hash" in node
-        assert len(node["node_id"]) == 64
-        assert len(node["payload_hash"]) == 64
+

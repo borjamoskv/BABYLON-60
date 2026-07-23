@@ -136,10 +136,10 @@ def persist_consensus_ledger(
     Persists Yuma Consensus state into SQLite WAL ledger (BFT_STATE_LOOP Omega 10 / Omega 11).
     """
 
-    conn = babylon60.database.core.connect(db_path, timeout=5.0)
+    conn = babylon60.database.core.connect_sync(db_path)
     try:
         conn.execute("PRAGMA journal_mode=WAL;")
-        conn.execute("PRAGMA busy_timeout=5000;")
+        conn.execute("PRAGMA busy_busy_timeout=50000;")
         conn.execute("""
             CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (
                 epoch INTEGER PRIMARY KEY,

@@ -181,3 +181,30 @@ Actualmente, las reglas devuelven un `CRDTMap`, y el motor las fusiona. Sin emba
 ### Resolución Requerida (Refactor Axiomático)
 - **Cálculo de Entropía Proxy (Lattice Entropy):** Dado que los CRDT (semilátices) crecen de forma estrictamente monótona, la Entropía del Estado ($H_S$) debe derivarse directamente de su volumen de información convergente. Se establecerá $H_{max} = 1,000,000$ microbits. Cada par (clave, valor) en el CRDT restará entropía proporcional a su densidad de información (ej. tamaño del payload CBOR) o mediante una métrica fija.
 - **Inferencia Termodinámica Activa:** `dag_inference` medirá el $H(S)$ antes y después de evaluar cada nodo del DAG, invocando `compute_information_gain`. Si una regla produce entropía negativa (aumento de incertidumbre) abortará la ejecución protegiendo Ω155. Finalmente, `dag_inference` retornará una tupla `(CRDTMap, residual_microbits)` permitiendo el sellado físico y real del certificado.
+
+---
+
+## 8. Prueba de Insuficiencia: Cisma Arquitectónico del Ledger Maestro (Falsación Estructural Global)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-24
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El diseño actual de `GraphLedger` (`core_graph_ledger.py`) y el motor orquestador (`net_mamba_ledger_engine.py`) existen en un vacío arquitectónico, ignorando por completo el **Proof Kernel**. El Master Ledger opera sobre diccionarios mutables, hashing de strings (en lugar de CBOR), y carece de Certificados de Cierre Termodinámico, invalidando todos los Invariantes (Ω138-Ω176) en el entorno de producción.
+
+### Demostración Destructiva
+
+**1. Mutabilidad y Colapso Determinista (Violación de Ω168 y BFT)**
+`core_calc_sha256` procesa f-strings de Python crudos (`f"{parent_id}:{claim}:{payload_hash}"`). Al depender de f-strings, el Ledger Maestro está expuesto a inyecciones de separadores y a la inconsistencia de tipos. No utiliza `canonicalize_cbor` como exige INV_C5_18.
+
+**2. Estado Centralizado no Concurrente (Violación de DAG/CRDT)**
+`self.nodes: Dict[str, StateNode] = {}` en `GraphLedger` es un diccionario plano sin soporte de fusión concurrente (CRDT). Si dos workers de Mamba intentan derivar ramas en paralelo, el estado colisionará o requerirá *locks* bloqueantes (violación de Exergía/BFT).
+
+**3. Ausencia de Cierre Epistémico (Violación de Ω171)**
+`MambaLedgerEngine.mut_generate_audited` devuelve una lista de nodos (`List[StateNode]`), pero no sella la inferencia. Sin un `ClosureCertificate`, la generación de Mamba no puede probar matemáticamente que alcanzó un límite de entropía convergente ($H_{residual} < \epsilon$). Es imposible auditar si la respuesta fue cortada por entropía o arbitrariamente por `max_new_tokens`.
+
+### Resolución Requerida (Refactor Axiomático - Integración de Producción)
+- **Integración Canonicalizadora:** `GraphLedger` debe erradicar `core_calc_sha256` y depender estrictamente de `hash_evidence` desde el Proof Kernel para garantizar la Invariabilidad Canónica (CBOR).
+- **Adopción de CRDTMap:** El Ledger Maestro debe encapsular su estado interno en `CRDTMap` para absorber ramas de manera BFT segura.
+- **Certificación Termodinámica de Mamba:** Al finalizar la generación, `net_mamba_ledger_engine.py` debe emitir un `ClosureCertificate` que ligue criptográficamente el prompt (Evidencia Inicial), el modelo/red (Reglas) y los nodos generados (Estado Final) con los microbits de entropía residual de la secuencia autoregresiva.

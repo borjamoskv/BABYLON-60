@@ -151,25 +151,22 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
         ledger = GraphLedger()
         engine = MambaLedgerEngine(tokenizer, network, ledger)
 
-        text, nodes = engine.mut_generate_audited(
+        text, cert = engine.mut_generate_audited(
             prompt=req.prompt,
             max_new_tokens=req.max_tokens,
             temperature=1.0,
             k=3
         )
 
-        nodes_list = []
-        for n in nodes:
-            nodes_list.append({
-                "node_id": n.node_id,
-                "parent_id": n.parent_id,
-                "claim": n.claim_summary,
-                "payload_hash": n.payload_hash
-            })
-
         return {
             "text": text,
-            "nodes": nodes_list,
+            "certificate": {
+                "evidence_hash": cert.evidence_hash,
+                "ruleset_hash": cert.ruleset_hash,
+                "cert_hash": cert.cert_hash,
+                "residual_microbits": cert.residual_microbits,
+                "nodes_count": len(ledger.crdt.state)
+            },
             "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
             "vocab_size": len(tokenizer.vocab)
         }

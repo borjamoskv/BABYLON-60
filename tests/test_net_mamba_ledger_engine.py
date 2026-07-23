@@ -18,28 +18,25 @@ def test_audited_generation_flow() -> None:
     engine = MambaLedgerEngine(tokenizer=tokenizer, network=network, ledger=ledger)
 
     prompt = "hello"
-    final_text, nodes = engine.mut_generate_audited(prompt=prompt, max_new_tokens=5, temperature=0.5)
+    final_text, cert = engine.mut_generate_audited(prompt=prompt, max_new_tokens=5, temperature=0.5)
 
-    # Assert nodes count: 1 prompt node + 5 generated tokens = 6 nodes
-    assert len(nodes) == 6
-    assert nodes[0].claim_summary.startswith("Prompt len")
-    assert nodes[-1].claim_summary.startswith("Step 5:")
+    assert isinstance(final_text, str)
+    assert len(final_text) > len(prompt)
+    assert cert.verify() is True
+    assert cert.residual_microbits >= 0
 
-    # Verify that the DAG path is continuous and trace-able from head back to genesis
-    path = ledger.core_get_path(nodes[-1].node_id)
-    assert len(path) == 6
-    for i in range(len(nodes)):
-        assert path[i].node_id == nodes[i].node_id
+    # Ensure 6 nodes were created (prompt + 5 steps)
+    assert len(ledger.crdt.state) == 6
 
-
-def test_engine_fail_fast_on_invalid_prompt() -> None:
-    """Verifica que el motor rechace inputs vacíos inmediatamente sin quemar ciclos en la red neuronal."""
+def test_mamba_ledger_fail_fast():
+    import pytest
     tokenizer = BPETokenizer()
     network = MambaNetwork(vocab_size=300, d_model=16, d_state=4, n_layers=2)
     ledger = GraphLedger()
     engine = MambaLedgerEngine(tokenizer=tokenizer, network=network, ledger=ledger)
 
-    import pytest
-
-    with pytest.raises(AssertionError, match="prompt must be non-empty str"):
+    with pytest.raises(AssertionError, match="Fail-fast: prompt must be non-empty str"):
         engine.mut_generate_audited(prompt="", max_new_tokens=5)
+
+    with pytest.raises(AssertionError, match="Fail-fast: max_new_tokens must be positive"):
+        engine.mut_generate_audited(prompt="hello", max_new_tokens=0)

@@ -2,7 +2,8 @@
 # Prefix: test_ (empirical falsification for the persistence layer)
 
 import pytest
-from core_graph_ledger import GraphLedger, core_calc_sha256
+from core_graph_ledger import GraphLedger
+from proof_kernel.canonicalizer import hash_evidence
 from io_persist_ledger import LedgerPersist
 
 
@@ -16,13 +17,13 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     # Phase 1: Build in-memory DAG and persist
     ledger = GraphLedger()
     n1 = ledger.mut_append_node(
-        parent_id=ledger.genesis_id, claim="Genesis node", payload_hash=core_calc_sha256("payload_genesis")
+        parent_id=ledger.genesis_id, claim="Genesis node", payload_hash=hash_evidence("payload_genesis")
     )
     n2 = ledger.mut_append_node(
-        parent_id=n1.node_id, claim="Second node", payload_hash=core_calc_sha256("payload_second")
+        parent_id=n1.node_id, claim="Second node", payload_hash=hash_evidence("payload_second")
     )
     n3 = ledger.mut_append_node(
-        parent_id=n2.node_id, claim="Third node", payload_hash=core_calc_sha256("payload_third")
+        parent_id=n2.node_id, claim="Third node", payload_hash=hash_evidence("payload_third")
     )
 
     persist = LedgerPersist(db_file)
@@ -39,7 +40,7 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     persist2 = LedgerPersist(db_file)
     restored = persist2.io_load_ledger()
 
-    assert len(restored.nodes) == 3
+    assert len(restored.crdt.state) == 3
 
     # Verify path integrity: trace from n3 back to genesis
     path = restored.core_get_path(n3.node_id)
@@ -58,7 +59,7 @@ def test_idempotent_persist(tmp_path: object) -> None:
     db_file = str(tmp_path) + "/test_idempotent.db"
 
     ledger = GraphLedger()
-    ledger.mut_append_node(parent_id=ledger.genesis_id, claim="Only node", payload_hash=core_calc_sha256("data"))
+    ledger.mut_append_node(parent_id=ledger.genesis_id, claim="Only node", payload_hash=hash_evidence("data"))
 
     persist = LedgerPersist(db_file)
     first = persist.io_persist_ledger(ledger)

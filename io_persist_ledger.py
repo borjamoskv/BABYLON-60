@@ -3,6 +3,7 @@
 # Prefix: io_ (disk I/O operations, non-pure)
 
 import sqlite3
+from dataclasses import asdict
 from core_graph_ledger import GraphLedger, StateNode
 
 
@@ -40,7 +41,9 @@ class LedgerPersist:
         """
         cursor = self.conn.cursor()
         inserted = 0
-        for node in ledger.nodes.values():
+        for crdt_entry in ledger.crdt.to_dict().values():
+            node_data = crdt_entry["value"]
+            node = StateNode(**node_data)
             cursor.execute(
                 "INSERT OR IGNORE INTO dag_nodes (node_id, parent_id, claim, payload_hash) VALUES (?, ?, ?, ?)",
                 (node.node_id, node.parent_id, node.claim_summary, node.payload_hash)
@@ -82,7 +85,7 @@ class LedgerPersist:
                         claim_summary=claim,
                         payload_hash=payload_hash
                     )
-                    ledger.nodes[nid] = node
+                    ledger.crdt.set(nid, asdict(node), ledger._clock())
                     inserted.add(nid)
                     progress = True
 
