@@ -11,7 +11,7 @@ Moskv-1 and the CORTEX ecosystem follow a Sovereign Architecture principle. We t
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability within the CORTEX ecosystem, please send an email to security@babylon60.com (or security@borjamoskv.com). All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within the CORTEX ecosystem, please send an email to security@borjamoskv.com (or security@babylon60.com). All security vulnerabilities will be promptly addressed.
 
 Please DO NOT report security vulnerabilities via public GitHub issues.
 
