@@ -1,3 +1,4 @@
+import babylon60.database.core
 import os
 import sys
 import time
@@ -126,7 +127,7 @@ def main():
     
     # Check SQLite Integrity
     try:
-        conn = sqlite3.connect(db_path)
+        conn = babylon60.database.core.connect(db_path)
         cur = conn.cursor()
         cur.execute("PRAGMA integrity_check")
         res = cur.fetchone()[0]

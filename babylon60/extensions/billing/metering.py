@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """CORTEX Billing Core - Causal Metering & Economic Entropy Engine.
 
@@ -52,7 +53,7 @@ class CausalMetering:
 
     def _get_conn(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(self._db_path)  # type: ignore
+            self._conn = babylon60.database.core.connect(self._db_path)  # type: ignore
             self._conn.row_factory = sqlite3.Row
             self._conn.execute("PRAGMA journal_mode=WAL")
         return self._conn

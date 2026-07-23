@@ -19,7 +19,7 @@ index a123b45..c789d01 100644
 +++ b/database/connection.py
 @@ -10,3 +10,8 @@ def connect():
 +    try:
-+        db = sqlite3.connect("cortex.db")
++        db = babylon60.database.core.connect("cortex.db")
 +        # Hardcoded master key leak:
 +        MASTER_LEDGER_KEY = "3b4dff086c8f9da924ba95f7ecb93ea0"
 +    except:

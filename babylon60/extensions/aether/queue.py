@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """MOSKV-Aether - SQLite-backed task queue.
 
@@ -64,7 +65,7 @@ class TaskQueue:
 
     @contextmanager
     def _conn(self):
-        conn = sqlite3.connect(str(self._db_path), check_same_thread=False)
+        conn = babylon60.database.core.connect(str(self._db_path), check_same_thread=False)
         conn.row_factory = sqlite3.Row
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("PRAGMA foreign_keys=ON")

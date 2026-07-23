@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 from __future__ import annotations
 
@@ -316,7 +317,7 @@ class _BlockingPatternDetector(ast.NodeVisitor):
             if node.func.value.id == "time" and node.func.attr == "sleep":
                 self.blocking_calls.append("time.sleep")
             elif node.func.value.id == "sqlite3" and node.func.attr == "connect":
-                self.blocking_calls.append("sqlite3.connect")
+                self.blocking_calls.append("babylon60.database.core.connect")
         elif isinstance(node.func, ast.Name) and node.func.id == "input":
             self.blocking_calls.append("input")
         self.generic_visit(node)

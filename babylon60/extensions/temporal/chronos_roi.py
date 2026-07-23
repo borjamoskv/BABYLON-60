@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """
 CHRONOS-1 ROI Engine (Sovereign Efficiency Quantification).
@@ -170,7 +171,7 @@ class ChronosROI:
         actual_tokens = 0
         if db_path and os.path.exists(db_path):
             try:
-                with sqlite3.connect(db_path) as conn:
+                with babylon60.database.core.connect(db_path) as conn:
                     cursor = conn.cursor()
                     cursor.execute("PRAGMA table_info(llm_telemetry)")
                     columns = {row[1] for row in cursor.fetchall()}

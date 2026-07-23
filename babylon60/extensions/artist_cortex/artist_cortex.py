@@ -1,3 +1,4 @@
+import babylon60.database.core
 """
 C5-REAL: Artist Cortex Engine
 Orchestrates aesthetic embeddings and thermodynamic artifact metrics using sqlite-vec.
@@ -17,7 +18,7 @@ class ArtistCortexEngine:
 
     def _init_db(self):
         """Initializes connection and loads sqlite-vec."""
-        self.conn = sqlite3.connect(self.db_path)
+        self.conn = babylon60.database.core.connect(self.db_path)
         if hasattr(self.conn, "enable_load_extension"):
             self.conn.enable_load_extension(True)
         try:

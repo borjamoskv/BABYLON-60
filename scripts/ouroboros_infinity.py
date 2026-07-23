@@ -1,3 +1,4 @@
+import babylon60.database.core
 import argparse
 import hashlib
 import json
@@ -15,7 +16,7 @@ CORTEX_DB_PATH: Path = PROJECT_ROOT / "cortex" / "engine" / "nexus_anchors.db"
 
 
 def get_db_connection(path: Path = DB_PATH) -> sqlite3.Connection:
-    conn = sqlite3.connect(str(path), timeout=5.0)
+    conn = babylon60.database.core.connect(str(path), timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=5000")
     return conn

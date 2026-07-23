@@ -15,7 +15,7 @@ import os
 try:
     import keyring
 except ImportError:  # pragma: no cover - exercised via blocked-import tests
-    keyring = None
+    keyring = None  # type: ignore[assignment]
 
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM

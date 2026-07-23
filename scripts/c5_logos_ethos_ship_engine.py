@@ -1,3 +1,4 @@
+import babylon60.database.core
 import hashlib
 import os
 import sqlite3
@@ -69,7 +70,7 @@ class BFTMasterLedgerWAL:
         self._init_membrane()
 
     def _init_membrane(self) -> None:
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
             conn.execute("PRAGMA journal_mode = WAL;")
             conn.execute("PRAGMA synchronous = NORMAL;")
             conn.execute("PRAGMA busy_timeout = 5000;")
@@ -79,7 +80,7 @@ class BFTMasterLedgerWAL:
             conn.commit()
 
     def append_c5_transaction(self, claim_payload: str, lamport_clock: int, agent_id: str) -> str:
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT taint_hash FROM master_ledger ORDER BY sequence_id DESC LIMIT 1;")
             row = cursor.fetchone()
@@ -98,7 +99,7 @@ class BFTMasterLedgerWAL:
                 raise RuntimeError(f"[SIGKILL_State_Purge] BFT/WAL integrity violation: {e}")
 
     def verify_ledger_integrity(self) -> bool:
-        with sqlite3.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
             cursor = conn.cursor()
             cursor.execute(
                 "SELECT prev_hash, claim_payload, lamport_clock, agent_id, taint_hash FROM master_ledger ORDER BY sequence_id ASC;"

@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 
 from __future__ import annotations
@@ -47,7 +48,7 @@ class AutoAuditMonitor(BaseMonitor[AutoAuditAlert]):
             if not db_path or not db_path.exists():
                 return alerts
 
-            with sqlite3.connect(db_path) as conn:
+            with babylon60.database.core.connect(db_path) as conn:
                 cursor = conn.cursor()
                 # Filter for active (not soft-deleted) facts
                 cursor.execute(

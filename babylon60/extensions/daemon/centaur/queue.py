@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """
 Entropic Task Queue.
@@ -30,7 +31,7 @@ class EntropicQueue:
 
     @contextmanager
     def _get_conn(self) -> Iterator[sqlite3.Connection]:
-        conn = sqlite3.connect(
+        conn = babylon60.database.core.connect(
             self.db_path,
             timeout=10,
             isolation_level="IMMEDIATE",  # Write-lock immediately to prevent concurrency issues

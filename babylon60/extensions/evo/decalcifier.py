@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """
 Sovereign Decalcifier (REM Phase Memory Consolidation).
@@ -61,7 +62,7 @@ class SovereignDecalcifier:
             from babylon60.core.paths import CORTEX_DB
 
             def _run_vacuum():
-                with sqlite3.connect(CORTEX_DB, isolation_level=None) as vconn:
+                with babylon60.database.core.connect(CORTEX_DB, isolation_level=None) as vconn:
                     vconn.execute("VACUUM")
 
             # Run vacuum asynchronously to avoid blocking

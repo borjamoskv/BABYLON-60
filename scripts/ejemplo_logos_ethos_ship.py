@@ -1,5 +1,5 @@
+import babylon60.database.core
 import hashlib
-import sqlite3
 import subprocess
 import time
 
@@ -30,7 +30,7 @@ def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
     scratch_dir: str = os.path.join(root_dir, "scratch")
     os.makedirs(scratch_dir, exist_ok=True)
     db_path: str = os.path.join(scratch_dir, "c5_ejemplo_ship.db")
-    with sqlite3.connect(db_path, timeout=5.0) as conn:
+    with babylon60.database.core.connect(db_path, timeout=5.0) as conn:
         conn.execute("PRAGMA journal_mode = WAL;")
         conn.execute("CREATE TABLE IF NOT EXISTS master_ledger (hash TEXT UNIQUE, payload TEXT)")
         conn.execute("INSERT OR IGNORE INTO master_ledger (hash, payload) VALUES (?, ?)", (taint_hash, ast_state))

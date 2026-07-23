@@ -1,3 +1,4 @@
+import babylon60.database.core
 #!/usr/bin/env python3
 """
 [C5-REAL] Exergy Optimizer Agent.
@@ -79,7 +80,7 @@ ConsolidationDecision = Union[TriggerConsolidation, Stable]
 
 def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
+    conn = babylon60.database.core.connect(str(DB_PATH), timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL;")
     cursor = conn.cursor()
     cursor.execute("""
@@ -327,7 +328,7 @@ ProvSignature: "{prov_hash}"
 
     # Write to database
     try:
-        conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
+        conn = babylon60.database.core.connect(str(DB_PATH), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         cursor.execute(

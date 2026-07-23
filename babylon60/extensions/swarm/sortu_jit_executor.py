@@ -168,7 +168,7 @@ async def run_jit_sandbox(source_code: str, timeout_ms: int = 500, global_ctx: d
                     res_dict = val
             except EOFError:
                 break
-            except Exception:  # noqa: BLE001
+            except (OSError, ValueError):
                 break
 
         now = time.perf_counter()

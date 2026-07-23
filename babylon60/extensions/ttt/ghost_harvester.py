@@ -1,3 +1,4 @@
+import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 import json
 import logging
@@ -25,7 +26,7 @@ def ensure_folders():
 def connect_db():
     if not os.path.exists(DB_PATH):
         raise FileNotFoundError(f"CORTEX Memory not found at {DB_PATH}. Is it booted?")
-    return sqlite3.connect(DB_PATH)
+    return babylon60.database.core.connect(DB_PATH)
 
 
 def fetch_recent_anomalies(cursor, days=7):

@@ -1,3 +1,4 @@
+import babylon60.database.core
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -134,9 +135,8 @@ def persist_consensus_ledger(
     """
     Persists Yuma Consensus state into SQLite WAL ledger (BFT_STATE_LOOP Omega 10 / Omega 11).
     """
-    import sqlite3
 
-    conn = sqlite3.connect(db_path, timeout=5.0)
+    conn = babylon60.database.core.connect(db_path, timeout=5.0)
     try:
         conn.execute("PRAGMA journal_mode=WAL;")
         conn.execute("PRAGMA busy_timeout=5000;")

@@ -147,7 +147,7 @@ class TTTEngine:
                         try:
                             parsed = json.loads(existing_lines[0])
                             f.write(json.dumps(parsed) + "\n")
-                        except Exception:  # noqa: BLE001
+                        except (json.JSONDecodeError, TypeError, ValueError):
                             f.write(
                                 json.dumps({"messages": [{"role": "system", "content": "stub"}]})
                                 + "\n"

@@ -1,4 +1,4 @@
-import sqlite3
+import babylon60.database.core
 import yaml
 import sys
 import os
@@ -50,7 +50,7 @@ def bootstrap_cortex() -> None:
     with open(ISOMORFISMOS_PATH, "rb") as f:
         isomorfismos_enc = f.read()
     isomorfismos = yaml.safe_load(fernet.decrypt(isomorfismos_enc))
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
+    conn = babylon60.database.core.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA busy_timeout = 5000;")
     cursor = conn.cursor()

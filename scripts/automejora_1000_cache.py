@@ -1,3 +1,4 @@
+import babylon60.database.core
 import os
 import sqlite3
 import sys
@@ -70,7 +71,7 @@ def main() -> None:
     for query in unique_queries:
         engine.execute_inference(query)
     engine.close()
-    conn: sqlite3.Connection = sqlite3.connect(CACHE_DB_PATH, timeout=5.0)
+    conn: sqlite3.Connection = babylon60.database.core.connect(CACHE_DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL;")
     cursor: sqlite3.Cursor = conn.cursor()
     cursor.execute("SELECT COUNT(*) FROM L3_inference_cache")

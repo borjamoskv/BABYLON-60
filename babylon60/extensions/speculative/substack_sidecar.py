@@ -1,3 +1,4 @@
+import babylon60.database.core
 import argparse
 import logging
 import sqlite3
@@ -19,7 +20,7 @@ def evaluate_retention(dry_run=True):
     """
     logger.info("Starting Causal Scheduler (Retention Evaluation)...")
 
-    conn = sqlite3.connect(CORTEX_DB_PATH)
+    conn = babylon60.database.core.connect(CORTEX_DB_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 

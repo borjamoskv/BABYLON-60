@@ -57,7 +57,7 @@ class CortexSyncManager:
 
                 return stats
 
-            except Exception:  # noqa: BLE001
+            except (RuntimeError, ValueError, asyncio.TimeoutError, OSError):
                 logger.exception("Sync cycle failed")
                 return {"error": "Internal server error"}
 

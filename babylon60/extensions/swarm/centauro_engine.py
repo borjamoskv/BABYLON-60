@@ -240,7 +240,7 @@ class CentauroEngine:
                     or "127.0.0.1" in getattr(p, "_base_url", "")
                     for p in providers
                 )
-            except Exception:  # noqa: BLE001
+            except (AttributeError, TypeError):
                 is_local = True
 
         import os

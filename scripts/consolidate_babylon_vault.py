@@ -1,3 +1,4 @@
+import babylon60.database.core
 #!/usr/bin/env python3
 """
 C5-REAL SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT
@@ -6,7 +7,6 @@ and local agent logs into the C5-REAL Memory Vault (`cortex_memory.db` & Master 
 Enforces Rule Ω1 (WAL/busy_timeout) and Rule Ω11 (CORTEX-TAINT signature).
 """
 
-import sqlite3
 import hashlib
 import json
 from pathlib import Path
@@ -119,7 +119,7 @@ def compute_sha3(text: str) -> str:
 
 def consolidate_vault() -> None:
     print("[*] C5-REAL: Bootstrapping and connecting to Memory Vault (`cortex_memory.db`)...")
-    conn = sqlite3.connect(DB_PATH, timeout=5.0)
+    conn = babylon60.database.core.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA busy_timeout = 5000;")
     cursor = conn.cursor()

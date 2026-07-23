@@ -115,7 +115,7 @@ def status_local() -> dict[str, Any]:
             "endpoint": "http://127.0.0.1:11434",
             "models": models
         }
-    except Exception:
+    except (urllib.error.URLError, json.JSONDecodeError, OSError, ConnectionError):
         return {
             "status": "OFFLINE",
             "provider": "Ollama/MLX",
