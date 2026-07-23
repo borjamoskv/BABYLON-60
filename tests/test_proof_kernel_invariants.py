@@ -20,8 +20,8 @@ def test_semantic_preservation():
 
 def test_canonicalization():
     """Ω168 · Canonical Representation Executable Test"""
-    ev1 = {"a": 1, "b": 2}
-    ev2 = {"b": 2, "a": 1}
+    ev1 = {"a": 1, "b": 2, "c": b"raw_data", "d": {1, 2}}
+    ev2 = {"d": {2, 1}, "b": 2, "c": b"raw_data", "a": 1}
     assert hash_evidence(ev1) == hash_evidence(ev2), "Ω168 Violated: Isomorphic states produced diverging hashes."
     
     # Float prohibition
@@ -35,24 +35,25 @@ def test_proof_derivation():
     assert result.get("processed") is True, "Ω169 Violated: Proof derivation pipeline failed execution."
 
 def test_minimality():
-    """Ω170 · Minimality Executable Test"""
-    prior_entropy = 5
-    posterior_entropy = 6
+    """Ω170 · Minimality Executable Test (Microbits)"""
+    prior_microbits = 1000000
+    posterior_microbits = 1500000
     with pytest.raises(ValueError, match="Epistemic Monotonicity"):
-        compute_information_gain(prior_entropy, posterior_entropy)
+        compute_information_gain(prior_microbits, posterior_microbits)
         
-    assert compute_information_gain(5, 5) == 0, "No exergy implies pruning under Ω170"
+    assert compute_information_gain(1000000, 1000000) == 0, "No exergy implies pruning under Ω170"
+    assert compute_information_gain(1000000, 469000) == 531000, "Fractional bits preserved in microbits"
 
 def test_closure_certificate():
-    """Ω171 · Completeness Certificate Executable Test"""
+    """Ω171 · Completeness Certificate Executable Test (Epsilon Threshold)"""
     state = {"resolved": True}
     proof_hash = hash_evidence(state)
     
-    cert = ClosureCertificate(state, proof_hash, residual_entropy=0)
-    assert cert.verify() is True, "Ω171 Violated: Valid certificate rejected."
+    cert = ClosureCertificate(state, proof_hash, residual_microbits=500, epsilon_threshold=1000)
+    assert cert.verify() is True, "Ω171 Violated: Valid certificate rejected under threshold."
     
-    with pytest.raises(ValueError, match="residual entropy"):
-        ClosureCertificate(state, proof_hash, residual_entropy=1)
+    with pytest.raises(ValueError, match="Residual entropy"):
+        ClosureCertificate(state, proof_hash, residual_microbits=1500, epsilon_threshold=1000)
 
 def test_replay_determinism():
     """Ω172 · Replay Determinism Executable Test"""

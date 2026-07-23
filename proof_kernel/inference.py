@@ -19,12 +19,15 @@ def pure_inference(evidence_state: dict[str, Any], rules: list[Callable[[dict[st
         state = rule(state)
     return state
 
-def compute_information_gain(prior_entropy: int, posterior_entropy: int) -> int:
+def compute_information_gain(prior_microbits: int, posterior_microbits: int) -> int:
     """
-    Ω162 · Falsification Power Invariant
-    La confianza emerge del Information Gain, no de adjetivos estocásticos.
-    (Operamos con bits enteros para evitar flotantes no deterministas, Ω18/INV_C5_18).
+    Ω162 · Falsification Power Invariant & Ω163 · Residual Entropy
+    La confianza emerge del Information Gain.
+    
+    Para cumplir con INV_C5_18 (exclusión de flotantes BFT) sin destruir
+    exergía matemática (truncamientos a 0), la Entropía de Shannon se 
+    calcula y propaga en 'microbits' (1 bit = 1,000,000 microbits).
     """
-    if prior_entropy < posterior_entropy:
+    if prior_microbits < posterior_microbits:
         raise ValueError("Epistemic Monotonicity (Ω155) violated: entropy increased.")
-    return prior_entropy - posterior_entropy
+    return prior_microbits - posterior_microbits
