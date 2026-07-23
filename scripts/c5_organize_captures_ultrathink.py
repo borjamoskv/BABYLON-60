@@ -114,7 +114,7 @@ def main() -> None:
                     "filename": fname,
                     "description": desc,
                     "timestamp": "Pre-Session Baseline / 2026-07-13",
-                    "size_kb": fpath.stat().st_size / 1024.0,
+                    "size_bytes": fpath.stat().st_size,
                     "sha256": sha256_file(fpath),
                     "sha3_256": sha3_file(fpath),
                 }
@@ -130,7 +130,7 @@ def main() -> None:
                     "filename": canonical_name,
                     "description": desc,
                     "timestamp": f"2026-07-14 {ts} CEST",
-                    "size_kb": target_path.stat().st_size / 1024.0,
+                    "size_bytes": target_path.stat().st_size,
                     "sha256": sha256_file(target_path),
                     "sha3_256": sha3_file(target_path),
                 }
@@ -166,7 +166,7 @@ def main() -> None:
     ]
     for entry in catalog_entries:
         md_lines.append(
-            f"| **`#{entry['id']}`** | `evidencias_capturas/{entry['filename']}` | `{entry['timestamp']}` | `{entry['size_kb']:.1f} KB` | `{entry['sha256']}` | **{entry['description']}** |"
+            f"| **`#{entry['id']}`** | `evidencias_capturas/{entry['filename']}` | `{entry['timestamp']}` | `{entry['size_bytes']} B` | `{entry['sha256']}` | **{entry['description']}** |"
         )
     md_lines.extend(
         [
