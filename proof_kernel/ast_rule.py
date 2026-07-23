@@ -1,6 +1,6 @@
 import ast
 import inspect
-from typing import Callable
+from typing import Callable, Any
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.crdt import CRDTMap
 
@@ -24,7 +24,7 @@ class ASTRule:
         
         # Compile it back into an executable object to verify we can run it
         code_obj = compile(self.ast_tree, filename="<ast>", mode="exec")
-        namespace = {"CRDTMap": CRDTMap}
+        namespace: dict[str, Any] = {"CRDTMap": CRDTMap}
         exec(code_obj, namespace)
         self.executable = namespace[self.name]
 

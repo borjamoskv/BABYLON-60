@@ -1,6 +1,10 @@
-"""ultrathink_scheduler.py — Async scheduler for the ULTRATHINK 10k-node swarm.
-
-Dispatches payloads to the consensus engine with exponential backoff on failure.
+"""
+█ C5-REAL: ULTRATHINK SCHEDULER
+=================================================================================
+SYS_ID: ULTRATHINK_10K_DISPATCHER
+REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution)
+PROTOCOL: Async BFT payload dispatch with integer-based deterministic backoff.
+[CORTEX-TAINT:borjamoskv:ultrathink_scheduler:2026-07]
 """
 import asyncio
 import logging
@@ -13,14 +17,14 @@ logging.basicConfig(
 log = logging.getLogger("ultrathink.scheduler")
 
 MAX_RETRIES: int = 5
-BASE_BACKOFF_S: float = 0.05
+BASE_BACKOFF_MS: int = 50  # Enforce integer math (INV_C5_18)
 
 
 class ConsensusEngineStub:
     """Placeholder for the Rust consensus engine FFI bridge."""
 
     def propose(self, payload: bytes) -> None:
-        # In production this calls into the Rust HotStuff crate via PyO3.
+        """In production this calls into the Rust HotStuff crate via PyO3."""
         pass
 
 
@@ -33,36 +37,46 @@ async def propose_with_backoff(
     payload: bytes,
     task_id: int,
 ) -> bool:
-    """Propose a payload with exponential backoff on failure."""
+    """Propose a payload with deterministic exponential backoff."""
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             engine.propose(payload)
             log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
             return True
         except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
-            wait = BASE_BACKOFF_S * (2 ** (attempt - 1))
-            log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait:.3f}s")
-            await asyncio.sleep(wait)
+            # Deterministic integer backoff calculation
+            wait_ms: int = BASE_BACKOFF_MS * (2 ** (attempt - 1))
+            log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait_ms}ms")
+            await asyncio.sleep(wait_ms / 1000.0)
+            
     log.error(f"task-{task_id}: exhausted {MAX_RETRIES} retries")
     return False
 
 
 async def main() -> None:
-    engine = get_consensus_engine()
+    engine: ConsensusEngineStub = get_consensus_engine()
     total_tasks: int = 1000
     successes: int = 0
-    t0 = time.monotonic()
+    
+    # Use nanoseconds for deterministic tracking without floats
+    t0_ns: int = time.monotonic_ns()
 
-    tasks = [
-        propose_with_backoff(engine, f"task-{i}".encode(), i)
+    tasks: list[asyncio.Task[bool]] = [
+        asyncio.create_task(propose_with_backoff(engine, f"task-{i}".encode("utf-8"), i))
         for i in range(total_tasks)
     ]
-    results = await asyncio.gather(*tasks)
+    results: list[bool] = await asyncio.gather(*tasks)
     successes = sum(1 for r in results if r)
 
-    elapsed = time.monotonic() - t0
-    log.info(f"Completed: {successes}/{total_tasks} proposals in {elapsed:.3f}s")
-    log.info(f"Throughput: {successes / elapsed:.1f} proposals/s")
+    elapsed_ns: int = time.monotonic_ns() - t0_ns
+    elapsed_ms: int = elapsed_ns // 1_000_000
+    
+    # Avoid float throughput if possible, but for display it's fine.
+    # Let's do integer ops.
+    throughput: int = (successes * 1000) // elapsed_ms if elapsed_ms > 0 else 0
+    
+    log.info(f"Completed: {successes}/{total_tasks} proposals in {elapsed_ms}ms")
+    log.info(f"Throughput: {throughput} proposals/s (integer floor)")
 
 
 if __name__ == "__main__":

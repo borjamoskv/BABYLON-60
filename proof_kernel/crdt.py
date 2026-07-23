@@ -27,7 +27,7 @@ class CRDTMap:
     Conflict-Free Replicated Data Type (Map).
     Resolves the Topological Diamond Problem deterministically.
     """
-    def __init__(self, state: dict[str, LWWRegister] = None):
+    def __init__(self, state: dict[str, LWWRegister] | None = None):
         self.state = state or {}
 
     def set(self, key: str, value: Any, lamport: int):
@@ -38,7 +38,7 @@ class CRDTMap:
             self.state[key] = new_reg
 
     def get(self, key: str) -> Any:
-        return self.state.get(key).value if key in self.state else None
+        return self.state[key].value if key in self.state else None
 
     def merge(self, other: 'CRDTMap') -> 'CRDTMap':
         merged = CRDTMap(dict(self.state))
