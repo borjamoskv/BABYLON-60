@@ -15,6 +15,7 @@ from cortex.quad_pillar_kernel import (
     DeterminismPillar,
     QuadPillarException,
     CausalHierarchyError,
+    QuadPillarIdempotencyError,
 )
 
 @pytest.fixture
@@ -31,6 +32,8 @@ def test_pillar_1_system():
     assert state["os_type"] in ["Darwin", "Linux", "Windows"]
     assert state["pid"] > 0
     assert "timestamp_ns" in state
+    assert "rss_memory" in state
+    assert isinstance(state["rss_memory"], int)
 
 def test_pillar_1_sovereignty_fail():
     sys_p = SystemPillar()
@@ -65,8 +68,8 @@ def test_pillar_3_memory_4tier_schema():
     assert entry["tier_1_evidence"]["measurement"] == 42.0
     assert entry["tier_2_repository_state"]["branch"] == "master"
 
-def test_pillar_4_determinism_disk_hash():
-    det = DeterminismPillar()
+def test_pillar_4_determinism_disk_hash(temp_db):
+    det = DeterminismPillar(db_file=temp_db)
     with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
         tmp.write(b"C5-REAL DISK GROUND TRUTH")
         tmp_path = tmp.name
@@ -78,8 +81,22 @@ def test_pillar_4_determinism_disk_hash():
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
 
-def test_pillar_4_causal_hierarchy():
-    det = DeterminismPillar()
+def test_pillar_4_idempotency_lock(temp_db):
+    orch = OrchestrationPillar(db_file=temp_db)
+    det = DeterminismPillar(db_file=temp_db)
+    
+    # Dispatch a task to create a ledger entry
+    payload_hash = asyncio.run(orch.dispatch_task({"task_id": "idem_test"}))
+    
+    # Verify that trying to run or check this hash raises the lock
+    with pytest.raises(QuadPillarIdempotencyError, match="Idempotency Lock"):
+        det.check_idempotency_lock(payload_hash)
+        
+    # Checking an unknown hash should pass
+    assert det.check_idempotency_lock("00000000000000000000000000") is True
+
+def test_pillar_4_causal_hierarchy(temp_db):
+    det = DeterminismPillar(db_file=temp_db)
     assert det.validate_causal_hierarchy(
         topology="cortex/quad_pillar_kernel.py",
         mechanism="SIGABRT on invalid memory access",

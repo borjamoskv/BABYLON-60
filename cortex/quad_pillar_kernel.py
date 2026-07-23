@@ -28,6 +28,9 @@ class RateLimitExhaustedError(QuadPillarException):
 class CausalHierarchyError(QuadPillarException):
     """Triggered when causal hierarchy validation fails (Ω158)."""
 
+class QuadPillarIdempotencyError(QuadPillarException):
+    """Triggered when a mutation violates the physical idempotency lock (Ω15)."""
+
 
 # ---------------------------------------------------------------------------
 # Pillar 1: Sistema (POSIX / Hardware Direct Control)
@@ -42,12 +45,20 @@ class SystemPillar:
 
     def inspect_system_state(self) -> Dict[str, Any]:
         """Reads physical runtime state directly from OS kernel interfaces."""
+        try:
+            import resource
+            usage = resource.getrusage(resource.RUSAGE_SELF)
+            rss_memory = usage.ru_maxrss
+        except ImportError:
+            rss_memory = -1
+
         return {
             "os_type": self.os_type,
             "machine": self.machine,
             "pid": self.pid,
             "timestamp_ns": time.time_ns(),
             "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
+            "rss_memory": rss_memory,
         }
 
     def verify_environment_sovereignty(self, key_name: str) -> str:
@@ -80,9 +91,11 @@ class OrchestrationPillar:
             CREATE TABLE IF NOT EXISTS state_events (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 payload_hash TEXT NOT NULL UNIQUE,
+                lamport_t INTEGER NOT NULL DEFAULT 0,
                 mode TEXT NOT NULL,
                 cortex_taint TEXT NOT NULL,
-                created_at REAL NOT NULL
+                created_at REAL NOT NULL,
+                UNIQUE(lamport_t, payload_hash)
             );
             """)
             conn.commit()
@@ -116,9 +129,16 @@ class OrchestrationPillar:
         with sqlite3.connect(self.db_file, timeout=5.0) as conn:
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
+            
+            # Retrieve Lamport clock (Ω12 Tie-Breaking BFT)
+            cur = conn.cursor()
+            cur.execute("SELECT MAX(lamport_t) FROM state_events;")
+            max_t = cur.fetchone()[0]
+            next_t = (max_t + 1) if max_t is not None else 1
+
             conn.execute(
-                "INSERT INTO state_events (payload_hash, mode, cortex_taint, created_at) VALUES (?, ?, ?, ?);",
-                (payload_hash, mode, taint, time.time()),
+                "INSERT INTO state_events (payload_hash, lamport_t, mode, cortex_taint, created_at) VALUES (?, ?, ?, ?, ?);",
+                (payload_hash, next_t, mode, taint, time.time()),
             )
             conn.commit()
 
@@ -172,6 +192,20 @@ class MemoryPillar:
 class DeterminismPillar:
     """Attestation engine enforcing physical disk validation and strict Causal Hierarchy (Ω34, Ω158)."""
 
+    def __init__(self, db_file: str = DB_PATH) -> None:
+        self.db_file = db_file
+
+    def check_idempotency_lock(self, payload_hash: str) -> bool:
+        """Verifies if the exact payload exists in the BFT topology (Ω15)."""
+        with sqlite3.connect(self.db_file, timeout=5.0) as conn:
+            cur = conn.cursor()
+            cur.execute("SELECT 1 FROM state_events WHERE payload_hash = ?", (payload_hash,))
+            if cur.fetchone():
+                raise QuadPillarIdempotencyError(
+                    f"Idempotency Lock (Ω15): Payload {payload_hash} already collapsed in BFT ledger."
+                )
+        return True
+
     def verify_disk_file_hash(self, file_path: str) -> str:
         """Confronts output against physical disk to eliminate MIMETIC_ITER (Ω34)."""
         if not os.path.isfile(file_path):
@@ -207,7 +241,7 @@ class QuadPillarKernel:
         self.system = SystemPillar()
         self.orchestration = OrchestrationPillar(db_file=db_file)
         self.memory = MemoryPillar()
-        self.determinism = DeterminismPillar()
+        self.determinism = DeterminismPillar(db_file=db_file)
 
     def audit_quad_pillars(self) -> Dict[str, Any]:
         """Runs a complete self-audit across the 4 autopoietic pillars."""

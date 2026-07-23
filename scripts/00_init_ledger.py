@@ -12,7 +12,7 @@ DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
 
 def init_ledger() -> None:
     # Validate BFT key presence via cortex_env (Ω25)
-    bft_key = get_bft_key()
+    get_bft_key()
 
     if not os.path.exists(CORTEX_DIR):
         os.makedirs(CORTEX_DIR)

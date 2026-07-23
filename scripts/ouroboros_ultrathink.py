@@ -3,7 +3,6 @@ import math
 import hashlib
 import json
 import os
-import subprocess
 import time
 
 def calculate_entropy(probabilities):

@@ -4,7 +4,6 @@ import pytest
 import os
 import hashlib
 import sys
-from unittest.mock import patch
 
 # Mock env var before importing
 os.environ["CORTEX_BFT_KEY"] = "DUMMY_TEST_KEY"
@@ -76,7 +75,6 @@ def test_wal_contention():
         
         # We will enqueue 100 writes concurrently
         prev = genesis_hash
-        tasks = []
         
         for i in range(1, 101):
             lamport_t = i

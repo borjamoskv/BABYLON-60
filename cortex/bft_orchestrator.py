@@ -18,7 +18,6 @@ import asyncio
 import sqlite3
 import hashlib
 import time
-import os
 
 try:
     import strike_rs  # type: ignore
