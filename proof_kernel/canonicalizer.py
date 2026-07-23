@@ -1,35 +1,38 @@
 import hashlib
-import json
+import cbor2
 from typing import Any
 
-def canonicalize(evidence: dict[str, Any]) -> str:
+def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
     """
-    Ω168 · Canonical Representation Invariant
-    Convierte un subgrafo de evidencia en una cadena de texto canónica.
-    Garantiza que grafos isomórficos generen la misma representación.
+    Ω168 / INV_C5_18 · Canonical Representation (CBOR)
+    Convierte el estado de evidencia en bytes puros de CBOR.
     """
-    # Exclusión de determinismo de punto flotante en BFT (INV_C5_18)
     def _sanitize_objects(obj: Any) -> Any:
         if isinstance(obj, float):
             raise ValueError("Floating-point numbers are prohibited in C5-REAL canonical representation.")
         if isinstance(obj, set):
-            # Sets have non-deterministic order. Sort and convert to list.
             return sorted(list(obj))
-        if isinstance(obj, bytes):
-            # Bytes cannot be serialized natively by JSON
-            import base64
-            return base64.b64encode(obj).decode('utf-8')
+        # bytes are natively supported by CBOR, so we don't need to b64 encode them anymore!
         if isinstance(obj, dict):
-            return {str(k): _sanitize_objects(v) for k, v in obj.items()}
+            # dict keys must be strings for deterministic cross-platform hashes usually, 
+            # though CBOR handles it. We enforce string keys and sort them.
+            return {str(k): _sanitize_objects(obj[k]) for k in sorted(obj.keys(), key=str)}
         if isinstance(obj, list):
             return [_sanitize_objects(i) for i in obj]
         return obj
 
     sanitized = _sanitize_objects(evidence)
-    return json.dumps(sanitized, sort_keys=True, separators=(',', ':'))
+    return cbor2.dumps(sanitized)
 
-def hash_evidence(evidence: dict[str, Any]) -> str:
+def hash_evidence(evidence: dict[str, Any] | str | int | bytes) -> str:
     """
-    Calcula el hash SHA3-256 de la evidencia canónica.
+    Calcula el hash determinista usando SHA-256 sobre CBOR.
     """
-    return hashlib.sha3_256(canonicalize(evidence).encode('utf-8')).hexdigest()
+    if isinstance(evidence, dict):
+        payload = canonicalize_cbor(evidence)
+    elif isinstance(evidence, bytes):
+        payload = evidence
+    else:
+        payload = str(evidence).encode('utf-8')
+        
+    return hashlib.sha256(payload).hexdigest()

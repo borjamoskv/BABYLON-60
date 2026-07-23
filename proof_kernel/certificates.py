@@ -32,6 +32,13 @@ class ClosureCertificate:
         
     def verify(self) -> bool:
         """
-        Verify(Replay(E)) = true
+        Ω171 / Tamper-Evident Verification.
+        Recalculates the internal cryptographic hash to prove memory immutability.
         """
+        combined = {"E": self.evidence_hash, "R": self.ruleset_hash, "S": self.state_hash, "M": self.residual_microbits}
+        current_hash = hash_evidence(combined)
+        
+        if current_hash != self.cert_hash:
+            raise ValueError(f"Ω171 Violated: Certificate Tampering Detected. Hash mismatch: {current_hash} != {self.cert_hash}")
+            
         return self.certified and self.residual_microbits < self.epsilon_threshold

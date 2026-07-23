@@ -135,3 +135,28 @@ Actualmente, `ASTRule` extrae el código fuente, calcula el hash, y lo ejecuta m
 
 ### Resolución Requerida (Refactor Axiomático)
 - **Auditoría Estática de Pureza (Static Purity Auditor):** `ASTRule` debe atravesar el AST antes de compilarlo (`ast.walk`) y abortar con excepción si detecta nodos de tipo `ast.Import`, `ast.ImportFrom`, o el uso de llamadas a funciones nativas termodinámicamente impuras o volátiles (`eval`, `exec`, `open`, `__import__`, `globals`). Esto confina matemáticamente la ejecución a una transformación pura del estado en memoria, cristalizando Ω166 a nivel de intérprete.
+
+---
+
+## 6. Prueba de Insuficiencia: Falsación de Inmutabilidad en Memoria y Colapso de Serialización (Falsación de Ω171 y Ω168)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El método de verificación del certificado asume confianza ciega en variables mutables en memoria, ignorando su propio hash criptográfico. Paralelamente, la función de canonicalización retorna strings JSON de longitud arbitraria en lugar de verdaderos *digests* criptográficos, quebrando las garantías de rendimiento y el determinismo binario BFT exigido por la regla INV_C5_18.
+
+### Demostración Destructiva
+
+**1. Tampering en Memoria (Falsación de Ω171)**
+El método `ClosureCertificate.verify()` evalúa `return self.certified and self.residual_microbits < self.epsilon_threshold`. Sin embargo, `cert_hash` no interviene en la validación.
+**Consecuencia:** Si la memoria del proceso sufre *bit-flipping* o un agente modifica `cert.residual_microbits = 0` post-instanciación, `verify()` retornará `True`. El certificado no es a prueba de manipulaciones (Tamper-Evident) porque ignora el re-cómputo y aserción de su propia raíz criptográfica.
+
+**2. Falsedad del Digest y Fragilidad JSON (Falsación de Ω168 / INV_C5_18)**
+La función `hash_evidence()` retorna `json.dumps(...)`. Si la evidencia pesa 50MB, el "hash" es un string de 50MB. Además, JSON sólo garantiza 53 bits de precisión entera, y su representación unicode varía entre implementaciones, quebrando el consenso BFT. INV_C5_18 ordena explícitamente el uso de `canonicalize_cbor`.
+**Consecuencia:** El sistema sufrirá latencias terminales y colapso de memoria moviendo strings gigantes, y el determinismo fallará en arquitecturas divergentes.
+
+### Resolución Requerida (Refactor Axiomático)
+- **CBOR + SHA-256 (Strict Digest):** `hash_evidence` debe ser reemplazado. El estado saneado debe ser serializado a bytes puros usando `cbor2.dumps()` (que respeta los 64-bits y el determinismo binario de mapas) y luego reducido a un verdadero *digest* de 32 bytes con `hashlib.sha256(payload).hexdigest()`.
+- **Verificación Auto-Criptográfica:** `ClosureCertificate.verify()` debe instanciar un recálculo de $C_{hash}$ combinando dinámicamente los campos actuales de la clase, y asertar rígidamente que coincide con el `cert_hash` sellado originalmente, garantizando inmutabilidad.

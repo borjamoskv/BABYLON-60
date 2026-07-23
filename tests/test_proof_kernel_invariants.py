@@ -99,6 +99,17 @@ def test_closure_certificate():
     with pytest.raises(ValueError, match="Residual entropy"):
         ClosureCertificate(e_hash, r_hash, state, residual_microbits=1500, epsilon_threshold=1000)
 
+def test_certificate_tampering():
+    """Ω171 · Tamper-Evident Verification Test"""
+    state = {"resolved": True}
+    cert = ClosureCertificate("e_hash", "r_hash", state, residual_microbits=500, epsilon_threshold=1000)
+    assert cert.verify() is True
+    
+    # Simulate memory tampering (Agent dynamically changes microbits to 0)
+    cert.residual_microbits = 0
+    with pytest.raises(ValueError, match="Certificate Tampering Detected"):
+        cert.verify()
+
 from proof_kernel.semantics import verify_kernel_minimality
 
 def test_kernel_minimality():
