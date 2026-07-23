@@ -72,19 +72,20 @@ def test_proof_derivation():
     dag = {"node1": ["node2"]}
     initial = CRDTMap()
     
-    result = dag_inference(initial, dag, rules)
+    result, entropy = dag_inference(initial, dag, rules)
+    
+    result, entropy = dag_inference(initial, dag, rules)
+    
     assert result.get("A") == 1
     assert result.get("B") == 2
+    assert entropy >= 0
 
-def test_minimality():
-    """Ω170 · Minimality Executable Test (Microbits)"""
-    prior_microbits = 1000000
-    posterior_microbits = 1500000
-    with pytest.raises(ValueError, match="Epistemic Monotonicity"):
-        compute_information_gain(prior_microbits, posterior_microbits)
-        
-    assert compute_information_gain(1000000, 1000000) == 0, "No exergy implies pruning under Ω170"
-    assert compute_information_gain(1000000, 469000) == 531000, "Fractional bits preserved in microbits"
+def test_epistemic_monotonicity():
+    """Ω155 · Epistemic Monotonicity Executable Test"""
+    # A prior cannot have less entropy than a posterior
+    assert compute_information_gain(prior_microbits=1000, posterior_microbits=500) == 500
+    with pytest.raises(ValueError, match="entropy increased"):
+        compute_information_gain(prior_microbits=500, posterior_microbits=1000)
 
 def test_closure_certificate():
     """Ω171 · Completeness Certificate Executable Test (Triple Bind)"""

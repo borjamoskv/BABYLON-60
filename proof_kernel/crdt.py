@@ -49,6 +49,18 @@ class CRDTMap:
                 merged.state[k] = v
         return merged
 
+    def measure_entropy(self, max_entropy_microbits: int = 1_000_000) -> int:
+        """
+        Ω163 / Thermodynamic Proxy.
+        Calculates residual entropy by subtracting information density from max entropy.
+        Each byte of deterministic CBOR serialization counts as 100 microbits of resolved information.
+        """
+        from proof_kernel.canonicalizer import canonicalize_cbor
+        cbor_bytes = canonicalize_cbor(self.to_dict())
+        info_density = len(cbor_bytes) * 100
+        residual = max_entropy_microbits - info_density
+        return max(0, residual)
+
     def to_dict(self) -> dict[str, Any]:
         """Canonical dictionary representation of the CRDT state."""
         return {k: v.to_dict() for k, v in self.state.items()}

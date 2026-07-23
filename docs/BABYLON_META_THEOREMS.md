@@ -160,3 +160,24 @@ La función `hash_evidence()` retorna `json.dumps(...)`. Si la evidencia pesa 50
 ### Resolución Requerida (Refactor Axiomático)
 - **CBOR + SHA-256 (Strict Digest):** `hash_evidence` debe ser reemplazado. El estado saneado debe ser serializado a bytes puros usando `cbor2.dumps()` (que respeta los 64-bits y el determinismo binario de mapas) y luego reducido a un verdadero *digest* de 32 bytes con `hashlib.sha256(payload).hexdigest()`.
 - **Verificación Auto-Criptográfica:** `ClosureCertificate.verify()` debe instanciar un recálculo de $C_{hash}$ combinando dinámicamente los campos actuales de la clase, y asertar rígidamente que coincide con el `cert_hash` sellado originalmente, garantizando inmutabilidad.
+
+---
+
+## 7. Prueba de Insuficiencia: Desconexión Termodinámica y Falsación de Monotonicidad (Falsación de Ω163 y Ω155)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El motor `dag_inference` procesa las mutaciones topológicas del estado (CRDT Maps) operando a ciegas respecto a la termodinámica de la información. Al no calcular la Entropía de Shannon (Microbits) derivada de cada mutación, el motor es incapaz de asertar la Monotonicidad Epistémica (Ω155) en tiempo de ejecución, y condena a `ClosureCertificate` a depender de valores inyectados estáticamente.
+
+### Demostración Destructiva
+
+**1. Desconexión Termodinámica (Falsación de Ω163)**
+Actualmente, las reglas devuelven un `CRDTMap`, y el motor las fusiona. Sin embargo, la función `compute_information_gain` jamás es invocada. El sistema no sabe si una regla destruyó incertidumbre o simplemente desperdició ciclos de CPU.
+**Consecuencia:** Al no vincular matemáticamente el crecimiento del estado CRDT con el decrecimiento de la Entropía (Microbits), el `ClosureCertificate` es una ilusión. Se puede certificar el éxito sin que el sistema demuestre formalmente que el "misterio" se redujo.
+
+### Resolución Requerida (Refactor Axiomático)
+- **Cálculo de Entropía Proxy (Lattice Entropy):** Dado que los CRDT (semilátices) crecen de forma estrictamente monótona, la Entropía del Estado ($H_S$) debe derivarse directamente de su volumen de información convergente. Se establecerá $H_{max} = 1,000,000$ microbits. Cada par (clave, valor) en el CRDT restará entropía proporcional a su densidad de información (ej. tamaño del payload CBOR) o mediante una métrica fija.
+- **Inferencia Termodinámica Activa:** `dag_inference` medirá el $H(S)$ antes y después de evaluar cada nodo del DAG, invocando `compute_information_gain`. Si una regla produce entropía negativa (aumento de incertidumbre) abortará la ejecución protegiendo Ω155. Finalmente, `dag_inference` retornará una tupla `(CRDTMap, residual_microbits)` permitiendo el sellado físico y real del certificado.

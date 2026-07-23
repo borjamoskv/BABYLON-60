@@ -24,14 +24,16 @@ def topological_sort(dag: dict[str, list[str]]) -> list[str]:
         raise ValueError("Ω159 Violated: Graph has cycles, topological sort failed.")
     return order
 
-def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict[str, ASTRule]) -> CRDTMap:
+def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict[str, ASTRule], max_entropy: int = 1_000_000) -> tuple[CRDTMap, int]:
     """
     Ω159 · Dependency Closure & Ω166 · Pure Inference (CRDT)
-    Ejecuta inferencia formal evaluando reglas AST en orden topológico estricto,
-    y unificando el estado a través de CRDT Maps para resolver diamantes.
+    Ejecuta inferencia formal evaluando reglas AST en orden topológico estricto.
+    Retorna el CRDT final y la entropía residual en microbits.
     """
     order = topological_sort(dag)
     node_states = {order[0]: initial_state}
+    
+    current_entropy = initial_state.measure_entropy(max_entropy)
     
     # Resolver en orden
     for node in order:
@@ -39,6 +41,10 @@ def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict
         
         if node in rules:
             result_state = rules[node].execute(current_state)
+            new_entropy = result_state.measure_entropy(max_entropy)
+            # Asertar monotonicidad epistémica
+            compute_information_gain(current_entropy, new_entropy)
+            current_entropy = new_entropy
         else:
             result_state = current_state
             
@@ -57,7 +63,8 @@ def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict
     for sink in sinks[1:]:
         final_crdt = final_crdt.merge(node_states[sink])
         
-    return final_crdt
+    final_entropy = final_crdt.measure_entropy(max_entropy)
+    return final_crdt, final_entropy
 
 def compute_information_gain(prior_microbits: int, posterior_microbits: int) -> int:
     """
