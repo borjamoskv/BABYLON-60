@@ -1,16 +1,23 @@
 #![allow(unsafe_op_in_unsafe_fn)]
 use pyo3::prelude::*;
 use pyo3::exceptions::PyRuntimeError;
+use std::sync::{Arc, Mutex};
 
 use crate::ledger::MasterLedger;
 use crate::atms::Atms;
 use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use crate::publisher::{Publisher, ExportFormat};
 
+#[derive(Clone)]
+struct CortexKernelInner {
+    ledger: Arc<Mutex<MasterLedger>>,
+    atms: Arc<Mutex<Atms>>,
+}
+
 #[pyclass]
+#[derive(Clone)]
 pub struct CortexKernel {
-    ledger: MasterLedger,
-    atms: Atms,
+    inner: CortexKernelInner,
 }
 
 #[pymethods]
@@ -51,93 +58,122 @@ impl CortexKernel {
         }
         
         Ok(Self {
-            ledger,
-            atms,
+            inner: CortexKernelInner {
+                ledger: Arc::new(Mutex::new(ledger)),
+                atms: Arc::new(Mutex::new(atms)),
+            }
         })
     }
 
     /// Inyecta conocimiento en el Kernel (C5-REAL SQLite WAL + ATMS)
-    pub fn assert_knowledge(&mut self, content: &str, sensor: &str, environment_id: &str) -> PyResult<String> {
-        let js = JustifiedStatement {
-            statement: Statement {
-                content: content.to_string(),
-                modality: Modality::Epistemic,
-                obligations: vec![],
-            },
-            justification: Justification::Observation {
-                timestamp: 0,
-                sensor: sensor.to_string(),
-            }
-        };
+    pub fn assert_knowledge(&self, py: Python<'_>, content: String, sensor: String, environment_id: String) -> PyResult<String> {
+        let inner = self.inner.clone();
+        
+        py.allow_threads(move || {
+            let mut ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
+            let mut atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
 
-        // Master Ledger (SQLite)
-        let taint = self.ledger.assert_knowledge(&js, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error: {}", e)))?;
-        
-        // ATMS Memory
-        self.atms.install(&js);
-        
-        Ok(taint)
+            let js = JustifiedStatement {
+                statement: Statement {
+                    content: content.clone(),
+                    modality: Modality::Epistemic,
+                    obligations: vec![],
+                },
+                justification: Justification::Observation {
+                    timestamp: 0,
+                    sensor,
+                }
+            };
+
+            // Master Ledger (SQLite)
+            let taint = ledger.assert_knowledge(&js, &environment_id)
+                .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error: {}", e)))?;
+            
+            // ATMS Memory
+            atms.install(&js);
+            
+            Ok(taint)
+        })
     }
 
     /// Inyecta una contradicción (nogood) en el Kernel y propaga DDB en ATMS
-    pub fn contradict_knowledge(&mut self, content: &str, environment_id: &str) -> PyResult<String> {
-        let stmt = Statement {
-            content: content.to_string(),
-            modality: Modality::Epistemic,
-            obligations: vec![],
-        };
-        let js = JustifiedStatement {
-            statement: stmt.clone(),
-            justification: Justification::Conjecture,
-        };
-        // Ensure statement is recorded in Master Ledger so nogood replay can find it
-        self.ledger.assert_knowledge(&js, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
-
-        let statement_hash = MasterLedger::hash_statement(&stmt);
-        let taint = self.ledger.assert_nogood(&statement_hash, environment_id)
-            .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting nogood: {}", e)))?;
-            
-        let node_id = if let Some(node_id) = self.atms.find_node_by_datum(content) {
-            node_id
-        } else {
-            self.atms.install(&js)
-        };
-        self.atms.contradict(&[node_id]);
+    pub fn contradict_knowledge(&self, py: Python<'_>, content: String, environment_id: String) -> PyResult<String> {
+        let inner = self.inner.clone();
         
-        Ok(taint)
+        py.allow_threads(move || {
+            let mut ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
+            let mut atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+
+            let stmt = Statement {
+                content: content.clone(),
+                modality: Modality::Epistemic,
+                obligations: vec![],
+            };
+            let js = JustifiedStatement {
+                statement: stmt.clone(),
+                justification: Justification::Conjecture,
+            };
+            
+            // Ensure statement is recorded in Master Ledger so nogood replay can find it
+            ledger.assert_knowledge(&js, &environment_id)
+                .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
+
+            let statement_hash = MasterLedger::hash_statement(&stmt);
+            let taint = ledger.assert_nogood(&statement_hash, &environment_id)
+                .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting nogood: {}", e)))?;
+                
+            let node_id = if let Some(node_id) = atms.find_node_by_datum(&content) {
+                node_id
+            } else {
+                atms.install(&js)
+            };
+            atms.contradict(&[node_id]);
+            
+            Ok(taint)
+        })
     }
 
     /// Verifica si una proposición es creída en el punto fijo ATMS actual
-    pub fn is_believed(&self, content: &str) -> PyResult<bool> {
-        if let Some(node_id) = self.atms.find_node_by_datum(content) {
-            Ok(self.atms.is_believed(node_id))
-        } else {
-            Ok(false)
-        }
+    pub fn is_believed(&self, py: Python<'_>, content: String) -> PyResult<bool> {
+        let inner = self.inner.clone();
+        py.allow_threads(move || {
+            let atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            if let Some(node_id) = atms.find_node_by_datum(&content) {
+                Ok(atms.is_believed(node_id))
+            } else {
+                Ok(false)
+            }
+        })
     }
 
     /// Descarga en tiempo de ejecución la obligación de no-contradicción
-    pub fn contradiction_free(&self, content: &str) -> PyResult<bool> {
-        if let Some(node_id) = self.atms.find_node_by_datum(content) {
-            Ok(self.atms.contradiction_free(node_id))
-        } else {
-            Ok(true)
-        }
+    pub fn contradiction_free(&self, py: Python<'_>, content: String) -> PyResult<bool> {
+        let inner = self.inner.clone();
+        py.allow_threads(move || {
+            let atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            if let Some(node_id) = atms.find_node_by_datum(&content) {
+                Ok(atms.contradiction_free(node_id))
+            } else {
+                Ok(true)
+            }
+        })
     }
 
     /// Exporta el subgrafo BFT como Markdown o JSON
-    pub fn publish(&self, environment_id: &str, format: &str) -> PyResult<String> {
-        let publisher = Publisher::new(&self.ledger);
-        let export_format = match format.to_lowercase().as_str() {
-            "json" => ExportFormat::Json,
-            "markdown" | "md" => ExportFormat::Markdown,
-            _ => return Err(PyRuntimeError::new_err("Unsupported format. Use 'json' or 'markdown'")),
-        };
+    pub fn publish(&self, py: Python<'_>, environment_id: String, format: String) -> PyResult<String> {
+        let inner = self.inner.clone();
+        py.allow_threads(move || {
+            let ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
+            let publisher = Publisher::new(&*ledger);
+            let export_format = match format.to_lowercase().as_str() {
+                "json" => ExportFormat::Json,
+                "markdown" | "md" => ExportFormat::Markdown,
+                _ => return Err(PyRuntimeError::new_err("Unsupported format. Use 'json' or 'markdown'")),
+            };
 
-        publisher.publish(environment_id, export_format)
-            .map_err(|e| PyRuntimeError::new_err(e))
+            publisher.publish(&environment_id, export_format)
+                .map_err(|e| PyRuntimeError::new_err(e))
+        })
     }
 }
 
@@ -158,37 +194,35 @@ mod tests {
         let db_path = "target/test_cortex_kernel_replay.db";
         let _ = fs::remove_file(db_path);
 
-        {
-            let mut kernel = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to initialize CortexKernel");
+        pyo3::prepare_freethreaded_python();
+        Python::with_gil(|py| {
+            {
+                let kernel = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to initialize CortexKernel");
 
-            // Assert empirical knowledge (Observation -> Premise in ATMS)
-            let id1 = kernel.assert_knowledge("Water is H2O", "sensor_a", "env_master")
-                .expect("[C5-REAL] FATAL: assert_knowledge failed");
-            assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
+                let id1 = kernel.assert_knowledge(py, "Water is H2O".to_string(), "sensor_a".to_string(), "env_master".to_string())
+                    .expect("[C5-REAL] FATAL: assert_knowledge failed");
+                assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
 
-            // Verify belief in ATMS
-            assert!(kernel.is_believed("Water is H2O").unwrap());
-            assert!(kernel.contradiction_free("Water is H2O").unwrap());
+                assert!(kernel.is_believed(py, "Water is H2O".to_string()).unwrap());
+                assert!(kernel.contradiction_free(py, "Water is H2O".to_string()).unwrap());
 
-            // Assert contradiction (nogood) against a conjecture hypothesis
-            let taint_nogood = kernel.contradict_knowledge("Alien hypothesis X", "env_master")
-                .expect("[C5-REAL] FATAL: contradict_knowledge failed");
-            assert!(taint_nogood.contains(":NOGOOD:"));
+                let taint_nogood = kernel.contradict_knowledge(py, "Alien hypothesis X".to_string(), "env_master".to_string())
+                    .expect("[C5-REAL] FATAL: contradict_knowledge failed");
+                assert!(taint_nogood.contains(":NOGOOD:"));
 
-            // Verify DDB contradiction propagation pruned the label of the contradicted conjecture
-            assert!(kernel.is_believed("Water is H2O").unwrap(), "Uncontradicted premise must remain believed");
-            assert!(!kernel.is_believed("Alien hypothesis X").unwrap(), "Contradicted hypothesis label must be pruned");
-            assert!(!kernel.contradiction_free("Alien hypothesis X").unwrap());
-        }
+                assert!(kernel.is_believed(py, "Water is H2O".to_string()).unwrap(), "Uncontradicted premise must remain believed");
+                assert!(!kernel.is_believed(py, "Alien hypothesis X".to_string()).unwrap(), "Contradicted hypothesis label must be pruned");
+                assert!(!kernel.contradiction_free(py, "Alien hypothesis X".to_string()).unwrap());
+            }
 
-        // Reopen new kernel instance from same disk DB and verify exact state replay
-        {
-            let kernel_replayed = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to reopen CortexKernel");
-            assert!(kernel_replayed.is_believed("Water is H2O").unwrap(), "Replayed uncontradicted premise must be believed");
-            assert!(kernel_replayed.contradiction_free("Water is H2O").unwrap());
-            assert!(!kernel_replayed.is_believed("Alien hypothesis X").unwrap(), "Replayed contradicted hypothesis must remain pruned");
-            assert!(!kernel_replayed.contradiction_free("Alien hypothesis X").unwrap(), "Replayed ATMS must preserve nogood state");
-        }
+            {
+                let kernel_replayed = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to reopen CortexKernel");
+                assert!(kernel_replayed.is_believed(py, "Water is H2O".to_string()).unwrap(), "Replayed uncontradicted premise must be believed");
+                assert!(kernel_replayed.contradiction_free(py, "Water is H2O".to_string()).unwrap());
+                assert!(!kernel_replayed.is_believed(py, "Alien hypothesis X".to_string()).unwrap(), "Replayed contradicted hypothesis must remain pruned");
+                assert!(!kernel_replayed.contradiction_free(py, "Alien hypothesis X".to_string()).unwrap(), "Replayed ATMS must preserve nogood state");
+            }
+        });
 
         let _ = fs::remove_file(db_path);
     }
