@@ -6,7 +6,7 @@ Validates license compliance and scans for known security vulnerabilities.
 
 import sys
 import subprocess
-import json
+
 
 APPROVED_LICENSES = {"MIT", "Apache-2.0", "BSD-3-Clause", "BSD-2-Clause", "ISC", "Python-2.0", "PSF-2.0"}
 

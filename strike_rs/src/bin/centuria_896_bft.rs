@@ -216,7 +216,7 @@ fn main() {
             
             if !node_indices.is_empty() {
                 for i in 0..node_indices.len() - 1 {
-                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]).expect("DAG invariant violated");
                 }
             }
             assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside Centuria execution flow");

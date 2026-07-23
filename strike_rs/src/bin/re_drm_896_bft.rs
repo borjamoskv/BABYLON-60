@@ -224,7 +224,7 @@ fn main() {
             // Connect edges linearly to enforce execution ordering bounds
             if !node_indices.is_empty() {
                 for i in 0..node_indices.len() - 1 {
-                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]);
+                    taint_engine.add_edge(node_indices[i], node_indices[i + 1]).expect("DAG invariant violated");
                 }
             }
             
