@@ -226,3 +226,18 @@ def test_inv_c5_18_bft_float_exclusion() -> None:
     with pytest.raises(ValueError, match="Flotantes"):
         canonicalize_cbor({"data": 12.34})
 
+
+
+def test_inv_c5_19_orchestration_fail_fast():
+    """INV_C5_19 — BFT orchestration is strictly prohibited from capturing generic exceptions."""
+    hits = _scan({".py"}, r'except\s+Exception\s*\w*\s*:')
+    hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h]
+    assert not hits, _fail_msg("INV_C5_19 (Generic except Exception: found)", hits)
+
+
+def test_inv_c5_20_kinetic_purge_protocol():
+    """INV_C5_20 — Kinetic Purge Protocol must implement Mach VM cache dropping and SIGKILL rogue daemons."""
+    hits_osascript = _scan({".py", ".sh"}, r'osascript\s+-e\s+[\'"]do\s+shell\s+script\s+["\']purge["\'][\'"]')
+    hits_sigkill = _scan({".py", ".sh"}, r'kill\s+-9|SIGKILL')
+    assert hits_osascript, "INV_C5_20 violated: Missing Mach VM cache drop via osascript purge"
+    assert hits_sigkill, "INV_C5_20 violated: Missing SIGKILL (-9) on rogue daemons"

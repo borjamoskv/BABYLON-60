@@ -13,11 +13,13 @@ __all__ = ["Vault"]
 
 try:
     from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+    from cryptography.exceptions import InvalidTag
 
     _HAS_AESGCM = True
 except ImportError:
     _HAS_AESGCM = False
     AESGCM = None  # type: ignore[assignment, misc]  # type: ignore
+    InvalidTag = Exception  # type: ignore
 
 
 class Vault:
@@ -102,7 +104,7 @@ class Vault:
                 try:
                     plaintext = aesgcm.decrypt(nonce, ciphertext, aad)
                     return plaintext.decode("utf-8")
-                except Exception:  # noqa: BLE001
+                except InvalidTag:
                     pass  # Fallthrough to try legacy
 
             # Try legacy format (no version byte, no AAD)
@@ -114,7 +116,7 @@ class Vault:
                 try:
                     plaintext = aesgcm.decrypt(nonce, ciphertext, None)
                     return plaintext.decode("utf-8")
-                except Exception:  # noqa: BLE001
+                except InvalidTag:
                     pass
 
             raise ValueError("Decryption failed: Invalid key, corrupted data, or AAD mismatch.")
