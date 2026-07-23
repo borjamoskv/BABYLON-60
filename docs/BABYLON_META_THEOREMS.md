@@ -67,3 +67,31 @@ Para sellar el Proof Kernel contra ataques de injerto, el `ClosureCertificate` d
 $$ C_{hash} = SHA3( H_E \parallel H_R \parallel H_S \parallel \text{microbits} ) $$
 1. **$H_E$ (Evidence Root):** Todo certificado debe instanciarse obligatoriamente pasando la evidencia canónica original.
 2. **$H_R$ (Ruleset Merkle Root):** El motor debe requerir un hash criptográfico de los módulos de inferencia, anclado al `kernel_version` de Ω174.
+
+---
+
+## 3. Prueba de Insuficiencia: Colapso de Topología y Amnesia Histórica (Falsación de Ω159, Ω165 y Ω170)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-23
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+La ejecución de inferencias definida en el Proof Kernel no opera realmente como un Grafo Acíclico Dirigido (DAG) formal, sino como una tubería secuencial vulnerable a condiciones de carrera topológicas. Asimismo, la afirmación de reversibilidad histórica (Ω165) es una ilusión estocástica debido a la transitoriedad del bytecode en ejecución.
+
+### Demostración Destructiva
+
+**1. Ilusión Topológica (Falsación de Ω159)**
+El motor de inferencia (`pure_inference`) acepta una lista plana de reglas (`list[Callable]`) y muta el estado iterando sobre ellas secuencialmente. 
+**Consecuencia:** El motor carece de un evaluador Topológico (Topological Sort). Si la `Regla_C` depende de la `Regla_B`, pero se inyectan en orden `[C, B]`, la prueba fallará silenciosamente. Más grave aún: si el grafo real tiene forma de diamante (A bifurca en B y C, y ambas convergen en D), la mutación directa de un diccionario centralizado (`dict[str, Any]`) sin álgebra de fusión (CRDTs) provocará que el resultado dependa enteramente del orden arbitrario en que B y C alteren las mismas claves. Esto quiebra el determinismo exigido por Ω166.
+
+**2. Amnesia Histórica (Falsación de Ω165)**
+El invariante Ω165 exige que toda prueba sea "automáticamente reconstruible". Si una prueba fue certificada bajo la `Regla_V1`, y el código físico del agente evoluciona reemplazándola por `Regla_V2`, la llamada a `replay()` fallará o arrojará un resultado divergente.
+**Consecuencia:** Guardar el string de versión (`"ruleset_version": "1.0.0"`) no preserva la función física. Dado que el Kernel no empaqueta ni almacena el AST, Bytecode o binario WASM de las reglas históricas, las pruebas antiguas se vuelven irreproducibles en el instante en que el agente hace un nuevo `git commit`.
+
+**3. Falacia de Minimidad (Falsación de Ω170)**
+El invariante declara que las premisas redundantes "se destruyen algorítmicamente". Sin embargo, la implementación actual solo verifica pasivamente si la entropía global disminuye (Monotonicidad). No existe ningún solucionador (MUC - Minimal Unsatisfiable Core) que pode activamente combinatorias de premisas que rinden $IG=0$. El grafo simplemente acumulará entropía muerta.
+
+### Resolución Requerida (Refactor Axiomático)
+- **Ejecución basada en AST/WASM:** Las reglas de inferencia no pueden ser punteros a memoria en Python (`Callable`). Deben compilarse a representaciones puras (como binarios WASM o AST serializable) que se almacenen inmutablemente en el Ledger para garantizar el Replay Histórico (Ω165).
+- **Semántica CRDT (Conflict-Free Replicated Data Types):** El estado de evidencia debe abandonar el `dict` plano y adoptar estructuras CRDT que garanticen que cualquier orden de evaluación topológica en un DAG produzca matemáticamente el mismo estado determinista.
