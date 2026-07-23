@@ -1,17 +1,12 @@
-# BABYLON Proof Kernel Specification v0.2
+# BABYLON Proof Kernel Specification v1.0
 
-Esta especificación define el núcleo de ejecución formal del sistema epistemológico BABYLON-60. El metamodelo descrito aquí transiciona el diagnóstico empírico de un registro estático hacia un asistente de pruebas empíricas fuertemente tipado (Proof Assistant).
+Esta especificación define el núcleo de ejecución formal del sistema epistemológico BABYLON-60. 
+El metamodelo reduce el espacio de arbitrariedad al exigir que las conclusiones sean trazables, reconstruibles, dependientes de evidencia explícita y recalculables bajo un kernel de inferencia definido.
 
 ## 1. Scope
-El Proof Kernel define el marco operacional que garantiza que las derivaciones causales sobre el comportamiento físico del sistema informático sean reproducibles, verificables y deterministas, aislando la inferencia epistémica de la heurística humana.
+El Proof Kernel define el marco operacional que garantiza que las derivaciones causales sobre el comportamiento físico del sistema informático sean verificables y deterministas, acotando matemáticamente el alcance del razonamiento empírico.
 
-## 2. Definitions
-- **Proof Kernel:** Motor determinista que valida las transiciones del grafo de conocimiento empírico.
-- **Ledger:** Estructura Append-Only materializada como un DAG criptográficamente sellado.
-- **C5-REAL:** Nivel de confianza físico; la conclusión está respaldada algorítmicamente por artefactos tangibles.
-- **C4-SIM:** Nivel de confianza estocástico/hipotético; la conclusión carece de validación reconstructible.
-
-## 3. Formal Objects (BABYLON vs Proof Assistants)
+## 2. Formal Objects (BABYLON vs Proof Assistants)
 | Proof Assistant (Lean/Coq) | BABYLON Proof Kernel |
 | :--- | :--- |
 | Term | Artifact |
@@ -21,45 +16,56 @@ El Proof Kernel define el marco operacional que garantiza que las derivaciones c
 | Normal Form | Canonical DAG |
 | Rechecking | Reconstruction |
 
+## 3. Formal Stratification
+El sistema completo queda estratificado lógicamente para evitar dependencias circulares:
+- **Nivel 0 (Artefactos):** Evidencia cruda. No demostrables. Aceptados axiomáticamente.
+- **Nivel 1 (Kernel):** Motor de verificación. Muy pequeño. Auditado exhaustivamente (Trusted Computing Base).
+- **Nivel 2 (Reglas de Inferencia):** Lógica causal. Demostrables por el Kernel.
+- **Nivel 3 (Diagnósticos):** Grafos de prueba instanciados. Recalculables.
+- **Nivel 4 (Decisiones):** Acciones ejecutadas en el mundo real. Reversibles.
+
 ## 4. Inference System
-El sistema de inferencia opera a través del estrato jerárquico causal:
-- **Ω138 · Causal Stratification:** La inferencia se estratifica rigurosamente en **Topología ≺ Mecanismo ≺ Etiología ≺ Remediación**. No se permite herencia transitiva de confianza entre estratos.
-- **Ω153 · Evidence Separation:** La evidencia observacional pura ($E$) está físicamente aislada de la interpretación asignada ($I$).
-- **Ω164 · Ontology vs Epistemology Separation:** El sustrato ontológico (evento físico ocurrido) nunca debe fusionarse con la asignación epistemológica (certeza inferencial actual).
+- **Ω138 · Causal Stratification:** La inferencia se estratifica en **Topología ≺ Mecanismo ≺ Etiología ≺ Remediación**.
+- **Ω153 · Evidence Separation:** La evidencia pura ($E$) está físicamente aislada de su interpretación asignada ($I$).
+- **Ω164 · Ontology vs Epistemology Separation:** El fenómeno físico (Ontología) jamás debe fusionarse con la certeza inferencial (Epistemología).
 
 ## 5. Operational Invariants
-Reglas funcionales que dictan cómo muta el grafo de conocimiento:
-- **Ω152 · Discriminatory Measurement:** Todo incremento de certeza requiere medición discriminatoria ($|H_{t+1}| < |H_t|$ o $H(M) > 0$).
-- **Ω154 · Confidence Traceability:** Todo valor de confianza exige un soporte explícito hacia uno o más `Artifacts`.
-- **Ω155 · Epistemic Monotonicity:** El estado inferencial evoluciona monótonamente. La degradación exige registro de evento de revocación.
-- **Ω156 · Physical Posterior:** Toda distribución posterior de hipótesis es un objeto probabilístico materializado que debe sumar $1.0$.
-- **Ω157 · A Priori Discriminatory Power:** Una medición $M$ registra su ganancia esperada ($EIG$) y ganancia real ($AIG$).
-- **Ω158 · Evidence Lineage:** Prohíbe mutación epistémica sin trazabilidad física ininterrumpida al subgrafo.
-- **Ω159 · Dependency Closure:** Toda inferencia es un sub-DAG cerrado; deben declararse exhaustivamente todos los `depends_on:`.
-- **Ω160 · Propagated Invalidation:** Invalidar $Artifact_i$ recalcula iterativamente solo sus inferencias descendientes.
-- **Ω161 · Absent Evidence:** "No observado" es ruido estadístico, nunca ontología negativa pura ($P(X)=0$).
-- **Ω162 · Falsification Power:** Las mediciones solo descartan (`falsifies:`) o soportan (`supports:`). Confianza es una métrica emergente $IG = H(P_{prior}) - H(P_{posterior})$.
-- **Ω163 · Residual Entropy:** El Ledger colapsa y cuantifica la entropía de Shannon restante para declarar progreso empírico.
-- **Ω166 · Pure Inference (Referential Transparency):** `Inference(Artifacts, Rules) -> Result`. Si el set de entrada no cambia, el set de salida permanece criptográficamente idéntico.
+- **Ω152 · Discriminatory Measurement:** Incrementos de certeza exigen reducción matemática de incertidumbre ($H(M) > 0$).
+- **Ω154 · Confidence Traceability:** La confianza requiere trazabilidad a artefactos mediante aristas del DAG.
+- **Ω155 · Epistemic Monotonicity:** El progreso es monótono; retroceder requiere registro de un evento físico de revocación.
+- **Ω156 · Physical Posterior:** Toda distribución posterior de hipótesis debe sumar exactamente $1.0$.
+- **Ω157 · A Priori Discriminatory Power:** Toda medición debe declarar EIG antes y registrar AIG después.
+- **Ω158 · Evidence Lineage:** Prohíbe avance epistémico sin un camino físico ininterrumpido hacia los artefactos.
+- **Ω159 · Dependency Closure:** Sub-DAGs cerrados: `depends_on:` explícito y exhaustivo.
+- **Ω160 · Propagated Invalidation:** Invalidar $Artifact_i$ recalcula incrementalmente solo sus descendientes causales.
+- **Ω161 · Absent Evidence Statistical:** "No encontrado" se procesa como probabilidad posterior estadística, nunca como imposibilidad ontológica.
+- **Ω162 · Falsification Power:** Mediciones falsifican o soportan. Certeza = $IG = H(P_{prior}) - H(P_{posterior})$.
+- **Ω163 · Residual Entropy:** Progreso empírico requiere colapso físico de la entropía de Shannon restante.
+- **Ω166 · Pure Inference (Referential Transparency):** `Inference(Artifacts, Rules) -> Result` es matemáticamente pura y determinista.
 
 ## 6. Physical Certificates
-- **Ω171 · Completeness Certificate:** Un diagnóstico empírico es un sistema incompleto hasta que emite un certificado que verifique $H_{residual} \to 0$, $H_{unresolved} = 0$, determinismo asegurado y ausencia de evidencia huérfana.
+- **Ω171 · Completeness Certificate:** Un expediente es incompleto hasta certificar $H_{residual} \to 0$, $H_{unresolved} = 0$, determinismo garantizado, y DAG hermético.
 
 ## 7. Canonical Encoding
-- **Ω168 · Canonical Representation:** El DAG entero colapsa en una Forma Normal criptográficamente deduplicable, garantizando que representaciones isomórficas arrojen idéntico hash (permitiendo comprobación O(1)).
+- **Ω168 · Canonical Representation:** El DAG entero debe colapsar a Forma Normal criptográfica para garantizar deduplicación exacta.
 
 ## 8. Proof Construction
-- **Ω169 · Proof-Carrying Diagnosis:** La unidad lógica no es "una conclusión" (`confidence: high`), sino un paquete de prueba ejecutable (`Proof: {premises, rules, derivation}`). La certeza requiere ejecución de prueba.
-- **Ω170 · Minimality:** Todo grafo de prueba es irreducible; si un artefacto puede podarse sin afectar el cálculo de la entropía residual, se destruye algorítmicamente para mantener minimidad.
+- **Ω169 · Proof-Carrying Diagnosis:** La unidad lógica de BABYLON es una prueba ejecutable (`Proof: {premises, rules, derivation}`), no un booleano de certeza.
+- **Ω170 · Minimality:** Todo grafo de prueba es irreducible. Premisas redundantes (IG = 0) deben ser podadas obligatoriamente.
 
-## 9. Soundness
-- **Ω167 · Semantic Preservation:** La semántica $\mathcal{I}(G_t)$ debe preservarse incondicionalmente bajo mutaciones o parches del motor de pruebas subyacente. Un cambio silente de significado se tipifica como error del motor, no evolución empírica.
+## 9. Failure Semantics
+- **Ω172 · Replay Determinism:** La evaluación empírica carece de dependencias externas. `∀E, Replay(E) = Replay(Canonicalize(E))`. Dependencia temporal o de estado oculto detona revocación del estrato C5.
 
-## 10. Completeness
-El sistema asume completitud relativa al set de evidencias ($A$). Ninguna inferencia $I_x$ puede afirmarse fuera del alcance topológico de la recolección física.
+## 10. The Epistemic Boundaries (Meta-Theory Closure)
+El cierre formal de la metateoría exige delimitar matemáticamente de qué es capaz el Proof Kernel y en qué confía a priori.
 
-## 11. Failure Semantics
-- **Ω172 · Replay Determinism:** La resolución de un caso debe poder reproducirse en cualquier máquina, en cualquier instante $T$. La garantía es: `replay(hash(evidence)) == replay(hash(evidence))`. Cualquier dependencia oculta (temporalidad, estado de la máquina) que quiebre este axioma revoca el estatus de C5-REAL del subgrafo afectado.
+- **Ω173 · Kernel Minimality (Trusted Computing Base):** El conjunto de reglas encargado de verificar una derivación debe ser estrictamente más pequeño que el conjunto de reglas capaces de generarla. Este axioma previene el colapso de legitimación circular (el generador no puede ser su propio verificador universal).
+- **Ω174 · Versioned Semantics:** Toda afirmación de validez depende de la tríada de versionado: `Semantics x.y`, `Ruleset a.b`, `Kernel v.v`. Una prueba no es "válida", sino "válida bajo el Kernel 0.4.2".
+- **Ω175 · Soundness Boundary:** El sistema garantiza $\text{Correct Inference} \mid \text{Correct Evidence}$. Resulta físicamente incapaz de garantizar $\text{Correct Reality}$. Si la integridad del artefacto base (e.g. log `.ips`) está comprometida, el DAG producirá una realidad formalmente válida pero empíricamente falsa.
+- **Ω176 · Completeness Boundary:** El sistema garantiza que una inferencia es *la mejor explicación* dentro del espacio topológico modelado, pero no puede demostrar la no existencia de una hipótesis $H_{n+1}$ no contemplada por el agente.
 
-## 12. Future Extensions
-La arquitectura actual servirá de pilar fundacional para la implementación de un verificador C5-REAL en el lenguaje de bajo nivel de la infraestructura BABYLON-60 (e.g., Rust), cerrando la brecha física entre definición abstracta y ejecución binaria.
+## 11. Family Ω Freeze Clause
+Con la estipulación de Ω176, **la familia de Invariantes Base (Ω) queda matemáticamente congelada.** 
+Cualquier futura evolución arquitectónica del motor o modelo de BABYLON-60 debe presentarse como:
+1. Un teorema lógicamente derivable de los invariantes Ω existentes (en `BABYLON_META_THEOREMS.md`).
+2. Una demostración destructiva explícita de que el kernel es deficiente y debe refactorizarse.

@@ -58,5 +58,28 @@ def test_replay_determinism():
     """Ω172 · Replay Determinism Executable Test"""
     evidence = {"id": "SIGABRT", "frame": "llvm"}
     
-    # ∀E, Replay(E) == Replay(Canonicalize(E))
     assert verify_replay_determinism(evidence, proof_pipeline) is True
+
+def test_kernel_minimality():
+    """Ω173 · Kernel Minimality Executable Test"""
+    from proof_kernel.semantics import verify_kernel_minimality
+    
+    assert verify_kernel_minimality(verifier_rules_count=3, generator_rules_count=10) is True
+    with pytest.raises(ValueError, match="Verifier TCB is larger"):
+        verify_kernel_minimality(verifier_rules_count=5, generator_rules_count=5)
+
+def test_versioned_semantics():
+    """Ω174 · Versioned Semantics Executable Test"""
+    from proof_kernel.semantics import execute_with_versioned_semantics
+    evidence = {"event": "crash"}
+    
+    res = execute_with_versioned_semantics(
+        proof_pipeline, evidence,
+        semantics_version="1.3.0",
+        ruleset_version="2.1.1",
+        kernel_version="0.4.2"
+    )
+    assert res["context"]["semantics"] == "1.3.0"
+    
+    with pytest.raises(ValueError, match="versioned semantics"):
+        execute_with_versioned_semantics(proof_pipeline, evidence, "", "", "")

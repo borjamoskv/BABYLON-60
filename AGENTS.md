@@ -134,3 +134,7 @@ Invariantes definidos:
 - Ω170 · Minimality
 - Ω171 · Completeness Certificate
 - Ω172 · Replay Determinism
+- Ω173 · Kernel Minimality
+- Ω174 · Versioned Semantics
+- Ω175 · Soundness Boundary
+- Ω176 · Completeness Boundary
