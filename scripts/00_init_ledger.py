@@ -1,11 +1,19 @@
 import sqlite3
 import os
+import sys
+
+# Append root directory to path to import cortex_env
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from cortex_env import get_bft_key
 
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
 
 
 def init_ledger() -> None:
+    # Validate BFT key presence via cortex_env (Ω25)
+    bft_key = get_bft_key()
+
     if not os.path.exists(CORTEX_DIR):
         os.makedirs(CORTEX_DIR)
 
