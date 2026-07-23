@@ -7,11 +7,10 @@ class ClosureCertificate:
     
     Un expediente diagnóstico es incompleto hasta que emite un certificado
     que verifique H_residual < epsilon_threshold, determinismo asegurado y ausencia
-    de evidencia huérfana.
+    de evidencia huérfana. Incorpora Triple Enlace Criptográfico para evitar Grafting.
     """
-    def __init__(self, final_state: dict[str, Any], proof_hash: str, residual_microbits: int, epsilon_threshold: int = 1000):
-        # Epsilon de Certeza: Resuelve la Paradoja de Cromwell evitando la 
-        # exigencia de 0 bits exactos inalcanzables bajo evidencia empírica con ruido.
+    def __init__(self, evidence_hash: str, ruleset_hash: str, final_state: dict[str, Any], residual_microbits: int, epsilon_threshold: int = 1000):
+        # Epsilon de Certeza
         if residual_microbits >= epsilon_threshold:
             raise ValueError(
                 f"Ω171 Violated: Cannot certify completeness. "
@@ -20,8 +19,15 @@ class ClosureCertificate:
         
         self.residual_microbits = residual_microbits
         self.epsilon_threshold = epsilon_threshold
-        self.proof_hash = proof_hash
+        
+        # Triple Cryptographic Bind
+        self.evidence_hash = evidence_hash
+        self.ruleset_hash = ruleset_hash
         self.state_hash = hash_evidence(final_state)
+        
+        # Combine hashes (naive concatenation hashed)
+        combined = {"E": self.evidence_hash, "R": self.ruleset_hash, "S": self.state_hash, "M": self.residual_microbits}
+        self.cert_hash = hash_evidence(combined)
         self.certified = True
         
     def verify(self) -> bool:
