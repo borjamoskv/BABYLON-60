@@ -10,7 +10,11 @@ os.environ["CORTEX_BFT_KEY"] = "DUMMY_TEST_KEY"
 
 # We have to import 00_init_ledger using importlib because of the leading numbers
 import importlib.util
+
 spec = importlib.util.spec_from_file_location("init_ledger_mod", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts', '00_init_ledger.py')))
+if spec is None or spec.loader is None:
+    raise RuntimeError("Failed to load spec for 00_init_ledger.py")
+
 init_ledger_mod = importlib.util.module_from_spec(spec)
 sys.modules["init_ledger_mod"] = init_ledger_mod
 spec.loader.exec_module(init_ledger_mod)
@@ -18,14 +22,14 @@ spec.loader.exec_module(init_ledger_mod)
 TEST_DB_PATH = ".cortex/test_cortex_resilience.db"
 
 # Override DB_PATH for tests
-init_ledger_mod.DB_PATH = TEST_DB_PATH
+init_ledger_mod.DB_PATH = TEST_DB_PATH  # type: ignore[attr-defined]
 
 def setup_module(module):
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
     if not os.path.exists(".cortex"):
         os.makedirs(".cortex")
-    init_ledger_mod.init_ledger()
+    init_ledger_mod.init_ledger()  # type: ignore[attr-defined]
 
 def teardown_module(module):
     if os.path.exists(TEST_DB_PATH):

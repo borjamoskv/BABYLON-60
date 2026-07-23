@@ -323,6 +323,7 @@ class BFTOrchestrator:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11, Ω113)."""
         import hmac
         import sys
+        import os
         
         # Resolve cortex_env dynamically or via sys.path to enforce Ω25
         try:
