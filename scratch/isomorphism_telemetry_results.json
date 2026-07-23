@@ -1,0 +1,34 @@
+{
+  "metadata": {
+    "system": "Darwin",
+    "architecture": "arm64",
+    "python_version": "3.14.6",
+    "timestamp_iso": "2026-07-23T17:52:32Z"
+  },
+  "metrics": {
+    "phase1_homeostasis": {
+      "processed": 244,
+      "throughput_hz": 162.38,
+      "avg_latency_us": 3.27,
+      "shannon_entropy": 1.3517
+    },
+    "phase2_chronic_pain_irq_storm": {
+      "processed": 229702,
+      "throughput_hz": 113498.07,
+      "avg_latency_us": 740380.81,
+      "max_latency_us": 1167152.5,
+      "shannon_entropy": 2.8569
+    },
+    "phase3_anesthesia_napi_gating": {
+      "processed": 8534,
+      "dropped": 866185,
+      "throughput_hz": 5269.06,
+      "avg_latency_us": 156233.23,
+      "shannon_entropy": 2.4081
+    }
+  },
+  "cryptographic_attestation": {
+    "algorithm": "SHA3-256",
+    "hash": "930a73740a53306bfdefb92717dd5991986cf8fc9b2b5543923a63e0563bd46d"
+  }
+}

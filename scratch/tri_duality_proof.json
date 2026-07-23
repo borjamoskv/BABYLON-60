@@ -1,0 +1,20 @@
+{
+  "status": "VERIFIED_C5_REAL",
+  "soc_sandpile_metrics": {
+    "total_avalanches": 867,
+    "max_avalanche_size": 1825,
+    "mean_avalanche_size": 126.05190311418686,
+    "empirical_power_law_tau": 0.7427012292664069
+  },
+  "lawvere_bqp_metrics": {
+    "lawvere_subadditivity_valid": true,
+    "mu_alpha": 12,
+    "mu_beta": 18,
+    "delta_friction": 5,
+    "compositional_singularity_active": true,
+    "bqp_grover_queries": 785,
+    "classical_queries": 500000,
+    "quantum_speedup_ratio": 636.94
+  },
+  "proof_hash": "c5_tri_duality_verified_2026_07_22"
+}
