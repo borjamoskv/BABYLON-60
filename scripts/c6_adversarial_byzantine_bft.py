@@ -52,8 +52,18 @@ class BFTLedger:
 
     def hash_block(self, lamport_t: int, nonce: str, payload: str, prev_hash: str) -> str:
         # Transductor determinista
+        import hmac
+        import sys
+        try:
+            from cortex_env import get_bft_key
+        except ImportError:
+            import os
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+            from cortex_env import get_bft_key
+            
+        bft_key = get_bft_key()
         data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
-        return hashlib.sha3_256(data).hexdigest()
+        return hmac.new(bft_key.encode("utf-8"), data, hashlib.sha3_256).hexdigest()
 
     def get_last_state(self) -> tuple[int, str]:
         cursor = self.conn.execute("SELECT lamport_t, block_hash FROM bft_ledger ORDER BY lamport_t DESC LIMIT 1")

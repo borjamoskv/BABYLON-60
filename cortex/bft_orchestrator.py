@@ -95,7 +95,20 @@ class BFTNode:
         self.is_healthy = True
 
     def compute_state_hash(self) -> str:
-        """Computes the state hash of the node using SHA3-256 for cryptographic integrity (Ω24)."""
+        """Computes the state hash of the node using HMAC-SHA3-256 for cryptographic integrity (Ω24, Ω25)."""
+        import hmac
+        import sys
+        
+        # Resolve cortex_env dynamically or via sys.path to enforce Ω25
+        try:
+            from cortex_env import get_bft_key
+        except ImportError:
+            import os
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+            from cortex_env import get_bft_key
+            
+        bft_key = get_bft_key()
+        
         # Read attributes from the Rust PyO3 classes
         state_data = (
             f"states:{self.state_vector.states},"
@@ -112,7 +125,7 @@ class BFTNode:
             f"arm64_pac:{self.arm64_re_matrix.pac_bypass_entropy},"
             f"arm64_dyld:{self.arm64_re_matrix.dyld_cache_hit_rate}"
         )
-        return hashlib.sha3_256(state_data.encode("utf-8")).hexdigest()
+        return hmac.new(bft_key.encode("utf-8"), state_data.encode("utf-8"), hashlib.sha3_256).hexdigest()
 
     def sync_from(self, source_node: "BFTNode") -> None:
         """Synchronizes the state from a healthy node to resolve a Byzantine fault."""
@@ -309,9 +322,22 @@ class BFTOrchestrator:
         self, d: int, p: int, m: int, prev_hash: str, current_hash: str
     ) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11, Ω113)."""
-        # Ω113: Dynamic Causal Taint
+        import hmac
+        import sys
+        
+        # Resolve cortex_env dynamically or via sys.path to enforce Ω25
+        try:
+            from cortex_env import get_bft_key
+        except ImportError:
+            import os
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+            from cortex_env import get_bft_key
+            
+        bft_key = get_bft_key()
+
+        # Ω113 + Ω25: Dynamic Causal Taint seeded by Sovereign Key
         raw_payload = f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
-        dynamic_hash = hashlib.sha3_256(raw_payload).hexdigest()
+        dynamic_hash = hmac.new(bft_key.encode("utf-8"), raw_payload, hashlib.sha3_256).hexdigest()
         taint = f"CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{dynamic_hash}"
         
         with self._get_connection() as conn:
