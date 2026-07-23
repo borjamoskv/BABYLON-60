@@ -407,9 +407,9 @@
   }
 </style>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js" defer></script>
 <style>
   /* Cinematic Cursor Magnet */
   .cursor-magnet {
@@ -482,12 +482,12 @@
       <p class="lead">BABYLON-60 gives an AI agent a memory it cannot quietly rewrite. Every fact, decision, and tool call is typed, hash-chained, and — when it has to hold up in front of a regulator — anchored to a timestamp the operator does not control.</p>
       <p class="lead dim" style="margin-top:.9rem;font-size:1rem">Local-first. Fail-stop. Apache-2.0.</p>
       <div class="cta-row">
-        <button class="btn btn-primary" data-copy="pip install babylon60">
+        <button class="btn btn-primary" data-copy="pip install babylon60" aria-label="Copy installation command">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-3"/><path d="M9 3v4h6V3"/></svg>
           pip install babylon60
         </button>
         <div class="download-dropdown">
-          <button class="btn btn-primary" id="download-btn" style="background: var(--lapis); border-color: var(--lapis);">
+          <button class="btn btn-primary" id="download-btn" style="background: var(--lapis); border-color: var(--lapis);" aria-label="Download Babylon 60">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Download IDE
           </button>
@@ -521,8 +521,8 @@
         <span><b>TamperError · chain broken at the mutated record.</b> Verification failed downstream. Fail-stop engaged — the ledger refuses to continue on a broken chain. Every halt leaves a reason.</span>
       </div>
       <div class="tab-foot">
-        <button class="mini-btn danger" id="tamperBtn">Simulate tamper</button>
-        <button class="mini-btn" id="resetBtn">Reset</button>
+        <button class="mini-btn danger" id="tamperBtn" aria-label="Simulate tamper">Simulate tamper</button>
+        <button class="mini-btn" id="resetBtn" aria-label="Reset simulation">Reset</button>
         <span class="foot-status" id="footStatus">chain intact</span>
       </div>
     </div>
@@ -1030,6 +1030,6 @@
 })();
 </script>
 
-<script src="cortex/frontend/cinematic_engine.js"></script>
+<script src="cortex/frontend/cinematic_engine.js" defer></script>
 </body>
 </html>
