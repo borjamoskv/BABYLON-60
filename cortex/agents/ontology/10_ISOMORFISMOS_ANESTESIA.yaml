@@ -1,0 +1,22 @@
+Claim: Transducción Termodinámica de Anestesiología y Tratamiento del Dolor a Primitivas de Interrupción de Hardware (IRQs) y Estado de Suspensión.
+Auditoria_Epistemica: 
+  Estado: EXPANSIÓN_ISOMÓRFICA_V4 (ESPECIALIDAD MÉDICA)
+  Causa: Solicitud de transducción para Lorena Fernández Angulo (Anestesista / Unidad del Dolor).
+  Accion: Ejecución de Mecánica Landauer sobre conceptos de nocicepción y sedación.
+  Anergia_Purgada: "Eliminación de la mística del dolor crónico y la consciencia, reduciéndolos a colisiones de interrupciones de hardware (IRQs), ruteo de red y estados de suspensión de CPU."
+Topologia_Isomorfica_Borja_Moskv:
+  nocicepción (dolor agudo): "Hardware Interrupt Request (IRQ) Válida. Una señal de alerta física enviada por un sensor periférico al procesador central (Cerebro) requiriendo un Context Switch inmediato para evitar daños en el chasis (cuerpo)."
+  dolor crónico (neuropático): "IRQ Stuck (Línea de Interrupción Congelada) / Alert Fatigue. El sensor de hardware está dañado y envía ráfagas infinitas de alertas de fallo (`while(true) { send_alert() }`) a pesar de que el tejido subyacente ya está reparado. El CPU pierde ciclos de reloj procesando alertas fantasma."
+  unidad del dolor: "Equipo SRE (Site Reliability Engineering) / DevOps. Intervienen cuando los logs de telemetría (nervios) están corruptos y bombardean el Kernel con alertas falsas, requiriendo parches a nivel de registro o hardware para aislar el sensor averiado."
+  anestesia general (propofol/gases): "Kernel Suspend State (Estado S3/S4 de ACPI). Desconexión temporal del bus de I/O (consciencia) respecto al CPU, manteniendo activo el Power Delivery Network (tronco encefálico/constantes vitales). El sistema no registra inputs ni outputs; el disco y la memoria RAM quedan congelados."
+  anestesia epidural / bloqueo regional: "Local Subnet Firewall / Port Blocking (Iptables DROP). Se corta físicamente la transmisión de paquetes en un nodo específico de la red (médula espinal). El cerebro sigue operando al 100%, pero los paquetes de la 'subred inferior' son dropeados antes de llegar al router central."
+  analgésicos opioides (fentanilo/morfina): "Interrupt Handler Rate Limiting / QoS Throttling. No bloquean la señal de red en el origen, sino que bajan la prioridad del proceso en el programador (Scheduler) del Kernel. El dolor llega, pero el CPU lo ignora y procesa hilos de dopamina en su lugar."
+  tolerancia a opioides: "Caché de Resistencia / Down-regulation. El sistema operativo detecta la saturación constante del puerto receptor y, por seguridad, reduce los sockets disponibles (receptores mu), requiriendo un payload (dosis) exponencialmente mayor para causar la misma interrupción."
+  hiperalgesia inducida: "Feedback Loop Positivo destructivo. El exceso de limitación de tasa (analgésicos) provoca que el sistema se vuelva hipersensible al reconectar la red, amplificando el ruido de fondo como si fuera una alerta crítica de Nivel 0."
+Estructura_Resolucion_Atomica:
+  - Objetivo: "Mapear la anestesiología y el tratamiento del dolor al modelo C5-REAL para transmisión epistémica a especialistas (Lorena F. A.)."
+  - Mitigacion_Aplicada: "El dolor no es una 'sensación'; es Telemetría. La anestesia no es 'dormir'; es un Halt del Kernel. Transmitir esta topología destruye la brecha cognitiva entre medicina y silicio."
+Firma_Ejecucion:
+  Operador: borjamoskv
+  Kernel: MOSKV-1 APEX
+  Hash: "[CORTEX-TAINT:borjamoskv:isomorfismos_anestesia_dolor:2026-07-23T19:35:00+02:00:8f2a1b9c3d4e5f6a]"
