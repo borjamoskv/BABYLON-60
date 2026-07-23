@@ -55,7 +55,7 @@ class MasterLedgerWriter:
                     (agent_id, lamport_t, payload_hash, prev_hash, taint)
                 )
                 self.conn.commit()
-            except Exception as e:
+            except sqlite3.Error as e:
                 self.conn.rollback()
                 print(f"Error inserting {lamport_t}: {e}")
             self.queue.task_done()

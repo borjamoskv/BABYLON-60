@@ -37,7 +37,7 @@ def run_single_thread(thread_id: int, db_path: str, pre: str, post: str, n_iters
         except sqlite3.OperationalError as e:
             failures += 2
             errors.append(str(e))
-        except Exception as e:
+        except sqlite3.Error as e:
             failures += 2
             errors.append(f"Unexpected: {str(e)}")
 

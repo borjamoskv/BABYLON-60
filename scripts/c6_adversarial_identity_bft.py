@@ -49,7 +49,7 @@ def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.s
     try:
         # TRUNCATE asegura que SQLite mueva todo el WAL a la BD y lo trunque a 0
         conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
-    except Exception:
+    except sqlite3.Error:
         pass
 
 def c6_adversarial_orchestrator() -> None:

@@ -16,7 +16,7 @@ class ObjectSpace:
             handle = Handle()
             self.objects[handle] = payload
             return handle
-        except Exception as e:
+        except (MemoryError, ValueError) as e:
             raise ImplementationError(f"Failed to allocate in Object Space: {e}") from e
 
     def lookup(self, handle: Handle) -> Any:

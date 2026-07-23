@@ -76,7 +76,7 @@ def ledger_validator(tx: dict[str, Any]) -> None:
         cursor.execute("INSERT INTO history (tx_data, status, reason) VALUES (?, 'COMMITTED', 'OK')", (str(tx),))
         conn.commit()
         
-    except Exception:
+    except sqlite3.Error:
         conn.rollback()
     finally:
         conn.close()

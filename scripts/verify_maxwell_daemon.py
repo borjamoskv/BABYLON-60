@@ -63,7 +63,7 @@ def main() -> None:
                     history = json.loads(content)
                     if not isinstance(history, list):
                         history = [history]
-        except Exception:
+        except (OSError, json.JSONDecodeError):
             pass
 
     history.append(metrics)

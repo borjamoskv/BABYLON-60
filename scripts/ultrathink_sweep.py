@@ -76,7 +76,7 @@ def ultrathink_sweep() -> None:
         engine = L3InferenceEnginePhysical(target_trajectories=20)
         theorem = engine.compile_theorem("ULTRATHINK_SWEEP_AUDIT")
         print(f"✔️  MCTS Physical Compiler Operativo. Entropía={theorem.shannon_entropy:.4f}, Exergía={theorem.exergy_ratio:.4f}, Nodos={theorem.ast_nodes}, Poda={theorem.pruned_branches}")
-    except Exception as e:
+    except (RuntimeError, ValueError, OSError, ImportError) as e:
         raise EpistemicHalt(f"Falla en Motor MCTS Physical Compiler: {e}. Ejecutando purga (Ω26).")
 
     print("\n[ULTRATHINK P0] Barrido Termodinámico Completado. Estado: CERO ANERGÍA.")

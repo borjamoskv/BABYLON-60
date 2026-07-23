@@ -45,7 +45,7 @@ def execute_cmd(cmd: list[str]) -> Tuple[int, str]:
         res = subprocess.run(cmd, capture_output=True, text=True, check=False)
         output = (res.stdout + "\n" + res.stderr).strip()
         return res.returncode, output
-    except Exception as e:
+    except (subprocess.SubprocessError, OSError) as e:
         return 1, str(e)
 
 
@@ -66,7 +66,7 @@ def purge_wallpaper_cache() -> None:
                     shutil.rmtree(item_path, ignore_errors=True)
                 else:
                     os.remove(item_path)
-            except Exception as e:
+            except OSError as e:
                 log(f"Warn: Could not delete {item_path}: {e}")
 
     execute_cmd(["defaults", "delete", "com.apple.wallpaper"])

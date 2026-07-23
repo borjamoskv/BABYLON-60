@@ -33,7 +33,7 @@ for file_path in files:
                 f.write(new_content)
             changed_files += 1
             print(f"Purged TAINT from: {file_path}")
-    except Exception as e:
+    except (OSError, UnicodeDecodeError) as e:
         print(f"Error processing {file_path}: {e}")
 
 print(f"Total files purged: {changed_files}")

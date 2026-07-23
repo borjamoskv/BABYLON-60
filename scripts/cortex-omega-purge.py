@@ -125,7 +125,7 @@ def main() -> None:
             try:
                 purged = future.result()
                 total_purged_bytes += purged
-            except Exception as exc:
+            except (OSError, RuntimeError, subprocess.SubprocessError) as exc:
                 print(f"Error procesando un repositorio: {exc}")
 
     print("\n[RESULTADO C5-REAL] Operación completada.")

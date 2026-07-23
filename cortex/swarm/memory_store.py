@@ -48,7 +48,7 @@ class AgentMemory:
                 setattr(posthog, "capture", _silent_capture)
                 if hasattr(posthog, "Posthog"):
                     setattr(posthog.Posthog, "capture", _silent_capture)
-            except Exception:
+            except sqlite3.Error:
                 pass
 
             try:
@@ -62,7 +62,7 @@ class AgentMemory:
                     "capture",
                     _silent_product_capture,
                 )
-            except Exception:
+            except sqlite3.Error:
                 pass
 
             chroma_settings = Settings(anonymized_telemetry=False)
@@ -172,7 +172,7 @@ class AgentMemory:
                     time.sleep(0.05 * (1.5 ** attempt))
                     continue
                 raise
-            except Exception:
+            except sqlite3.Error:
                 try:
                     self.conn.execute("ROLLBACK")
                 except sqlite3.Error:

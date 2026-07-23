@@ -70,11 +70,11 @@ def write_output(path: str, lines: list[Any]) -> None:
         with open(tmp_path, "w", encoding="utf-8") as f:
             f.write("\n".join(str(ln) for ln in lines))
         os.replace(tmp_path, path)
-    except Exception as e:
+    except OSError as e:
         if os.path.exists(tmp_path):
             try:
                 os.remove(tmp_path)
-            except Exception:
+            except OSError:
                 pass
         raise e
     print(f"Generated: {path}")

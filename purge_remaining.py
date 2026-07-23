@@ -31,7 +31,7 @@ for root, dirs, files in os.walk(root_dir):
             try:
                 with open(path, 'r', encoding='utf-8') as file:
                     content = file.read()
-            except Exception:
+            except (OSError, UnicodeDecodeError):
                 continue
             
             orig = content

@@ -249,7 +249,7 @@ class Categorical896Engine:
         if RUST_ENGINE_AVAILABLE:
             try:
                 self.rust_engine = strike_rs.RustCategoricalEngine()
-            except Exception:
+            except (ImportError, RuntimeError, OSError, AttributeError):
                 self.rust_engine = None
 
         self._load_yaml()
