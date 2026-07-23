@@ -1,7 +1,10 @@
+#[cfg(target_os = "linux")]
 use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
+#[cfg(target_os = "linux")]
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
+#[cfg(target_os = "linux")]
 use signal_hook::iterator::Signals;
 use std::env;
 use std::path::Path;
@@ -81,6 +84,7 @@ impl BftLedger {
     }
 }
 
+#[cfg(target_os = "linux")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
@@ -259,4 +263,10 @@ mod tests {
         let root_2 = ledger.compute_merkle_root();
         assert_ne!(root_1, root_2);
     }
+}
+
+#[cfg(not(target_os = "linux"))]
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    println!("█▄ [C5-REAL] OS NO SOPORTADO PARA BFT_INTERCEPTOR");
+    Ok(())
 }
