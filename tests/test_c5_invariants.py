@@ -306,3 +306,9 @@ def test_inv_c5_25_dynamic_brain_vault_scanning() -> None:
     content = agents_path.read_text(errors="ignore")
     assert "INV_C5_25" in content, "INV_C5_25 rule definition missing in .agents/AGENTS.md"
     assert "belongs_to_babylon" in content, "INV_C5_25 missing belongs_to_babylon filtering clause"
+
+
+def test_inv_c5_26_stub():
+    """INV_C5_26 — Auto-generated stub for rule validation."""
+    # Implementation required for concrete scan logic of rule INV_C5_26
+    pass
