@@ -20,7 +20,7 @@ class LWWRegister:
             h_other = hash_evidence(other.value)
             return self if h_self >= h_other else other
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
         return {"value": self.value, "lamport": self.lamport}
 
 
@@ -33,7 +33,7 @@ class CRDTMap:
     def __init__(self, state: dict[str, LWWRegister] | None = None):
         self.state = state or {}
 
-    def set(self, key: str, value: Any, lamport: int):
+    def set(self, key: str, value: Any, lamport: int) -> None:
         new_reg = LWWRegister(value, lamport)
         if key in self.state:
             self.state[key] = self.state[key].merge(new_reg)

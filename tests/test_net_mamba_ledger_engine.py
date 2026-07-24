@@ -25,7 +25,7 @@ def test_audited_generation_flow() -> None:
     assert len(ledger.crdt.state) == 6
 
 
-def test_mamba_ledger_fail_fast():
+def test_mamba_ledger_fail_fast() -> None:
     import pytest
 
     tokenizer = BPETokenizer()

@@ -2,7 +2,7 @@ from typing import Any, Callable
 
 
 def execute_with_versioned_semantics(
-    proof_pipeline: Callable,
+    proof_pipeline: Callable[..., Any],
     evidence: dict[str, Any],
     semantics_version: str,
     ruleset_version: str,

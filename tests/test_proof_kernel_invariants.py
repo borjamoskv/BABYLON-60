@@ -8,7 +8,7 @@ from proof_kernel.inference import compute_information_gain, dag_inference
 from proof_kernel.semantics import verify_kernel_minimality
 
 
-def test_canonicalization():
+def test_canonicalization() -> None:
     """Ω168 · Canonical Representation Executable Test"""
     ev1 = {"a": 1, "b": 2, "c": b"raw_data", "d": {1, 2}}
     ev2 = {"d": {2, 1}, "b": 2, "c": b"raw_data", "a": 1}
@@ -18,7 +18,7 @@ def test_canonicalization():
         hash_evidence({"a": 1.5})
 
 
-def test_crdt_merge():
+def test_crdt_merge() -> None:
     """CRDT Map Deterministic Merge Test"""
     map1 = CRDTMap()
     map1.set("keyA", "val1", 10)
@@ -33,7 +33,7 @@ def test_crdt_merge():
     assert merged.get("keyB") == "valB"
 
 
-def test_ast_rule():
+def test_ast_rule() -> None:
     """Ω165 / Ω166 AST Rule Binding Test"""
 
     def dummy_rule(state: CRDTMap) -> CRDTMap:
@@ -48,7 +48,7 @@ def test_ast_rule():
     assert result.get("mutated") is True
 
 
-def test_ast_purity_auditor():
+def test_ast_purity_auditor() -> None:
     """Ω166 · Pure Inference Impurity Escape Test"""
 
     def impure_import(state: CRDTMap) -> CRDTMap:
@@ -68,7 +68,7 @@ def test_ast_purity_auditor():
         ASTRule(impure_eval)
 
 
-def test_proof_derivation():
+def test_proof_derivation() -> None:
     """Ω169 · Proof-Carrying Diagnosis Executable Test (DAG Mode)"""
 
     def r1(s: CRDTMap) -> CRDTMap:
@@ -92,14 +92,14 @@ def test_proof_derivation():
     assert entropy >= 0
 
 
-def test_epistemic_monotonicity():
+def test_epistemic_monotonicity() -> None:
     """Ω155 · Epistemic Monotonicity Executable Test"""
     assert compute_information_gain(prior_microbits=1000, posterior_microbits=500) == 500
     with pytest.raises(ValueError, match="entropy increased"):
         compute_information_gain(prior_microbits=500, posterior_microbits=1000)
 
 
-def test_closure_certificate():
+def test_closure_certificate() -> None:
     """Ω171 · Completeness Certificate Executable Test (Triple Bind)"""
     state = {"resolved": True}
     e_hash = "evidence_root"
@@ -113,7 +113,7 @@ def test_closure_certificate():
         ClosureCertificate(e_hash, r_hash, state, residual_microbits=1500, epsilon_threshold=1000)
 
 
-def test_certificate_tampering():
+def test_certificate_tampering() -> None:
     """Ω171 · Tamper-Evident Verification Test"""
     state = {"resolved": True}
     cert = ClosureCertificate("e_hash", "r_hash", state, residual_microbits=500, epsilon_threshold=1000)
@@ -124,7 +124,7 @@ def test_certificate_tampering():
         cert.verify()
 
 
-def test_kernel_minimality():
+def test_kernel_minimality() -> None:
     """Ω173 · Kernel Minimality AST-based Test"""
     assert verify_kernel_minimality(verifier_ast_nodes=50, generator_ast_nodes=100) is True
 

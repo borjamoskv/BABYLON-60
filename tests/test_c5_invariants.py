@@ -16,6 +16,7 @@ Génesis forense: AUDITORIA_CENTURIA.md (2026-07-17).
 
 import pathlib
 import re
+from collections.abc import Generator
 
 import pytest
 
@@ -24,7 +25,7 @@ SRC_DIRS = ["babylon60", "strike_rs/src", "contracts", "scripts", "proof"]
 PRUNE = {"target", "__pycache__", ".venv", "node_modules", "experimental", ".lake", "dist", "extensions"}
 
 
-def _iter_files(exts):  # type: ignore
+def _iter_files(exts: set[str]) -> Generator[pathlib.Path, None, None]:
     for d in SRC_DIRS:
         base = ROOT / d
         if not base.exists():
@@ -34,7 +35,7 @@ def _iter_files(exts):  # type: ignore
                 yield f
 
 
-def _scan(exts, pattern, flags=0):  # type: ignore
+def _scan(exts: set[str], pattern: str, flags: int = 0) -> list[str]:
     rx = re.compile(pattern, flags)
     hits = []
     for f in _iter_files(exts):  # type: ignore
@@ -45,7 +46,7 @@ def _scan(exts, pattern, flags=0):  # type: ignore
     return hits
 
 
-def _fail_msg(law, hits):  # type: ignore
+def _fail_msg(law: str, hits: list[str]) -> str:
     return f"{law} violado — {len(hits)} ocurrencia(s):\n  " + "\n  ".join(hits)
 
 
@@ -100,7 +101,7 @@ def test_inv_c5_06_lean_bound_to_system() -> None:
 
 
 @pytest.mark.asyncio
-async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path, monkeypatch) -> None:  # type: ignore
+async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path: pathlib.Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """INV_C5_05 — el verificador valida el estado que protege bajo cifrado.
     Hoy ROJO: el INSERT hashea el payload cifrado y verify_chain hashea el
     descifrado -> entry_hash != computed_hash -> False con CORTEX_VAULT_KEY activo.
@@ -233,13 +234,13 @@ def test_inv_c5_18_bft_float_exclusion() -> None:
         canonicalize_cbor({"data": 12.34})
 
 
-def test_inv_c5_19_memory_convergence():
+def test_inv_c5_19_memory_convergence() -> None:
     """INV_C5_19 — BFT orchestration memory convergence must collapse into memory_vault."""
     hits = _scan({".py"}, r"memory_vault")
     assert hits, "INV_C5_19 violated: memory_vault convergence missing"
 
 
-def test_inv_c5_20_kinetic_purge_protocol():
+def test_inv_c5_20_kinetic_purge_protocol() -> None:
     """INV_C5_20 — Kinetic Purge Protocol must implement Mach VM cache dropping and SIGKILL rogue daemons."""
     hits_osascript = _scan({".py", ".sh"}, r'osascript\s+-e\s+[\'"]do\s+shell\s+script\s+["\']purge["\'][\'"]')
     hits_sigkill = _scan({".py", ".sh"}, r"kill\s+-9|SIGKILL")
@@ -308,7 +309,7 @@ def test_inv_c5_25_dynamic_brain_vault_scanning() -> None:
     assert "belongs_to_babylon" in content, "INV_C5_25 missing belongs_to_babylon filtering clause"
 
 
-def test_inv_c5_26_stub():
+def test_inv_c5_26_stub() -> None:
     """INV_C5_26 — Auto-generated stub for rule validation."""
     # Implementation required for concrete scan logic of rule INV_C5_26
     pass

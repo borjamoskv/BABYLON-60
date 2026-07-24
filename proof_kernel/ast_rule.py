@@ -38,7 +38,7 @@ class ASTRule:
         exec(code_obj, namespace)
         self.executable = namespace[self.name]
 
-    def _audit_purity(self):
+    def _audit_purity(self) -> None:
         """Ω166 · Pure Inference: Static AST Analysis for Side Effects"""
         banned_calls = {
             "eval",
@@ -63,7 +63,8 @@ class ASTRule:
                     raise ValueError(f"Ω166 Violated: Call to impure function '{node.func.id}' is prohibited.")
 
     def execute(self, state: CRDTMap) -> CRDTMap:
-        return self.executable(state)
+        result: CRDTMap = self.executable(state)
+        return result
 
     def get_hash(self) -> str:
         return self.ruleset_hash

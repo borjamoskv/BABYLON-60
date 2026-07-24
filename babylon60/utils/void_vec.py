@@ -95,7 +95,7 @@ def pack_void_bit(vector: list[float] | np.ndarray) -> bytes:  # pyright: ignore
         binary = np.pad(binary, (0, padding), "constant")
 
     packed = np.packbits(binary)
-    return packed.tobytes()  # type: ignore
+    return packed.tobytes()
 
 
 def void_hamming_dist(a: bytes, b: bytes) -> int:
