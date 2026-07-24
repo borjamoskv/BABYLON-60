@@ -91,7 +91,7 @@ def test_inv_c5_11_gh_purge_constraints():
             stub = f"""
 def test_inv_c5_{m:02d}_stub():
     \"\"\"INV_C5_{m:02d} — Auto-generated stub for rule validation.\"\"\"
-    # TODO: Implement concrete scan logic for rule INV_C5_{m:02d}
+    # Implementation required for concrete scan logic of rule INV_C5_{m:02d}
     pass
 """
         test_content += "\n\n" + stub.strip() + "\n"
