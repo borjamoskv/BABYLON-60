@@ -79,7 +79,7 @@ class ApisOmegaAgent(EngineAwareMixin):
         with open(self.presets_path, encoding="utf-8") as f:
             presets = json.load(f)
 
-        results = {
+        results: dict[str, Any] = {
             "configured": [],
             "missing": [],
             "stats": {"total": 0, "coverage": 0.0, "valid_count": 0},

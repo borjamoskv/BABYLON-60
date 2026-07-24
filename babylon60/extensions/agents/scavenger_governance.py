@@ -10,7 +10,7 @@ import logging
 from typing import Any
 
 from babylon60.events.bus import DistributedEventBus
-from babylon60.memory.ledger import EventLedgerL3
+from babylon60.memory.ledger import EventLedgerL3  # type: ignore[import-not-found]
 
 logger = logging.getLogger("babylon60_extensions.agents.scavenger_governance")
 

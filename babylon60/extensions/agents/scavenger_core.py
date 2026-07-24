@@ -18,8 +18,8 @@ from babylon60.events.bus import DistributedEventBus
 from babylon60.extensions.skills.cadastral.models import (
     ZoneClassification,
 )
-from babylon60.memory.ledger import EventLedgerL3
-from babylon60.memory.models import MemoryEvent
+from babylon60.memory.ledger import EventLedgerL3  # type: ignore[import-not-found]
+from babylon60.memory.models import MemoryEvent  # type: ignore[attr-defined]
 
 logger = logging.getLogger("babylon60_extensions.agents.scavenger_core")
 
