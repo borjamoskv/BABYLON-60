@@ -309,13 +309,19 @@ def test_inv_c5_25_dynamic_brain_vault_scanning() -> None:
     assert "belongs_to_babylon" in content, "INV_C5_25 missing belongs_to_babylon filtering clause"
 
 
-def test_inv_c5_26_stub() -> None:
-    """INV_C5_26 — Auto-generated stub for rule validation."""
-    # Implementation required for concrete scan logic of rule INV_C5_26
-    pass
+def test_inv_c5_26_maximum_exergy_nodes() -> None:
+    """INV_C5_26 — Maximum Exergy Nodes."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_26 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_26" in content, "INV_C5_26 rule definition missing in .agents/AGENTS.md"
+    assert "1000/1000" in content, "INV_C5_26 missing 1000/1000 exergy criteria clause"
 
 
-def test_inv_c5_27_stub():
-    """INV_C5_27 — Auto-generated stub for rule validation."""
-    # Implementation required for concrete scan logic of rule INV_C5_27
-    pass
+def test_inv_c5_27_high_density_ontological_ingestion() -> None:
+    """INV_C5_27 — High Density Ontological Ingestion Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_27 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_27" in content, "INV_C5_27 rule definition missing in .agents/AGENTS.md"
+    assert "S/N ≥ 0.80" in content or "S/N >= 0.80" in content, "INV_C5_27 missing Signal/Noise (S/N) ratio restriction"
