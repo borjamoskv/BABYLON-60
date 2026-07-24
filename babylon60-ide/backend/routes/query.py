@@ -35,15 +35,16 @@ def _get_project_root() -> Path:
 @router.post("")
 def run_query(req: QueryRequest) -> dict[str, Any]:
     """Execute a read-only SQL query against any discovered database."""
-    root = _get_project_root()
-    db_path = root / req.database
+    root = _get_project_root().resolve()
+    db_name = Path(req.database).name
+    db_path = (root / db_name).resolve()
 
+    if db_path.parent != root:
+        raise HTTPException(403, "Path traversal denied")
+    if db_path.suffix != ".db":
+        raise HTTPException(400, "Only .db files allowed")
     if not db_path.exists():
         raise HTTPException(404, f"Database '{req.database}' not found")
-    if not db_path.suffix == ".db":
-        raise HTTPException(400, "Only .db files allowed")
-    if not db_path.resolve().parent == root.resolve():
-        raise HTTPException(403, "Path traversal denied")
 
     # Lista BLANCA (más fuerte que la negra anterior): tras retirar
     # comentarios de línea/bloque, la sentencia debe empezar por

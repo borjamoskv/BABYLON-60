@@ -8,6 +8,7 @@ from __future__ import annotations
 import hashlib
 import time
 import urllib.request
+from urllib.parse import urlparse
 import json
 from pathlib import Path
 from typing import Any
@@ -26,6 +27,12 @@ class InferenceRequest(BaseModel):
 
 
 def validate_zero_network(url: str) -> None:
+    parsed = urlparse(url)
+    if parsed.scheme != "http" or parsed.hostname not in ("127.0.0.1", "localhost"):
+        raise HTTPException(
+            status_code=403,
+            detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (http://127.0.0.1 or http://localhost)."
+        )
     lower = url.lower()
     forbidden = ["openai.com", "anthropic.com", "dashscope", "googleapis.com", "deepmind"]
     for domain in forbidden:
@@ -34,11 +41,6 @@ def validate_zero_network(url: str) -> None:
                 status_code=403,
                 detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
             )
-    if not lower.startswith("http://127.0.0.1") and not lower.startswith("http://localhost"):
-        raise HTTPException(
-            status_code=403,
-            detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (127.0.0.1 / localhost)."
-        )
 
 
 @router.post("/generate")

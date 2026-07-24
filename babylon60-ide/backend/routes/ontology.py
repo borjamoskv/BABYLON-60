@@ -55,15 +55,15 @@ def _human_size(size: int) -> str:
 
 
 def _resolve_db(name: str) -> Path:
-    root = _get_project_root()
-    db_path = root / name
+    root = _get_project_root().resolve()
+    db_filename = Path(name).name
+    db_path = (root / db_filename).resolve()
+    if db_path.parent != root:
+        raise HTTPException(403, "Path traversal denied")
+    if db_path.suffix != ".db":
+        raise HTTPException(400, "Only .db files allowed")
     if not db_path.exists():
         raise HTTPException(404, f"Database '{name}' not found")
-    if not db_path.suffix == ".db":
-        raise HTTPException(400, "Only .db files allowed")
-    # Prevent path traversal
-    if not db_path.resolve().parent == root.resolve():
-        raise HTTPException(403, "Path traversal denied")
     return db_path
 
 
