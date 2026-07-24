@@ -1,6 +1,5 @@
 import re
 import uuid
-import sys
 import sqlite3
 import time
 from pathlib import Path
@@ -59,7 +58,7 @@ def main() -> None:
         conn.commit()
     t1 = time.time()
     
-    print(f"[*] Ingestión Ontológica del Español Estructural (C5-REAL) Completada.")
+    print("[*] Ingestión Ontológica del Español Estructural (C5-REAL) Completada.")
     print(f"[*] {ops} Invariantes Físicas asimiladas en {t1-t0:.3f}s.")
     print("[*] S/N Ratio: 1.00 (Exergía Pura)")
 
