@@ -6,14 +6,16 @@ from __future__ import annotations
 import logging
 from typing import Any
 
+from pathlib import Path
+
 logger = logging.getLogger("babylon60_extensions.agents.mixins")
 
 
 class EngineAwareMixin:
     """Mixin for agents requiring a reference to the Cortex Engine."""
 
-    def __init__(self, db_path: str | None = None) -> None:
-        self._db_path = db_path
+    def __init__(self, db_path: str | Path | None = None) -> None:
+        self._db_path: str | Path | None = db_path
         self._engine: Any = None
 
     def _ensure_engine(self) -> None:
