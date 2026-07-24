@@ -1,6 +1,10 @@
 // C5-REAL: 896 RE_DRM PRIMITIVES RUST BFT CONSENSUS ENGINE
+// =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual C5-REAL Iteration)
 // REALITY_LEVEL: C5-REAL (Rust Taint Verification / BLAKE3 Poset / WAL Persistence)
+//
+// Transducción y verificación empírica nativa en Rust del arsenal de 896 Primitivas
+// de Ingeniería Inversa, Descompilación y Evasión de DRM.
 // [CORTEX-TAINT:borjamoskv:re_drm_896_bft:2026-07-18T13:25:00Z]
 
 use rusqlite::Connection;
@@ -23,11 +27,13 @@ const VECTORS: [&str; 10] = [
     "Transduction", "Decryption", "Verification", "Reconstruction", "Purge"
 ];
 
+#[derive(Debug, Clone)]
 struct PeerNode {
     node_id: &'static str,
     seed_bias: i64,
 }
 
+#[derive(Debug, Clone)]
 struct VerificationResult {
     primitive_id: String,
     domain_id: String,
@@ -75,6 +81,7 @@ impl PeerNode {
 }
 
 fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, inject_byzantine: bool) -> VerificationResult {
+    // Generate primitive ID matching the YAML naming convention
     let quad_id = match abs_idx / 200 {
         0 => "Q1_Static_Recon",
         1 => "Q2_Dynamic_Control",
@@ -93,6 +100,7 @@ fn verify_primitive_p2p(abs_idx: usize, domain_idx: usize, vector_idx: usize, in
     let gamma_bias = if inject_byzantine { 1337 } else { 0 };
     let node_gamma = PeerNode { node_id: "PEER_GAMMA_SANDBOXED_RE", seed_bias: gamma_bias };
 
+    // Executing challenge-response checks concurrently across virtual peers
     let pid_a = primitive_id.clone();
     let handle_a = thread::spawn(move || node_alpha.execute_re_drm_primitive(&pid_a, domain_name, vector_name, abs_idx).1);
 
@@ -175,31 +183,37 @@ fn main() {
     println!("[C5-REAL] Initiating RE/DRM P2P BFT consensus check...");
     let start_time = SystemTime::now();
 
+    // Resolve db path to the dedicated ledger
     let db_path = Path::new("cortex/agents/ontology/re_drm_bft_ledger.db");
     let mut conn = init_db(db_path).expect("[C5-REAL] FATAL: Error opening RE/DRM WAL SQLite Ledger");
 
     let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
     let mut handles = Vec::with_capacity(20);
 
+    // 20 concurrent threads (1 per domain to avoid thread contention and scale exergy)
     for d_idx in 0..20 {
         let results_clone = Arc::clone(&results);
         let handle = thread::spawn(move || {
             let mut domain_results = Vec::with_capacity(50);
             
+            // Instantiating Taint Engine to audit this domain's execution paths topological properties
             let mut taint_engine = TaintEngine::new();
             let mut node_indices = Vec::with_capacity(50);
             
             for v_idx in 0..10 {
+                // Loop 5 times to generate 50 entries per domain across the 5 quadrants (200 primitives per quadrant)
                 for q_idx in 0..5 {
                     let abs_idx = q_idx * 200 + d_idx * 10 + v_idx;
                     if abs_idx >= 896 {
                         continue;
                     }
                     
+                    // Injecting simulated byzantine faults on specific indices (10% anomaly rate to test BFT robustness)
                     let inject_fault = abs_idx % 11 == 0;
                     
                     let res = verify_primitive_p2p(abs_idx, d_idx, v_idx, inject_fault);
                     
+                    // Push to the TaintEngine DAG to enforce Kahn Invariant without Box::leak
                     let node_ref = taint_engine.add_node(&res.primitive_id, res.cortex_taint.as_bytes());
                     node_indices.push(node_ref);
                     
@@ -207,12 +221,14 @@ fn main() {
                 }
             }
             
+            // Connect edges linearly to enforce execution ordering bounds
             if !node_indices.is_empty() {
                 for i in 0..node_indices.len() - 1 {
                     taint_engine.add_edge(node_indices[i], node_indices[i + 1]).expect("DAG invariant violated");
                 }
             }
             
+            // Verify topological correctness (acyclic check)
             assert!(taint_engine.verify_kahn_invariant().is_ok(), "[C5-REAL] FATAL: Taint Poset cycles detected inside RE/DRM execution flow");
             
             let mut guard = results_clone.lock().expect("[C5-REAL] FATAL: Mutex poisoned in RE/DRM domain thread");
@@ -273,9 +289,11 @@ fn main() {
     }
 }
 
+#[cfg(test)]
 mod tests {
     use super::*;
 
+    #[test]
     fn test_execute_re_drm_primitive_stable_and_byzantine() {
         let node_stable = PeerNode { node_id: "PEER_ALPHA", seed_bias: 0 };
         let (canon, hash) = node_stable.execute_re_drm_primitive("RE_DRM_Q1_PE_ELF_Headers_Extraction_000", "PE_ELF_Headers", "Extraction", 0);
@@ -288,6 +306,7 @@ mod tests {
         assert_ne!(hash, hash_byz);
     }
 
+    #[test]
     fn test_verify_primitive_p2p_quorums() {
         let res_stable = verify_primitive_p2p(0, 0, 0, false);
         assert_eq!(res_stable.quorum_match, "3/3");

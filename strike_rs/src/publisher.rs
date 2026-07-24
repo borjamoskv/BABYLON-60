@@ -1,3 +1,8 @@
+//! VECTOR D: SDK / Extracción (El Límite Físico)
+//! 
+//! Capa de I/O que transfiere un subgrafo verificado del ATMS (Hereditary Harrop)
+//! hacia formatos de consumo biológico o sistémico (JSON, Markdown, Dashboards).
+//! Publish no es lógica del Kernel, es un acto de cristalización física.
 
 use crate::ledger::MasterLedger;
 use crate::omega0::JustifiedStatement;
@@ -16,10 +21,13 @@ impl<'a> Publisher<'a> {
         Self { ledger }
     }
 
+    /// Extrae un subgrafo causal cronológicamente ordenado, garantizando su integridad criptográfica BFT.
     pub fn extract_subgraph(&self, environment_id: &str) -> Result<Vec<JustifiedStatement>, String> {
+        // 1. Verificación BFT de la Cadena (Invariante Causal)
         self.ledger.verify_chain(environment_id)
             .map_err(|e| format!("C5-REAL FATAL: Ledger corruption detected: {}", e))?;
 
+        // 2. Extraer log causal
         let assertions = self.ledger.get_all_assertions()
             .map_err(|e| format!("Ledger read error: {}", e))?;
 
@@ -38,6 +46,7 @@ impl<'a> Publisher<'a> {
         Ok(subgraph)
     }
 
+    /// Transducción: Compila el subgrafo BFT a un artefacto biológico o sistémico (JSON/Markdown).
     pub fn publish(&self, environment_id: &str, format: ExportFormat) -> Result<String, String> {
         let subgraph = self.extract_subgraph(environment_id)?;
         
@@ -64,6 +73,7 @@ impl<'a> Publisher<'a> {
     }
 }
 
+#[cfg(test)]
 mod tests {
     use super::*;
     use crate::omega0::{Modality, Statement, Justification};
@@ -76,6 +86,7 @@ mod tests {
         }
     }
 
+    #[test]
     fn test_publish_markdown() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let oracle = Box::new(DummyOracle);
@@ -87,6 +98,7 @@ mod tests {
             obligations: vec![],
         };
 
+        // Inject into ATMS and Ledger
         orch.resolve_intent(&goal, "prod_env").unwrap();
 
         let publisher = Publisher::new(&orch.ledger);
@@ -98,6 +110,7 @@ mod tests {
         assert!(markdown.contains("Conjecture"));
     }
 
+    #[test]
     fn test_publish_json() {
         let ledger = MasterLedger::new(":memory:").unwrap();
         let oracle = Box::new(DummyOracle);
@@ -114,6 +127,7 @@ mod tests {
         let publisher = Publisher::new(&orch.ledger);
         let json = publisher.publish("json_env", ExportFormat::Json).unwrap();
         
+        // Assert valid JSON
         let parsed: Vec<JustifiedStatement> = serde_json::from_str(&json).unwrap();
         assert_eq!(parsed.len(), 1);
         assert_eq!(parsed[0].statement.content, "Energy is conserved");

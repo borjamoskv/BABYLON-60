@@ -1,6 +1,10 @@
 // C5-REAL: 896 PRIMITIVAS RUST (STRIKE-RS P2P BFT & CAUSAL POSET ENGINE)
+// =================================================================================
 // SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Trilingual C5-REAL Iteration)
 // REALITY_LEVEL: C5-REAL (Zero-Cost Execution / BLAKE3 Taint / WAL Persistence)
+//
+// Transducción y verificación empírica par-par en Rust de las 896 Primitivas
+// Ontológicas de la Matriz Centuria.
 
 use rusqlite::Connection;
 use strike_rs::TaintEngine;
@@ -10,6 +14,8 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{SystemTime, UNIX_EPOCH};
 
+#[allow(dead_code)]
+#[derive(Debug, Clone)]
 struct Theory {
     code: &'static str,
     name: &'static str,
@@ -29,11 +35,13 @@ const THEORIES_10: [Theory; 10] = [
     Theory { code: "T10", name: "T10_Systemic_Ontology_Luhmann_Babylon60", description: "Base-60 Sexagesimal Transduction & Autocatalytic Systemic Loops" },
 ];
 
+#[derive(Debug, Clone)]
 struct PeerNode {
     node_id: &'static str,
     seed_bias: i64,
 }
 
+#[derive(Debug, Clone)]
 struct VerificationResult {
     primitive_id: String,
     domain_id: String,
@@ -88,6 +96,7 @@ fn verify_primitive_p2p(p_num: usize, domain_idx: usize, inject_byzantine: bool)
     let gamma_bias = if inject_byzantine { 999_999 } else { 0 };
     let node_gamma = PeerNode { node_id: "NODE_GAMMA_RUST_03", seed_bias: gamma_bias };
 
+    // Parallel thread execution for each peer node
     let pid_a = primitive_id.clone();
     let dom_a = domain_name.clone();
     let handle_a = thread::spawn(move || node_alpha.execute_primitive(&pid_a, &dom_a, p_num).1);
@@ -169,6 +178,7 @@ fn main() {
     println!("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Rust (strike-rs) sobre 896 Primitivas...");
     let start_time = SystemTime::now();
 
+    // Resolve db path dynamically
     let possible_paths = [
         Path::new("cortex/engine/nexus_anchors.db"),
         Path::new("../cortex/engine/nexus_anchors.db"),
@@ -182,6 +192,7 @@ fn main() {
     let results = Arc::new(Mutex::new(Vec::with_capacity(896)));
     let mut handles = Vec::with_capacity(10);
 
+    // 10 concurrent threads (1 per domain)
     for d in 0..10 {
         let results_clone = Arc::clone(&results);
         let handle = thread::spawn(move || {
@@ -268,9 +279,11 @@ fn main() {
     }
 }
 
+#[cfg(test)]
 mod tests {
     use super::*;
 
+    #[test]
     fn test_peer_node_execute_primitive() {
         let node_honest = PeerNode { node_id: "HONEST_NODE", seed_bias: 0 };
         let (canon, hash) = node_honest.execute_primitive("P_0001", "T01_Causal_Ontology_Pearl", 1);
@@ -283,6 +296,7 @@ mod tests {
         assert_ne!(hash, hash_byz);
     }
 
+    #[test]
     fn test_verify_primitive_p2p_consensus() {
         let res_clean = verify_primitive_p2p(1, 0, false);
         assert_eq!(res_clean.quorum_match, "3/3");
