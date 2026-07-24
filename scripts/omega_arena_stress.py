@@ -121,7 +121,7 @@ def main() -> None:
     print(f"Panics: {stats['panics']}")
 
     try:
-        conn = babylon60.database.core.connect(db_path)  # type: ignore[attr-defined]
+        conn = babylon60.database.core.connect_sync(db_path)
         cur = conn.cursor()
         cur.execute("PRAGMA integrity_check")
         res = cur.fetchone()[0]

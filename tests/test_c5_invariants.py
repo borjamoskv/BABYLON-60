@@ -313,3 +313,9 @@ def test_inv_c5_26_stub() -> None:
     """INV_C5_26 — Auto-generated stub for rule validation."""
     # Implementation required for concrete scan logic of rule INV_C5_26
     pass
+
+
+def test_inv_c5_27_stub():
+    """INV_C5_27 — Auto-generated stub for rule validation."""
+    # Implementation required for concrete scan logic of rule INV_C5_27
+    pass

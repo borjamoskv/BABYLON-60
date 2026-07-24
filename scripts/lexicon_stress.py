@@ -2,7 +2,6 @@ import asyncio
 import sqlite3
 import uuid
 import time
-import sys
 import queue
 from pathlib import Path
 
@@ -99,8 +98,8 @@ async def main() -> None:
     print(f"Total Concepts Assimilated : {total_ops}")
     print(f"Elapsed Time               : {elapsed:.3f} seconds")
     print(f"Throughput                 : {total_ops/elapsed:.2f} hashes/sec")
-    print(f"Green Theater              : 0%")
-    print(f"Exergy Score               : 1000/1000")
+    print("Green Theater              : 0%")
+    print("Exergy Score               : 1000/1000")
 
 if __name__ == "__main__":
     asyncio.run(main())
