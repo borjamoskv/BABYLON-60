@@ -203,7 +203,7 @@ async def generate_handoff(
     if session_meta:
         session.update(session_meta)
 
-    cognitive_fingerprint: dict = {}
+    cognitive_fingerprint: dict[str, Any] = {}
     try:
         from babylon60.extensions.fingerprint.extractor import FingerprintExtractor
 

@@ -93,7 +93,7 @@ class FrictionAnnihilatorAgent(EngineAwareMixin):
             return {"status": "failed", "reason": str(e)}
 
 
-async def run_friction_cli(target_file: str, error_trace: str):
+async def run_friction_cli(target_file: str, error_trace: str) -> None:
     agent = FrictionAnnihilatorAgent()
     result = await agent.annihilate_friction(target_file, error_trace, "CLI triggered annihilation")
     logging.getLogger(__name__).info(result)

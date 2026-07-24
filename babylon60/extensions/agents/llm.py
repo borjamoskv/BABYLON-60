@@ -1,6 +1,8 @@
-# [C5-REAL] Exergy-Maximized
+from typing import Any
+
+
 class AIClient:
-    async def generate(self, prompt: str, **kwargs) -> str:
+    async def generate(self, prompt: str, **kwargs: Any) -> str:
         import json
 
         return json.dumps(
@@ -13,5 +15,6 @@ class AIClient:
         )
 
 
-def get_ai_client():
+def get_ai_client() -> AIClient:
     return AIClient()
+

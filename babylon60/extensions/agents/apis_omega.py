@@ -192,7 +192,7 @@ class ApisOmegaAgent(EngineAwareMixin):
         return summary
 
 
-async def run_apis_cli():
+async def run_apis_cli() -> None:
     agent = ApisOmegaAgent()
     logging.getLogger(__name__).info(await agent.pulse(validate=True))
 
