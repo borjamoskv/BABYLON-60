@@ -119,7 +119,7 @@ def compute_sha3(text: str) -> str:
 
 def consolidate_vault() -> None:
     print("[*] C5-REAL: Bootstrapping and connecting to Memory Vault (`cortex_memory.db`)...")
-    conn = babylon60.database.core.connect(DB_PATH, timeout=5.0)
+    conn = babylon60.database.core.connect_sync(DB_PATH, synchronous="NORMAL")
     conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA busy_timeout = 5000;")
     cursor = conn.cursor()
