@@ -409,8 +409,10 @@ fn minimize(envs: Vec<Environment>) -> Vec<Environment> {
 // ──────────────────────────────────────────────────────────
 mod tests {
     use super::*;
+    #[allow(unused_imports)]
     use crate::omega0::{Modality, Statement};
 
+    #[allow(dead_code)]
     fn env(xs: &[AssumptionId]) -> Environment {
         Environment::from_assumptions(xs.iter().copied())
     }
