@@ -56,6 +56,7 @@ def test_pillar_3_memory_sharding() -> None:
     shard_rules = mem.get_shard_rules("L15_Diamond")
     assert "Ω159" in shard_rules
     assert "Ω156" in shard_rules
+    assert "Ω165" in shard_rules
     assert "Ω1" in shard_rules
 
 def test_pillar_3_memory_4tier_schema() -> None:
