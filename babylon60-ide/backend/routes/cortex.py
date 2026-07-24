@@ -13,6 +13,7 @@ tombstone COGNITIVE_NOTE_DELETED y la proyección la oculta.
 
 from __future__ import annotations
 
+import time
 from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
@@ -108,6 +109,86 @@ def add_note(req: NoteRequest) -> dict[str, Any]:
         "route": req.route,
         "created_at": ev["created_at"],
         "hash": ev["current_hash"][:16],
+    }
+
+
+def _human_away(ms: int) -> str:
+    """'3h 24m' / '2d 5h' — cuánto llevas fuera, en lenguaje de persona."""
+    mins = ms // 60000
+    if mins < 1:
+        return "menos de 1 min"
+    if mins < 60:
+        return f"{mins} min"
+    hours, mins = divmod(mins, 60)
+    if hours < 24:
+        return f"{hours}h {mins}m"
+    days, hours = divmod(hours, 24)
+    return f"{days}d {hours}h"
+
+
+@router.get("/resume")
+def resume_context() -> dict[str, Any]:
+    """Auto-Mantenimiento del Contexto (spec MOSKV-1): al volver al proyecto,
+    el IDE te recibe con el estado REAL proyectado del CortexLedger — cuánto
+    llevas fuera, tu última idea, la última delegación y dónde retomar.
+    Elimina la fricción de arranque (blank-slate panic)."""
+    root = _get_project_root()
+    data = cortex_ledger.list_events(root, limit=300, offset=0)
+    events = data["events"]  # newest first
+    now_ms = int(time.time() * 1000)
+
+    last_ev = events[0] if events else None
+    away_ms = (now_ms - last_ev["created_at"]) if last_ev else None
+
+    notes = _notes_projection(root, 1)
+    last_note = notes[0] if notes else None
+
+    # Última delegación con su estado terminal (mini-proyección local).
+    last_delegation: dict[str, Any] | None = None
+    terminal: dict[str, str] = {}
+    for ev in events:  # newest first: el primer QUEUED que veamos es el más reciente
+        et = ev["event_type"]
+        p = ev["payload"]
+        if et in ("DELEGATION_EXECUTED", "DELEGATION_BLOCKED", "DELEGATION_FAILED", "DELEGATION_CANCELLED"):
+            did = p.get("delegation_id")
+            if did and did not in terminal:
+                terminal[did] = et.replace("DELEGATION_", "")
+        elif et == "DELEGATION_QUEUED" and last_delegation is None:
+            did = ev["current_hash"][:16]
+            last_delegation = {
+                "directive": p.get("directive", ""),
+                "kind": p.get("kind", ""),
+                "state": terminal.get(did, "QUEUED"),
+                "created_at": ev["created_at"],
+            }
+
+    # ¿Dónde retomar? La ruta donde nació el último evento con contexto.
+    suggested = "ledger"
+    if last_note and last_note.get("route"):
+        suggested = last_note["route"] if last_note["route"] != "alcove" else "ledger"
+    elif last_delegation:
+        suggested = "sentinel"
+
+    bullets: list[str] = []
+    if away_ms is not None:
+        bullets.append(f"Fuera {_human_away(away_ms)} — el ledger no olvidó nada")
+    if last_note:
+        txt = last_note["text"][:70] + ("…" if len(last_note["text"]) > 70 else "")
+        origen = f" (nació en {last_note['route']})" if last_note.get("route") else ""
+        bullets.append(f"Última idea: «{txt}»{origen}")
+    if last_delegation:
+        bullets.append(f"Última delegación: {last_delegation['kind']} → {last_delegation['state']}")
+    if not bullets:
+        bullets.append("Ledger cognitivo vacío — primera sesión con memoria")
+
+    return {
+        "away_ms": away_ms,
+        "away_human": _human_away(away_ms) if away_ms is not None else None,
+        "last_note": last_note,
+        "last_delegation": last_delegation,
+        "total_events": data["total"],
+        "suggested_route": suggested,
+        "bullets": bullets,
     }
 
 

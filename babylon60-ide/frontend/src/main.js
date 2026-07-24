@@ -1,6 +1,6 @@
 /**
  * BABYLON60 IDE — Main Application Core
- * v1.3.0 · C5-REAL · Author: Borja Moskv (borjamoskv)
+ * v1.4.0 · C5-REAL · Author: Borja Moskv (borjamoskv)
  *
  * Exergy doctrine: maximize both ABSTRAER (macro: see the whole system)
  * and DETERMINAR (micro: verify one causal fact to the hash).
@@ -217,7 +217,7 @@ function setupSpine() {
 
   const logo = document.createElement('div');
   logo.className = 'spine-logo';
-  logo.title = 'BABYLON·60 v1.3.0';
+  logo.title = 'BABYLON·60 v1.4.0';
   logo.innerHTML = '<div class="spine-logo-dot"></div>';
   spine.appendChild(logo);
 
@@ -740,7 +740,7 @@ function setupLoopDetector() {
 /* ══════════════════════════════════════════════════════════
    CONTEXT RESTORE BANNER — solo 2E
    ══════════════════════════════════════════════════════════ */
-function showRestoreBanner(lastRoute) {
+async function showRestoreBanner(lastRoute) {
   const banner = document.getElementById('restore-banner');
   const msg = document.getElementById('restore-msg');
   const points = document.getElementById('restore-points');
@@ -750,21 +750,44 @@ function showRestoreBanner(lastRoute) {
   const routeLabels = {
     ledger: 'BFT Ledger', databases: 'Ontologies', query: 'SQL Console',
     swarm: 'Agent Swarm', canvas: 'Architecture Canvas', sentinel: 'Git Sentinel',
+    analytics: 'Ledger Analytics',
   };
 
-  const bullets = [
-    `Last active: ${routeLabels[lastRoute] || lastRoute}`,
-    `${S.databaseList.length || '—'} databases available`,
-    S.ledgerStats?.entries != null ? `${S.ledgerStats.entries} ledger entries` : 'Ledger loading...',
-    S.sentinel ? `repo ${S.sentinel.repo_name}@${S.sentinel.branch ?? '—'}` : '',
-  ].filter(Boolean);
+  // Auto-Mantenimiento del Contexto (spec MOSKV-1): bullets REALES
+  // proyectados del CortexLedger — cuánto llevas fuera, tu última idea,
+  // la última delegación — no genéricos.
+  let bullets = null;
+  let jumpRoute = lastRoute;
+  try {
+    const r = await get('/api/cortex/resume');
+    bullets = r.bullets || null;
+    if (r.suggested_route && routeLabels[r.suggested_route]) jumpRoute = r.suggested_route;
+    if (bullets) bullets.push(`Retomar en ${routeLabels[jumpRoute] || jumpRoute} →`);
+  } catch { /* offline → fallback genérico */ }
 
-  msg.textContent = 'Session restored · ';
-  if (points) points.innerHTML = bullets.map(b => `<span class="restore-point">${escapeHtml(b)}</span>`).join('');
+  if (!bullets) {
+    bullets = [
+      `Last active: ${routeLabels[lastRoute] || lastRoute}`,
+      `${S.databaseList.length || '—'} databases available`,
+      S.ledgerStats?.entries != null ? `${S.ledgerStats.entries} ledger entries` : 'Ledger loading...',
+      S.sentinel ? `repo ${S.sentinel.repo_name}@${S.sentinel.branch ?? '—'}` : '',
+    ].filter(Boolean);
+  }
+
+  msg.textContent = 'Contexto restaurado · ';
+  if (points) {
+    points.innerHTML = bullets.map((b, i) =>
+      `<span class="restore-point" ${i === bullets.length - 1 && routeLabels[jumpRoute] ? `data-jump="${escapeHtml(jumpRoute)}" style="cursor:pointer;color:var(--lapis-bright)"` : ''}>${escapeHtml(b)}</span>`
+    ).join('');
+    points.querySelector('[data-jump]')?.addEventListener('click', () => {
+      navigate(points.querySelector('[data-jump]').dataset.jump);
+      banner.style.display = 'none';
+    });
+  }
 
   banner.style.display = 'flex';
   dismiss?.addEventListener('click', () => { banner.style.display = 'none'; });
-  setTimeout(() => { banner.style.display = 'none'; }, 12000);
+  setTimeout(() => { banner.style.display = 'none'; }, 14000);
 }
 
 /* ══════════════════════════════════════════════════════════

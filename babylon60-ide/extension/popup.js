@@ -123,6 +123,33 @@ $('dg').addEventListener('click', async () => {
   } catch (e) { m.style.color = 'var(--break)'; m.textContent = e.message; }
 });
 
+/* ── Thought capture → CortexLedger (memoria de trabajo externalizada) ── */
+async function loadLastNote() {
+  try {
+    const d = await get('/api/cortex/notes?limit=1');
+    const n = (d.notes || [])[0];
+    $('last-note').textContent = n ? `última: «${n.text.slice(0, 64)}${n.text.length > 64 ? '…' : ''}»` : '';
+  } catch { /* offline */ }
+}
+async function sealThought() {
+  const input = $('thought');
+  const text = input.value.trim();
+  if (!text) return;
+  const m = $('thought-msg');
+  try {
+    const r = await post('/api/cortex/notes', { text, route: 'alcove' });
+    input.value = '';
+    m.style.color = 'var(--verify)';
+    m.textContent = `✓ sellada en el ledger (${r.hash}) — te espera en el scratchpad del IDE`;
+    loadLastNote();
+  } catch (e) {
+    m.style.color = 'var(--break)';
+    m.textContent = e.message;
+  }
+}
+$('thought-btn').addEventListener('click', sealThought);
+$('thought').addEventListener('keydown', (e) => { if (e.key === 'Enter') sealThought(); });
+
 /* ── BM25 search ── */
 $('qb').addEventListener('click', runSearch);
 $('q').addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
@@ -143,4 +170,5 @@ async function runSearch() {
 initMode();
 loadHead();
 loadDelegations();
+loadLastNote();
 try { chrome.runtime?.sendMessage({ type: 'b60-refresh' }, () => void chrome.runtime?.lastError); } catch { /* noop */ }

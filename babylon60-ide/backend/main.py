@@ -22,7 +22,7 @@ logger = logging.getLogger("babylon60")
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
-    version="0.6.0",
+    version="0.7.0",
 )
 
 # Initialize the IDE's own CortexLedger (append-only, hash-chained).
