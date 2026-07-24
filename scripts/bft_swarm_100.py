@@ -63,7 +63,7 @@ def _write_swarm_node_record(agent_id: int) -> str:
         return f"FATAL: {e}"
 
 
-async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
+async def bft_agent_task(agent_id: int, metrics: SwarmMetrics) -> None:
     await asyncio.sleep(0.01 * (agent_id % 10))
     res = await asyncio.to_thread(_write_swarm_node_record, agent_id)
     if res == "SUCCESS":
@@ -74,7 +74,7 @@ async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
         metrics.failures += 1
 
 
-async def main():
+async def main() -> None:
     print("🔋 Igniting BFT Swarm Mitosis: 100 Concurrent Agents...")
 
     if not DB_PATH.exists():

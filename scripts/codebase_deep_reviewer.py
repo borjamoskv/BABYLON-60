@@ -71,7 +71,7 @@ def audit_py_file(file_path: Path) -> Dict[str, Any]:
     return {"path": str(rel_path), "lines": len(lines), "status": status, "issues": issues}
 
 
-def main():
+def main() -> None:
     py_files = find_python_files(REPO_ROOT)
     results = [audit_py_file(f) for f in py_files]
 

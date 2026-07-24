@@ -74,7 +74,7 @@ async def audit_conversation(conv_id: str) -> str:
         return f"## Agent Audit: {conv_id}\n- **Status**: 🔴 FATAL ERROR\n- **Error**: {str(e)}\n\n"
 
 
-async def main():
+async def main() -> None:
     target_file = Path("target_conversations.txt")
     if not target_file.exists():
         print("target_conversations.txt not found")

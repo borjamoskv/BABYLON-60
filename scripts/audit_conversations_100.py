@@ -89,7 +89,7 @@ def _write_audit_log(uuid_name: str, score: float) -> bool:
         return False
 
 
-async def audit_agent_task(agent_id: int, uuid_dir: Path):
+async def audit_agent_task(agent_id: int, uuid_dir: Path) -> None:
     """BFT Node audits a single conversation concurrently."""
     await asyncio.sleep(0.01 * (agent_id % 10))
     transcript_path = uuid_dir / ".system_generated/logs/transcript.jsonl"
@@ -106,7 +106,7 @@ async def audit_agent_task(agent_id: int, uuid_dir: Path):
         print(f"[🔴] Agent {agent_id:03d} FAILED to log {uuid_dir.name[:8]}")
 
 
-async def main():
+async def main() -> None:
     print("🔋 Igniting Cognitive Audit Swarm: 100 Agents...")
 
     if not BRAIN_DIR.exists():

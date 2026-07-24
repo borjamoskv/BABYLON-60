@@ -9,8 +9,10 @@ Correlates conversation intents with actual Git Ledger physical mutations.
 import subprocess
 from pathlib import Path
 
+from typing import Any
 
-def get_git_sentinel_hashes(repo_path: Path) -> set:
+
+def get_git_sentinel_hashes(repo_path: Path) -> set[str]:
     try:
         res = subprocess.run(
             ["git", "log", "--format=%H %s", "-n", "100"],
@@ -24,7 +26,7 @@ def get_git_sentinel_hashes(repo_path: Path) -> set:
         return set()
 
 
-def verify_attestation(session_dir: Path, repo_path: Path) -> dict:
+def verify_attestation(session_dir: Path, repo_path: Path) -> dict[str, Any]:
     session_id = session_dir.name
     transcript_path = session_dir / ".system_generated" / "logs" / "transcript.jsonl"
 

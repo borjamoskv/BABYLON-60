@@ -9,7 +9,7 @@ import re
 import sys
 
 
-def main():  # type: ignore
+def main() -> None:
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     agents_file = os.path.join(root_dir, ".agents", "AGENTS.md")
     test_file = os.path.join(root_dir, "tests", "test_c5_invariants.py")
@@ -27,7 +27,7 @@ def main():  # type: ignore
         os.path.join(root_dir, "ETHOS.md"),
     ]
 
-    defined_invariants_set = set()
+    defined_invariants_set: set[int] = set()
     for rf in rule_files:
         if os.path.exists(rf):
             with open(rf, "r") as f:
@@ -98,4 +98,4 @@ def test_inv_c5_{m:02d}_stub():
 
 
 if __name__ == "__main__":
-    main()  # type: ignore
+    main()

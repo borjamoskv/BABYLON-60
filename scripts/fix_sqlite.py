@@ -1,7 +1,7 @@
 import glob
 
 
-def fix_sqlite():
+def fix_sqlite() -> None:
     files = glob.glob("babylon60/**/*.py", recursive=True) + glob.glob("scripts/**/*.py", recursive=True)
     for filepath in files:
         if "database/core.py" in filepath or "purge_exceptions.py" in filepath:

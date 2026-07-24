@@ -8,7 +8,7 @@ def run_cmd(cmd: list[str]) -> None:
     subprocess.run(cmd, capture_output=True, text=True)
 
 
-def kinetic_purge():
+def kinetic_purge() -> None:
     run_cmd(["osascript", "-e", 'do shell script "purge"'])
 
     rogue_daemons = ["studentd", "mediaanalysisd", "parsecd", "CoreDuetd", "knowledge-agent"]

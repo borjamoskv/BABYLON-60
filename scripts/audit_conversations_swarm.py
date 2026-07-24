@@ -144,7 +144,7 @@ def audit_single_session(session_dir: Path) -> Dict[str, Any]:
     }
 
 
-def main():
+def main() -> None:
     print("🚀 [SWARM 100-AGENT] Bootstrapping Parallel Audit across all Brain Conversations...")
     session_dirs = [d for d in BRAIN_DIR.iterdir() if d.is_dir() and d.name != "tempmediaStorage"]
     print(f"[*] Total target conversation sessions: {len(session_dirs)}")

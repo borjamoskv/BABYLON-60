@@ -93,7 +93,7 @@ def audit_file(file_path: Path) -> Dict[str, Any]:
     }
 
 
-def main():
+def main() -> None:
     md_files = find_md_files(REPO_ROOT)
     results = [audit_file(f) for f in md_files]
 

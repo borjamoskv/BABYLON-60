@@ -34,7 +34,7 @@ def discover_skills(base_dir: str) -> List[str]:
     return skills
 
 
-def main():
+def main() -> None:
     logger.info("Initializing Map Skills Bridges Transducer...")
 
     # Example paths to discover
