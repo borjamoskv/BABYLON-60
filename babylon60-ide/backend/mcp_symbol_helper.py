@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import sys
-import os
 import json
+import os
 import sqlite3
+import sys
 
 
 def get_db_path():

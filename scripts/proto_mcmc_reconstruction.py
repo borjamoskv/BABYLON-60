@@ -1,20 +1,24 @@
-import os
-import math
 import csv
+import math
+import os
 from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
+
 from scripts.romance_common import (
-    GOLD,
     DATA,
     GAP,
+    GOLD,
+    Model,
     build_msa,
     build_Q,
-    Model,
-    reconstruct_column,
-    nw_match_flags,
     levenshtein,
+    nw_match_flags,
     partial,
+    reconstruct_column,
+)
+from scripts.romance_common import (
     TREE as _INITIAL_TREE,
 )
 

@@ -9,10 +9,11 @@ import json
 import os
 import uuid
 from typing import Any, Dict, List
+
 import aiosqlite
 import yaml
 
-from cortex.agents.arsenal_896.registry import get_all_primitives, execute_primitive
+from cortex.agents.arsenal_896.registry import execute_primitive, get_all_primitives
 
 
 class CenturiaMetaTransducer:

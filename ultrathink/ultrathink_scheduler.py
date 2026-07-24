@@ -9,9 +9,9 @@ PROTOCOL: Async BFT payload dispatch with integer-based deterministic backoff.
 
 import asyncio
 import logging
-import time
 import os
 import re
+import time
 
 logging.basicConfig(
     level=logging.INFO,

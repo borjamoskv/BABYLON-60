@@ -6,7 +6,7 @@ if backend_dir not in sys.path:
     sys.path.insert(0, backend_dir)
 
 
-from routes.inference import generate_mamba, MambaInferenceRequest  # noqa: E402
+from routes.inference import MambaInferenceRequest, generate_mamba  # noqa: E402
 
 
 def test_mamba_route_handler() -> None:

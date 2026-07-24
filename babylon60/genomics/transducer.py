@@ -5,16 +5,18 @@ into the deterministic 300-primitive Boolean network state matrix (`simulate_boo
 """
 
 from __future__ import annotations
-from typing import Any
-from .models import (
-    GenomicVariantRecord,
-    TMBResult,
-    APOBECEnrichmentResult,
-    LOHHRDResult,
-    ECDNAAmpliconResult,
-)
-from .engine import GenomicEvaluationEngine
+
 from dataclasses import dataclass
+from typing import Any
+
+from .engine import GenomicEvaluationEngine
+from .models import (
+    APOBECEnrichmentResult,
+    ECDNAAmpliconResult,
+    GenomicVariantRecord,
+    LOHHRDResult,
+    TMBResult,
+)
 
 
 @dataclass

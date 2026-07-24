@@ -9,7 +9,8 @@ AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y 
 """
 
 from __future__ import annotations
-from typing import Optional, Any
+
+from typing import Any, Optional
 
 DISCLAIMER = "AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios."
 

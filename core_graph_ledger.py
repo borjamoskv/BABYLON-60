@@ -1,6 +1,7 @@
-from dataclasses import dataclass, asdict
-from typing import List
 import time
+from dataclasses import asdict, dataclass
+from typing import List
+
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.crdt import CRDTMap
 

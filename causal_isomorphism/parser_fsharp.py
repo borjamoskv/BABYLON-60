@@ -47,7 +47,6 @@ from causal_isomorphism.ir import (
     ir_result,
 )
 
-
 FSHARP_TYPE_MAP: dict[str, IRType] = {
     "float": IR_FLOAT,
     "double": IR_FLOAT,

@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
-import os
-import re
-import math
+import argparse
 import hashlib
 import json
-import argparse
+import math
+import os
+import re
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 EXCLUDE_DIRS = {
     ".git",

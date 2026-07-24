@@ -5,8 +5,9 @@ Enforces Curry-Howard Isomorphism and guarantees that illegal states are physica
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Generic, TypeVar, Union, NoReturn
+from typing import Generic, NoReturn, TypeVar, Union
 
 T = TypeVar("T")
 E = TypeVar("E")

@@ -1,6 +1,6 @@
+import argparse
 import ast
 from typing import Optional
-import argparse
 
 
 class AnergiaPurger(ast.NodeTransformer):

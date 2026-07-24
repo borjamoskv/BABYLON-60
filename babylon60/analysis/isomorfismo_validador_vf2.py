@@ -1,7 +1,8 @@
+import time
 from typing import Any, Dict
+
 import networkx as nx
 from networkx.algorithms import isomorphism as iso
-import time
 
 
 def evaluate_c5_isomorphism(G1: nx.Graph, G2: nx.Graph) -> Dict[str, Any]:

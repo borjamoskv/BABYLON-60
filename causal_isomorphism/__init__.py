@@ -13,10 +13,10 @@ Layers:
 """
 
 from causal_isomorphism.ir import (
-    IRModule,
     IRDiscriminatedUnion,
-    IRRecordType,
     IRFunction,
+    IRModule,
+    IRRecordType,
     RegimeLayer,
 )
 

@@ -1,8 +1,9 @@
-import babylon60.database.core
 import os
 import sqlite3
 import sys
 from typing import Any
+
+import babylon60.database.core
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cortex_inference import CACHE_DB_PATH, CortexInferenceEngine  # noqa: E402

@@ -5,6 +5,7 @@ and cryptographic SHA3-256 / BLAKE2b hashing (Rule Ω24) without weak crypto.
 """
 
 from __future__ import annotations
+
 import hashlib
 from typing import Any
 

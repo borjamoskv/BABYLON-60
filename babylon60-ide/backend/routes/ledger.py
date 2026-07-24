@@ -12,8 +12,8 @@ from typing import Any
 
 from fastapi import APIRouter, HTTPException, Query
 
-from ..services.db_pool import connect_readonly
 from ..services.chain_verifier import verify_chain
+from ..services.db_pool import connect_readonly
 
 router = APIRouter(prefix="/api/ledger", tags=["ledger"])
 

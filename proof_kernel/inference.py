@@ -1,6 +1,7 @@
 from collections import deque
-from proof_kernel.crdt import CRDTMap
+
 from proof_kernel.ast_rule import ASTRule
+from proof_kernel.crdt import CRDTMap
 
 
 def topological_sort(dag: dict[str, list[str]]) -> list[str]:

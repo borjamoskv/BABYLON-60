@@ -1,6 +1,7 @@
 # [C5-REAL] Vector store interface
 import logging
 from typing import Any
+
 from .models import CortexFactModel
 
 logger = logging.getLogger("babylon60.memory.sqlite_vec_store")

@@ -1,8 +1,9 @@
-from typing import Any, Dict
-import json
-import hashlib
 import base64
+import hashlib
+import json
 import sys
+from typing import Any, Dict
+
 from nacl.signing import SigningKey
 
 

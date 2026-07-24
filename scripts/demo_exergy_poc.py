@@ -4,8 +4,8 @@
 Simulates high-entropy vs. high-exergy code changes and evaluates them using the GELABP framework.
 """
 
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exergy_optimizer_agent import evaluate_gelabp

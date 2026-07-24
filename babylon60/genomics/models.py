@@ -4,6 +4,7 @@ Enforces typed invariants (Rule Ω17), exact causality tracking, and zero-anergy
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Any
 

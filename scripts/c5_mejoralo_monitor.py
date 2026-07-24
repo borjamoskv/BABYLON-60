@@ -6,12 +6,13 @@ Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
 linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
 """
 
-import babylon60.database.core
 import hashlib
 import sqlite3
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+
+import babylon60.database.core
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
 STATUS_FILE = ROOT_DIR / "STATUS.md"

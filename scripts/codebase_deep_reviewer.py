@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import ast
 from pathlib import Path
-from typing import List, Dict, Any
+from typing import Any, Dict, List
 
 REPO_ROOT = Path("/Users/borjafernandezangulo/30_BABYLON-60").resolve()
 

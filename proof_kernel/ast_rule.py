@@ -1,6 +1,7 @@
 import ast
 import inspect
-from typing import Callable, Any
+from typing import Any, Callable
+
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.crdt import CRDTMap
 

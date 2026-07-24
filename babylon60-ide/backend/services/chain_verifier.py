@@ -13,7 +13,6 @@ from typing import Any
 
 from .db_pool import connect_readonly
 
-
 ZERO_HASH = "0" * 64
 
 

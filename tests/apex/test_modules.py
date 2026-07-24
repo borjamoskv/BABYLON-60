@@ -113,8 +113,9 @@ def test_tfidf_pure_sklearn_equivalence() -> None:
         "sklearn",
         reason="sklearn no instalado — solo es oráculo de referencia para esta prueba, no una dependencia de runtime de apex_trials",
     )
-    from sklearn.feature_extraction.text import TfidfVectorizer
     import numpy as np
+    from sklearn.feature_extraction.text import TfidfVectorizer
+
     from apex_trials.modules import _transform_pure
 
     elig_model = _MODELS["modules"]["elig"]  # type: ignore

@@ -2,11 +2,10 @@
 
 from __future__ import annotations
 
-
 import pytest
 
 from apex_trials.features import StudyFeatures
-from apex_trials.risk_engine import _FITTED, assess, RAW_MAX
+from apex_trials.risk_engine import _FITTED, RAW_MAX, assess
 
 _HAS_FITTED = _FITTED is not None
 

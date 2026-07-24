@@ -1,7 +1,6 @@
 # [C5-REAL] Exergy-Maximized
 from __future__ import annotations
 
-from typing import Any, Dict
 import asyncio
 import hashlib
 import hmac
@@ -10,7 +9,7 @@ import os
 import secrets
 import time
 from datetime import datetime, timezone
-from typing import Tuple
+from typing import Any, Dict, Tuple
 
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 

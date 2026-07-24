@@ -10,7 +10,7 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any, Dict
 
 BRAIN_DIR = Path.home() / ".gemini" / "antigravity" / "brain"
 

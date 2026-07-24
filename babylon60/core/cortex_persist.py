@@ -1,8 +1,8 @@
+import json
 import os
 import sys
-import json
-from datetime import datetime, timezone
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 

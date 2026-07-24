@@ -39,8 +39,9 @@ def check_wheel_contents() -> None:
 
 def create_crypto_vectors() -> None:
     print("\n--- Creating Cryptographic Vectors ---")
-    import cbor2
     import hashlib
+
+    import cbor2
 
     vectors_dir = "tests/conformance/vectors"
     os.makedirs(vectors_dir, exist_ok=True)

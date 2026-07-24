@@ -1,7 +1,8 @@
 import pytest
+
 from core_graph_ledger import GraphLedger
-from proof_kernel.canonicalizer import hash_evidence
 from io_persist_ledger import LedgerPersist
+from proof_kernel.canonicalizer import hash_evidence
 
 
 def test_roundtrip_persist_and_reload(tmp_path: object) -> None:

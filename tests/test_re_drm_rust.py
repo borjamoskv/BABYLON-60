@@ -2,8 +2,8 @@
 # [CORTEX-TAINT:borjamoskv:test_re_drm_rust:2026-07-17T18:22:00Z]
 
 import os
-import subprocess
 import sqlite3
+import subprocess
 import sys
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))

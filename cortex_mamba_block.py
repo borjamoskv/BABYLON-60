@@ -2,6 +2,7 @@
 
 import math
 from typing import List
+
 from cortex_ssm_mamba_core import StateSpaceModel
 
 

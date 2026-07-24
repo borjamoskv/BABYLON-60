@@ -6,10 +6,11 @@ and local agent logs into the C5-REAL Memory Vault (`cortex_memory.db` & Master 
 Enforces Rule Ω1 (WAL/busy_timeout) and Rule Ω11 (CORTEX-TAINT signature).
 """
 
-import babylon60.database.core
 import hashlib
 import json
 from pathlib import Path
+
+import babylon60.database.core
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / "cortex_memory.db"

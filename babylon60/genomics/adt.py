@@ -5,9 +5,11 @@ Makes genomic illegal states (e.g., TMB-High without score) physically unreprese
 """
 
 from __future__ import annotations
+
 from dataclasses import dataclass, field
-from typing import Union, Any
-from babylon60.types.algebraic import Result, Option
+from typing import Any, Union
+
+from babylon60.types.algebraic import Option, Result
 
 
 @dataclass(frozen=True)

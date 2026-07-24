@@ -21,11 +21,12 @@ Consuming operations:
 from __future__ import annotations
 
 from dataclasses import dataclass
+
 from causal_isomorphism.ir import (
-    IRModule,
-    IRFunction,
     IRExpr,
     IRExprKind,
+    IRFunction,
+    IRModule,
 )
 
 

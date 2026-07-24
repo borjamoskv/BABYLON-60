@@ -4,9 +4,10 @@ Verifies the strict invariants of Genomic Profile ADTs, Monadic Results, and Sha
 """
 
 import pytest
-from babylon60.types.algebraic import Ok, Err, Result, AlgebraicCardinality, make_illegal_states_unrepresentable
-from babylon60.genomics.adt import VCF1Based, CoordinateSystem, SNV, AlgebraicGenomicVariant
+
+from babylon60.genomics.adt import SNV, AlgebraicGenomicVariant, CoordinateSystem, VCF1Based
 from babylon60.genomics.engine import GenomicEvaluationEngine
+from babylon60.types.algebraic import AlgebraicCardinality, Err, Ok, Result, make_illegal_states_unrepresentable
 
 
 def test_algebraic_cardinality() -> None:

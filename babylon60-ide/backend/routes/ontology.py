@@ -15,8 +15,8 @@ from fastapi import APIRouter, HTTPException, Query
 from ..services.db_pool import (
     connect_readonly,
     get_table_list,
-    get_table_schema,
     get_table_rows,
+    get_table_schema,
 )
 
 router = APIRouter(prefix="/api/databases", tags=["ontology"])

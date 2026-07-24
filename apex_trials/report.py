@@ -15,9 +15,9 @@ from __future__ import annotations
 import html
 
 from .backtest import BacktestReport
-from .transducer import TransducerResult as CopilotResult  # back-compat alias
 from .modules import _MODELS as _MOD_MODELS
 from .risk_engine import _FITTED
+from .transducer import TransducerResult as CopilotResult  # back-compat alias
 
 _TIER_COLOR = {
     "LOW": "#4CAF50",

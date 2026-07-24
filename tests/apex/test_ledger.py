@@ -6,7 +6,7 @@ import sqlite3
 
 import pytest
 
-from apex_trials.ledger import AmendmentLedger, BabylonBFTLedgerAdapter, GENESIS_PREV_HASH
+from apex_trials.ledger import GENESIS_PREV_HASH, AmendmentLedger, BabylonBFTLedgerAdapter
 
 
 def _payload(score: int) -> dict[str, object]:

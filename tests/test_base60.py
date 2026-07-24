@@ -1,4 +1,5 @@
 import pytest
+
 from babylon60.utils import base60
 
 

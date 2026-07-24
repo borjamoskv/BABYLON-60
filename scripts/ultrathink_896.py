@@ -1,6 +1,6 @@
+import hashlib
 import os
 import subprocess
-import hashlib
 import time
 
 path = "/Users/borjafernandezangulo/30_BABYLON-60/cortex/ontology/896_primitives_algebra.yaml"

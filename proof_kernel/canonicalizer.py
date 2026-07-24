@@ -1,6 +1,7 @@
 import hashlib
-import cbor2
 from typing import Any
+
+import cbor2
 
 
 def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:

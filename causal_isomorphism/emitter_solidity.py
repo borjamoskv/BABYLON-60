@@ -21,6 +21,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from causal_isomorphism.ir import (
+    REGIME_PERMISSIONS,
     EmitPermission,
     FunctionClassification,
     IRDiscriminatedUnion,
@@ -31,7 +32,6 @@ from causal_isomorphism.ir import (
     IRRecordType,
     IRType,
     IRTypeKind,
-    REGIME_PERMISSIONS,
     RegimeLayer,
 )
 

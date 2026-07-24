@@ -1,4 +1,3 @@
-import babylon60.database.core
 import datetime
 import hashlib
 import json
@@ -7,6 +6,8 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+
+import babylon60.database.core
 
 EXERGY_LEVEL: str = "1000/1000"
 BFT_MIN_CONSENSUS: int = 3

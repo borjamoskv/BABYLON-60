@@ -1,4 +1,5 @@
 from typing import Any
+
 from proof_kernel.canonicalizer import hash_evidence
 
 

@@ -12,6 +12,8 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 
+from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
+from causal_isomorphism.emitter_solidity import SolidityEmitter, ir_type_to_solidity
 from causal_isomorphism.ir import (
     IR_FLOAT,
     IR_STRING,
@@ -24,8 +26,6 @@ from causal_isomorphism.ir import (
     RegimeLayer,
 )
 from causal_isomorphism.parser_fsharp import FSharpParser, resolve_fsharp_type
-from causal_isomorphism.emitter_solidity import SolidityEmitter, ir_type_to_solidity
-from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
 from causal_isomorphism.regime_validator import RegimeValidator, ViolationSeverity
 from causal_isomorphism.transpiler import CausalIsomorphismTranspiler
 
@@ -381,14 +381,14 @@ def test_full_pipeline_irpautomata() -> None:
 def test_linear_type_checker() -> None:
     """Verify linear and affine type checker rules."""
     from causal_isomorphism.ir import (
-        IRFunction,
-        IRParam,
-        IRType,
-        IRTypeKind,
         IRExpr,
         IRExprKind,
+        IRFunction,
         IRMatchArm,
+        IRParam,
         IRPattern,
+        IRType,
+        IRTypeKind,
     )
     from causal_isomorphism.linear_checker import LinearTypeChecker
 

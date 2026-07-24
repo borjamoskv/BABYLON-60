@@ -1,18 +1,20 @@
-import os
 import csv
+import os
 from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
+
 from scripts.romance_common import (
-    GOLD,
     DATA,
     GAP,
-    build_msa,
+    GOLD,
     Model,
-    reconstruct_column,
-    nw_match_flags,
-    levenshtein,
+    build_msa,
     build_Q,
+    levenshtein,
+    nw_match_flags,
+    reconstruct_column,
 )
 
 

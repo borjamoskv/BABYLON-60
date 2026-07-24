@@ -12,8 +12,8 @@ import os
 __all__ = ["Vault"]
 
 try:
-    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
     from cryptography.exceptions import InvalidTag
+    from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
     _HAS_AESGCM = True
 except ImportError:

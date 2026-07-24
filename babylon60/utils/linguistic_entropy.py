@@ -18,7 +18,6 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-
 _SLOP_PATTERNS: list[tuple[str, float]] = [
     (r"Aquí tienes el código", 1.0),
     (r"Espero que esto ayude", 1.0),

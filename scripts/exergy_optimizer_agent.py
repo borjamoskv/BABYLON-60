@@ -5,21 +5,22 @@ Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
 
-import babylon60.database.core
 import sys
 from pathlib import Path
+
+import babylon60.database.core
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from dataclasses import dataclass  # noqa: E402
-from typing import Union, List, Set  # noqa: E402
+import hashlib  # noqa: E402
+import json  # noqa: E402
 import re  # noqa: E402
 import sqlite3  # noqa: E402
-import hashlib  # noqa: E402
-import time  # noqa: E402
 import subprocess  # noqa: E402
-import json  # noqa: E402
+import time  # noqa: E402
+from dataclasses import dataclass  # noqa: E402
+from typing import List, Set, Union  # noqa: E402
 
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
 VAULT_DIR = Path.home() / ".gemini/config/.cortex/memory_vault"

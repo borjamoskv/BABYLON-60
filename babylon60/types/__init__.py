@@ -8,13 +8,13 @@ Enforces strict algebraic typing invariants:
 """
 
 from .algebraic import (
-    Result,
-    Ok,
-    Err,
-    Option,
-    Some,
-    Nothing,
     AlgebraicCardinality,
+    Err,
+    Nothing,
+    Ok,
+    Option,
+    Result,
+    Some,
     make_illegal_states_unrepresentable,
 )
 

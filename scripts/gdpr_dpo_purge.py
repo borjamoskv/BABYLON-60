@@ -4,8 +4,8 @@ GDPR Art. 17 (Right to Erasure / Right to be Forgotten) Automated Generator & DP
 C5-REAL Sovereign Privacy Transducer.
 """
 
-import os
 import hashlib
+import os
 from datetime import datetime, timezone
 
 DPO_REGISTRY = {

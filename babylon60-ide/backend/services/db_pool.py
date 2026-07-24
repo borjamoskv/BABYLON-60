@@ -9,7 +9,6 @@ import sqlite3
 from pathlib import Path
 from typing import Any
 
-
 _BUSY_TIMEOUT_MS = 5000
 
 

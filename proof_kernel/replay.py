@@ -1,5 +1,7 @@
-import cbor2
 from typing import Any, Callable
+
+import cbor2
+
 from proof_kernel.canonicalizer import canonicalize_cbor, hash_evidence
 
 

@@ -1,8 +1,8 @@
-import os
 import hashlib
-import time
 import json
+import os
 import sys
+import time
 
 
 def batch_crystallize(matrices: list[dict[str, str]]) -> None:

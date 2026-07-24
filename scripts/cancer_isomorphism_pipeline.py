@@ -1,7 +1,8 @@
-import numpy as np
-import networkx as nx
 import warnings
 from typing import Any, Optional
+
+import networkx as nx
+import numpy as np
 
 warnings.filterwarnings("ignore")
 

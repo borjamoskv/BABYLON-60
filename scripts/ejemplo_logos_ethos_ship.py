@@ -1,7 +1,8 @@
-import babylon60.database.core
 import hashlib
 import subprocess
 import time
+
+import babylon60.database.core
 
 
 def logos_transducer(raw_float_input: float) -> str:

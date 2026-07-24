@@ -1,12 +1,13 @@
-import babylon60.database.core
 import hashlib
 import os
 import sqlite3
 import string
 import sys
 import time
-from typing import Literal
 from decimal import getcontext
+from typing import Literal
+
+import babylon60.database.core
 
 StateKind = Literal["C5_Real_Atomic", "C4_Simulated_Buffer"]
 

@@ -1,4 +1,3 @@
-import babylon60.database.core
 import argparse
 import hashlib
 import json
@@ -7,6 +6,8 @@ import subprocess
 import time
 from pathlib import Path
 from typing import Any
+
+import babylon60.database.core
 
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 DB_PATH: Path = PROJECT_ROOT / "scripts" / "cib_master_ledger.db"

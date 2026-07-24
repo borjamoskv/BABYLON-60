@@ -6,12 +6,13 @@ Enforces C5-REAL Zero-Network Policy.
 from __future__ import annotations
 
 import hashlib
+import json
 import time
 import urllib.request
-from urllib.parse import urlparse
-import json
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
+
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 

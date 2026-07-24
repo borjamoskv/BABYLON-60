@@ -14,8 +14,9 @@ reaparece en el árbol; verde sólo cuando el hallazgo está remediado.
 Génesis forense: AUDITORIA_CENTURIA.md (2026-07-17).
 """
 
-import re
 import pathlib
+import re
+
 import pytest
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
@@ -224,8 +225,9 @@ def test_inv_c5_17_autodidact_omega_bypass() -> None:
 
 def test_inv_c5_18_bft_float_exclusion() -> None:
     """INV_C5_18 — BFT Float Exclusion in canonicalize_cbor and BFT_Ledger."""
-    from babylon60.core.crypto import canonicalize_cbor
     import pytest
+
+    from babylon60.core.crypto import canonicalize_cbor
 
     with pytest.raises(ValueError, match="Flotantes"):
         canonicalize_cbor({"data": 12.34})

@@ -2,13 +2,14 @@
 # REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution)
 # [CORTEX-TAINT:borjamoskv:anergy_token_purge:2026-07-18T05:00:00Z]
 
-import os
-import shutil
 import datetime
 import hashlib
 import json
+import os
+import shutil
+from typing import Any, Dict, List, Tuple
+
 import yaml
-from typing import List, Dict, Tuple, Any
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 ARCHIVE_ROOT = os.path.join(PROJECT_ROOT, ".cortex", "archive")

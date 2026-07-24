@@ -1,6 +1,6 @@
 # [C5-REAL] Exergy-Maximized Paths Configuration
-from pathlib import Path
 import os
+from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 CORTEX_DIR = Path(os.getenv("CORTEX_DIR", "~/.babylon60")).expanduser()

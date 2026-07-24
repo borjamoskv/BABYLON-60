@@ -15,8 +15,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 _ONCO_IMPORT_ERROR: Optional[BaseException]
 try:
-    import numpy as np
     import networkx as nx
+    import numpy as np
     import pandas as pd
 except ImportError as _exc:  # extra 'onco' no instalado
     np = None  # type: ignore[assignment]

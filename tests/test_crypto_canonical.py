@@ -1,5 +1,5 @@
 # [C5-REAL] Exergy-Maximized
-from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, Ed25519Signer
+from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
 
 def test_canonicalize_cbor_ordering() -> None:

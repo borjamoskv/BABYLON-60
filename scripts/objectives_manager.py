@@ -1,11 +1,12 @@
-import sys
-import yaml
-import hashlib
 import argparse
+import hashlib
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / "cortex/ontology/babylon60_objectives.yaml"

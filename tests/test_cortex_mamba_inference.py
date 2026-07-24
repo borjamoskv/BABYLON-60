@@ -1,11 +1,11 @@
 # C5-REAL
 
-import sys
 import os
+import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from cortex_mamba_network import MambaNetwork
 from cortex_mamba_inference import MambaGenerator, softmax
+from cortex_mamba_network import MambaNetwork
 
 
 def test_softmax_invariants() -> None:

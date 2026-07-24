@@ -9,11 +9,12 @@ Ontology Level: C5-REAL (Physical assertion of Yuma invariants and WAL persisten
 
 import os
 import sqlite3
+
 from scripts.bittensor_yuma_consensus_c5 import (
     compute_yuma_consensus,
+    simulate_adversarial_matrix,
     simulate_subnet_emission,
     simulate_subnet_epochs,
-    simulate_adversarial_matrix,
 )
 
 

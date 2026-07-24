@@ -13,17 +13,17 @@ Author: Borja Moskv (borjamoskv). Reality level: C5-REAL.
 
 from __future__ import annotations
 
-from typing import Any
 import json
 from pathlib import Path
+from typing import Any
 
 import click
 
 from .backtest import run_backtest
-from .transducer import Transducer
 from .ctgov import CtGovClient, HttpCache
 from .ledger import AmendmentLedger
 from .report import render_report
+from .transducer import Transducer
 
 DEFAULT_DB = "master_ledger.db"
 DEFAULT_CACHE = "ctgov_cache.db"

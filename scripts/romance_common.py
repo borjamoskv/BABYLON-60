@@ -1,8 +1,9 @@
 import math
+from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
 from scipy.linalg import expm
-from typing import Any
 
 GOLD: dict[str, str] = {
     "key": "k l a v e",

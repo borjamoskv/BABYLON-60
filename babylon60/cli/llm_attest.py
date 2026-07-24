@@ -1,13 +1,13 @@
-from typing import Any, Dict, List
-import json
-import hashlib
 import argparse
-import sys
 import base64
+import hashlib
+import json
+import sys
+from typing import Any, Dict, List
 
 try:
-    from nacl.signing import VerifyKey
     from nacl.exceptions import BadSignatureError
+    from nacl.signing import VerifyKey
 
     NACL_AVAILABLE = True
 except ImportError:

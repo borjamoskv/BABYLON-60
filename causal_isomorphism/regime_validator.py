@@ -21,10 +21,10 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 
 from causal_isomorphism.ir import (
+    REGIME_PERMISSIONS,
     EmitPermission,
     FunctionClassification,
     IRModule,
-    REGIME_PERMISSIONS,
     RegimeLayer,
 )
 

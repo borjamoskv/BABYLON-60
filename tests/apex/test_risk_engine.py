@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from apex_trials.features import StudyFeatures
-from apex_trials.risk_engine import assess, RAW_MAX
+from apex_trials.risk_engine import RAW_MAX, assess
 
 
 def _mk(**over: object) -> StudyFeatures:

@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
-
 import asyncio
 import json
 import logging
@@ -13,6 +11,8 @@ from collections.abc import Awaitable, Callable
 from functools import wraps
 from pathlib import Path
 from typing import Any
+
+import babylon60.database.core
 
 logger = logging.getLogger("CORTEX.PULMONES")
 

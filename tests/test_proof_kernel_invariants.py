@@ -1,9 +1,10 @@
 import pytest
-from proof_kernel.inference import compute_information_gain, dag_inference
+
+from proof_kernel.ast_rule import ASTRule
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.certificates import ClosureCertificate
 from proof_kernel.crdt import CRDTMap
-from proof_kernel.ast_rule import ASTRule
+from proof_kernel.inference import compute_information_gain, dag_inference
 from proof_kernel.semantics import verify_kernel_minimality
 
 
