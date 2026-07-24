@@ -4,7 +4,7 @@ Unit test suite for CAM-5.0 Abstract Effect Observation Machine Core.
 
 import pytest
 from cortex.aem.effects import EffectProgram
-from cortex.aem.isa import CapabilityError, Handle, InstructionFamily, IntegrityError
+from cortex.aem.isa import CapabilityError, ExecutionError, Handle, InstructionFamily, IntegrityError
 from cortex.aem.machine import AbstractEffectMachine
 
 
@@ -63,3 +63,31 @@ def test_cam5_control_assert_and_extension() -> None:
     _, effects = machine.step("agent_ctrl", prog_ext)
     assert len(effects) == 1
     assert "cesl://ledger" in machine.loaded_extensions
+
+
+def test_cam5_mutate_and_release_ops() -> None:
+    machine = AbstractEffectMachine()
+    machine.grant_agent_capabilities("agent_rw", {InstructionFamily.READ, InstructionFamily.WRITE})
+
+    # Alloc
+    alloc_p = {"op": "ALLOC", "payload": "Initial Value"}
+    machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.WRITE, alloc_p)]))
+    h = alloc_p["result_handle"]
+    assert isinstance(h, Handle)
+
+    # Mutate
+    mutate_p = {"op": "MUTATE", "handle": h, "payload": "Mutated Value"}
+    machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.WRITE, mutate_p)]))
+
+    read_p = {"handle": h}
+    machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.READ, read_p)]))
+    assert read_p["result_val"] == "Mutated Value"
+
+    # Release
+    release_p = {"op": "RELEASE", "handle": h}
+    machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.WRITE, release_p)]))
+
+    with pytest.raises(ExecutionError, match="Invalid Handle"):
+        read_p2 = {"handle": h}
+        machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.READ, read_p2)]))
+
