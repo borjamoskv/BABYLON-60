@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-import os
 import ast
-import re
 from pathlib import Path
 from typing import List, Dict, Any
 
@@ -74,7 +72,7 @@ def main():
     syntax_fails = [r for r in results if r["status"] == "FAIL"]
     warns = [r for r in results if r["issues"]]
     
-    print(f"=== CODEBASE DEEP REVIEW SUMMARY ===")
+    print("=== CODEBASE DEEP REVIEW SUMMARY ===")
     print(f"Total Python Files: {total_files}")
     print(f"Total Lines of Code: {total_lines}")
     print(f"Files with Syntax Errors: {len(syntax_fails)}")
