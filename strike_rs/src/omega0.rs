@@ -466,7 +466,6 @@ mod tests {
     }
 
     #[cfg(test)]
-    #[cfg(test)]
     mod proptests {
         use super::super::*;
         use proptest::prelude::*;

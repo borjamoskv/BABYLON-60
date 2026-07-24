@@ -407,8 +407,6 @@ fn minimize(envs: Vec<Environment>) -> Vec<Environment> {
 // ──────────────────────────────────────────────────────────
 // TESTS
 // ──────────────────────────────────────────────────────────
-
-#[cfg(test)]
 mod tests {
     use super::*;
     use crate::omega0::{Modality, Statement};
