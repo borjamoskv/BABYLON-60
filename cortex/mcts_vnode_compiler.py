@@ -118,7 +118,7 @@ def calculate_shannon_entropy(data: bytes) -> float:
         unique_bytes = set(data)
         log2_len = _fast_log2(length)
         for b in unique_bytes:
-            count = data.count(bytes([b]))
+            count = data.count(b)
             if count > 0:
                 p_x = count / length
                 entropy += -p_x * (_fast_log2(count) - log2_len)
