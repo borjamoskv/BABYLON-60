@@ -44,6 +44,6 @@ def get_mih_shards(vector: Sequence[float] | bytes, shard_count: int = 16) -> li
     if isinstance(vector, bytes):
         packed = vector
     else:
-        packed = void_vec.pack_void_bit(vector)
+        packed = void_vec.pack_void_bit(list(vector))
 
     return slice_void_bit(packed, shard_count)

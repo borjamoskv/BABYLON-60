@@ -12,6 +12,7 @@ pub mod bindings;
 
 /// Motor de Taint C5-REAL (Causal Poset)
 
+#[derive(Debug, PartialEq)]
 pub enum TaintError {
     CycleDetected,
     TopologicalSortFailed,

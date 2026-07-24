@@ -2,6 +2,7 @@
 use crate::omega0::{Justification, JustifiedStatement, verify};
 use std::collections::BTreeSet;
 
+#[derive(Debug)]
 pub enum AtmsError {
     InvalidNode(NodeId),
 }
@@ -20,6 +21,7 @@ impl std::error::Error for AtmsError {}
 pub type AssumptionId = usize;
 pub type NodeId = usize;
 
+#[derive(Clone, Debug, PartialEq)]
 pub struct Environment {
     assumptions: BTreeSet<AssumptionId>,
 }
@@ -66,12 +68,14 @@ impl Environment {
     }
 }
 
+#[derive(Clone, Debug)]
 struct Node {
     datum: String,
     assumption: Option<AssumptionId>,
     label: Vec<Environment>,
 }
 
+#[derive(Clone, Debug)]
 struct Justif {
     consequent: NodeId,
     antecedents: Vec<NodeId>,
@@ -336,6 +340,7 @@ fn minimize(envs: Vec<Environment>) -> Vec<Environment> {
 }
 
 
+#[cfg(test)]
 mod tests {
     use super::*;
     use crate::omega0::{Modality, Statement};
@@ -447,6 +452,7 @@ mod tests {
 }
 
 
+#[cfg(test)]
 mod laws {
     use super::*;
     use proptest::prelude::*;
