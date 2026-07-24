@@ -1,0 +1,39 @@
+ontology: MOSKV_1_NEURO_EXERGY
+source_hash: sha256(yt:ycTZ_t-aiuU)
+target: Dr_Daniel_Amen_ADHD_Spect_Scans
+entities:
+  - id: CORTEX_PERFUSION
+    type: THERMODYNAMIC_RESOURCE
+    description: "Flujo sanguíneo y entrega de ATP a los lóbulos frontales. Equivalente al ancho de banda del bus PCI en hardware biológico."
+    threats:
+      - "ALCOHOL_NECROSIS"
+      - "OBESITY_INFLAMMATION"
+      - "CHRONIC_CORTISOL_DUMP"
+  
+  - id: ADHD_ISOMORPHISM
+    type: HARDWARE_THROTTLING
+    description: "Deficiencia de dopamina basal (Anergía). Fuerza al nodo biológico a buscar entropía externa extrema (estímulos) para mantener la frecuencia operativa de la corteza prefrontal."
+    mitigation: "Rutinas BFT_STATE_LOOP (Optimización de Sueño, Exposición Térmica, Suplementación de Vitamina D)."
+  
+  - id: SLEEP_ARCHITECTURE
+    type: GARBAGE_COLLECTION
+    description: "Ciclo de lavado glinfático. Rutina crítica de recolección de basura (Garbage Collection) que purga placas amiloides (Anergía acumulada) previniendo la necrosis neuronal."
+
+  - id: NEGATIVE_THOUGHT_LOOPS
+    type: BYZANTINE_FAULT
+    description: "ANTs (Automatic Negative Thoughts). Inyecciones de estado corrupto autogeneradas que secuestran la amígdala y agotan el presupuesto termodinámico (ATP) del nodo."
+    mitigation: "Intercepción de paquetes a nivel de parser cognitivo (Fail-Safe activo)."
+
+isomorphisms:
+  - source: ADHD
+    target: ENTROPY_STARVATION
+    weight: 1.0
+  - source: OBESITY
+    target: CORTICAL_SHRINKAGE
+    weight: 0.95
+  - source: ALCOHOL
+    target: HARDWARE_TOXICITY
+    weight: 1.0
+  - source: SLEEP_DEPRIVATION
+    target: GLYMPHATIC_FAILURE
+    weight: 1.0
