@@ -10,10 +10,8 @@ C5-REAL Physical Implementation and Verification of Invariants Ω160, Ω161, Ω1
 
 import math
 import random
-import time
 import json
 import hashlib
-import os
 
 class GenericIRQChipL2:
     """Ω161: Abstraction layer between raw peripheral IRQs (L1) and Cortex decision unit (L3)."""
@@ -74,7 +72,6 @@ class BayesianCortexL3:
     def update_belief(self, signature: dict, shedding_active: bool) -> float:
         """P(Threat | Evidence) = P(Evidence | Threat) * P(Threat) / P(Evidence)"""
         raw_freq = signature["mean_freq"]
-        var = signature["variance"]
 
         # Likelihood P(Evidence | Threat)
         p_evidence_given_threat = 1.0 / (1.0 + math.exp(-(raw_freq - 50.0) / 10.0))
@@ -142,7 +139,7 @@ def run_bio_silicon_verification():
     peak_passed = max(r["passed_load"] for r in simulation_results)
     final_belief = simulation_results[-1]["belief_state"]
 
-    print(f"✓ Simulation completed over 50 steps.")
+    print("✓ Simulation completed over 50 steps.")
     print(f"  - Peak Raw IRQ Input (L1): {peak_raw:.2f} Hz")
     print(f"  - Peak Passed Load after Hysteresis (Ω160): {peak_passed:.2f} Hz")
     print(f"  - Stateful Shedding Active Steps: {shedding_count}/50")

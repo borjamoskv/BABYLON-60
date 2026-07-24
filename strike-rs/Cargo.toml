@@ -13,3 +13,8 @@ pyo3 = { version = "0.29.0", features = ["extension-module"] }
 # PyO3 requires Python ≤3.12 at this version. Point to the isolated venv.
 # Run tests with: PYO3_PYTHON=.venv/bin/python3 cargo test --lib
 # Or set permanently in .cargo/config.toml (see below).
+
+[profile.release]
+lto = "fat"
+codegen-units = 1
+opt-level = 3

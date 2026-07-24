@@ -6,7 +6,7 @@ use pyo3::prelude::*;
 
 macro_rules! define_ontology_lookup {
     ($func_name:ident, $( $val:expr => $str:expr ),* $(,)?) => {
-        fn $func_name(val: u8) -> &'static str {
+        pub fn $func_name(val: u8) -> &'static str {
             match val {
                 $( $val => $str, )*
                 _ => "UNKNOWN",
