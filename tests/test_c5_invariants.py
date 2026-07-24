@@ -275,3 +275,13 @@ def test_inv_c5_22_kimi_k3_interleaved_execution() -> None:
     assert "INV_C5_22" in content, "INV_C5_22 rule definition missing in .agents/AGENTS.md"
     assert "Kimi" in content or "Interleaved" in content, "INV_C5_22 missing Interleaved clause"
 
+
+def test_inv_c5_23_epistemic_grounding() -> None:
+    """INV_C5_23 — Semi-Formal Epistemic Grounding Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_23 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_23" in content, "INV_C5_23 rule definition missing in .agents/AGENTS.md"
+    assert "Epistemic" in content or "Semi-Formal" in content, "INV_C5_23 missing Epistemic clause"
+
+
