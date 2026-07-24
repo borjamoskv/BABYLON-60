@@ -47,10 +47,12 @@ class PhysicalMembraneState:
             raise TypeError(f"[SIGKILL_State_Purge] Illegal state unrepresentable: {state_type}")
         if state_type == "C4_Simulated_Buffer":
             raise RuntimeError("[SIGKILL_State_Purge] C4-SIM state rejected by C5-REAL physical membrane during SHIP.")
-        
+
         if len(payload_hash) != 64 or not all(c in string.hexdigits for c in payload_hash):
-            raise ValueError(f"[SIGKILL_State_Purge] Invalid payload_hash: Must be 64-char SHA3-256 hex. Got: {payload_hash}")
-            
+            raise ValueError(
+                f"[SIGKILL_State_Purge] Invalid payload_hash: Must be 64-char SHA3-256 hex. Got: {payload_hash}"
+            )
+
         if lamport_clock <= 0:
             raise ValueError(f"[SIGKILL_State_Purge] lamport_clock must be strictly positive. Got: {lamport_clock}")
 

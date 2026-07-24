@@ -1,14 +1,15 @@
-
 from typing import Any
 from proof_kernel.canonicalizer import hash_evidence
 
+
 class LWWRegister:
     """Last-Writer-Wins Register for CRDT Map"""
+
     def __init__(self, value: Any, lamport: int):
         self.value = value
         self.lamport = lamport
 
-    def merge(self, other: 'LWWRegister') -> 'LWWRegister':
+    def merge(self, other: "LWWRegister") -> "LWWRegister":
         if self.lamport > other.lamport:
             return self
         elif other.lamport > self.lamport:
@@ -21,11 +22,13 @@ class LWWRegister:
     def to_dict(self):
         return {"value": self.value, "lamport": self.lamport}
 
+
 class CRDTMap:
     """
     Conflict-Free Replicated Data Type (Map).
     Resolves the Topological Diamond Problem deterministically.
     """
+
     def __init__(self, state: dict[str, LWWRegister] | None = None):
         self.state = state or {}
 
@@ -39,7 +42,7 @@ class CRDTMap:
     def get(self, key: str) -> Any:
         return self.state[key].value if key in self.state else None
 
-    def merge(self, other: 'CRDTMap') -> 'CRDTMap':
+    def merge(self, other: "CRDTMap") -> "CRDTMap":
         merged = CRDTMap(dict(self.state))
         for k, v in other.state.items():
             if k in merged.state:
@@ -55,6 +58,7 @@ class CRDTMap:
         Each byte of deterministic CBOR serialization counts as 100 microbits of resolved information.
         """
         from proof_kernel.canonicalizer import canonicalize_cbor
+
         cbor_bytes = canonicalize_cbor(self.to_dict())
         info_density = len(cbor_bytes) * 100
         residual = max_entropy_microbits - info_density

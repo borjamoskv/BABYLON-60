@@ -18,7 +18,7 @@ DPO_REGISTRY = {
     "Telegram": "support@telegram.org",
     "Discord": "privacy@discord.com",
     "OpenAI": "dsar@openai.com",
-    "Microsoft": "privacydpo@microsoft.com"
+    "Microsoft": "privacydpo@microsoft.com",
 }
 
 GDPR_TEMPLATE = """DE: {operator_identity} <{operator_email}>
@@ -42,18 +42,21 @@ CORTEX-TAINT Provenance: {cortex_taint}
 Sha256 Signature Proof: {sha256_proof}
 """
 
-def generate_erasure_dossier(operator_identity: str = "Borja Moskv", operator_email: str = "operator@cortex.local") -> dict[str, str]:
+
+def generate_erasure_dossier(
+    operator_identity: str = "Borja Moskv", operator_email: str = "operator@cortex.local"
+) -> dict[str, str]:
     now_str = datetime.now(timezone.utc).isoformat()
     dossiers = {}
-    
+
     out_dir = os.path.join(os.path.dirname(__file__), "..", "gdpr_dossiers")
     os.makedirs(out_dir, exist_ok=True)
-    
+
     for platform, dpo_email in DPO_REGISTRY.items():
         raw_seed = f"{operator_identity}:{operator_email}:{platform}:{now_str}".encode("utf-8")
         taint = f"CORTEX-TAINT:borjamoskv:gdpr_purge:{platform}:{hashlib.sha256(raw_seed).hexdigest()[:16]}"
         proof = hashlib.sha256(f"{taint}:{now_str}".encode("utf-8")).hexdigest()
-        
+
         letter = GDPR_TEMPLATE.format(
             operator_identity=operator_identity,
             operator_email=operator_email,
@@ -61,15 +64,16 @@ def generate_erasure_dossier(operator_identity: str = "Borja Moskv", operator_em
             dpo_email=dpo_email,
             date_iso=now_str,
             cortex_taint=taint,
-            sha256_proof=proof
+            sha256_proof=proof,
         )
-        
+
         filepath = os.path.join(out_dir, f"GDPR_Erasure_{platform}.txt")
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(letter)
         dossiers[platform] = filepath
-        
+
     return dossiers
+
 
 if __name__ == "__main__":
     print("[C5-REAL] Generating GDPR Art. 17 Erasure Dossiers...")

@@ -36,7 +36,6 @@ def test_entropy_injection() -> None:
 
     initial = {"A": 1, "B": 1, "C": 1}
 
-
     history_force, _ = simulate_boolean_network(G, initial, steps=10, perturbed_nodes={"A": 1})
     assert np.sum(history_force[-1]) == 3.0  # Todos en 1
 

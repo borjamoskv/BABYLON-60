@@ -47,7 +47,7 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
 
     stripped = re.sub(r"/\*.*?\*/", " ", req.sql, flags=re.DOTALL)
     stripped = re.sub(r"--[^\n]*", " ", stripped).strip()
-    first_word = (stripped.split(None, 1)[0].upper() if stripped else "")
+    first_word = stripped.split(None, 1)[0].upper() if stripped else ""
     if first_word not in ("SELECT", "WITH", "EXPLAIN"):
         raise HTTPException(
             403,

@@ -62,8 +62,6 @@ def _sentences(text: str) -> list[str]:
     return [s for s in parts if s]
 
 
-
-
 @dataclass
 class LinguisticEntropyReport:
     char_count: int = 0
@@ -101,8 +99,6 @@ class LinguisticEntropyReport:
         return d
 
 
-
-
 class LinguisticEntropyDetector:
     """
     Full-spectrum linguistic entropy analyzer.
@@ -114,7 +110,6 @@ class LinguisticEntropyDetector:
         self._compiled_slop: list[tuple[re.Pattern[str], float]] = [
             (re.compile(pattern, re.IGNORECASE), weight) for pattern, weight in _SLOP_PATTERNS
         ]
-
 
     @staticmethod
     def _shannon(items: list[str]) -> float:
@@ -138,7 +133,6 @@ class LinguisticEntropyDetector:
         trigrams = [f"{words[i]} {words[i + 1]} {words[i + 2]}" for i in range(len(words) - 2)]
         return round(self._shannon(trigrams), 4)
 
-
     @staticmethod
     def calculate_ttr(words: list[str]) -> float:
         if not words:
@@ -155,7 +149,6 @@ class LinguisticEntropyDetector:
         ttrs = [len(set(words[i : i + window])) / window for i in range(len(words) - window + 1)]
         return round(sum(ttrs) / len(ttrs), 4)
 
-
     @staticmethod
     def _sentence_metrics(text: str) -> tuple[float, float]:
         """Returns (avg_sentence_length_words, variance)."""
@@ -166,7 +159,6 @@ class LinguisticEntropyDetector:
         avg = statistics.mean(lengths)
         var = statistics.pvariance(lengths) if len(lengths) > 1 else 0.0
         return round(avg, 4), round(var, 4)
-
 
     @staticmethod
     def _burstiness(words: list[str]) -> float:
@@ -194,7 +186,6 @@ class LinguisticEntropyDetector:
         if (sigma + mu) == 0:
             return 0.0
         return round((sigma - mu) / (sigma + mu), 4)
-
 
     @staticmethod
     def _context_rot(text: str, window_size: int = 100) -> float:
@@ -229,7 +220,6 @@ class LinguisticEntropyDetector:
         decay = max(0.0, (h_first - h_second) / h_first)
         return round(min(decay, 1.0), 4)
 
-
     def detect_slop(self, text: str) -> list[dict[str, Any]]:
         results: list[dict[str, Any]] = []
         for pattern, weight in self._compiled_slop:
@@ -244,7 +234,6 @@ class LinguisticEntropyDetector:
                     }
                 )
         return results
-
 
     def analyze(self, text: str) -> LinguisticEntropyReport:
         """

@@ -36,6 +36,7 @@ def _client() -> CtGovClient:
 def _get_ledger(db_path: str) -> Any:
     if db_path == "live-bft" or db_path.startswith("bft:"):
         from .ledger import BabylonBFTLedgerAdapter
+
         actual_path = db_path.split(":", 1)[1] if ":" in db_path else "cortex.db"
         return BabylonBFTLedgerAdapter(actual_path)
     return AmendmentLedger(db_path)

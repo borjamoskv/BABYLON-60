@@ -41,8 +41,6 @@ _DEFAULT_MAX_RETRIES = 5
 _DEFAULT_BASE_DELAY = 2.0  # seconds - doubles each attempt (exponential)
 
 
-
-
 class HttpRetryMixin:
     """Soberano HTTP retry mixin - exponential backoff on 429.
 
@@ -168,8 +166,6 @@ class HttpRetryMixin:
         raise last_exc or RuntimeError(  # pragma: no cover
             f"Retry loop exhausted for {self._provider} ({label})"
         )
-
-
 
 
 async def _do_standalone_post(

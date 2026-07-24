@@ -1,4 +1,3 @@
-
 from core_graph_ledger import GraphLedger
 from cortex_bpe_tokenizer import BPETokenizer
 from cortex_mamba_network import MambaNetwork
@@ -25,8 +24,10 @@ def test_audited_generation_flow() -> None:
 
     assert len(ledger.crdt.state) == 6
 
+
 def test_mamba_ledger_fail_fast():
     import pytest
+
     tokenizer = BPETokenizer()
     network = MambaNetwork(vocab_size=300, d_model=16, d_state=4, n_layers=2)
     ledger = GraphLedger()

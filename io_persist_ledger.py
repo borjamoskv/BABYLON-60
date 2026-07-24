@@ -1,4 +1,3 @@
-
 import sqlite3
 from dataclasses import asdict
 from core_graph_ledger import GraphLedger, StateNode
@@ -10,6 +9,7 @@ class LedgerPersist:
     Writes are atomic (single transaction per batch).
     Reads reconstruct the full in-memory DAG from disk.
     """
+
     def __init__(self, db_path: str) -> None:
         assert isinstance(db_path, str) and len(db_path) > 0, "Fail-fast: db_path must be non-empty str"
         self.db_path = db_path
@@ -43,7 +43,7 @@ class LedgerPersist:
             node = StateNode(**node_data)
             cursor.execute(
                 "INSERT OR IGNORE INTO dag_nodes (node_id, parent_id, claim, payload_hash) VALUES (?, ?, ?, ?)",
-                (node.node_id, node.parent_id, node.claim_summary, node.payload_hash)
+                (node.node_id, node.parent_id, node.claim_summary, node.payload_hash),
             )
             inserted += cursor.rowcount
         self.conn.commit()
@@ -74,19 +74,16 @@ class LedgerPersist:
                 if node_id in inserted:
                     continue
                 if parent_id == ledger.genesis_id or parent_id in inserted:
-                    node = StateNode(
-                        node_id=nid,
-                        parent_id=parent_id,
-                        claim_summary=claim,
-                        payload_hash=payload_hash
-                    )
+                    node = StateNode(node_id=nid, parent_id=parent_id, claim_summary=claim, payload_hash=payload_hash)
                     ledger.crdt.set(nid, asdict(node), ledger._clock())
                     inserted.add(nid)
                     progress = True
 
         if len(inserted) != len(row_map):
             orphans = set(row_map.keys()) - inserted
-            raise ValueError(f"Fail-fast: {len(orphans)} orphan nodes detected in DB, DAG integrity violated: {orphans}")
+            raise ValueError(
+                f"Fail-fast: {len(orphans)} orphan nodes detected in DB, DAG integrity violated: {orphans}"
+            )
 
         return ledger
 

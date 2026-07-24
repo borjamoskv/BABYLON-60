@@ -8,6 +8,7 @@ Usage:
     python -m causal_isomorphism.cli validate domain_kernel/IRPAutomata.fs
     python -m causal_isomorphism.cli inspect domain_kernel/IRPAutomata.fs
 """
+
 from __future__ import annotations
 
 import argparse

@@ -47,6 +47,7 @@ class CortexOntologyLedger:
 
     def _read_json(self, path: str) -> Dict[str, Any]:
         from typing import cast
+
         try:
             with open(path, "r", encoding="utf-8") as f:
                 return cast(Dict[str, Any], dict(json.load(f)))

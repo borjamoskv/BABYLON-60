@@ -60,7 +60,11 @@ def execute_pulse() -> dict[str, Any]:
                 continue
             try:
                 lines = len(f.read_text(errors="ignore").splitlines())
-                if lines > 800 and f.name != "300_primitivas_external_compensation.yaml" and f.name not in ("moskv1_core.py", "moskv1_dataset_compiler.py"):
+                if (
+                    lines > 800
+                    and f.name != "300_primitivas_external_compensation.yaml"
+                    and f.name not in ("moskv1_core.py", "moskv1_dataset_compiler.py")
+                ):
                     large_files += 1
                     if len(alarms) < 3:
                         alarms.append(f"High LOC ({lines}): {f.relative_to(PROJECT_ROOT)}")

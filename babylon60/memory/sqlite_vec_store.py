@@ -5,6 +5,7 @@ from .models import CortexFactModel
 
 logger = logging.getLogger("babylon60.memory.sqlite_vec_store")
 
+
 class SovereignVectorStoreL2:
     def __init__(self, encoder: Any = None) -> None:
         self.encoder = encoder

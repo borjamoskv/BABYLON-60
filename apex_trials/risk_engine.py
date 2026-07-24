@@ -43,6 +43,7 @@ _FITTED_PATH = Path(__file__).with_name("fitted_weights.json")
 def _load_fitted() -> dict[str, Any] | None:
     if _FITTED_PATH.exists():
         from typing import cast
+
         return cast(dict[str, Any], json.loads(_FITTED_PATH.read_text(encoding="utf-8")))
     return None
 

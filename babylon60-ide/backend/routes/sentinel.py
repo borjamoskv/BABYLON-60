@@ -90,32 +90,42 @@ def sentinel_status() -> dict[str, Any]:
 
     warnings: list[dict[str, str]] = []
     if not is_git:
-        warnings.append({
-            "level": "red",
-            "msg": f"'{repo_name}' no es un repo git — sin Git Sentinel no hay ledger de mutaciones.",
-        })
+        warnings.append(
+            {
+                "level": "red",
+                "msg": f"'{repo_name}' no es un repo git — sin Git Sentinel no hay ledger de mutaciones.",
+            }
+        )
     if repo_name != CANONICAL_REPO_NAME:
-        warnings.append({
-            "level": "red",
-            "msg": f"REPO INCORRECTO: estás en '{repo_name}', el linaje canónico es '{CANONICAL_REPO_NAME}'.",
-        })
+        warnings.append(
+            {
+                "level": "red",
+                "msg": f"REPO INCORRECTO: estás en '{repo_name}', el linaje canónico es '{CANONICAL_REPO_NAME}'.",
+            }
+        )
     if branch and branch != CANONICAL_BRANCH:
-        warnings.append({
-            "level": "amber",
-            "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
-        })
+        warnings.append(
+            {
+                "level": "amber",
+                "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
+            }
+        )
     marker = DEAD_FORK_MARKER.lower()
     for r in remotes:
         if marker in r["url"].lower():
-            warnings.append({
-                "level": "red",
-                "msg": f"Remoto '{r['name']}' apunta al fork muerto {DEAD_FORK_MARKER} (historia no relacionada, claves expuestas). Linaje NO canónico.",
-            })
+            warnings.append(
+                {
+                    "level": "red",
+                    "msg": f"Remoto '{r['name']}' apunta al fork muerto {DEAD_FORK_MARKER} (historia no relacionada, claves expuestas). Linaje NO canónico.",
+                }
+            )
     if remotes and not any(marker in r["url"].lower() for r in remotes):
-        warnings.append({
-            "level": "amber",
-            "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
-        })
+        warnings.append(
+            {
+                "level": "amber",
+                "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
+            }
+        )
 
     warnings.sort(key=lambda w: 0 if w["level"] == "red" else 1)
 

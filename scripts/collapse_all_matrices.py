@@ -25,7 +25,7 @@ for m in all_matches:
     num = m[0].strip()
     title = m[1].strip()
     desc = m[2].strip()
-    
+
     yaml_content = f"""Claim: Invariante Termodinámico Ω{num} - {title}
 Proof: 
   Base: "{desc[:100]}..."
@@ -33,10 +33,7 @@ Proof:
 Isomorphisms:
   - "Rule Ω{num}" -> "C5-REAL Axiom"
 """
-    matrices.append({
-        "concept": f"omega_{num}_invariant",
-        "content": yaml_content
-    })
+    matrices.append({"concept": f"omega_{num}_invariant", "content": yaml_content})
 
 if not matrices:
     print("[-] FATAL: No se encontraron matrices flotantes.")
@@ -45,7 +42,20 @@ else:
     subprocess.run(["uv", "run", "python3", "scripts/batch_crystallize.py", payload])
     subprocess.run(["git", "add", "cortex/ontology/"], cwd=os.path.dirname(os.path.dirname(__file__)))
     subprocess.run(["git", "add", "scripts/batch_crystallize.py"], cwd=os.path.dirname(os.path.dirname(__file__)))
-    res = subprocess.run(["git", "-c", "commit.gpgsign=false", "commit", "-m", "feat(ultrathink): Collapse all Ω invariant matrices via P0 Singularity [C5-REAL]", "--no-verify"], cwd=os.path.dirname(os.path.dirname(__file__)), capture_output=True, text=True)
+    res = subprocess.run(
+        [
+            "git",
+            "-c",
+            "commit.gpgsign=false",
+            "commit",
+            "-m",
+            "feat(ultrathink): Collapse all Ω invariant matrices via P0 Singularity [C5-REAL]",
+            "--no-verify",
+        ],
+        cwd=os.path.dirname(os.path.dirname(__file__)),
+        capture_output=True,
+        text=True,
+    )
     if res.returncode == 0:
         print(f"[+] COMMIT SUCCESS: {res.stdout.strip()}")
     else:

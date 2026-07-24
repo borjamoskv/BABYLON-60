@@ -222,9 +222,7 @@ class AmendmentLedger:
         async def _run() -> LedgerEntry | None:
             async with aiosqlite.connect(self.db_path) as db:
                 db.row_factory = aiosqlite.Row
-                async with db.execute(
-                    "SELECT * FROM ledger_entries WHERE event_id = ?", (entry_id,)
-                ) as cursor:
+                async with db.execute("SELECT * FROM ledger_entries WHERE event_id = ?", (entry_id,)) as cursor:
                     row = await cursor.fetchone()
                     return self._row_to_entry(row) if row is not None else None
 

@@ -41,9 +41,7 @@ def _discover_ledger_db(project_root: Path) -> Path | None:
     for db_file in sorted(project_root.glob("*.db")):
         try:
             with contextlib.closing(connect_readonly(db_file)) as conn:
-                cursor = conn.execute(
-                    "SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'"
-                )
+                cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='ledger_entries'")
                 if cursor.fetchone():
                     return db_file
         except sqlite3.DatabaseError:

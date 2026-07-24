@@ -31,7 +31,7 @@ def validate_zero_network(url: str) -> None:
     if parsed.scheme != "http" or parsed.hostname not in ("127.0.0.1", "localhost"):
         raise HTTPException(
             status_code=403,
-            detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (http://127.0.0.1 or http://localhost)."
+            detail=f"C5-REAL VIOLATION: Endpoint '{url}' must be confined to loopback (http://127.0.0.1 or http://localhost).",
         )
     lower = url.lower()
     forbidden = ["openai.com", "anthropic.com", "dashscope", "googleapis.com", "deepmind"]
@@ -39,7 +39,7 @@ def validate_zero_network(url: str) -> None:
         if domain in lower:
             raise HTTPException(
                 status_code=403,
-                detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden."
+                detail=f"C5-REAL VIOLATION: Zero-Network Policy breached. External endpoint '{domain}' is strictly forbidden.",
             )
 
 
@@ -54,16 +54,13 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon."
+                "content": "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon.",
             },
-            {
-                "role": "user",
-                "content": req.prompt
-            }
+            {"role": "user", "content": req.prompt},
         ],
         "temperature": req.temperature,
         "max_tokens": req.max_tokens,
-        "stream": False
+        "stream": False,
     }
 
     start_time = time.perf_counter()
@@ -72,18 +69,15 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
             endpoint,
             data=json.dumps(payload).encode("utf-8"),
             headers={"Content-Type": "application/json"},
-            method="POST"
+            method="POST",
         )
         with urllib.request.urlopen(req_obj, timeout=30.0) as resp:
             resp_data = json.loads(resp.read().decode("utf-8"))
     except Exception as e:
-        raise HTTPException(
-            status_code=503,
-            detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}"
-        )
+        raise HTTPException(status_code=503, detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}")
 
     latency_ms = int((time.perf_counter() - start_time) * 1000)
-    
+
     try:
         text = resp_data["choices"][0]["message"]["content"]
     except (KeyError, IndexError):
@@ -99,7 +93,7 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         "tps": tps,
         "latency_ms": latency_ms,
         "sha256": sha256,
-        "provider": "LOCAL_SILICON_FASTAPI_BRIDGE"
+        "provider": "LOCAL_SILICON_FASTAPI_BRIDGE",
     }
 
 
@@ -115,15 +109,10 @@ def status_local() -> dict[str, Any]:
             "status": "ONLINE",
             "provider": "Ollama/MLX Local Silicon",
             "endpoint": "http://127.0.0.1:11434",
-            "models": models
+            "models": models,
         }
     except (urllib.error.URLError, json.JSONDecodeError, OSError, ConnectionError):
-        return {
-            "status": "OFFLINE",
-            "provider": "Ollama/MLX",
-            "endpoint": "http://127.0.0.1:11434",
-            "models": []
-        }
+        return {"status": "OFFLINE", "provider": "Ollama/MLX", "endpoint": "http://127.0.0.1:11434", "models": []}
 
 
 class MambaInferenceRequest(BaseModel):
@@ -136,6 +125,7 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
     """Execute local Mamba SSM inference integrated with GraphLedger."""
     try:
         import sys
+
         parent_dir = str(Path(__file__).resolve().parent.parent.parent.parent)
         if parent_dir not in sys.path:
             sys.path.insert(0, parent_dir)
@@ -146,17 +136,14 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
         from net_mamba_ledger_engine import MambaLedgerEngine
 
         tokenizer = BPETokenizer()
-        tokenizer.train("Lorem ipsum dolor sit amet. Babylon-60 is a C5-REAL sovereign kernel and Mamba network.", num_merges=10)
+        tokenizer.train(
+            "Lorem ipsum dolor sit amet. Babylon-60 is a C5-REAL sovereign kernel and Mamba network.", num_merges=10
+        )
         network = MambaNetwork(vocab_size=len(tokenizer.vocab), d_model=16, d_state=8, n_layers=2)
         ledger = GraphLedger()
         engine = MambaLedgerEngine(tokenizer, network, ledger)
 
-        text, cert = engine.mut_generate_audited(
-            prompt=req.prompt,
-            max_new_tokens=req.max_tokens,
-            temperature=1.0,
-            k=3
-        )
+        text, cert = engine.mut_generate_audited(prompt=req.prompt, max_new_tokens=req.max_tokens, temperature=1.0, k=3)
 
         return {
             "text": text,
@@ -165,13 +152,10 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
                 "ruleset_hash": cert.ruleset_hash,
                 "cert_hash": cert.cert_hash,
                 "residual_microbits": cert.residual_microbits,
-                "nodes_count": len(ledger.crdt.state)
+                "nodes_count": len(ledger.crdt.state),
             },
             "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
-            "vocab_size": len(tokenizer.vocab)
+            "vocab_size": len(tokenizer.vocab),
         }
     except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=f"Native Mamba inference failed: {str(e)}"
-        )
+        raise HTTPException(status_code=500, detail=f"Native Mamba inference failed: {str(e)}")

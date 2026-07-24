@@ -46,8 +46,6 @@ _DANGEROUS_CHARS: Final = frozenset({"\x00", "\r", "\n", "\t", "\x1b"})
 MAX_QUERY_LENGTH: Final = 2048
 
 
-
-
 def sanitize_project_name(project: str) -> str:
     """Validate and normalize a project name.
 

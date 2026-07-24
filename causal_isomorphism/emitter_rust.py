@@ -15,6 +15,7 @@ REGIME ENFORCEMENT:
 The emitter generates type-safe Rust structs and enums that mirror
 the F# ontological types, plus trait implementations for BLAKE3 hashing.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -82,6 +83,7 @@ class RustEmitter:
     Enforces the Trilingual Regime by blocking physics computation
     and emitting only type definitions and poset operation stubs.
     """
+
     indent: int = 0
     lines: list[str] = field(default_factory=list)
 
@@ -203,16 +205,14 @@ class RustEmitter:
 
         for case in union.cases:
             if not case.payload_fields:
-                self._line(f'{union.name}::{case.name} => {{')
+                self._line(f"{union.name}::{case.name} => {{")
                 self.indent += 1
                 self._line(f'hasher.update(b"{case.name}");')
                 self.indent -= 1
                 self._line("}")
             else:
-                bindings = ", ".join(
-                    self._to_snake_case(fname) for fname, _ in case.payload_fields
-                )
-                self._line(f'{union.name}::{case.name} {{ {bindings} }} => {{')
+                bindings = ", ".join(self._to_snake_case(fname) for fname, _ in case.payload_fields)
+                self._line(f"{union.name}::{case.name} {{ {bindings} }} => {{")
                 self.indent += 1
                 self._line(f'hasher.update(b"{case.name}");')
                 for fname, ftype in case.payload_fields:
@@ -315,7 +315,7 @@ class RustEmitter:
         self._line(f"/// {func.name} — Pure query / validation")
         self._line(f"pub fn {self._to_snake_case(func.name)}({params_rust}) -> {ret_type} {{")
         self.indent += 1
-        self._line("todo!(\"Implement from F# Domain Kernel logic\")")
+        self._line('todo!("Implement from F# Domain Kernel logic")')
         self.indent -= 1
         self._line("}")
         self._line("")
@@ -343,5 +343,6 @@ class RustEmitter:
     def _to_snake_case(name: str) -> str:
         """Convert PascalCase/camelCase to snake_case."""
         import re
+
         s1 = re.sub(r"(.)([A-Z][a-z]+)", r"\1_\2", name)
         return re.sub(r"([a-z0-9])([A-Z])", r"\1_\2", s1).lower()

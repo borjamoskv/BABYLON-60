@@ -24,7 +24,7 @@ def get_leaderboard() -> dict[str, Any]:
     """Get the latest LMSYS Chatbot Arena leaderboard sync."""
     db_dir = _get_babylon_db_dir()
     db_path = db_dir / "ojeador_leaderboard.db"
-    
+
     if not db_path.exists():
         return {"exists": False, "models": [], "meta": {}}
 
@@ -36,7 +36,7 @@ def get_leaderboard() -> dict[str, Any]:
         run = run_cursor.fetchone()
         if not run:
             return {"exists": False, "models": [], "meta": {}}
-            
+
         run_id = run["id"]
         meta = {
             "fetched_at": run["fetched_at"],
@@ -44,13 +44,13 @@ def get_leaderboard() -> dict[str, Any]:
             "latency_ms": run["latency_ms"],
             "entropy": run["entropy"],
         }
-        
+
         models_cursor = conn.execute(
             "SELECT rank, model, vendor, score, votes FROM leaderboard_snapshots WHERE run_id = ? ORDER BY rank",
-            (run_id,)
+            (run_id,),
         )
         models = [dict(row) for row in models_cursor.fetchall()]
-        
+
         return {"exists": True, "meta": meta, "models": models}
     except sqlite3.OperationalError as e:
         return {"exists": False, "models": [], "error": str(e)}
@@ -63,7 +63,7 @@ def get_battles() -> dict[str, Any]:
     """Get the domestic arena battles captured from the DOM."""
     db_dir = _get_babylon_db_dir()
     db_path = db_dir / "arena_alpha_ledger.db"
-    
+
     if not db_path.exists():
         return {"exists": False, "battles": []}
 
@@ -87,55 +87,52 @@ def get_conversations() -> dict[str, Any]:
     path = Path(__file__).resolve().parent.parent / "sample_toxic_chat.txt"
     if not path.exists():
         return {"exists": False, "conversations": [], "message": f"Sample file not found at {path.name}"}
-        
+
     try:
         with open(path, "r", encoding="utf-8") as f:
             content = f.read()
-            
+
         parts = content.split("================================================================================")
         conversations = []
         for part in parts:
             part = part.strip()
             if not part:
                 continue
-            
+
             id_start = part.find("(ID: ")
             id_end = part.find(")")
             conv_id = "unknown"
             if id_start != -1 and id_end != -1:
                 conv_id = part[id_start + 5 : id_end]
-                
+
             prompt_marker = "Prompt:\n"
             prompt_start = part.find(prompt_marker)
             response_marker = "\n\nResponse:\n"
             response_start = part.find(response_marker)
             toxicity_marker = "\n\nToxicity (User/Model): "
             toxicity_start = part.find(toxicity_marker)
-            
+
             prompt = ""
             response = ""
             toxicity = "None / None"
-            
+
             if prompt_start != -1:
                 start_idx = prompt_start + len(prompt_marker)
-                end_idx = response_start if response_start != -1 else (toxicity_start if toxicity_start != -1 else len(part))
+                end_idx = (
+                    response_start if response_start != -1 else (toxicity_start if toxicity_start != -1 else len(part))
+                )
                 prompt = part[start_idx:end_idx].strip()
-                
+
             if response_start != -1:
                 start_idx = response_start + len(response_marker)
                 end_idx = toxicity_start if toxicity_start != -1 else len(part)
                 response = part[start_idx:end_idx].strip()
-                
+
             if toxicity_start != -1:
-                toxicity = part[toxicity_start + len(toxicity_marker):].strip()
-                
-            conversations.append({
-                "conv_id": conv_id,
-                "prompt": prompt,
-                "response": response,
-                "toxicity": toxicity
-            })
-            
+                toxicity = part[toxicity_start + len(toxicity_marker) :].strip()
+
+            conversations.append({"conv_id": conv_id, "prompt": prompt, "response": response, "toxicity": toxicity})
+
         return {"exists": True, "conversations": conversations}
     except Exception as e:
         return {"exists": False, "conversations": [], "error": str(e)}

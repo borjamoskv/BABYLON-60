@@ -2,11 +2,13 @@
 
 from typing import List, Dict, Tuple
 
+
 class BPETokenizer:
     """
     C5-REAL primitive for Byte-Pair Encoding (BPE).
     Transduces unstructured text entropy into discrete tokens for the SSM Core.
     """
+
     def __init__(self) -> None:
         self.vocab: Dict[str, int] = {chr(i): i for i in range(256)}
         self.inverse_vocab: Dict[int, str] = {i: chr(i) for i in range(256)}
@@ -25,7 +27,7 @@ class BPETokenizer:
         new_tokens = []
         i = 0
         while i < len(tokens):
-            if i < len(tokens) - 1 and tokens[i] == pair[0] and tokens[i+1] == pair[1]:
+            if i < len(tokens) - 1 and tokens[i] == pair[0] and tokens[i + 1] == pair[1]:
                 new_tokens.append(new_token)
                 i += 2
             else:
@@ -40,15 +42,15 @@ class BPETokenizer:
             stats = self.get_stats(tokens)
             if not stats:
                 break
-            
-            best_pair = max(stats, key=stats.get) # type: ignore
+
+            best_pair = max(stats, key=stats.get)  # type: ignore
             new_token_str = best_pair[0] + best_pair[1]
-            
+
             self.merges[best_pair] = self.next_token_id
             self.vocab[new_token_str] = self.next_token_id
             self.inverse_vocab[self.next_token_id] = new_token_str
             self.next_token_id += 1
-            
+
             tokens = self.merge(tokens, best_pair, new_token_str)
 
     def encode(self, text: str) -> List[int]:
@@ -61,13 +63,13 @@ class BPETokenizer:
                 if pair in self.merges:
                     pair_to_merge = pair
                     break
-            
+
             if not pair_to_merge:
                 break
-                
+
             new_token_str = pair_to_merge[0] + pair_to_merge[1]
             tokens = self.merge(tokens, pair_to_merge, new_token_str)
-            
+
         return [self.vocab[t] for t in tokens]
 
     def decode(self, token_ids: List[int]) -> str:

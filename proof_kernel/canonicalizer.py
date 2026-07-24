@@ -2,11 +2,13 @@ import hashlib
 import cbor2
 from typing import Any
 
+
 def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
     """
     Ω168 / INV_C5_18 · Canonical Representation (CBOR)
     Convierte el estado de evidencia en bytes puros de CBOR.
     """
+
     def _sanitize_objects(obj: Any) -> Any:
         if isinstance(obj, float):
             raise ValueError("Floating-point numbers are prohibited in C5-REAL canonical representation.")
@@ -21,6 +23,7 @@ def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
     sanitized = _sanitize_objects(evidence)
     return cbor2.dumps(sanitized)
 
+
 def hash_evidence(evidence: dict[str, Any] | str | int | bytes | list[Any]) -> str:
     """
     Calcula el hash determinista usando SHA-256 sobre CBOR.
@@ -30,6 +33,6 @@ def hash_evidence(evidence: dict[str, Any] | str | int | bytes | list[Any]) -> s
     elif isinstance(evidence, bytes):
         payload = evidence
     else:
-        payload = str(evidence).encode('utf-8')
-        
+        payload = str(evidence).encode("utf-8")
+
     return hashlib.sha256(payload).hexdigest()

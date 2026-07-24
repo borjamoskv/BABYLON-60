@@ -17,6 +17,7 @@ Consuming operations:
   - Returning it.
   - Using it in binary operations.
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -137,18 +138,20 @@ class LinearTypeChecker:
                 return current
 
             case IRExprKind.MATCH:
-                match_expr_usages = self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
-                
+                match_expr_usages = (
+                    self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
+                )
+
                 arm_usages: set[int] = set()
                 for arm in expr.match_arms:
                     if param_name in arm.pattern.bindings:
                         arm_usages.add(0)
                     else:
                         arm_usages.update(self._get_usage_paths(param_name, arm.body))
-                
+
                 if not arm_usages:
                     arm_usages = {0}
-                
+
                 return self._add_sets(match_expr_usages, arm_usages)
 
             case IRExprKind.BLOCK:

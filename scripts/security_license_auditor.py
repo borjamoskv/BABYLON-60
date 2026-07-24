@@ -10,6 +10,7 @@ import subprocess
 
 APPROVED_LICENSES = {"MIT", "Apache-2.0", "BSD-3-Clause", "BSD-2-Clause", "ISC", "Python-2.0", "PSF-2.0"}
 
+
 def main() -> int:
     print("🟢 [MOSKV-1 APEX] Initiating Security & License Audit...")
 
@@ -38,6 +39,7 @@ def main() -> int:
 
     print("🟢 [MOSKV-1 APEX] Security & License Audit Completed Successfully.")
     return 0
+
 
 if __name__ == "__main__":
     sys.exit(main())

@@ -18,5 +18,3 @@ def test_mamba_route_handler() -> None:
     assert "certificate" in res
     assert res["certificate"]["nodes_count"] == 4  # 1 prompt node + 3 token nodes
     assert res["provider"] == "NATIVE_MAMBA_SSM_LEDGER_ENGINE"
-
-

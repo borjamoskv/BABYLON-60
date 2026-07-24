@@ -1,4 +1,3 @@
-
 import pytest
 from core_graph_ledger import GraphLedger
 from proof_kernel.canonicalizer import hash_evidence
@@ -16,12 +15,8 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     n1 = ledger.mut_append_node(
         parent_id=ledger.genesis_id, claim="Genesis node", payload_hash=hash_evidence("payload_genesis")
     )
-    n2 = ledger.mut_append_node(
-        parent_id=n1.node_id, claim="Second node", payload_hash=hash_evidence("payload_second")
-    )
-    n3 = ledger.mut_append_node(
-        parent_id=n2.node_id, claim="Third node", payload_hash=hash_evidence("payload_third")
-    )
+    n2 = ledger.mut_append_node(parent_id=n1.node_id, claim="Second node", payload_hash=hash_evidence("payload_second"))
+    n3 = ledger.mut_append_node(parent_id=n2.node_id, claim="Third node", payload_hash=hash_evidence("payload_third"))
 
     persist = LedgerPersist(db_file)
     inserted = persist.io_persist_ledger(ledger)

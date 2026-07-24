@@ -50,7 +50,6 @@ __all__ = ["ASTSandbox", "ExecResult", "SandboxVerdict"]
 logger = logging.getLogger("babylon60.sandbox")
 
 
-
 _ALLOWED_NODES = frozenset(
     {
         ast.Module,
@@ -177,8 +176,6 @@ _BLOCKED_ATTRS = frozenset(
 )
 
 
-
-
 @dataclass(frozen=True)
 class SandboxVerdict:
     """Result of AST validation."""
@@ -202,8 +199,6 @@ class ExecResult:
     stdout: str = ""
     error: str | None = None
     duration_ms: float = 0.0
-
-
 
 
 class ASTSandbox:

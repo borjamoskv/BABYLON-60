@@ -1,23 +1,26 @@
-
 from dataclasses import dataclass, asdict
 from typing import List
 import time
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.crdt import CRDTMap
 
+
 @dataclass(frozen=True)
 class StateNode:
     """Strict schema for a content-addressable state transition node in the Poset/DAG."""
-    node_id: str          # CBOR/SHA256 content address
-    parent_id: str        # CBOR/SHA256 of parent node ('0' * 64 if genesis)
-    claim_summary: str    # BPE-aligned summary (< 64 chars)
-    payload_hash: str     # CBOR/SHA256 of mutated data
+
+    node_id: str  # CBOR/SHA256 content address
+    parent_id: str  # CBOR/SHA256 of parent node ('0' * 64 if genesis)
+    claim_summary: str  # BPE-aligned summary (< 64 chars)
+    payload_hash: str  # CBOR/SHA256 of mutated data
+
 
 class GraphLedger:
     """
     DAG state ledger enforcing strict acyclycity and content-addressable SSOT.
     Integrated with Proof Kernel CRDTMap and CBOR hashing for BFT determinism.
     """
+
     def __init__(self) -> None:
         self.crdt = CRDTMap()
         self.genesis_id: str = "0" * 64
@@ -44,12 +47,7 @@ class GraphLedger:
         if self.crdt.get(node_id) is not None:
             raise ValueError(f"Fail-fast: idempotency violation, node {node_id} already exists.")
 
-        node = StateNode(
-            node_id=node_id,
-            parent_id=parent_id,
-            claim_summary=claim,
-            payload_hash=payload_hash
-        )
+        node = StateNode(node_id=node_id, parent_id=parent_id, claim_summary=claim, payload_hash=payload_hash)
         self.crdt.set(node_id, asdict(node), self._clock())
         return node
 
@@ -57,7 +55,7 @@ class GraphLedger:
         """Pre: head_id in DAG -> Exec: trace parent_ids to genesis -> Post: ordered list of nodes."""
         if self.crdt.get(head_id) is None:
             raise ValueError(f"Fail-fast: head_id {head_id} missing from ledger.")
-        
+
         path: List[StateNode] = []
         curr_id: str = head_id
         while curr_id != self.genesis_id:
@@ -65,6 +63,6 @@ class GraphLedger:
             node = StateNode(**node_data)
             path.append(node)
             curr_id = node.parent_id
-        
+
         path.reverse()
         return path

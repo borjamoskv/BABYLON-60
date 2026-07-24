@@ -79,7 +79,7 @@ def test_inv_c5_04_no_mock_signatures() -> None:
 
 def test_inv_c5_07a_no_broad_except() -> None:
     """INV_C5_07 — Loud Failure: except Exception is strictly prohibited."""
-    hits = _scan({".py"}, r'except\s+Exception\s*\w*\s*:')
+    hits = _scan({".py"}, r"except\s+Exception\s*\w*\s*:")
     hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h]
     assert not hits, _fail_msg("INV_C5_07a (Generic except Exception: found)", hits)
 
@@ -217,7 +217,9 @@ def test_inv_c5_17_autodidact_omega_bypass() -> None:
         text = local_agents.read_text(errors="ignore")
         if "INV_C5_17" in text and "Ultrathink Protocol" in text:
             found = True
-    assert found, f"INV_C5_17 missing in local AGENTS.md. Path: {local_agents}, Exists: {local_agents.exists()}, Text preview: {text[:100]}"
+    assert found, (
+        f"INV_C5_17 missing in local AGENTS.md. Path: {local_agents}, Exists: {local_agents.exists()}, Text preview: {text[:100]}"
+    )
 
 
 def test_inv_c5_18_bft_float_exclusion() -> None:
@@ -229,17 +231,16 @@ def test_inv_c5_18_bft_float_exclusion() -> None:
         canonicalize_cbor({"data": 12.34})
 
 
-
 def test_inv_c5_19_memory_convergence():
     """INV_C5_19 — BFT orchestration memory convergence must collapse into memory_vault."""
-    hits = _scan({".py"}, r'memory_vault')
+    hits = _scan({".py"}, r"memory_vault")
     assert hits, "INV_C5_19 violated: memory_vault convergence missing"
 
 
 def test_inv_c5_20_kinetic_purge_protocol():
     """INV_C5_20 — Kinetic Purge Protocol must implement Mach VM cache dropping and SIGKILL rogue daemons."""
     hits_osascript = _scan({".py", ".sh"}, r'osascript\s+-e\s+[\'"]do\s+shell\s+script\s+["\']purge["\'][\'"]')
-    hits_sigkill = _scan({".py", ".sh"}, r'kill\s+-9|SIGKILL')
+    hits_sigkill = _scan({".py", ".sh"}, r"kill\s+-9|SIGKILL")
     assert hits_osascript, "INV_C5_20 violated: Missing Mach VM cache drop via osascript purge"
     assert hits_sigkill, "INV_C5_20 violated: Missing SIGKILL (-9) on rogue daemons"
 
@@ -303,5 +304,3 @@ def test_inv_c5_25_dynamic_brain_vault_scanning() -> None:
     content = agents_path.read_text(errors="ignore")
     assert "INV_C5_25" in content, "INV_C5_25 rule definition missing in .agents/AGENTS.md"
     assert "belongs_to_babylon" in content, "INV_C5_25 missing belongs_to_babylon filtering clause"
-
-

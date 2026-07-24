@@ -14,6 +14,7 @@ Antipatterns (PROHIBITED):
   - Consensus anchoring in Rust → Solidity only
   - Direct Rust→Solidity writes bypassing F# → CommitBoundary violation
 """
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field
@@ -29,13 +30,14 @@ from causal_isomorphism.ir import (
 
 
 class ViolationSeverity(Enum):
-    ERROR = auto()    # Hard block — must not emit
+    ERROR = auto()  # Hard block — must not emit
     WARNING = auto()  # Soft block — emit with annotation
 
 
 @dataclass
 class RegimeViolation:
     """A detected regime boundary violation."""
+
     severity: ViolationSeverity
     source_layer: RegimeLayer
     target_layer: RegimeLayer
@@ -47,6 +49,7 @@ class RegimeViolation:
 @dataclass
 class ValidationReport:
     """Complete validation report for a transpilation run."""
+
     violations: list[RegimeViolation] = field(default_factory=list)
     blocked_functions: list[str] = field(default_factory=list)
     permitted_functions: list[str] = field(default_factory=list)
@@ -106,16 +109,31 @@ CLASSIFICATION_PERMISSIONS: dict[FunctionClassification, EmitPermission] = {
 }
 
 REGIME_RULES: list[tuple[FunctionClassification, RegimeLayer, str]] = [
-    (FunctionClassification.STATE_TRANSITION, RegimeLayer.THERMODYNAMICS,
-     "ANTIPATTERN: Physics computation in Rust — must stay in F# Domain Kernel"),
-    (FunctionClassification.STATE_TRANSITION, RegimeLayer.CONSENSUS,
-     "ANTIPATTERN: Physics computation in Solidity — must stay in F# Domain Kernel"),
-    (FunctionClassification.HASH_COMPUTATION, RegimeLayer.CONSENSUS,
-     "ANTIPATTERN: BLAKE3/DAG operations in Solidity — must stay in Rust strike_rs"),
-    (FunctionClassification.COMMIT_BOUNDARY, RegimeLayer.THERMODYNAMICS,
-     "ANTIPATTERN: Consensus anchoring in Rust — must stay in Solidity/Anvil"),
-    (FunctionClassification.EVENT_EMITTER, RegimeLayer.THERMODYNAMICS,
-     "ANTIPATTERN: Event emission in Rust — must stay in Solidity/Anvil"),
+    (
+        FunctionClassification.STATE_TRANSITION,
+        RegimeLayer.THERMODYNAMICS,
+        "ANTIPATTERN: Physics computation in Rust — must stay in F# Domain Kernel",
+    ),
+    (
+        FunctionClassification.STATE_TRANSITION,
+        RegimeLayer.CONSENSUS,
+        "ANTIPATTERN: Physics computation in Solidity — must stay in F# Domain Kernel",
+    ),
+    (
+        FunctionClassification.HASH_COMPUTATION,
+        RegimeLayer.CONSENSUS,
+        "ANTIPATTERN: BLAKE3/DAG operations in Solidity — must stay in Rust strike_rs",
+    ),
+    (
+        FunctionClassification.COMMIT_BOUNDARY,
+        RegimeLayer.THERMODYNAMICS,
+        "ANTIPATTERN: Consensus anchoring in Rust — must stay in Solidity/Anvil",
+    ),
+    (
+        FunctionClassification.EVENT_EMITTER,
+        RegimeLayer.THERMODYNAMICS,
+        "ANTIPATTERN: Event emission in Rust — must stay in Solidity/Anvil",
+    ),
 ]
 
 
@@ -137,9 +155,7 @@ class RegimeValidator:
         report.total_functions = len(module.all_functions())
 
         for func in module.all_functions():
-            required_permission = CLASSIFICATION_PERMISSIONS.get(
-                func.classification, EmitPermission.PURE_QUERY
-            )
+            required_permission = CLASSIFICATION_PERMISSIONS.get(func.classification, EmitPermission.PURE_QUERY)
 
             if required_permission in target_permissions:
                 report.permitted_functions.append(func.name)
@@ -148,27 +164,32 @@ class RegimeValidator:
 
                 for rule_class, rule_layer, rule_msg in REGIME_RULES:
                     if func.classification == rule_class and target_layer == rule_layer:
-                        report.violations.append(RegimeViolation(
-                            severity=ViolationSeverity.ERROR,
-                            source_layer=module.source_layer,
-                            target_layer=target_layer,
-                            construct_name=func.name,
-                            rule=f"{rule_class.name}→{rule_layer.value}",
-                            message=rule_msg,
-                        ))
+                        report.violations.append(
+                            RegimeViolation(
+                                severity=ViolationSeverity.ERROR,
+                                source_layer=module.source_layer,
+                                target_layer=target_layer,
+                                construct_name=func.name,
+                                rule=f"{rule_class.name}→{rule_layer.value}",
+                                message=rule_msg,
+                            )
+                        )
                         break
 
         from causal_isomorphism.linear_checker import LinearTypeChecker
+
         checker = LinearTypeChecker()
         for viol in checker.check_module(module):
-            report.violations.append(RegimeViolation(
-                severity=ViolationSeverity.ERROR,
-                source_layer=module.source_layer,
-                target_layer=target_layer,
-                construct_name=viol.function_name,
-                rule="LinearTypeCheck",
-                message=viol.message,
-            ))
+            report.violations.append(
+                RegimeViolation(
+                    severity=ViolationSeverity.ERROR,
+                    source_layer=module.source_layer,
+                    target_layer=target_layer,
+                    construct_name=viol.function_name,
+                    rule="LinearTypeCheck",
+                    message=viol.message,
+                )
+            )
 
         return report
 

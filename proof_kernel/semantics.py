@@ -1,11 +1,12 @@
 from typing import Any, Callable
 
+
 def execute_with_versioned_semantics(
-    proof_pipeline: Callable, 
-    evidence: dict[str, Any], 
-    semantics_version: str, 
-    ruleset_version: str, 
-    kernel_version: str
+    proof_pipeline: Callable,
+    evidence: dict[str, Any],
+    semantics_version: str,
+    ruleset_version: str,
+    kernel_version: str,
 ) -> dict[str, Any]:
     """
     Ω174 · Versioned Semantics Invariant
@@ -13,21 +14,18 @@ def execute_with_versioned_semantics(
     """
     if not (semantics_version and ruleset_version and kernel_version):
         raise ValueError("Ω174 Violated: Execution lacks versioned semantics context.")
-    
+
     result = proof_pipeline(evidence)
     return {
         "conclusion": result,
-        "context": {
-            "semantics": semantics_version,
-            "ruleset": ruleset_version,
-            "kernel": kernel_version
-        }
+        "context": {"semantics": semantics_version, "ruleset": ruleset_version, "kernel": kernel_version},
     }
+
 
 def verify_kernel_minimality(verifier_ast_nodes: int, generator_ast_nodes: int) -> bool:
     """
     Ω173 · Kernel Minimality Invariant
-    El núcleo de verificación (TCB) debe ser estrictamente más simple 
+    El núcleo de verificación (TCB) debe ser estrictamente más simple
     (en complejidad de AST / Kolmogorov) que el motor generador.
     """
     if verifier_ast_nodes >= generator_ast_nodes:

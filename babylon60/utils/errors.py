@@ -75,8 +75,6 @@ class MemorySubsystemError(CortexError):
     """Raised when the cognitive memory subsystem fails."""
 
 
-
-
 class LLMRoutingError(CriticalSubsystemError):
     """Raised when all LLM providers fail (Singularidad Negativa)."""
 

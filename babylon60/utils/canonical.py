@@ -34,8 +34,6 @@ def now_iso() -> str:
     return datetime.datetime.fromtimestamp(time.time(), tz=datetime.timezone.utc).isoformat()
 
 
-
-
 def canonical_json(obj: Any) -> str:
     """Deterministic JSON: sorted keys, no whitespace, ASCII-safe.
 
@@ -55,7 +53,6 @@ def canonical_json(obj: Any) -> str:
         ensure_ascii=True,
         default=str,
     )
-
 
 
 HASH_VERSION = 3

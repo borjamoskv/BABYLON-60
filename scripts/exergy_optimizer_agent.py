@@ -148,7 +148,12 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         if not is_excluded:
             for line in added_lines:
                 # 1. Broad exceptions (INV_C5_07)
-                if re.search(r"except\s+Exception\b|except\s*:", line) and "bare 'except:'" not in line.lower() and "except exception" not in line.lower() and "check for broad excepts" not in line.lower():
+                if (
+                    re.search(r"except\s+Exception\b|except\s*:", line)
+                    and "bare 'except:'" not in line.lower()
+                    and "except exception" not in line.lower()
+                    and "check for broad excepts" not in line.lower()
+                ):
                     print(f"DEBUG Match in {header}: {line}")
                     e_points += 4.0
                     msg = "Broad exception caught (INV_C5_07 violation)."
@@ -242,7 +247,16 @@ def check_consolidation_need() -> ConsolidationDecision:
                 transcript = entry / ".system_generated/logs/transcript.jsonl"
                 if transcript.exists():
                     belongs_to_babylon = False
-                    keywords = ["babylon", "30_babylon-60", "babylon60", "cortex-persist", "cortex.db", "teorema", "robinson", "moskv"]
+                    keywords = [
+                        "babylon",
+                        "30_babylon-60",
+                        "babylon60",
+                        "cortex-persist",
+                        "cortex.db",
+                        "teorema",
+                        "robinson",
+                        "moskv",
+                    ]
                     try:
                         with open(transcript, "r", encoding="utf-8") as tf:
                             for line in tf:

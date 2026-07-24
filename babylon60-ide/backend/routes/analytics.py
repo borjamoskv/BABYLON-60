@@ -105,9 +105,7 @@ def ledger_analytics() -> dict[str, Any]:
             "contiguous": bool(expected) and lam_distinct == expected,
         }
 
-        span = conn.execute(
-            "SELECT MIN(created_at) AS first, MAX(created_at) AS last FROM ledger_entries"
-        ).fetchone()
+        span = conn.execute("SELECT MIN(created_at) AS first, MAX(created_at) AS last FROM ledger_entries").fetchone()
 
         return {
             "db_path": db_path.name,
