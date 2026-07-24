@@ -48,12 +48,17 @@ LEDGER_TABLES = [
 
 
 def _git(args: list[str]) -> str:
-    result = subprocess.run(
-        ["git", "-c", "commit.gpgsign=false", *args],
-        cwd=str(ROOT_DIR),
-        capture_output=True,
-        text=True,
-    )
+    for attempt in range(2):
+        result = subprocess.run(
+            ["git", "-c", "commit.gpgsign=false", *args],
+            cwd=str(ROOT_DIR),
+            capture_output=True,
+            text=True,
+        )
+        if result.returncode != 0 and ("cannot lock ref" in result.stderr or "index.lock" in result.stderr):
+            subprocess.run("rm -f .git/*.lock .git/refs/heads/*.lock", shell=True, cwd=str(ROOT_DIR))
+            continue
+        break
     return result.stdout.strip()
 
 
