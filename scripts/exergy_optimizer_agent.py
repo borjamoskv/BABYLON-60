@@ -183,7 +183,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                 a_points += 4
                 reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
 
-    if added > 100 and removed < 5:
+    if added > 400 and removed < 10:
         e_points += 1.5
         reasons_e.append("Large code volume increase with minimal deletion (Anergia Bloat risk).")
 
