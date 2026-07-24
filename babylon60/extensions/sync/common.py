@@ -130,7 +130,6 @@ def atomic_write(path: Path, content: str) -> None:
     In POSIX, os.replace() is atomic within the same filesystem.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
-    # Create temp in the same directory to guarantee the same filesystem
     fd, tmp_path = tempfile.mkstemp(
         dir=str(path.parent),
         prefix=f".{path.name}.",
@@ -141,7 +140,6 @@ def atomic_write(path: Path, content: str) -> None:
             f.write(content)
         os.replace(tmp_path, str(path))
     except OSError:
-        # Clean up temp if replace fails
         try:
             os.unlink(tmp_path)
         except Exception as exc:  # noqa: BLE001
@@ -179,9 +177,6 @@ async def get_existing_contents(
         rows = await cursor.fetchall()
         result = {row[0] for row in rows}
 
-    # Normalize legacy-prefixed entries for backward-compat dedup.
-    # Old syncs stored "DECISION: X | RAZON: Y"; new syncs store "X".
-    # Both forms must be in the set to prevent re-insertion.
     normalized: set[str] = set()
     for c in result:
         stripped = c
@@ -214,7 +209,6 @@ async def db_content_hash(engine: CortexEngine, fact_type: str | None = None) ->
             )
         rows = await cursor.fetchall()
 
-    # Serialize the complete content as a deterministic hash
     hasher = hashlib.sha256()
     for row in rows:
         hasher.update(f"{row[0]}|{row[1]}|{row[2]}|{row[3]}\n".encode())

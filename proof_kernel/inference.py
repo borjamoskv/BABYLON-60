@@ -35,14 +35,12 @@ def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict
     
     current_entropy = initial_state.measure_entropy(max_entropy)
     
-    # Resolver en orden
     for node in order:
         current_state = node_states.get(node, CRDTMap())
         
         if node in rules:
             result_state = rules[node].execute(current_state)
             new_entropy = result_state.measure_entropy(max_entropy)
-            # Asertar monotonicidad epistémica
             compute_information_gain(current_entropy, new_entropy)
             current_entropy = new_entropy
         else:
@@ -54,7 +52,6 @@ def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict
             else:
                 node_states[child] = node_states[child].merge(result_state)
                 
-    # Merge all sinks
     sinks = [n for n in dag if not dag.get(n)]
     if not sinks:
         sinks = [order[-1]]

@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX LLM Router - Models & Contracts.
 
@@ -29,7 +25,6 @@ __all__ = [
     "ReasoningMode",
 ]
 
-# ─── Cognitive Reasoning Modes (Axiom Ω₁₆) ──────────────────────────────
 
 
 class ReasoningMode(str, Enum):
@@ -51,7 +46,6 @@ class ReasoningMode(str, Enum):
     Used by P0VulnerabilityExtractor for code-level hypothesis generation."""
 
 
-# ─── Intent Classification ─────────────────────────────────────────────────
 
 
 class IntentProfile(str, Enum):
@@ -136,7 +130,6 @@ class HedgedResult:
     """provider_names of cancelled (loser) providers."""
 
 
-# ─── Prompt ────────────────────────────────────────────────────────────────
 
 
 class CortexPrompt(BaseModel):
@@ -184,7 +177,6 @@ class CortexPrompt(BaseModel):
         """Converts the sovereign structure to the OpenAI messages format."""
         messages: list[dict[str, str]] = [{"role": "system", "content": self.system_instruction}]
 
-        # Inject episodic context if it exists, assimilated early
         if self.episodic_context:
             context_str = "\n".join(
                 f"[{m.get('role', 'memory')}]: {m.get('content', '')}"
@@ -204,7 +196,6 @@ class CortexPrompt(BaseModel):
         return messages
 
 
-# ─── Provider Interface ────────────────────────────────────────────────────
 
 
 class BaseProvider(ABC):

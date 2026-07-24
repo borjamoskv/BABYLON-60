@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 from __future__ import annotations
 
 import asyncio
@@ -145,7 +144,6 @@ async def resilient_call(
                 logger.error("LLM Call [CIRCUIT-OPEN] -> Provider: %s", provider_name)
                 raise
 
-            # Non-retryable errors (FATAL or FAIL-FAST)
             provider_name[:4] + "***" if provider_name else "***"
             if isinstance(e, httpx.HTTPStatusError) and e.response.status_code in (
                 400,
@@ -170,7 +168,6 @@ async def resilient_call(
                 )
                 raise
 
-            # Exponential backoff with jitter
             delay = min(base_delay * (2 ** (attempt - 1)), max_delay)
             jitter = delay * 0.1 * random.uniform(-1, 1)
             sleep_s = delay + jitter

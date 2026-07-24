@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Cadastral Perimeter Check - Data Models.
 
 Defines the type-safe domain objects for territorial risk analysis:
@@ -13,9 +12,6 @@ import time
 from dataclasses import dataclass, field
 from enum import Enum
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ENUMERATIONS
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 class ZoneClassification(str, Enum):
@@ -71,9 +67,6 @@ class ExpropiationStatus(str, Enum):
     REVERTED = "reverted"
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# DATA MODELS
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 @dataclass(frozen=True)

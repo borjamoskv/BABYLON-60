@@ -28,7 +28,6 @@ class Err(Generic[E]):
     causal_taint: str = "borjamoskv:adt_err_c5"
 
 
-# Strict Sum Type (Union): |Result[T, E]| = |Ok[T]| + |Err[E]|
 Result = Union[Ok[T], Err[E]]
 
 
@@ -47,7 +46,6 @@ class Nothing:
     causal_taint: str = "borjamoskv:adt_nothing_c5"
 
 
-# Strict Sum Type (Union): |Option[T]| = |Some[T]| + |Nothing|
 Option = Union[Some[T], Nothing]
 
 

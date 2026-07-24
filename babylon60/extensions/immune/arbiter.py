@@ -65,27 +65,21 @@ class ImmuneArbiter:
         logger.info("⚔️ IMMUNE-SYSTEM-v1: Initiating triage for signal...")
 
         results = []
-        # F1: Reversibility
         f1 = self._filter_reversibility(plan)
         results.append(f1)
 
-        # F2: Adversarial (Falsification check)
         f2 = self._filter_adversarial(signal, plan)
         results.append(f2)
 
-        # F3: Causal (Verification check)
         f3 = self._filter_causal(plan)
         results.append(f3)
 
-        # F4: Entropy
         f4 = self._filter_entropy(plan)
         results.append(f4)
 
-        # F5: Confidence
         f5 = self._filter_confidence(confidence, f1.score)
         results.append(f5)
 
-        # Consolidate
         triage_result = self._consolidate(results)
         self.processed_signals += 1
 
@@ -114,7 +108,6 @@ class ImmuneArbiter:
             if r_level > max_r:
                 max_r = r_level
 
-        # Scoring: lower levels = higher score (safer)
         score = 100 - (max_r * 25)
         verdict = Verdict.PASS if max_r <= 1 else Verdict.HOLD
 
@@ -159,7 +152,6 @@ class ImmuneArbiter:
                 else:
                     justification = f"{falsifiable}/{len(assumptions)} assumptions are falsifiable."
 
-            # Check for signal/plan confirmation bias (min 3 actions)
             actions = plan.get("actions", [])
             if signal and len(actions) >= 3:
                 sig_lower = signal.lower()
@@ -206,14 +198,12 @@ class ImmuneArbiter:
                     justification="No actions to verify.",
                 )
 
-            # Build dependency graph from action requires/produces
             produces: set[str] = set()
             requires: set[str] = set()
             for action in actions:
                 produces.update(action.get("produces", []))
                 requires.update(action.get("requires", []))
 
-            # Missing prerequisites: required but never produced
             missing = requires - produces
             if missing:
                 penalty = min(50.0, len(missing) * 10.0)
@@ -223,7 +213,6 @@ class ImmuneArbiter:
                 )
                 verdict = Verdict.HOLD
 
-            # Dead-end detection: produces things nobody requires
             dead_ends = produces - requires
             if dead_ends and len(dead_ends) > len(actions):
                 score -= 10.0
@@ -245,7 +234,6 @@ class ImmuneArbiter:
         """F4: Measures complexity added vs removed (Shannon).
         Axiom Net-Negative Entropy.
         """
-        # Simplified complexity delta
         added = plan.get("added_lines", 0) * 0.1 + plan.get("new_files", 0) * 2.0
         removed = plan.get("removed_lines", 0) * 0.1 + plan.get("f" + "ixme_resolved", 0) * 1.0
         delta = added - removed
@@ -262,7 +250,6 @@ class ImmuneArbiter:
 
     def _filter_confidence(self, reported: float, r_score: float) -> FilterResult:
         """F5: Calibrates confidence against reversibility risk."""
-        # Risk-adjusted threshold: higher risk (lower r_score) requires higher confidence
         threshold = 1.0 - (r_score / 100.0)
 
         verdict = Verdict.PASS if reported >= threshold else Verdict.HOLD
@@ -302,7 +289,6 @@ class ImmuneArbiter:
         else:
             final_verdict = Verdict.PASS
 
-        # Blast radius heuristic: inverse of reversibility score
         f1_res = next(r for r in results if r.filter_id == "F1_REVERSIBILITY")
         blast_radius = 100.0 - f1_res.score
 

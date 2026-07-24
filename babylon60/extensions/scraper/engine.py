@@ -66,7 +66,6 @@ class ScraperEngine:
                 elapsed_ms=0,
             )
 
-        # Robots.txt compliance
         if request.respect_robots:
             allowed = await check_robots_txt(request.url)
             if not allowed:
@@ -77,17 +76,14 @@ class ScraperEngine:
                     elapsed_ms=0,
                 )
 
-        # Rate limiting
         await self._rate_limit(request.rate_limit)
 
-        # Execute extraction
         start = time.monotonic()
         result = await self._execute_strategy(request)
         elapsed_ms = (time.monotonic() - start) * 1000
 
         if result.status == "success":
             result.elapsed_ms = elapsed_ms
-            # Deduplication check
             if result.content_hash in self._seen_hashes:
                 LOG.info("♻️ [DEDUP] Content already seen: %s", request.url)
                 result.metadata["deduplicated"] = True
@@ -212,7 +208,6 @@ class ScraperEngine:
             visited.add(current_url)
             discovered.add(current_url)
 
-            # Rate limit
             await self._rate_limit(1.0)
 
             try:
@@ -223,14 +218,12 @@ class ScraperEngine:
                     if response.status_code != 200:
                         continue
 
-                    # Simple link extraction via regex
                     import re
 
                     links = re.findall(r'href=["\']([^"\']+)["\']', response.text)
                     for link in links:
                         absolute = urljoin(current_url, link)
                         parsed = urlparse(absolute)
-                        # Same domain only
                         if parsed.netloc == base_domain and absolute not in visited:
                             to_visit.append((absolute, depth + 1))
                             discovered.add(absolute)
@@ -245,7 +238,6 @@ class ScraperEngine:
         """Get a batch job by ID."""
         return self._jobs.get(job_id)
 
-    # ── Internal ──────────────────────────────────────────────────────
 
     async def _execute_strategy(self, request: ScrapeRequest) -> ScrapeResult:
         """Execute extraction with the configured strategy."""
@@ -254,7 +246,6 @@ class ScraperEngine:
         if request.strategy == ExtractionStrategy.AUTO:
             return await self._cascade_extract(request.url, request.timeout)
 
-        # Specific strategy
         strategy_key = request.strategy.value
         extractor = EXTRACTORS.get(strategy_key)
         if not extractor:
@@ -322,7 +313,6 @@ class ScraperEngine:
                 )
                 errors.append(f"{key}: {e}")
 
-        # All strategies exhausted
         return ScrapeResult.from_error(
             url=url,
             error=f"All strategies failed: {'; '.join(errors)}",

@@ -10,7 +10,6 @@ from babylon60.compat.optional import np  # lazy: pip install cortex-persist[com
 
 DEFAULT_SR = 44100
 
-# Drum synthesis constants
 KICK_AMPLITUDE = 0.8
 HAT_AMPLITUDE = 0.15
 SNARE_AMPLITUDE = 0.5
@@ -39,12 +38,10 @@ def _synth_kick(sr: int = DEFAULT_SR) -> np.ndarray:  # pyright: ignore[reportIn
     n_samples = int(sr * duration_s)
     t = np.arange(n_samples) / sr
 
-    # Exponential frequency sweep
     freq = KICK_FREQ_START * np.exp(-t * np.log(KICK_FREQ_START / KICK_FREQ_END) / duration_s)
     phase = 2 * np.pi * np.cumsum(freq) / sr
     wave = np.sin(phase)
 
-    # Exponential amplitude decay
     envelope = np.exp(-t * 5.0 / duration_s)
     return wave * envelope * KICK_AMPLITUDE
 
@@ -55,10 +52,8 @@ def _synth_snare(sr: int = DEFAULT_SR) -> np.ndarray:  # pyright: ignore[reportI
     n_samples = int(sr * duration_s)
     t = np.arange(n_samples) / sr
 
-    # Body: 180Hz sine with fast decay
     body = np.sin(2 * np.pi * 180 * t) * np.exp(-t * 20)
 
-    # Noise: white noise with envelope
     noise = np.random.randn(n_samples) * np.exp(-t * 12)
 
     return (body * 0.4 + noise * 0.6) * SNARE_AMPLITUDE

@@ -58,7 +58,6 @@ class UIFeedbackLoop:
             handler = Vision.VNImageRequestHandler.alloc().initWithURL_options_(url, None)
             request = Vision.VNRecognizeTextRequest.alloc().init()
 
-            # Configure OCR settings
             request.setRecognitionLevel_(0)  # 0 = Accurate, 1 = Fast
             request.setUsesLanguageCorrection_(True)
 
@@ -77,9 +76,7 @@ class UIFeedbackLoop:
                 text = candidate.string()
                 confidence = candidate.confidence()
 
-                # Get bounding box (normalized coordinates 0.0 - 1.0)
                 bbox = obs.boundingBox()
-                # bbox properties: origin.x, origin.y, size.width, size.height
                 parsed.append(
                     {
                         "text": text,
@@ -97,18 +94,15 @@ class UIFeedbackLoop:
 
     async def observe_state(self) -> dict[str, Any]:
         """Captures screen and extracts native OCR text state."""
-        # 1. Capture screen
         cap_res = self.maestro.screenshot()
         if not cap_res.success or not cap_res.output:
             raise RuntimeError(f"Screen capture failed: {cap_res.error}")
 
         self.last_screenshot_path = cap_res.output
 
-        # 2. Extract OCR
         ocr_res = self.perform_native_ocr(self.last_screenshot_path)  # type: ignore
         self.last_ocr_results = ocr_res
 
-        # 3. Compile textual state
         full_text = " ".join([item["text"] for item in ocr_res])
 
         return {
@@ -139,14 +133,12 @@ class UIFeedbackLoop:
         for iteration in range(1, max_iterations + 1):
             logger.info("[FeedbackLoop] Iteration %d/%d starting...", iteration, max_iterations)
 
-            # Step 1 & 2: Observe and parse
             try:
                 state = await self.observe_state()
             except Exception as e:  # noqa: BLE001
                 logger.error("[FeedbackLoop] Perception step failed: %s", e)
                 return InteractionResult(success=False, error=f"Perception failed: {e}")
 
-            # Step 3: Verify target state
             if verify_fn(state):
                 logger.info("[FeedbackLoop] Goal successfully achieved and verified!")
                 return InteractionResult(
@@ -157,7 +149,6 @@ class UIFeedbackLoop:
             if iteration == max_iterations:
                 break
 
-            # Step 4: Decide next actions
             actions = decide_fn(state, goal)
             if not actions:
                 logger.warning("[FeedbackLoop] No actions generated. Terminating loop.")
@@ -165,7 +156,6 @@ class UIFeedbackLoop:
                     success=False, error="Decision function returned no actions."
                 )
 
-            # Step 5: Execute actions
             for action in actions:
                 action_name = action.get("action")
                 if not action_name:
@@ -174,7 +164,6 @@ class UIFeedbackLoop:
                 logger.info("[FeedbackLoop] Executing decided action: %s", action_name)
                 args = action.get("args", {})
 
-                # Map 'app' or 'app_name' to target AppTarget if expected
                 app_name = args.get("app") or args.get("app_name") or args.get("target")
                 if app_name and isinstance(app_name, str):
                     args["target"] = AppTarget(name=app_name)
@@ -193,7 +182,6 @@ class UIFeedbackLoop:
                         else:
                             res = method
 
-                        # Check result type
                         if isinstance(res, InteractionResult) and not res.success:
                             logger.warning(
                                 "[FeedbackLoop] Action execution warning: %s failed: %s",
@@ -207,7 +195,6 @@ class UIFeedbackLoop:
                 else:
                     logger.error("[FeedbackLoop] MaestroUI has no method %s", action_name)
 
-            # Step 6: Step delay to allow GUI to render / update
             await asyncio.sleep(step_delay)
 
         logger.warning(

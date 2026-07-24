@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/models.py
 """Sovereign Evolution Models (350/100 standard).
 
 Implements the structural types for agent evolution:

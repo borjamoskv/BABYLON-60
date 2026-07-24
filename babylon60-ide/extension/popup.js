@@ -17,7 +17,6 @@ async function api(path, opts) {
     try {
       const res = await fetch(`${host}${path}`, { cache: 'no-store', ...opts });
       if (res.ok) { HOST = host; return await res.json(); }
-      // surface backend causal errors (e.g. 423 P0 block)
       const body = await res.json().catch(() => ({}));
       const err = new Error(body.detail || res.statusText);
       err.status = res.status;

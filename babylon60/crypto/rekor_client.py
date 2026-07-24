@@ -13,7 +13,6 @@ from typing import Any
 
 logger = logging.getLogger("babylon60.crypto.rekor")
 
-# Default public Rekor instance
 REKOR_URL = "https://rekor.sigstore.dev"
 
 
@@ -35,7 +34,6 @@ class RekorClient:
         Returns:
             The transparency log entry containing UUID and logIndex, or None if it fails.
         """
-        # Hashedrekord schema version 0.0.1
         data = {
             "kind": "hashedrekord",
             "apiVersion": "0.0.1",
@@ -60,7 +58,6 @@ class RekorClient:
                 if response.status in (201, 200):
                     response_body = response.read().decode("utf-8")
                     resp_json = json.loads(response_body)
-                    # Rekor returns a dict where the key is the entry UUID
                     if resp_json:
                         uuid = list(resp_json.keys())[0]
                         entry = resp_json[uuid]

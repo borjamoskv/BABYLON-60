@@ -6,7 +6,6 @@ from pathlib import Path
 
 from babylon60.services.email import send_reengagement_email
 
-# Logging Configuration
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("CausalScheduler")
 
@@ -24,7 +23,6 @@ def evaluate_retention(dry_run=True):
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # Extract Elite at risk (days_active > 15 and of type import/music_media)
     cursor.execute("""
         SELECT email, name, days_active, opens, cluster
         FROM audience
@@ -47,18 +45,14 @@ def evaluate_retention(dry_run=True):
         )
 
         if not dry_run:
-            # Here Mailgun / local SMTP integration will go
             logger.warning("TRIGGERING TRANSACTION TO: %s", node["email"])
 
-            # Connection resolved to cortex.services.email
             send_reengagement_email(node["email"], node["cluster"])
 
-            # Update status to prevent spamming
             cursor.execute(
                 "UPDATE audience SET status = 'churn_mitigated' WHERE email = ?", (node["email"],)
             )
 
-    # Extract pure Volume (For Directed Reciprocity attacks)
     cursor.execute("""
         SELECT count(*) as total FROM audience WHERE source = 'global_enriched'
     """)

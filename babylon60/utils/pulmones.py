@@ -65,7 +65,6 @@ class PulmonesQueue:
                     next_retry_at REAL NOT NULL
                 )
             """)
-            # Índice para O(1) fetch de la próxima tarea
             conn.execute("CREATE INDEX IF NOT EXISTS idx_next_retry ON fallback_queue(next_retry_at)")
 
     def enqueue(self, func_name: str, args: tuple, kwargs: dict, delay: float = 60.0) -> None:  # type: ignore
@@ -175,7 +174,6 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
 
             for attempt in range(max_retries + 1):
                 try:
-                    # Timeout estricto para no bloquear el agente
                     result = await asyncio.wait_for(func(*args, **kwargs), timeout=timeout)
                     cb.record_success()  # type: ignore
                     return {"status": "success", "data": result}
@@ -196,7 +194,6 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                     await asyncio.sleep(2**attempt)  # Exponential backoff
 
                 except Exception as e:  # noqa: BLE001
-                    # Ω₃: Excepciones de negocio o código no activan el circuit breaker, solo timeouts/red
                     logger.critical(
                         "💀 [PULMONES] Falla interna no recuperable en %s: %s",
                         func.__name__,

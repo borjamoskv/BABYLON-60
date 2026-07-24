@@ -16,7 +16,6 @@ __all__ = ["DEFAULT_SWARM_PATH", "MissionOrchestrator"]
 
 logger = logging.getLogger("babylon60_extensions.launchpad")
 
-# Default path to the swarm engine relative to home
 DEFAULT_SWARM_PATH = "~/game/.agent/skills/autonomous-browser-swarm/scripts/swarm-v6-engine.js"
 
 
@@ -38,7 +37,6 @@ class MissionOrchestrator:
     ) -> dict[str, Any]:
         """Record intent and launch a swarm mission via subprocess."""
 
-        # 1. Record the intent in the ledger
         display_goal = goal if goal else f"File: {mission_file}"
         intent_fact = {
             "project": project,
@@ -49,11 +47,9 @@ class MissionOrchestrator:
             "source": "cortex-launchpad",
         }
 
-        # Use sync method
         fact_id = self.engine.store_sync(**intent_fact)
         logger.info("Recorded mission intent #%s for project %s", fact_id, project)
 
-        # 2. Build the command
         cmd = ["node", str(self.swarm_path)]
 
         if mission_file:
@@ -67,7 +63,6 @@ class MissionOrchestrator:
         if context:
             cmd.extend(["--context", context])
 
-        # 3. Execute via SovereignGate (L3 interception)
         try:
             from babylon60.extensions.gate import ActionLevel, get_gate
 
@@ -83,7 +78,6 @@ class MissionOrchestrator:
             )
             gate.approve_interactive(action.action_id)
 
-            # Close connection to avoid locking if subprocess tries to write to the same DB
             import asyncio
 
             asyncio.run(self.engine.close())
@@ -100,7 +94,6 @@ class MissionOrchestrator:
             error = result.stderr
             status = "success" if result.returncode == 0 else "failed"
 
-            # 4. Record the result
             result_fact = {
                 "project": project,
                 "content": f"MISSION_RESULT: {status}\nOutput: {output[:500]}...",
@@ -115,7 +108,6 @@ class MissionOrchestrator:
                 },
             }
 
-            # Use sync store
             result_id = self.engine.store_sync(**result_fact)
 
             return {
@@ -136,8 +128,6 @@ class MissionOrchestrator:
 
     def list_missions(self, project: str | None = None) -> list[dict[str, Any]]:
         """Retrieve recent mission attempts from the ledger."""
-        # Query facts of type 'intent' or 'report' with 'swarm' tag
-        # Use sync connection
         conn = self.engine._get_sync_conn()
         query = (
             "SELECT id, project, content, created_at, fact_type "

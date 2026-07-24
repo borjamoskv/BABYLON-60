@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
 """
 Test-Time Training (TTT) Engine.
 The Event Horizon of Autonomous Evolution.
@@ -41,7 +40,6 @@ class TTTEngine:
         self.dataset_dir = Path.home() / ".babylon60" / "training" / "datasets"
         self.dataset_dir.mkdir(parents=True, exist_ok=True)
 
-        # We target the Qwen2.5 base model used by BABYLON-60
         self.base_model = os.getenv(
             "CORTEX_BASE_MODEL_PATH", "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit"
         )
@@ -68,7 +66,6 @@ class TTTEngine:
 
                 reward = self.rewarder.calculate_reward(traj)
 
-                # Axiom Ω4: Aesthetic Integrity - Only learn from excellence
                 if reward > 0.4:
                     traj.reward = reward
                     golden_trajectories.append(traj)
@@ -86,11 +83,9 @@ class TTTEngine:
             logger.info("No golden trajectories found tonight. Skipping MLX training.")
             return {"status": "skipped", "reason": "No high-reward data"}
 
-        # Format and save dataset
         dataset_path = self._save_dataset(golden_trajectories)
         logger.info("💾 Saved %d golden trajectories to %s", len(golden_trajectories), dataset_path)
 
-        # Trigger actual or simulated MLX training
         avg_reward = total_reward / len(golden_trajectories)
         training_result = await self._trigger_mlx_lora()
 
@@ -104,11 +99,9 @@ class TTTEngine:
 
     def _save_dataset(self, trajectories: list[Trajectory]) -> Path:
         """Saves golden trajectories in ShareGPT/messages format for MLX-LM."""
-        # Format trajectories into JSON format
         formatted_json = self.collector.format_for_sft(trajectories, format_type="sharegpt")
         data = json.loads(formatted_json)
 
-        # Map 'conversations' key to 'messages' for MLX-LM compatibility
         mapped_entries = []
         for entry in data:
             if "conversations" in entry:
@@ -120,24 +113,18 @@ class TTTEngine:
         valid_path = self.dataset_dir / "valid.jsonl"
         test_path = self.dataset_dir / "test.jsonl"
 
-        # Append golden trajectories incrementally to the train set
-        # This merges user corrections with static compiled knowledge
         existing_lines = []
         if train_path.exists():
             with open(train_path, encoding="utf-8") as f:
                 existing_lines = [line.strip() for line in f if line.strip()]
 
-        # Write combined dataset
         with open(train_path, "w", encoding="utf-8") as f:
-            # Keep existing lines
             for line in existing_lines:
                 f.write(line + "\n")
-            # Append new golden trajectories
             for entry in mapped_entries:
                 f.write(json.dumps(entry) + "\n")
         logger.info("Injected %d golden trajectories into train.jsonl", len(mapped_entries))
 
-        # Ensure valid.jsonl and test.jsonl exist with at least 1 entry to satisfy MLX-LM
         for path in [valid_path, test_path]:
             if not path.exists() or path.stat().st_size == 0:
                 with open(path, "w", encoding="utf-8") as f:
@@ -153,7 +140,6 @@ class TTTEngine:
                                 + "\n"
                             )
                     else:
-                        # Strict fallback dummy matching format
                         dummy = {
                             "messages": [
                                 {"role": "system", "content": "stub"},
@@ -163,7 +149,6 @@ class TTTEngine:
                         }
                         f.write(json.dumps(dummy) + "\n")
 
-        # Maintain a log of the nocturnal trajectories
         timestamp = int(time.time())
         log_file = self.dataset_dir / f"golden_dataset_{timestamp}.jsonl"
         with open(log_file, "w", encoding="utf-8") as f:
@@ -181,7 +166,6 @@ class TTTEngine:
 
         self.adapter_path.mkdir(parents=True, exist_ok=True)
 
-        # Optimized cmd arguments avoiding OOM/NaN and using updated subcommand syntax
         cmd = [
             sys.executable,
             "-m",
@@ -216,7 +200,6 @@ class TTTEngine:
 
         process = None
         try:
-            # We run via create_subprocess_exec to allow cancellation and avoid thread pool starvation
             process = await asyncio.create_subprocess_exec(
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,

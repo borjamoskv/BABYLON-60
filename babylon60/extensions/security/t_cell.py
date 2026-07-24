@@ -28,7 +28,6 @@ class BabestuTCell:
     }
     FORBIDDEN_IMPORTS = {"socket", "requests", "urllib", "http.client", "subprocess", "os", "sys"}
 
-    # Expressions for obfuscation and steganography
     B64_HEURISTIC = re.compile(r"([A-Za-z0-9+/]{200,}={0,2})")
     HEX_HEURISTIC = re.compile(r"(\\x[0-9a-fA-F]{2}){15,}")
 
@@ -38,8 +37,6 @@ class BabestuTCell:
         try:
             tree = ast.parse(code)
         except SyntaxError:
-            # If it's not even valid Python, we let it pass through the AST.
-            # The LLM's semantic analyzer will handle it if it's garbage.
             return True, ""
 
         for node in ast.walk(tree):
@@ -73,7 +70,6 @@ class BabestuTCell:
         """
         parsed_url = urllib.parse.urlparse(source_url)
         hostname = parsed_url.hostname or ""
-        # codeql[py/incomplete-url-substring-sanitization]
         is_youtube = (
             hostname == "youtube.com"
             or hostname.endswith(".youtube.com")

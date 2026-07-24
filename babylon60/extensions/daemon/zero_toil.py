@@ -55,8 +55,6 @@ class ZeroToilDaemon:
         """Asimila la sesión asíncronamente."""
         logger.info(f"[ZERO-TOIL] Invocando cierre asíncrono para {conv_id}")
 
-        # Invocamos al CLI closer en background para automatizar el cierre
-        # sin que el usuario tenga que hacerlo interactivamente.
 
         script_path = Path(os.path.expanduser("~/60_SCRIPTS/cortex_session_closer.py"))
         if script_path.exists():
@@ -89,7 +87,6 @@ class ZeroToilDaemon:
             convs = [d for d in BRAIN_DIR.iterdir() if d.is_dir()]
             convs.sort(key=lambda d: d.stat().st_mtime, reverse=True)
 
-            # Revisamos las 3 más recientes
             for conv_dir in convs[:3]:
                 task_md = conv_dir / "task.md"
                 if task_md.exists():
@@ -104,7 +101,6 @@ class ZeroToilDaemon:
                         tasks_done = content.count("- [x]")
 
                         if tasks_total > 0 and tasks_done == tasks_total:
-                            # Tarea completada.
                             logger.info(
                                 f"[ZERO-TOIL] Colapso de tarea detectado en {conv_dir.name}. {tasks_done}/{tasks_total} completadas."
                             )

@@ -62,7 +62,6 @@ class PerceptionRecorder:
         if snapshot.confidence not in self.MIN_CONFIDENCE:
             return None
 
-        # Rate limit per project
         project_key = snapshot.project or "__global__"
         now = time.monotonic()
         last = self._last_record.get(project_key, 0)
@@ -71,7 +70,6 @@ class PerceptionRecorder:
 
         self._last_record[project_key] = now
 
-        # Map intent to episodic event type
         event_type_map = {
             "debugging": "discovery",
             "setup": "decision",
@@ -108,7 +106,6 @@ class PerceptionPipeline:
     Usage:
         pipeline = PerceptionPipeline(conn, session_id, workspace)
         pipeline.start()
-        # ... runs in background, auto-records episodes
         pipeline.stop()
     """
 
@@ -154,7 +151,6 @@ class PerceptionPipeline:
         """Get events within the current inference window."""
         now = time.monotonic()
         cutoff = now - self.window_s
-        # Prune old events
         self._events = [e for e in self._events if e.timestamp >= cutoff]
         return list(self._events)
 

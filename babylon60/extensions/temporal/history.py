@@ -25,7 +25,6 @@ class HistoryMixin(EngineMixinBase):
             conn.row_factory = aiosqlite.Row
             clause, params = time_travel_filter(tx_id, table_alias="f")
 
-            # Enforce RLS
             clause = f"({clause}) AND f.tenant_id = ?"
             params.append(current_tenant)
 
@@ -39,7 +38,6 @@ class HistoryMixin(EngineMixinBase):
                 rows = await cursor.fetchall()
                 results = []
                 for row in rows:
-                    # Leverage base method for secure decryption and normalization
                     fact_data = self._row_to_fact(row, current_tenant)
                     results.append(fact_data)
                 return results

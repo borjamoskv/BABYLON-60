@@ -37,25 +37,18 @@ class EntropicWakeDaemon:
         Calculate current τ_z (Zenón's Entropy).
         """
         logger.info("RADAR-Ω: Calculating codebase entropy...")
-        # Placeholder for actual RADAR metric calculation logic
-        # For now, it queries the DB ghosts or relies on an existing telemetry heuristic
         if not self.engine:
             return 0.0
 
         entropy_score = 0.0
         try:
-            # 1. Physical Ghosts (Banda G resonance)
             sensor = TopographicSensor()
-            # Default to scanning the CORTEX directory
             scan_path = Path.home() / "cortex"
             ghosts = sensor.scan_field(scan_path)
 
-            # Each ghost's strength contributes to the total resonance
             physical_resonance = sum(g.get("strength", 0.0) for g in ghosts)
-            # Normalize physical resonance impact (e.g., 0.1 per full point of resonance)
             entropy_score += physical_resonance * 0.1
 
-            # 2. Epistemic Entropy (Banda E) - Low confidence facts in the database
             conn = self.engine.pool.get_connection()
             cursor = conn.cursor()
             cursor.execute(
@@ -63,10 +56,8 @@ class EntropicWakeDaemon:
                 "WHERE confidence IN ('stated', 'C3', 'C2', 'C1') AND is_tombstoned = 0"
             )
             epistemic_ghosts = cursor.fetchone()[0]
-            # Normalize epistemic weight (e.g., 0.05 per low confidence fact)
             entropy_score += epistemic_ghosts * 0.05
 
-            # 3. DB Type Ghosts
             cursor.execute(
                 "SELECT COUNT(*) FROM facts WHERE type = 'ghost' AND status != 'resolved'"
             )
@@ -92,7 +83,6 @@ class EntropicWakeDaemon:
         command = ["cortex", "spawn", f"--target={target}", f"--intent={intent}"]
 
         try:
-            # Singularidad Headless: Detached background process
             logger.info("Executing: %s", " ".join(command))
             subprocess.Popen(
                 command,
@@ -100,7 +90,6 @@ class EntropicWakeDaemon:
                 stderr=subprocess.DEVNULL,
                 start_new_session=True,
             )
-            # Log the action in memory
             await self._log_action_to_cortex(target)
         except (subprocess.SubprocessError, OSError) as e:
             logger.error("Failed to ignite purification agent: %s", e)
@@ -138,7 +127,6 @@ class EntropicWakeDaemon:
             try:
                 tau_z = self.check_entropy()
                 if tau_z > self.threshold:
-                    # In a true system, we dynamically select the target based on entropy clusters
                     highest_entropy_target = "cortex_router"  # Placeholder
                     await self.ignite_purification_agent(highest_entropy_target)
             except (sqlite3.Error, OSError, ValueError, RuntimeError) as e:
@@ -146,7 +134,6 @@ class EntropicWakeDaemon:
                 self.stop()
                 raise  # Crash daemon to allow supervisor restart (C5-REAL)
 
-            # Sleep until next pulse
             await asyncio.sleep(self.interval_seconds)
 
     def stop(self):

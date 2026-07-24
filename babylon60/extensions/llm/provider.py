@@ -101,8 +101,6 @@ class LLMProvider(BaseProvider):
         presets = load_presets()
         cfg = resolve_provider_config(provider, presets, api_key, model, base_url)
 
-        # [LOCAL-INFERENCE-OMEGA] ZERO-NETWORK HARD BOUNDARY
-        # Absolute structural override at the lowest instantiation layer.
         forbidden_domains = [
             "api.openai.com",
             "dashscope",
@@ -122,7 +120,6 @@ class LLMProvider(BaseProvider):
             os.environ.get("CORTEX_SUBAGENT") == "1" or os.environ.get("CORTEX_DAEMON") == "1"
         )
 
-        # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
         if is_external and "localhost" not in prov_url and "127.0.0.1" not in prov_url:
             allow_external = os.environ.get("CORTEX_ALLOW_EXTERNAL_SWARM") == "1"
             if (is_hybrid_bft and prov_name == "gemini" and not is_subagent) or allow_external:
@@ -159,9 +156,7 @@ class LLMProvider(BaseProvider):
 
         if self._provider == "ollama" and "CORTEX_LLM_TIMEOUT" not in os.environ:
             timeout_val = 60.0
-        # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
         else:
-            # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
             timeout_val = float(os.environ.get("CORTEX_LLM_TIMEOUT", "120.0"))
         self._client = httpx.AsyncClient(timeout=timeout_val)
         self._semaphore = asyncio.Semaphore(100)
@@ -293,7 +288,6 @@ class LLMProvider(BaseProvider):
                 self._circuit_breaker,
             )
         except httpx.HTTPStatusError as e:
-            # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
             try:
                 err_text = e.response.content.decode("utf-8", errors="replace")[:500]
             except (UnicodeDecodeError, AttributeError, ValueError):
@@ -306,7 +300,6 @@ class LLMProvider(BaseProvider):
                 from babylon60.utils.errors import CortexError
 
                 raise CortexError(f"HTTP {e.response.status_code} from {self._provider}") from e
-            # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
             raise
         except (
             KeyError,
@@ -369,7 +362,6 @@ class LLMProvider(BaseProvider):
 
                 asyncio.create_task(notify_notch_halo(color, False))
             except (ImportError, AttributeError, ValueError, RuntimeError):
-                # codeql[py/clear-text-logging-sensitive-data] - Data is safe and does not expose secrets
                 pass
 
     async def stream(

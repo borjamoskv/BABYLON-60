@@ -23,7 +23,6 @@ async def verify_webhook(request: Request):
     token = params.get("hub.verify_token")
     challenge = params.get("hub.challenge")
 
-    # Fetch expected token from OS keyring or environment fallback
     expected_token = None
     if keyring is not None:
         try:
@@ -59,10 +58,8 @@ async def receive_webhook(request: Request):
         logger.info("Received Kapso Webhook: %s", payload)
 
         # Enforce CORTEX-TAINT and route to Sovereign Swarm or event bus
-        # TBD based on specific use case
 
         return {"status": "received"}
     except Exception as e:  # noqa: BLE001
         logger.error("Error processing Kapso Webhook: %s", e)
-        # Return 200 anyway so Kapso doesn't retry unnecessarily for parsing errors
         return {"status": "error"}

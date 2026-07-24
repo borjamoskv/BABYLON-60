@@ -30,7 +30,6 @@ class ExergyFilter(BaseNodePostprocessor):
     ) -> list[NodeWithScore]:
         exergic_nodes = []
         for n in nodes:
-            # Score de similitud como proxy termodinámico (Exergía = Trabajo Útil)
             score = n.score if n.score is not None else 0.0
             if score >= self.min_exergy:
                 exergic_nodes.append(n)
@@ -69,7 +68,6 @@ class CortexIndexCallback(BaseCallbackHandler):
         if event_type == CBEventType.RETRIEVE:
             nodes = payload.get("nodes", [])
 
-            # Cómputo termodinámico: calcular la exergía media del retrieval
             total_nodes = len(nodes)
             avg_exergy = 0.0
             if total_nodes > 0:

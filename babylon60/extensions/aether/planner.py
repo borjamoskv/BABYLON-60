@@ -75,25 +75,21 @@ class PlannerAgent:
         """Collect repo structure + key files for context."""
         parts: list[str] = []
 
-        # Tree
         tree = self._tree(toolkit.repo_path, depth=_MAX_TREE_DEPTH)
         parts.append(f"TREE:\n{tree}")
 
-        # README
         for name in ("README.md", "README.rst", "README.txt", "README"):
             content = toolkit.read_file(name)
             if not content.startswith("[ERROR]"):
                 parts.append(f"README:\n{content[:_MAX_FILE_READ]}")
                 break
 
-        # pyproject / package.json
         for cfg in ("pyproject.toml", "package.json", "Cargo.toml", "go.mod"):
             content = toolkit.read_file(cfg)
             if not content.startswith("[ERROR]"):
                 parts.append(f"{cfg.upper()}:\n{content[:1500]}")
                 break
 
-        # Recent git log
         parts.append(f"RECENT LOG:\n{toolkit.git_log(5)}")
 
         return "\n\n".join(parts)
@@ -131,7 +127,6 @@ class PlannerAgent:
 
     def _parse(self, raw: str) -> PlanOutput:
         """Parse JSON plan from LLM output, with fallback."""
-        # Strip potential markdown fences
         text = raw.strip()
         if text.startswith("```"):
             lines = text.splitlines()

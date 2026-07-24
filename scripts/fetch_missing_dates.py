@@ -65,7 +65,6 @@ def main() -> None:
 
     study_dates: dict[str, dict[str, str | None]] = {}
 
-    # Query in batches of 200
     for i in range(0, len(ncts), 200):
         batch = ncts[i : i + 200]
         params = {
@@ -93,7 +92,6 @@ def main() -> None:
 
     print(f"Fetched dates for {len(study_dates)} studies.", flush=True)
 
-    # Calculate enrollment velocity and update rows
     updated_count = 0
     for row in rows:
         nct = row["nct_id"]

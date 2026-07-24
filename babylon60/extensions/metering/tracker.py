@@ -18,7 +18,6 @@ __all__ = ["UsageRecord", "UsageTracker"]
 
 logger = logging.getLogger(__name__)
 
-# ─── Schema ──────────────────────────────────────────────────────────
 
 _SCHEMA_SQL = """
 CREATE TABLE IF NOT EXISTS api_usage (
@@ -124,7 +123,6 @@ class UsageTracker:
             ),
         )
 
-        # Upsert monthly summary - atomic O(1)
         conn.execute(
             "INSERT INTO usage_monthly_summary (tenant_id, month_bucket, total_calls, "
             "total_tokens, last_updated) VALUES (?, ?, 1, ?, ?) "

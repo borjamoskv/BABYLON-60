@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Fusion Data Models & Utilities.
 
@@ -25,9 +21,7 @@ __all__ = [
     "ThinkingHistory",
 ]
 
-# ─── Constantes ──────────────────────────────────────────────────────
 
-# Palabras demasiado comunes para afectar el agreement
 _STOPWORDS = frozenset(
     {
         "the",
@@ -101,7 +95,6 @@ _STOPWORDS = frozenset(
 _PUNCT_RE = re.compile(r"[.,!?;:\"'()\[\]{}-–\-/\\<>@#$%^&*~`|+=]")
 
 
-# ─── Enums ───────────────────────────────────────────────────────────
 
 
 class FusionStrategy(str, Enum):
@@ -113,7 +106,6 @@ class FusionStrategy(str, Enum):
     WEIGHTED_SYNTHESIS = "weighted_synthesis"
 
 
-# ─── Data Classes ────────────────────────────────────────────────────
 
 
 @dataclass()
@@ -233,7 +225,6 @@ class ThinkingHistory:
         return self._total_fusions
 
 
-# ─── Tokenización ───────────────────────────────────────────────────
 
 
 def _tokenize(text: str) -> set[str]:

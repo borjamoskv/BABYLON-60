@@ -28,12 +28,9 @@ def slice_void_bit(packed: bytes, shard_count: int = 16) -> list[int]:
     """
     required_bytes = shard_count * 8
     if len(packed) < required_bytes:
-        # Pad with 0xA5 (Sovereign sentinel) to avoid "all zero" collision in MIH
-        # on high shards for low-dimensional vectors.
         padding = required_bytes - len(packed)
         packed = packed + b"\xa5" * padding
 
-    # Extract 64-bit blocks (Signed 64-bit for SQLite compatibility)
     fmt = f">{shard_count}q"
     return list(struct.unpack(fmt, packed[:required_bytes]))
 

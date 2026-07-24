@@ -36,7 +36,6 @@ from babylon60.extensions.swarm.worktree_isolation import isolated_worktree
 logger = logging.getLogger("babylon60_extensions.swarm.josu_daemon")
 
 
-# ── Configuration ─────────────────────────────────────────────────────────
 
 POLL_INTERVAL_S: int = 600  # 10 min between scans
 MAX_COMPLEXITY: int = 5  # Only attempt ghosts with estimated_complexity ≤ 5
@@ -44,7 +43,6 @@ MAX_PULSE_BEATS: int = 15  # Ephemeral agents die fast
 MAX_CONCURRENT_FIXES: int = 2  # Parallel Pulse agents cap
 
 
-# ── Data Models ───────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -73,7 +71,6 @@ class FixResult:
     error: str = ""
 
 
-# ── The Daemon ────────────────────────────────────────────────────────────
 
 
 class JosuProactiveDaemon:
@@ -112,7 +109,6 @@ class JosuProactiveDaemon:
         """Lifecycle loop. Scans → Filters → Spawns → Sleeps."""
         logger.info("⚡️ [JOSU] Code Sniper Daemon Activated.")
 
-        # Co-launch Toolbox watchdog (Ω₀ self-reference)
         try:
             from babylon60.mcp_server.toolbox_watchdog import (
                 ToolboxWatchdog,
@@ -123,7 +119,6 @@ class JosuProactiveDaemon:
                 self._toolbox_watchdog.run(),
                 name="toolbox-watchdog",
             )
-            # prevent GC of the background task
             self._toolbox_watcher_task = watcher  # type: ignore[reportGeneralTypeIssues]
             logger.info(
                 "🔭 [JOSU] Toolbox watchdog co-launched.",
@@ -142,7 +137,6 @@ class JosuProactiveDaemon:
                 if not targets:
                     logger.debug("💤 [JOSU] No resolvable ghosts. Sleeping %ds.", POLL_INTERVAL_S)
                 else:
-                    # Filter by complexity and remaining attempts
                     viable = [
                         t
                         for t in targets
@@ -156,7 +150,6 @@ class JosuProactiveDaemon:
                         MAX_COMPLEXITY,
                     )
 
-                    # Process viable targets with concurrency cap
                     semaphore = asyncio.Semaphore(MAX_CONCURRENT_FIXES)
                     tasks = [self._process_target(t, semaphore) for t in viable]
                     await asyncio.gather(*tasks, return_exceptions=True)
@@ -175,7 +168,6 @@ class JosuProactiveDaemon:
             self._active_tasks += 1
             source_id = f"josu-{target.id[:8]}"
             try:
-                # Signal planning
                 async with self.db.session() as conn:
                     from babylon60.extensions.signals.bus import AsyncSignalBus
 
@@ -219,7 +211,6 @@ class JosuProactiveDaemon:
                                 },
                                 source=source_id,
                             )
-                            # Invoke HumanEscalationPulse structurally
                             from babylon60.extensions.swarm.escalation import HumanEscalationPulse
 
                             raise HumanEscalationPulse(
@@ -256,20 +247,11 @@ class JosuProactiveDaemon:
                         "swarm:worktree_enter", {"branch": branch_name}, source=source_id
                     )
 
-                # Import Pulse lazily to avoid circular deps
                 from babylon60.engine.meta.metabolism import Metabolism
 
                 metabolism = Metabolism(flatline_threshold=3.0)
 
-                # Simulate Pulse-like execution loop
-                # In production, this spawns a real Pulse agent:
-                #   from pulse import Pulse
-                #   agent = Pulse(objective=target.description,
-                #                 workspace_dir=str(wt_path),
-                #                 max_beats=MAX_PULSE_BEATS)
-                #   agent.live()
 
-                # For now: delegate to AgentToolkit + simple heuristic
                 from babylon60.extensions.aether.tools import AgentToolkit
 
                 toolkit = AgentToolkit(wt_path)
@@ -280,7 +262,6 @@ class JosuProactiveDaemon:
                         "swarm:verify", {"action": "Running baseline tests"}, source=source_id
                     )
 
-                # Run tests to detect baseline state
                 test_output = toolkit.bash(
                     "python -m pytest --tb=short -q 2>&1 || true", timeout=30
                 )
@@ -352,7 +333,6 @@ class JosuProactiveDaemon:
             result.summary[:100],
         )
 
-        # [DESTRUCTOR-OMEGA] Technical debt resolved: Authored the persistence layer
         try:
             content = (
                 f"Josu Daemon Fix for Ghost [{target.id}]\n"
@@ -371,7 +351,6 @@ class JosuProactiveDaemon:
                 "workflow": "josu_proactive",
             }
 
-            # Attempt to persist to CORTEX DB
             if hasattr(self.db, "store"):
                 await self.db.store(
                     project=target.project,
@@ -385,7 +364,6 @@ class JosuProactiveDaemon:
         except (sqlite3.Error, ValueError, TypeError) as e:
             logger.error("☠️ [JOSU] Error generating review request: %s", e)
 
-    # ── Introspection ─────────────────────────────────────────────────
 
     @property
     def results(self) -> list[FixResult]:

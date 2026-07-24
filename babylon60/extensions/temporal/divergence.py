@@ -24,17 +24,14 @@ class DivergenceMap:
         Computes the structural distance between two execution trajectories.
         Returns a normalized score where 0.0 is identical and 1.0 is completely divergent.
         """
-        # We extract the sequence of actions as the primary structural dimension
         seq_a = [str(node.get("action", "")) for node in trajectory_a]
         seq_b = [str(node.get("action", "")) for node in trajectory_b]
 
         if not seq_a and not seq_b:
             return 0.0
 
-        # SequenceMatcher ratio returns 1.0 for identical sequences, 0.0 for completely different
         ratio = difflib.SequenceMatcher(None, seq_a, seq_b).ratio()
 
-        # We want distance, so 1.0 - ratio
         return 1.0 - ratio
 
     @staticmethod

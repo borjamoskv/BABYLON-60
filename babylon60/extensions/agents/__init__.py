@@ -20,11 +20,9 @@ from babylon60.extensions.agents.system_prompt import (
 )
 
 __all__ = [
-    # System prompts
     "SYSTEM_PROMPT",
     "SYSTEM_PROMPT_MEDIUM",
     "SYSTEM_PROMPT_SHORT",
-    # Pitches
     "PITCH_CTO_SKEPTIC",
     "PITCH_MEMO_DEV",
     "PITCH_OS_CONTRIBUTOR",

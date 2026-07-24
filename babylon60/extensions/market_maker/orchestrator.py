@@ -49,19 +49,16 @@ class MarketMakerOrchestrator:
         """
         log.info("Iniciando Market Maker Cycle para %d keywords...", len(keywords))
 
-        # Phase 1
         signals = await self.detector.scan(keywords)
         if not signals:
             log.info("Cycle completado: no se detectó convergencia.")
             return []
 
-        # Phase 2
         opportunities: list[Opportunity] = []
         for sig in signals:
             opp = await self.scorer.score(sig)
             opportunities.append(opp)
 
-        # Phase 3, 4, 5
         active_experiments: list[Experiment] = []
         for opp in opportunities:
             exp = Experiment(
@@ -82,18 +79,15 @@ class MarketMakerOrchestrator:
                 exp.status = ExperimentStatus.KILLED
                 continue
 
-            # Phase 3
             mvp = await self.generator.generate(opp)
             exp.mvp = mvp
             exp.status = ExperimentStatus.MVP_GENERATED
 
             if not dry_run:
-                # Phase 4
                 exp.status = ExperimentStatus.VALIDATING
                 val = await self.validator.validate(exp)
                 exp.validation = val
 
-                # Phase 5
                 if val.should_scale:
                     exp.status = ExperimentStatus.SCALED
                 else:

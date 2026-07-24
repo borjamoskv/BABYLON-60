@@ -32,7 +32,6 @@ class GossipProtocol(asyncio.DatagramProtocol):
         self.transport = transport  # type: ignore[assignment]
 
     def datagram_received(self, data: bytes, addr: tuple[str, int]) -> None:
-        # Spawn handler task to keep receive loop non-blocking
         asyncio.create_task(self.node.handle_datagram(data, addr))
 
     def error_received(self, exc: Exception) -> None:
@@ -69,7 +68,6 @@ class GossipNode:
 
         self._running = True
 
-        # Bind UDP port for direct node-to-node datagram exchanges
         loop = asyncio.get_running_loop()
         self.transport, self.protocol = await loop.create_datagram_endpoint(
             lambda: GossipProtocol(self),
@@ -137,14 +135,12 @@ class GossipNode:
         if not sender_id or sender_id == self.node_id:
             return
 
-        # Register sender node
         sender_addr = f"{addr[0]}:{sender_port or addr[1]}"
         await self.register_peer(sender_id, sender_addr)
 
         if "vitals" in payload and sender_id in self.peers:
             self.peers[sender_id]["vitals"] = payload["vitals"]
 
-        # Merge known state
         sender_state = payload.get("known_state", {})
         sender_version = sender_state.get("version", 0)
         sender_facts = sender_state.get("facts", 0)
@@ -154,13 +150,11 @@ class GossipNode:
             self.known_state["facts"] = max(self.known_state["facts"], sender_facts)
             logger.debug("[Gossip] Merged newer state version %s from ***id", sender_version)
 
-        # Merge peer table for decentralized discovery
         peer_list = payload.get("peers", {})
         for p_id, p_addr in peer_list.items():
             if p_id != self.node_id and p_id not in self.peers:
                 await self.register_peer(p_id, p_addr)
 
-        # Reply if it's a PING
         if msg_type == "PING" and self.transport:
             response = self._build_payload("ACK")
             try:
@@ -185,7 +179,6 @@ class GossipNode:
         while self._running:
             try:
                 await self._propagate_state()
-                # Gossip frequency aligned with LEGION-10k execution speed
                 await asyncio.sleep(0.5)
             except asyncio.CancelledError:
                 break
@@ -198,14 +191,12 @@ class GossipNode:
         if not self.peers or not self.transport:
             return
 
-        # Select random peer for epidemic propagation
         peer_id = random.choice(list(self.peers.keys()))
         peer = self.peers[peer_id]
 
         host, port_str = peer["address"].split(":")
         port = int(port_str)
 
-        # Send PING payload
         payload = self._build_payload("PING")
         try:
             self.transport.sendto(payload, (host, port))

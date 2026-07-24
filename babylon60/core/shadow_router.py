@@ -77,7 +77,6 @@ class ShadowRouter:
             "cost_microusd": 4200,
             "fallback_used": False,
             "response_commitment": self._commit(b"response|" + prompt.encode("utf-8")),
-            # C4-SIM: no existe recibo real de proveedor; nunca se fabrica uno.
             "provider_receipt_hash": None,
         }
 
@@ -154,7 +153,6 @@ class ShadowRouter:
 
 
 async def demo() -> None:
-    # Clave efímera SOLO para la demo local; en runtime real la inyecta el operador.
     os.environ.setdefault("CORTEX_SHADOW_HMAC_KEY", secrets.token_hex(32))
     signer = Ed25519Signer()
     router = ShadowRouter(signer)

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 C5-REAL BITTENSOR (TAO) YUMA CONSENSUS & EXERGY TRANSDUCER
 ==========================================================
@@ -29,7 +28,6 @@ def compute_yuma_consensus(
     V = len(weights)
     M = len(weights[0]) if V > 0 else 0
 
-    # 1. Enforce normalization invariants
     total_stake = sum(stake)
     stake_norm = [s / total_stake for s in stake]
 
@@ -41,12 +39,10 @@ def compute_yuma_consensus(
         else:
             weights_norm.append([w / row_sum for w in weights[i]])
 
-    # 2. Compute Stake-Weighted Matrix S (V x M)
     S = []
     for i in range(V):
         S.append([weights_norm[i][j] * stake_norm[i] for j in range(M)])
 
-    # 3. Yuma Consensus Clipping (kappa_j) per miner j across validator stakes
     consensus = [0.0] * M
     for j in range(M):
         col_data = sorted([(weights_norm[i][j], stake_norm[i]) for i in range(V)], key=lambda x: x[0])
@@ -59,7 +55,6 @@ def compute_yuma_consensus(
                 break
         consensus[j] = clipped_val
 
-    # 4. Compute Clipped Weight Matrix W_clipped and S_clipped
     W_clipped = []
     S_clipped = []
     for i in range(V):
@@ -67,17 +62,14 @@ def compute_yuma_consensus(
         W_clipped.append(w_row)
         S_clipped.append([w_row[j] * stake_norm[i] for j in range(M)])
 
-    # 5. Compute Miner Consensus Ranks (Incentives basis)
     ranks_raw = [sum(S_clipped[i][j] for i in range(V)) for j in range(M)]
     total_ranks = sum(ranks_raw)
     ranks = [r / total_ranks if total_ranks > 0 else 0.0 for r in ranks_raw]
 
-    # 6. Compute Miner Trust (Fraction of stake voting > trust_threshold)
     trust = [0.0] * M
     for j in range(M):
         trust[j] = sum(stake_norm[i] for i in range(V) if weights_norm[i][j] > trust_threshold)
 
-    # 7. Compute Validator Dividends (Alignment with consensus ranks)
     dividends_raw = [0.0] * V
     for i in range(V):
         align_sum = sum(weights_norm[i][j] * ranks[j] for j in range(M))
@@ -85,7 +77,6 @@ def compute_yuma_consensus(
     total_div = sum(dividends_raw)
     dividends = [d / total_div if total_div > 0 else 0.0 for d in dividends_raw]
 
-    # 8. Cryptographic State Ledger Anchor (SHA3-256)
     state_payload = json.dumps(
         {
             "ranks": [round(r, 8) for r in ranks],
@@ -188,7 +179,6 @@ def simulate_subnet_epochs(
     stakes = list(initial_stakes)
     weights = [list(row) for row in initial_weights]
 
-    # Initialize EMA Bond Matrix B (V x M)
     B = [[0.0] * M for _ in range(V)]
     epoch_history = []
 
@@ -196,18 +186,14 @@ def simulate_subnet_epochs(
         ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)
         emission = simulate_subnet_emission(1.0, ranks, dividends)
 
-        # Persist to SQLite WAL ledger
         persist_consensus_ledger(db_path, t, state_hash, ranks, trust, dividends, emission)
 
-        # Compound validator stakes with captured emissions
         total_stake = sum(stakes)
         for i in range(V):
             stakes[i] += emission["validator_distribution"][i]
 
-        # Update EMA Bond Matrix B
         for i in range(V):
             for j in range(M):
-                # Effective stake-weighted assignment
                 effective_s = min(weights[i][j], consensus[j]) * (stakes[i] / total_stake)
                 B[i][j] = ema_alpha * B[i][j] + (1.0 - ema_alpha) * effective_s
 
@@ -240,8 +226,6 @@ def simulate_adversarial_matrix() -> Dict[str, Any]:
     """
     results: Dict[str, Any] = {}
 
-    # Test 1: Sybil Swarm Attack
-    # 2 honest validators (75% stake), 3 Sybil validators (25% stake) trying to boost Miner 3
     stakes_1 = [500_000.0, 250_000.0, 100_000.0, 100_000.0, 50_000.0]
     weights_1 = [
         [0.4, 0.4, 0.2, 0.0],  # Honest
@@ -257,9 +241,6 @@ def simulate_adversarial_matrix() -> Dict[str, Any]:
         "status": "MITIGATED" if r1[3] < 0.01 else "BREACHED",
     }
 
-    # Test 2: Ouroboros Attack (Self-Weighting)
-    # Honest validator (60% stake) assigns 100% to SOTA Miner 0, 0% to Ouroboros junk Miner 1
-    # Ouroboros validator (40% stake) assigns 100% to its own junk Miner 1
     stakes_2 = [600_000.0, 400_000.0]
     weights_2 = [
         [1.0, 0.0],  # Honest validator SOTA evaluation
@@ -284,7 +265,6 @@ if __name__ == "__main__":
         [0.00, 0.00, 0.00, 0.00, 1.00],
     ]
 
-    # Run multi-epoch simulation
     epoch_sim = simulate_subnet_epochs(5, weights, stakes, db_path="bittensor_yuma_ledger.db")
     adversarial = simulate_adversarial_matrix()
 

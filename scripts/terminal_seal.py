@@ -45,15 +45,12 @@ def execute_terminal_seal() -> None:
     
     print("=== BEGIN TERMINAL SEAL PROTOCOL (INV_C5_16) ===")
     
-    # 1. Purge git locks
     purge_git_locks(root)
     
-    # 2. WAL Checkpoints
     dbs = get_all_sqlite_dbs(root)
     for db in dbs:
         execute_wal_checkpoint(db)
         
-    # 3. ETHOS Validation
     run_ethos_validation()
     
     print("=== TERMINAL SEAL PROTOCOL COMPLETED ===")

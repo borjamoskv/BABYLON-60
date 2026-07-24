@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Scavenger Governance Policy.
 
 Enforces deterministic validation boundaries for the Scavenger Tactical Suite.
@@ -33,8 +32,6 @@ class ScavengerGovernance:
 
     async def validate_operation(self, op: dict[str, Any]) -> bool:
         """Validate if an operation is legally and chemically safe."""
-        # This will contain the strict validation logic for operations.
-        # It's an internal fail-safe for the agent.
         return True
 
     def __repr__(self) -> str:

@@ -24,7 +24,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.context")
 
-# Confidence thresholds (ratio of top project score to second)
 _CONFIDENCE_MAP = [
     (5.0, "C5"),  # Confirmed - overwhelming evidence
     (3.0, "C4"),  # Probable - strong signal
@@ -67,7 +66,6 @@ class ContextInference:
                 projects_ranked=[],
             )
 
-        # ─── Step 1: Aggregate by project ────────────────────────────
         project_scores: dict[str, float] = defaultdict(float)
         project_signals: dict[str, list[Signal]] = defaultdict(list)
         orphan_signals: list[Signal] = []
@@ -79,7 +77,6 @@ class ContextInference:
             else:
                 orphan_signals.append(signal)
 
-        # ─── Step 2: Rank projects ───────────────────────────────────
         ranked = sorted(project_scores.items(), key=lambda x: x[1], reverse=True)
 
         if not ranked:
@@ -95,7 +92,6 @@ class ContextInference:
         top_project, top_score = ranked[0]
         second_score = ranked[1][1] if len(ranked) > 1 else 0.0
 
-        # ─── Step 3: Compute confidence ──────────────────────────────
         ratio = top_score / second_score if second_score > 0 else float("inf")
         confidence = "C5"
         for threshold, grade in _CONFIDENCE_MAP:
@@ -103,7 +99,6 @@ class ContextInference:
                 confidence = grade
                 break
 
-        # ─── Step 4: Build summary ───────────────────────────────────
         signal_sources = {s.source.split(":")[0] for s in signals}
         source_str = ", ".join(sorted(signal_sources))
 
@@ -118,7 +113,6 @@ class ContextInference:
                 f"Runner-up: {runner_up} (score: {ranked[1][1]:.2f}, ratio: {ratio:.1f}x)."
             )
 
-        # Highlight dominant signal types
         type_counts: dict[str, int] = defaultdict(int)
         for s in project_signals.get(top_project, []):
             type_counts[s.signal_type] += 1

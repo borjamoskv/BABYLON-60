@@ -59,7 +59,6 @@ class AnomalyHunterEngine:
         a_content = fact_a.content.lower()
         b_content = fact_b.content.lower()
 
-        # Highly simplified logic for the example, supporting English and Spanish
         is_a_blocked = "blocked" in a_content or "bloquead" in a_content
         is_b_passed = "passed" in b_content or "pasé" in b_content or "pase" in b_content
 
@@ -74,29 +73,21 @@ class AnomalyHunterEngine:
 
     async def _trace_causal_chain(self, fact: Fact) -> list[Fact]:
         """Extracts the causal chain using the hierarchy abstraction."""
-        # We delegate to the engine method (which already returns list[Fact])
         chain = await self.cortex.get_causal_chain(fact.id)
         return chain if chain else []
 
     async def run_full_scan(self) -> dict:
         """NightShift entry point: full parallel scan."""
         threshold = datetime.fromtimestamp(time.time(), tz=timezone.utc) - self.window
-        # Fetching facts from the last 24h
         time_filter = threshold.isoformat()
 
-        # We limit the query for Nightshift (assuming there is a recall with as_of)
-        # Here we use history to have all states and then filter
 
-        # Recall relevant facts from history across tracked projects
         recent_raw_facts = await self.cortex.history(project="anomaly-hunter")
-        # recent_raw_facts is now list[Fact] thanks to the update in CortexEngine
         recent_facts = [f for f in recent_raw_facts if (f.created_at or "") > time_filter]
 
         if not recent_facts:
-            # Expand the search in a dummy way for the example
             pass
 
-        # Run all detectors in parallel
         results = await asyncio.gather(
             self.detect_temporal_inversions(recent_facts),
             self.detect_spatial_contradictions(recent_facts),
@@ -183,12 +174,10 @@ class AnomalyHunterEngine:
             if len(group) < 2:
                 continue
 
-            # Sort by time
             sorted_group = sorted(group, key=lambda x: x.created_at or "")
 
             for i in range(len(sorted_group) - 1):
                 f1, f2 = sorted_group[i], sorted_group[i + 1]
-                # Simple drift detection: if both have numerical values and they differ by > 50%
                 v1 = f1.meta.get("value") if isinstance(f1.meta, dict) else None
                 v2 = f2.meta.get("value") if isinstance(f2.meta, dict) else None
 

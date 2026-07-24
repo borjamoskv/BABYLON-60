@@ -40,7 +40,6 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
         self._engine = engine
         self._eval_interval_seconds = eval_interval_seconds
         self._critical_repair_threshold = critical_repair_threshold
-        # Negative velocity = confidence is dropping
         self._decay_velocity_threshold = decay_velocity_threshold
         self._stale_ratio_threshold = stale_ratio_threshold
 
@@ -60,9 +59,7 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
             return suggestions
 
         try:
-            # Query metamemory stats on the fly
             stats = self._engine.memory.metamemory.summary_stats()
-            # 1. Critical Repair Needed -> /josu
             if stats.memories_needing_repair >= self._critical_repair_threshold:
                 suggestions.append(
                     WorkflowAlert(
@@ -77,8 +74,6 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
                     )
                 )
 
-            # 2. Derivative of Certainty (Decay) -> /autodidact
-            # If mean confidence is dropping fast, trigger autodidact to re-ingest
             if self._last_mean_confidence is not None:
                 velocity = stats.mean_retrieval_confidence - self._last_mean_confidence
                 if velocity <= self._decay_velocity_threshold:
@@ -94,13 +89,10 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
                             tags=["epistemic", "decay", "learning"],
                         )
                     )
-            # 3. Staleness Ratio -> /nightshift
-            # If > 20% of memory is stale, we need a night cycle to refresh/crystallize
             stale_ratio = 0.0
             if stats.total_memories > 0:
                 stale_ratio = stats.stale_memories / stats.total_memories
 
-            # [OUROBOROS] Autopoiesis Singularity Hook
             if stale_ratio >= 0.50:
                 suggestions.append(
                     WorkflowAlert(
@@ -128,13 +120,11 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
                     )
                 )
 
-            # Update state
             self._last_mean_confidence = stats.mean_retrieval_confidence
 
         except Exception as e:  # noqa: BLE001
             logger.error("Failed to evaluate epistemic certainty: %s", e)
 
-        # Sort by priority
         suggestions.sort(key=lambda a: a.priority)
 
         self._last_eval = now

@@ -31,7 +31,6 @@ class ASTRule:
         
         self._audit_purity()
         
-        # Compile it back into an executable object to verify we can run it
         code_obj = compile(self.ast_tree, filename="<ast>", mode="exec")
         namespace: dict[str, Any] = {"CRDTMap": CRDTMap}
         exec(code_obj, namespace)

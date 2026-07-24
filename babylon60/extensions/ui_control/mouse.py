@@ -16,11 +16,9 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.ui_control.mouse")
 
-# ─── Constantes ──────────────────────────────────────────────────
 HUMAN_CLICK_DELAY = 0.1  # Segundos entre down/up
 
 
-# pyright: reportAttributeAccessIssue=false
 class MouseEngine:
     """
     Control de mouse de bajo nivel usando macOS CoreGraphics (Quartz).
@@ -61,7 +59,6 @@ class MouseEngine:
         p = Point(x, y)
         btn = CG.kCGMouseButtonLeft
 
-        # Primer click
         down1 = CG.CGEventCreateMouseEvent(None, CG.kCGEventLeftMouseDown, (p.x, p.y), btn)
         CG.CGEventSetIntegerValueField(down1, CG.kCGMouseEventClickState, 1)
         CG.CGEventPost(CG.kCGHIDEventTap, down1)
@@ -72,7 +69,6 @@ class MouseEngine:
 
         await asyncio.sleep(0.05)
 
-        # Segundo click con clickCount=2
         down2 = CG.CGEventCreateMouseEvent(None, CG.kCGEventLeftMouseDown, (p.x, p.y), btn)
         CG.CGEventSetIntegerValueField(down2, CG.kCGMouseEventClickState, 2)
         CG.CGEventPost(CG.kCGHIDEventTap, down2)
@@ -106,12 +102,10 @@ class MouseEngine:
         btn = CG.kCGMouseButtonLeft
         step_delay = duration / steps
 
-        # Mouse down en origen
         down = CG.CGEventCreateMouseEvent(None, CG.kCGEventLeftMouseDown, (from_x, from_y), btn)
         CG.CGEventPost(CG.kCGHIDEventTap, down)
         await asyncio.sleep(0.05)
 
-        # Movimiento interpolado
         for i in range(1, steps + 1):
             t = i / steps
             cx = from_x + int((to_x - from_x) * t)
@@ -120,7 +114,6 @@ class MouseEngine:
             CG.CGEventPost(CG.kCGHIDEventTap, drag_ev)
             await asyncio.sleep(step_delay)
 
-        # Mouse up en destino
         up = CG.CGEventCreateMouseEvent(None, CG.kCGEventLeftMouseUp, (to_x, to_y), btn)
         CG.CGEventPost(CG.kCGHIDEventTap, up)
 

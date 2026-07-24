@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX Signal Hook - fact:stored reactive emission.
 
@@ -48,9 +44,6 @@ __all__ = ["emit_fact_stored"]
 
 logger = logging.getLogger("babylon60_extensions.signals.fact_hook")
 
-# ── Tuneable constants ────────────────────────────────────────────────────────
-# Number of un-consumed fact:stored signals before a compact:needed is emitted.
-# Operators may override via env var CORTEX_COMPACT_THRESHOLD.
 _DEFAULT_COMPACT_THRESHOLD: int = 50
 
 
@@ -114,10 +107,6 @@ def emit_fact_stored(
             project=project,
         )
 
-        # ── Reactive Auto-Trigger: compact:needed ─────────────────────────
-        # Count unconsumed fact:stored signals for this project.
-        # If they exceed the threshold, emit compact:needed so a daemon
-        # can act without human intervention - the L2 neural seed.
         threshold = _compact_threshold()
         try:
             cursor = conn.execute(
@@ -156,5 +145,4 @@ def emit_fact_stored(
         conn.close()
 
     except Exception as e:  # noqa: BLE001
-        # Never propagate - this hook must never break the store operation.
         logger.debug("fact:stored signal emission failed: %s", e)

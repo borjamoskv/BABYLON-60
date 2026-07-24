@@ -74,7 +74,6 @@ class ScheduleEntry:
     updated_at: str = ""
 
 
-# Type alias for task factories
 TaskFactory = Callable[[], Coroutine[Any, Any, Any]]
 
 
@@ -143,7 +142,6 @@ class SovereignScheduler:
         with self._conn() as conn:
             conn.executescript(_SCHEMA)
 
-    # ─── Registration ─────────────────────────────────────────────
 
     def add_recurring(
         self,
@@ -237,7 +235,6 @@ class SovereignScheduler:
             ).fetchall()
         return [self._row_to_entry(r) for r in rows]
 
-    # ─── Main Loop ────────────────────────────────────────────────
 
     async def run(self) -> None:
         """Main scheduler loop. Blocks until stop() is called."""
@@ -258,7 +255,6 @@ class SovereignScheduler:
                 break  # stop_event was set
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
-        # normal tick timeout
 
         logger.info("SovereignScheduler stopped")
 
@@ -317,7 +313,6 @@ class SovereignScheduler:
 
             elapsed_ms = (time.monotonic() - start) * 1000
 
-            # Update schedule state
             next_run = self._compute_next_run(entry)
             with self._conn() as conn:
                 conn.execute(
@@ -335,7 +330,6 @@ class SovereignScheduler:
                     (now_iso, next_run, elapsed_ms, error, now_iso, entry.name),
                 )
 
-            # Publish event
             if self._event_bus is not None:
                 try:
                     await self._event_bus.publish(
@@ -352,7 +346,6 @@ class SovereignScheduler:
                         "Scheduler event bus publish failed: %s", e, exc_info=True
                     )  # bus errors must not kill scheduler
 
-            # Hot state update
             if self._hot_state is not None:
                 try:
                     self._hot_state.set(
@@ -375,7 +368,6 @@ class SovereignScheduler:
                 f" - {error}" if error else "",
             )
 
-    # ─── Helpers ──────────────────────────────────────────────────
 
     def _upsert(self, entry: ScheduleEntry) -> None:
         with self._conn() as conn:

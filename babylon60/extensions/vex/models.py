@@ -220,14 +220,11 @@ class ExecutionReceipt:
 
     def verify(self) -> bool:
         """Self-verification: recompute receipt_hash and verify consistency."""
-        # 1. Verify all step hashes are consistent
         for step in self.steps:
             if not step.content_hash():
                 return False
-        # 2. Verify plan_hash was set
         if not self.plan_hash:
             return False
-        # 3. Receipt hash is deterministic
         _ = self.receipt_hash
         return True
 

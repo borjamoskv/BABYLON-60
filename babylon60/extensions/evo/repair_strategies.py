@@ -31,7 +31,6 @@ __all__ = [
 logger = logging.getLogger("babylon60.engine.repair")
 
 
-# ─── Types ────────────────────────────────────────────────────────
 
 
 class RepairStatus(Enum):
@@ -82,7 +81,6 @@ class RepairStrategy(Protocol):
     ) -> RepairResult: ...
 
 
-# ─── Concrete Strategies ──────────────────────────────────────────
 
 
 class InjectTimeoutGuard:
@@ -98,7 +96,6 @@ class InjectTimeoutGuard:
         timeout_ms = int(parameters.get("timeout_ms", "5000"))
 
         try:
-            # Apply timeout guard via ISA rewrite if tree is available
             tree = context.get("dispatch_tree")
             if tree is not None:
                 from babylon60.engine.cognitive.reflexion import TreeRewriter
@@ -138,7 +135,6 @@ class ForceGcAndReduceBatch:
         start = time.perf_counter_ns()
 
         try:
-            # Force GC
             gc.collect()
 
             reduction = float(parameters.get("batch_reduction_factor", "0.5"))
@@ -181,7 +177,6 @@ class ResetPoolAndRetry:
         try:
             engine = context.get("engine")
             if engine is not None and hasattr(engine, "_conns_by_loop"):
-                # Close stale connections
                 conns = list(engine._conns_by_loop.values())
                 for conn in conns:
                     try:
@@ -232,7 +227,6 @@ class ExponentialBackoff:
             if use_jitter:
                 delay_s *= 0.5 + random.random()
 
-            # Store the backoff state for the caller to use
             context["backoff_delay_s"] = delay_s
             context["backoff_applied"] = True
 
@@ -273,7 +267,6 @@ class ProbeAndResetBreaker:
                 from babylon60.extensions.forensic.circuit_breaker import CircuitState
 
                 if breaker.state == CircuitState.OPEN:
-                    # Force half-open for probe
                     breaker._state = CircuitState.HALF_OPEN
                     logger.info(
                         "[REPAIR] Circuit breaker '%s' forced to HALF_OPEN for probe",
@@ -281,7 +274,6 @@ class ProbeAndResetBreaker:
                     )
 
                 elif breaker.state == CircuitState.HALF_OPEN:
-                    # Already probing
                     pass
 
             latency = (time.perf_counter_ns() - start) / 1e6
@@ -321,7 +313,6 @@ class RestartHeartbeatEmitter:
             if heartbeat is not None:
                 heartbeat.stop()
                 await asyncio.sleep(restart_delay / 1000.0)
-                # The caller should restart - we just set the flag
                 context["heartbeat_needs_restart"] = True
 
             latency = (time.perf_counter_ns() - start) / 1e6
@@ -474,7 +465,6 @@ class ReserializeWithValidation:
             if payload is not None:
                 import json
 
-                # Round-trip through JSON with null stripping
                 cleaned = json.loads(json.dumps(payload, default=str))
                 if parameters.get("strip_nulls", "true").lower() == "true":
                     cleaned = {k: v for k, v in cleaned.items() if v is not None}
@@ -500,7 +490,6 @@ class ReserializeWithValidation:
             )
 
 
-# ─── Registry ─────────────────────────────────────────────────────
 
 
 class RepairRegistry:
@@ -573,5 +562,4 @@ class RepairRegistry:
         return list(self._strategies.keys())
 
 
-# Module-level singleton
 REPAIR_REGISTRY = RepairRegistry()

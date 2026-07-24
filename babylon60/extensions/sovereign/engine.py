@@ -31,9 +31,6 @@ from babylon60.extensions.sovereign.observability import (
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
-# Pipeline phases
-# ---------------------------------------------------------------------------
 
 
 class Phase(Enum):
@@ -76,9 +73,6 @@ class SovereignContext:
         return (time.monotonic() - self.started_at) * 1000
 
 
-# ---------------------------------------------------------------------------
-# Phase executors
-# ---------------------------------------------------------------------------
 
 
 async def _execute_bridge_phase(
@@ -172,7 +166,6 @@ async def _phase_observability(ctx: SovereignContext) -> PipelineResult:
     t0 = time.monotonic()
     init_telemetry()
 
-    # Seed initial scores and apply the 130/100 sovereign multiplier
     scores = {dim.value: 100.0 for dim in Dimension}
     power = compute_power(scores, multiplier=1.3)
     ctx.power = power
@@ -194,7 +187,6 @@ async def _phase_experience(ctx: SovereignContext) -> PipelineResult:
 async def _phase_arbitration(ctx: SovereignContext) -> PipelineResult:
     """Phase - Calibrate the arbiter state."""
     t0 = time.monotonic()
-    # Baseline justice check
     return PipelineResult(
         phase=Phase.ARBITRATION,
         success=True,
@@ -219,9 +211,6 @@ async def _phase_verification(ctx: SovereignContext) -> PipelineResult:
     )
 
 
-# ---------------------------------------------------------------------------
-# Main pipeline
-# ---------------------------------------------------------------------------
 
 
 async def _phase_evolution(ctx: SovereignContext) -> PipelineResult:
@@ -230,7 +219,6 @@ async def _phase_evolution(ctx: SovereignContext) -> PipelineResult:
     try:
         from babylon60.extensions.evolution.engine import EvolutionEngine
 
-        # Thermodynamic God-Tier Engine
         engine = EvolutionEngine()
         await engine.initialize_swarm()
         stats = await engine.cycle()
@@ -283,12 +271,9 @@ async def run_pipeline(
     logger.info("⚡ Sovereign Pipeline: IGNITION")
 
     for phase in Phase:
-        # --- EPISTEMIC ARBITRATION GATE ---
-        # Critical phases require explicit triage before execution
         if phase in (Phase.FABRICATION, Phase.ORCHESTRATION, Phase.DEPLOYMENT, Phase.SWARM):
             signal = f"Intention to execute {phase.name} phase"
             plan = {"actions": [{"type": phase.name.lower()}]}
-            # Extract confidence from endocrine (serotonin level acts as proxy)
             confidence = ctx.endocrine._get_state("default").get("serotonin", 0.5)
 
             triage = await ctx.arbiter.triage(signal, plan, confidence=confidence)
@@ -310,7 +295,6 @@ async def run_pipeline(
         if executor:
             result = await executor(ctx)
         else:
-            # For unmapped phases, check if we have a direct skill mapping
             t0 = time.monotonic()
             skill_name = phase.name.lower().replace("_", "-")
             try:
@@ -320,14 +304,12 @@ async def run_pipeline(
                 )
             except (RuntimeError, ValueError, OSError, ImportError) as e:
                 logger.debug("Skill fallback failed for %s: %s", skill_name, e)
-                # Skill fallback failed, yield
                 await asyncio.sleep(0)
                 result = PipelineResult(
                     phase=phase, success=True, duration_ms=0, details={"status": "skipped"}
                 )
 
         ctx.results.append(result)
-        # Update endocrine context after each phase if needed
         ctx.endocrine.ingest_context(
             f"Completed phase {phase.name}", metadata={"success": result.success}
         )

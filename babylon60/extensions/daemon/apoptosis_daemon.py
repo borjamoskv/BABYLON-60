@@ -31,7 +31,6 @@ class ApoptosisDaemon:
     def _is_untouched(self, filepath: Path) -> bool:
         """Check if the file has been untouched for > 7 days using git."""
         try:
-            # Get the Unix timestamp of the last commit modifying this file
             result = subprocess.run(
                 ["git", "log", "-1", "--format=%ct", "--", str(filepath)],
                 cwd=self.repo_path,
@@ -41,7 +40,6 @@ class ApoptosisDaemon:
             )
             timestamp_str = result.stdout.strip()
             if not timestamp_str:
-                # File might be untracked. We don't apoptose untracked files automatically here.
                 return False
 
             last_commit_time = int(timestamp_str)
@@ -71,13 +69,9 @@ class ApoptosisDaemon:
     def _has_external_references(self, filepath: Path, exports: list[str]) -> bool:
         """Check if any of the exports are referenced in other files in cortex/."""
         if not exports:
-            # If a file exports nothing public, it might be a script.
-            # Check if its filename is imported.
             module_name = filepath.stem
             exports = [module_name]
 
-        # We use a simple but rigorous heuristic: ripgrep or standard string matching
-        # across all .py files.
         for py_file in self.cortex_dir.rglob("*.py"):
             if py_file.resolve() == filepath.resolve():
                 continue
@@ -98,7 +92,6 @@ class ApoptosisDaemon:
         name = filepath.name
         if name in ("__init__.py", "__main__.py", "config.py"):
             return True
-        # Protect specific directories
         if "cli" in filepath.parts or "migrations" in filepath.parts:
             return True
         return False
@@ -118,18 +111,14 @@ class ApoptosisDaemon:
                 if self._is_protected(py_file):
                     continue
 
-                # 1. Check Age
                 if not self._is_untouched(py_file):
                     continue
 
-                # 2. Extract public symbols
                 exports = self._extract_exports(py_file)
 
-                # 3. Check for external references
                 if self._has_external_references(py_file, exports):
                     continue
 
-                # 4. Apoptosis execution
                 logger.critical(
                     "[APOPTOSIS] Thermodynamic death of unreferenced module: %s", py_file.name
                 )

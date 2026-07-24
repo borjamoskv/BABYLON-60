@@ -13,7 +13,6 @@ APPROVED_LICENSES = {"MIT", "Apache-2.0", "BSD-3-Clause", "BSD-2-Clause", "ISC",
 def main() -> int:
     print("🟢 [MOSKV-1 APEX] Initiating Security & License Audit...")
 
-    # 1. Run pip audit for security vulnerabilities
     print("⚙️ Auditing Python dependencies for vulnerabilities...")
     try:
         res = subprocess.run(["uv", "pip", "audit"], capture_output=True, text=True)
@@ -24,7 +23,6 @@ def main() -> int:
     except Exception as e:
         print(f"ℹ️ Skipping live pip audit execution: {e}")
 
-    # 2. Verify pyproject.toml license declaration
     print("⚙️ Verifying repository license integrity...")
     try:
         with open("pyproject.toml", "r", encoding="utf-8") as f:

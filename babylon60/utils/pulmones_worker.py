@@ -18,7 +18,6 @@ class PulmonesWorker:
     def __init__(self, db_path: Path = Path.home() / ".cortex" / "pulmones.db"):
         self.db_path = db_path
         self.running = False
-        # Para evitar saturar APIs en la recuperación, aplicamos rate-limiting por lote
         self.batch_size = 5
 
     def _fetch_ripe_tasks(self) -> list:  # type: ignore
@@ -45,7 +44,6 @@ class PulmonesWorker:
     def _penalize_task(self, task_id: int, retries: int):  # type: ignore
         """Exponential backoff para tareas crónicamente fallidas."""
         new_retries = retries + 1
-        # Backoff: 1m, 2m, 4m, 8m... max 60 min.
         delay = min(60 * (2**retries), 3600)
         next_retry = time.monotonic() + delay
 
@@ -77,7 +75,6 @@ class PulmonesWorker:
 
             await func(*args, **kwargs)
 
-            # Éxito de la operación. Eliminamos la impureza de la BD.
             self._remove_task(task_id)
             logger.info("✅ Tarea %s recuperada exitosamente.", task_id)
 
@@ -95,7 +92,6 @@ class PulmonesWorker:
                 tasks = self._fetch_ripe_tasks()
                 if tasks:
                     logger.info("📥 Encontradas %s tareas maduras para reintento.", len(tasks))
-                    # Ejecución concurrente del lote
                     await asyncio.gather(*(self._execute_task(t) for t in tasks))
                 else:
                     logger.debug("O₂ levels optimal. No tasks pending.")

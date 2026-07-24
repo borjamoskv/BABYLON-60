@@ -24,7 +24,6 @@ def _collect_snapshot() -> dict[str, Any]:
     """One-shot system telemetry snapshot."""
     root = _get_project_root()
 
-    # Database file sizes
     db_files: list[dict[str, Any]] = []
     for db_file in sorted(root.glob("*.db")):
         try:
@@ -41,7 +40,6 @@ def _collect_snapshot() -> dict[str, Any]:
 
     total_db_size = sum(int(d["size_bytes"]) for d in db_files)
 
-    # WAL files
     wal_files: list[dict[str, Any]] = []
     for wal in sorted(root.glob("*.db-wal")):
         try:
@@ -55,8 +53,6 @@ def _collect_snapshot() -> dict[str, Any]:
         except OSError:
             continue
 
-    # Git status — cada stat/read protegido: un fichero borrado a mitad de
-    # iteración (gc de git concurrente) no debe tumbar el snapshot entero.
     git_dir = root / ".git"
     git_info: dict[str, Any] = {"exists": git_dir.is_dir()}
     if git_dir.is_dir():
@@ -77,13 +73,11 @@ def _collect_snapshot() -> dict[str, Any]:
         except OSError:
             git_info["head"] = "(no legible)"
 
-    # Process info
     try:
         import resource
         import sys
 
         rusage = resource.getrusage(resource.RUSAGE_SELF)
-        # ru_maxrss unit is platform-dependent: bytes on macOS, kilobytes on Linux.
         rss_divisor = (1024 * 1024) if sys.platform == "darwin" else 1024
         process_info = {
             "user_time_s": round(rusage.ru_utime, 2),

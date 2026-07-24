@@ -25,12 +25,9 @@ class EventSovereigntyRuntime:
         logger.info("🚀 Starting EventSovereigntyRuntime...")
         self._running = True
 
-        # Subscribe to relevant telemetry/system events
         self.event_bus.subscribe("system.telemetry", self._handle_telemetry_event)
         self.event_bus.subscribe("system.alert", self._handle_alert_event)
 
-        # We can also keep a scheduled observation task running in parallel
-        # to ensure the system is not fully dependent on external pulses.
         asyncio.create_task(self._scheduled_observation_loop())
 
     async def stop(self) -> None:
@@ -64,9 +61,7 @@ class EventSovereigntyRuntime:
         """Ensures the system still has a pulse even if no external events arrive."""
         while self._running:
             try:
-                # Polling frequency for scheduled observation
                 await asyncio.sleep(60)
-                # Emit a heartbeat/observation event to the bus to trigger self-auditing
                 await self.event_bus.publish(
                     "system.telemetry",
                     {

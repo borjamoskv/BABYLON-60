@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# pyright: reportMissingImports=false, reportAttributeAccessIssue=false, reportOptionalMemberAccess=false
 from __future__ import annotations
 
 import logging
@@ -44,7 +43,6 @@ class VisionEngine:
         if not CG:
             return InteractionResult(success=False, error="Quartz/CoreGraphics not available")
 
-        # Create screenshot
         if region:
             rect = CG.CGRectMake(*region)
             image = CG.CGWindowListCreateImage(
@@ -59,7 +57,6 @@ class VisionEngine:
         if not image:
             return InteractionResult(success=False, error="Failed to capture screen")
 
-        # Save to file
         timestamp = datetime.fromtimestamp(time.time(), tz=timezone.utc).strftime("%Y%m%d_%H%M%S")
         filename = f"capture_{timestamp}.png"
         path = os.path.join(self._screenshots_dir, filename)

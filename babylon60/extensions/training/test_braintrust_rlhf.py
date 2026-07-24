@@ -14,7 +14,6 @@ class MockEpisodicMemory:
     """Mock for episodic memory to simulate session extraction."""
 
     async def get_session_timeline(self, session_id: str) -> list[Episode]:
-        # Simulamos una trayectoria simple de éxito.
         now = datetime.datetime.fromtimestamp(
             time.monotonic(), tz=datetime.timezone.utc
         ).isoformat()
@@ -61,8 +60,6 @@ async def run_triad_rlhf_sandbox():
 
     mock_memory = MockEpisodicMemory()
 
-    # Force mock API KEY if not present for log tracking attempt without hard failing.
-    # _triad.braintrust_key = "fake_key_para_evitar_warnings"
 
     session_id = f"sandbox_{uuid.uuid4().hex[:8]}"
 

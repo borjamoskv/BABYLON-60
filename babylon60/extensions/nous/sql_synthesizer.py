@@ -41,7 +41,6 @@ class SQLSynthesizer:
         for op in ast.operations:
             op_type = op.type if op.type in valid_ops else "raw_sql"
 
-            # Identify specific constraints from AST if needed, for now just empty list
             mig = MigrationOperation(
                 op=op_type,  # type: ignore
                 table=op.target,

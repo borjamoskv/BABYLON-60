@@ -43,7 +43,6 @@ class SoundVector(str, Enum):
     MASTER = "master"  # Ξ₅
 
 
-# Constants
 DEFAULT_BPM = 120
 DEFAULT_KEY = "C minor"
 DEFAULT_TEMPERATURE_REASONING = 0.2
@@ -83,7 +82,6 @@ class GRAMMYOrchestrator:
         self.current_album: AlbumContext | None = None
         self.llm_manager = LLMManager()
 
-        # Audio Backends (Frontier Models + Local)
         self.adapters = {
             "suno_v5": SunoV5Adapter(),
             "udio_v4": UdioV4Adapter(),
@@ -91,10 +89,8 @@ class GRAMMYOrchestrator:
             "local": LocalMIDIAdapter(),
         }
 
-        # O(1) Deterministic DSP
         self.dsp_engine = DSPApotheosis()
 
-        # Mantenemos a Gemini-3.1-Pro-Preview como núcleo cognitivo
         self.system_prompt = """
         Eres el GRAMMY-Ω Orchestrator. Un hiper-productor de música electrónica soberana.
         Tu objetivo: Generar matrices paramétricas acústicas para sintetizadores de frontera (Suno v5, Udio v4, Lyria 3).
@@ -154,8 +150,6 @@ class GRAMMYOrchestrator:
         try:
             if not response_text:
                 raise ValueError("No response from LLM Manager.")
-            # Parseamos y validamos la estructura
-            # Find json block or parse directly
             clean_json = response_text.replace("```json", "").replace("```", "").strip()
             matrix = json.loads(clean_json)
             logger.info(
@@ -238,7 +232,6 @@ class GRAMMYOrchestrator:
                 return NEUTRAL_GRI_SCORE
 
             clean_json = response_text.replace("```json", "").replace("```", "").strip()
-            # Handle potential markdown artifacts
             if "{" in clean_json:
                 start = clean_json.find("{")
                 end = clean_json.rfind("}") + 1
@@ -251,7 +244,6 @@ class GRAMMYOrchestrator:
                 "GRI Score asignado: %.2f | Rationale: %s", gri_score, eval_data.get("rationale")
             )
 
-            # Almacenamos el desglose en metadata para persistencia
             track.metadata["gri_breakdown"] = eval_data.get("scores", {})
             track.metadata["critique_rationale"] = eval_data.get("rationale", "")
 
@@ -318,7 +310,6 @@ class GRAMMYOrchestrator:
         track.metadata["raw_audio_uri"] = wav_path
         track.stems = {"master": wav_path}
 
-        # Apply DSPApotheosis mastering
         track.state = TrackState.POST_PRODUCTION
         try:
             import numpy as np

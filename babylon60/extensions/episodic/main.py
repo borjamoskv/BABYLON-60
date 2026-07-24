@@ -33,9 +33,7 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.episodic")
 
-# ─── Configuration ────────────────────────────────────────────────────
 
-# Extended stop words for technical context filtering
 _STOP_WORDS: Final[frozenset[str]] = frozenset(
     [
         "the",
@@ -136,11 +134,9 @@ _STOP_WORDS: Final[frozenset[str]] = frozenset(
     ]
 )
 
-# Token extraction: Alphanumeric + underscores + hyphens (for code/technical IDs)
 _TOKEN_RE: Final[re.Pattern] = re.compile(r"\b[a-z0-9_\-]{4,}\b", re.IGNORECASE)
 
 
-# ─── Episodic Memory Engine ─────────────────────────────────────────
 
 
 class EpisodicMemory:
@@ -182,7 +178,6 @@ class EpisodicMemory:
         ) as cursor:
             rowid = cursor.lastrowid or 0
 
-        # Update FTS index (asynchronous)
         await self._conn.execute(
             "INSERT INTO episodes_fts(rowid, content) VALUES (?, ?)", (rowid, content)
         )
@@ -274,7 +269,6 @@ class EpisodicMemory:
         if not rows:
             return []
 
-        # Computationally expensive operation - offloaded to thread pool under high load
         return await asyncio.to_thread(
             _extract_patterns,
             list(rows),  # pyright: ignore[reportArgumentType]
@@ -296,8 +290,6 @@ class EpisodicMemory:
 
     def _row_to_episode(self, row: tuple) -> Episode:
         """Map database raw row to Sovereign Episode Model."""
-        # Adjust indices based on your actual table schema
-        # Order: id, session_id, event_type, content, project, emotion, tags, meta, created_at
         return Episode(
             id=row[0],
             session_id=row[1],
@@ -324,7 +316,6 @@ class EpisodicMemory:
         return [self._row_to_episode(row) for row in rows]  # type: ignore[reportArgumentType]
 
 
-# ─── Pattern Detection (Advanced Algorithmic) ─────────────────────────
 
 
 def _extract_patterns(
@@ -336,21 +327,15 @@ def _extract_patterns(
     Extract multi-token recurring themes from episode rows.
     Supports Uni-grams and Bi-grams for technical context capture via Sliding Window O(N).
     """
-    # token -> set of session_ids
     token_sessions: dict[str, set[str]] = defaultdict(set)
-    # token -> event types
     token_types: dict[str, list[str]] = defaultdict(list)
-    # token -> samples
     token_samples: dict[str, list[str]] = defaultdict(list)
 
     for session_id, event_type, content in rows:
-        # 1. Uni-grams (Smarter filtering preserving order)
         tokens = _extract_tokens(content)
 
-        # 2. Bi-grams (Adjacent sliding window O(N))
         bigrams = {f"{tokens[i]} {tokens[i + 1]}" for i in range(len(tokens) - 1)}
 
-        # Merge all candidate themes
         for candidate in set(tokens) | bigrams:
             token_sessions[candidate].add(session_id)
             token_types[candidate].append(event_type)
@@ -375,7 +360,6 @@ def _extract_patterns(
                 )
             )
 
-    # Sort by 1. Occurrence frequency 2. Pattern complexity (bi-grams > uni-grams)
     patterns.sort(key=lambda p: (p.occurrences, " " in p.theme), reverse=True)
     return patterns[:limit]
 
@@ -384,5 +368,4 @@ def _extract_tokens(text: str) -> list[str]:
     """Sovereign tokenization: captures technical IDs, snake_case, and kebab-case.
     Preserves sequential order for $O(N)$ bigram construction."""
     raw = _TOKEN_RE.findall(text.lower())
-    # Filter by stop words and non-numeric noise
     return [t for t in raw if t not in _STOP_WORDS and not t.isdigit() and len(t) >= 4]

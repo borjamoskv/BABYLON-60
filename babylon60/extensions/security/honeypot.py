@@ -138,5 +138,4 @@ class HoneypotManager:
         return fact_hash in self._active_honeypots
 
 
-# Global Singleton
 HONEY_POT = HoneypotManager()

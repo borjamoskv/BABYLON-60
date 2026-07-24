@@ -86,7 +86,6 @@ def prove_range(value: int, min_val: int, max_val: int) -> ZKRangeProof:
             "Cannot construct honest proof."
         )
 
-    # Bit decomposition
     num_bits = max(1, (max_val).bit_length())
     bits = [(value >> i) & 1 for i in range(num_bits)]
     blindings = [os.urandom(_BLINDING_LENGTH) for _ in range(num_bits)]
@@ -96,8 +95,6 @@ def prove_range(value: int, min_val: int, max_val: int) -> ZKRangeProof:
     challenge = hashlib.sha256(
         b"zkortex:range:challenge:" + str(value).encode() + combined
     ).digest()
-    # En un Σ-protocol real: response = r + challenge * secret (mod order)
-    # Aquí usamos HMAC como aproximación honesta
     response = bytes_to_base60(hmaclib.new(challenge, combined, hashlib.sha256).digest())
 
     return ZKRangeProof(

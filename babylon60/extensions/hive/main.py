@@ -56,7 +56,6 @@ def get_hive_graph(
     conn = connect(DB_PATH, row_factory=sqlite3.Row)
 
     try:
-        # 1. Fetch recent/important nodes
         cursor = conn.execute(
             """
             SELECT id, content, project, fact_type, created_at
@@ -93,13 +92,9 @@ def get_hive_graph(
                 )
             )
 
-        # 2. Fetch edges (semantic connections)
-        # using vec_distance if available, or just random/temporal for now if no embeddings
-        # For this MVP, we will try to get connections from embeddings if possible.
 
         links = []
 
-        # Check if vectors exist
         try:
             vec_cursor = conn.execute("SELECT count(*) FROM fact_embeddings")
             has_vecs = vec_cursor.fetchone()[0] > 0
@@ -107,11 +102,7 @@ def get_hive_graph(
             has_vecs = False
 
         if has_vecs:
-            # Slow O(N^2) approach for MVP or use sqlite-vec knn on a subset
-            # Let's just link sequential items for now to ensure visualization works
-            # Real implementation needs optimized KNN query
 
-            # Simple temporal links for MVP 1.0
             prev_id = None
             for node in nodes:
                 if prev_id:

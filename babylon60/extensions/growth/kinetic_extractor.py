@@ -27,7 +27,6 @@ class KineticExtractor:
 
     def __init__(self, target_max_length: int = 280):
         self.target_max_length = target_max_length
-        # Purgamos padding phrases.
         self.anergy_stop_words = [
             "en conclusión",
             "como he dicho",
@@ -60,10 +59,8 @@ class KineticExtractor:
         length = len(text)
         entropy = calculate_shannon_entropy(text)
 
-        # Max theoretical entropy for language is ~5.0. Normalize to a 100 scale.
         base_score = min(100.0, (entropy / 5.0) * 100.0)
 
-        # Length thermodynamic boundaries
         if length > self.target_max_length:
             penalty = self.target_max_length / length
         elif length < 60:
@@ -81,18 +78,15 @@ class KineticExtractor:
         notes = []
 
         for p in paragraphs:
-            # Bypass Green Theater & Structural Noise (Headers, Lists, Comments, Code)
             if p.startswith(("```", "#", "<!--", "-", "*", ">")):
                 continue
 
-            # Filter low word-count fragments
             if len(p.split()) < 8:
                 continue
 
             purged = self._purge_anergy(p)
             density = self._evaluate_density(purged)
 
-            # Thermodynamic threshold and max length cap
             if density > 65.0 and len(purged) <= self.target_max_length * 1.5:
                 final_content = purged[: self.target_max_length]
                 notes.append(
@@ -103,7 +97,6 @@ class KineticExtractor:
                     )
                 )
 
-        # Sort by density (highest first)
         notes.sort(key=lambda n: n.shannon_entropy_score, reverse=True)
         logger.info("Extracted %d Exergy Notes from content.", len(notes))
         return notes
@@ -139,7 +132,6 @@ if __name__ == "__main__":
         from babylon60.engine.causal.taint_engine import generate_secure_taint_token
         from babylon60.guards.saga_contract import SagaWriteProposal
 
-        # 1. Identity Provisioning
         km = KeyManager(service_name="cortex_agent_keys")
         agent_id = "kinetic_extractor"
         priv_b64 = km.get_private_key_b64(agent_id)
@@ -160,7 +152,6 @@ if __name__ == "__main__":
                 if note.shannon_entropy_score < 75.0:
                     continue
 
-                # 2. SAGA Contract Validation (Local)
                 proposal = SagaWriteProposal(
                     tenant_id="borjamoskv",
                     project="growth_engine",
@@ -170,7 +161,6 @@ if __name__ == "__main__":
                     source=agent_id,
                 )
 
-                # 3. Taint Generation (Procedural attribution)
                 taint = generate_secure_taint_token(
                     agent_id=agent_id,
                     session_id="cli_session",
@@ -178,7 +168,6 @@ if __name__ == "__main__":
                     private_key_b64=priv_b64,
                 )
 
-                # 4. Ledger Audit Emission (Cryptographic hash-chain)
                 await ledger.log_action(
                     tenant_id="borjamoskv",
                     actor_role="extractor_daemon",
@@ -188,7 +177,6 @@ if __name__ == "__main__":
                     status="SUCCESS",
                 )
 
-                # 5. Atomic Disk Write (Safe)
                 safe_score = str(note.shannon_entropy_score).replace(".", "_")
                 filename = f"note_exergy_{safe_score}_{i}.md"
                 outpath = os.path.join(args.outdir, filename)
@@ -201,7 +189,6 @@ if __name__ == "__main__":
                     f.write(f"{note.content}\n")
                 saved_count += 1
 
-            # Await ledger queue flush
             await ledger.close()
             logging.getLogger(__name__).info(
                 f"[C5-REAL] Extracted, Tainted and Ledger-Audited {saved_count} High-Exergy Notes to {args.outdir}/"

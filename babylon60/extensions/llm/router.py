@@ -46,7 +46,6 @@ __all__ = [
 class CortexLLMRouter:
     """Enrutador resiliente con routing determinista por intención."""
 
-    # Default safety margin: keep prompts under 90% of model window.
     _CONTEXT_SAFETY_MARGIN: float = 0.90
     _COMPRESSED_TAIL_MESSAGES: int = 6
 
@@ -65,7 +64,6 @@ class CortexLLMRouter:
         self._hedging_providers = list(hedging_providers or [])
         self._cascade = CascadeManager(negative_ttl, positive_ttl)
         self._telemetry = CascadeTelemetry()
-        # Thermal Heat-Sink: coalesce identical inflight prompts (Ω₂)
         self._inflight: dict[str, asyncio.Future[Result[str, str]]] = {}
         self._evicted: set[str] = set()
 
@@ -100,7 +98,6 @@ class CortexLLMRouter:
 
     async def execute_resilient(self, prompt: CortexPrompt) -> Result[str, str]:
         """Ejecuta inferencia con cascade determinista por intención."""
-        # Dynamic threshold based on provider context window (Ω₁₃)
         model_window = getattr(self._primary, "context_window", 32000)
         max_words = int((model_window * self._CONTEXT_SAFETY_MARGIN) * 0.75)
 
@@ -110,7 +107,6 @@ class CortexLLMRouter:
             self._COMPRESSED_TAIL_MESSAGES,
         )
 
-        # Thermal Heat-Sink: coalesce identical concurrent requests (Ω₂)
         wm_hash = hash(tuple((m.get("role"), m.get("content")) for m in prompt.working_memory))
         prompt_key = str(
             hash(
@@ -152,7 +148,6 @@ class CortexLLMRouter:
     ) -> Result[str, str]:
         """Dispatch a prompt with optional provider override (hint) and Dynamic Cache Routing."""
         if not provider_hint and prompt.system_instruction:
-            # Implement Cache-Aware Routing (Zero-Recompute Policy)
             try:
                 from babylon60.extensions.swarm.kv_prefix_registry import get_kv_registry
 
@@ -176,7 +171,6 @@ class CortexLLMRouter:
         if not provider_hint or self._primary.provider_name == provider_hint:
             return await self.execute_resilient(prompt)
 
-        # Provider Hint: temporarily swap priority for this request
         for p in self._fallbacks:
             if p.provider_name == provider_hint:
                 logger.debug("🎯 [ROUTING] Overriding primary with hint: %s", provider_hint)
@@ -189,18 +183,15 @@ class CortexLLMRouter:
 
     async def _execute_resilient_impl(self, prompt: CortexPrompt) -> Result[str, str]:
         """Core cascade logic."""
-        # Phase 0.1: Parallel Swarm Racing (Ω₂₁)
         if prompt.swarm_mode:
             swarm_res = await self.execute_swarm(prompt)
             if swarm_res:
                 return swarm_res
 
-        # Phase 0.2: Standard Hedging (Parallel race-to-first)
         hedged_res = await self.execute_hedged(prompt)
         if hedged_res:
             return hedged_res
 
-        # Phase 1: Primary sequential attempt
         start = time.monotonic()
         primary_valid = True
 
@@ -208,7 +199,6 @@ class CortexLLMRouter:
         if reasoning_mode == ReasoningMode.ULTRA_THINK:
             tier = getattr(self._primary, "tier", None)
             if tier != "frontier":
-                # [LOCAL-INFERENCE-OMEGA] Bypass tier check if local autarchy is enforced
                 if getattr(self._primary, "provider_name", "") == "ollama":
                     pass
                 else:
@@ -245,7 +235,6 @@ class CortexLLMRouter:
                     f"Primary ({self._primary.provider_name}): Skipped (ULTRA_THINK requires frontier tier)"
                 )
 
-        # Phase 2: Fallback cascade
         fallbacks = self._ordered_fallbacks(prompt)
 
         is_fast_reject = False
@@ -255,7 +244,6 @@ class CortexLLMRouter:
             else ""
         )
         if not primary_valid:
-            # Primary was skipped, not a fast reject
             pass
         elif res_error and ("Fast-Reject" in res_error or "429" in res_error):
             is_fast_reject = True
@@ -270,7 +258,6 @@ class CortexLLMRouter:
                 continue
             valid_fallbacks.append(provider)
 
-        # Si el primario tuvo un Fast-Reject, corremos los fallbacks en paralelo (Zero-Wait tuning)
         if is_fast_reject and valid_fallbacks:
             logger.warning(
                 "🚀 [ZERO-WAIT FAILOVER] Primary Fast-Rejected. Racing %d fallbacks simultaneously...",
@@ -303,13 +290,11 @@ class CortexLLMRouter:
                 )
                 return Ok(hedged_res.response)
 
-            # If the race failed, all fallbacks failed
             for err in hedge_errors:
                 errors.append(err)
             for provider in valid_fallbacks:
                 self._cascade.set_nx_record(provider.provider_name)
         else:
-            # Fallback cascade secuencial tradicional
             for i, provider in enumerate(valid_fallbacks, start=2):
                 fb_start = time.monotonic()
                 res_fb = await self._try_provider(provider, prompt)
@@ -369,7 +354,6 @@ class CortexLLMRouter:
                     "🚀 [THERMODYNAMIC BOTTLENECK] Provider %s hit 429. Initiating Ultrathink backoff cycles...",
                     provider.provider_name,
                 )
-                # Ultrathink Cycles: Exponential backoff for 429 Too Many Requests
                 import asyncio
                 import random
 
@@ -405,8 +389,6 @@ class CortexLLMRouter:
                 self._evicted.add(provider.provider_name)
             return Err(str(exc))
         except Exception as exc:  # noqa: BLE001
-            # Catch CortexError and any other wrapped provider errors
-            # to prevent cascade bypass (P0 fix: HTTP 402/5xx propagation)
             if "HTTP 401" in str(exc) or "401" in str(exc) or "invalid_api_key" in str(exc):
                 logger.error(
                     "🚫 [EVICTION] Provider %s hit 401 Unauthorized. Evicting...",

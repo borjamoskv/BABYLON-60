@@ -27,9 +27,7 @@ class SemanticHeartbeat:
 
     def _hash_payload(self, payload: dict[str, Any]) -> str:
         """Serializes and hashes the health report."""
-        # Normalize: round floats to 1 decimal to avoid jitter
         normalized = {k: round(v, 1) if isinstance(v, float) else v for k, v in payload.items()}
-        # Handle load_average tuple
         if "load_average" in normalized:
             normalized["load_average"] = [round(x, 1) for x in normalized["load_average"]]  # type: ignore[union-attr]
 
@@ -51,11 +49,9 @@ class SemanticHeartbeat:
         if current_hash == self.last_entropy_hash:
             return 0.0
 
-        # Simple Hamming distance between hashes as proxy for asymmetry
         diff = sum(c1 != c2 for c1, c2 in zip(current_hash, self.last_entropy_hash, strict=False))
         drift = diff / len(current_hash)
 
-        # High-weight semantic triggers: if orphans appeared, bypass hash and spike drift
         if current_report.get("orphans", 0) > self.last_report.get("orphans", 0):
             drift = max(drift, 0.9)  # CRITICAL DRIFT
 

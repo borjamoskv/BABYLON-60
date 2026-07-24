@@ -1,8 +1,5 @@
 name: Verify Lean Proofs (C5-REAL)
 
-# Verificación mecánica del teorema causal (proof/lean/Babylon.lean).
-# `lake build` type-checkea cada prueba; si alguna no cierra, el job FALLA.
-# Anti-teatro: la corrección del teorema se demuestra en cada push, no se afirma.
 
 on:
   push:

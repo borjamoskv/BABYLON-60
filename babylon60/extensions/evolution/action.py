@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/action.py
 """
 ψSAP (Symbolic Action Principle) - Lagrangian Formalism for CORTEX.
 
@@ -30,22 +29,16 @@ class SymbolicActionState:
     domain: AgentDomain
     timestamp: float = field(default_factory=time.time)
 
-    # K_ψ(t): Coherence momentum (velocity of improvement)
     momentum: float = 0.0
 
-    # S_ψentropy(t): Entropic resistance / genetic drift pressure
     entropy_resistance: float = 0.0
 
-    # G_grace(t): Grace signal (intervention sum from strategies)
     grace: float = 0.0
 
-    # F_collapse(t): Failure potential (proximity to failing threshold)
     collapse_potential: float = 0.0
 
-    # L_ψ: The Symbolic Lagrangian
     lagrangian: float = 0.0
 
-    # S_ψ: Total Action Integral (accumulated over time)
     cumulative_action: float = 0.0
 
 
@@ -60,22 +53,14 @@ class SymbolicActionEngine:
     ) -> SymbolicActionState:
         """Compute the current L_ψ for an agent domain."""
 
-        # 1. Momentum K_ψ: Derived from fitness_delta (velocity of improvement)
-        # We also consider the change in fitness since the last cycle.
         momentum = max(0.0, metrics.fitness_delta)
 
-        # 2. Entropy Resistance S_ψ: Derived from ghost_density and error_rate
         entropy_res = (metrics.ghost_density * 5.0) + (metrics.error_rate * 3.0)
 
-        # 3. Collapse Potential F_collapse: Proximity to failure
-        # If health is 1.0, collapse is 0. If health is 0.0, collapse is high.
         collapse_pot = (1.0 - metrics.health_score) * 10.0
 
-        # 4. Grace G_grace: The sum of positive delta_fitness from current mutations
         grace = grace_injection
 
-        # 5. Calculation of L_ψ (Symbolic Lagrangian)
-        # L_ψ = K - S + G - F
         lagrangian = momentum - entropy_res + grace - collapse_pot
 
         state = SymbolicActionState(
@@ -87,14 +72,10 @@ class SymbolicActionEngine:
             lagrangian=lagrangian,
         )
 
-        # Update cumulative action
         history = self._history[agent.domain]
         if history:
             prev = history[-1]
             dt = state.timestamp - prev.timestamp
-            # Trapezoidal integration for the action integral
-            # Note: For simplicity in discrete cycles, we can just sum L * cycle_count
-            # but here we use a simple additive approach.
             state.cumulative_action = prev.cumulative_action + (lagrangian * dt)
         else:
             state.cumulative_action = lagrangian

@@ -14,7 +14,6 @@ logger = logging.getLogger(__name__)
 def get_orphaned_browsers():  # type: ignore
     """Identify orphaned ms-playwright-go processes."""
     try:
-        # /bin/ps aux | grep ms-playwright-go
         ps = subprocess.check_output(["/bin/ps", "aux"], text=True)
         orphans = [line for line in ps.split("\n") if "ms-playwright-go" in line and "grep" not in line]
         return orphans

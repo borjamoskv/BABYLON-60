@@ -36,7 +36,6 @@ class CompactionMonitor:
         """Helper to compact a single project's memory."""
         last_run = self._last_runs.get(project, 0)
 
-        # Enforce the sleep cycle interval
         if now - last_run < self.interval_seconds:
             return None
 
@@ -45,11 +44,9 @@ class CompactionMonitor:
 
             logger.info("Autonomous Compaction (REM Sleep) running on %s", project)
 
-            # Run the actual compaction directly using the injected engine
             result = compact(engine=self._engine, project=project, dry_run=False)
             self._last_runs[project] = now
 
-            # We only alert if there was actual garbage collected
             if result.reduction > 0 or result.deprecated_ids:  # type: ignore[reportAttributeAccessIssue]
                 return CompactionAlert(
                     project=project,

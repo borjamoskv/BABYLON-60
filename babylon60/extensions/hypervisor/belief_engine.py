@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX Hypervisor - Belief Engine.
 
@@ -50,7 +46,6 @@ class BeliefEngine:
             project="my-project",
         )
         if verdict.action == VerdictAction.QUARANTINE:
-            # Handle contradiction
             ...
     """
 
@@ -72,10 +67,8 @@ class BeliefEngine:
         self._handoff = handoff
         self._max_context = max_context_beliefs
 
-        # In-memory belief cache (project → beliefs)
         self._cache: dict[str, list[BeliefObject]] = {}
 
-    # ─── Public API ─────────────────────────────────────────────────────
 
     async def evaluate_incoming(
         self,
@@ -100,7 +93,6 @@ class BeliefEngine:
         Returns:
             BeliefVerdict with action and reasoning.
         """
-        # Build candidate belief
 
         prov_kwargs = (
             {
@@ -120,10 +112,8 @@ class BeliefEngine:
             provenance=provenance,
         )
 
-        # Load existing beliefs as context
         context = await self._load_context(project, tenant_id)
 
-        # Route through CognitiveHandoff
         if self._handoff is None:
             logger.warning("No CognitiveHandoff configured - auto-accepting belief")
             return BeliefVerdict(
@@ -134,11 +124,9 @@ class BeliefEngine:
 
         verdict = await self._handoff.process_belief(candidate, context)
 
-        # Handle quarantine - persist the quarantine state
         if verdict.action == VerdictAction.QUARANTINE:
             await self._quarantine_belief(candidate, verdict)
 
-            # Epistemic Slashing (Axiom Ω₃) - Punish source if Supreme Court (Opus/Fable) confirmed quarantine
             has_source = bool(candidate.provenance.was_generated_by)
             if (
                 verdict.model in ("opus", "fable", "architect", "o1-preview", "o1-mini")
@@ -176,7 +164,6 @@ class BeliefEngine:
                 except Exception as exc:  # noqa: BLE001
                     logger.error("Failed to execute Epistemic Slashing: %s", exc)
 
-        # Handle accept - persist the belief
         elif verdict.action == VerdictAction.ACCEPT:
             await self._persist_belief(candidate)
 
@@ -217,7 +204,6 @@ class BeliefEngine:
         """
         return await self._load_context(project, tenant_id)
 
-    # ─── Internal ───────────────────────────────────────────────────────
 
     async def _load_context(
         self,
@@ -237,7 +223,6 @@ class BeliefEngine:
         if self._engine is None:
             return []
 
-        # Query existing beliefs from the engine
         try:
             facts = await self._engine.recall(
                 project=project,
@@ -299,13 +284,9 @@ class BeliefEngine:
                 confidence=quarantined.confidence_score,
             )
 
-        # Invalidate cache
         cache_key = f"{quarantined.tenant_id}:{quarantined.project}"
         self._cache.pop(cache_key, None)
 
-        # Trigger Cascading Quarantine (O(1) Graph Orphan) for dependencies
-        # Do not cascade if the verdict model is 'system_cascade' to avoid infinite loops
-        # from cyclical dependencies (though they shouldn't exist).
         if verdict.model != "system_cascade":
             await self._cascade_quarantine(
                 root_id=quarantined.id,
@@ -322,8 +303,6 @@ class BeliefEngine:
         reason: str,
     ) -> None:
         """Recursively quarantine any active beliefs that depend on the root_id (Graph Orphan)."""
-        # Load all current beliefs in the graph UNBOUNDED to prevent Silent Epistemic Corruption (P0)
-        # Avoid _load_context which is bounded by _max_context.
         if self._engine is None:
             return
 
@@ -335,7 +314,6 @@ class BeliefEngine:
                 fact_type="belief",
             )
 
-            # Construct BeliefObjects
             context = []
             for fact in facts:
                 meta = fact.meta if hasattr(fact, "meta") else fact.get("meta", {})
@@ -359,7 +337,6 @@ class BeliefEngine:
                     reason=f"Cascading Quarantine: Dependent root belief {root_id} collapsed. Root cause: {reason}",
                 )
                 await self._quarantine_belief(b, cascade_verdict)
-                # Recursive topological sweep for beliefs depending on this newly quarantined belief
                 await self._cascade_quarantine(b.id, project, tenant_id, reason)
 
     async def _persist_belief(self, belief: BeliefObject) -> None:
@@ -374,7 +351,6 @@ class BeliefEngine:
                 confidence=belief.confidence_score,
             )
 
-        # Update cache
         cache_key = f"{belief.tenant_id}:{belief.project}"
         if cache_key not in self._cache:
             self._cache[cache_key] = []

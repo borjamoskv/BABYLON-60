@@ -45,9 +45,6 @@ class PreVoteResult:
         return (self.granted + 1) >= needed
 
 
-# ─── In-Process Node Registry ─────────────────────────────────────────────────
-# Shared dict mapping node_id → RaftNode for same-process clusters.
-# For multi-process clusters, replace RequestVote with HTTP/gRPC calls.
 
 
 class NodeRegistry:
@@ -77,7 +74,6 @@ class NodeRegistry:
         cls._nodes.clear()
 
 
-# ─── RaftNode ─────────────────────────────────────────────────────────────────
 
 
 class RaftNode:
@@ -92,9 +88,6 @@ class RaftNode:
     ELECTION_TIMEOUT_MIN = 1.5  # seconds (tightened from 3.0 for faster convergence)
     ELECTION_TIMEOUT_MAX = 3.0  # seconds
 
-    # Pre-vote phase (Ongaro §9.6): candidate probes peers BEFORE
-    # incrementing current_term. Eliminates term inflation caused by
-    # partitioned nodes looping through elections with no quorum.
     PRE_VOTE_ENABLED = True
 
     def __init__(
@@ -140,7 +133,6 @@ class RaftNode:
                     await task
                 except Exception as exc:  # noqa: BLE001
                     logger.warning("Suppressed exception: %s", exc)
-        # Expected - do NOT re-raise during shutdown
         self._election_task = None
         self._heartbeat_task = None
         NodeRegistry.deregister(self.node_id)
@@ -165,7 +157,6 @@ class RaftNode:
                     self._heartbeat_event.wait(),
                     timeout=timeout,
                 )
-                # Heartbeat received - reset loop
             except asyncio.TimeoutError:
                 if self._heartbeat_event.is_set():
                     continue
@@ -177,7 +168,6 @@ class RaftNode:
                     timeout,
                     self.current_term + 1,
                 )
-                # Acquire lock only for the initial role transition, then release.
                 should_elect = False
                 async with self._role_lock:
                     if self.role == NodeRole.FOLLOWER:
@@ -237,7 +227,6 @@ class RaftNode:
             if hypothetical_term < self.current_term:
                 return False
 
-            # Only grant if we also think the leader might be dead
             elapsed = time.monotonic() - self.last_heartbeat
             leader_alive = elapsed < self.ELECTION_TIMEOUT_MIN
             if leader_alive:
@@ -257,7 +246,6 @@ class RaftNode:
         Must be called WITHOUT holding _role_lock.
         _role_lock is acquired atomically per-transition, then released.
         """
-        # ─── Pre-vote gate ─────────────────────────────────────────────────
         if self.PRE_VOTE_ENABLED and self.peers:
             pre = await self._pre_vote()
             if not pre.quorum_reachable:
@@ -274,7 +262,6 @@ class RaftNode:
                 pre.total,
             )
 
-        # ─── Atomic transition to CANDIDATE ────────────────────────────────
         async with self._role_lock:
             if self.role != NodeRole.FOLLOWER:
                 return  # Already mutated by another path
@@ -283,7 +270,6 @@ class RaftNode:
             self.voted_for = self.node_id
             self.last_heartbeat = time.monotonic()
             term = self.current_term
-        # Lock released - RPCs happen without holding it
         logger.info(
             "Node %s starting election for term %d (peers=%s)",
             self.node_id,
@@ -292,18 +278,15 @@ class RaftNode:
         )
 
         if not self.peers:
-            # Single-node cluster: win immediately
             logger.info("No peers. Self-electing as LEADER.")
             await self._become_leader()
             return
 
-        # ─── RequestVote RPC ───────────────────────────────────────────────
         votes_received = 1  # Self-vote counts
         majority = (len(self.peers) + 1) // 2 + 1  # +1 for self
 
         vote_tasks = [asyncio.create_task(self._request_vote(peer, term)) for peer in self.peers]
 
-        # Race for majority within one election timeout window
         vote_timeout = _rng.uniform(self.ELECTION_TIMEOUT_MIN, self.ELECTION_TIMEOUT_MAX)
 
         try:
@@ -328,7 +311,6 @@ class RaftNode:
             except Exception as exc:  # noqa: BLE001
                 logger.debug("Vote request failed: %s", exc)
 
-        # If term changed while we were voting (split-brain / higher term), abort
         if self.current_term != term or self.role != NodeRole.CANDIDATE:
             logger.info("Election aborted for term %d: term changed or role mutated.", term)
             return
@@ -344,7 +326,6 @@ class RaftNode:
         if votes_received >= majority:
             await self._become_leader()
         else:
-            # Didn't win - revert to FOLLOWER and wait for next timeout
             async with self._role_lock:
                 self.role = NodeRole.FOLLOWER
             logger.info(
@@ -361,7 +342,6 @@ class RaftNode:
         """
         peer = NodeRegistry.get(peer_id)
         if peer is None:
-            # Peer not in registry - could be remote (stub: assume no vote)
             logger.debug("Peer %s not in NodeRegistry. Skipping vote.", peer_id)
             return False
 
@@ -386,7 +366,6 @@ class RaftNode:
           - We haven't voted in this term yet (or already voted for this candidate)
         """
         async with self._role_lock:
-            # Higher term: update our term and revert to FOLLOWER
             if candidate_term > self.current_term:
                 self.current_term = candidate_term
                 self.voted_for = None
@@ -411,7 +390,6 @@ class RaftNode:
                 )
                 return False
 
-            # Grant vote
             self.voted_for = candidate_id
             self.last_heartbeat = time.monotonic()
             self._heartbeat_event.set()  # Reset election timer on this node too

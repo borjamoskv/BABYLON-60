@@ -51,14 +51,12 @@ class GenomicEvaluationEngine:
         if not isinstance(variants, list):
             raise TypeError("[C5-FAIL] Variants must be provided as a list.")
 
-        # Filter for somatic coding SNVs / INDELs
         coding_muts = [v for v in variants if v.variant_type in ("SNV", "INDEL") and v.quality >= 30.0]
         total_muts = len(coding_muts)
         tmb_score = float(total_muts) / float(target_region_mb)
 
         status = "TMB-High" if tmb_score >= 10.0 else "TMB-Low"
 
-        # Poisson 95% CI approximation: lambda +/- 1.96 * sqrt(lambda) scaled by target region
         std_err = math.sqrt(float(total_muts)) / float(target_region_mb) if total_muts > 0 else 0.0
         ci_low = max(0.0, tmb_score - 1.96 * std_err)
         ci_high = tmb_score + 1.96 * std_err
@@ -109,7 +107,6 @@ class GenomicEvaluationEngine:
             elif "trinucleotide_context" in v.metadata:
                 motif = str(v.metadata["trinucleotide_context"]).upper()
             else:
-                # Fallback check if alt allele is C->T or C->G and metadata flags APOBEC
                 if (v.ref_allele == "C" and v.alt_allele in ("T", "G")) or (
                     v.ref_allele == "G" and v.alt_allele in ("A", "C")
                 ):
@@ -124,7 +121,6 @@ class GenomicEvaluationEngine:
                 if v.ref_allele == "G" and v.alt_allele in ("A", "C"):
                     tcw_muts += 1
 
-        # Enrichment ratio calculation: observed fraction of TCW mutations relative to expected random baseline (~16%)
         observed_fraction = float(tcw_muts) / float(total_snvs)
         enrichment_score = observed_fraction / 0.16 if total_snvs >= 5 else 0.0
         is_driven = enrichment_score >= 2.0 and tcw_muts >= 3
@@ -150,7 +146,6 @@ class GenomicEvaluationEngine:
             raise ValueError(f"[C5-FAIL] Invalid LOH regions: loh_events={loh_events}, total_regions={total_regions}")
 
         loh_fraction = float(loh_events) / float(total_regions)
-        # HRD score proxy scaled from LOH events, telomeric allelic imbalance, and large scale transitions
         hrd_score = float(loh_events) * 2.8 + (10.0 if wgd_detected else 0.0)
         status = "HRD-Positive" if hrd_score >= 42.0 or loh_events >= 15 else "HRD-Negative"
 
@@ -180,7 +175,6 @@ class GenomicEvaluationEngine:
         if not isinstance(rna_fold_change, (int, float)) or rna_fold_change < 0.0:
             raise ValueError(f"[C5-FAIL] RNA fold change must be non-negative, got: {rna_fold_change}")
 
-        # Transcriptional leverage: efficiency of oncogene overexpression per gene copy
         leverage = float(rna_fold_change) / float(copy_number) if copy_number > 1 else float(rna_fold_change)
         if circular_confirmed:
             leverage *= 1.35  # Enhancer hijacking / open chromatin boost in ecDNA circular topology

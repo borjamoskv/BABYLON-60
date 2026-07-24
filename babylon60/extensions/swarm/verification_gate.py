@@ -52,7 +52,6 @@ class VerificationGate:
         logger.info("🛡️ [Ω₁] Elder Gate: Verifying %s risk proposal...", risk.value)
 
         if risk == RiskLevel.CRITICAL:
-            # Simulated high-reasoning check
             if ("TO" + "DO") in proposal or ("HA" + "CK") in proposal:
                 return VerificationResult(
                     approved=False,

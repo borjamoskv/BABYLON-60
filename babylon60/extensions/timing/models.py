@@ -13,10 +13,8 @@ __all__ = [
     "classify_entity",
 ]
 
-# ─── Activity Classification ─────────────────────────────────────────
 
 CATEGORY_MAP: dict[str, str] = {
-    # Coding
     ".py": "coding",
     ".js": "coding",
     ".ts": "coding",
@@ -42,7 +40,6 @@ CATEGORY_MAP: dict[str, str] = {
     ".sql": "coding",
     ".sh": "coding",
     ".bash": "coding",
-    # Docs
     ".md": "docs",
     ".txt": "docs",
     ".rst": "docs",
@@ -50,7 +47,6 @@ CATEGORY_MAP: dict[str, str] = {
     ".pdf": "docs",
     ".doc": "docs",
     ".docx": "docs",
-    # Config
     ".json": "coding",
     ".yaml": "coding",
     ".yml": "coding",
@@ -100,7 +96,6 @@ def classify_entity(entity: str) -> str:
     return "other"
 
 
-# ─── Data Classes ─────────────────────────────────────────────────────
 
 
 @dataclass

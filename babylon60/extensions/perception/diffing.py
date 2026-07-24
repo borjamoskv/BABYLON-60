@@ -16,9 +16,7 @@ from typing import Final
 
 logger = logging.getLogger("babylon60_extensions.perception.diffing")
 
-# Maximum size of a file to perform diffing on (100KB default to prevent OOM)
 MAX_DIFF_SIZE_BYTES: Final[int] = 100 * 1024
-# Maximum number of lines to keep in a diff to avoid token bloat
 MAX_DIFF_LINES: Final[int] = 50
 
 
@@ -42,7 +40,6 @@ class DiffManager:
                 del self._shadow[path]
             return None
 
-        # Check size before reading
         try:
             if p.stat().st_size > MAX_DIFF_SIZE_BYTES:
                 logger.debug("Skipping diff for large file: %s", path)
@@ -63,13 +60,11 @@ class DiffManager:
         self._shadow[path] = new_lines
 
         if old_lines is None:
-            # New file or first time seeing it
             return None
 
         if old_lines == new_lines:
             return ""
 
-        # Generate unified diff
         diff_gen = difflib.unified_diff(
             old_lines,
             new_lines,
@@ -83,7 +78,6 @@ class DiffManager:
         if not diff_list:
             return ""
 
-        # Trim diff to avoid context window bloat
         if len(diff_list) > MAX_DIFF_LINES:
             diff_list = diff_list[:MAX_DIFF_LINES] + ["... (diff truncated)"]
 

@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Scavenger Tactical Suite Core.
 
 Implements the 4-valve pipeline (Tox-Vision, Cadastral-Radar, Negotiator, Heavy-Geo)
@@ -76,7 +75,6 @@ def valve_tox_vision(material_type: str, container_labels: list[str]) -> bool:
 
 def valve_cadastral_radar(lat: float, lon: float) -> dict[str, Any]:
     """Válvula 2: Riesgo Legal (Catastro/Zoning Open Data)."""
-    # Mocking cadastral response for deterministic typing.
     zone_type = ZoneClassification.ABANDONED_PUBLIC
     owner = None
 
@@ -140,7 +138,6 @@ class ScavengerAgent:
 
     async def ingest_observation(self, obs: Observation) -> None:
         """Process a field observation through the pipeline."""
-        # 1. Tox-Vision
         if not valve_tox_vision(obs.raw_text, obs.labels):
             await self._emit_event(
                 "system",
@@ -149,7 +146,6 @@ class ScavengerAgent:
             )
             return
 
-        # 2. Cadastral (Dummy coordinates)
         legal_status = valve_cadastral_radar(0.0, 0.0)
         if not legal_status["clear"]:
             await self._emit_event(
@@ -159,12 +155,10 @@ class ScavengerAgent:
             )
             return
 
-        # 3. Handle negotiation
         req_nego = legal_status.get("requires_negotiation", False)
         owner = legal_status.get("owner")
         final_price = valve_scrap_negotiator(obs.raw_text, owner, 0.0) if req_nego else 0.0
 
-        # 4. Dispatch Logistics (Dummy mass)
         plan = valve_geo_logistics(item_mass_tons=1.5, lat=0.0, lon=0.0)
 
         await self._emit_event(

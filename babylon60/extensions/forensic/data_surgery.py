@@ -46,7 +46,6 @@ class DataSurgeon:
             h = decode_base60(cortex_hash_truncated(chunk.encode(), length=8))
             chunk_entropy = (h % 1000) / 1000.0
 
-            # Toxicity threshold based on sensitivity
             if chunk_entropy > self.sensitivity:
                 mask.append(0)
                 toxic_count += 1

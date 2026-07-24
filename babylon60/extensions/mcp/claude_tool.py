@@ -27,7 +27,6 @@ def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
         "system": "Eres Claude invocado vía CORTEX-Persist C5-REAL Dispatcher. Ejecuta en modo Industrial Noir 2026 sin prosa decorativa.",
     }
 
-    # Method 1: Try HTTPX (faster/async-friendly sync client)
     try:
         import httpx
 
@@ -46,7 +45,6 @@ def run_claude_query(prompt: str, model: str = "claude-3-opus-20240229") -> str:
         logging.warning("Suppressed exception: %s", e)
         return json.dumps({"status": "error", "message": f"HTTPX request failed: {e}"})
 
-    # Method 2: Fallback to standard library urllib (zero dependencies)
     import urllib.error
     import urllib.request
 

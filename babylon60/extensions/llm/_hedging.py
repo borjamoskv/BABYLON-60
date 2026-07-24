@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX LLM Router - Hedged Request Strategy.
 
@@ -79,7 +75,6 @@ class HedgedRequestStrategy:
                         )
                         continue
 
-                    # Winner - capture latency, cancel remaining
                     latency_ms = (time.monotonic() - start) * 1000
                     cancelled_names: list[str] = []
                     for loser in pending:
@@ -100,7 +95,6 @@ class HedgedRequestStrategy:
                     )
                     return result, []
 
-            # All tasks completed with errors
             return None, errors
 
         except asyncio.CancelledError:
@@ -109,12 +103,9 @@ class HedgedRequestStrategy:
             errors.append(f"Hedging infrastructure: {exc}")
             return None, errors
         finally:
-            # Guaranteed cleanup using the immutable snapshot (Ω₃ Byzantine Default)
-            # `pending` may have been reassigned mid-loop - all_tasks is the safe ref
             for t in all_tasks:
                 if not t.done():
                     t.cancel()
-            # Suppress ResourceWarnings from cancelled tasks
             for t in all_tasks:
                 if not t.done():
                     try:

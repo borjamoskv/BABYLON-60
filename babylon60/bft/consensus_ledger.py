@@ -1,5 +1,4 @@
 # [C5-REAL] BFT consensus ledger — votos Ed25519 reales, conexión INV_BFT_02, auditoría sin necrosis.
-# Génesis ITERA-2: CENT-06 (conexión directa divergente), CENT-14 (replace no-op),
 # INV_C5_04 (verificador mock = teatro de consenso), INV_C5_07 (SIGKILL en audit).
 from __future__ import annotations
 

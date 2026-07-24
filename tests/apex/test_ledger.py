@@ -63,7 +63,6 @@ def test_tamper_detection(tmp_path) -> None:  # type: ignore
         led.append(_payload(20), "agent:t1")
         assert led.verify_chain().valid
 
-    # Corrupt a stored payload directly (attacker with filesystem access).
     conn = sqlite3.connect(db)
     conn.execute("DROP TRIGGER IF EXISTS trg_ledger_immutable_update;")
     conn.execute("UPDATE ledger_entries SET payload_json = ? WHERE seq = 1;", ('{"score":9999}',))

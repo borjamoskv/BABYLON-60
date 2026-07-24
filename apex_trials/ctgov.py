@@ -33,8 +33,6 @@ V2_BASE = "https://clinicaltrials.gov/api/v2"
 INT_BASE = "https://clinicaltrials.gov/api/int"
 USER_AGENT = "apex-trials/0.1 (+moskv://cortex-persist)"
 
-# moduleLabels emitted by the history API, partitioned by regulatory weight.
-# Vocabulary verified empirically against a 48-study sample (see labels probe).
 SUBSTANTIVE_MODULES: frozenset[str] = frozenset(
     {
         "Study Design",
@@ -59,8 +57,6 @@ ADMINISTRATIVE_MODULES: frozenset[str] = frozenset(
         "Recruitment Status",
     }
 )
-# Results-reporting sections: posted AFTER completion, not protocol amendments.
-# Excluded from both amendment and admin counts.
 RESULTS_MODULES: frozenset[str] = frozenset(
     {
         "Baseline Characteristics",
@@ -148,7 +144,6 @@ class CtGovClient:
             time.sleep(0.4 * (2 ** (attempt - 1)))
         raise CtGovError(f"Failed after {self.retries} attempts: {url} ({last_err})")
 
-    # -- v2 study records --------------------------------------------------------
     def get_study(self, nct_id: str) -> dict[str, Any]:
         nct = nct_id.strip().upper()
         return self._fetch(f"{V2_BASE}/studies/{urllib.parse.quote(nct)}")
@@ -177,7 +172,6 @@ class CtGovClient:
         data = self._fetch(url)
         return list(data.get("studies", []))
 
-    # -- internal history plane --------------------------------------------------
     def get_history(self, nct_id: str) -> dict[str, Any]:
         nct = nct_id.strip().upper()
         return self._fetch(f"{INT_BASE}/studies/{urllib.parse.quote(nct)}/history")
@@ -244,7 +238,6 @@ def classify_history(nct_id: str, history: dict[str, Any]) -> AmendmentHistory:
                 substantive_dates.append(date)
         elif is_administrative:
             n_administrative += 1
-        # else: results-only version -> not counted as a protocol amendment
 
     return AmendmentHistory(
         nct_id=nct_id,

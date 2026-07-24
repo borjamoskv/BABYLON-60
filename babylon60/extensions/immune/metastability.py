@@ -20,8 +20,6 @@ __all__ = [
 
 logger = logging.getLogger("babylon60_extensions.immune.metastability")
 
-# ── Heuristic weights ────────────────────────────────────────────────
-# Sum to 1.0. Each signal contributes independently.
 
 _W_COVERAGE = 0.30
 _W_SINGLE_POINT = 0.20
@@ -29,7 +27,6 @@ _W_UNTESTED_FALLBACK = 0.20
 _W_IMPLICIT_CONFIG = 0.15
 _W_SILENT_FAILURE = 0.15
 
-# Threshold: score ≥ 0.45 → fragile metastable state
 _FRAGILE_THRESHOLD = 0.45
 _CONFIDENCE_PENALTY = 0.2
 

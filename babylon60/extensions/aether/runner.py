@@ -45,7 +45,6 @@ class AetherAgent:
         self._allowed_tools: list[str] | None = None
         if agent_id:
             registry = AgentCatalogLoader()
-            # Ensure registries are loaded (safe to call multiple times)
             registry.load_all()
             if agent_def := registry.get(agent_id):
                 system_prompt = agent_def.system_prompt
@@ -67,12 +66,10 @@ class AetherAgent:
         except FileNotFoundError as e:
             return await self._fail(task, queue, str(e))
 
-        # ── 0. Create branch ──────────────────────────────────────────
         branch_result = toolkit.git_create_branch(branch)
         logger.info("Branch: %s", branch_result)
         queue.update(task.id, branch=branch)
 
-        # ── 1. Plan ───────────────────────────────────────────────────
         queue.update(task.id, status=TaskStatus.PLANNING)
         logger.info("🧠 Planning...")
         try:
@@ -82,7 +79,6 @@ class AetherAgent:
         except (ValueError, TypeError, OSError, KeyError) as e:
             return await self._fail(task, queue, f"Planner error: {e}")
 
-        # ── 1.5 Ω₆ Siege-Verification (Pathogen Matching) ─────────────
         if plan.repro_test:
             logger.info("🔬 [Ω₆] Identified pathogen: %s", plan.repro_test)
             logger.info("     Verifying pathogen existence and failure before execution...")
@@ -96,13 +92,11 @@ class AetherAgent:
                     "passed/not verified. Hallucinated repair averted.",
                 )
 
-        # ── 2. Execute (with Critic retry) ────────────────────────────
         queue.update(task.id, status=TaskStatus.EXECUTING)
         execute_result = ""
         for attempt in range(_MAX_EXECUTOR_RETRIES + 1):
             logger.info("⚙️  Executing (attempt %d)...", attempt + 1)
             try:
-                # If Ω₆ is active, we can tell the executor to focus on repro first
                 instruction = task.description
                 if attempt == 0 and plan.repro_test:
                     instruction = (
@@ -115,7 +109,6 @@ class AetherAgent:
             except (ValueError, TypeError, OSError, KeyError) as e:
                 return await self._fail(task, queue, f"Executor error: {e}")
 
-            # ── 3. Critique ───────────────────────────────────────────
             queue.update(task.id, status=TaskStatus.CRITIQUING)
             logger.info("🔍 Critiquing...")
             try:
@@ -133,7 +126,6 @@ class AetherAgent:
                 "; ".join(critique.issues),
             )
             if attempt < _MAX_EXECUTOR_RETRIES:
-                # Feed critic feedback back as a new description
                 fix_desc = (
                     f"ORIGINAL TASK: {task.description}\n\n"
                     f"CRITIC ISSUES TO FIX:\n"
@@ -143,7 +135,6 @@ class AetherAgent:
                 task.description = fix_desc
                 queue.update(task.id, status=TaskStatus.EXECUTING)
 
-        # ── 4. Test ───────────────────────────────────────────────────
         queue.update(task.id, status=TaskStatus.TESTING)
         logger.info("🧪 Testing...")
         try:
@@ -157,17 +148,14 @@ class AetherAgent:
 
         if test_result and not test_result.passed:
             logger.warning("❌ Tests failed:\n%s", test_result.output[:500])
-            # Non-blocking: we still deliver the branch, but flag in result
             result_msg = f"{execute_result}\n\n⚠️  TESTS FAILED:\n{test_result.output[:1000]}"
         else:
             result_msg = execute_result
 
-        # ── 5. Final commit (if not already committed) ─────────────────
         diff = toolkit.git_diff()
         if diff.strip() and not diff.startswith("[ERROR]"):
             toolkit.git_commit(f"aether({task.id}): {task.title[:60]}")
 
-        # ── 6. Done ───────────────────────────────────────────────────
         queue.update(
             task.id,
             status=TaskStatus.DONE,
@@ -175,10 +163,8 @@ class AetherAgent:
             branch=branch,
         )
 
-        # CORTEX persistence
         await self._persist_to_cortex(task, result_msg)
 
-        # macOS notification
         await self._notify(f"Aether ✅ [{task.id}]", task.title)
 
         logger.info("🎉 Task [%s] DONE on branch %s", task.id, branch)
@@ -193,7 +179,6 @@ class AetherAgent:
         """Synchronous wrapper for use in daemon threads."""
         return asyncio.run(self.run_task(task, queue))
 
-    # ── Private helpers ────────────────────────────────────────────────
 
     async def _fail(self, task: AgentTask, queue: TaskQueue, error: str) -> AgentTask:
         logger.error("❌ Task [%s] FAILED: %s", task.id, error)
@@ -224,7 +209,6 @@ class AetherAgent:
                 stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.PIPE,
             )
-            # Fire and forget / bounded wait
             await asyncio.wait_for(proc.communicate(), timeout=10.0)
         except (asyncio.TimeoutError, OSError) as e:
             logger.debug("CORTEX persist failed: %s", e)

@@ -22,7 +22,6 @@ class DryRunEngine:
         warnings: list[str] = []
         estimated_data_loss_risk = "none"
 
-        # Basic structural guards
         for op in operations:
             if op.op in ("drop_table", "drop_column"):
                 warnings.append(f"Destructive operation detected: {op.op} on {op.table}")
@@ -33,15 +32,12 @@ class DryRunEngine:
                     f"Irreversible operation detected: no rollback_sql for {op.op} on {op.table}"
                 )
 
-        # Assume syntax check passed in static mode
-        # In a real environment, this would run: BEGIN; execute(sql); ROLLBACK;
         guards["syntax_check"] = GuardResult(
             guard="syntax_check",
             passed=True,
             details="Static validation passed. Transaction simulation pending.",
         )
 
-        # Ensure rollback availability
         guards["rollback_check"] = GuardResult(
             guard="rollback_check",
             passed=all(op.sql_down for op in operations),

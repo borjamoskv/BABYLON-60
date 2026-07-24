@@ -7,8 +7,6 @@ Orchestrates aesthetic embeddings and thermodynamic artifact metrics using sqlit
 import sqlite3
 import struct
 
-# Taint Engine and Ledger dependencies might be injected here per BABYLON-60 architecture
-# For structural isolation, we define the causal logic locally.
 
 
 class ArtistCortexEngine:
@@ -22,12 +20,10 @@ class ArtistCortexEngine:
         if hasattr(self.conn, "enable_load_extension"):
             self.conn.enable_load_extension(True)
         try:
-            # Requires sqlite-vec to be installed on the system paths
             import sqlite_vec
 
             sqlite_vec.load(self.conn)
         except ImportError:
-            # Fallback or strict error depending on env
             pass
         self.conn.row_factory = sqlite3.Row
 
@@ -46,7 +42,6 @@ class ArtistCortexEngine:
         Calculates Exergy metrics based on execution friction and output confidence.
         """
         friction_ms = t1_ms - t0_ms
-        # Heuristic causal mappings
         originality_raw = min(1.0, max(0.0, input_entropy * 1.2))
         attention_yield = min(1.0, max(0.0, model_confidence * 0.9))
 
@@ -80,7 +75,6 @@ class ArtistCortexEngine:
 
         cursor = self.conn.cursor()
 
-        # 1. Insert Artifact
         cursor.execute(
             """
             INSERT INTO cortex_artifacts (
@@ -102,7 +96,6 @@ class ArtistCortexEngine:
 
         artifact_id = cursor.lastrowid
 
-        # 2. Insert Embedding Mapping
         embedding_key = f"emb_{artifact_key}"
         cursor.execute(
             """
@@ -113,7 +106,6 @@ class ArtistCortexEngine:
             (artifact_id, embedding_key, "default-1536", len(vector_1536)),
         )
 
-        # 3. Write to sqlite-vec vec0 Virtual Table
         binary_emb = self.serialize_embedding(vector_1536)
         cursor.execute(
             """
@@ -137,7 +129,6 @@ class ArtistCortexEngine:
         """
         cursor = self.conn.cursor()
 
-        # Identify low-exergy artifacts
         cursor.execute(
             """
             SELECT id FROM cortex_artifacts
@@ -153,17 +144,14 @@ class ArtistCortexEngine:
         artifact_ids = [row["id"] for row in rows]
         placeholders = ",".join("?" for _ in artifact_ids)
 
-        # 1. Purge from vec0 (VEC-0 integrity invariant)
         cursor.execute(
             f"DELETE FROM cortex_embeddings WHERE rowid IN ({placeholders})", artifact_ids
         )
 
-        # 2. Purge from embedding map
         cursor.execute(
             f"DELETE FROM cortex_embedding_map WHERE artifact_id IN ({placeholders})", artifact_ids
         )
 
-        # 3. Purge from artifacts
         cursor.execute(f"DELETE FROM cortex_artifacts WHERE id IN ({placeholders})", artifact_ids)
 
         self.conn.commit()

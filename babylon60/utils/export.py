@@ -51,7 +51,6 @@ def _export_notebooklm(facts: list[Fact]) -> str:
     import time
     from datetime import datetime, timezone
 
-    # Group by project
     projects: dict[str, list[Fact]] = {}
     for f in facts:
         if f.project not in projects:
@@ -64,7 +63,6 @@ def _export_notebooklm(facts: list[Fact]) -> str:
     for project, p_facts in sorted(projects.items()):
         lines.append(f"## Domain: {project.upper()}\n")
 
-        # Group by type within project
         types: dict[str, list[Fact]] = {}
         for f in p_facts:
             t = f.fact_type or "general"
@@ -109,7 +107,6 @@ def _export_csv(facts: list[Fact]) -> str:
 
     for f in facts:
         d = f.to_dict()
-        # Flatten tags list to semicolon-separated string
         d["tags"] = ";".join(d.get("tags", []))
         writer.writerow({k: d.get(k, "") for k in fieldnames})
 

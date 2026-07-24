@@ -31,7 +31,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.ui_control.maestro")
 
-# Constantes de reintentos
 MAX_RETRIES = 3
 RETRY_DELAY = 0.5  # segundos
 
@@ -52,7 +51,6 @@ class MaestroUI:
         self.window = WindowEngine(engine)
         self.vision = VisionEngine(engine)
 
-    # ─── Utilidades ─────────────────────────────────────────────
 
     async def _retry(
         self,
@@ -77,7 +75,6 @@ class MaestroUI:
         )
 
     def __getattr__(self, name: str) -> Any:
-        # Mapping for renamed methods in legacy facade
         aliases = {
             "move_window": (self.window, "move"),
             "resize_window": (self.window, "resize"),
@@ -98,16 +95,13 @@ class MaestroUI:
                 return lambda *a, **kw: self._retry(method, *a, **kw)
             return method
 
-        # Auto-introspect sub-engines
         for engine in (self.accessibility, self.keyboard, self.mouse, self.window, self.vision):
             if hasattr(engine, name):
                 method = getattr(engine, name)
-                # Apply retry for keyboard methods automatically if async
                 if engine is self.keyboard and asyncio.iscoroutinefunction(method):
                     return lambda *a, **kw: self._retry(method, *a, **kw)
                 return method
 
-        # Applescript fallbacks
         import babylon60.extensions.ui_control.applescript as applescript
 
         if hasattr(applescript, name):

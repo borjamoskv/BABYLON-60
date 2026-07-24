@@ -33,15 +33,10 @@ from typing import Any, Callable
 
 from .features import StudyFeatures
 
-# Sum of per-driver maxima below. Used to normalize raw -> 0..100.
 RAW_MAX: int = 124
 
 MODEL_VERSION: str = "apex-amendment-risk/1.0.0"
 
-# Optional data-fitted mixing weights (see fit_weights.py). When present, the score
-# uses learned per-driver importances + isotonic calibration to an expected
-# substantive-amendment count. The transparent bands/thresholds are unchanged —
-# only the driver mixing weights are relearned. Absent -> hand-tuned prior.
 _FITTED_PATH = Path(__file__).with_name("fitted_weights.json")
 
 

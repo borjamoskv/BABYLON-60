@@ -4,9 +4,6 @@ from babylon60.extensions.scraper.models import ExtractionStrategy, ScrapeReques
 
 from .models import MarketReport, NicheTarget
 
-# Depending on existing LLM integrations, we will try to use Instructor or directly the LLM gateway.
-# Assuming standard CORTEX gateway interaction here for Pydantic structuring.
-# If CORTEX has a different structured output method, this should be adapted.
 try:
     import instructor  # pyright: ignore[reportMissingImports]
     from openai import AsyncOpenAI
@@ -21,13 +18,11 @@ class NicheArbitrageEngine:
         self.scraper = ScraperEngine()
         self.llm_client = llm_client
         if not self.llm_client and instructor:
-            # Fallback to default async client with instructor
             self.llm_client = instructor.from_openai(AsyncOpenAI())
 
     async def run_pipeline(self, target: NicheTarget) -> MarketReport:
         """Runs the fully autonomous pipeline for a given target."""
 
-        # 1. Extraction (Scraping)
         scrape_req = ScrapeRequest(url=target.url, strategy=ExtractionStrategy.AUTO)
         scrape_result: ScrapeResult = await self.scraper.scrape(scrape_req)
 
@@ -38,7 +33,6 @@ class NicheArbitrageEngine:
                 signals=[],
             )
 
-        # 2. Synthesis (LLM extraction of TrendSignals)
         report = await self.synthesize_signals(target.name, scrape_result.markdown)  # type: ignore[type-error]
         return report
 
@@ -47,8 +41,6 @@ class NicheArbitrageEngine:
         if not self.llm_client:
             raise RuntimeError("LLM Client not configured for synthesis.")
 
-        # We process in chunks if markdown is too large, but for now we assume it fits in context.
-        # This uses the CORTEX structural rigor (Axiom Ω₃) to enforce the MarketReport schema.
 
         system_prompt = (
             "You are a Sovereign Arbitrage Agent analyzing raw web extractions. "
@@ -60,7 +52,6 @@ class NicheArbitrageEngine:
         )
 
         try:
-            # Ensure we don't blow up context limit - naive truncation for demo
             max_chars = 60000
             content_to_analyze = raw_markdown[:max_chars]
 
@@ -76,12 +67,10 @@ class NicheArbitrageEngine:
                 ],
             )
 
-            # Ensure target name is set correctly
             report.target_name = target_name
             return report
 
         except (ValueError, TypeError, OSError, KeyError) as e:
-            # Fallback report on error
             return MarketReport(
                 target_name=target_name, summary=f"LLM Synthesis Failed: {str(e)}", signals=[]
             )

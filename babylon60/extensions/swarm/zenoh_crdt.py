@@ -42,7 +42,6 @@ class ZenohCRDTBridge:
             conf = zenoh.Config()
             self.session = zenoh.open(conf)
 
-            # Subscribe to all Swarm CRDT mutations
             self.sub = self.session.declare_subscriber(  # type: ignore[attr-defined]
                 f"{self.workspace_prefix}/**", self._zenoh_callback
             )
@@ -63,19 +62,15 @@ class ZenohCRDTBridge:
         try:
             data = json.loads(payload_str)
 
-            # Extract signatures for BFT validation
             signatures_hex = data.get("bft_signatures", {})
-            # Decode signatures
             signatures = {k: bytes.fromhex(v) for k, v in signatures_hex.items()}
 
-            # Validate BFT Quorum using the distributed Trust Matrix
             from babylon60.consensus.bft_quorum import BFTQuorumGuard
             from babylon60.consensus.pki import trust_matrix
 
             known_peers = trust_matrix.get_known_peers()
             bft_guard = BFTQuorumGuard(known_peers)
 
-            # The payload for BFT is the engram data without the signatures
             bft_payload_dict = {k: v for k, v in data.items() if k != "bft_signatures"}
             bft_payload_bytes = json.dumps(bft_payload_dict, sort_keys=True).encode("utf-8")
 

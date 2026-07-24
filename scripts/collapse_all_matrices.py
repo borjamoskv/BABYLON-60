@@ -12,11 +12,9 @@ if not os.path.exists(agents_md_path):
 with open(agents_md_path, "r", encoding="utf-8") as f:
     content = f.read()
 
-# Buscar todos los invariantes Ωx
 pattern = re.compile(r"\*\*Ω(\d+)\s*·\s*(.*?)\*\*\s*:\s*(.*)", re.MULTILINE)
 matches = pattern.findall(content)
 
-# Buscar tambien con formato sin los dos puntos
 pattern2 = re.compile(r"\*\*Ω(\d+)\s*·\s*(.*?)\*\*(.*)", re.MULTILINE)
 matches2 = pattern2.findall(content)
 

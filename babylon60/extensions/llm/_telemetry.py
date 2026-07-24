@@ -34,13 +34,11 @@ class CascadeTelemetry:
 
     def emit(self, event: CascadeEvent) -> None:
         """Record structured telemetry for this cascade resolution."""
-        # Truncate history to prevent memory leaks (sliding window)
         if len(self.events) >= 1000:
             self.events.pop(0)
 
         self.events.append(event)
 
-        # Log visual forensic summary
         msg = f"Cascade: intent={event.intent.value} | res={event.resolved_by or 'FAIL'}"
         msg += f" | tier={event.tier.value} | depth={event.depth} | lat={event.latency_ms:.1f}ms"
 

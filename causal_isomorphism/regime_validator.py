@@ -1,6 +1,4 @@
-# causal_isomorphism/regime_validator.py — Trilingual Regime Boundary Enforcer
 # C5-REAL: Validates that emitted code respects the regime
-# Author: Borja Moskv (borjamoskv)
 """
 Validates that IR modules and emitted code respect the Trilingual Regime:
 
@@ -98,9 +96,6 @@ class ValidationReport:
         return "\n".join(lines)
 
 
-# ============================================================
-# CLASSIFICATION → PERMISSION MAPPING
-# ============================================================
 CLASSIFICATION_PERMISSIONS: dict[FunctionClassification, EmitPermission] = {
     FunctionClassification.STATE_TRANSITION: EmitPermission.PHYSICS_COMPUTATION,
     FunctionClassification.COMMIT_BOUNDARY: EmitPermission.COMMIT_ANCHOR,
@@ -110,20 +105,15 @@ CLASSIFICATION_PERMISSIONS: dict[FunctionClassification, EmitPermission] = {
     FunctionClassification.EVENT_EMITTER: EmitPermission.EVENT_EMISSION,
 }
 
-# Anti-pattern rules
 REGIME_RULES: list[tuple[FunctionClassification, RegimeLayer, str]] = [
-    # Physics computation MUST NOT appear in Rust or Solidity
     (FunctionClassification.STATE_TRANSITION, RegimeLayer.THERMODYNAMICS,
      "ANTIPATTERN: Physics computation in Rust — must stay in F# Domain Kernel"),
     (FunctionClassification.STATE_TRANSITION, RegimeLayer.CONSENSUS,
      "ANTIPATTERN: Physics computation in Solidity — must stay in F# Domain Kernel"),
-    # Hash computation MUST NOT appear in Solidity
     (FunctionClassification.HASH_COMPUTATION, RegimeLayer.CONSENSUS,
      "ANTIPATTERN: BLAKE3/DAG operations in Solidity — must stay in Rust strike_rs"),
-    # Consensus anchoring MUST NOT appear in Rust
     (FunctionClassification.COMMIT_BOUNDARY, RegimeLayer.THERMODYNAMICS,
      "ANTIPATTERN: Consensus anchoring in Rust — must stay in Solidity/Anvil"),
-    # Event emission MUST NOT appear in Rust
     (FunctionClassification.EVENT_EMITTER, RegimeLayer.THERMODYNAMICS,
      "ANTIPATTERN: Event emission in Rust — must stay in Solidity/Anvil"),
 ]
@@ -143,11 +133,9 @@ class RegimeValidator:
         report = ValidationReport()
         target_permissions = REGIME_PERMISSIONS[target_layer]
 
-        # Count types
         report.total_types = len(module.all_types())
         report.total_functions = len(module.all_functions())
 
-        # Validate each function
         for func in module.all_functions():
             required_permission = CLASSIFICATION_PERMISSIONS.get(
                 func.classification, EmitPermission.PURE_QUERY
@@ -158,7 +146,6 @@ class RegimeValidator:
             else:
                 report.blocked_functions.append(func.name)
 
-                # Check against anti-pattern rules
                 for rule_class, rule_layer, rule_msg in REGIME_RULES:
                     if func.classification == rule_class and target_layer == rule_layer:
                         report.violations.append(RegimeViolation(
@@ -171,7 +158,6 @@ class RegimeValidator:
                         ))
                         break
 
-        # Linear/Affine type checks
         from causal_isomorphism.linear_checker import LinearTypeChecker
         checker = LinearTypeChecker()
         for viol in checker.check_module(module):

@@ -33,7 +33,6 @@ class Notifier:
                 return Notifier._notify_linux(title, message)
             if is_windows():
                 return Notifier._notify_windows(title, message)
-            # Fallback: just log
             logger.info("[Notification] %s: %s", title, message)
             return True
         except (subprocess.SubprocessError, OSError) as e:
@@ -43,7 +42,6 @@ class Notifier:
     @staticmethod
     def _notify_macos(title: str, message: str, sound: str) -> bool:
         """macOS: osascript AppleScript notification."""
-        # Escape double quotes in title/message
         safe_title = title.replace('"', '\\"')
         safe_msg = message.replace('"', '\\"')
         script = f'display notification "{safe_msg}" with title "{safe_title}" sound name "{sound}"'
@@ -67,7 +65,6 @@ class Notifier:
     @staticmethod
     def _notify_windows(title: str, message: str) -> bool:
         """Windows: PowerShell toast notification."""
-        # Escape single quotes for PowerShell
         safe_title = title.replace("'", "''")
         safe_msg = message.replace("'", "''")
         ps_script = (

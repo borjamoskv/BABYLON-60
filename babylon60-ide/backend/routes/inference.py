@@ -135,7 +135,6 @@ class MambaInferenceRequest(BaseModel):
 def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
     """Execute local Mamba SSM inference integrated with GraphLedger."""
     try:
-        # Import primitives from parent workspace dynamically
         import sys
         parent_dir = str(Path(__file__).resolve().parent.parent.parent.parent)
         if parent_dir not in sys.path:
@@ -146,7 +145,6 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
         from cortex_mamba_network import MambaNetwork
         from net_mamba_ledger_engine import MambaLedgerEngine
 
-        # JIT Initialization of lightweight Mamba Engine
         tokenizer = BPETokenizer()
         tokenizer.train("Lorem ipsum dolor sit amet. Babylon-60 is a C5-REAL sovereign kernel and Mamba network.", num_merges=10)
         network = MambaNetwork(vocab_size=len(tokenizer.vocab), d_model=16, d_state=8, n_layers=2)

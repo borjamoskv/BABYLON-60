@@ -64,7 +64,6 @@ def test_fitted_mode_is_deterministic_and_calibrated() -> None:
     assert a1.mode == "fitted"
     assert 0 <= a1.score <= 100
     assert a1.expected_amendments is not None and a1.expected_amendments >= 0
-    # contributions align to the 9 drivers and (rounding aside) reconstruct the score
     assert len(a1.contributions) == 9
     assert abs(sum(a1.contributions) - a1.score) <= 1.0
 

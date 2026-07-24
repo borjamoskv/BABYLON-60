@@ -1,7 +1,6 @@
 # [C5-REAL] Exergy-Maximized
 import re
 
-# Allows only alphanumeric characters and underscores, starting with a letter or underscore, up to 64 chars.
 _SAFE_IDENTIFIER = re.compile(r"^[a-zA-Z_][a-zA-Z0-9_]{0,63}\Z")
 
 

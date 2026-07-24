@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
-# License: Apache-2.0
 """
 MOSKV-1 CLI v2.0 — Interfaz de línea de comandos para el Kernel Cognitivo Híbrido.
 
@@ -40,7 +38,6 @@ def cmd_compile(workspace: str | None = None) -> int:
 
     compiler.compile_full_dataset()
 
-    # Export with train/val/test split
     sharegpt_path = compiler.export_sharegpt(split=True)
     alpaca_path = compiler.export_alpaca()
 
@@ -51,7 +48,6 @@ def cmd_compile(workspace: str | None = None) -> int:
     logging.getLogger(__name__).info(f"📁 ShareGPT: {sharegpt_path}")
     logging.getLogger(__name__).info(f"📁 Alpaca:   {alpaca_path}")
 
-    # Show split info
     dataset_dir = compiler.output_dir
     for name in ["train", "valid", "test"]:
         path = dataset_dir / f"{name}.jsonl"
@@ -76,7 +72,6 @@ def cmd_train(
     adapter_path = Path.home() / ".babylon60" / "training" / "adapters"
     adapter_path.mkdir(parents=True, exist_ok=True)
 
-    # Check for train.jsonl (v2 split format) or moskv1_dataset.jsonl
     if not (dataset_dir / "train.jsonl").exists():
         if (dataset_dir / "moskv1_dataset.jsonl").exists():
             logging.getLogger(__name__).info("⚠️ No train/val/test split found. Run 'compile' with v2.0 first.")
@@ -85,7 +80,6 @@ def cmd_train(
             logging.getLogger(__name__).info("❌ Dataset not found. Run 'compile' first.")
             return 1
 
-    # Use non-deprecated mlx_lm subcommand syntax
     cmd = [
         sys.executable,
         "-m",
@@ -170,7 +164,6 @@ def cmd_validate() -> int:
         for line in f:
             entries.append(json.loads(line))
 
-    # ─── Quality Metrics ───────────────────────────────────────────
     output_lengths: list[int] = []
     instruction_lengths: list[int] = []
     has_code = 0
@@ -217,7 +210,6 @@ def cmd_validate() -> int:
                 anergy_detected += 1
                 break
 
-        # Categorize by instruction pattern
         inst_lower = instruction.lower()
         if "clase" in inst_lower:
             categories["code_class"] += 1
@@ -253,7 +245,6 @@ def cmd_validate() -> int:
         calculate_distribution_entropy(length_buckets, total_length) if total_length > 0 else 0.0
     )
 
-    # ─── Report ────────────────────────────────────────────────────
     logging.getLogger(__name__).info("═══ MOSKV-1 DATASET VALIDATION v2.0 ═══")
     logging.getLogger(__name__).info("")
     logging.getLogger(__name__).info(f"📊 Total entries: {n}")
@@ -281,7 +272,6 @@ def cmd_validate() -> int:
         bar = "█" * (count * 40 // n)
         logging.getLogger(__name__).info(f"  {cat:20s} {count:5d} ({count / n * 100:5.1f}%) {bar}")
 
-    # ─── Split Validation ──────────────────────────────────────────
     logging.getLogger(__name__).info("")
     logging.getLogger(__name__).info("── Train/Val/Test Split ──")
     for name in ["train", "valid", "test"]:
@@ -293,7 +283,6 @@ def cmd_validate() -> int:
         else:
             logging.getLogger(__name__).info(f"  {name:8s} NOT FOUND ❌")
 
-    # ─── Overall Score ─────────────────────────────────────────────
     score = 0
     if html_in_instruction == 0:
         score += 200
@@ -312,7 +301,6 @@ def cmd_validate() -> int:
     else:
         logging.getLogger(__name__).info("   ❌ Dataset quality is insufficient — review filter settings")
 
-    # ─── Weights Verification ───
     adapter_path = Path.home() / ".babylon60" / "training" / "adapters"
     if (adapter_path / "adapters.safetensors").exists() or (adapter_path / "weights.npz").exists():
         logging.getLogger(__name__).info("")
@@ -358,7 +346,6 @@ def cmd_stats() -> int:
             )
             for e in entries
         )
-        // 4
     )
 
     logging.getLogger(__name__).info(f"📊 Dataset: {dataset_path}")
@@ -366,7 +353,6 @@ def cmd_stats() -> int:
     logging.getLogger(__name__).info(f"   Estimated tokens: {total_tokens:,}")
     logging.getLogger(__name__).info(f"   File size: {dataset_path.stat().st_size / 1024:.1f} KB")
 
-    # Show split info
     dataset_dir = dataset_path.parent
     for name in ["train", "valid", "test"]:
         path = dataset_dir / f"{name}.jsonl"
@@ -424,13 +410,11 @@ def main() -> None:
     )
     subparsers = parser.add_subparsers(dest="command", help="Available subcommands")
 
-    # compile
     compile_parser = subparsers.add_parser(
         "compile", help="Compile CORTEX knowledge into training dataset"
     )
     compile_parser.add_argument("--workspace", help="Path to workspace directory")
 
-    # train
     train_parser = subparsers.add_parser("train", help="Run MLX LoRA fine-tuning")
     train_parser.add_argument(
         "--model",
@@ -442,19 +426,14 @@ def main() -> None:
     train_parser.add_argument("--lora-layers", type=int, default=16, help="Number of LoRA layers")
     train_parser.add_argument("--learning-rate", type=float, default=2e-5, help="Learning rate")
 
-    # register
     subparsers.add_parser("register", help="Generate Ollama Modelfile")
 
-    # validate
     subparsers.add_parser("validate", help="Validate dataset quality with diagnostics")
 
-    # stats
     subparsers.add_parser("stats", help="Show dataset statistics")
 
-    # health
     subparsers.add_parser("health", help="Check Ollama availability")
 
-    # daemon
     daemon_parser = subparsers.add_parser(
         "daemon", help="Run the autonomous nocturnal training daemon loop"
     )

@@ -18,7 +18,6 @@ from babylon60.utils.errors import CortexError
 
 logger = logging.getLogger(__name__)
 
-# --- Sovereign Constants ---
 MAX_RETRIES: Final[int] = 3
 BASE_BACKOFF: Final[float] = 1.1  # Golden ratio-ish base
 
@@ -39,7 +38,6 @@ class KeterPayload(TypedDict, total=False):
     fv_audit: str
     score_130_100: float
     status: str
-    # Catch-all for other dynamic kwargs passed to ignite
     kwargs: dict[str, Any]
 
 
@@ -65,7 +63,6 @@ class IntentAlchemist(SovereignPhase):
         if not intent:
             raise CortexError("KETER intent missing. Execution aborted.")
 
-        # Zero-Trust Intent Classification (Simulated)
         if len(intent) < 5:
             logger.warning("⚠️ [KETER] Intent density too low. Escalating analysis...")
 
@@ -97,7 +94,6 @@ class LegionSwarm(SovereignPhase):
         intent = payload.get("intent", "Refactor")
         logger.info("🐝 [KETER] Desplegando Enjambre HYDRA (Legion-Omega)...")
 
-        # Invoke the Immortal Siege (Ω₆)
         result = await LEGION_OMEGA.forge(intent, context=payload)
 
         payload["legion_audit"] = (
@@ -131,10 +127,8 @@ class FormalVerificationGate(SovereignPhase):
 
         logger.info("🛡️ [KETER] Validando Invariantes Soberanos (Z3)...")
 
-        # In a real Legion swarm, payload would contain "proposed_mutations"
         mutations = payload.get("proposed_mutations", {})
         if not mutations:
-            # Simulation: generate a dummy check if nothing is provided
             mutations = {"placeholder.py": "# Dummy code\npass"}
 
         memory_manager = payload.get("memory_manager")
@@ -151,7 +145,6 @@ class FormalVerificationGate(SovereignPhase):
                     result.violations,
                 )
 
-                # Counterexample Learning: Store failure in semantic memory
                 if memory_manager:
                     for violation in result.violations:
                         await learn_from_failure(
@@ -194,7 +187,6 @@ class KeterReservoir:
         from babylon60.database.core import connect
 
         self.db_path = Path(db_path)
-        # Use centralized factory
         self._conn = connect(str(self.db_path))
         self._conn.execute("""
             CREATE TABLE IF NOT EXISTS keter_reservoir (
@@ -250,8 +242,6 @@ class KeterEngine:
             FormalVerificationGate(),
             MejoraloCrush(),
         ]
-        # Axiom Ω₂: Cross-invocation Thermal Bypass Repository (Persistent)
-        # We store it in a predictable location within .cortex
         config_dir = Path("~/.babylon60").expanduser()
         db_path = config_dir / "keter_reservoir.db"
         self._reservoir = KeterReservoir(db_path)
@@ -285,7 +275,6 @@ class KeterEngine:
                 import secrets
 
                 rng = secrets.SystemRandom()
-                # The chaos window grows fractally with the Golden Ratio (Phi)
                 base_delay = BASE_BACKOFF**attempt
                 jitter = rng.uniform(0.1, 1.618 ** (attempt + 1))
                 delay = base_delay + jitter
@@ -351,12 +340,10 @@ class KeterEngine:
         thermal_audit = kwargs.get("thermal_audit", False)
         formation = kwargs.get("formation", "BLITZ")
 
-        # Axiom Ω₂: Identity Short-Circuit (Thermal Bypass)
         mission_id, bypass_payload = self._check_thermal_bypass(intent, formation, thermal_audit)
         if bypass_payload:
             return bypass_payload
 
-        # --- Adaptive Jitter (Thermal Noise Control) ---
         await self._apply_adaptive_jitter(formation, thermal_audit)
 
         logger.info("=" * 60)
@@ -368,11 +355,9 @@ class KeterEngine:
 
         try:
             for phase in execution_sequence:
-                # ─── Thermal Bypass (Ω₂) ───
                 previous_code = payload.get("final_code", "")
                 previous_score = payload.get("score_130_100", 0.0)
 
-                # Skip Shortcut: If we already reached Singularity excellence, bypass the Crush.
                 if previous_score >= 99.0 and isinstance(phase, MejoraloCrush):
                     if thermal_audit:
                         logger.info(
@@ -382,7 +367,6 @@ class KeterEngine:
 
                 payload = await self._execute_with_backoff(phase, payload)
 
-                # Detection of Static Equilibrium (Redundancy)
                 if (
                     isinstance(phase, LegionSwarm | MejoraloCrush)
                     and payload.get("final_code") == previous_code
@@ -395,7 +379,6 @@ class KeterEngine:
                         )
 
             payload["status"] = "SINGULARITY_REACHED"
-            # Update reservoir for future short-circuits
             self._reservoir.set(mission_id, payload)
             logger.info("🌌 [KETER] Ecosistema tejido. Friccion cero.")
         except CortexError as e:

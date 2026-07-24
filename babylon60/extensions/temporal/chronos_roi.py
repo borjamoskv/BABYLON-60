@@ -25,7 +25,6 @@ logger = logging.getLogger("babylon60.chronos")
 __all__ = ["CHRONOS", "ChronosROI", "ChronosReport"]
 
 
-# ── Data Model ──────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -66,7 +65,6 @@ class ChronosReport:
         )
 
 
-# ── Engine ──────────────────────────────────────────────────────────
 
 _SKIP_DIRS = frozenset(
     (".venv", ".git", "__pycache__", "node_modules", ".mypy_cache", ".ruff_cache")
@@ -142,7 +140,6 @@ class ChronosROI:
         """
         relevant_files: list[str] = []
         for root, dirs, files in os.walk(project_path):
-            # Prune skip dirs in-place for performance
             dirs[:] = [d for d in dirs if d not in _SKIP_DIRS]
             for f in files:
                 if f.endswith(_CODE_EXTENSIONS):
@@ -151,23 +148,19 @@ class ChronosROI:
         file_count = len(relevant_files)
         git = self.get_git_stats(project_path)
 
-        # Boost complexity based on git activity
         base_complexity = 6.5
         if git["commits"] > 10:
             base_complexity += 1.5
         if git["added"] > 1000:
             base_complexity += 1.0
 
-        # Use files actually affected by commits instead of total project files
         affected_count = git.get("files_changed", 0)
         if affected_count == 0:
-            # Baseline interaction size if no commits/files changed in the git log
             affected_count = 1
 
         hours = self.calculate_hours_saved(affected_count, base_complexity)
         monetary_value = round(hours * self.hourly_rate, 2)
 
-        # Dynamic token estimation from DB if available
         actual_tokens = 0
         if db_path and os.path.exists(db_path):
             try:
@@ -176,7 +169,6 @@ class ChronosROI:
                     cursor.execute("PRAGMA table_info(llm_telemetry)")
                     columns = {row[1] for row in cursor.fetchall()}
                     if "prompt_tokens" in columns and "completion_tokens" in columns:
-                        # Query tokens consumed in the last 24 hours (86400s)
                         cursor.execute(
                             "SELECT SUM(COALESCE(prompt_tokens, 0) + COALESCE(completion_tokens, 0)) "
                             "FROM llm_telemetry "
@@ -188,7 +180,6 @@ class ChronosROI:
             except (ValueError, TypeError, KeyError, OSError, RuntimeError) as e:
                 logger.warning("Dynamic token query failed: %s", e)
 
-        # Fallback logic
         if actual_tokens > 0:
             final_tokens = actual_tokens
         elif tokens_used is not None:
@@ -210,7 +201,6 @@ class ChronosROI:
             cost=round(cost, 4),
         )
 
-    # ── Observability Loop (NEW - closes the blind oracle gap) ──────
 
     async def persist_report(
         self,

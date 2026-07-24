@@ -83,7 +83,6 @@ def test_proof_derivation():
 
 def test_epistemic_monotonicity():
     """Ω155 · Epistemic Monotonicity Executable Test"""
-    # A prior cannot have less entropy than a posterior
     assert compute_information_gain(prior_microbits=1000, posterior_microbits=500) == 500
     with pytest.raises(ValueError, match="entropy increased"):
         compute_information_gain(prior_microbits=500, posterior_microbits=1000)
@@ -107,14 +106,12 @@ def test_certificate_tampering():
     cert = ClosureCertificate("e_hash", "r_hash", state, residual_microbits=500, epsilon_threshold=1000)
     assert cert.verify() is True
     
-    # Simulate memory tampering (Agent dynamically changes microbits to 0)
     cert.residual_microbits = 0
     with pytest.raises(ValueError, match="Certificate Tampering Detected"):
         cert.verify()
 
 def test_kernel_minimality():
     """Ω173 · Kernel Minimality AST-based Test"""
-    # Verifier must be strictly simpler than Generator
     assert verify_kernel_minimality(verifier_ast_nodes=50, generator_ast_nodes=100) is True
     
     with pytest.raises(ValueError, match="TCB is too large"):

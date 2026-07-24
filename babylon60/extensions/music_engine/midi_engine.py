@@ -24,14 +24,12 @@ from babylon60.extensions.music_engine._synth import (
 
 logger = logging.getLogger(__name__)
 
-# ─── Constants ───────────────────────────────────────────────────────────
 TICKS_PER_BEAT = 480
 DEFAULT_SR = 44100
 DEFAULT_BPM = 128
 BARS_DEFAULT = 4
 BEATS_PER_BAR = 4
 
-# MIDI note mappings (General MIDI Drum Map)
 KICK = 36
 SNARE = 38
 CLAP = 39
@@ -39,7 +37,6 @@ CLOSED_HAT = 42
 OPEN_HAT = 46
 SUB_NOTE = 24  # C1
 
-# Synthesis
 FADE_SAMPLES = 128
 NOISE_AMPLITUDE = 0.03
 SUB_AMPLITUDE = 0.6
@@ -112,7 +109,6 @@ class MIDISequence:
         )
 
 
-# ─── Euclidean Rhythm ────────────────────────────────────────────────────
 
 
 def euclidean_rhythm(steps: int, pulses: int, offset: int = 0) -> list[int]:
@@ -147,7 +143,6 @@ def euclidean_rhythm(steps: int, pulses: int, offset: int = 0) -> list[int]:
     return pattern
 
 
-# ─── MIDI Generation Functions ───────────────────────────────────────────
 
 
 def generate_euclidean_groove(
@@ -174,10 +169,8 @@ def generate_euclidean_groove(
     seq = MIDISequence(bpm=bpm)
     tick_per_16th = TICKS_PER_BEAT // 4  # 120 ticks
 
-    # Swing offset (applies to off-beat 16th notes)
     swing_offset_ticks = int(tick_per_16th * (swing_pct - 0.5) * 2)
 
-    # ─── Kick (Euclidean) ───
     kick_track = MIDITrack(name="kick")
     kick_pattern = euclidean_rhythm(kick_steps, kick_pulses)
     for bar in range(bars):
@@ -186,7 +179,6 @@ def generate_euclidean_groove(
             if hit:
                 micro = int(random.gauss(0, humanize_ms * TICKS_PER_BEAT / 1000))
                 tick = bar_start + (i * tick_per_16th) + micro
-                # Apply swing to off-beat positions
                 if i % 2 == 1:
                     tick += swing_offset_ticks
                 vel = random.randint(100, 127)
@@ -194,7 +186,6 @@ def generate_euclidean_groove(
                 kick_track.events.append(MIDIEvent(tick + 60, "off", KICK, 0))
     seq.tracks.append(kick_track)
 
-    # ─── Snare (beats 2 and 4) ───
     snare_track = MIDITrack(name="snare")
     for bar in range(bars):
         bar_start = bar * BEATS_PER_BAR * TICKS_PER_BEAT
@@ -207,7 +198,6 @@ def generate_euclidean_groove(
             snare_track.events.append(MIDIEvent(tick + 60, "off", note, 0))
     seq.tracks.append(snare_track)
 
-    # ─── Hats (32nd notes with probability and sine drift) ───
     hat_track = MIDITrack(name="hats")
     tick_per_32nd = TICKS_PER_BEAT // 8  # 60 ticks
     for bar in range(bars):
@@ -222,7 +212,6 @@ def generate_euclidean_groove(
                 hat_track.events.append(MIDIEvent(tick + 25, "off", CLOSED_HAT, 0))
     seq.tracks.append(hat_track)
 
-    # ─── Sub pulse (root note sustained) ───
     sub_track = MIDITrack(name="sub")
     for bar in range(bars):
         bar_start = bar * BEATS_PER_BAR * TICKS_PER_BEAT
@@ -232,7 +221,6 @@ def generate_euclidean_groove(
         )
     seq.tracks.append(sub_track)
 
-    # Sort all tracks
     for track in seq.tracks:
         track.sort()
 
@@ -266,7 +254,6 @@ def generate_harmonic_sequence(
 
     intervals = scales.get(scale_type, scales["minor"])
 
-    # Common progressions (scale degree indices, 0-based)
     progressions = [
         [0, 5, 3, 4],  # i - vi - iv - v
         [0, 3, 5, 4],  # i - iv - vi - v
@@ -283,16 +270,13 @@ def generate_harmonic_sequence(
         degree = progression[bar % len(progression)]
         root = key_root + intervals[degree % len(intervals)]
 
-        # Build chord voicing
         if voicing == "sevenths":
             notes = [root, root + 3, root + 7, root + 10]
         elif voicing == "extended":
             notes = [root, root + 3, root + 7, root + 10, root + 14]
         else:
-            # Triads using scale intervals
             third = intervals[(degree + 2) % len(intervals)]
             fifth = intervals[(degree + 4) % len(intervals)]
-            # Normalize relative to root
             note_third = key_root + third
             note_fifth = key_root + fifth
             while note_third <= root:
@@ -343,7 +327,6 @@ def generate_texture_layer(
                 note = random.randint(note_range[0], note_range[1])
                 tick = bar_start + (i * tick_per_8th) + random.randint(-10, 10)
                 vel = random.randint(25, 70)
-                # Long sustain for drone feel
                 duration = random.randint(TICKS_PER_BEAT, TICKS_PER_BEAT * 3)
                 texture_track.events.append(MIDIEvent(max(0, tick), "on", note, vel))
                 texture_track.events.append(MIDIEvent(tick + duration, "off", note, 0))
@@ -353,7 +336,6 @@ def generate_texture_layer(
     return seq
 
 
-# ─── WAV Synthesis (Pure Python / NumPy) ─────────────────────────────────
 
 
 def render_sequence_to_wav(
@@ -377,7 +359,6 @@ def render_sequence_to_wav(
     """
     import scipy.io.wavfile as wavfile  # pyright: ignore[reportMissingImports]
 
-    # Calculate total duration
     total_ticks = sequence.total_ticks + TICKS_PER_BEAT  # Buffer
     total_samples = int(total_ticks * sequence.tick_duration_s * sr) + sr  # +1s buffer
     audio = np.zeros(total_samples, dtype=np.float64)
@@ -396,7 +377,6 @@ def render_sequence_to_wav(
             vel_scale = event.velocity / 127.0
 
             if event.note in drum_notes:
-                # Drum synthesis
                 if event.note == KICK:
                     wave = _synth_kick(sr)
                 elif event.note in (SNARE, CLAP):
@@ -406,7 +386,6 @@ def render_sequence_to_wav(
                 else:
                     continue
             else:
-                # Find note-off to determine duration
                 dur_ticks = TICKS_PER_BEAT  # Default 1 beat
                 for off_evt in track.events:
                     if (
@@ -421,12 +400,9 @@ def render_sequence_to_wav(
                 freq = _note_to_freq(event.note)
 
                 if event.note < 36:
-                    # Sub-bass: pure sine
                     wave = _synth_sine(freq, dur_s, sr) * SUB_AMPLITUDE
                 else:
-                    # Melodic: sine with gentle attack/release
                     wave = _synth_sine(freq, dur_s, sr) * 0.3
-                    # Apply fade in/out
                     fade_len = min(FADE_SAMPLES, len(wave) // 4)
                     if fade_len > 0:
                         fade_in = np.linspace(0, 1, fade_len)
@@ -434,18 +410,15 @@ def render_sequence_to_wav(
                         wave[:fade_len] *= fade_in
                         wave[-fade_len:] *= fade_out
 
-            # Mix into output buffer
             wave *= vel_scale
             end_pos = min(sample_pos + len(wave), total_samples)
             segment_len = end_pos - sample_pos
             audio[sample_pos:end_pos] += wave[:segment_len]
 
-    # Normalize to prevent clipping
     peak = np.max(np.abs(audio))
     if peak > 0:
         audio = audio / peak * 0.95
 
-    # Write WAV (16-bit PCM)
     audio_int16 = (audio * 32767).astype(np.int16)
     os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
     wavfile.write(output_path, sr, audio_int16)
@@ -473,7 +446,6 @@ def save_sequence_as_midi(sequence: MIDISequence, output_path: str) -> str:
 
     mid = mido.MidiFile(ticks_per_beat=sequence.ticks_per_beat)
 
-    # Master tempo track
     master = mido.MidiTrack()
     mid.tracks.append(master)
     master.append(mido.MetaMessage("set_tempo", tempo=mido.bpm2tempo(sequence.bpm), time=0))
@@ -482,7 +454,6 @@ def save_sequence_as_midi(sequence: MIDISequence, output_path: str) -> str:
         midi_track = mido.MidiTrack()
         mid.tracks.append(midi_track)
 
-        # Convert absolute ticks to delta
         last_tick = 0
         for event in track.events:
             delta = max(0, event.tick - last_tick)

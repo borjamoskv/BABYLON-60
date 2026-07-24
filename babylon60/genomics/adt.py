@@ -10,7 +10,6 @@ from typing import Union, Any
 from babylon60.types.algebraic import Result, Option
 
 
-# 1. Coordinate System Sum Type (|Coord| = |BED| + |VCF|)
 @dataclass(frozen=True)
 class BED0Based:
     """0-based half-open interval [start, end)"""
@@ -32,7 +31,6 @@ class VCF1Based:
 CoordinateSystem = Union[BED0Based, VCF1Based]
 
 
-# 2. Variant Type Sum Type
 @dataclass(frozen=True)
 class SNV:
     ref: str
@@ -61,7 +59,6 @@ class StructuralVariant:
 VariantType = Union[SNV, INDEL, CNV, StructuralVariant]
 
 
-# 3. Product Type for an exact Variant Record
 @dataclass(frozen=True)
 class AlgebraicGenomicVariant:
     coordinate: CoordinateSystem
@@ -71,7 +68,6 @@ class AlgebraicGenomicVariant:
     metadata: dict[str, Any] = field(default_factory=dict)
 
 
-# 4. TMB Sum Type
 @dataclass(frozen=True)
 class TMBHigh:
     score: float
@@ -94,7 +90,6 @@ class TMBIndeterminate:
 TMBClassification = Union[TMBHigh, TMBLow, TMBIndeterminate]
 
 
-# 5. APOBEC Sum Type
 @dataclass(frozen=True)
 class APOBECDriven:
     tcw_mutations: int
@@ -111,7 +106,6 @@ class APOBECBackground:
 APOBECStatus = Union[APOBECDriven, APOBECBackground]
 
 
-# 6. HRD Sum Type
 @dataclass(frozen=True)
 class HRDPositive:
     hr_deficiency_score: float
@@ -128,7 +122,6 @@ class HRDNegative:
 HRDStatus = Union[HRDPositive, HRDNegative]
 
 
-# 7. Clonal Entropy Product Type (Rule Ω31)
 @dataclass(frozen=True)
 class ClonalEntropyResult:
     shannon_entropy: float  # S = -sum(p_i * ln(p_i))
@@ -136,7 +129,6 @@ class ClonalEntropyResult:
     causal_taint: str = "borjamoskv:clonal_entropy_c5"
 
 
-# 8. Full Algebraic Profile
 @dataclass(frozen=True)
 class GenomicProfileADT:
     variants: list[AlgebraicGenomicVariant]
@@ -147,7 +139,6 @@ class GenomicProfileADT:
     causal_taint: str = "borjamoskv:algebraic_genomic_profile_c5"
 
 
-# 9. Errors
 @dataclass(frozen=True)
 class SequenceCorruption:
     sha3_seal: str

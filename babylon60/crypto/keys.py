@@ -306,7 +306,6 @@ class Secp256k1Signer:
             if not isinstance(priv_key, ec.EllipticCurvePrivateKey):
                 raise ValueError("Key must be an EllipticCurvePrivateKey")
         except ValueError:
-            # Fallback for raw bytes
             priv_value = int.from_bytes(priv_bytes, "big")
             priv_key = ec.derive_private_key(priv_value, ec.SECP256K1())
 
@@ -331,7 +330,6 @@ class Secp256k1Verifier:
                 try:
                     public_key = serialization.load_ssh_public_key(pub_bytes)
                 except ValueError:
-                    # Raw representation: uncompressed points 0x04 + x + y
                     public_key = ec.EllipticCurvePublicKey.from_encoded_point(ec.SECP256K1(), pub_bytes)
 
             if not isinstance(public_key, ec.EllipticCurvePublicKey):

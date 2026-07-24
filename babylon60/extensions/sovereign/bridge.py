@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/sovereign/bridge.py
 """Sovereign Bridge - The interface between CORTEX and Antigravity skills.
 
 Provides the `SovereignBridge` class, which handles dynamic loading and
@@ -18,7 +17,6 @@ from typing import Any
 
 logger = logging.getLogger(__name__)
 
-# Base directory for Antigravity skills
 SKILLS_ROOT = Path(os.path.expanduser("~/.gemini/antigravity/skills"))
 
 
@@ -68,7 +66,6 @@ class SovereignBridge:
         """Execute the 'main' entry point of a registered skill."""
         skill = self.registry.get(skill_name)
         if not skill:
-            # Try to load it lazily if not found
             self._load_skill(skill_name)
             skill = self.registry.get(skill_name)
 
@@ -79,7 +76,6 @@ class SovereignBridge:
             logger.info("Executing Sovereign Skill: %s", skill_name)
             return skill.main(*args, **kwargs)
 
-        # Fallback for skills that might expose other entry points
         if hasattr(skill, "run") and callable(skill.run):
             return skill.run(*args, **kwargs)
 

@@ -45,7 +45,6 @@ class ThermodynamicMemoryMonitor:
         except RuntimeError:
             return asyncio.run(self.check_async())
 
-        # Already inside an event loop.
         if not hasattr(self, "_bg_tasks"):
             self._bg_tasks: set[asyncio.Task[list[ThermodynamicAlert]]] = set()
 
@@ -75,7 +74,6 @@ class ThermodynamicMemoryMonitor:
                 self._last_runs[tenant] = now
 
                 if pruned_count > 0:
-                    # [OUROBOROS] Autopoiesis Callback
                     ouroboros_prefix = "[OUROBOROS] Autopoiesis: " if pruned_count >= 10 else ""
                     alerts.append(
                         ThermodynamicAlert(

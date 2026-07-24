@@ -24,7 +24,6 @@ class CausalFilter(ImmuneFilter):
     async def evaluate(self, signal: Any, context: dict[str, Any]) -> FilterResult:
         """Analyze if the proposed action is causal or just correlational."""
 
-        # Step 1: Causal Separation
         context.get("is_causal", True)
         is_correlational = context.get("is_correlational", False)
 
@@ -37,10 +36,8 @@ class CausalFilter(ImmuneFilter):
                 metadata={"causality_type": "correlational"},
             )
 
-        # Step 2: Causal Chain (5 Why's reverso)
         chain_depth = context.get("causal_chain_depth", 1)
         if chain_depth > 3:
-            # Too many intermediate steps without evidence
             return FilterResult(
                 filter_id=self.filter_id,
                 verdict=Verdict.HOLD,
@@ -49,7 +46,6 @@ class CausalFilter(ImmuneFilter):
                 metadata={"chain_depth": chain_depth},
             )
 
-        # Step 3: Falsification (Operational Axiom 15)
         is_falsifiable = context.get("is_falsifiable", True)
         if not is_falsifiable:
             return FilterResult(

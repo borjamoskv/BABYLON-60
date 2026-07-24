@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Thought Orchestra.
 
@@ -57,9 +53,6 @@ __all__ = ["ThoughtOrchestra"]
 
 logger = logging.getLogger("babylon60_extensions.thinking.orchestra")
 
-# ─── Mode → Intent mapping ───────────────────────────────────────────
-# Maps ThinkingMode strings to the IntentProfile used by CortexLLMRouter
-# to sort fallbacks by semantic affinity.
 _MODE_TO_INTENT: dict[str, IntentProfile] = {
     "code": IntentProfile.CODE,
     "deep_reasoning": IntentProfile.REASONING,
@@ -69,7 +62,6 @@ _MODE_TO_INTENT: dict[str, IntentProfile] = {
 }
 
 
-# ─── Thought Orchestra ──────────────────────────────────────────────
 
 
 class ThoughtOrchestra(OrchestraIntrospectionMixin):
@@ -100,7 +92,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
         self._history: list[ThinkingRecord] = []
         self._available_cache: list[str] | None = None
 
-    # ── Lifecycle ────────────────────────────────────────────────
 
     async def __aenter__(self) -> ThoughtOrchestra:
         self._initialize()
@@ -162,7 +153,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
                     continue
         return None
 
-    # ── Model Resolution ─────────────────────────────────────────
 
     def _resolve_models(self, mode: ThinkingMode | str) -> list[tuple[str, str]]:
         """Resuelve qué modelos usar para un modo dado."""
@@ -177,7 +167,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
                 continue
 
             env_key = preset.get("env_key", "")
-            # Fix: Support local providers without API keys
             if not env_key or os.environ.get(env_key):
                 resolved.append((provider_name, model))
 
@@ -186,7 +175,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
 
         return resolved
 
-    # ── Query with Retry ──────────────────────────────────────────
 
     def _resolve_mode_aware_fallbacks(
         self,
@@ -206,7 +194,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
         fallbacks: list[Any] = []
         available = self._available_cache or self._detect_available_providers()
 
-        # Resolve the routing candidates for this mode
         try:
             mode_enum = ThinkingMode(mode)
             candidates = DEFAULT_ROUTING.get(mode_enum, [])
@@ -224,7 +211,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             except (OSError, ValueError, KeyError):
                 continue
 
-        # Safety-net: if no mode-specific fallbacks found, use generic order
         if not fallbacks:
             logger.debug(
                 "No mode-specific fallbacks for '%s', using generic chain",
@@ -256,10 +242,8 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             provider = self._pool.get(provider_name, model)
             fallbacks = self._resolve_mode_aware_fallbacks(provider_name, mode)
 
-            # Map mode to IntentProfile for the deterministic cascade
             intent = _MODE_TO_INTENT.get(mode, IntentProfile.GENERAL)
 
-            # Use override temperature or default from config
             temp = temperature if temperature is not None else self.config.temperature
 
             router = CortexLLMRouter(primary=provider, fallbacks=fallbacks)
@@ -341,7 +325,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
                 response.latency_ms = (time.monotonic() - start) * 1000
                 return response
 
-            # Exponential backoff + jitter (Ω₁₃: prevent thermal token burn)
             if attempt < attempts - 1:
                 backoff = min(
                     60.0, self.config.retry_delay_seconds * (2**attempt)
@@ -365,7 +348,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             error=last_error,
         )
 
-    # ── Main Think API ────────────────────────────────────────────
 
     @oxygenate(min_interval=0.01)
     async def think(
@@ -388,7 +370,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
         """
         self._initialize()
 
-        # Auto-routing: classify prompt semantically
         if mode == "auto":
             route = self._semantic_router.classify(prompt)
             mode = route.mode.value
@@ -409,13 +390,11 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
                 confidence=0.0,
             )
 
-        # Resolver system prompt
         if system is None and self.config.use_mode_prompts:
             system = MODE_SYSTEM_PROMPTS.get(mode, MODE_SYSTEM_PROMPTS[ThinkingMode.DEEP_REASONING])
         elif system is None:
             system = "You are a world-class reasoning AI. Think step by step."
 
-        # Resolver estrategia
         if strategy is None:
             fusion_strategy = self.config.default_strategy
         elif isinstance(strategy, str):
@@ -430,15 +409,12 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             fusion_strategy.value,
         )
 
-        # Ejecución paralela - pasamos mode y temperatura variada a cada _query_model
         start = time.monotonic()
 
         tasks = []
         for i, (p, m) in enumerate(models):
             temp = self.config.temperature
             if self.config.dynamic_temperature and len(models) > 1:
-                # Spread temperature linearly around the base temperature
-                # using the configured variance.
                 variance = self.config.temperature_variance
                 offset = i / (len(models) - 1)
                 temp = max(0.0, min(1.0, temp + (offset - 0.5) * variance))
@@ -456,7 +432,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             len(responses),
         )
 
-        # Fusionar
         assert self._fusion is not None
         result = await self._fusion.fuse(  # type: ignore[reportOptionalMemberAccess]
             responses=list(responses),
@@ -464,7 +439,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             strategy=fusion_strategy,
         )
 
-        # Metadatos del orchestra
         result.meta.update(
             {
                 "mode": mode,
@@ -475,7 +449,6 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
             }
         )
 
-        # Registrar en historial
         self._history.append(
             ThinkingRecord(
                 mode=mode,
@@ -491,12 +464,8 @@ class ThoughtOrchestra(OrchestraIntrospectionMixin):
 
         return result
 
-    # ── Cleanup ───────────────────────────────────────────────────
 
     async def close(self) -> None:
         """Cerrar todas las conexiones del pool."""
         await self._pool.close_all()
 
-    # Convenience and introspection methods provided by OrchestraIntrospectionMixin:
-    #   quick_think, deep_think, code_think, creative_think, consensus_think,
-    #   available_modes (property), history (property), status(), stats()

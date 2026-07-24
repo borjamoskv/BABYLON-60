@@ -46,7 +46,6 @@ class GhostWatcher(BaseMonitor[GhostAlert]):
             ts = data.get("timestamp", "")
             if not ts:
                 continue
-            # Skip ghosts that are intentionally blocked (parked)
             if data.get("blocked_by"):
                 continue
 

@@ -37,18 +37,15 @@ class NightShiftDaemon:
                     continue
                 try:
                     step = json.loads(line)
-                    # Filter for highly exergic nodes
                     if step.get("type") == "USER_INPUT":
                         raw_events.append(f"[USER] {step.get('content', '')[:200]}")
                     elif step.get("type") == "PLANNER_RESPONSE":
-                        # Extract tools used or hashes
                         content = step.get("content", "")
                         if "Git Sentinel Hash:" in content or "C5-REAL" in content:
                             raw_events.append(f"[KERNEL] {content[:300]}")
                 except (ValueError, TypeError, OSError, KeyError):
                     pass
 
-        # Collate episodic memory
         episodic_memory = "\n".join(raw_events)
         logger.info(
             "Extracted %s exergic events. Total length: %s chars.",
@@ -56,16 +53,13 @@ class NightShiftDaemon:
             len(episodic_memory),
         )
 
-        # Pass to AutoCrystallizer
         frozen_fact = auto_crystallizer.crystallize_fact(
             episodic_memory, origin=str(self.transcript_path.absolute())
         )
 
-        # Save absolute Axiom
         timestamp = datetime.now().strftime("%Y%md_%H%M%S")
         axiom_file = self.output_dir / f"AXIOM_{timestamp}.json"
 
-        # Unpack MappingProxyType for JSON serialization
         axiom_dict = dict(frozen_fact)
 
         with open(axiom_file, "w", encoding="utf-8") as out:

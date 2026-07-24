@@ -1,6 +1,5 @@
 # [C5-REAL] ITERA-2 — Falsación de INV_BFT_02 (database.core), INV_C5_04 (votos reales),
 # INV_C5_07 (cero necrosis en audit/queue) e INV_C5_03 (arco de atestación SHA3-256).
-# Génesis: AUDITORIA_CENTURIA CENT-03/06/10/14 + NEW-E + ETHOS §3.
 from __future__ import annotations
 
 import asyncio

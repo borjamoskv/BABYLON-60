@@ -34,8 +34,6 @@ class HashAlgorithm(Enum):
     SHA3_512 = "sha3_512"  # Maximum post-quantum margin
 
 
-# Module-level singleton: the active algorithm for all CORTEX hashing.
-# Changed via configure() at startup or in tests.
 _active_algorithm: HashAlgorithm = HashAlgorithm.SHA256
 
 
@@ -165,5 +163,4 @@ def cortex_hash_raw(data: bytes | str) -> bytes:
     return hashlib.new(_active_algorithm.value, data).digest()
 
 
-# Backwards-compatible aliases for migration
 hash_sha256 = cortex_hash  # Explicit SHA-256 for callers that need algorithm pinning

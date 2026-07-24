@@ -43,7 +43,6 @@ async def project(
     if projector:
         await projector(engine, conn, fact_id, payload, tenant_id=tenant_id)
     else:
-        # Unknown event type - log but don't fail.
         logger.info(
             "No projector for event_type=%s on fact %d - event stored but not projected",
             event_type,
@@ -64,7 +63,6 @@ async def proj_decalcify(
     ts = payload.get("timestamp") or datetime.now(timezone.utc).isoformat()
     facts_columns = await engine._facts_columns(conn)
     has_consensus_column = "consensus_score" in facts_columns
-    # 1. Fetch current scores
     score_query = (
         "SELECT consensus_score, confidence FROM facts WHERE id = ? AND tenant_id = ?"
         if has_consensus_column
@@ -77,7 +75,6 @@ async def proj_decalcify(
     current_score_raw, confidence = row
     current_score = float(current_score_raw) if current_score_raw is not None else 1.0
     new_score = round(current_score * decay_factor, 3)
-    # 2. State demotion (Verified -> Tentative -> Disputed)
     new_confidence = confidence
     if new_score < 1.4 and confidence == "verified":
         new_confidence = "tentative"

@@ -103,10 +103,8 @@ class ASTOracle:
         self._running = True
         logger.info("👁️ AST ORACLE ONLINE. Sovereign Surveillance on: %s", self.watch_dir)
 
-        # Pre-warm cache from existing files (one-time O(N) bootstrap)
         await self._pre_warm_cache()
 
-        # Mount watchdog observer for O(1) event-driven detection
         loop = asyncio.get_running_loop()
         self._event_queue = asyncio.Queue()
         handler = _ASTEventHandler(loop, self._event_queue)
@@ -115,7 +113,6 @@ class ASTOracle:
             self._observer.schedule(handler, str(self.watch_dir), recursive=True)
             self._observer.start()
 
-        # Process events as they arrive
         while self._running:
             try:
                 await self._process_events()
@@ -162,7 +159,6 @@ class ASTOracle:
             target_str = str(py_file)
 
             if not py_file.exists():
-                # File deleted - purge from memory
                 self._mtimes.pop(target_str, None)
                 self._cache.pop(target_str, None)
                 continue

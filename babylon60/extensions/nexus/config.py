@@ -49,7 +49,6 @@ def load_nexus_config(config_path: str | Path) -> NexusConfig:
         workspaces = data.get("target_workspaces", [])
         artifacts = data.get("artifacts", [])
 
-        # Expand ~ to home directory in workspaces
         expanded_workspaces = [os.path.expanduser(w) for w in workspaces]
 
         return NexusConfig(target_workspaces=expanded_workspaces, artifacts=artifacts)

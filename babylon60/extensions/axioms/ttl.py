@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Fact TTL Policy - Reconciles 'Persist Everything' with 'Entropy = Death'.
 
 Principle: Persist aggressively. Decay intelligently.
@@ -10,7 +9,6 @@ Referenced by: TTL Policy (Persist With Decay)
 
 from __future__ import annotations
 
-# TTL in seconds. None = immortal.
 FACT_TTL: dict[str, int | None] = {
     "axiom": None,  # Immutable governance - never expires
     "decision": None,  # Append-only - architecture archaeology
@@ -23,7 +21,6 @@ FACT_TTL: dict[str, int | None] = {
     "report": None,  # Audit reports are immutable records
     "evolution": None,  # Upgrade records persist - git archaeology
     "world-model": 90 * 86_400,  # 90 days - counterfactuals decay
-    # ─── Types discovered in production ─────────────────────────
     "archived_ghost": 7 * 86_400,  # 7 days - already resolved, cleanup fast
     "phantom": 90 * 86_400,  # 90 days - transient observations
     "intent": 90 * 86_400,  # 90 days - session intents decay

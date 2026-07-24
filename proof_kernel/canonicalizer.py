@@ -12,10 +12,7 @@ def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
             raise ValueError("Floating-point numbers are prohibited in C5-REAL canonical representation.")
         if isinstance(obj, set):
             return sorted(list(obj))
-        # bytes are natively supported by CBOR, so we don't need to b64 encode them anymore!
         if isinstance(obj, dict):
-            # dict keys must be strings for deterministic cross-platform hashes usually, 
-            # though CBOR handles it. We enforce string keys and sort them.
             return {str(k): _sanitize_objects(obj[k]) for k in sorted(obj.keys(), key=str)}
         if isinstance(obj, list):
             return [_sanitize_objects(i) for i in obj]

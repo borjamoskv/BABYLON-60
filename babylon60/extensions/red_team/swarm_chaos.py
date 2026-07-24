@@ -32,7 +32,6 @@ class RedTeamSwarm:
         """
         logger.info("Red Team Swarm: Targeting %s.%s", target_service, target_func.__name__)
 
-        # Perform falsification (adversarial mutation)
         survived = self.falsifier.falsify_target(target_func, seed_inputs)
 
         if not survived:
@@ -40,10 +39,7 @@ class RedTeamSwarm:
             if autopsies:
                 latest = autopsies[-1]
                 vector = str(latest["vector"])
-                # Simplified antibody generation: reject the collapse vector pattern
-                # If the vector is a dict, we extract the values to avoid regex-breaking characters
                 if isinstance(latest["vector"], dict):
-                    # For tests, we know 'data' is the key. In production, we'd iterate.
                     vector_val = str(latest["vector"].get("data", vector))
                 else:
                     vector_val = vector
@@ -78,7 +74,6 @@ class RedTeamSwarm:
                     "🦾 [RED-TEAM] No attack surfaces found. Intelligence core secured or unreachable."
                 )
             else:
-                # Elegir un objetivo aleatorio de la lista para inyectar caos
                 service, func, seed = random.choice(targets)
                 logger.info(
                     "🔥 [RED-TEAM] Chaos Cycle #%d - Targeted: %s.%s",
@@ -99,12 +94,10 @@ class RedTeamSwarm:
                             func.__name__,
                         )
                 except Exception as e:  # noqa: BLE001
-                    # Si el propio inyector explota, es un error del Red Team, no del objetivo.
                     logger.error(
                         "❌ [RED-TEAM] Red Team internal failure (Byzantine Swarm Error): %s", e
                     )
 
-            # Ω₅: El ritmo del caos es irregular para evitar patrones de adaptación predecibles.
             jitter = random.uniform(0.8, 1.2)
             sleep_time = interval_seconds * jitter
             logger.info("🦾 [RED-TEAM] Retreating. Next siege in %.1f seconds.", sleep_time)

@@ -13,9 +13,6 @@ import logging
 import time
 
 # type: ignore
-# try:
-#     from babylon60.extensions.perception.config import PERCEPTION_INTENSITY
-# except ImportError:
 PERCEPTION_INTENSITY = 0.5
 
 logger = logging.getLogger("babylon60_extensions.perception.metabolism")
@@ -48,7 +45,6 @@ class MetabolicObserver:
         Returns:
             One of "LOW", "MED", "HIGH".
         """
-        # 1. Base logic: Intensity scales with exergy if provided
         if exergy_score is not None:
             if exergy_score > 0.4:  # High signal breakthrough
                 self._consecutive_low_exergy = 0
@@ -58,16 +54,12 @@ class MetabolicObserver:
             else:
                 self._consecutive_low_exergy = 0
 
-        # 2. Activity-based scaling (fallback or reinforcement)
-        # If we have many meaningful diffs, stay at least at MED
         if event_count > 10 and avg_diff_size > 5:
             return "HIGH" if event_count > 25 else "MED"
 
-        # 3. Decay to LOW if no signal for a while
         if self._consecutive_low_exergy > 3:
             return "LOW"
 
-        # 4. Default to MED
         return "MED"
 
     def get_config(self, intensity: str) -> dict[str, float]:

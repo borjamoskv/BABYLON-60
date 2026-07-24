@@ -142,7 +142,6 @@ class MacOSClipboardSensor(BaseClipboardSensor):
             pasteboard = AppKit.NSPasteboard.generalPasteboard()  # type: ignore[reportAttributeAccessIssue]
             content = pasteboard.stringForType_(AppKit.NSPasteboardTypeString)  # type: ignore[reportAttributeAccessIssue]
             if content:
-                # Truncate to avoid massive clipboards blowing up memory/logs
                 return content[:2000]
             return ""
         except (ValueError, OSError, RuntimeError, AttributeError) as e:
@@ -305,7 +304,6 @@ class NeuralIntentEngine:
         if not context.active_window or context.active_window == "unknown":
             return None
 
-        # Optimization: if context is strictly identical to last inference
         if self._is_redundant_context(context):
             return None
 
@@ -339,7 +337,6 @@ class NeuralIntentEngine:
             summary=f"Inferred intent '{intent}' ({trigger}) [App: {context.active_window}]",
         )
 
-        # Deduplicate consecutive identical hypotheses
         if self._last_hypothesis and self._last_hypothesis.intent == hyp.intent:
             if (context.timestamp - self._last_hypothesis_timestamp) < 60:
                 return None

@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-# pyright: reportAttributeAccessIssue=false
 import asyncio
 import logging
 import random
@@ -266,7 +265,6 @@ class EvolutionOpsMixin:
         sub_muts_to_record = []
         crossovers_count = 0
 
-        # Agent Mutations
         for strategy in DEFAULT_STRATEGIES:
             mutation = strategy.evaluate_agent(sovereign)
             if mutation:
@@ -294,7 +292,6 @@ class EvolutionOpsMixin:
                 if mutation.epigenetic_tags.get("axiom_12_trigger"):
                     self._record_merkle_checkpoint(sovereign, mutation)
 
-        # Subagent Mutations
         for sub in sovereign.subagents:
             for strategy in DEFAULT_STRATEGIES:
                 mutation = strategy.evaluate_subagent(sub)
@@ -334,7 +331,6 @@ class EvolutionOpsMixin:
                 sovereign, domain_telemetry, grace_injection=domain_grace
             )
 
-        # Crossover & Survival
         subs: list[EnneagramSubAgent] = sorted(
             sovereign.subagents, key=lambda s: s.fitness, reverse=True
         )

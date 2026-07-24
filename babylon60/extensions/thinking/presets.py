@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Thought Orchestra Presets.
 
@@ -27,7 +23,6 @@ __all__ = [
 ]
 
 
-# ─── Thinking Modes ──────────────────────────────────────────────────
 
 
 class ThinkingMode(str, Enum):
@@ -43,7 +38,6 @@ class ThinkingMode(str, Enum):
     DEEPTHINK_CLUSTER = "deepthink_cluster"  # DeepSeek-R1 extended reasoning cluster (P0)
 
 
-# ─── Mode-specific system prompts ────────────────────────────────────
 
 MODE_SYSTEM_PROMPTS: dict[str, str] = {
     ThinkingMode.DEEP_REASONING: (
@@ -101,9 +95,7 @@ MODE_SYSTEM_PROMPTS: dict[str, str] = {
 }
 
 
-# ─── Routing Table ───────────────────────────────────────────────────
 
-# Model constants to avoid literal duplication
 ERNIE_5_0 = "baidu/ernie-5-0-thinking-latest"
 GPT_5_4 = "gpt-5.4"
 GPT_5_4_TURBO = "gpt-5.4-turbo"
@@ -112,8 +104,6 @@ DEEPSEEK_R1 = "deepseek-r1-2026"
 DEEPSEEK_V4 = "deepseek-v4"
 GROK_4_1 = "grok-4.1"
 
-# modo → lista de (provider, model) a consultar.
-# Solo se usarán los que tengan API key configurada.
 DEFAULT_ROUTING: dict[str, list[tuple[str, str]]] = {
     ThinkingMode.DEEP_REASONING: [
         ("ollama", "qwen2.5-coder:7b"),
@@ -162,8 +152,6 @@ DEFAULT_ROUTING: dict[str, list[tuple[str, str]]] = {
         ("groq", "llama-3.3-70b-versatile"),
         ("xai", GROK_4_1),
     ],
-    # Sprint 1: Metacognitive mode uses the best reasoning models -
-    # these need to follow complex epistemic instructions reliably.
     ThinkingMode.METACOGNITIVE: [
         ("gemini", "gemini-3.1-pro-preview"),
         ("anthropic", "claude-sonnet-4-20250514"),
@@ -179,7 +167,6 @@ DEFAULT_ROUTING: dict[str, list[tuple[str, str]]] = {
         ("openai", O3_ULTRA),
         ("openai", GPT_5_4),
     ],
-    # Deepthink Cluster: DeepSeek-R1 primary, reasoning-capable fallbacks only
     ThinkingMode.DEEPTHINK_CLUSTER: [
         ("deepseek", DEEPSEEK_R1),
         ("gemini", "gemini-3.1-pro-preview"),
@@ -190,7 +177,6 @@ DEFAULT_ROUTING: dict[str, list[tuple[str, str]]] = {
 }
 
 
-# ─── Configuration ───────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -206,23 +192,16 @@ class OrchestraConfig:
         default_factory=lambda: int(os.environ.get("CORTEX_LLM_MAX_TOKENS", "4096"))
     )
 
-    # ── Thermal Variance (Prevents Swarm Mode Collapse) ──
     dynamic_temperature: bool = True
     temperature_variance: float = 0.5  # Modifica la temp de cada subagente
 
     judge_provider: str | None = None
     judge_model: str | None = None
-    # Retry en caso de fallo individual
     retry_on_failure: bool = True
     retry_delay_seconds: float = 1.0
-    # Usar system prompts específicos por modo
     use_mode_prompts: bool = True
 
 
-# ─── Metacognitive Preamble Template ─────────────────────────────────
-# Used by inject_epistemic_preamble() in metacognitive_boundary.py
-# when the METACOGNITIVE thinking mode is active.
-# Kept here so presets remain the single source of truth for prompts.
 
 METACOGNITIVE_PREAMBLE_TEMPLATE: str = (
     "[CORTEX EPISTEMIC STATE] follows. It contains Feeling-of-Knowing (FOK), "

@@ -51,7 +51,6 @@ class PlatformConfig:
     )
 
 
-# Platform Registry — single source of truth
 PLATFORM_REGISTRY: dict[Platform, PlatformConfig] = {
     Platform.SHERLOCK: PlatformConfig(
         platform=Platform.SHERLOCK,

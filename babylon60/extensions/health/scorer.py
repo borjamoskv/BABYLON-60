@@ -8,7 +8,6 @@ from __future__ import annotations
 
 from babylon60.extensions.health.models import Grade, HealthScore, MetricSnapshot
 
-# Default metric weights (override via HealthScorer.score(weights=...))
 DEFAULT_WEIGHTS: dict[str, float] = {
     "db": 1.5,
     "ledger": 1.2,
@@ -67,7 +66,6 @@ class HealthScorer:
         clamped = max(0.0, min(100.0, raw_score))
         grade = Grade.from_score(clamped)
 
-        # Calculate Sub-indices
         sub_indices: dict[str, float] = {}
         mapping = {
             "storage": {"db", "facts", "disk"},

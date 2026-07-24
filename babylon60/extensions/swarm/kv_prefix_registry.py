@@ -78,7 +78,6 @@ class KVPrefixRegistry:
         )
         self._slots[slot.cache_key] = slot
 
-        # O(1) lookup index
         if prefix_hash not in self._prefix_providers:
             self._prefix_providers[prefix_hash] = set()
         self._prefix_providers[prefix_hash].add(provider_name)

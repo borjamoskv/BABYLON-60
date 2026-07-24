@@ -31,7 +31,6 @@ logger = logging.getLogger("babylon60_extensions.policy")
 
 __all__ = ["PolicyEngine"]
 
-# ISO format used by CORTEX timestamps.
 _ISO_FMT = "%Y-%m-%dT%H:%M:%S"
 _ISO_FMT_FRAC = "%Y-%m-%dT%H:%M:%S.%f"
 
@@ -46,7 +45,6 @@ def _parse_ts(ts: str | None) -> datetime | None:
             return datetime.strptime(ts, fmt).replace(tzinfo=timezone.utc)
         except ValueError:
             continue
-    # Last resort: truncate to seconds precision
     try:
         return datetime.strptime(ts[:19], _ISO_FMT).replace(tzinfo=timezone.utc)
     except (ValueError, IndexError):
@@ -82,7 +80,6 @@ class PolicyEngine:
     def config(self) -> PolicyConfig:
         return self._config
 
-    # ── Public API ──────────────────────────────────────────────────
 
     async def evaluate(
         self,
@@ -102,12 +99,10 @@ class PolicyEngine:
         if not facts:
             return []
 
-        # Build cross-reference index for future value estimation.
         project_index: dict[str, list[Fact]] = {}
         for f in facts:
             project_index.setdefault(f.project, []).append(f)
 
-        # Precompute lowercased project names to avoid O(P*F) string matching
         project_names_lower = {p.lower() for p in project_index}
 
         now = datetime.fromtimestamp(time.time(), tz=timezone.utc)
@@ -118,12 +113,10 @@ class PolicyEngine:
             if action.value > 0.0:
                 actions.append(action)
 
-        # Sort descending by value (highest priority first).
         actions.sort(key=lambda a: a.value, reverse=True)
 
         return actions[: self._config.max_actions]
 
-    # ── Scoring ─────────────────────────────────────────────────────
 
     def _score_fact(
         self,
@@ -137,7 +130,6 @@ class PolicyEngine:
         future = self._compute_future_value(fact, project_index, project_names_lower)
         value = self._bellman_value(reward, future, self._config.gamma)
 
-        # Clamp to [0, 1].
         value = max(0.0, min(1.0, value))
 
         fact_type = (fact.fact_type or "knowledge").lower()
@@ -171,27 +163,22 @@ class PolicyEngine:
         fact_type = (fact.fact_type or "knowledge").lower()
         base = REWARD_MAP.get(fact_type, 0.1)
 
-        # Time discount: older facts decay.
         created = _parse_ts(fact.created_at)
         if created:
             age_days = max(0.0, (now - created).total_seconds() / 86400)
             if fact_type == "ghost":
-                # Ghosts decay per-day.
                 time_factor = self._config.ghost_age_decay**age_days
             elif fact_type == "error":
-                # Recent errors get a recency bonus.
                 age_hours = age_days * 24
                 if age_hours < self._config.recency_window_hours:
                     time_factor = self._config.error_recency_weight
                 else:
                     time_factor = max(0.3, 1.0 - (age_days / 30))
             else:
-                # Generic slow decay.
                 time_factor = max(0.2, 1.0 - (age_days / 90))
         else:
             time_factor = 0.5  # Unknown age → conservative.
 
-        # Confidence modifier: low confidence → higher urgency to verify.
         conf = (fact.confidence or "").lower()
         conf_multiplier = {
             "c1": 1.3,  # Hypothesis needs validation.
@@ -201,7 +188,6 @@ class PolicyEngine:
             "c5": 0.8,  # Confirmed - least urgent.
         }.get(conf, 1.0)
 
-        # Consensus: low consensus → needs attention.
         consensus_mod = 1.0
         if fact.consensus_score < 0.5:  # type: ignore[type-error]
             consensus_mod = 1.3
@@ -222,15 +208,12 @@ class PolicyEngine:
         fact_type = (fact.fact_type or "knowledge").lower()
         content_lower = (fact.content or "").lower()
 
-        # Cross-project detection using set intersection (O(words) instead of O(projects * facts))
         words = set(re.findall(r"[\w-]+", content_lower))
         other_projects = words.intersection(project_names_lower) - {fact.project.lower()}
 
         if other_projects:
             future += self._config.cross_project_bonus
 
-        # Blocking multiplier: ghosts and errors that reference
-        # architectural/critical keywords are likely blocking.
         blocking_keywords = frozenset(
             {
                 "blocking",
@@ -251,19 +234,14 @@ class PolicyEngine:
             if any(kw in content_lower for kw in blocking_keywords):
                 future += self._config.blocking_multiplier
 
-        # Bridge downstream: bridges unlock pattern reuse across projects.
         if fact_type == "bridge":
-            # Count how many projects could benefit.
             future += len(other_projects) * 0.3
 
-        # Normalize to [0, 1] range.
-        # Use sigmoid-like compression for high values.
         if future > 0:
             future = 1.0 - math.exp(-future / 3.0)
 
         return future
 
-    # ── Helpers ──────────────────────────────────────────────────────
 
     async def _gather_facts(
         self,
@@ -274,7 +252,6 @@ class PolicyEngine:
         if project:
             return await self._engine.recall(project, tenant_id=tenant_id)  # type: ignore[type-error]
 
-        # All projects: get stats then recall each.
         try:
             stats = await self._engine.stats()
         except (RuntimeError, AttributeError, OSError) as e:

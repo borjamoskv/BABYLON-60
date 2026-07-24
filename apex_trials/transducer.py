@@ -39,7 +39,6 @@ class TransducerResult:
         }
 
 
-# Backwards compatibility
 CopilotResult = TransducerResult
 
 
@@ -60,7 +59,6 @@ class Transducer:
             except CtGovError:
                 history = None  # history plane optional; scoring is complete without it
 
-        # Deterministic decision payload -> hashed into the chain. No wall-clock here.
         payload: dict[str, Any] = {
             "nct_id": features.nct_id,
             "model_version": assessment.model_version,
@@ -74,7 +72,6 @@ class Transducer:
             "contributions": list(assessment.contributions),
         }
         top_drivers = "+".join(r.driver.split()[0].lower() for r in assessment.fired_rules if r.points > 0) or "none"
-        # causal_taint carries the model tag so the audit trail records WHICH model decided.
         causal_taint = (
             f"apex-amendment-engine:{assessment.model_version}|"
             f"{assessment.tier.lower()}({assessment.score})|{top_drivers}"

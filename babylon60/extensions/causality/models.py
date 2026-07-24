@@ -42,7 +42,6 @@ class TaintStatus(str, Enum):
     TAINTED = "tainted"
 
 
-# Ordinal mapping for confidence arithmetic
 CONFIDENCE_ORDER: dict[Confidence, int] = {
     Confidence.C1: 1,
     Confidence.C2: 2,

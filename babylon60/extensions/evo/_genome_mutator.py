@@ -104,7 +104,6 @@ class GenomeMutator:
                 child._invalidate_hash()
             except (ValueError, TypeError, KeyError, OSError, RuntimeError, ImportError) as e:
                 logger.error("Rust AST mutation failed: %s", e)
-                # Fallback to Python-based implementation
                 method_name = self._OPERATORS.get(mutation_type)
                 if method_name and hasattr(self, method_name):
                     getattr(self, method_name)(child)
@@ -151,14 +150,12 @@ class GenomeMutator:
         child.lineage.generation = max(fitter.lineage.generation, weaker.lineage.generation) + 1
         child.lineage.parent_hash = f"{fitter.genome_hash}x{weaker.genome_hash}"
 
-        # Uniform crossover on parameters
         all_keys = set(fitter.parameters) | set(weaker.parameters)
         for key in all_keys:
             if random.random() > 0.5:
                 if key in weaker.parameters:
                     child.parameters[key] = copy.deepcopy(weaker.parameters[key])
 
-        # Blend mutation rates
         for mt in MutationType:
             rate_a = fitter.mutation_rates.get(mt, 0.0)
             rate_b = weaker.mutation_rates.get(mt, 0.0)
@@ -302,7 +299,6 @@ class GenomeMutator:
         * Logging records the final rate after any budget adjustment.
         """
         rates = genome.mutation_rates
-        # Weighted selection: dampened by sqrt to limit dominance of high rates
         types = list(MutationType)
         weights = [max(0.001, (rates.get(mt, 0.05)) ** 0.5) for mt in types]
         selected_mt = random.choices(types, weights=weights, k=1)[0]
@@ -313,7 +309,6 @@ class GenomeMutator:
         new_rate = max(0.001, min(0.5, current_rate + delta))
         rates[selected_mt] = new_rate
 
-        # Enforce global budget: only adjust the mutated rate if total exceeds limit
         max_total = 0.7
         total = sum(rates.values())
         if total > max_total:

@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
-# Reverse-Engineered Fable 5 Agentic Adapter
 import asyncio
 import logging
 from typing import Any
@@ -40,8 +38,6 @@ async def execute_fable_native(
     async def _call():
         ffi_client = FableFFIClient(api_key=api_key, client=client)
 
-        # Inject structural Taint from CORTEX (Rule Ω3 / Axiom AX-045)
-        # Binds the agentic workflow deterministically to the execution ledger
         taint_marker = generate_secure_taint_token(
             agent_id="fable-5-orchestrator",
             session_id="agentic_harness_01",
@@ -59,7 +55,6 @@ async def execute_fable_native(
 
         if tools:
             payload["tools"] = tools
-            # Force Steerability: Tool adherence mapping
             payload["tool_choice"] = {"type": "auto"}
 
         await apply_causal_jitter(tokens_estimate=100)
@@ -67,12 +62,9 @@ async def execute_fable_native(
         async with semaphore:
             data = await ffi_client.invoke(payload, timeout=120.0)
 
-        # Fable 5 Agentic Routing Verification
         if data["stop_reason"] == "tool_use":
-            # Extract the deterministic AST from the agent (L1 invariant)
             tool_calls = [c for c in data["content"] if c["type"] == "tool_use"]
             logger.info("[CORTEX] Fable 5 orchestrated %s tool calls.", len(tool_calls))
-            # Yield structured string; to be parsed by upstream causal engine
             return str(tool_calls)
 
         raw_content = next((c["text"] for c in data["content"] if c["type"] == "text"), "")

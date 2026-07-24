@@ -16,7 +16,6 @@ __all__ = ["SAPMapper", "SyncDiff"]
 
 logger = logging.getLogger("babylon60_extensions.sap.mapper")
 
-# SAP OData metadata keys to strip from entity payloads
 _SAP_META_KEYS = frozenset({"__metadata", "__deferred", "__count", "results"})
 
 
@@ -49,16 +48,13 @@ class SAPMapper:
         Returns:
             Dict ready for CortexEngine.store().
         """
-        # Strip OData metadata from the entity
         clean = {k: v for k, v in entity.items() if k not in _SAP_META_KEYS}
 
-        # Extract SAP key from __metadata if available
         sap_key = ""
         metadata = entity.get("__metadata", {})
         if isinstance(metadata, dict):
             sap_key = metadata.get("uri", "")
 
-        # Build a human-readable content summary
         content = json.dumps(clean, ensure_ascii=False, default=str)
 
         return {
@@ -99,7 +95,6 @@ class SAPMapper:
         if sap_entity:
             return sap_entity
 
-        # Fallback: try to parse content as JSON
         content = fact.get("content", "")
         try:
             return json.loads(content)
@@ -137,20 +132,17 @@ class SAPMapper:
         """
         diff = SyncDiff()
 
-        # Index existing CORTEX facts by SAP key
         cortex_by_key: dict[str, dict] = {}
         for fact in cortex_facts:
             key = SAPMapper.extract_sap_key(fact)
             if key:
                 cortex_by_key[key] = fact
 
-        # Index SAP entities by their metadata URI
         for entity in sap_entities:
             metadata = entity.get("__metadata", {})
             sap_key = metadata.get("uri", "") if isinstance(metadata, dict) else ""
 
             if sap_key in cortex_by_key:
-                # Exists in both - check for modification
                 existing = cortex_by_key.pop(sap_key)
                 existing_meta = _parse_meta_str(
                     existing.get("meta") or existing.get("metadata") or {}
@@ -164,10 +156,8 @@ class SAPMapper:
                 else:
                     diff.unchanged += 1
             else:
-                # New in SAP
                 diff.new.append(entity)
 
-        # Remaining in cortex_by_key = deleted from SAP
         diff.deleted = list(cortex_by_key.values())
 
         return diff
@@ -175,7 +165,6 @@ class SAPMapper:
 
 def _entities_differ(a: dict[str, Any], b: dict[str, Any]) -> bool:
     """Compare two entity dicts, ignoring order and metadata fields."""
-    # Normalize both by stripping metadata
     clean_a = {k: v for k, v in a.items() if k not in _SAP_META_KEYS}
     clean_b = {k: v for k, v in b.items() if k not in _SAP_META_KEYS}
 

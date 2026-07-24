@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX - P0 Vulnerability Extractor.
 
@@ -44,7 +40,6 @@ from typing import Any
 logger = logging.getLogger("babylon60_extensions.evolution.p0_extractor")
 
 
-# ─── Types ──────────────────────────────────────────────────────────────
 
 
 class P0Severity(str, Enum):
@@ -106,7 +101,6 @@ class P0Report:
         }
 
 
-# ─── P0 Extractor ──────────────────────────────────────────────────────
 
 
 class P0VulnerabilityExtractor:
@@ -131,7 +125,6 @@ class P0VulnerabilityExtractor:
             logging.getLogger(__name__).info(f"[{finding.severity}] {finding.hypothesis}")
     """
 
-    # Maximum source code length to include in prompt (token budget guard)
     MAX_SOURCE_CHARS: int = 30_000
 
     def __init__(self, timeout_seconds: float = 120.0):
@@ -158,15 +151,12 @@ class P0VulnerabilityExtractor:
             entropy_score=getattr(diagnosis, "entropy_score", 0.0),
         )
 
-        # Identify complexity hotspots for focused analysis
         mccabe = getattr(diagnosis, "mccabe_complexity", {})
         hotspots = [f for f, c in mccabe.items() if c > 10]
         report.complexity_hotspots = hotspots
 
-        # Build the analysis prompt
         prompt = self._build_prompt(source_code, diagnosis, target_file, hotspots)
 
-        # Dispatch to Deepthink cluster
         try:
             raw_response = await self._dispatch_deepthink(prompt)
             findings = self._parse_findings(raw_response)
@@ -193,14 +183,12 @@ class P0VulnerabilityExtractor:
         hotspots: list[str],
     ) -> str:
         """Build the structured prompt for the Deepthink cluster."""
-        # Truncate source if too long
         truncated = source_code[: self.MAX_SOURCE_CHARS]
         if len(source_code) > self.MAX_SOURCE_CHARS:
             truncated += (
                 f"\n\n# ... TRUNCATED ({len(source_code) - self.MAX_SOURCE_CHARS} chars remaining)"
             )
 
-        # Build diagnosis summary
         mccabe = getattr(diagnosis, "mccabe_complexity", {})
         nesting = getattr(diagnosis, "nesting_depths", {})
         dead: set[str] = getattr(diagnosis, "dead_interfaces", set())
@@ -298,17 +286,13 @@ class P0VulnerabilityExtractor:
         if not raw or not raw.strip():
             return []
 
-        # Strip markdown fencing if present
         content = raw.strip()
         if content.startswith("```"):
             lines = content.split("\n")
-            # Remove first and last lines (fencing)
             if len(lines) > 2:
                 content = "\n".join(lines[1:-1])
 
-        # Try to extract JSON array
         try:
-            # Find the JSON array in the response
             start = content.find("[")
             end = content.rfind("]") + 1
             if start >= 0 and end > start:
@@ -317,7 +301,6 @@ class P0VulnerabilityExtractor:
                 data = json.loads(content)
         except json.JSONDecodeError as e:
             logger.warning("Failed to parse P0 findings JSON: %s", e)
-            # Attempt line-by-line object extraction
             return self._fuzzy_parse(content)
 
         if not isinstance(data, list):

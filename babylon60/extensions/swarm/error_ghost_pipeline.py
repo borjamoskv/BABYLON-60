@@ -27,7 +27,6 @@ from babylon60.crypto.hash_registry import cortex_hash_truncated
 
 logger = logging.getLogger("babylon60_extensions.swarm.error_ghost_pipeline")
 
-# ── Constants ──────────────────────────────────────────────────────────
 _DEDUP_WINDOW_SIZE = 64  # Ring buffer: last N error hashes
 _RATE_LIMIT_SECONDS = 60.0  # Min interval between ghosts from same source
 _FALLBACK_DIR_NAME = ".error_ghosts"
@@ -69,17 +68,13 @@ class ErrorGhostPipeline:
         if self._initialized:
             return
         self._lock = threading.Lock()
-        # OrderedDict used as LRU ring buffer for content hashes
         self._seen_hashes: OrderedDict[str, float] = OrderedDict()
-        # Per-source last-emit timestamps for rate limiting
         self._rate_limits: dict[str, float] = {}
-        # Stats
         self._total_captured: int = 0
         self._total_deduped: int = 0
         self._total_rate_limited: int = 0
         self._initialized = True
 
-    # ── Public API ─────────────────────────────────────────────────────
 
     async def capture(
         self,
@@ -113,7 +108,6 @@ class ErrorGhostPipeline:
         if self._should_suppress(content_hash, source):
             return
 
-        # Fire in background - ghost persistence must never block the daemon
         thread = threading.Thread(
             target=self._persist_sync,
             args=(project, content, source, meta, content_hash),
@@ -142,7 +136,6 @@ class ErrorGhostPipeline:
             self._total_deduped = 0
             self._total_rate_limited = 0
 
-    # ── Internal ───────────────────────────────────────────────────────
 
     def _prepare(
         self,
@@ -178,13 +171,11 @@ class ErrorGhostPipeline:
         now = time.monotonic()
 
         with self._lock:
-            # 1. Content-hash dedup (ring buffer)
             if content_hash in self._seen_hashes:
                 self._total_deduped += 1
                 logger.debug("AUTO-GHOST deduped [%s] (seen in window)", content_hash[:8])
                 return True
 
-            # 2. Per-source rate limiting
             last_emit = self._rate_limits.get(source, 0.0)
             if now - last_emit < _RATE_LIMIT_SECONDS:
                 self._total_rate_limited += 1
@@ -201,7 +192,6 @@ class ErrorGhostPipeline:
         """Record successful emission in dedup window and rate limiter."""
         now = time.monotonic()
         with self._lock:
-            # Ring buffer eviction
             self._seen_hashes[content_hash] = now
             while len(self._seen_hashes) > _DEDUP_WINDOW_SIZE:
                 self._seen_hashes.popitem(last=False)
@@ -258,7 +248,6 @@ class ErrorGhostPipeline:
             fact_id = asyncio.run(self._persist_async(project, content, source, meta))
             self._record_emission(content_hash, source, fact_id)
         except (ValueError, TypeError, KeyError, OSError, RuntimeError) as e:
-            # Last resort - never let ghost persistence crash the daemon
             logger.error("AUTO-GHOST sync persist failed: %s", e)
             self._record_emission(content_hash, source, None)
 

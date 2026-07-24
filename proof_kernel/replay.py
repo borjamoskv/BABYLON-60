@@ -19,10 +19,8 @@ def verify_replay_determinism(evidence: dict[str, Any], proof_pipeline: Callable
     el mismo estado que la evaluación canónica pura:
     ∀E, Replay(E) == Replay(Canonicalize(E))
     """
-    # 1. Ejecución sobre objeto crudo
     res_direct = proof_pipeline(evidence)
     
-    # 2. Ejecución sobre objeto reconstruido canónicamente
     res_canonical = replay(evidence, proof_pipeline)
     
     hash_direct = hash_evidence(res_direct)

@@ -32,14 +32,10 @@ class TomAgent:
         """
         findings_count = 0
         for tx in transactions:
-            # Ω₃: Metabolic Loop Prevention
-            # Do NOT audit internal signals as if they were business transactions.
             if tx.get("source", "").startswith("agent:") or tx.get("agent"):
                 logger.debug("Skipping internal agent activity: %s", tx.get("id"))
                 continue
 
-            # Synthetic Benford/Outlier detection logic
-            # In real system this uses scipy/stats on numeric clusters
             amount = tx.get("amount", 0)
             if amount > 10_000_000:
                 await self._emit_finding(
@@ -50,7 +46,6 @@ class TomAgent:
                 )
                 findings_count += 1
 
-            # Synthetic SOD logic
             user_create = tx.get("created_by")
             user_approve = tx.get("approved_by")
             if user_create and user_approve and user_create == user_approve:

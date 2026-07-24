@@ -76,9 +76,6 @@ class ReaperDaemon:
 
         cert = DeathCertificate(target_id, reason, exergy, lifetime)
 
-        # In a full run, this invokes the CORTEX ledger to write the certificate
-        # from babylon60.audit.ledger import emit_event
-        # emit_event("DEATH_CERTIFICATE", cert.to_dict())
 
         return cert
 

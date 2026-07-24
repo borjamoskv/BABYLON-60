@@ -98,12 +98,10 @@ class FrontierDaemon:
         while not self._shutdown:
             now = time.monotonic()
 
-            # Metabolism Cycle
             if now - self.last_metabolism > self.metabolism_interval:
                 await self._run_metabolism()
                 self.last_metabolism = now
 
-            # Ingestion Cycle
             if now - self.last_ingestion > self.ingestion_interval:
                 await self._run_ingestion()
                 self.last_ingestion = now

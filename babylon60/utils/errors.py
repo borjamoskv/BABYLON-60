@@ -18,7 +18,6 @@ __all__ = [
     "FactNotFound",
     "ProjectNotFound",
     "ThreadPoolExhausted",
-    # KETER-∞ Phase 1
     "LLMRoutingError",
     "LLMProviderError",
     "MemorySubsystemError",
@@ -76,7 +75,6 @@ class MemorySubsystemError(CortexError):
     """Raised when the cognitive memory subsystem fails."""
 
 
-# ─── KETER-∞ Phase 1: Extended Hierarchy ─────────────────────────────
 
 
 class LLMRoutingError(CriticalSubsystemError):

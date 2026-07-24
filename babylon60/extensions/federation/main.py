@@ -46,7 +46,6 @@ class FederatedEngine:
 
         Each shard is lazily initialized on first access.
         """
-        # Normalize tenant_id to safe filesystem name
         safe_id = self._sanitize_tenant_id(tenant_id)
 
         async with self._lock:
@@ -89,7 +88,6 @@ class FederatedEngine:
             engine = await self.get_shard(tenant_id)
             return await engine.search(query, top_k=top_k, **kwargs)
 
-        # Cross-shard search: query all shards in parallel
         async with self._lock:
             shard_items = list(self._shards.items())
 
@@ -99,7 +97,6 @@ class FederatedEngine:
         tasks = [engine.search(query, top_k=top_k, **kwargs) for _, engine in shard_items]
         results_per_shard = await asyncio.gather(*tasks, return_exceptions=True)
 
-        # Merge all results, sorted by score descending
         merged = []
         for results in results_per_shard:
             if isinstance(results, Exception):

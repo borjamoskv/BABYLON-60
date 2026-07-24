@@ -67,7 +67,6 @@ class WeightedVote:
     agent_id: str
     option_id: str
     weight: float
-    # Diagnostic breakdown
     domain_component: float
     track_component: float
     confidence_component: float
@@ -124,7 +123,6 @@ class ResolutionResult:
         }
 
 
-# Weight distribution constants (sum = 1.0)
 _W_DOMAIN: float = 0.40
 _W_TRACK: float = 0.30
 _W_CONFIDENCE: float = 0.20
@@ -171,7 +169,6 @@ class DeadlockBreaker:
             score = self._heuristic_score(opt)
             scored.append((opt, score))
 
-        # O(N log N) - but N is ≤ 10 for any sane conflict
         scored.sort(key=lambda x: x[1], reverse=True)
 
         winner, best_score = scored[0]
@@ -235,12 +232,10 @@ class ConflictResolver:
             len(agents),
         )
 
-        # Tier 1: Factual Triangulation
         if conflict_type == ConflictType.FACTUAL:
             result = await self._triangulate(options, agents)
             return self._record(conflict_id, now, conflict_type, participants, options, result)
 
-        # Tier 2: Weighted Voting
         votes, result = self._weighted_vote(options, agents, conflict_domain)
 
         if result.consensus_level >= self.CONSENSUS_THRESHOLD:
@@ -257,7 +252,6 @@ class ConflictResolver:
             self.CONSENSUS_THRESHOLD * 100,
         )
 
-        # Tier 3: Architect Arbitration
         if architect_judge is not None:
             arb_result = await self._architect_arbitrate(options, architect_judge)
             if arb_result is not None:
@@ -267,7 +261,6 @@ class ConflictResolver:
                 record.votes = votes
                 return record
 
-        # Tier 4: Deadlock Heuristic
         logger.warning("🔧 Deadlock: applying heuristic breaker (Ω₆ Zenón's Razor)")
         dl_result = self._deadlock_breaker.resolve(options)
         record = self._record(conflict_id, now, conflict_type, participants, options, dl_result)
@@ -286,7 +279,6 @@ class ConflictResolver:
                 option_votes[chosen_id] += 1
 
         if not option_votes:
-            # Edge case: no valid votes
             return ResolutionResult(
                 winner_id=options[0].id,
                 method=ResolutionMethod.TRIANGULATION,
@@ -294,7 +286,6 @@ class ConflictResolver:
                 reasoning="No valid factual sources; defaulting to first option.",
             )
 
-        # Winner = most independent confirmations
         winner_id = max(option_votes, key=lambda k: option_votes[k])
         total_votes = sum(option_votes.values())
         consensus = option_votes[winner_id] / total_votes if total_votes > 0 else 0.0
@@ -317,7 +308,6 @@ class ConflictResolver:
         conflict_domain: str,
     ) -> tuple[list[WeightedVote], ResolutionResult]:
         """Execute reputation-weighted voting."""
-        # O(1) accumulator per option
         option_weights: dict[str, float] = {o.id: 0.0 for o in options}
         all_votes: list[WeightedVote] = []
         total_weight = 0.0
@@ -327,7 +317,6 @@ class ConflictResolver:
             if vote_template is None:
                 continue
 
-            # Materialize the vote with the chosen option
             vote = WeightedVote(
                 agent_id=agent_id,
                 option_id=chosen_id,
@@ -351,7 +340,6 @@ class ConflictResolver:
                 reasoning="Zero total weight - no valid voters.",
             )
 
-        # Find winner (O(K) where K = number of options, typically ≤ 5)
         winner_id = max(option_weights, key=lambda k: option_weights[k])
         winner_weight = option_weights[winner_id]
         consensus = winner_weight / total_weight
@@ -387,7 +375,6 @@ class ConflictResolver:
                 'Respond with JSON: {"winner_id": "...", "confidence": 0.0-1.0, "reasoning": "..."}'
             )
 
-            # The judge is an async callable (e.g., an LLM completion function)
             response = await judge(prompt)
 
             if not isinstance(response, dict):
@@ -406,7 +393,6 @@ class ConflictResolver:
                 )
                 return None
 
-            # Validate winner_id exists in options
             valid_ids = {o.id for o in options}
             if winner_id not in valid_ids:
                 logger.error("Architect selected invalid option: %s", winner_id)

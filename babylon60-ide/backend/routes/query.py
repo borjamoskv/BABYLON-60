@@ -19,7 +19,6 @@ from ..services.db_pool import connect_readonly, execute_readonly_query
 
 router = APIRouter(prefix="/api/query", tags=["query"])
 
-# Tope de filas por consulta: acota RAM y payload por el puente.
 _MAX_ROWS = 1000
 
 
@@ -46,11 +45,6 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
     if not db_path.exists():
         raise HTTPException(404, f"Database '{req.database}' not found")
 
-    # Lista BLANCA (más fuerte que la negra anterior): tras retirar
-    # comentarios de línea/bloque, la sentencia debe empezar por
-    # SELECT / WITH / EXPLAIN. El candado real sigue siendo
-    # PRAGMA query_only=ON a nivel de motor; esto es defensa en profundidad
-    # y un mensaje claro en vez de un error críptico del motor.
     stripped = re.sub(r"/\*.*?\*/", " ", req.sql, flags=re.DOTALL)
     stripped = re.sub(r"--[^\n]*", " ", stripped).strip()
     first_word = (stripped.split(None, 1)[0].upper() if stripped else "")
@@ -61,10 +55,6 @@ def run_query(req: QueryRequest) -> dict[str, Any]:
         )
 
     try:
-        # closing → la conexión se cierra aunque la query lance (antes solo
-        # se cerraba en éxito: fuga en cada error SQL). sqlite3.Error cubre
-        # OperationalError/DatabaseError/ProgrammingError. El texto SÍ se
-        # muestra: es una consola SQL, el error es la señal útil.
         with contextlib.closing(connect_readonly(db_path)) as conn:
             t0 = time.monotonic()
             result = execute_readonly_query(conn, req.sql, max_rows=_MAX_ROWS)

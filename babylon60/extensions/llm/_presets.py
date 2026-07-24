@@ -10,24 +10,19 @@ from typing import Any, Final
 
 logger = logging.getLogger("babylon60_extensions.llm.presets")
 
-# Default location for presets
 _ASSET_PATH: Final[str] = str(
     Path(__file__).parent.parent.parent.parent / "config" / "llm_presets.json"
 )
 
-# Global cache for presets to avoid redundant I/O
 _PRESETS_CACHE: dict[str, dict[str, Any]] = {}
 
-# Model Policy: prohibited tier patterns (GEMINI.md §1.3)
 _PROHIBITED_TIERS: Final[re.Pattern[str]] = re.compile(
     r"\b(mini|flash|haiku|nano|tiny|small|lite)\b",
     re.IGNORECASE,
 )
 
-# Valid tier values (ordered by capability)
 _VALID_TIERS: Final[frozenset[str]] = frozenset({"frontier", "high", "local"})
 
-# Cost ordering: lower index = cheaper
 _COST_RANK: Final[dict[str, int]] = {
     "free": 0,
     "low": 1,
@@ -36,7 +31,6 @@ _COST_RANK: Final[dict[str, int]] = {
     "high": 4,
 }
 
-# Tier ordering: higher index = stronger
 _TIER_RANK: Final[dict[str, int]] = {
     "local": 0,
     "high": 1,
@@ -69,7 +63,6 @@ def load_presets() -> dict[str, dict[str, Any]]:
 def _validate_model_policy(presets: dict[str, dict[str, Any]]) -> None:
     """Enforce Rule 1.3: Strictly mandate frontier or high-tier models."""
     for name, config in presets.items():
-        # Check default model
         default_model = config.get("default_model", "")
         if "heretic" not in default_model.lower() and _PROHIBITED_TIERS.search(default_model):
             logger.warning(
@@ -79,7 +72,6 @@ def _validate_model_policy(presets: dict[str, dict[str, Any]]) -> None:
                 default_model,
             )
 
-        # Check intent-specific models
         intent_map = config.get("intent_model_map", {})
         for intent, model in intent_map.items():
             if "heretic" not in model.lower() and _PROHIBITED_TIERS.search(model):
@@ -119,7 +111,6 @@ def check_api_key(preset: dict[str, Any]) -> str | None:
         if val := os.environ.get(k):
             return val
 
-    # Hardcoded fallbacks if nothing was found
     for k in keys:
         if k == "MOONSHOT_API_KEY" and (val := os.environ.get("KIMI_API_KEY")):
             return val

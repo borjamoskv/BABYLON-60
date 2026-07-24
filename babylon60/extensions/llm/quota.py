@@ -30,7 +30,6 @@ class QuotaRejectedError(Exception):
 
 logger = logging.getLogger("babylon60_extensions.llm.quota")
 
-# Module-level CSPRNG - avoid recreating per-iteration (~0.5ms saved/call)
 _RNG = secrets.SystemRandom()
 
 
@@ -99,8 +98,6 @@ class SovereignQuotaManager:
         self.max_waiters = int(env_max_waiters) if env_max_waiters else max_waiters
         self._current_waiters = 0
 
-        # ── Protocolo PULMONES Conservative Refill ──
-        # Prioritize ENV > Explicit arg > 10 RPM Default
         env_max_rpm = os.environ.get("CORTEX_LLM_MAX_RPM")
         if env_max_rpm:
             self.refill_rate = float(env_max_rpm) / 60.0
@@ -111,7 +108,6 @@ class SovereignQuotaManager:
 
         self._init_db()
 
-    # ─── Internals ────────────────────────────────────────────────────
 
     def _init_db(self) -> None:
         candidates = [self.db_path]
@@ -178,7 +174,6 @@ class SovereignQuotaManager:
                 ).fetchone()
                 current_tokens, last_update = row
 
-                # Protect against system reboot (time.monotonic() going backwards)
                 if now < last_update:
                     logger.warning("PULMONES: Time regression detected. Resetting bucket.")
                     current_tokens = self.capacity
@@ -206,7 +201,6 @@ class SovereignQuotaManager:
         except sqlite3.OperationalError:
             return 0.5  # DB contendida - backoff corto
 
-    # ─── Public API ───────────────────────────────────────────────────
 
     async def acquire(
         self, tokens: int = 1, deadline: float = 120.0, fast_reject: bool = False
@@ -259,7 +253,6 @@ class SovereignQuotaManager:
                     self._increment_timeouts()
                     raise QuotaRejectedError(f"PULMONES deadline exceeded ({deadline}s)")
 
-                # Hardware Entropy + Golden Ratio (Caos termodinámico asimétrico profundo)
                 jitter = _RNG.uniform(0.1, 1.618 ** min(attempt + 1, 6))
                 sleep = min(wait, 2 ** min(attempt, 5)) + jitter
                 sleep = min(sleep, deadline - elapsed)  # nunca sobrepasar el deadline

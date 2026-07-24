@@ -57,7 +57,6 @@ __all__ = [
     "WorkflowAlert",
 ]
 
-# ─── Constants ────────────────────────────────────────────────────────
 
 DEFAULT_INTERVAL = 300  # 5 minutes
 DEFAULT_STALE_HOURS = 48  # ghost projects stale after 48h
@@ -70,7 +69,6 @@ DEFAULT_CERT_WARN_DAYS = 14  # warn if SSL expires within 14 days
 DEFAULT_DISK_WARN_MB = 500  # warn if cortex dir exceeds 500 MB
 BUNDLE_ID = "com.moskv.daemon"
 
-# ─── Data Classes ─────────────────────────────────────────────────────
 
 
 @dataclass

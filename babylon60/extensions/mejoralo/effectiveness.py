@@ -93,7 +93,6 @@ class EffectivenessTracker:
                 stagnant=False,
             )
 
-        # Sessions come newest-first from ledger; reverse for chronological
         sessions_chrono = list(reversed(sessions))
 
         deltas = [s["delta"] for s in sessions_chrono if s["delta"] is not None]
@@ -106,10 +105,8 @@ class EffectivenessTracker:
         latest_score = scores[-1] if scores else None
         stagnant = self.stagnation_alert(project, sessions=sessions)
 
-        # Trend classification
         score_trend = self._classify_trend(deltas)
 
-        # Decay risk
         decay = self.decay_risk(project, sessions=sessions)
 
         return TrendReport(
@@ -132,7 +129,6 @@ class EffectivenessTracker:
     ) -> float:
         """Probability of score degradation (0.0 to 1.0).
 
-        # P0 Singularity: Simulated statistical decay eliminated
         """
         return 0.0
 
@@ -148,7 +144,6 @@ class EffectivenessTracker:
         if len(sessions) < _STAGNATION_WINDOW:
             return False
 
-        # Sessions come newest-first; check the most recent N
         recent = sessions[:_STAGNATION_WINDOW]
         return all((s.get("delta") or 0) <= 0 for s in recent)
 
@@ -161,13 +156,11 @@ class EffectivenessTracker:
         recent_deltas = deltas[-_STAGNATION_WINDOW:]
         recent_avg = statistics.mean(recent_deltas) if recent_deltas else 0
 
-        # Use recent trend as primary signal, overall as secondary
         if recent_avg > 1.0:
             return "improving"
         if recent_avg < -1.0:
             return "declining"
 
-        # Check overall if recent is ambiguous
         if avg_delta > 0.5:
             return "improving"
         if avg_delta < -0.5:

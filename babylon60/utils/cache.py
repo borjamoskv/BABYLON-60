@@ -76,7 +76,6 @@ class SovereignCache(Generic[T]):
         self._lock = asyncio.Lock()
         self._eviction_tasks: set[asyncio.Task[Any]] = set()
 
-        # Sovereign Evidence Chain (Ω₀)
         self._evidence_hash = cortex_hash(b"CORTEX_GENESIS_VOID")
         self._eviction_count = 0
 
@@ -88,12 +87,10 @@ class SovereignCache(Generic[T]):
 
             expiry, value = self._cache[key]
             if time.monotonic() > expiry:
-                # Lazy eviction (TTL)
                 val = self._cache.pop(key)[1]
                 await self._execute_eviction(key, val, EvictionReason.TTL)
                 return default
 
-            # Refresh LRU
             self._cache.move_to_end(key)
             return value
 
@@ -107,9 +104,7 @@ class SovereignCache(Generic[T]):
 
             self._cache[key] = (expiry, value)
 
-            # Bound Enforcement (LRU)
             if len(self._cache) > self._maxsize:
-                # Pop oldest (LRU)
                 old_key, (_, old_val) = self._cache.popitem(last=False)
                 await self._execute_eviction(old_key, old_val, EvictionReason.LRU)
 
@@ -117,8 +112,6 @@ class SovereignCache(Generic[T]):
         """Compute the Proof of Forgetting and execute the hook safely."""
         self._eviction_count += 1
 
-        # 130/100: Mathematical proof of what was forgotten
-        # H(prev | k_hash | v_hash | reason)
         k_hash = cortex_hash(str(key).encode())
         v_hash = cortex_hash(str(value).encode())
         proof_payload = f"{self._evidence_hash}|{k_hash}|{v_hash}|{reason.value}"
@@ -151,8 +144,6 @@ class SovereignCache(Generic[T]):
 
     async def clear(self) -> None:
         async with self._lock:
-            # When clearing manually, we treat each as a 'manual purge' eviction
-            # to maintain the chain integrity.
             while self._cache:
                 old_key, (_, old_val) = self._cache.popitem(last=False)
                 await self._execute_eviction(old_key, old_val, EvictionReason.MANUAL)

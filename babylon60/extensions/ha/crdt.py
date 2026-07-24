@@ -89,8 +89,6 @@ class LWWRegister(Generic[T]):
             return other
         if other.timestamp < self.timestamp:
             return self
-        # Tie-breaker: arbitrary but deterministic (e.g. value hash or comparison)
-        # Here we just keep self if equal
         return self
 
 
@@ -101,16 +99,12 @@ class ORSet(Generic[T]):
     """
 
     def __init__(self):
-        # State: set of (element, uuid) pairs.
-        # Add(e, uid) → state ∪ {(e, uid)}
-        # Remove(e) → drop all (e, *) pairs known locally.
         self._state: set[tuple[T, str]] = set()
 
     def add(self, element: T, uid: str):
         self._state.add((element, uid))
 
     def remove(self, element: T):
-        # Remove all instances of this element currently known
         to_remove = {item for item in self._state if item[0] == element}
         self._state -= to_remove
 

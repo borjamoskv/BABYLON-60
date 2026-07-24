@@ -27,7 +27,6 @@ __all__ = ["check_ship_gate"]
 logger = logging.getLogger("babylon60_extensions.mejoralo")
 
 
-# ─── Individual Seal Checks ─────────────────────────────────────────
 
 
 def _seal_build(stack: str, cwd: str) -> ShipSeal:
@@ -91,7 +90,6 @@ def _seal_visual(p: Path) -> ShipSeal:
         try:
             with open(visual_json) as f:
                 data = json.load(f)
-            # Renderizar métricas básicas si existen
             components = data.get("components_tested", len(data.get("tests", [])))
             status = data.get("status", "OK")
             detail = f"Visual Proof: {components} components rendered | Status: {status}"
@@ -160,7 +158,6 @@ def _seal_psi(project: str, path: str | Path) -> ShipSeal:
     )
 
 
-# ─── Main Entry Point ────────────────────────────────────────────────
 
 
 def check_ship_gate(project: str, path: str | Path) -> ShipResult:
@@ -178,7 +175,6 @@ def check_ship_gate(project: str, path: str | Path) -> ShipResult:
     import os
 
     base_dir = os.path.realpath(str(Path.cwd()))
-    # Lexical resolution to prevent filesystem sinks before validation
     target_str = os.path.realpath(os.path.join(base_dir, os.path.expanduser(str(path))))
     try:
         common = os.path.commonpath([base_dir, target_str])

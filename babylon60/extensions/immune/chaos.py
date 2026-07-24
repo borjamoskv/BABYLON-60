@@ -84,17 +84,13 @@ async def async_interceptor(
     """Wraps an async call with a ChaosGate."""
     gate.check()
 
-    # Corruption and Byzantine logic usually happens AFTER the call or during payload prep
-    # For now, we focus on the most aggressive failure modes (network/daemon death)
     try:
         res = await func(*args, **kwargs)
 
         if gate.scenario == ChaosScenario.PARTIAL_FAILURE:
-            # Call succeeded, but we simulate a disconnect before/during the ACK
             raise ConnectionError(f"CHAOS_GATE[{gate.name}]: Partial failure (ACK lost)")
 
         if gate.scenario == ChaosScenario.CORRUPTION:
-            # Tamper the valid result
             if isinstance(res, dict):
                 res["chaos_corrupted"] = True
                 res["content"] = "!!CORRUPTED_BYZANTINE_PAYLOAD!!"
@@ -103,6 +99,5 @@ async def async_interceptor(
 
         return res  # type: ignore[type-error]
     except Exception as e:  # noqa: BLE001
-        # Re-check gate state
         gate.check()
         raise e

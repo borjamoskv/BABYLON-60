@@ -20,7 +20,6 @@ __all__ = ["MeteringMiddleware"]
 
 logger = logging.getLogger(__name__)
 
-# Paths that should NOT be metered (health, docs, billing, onboarding)
 _EXCLUDED_PREFIXES = (
     "/health",
     "/docs",
@@ -48,20 +47,16 @@ class MeteringMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         path = request.url.path
 
-        # Skip non-API and excluded paths
         if not path.startswith("/v1/") or any(path.startswith(p) for p in _EXCLUDED_PREFIXES):
             return await call_next(request)
 
-        # Extract tenant from auth result (set by auth dependency)
         tenant_id = getattr(getattr(request, "state", None), "tenant_id", None)
         plan = getattr(getattr(request, "state", None), "plan", "free")
         plan_quota = getattr(getattr(request, "state", None), "plan_quota", None)
 
-        # If no tenant identified (unauthenticated), let the auth layer handle it
         if not tenant_id:
             return await call_next(request)
 
-        # ── Quota Check ──
         if plan_quota is not None:
             check = self._enforcer.check_with_quota(tenant_id, plan_quota)
         else:
@@ -94,13 +89,10 @@ class MeteringMiddleware(BaseHTTPMiddleware):
                 },
             )
 
-        # ── Process Request ──
         response = await call_next(request)
 
-        # ── Estimate Tokens ──
         tokens = _estimate_tokens(request, response)
 
-        # ── Record Usage ──
         try:
             self._tracker.record_call(
                 tenant_id=tenant_id,
@@ -112,7 +104,6 @@ class MeteringMiddleware(BaseHTTPMiddleware):
         except (RuntimeError, ValueError, OSError):
             logger.exception("Failed to record usage for tenant %s", tenant_id)
 
-        # ── Inject Usage Headers ──
         if check.limit > 0:
             response.headers["X-RateLimit-Limit"] = str(check.limit)
             response.headers["X-RateLimit-Remaining"] = str(max(0, check.remaining - 1))
@@ -128,18 +119,15 @@ def _estimate_tokens(request: Request, response) -> int:
       1. Explicit X-Tokens-Used header (set by routes that know exact count)
       2. Content-length heuristic (~4 chars per token)
     """
-    # Route-provided exact count
     explicit = response.headers.get("X-Tokens-Used")
     if explicit and explicit.isdigit():
         return int(explicit)
 
-    # Heuristic: estimate from content length (~4 chars/token)
     content_len = 0
     cl_header = response.headers.get("content-length")
     if cl_header and cl_header.isdigit():
         content_len = int(cl_header)
 
-    # For POST (store/search), also account for request body size
     if request.method == "POST":
         req_cl = request.headers.get("content-length")
         if req_cl and req_cl.isdigit():

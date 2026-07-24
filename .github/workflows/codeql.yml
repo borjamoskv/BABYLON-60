@@ -30,7 +30,6 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
-        # Configuración brutalista: máxima sensibilidad de escaneo
         queries: security-extended,security-and-quality
 
     - name: Perform CodeQL Analysis

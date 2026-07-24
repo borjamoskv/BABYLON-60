@@ -35,28 +35,23 @@ def verify_receipt(receipt: ExecutionReceipt) -> dict[str, Any]:
     """
     violations: list[str] = []
 
-    # 1. Plan hash
     if not receipt.plan_hash:
         violations.append("Missing plan_hash - cannot verify plan origin")
 
-    # 2. Step hash consistency
     for i, step in enumerate(receipt.steps):
         h = step.content_hash()
         if not h:
             violations.append(f"Step {i} ({step.step_id}): empty content hash")
 
-    # 3. Receipt hash determinism - recompute and compare
     computed = receipt.receipt_hash
     if not computed:
         violations.append("Empty receipt_hash - receipt may be corrupted")
 
-    # 4. Status validity
     try:
         VEXStatus(receipt.status) if isinstance(receipt.status, str) else receipt.status
     except ValueError:
         violations.append(f"Invalid status: {receipt.status}")
 
-    # 5. Step chain integrity - verify step order
     step_ids = [s.step_id for s in receipt.steps]
     if len(step_ids) != len(set(step_ids)):
         violations.append("Duplicate step IDs detected")

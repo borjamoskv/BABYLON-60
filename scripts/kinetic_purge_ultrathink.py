@@ -7,15 +7,12 @@ def run_cmd(cmd: list[str]) -> None:
     subprocess.run(cmd, capture_output=True, text=True)
 
 def kinetic_purge():
-    # 1. Mach VM Cache drop
     run_cmd(["osascript", "-e", 'do shell script "purge"'])
 
-    # 2. SIGKILL rogue daemons
     rogue_daemons = ["studentd", "mediaanalysisd", "parsecd", "CoreDuetd", "knowledge-agent"]
     for daemon in rogue_daemons:
         run_cmd(["killall", "-9", daemon])
 
-    # 3. Aggressively wipe redundant local repository caches
     root = Path(__file__).resolve().parent.parent
     caches = [
         root / ".venv",
@@ -32,7 +29,6 @@ def kinetic_purge():
         shutil.rmtree(pycache, ignore_errors=True)
 
     # 4. OS-level failure mitigation (INV_C5_17)
-    # Injecting launchctl setenv overrides
     run_cmd(["launchctl", "setenv", "CG_PDF_VERBOSE", "1"])
     run_cmd(["launchctl", "setenv", "MTL_HUD_ENABLED", "0"])
 

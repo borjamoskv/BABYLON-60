@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/landscape.py
 """Dynamic Fitness Landscape - the ceiling that moves.
 
 The fitness ceiling is not a constant. It grows with the ecosystem:
@@ -25,7 +24,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger(__name__)
 
-# MOSKV-1 known project roots
 _PROJECT_ROOTS = [
     Path("~/cortex").expanduser(),
     Path("~/notch-live").expanduser(),
@@ -35,7 +33,6 @@ _PROJECT_ROOTS = [
 
 _SKILLS_DIR = Path("~/.gemini/antigravity/skills").expanduser()
 
-# Weights
 _BASE_CEILING = 100.0
 _PER_PROJECT = 15.0
 _PER_BRIDGE = 5.0
@@ -43,7 +40,6 @@ _PER_SKILL = 2.0
 _PER_GHOST = 3.0
 _PER_DECISION = 1.0
 
-# Cache TTL (seconds)
 _CACHE_TTL = 30.0
 
 
@@ -102,7 +98,6 @@ class FitnessLandscape:
             + facts.get("decision", 0) * _PER_DECISION
         )
 
-        # Ratchet - ceiling never decreases
         ceiling = max(ceiling, self._last_ceiling)
         self._last_ceiling = ceiling
 
@@ -146,7 +141,6 @@ class FitnessLandscape:
         for sub in agent.subagents:
             sub.fitness = min(ceil, max(0.0, sub.fitness))
 
-    # ── Internal ───────────────────────────────────────────────
 
     @staticmethod
     def _count_projects() -> int:

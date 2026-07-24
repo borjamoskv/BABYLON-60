@@ -68,7 +68,6 @@ class KnowledgeCommitment:
         nadie más puede abrir el commitment.
         """
         expected = _compute_commitment(secret, blinding_factor)
-        # Constant-time compare para evitar timing attacks
         return hmac.compare_digest(self.commitment_hex, expected)
 
     def to_public_dict(self) -> dict[str, object]:

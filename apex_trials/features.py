@@ -104,7 +104,6 @@ def _count_criteria(text: str) -> tuple[int, int, int]:
         bulleted = sum(1 for ln in lines if _BULLET.match(ln))
         if bulleted:
             return bulleted
-        # fallback: substantive non-empty lines excluding the header itself
         return sum(1 for ln in lines if len(ln.strip()) > 12 and "criteria" not in ln.lower())
 
     n_inc = count_block(inclusion_block)

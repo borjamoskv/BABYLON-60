@@ -71,7 +71,6 @@ class GPTCanaryDetector:
         token_count = len(response_text) / 4.0  # Approx tokens
         tokens_per_sec = token_count / latency if latency > 0 else 0
 
-        # Signature analysis to detect GPT-5.6 (e.g. enhanced reasoning step tags, schema adherence)
         has_reasoning_markers = any(
             x in response_text.lower() for x in ["<thought>", "<reasoning>", "deduction", "step-by-step"]
         )
@@ -160,7 +159,6 @@ async def execute_canary_audit(target_code: str) -> dict[str, Any]:
     detector = GPTCanaryDetector(router)
     scanner = GlasswingVulnerabilityScanner(router)
 
-    # Run detectors
     canary_result = await detector.benchmark_endpoint(target_code, context_size=1000)
     security_report = await scanner.scan_and_patch(target_code, language="python")
 

@@ -37,7 +37,6 @@ class SecurityMonitor:
             return self._vector_store
 
         self._encoder = AsyncEncoder()
-        # LocalEmbedder handles lazy loading of the model
 
         self._vector_store = VectorStoreL2(  # type: ignore[type-error]
             encoder=self._encoder, db_path=Path("~/.babylon60/security_vectors.db").expanduser()
@@ -48,13 +47,9 @@ class SecurityMonitor:
         """Reads the tail of the firewall/API log for unprocessed events."""
         events = []
         if not self.log_path.exists():
-            # Seed a dummy log or return empty if absent
             return events
 
         try:
-            # Simple simulation: read all lines, assuming it's manageable
-            # In a sovereign KETER-level system we would track read offsets
-            # Lee el log entero y lo vacía para que no se re-analicen los mismos eventos.
             lines = self.log_path.read_text().splitlines()
             self.log_path.write_text("")
 
@@ -102,7 +97,6 @@ class SecurityMonitor:
         if not payload:
             return None
 
-        # Query L2 vector store for structurally/semantically similar attacks
         results = await store.recall(query=payload, limit=1)
         if not results:
             return None

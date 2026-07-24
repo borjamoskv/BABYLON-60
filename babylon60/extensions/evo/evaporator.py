@@ -39,10 +39,6 @@ class EntropicEvaporator:
             datetime.fromtimestamp(time.time(), tz=timezone.utc) - timedelta(days=30)
         ).isoformat()
 
-        # We query for candidate IDs
-        # meta NOT LIKE '%causal_parent%' is a heuristic check on encrypted/raw meta
-        # Note: In a real scenario with full encryption, we'd need a way to check
-        # without decrypting everything, but here we favor the principle.
 
         query = """
             SELECT id, tenant_id FROM facts

@@ -13,9 +13,7 @@ from typing import Any, Final
 
 __all__ = ["Episode", "Pattern"]
 
-# ─── Constants ───────────────────────────────────────────────────────
 
-# Episodic event categories
 EVENT_TYPES: Final[frozenset[str]] = frozenset(
     {
         "decision",  # Architectural choice, dependency addition, etc.
@@ -28,7 +26,6 @@ EVENT_TYPES: Final[frozenset[str]] = frozenset(
     }
 )
 
-# Valid human/agent emotional states
 EMOTIONS: Final[frozenset[str]] = frozenset(
     {
         "neutral",

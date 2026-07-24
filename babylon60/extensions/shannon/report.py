@@ -30,13 +30,11 @@ __all__ = ["EntropyReport"]
 
 logger = logging.getLogger("babylon60_extensions.shannon")
 
-# Diagnosis thresholds (normalized entropy)
 _THRESHOLD_CONCENTRATED = 0.3
 _THRESHOLD_FRAGMENTED = 0.9
 _THRESHOLD_STALE = 0.3
 _THRESHOLD_REDUNDANT = 0.7  # redundancy > 70% is problematic
 
-# Health score weights (must sum to 1.0)
 _WEIGHTS = {
     "type": 0.30,
     "age": 0.20,
@@ -105,7 +103,6 @@ def _detect_trend(velocity: dict[str, int]) -> str:
     all_counts = [velocity[d] for d in sorted_days]
     avg_all = sum(all_counts) / len(all_counts)
 
-    # Last 7 entries (or all if < 7)
     recent = all_counts[-7:]
     avg_recent = sum(recent) / len(recent)
 
@@ -195,7 +192,6 @@ class EntropyReport:
         """
         scanner = MemoryScanner(engine)
 
-        # Gather all distributions (sequential for SQLite safety)
         total = await scanner.total_active_facts(project)
         type_dist = await scanner.type_distribution(project)
         conf_dist = await scanner.confidence_distribution(project)
@@ -204,7 +200,6 @@ class EntropyReport:
         content_dist = await scanner.content_length_distribution(project)
         velocity = await scanner.temporal_velocity(project)
 
-        # Project distribution only makes sense without project filter
         if project is None:
             proj_dist = await scanner.project_distribution()
             joint = await scanner.type_project_joint()
@@ -213,7 +208,6 @@ class EntropyReport:
             proj_dist = {}
             mi = 0.0
 
-        # Compute entropy blocks
         type_block = _entropy_block(type_dist)
         conf_block = _entropy_block(conf_dist)
         proj_block = _entropy_block(proj_dist)
@@ -221,7 +215,6 @@ class EntropyReport:
         age_block = _entropy_block(age_dist)
         content_block = _entropy_block(content_dist)
 
-        # Trend and health
         trend = _detect_trend(velocity)
         type_r = type_block["redundancy"]
 
@@ -234,7 +227,6 @@ class EntropyReport:
             content_norm=content_block["normalized"],
         )
 
-        # Baseline weights for exergy (higher means the type drives more actions)
         usage_weights = {
             "decision": 1.0,
             "error": 0.9,
@@ -249,8 +241,6 @@ class EntropyReport:
         type_exergy = exergy_score(type_dist, usage_weights)
         type_dead_weight = dead_weight(type_dist, usage_weights)
 
-        # Full exergy report - Ω₁₃: useful work measurement, not just entropy
-        # Map high-confidence facts to decisions_enabled proxy
         conf_decisions = sum(
             v for k, v in type_dist.items() if k in {"decision", "architecture", "error", "bridge"}
         )
@@ -263,7 +253,6 @@ class EntropyReport:
             noise_fraction=min(type_dead_weight / max(type_block["H"], 1e-15), 1.0),
         )
 
-        # Diagnose with enriched inputs
         diagnosis, recommendations = _diagnose(
             type_block["normalized"],
             age_block["normalized"],

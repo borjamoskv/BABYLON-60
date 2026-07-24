@@ -36,7 +36,6 @@ class ForensicCommander(SwarmCommander):
                 mission.target_repo,
             )
 
-            # Map agents to regions based on the target repo name
             domain = mission.target_repo.split("/")[-1]
 
             for i in range(mission.agent_density):
@@ -50,7 +49,6 @@ class ForensicCommander(SwarmCommander):
                 }
                 dispatch_tasks.append({"id": agent_id, "domain": domain, "payload": payload})
 
-        # V8 Bucketed Parallel Dispatch (Thermal Stability)
         await self.execute_global_dispatch(dispatch_tasks, parallel=True)
 
         logger.info("💎 STRIKE CRYSTALLIZED: 10,000 forensic agents active.")
@@ -61,7 +59,6 @@ class ForensicCommander(SwarmCommander):
 
         for name, mission in self.missions.items():
             density = mission.agent_density
-            # Simulation: Aggregate exergy and uncertainty from the Legion
             report["mission_results"][name] = {  # type: ignore[index]
                 "agents": density,
                 "target": mission.target_repo,

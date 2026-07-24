@@ -15,7 +15,6 @@ import stat
 from decimal import Decimal
 from typing import Any
 
-# CDP Native integration pending. Stub mode active.
 CDP_AVAILABLE = False
 
 
@@ -42,7 +41,6 @@ class CdpToolkit:
 
 logger = logging.getLogger(__name__)
 
-# ── Spending Guardrails (Axiom Ω₃: Verify, then trust) ──────────
 MAX_TX_AMOUNT = Decimal("1.0")  # Max per-transaction (ETH equiv)
 MAX_TX_PER_SESSION = 10  # Circuit breaker per boot cycle
 _tx_count_this_session = 0
@@ -115,12 +113,10 @@ class CDPSovereignWallet:
             )
             assert self.agentkit is not None
 
-            # Persist seed with restrictive permissions (0600)
             new_wallet_data = self.agentkit.export_wallet()
             if new_wallet_data and new_wallet_data != wallet_data:
                 self._write_seed(new_wallet_data)
 
-            # Load LangChain action tools
             cdp_toolkit = CdpToolkit.from_cdp_agentkit_wrapper(
                 self.agentkit,
             )
@@ -189,7 +185,6 @@ class CDPSovereignWallet:
             logger.error("[CDP] Wallet not initialized.")
             return False
 
-        # ── Spending Guardrails ──────────────────────────────
         tx_amount = Decimal(amount)
         if tx_amount > MAX_TX_AMOUNT:
             logger.error(
@@ -263,7 +258,6 @@ if __name__ == "__main__":
                 desc = t.description[:70]
                 logging.getLogger(__name__).info(f"   - {t.name}: {desc}...")
 
-            # Verify singleton
             w2 = CDPSovereignWallet()
             assert w2 is wallet, "Singleton broken!"
             logging.getLogger(__name__).info("✅ Singleton verified")

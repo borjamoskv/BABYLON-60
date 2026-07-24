@@ -76,10 +76,8 @@ class HealthMixin:
         if not persist:
             return hs
 
-        # Feed trend detector
         trend = self._get_trend_detector()
 
-        # Seed from DB on first access
         db_path = str(getattr(self, "_db_path", ""))
         if not self._health_trend_seeded and db_path:
             trend.load_from_db(db_path)
@@ -87,7 +85,6 @@ class HealthMixin:
 
         trend.push(hs.score)
 
-        # Persist to DB (throttled to once per 60 seconds to prevent lock contention)
         if db_path:
             import time
 

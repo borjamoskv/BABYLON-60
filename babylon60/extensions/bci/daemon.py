@@ -10,9 +10,6 @@ from collections.abc import Callable
 
 from babylon60.crypto.hash_registry import cortex_hash
 
-# Standard library fallback since protobuf might need to be generated via protoc
-# In pure O(1) spirit, if we don't compile intent_pb2, we can just use length-prefixed struct packing.
-# But for the BCI, we'll emulate the byte-level buffer here without the heavy protoc dependency for now.
 
 SOCKET_PATH = "/tmp/cortex_bci.sock"
 
@@ -35,17 +32,13 @@ class BCI_Daemon:
     async def _handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
         writer.get_extra_info("peername")
         try:
-            # 1. Read header length (4 bytes)
             header_bytes = await reader.readexactly(4)
             payload_len = int.from_bytes(header_bytes, byteorder="big")
 
-            # 2. Read the raw payload buffer
             payload_buffer = await reader.readexactly(payload_len)
 
-            # 3. Quick hash check (last 32 bytes or similar depending on spec) -> Simplified to JSON dict logic here for bootstrap
             data = json.loads(payload_buffer.decode("utf-8"))
 
-            # Verify integrity
             expected_hash = data.get("integrity_hash")
             derivation = data.get("derivation", "UNKNOWN")
             action = data.get("action", 0)
@@ -62,7 +55,6 @@ class BCI_Daemon:
                     f"Integrity compromise (Hash mismatch) -> Expected: {expected_hash} | Got: {calculated_hash}"
                 )
 
-            # 4. Route to executing logic (Babestu integration point)
             logging.getLogger(__name__).info(f"[BCI] ⚡ INTENT RECEIVED | Action: {action} | Derivation: {derivation}")
             if action in self.action_handlers:
                 await self.action_handlers[action](instruction, raw_cargo)
@@ -87,7 +79,6 @@ class BCI_Daemon:
             os.remove(SOCKET_PATH)
 
         self.server = await asyncio.start_unix_server(self._handle_client, path=SOCKET_PATH)
-        # Apply restrictive permissions to the socket
         os.chmod(SOCKET_PATH, 0o600)
 
         logging.getLogger(__name__).info(f"[BCI] 🚀 ZERO-LATENCY UNIX SOCKET ESTABLISHED AT {SOCKET_PATH}")
@@ -116,11 +107,9 @@ class BCI_Transmitter:
             "timestamp": int(time.monotonic()),
         }
 
-        # Encode to bytes
         buffer = json.dumps(packet).encode("utf-8")
         payload_len = len(buffer)
 
-        # 4 bytes size header + buffer
         transmission = payload_len.to_bytes(4, byteorder="big") + buffer
 
         try:
@@ -144,9 +133,6 @@ class BCI_Transmitter:
                 logging.getLogger(__name__).warning("Suppressed exception: %s", exc)
 
 
-# -----------------------
-# TESTING SCAFFOLDING
-# -----------------------
 async def mock_handler(instruction: str, payload: str):
     """Simulates Babestu or Cortex execution."""
     logging.getLogger(__name__).info(f"      -> Running instruction [{instruction}]")
@@ -167,10 +153,8 @@ async def test_bci():
     daemon = BCI_Daemon(handlers)
     task = asyncio.create_task(daemon.start())
 
-    # Let server boot
     await asyncio.sleep(0.5)
 
-    # Inject intent bypass
     logging.getLogger(__name__).info("\n--- INJECTING INTENT 0x01 ---")
     await BCI_Transmitter.send_intent(
         derivation="Ω₂ (Entropic Asymmetry)",

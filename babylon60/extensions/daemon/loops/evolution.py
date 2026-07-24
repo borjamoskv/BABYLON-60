@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
 
 import asyncio
 import itertools
@@ -20,7 +18,6 @@ async def evolution_loop(state, cortex_root, speak_func):
             calculate_module_overlap,  # pyright: ignore[reportMissingImports]
         )
     except ImportError:
-        # Fallback if analyze_entropy is not on path
         return
 
     while True:
@@ -49,7 +46,6 @@ async def evolution_loop(state, cortex_root, speak_func):
                                         "strength": 0.8,
                                     }
                                 )
-                                # Cap resonances to prevent OOM
                                 res = state.daemons["ghost_field"]["resonances"]
                                 if len(res) > _MAX_RESONANCES:
                                     state.daemons["ghost_field"]["resonances"] = res[

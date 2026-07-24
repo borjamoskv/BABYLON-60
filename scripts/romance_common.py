@@ -183,8 +183,6 @@ def I(length: float, kids: list[TreeNode]) -> TreeNode:  # noqa: E743
     return ("I", str(length), *[str(id(k)) for k in kids])
 
 
-# NOTE: The tree is built with raw tuples for runtime flexibility.
-# mypy sees the declared type but runtime uses heterogeneous tuples.
 TREE: tuple[str, ...] = (
     "I",
     "0.0",
@@ -214,7 +212,6 @@ TREE: tuple[str, ...] = (
     "0.5",
 )
 
-# Re-define TREE as the actual runtime structure using Any-typed tuples
 _TREE: Any = (
     "I",
     0.0,

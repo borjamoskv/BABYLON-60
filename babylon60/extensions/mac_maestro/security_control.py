@@ -94,7 +94,6 @@ class SecurityControl:
         lines = out.splitlines()
         listening = [line for line in lines if "LISTEN" in line]
 
-        # For now, observing counts as valid (true secure state depends on a whitelist).
         raw_out = "\n".join(listening[:10])
         if len(listening) > 10:
             raw_out += f"\n... and {len(listening) - 10} more"
@@ -118,7 +117,6 @@ class SecurityControl:
             return_exceptions=True,
         )
 
-        # Handle potential exceptions from asyncio.gather
         clean_results = []
         for i, res in enumerate(results):
             if isinstance(res, Exception):

@@ -19,7 +19,6 @@ def evaluate_c5_isomorphism(G1: nx.Graph, G2: nx.Graph) -> Dict[str, Any]:
 if __name__ == "__main__":
     print("--- C5-REAL: ANÁLISIS TOPOLÓGICO Y ALINEAMIENTO VF2 ---")
 
-    # Construcción de redes (Substrato Causal)
     G1: nx.Graph = nx.Graph()
     G1.add_edges_from([(1, 2), (2, 3), (3, 1)])
 

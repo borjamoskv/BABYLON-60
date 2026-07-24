@@ -22,7 +22,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.ui_control.keyboard")
 
-# Default inter-character delay (seconds) - human-like cadence
 DEFAULT_TYPING_DELAY = 0.03
 
 
@@ -102,7 +101,6 @@ class KeyboardEngine:
         if not text:
             return InteractionResult(success=True)
 
-        # For long text, use clipboard injection - O(1) instead of O(n)
         if len(text) > 50:
             return await self._type_via_clipboard(text, target)
 

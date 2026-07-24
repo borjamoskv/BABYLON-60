@@ -34,7 +34,6 @@ def now_iso() -> str:
     return datetime.datetime.fromtimestamp(time.time(), tz=datetime.timezone.utc).isoformat()
 
 
-# ─── Canonical JSON ───────────────────────────────────────────────
 
 
 def canonical_json(obj: Any) -> str:
@@ -58,7 +57,6 @@ def canonical_json(obj: Any) -> str:
     )
 
 
-# ─── Transaction Hash ────────────────────────────────────────────
 
 HASH_VERSION = 3
 

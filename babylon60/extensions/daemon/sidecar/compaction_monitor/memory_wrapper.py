@@ -14,18 +14,14 @@ import ctypes
 import os
 from dataclasses import dataclass
 
-# Load the standard C library (glibc). On Linux it's libc.so.6.
 _libc = None
 try:
     if os.name == "posix":
-        # On Linux, malloc_trim is in libc.so.6.
-        # On macOS, libc.dylib exists but does NOT contain malloc_trim or mallinfo2.
         _libc_name = "libc.so.6" if os.uname().sysname != "Darwin" else "libc.dylib"
         _libc = ctypes.CDLL(_libc_name, use_errno=True)
 except (ValueError, TypeError, OSError, KeyError):
     _libc = None
 
-# Symbols availability
 HAS_MALLOC_TRIM = False
 HAS_MALLINFO2 = False
 
@@ -130,9 +126,6 @@ def get_mallinfo2() -> MallInfo2:
     return MallInfo2.from_c()
 
 
-# ---------------------------------------------------------------------------
-# Simple sanity test (executed only when run as a script)
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     logging.getLogger(__name__).info("mallinfo2:", get_mallinfo2())
     try:

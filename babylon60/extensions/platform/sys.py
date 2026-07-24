@@ -22,7 +22,6 @@ __all__ = [
     "tail_file_command",
 ]
 
-# ─── Platform Detection ──────────────────────────────────────────────
 
 
 def is_macos() -> bool:
@@ -51,7 +50,6 @@ def platform_name() -> str:
     return sys.platform
 
 
-# ─── Path Resolution ─────────────────────────────────────────────────
 
 
 def get_cortex_dir() -> Path:
@@ -91,7 +89,6 @@ def get_service_dir() -> Path | None:
     return None
 
 
-# ─── Log File Viewer ─────────────────────────────────────────────────
 
 
 def tail_file_command(path: str) -> list[str]:

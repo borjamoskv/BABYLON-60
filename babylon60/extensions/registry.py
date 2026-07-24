@@ -13,9 +13,7 @@ import sys
 
 logger = logging.getLogger("babylon60.extensions.registry")
 
-# Extension classification mapping
 TIER_MAP = {
-    # CORE: Always allowed, critical path
     "llm": "CORE",
     "swarm": "CORE",
     "mcp": "CORE",
@@ -27,7 +25,6 @@ TIER_MAP = {
     "adk": "CORE",
     "daemon": "CORE",
     "nexus": "CORE",
-    # OPTIONAL: Allowed, but lazy-loaded and monitored
     "browser": "OPTIONAL",
     "audio": "OPTIONAL",
     "compliance": "OPTIONAL",
@@ -49,7 +46,6 @@ TIER_MAP = {
     "sync": "OPTIONAL",
     "skills": "OPTIONAL",
     "trust": "OPTIONAL",
-    # EXPERIMENTAL: Forbidden or strict warning unless CORTEX_EXPERIMENTAL_EXTENSIONS=1
     "dopamine_loop": "EXPERIMENTAL",
     "wealth": "EXPERIMENTAL",
     "bci": "EXPERIMENTAL",
@@ -110,5 +106,4 @@ def verify_extension_import(fullname: str) -> None:
                 )
             else:
                 logger.warning(msg)
-                # Fallback to direct stderr write to ensure visibility in console logs
                 sys.stderr.write(f"\033[93m{msg}\033[0m\n")

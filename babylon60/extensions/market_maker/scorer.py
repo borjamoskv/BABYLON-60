@@ -29,7 +29,6 @@ class OpportunityScorer:
         """
         Evaluates 4 axes up to 25 pts each: TAM, Competition, CORTEX Advantage, and TTM.
         """
-        # Simulate the evaluation of each axis deterministically for automated demonstration.
         tam = Decimal(str(round(self._rng.uniform(5, 25), 2)))
         comp = Decimal(str(round(self._rng.uniform(5, 25), 2)))
         adv = Decimal(str(round(self._rng.uniform(5, 25), 2)))

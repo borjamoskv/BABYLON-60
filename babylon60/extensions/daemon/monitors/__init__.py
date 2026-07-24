@@ -26,7 +26,6 @@ if TYPE_CHECKING:
     from babylon60.extensions.daemon.monitors.trends import TrendsMonitor
     from babylon60.extensions.daemon.monitors.workflow import WorkflowMonitor
 
-# Aliases for backward compatibility
 _ALIASES: dict[str, str] = {
     "AutonomousMejoraloMonitor": "UnifiedMejoraloMonitor",
     "EntropyMonitor": "UnifiedMejoraloMonitor",
@@ -84,7 +83,6 @@ _LAZY_IMPORTS: dict[str, tuple[str, str]] = {
 
 def __getattr__(name: str) -> object:
     """Lazy-load monitor symbols on first access (PEP 562)."""
-    # Handle aliases first
     if name in _ALIASES:
         canonical = _ALIASES[name]
         value = __getattr__(canonical)

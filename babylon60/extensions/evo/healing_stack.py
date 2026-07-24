@@ -70,19 +70,15 @@ class HealingStack:
     Usage:
         stack = HealingStack()
 
-        # Execute with self-healing + auto-optimization + prediction
         result = await stack.execute(
             task=my_function,
             subsystem="api",
         )
 
-        # Run as unified daemon
         await stack.start()
 
-        # Query optimized parameters
         timeout = stack.get_timeout("api")
 
-        # Get failure predictions
         predictions = stack.predict()
     """
 
@@ -91,7 +87,6 @@ class HealingStack:
 
         self._config = config or HealingStackConfig()
 
-        # Core components
         self._tracker = PerformanceTracker()
         self._optimizer = SelfOptimizer(
             tracker=self._tracker,
@@ -101,10 +96,8 @@ class HealingStack:
             config=self._config.curative,
         )
 
-        # Predictive healer
         self._predictor = PredictiveHealer(tracker=self._tracker)
 
-        # Persistence
         self._store: TuningStore | None = None
         if self._config.enable_persistence:
             self._store = TuningStore(base_dir=self._config.persist_dir)
@@ -127,7 +120,6 @@ class HealingStack:
                 len(saved),
                 list(saved.keys()),
             )
-            # Sync restored params into L5
             self._sync_parameters_sync()
 
     async def execute(
@@ -149,7 +141,6 @@ class HealingStack:
         ctx = context or {}
         start_ns = time.perf_counter_ns()
 
-        # Inject ALL optimized parameters
         ctx["timeout_ms"] = self._optimizer.get_tuned_timeout(subsystem)
         ctx["batch_size"] = self._optimizer.get_tuned_batch_size(subsystem)
         ctx["cooldown_s"] = self._optimizer.get_tuned_cooldown(subsystem)
@@ -166,7 +157,6 @@ class HealingStack:
             latency_ms = (time.perf_counter_ns() - start_ns) / 1e6
             self._tracker.record_execution(subsystem, latency_ms, success=True)
 
-            # Feed repair telemetry from healing events
             self._feed_repair_telemetry(subsystem)
 
             return result
@@ -193,7 +183,6 @@ class HealingStack:
                     latency_ms=repair.get("latency_ms", 0.0),
                 )
 
-    # ─── Prediction ───────────────────────────────────────────
 
     def predict(self) -> list[Prediction]:
         """Run all prediction models."""
@@ -220,7 +209,6 @@ class HealingStack:
                             p.confidence,
                             p.recommended_action,
                         )
-                        # Apply preemptive action if confidence is high enough
                         if p.confidence >= self._config.preemptive_action_confidence:
                             await self._apply_preemptive_action(p)
 
@@ -256,7 +244,6 @@ class HealingStack:
         self._predictor.record_prevention()
         self._sync_parameters_sync()
 
-    # ─── Persistence ──────────────────────────────────────────
 
     async def _persist_loop(self) -> None:
         """Periodically persist optimizer tunings to disk."""
@@ -278,26 +265,22 @@ class HealingStack:
             if all_params:
                 self._store.snapshot(all_params, self._optimizer.stats)
 
-    # ─── Parameter Sync (FULL) ────────────────────────────────
 
     def _sync_parameters_sync(self) -> None:
         """Sync ALL L6 optimized params into L5 agent config (synchronous)."""
         all_params = self._optimizer.get_all_tuned_params()
 
         for subsystem, params in all_params.items():
-            # Sync circuit breaker threshold
             breaker = self._agent._breakers.get(subsystem)
             if breaker is not None:
                 new_threshold = params.get("breaker_threshold")
                 if new_threshold is not None:
                     breaker._threshold = new_threshold
 
-            # Sync timeout into agent config
             new_timeout = params.get("timeout_ms")
             if new_timeout is not None:
                 self._agent.config.healing_timeout_s = new_timeout / 1000.0
 
-            # Sync cooldown
             new_cooldown = params.get("cooldown_s")
             if new_cooldown is not None:
                 self._agent.config.cooldown_after_repair_s = new_cooldown
@@ -306,7 +289,6 @@ class HealingStack:
         """Async wrapper for parameter sync."""
         self._sync_parameters_sync()
 
-    # ─── Daemon ───────────────────────────────────────────────
 
     async def start(self, engine: Any = None) -> None:
         """Start the unified L5+L6+Predictive+Persistent daemon."""
@@ -353,7 +335,6 @@ class HealingStack:
         self.persist_now()
         logger.info("[HEALING_STACK] Daemon stopped. Tunings persisted.")
 
-    # ─── Parameter Queries ────────────────────────────────────
 
     def get_timeout(self, subsystem: str) -> float:
         return self._optimizer.get_tuned_timeout(subsystem)
@@ -364,7 +345,6 @@ class HealingStack:
     def get_cooldown(self, subsystem: str) -> float:
         return self._optimizer.get_tuned_cooldown(subsystem)
 
-    # ─── Introspection ────────────────────────────────────────
 
     @property
     def health(self) -> dict[str, Any]:

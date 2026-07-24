@@ -6,7 +6,6 @@ from typing import Any
 
 from pydantic import BaseModel, Field
 
-# Importación de la Cúspide O(1)
 from babylon60.extensions.skills.autodidact.actuator import autodidact_pipeline
 
 logger = logging.getLogger("CORTEX.TOOLS.AUTODIDACT")
@@ -46,11 +45,8 @@ class AutodidactIngestionTool:
             "🧠 [AGENT TOOL] Disparando AUTODIDACT-Ω -> Target: %s | Intent: %s", target, intent
         )
         try:
-            # Invoca el pipeline completo. Como está protegido por PULMONES,
-            # el agente principal nunca se bloqueará si la red cae.
             await autodidact_pipeline(target, intent, force)
 
-            # Devolvemos un string limpio para el scratchpad del LLM.
             return (
                 f"Protocolo AUTODIDACT ejecutado sobre '{target}' con intent '{intent}'. "
                 f"El conocimiento ha sido/será destilado y sembrado en cortex.db (vía PULMONES si hubo fallo de red)."

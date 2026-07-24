@@ -1,6 +1,4 @@
-# causal_isomorphism/transpiler.py — Causal Isomorphism Transpiler Orchestrator
 # C5-REAL: F# → {Solidity, Rust} controlled AST transmutation
-# Author: Borja Moskv (borjamoskv)
 """
 Main orchestrator for the Causal Isomorphism Transpiler.
 
@@ -43,7 +41,6 @@ class TranspilationResult:
     timestamp: str = ""
     source_hash: str = ""
 
-    # Output paths (filled after write)
     solidity_path: str = ""
     rust_path: str = ""
     report_path: str = ""
@@ -123,26 +120,20 @@ class CausalIsomorphismTranspiler:
         Returns:
             TranspilationResult with all outputs and validation reports
         """
-        # 1. Read source and compute hash
         source_text = source.read_text(encoding="utf-8")
         source_hash = hashlib.sha256(source_text.encode("utf-8")).hexdigest()
 
-        # 2. Parse F# → IR
         ir_module = self.parser.parse_file(source)
 
-        # 3. Validate against Trilingual Regime
         sol_report = self.validator.validate(ir_module, RegimeLayer.CONSENSUS)
         rust_report = self.validator.validate(ir_module, RegimeLayer.THERMODYNAMICS)
 
-        # 4. Emit Solidity (regime-filtered)
         self.sol_emitter = SolidityEmitter()  # Reset state
         solidity_output = self.sol_emitter.emit_module(ir_module)
 
-        # 5. Emit Rust (regime-filtered)
         self.rust_emitter = RustEmitter()  # Reset state
         rust_output = self.rust_emitter.emit_module(ir_module)
 
-        # 6. Build result
         try:
             rel_source = str(source.resolve().relative_to(Path.cwd()))
         except ValueError:
@@ -158,7 +149,6 @@ class CausalIsomorphismTranspiler:
             source_hash=source_hash,
         )
 
-        # 7. Write outputs if output_dir specified
         if output_dir is not None:
             output_dir.mkdir(parents=True, exist_ok=True)
             self._write_outputs(result, output_dir)
@@ -203,7 +193,6 @@ class CausalIsomorphismTranspiler:
         """Write generated code and reports to disk."""
         module_name = result.ir_module.name
 
-        # Solidity output
         sol_path = output_dir / f"{module_name}Anchor.sol"
         sol_path.write_text(result.solidity_output, encoding="utf-8")
         try:
@@ -211,7 +200,6 @@ class CausalIsomorphismTranspiler:
         except ValueError:
             result.solidity_path = str(sol_path)
 
-        # Rust output
         rust_path = output_dir / f"{self._to_snake(module_name)}.rs"
         rust_path.write_text(result.rust_output, encoding="utf-8")
         try:
@@ -219,7 +207,6 @@ class CausalIsomorphismTranspiler:
         except ValueError:
             result.rust_path = str(rust_path)
 
-        # Validation report
         report_path = output_dir / f"{module_name}_regime_report.txt"
         report_path.write_text(result.full_report(), encoding="utf-8")
         try:

@@ -49,7 +49,6 @@ class MejoraloDaemon:
         self.target_score = target_score
         self.metrics = metrics or MetricsRegistry()
 
-        # 🛡️ Sovereign Security & Context
         from babylon60.core.paths import CORTEX_DB as DEFAULT_DB_PATH
 
         self.cortex_engine = get_engine(
@@ -81,7 +80,6 @@ class MejoraloDaemon:
                 await self._loop_task
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
-            # expected - task was cancelled by us
             self._loop_task = None
         logger.info("Sovereign Daemon: Ouroboros cycle paused.")
 
@@ -109,7 +107,6 @@ class MejoraloDaemon:
         logger.info("⚡ Starting MEJORAlo evolutionary wave...")
         self.canary.capture_baselines()  # type: ignore[reportAttributeAccessIssue]
 
-        # 1. Pre-scan: capture baseline score
         result = await self.engine.scan(  # type: ignore[reportGeneralTypeIssues]
             self.project,
             self.base_path,
@@ -126,7 +123,6 @@ class MejoraloDaemon:
             "🚨 Quality Breach (%d < %d). Fetching context...", score_before, self.target_score
         )
 
-        # 2. Memory/KI Context Fusion + Causal Analysis
         fused_context = await self.fusion.fuse_context(  # type: ignore[reportCallIssue]
             query=" ".join(  # type: ignore[reportCallIssue]
                 d.name for d in result.dimensions if d.score < DAEMON_DIM_SCORE_THRESHOLD
@@ -136,7 +132,6 @@ class MejoraloDaemon:
         )
         fused_context = await self._ouroboros_analyze(result, fused_context)
 
-        # 3. Healing - escalate to relentless after consecutive stagnation
         if self._consecutive_stagnant >= STAGNATION_ESCALATION_THRESHOLD:
             logger.warning(
                 "🔥 Stagnation detected (%d cycles). Escalating to relentless mode.",
@@ -154,7 +149,6 @@ class MejoraloDaemon:
                 fused_context=fused_context,  # type: ignore[reportCallIssue]
             )
 
-        # 4. Post-heal verification: re-scan to measure real impact
         result_after = await self.engine.scan(  # type: ignore[reportGeneralTypeIssues]
             self.project,
             self.base_path,
@@ -165,7 +159,6 @@ class MejoraloDaemon:
         self.metrics.set_gauge("cortex_code_score", score_after)
         self.metrics.set_gauge("cortex_heal_delta", delta)
 
-        # 5. Record session with REAL before/after scores
         action = (
             "autonomous_heal"
             if self._consecutive_stagnant < STAGNATION_ESCALATION_THRESHOLD
@@ -178,7 +171,6 @@ class MejoraloDaemon:
             actions=[action],
         )
 
-        # 6. Track stagnation for escalation
         if delta <= 0:
             self._consecutive_stagnant += 1
             logger.warning(
@@ -210,7 +202,6 @@ class MejoraloDaemon:
 
     async def _ouroboros_analyze(self, result: Any, context: str) -> str:
         """🐍 OUROBOROS-∞ PHASE 1: Causal Reasoning with effectiveness context."""
-        # Inject historical trend data for informed reasoning
         trend_ctx = ""
         try:
             from babylon60.extensions.mejoralo.effectiveness import EffectivenessTracker

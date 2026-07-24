@@ -1,5 +1,3 @@
-// BABYLON60 IDE — Ontology Bridge (KINETIC BIND RAW)
-// Semantic vector dispatch over Tauri IPC
 import { isTauri } from './api.js';
 
 let invoke = null;
@@ -7,7 +5,6 @@ if (isTauri) {
   import('@tauri-apps/api/core').then(m => { invoke = m.invoke; }).catch(() => {});
 }
 
-// Domain, Primitive, Modifier enums mirrored from Rust lexicon
 export const Domain    = Object.freeze(['SOURCE','MATRIX','PULSE','KINETIC','LOGIC','VECTOR','STORAGE','OSINT','CLOCK','COMPILER']);
 export const Primitive = Object.freeze(['INIT','MUTATE','BIND','QUERY','STREAM','COMMIT','SYNC','HALT','FORK','JOIN']);
 export const Modifier  = Object.freeze(['RAW','ATOMIC','PERSIST','EPHEMERAL','ASYNC','SYNC','QUANTIZED','MAPPED','WRAPPED','LOCKED']);

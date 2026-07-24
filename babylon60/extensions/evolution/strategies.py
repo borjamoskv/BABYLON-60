@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/strategies.py
 """Improvement Strategies for the Continuous Improvement Engine.
 
 Phase 2 (v3): All signal-bearing strategies consume real CORTEX telemetry
@@ -41,7 +40,6 @@ logger = logging.getLogger(__name__)
 
 _rng = secrets.SystemRandom()
 
-# Shared metrics instance - 60s TTL cache, thread-safe
 _metrics = CortexMetrics()
 
 
@@ -78,9 +76,6 @@ class ParameterTuningStrategy:
         m = _dm(agent)
         if m.health_score > 0.9:
             return None  # Already sovereign-grade
-        # Developmental Plasticity: scale with error_rate + rugeddness (fitness variance)
-        # Low variance -> smooth landscape; High variance -> rugged/chaotic landscape.
-        # Note: EnneagramSovereign.get_fitness_variance() is expected in the population controller.
         variance = getattr(agent, "avg_subagent_fitness_variance", 0.0)
         ruggedness = min(1.0, variance / 50.0) if variance > 0 else 0.0
         scale = (0.5 + 2.5 * m.error_rate) * (1.0 + ruggedness)
@@ -115,7 +110,6 @@ class PruneDeadPathStrategy:
 
     def evaluate_agent(self, agent: EnneagramSovereign) -> Mutation | None:
         m = _dm(agent)
-        # ghost_density 0→threshold=20, density 1→threshold=40
         threshold = 20.0 + 20.0 * m.ghost_density
         worst = agent.worst_subagent
         if worst and worst.fitness < threshold:
@@ -164,7 +158,6 @@ class HeuristicInjectionStrategy:
     def _weight(self, agent: EnneagramSovereign) -> float:
         m = _dm(agent)
         base = self._BASE_HEURISTICS.get(agent.domain.name, 0.5)
-        # fact_density bonus: 0 facts → 0, 100+ facts → +0.5
         density_bonus = min(0.5, m.fact_density / 200.0)
         return base + density_bonus
 
@@ -208,11 +201,9 @@ class BridgeImportStrategy:
         if gap <= 30.0:
             return None
         m = _dm(agent)
-        # base_mult=0.1, bridge_score boosts to max 0.25 (Margulian Endosymbiosis)
         mult = 0.1 + 0.15 * m.bridge_score
         delta = gap * mult
 
-        # Symbiotic Trait Transfer: Permanent inheritance of effective parameters
         if hasattr(worst, "parameters") and hasattr(best, "parameters"):
             worst.parameters.update(best.parameters)
 
@@ -245,8 +236,6 @@ class AdversarialStressStrategy:
             return None
 
         m = _dm(agent)
-        # Red Queen Trigger: Frequency-dependent dynamics.
-        # If the domain is evolving fast (high fitness_delta), stress probability increases.
         fd = _safe_float(m.fitness_delta)
         p_queen = 0.1 + 0.5 * min(1.0, max(0.0, fd))
         if _rng.random() > p_queen:
@@ -396,10 +385,6 @@ class StagnationBreakerStrategy:
         if not self._is_stagnated(agent.mutations):
             return None
 
-        # ── Gould-Eldredge Circuit Breaker ─────────────────────────
-        # Reject shock if we don't have enough fitness budget.
-        # If the system is already struggling (fitness <= 80), a negative
-        # shock from fitness_delta could cause a death spiral.
         best_sub = agent.best_subagent
         if not best_sub or best_sub.fitness <= 80.0:
             logger.debug(
@@ -426,7 +411,6 @@ class StagnationBreakerStrategy:
         if not self._is_stagnated(sub.mutations):
             return None
 
-        # ── Gould-Eldredge Circuit Breaker (EnneagramSubAgent level) ────────
         if sub.fitness <= 80.0:
             return None
 
@@ -440,13 +424,6 @@ class StagnationBreakerStrategy:
         )
 
 
-# Default strategy pipeline (order matters - applied sequentially)
-# Phase 1: Repair (prune, bridge)
-# Phase 2: Grow (heuristics, tuning)
-# Phase 3: Stress-test (adversarial)
-# Phase 4: Compress (entropy)
-# Phase 5: Recombine (crossover)
-# Phase 6: Escape plateaus (stagnation break)
 DEFAULT_STRATEGIES: list[ImprovementStrategy] = [
     PruneDeadPathStrategy(),
     BridgeImportStrategy(),  # type: ignore[reportAssignmentType]

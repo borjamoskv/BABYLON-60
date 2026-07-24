@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 
 """Grok Resilient Client.
 
@@ -63,10 +62,8 @@ class ConversationHistory:
         has_system = self.messages and self.messages[0]["role"] == "system"
         start_idx = 1 if has_system else 0
 
-        # Calculate how many to remove
         to_remove = len(self.messages) - self.max_messages
 
-        # Remove oldest non-system messages
         for _ in range(to_remove):
             if len(self.messages) > start_idx:
                 self.messages.pop(start_idx)
@@ -98,7 +95,6 @@ class ResilientGrokClient:
         base_url: str = "https://api.x.ai/v1",
         timeout: float = 60.0,
     ) -> None:
-        # Load from environment fallback
         self.api_key = api_key or os.environ.get("XAI_API_KEY") or os.environ.get("GROK_API_KEY")
         if not self.api_key:
             logger.warning("No XAI_API_KEY or GROK_API_KEY found in environment variables.")
@@ -106,7 +102,6 @@ class ResilientGrokClient:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
 
-        # Initialize clients lazily to prevent env verification errors at load-time
         self._sync_client: OpenAI | None = None
         self._async_client: AsyncOpenAI | None = None
 
@@ -237,7 +232,6 @@ class ResilientGrokClient:
             if max_tokens is not None:
                 payload["max_tokens"] = max_tokens
 
-            # Uses OpenAI Beta parse helper
             completion = self.sync_client.beta.chat.completions.parse(**payload)
             parsed = completion.choices[0].message.parsed
             if parsed is None:
@@ -247,7 +241,6 @@ class ResilientGrokClient:
             logger.error("xAI API structured call failed: %s", e)
             raise
 
-    # ─── Async Implementations ───────────────────────────────────────────
 
     @retry(
         retry=retry_if_exception_type(

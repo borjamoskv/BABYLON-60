@@ -25,10 +25,8 @@ SQUADS = [
 
 async def agent_task(agent_id: int, squad: str) -> dict:
     """Micro-task representing a single agent's execution cycle."""
-    # Deterministic delay to simulate IO/Ledger access without blocking the loop
     await asyncio.sleep(0.05)
 
-    # Compute cryptographic proof of work
     payload = f"{squad}_agent_{agent_id}_exergy".encode()
     work_hash = bytes_to_base60(hashlib.sha3_256(payload).digest())
 
@@ -44,20 +42,17 @@ async def deploy_legion():
 
     start_time = time.perf_counter()
 
-    # Matrix Generation
     tasks = []
     for i in range(TOTAL_AGENTS):
         squad = SQUADS[i % len(SQUADS)]
         tasks.append(agent_task(i, squad))
 
-    # Parallel execution of 10,000 futures
     logger.info("Saturando el Event Loop. VSA Anchoring...")
     results = await asyncio.gather(*tasks)
 
     end_time = time.perf_counter()
     elapsed = end_time - start_time
 
-    # Verification
     assert len(results) == TOTAL_AGENTS
 
     logger.info("✅ LEGION-10k COMPLETADO. %s Agentes sincronizados.", TOTAL_AGENTS)
@@ -67,5 +62,4 @@ async def deploy_legion():
 
 
 if __name__ == "__main__":
-    # Optimize event loop policy if needed, but standard is fine for 10k
     asyncio.run(deploy_legion())

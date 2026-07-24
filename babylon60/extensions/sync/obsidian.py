@@ -25,7 +25,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.sync.obsidian")
 
-# ─── Type → Folder mapping ─────────────────────────────────────────
 TYPE_FOLDERS: dict[str, str] = {
     "decision": "decisions",
     "error": "errors",
@@ -36,7 +35,6 @@ TYPE_FOLDERS: dict[str, str] = {
     "reflection": "reflections",
 }
 
-# ─── Emoji for types ───────────────────────────────────────────────
 TYPE_EMOJI: dict[str, str] = {
     "decision": "⚡",
     "error": "🔴",
@@ -70,7 +68,6 @@ def _render_frontmatter(data: dict) -> str:
         elif value is None:
             lines.append(f"{key}: null")
         else:
-            # Escape quotes in strings
             safe = str(value).replace('"', '\\"')
             lines.append(f'{key}: "{safe}"')
     lines.append("---")
@@ -96,7 +93,6 @@ def _render_fact_note(fact: dict) -> str:
         }
     )
 
-    # Build note body
     lines = [
         frontmatter,
         "",
@@ -127,7 +123,6 @@ def _render_fact_note(fact: dict) -> str:
 
 def _render_project_moc(project: str, facts: list[dict]) -> str:
     """Render a project Map of Content note."""
-    # Group by type
     by_type: dict[str, list[dict]] = {}
     for f in facts:
         by_type.setdefault(f["type"], []).append(f)
@@ -211,7 +206,6 @@ def _render_dashboard(
         "",
     ]
 
-    # Type distribution
     lines.append("| Type | Count |")
     lines.append("|:---|---:|")
     for ftype, count in sorted(type_counts.items(), key=lambda x: -x[1]):
@@ -219,7 +213,6 @@ def _render_dashboard(
         lines.append(f"| {emoji} {ftype} | {count} |")
     lines.append("")
 
-    # Project index
     lines.append("## 📂 Projects")
     lines.append("")
     for project, facts in sorted(projects.items()):
@@ -275,12 +268,10 @@ def _write_vault(
     """Write all vault files and return notes_created count."""
     notes_created = 0
 
-    # Create type folders
     all_folders = set(TYPE_FOLDERS.values()) | {"projects", "tags"}
     for folder in all_folders:
         (vault_path / folder).mkdir(parents=True, exist_ok=True)
 
-    # 1. Individual fact notes
     for f in facts:
         folder = TYPE_FOLDERS.get(f["type"], f["type"])
         folder_path = vault_path / folder  # type: ignore[reportOperatorIssue]
@@ -289,20 +280,17 @@ def _write_vault(
         (folder_path / filename).write_text(_render_fact_note(f), encoding="utf-8")
         notes_created += 1
 
-    # 2. Project MOC notes
     for project, proj_facts in by_project.items():
         content = _render_project_moc(project, proj_facts)
         (vault_path / "projects" / f"{project}.md").write_text(content, encoding="utf-8")
         notes_created += 1
 
-    # 3. Tag index notes
     for tag, tag_facts in by_tag.items():
         safe_tag = _slugify(tag) or "untagged"
         content = _render_tag_note(tag, tag_facts)
         (vault_path / "tags" / f"{safe_tag}.md").write_text(content, encoding="utf-8")
         notes_created += 1
 
-    # 4. Dashboard MOC
     dashboard = _render_dashboard(by_project, len(facts), type_counts)
     (vault_path / "🧠 CORTEX Dashboard.md").write_text(dashboard, encoding="utf-8")
     notes_created += 1
@@ -330,7 +318,6 @@ async def export_obsidian(
 
     vault_path = Path(vault_path)
 
-    # ─── Fetch all active facts ─────────────────────────────────────
     async with (
         engine.session() as conn,
         conn.execute(

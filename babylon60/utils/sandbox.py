@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """AST Sandbox (KETER-∞ Ola 4).
 
@@ -34,14 +30,10 @@ Usage::
 
     sandbox = ASTSandbox()
     verdict = sandbox.validate("x = 2 + 3")
-    # verdict.is_safe == True
 
     verdict = sandbox.validate("import os; os.system('rm -rf /')")
-    # verdict.is_safe == False
-    # verdict.violations == ["Import node not allowed: 'import os'"]
 
     result = sandbox.safe_exec("x = 2 + 3\\nresult = x * 10")
-    # result.output == {'result': 30}
 """
 
 from __future__ import annotations
@@ -58,12 +50,9 @@ __all__ = ["ASTSandbox", "ExecResult", "SandboxVerdict"]
 logger = logging.getLogger("babylon60.sandbox")
 
 
-# ─── AST Whitelist ───────────────────────────────────────────────────
 
-# Node types allowed in sandboxed code
 _ALLOWED_NODES = frozenset(
     {
-        # Literals & expressions
         ast.Module,
         ast.Expression,
         ast.Interactive,
@@ -80,7 +69,6 @@ _ALLOWED_NODES = frozenset(
         ast.Del,
         ast.Starred,
         ast.Expr,
-        # Operations
         ast.UnaryOp,
         ast.UAdd,
         ast.USub,
@@ -114,16 +102,13 @@ _ALLOWED_NODES = frozenset(
         ast.IsNot,
         ast.In,
         ast.NotIn,
-        # Subscripting
         ast.Subscript,
         ast.Slice,
-        # Comprehensions
         ast.ListComp,
         ast.SetComp,
         ast.DictComp,
         ast.GeneratorExp,
         ast.comprehension,
-        # Statements
         ast.Assign,
         ast.AugAssign,
         ast.AnnAssign,
@@ -132,24 +117,19 @@ _ALLOWED_NODES = frozenset(
         ast.Pass,
         ast.Break,
         ast.Continue,
-        # Control flow
         ast.If,
         ast.IfExp,
         ast.For,
         ast.While,
-        # Functions (no classes - too powerful)
         ast.FunctionDef,
         ast.arguments,
         ast.arg,
         ast.Lambda,
-        # F-strings & formatting
         ast.Call,
-        # Attribute access (validated separately for dunder)
         ast.Attribute,
     }
 )
 
-# Blocked builtin names
 _BLOCKED_NAMES = frozenset(
     {
         "exec",
@@ -176,7 +156,6 @@ _BLOCKED_NAMES = frozenset(
     }
 )
 
-# Blocked attribute patterns (dunder)
 _BLOCKED_ATTRS = frozenset(
     {
         "__class__",
@@ -198,7 +177,6 @@ _BLOCKED_ATTRS = frozenset(
 )
 
 
-# ─── Data Models ─────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -226,7 +204,6 @@ class ExecResult:
     duration_ms: float = 0.0
 
 
-# ─── AST Sandbox ─────────────────────────────────────────────────────
 
 
 class ASTSandbox:
@@ -320,7 +297,6 @@ class ASTSandbox:
         """
         import time as _time
 
-        # Step 1: Validate
         verdict = self.validate(code)
         if not verdict.is_safe:
             return ExecResult(
@@ -328,7 +304,6 @@ class ASTSandbox:
                 error=f"Validation failed: {'; '.join(verdict.violations)}",
             )
 
-        # Step 2: Prepare restricted namespace
         safe_builtins = {
             "abs": abs,
             "all": all,
@@ -377,7 +352,6 @@ class ASTSandbox:
 
         namespace: dict[str, object] = {"__builtins__": safe_builtins}
 
-        # Step 3: Execute with timeout
         start = _time.monotonic()
         old_stdout = sys.stdout
         captured = StringIO()
@@ -385,7 +359,6 @@ class ASTSandbox:
         try:
             sys.stdout = captured
 
-            # Set timeout (Unix only; no-op on Windows)
             if hasattr(signal, "SIGALRM"):
 
                 def _timeout_handler(signum, frame):  # type: ignore
@@ -395,7 +368,6 @@ class ASTSandbox:
                 signal.alarm(self._timeout)
 
             try:
-                # nosec B102 - guarded by AST whitelist + timeout + restricted builtins
                 exec(compile(code, "<sandbox>", "exec"), namespace)  # nosec B102 - exec() in sandboxed namespace - explicit design decision for REPL
             finally:
                 if hasattr(signal, "SIGALRM"):
@@ -421,7 +393,6 @@ class ASTSandbox:
 
         duration = (_time.monotonic() - start) * 1000
 
-        # Filter namespace to user-defined names only
         user_vars = {k: v for k, v in namespace.items() if not k.startswith("_") and k != "__builtins__"}
 
         return ExecResult(

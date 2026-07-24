@@ -18,7 +18,6 @@ __all__ = ["MemoryScanner"]
 
 logger = logging.getLogger("babylon60_extensions.shannon")
 
-# Age bucket boundaries in days
 _AGE_BUCKETS = [
     ("today", 1),
     ("this_week", 7),
@@ -27,7 +26,6 @@ _AGE_BUCKETS = [
     ("older", None),
 ]
 
-# Base WHERE clause for active (non-deprecated, non-quarantined) facts
 _ACTIVE = "valid_until IS NULL AND is_quarantined = 0"
 _PROJECT_FILTER = " AND project = ?"
 
@@ -40,7 +38,6 @@ class MemoryScanner:
     def __init__(self, engine: CortexEngine) -> None:
         self._engine = engine
 
-    # ── Single-dimension distributions ──────────────────────────────
 
     async def type_distribution(
         self,
@@ -81,8 +78,6 @@ class MemoryScanner:
         async with self._engine.session() as conn:
             result: dict[str, int] = {}
             for label, days in _AGE_BUCKETS:
-                # Use parameterized '-' || ? || ' days' to avoid injecting
-                # integer literals directly into SQL (bandit B608).
                 if days is not None:
                     q = (
                         f"SELECT COUNT(*) FROM facts WHERE {where} "  # nosec B608
@@ -102,7 +97,6 @@ class MemoryScanner:
                     result[label] = count
             return result
 
-    # ── Joint distribution (for mutual information) ──────────────────
 
     async def type_project_joint(self) -> dict[tuple[str, str], int]:
         """Joint distribution of (fact_type, project) for I(type; project)."""
@@ -115,7 +109,6 @@ class MemoryScanner:
             rows = await cursor.fetchall()
             return {(r[0], r[1]): r[2] for r in rows}
 
-    # ── Temporal velocity (trend detection) ──────────────────────────
 
     async def temporal_velocity(
         self,
@@ -145,7 +138,6 @@ class MemoryScanner:
             rows = await cursor.fetchall()
             return {r[0]: r[1] for r in rows if r[0] is not None}
 
-    # ── Content length distribution ──────────────────────────────────
 
     async def content_length_distribution(
         self,
@@ -180,7 +172,6 @@ class MemoryScanner:
             rows = await cursor.fetchall()
             return {r[0]: r[1] for r in rows}
 
-    # ── Totals ───────────────────────────────────────────────────────
 
     async def total_active_facts(
         self,
@@ -201,7 +192,6 @@ class MemoryScanner:
             row = await cursor.fetchone()
             return row[0] if row else 0
 
-    # ── Immortality Index queries ───────────────────────────────────
 
     async def domain_coverage(self) -> tuple[int, int]:
         """Filled vs. theoretical max (fact_type × project) pairs.
@@ -301,7 +291,6 @@ class MemoryScanner:
 
         return weighted, max(total, 1)
 
-    # ── Internal helpers ─────────────────────────────────────────────
 
     async def _grouped_count(
         self,

@@ -17,9 +17,7 @@ from babylon60.engine.core.mutation_engine import MUTATION_ENGINE
 
 logger = logging.getLogger("babylon60.growth")
 
-# Threshold for bridge promotion (Neural-Growth level)
 _PROMOTION_THRESHOLD = 0.8
-# Minimum project count for bridge promotion
 _MIN_PROJECT_SUPPORT = 3
 
 
@@ -120,9 +118,6 @@ class NeuralGrowthEngine:
                 from babylon60.memory.temporal import now_iso
 
                 ts = now_iso()
-                # Ω₈: Morphic Resonance. Promoción a Axioma Global.
-                # Un patrón que se repite en 3 proyectos deja de ser local.
-                # Se sincroniza con la "conciencia colectiva".
                 logger.info("🧬 [GROWTH] Morphic Resonance detected: %s", content[:50])
                 meta_dict = {"origin": "synaptic_promotion", "axiom": "Ω₈"}
                 conn._conn.authorize_causal_writes()  # type: ignore

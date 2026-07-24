@@ -38,7 +38,6 @@ class CloudSyncMonitor:
 
     def _ensure_remote_table(self):
         """Ensure the 'transactions' table exists on the edge."""
-        # Simple schema matching the local transactions
         schema = """
         CREATE TABLE IF NOT EXISTS transactions (
             id INTEGER PRIMARY KEY,
@@ -50,8 +49,6 @@ class CloudSyncMonitor:
             timestamp TEXT NOT NULL
         );
         """
-        # Note: this would ideally be async, but called from sync daemon context
-        # We'll rely on the underlying async loop mapping or just use threaded execution.
         import asyncio
 
         asyncio.run(self._turso.connect())  # type: ignore[reportOptionalMemberAccess]

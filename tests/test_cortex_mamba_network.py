@@ -1,6 +1,4 @@
 # C5-REAL
-# MOSKV-1 APEX SINGULARITY
-# FALSACIÓN EMPÍRICA: MAMBA NETWORK
 
 import sys
 import os
@@ -19,7 +17,6 @@ def test_mamba_network_forward() -> None:
 
     model = MambaNetwork(vocab_size=vocab_size, d_model=d_model, d_state=d_state, n_layers=n_layers)
 
-    # Simulate a sequence of token IDs
     token_ids = [5, 12, 49, 0, 1, 8, 33, 2, 9, 10]
 
     logits = model.forward(token_ids)

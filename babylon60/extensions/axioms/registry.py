@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Canonical Sovereign Axiom Registry - 7 axioms, zero ambiguity.
 
 Every axiom in the CORTEX ecosystem has exactly ONE definition here.
@@ -33,9 +32,6 @@ class Axiom:
     ci_gate: str | None = None
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# THE 7 SOVEREIGN AXIOMS
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 _SOVEREIGN: list[Axiom] = [
     Axiom(
@@ -118,9 +114,6 @@ _SOVEREIGN: list[Axiom] = [
 ]
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# THE REGISTRY
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 class AxiomRegistry:
@@ -145,7 +138,6 @@ class AxiomRegistry:
         return list(self._guarded.values())
 
 
-# Legacy exports for backwards compatibility
 AXIOM_REGISTRY: dict[str, Axiom] = {ax.id: ax for ax in _SOVEREIGN}
 
 

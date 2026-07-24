@@ -28,7 +28,6 @@ class ApotheosisAuditsMixin:
     async def _check_singularity_state(self, dopamine: float, growth: float) -> None:
         if dopamine > 0.9 and growth > 0.8:
             logger.warning("🌌 [SINGULARITY-Ω] High Coherent.")
-            # Ω₃: Verify compliance before manifestation (O(1) async check)
             if hasattr(self, "_trust") and self._trust:
                 stats = await asyncio.to_thread(self._trust.get_compliance_stats)
                 if stats.eu_ai_act_score < 0.8:
@@ -49,7 +48,6 @@ class ApotheosisAuditsMixin:
             digest_path.parent.mkdir(parents=True, exist_ok=True)
             digest_path.write_text(digest)
 
-            # Sync to cloud if detected
             cloud_target = self._notebooklm.sync_to_cloud(digest_path)
             logger.info("📓 [NOTEBOOKLM] Digest synced to cloud: %s", cloud_target)
         except (OSError, AttributeError, sqlite3.Error, asyncio.CancelledError) as e:
@@ -66,7 +64,6 @@ class ApotheosisAuditsMixin:
             if not manager or not hasattr(manager, "metamemory"):
                 return
 
-            # 1. Global Calibration Check (Ω₂)
             global_score = manager.metamemory.calibration_score()
             if global_score != -1.0:
                 if global_score > 0.25:
@@ -75,8 +72,6 @@ class ApotheosisAuditsMixin:
                 else:
                     logger.debug("🧠 [METAMEMORY] Global Calibration: %.2f", global_score)
 
-            # 2. Domain-Specific Monitoring (Ω₅) - Per Project
-            # Introspection of existing outcomes to detect specific domain ignorance
             outcomes = getattr(manager.metamemory, "_outcomes", [])
             projects = {o.project_id for o in outcomes} if outcomes else set()
 
@@ -99,10 +94,7 @@ class ApotheosisAuditsMixin:
             from babylon60.engine.meta.forgetting_oracle import ForgettingOracle
 
             if getattr(self, "_oracle", None) is None:
-                # Get reference to the optimized engine cache if it exists
                 cache_ref = getattr(self._cortex, "_cache", None)
-                # Pass L1 reference so Oracle reads real access frequency data,
-                # not the transaction-count approximation ghost (Ω₁ + Ω₂).
                 self._oracle = ForgettingOracle(
                     self._cortex,
                     cache_ref=cache_ref,
@@ -166,8 +158,6 @@ class ApotheosisAuditsMixin:
         if entropy_found:
             consecutive_clean = 0
             r_factor = 1.0 + (dopamine * 0.5)
-            # After reset: base_sleep * (1.0 + growth) * r_factor
-            # The exponential only kicks in on subsequent clean rounds below.
             derived_sleep = min(
                 base_sleep * (1.0 + growth) * r_factor, getattr(self, "_SLEEP_MAX", 60.0)
             )
@@ -182,6 +172,5 @@ class ApotheosisAuditsMixin:
     def _calc_duration(self, derived_sleep: float, adrenaline: float, _random: Any) -> float:
         final_sleep = derived_sleep * (1.0 - adrenaline)
         q_jitter = final_sleep * getattr(self, "_SLEEP_JITTER", 0.05) * (1.0 + _random.random())
-        # KAIROS-Ω: Lowered floor for high-adrenaline states
         floor = 0.05 if adrenaline > 0.8 else (0.5 if adrenaline > 0.3 else 1.0)
         return max(floor, final_sleep + _random.uniform(-q_jitter, q_jitter))

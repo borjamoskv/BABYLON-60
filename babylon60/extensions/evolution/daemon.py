@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/daemon.py
 """Daemon entry point - starts the Evolution Engine as a background process.
 
 Usage:
@@ -44,7 +43,6 @@ def _print_swarm(engine: EvolutionEngine) -> None:
         bar = "█" * int(fit / 3)
         logging.getLogger(__name__).info(f"  {domain:>16}  fit={fit:>6.1f}  gen={gen:>4}  avg_sub={avg_sub:>6.1f}  {bar}")
 
-    # Species breakdown
     if "species" in status:
         logging.getLogger(__name__).info("\n  ─── Species ───")
         for domain, species_list in status["species"].items():
@@ -52,7 +50,6 @@ def _print_swarm(engine: EvolutionEngine) -> None:
                 names = ", ".join(f"{s['name']}({s['size']}@{s['centroid']})" for s in species_list)
                 logging.getLogger(__name__).info(f"  {domain:>16}: {names}")
 
-    # Endocrine
     endo = status.get("endocrine", {})
     hormones = endo.get("hormones", {})
     if hormones:
@@ -65,7 +62,6 @@ def _print_swarm(engine: EvolutionEngine) -> None:
             f"style={endo.get('style', '?')}"
         )
 
-    # Latest report
     report = status.get("latest_report")
     if report:
         logging.getLogger(__name__).info("\n  ─── Last cycle ───")

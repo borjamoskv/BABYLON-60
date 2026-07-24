@@ -9,7 +9,6 @@ import babylon60.database.core
 import sys
 from pathlib import Path
 
-# Add project root to sys.path to resolve local packages
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -22,7 +21,6 @@ import time  # noqa: E402
 import subprocess  # noqa: E402
 import json  # noqa: E402
 
-# Invariants
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
 VAULT_DIR = Path.home() / ".gemini/config/.cortex/memory_vault"
 BRAIN_DIR = Path.home() / ".gemini/antigravity/brain"
@@ -60,7 +58,6 @@ class ExergyFailed:
     reasons: List[str]
 
 
-# Algebraic Sum Type for Verdict
 ExergyVerdict = Union[ExergyPassed, ExergyFailed]
 
 
@@ -75,7 +72,6 @@ class Stable:
     last_timestamp: float
 
 
-# Algebraic Sum Type for Consolidation
 ConsolidationDecision = Union[TriggerConsolidation, Stable]
 
 
@@ -130,7 +126,6 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
     added = 0
     removed = 0
 
-    # Split the diff by file to analyze scope-specific additions
     files_diffs = diff_text.split("diff --git ")
     for file_diff in files_diffs:
         if not file_diff.strip():
@@ -138,7 +133,6 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         lines = file_diff.splitlines()
         header = lines[0] if lines else ""
 
-        # Exclude self, tests, and demo files from strict pattern checks
         is_excluded = (
             any(x in header for x in ["demo_exergy_poc.py", "exergy_optimizer_agent.py", "autodetect_invariants.py"])
             or "test_" in header
@@ -185,7 +179,6 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                     l_points += 2
                     reasons_l.append("Nexus package symlink validation (INV_C5_12).")
         else:
-            # If tests/checks are added, register autoloop credit
             if any("test" in ln or "invariant" in ln for ln in added_lines):
                 a_points += 4
                 reasons_a.append("Autopoietic alignment of invariants (INV_C5_13).")
@@ -307,11 +300,9 @@ def main() -> None:
 
     prov_hash = bytes_to_base60(digest)
 
-    # Update prov_hash on verdict if it's passed
     if isinstance(verdict, ExergyPassed):
         verdict = ExergyPassed(score=verdict.score, gelabp=verdict.gelabp, prov_hash=prov_hash)
 
-    # Check consolidation decision
     consolidation = check_consolidation_need()
 
     verdict_yaml = f"""# GELABP MATRIX O-COLLAPSE
@@ -319,7 +310,6 @@ Target: "Teorema-Robinson-Moskv"
 Confidence: C5-REAL
 ExergyScore: {verdict.score.value:.1f}/1000.0
 
-# INVARIANTES ESTRUCTURALES
 G_Gradient: |
   {verdict.gelabp.gradient}
 E_Entropy: |
@@ -333,18 +323,15 @@ B_Bottleneck: |
 P_PostHoc: |
   "Narrativa descriptiva sin código" -> [TACHADO - IGNORAR]
 
-# CONSOLIDATION METRICS
 ConsolidationStatus: "{"REQUIRED" if isinstance(consolidation, TriggerConsolidation) else "STABLE"}"
 ConsolidationDetails: "{consolidation.reason if isinstance(consolidation, TriggerConsolidation) else "Vault is synchronized"}"
 
-# ATTESTATION PROVENANCE
 Timestamp: {timestamp}
 CommitHash: "{commit_hash}"
 ProvSignature: "{prov_hash}"
 """
     print(verdict_yaml)
 
-    # Write to database
     try:
         conn = babylon60.database.core.connect_sync(str(DB_PATH))
         conn.execute("PRAGMA journal_mode=WAL;")
@@ -373,12 +360,10 @@ ProvSignature: "{prov_hash}"
     except sqlite3.Error as err:
         print(f"❌ Failed to persist ledger: {err}")
 
-    # Act on consolidation decision
     if isinstance(consolidation, TriggerConsolidation):
         print(f"\n🚨 CONSOLIDATION REQUIRED: {consolidation.pending_count} unconsolidated sessions pending.")
         print("💡 Suggestion: Run 'python3 scratch/prepare_and_crystallize.py' to crystallize sessions into the vault.")
 
-    # Fail-Fast if exergy score is below threshold (700)
     if isinstance(verdict, ExergyFailed):
         print(
             f"🚨 ALERT: Iteration Exergy too low ({verdict.score.value:.1f}/1000.0). Purge entropy before committing."

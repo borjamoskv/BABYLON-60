@@ -310,7 +310,6 @@ class AgentCatalogLoader:
         self._loaded = False
 
 
-# ─── Module-Level Convenience ──────────────────────────────────
 
 
 def list_agents() -> list[str]:
@@ -323,6 +322,5 @@ def get_agent(agent_id: str) -> AgentCatalogEntry | None:
     return AgentCatalogLoader().get(agent_id)
 
 
-# Backward-compatibility alias for older imports. Prefer AgentCatalogEntry.
 AgentDefinition = AgentCatalogEntry
 AgentRegistry = AgentCatalogLoader

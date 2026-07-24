@@ -34,7 +34,6 @@ __all__ = [
 logger = logging.getLogger("babylon60.engine.predictive")
 
 
-# ─── Types ────────────────────────────────────────────────────────
 
 
 class PredictionType:
@@ -78,7 +77,6 @@ class Prediction:
         return self.confidence > 0.8 and self.estimated_time_to_failure_s < 60
 
 
-# ─── Trend Analysis ──────────────────────────────────────────────
 
 
 @dataclass
@@ -109,7 +107,6 @@ class _TrendWindow:
             return 0.0, 0.0, 0.0
 
         data = list(self._data)
-        # Normalize timestamps to start at 0
         t0 = data[0][0]
         xs = [t - t0 for t, _ in data]
         ys = [v for _, v in data]
@@ -141,7 +138,6 @@ class _TrendWindow:
         if slope == 0 or r_sq < 0.3:
             return None
 
-        # Current value
         data = list(self._data)
         if not data:
             return None
@@ -151,7 +147,6 @@ class _TrendWindow:
         current_val = slope * current_t + intercept
 
         if slope > 0 and current_val < threshold:
-            # Time to reach threshold
             target_t = (threshold - intercept) / slope
             remaining = target_t - current_t
             return max(0, remaining)
@@ -175,7 +170,6 @@ class _TrendWindow:
         return sum(v for _, v in self._data) / len(self._data)
 
 
-# ─── Predictive Healer ───────────────────────────────────────────
 
 
 class PredictiveHealer:
@@ -187,12 +181,10 @@ class PredictiveHealer:
     Usage:
         healer = PredictiveHealer(tracker=perf_tracker)
 
-        # Feed error rate samples
         healer.record_error_rate("api", 0.05)
         healer.record_error_rate("api", 0.08)
         healer.record_error_rate("api", 0.12)
 
-        # Get predictions
         predictions = healer.predict_all()
         for p in predictions:
             if p.is_critical:
@@ -213,20 +205,16 @@ class PredictiveHealer:
         self._cortisol_threshold = cortisol_threshold
         self._min_samples = min_samples
 
-        # Trend windows per subsystem
         self._error_trends: dict[str, _TrendWindow] = {}
         self._latency_trends: dict[str, _TrendWindow] = {}
         self._cortisol_trend = _TrendWindow(max_size=200)
 
-        # Error timestamps for pattern detection
         self._error_timestamps: dict[str, deque[float]] = {}
 
-        # Prediction history
         self._predictions: deque[Prediction] = deque(maxlen=500)
         self._total_predictions = 0
         self._total_preventions = 0
 
-    # ─── Data Ingestion ───────────────────────────────────────
 
     def record_error_rate(
         self, subsystem: str, rate: float, timestamp: float | None = None
@@ -269,7 +257,6 @@ class PredictiveHealer:
         cortisol = ENDOCRINE.get_level(HormoneType.CORTISOL)
         self.record_cortisol(cortisol, now)
 
-    # ─── Prediction ───────────────────────────────────────────
 
     def predict_all(self) -> list[Prediction]:
         """Run all prediction models and return findings."""
@@ -277,30 +264,25 @@ class PredictiveHealer:
 
         predictions: list[Prediction] = []
 
-        # 1. Error rate trend
         for sub, trend in self._error_trends.items():
             pred = self._predict_error_rate(sub, trend)
             if pred:
                 predictions.append(pred)
 
-        # 2. Latency drift
         for sub, trend in self._latency_trends.items():
             pred = self._predict_latency_drift(sub, trend)
             if pred:
                 predictions.append(pred)
 
-        # 3. Recurring patterns
         for sub, timestamps in self._error_timestamps.items():
             pred = self._predict_recurring(sub, timestamps)
             if pred:
                 predictions.append(pred)
 
-        # 4. Cortisol momentum
         pred = self._predict_cortisol()
         if pred:
             predictions.append(pred)
 
-        # Store
         for p in predictions:
             self._predictions.append(p)
             self._total_predictions += 1
@@ -314,7 +296,6 @@ class PredictiveHealer:
 
         slope, intercept, r_sq = trend.linear_regression()
 
-        # Only predict if slope is positive (error rate rising) and fit is decent
         if slope <= 0 or r_sq < 0.3:
             return None
 
@@ -345,10 +326,8 @@ class PredictiveHealer:
         if slope <= 0 or r_sq < 0.3:
             return None
 
-        # Get current timeout from optimizer or default
         timeout_ms = 5000.0
         if self._tracker:
-            # Will be overridden by the stack's optimized value
             pass
 
         threshold = timeout_ms * self._latency_threshold_factor
@@ -388,7 +367,6 @@ class PredictiveHealer:
         variance = sum((x - mean_interval) ** 2 for x in intervals) / len(intervals)
         cv = math.sqrt(variance) / mean_interval if mean_interval > 0 else float("inf")
 
-        # Low coefficient of variation = regular pattern
         if cv < 0.3 and mean_interval < 300:  # Regular pattern under 5 min
             time_since_last = time.monotonic() - ts[-1]
             next_predicted = mean_interval - time_since_last
@@ -435,13 +413,11 @@ class PredictiveHealer:
             recommended_action="PREEMPTIVE_CONSOLIDATION",
         )
 
-    # ─── Prevention Tracking ──────────────────────────────────
 
     def record_prevention(self) -> None:
         """Record that a predicted failure was prevented."""
         self._total_preventions += 1
 
-    # ─── Introspection ────────────────────────────────────────
 
     @property
     def stats(self) -> dict[str, Any]:

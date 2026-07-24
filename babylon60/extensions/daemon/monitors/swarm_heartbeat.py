@@ -57,7 +57,6 @@ class SwarmHeartbeatMonitor:
                 )
             )
 
-        # Log summary every check
         summary = SWARM_HEARTBEAT.status_summary()
         if transitioned:
             logger.warning("🫀 Heartbeat check: %s", summary)

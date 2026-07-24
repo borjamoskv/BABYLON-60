@@ -33,7 +33,6 @@ def sync():  # type: ignore
 conversation_id: "{cid}"
 status: "crystallized"
 ---
-# B60 Session {cid}
 Crystallized into memory vault.
 """,
                         encoding="utf-8",

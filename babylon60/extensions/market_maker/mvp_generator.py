@@ -24,7 +24,6 @@ class MVPGenerator:
         Here we generate a high-conversion deterministic stub.
         """
         html = self._generate_landing_html(opportunity)
-        # Mock stripe price creation
         stripe_id = f"price_mock_{opportunity.signal.topic.replace(' ', '_').lower()}"
 
         log.info(

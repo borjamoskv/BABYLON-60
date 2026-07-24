@@ -23,8 +23,6 @@ __all__ = [
 
 logger = logging.getLogger("babylon60_extensions.shannon.exergy")
 
-# ── Formula weights ──────────────────────────────────────────────────
-# downstream_utility dominates - if decisions can't use it, it's waste.
 
 _W_UTILITY = 0.35
 _W_WORK_RATIO = 0.25

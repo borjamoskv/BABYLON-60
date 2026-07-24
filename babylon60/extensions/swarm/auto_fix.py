@@ -13,7 +13,6 @@ from typing import Any, Protocol
 logger = logging.getLogger("babylon60_extensions.swarm.auto_fix")
 
 
-# ── Classification ────────────────────────────────────────────────────
 
 
 class GhostClass(str, Enum):

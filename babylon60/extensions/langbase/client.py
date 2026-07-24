@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Langbase HTTP Client.
 
@@ -27,10 +23,8 @@ __all__ = [
 
 logger = logging.getLogger("babylon60_extensions.langbase.client")
 
-# Langbase API base
 DEFAULT_BASE_URL = "https://api.langbase.com/v1"
 
-# Timeouts
 PIPE_TIMEOUT = 120.0  # Pipe runs can take time (LLM inference)
 DEFAULT_TIMEOUT = 30.0
 
@@ -44,8 +38,6 @@ class LangbaseError(Exception):
         super().__init__(f"Langbase API error {status_code}: {detail}")
 
 
-# Default model for Langbase Pipes. SovereignLLM is preferred but Langbase requires
-# a specific provider:model string. This can be overridden in the constructor.
 DEFAULT_MODEL = "openai:gpt-4o-mini"
 
 
@@ -91,7 +83,6 @@ class LangbaseClient:
         """Shut down the HTTP client."""
         await self._client.aclose()
 
-    # ─── Internal ────────────────────────────────────────────────────
 
     async def _request(
         self,
@@ -126,7 +117,6 @@ class LangbaseClient:
 
         return resp.json()
 
-    # ─── Pipes (AI Agents) ───────────────────────────────────────────
 
     async def run_pipe(
         self,
@@ -197,7 +187,6 @@ class LangbaseClient:
 
         return await self._request("POST", "/pipes", json_body=body)
 
-    # ─── Memory (RAG) ────────────────────────────────────────────────
 
     async def list_memories(self) -> list[dict]:
         """List all Memory sets."""
@@ -269,7 +258,6 @@ class LangbaseClient:
         Returns:
             Upload confirmation with document ID
         """
-        # Langbase expects multipart or base64 - we use the text content approach
         body: dict[str, Any] = {
             "fileName": filename,
             "content": content,
@@ -288,7 +276,6 @@ class LangbaseClient:
         result = await self._request("GET", f"/memory/{memory_name}/documents")
         return result if isinstance(result, list) else result.get("data", [])
 
-    # ─── Tools ───────────────────────────────────────────────────────
 
     async def web_search(self, query: str) -> list[dict]:
         """Search the web via Langbase Tools API.
@@ -322,7 +309,6 @@ class LangbaseClient:
             timeout=60.0,
         )
 
-    # ─── Status ──────────────────────────────────────────────────────
 
     async def status(self) -> dict:
         """Check Langbase API connectivity.

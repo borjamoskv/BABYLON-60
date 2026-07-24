@@ -1,7 +1,4 @@
 # C5-REAL
-# MOSKV-1 APEX SINGULARITY
-# ARCHITECTURE: BYTE-PAIR ENCODING (BPE) TOKENIZER
-# EXERGY: DETERMINISTIC TEXT-TO-TENSOR TRANSDUCTION
 
 from typing import List, Dict, Tuple
 
@@ -11,7 +8,6 @@ class BPETokenizer:
     Transduces unstructured text entropy into discrete tokens for the SSM Core.
     """
     def __init__(self) -> None:
-        # Base vocabulary (ASCII/UTF-8 subset for structural invariant)
         self.vocab: Dict[str, int] = {chr(i): i for i in range(256)}
         self.inverse_vocab: Dict[int, str] = {i: chr(i) for i in range(256)}
         self.merges: Dict[Tuple[str, str], int] = {}
@@ -45,11 +41,9 @@ class BPETokenizer:
             if not stats:
                 break
             
-            # Find most frequent pair
             best_pair = max(stats, key=stats.get) # type: ignore
             new_token_str = best_pair[0] + best_pair[1]
             
-            # Register merge
             self.merges[best_pair] = self.next_token_id
             self.vocab[new_token_str] = self.next_token_id
             self.inverse_vocab[self.next_token_id] = new_token_str
@@ -62,8 +56,6 @@ class BPETokenizer:
         tokens = list(text)
         while len(tokens) > 1:
             stats = self.get_stats(tokens)
-            # Find the pair that exists in our merges with the lowest merge index (first learned)
-            # For simplicity in this primitive, we greedily apply known merges
             pair_to_merge = None
             for pair in stats:
                 if pair in self.merges:

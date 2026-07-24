@@ -177,7 +177,6 @@ class Ed25519Signer:
         }
 
 
-# Module-level singleton
 _default_signer: Ed25519Signer | None = None
 
 
@@ -193,7 +192,6 @@ def get_default_signer() -> Ed25519Signer | None:
 
     priv_b64: str | None = None
 
-    # Try OS keyring first (skip in testing)
     if not os.environ.get("CORTEX_TESTING"):
         try:
             import keyring
@@ -202,7 +200,6 @@ def get_default_signer() -> Ed25519Signer | None:
         except (ImportError, OSError, ValueError) as exc:
             logger.debug("Keyring Ed25519 key not available: %s", exc)
 
-    # Env var fallback for CI/CD
     if not priv_b64:
         priv_b64 = os.environ.get("CORTEX_ED25519_PRIVATE_KEY")
 

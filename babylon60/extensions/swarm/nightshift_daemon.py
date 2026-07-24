@@ -66,7 +66,6 @@ class NightShiftCrystalDaemon:
         self._cycle_history: list[dict[str, Any]] = []
         self._pipeline = NightShiftPipeline()
 
-    # ── Single Cycle ──────────────────────────────────────────────────
 
     async def run_cycle(self) -> dict[str, Any]:
         """Execute one complete crystal generation cycle.
@@ -83,7 +82,6 @@ class NightShiftCrystalDaemon:
             self._max_crystals,
         )
 
-        # 1. Radar scan - discover targets
         try:
             targets = await discover(
                 cortex_db=self._db,
@@ -124,7 +122,6 @@ class NightShiftCrystalDaemon:
             self._cycle_history.append(report)
             return report
 
-        # 2. Pipeline execution
         try:
             pipeline_result = await self._pipeline.run(targets=targets)
         except sqlite3.Error as e:
@@ -152,7 +149,6 @@ class NightShiftCrystalDaemon:
             self._cycle_history.append(report)
             return report
 
-        # 3. Build cycle report
         crystals_count = pipeline_result.get("crystals_count", 0)
         crystals_forged = pipeline_result.get("crystals_forged", [])
         confidence = pipeline_result.get("confidence", "N/A")
@@ -172,14 +168,12 @@ class NightShiftCrystalDaemon:
         if is_paused:
             report["pause_reason"] = pipeline_result.get("pause_reason", "")
 
-        # ── Phase 2: Consolidation (REM) ────────────────────────────
         consolidation_report = await self._run_consolidation(cycle_id)
         if consolidation_report:
             report["consolidation"] = consolidation_report
 
         self._cycle_history.append(report)
 
-        # 4. Persist cycle report to CORTEX (fire and forget)
         await self._persist_cycle_report(report)
 
         logger.info(
@@ -197,7 +191,6 @@ class NightShiftCrystalDaemon:
         report["duration_s"] = time.monotonic() - cycle_start
         return report
 
-    # ── Perpetual Loop ────────────────────────────────────────────────
 
     async def daemon_loop(self) -> None:
         """Run crystallization cycles in a perpetual loop with cooldown.
@@ -219,7 +212,6 @@ class NightShiftCrystalDaemon:
             except (sqlite3.Error, ValueError, TypeError, RuntimeError) as e:
                 logger.error("🌙 [NIGHTSHIFT] Unhandled cycle error: %s", e)
 
-            # Cooldown
             cooldown_s = self._cooldown_hours * 3600
             logger.info(
                 "🌙 [NIGHTSHIFT] Sleeping %.1fh until next cycle.",
@@ -230,10 +222,8 @@ class NightShiftCrystalDaemon:
                     self._stop_event.wait(),
                     timeout=cooldown_s,
                 )
-                # If we get here, stop was called
                 break
             except asyncio.TimeoutError:
-                # Normal: cooldown elapsed, time for next cycle
                 continue
 
         logger.info("🌙 [NIGHTSHIFT] Daemon stopped.")
@@ -242,7 +232,6 @@ class NightShiftCrystalDaemon:
         """Signal the daemon to stop after the current cycle."""
         self._stop_event.set()
 
-    # ── Internal ──────────────────────────────────────────────────────
 
     async def _persist_cycle_report(self, report: dict[str, Any]) -> None:
         """Persist cycle report to CORTEX as a knowledge fact."""
@@ -265,7 +254,6 @@ class NightShiftCrystalDaemon:
         except (sqlite3.Error, AttributeError, ValueError, TypeError) as e:
             logger.warning("🌙 [NIGHTSHIFT] Failed to persist cycle report: %s", e)
 
-    # ── Consolidation Phase ────────────────────────────────────────────
 
     async def _run_consolidation(self, cycle_id: str) -> dict[str, Any] | None:
         """Execute Phase 2: Crystal consolidation (REM sleep)."""
@@ -303,7 +291,6 @@ class NightShiftCrystalDaemon:
         """Filter crystal text by Shannon entropy threshold."""
         return shannon_density(crystal_text) > ENTROPY_SURVIVAL_THRESHOLD
 
-    # ── Status ────────────────────────────────────────────────────────
 
     @property
     def history(self) -> list[dict[str, Any]]:

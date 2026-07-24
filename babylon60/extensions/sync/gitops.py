@@ -15,7 +15,6 @@ def _locate_repo_root(project_name: str) -> Path | None:
     game_dir = Path.home() / "game" / project_name
     if game_dir.exists() and game_dir.is_dir():
         return game_dir
-    # More heuristics could be added here (e.g. search in ~/Developer, etc.)
     return None
 
 
@@ -50,12 +49,10 @@ async def sync_fact_to_repo(
         cortex_dir = _get_cortex_dir(repo_path)
         json_path = cortex_dir / "knowledge.json"
 
-        # 1. Load the current JSON or create a new one
         knowledge = _load_knowledge(json_path)
 
         facts_list = knowledge.get("facts", [])
 
-        # 2. Modify the list
         existing_idx = next((i for i, f in enumerate(facts_list) if f.get("id") == fact_id), None)
 
         if action == "upsert":
@@ -70,10 +67,8 @@ async def sync_fact_to_repo(
 
         knowledge["facts"] = facts_list
 
-        # 3. Write JSON atomically (or almost, sufficient for our local use case)
         json_path.write_text(json.dumps(knowledge, indent=2, ensure_ascii=False), encoding="utf-8")
 
-        # 4. Render Markdown snapshot
         _render_snapshot(cortex_dir, facts_list, project)
         return True
 
@@ -86,7 +81,6 @@ def _render_snapshot(cortex_dir: Path, facts_list: list[dict[str, Any]], project
     """Generates a readable Markdown from the facts JSON."""
     md_path = cortex_dir / "context-snapshot.md"
 
-    # Filter active and sort by descending date
     active_facts = [f for f in facts_list if not f.get("valid_until")]
     active_facts.sort(key=lambda x: x.get("created_at", ""), reverse=True)
 
@@ -100,7 +94,6 @@ def _render_snapshot(cortex_dir: Path, facts_list: list[dict[str, Any]], project
         "",
     ]
 
-    # Group by type
     by_type: dict[str, list[Any]] = {}
     for fact in active_facts:
         ftype = fact.get("fact_type", "knowledge")
@@ -138,10 +131,8 @@ async def export_gitops_memory(engine, project: str) -> bool:
         facts_list = []
         for f in facts:
             fact_data = dataclasses.asdict(f)
-            # rename id to match JSON format
             fact_data["id"] = fact_data.pop("fact_id", fact_data.get("id"))
             if fact_data.get("valid_from") and isinstance(fact_data["valid_from"], str):
-                # Ensure date format
                 fact_data["created_at"] = fact_data["valid_from"]
             facts_list.append(fact_data)
 

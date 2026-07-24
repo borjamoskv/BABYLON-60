@@ -26,7 +26,6 @@ def _safe_parse_tags(raw: str | None) -> list[str]:
         parsed = json.loads(raw)
         return parsed if isinstance(parsed, list) else []
     except (json.JSONDecodeError, TypeError):
-        # Legacy format: "tag1,tag2,tag3" - split and clean
         return [t.strip() for t in raw.split(",") if t.strip()]
 
 
@@ -119,7 +118,6 @@ async def export_snapshot(
     for project, facts in by_project.items():
         lines.extend(_format_project_section(project, facts))
 
-    # ─── Tip del Día ─────────────────────────────────────────────────
     lines.extend(await _generate_tips_section(engine))
 
     out_path.parent.mkdir(parents=True, exist_ok=True)

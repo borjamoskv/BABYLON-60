@@ -62,7 +62,6 @@ function mode() { return MODES[S.cognitiveMode] || MODES['2e']; }
 /* ══════════════════════════════════════════════════════════
    GLOBAL STATE
    ══════════════════════════════════════════════════════════ */
-// Corrupt localStorage must never brick the boot (module-scope parse crash)
 function safeParseArray(raw) {
   try {
     const v = JSON.parse(raw || '[]');
@@ -406,7 +405,6 @@ async function refreshSentinel() {
   try {
     S.sentinel = await get('/api/sentinel/status');
     updateRepoSegment();
-    // Intuir repo incorrecto → interrumpir UNA vez con modal si hay rojo
     const reds = S.sentinel.warnings?.filter(w => w.level === 'red') || [];
     if (reds.length > 0 && !S.sentinelModalShown) {
       S.sentinelModalShown = true;
@@ -595,7 +593,6 @@ function toggleScratchpad(force) {
 }
 
 async function refreshNotes() {
-  // Flush del buffer offline: cada nota local intenta subir al ledger.
   const pending = [...S.scratchpadOffline];
   for (const item of pending) {
     try {
@@ -623,7 +620,6 @@ async function saveScratchpadItem() {
     await post('/api/cortex/notes', { text, route: S.activeRoute || '' });
     await refreshNotes();
   } catch {
-    // Backend caído → buffer offline explícito (marcado, no silencioso).
     S.scratchpadOffline.unshift({ id: Date.now(), text, route: S.activeRoute || '', offline: true });
     if (S.scratchpadOffline.length > 30) S.scratchpadOffline.pop();
     localStorage.setItem('b60-scratch-offline', JSON.stringify(S.scratchpadOffline));
@@ -756,9 +752,6 @@ async function showRestoreBanner(lastRoute) {
     analytics: 'Ledger Analytics',
   };
 
-  // Auto-Mantenimiento del Contexto (spec MOSKV-1): bullets REALES
-  // proyectados del CortexLedger — cuánto llevas fuera, tu última idea,
-  // la última delegación — no genéricos.
   let bullets = null;
   let jumpRoute = lastRoute;
   try {
@@ -879,8 +872,6 @@ function onRouteEnter(routeName) {
   setActiveContextItem(routeName);
   closeEntryDetail();
 
-  // Leaving Swarm → kill the telemetry socket (no background stream
-  // stomping the tachometer or leaking connections).
   if (routeName !== 'swarm' && S.telemetrySocket) {
     S.telemetrySocket.close();
     S.telemetrySocket = null;
@@ -1020,8 +1011,6 @@ async function renderCanvasPage(container) {
     zoom(e.deltaY > 0 ? 1.1 : 1 / 1.1);
   }, { passive: false });
 
-  // Window-level listeners scoped to this render via AbortController —
-  // re-rendering the canvas aborts the old ones (no listener/DOM leak).
   if (S.canvasAbort) S.canvasAbort.abort();
   S.canvasAbort = new AbortController();
   const sig = S.canvasAbort.signal;
@@ -1051,8 +1040,6 @@ async function renderLedgerPage(container) {
     breadcrumb: setBreadcrumb('BABYLON·60', 'BFT Ledger — DETERMINAR (verificar hasta el hash)'),
     actions: `<button class="btn btn-verify" id="btn-verify-chain">⚿ Verify Chain</button>`,
   });
-  // Attach BEFORE any await: the palette command clicks this button on a
-  // timer and must never hit a listener-less element on a slow backend.
   document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
 
   container.innerHTML = `
@@ -1615,8 +1602,6 @@ async function renderSwarmPage(container) {
   S.telemetrySocket = connectWebSocket('/ws/telemetry', (snap) => {
     S.telemetrySnapshot = snap;
     appendSwarmSnapshot(snap);
-    // Only clear the 'indexing' handshake state — never stomp
-    // 'working'/'alert' set by other operations.
     if (S.tachometerState === 'indexing') setTachometer('idle');
   }, () => { if (S.tachometerState === 'indexing') setTachometer('idle'); });
 }
@@ -1838,7 +1823,6 @@ async function executeDelegation(id) {
       setTimeout(() => fb?.classList.remove('reward-active'), 1400);
     }
   } catch (err) {
-    // Causal crash (423 P0 block / 422 no-repo) surfaces here with its reason.
     if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">⛔ ${escapeHtml(err.message)}</span>`;
     setTachometer('alert');
     setTimeout(() => setTachometer('idle'), 2500);

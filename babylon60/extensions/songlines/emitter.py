@@ -50,7 +50,6 @@ class ResonanceEmitter:
         encoded_payload = json.dumps(payload).encode("utf-8")
         attr_name = f"{self.prefix}.{ghost_id}"
 
-        # Try os.setxattr first
         if hasattr(os, "setxattr"):
             try:
                 os.setxattr(str(target_file), attr_name, encoded_payload)  # type: ignore[reportAttributeAccessIssue]
@@ -59,11 +58,9 @@ class ResonanceEmitter:
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
-        # Primary Fallback: /usr/bin/xattr CLI (macOS)
         try:
             import subprocess
 
-            # Use -w to write
             subprocess.run(
                 ["xattr", "-w", attr_name, encoded_payload.decode("utf-8"), str(target_file)],
                 check=True,
@@ -74,7 +71,6 @@ class ResonanceEmitter:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-        # Final Fallback: .songlines manifest
         self._fallback_embed(target_file, attr_name, encoded_payload)
 
     def _fallback_embed(self, target_file: Path, attr_name: str, payload: bytes):

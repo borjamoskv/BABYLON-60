@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 from __future__ import annotations
 
 import asyncio
@@ -51,11 +50,8 @@ async def handle_429_backoff(
     original_error: httpx.HTTPStatusError,
 ) -> str:
     """Handle fast backoff or hypersonic fallback."""
-    # ── PULMONES Protocol Upgrade ──
-    # Extract wait time from the error (Gemini/OpenAI)
     wait_time = extract_retry_delay(original_error.response.text)
 
-    # If wait_time is too high (>60s), fail immediately to avoid blocking the swarm
     if wait_time and wait_time > 60.0:
         logger.warning(
             "LLM API [429 Quota Exhausted] on %s. Reset delay too high (%.1fs). Falling back.",
@@ -64,12 +60,10 @@ async def handle_429_backoff(
         )
         return await execute_fallback(provider, payload, original_error)
 
-    # ── Re-Injection with Dynamic Backoff ──
     last_error = original_error
     max_attempts = 0 if os.environ.get("CORTEX_TESTING") == "1" else 5
 
     for attempt in range(1, max_attempts + 1):
-        # Use the API delay + jitter, or a base exponential backoff
         if wait_time:
             sleep_s = wait_time + (0.5 * attempt)
             wait_time = None  # Consumed
@@ -86,12 +80,10 @@ async def handle_429_backoff(
         await asyncio.sleep(sleep_s)
 
         try:
-            # Retry raw execution to bypass the local quota manager
             return await provider._execute_completion_raw(url, headers, payload)
         except httpx.HTTPStatusError as e2:
             if e2.response.status_code == 429:
                 last_error = e2
-                # Update wait_time if the API returns a new one
                 wait_time = extract_retry_delay(e2.response.text)
                 continue
             raise original_error from e2

@@ -27,7 +27,6 @@ class ASTOracleMonitor(IntervalProjectMonitor[ASTAlert]):
         try:
             logger.info("ASTOracle: Midiendo deuda estructural en %s", project)
 
-            # Executing pyright directly
             result = subprocess.run(
                 ["uv", "run", "pyright", "--outputjson"],
                 cwd=path_str,

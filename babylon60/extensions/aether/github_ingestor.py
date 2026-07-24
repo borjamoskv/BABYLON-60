@@ -79,7 +79,6 @@ class GitHubIngestor:
             if issue_key in self._processed:
                 continue
 
-            # Check if already enqueued (via comment or label check)
             if any(label["name"] == _COMMENTED_LABEL for label in issue.get("labels", [])):
                 self._processed.add(issue_key)
                 continue
@@ -96,7 +95,6 @@ class GitHubIngestor:
 
     def _issue_to_task(self, issue: dict, repo: str) -> AgentTask:
         """Convert a GitHub issue to an AgentTask."""
-        # Try to find a local clone of the repo
         repo_name = repo.split("/")[-1]
         possible_paths = [
             self._default_repo_base / repo_name,

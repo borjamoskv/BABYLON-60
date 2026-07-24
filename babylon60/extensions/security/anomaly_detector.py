@@ -29,9 +29,6 @@ __all__ = [
 ]
 
 
-# ═══════════════════════════════════════
-# Data Models
-# ═══════════════════════════════════════
 
 
 @dataclass(frozen=True)
@@ -84,9 +81,6 @@ class ProjectBaseline:
     last_updated: str = ""
 
 
-# ═══════════════════════════════════════
-# Anomaly Detector
-# ═══════════════════════════════════════
 
 
 class AnomalyDetector:
@@ -95,26 +89,17 @@ class AnomalyDetector:
     Thread-safe in-memory event tracking with Z-score analysis.
     """
 
-    # Rate limit: max events per source per minute
     DEFAULT_RATE_LIMIT: int = 60
-    # Z-score threshold for anomaly
     Z_THRESHOLD: float = 3.0
-    # Entropy threshold for content
     ENTROPY_THRESHOLD: float = 4.5
-    # Window size for rate tracking (seconds)
     RATE_WINDOW: float = 60.0
-    # Bulk mutation threshold (events in 10 seconds)
     BULK_THRESHOLD: int = 20
 
     def __init__(self, rate_limit: int | None = None) -> None:
         self._rate_limit = rate_limit or self.DEFAULT_RATE_LIMIT
-        # source -> list of timestamps
         self._rate_tracker: dict[str, list[float]] = defaultdict(list)
-        # project -> list of (timestamp, content_length)
         self._project_events: dict[str, list[tuple[float, int]]] = defaultdict(list)
-        # project -> baseline
         self._baselines: dict[str, ProjectBaseline] = {}
-        # Counters for daily report
         self._daily_events: int = 0
         self._daily_anomalies: int = 0
         self._daily_blocked: int = 0
@@ -127,20 +112,17 @@ class AnomalyDetector:
         self._daily_events += 1
         now = event.timestamp
 
-        # ── Rate Limiting ──
         rate_report = self._check_rate(event.source, now)
         if rate_report:
             self._daily_anomalies += 1
             self._daily_blocked += 1
             return rate_report
 
-        # ── Bulk Mutation Detection ──
         bulk_report = self._check_bulk_mutation(event.source, now)
         if bulk_report:
             self._daily_anomalies += 1
             return bulk_report
 
-        # ── Behavioral Baseline ──
         self._project_events[event.project].append((now, event.content_length))
         baseline_report = self._check_baseline(event)
         if baseline_report:
@@ -172,17 +154,14 @@ class AnomalyDetector:
         )
 
         if len(events) >= 10:
-            # Compute rate stats (events per minute)
             sorted_events = sorted(events, key=lambda e: e[0])
             if len(sorted_events) >= 2:
                 time_span = sorted_events[-1][0] - sorted_events[0][0]
                 if time_span > 0:
                     rate = len(sorted_events) / (time_span / 60.0)
                     baseline.avg_events_per_minute = rate
-                    # Approximate std via windowed rates
                     baseline.std_events_per_minute = max(rate * 0.3, 1.0)
 
-            # Content length stats
             lengths = [e[1] for e in events if e[1] > 0]
             if lengths:
                 mean_len = sum(lengths) / len(lengths)
@@ -215,7 +194,6 @@ class AnomalyDetector:
         self._baselines.clear()
         self.reset_daily_stats()
 
-    # ── Internal Methods ──
 
     def _check_rate(self, source: str, now: float) -> AnomalyReport | None:
         """Check if source exceeds rate limit."""
@@ -263,7 +241,6 @@ class AnomalyDetector:
         if baseline.total_events < 10:
             return None  # Not enough data for baseline
 
-        # Check content length anomaly
         if event.content_length > 0 and baseline.std_content_length > 0:
             z = (
                 abs(event.content_length - baseline.avg_content_length)
@@ -296,5 +273,4 @@ class AnomalyDetector:
         self._rate_tracker[source] = [t for t in self._rate_tracker[source] if t > cutoff]
 
 
-# Global singleton
 DETECTOR = AnomalyDetector()

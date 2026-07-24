@@ -37,26 +37,15 @@ class SovereignDecalcifier:
 
         metrics = {"purged_orphans": 0, "compressed_engrams": 0, "serotonin_boost": 0.0}
 
-        # 1. Sweep stale transactions / ledger entries that are purely logging
-        # We only delete old 'telemetry' or extremely low-impact actions.
-        # Axiom: Core decisions are never deleted.
         try:
-            # Committing any pending open transactions before we do maintenance
             await conn.commit()
 
-            # Note: We rely on the schema having a timestamp. We'll do a safe threshold.
             cursor = await conn.execute(
                 "DELETE FROM transactions WHERE action = 'telemetry' AND timestamp < datetime('now', '-7 days')"
             )
             metrics["purged_orphans"] = cursor.rowcount
             await conn.commit()
 
-            # 2. Check if we have facts with a decay score < 0.1 (calcified)
-            # This requires knowing the memory schema. Let's assume standard `facts` table
-            # with `decay_score` or `last_accessed` if it exists.
-            # Biological defragmentation (VACUUM cannot run in transaction)
-            # In aiosqlite, accessing conn.isolation_level triggers cross-thread errors.
-            # So we create an ephemeral connection with isolation_level=None to execute VACUUM.
             import sqlite3
 
             from babylon60.core.paths import CORTEX_DB
@@ -65,12 +54,10 @@ class SovereignDecalcifier:
                 with babylon60.database.core.connect(CORTEX_DB, isolation_level=None) as vconn:
                     vconn.execute("VACUUM")
 
-            # Run vacuum asynchronously to avoid blocking
             import asyncio
 
             await asyncio.to_thread(_run_vacuum)
 
-            # 3. Reward the system for a successful sleep cycle
             ENDOCRINE.pulse(HormoneType.SEROTONIN, 0.1, reason="REM Cycle Completed")
             ENDOCRINE.pulse(HormoneType.NEURAL_GROWTH, 0.05, reason="Memory Compression")
             metrics["serotonin_boost"] = 0.1

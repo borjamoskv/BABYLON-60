@@ -15,7 +15,6 @@ def execute_with_versioned_semantics(
         raise ValueError("Ω174 Violated: Execution lacks versioned semantics context.")
     
     result = proof_pipeline(evidence)
-    # The result is wrapped in the exact versioning context that produced it
     return {
         "conclusion": result,
         "context": {

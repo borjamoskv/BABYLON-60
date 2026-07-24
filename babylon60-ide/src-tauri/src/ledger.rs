@@ -3,7 +3,6 @@ use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};
 use chrono::Utc;
 
-#[derive(Debug, Serialize, Deserialize)]
 pub struct CortexEvent {
     pub id: Option<i64>,
     pub timestamp: String,
@@ -21,7 +20,6 @@ impl CortexLedger {
     pub fn new(db_path: &str) -> Result<Self> {
         let conn = Connection::open(db_path)?;
 
-        // Ω10 · Concurrencia Confiable de DB: busy_timeout=5000ms and WAL mode
         conn.execute_batch(
             "PRAGMA journal_mode = WAL;
              PRAGMA busy_timeout = 5000;

@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 # MOSKV-1 APEX: CLI ONCO TRANSDUCER (C5-REAL)
 """
 Motor de CLI para transducción de datos transcriptómicos a modelos Booleanos.
@@ -187,15 +186,12 @@ def execute_pipeline(data_path: str | None = None, falsifiability_threshold: flo
         logger.warning("No se hallaron Driver Nodes (red completamente aislada).")
         sys.exit(0)
 
-    # Estado inicial proliferativo (Todos a 1)
     initial_state = {n: 1 for n in G.nodes()}
 
-    # 1. Simular Basal
     hist_basal, _ = simulate_boolean_network(G, initial_state)
     act_basal = np.sum(hist_basal[-1]) / len(G.nodes())
     logger.info(f"Atractor Basal: {act_basal * 100:.1f}% de actividad en steady-state.")
 
-    # 2. Perturbación (Knockout top 3 drivers o max available)
     top_k = min(3, len(drivers))
     terapia = {d: 0 for d in drivers[:top_k]}
     logger.info(f"Aplicando terapia in-silico sobre: {list(terapia.keys())}")

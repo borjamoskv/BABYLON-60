@@ -34,7 +34,6 @@ class GhostReaper:
             raise ValueError("ttl_days must be >= 1")
         self._ttl_days = ttl_days
 
-    # ── DB Ghosts ──────────────────────────────────────────────────
 
     async def reap_db_ghosts(self, conn: Any) -> int:
         """Delete expired ghosts from the legacy DB table.
@@ -50,7 +49,6 @@ class GhostReaper:
             datetime.fromtimestamp(time.time(), tz=timezone.utc) - timedelta(days=self._ttl_days)
         ).strftime("%Y-%m-%dT%H:%M:%S")
 
-        # Phase 1: Explicit TTL expiry
         cursor = await conn.execute(
             "DELETE FROM ghosts WHERE status = 'open' "
             "AND expires_at IS NOT NULL AND expires_at < ?",
@@ -58,7 +56,6 @@ class GhostReaper:
         )
         explicit_count = cursor.rowcount
 
-        # Phase 2: Implicit TTL (no expires_at, old created_at)
         cursor = await conn.execute(
             "DELETE FROM ghosts WHERE status = 'open' AND expires_at IS NULL AND created_at < ?",
             (cutoff,),
@@ -78,7 +75,6 @@ class GhostReaper:
             )
         return total
 
-    # ── Songlines Ghosts (filesystem xattrs) ───────────────────────
 
     def reap_songlines_ghosts(self, root_dir: Path | None = None) -> int:
         """Remove expired ghost traces from filesystem xattrs/manifests.
@@ -90,7 +86,6 @@ class GhostReaper:
         reaped = 0
         cutoff_ts = time.monotonic() - (self._ttl_days * 86400)
 
-        # Scan .songlines manifest files
         for manifest_path in root.rglob(".songlines"):
             reaped += self._reap_manifest(manifest_path, cutoff_ts)
 
@@ -114,12 +109,10 @@ class GhostReaper:
             for key, value in attrs.items():
                 if not key.startswith("user.cortex.ghost."):
                     continue
-                # Check if the ghost trace is older than cutoff
                 if isinstance(value, dict) and "timestamp" in value:
                     if value["timestamp"] < cutoff_ts:
                         keys_to_remove.append(key)
                 elif manifest_path.stat().st_mtime < cutoff_ts:
-                    # Fallback: if manifest itself is old, reap all ghosts in it
                     keys_to_remove.append(key)
 
             for key in keys_to_remove:

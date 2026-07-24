@@ -116,7 +116,6 @@ class MockRedisClient:
         mock = MagicMock()
         mock.transaction = transaction
 
-        # mock.set should not be a coroutine here, it just buffers
         def sync_set(k: str, v: str, **_kwargs: Any) -> None:
             self._store[k] = v
 
@@ -162,7 +161,6 @@ class HydraChaosEngine:
         ghost_pipeline = ErrorGhostPipeline()
         ghost_pipeline.reset()
 
-        # Mock db persistence for fast chaos tests
         async def fast_mock_persist(*args, **kwargs):
             return 999
 
@@ -170,7 +168,6 @@ class HydraChaosEngine:
 
         start_ts = time.perf_counter_ns()
 
-        # Scenario logic
         critical_interrupted = False
         error_type = None
         metadata: dict[str, Any] = {"phase": "siege_execution"}
@@ -205,13 +202,11 @@ class HydraChaosEngine:
 
         latency_ns = time.perf_counter_ns() - start_ts
 
-        # Wait up to 2 seconds for ghost tasks to register
         for _ in range(40):
             if ghost_pipeline.stats["total_captured"] > 0:
                 break
             await asyncio.sleep(0.05)
 
-        # Pipeline check
         ghost_captured = ghost_pipeline.stats["total_captured"] > 0
         pipeline_transferred = ghost_captured  # Simplified for mock
 

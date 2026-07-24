@@ -22,16 +22,13 @@ __all__ = [
     "should_ignore",
 ]
 
-# ─── Constants ───────────────────────────────────────────────────────
 
 DEBOUNCE_SECONDS: Final[float] = 2.0
 INFERENCE_WINDOW_SECONDS: Final[int] = 300  # 5 minutes
 RECORD_COOLDOWN_SECONDS: Final[int] = 300  # 1 episode per 5min per project
 MIN_EVENTS_FOR_INFERENCE: Final[int] = 3  # need at least 3 events to infer
 
-# Pre-compiled extension mapping for O(1) classification of common files
 _EXT_ROLES: Final[dict[str, str]] = {
-    # Source
     ".py": "source",
     ".ts": "source",
     ".tsx": "source",
@@ -44,7 +41,6 @@ _EXT_ROLES: Final[dict[str, str]] = {
     ".html": "source",
     ".c": "source",
     ".cpp": "source",
-    # Config
     ".json": "config",
     ".toml": "config",
     ".yaml": "config",
@@ -53,12 +49,10 @@ _EXT_ROLES: Final[dict[str, str]] = {
     ".env": "config",
     "Makefile": "config",
     "Dockerfile": "config",
-    # Docs
     ".md": "docs",
     ".txt": "docs",
     ".rst": "docs",
     ".pdf": "docs",
-    # Assets
     ".png": "asset",
     ".jpg": "asset",
     ".jpeg": "asset",
@@ -73,12 +67,10 @@ _EXT_ROLES: Final[dict[str, str]] = {
     ".ttf": "asset",
 }
 
-# Regex fallbacks for more complex patterns (e.g. test files)
 _ROLE_PATTERNS: Final[list[tuple[str, re.Pattern]]] = [
     ("test", re.compile(r"(test_|_test\.|spec\.|\.test\.)", re.IGNORECASE)),
 ]
 
-# Git/hidden paths to always ignore (Comprehensive list)
 _IGNORE_PATTERNS: Final[re.Pattern] = re.compile(
     r"(\.git/|__pycache__/|\.pyc$|node_modules/|\.DS_Store|\.venv/|\.pytest_cache/|dist/|build/|\.next/|\.turbo/)"
 )
@@ -129,7 +121,6 @@ class BehavioralSnapshot:
         }
 
 
-# ─── Classification Logic ────────────────────────────────────────────
 
 
 def classify_file(path: str) -> str:
@@ -139,21 +130,17 @@ def classify_file(path: str) -> str:
     """
     p = Path(path)
 
-    # 1. Check complex patterns first (Test files often have source extensions)
     for role, pattern in _ROLE_PATTERNS:
         if pattern.search(path):
             return role
 
-    # 2. Check O(1) extension lookup
     ext = p.suffix.lower()
     if ext in _EXT_ROLES:
         return _EXT_ROLES[ext]
 
-    # 3. Handle compound config names (.env.local, .env.production)
     if p.name.startswith(".env"):
         return "config"
 
-    # 4. Check exact filenames (Makefile, Dockerfile)
     if p.name in _EXT_ROLES:
         return _EXT_ROLES[p.name]
 
@@ -183,12 +170,10 @@ def _infer_from_workspace(p: Path, root: Path) -> str | None:
         if not parts:
             return root.name
 
-        # Monorepo detection: packages/my-pkg -> my-pkg
         monorepo_dirs = ("packages", "apps", "services", "src")
         if len(parts) >= 2 and parts[0] in monorepo_dirs:
             return parts[1]
 
-        # Single file or project in workspace root
         return parts[0] if parts[0] else root.name  # type: ignore[reportGeneralTypeIssues]
     except ValueError:
         return None
@@ -197,7 +182,6 @@ def _infer_from_workspace(p: Path, root: Path) -> str | None:
 def _infer_from_parents(p: Path) -> str | None:
     """Fallback: scan up parents until we find a common project marker. (Complexity Crushed O(1))"""
     ignore_dirs = {"src", "lib", "internal", "pkg", "docs", "tests", ".", "/"}
-    # Use next() with a generator expression to dramatically reduce cyclomatic complexity
     return next((parent.name for parent in p.parents if parent.name not in ignore_dirs), None)
 
 

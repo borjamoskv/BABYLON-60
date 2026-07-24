@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
-# License: Apache-2.0
 """
 MOSKV-1 Dataset Compiler v2.0 — Canal Paramétrico del Kernel Cognitivo.
 
@@ -39,7 +37,6 @@ from babylon60.extensions.security.utils import calculate_shannon_entropy
 
 logger = logging.getLogger("babylon60.training.moskv1_compiler")
 
-# ─── Anergy Patterns (Supresión de Green Theater) ──────────────────────────
 
 _ANERGY_PATTERNS: list[re.Pattern[str]] = [
     re.compile(p, re.IGNORECASE)
@@ -62,10 +59,8 @@ _ANERGY_PATTERNS: list[re.Pattern[str]] = [
     ]
 ]
 
-# HTML comment pattern for stripping
 _HTML_COMMENT_RE = re.compile(r"<!--.*?-->", re.DOTALL)
 
-# System-injected XML tags from transcripts
 _SYSTEM_XML_TAGS_RE = re.compile(
     r"<(?:USER_REQUEST|/USER_REQUEST|ADDITIONAL_METADATA|/ADDITIONAL_METADATA"
     r"|USER_SETTINGS_CHANGE|/USER_SETTINGS_CHANGE|SYSTEM_MESSAGE|/SYSTEM_MESSAGE"
@@ -76,16 +71,13 @@ _SYSTEM_XML_TAGS_RE = re.compile(
 
 def _clean_transcript_prompt(text: str) -> str:
     """Strip system-injected XML metadata from transcript user prompts."""
-    # Remove XML tags
     cleaned = _SYSTEM_XML_TAGS_RE.sub("", text)
     cleaned = _HTML_COMMENT_RE.sub("", cleaned)
-    # Remove lines that are pure metadata
     lines = cleaned.split("\n")
     filtered = []
     skip_block = False
     for line in lines:
         stripped = line.strip()
-        # Skip metadata blocks
         if stripped.startswith("The current local time is:"):
             continue
         if stripped.startswith("The user changed setting"):
@@ -103,14 +95,12 @@ def _clean_transcript_prompt(text: str) -> str:
     return "\n".join(filtered).strip()
 
 
-# Minimum thresholds
 _MIN_ENTROPY_THRESHOLD = 2.8
 _MIN_LINE_LENGTH = 12
 _MIN_OUTPUT_LENGTH = 100
 _MAX_OUTPUT_LENGTH = 4096
 _MIN_INSTRUCTION_LENGTH = 15
 
-# ─── Instruction Templates (Diversity) ─────────────────────────────────────
 
 _DIRECTIVE_TEMPLATES = [
     "Explica e implementa la directiva de CORTEX: {title}",
@@ -158,7 +148,6 @@ def _pick_template(templates: list[str], **kwargs: str) -> str:
     return random.choice(templates).format(**kwargs)
 
 
-# ─── Entropy & Quality Scoring ──────────────────────────────────────────────
 
 
 def _shannon_entropy(text: str) -> float:
@@ -181,11 +170,9 @@ def _exergy_score(text: str) -> float:
     entropy = _shannon_entropy(text)
     entropy_score = min(entropy / 5.0, 1.0)  # Normalize to [0, 1]
 
-    # Code block density
     code_blocks = text.count("```")
     code_score = min(code_blocks / 4.0, 1.0)
 
-    # Structural markers (YAML, lists, headers)
     structural_markers = (
         text.count("\n- ")
         + text.count("\n* ")
@@ -196,7 +183,6 @@ def _exergy_score(text: str) -> float:
     )
     structure_score = min(structural_markers / 10.0, 1.0)
 
-    # Unique token ratio (vocabulary richness)
     tokens = text.lower().split()
     unique_ratio = len(set(tokens)) / max(len(tokens), 1)
 
@@ -211,7 +197,6 @@ def _is_anergy(line: str) -> bool:
     for pattern in _ANERGY_PATTERNS:
         if pattern.search(stripped):
             return True
-    # Only apply entropy check to longer prose lines (not code/yaml)
     if not stripped.startswith(("-", "*", "|", "#", "`", "def ", "class ", "import ")):
         if _shannon_entropy(stripped) < _MIN_ENTROPY_THRESHOLD and len(stripped) > 50:
             return True
@@ -220,11 +205,9 @@ def _is_anergy(line: str) -> bool:
 
 def _clean_content(text: str) -> str:
     """Purge anergy and HTML comments from text content."""
-    # Strip HTML comments first
     text = _HTML_COMMENT_RE.sub("", text)
     lines = text.split("\n")
     cleaned = [line for line in lines if not _is_anergy(line)]
-    # Remove excessive blank lines
     result = []
     blank_count = 0
     for line in cleaned:
@@ -242,19 +225,16 @@ def _truncate_output(text: str, max_length: int = _MAX_OUTPUT_LENGTH) -> str:
     """Truncate output to max_length, preserving complete blocks."""
     if len(text) <= max_length:
         return text
-    # Try to cut at a paragraph boundary
     truncated = text[:max_length]
     last_double_newline = truncated.rfind("\n\n")
     if last_double_newline > max_length * 0.6:
         return truncated[:last_double_newline].strip()
-    # Cut at last complete line
     last_newline = truncated.rfind("\n")
     if last_newline > max_length * 0.8:
         return truncated[:last_newline].strip()
     return truncated.strip()
 
 
-# ─── Data Models ────────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -369,17 +349,14 @@ class MOSKV1DatasetCompiler:
 
     def _add_entry(self, entry: DatasetEntry) -> bool:
         """Add entry with dedup, length bounds, and exergy check."""
-        # Dedup
         content_hash = self._hash_content(f"{entry.instruction}{entry.output}")
         if content_hash in self.seen_hashes:
             self._filter_reason("duplicate")
             return False
 
-        # Purge HTML comments and XML tags from instructions to prevent leakages
         entry.instruction = _HTML_COMMENT_RE.sub("", entry.instruction)
         entry.instruction = _SYSTEM_XML_TAGS_RE.sub("", entry.instruction).strip()
 
-        # Length bounds
         inst_len = len(entry.instruction)
         output_len = len(entry.output.strip())
 
@@ -396,10 +373,8 @@ class MOSKV1DatasetCompiler:
             self._filter_reason("combined_length_exceeded")
             return False
 
-        # Truncate oversized outputs
         entry.output = _truncate_output(entry.output)
 
-        # Exergy scoring
         score = _exergy_score(entry.output)
         if score < self.min_exergy:
             self._filter_reason("low_exergy")
@@ -413,7 +388,6 @@ class MOSKV1DatasetCompiler:
         self.stats.categories[entry.category] = self.stats.categories.get(entry.category, 0) + 1
         return True
 
-    # ─── Source Extractors ──────────────────────────────────────────────
 
     def extract_from_markdown_directives(self, file_path: Path) -> int:
         """Extract instruction pairs from structured markdown (AGENTS.md, GEMINI.md)."""
@@ -424,7 +398,6 @@ class MOSKV1DatasetCompiler:
         self.stats.total_files_scanned += 1
         self.stats.total_bytes_input += len(content.encode("utf-8"))
 
-        # Strip HTML comments before parsing
         content = _HTML_COMMENT_RE.sub("", content)
 
         count = 0
@@ -435,7 +408,6 @@ class MOSKV1DatasetCompiler:
             lines = section.split("\n")
             title = lines[0].strip().lstrip("#").strip()
 
-            # Skip empty/structural-only titles
             if not title or len(title) < 5 or title.startswith("─"):
                 continue
 
@@ -533,7 +505,6 @@ class MOSKV1DatasetCompiler:
             self.stats.total_files_scanned += 1
             self.stats.total_bytes_input += len(content.encode("utf-8"))
 
-            # Extract module-level docstrings
             module_doc = self._extract_module_docstring(content)
             if module_doc and len(module_doc) > _MIN_OUTPUT_LENGTH:
                 try:
@@ -553,7 +524,6 @@ class MOSKV1DatasetCompiler:
             elif module_doc:
                 self._filter_reason("pre_short_module_doc")
 
-            # Extract class docstrings
             for class_name, class_doc in self._extract_class_docstrings(content):
                 if len(class_doc) > _MIN_OUTPUT_LENGTH:
                     instruction = _pick_template(_CODE_CLASS_TEMPLATES, name=class_name)
@@ -623,16 +593,13 @@ class MOSKV1DatasetCompiler:
                 step_content = step.get("content", "")
 
                 if step_type == "USER_INPUT" and step_content:
-                    # Clean user prompt: strip XML tags, HTML comments, metadata
                     cleaned_prompt = _clean_transcript_prompt(step_content)
-                    # Skip system-injected or too-short prompts
                     if len(cleaned_prompt) >= _MIN_INSTRUCTION_LENGTH:
                         user_prompt = cleaned_prompt
                     else:
                         user_prompt = None
                 elif step_type == "PLANNER_RESPONSE" and user_prompt and step_content:
                     cleaned = _clean_content(step_content)
-                    # Only keep high-quality pairs with structured content
                     has_structure = (
                         "```" in cleaned
                         or "yaml" in cleaned.lower()
@@ -678,7 +645,6 @@ class MOSKV1DatasetCompiler:
                 self._filter_reason("pre_short_vault")
                 continue
 
-            # Derive title from filename
             title = vault_file.stem.replace("_", " ").replace("-", " ").title()
 
             instruction = _pick_template(_VAULT_TEMPLATES, title=title)
@@ -711,11 +677,9 @@ class MOSKV1DatasetCompiler:
             self.stats.total_files_scanned += 1
             self.stats.total_bytes_input += len(content.encode("utf-8"))
 
-            # Parse frontmatter/first line for description
             name = wf_file.stem.replace("-", " ").replace("_", " ").title()
             description = ""
 
-            # Try to extract description from first header or line
             lines = content.split("\n")
             for line in lines[:10]:
                 stripped = line.strip().lstrip("#").strip()
@@ -749,7 +713,6 @@ class MOSKV1DatasetCompiler:
     def extract_from_ledger_db(self, db_path: str | Path | None = None) -> int:
         """Extract high-value facts from the CORTEX SQLite database."""
         if db_path is None:
-            # Try common DB locations
             candidates = [
                 Path.home() / ".cortex" / "cortex.db",
                 Path(os.getenv("CORTEX_DB_PATH", "")),
@@ -768,13 +731,11 @@ class MOSKV1DatasetCompiler:
 
         count = 0
         try:
-            # R10 Compliance: Rigid busy_timeout (5000ms) and WAL mode active
             from babylon60.database.core import connect
 
             conn = connect(str(db_path_resolved), timeout=5.0)  # type: ignore[call-arg]
             conn.row_factory = sqlite3.Row  # type: ignore[attr-defined]
 
-            # Extract high-confidence facts
             cursor = conn.execute(  # type: ignore[attr-defined]
                 """
                 SELECT content, project, fact_type, confidence, source, tags
@@ -817,35 +778,26 @@ class MOSKV1DatasetCompiler:
         logger.info("Extracted %d entries from Ledger DB", count)
         return count
 
-    # ─── Compilation Pipeline ──────────────────────────────────────────
 
     def compile_full_dataset(self) -> CompilationStats:
         """Execute the full compilation pipeline across all sources."""
         logger.info("🔧 MOSKV-1 Dataset Compilation v2.0 — Starting...")
 
-        # 1. Axioms & Directives
         self.extract_from_markdown_directives(self.workspace / "AGENTS.md")
         self.extract_from_markdown_directives(self.workspace / "GEMINI.md")
 
-        # 2. Skills
         self.extract_from_skills()
 
-        # 3. Python module architecture
         self.extract_from_python_modules()
 
-        # 4. Session transcripts
         self.extract_from_transcripts()
 
-        # 5. Memory Vault (NEW v2.0)
         self.extract_from_memory_vault()
 
-        # 6. Workflows (NEW v2.0)
         self.extract_from_workflows()
 
-        # 7. Ledger DB facts (NEW v2.0)
         self.extract_from_ledger_db()
 
-        # Calculate output bytes and avg exergy
         total_exergy = 0.0
         for entry in self.entries:
             self.stats.total_bytes_output += len(
@@ -856,7 +808,6 @@ class MOSKV1DatasetCompiler:
         if self.entries:
             self.stats.avg_exergy_score = total_exergy / len(self.entries)
 
-        # Sort by exergy score (highest quality first)
         self.entries.sort(key=lambda e: e.exergy_score, reverse=True)
 
         logger.info(
@@ -883,7 +834,6 @@ class MOSKV1DatasetCompiler:
         if n == 0:
             return [], [], []
 
-        # If we have very few entries, distribute them to ensure train, val, and test are not empty
         if n < 3:
             train = [shuffled[0]]
             val = [shuffled[0]]
@@ -893,7 +843,6 @@ class MOSKV1DatasetCompiler:
         train_end = int(n * train_ratio)
         val_end = int(n * (train_ratio + val_ratio))
 
-        # Enforce that validation and testing sets have at least 1 entry
         train = shuffled[:train_end]
         val = shuffled[train_end:val_end]
         test = shuffled[val_end:]
@@ -922,7 +871,6 @@ class MOSKV1DatasetCompiler:
                         f.write(json.dumps(entry.to_sharegpt(), ensure_ascii=False) + "\n")
                 logger.info("💾 %s: %d entries → %s", name, len(subset), path)
 
-        # Also export combined
         output_path = self.output_dir / filename
         with open(output_path, "w", encoding="utf-8") as f:
             for entry in self.entries:

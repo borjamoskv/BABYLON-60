@@ -39,25 +39,21 @@ def export_prometheus(score_or_report: HealthScore | HealthReport) -> str:
     if isinstance(score_or_report, HealthReport):
         score = score_or_report.score
     else:
-        # Cast to appease type checker if the type intersection is strict
         score = cast(HealthScore, score_or_report)
 
     lines: list[str] = []
 
-    # ── Overall Score ──────────────────────────────────────────
     lines.append("# HELP cortex_health_score_total Overall CORTEX health score (0-100)")
     lines.append("# TYPE cortex_health_score_total gauge")
     lines.append(f"cortex_health_score_total {score.score:.2f}")
     lines.append("")
 
-    # ── Grade ──────────────────────────────────────────────────
     numeric_grade = _grade_to_numeric(score.grade)
     lines.append("# HELP cortex_health_grade Current grade (0=F, 1=D, 2=C, 3=B, 4=A, 5=S)")
     lines.append("# TYPE cortex_health_grade gauge")
     lines.append(f"cortex_health_grade {numeric_grade}")
     lines.append("")
 
-    # ── Sub-indices ────────────────────────────────────────────
     if score.sub_indices:
         lines.append("# HELP cortex_health_sub_index Composite health sub-indices (0-100)")
         lines.append("# TYPE cortex_health_sub_index gauge")
@@ -65,7 +61,6 @@ def export_prometheus(score_or_report: HealthScore | HealthReport) -> str:
             lines.append(f'cortex_health_sub_index{{index="{index_name}"}} {val:.2f}')
         lines.append("")
 
-    # ── Individual Metrics (Value) ─────────────────────────────
     if score.metrics:
         lines.append("# HELP cortex_health_metric_value Individual collector metric values")
         lines.append("# TYPE cortex_health_metric_value gauge")
@@ -73,7 +68,6 @@ def export_prometheus(score_or_report: HealthScore | HealthReport) -> str:
             lines.append(f'cortex_health_metric_value{{collector="{m.name}"}} {m.value:.4f}')
         lines.append("")
 
-        # ── Individual Metrics (Latency) ───────────────────────
         lines.append("# HELP cortex_health_metric_latency_ms Individual collector latency (ms)")
         lines.append("# TYPE cortex_health_metric_latency_ms gauge")
         for m in score.metrics:

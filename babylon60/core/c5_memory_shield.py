@@ -23,7 +23,6 @@ def enforce_no_coredump() -> None:
     try:
         resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     except ValueError as exc:
-        # If the kernel rejects the limit, the process is compromised.
         print(f"[OPSEC] RLIMIT_CORE rejection: {exc}", file=sys.stderr)
         _kill_self()
 

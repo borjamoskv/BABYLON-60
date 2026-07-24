@@ -73,7 +73,6 @@ def list_databases() -> list[dict[str, Any]]:
     return _discover_databases()
 
 
-# Stable, non-leaking message: never echo raw sqlite text (could leak paths).
 _DB_ERR = "No se pudo leer la base (fichero corrupto o no es SQLite)"
 
 
@@ -82,8 +81,6 @@ def list_tables(name: str) -> list[dict[str, Any]]:
     """List tables in a specific database."""
     db_path = _resolve_db(name)
     try:
-        # contextlib.closing → conn.close() ocurre también si execute lanza
-        # (antes solo se cerraba en la ruta feliz: fuga de conexión).
         with contextlib.closing(connect_readonly(db_path)) as conn:
             return get_table_list(conn)
     except sqlite3.DatabaseError as e:
@@ -115,8 +112,6 @@ def browse_table(
     db_path = _resolve_db(name)
     try:
         with contextlib.closing(connect_readonly(db_path)) as conn:
-            # Validar la tabla contra el catálogo real → 404 claro en vez de
-            # un 500 con "no such table" y texto crudo filtrado.
             valid = {t["name"] for t in get_table_list(conn)}
             if table not in valid:
                 raise HTTPException(404, f"Table '{table}' not found in '{name}'")

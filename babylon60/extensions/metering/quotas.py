@@ -21,7 +21,6 @@ __all__ = ["PLAN_QUOTAS", "QuotaCheckResult", "QuotaEnforcer"]
 logger = logging.getLogger(__name__)
 
 
-# ─── Plan Definitions ────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -72,7 +71,6 @@ PLAN_QUOTAS: dict[str, PlanQuota] = {
 }
 
 
-# ─── Quota Check Result ──────────────────────────────────────────────
 
 
 @dataclass
@@ -87,7 +85,6 @@ class QuotaCheckResult:
     reset_at: str  # ISO timestamp of month reset
 
 
-# ─── Enforcer ────────────────────────────────────────────────────────
 
 
 class QuotaEnforcer:
@@ -122,7 +119,6 @@ class QuotaEnforcer:
         usage = self._tracker.get_usage(tenant_id)
         calls_used = usage["calls_used"]
 
-        # Unlimited plan
         if quota.calls_limit == -1:
             return QuotaCheckResult(
                 allowed=True,

@@ -7,7 +7,6 @@ from typing import Any
 from babylon60.extensions.skills.autodidact.fetchers import execute_cognitive_acquisition
 from babylon60.extensions.skills.autodidact.synthesis import execute_cognitive_synthesis
 
-# Integración Babestu (Security)
 try:
     from babylon60.extensions.security.t_cell import BabestuTCell
 except ImportError:
@@ -51,17 +50,14 @@ async def daemon_ingesta_soberana(
     """Protocolo AUTODIDACT-Ω: Ingesta, Filtrado y Síntesis."""
     logger.info("🫁 [PULMONES] Iniciando Ingesta: %s (Intent: %s)", target_url, intent)
 
-    # 1. Adquisición vía Orquestador de Fetchers
     texto_raw = await execute_cognitive_acquisition(intent, target_url)
     if not texto_raw or str(texto_raw).startswith(ERR_PREFIX):
         return {"estado": "FALLO", "error": f"Adquisición fallida: {texto_raw}"}
 
-    # 1.5. El Demonio de Maxwell (Filtros de Entropía)
     h_char = shannon_entropy(list(texto_raw))
     k_ratio = kolmogorov_ratio(texto_raw)
     logger.info("🦇 [MAXWELL] H_char=%.2f | K=%.2f", h_char, k_ratio)
 
-    # Reflexión Matemática: El Borde del Caos
     if 4.0 <= h_char <= 5.5 and 0.2 <= k_ratio <= 0.4:
         logger.info(
             "🌌 [SOVEREIGN] Métrica óptima. Payload reside en el Borde del Caos (ideal para LLMs)."
@@ -75,7 +71,6 @@ async def daemon_ingesta_soberana(
         msg = f"Rechazo Kolmogorov: K={k_ratio:.2f} (Baja complejidad/Spam)."
         return {"estado": "FALLO", "error": msg}
 
-    # 2. Barrera Babestu (Seguridad Estática T-Cell)
     if BabestuTCell:
         logger.info("🛡️ [BABESTU] Escaneando payload con T-Cell (O(1))...")
         audit = BabestuTCell.scan_payload(texto_raw, source_url=target_url)
@@ -83,10 +78,8 @@ async def daemon_ingesta_soberana(
             msg = f"Veneno detectado: {audit.get('firma_ataque')}. Razón: {audit.get('razon')}"
             logger.critical("🛑 [BABESTU] %s", msg)
             return {"estado": "CUARENTENA", "error": msg}
-        # Si hay contenido saneado (stripping de JS/HTML peligroso), lo usamos.
         texto_raw = audit.get("contenido_saneado") or texto_raw
 
-    # 3. Síntesis Profunda (Crystallization)
     try:
         logger.info("💎 [CORTEX] Cristalizando conocimiento en O(1)...")
         memo_id = await execute_cognitive_synthesis(
@@ -96,7 +89,6 @@ async def daemon_ingesta_soberana(
         if "MEMO" in str(memo_id):
             logger.info("✨ Singularidad alcanzada. Memo: %s", memo_id)
             return {"estado": "ASIMILADO", "memo_id": memo_id}
-        # Si execute_cognitive_synthesis retornó un ID de memo existente (redundancia)
         return {"estado": "REDUNDANTE", "memo_id": memo_id}
 
     except (RuntimeError, ValueError, TypeError) as e:

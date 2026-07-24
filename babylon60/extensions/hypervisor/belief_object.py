@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX Hypervisor - BeliefObject Contract (RFC-BABYLON60-NATIVE-AI v0.1).
 
@@ -29,7 +25,6 @@ __all__ = [
 ]
 
 
-# ─── Enums ──────────────────────────────────────────────────────────────────
 
 
 class BeliefConfidence(str, Enum):
@@ -64,7 +59,6 @@ class VerdictAction(str, Enum):
     ESCALATE = "escalate"
 
 
-# ─── Provenance ─────────────────────────────────────────────────────────────
 
 
 def _now_iso() -> str:
@@ -86,7 +80,6 @@ class ProvenanceEnvelope:
     was_generated_by: str = ""
 
 
-# ─── ATMS Relations ─────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -97,7 +90,6 @@ class BeliefRelations:
     discards: tuple[str, ...] = ()
 
 
-# ─── BeliefObject ───────────────────────────────────────────────────────────
 
 
 def _uuid7() -> str:
@@ -156,7 +148,6 @@ class BeliefObject:
     arbitrated_by: str | None = None
     """Model identifier that last judged this belief (e.g., 'opus', 'deep_think')."""
 
-    # ALIASES FOR BACKWARD COMPATIBILITY DURING MIGRATION
     @property
     def id(self) -> str:
         return self.belief_id
@@ -205,7 +196,6 @@ class BeliefObject:
             "arbitrated_by": self.arbitrated_by,
             "project": self.project,
             "tenant_id": self.tenant_id,
-            # Legacy mapping for backwards-compatible DB reads
             "id": self.belief_id,
             "content": self.proposition,
             "status": self.state.value,
@@ -216,7 +206,6 @@ class BeliefObject:
         """Deserialize from dict (SQLite/JSON)."""
         prov_data = data.get("provenance", {})
         if isinstance(prov_data, list):
-            # Legacy ProvenanceChain support
             prov_data = {}
 
         prov = ProvenanceEnvelope(
@@ -255,7 +244,6 @@ class BeliefObject:
         )
 
 
-# ─── BeliefVerdict ──────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)

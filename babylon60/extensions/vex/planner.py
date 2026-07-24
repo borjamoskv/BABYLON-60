@@ -41,7 +41,6 @@ class Planner:
     2. LLM-backed: Use a PlannerBackend for arbitrary intent decomposition
     """
 
-    # Known tools that map to CORTEX engine operations.
     _KNOWN_TOOLS: frozenset[str] = frozenset(
         (
             "cortex_store",

@@ -9,7 +9,6 @@ import asyncio
 import logging
 import sys
 
-# Assuming usage of an MCP python sdk if available, otherwise defining a stub
 try:
     from mcp.server import Server
     from mcp.server.stdio import stdio_server

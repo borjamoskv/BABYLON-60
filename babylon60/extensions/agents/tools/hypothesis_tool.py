@@ -72,7 +72,6 @@ class HypothesisArgs(BaseModel):
     )
 
 
-# ── Verdict → fact_type mapping ──────────────────────────────────────────
 _VERDICT_TYPE_MAP: dict[str, str] = {
     "proposed": "discovery",
     "testing": "discovery",
@@ -123,7 +122,6 @@ class HypothesisEngineTool:
             project,
         )
 
-        # Build structured metadata for the hypothesis
         meta = {
             "domain": domain,
             "method": method,
@@ -146,7 +144,6 @@ class HypothesisEngineTool:
                 meta=meta,
             )
 
-            # Format response based on verdict
             icons = {
                 "proposed": "🔬",
                 "testing": "🧪",

@@ -41,8 +41,6 @@ else:
 
 def _get_passphrase() -> bytes:
     """Retrieve the KDF passphrase from environment."""
-    # In CORTEX_TESTING, we default to a predictable passphrase to avoid breaking existing pipelines
-    # that don't pass the env variable. In production, it must be set.
     if os.environ.get("CORTEX_TESTING"):
         pp = os.environ.get("CORTEX_KDF_PASSPHRASE", "c5_real_test_passphrase")
     else:
@@ -70,7 +68,6 @@ def _wrap_key(raw_key: bytes, passphrase: bytes) -> str:
     nonce = os.urandom(_NONCE_LENGTH)
     ciphertext = aesgcm.encrypt(nonce, raw_key, None)
 
-    # Blob format: v1: + salt (16) + nonce (12) + ciphertext
     blob = b"v1:" + salt + nonce + ciphertext
     return base64.b64encode(blob).decode("utf-8")
 
@@ -82,9 +79,7 @@ def _unwrap_key(blob_b64: str, passphrase: bytes) -> bytes | None:
     except (ValueError, binascii.Error):
         return None
 
-    # Check prefix
     if blob.startswith(b"v1:"):
-        # v1: (3) + salt (16) + nonce (12) + ciphertext
         if len(blob) < 3 + _SALT_LENGTH + _NONCE_LENGTH:
             return None
 
@@ -107,7 +102,6 @@ def _unwrap_key(blob_b64: str, passphrase: bytes) -> bytes | None:
             logger.error("Failed to unwrap L0 Master Key: Invalid KDF Passphrase or tampered payload.")
             raise ValueError("KDF-0 Violation: Incorrect Passphrase or corrupted key blob.") from e
 
-    # Legacy Fallback (Migration on-the-fly)
     if len(blob) == _AES_KEY_LENGTH:
         logger.warning(
             "[C5-REAL] Detected Legacy Plaintext Base64 Master Key. Auto-migrating to Argon2id Wrapped Key..."

@@ -30,7 +30,6 @@ class DemiurgeCompiler:
 
     async def initialize(self) -> None:
         """Initialize engine if needed."""
-        # CortexEngine is initialized synchronously.
 
     async def forge_skill(self, intent: str, project_scope: str = "demiurge") -> dict[str, Any]:
         """
@@ -56,7 +55,6 @@ class DemiurgeCompiler:
         )
 
         try:
-            # Phase 1-2: Interception & Genetics
             generated_code = await self.llm.complete(
                 prompt=intent, system=system_prompt, temperature=0.2
             )
@@ -73,7 +71,6 @@ class DemiurgeCompiler:
                 if generated_code.startswith("python"):
                     generated_code = generated_code[6:].strip()
 
-            # Phase 3: Zero-Trust Validation (AST Sandbox - CRIT-01 hardened)
             from babylon60.utils.sandbox import ASTSandbox
 
             _sandbox = ASTSandbox(max_nodes=500, max_depth=20, timeout_seconds=5)
@@ -90,13 +87,9 @@ class DemiurgeCompiler:
                     "code": generated_code,
                 }
 
-            # Phase 4-5: Ephemeral Execution (Sandbox)
             sandbox_globals: dict[str, Any] = {"__builtins__": {}}
             try:
                 code_obj = compile(generated_code, "<demiurge_ast>", "exec")
-                # Security Justification: The Demiurge JIT compiler requires exec() for
-                # ephemeral skill generation (autopoiesis) within a controlled sandbox.
-                # All inputs are validated via ASTSandbox whitelist before execution.
                 exec(code_obj, sandbox_globals)  # nosec B102
             except (ValueError, TypeError, OSError, KeyError) as e:
                 await self._record_ghost(intent, generated_code, f"Compilation Error: {e}", 0.15)
@@ -115,17 +108,13 @@ class DemiurgeCompiler:
                     "code": generated_code,
                 }
 
-            # Phase 6: Run the skill
             start_time = asyncio.get_event_loop().time()
             try:
-                # We must await the execution as the function is defined as async
                 result = await sandbox_globals["execute_skill"]()
                 execution_time = asyncio.get_event_loop().time() - start_time
 
-                # Assign a base utility score
                 utility = 0.9 if execution_time < 2.0 else 0.6
 
-                # Phase 7-9: Crystallization (Ledger persistence)
                 await self.engine.store(
                     project=project_scope,
                     fact_type="demiurge:bridge",

@@ -163,13 +163,11 @@ def jensen_shannon_divergence(
     if not all_keys:
         return 0.0
 
-    # Build midpoint M = ½(P + Q)
     m: dict[str, float] = {}
     for key in all_keys:
         m[key] = 0.5 * (p.get(key, 0.0) + q.get(key, 0.0))
 
     jsd = 0.5 * kl_divergence(p, q) + 0.5 * kl_divergence(q, p)
-    # Clamp to [0, 1] for numerical stability
     return max(0.0, min(jsd, 1.0))
 
 
@@ -194,7 +192,6 @@ def mutual_information(joint: dict[tuple[str, str], int]) -> float:
     if total <= 0:
         return 0.0
 
-    # Marginal distributions
     margin_x: dict[str, int] = {}
     margin_y: dict[str, int] = {}
     for (x, y), count in joint.items():
@@ -204,7 +201,6 @@ def mutual_information(joint: dict[tuple[str, str], int]) -> float:
     h_x = shannon_entropy(margin_x)
     h_y = shannon_entropy(margin_y)
 
-    # Joint entropy H(X,Y) - treat tuple keys as flat categories
     joint_flat: dict[str, int] = {f"{x}|{y}": c for (x, y), c in joint.items()}
     h_xy = shannon_entropy(joint_flat)
 
@@ -232,13 +228,11 @@ def conditional_entropy(
     if not joint:
         return 0.0
 
-    # Marginal H(X)
     margin_x: dict[str, int] = {}
     for (x, _y), count in joint.items():
         margin_x[x] = margin_x.get(x, 0) + count
     h_x = shannon_entropy(margin_x)
 
-    # Joint H(X,Y)
     joint_flat: dict[str, int] = {f"{x}|{y}": c for (x, y), c in joint.items()}
     h_xy = shannon_entropy(joint_flat)
 
@@ -299,7 +293,6 @@ def information_value(freq: int, total: int) -> float:
     return -math.log2(p)
 
 
-# ── Exergy - Ω₁₃ §15.9: Useful Work Measurement ──────────────────────
 
 
 def exergy_score(
@@ -326,7 +319,6 @@ def exergy_score(
     if total <= 0:
         return 0.0
 
-    # Compute weighted entropy (exergy)
     ex = 0.0
     for cat, count in distribution.items():
         if count > 0:
@@ -334,7 +326,6 @@ def exergy_score(
             w = usage_weights.get(cat, 0.0)
             ex += p * w * (-math.log2(p))
 
-    # Normalize: max exergy = H(X) when all weights = 1.0
     h_max = shannon_entropy(distribution)
     if h_max < 1e-15:
         return 0.0

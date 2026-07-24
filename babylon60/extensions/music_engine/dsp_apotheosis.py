@@ -26,7 +26,6 @@ except ImportError:
 logger = logging.getLogger(__name__)
 
 
-# Standards and Constants
 DEFAULT_SAMPLING_RATE = 44100
 MIN_AUDIO_LENGTH = 1024
 LUFS_FLOOR = -144.0
@@ -73,13 +72,11 @@ class DSPApotheosis:
         """Calculates Integrated LUFS using pyloudnorm (EBU R128 / ITU-R BS.1770)."""
         if len(audio_data) == 0:
             return LUFS_FLOOR
-        # pyloudnorm requiere [samples, channels]
         meter = pyln.Meter(sample_rate)
         try:
             lufs = meter.integrated_loudness(audio_data)
             return float(lufs)
         except (ValueError, AttributeError) as e:
-            # Catch specific errors from pyloudnorm internals or buffer shape
             logger.error("Error calculating LUFS: %s", e)
             return LUFS_FLOOR
 
@@ -94,11 +91,8 @@ class DSPApotheosis:
         spectrum = np.fft.rfft(audio_data)
         magnitude = np.abs(spectrum)
 
-        # Ideal pink noise spectrum: magnitude proportional to 1/sqrt(f)
         ideal_slope = np.zeros_like(freqs)
-        # Avoid division by zero at DC
         ideal_slope[1:] = 1.0 / (np.sqrt(freqs[1:]) + PINK_NOISE_SLOPE_OFFSET)
-        # Match magnitude above 30Hz
         mask = freqs > MIN_FREQ_HZ
         if np.any(mask):
             scaling = np.median(magnitude[mask]) / (
@@ -106,19 +100,15 @@ class DSPApotheosis:
             )
             ideal_slope *= scaling
 
-        # Calculate corrective gain
         gain = np.ones_like(magnitude)
         gain[mask] = ideal_slope[mask] / (magnitude[mask] + PINK_NOISE_SLOPE_OFFSET)
 
-        # Clip gain to avoid extreme resonance (+/- 12dB)
         gain = np.clip(gain, MIN_GAIN_BOOST, MAX_GAIN_BOOST)
 
-        # Smooth gain curve using Savitzky-Golay filter
         win_size = min(101, len(gain) // 4 * 2 + 1)
         if win_size > 5:
             gain = scipy.signal.savgol_filter(gain, win_size, 3)
 
-        # Apply gain in frequency domain
         spectrum_matched = spectrum * gain  # type: ignore[operator]
         audio_matched = np.fft.irfft(spectrum_matched, n=n)
 
@@ -131,7 +121,6 @@ class DSPApotheosis:
         alpha_at = np.exp(-1.0 / (ATTACK_ALPHA_MS * sample_rate))
         alpha_re = np.exp(-1.0 / (RELEASE_ALPHA_MS * sample_rate))
 
-        # Handle stereo/mono
         if len(audio_data.shape) > 1:
             processed = np.zeros_like(audio_data)
             for ch in range(audio_data.shape[1]):
@@ -151,26 +140,21 @@ class DSPApotheosis:
         """
         logger.info("Starting deterministic mastering. SR: %dHz", sample_rate)
 
-        # 1. Tonal Balance (Pink Noise matching)
         if len(audio_data.shape) > 1 and audio_data.shape[1] == 2:
             audio_data[:, 0] = self.match_pink_noise_curve(audio_data[:, 0], sample_rate)
             audio_data[:, 1] = self.match_pink_noise_curve(audio_data[:, 1], sample_rate)
         else:
             audio_data = self.match_pink_noise_curve(audio_data, sample_rate)
 
-        # 2. Transient Shaping
         audio_data = self.apply_transient_shaping(audio_data, sample_rate)
 
-        # 3. Loudness Normalization to target (Streaming Standard)
         current_lufs = self.calculate_lufs(audio_data, sample_rate)
         if current_lufs > LUFS_FLOOR:
             gain_db = STREAMING_LUFS_TARGET - current_lufs
-            # Prevent excessive boost
             gain_db = min(gain_db, MAX_MASTERING_GAIN_DB)
             gain_linear = 10 ** (gain_db / 20.0)
             audio_data *= gain_linear
 
-        # 4. Final Peak Limiter / Ceiling
         audio_data = np.clip(audio_data, -PEAK_CEILING, PEAK_CEILING)
 
         final_lufs = self.calculate_lufs(audio_data, sample_rate)

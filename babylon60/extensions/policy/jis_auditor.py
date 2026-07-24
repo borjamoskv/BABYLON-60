@@ -25,7 +25,6 @@ class JISViolation:
 class JISAuditor:
     """Evaluates JSON payloads against strict compliance policies."""
 
-    # Simple regex for PII (Credit Cards, SSN, Emails)
     _PII_PATTERNS = [
         re.compile(r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b"),  # Email
         re.compile(r"\b(?:\d[ -]*?){13,16}\b"),  # Basic CC
@@ -40,7 +39,6 @@ class JISAuditor:
         """Run all compliance checks on a transaction payload."""
         violations = []
 
-        # 1. GDPR Check: Detect cleartext PII
         payload_str = str(payload)
         for pattern in self._PII_PATTERNS:
             if pattern.search(payload_str):
@@ -53,7 +51,6 @@ class JISAuditor:
                     )
                 )
 
-        # 2. SOC 2 Check: Ensure 'actor_id' is present for accountability
         if "actor_id" not in payload and "actor" not in payload:
             violations.append(
                 JISViolation(
@@ -64,7 +61,6 @@ class JISAuditor:
                 )
             )
 
-        # 3. C5 Check: Cryptographic Verification markers
         if self.enforce_encryption:
             if "signature" not in payload and "origin_signature" not in payload:
                 violations.append(
@@ -76,7 +72,6 @@ class JISAuditor:
                     )
                 )
 
-        # 4. Thermodynamic Stress Check: Detect high cortisol
         metrics = payload.get("metrics", {})
         cortisol = metrics.get("cortisol_level", 0.0)
         if cortisol > 0.8:

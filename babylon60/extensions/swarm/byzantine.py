@@ -26,7 +26,6 @@ class ByzantineConsensus:
     """
 
     def __init__(self, tolerance_threshold: float = 0.67):
-        # By default, a 2/3 majority weighted by reputation is required.
         self.tolerance_threshold = tolerance_threshold
         self.nodes: dict[str, ByzantineNode] = {}
         # [C5-REAL] Exergy Cache: Previene Thermal Runaway O(N^2) en evaluación continua de cuórum.
@@ -75,7 +74,6 @@ class ByzantineConsensus:
         Calcula hashes asincrónicamente pero usando memoización estricta sincrónica.
         Destruye el ThreadPoolExecutor bottleneck de asyncio.to_thread x 10,000.
         """
-        # La evaluación es mayoritariamente O(1) por caché, liberando el event loop.
         return {
             nid: self._get_proposal_hash_sync(prop)
             for nid, prop in proposals.items()
@@ -106,20 +104,16 @@ class ByzantineConsensus:
         if math.isclose(total_reputation, 0.0, abs_tol=1e-9):
             return None
 
-        # Find winning proposal
         winning_hash = max(vote_tally.keys(), key=lambda k: vote_tally[k])
         winning_weight = vote_tally[winning_hash]
 
-        # Check against Byzantine tolerance threshold
         ratio = winning_weight / total_reputation
         if ratio > self.tolerance_threshold or math.isclose(
             ratio, self.tolerance_threshold, rel_tol=1e-9
         ):
-            # Consensus achieved
             self._update_reputations(winning_hash, proposals, node_hashes)
             return hash_to_proposal[winning_hash]
 
-        # Consensus failed (Shattered Trust)
         return None
 
     def _update_reputations(
@@ -136,8 +130,6 @@ class ByzantineConsensus:
 
             proposal_hash = node_hashes.get(node_id)
             if proposal_hash == winning_hash:
-                # Reward
                 self.nodes[node_id].reputation = min(1.0, self.nodes[node_id].reputation * 1.05)
             else:
-                # Slash
                 self.nodes[node_id].reputation *= 0.8

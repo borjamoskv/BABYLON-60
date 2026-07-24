@@ -176,7 +176,6 @@ class CryptoShredder:
         if not isinstance(self._conn, sqlite3.Connection):
             raise TypeError("Use shred_fact_async for async connections")
 
-        # Check if already shredded
         if self.is_shredded(fact_id, tenant_id):
             return ShredResult(
                 fact_id=fact_id,
@@ -195,7 +194,6 @@ class CryptoShredder:
                 (fact_id, tenant_id, reason, shredded_by, ts),
             )
 
-            # Invalidate the fact-specific derived key from the encrypter cache
             self._invalidate_fact_key(fact_id, tenant_id)
 
             self._conn.commit()
@@ -346,10 +344,6 @@ class CryptoShredder:
             from babylon60.crypto.aes import get_default_encrypter
 
             enc = get_default_encrypter()
-            # Remove the fact-specific key derivation marker
-            # The _tenant_keys cache only stores per-tenant keys,
-            # but we mark this fact_id as shredded so the decrypt
-            # path can check before attempting HKDF derivation.
             cache_key = f"{tenant_id}:fact:{fact_id}"
             if not hasattr(enc, "_shredded_facts"):
                 enc._shredded_facts = set()  # type: ignore

@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
 
 import json
 import logging
@@ -111,7 +109,6 @@ class DaemonState:
         try:
             path = CORTEX_ROOT / "handoff.json"
             CORTEX_ROOT.mkdir(parents=True, exist_ok=True)
-            # Atomic write: temp file + rename
             fd, tmp_path = tempfile.mkstemp(dir=str(CORTEX_ROOT), suffix=".tmp")
             try:
                 with open(fd, "w") as f:
@@ -142,5 +139,4 @@ class DaemonState:
         return False
 
 
-# Global Singleton state
 state = DaemonState()

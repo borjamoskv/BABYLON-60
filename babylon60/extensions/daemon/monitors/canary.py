@@ -15,7 +15,6 @@ from babylon60.extensions.daemon.models import SecurityAlert
 
 logger = logging.getLogger("moskv-daemon")
 
-# List of files to watch. These are mentioned in the Sovereign Security Protocol.
 CANARY_FILES = [
     Path("~/.babylon60/canaries/secrets.env").expanduser(),
     Path("~/.babylon60/canaries/aws_secrets.txt").expanduser(),
@@ -46,7 +45,6 @@ class CanaryMonitor:
                     f"STRIKE_KEY={os.urandom(16).hex()}\n",
                     encoding="utf-8",
                 )
-            # Initialize stats with current access/mod time
             try:
                 st = path.stat()
                 self._last_stats[path] = max(st.st_atime, st.st_mtime)
@@ -60,7 +58,6 @@ class CanaryMonitor:
             try:
                 if not path.exists():
                     logger.critical("🚨 CANARY DELETED: %s", path)
-                    # Re-create it immediately
                     self._ensure_canaries()
                     current_val = 0.0  # Force alert
                 else:
@@ -84,7 +81,6 @@ class CanaryMonitor:
                     alerts.append(alert)
                     self._last_stats[path] = current_val
 
-                    # Persist to threat intel immediately
                     await self._trigger_lockdown(alert)
 
             except OSError as e:

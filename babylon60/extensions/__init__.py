@@ -19,5 +19,4 @@ class ExtensionTierImportEnforcer(importlib.abc.MetaPathFinder):
         return None  # Let standard importers load it after verification
 
 
-# Register the enforcer at the head of the meta path
 sys.meta_path.insert(0, ExtensionTierImportEnforcer())

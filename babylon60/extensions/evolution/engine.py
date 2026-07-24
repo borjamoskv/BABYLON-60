@@ -126,16 +126,12 @@ class EvolutionEngine(EvolutionOpsMixin):
         extinctions = 0
         transfers = 0
 
-        # 1. Fetch Terminal Metrics (Afferent snapshot)
         metrics = await fetch_all_domain_metrics()
 
-        # 2. Epigenetic Modulation (Endocrine feedback)
         self._apply_epigenetic_modulation()  # pyright: ignore[reportAttributeAccessIssue]
 
-        # 3. Torneo Adversarial (Telemetry-Grounding)
         await self._evaluate_adversarial(metrics)  # pyright: ignore[reportAttributeAccessIssue]
 
-        # 4. Extinción Masiva
         if self.cycle_count % self.params.extinction_cycle == 0:
             if random.random() > 0.5:
                 await self._ouroboros_pruning()  # pyright: ignore[reportAttributeAccessIssue]
@@ -143,7 +139,6 @@ class EvolutionEngine(EvolutionOpsMixin):
             else:
                 extinctions = self._mass_extinction()  # pyright: ignore[reportAttributeAccessIssue]
 
-        # 5. Selección, Recombinación y Plásmidos (Ω₀ Parallelized)
         tasks = [self._process_sovereign(s, metrics) for s in self.sovereigns]  # pyright: ignore[reportAttributeAccessIssue]
         results = await asyncio.gather(*tasks)
 
@@ -161,7 +156,6 @@ class EvolutionEngine(EvolutionOpsMixin):
             if domain_state:
                 domain_states[domain_state.domain] = domain_state
 
-        # Batch record all mutations in one pass
         if all_mutations:
             self._evolution_ledger.record_mutations_batch(all_mutations)
 

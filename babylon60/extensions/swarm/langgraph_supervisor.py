@@ -115,7 +115,6 @@ class CortexLangGraphSupervisor:
         except Exception as e:
             error_msg = str(e).upper()
             if "RESOURCE_EXHAUSTED" in error_msg or "429" in error_msg or "RATE LIMIT" in error_msg:
-                # Ω27 trigger
                 fallback_state = await self.fallback_local_execution(initial_state)
                 yield fallback_state
             elif isinstance(e, (ValueError, TypeError, RuntimeError)):

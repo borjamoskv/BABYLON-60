@@ -31,8 +31,6 @@ router = APIRouter(prefix="/api/ledger", tags=["analytics"])
 _TOKEN_RE = re.compile(r"[a-z0-9_]+")
 _BM25_K1 = 1.5
 _BM25_B = 0.75
-# Bound the scan so a huge ledger can't OOM the process on a single query.
-# No silent truncation: the response reports `scanned` vs `total`.
 _SEARCH_SCAN_CAP = 5000
 
 
@@ -45,8 +43,6 @@ def _find_ledger_db(root: Path) -> Path | None:
     for c in candidates:
         if c.exists():
             return c
-    # sorted → determinista; closing → sin fuga si execute lanza;
-    # DatabaseError → cubre también "file is not a database".
     for db_file in sorted(root.glob("*.db")):
         try:
             with contextlib.closing(connect_readonly(db_file)) as conn:
@@ -89,14 +85,12 @@ def ledger_analytics() -> dict[str, Any]:
             )
         ]
 
-        # Agents = prefix of cortex_taint before the first ':' (quién escribió).
         agent_counter: Counter[str] = Counter()
         for r in conn.execute("SELECT cortex_taint FROM ledger_entries"):
             taint = r["cortex_taint"] or "unknown"
             agent_counter[taint.split(":", 1)[0].split("|", 1)[0]] += 1
         agents = [{"agent": a, "count": c} for a, c in agent_counter.most_common(20)]
 
-        # Lamport continuity: gaps break causal orderability.
         lam = conn.execute(
             "SELECT MIN(lamport_t) AS mn, MAX(lamport_t) AS mx, COUNT(DISTINCT lamport_t) AS d FROM ledger_entries"
         ).fetchone()
@@ -146,8 +140,6 @@ def ledger_search(
     conn = connect_readonly(db_path)
     try:
         total_rows = conn.execute("SELECT COUNT(*) AS c FROM ledger_entries").fetchone()["c"]
-        # Scan the most recent N entries (bounded memory); newest is where the
-        # "por qué" usually lives. Truncation is reported, never silent.
         rows = conn.execute(
             "SELECT seq, stream, entity_id, event_type, cortex_taint, payload_json, created_at "
             "FROM ledger_entries ORDER BY seq DESC LIMIT ?",
@@ -167,8 +159,6 @@ def ledger_search(
             for t in set(toks):
                 df[t] += 1
 
-        # scanned = recuento REAL para el contrato; el divisor guardado (or 1)
-        # solo protege la división — no se filtra al cliente.
         scanned = len(docs)
         n = scanned or 1
         avgdl = total_len / n

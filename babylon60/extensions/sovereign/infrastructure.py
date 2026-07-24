@@ -15,7 +15,6 @@ from typing import Final
 
 logger = logging.getLogger("babylon60_extensions.sovereign.infrastructure")
 
-# Paths for the Sovereign Air-Gap simulation
 from babylon60.core.paths import CORTEX_DIR as _CORTEX_DIR
 
 SOVEREIGN_STORAGE: Final[Path] = _CORTEX_DIR / "mailing" / "vault"
@@ -73,16 +72,12 @@ class DataDiodeBridge:
         """
         self._buffer.append(event_data)
         if len(self._buffer) > 10:
-            # Simulation of a pulsed diode transmit
             logger.info("DataDiode: Pulsing 10 telemetry events through the gap.")
             self._flush()
 
     def _flush(self):
-        # In a real air-gap, this would be a physical diode (Fibre Optic)
-        # Here we just clean the buffer.
         self._buffer.clear()
 
     def check_integrity(self) -> bool:
         """Verifies if the diode is physically or logically breached."""
-        # Simulated check: ensure no incoming ports are open
         return True

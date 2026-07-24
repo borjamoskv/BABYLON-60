@@ -25,15 +25,10 @@ app = FastAPI(
     version="0.7.0",
 )
 
-# Initialize the IDE's own CortexLedger (append-only, hash-chained).
 cortex_ledger.init(Path(__file__).parent.parent.parent)
 
-# GZip — comprime bundle estático + respuestas JSON grandes por el puente.
 app.add_middleware(GZipMiddleware, minimum_size=1024)
 
-# CORS — solo localhost. Verbos/headers acotados a lo que los routers usan
-# (defensa en profundidad; la extensión MV3 no depende de CORS: usa
-# host_permissions que ya evitan la comprobación en el navegador).
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
@@ -56,7 +51,6 @@ async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
     logger.exception("unhandled error on %s %s", request.method, request.url.path)
     return JSONResponse(status_code=500, content={"detail": "Error interno (ver log del servidor)"})
 
-# Mount API routes
 app.include_router(ledger.router)
 app.include_router(analytics.router)
 app.include_router(ontology.router)
@@ -72,7 +66,6 @@ def health_check() -> dict[str, str]:
     return {"status": "ok", "service": "babylon60-ide"}
 
 
-# Serve static frontend (production build)
 FRONTEND_DIST = Path(__file__).parent.parent / "frontend" / "dist"
 if FRONTEND_DIST.is_dir():
     app.mount("/", StaticFiles(directory=str(FRONTEND_DIST), html=True), name="frontend")

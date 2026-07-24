@@ -46,14 +46,12 @@ class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
         m = MejoraloEngine(engine=self._engine)
         logger.info("🌌 OMEGA-SINGULARITY sweep initiated for %s", project)
 
-        # 1. Singular Scan
         result = m.scan(project, path, deep=True, brutal=True)
         self._stats["scans"] += 1
 
         initial_score = result.score
         alerts: list[Any] = []
 
-        # 2. Entropy / Quality Violation Detection
         if initial_score < self.threshold and not result.dead_code:
             logger.warning(
                 "🚨 Entropy breach in %s (score %d < %d).",
@@ -62,12 +60,10 @@ class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
                 self.threshold,
             )
 
-            # 3. Autonomous Healing (if enabled)
             if self.auto_heal:
                 logger.info("🛠️  Triggering sovereign healing for %s...", project)
                 if m.relentless_heal(project, path, result, target_score=100):
                     self._stats["heals"] += 1
-                    # Full re-scan after heal
                     result = m.scan(project, path, deep=True)
                     logger.info(
                         "✅ Entropy resolved in %s. Score: %d -> %d",
@@ -76,7 +72,6 @@ class UnifiedMejoraloMonitor(IntervalProjectMonitor[Any]):
                         result.score,
                     )
 
-        # 4. Generate Alerts (backward compatible with DaemonStatus)
         alerts.append(
             MejoraloAlert(
                 project=project,

@@ -25,7 +25,6 @@ from babylon60.extensions.signals.bus import SignalBus
 
 console = Console()
 
-# Defined Swarm States
 STATE_INITIALIZING = "INITIALIZING"
 STATE_PLANNING = "PLANNING"
 STATE_ISOLATED = "ISOLATED_WORKTREE"
@@ -51,7 +50,6 @@ class SwarmBoard:
         self._conn = babylon60.database.core.connect_sync(db_path)
         self.bus = SignalBus(self._conn)
 
-        # Agent state tracking: source -> state dict
         self.agents: dict[str, dict[str, Any]] = defaultdict(
             lambda: {
                 "state": STATE_INITIALIZING,
@@ -65,9 +63,6 @@ class SwarmBoard:
 
     def fetch_latest_signals(self):
         """Poll the bus for new events related to swarm state."""
-        # Polling events without consuming them globally (using peek)
-        # We only care about signals in the last few seconds to catch up,
-        # or we just consume them with a specific TUI consumer name.
         signals = self.bus.poll(consumer="swarm_kanban_tui", limit=100)
 
         for sig in signals:
@@ -78,7 +73,6 @@ class SwarmBoard:
             event = sig.event_type
             payload = sig.payload
 
-            # Map events to states
             if event == "swarm:plan":
                 self.agents[source]["state"] = STATE_PLANNING
                 self.agents[source]["task"] = payload.get("task", "Planning...")
@@ -114,7 +108,6 @@ class SwarmBoard:
             )
         )
 
-        # Build lanes
         lanes = {
             "PLANNING": Table(show_header=False, expand=True, box=box.SIMPLE),
             "EXECUTING": Table(show_header=False, expand=True, box=box.SIMPLE),
@@ -140,7 +133,6 @@ class SwarmBoard:
             elif state == STATE_HALTED:
                 lanes["HALTED"].add_row(*row)
 
-        # Split main into 4 columns
         layout["main"].split_row(
             Layout(Panel(lanes["PLANNING"], title="[blue]PLANNING", border_style="blue")),
             Layout(

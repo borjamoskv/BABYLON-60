@@ -140,7 +140,6 @@ class ResourceMgrMixin:
 
     def _init_sovereign_subsystems(self, file_config: dict) -> None:
         """Initialize the v2.0 sovereign async subsystems."""
-        # 1. Hot State — SQLite-backed KV store
         self.hot_state = None
         if _HOT_STATE_AVAILABLE:
             try:
@@ -149,7 +148,6 @@ class ResourceMgrMixin:
             except Exception as e:  # noqa: BLE001
                 logger.warning("Failed to init HotStateDB: %s", e)
 
-        # 2. Event Bus (reuse existing or create)
         self._event_bus = None
         try:
             from babylon60.events.bus import DistributedEventBus
@@ -159,7 +157,6 @@ class ResourceMgrMixin:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-        # 2.5 Event Sovereignty Runtime (Hito 34)
         self.sovereignty_runtime = None
         if self._event_bus:
             try:
@@ -168,8 +165,6 @@ class ResourceMgrMixin:
                 from babylon60.swarm.auth_gateway import AuthGateway  # type: ignore
 
                 auth_gw = AuthGateway(self._shared_engine)  # type: ignore
-                # ensure table is created, though we should probably run this asynchronously,
-                # but it's safe to run create table in init or async start.
                 anomaly_br = AnomalyBridge()
 
                 self.sovereignty_runtime = EventSovereigntyRuntime(
@@ -179,7 +174,6 @@ class ResourceMgrMixin:
             except Exception as e:  # noqa: BLE001
                 logger.warning("Failed to init EventSovereigntyRuntime: %s", e)
 
-        # 3. Scheduler — cron/interval task execution
         self.scheduler = None
         if _SCHEDULER_AVAILABLE:
             try:
@@ -193,7 +187,6 @@ class ResourceMgrMixin:
             except Exception as e:  # noqa: BLE001
                 logger.warning("Failed to init SovereignScheduler: %s", e)
 
-        # 4. Watchdog Hub — unified filesystem monitor
         self.watchdog_hub = None
         if _WATCHDOG_HUB_AVAILABLE:
             try:
@@ -215,7 +208,6 @@ class ResourceMgrMixin:
             except Exception as e:  # noqa: BLE001
                 logger.warning("Failed to init WatchdogHub: %s", e)
 
-        # 5. Human Callback API — REST + WebSocket sidecar
         self.callback_api = None
         if _API_AVAILABLE and file_config.get("api_enabled", True):
             try:
@@ -254,7 +246,6 @@ class ResourceMgrMixin:
                 logger.info("🌌 Entropic Wake Daemon (VOID DAEMON) ENABLED")
             except Exception as e:  # noqa: BLE001
                 logger.warning("Failed to init Entropic Wake Daemon: %s", e)
-        # Time Tracker
         try:
             import sqlite3
 

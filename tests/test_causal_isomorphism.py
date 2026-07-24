@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # tests/test_causal_isomorphism.py — C5-REAL Verification Suite
-# Author: Borja Moskv (borjamoskv)
 """
 Verification suite for the Causal Isomorphism Transpiler.
 
@@ -30,15 +29,9 @@ from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
 from causal_isomorphism.regime_validator import RegimeValidator, ViolationSeverity
 from causal_isomorphism.transpiler import CausalIsomorphismTranspiler
 
-# Raíz del repo para localizar fixtures (domain_kernel/) y artefactos generados.
-# El paquete causal_isomorphism es importable vía `pythonpath = ["."]`
-# en pyproject [tool.pytest.ini_options] — no hace falta manipular sys.path.
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 
-# ============================================================
-# UNIT TESTS: TYPE RESOLUTION
-# ============================================================
 def test_fsharp_type_resolution() -> None:
     """Verify F# type strings resolve to correct IR types."""
     assert resolve_fsharp_type("float").kind == IRTypeKind.FLOAT
@@ -69,9 +62,6 @@ def test_rust_type_mapping() -> None:
     print("  ✅ Rust type mapping")
 
 
-# ============================================================
-# UNIT TESTS: F# PARSER
-# ============================================================
 def test_parse_simple_union() -> None:
     """Parse a simple discriminated union (no payloads)."""
     source = """
@@ -181,9 +171,6 @@ module TestModule =
     print("  ✅ Function with pattern matching")
 
 
-# ============================================================
-# UNIT TESTS: REGIME VALIDATOR
-# ============================================================
 def test_regime_blocks_physics_in_solidity() -> None:
     """Verify that STATE_TRANSITION functions are blocked for Solidity."""
     from causal_isomorphism.ir import IRFunction, IRParam, ir_custom
@@ -272,9 +259,6 @@ def test_regime_permits_hash_in_rust() -> None:
     print("  ✅ Regime permits hash computation in Rust")
 
 
-# ============================================================
-# UNIT TESTS: EMITTERS
-# ============================================================
 def test_solidity_emitter_simple_enum() -> None:
     """Emit a simple enum to Solidity."""
     union = IRDiscriminatedUnion(
@@ -359,9 +343,6 @@ def test_rust_emitter_taint_trait() -> None:
     print("  ✅ Rust CortexTaint trait generation")
 
 
-# ============================================================
-# INTEGRATION TEST: FULL PIPELINE ON ACTUAL IRPAUTOMATA.FS
-# ============================================================
 def test_full_pipeline_irpautomata() -> None:
     """Run the full transpilation pipeline on the actual IRPAutomata.fs."""
     source_path = PROJECT_ROOT / "domain_kernel" / "IRPAutomata.fs"
@@ -374,31 +355,25 @@ def test_full_pipeline_irpautomata() -> None:
     transpiler = CausalIsomorphismTranspiler()
     result = transpiler.transpile_file(source_path, output_dir)
 
-    # Verify IR extraction
     assert result.ir_module.name in ("Domain", "IRPAutomata")
     all_unions = result.ir_module.all_types()
     union_names = [u.name for u in all_unions if isinstance(u, IRDiscriminatedUnion)]
     assert "Gravity" in union_names, f"Gravity not found in {union_names}"
     assert "MembraneState" in union_names, f"MembraneState not found in {union_names}"
 
-    # Verify Solidity output
     assert "pragma solidity" in result.solidity_output
     assert "enum Gravity" in result.solidity_output
     assert "C5_ColapsoOntologico" in result.solidity_output
 
-    # Verify regime: physics blocked in Solidity
     assert "applyThermalStress" in result.solidity_report.blocked_functions
 
-    # Verify Rust output
     assert "pub enum Gravity" in result.rust_output
     assert "blake3" in result.rust_output
 
-    # Verify files written
     assert Path(result.solidity_path).exists()
     assert Path(result.rust_path).exists()
     assert Path(result.report_path).exists()
 
-    # Print report
     print(result.full_report())
     print("  ✅ Full pipeline on IRPAutomata.fs")
 
@@ -417,12 +392,10 @@ def test_linear_type_checker() -> None:
     )
     from causal_isomorphism.linear_checker import LinearTypeChecker
 
-    # 1. Valid Linear: consumed exactly once
     p1 = IRParam(
         name="x",
         ir_type=IRType(IRTypeKind.INT, is_linear=True),
     )
-    # Body: just return x (variable access)
     body1 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="x")
     f1 = IRFunction(name="f1", params=[p1], body=body1)
 
@@ -430,7 +403,6 @@ def test_linear_type_checker() -> None:
     violations = checker.check_function(f1)
     assert not violations, f"Expected no violations, got: {violations}"
 
-    # 2. Invalid Linear: consumed zero times
     body2 = IRExpr(kind=IRExprKind.LITERAL, literal_value="42", literal_type=IR_FLOAT)
     f2 = IRFunction(name="f2", params=[p1], body=body2)
     violations = checker.check_function(f2)
@@ -438,7 +410,6 @@ def test_linear_type_checker() -> None:
     assert "must be consumed exactly once" in violations[0].message
     assert "Found 0" in violations[0].message
 
-    # 3. Invalid Linear: consumed twice
     body3 = IRExpr(
         kind=IRExprKind.BINARY_OP,
         op="+",
@@ -450,7 +421,6 @@ def test_linear_type_checker() -> None:
     assert len(violations) == 1
     assert "Found 2" in violations[0].message
 
-    # 4. Valid Affine: consumed once
     p2 = IRParam(
         name="y",
         ir_type=IRType(IRTypeKind.INT, is_affine=True),
@@ -461,12 +431,10 @@ def test_linear_type_checker() -> None:
     violations = checker.check_function(f4)
     assert not violations
 
-    # 5. Valid Affine: consumed zero times (affine allows 0 or 1)
     f5 = IRFunction(name="f5", params=[p2], body=body2)
     violations = checker.check_function(f5)
     assert not violations
 
-    # 6. Invalid Affine: consumed twice
     body6 = IRExpr(
         kind=IRExprKind.BINARY_OP,
         op="+",
@@ -477,7 +445,6 @@ def test_linear_type_checker() -> None:
     violations = checker.check_function(f6)
     assert len(violations) == 1
 
-    # 7. Non-uniform consumption in Match arms: x consumed in one branch but not another
     arm1 = IRMatchArm(
         pattern=IRPattern(case_name="A"),
         body=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
@@ -498,9 +465,6 @@ def test_linear_type_checker() -> None:
     print("  ✅ Linear type checker logic")
 
 
-# ============================================================
-# RUNNER
-# ============================================================
 def main() -> int:
     print("╔══════════════════════════════════════════════════════════╗")
     print("║  CAUSAL ISOMORPHISM TRANSPILER — VERIFICATION SUITE    ║")

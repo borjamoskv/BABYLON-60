@@ -30,12 +30,10 @@ __all__ = ["FingerprintExtractor"]
 
 logger = logging.getLogger("babylon60_extensions.fingerprint")
 
-# Normalization caps
 _SESSION_DENSITY_CAP = 10.0  # 10 facts/day = maximum density
 _DEPTH_CAP = 500.0  # 500 chars avg = maximum depth
 _BREADTH_CAP = 20.0  # 20 distinct projects = fully polymath
 
-# Archetype decision boundaries (risk_tolerance, synthesis_drive, caution_index)
 _ARCHETYPES: list[tuple[str, dict]] = [
     ("sovereign_architect", {"synthesis_drive": 0.2, "breadth": 0.5, "risk_tolerance": 0.5}),
     ("obsessive_executor", {"synthesis_drive": 0.0, "session_density": 0.6, "caution_index": 0.15}),
@@ -69,7 +67,6 @@ def _classify_archetype(
     best_score = -1.0
 
     for name, thresholds in _ARCHETYPES:
-        # Score = average dimension match (how well this pattern fits)
         score = 0.0
         for dim, threshold in thresholds.items():
             val = pattern_dict.get(dim, 0.0)
@@ -82,7 +79,6 @@ def _classify_archetype(
             best_score = score
             best_name = name
 
-    # Confidence = how far best_score is from 0.5 baseline
     confidence = _clamp(abs(best_score - 0.5) * 2.0)
     return best_name, confidence
 
@@ -116,7 +112,6 @@ class FingerprintExtractor:
         """
         scanner = FingerprintScanner(engine)
 
-        # ── Gather raw data ──────────────────────────────────────────
         total = await scanner.total_facts(project)
 
         if total == 0:
@@ -131,31 +126,23 @@ class FingerprintExtractor:
         domain_profiles = await scanner.domain_profiles(project, top_n=top_domains)
         weekly_velocity = await scanner.weekly_velocity_per_domain(project)
 
-        # ── PatternVector computation ────────────────────────────────
 
-        # Risk tolerance: ratio of C3/C4/C5 vs total
         high_conf = sum(conf_dist.get(c, 0) for c in ("C3", "C4", "C5"))
         risk_tolerance = _clamp(high_conf / max(total, 1))
 
-        # Caution index: ratio of error + ghost facts
         caution_types = type_dist.get("error", 0) + type_dist.get("ghost", 0)
         caution_index = _clamp(caution_types / max(total, 1))
 
-        # Synthesis drive: ratio of bridge + discovery facts
         bridge_types = type_dist.get("bridge", 0) + type_dist.get("discovery", 0)
         synthesis_drive = _clamp(bridge_types / max(total, 1))
 
-        # Session density: facts per active day (capped at _SESSION_DENSITY_CAP)
         facts_per_day = total / max(n_active_days, 1)
         session_density = _clamp(facts_per_day / _SESSION_DENSITY_CAP)
 
-        # Recency bias: facts in last 30 days vs total
         recency_bias = _clamp(recent_count / max(total_count, 1))
 
-        # Breadth: distinct projects (capped at _BREADTH_CAP)
         breadth = _clamp(n_projects / _BREADTH_CAP)
 
-        # Depth preference: avg content length (capped at _DEPTH_CAP)
         depth_preference = _clamp(avg_len / _DEPTH_CAP)
 
         pattern = PatternVector(
@@ -168,7 +155,6 @@ class FingerprintExtractor:
             depth_preference=round(depth_preference, 4),
         )
 
-        # ── Domain preferences ───────────────────────────────────────
         domain_prefs: list[DomainPreference] = []
         for dp in domain_profiles:
             vel = weekly_velocity.get((dp["project"], dp["fact_type"]), 0.0)
@@ -184,7 +170,6 @@ class FingerprintExtractor:
                 )
             )
 
-        # ── Archetype ────────────────────────────────────────────────
         archetype, arch_confidence = _classify_archetype(pattern)
         completeness = _fingerprint_completeness(total, len(domain_prefs))
 

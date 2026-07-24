@@ -27,11 +27,9 @@ def test_commitments_are_keyed_and_deterministic(monkeypatch) -> None:  # type: 
     monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
     d1, e1 = _route()
     d2, e2 = _route()
-    # Determinista bajo la misma clave y prompt:
     assert d1["payload"]["request_commitment"] == d2["payload"]["request_commitment"]
     assert e1["payload"]["response_commitment"] == e2["payload"]["response_commitment"]
 
-    # Cambia la clave → cambia el commitment (no hay clave estática global):
     monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-B")
     d3, _ = _route()
     assert d3["payload"]["request_commitment"] != d1["payload"]["request_commitment"]
@@ -41,7 +39,6 @@ def test_hashes_commit_to_real_content(monkeypatch) -> None:  # type: ignore
     monkeypatch.setenv("CORTEX_SHADOW_HMAC_KEY", "clave-operador-A")
     d1, _ = _route()
     d2, _ = _route()
-    # policy/candidate hashes son función del contenido, no bytes aleatorios:
     assert d1["payload"]["policy_hash"] == d2["payload"]["policy_hash"]
     assert d1["payload"]["candidate_set_hash"] == d2["payload"]["candidate_set_hash"]
 
@@ -51,11 +48,8 @@ def test_simulation_is_declared_not_fabricated(monkeypatch) -> None:  # type: ig
     d, e = _route()
     assert d["payload"]["mode"] == "simulation"
     assert e["payload"]["mode"] == "simulation"
-    # No se fabrica recibo de proveedor inexistente:
     assert e["payload"]["provider_receipt_hash"] is None
-    # issued_at real, no timestamp fósil:
     assert d["issued_at"] != "2026-07-10T14:32:08.442Z"
-    # Serializable de extremo a extremo:
     json.dumps([d, e])
 
 

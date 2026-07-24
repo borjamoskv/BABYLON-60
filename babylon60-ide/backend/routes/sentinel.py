@@ -63,11 +63,9 @@ def sentinel_status() -> dict[str, Any]:
     """Repo identity, dirty state, remotes and lineage warnings (read-only)."""
     root = _get_project_root()
     repo_name = root.name
-    # .exists(): en worktrees/submódulos .git es un FICHERO (gitlink), no dir.
     is_git = (root / ".git").exists()
 
     branch = _git(root, "rev-parse", "--abbrev-ref", "HEAD") if is_git else None
-    # Una sola invocación para hash+asunto+fecha (antes eran 3 subprocess).
     head = head_subject = head_time = None
     if is_git:
         head_meta = _git(root, "log", "-1", "--pretty=%h%x1f%s%x1f%cI")
@@ -90,7 +88,6 @@ def sentinel_status() -> dict[str, Any]:
                 seen.add(parts[0])
                 remotes.append({"name": parts[0], "url": _redact_url(parts[1])})
 
-    # ── Lineage warnings (RECALCAR repo actual + intuir repo incorrecto) ──
     warnings: list[dict[str, str]] = []
     if not is_git:
         warnings.append({
@@ -107,7 +104,6 @@ def sentinel_status() -> dict[str, Any]:
             "level": "amber",
             "msg": f"Rama '{branch}' ≠ '{CANONICAL_BRANCH}' (canónica). Verifica antes de mutar.",
         })
-    # Detección case-insensitive: GitHub trata owner/repo sin distinguir mayúsculas.
     marker = DEAD_FORK_MARKER.lower()
     for r in remotes:
         if marker in r["url"].lower():
@@ -121,7 +117,6 @@ def sentinel_status() -> dict[str, Any]:
             "msg": "Hay remoto configurado. P0 (STATUS.md) exige linaje local sin remoto hasta rotar claves.",
         })
 
-    # Rojo primero: lo crítico entra a la fóvea antes que lo cautelar.
     warnings.sort(key=lambda w: 0 if w["level"] == "red" else 1)
 
     return {

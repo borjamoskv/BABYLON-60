@@ -20,13 +20,11 @@ class QuantumMemory:
         En lugar de escribir a disco, 'colapsa' el estado en la red neuronal del agente.
         """
         start_time = time.perf_counter()
-        # Simulación de colapso de función de onda
         self.collapsed_frames[key] = {
             "value": value,
             "timestamp": start_time,
             "entanglement_id": hash(key),
         }
-        # Latencia negativa: El dato se considera guardado antes de que termine el tick.
         return True
 
     async def retrieve_entangled(self, key: str) -> Any | None:

@@ -6,12 +6,10 @@ import sys
 from pathlib import Path
 from typing import Any, Dict
 
-# Add project root to sys.path to allow absolute imports
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-# Try importing the AmendmentLedger from the apex_trials module
 AmendmentLedgerClass = None
 try:
     from apex_trials.ledger import AmendmentLedger
@@ -47,14 +45,11 @@ class LuhmannAutopoiesisSimulation:
 
     def run(self) -> Dict[str, Any]:
         for step in range(self.steps):
-            # 1. Environment dispatches a citizen request (Attempt of Structural Coupling)
             citizen = random.choice(self.env_state["citizens"])
             self.env_state["total_attempts"] += 1
             self.env_state["dissipated_atp"] += 1.5  # ATP cost per transaction attempt
 
-            # Structural Coupling check (Digital Certificate signature validation)
             if citizen["has_cert"] and random.random() > 0.4:  # 60% chance signature applet works
-                # Successful coupling: transaction is successfully parsed into the system's binary code (1)
                 self.successful_couplings += 1
                 dossier_id = f"DOSSIER_{self.successful_couplings:04d}"
                 self.system_state["dossiers_db"][dossier_id] = {
@@ -62,15 +57,12 @@ class LuhmannAutopoiesisSimulation:
                     "status": "INITIATED",
                     "step_count": 1,
                 }
-                # System injects internal communication to process the dossier (Autopoietic trigger)
                 self.system_state["internal_queue"].append({"dossier_id": dossier_id, "action": "SUBSANACION_CHECK"})
             else:
-                # Failed coupling: system remains closed, returns 0 (invalid signature)
                 self.failed_couplings += 1
                 citizen["frustration"] += 10.0  # Frustration scales on rejection
                 self.env_state["dissipated_atp"] += 5.0  # Extra ATP spent cursing the Java Applet
 
-            # 2. System executes its closed autopoietic loop (Internal communications)
             next_queue = []
             for item in self.system_state["internal_queue"]:
                 self.system_state["loops_run"] += 1
@@ -89,11 +81,9 @@ class LuhmannAutopoiesisSimulation:
                     dossier["status"] = "RESOLVED"
             self.system_state["internal_queue"] = next_queue
 
-        # Calculate metrics
         total_frustration = sum(c["frustration"] for c in self.env_state["citizens"])
         avg_frustration = total_frustration / len(self.env_state["citizens"])
 
-        # Calculate system entropy (Shannon entropy of status distribution)
         status_counts: Dict[str, int] = {}
         for d in self.system_state["dossiers_db"].values():
             status = d["status"]
@@ -126,7 +116,6 @@ class LuhmannAutopoiesisSimulation:
             ),
         }
 
-        # Compute SHA3-256 of final metrics
         payload = json.dumps(results, sort_keys=True)
         results_hash = hashlib.sha3_256(payload.encode()).hexdigest()
 
@@ -135,7 +124,6 @@ class LuhmannAutopoiesisSimulation:
         ledger_entry_hash = None
         ledger_prev_hash = None
 
-        # Persist results to master_ledger.db if available
         if AmendmentLedgerClass is not None:
             try:
                 db_path = project_root / "master_ledger.db"
@@ -148,7 +136,6 @@ class LuhmannAutopoiesisSimulation:
                 ledger_entry_hash = entry.entry_hash
                 ledger_prev_hash = entry.prev_hash
             except (RuntimeError, ValueError, OSError) as e:
-                # Log but proceed
                 print(f"[-] Ledger write failed: {e}")
                 import traceback
 

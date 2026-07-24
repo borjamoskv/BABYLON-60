@@ -55,7 +55,6 @@ class TaskQueue:
                 db_path = Path(cortex_db_path) / "aether.db"
             else:
                 db_path = Path.home() / ".cortex" / "aether.db"
-                # Auto-migrate legacy jules.db if it exists
                 legacy_path = Path.home() / ".cortex" / "jules.db"
                 if not db_path.exists() and legacy_path.exists():
                     legacy_path.rename(db_path)

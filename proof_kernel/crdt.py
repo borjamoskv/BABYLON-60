@@ -14,7 +14,6 @@ class LWWRegister:
         elif other.lamport > self.lamport:
             return other
         else:
-            # Deterministic tie-breaker: hash of sanitized value
             h_self = hash_evidence(self.value)
             h_other = hash_evidence(other.value)
             return self if h_self >= h_other else other

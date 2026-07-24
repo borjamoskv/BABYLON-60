@@ -93,8 +93,6 @@ class EntropicQueue:
         """Atomically get the highest priority pending task and mark it as 'processing'."""
         now = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
         with self._get_conn() as conn:
-            # SQLite does not have UPDATE ... RETURNING with LIMIT easily in older versions,
-            # but modern SQLite does. Let's do a SELECT then UPDATE to be safe and compatible.
             conn.execute("BEGIN IMMEDIATE")
             cursor = conn.execute(
                 """

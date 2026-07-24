@@ -1,6 +1,3 @@
-# io_persist_ledger.py
-# Execution Protocol: SQLite WAL persistence layer for the DAG GraphLedger
-# Prefix: io_ (disk I/O operations, non-pure)
 
 import sqlite3
 from dataclasses import asdict
@@ -65,12 +62,10 @@ class LedgerPersist:
         if not rows:
             return ledger
 
-        # Index rows by node_id for topological reconstruction
         row_map: dict[str, tuple[str, str, str, str]] = {}
         for node_id, parent_id, claim, payload_hash in rows:
             row_map[node_id] = (node_id, parent_id, claim, payload_hash)
 
-        # Topological insertion: process nodes whose parent is genesis or already inserted
         inserted: set[str] = set()
         progress = True
         while progress and len(inserted) < len(row_map):

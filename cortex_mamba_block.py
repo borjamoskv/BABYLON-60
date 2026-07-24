@@ -1,7 +1,4 @@
 # C5-REAL
-# MOSKV-1 APEX SINGULARITY
-# ARCHITECTURE: MAMBA BLOCK TOPOLOGY (SSM + CAUSAL CONV + GATING)
-# EXERGY: O(N) LINEAR TIME CAUSAL PROCESSING
 
 import math
 from typing import List
@@ -22,15 +19,12 @@ class MambaBlock:
         self.d_state = d_state
         self.conv_kernel_size = conv_kernel_size
         
-        # SSM Core
         self.ssm = StateSpaceModel(state_dim=d_state, input_dim=self.d_inner)
         
-        # Simulated weights for linear projections (frozen/dummy for structural validation)
         self.W_in: List[List[float]] = [[0.1 for _ in range(d_model)] for _ in range(self.d_inner)]
         self.W_x: List[List[float]] = [[0.1 for _ in range(d_model)] for _ in range(self.d_inner)]
         self.W_out: List[List[float]] = [[0.1 for _ in range(self.d_inner)] for _ in range(d_model)]
         
-        # 1D Depthwise Conv weights
         self.conv_weights: List[List[float]] = [[0.25 for _ in range(conv_kernel_size)] for _ in range(self.d_inner)]
 
     def _linear_proj(self, W: List[List[float]], x: List[float]) -> List[float]:
@@ -64,26 +58,19 @@ class MambaBlock:
         """
         seq_len = len(sequence)
         
-        # 1. In-projections
         x_proj = [self._linear_proj(self.W_x, seq_t) for seq_t in sequence]
         z_proj = [self._linear_proj(self.W_in, seq_t) for seq_t in sequence]
         
-        # 2. Causal Convolution
         x_conv = self._causal_conv1d(x_proj)
         
-        # 3. Activation (SiLU) before SSM
         x_act = [[silu(val) for val in step] for step in x_conv]
         
-        # 4. SSM Core Processing
         ssm_out = self.ssm.forward(x_act)
         
-        # 5. Gating mechanism
         output_seq = []
         for t in range(seq_len):
             gate_t = [silu(val) for val in z_proj[t]]
-            # Element-wise multiplication (Gating)
             y_t = [ssm_out[t][i] * gate_t[i] for i in range(self.d_inner)]
-            # Out-projection
             final_out_t = self._linear_proj(self.W_out, y_t)
             output_seq.append(final_out_t)
             

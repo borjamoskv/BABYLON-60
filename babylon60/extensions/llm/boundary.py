@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Sovereign Immune Boundary.
 
@@ -26,8 +22,6 @@ logger = logging.getLogger("babylon60_extensions.llm.boundary")
 T = TypeVar("T", bound=BaseModel)
 
 
-# Maximum characters of error detail to feed back to the LLM.
-# Avoids wasting tokens on a 2KB Pydantic dump.
 _MAX_ERROR_FEEDBACK = 500
 
 
@@ -42,7 +36,6 @@ def _clean_llm_json(raw: str) -> str:
     """
     clean = raw.strip()
 
-    # Strip markdown fences
     if "```json" in clean:
         start = clean.index("```json") + 7
         end = clean.find("```", start)
@@ -54,7 +47,6 @@ def _clean_llm_json(raw: str) -> str:
 
     clean = clean.strip()
 
-    # If still not starting with { or [, hunt for first JSON-like char
     if clean and clean[0] not in ("{", "["):
         for i, ch in enumerate(clean):
             if ch in ("{", "["):
@@ -103,15 +95,12 @@ class ImmuneBoundary:
 
         for attempt in range(max_retries):
             try:
-                # Determine how many arguments the generation function accepts
-                # Axiom 14: Structural Determinism (DFA schema)
                 sig = inspect.signature(generation_func)
                 params = len(sig.parameters)
 
                 if params >= 2:
                     raw_output = await generation_func(schema_dict, last_error_msg)  # type: ignore[call-arg, arg-type]
                 else:
-                    # By default we pass the schema (Axiom 14)
                     raw_output = await generation_func(schema_dict)  # type: ignore[arg-type]
 
                 clean_output = _clean_llm_json(raw_output)
@@ -129,7 +118,6 @@ class ImmuneBoundary:
                 )
             except (ValueError, TypeError) as e:
                 last_exception = e
-                # If it failed due to arguments (TypeError), provide detail
                 last_error_msg = f"Parsing failure: {e!s}"
                 logger.warning(
                     "ImmuneBoundary: Parsing failure for %s (attempt %d/%d): %s",

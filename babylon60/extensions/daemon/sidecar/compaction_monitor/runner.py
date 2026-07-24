@@ -12,7 +12,6 @@ import os
 import signal
 from typing import Any
 
-# uvloop for high‑performance event loop
 try:
     import uvloop
 
@@ -20,7 +19,6 @@ try:
 except ImportError:
     logging.warning("uvloop not installed; falling back to default asyncio loop")
 
-# ARQ (async Redis queue) – optional, fallback to in‑process queue if Redis unavailable
 try:
     from arq import Queue, Worker, create_pool  # pyright: ignore[reportMissingImports]
     from arq.connections import RedisSettings  # pyright: ignore[reportMissingImports]
@@ -30,7 +28,6 @@ except ImportError:
     Worker = None
     logging.warning("arq not installed; sidecar will use a dummy in‑process queue")
 
-# Local imports
 from babylon60.engine import CortexEngine
 from babylon60.extensions.daemon.monitors.l2_drain import L2DrainMonitor
 
@@ -44,8 +41,6 @@ logging.basicConfig(level=logging.INFO)
 
 async def l2_drain_loop(engine: Any, interval: int = 28800) -> None:
     """Background task to periodically drain vectors from SQLite to Turbopuffer."""
-    # Assuming "cortex-persist" as a default project, can be expanded via env or config.
-    # We could also fetch active projects from the DB, but for now we'll inject a default or read env.
     projects = [p.strip() for p in os.getenv("L2_DRAIN_PROJECTS", "cortex-persist").split(",")]
     monitor = L2DrainMonitor(projects=projects, interval_seconds=interval, engine=engine)
     LOGGER.info("L2Drain loop started for projects: %s every %d seconds", projects, interval)
@@ -69,11 +64,9 @@ async def compaction_job(ctx: Any = None) -> None:
     try:
         info = get_mallinfo2()
         LOGGER.info("MallInfo2 before trim: %s", info)
-        # Attempt to release memory back to OS
         malloc_trim()
         info_after = get_mallinfo2()
         LOGGER.info("MallInfo2 after trim: %s", info_after)
-        # Call external compaction service (placeholder)
         await circuit_breaker.call_external_compact()  # type: ignore[reportAttributeAccessIssue]
     except (ValueError, TypeError, OSError, KeyError) as exc:
         LOGGER.exception("Compaction job failed: %s", exc)
@@ -96,16 +89,13 @@ async def shutdown(sig, loop, monitor: MemoryPressureMonitor | None = None):
 async def main() -> None:
     loop = asyncio.get_running_loop()
 
-    # Initialize Monitor (Nivel 130/100)
     monitor = MemoryPressureMonitor(
         interval=int(os.getenv("PSI_WATCH_INTERVAL", "5")),
-        # Use a safe default for sys_free_threshold (e.g. 15% free)
         sys_free_threshold=float(os.getenv("PSI_PRESSURE_THRESHOLD", "15")) / 100.0,
         alert_callback=lambda alert: compaction_job(None),
         use_legion=True,
     )
 
-    # State for cleanup
     arq_pool = None
 
     async def _shutdown_handler(sig):
@@ -118,19 +108,16 @@ async def main() -> None:
     for s in (signal.SIGINT, signal.SIGTERM):
         loop.add_signal_handler(s, lambda s=s: asyncio.create_task(_shutdown_handler(s)))
 
-    # Start the monitor
     monitor.start(loop=loop)
 
     engine = CortexEngine()
     _ = asyncio.create_task(l2_drain_loop(engine=engine))
 
-    # Set up ARQ worker if available
     if RedisSettings is not None:
         redis_settings = RedisSettings(
             host=os.getenv("REDIS_HOST", "localhost"), port=int(os.getenv("REDIS_PORT", "6379"))
         )
 
-        # Register the job
         async def on_startup(ctx):
             nonlocal arq_pool
             arq_pool = await create_pool(redis_settings)
@@ -154,9 +141,6 @@ async def main() -> None:
             LOGGER.info("Worker execution cancelled.")
             raise
     else:
-        # Fallback: keep the loop alive until stop signal arrives.
-        # Using an Event is instantaneously responsive to SIGINT/SIGTERM,
-        # unlike sleep(3600) which would block shutdown for up to an hour.
         _stop_event = asyncio.Event()
 
         for s in (signal.SIGINT, signal.SIGTERM):

@@ -25,7 +25,6 @@ import uuid
 from pathlib import Path
 from typing import Any
 
-# Deterministic namespace for UUID v5 idempotency keys.
 _NS = uuid.UUID("6ba7b812-9dad-11d1-80b4-00c04fd430c8")
 _ZERO_HASH = "0" * 64
 _BUSY_TIMEOUT_MS = 5000
@@ -52,8 +51,6 @@ def _canonical(data: Any) -> str:
 
 
 def _connect(db_path: str | Path) -> sqlite3.Connection:
-    # isolation_level=None → autocommit; append_event manages its own
-    # BEGIN IMMEDIATE so read-head + insert is atomic against other writers.
     conn = sqlite3.connect(str(db_path), timeout=5.0, isolation_level=None)
     conn.row_factory = sqlite3.Row
     conn.execute("PRAGMA journal_mode=WAL")
@@ -111,9 +108,6 @@ def append_event(
     conn = _connect(_ledger_path(project_root))
     try:
         conn.executescript(DDL)
-        # BEGIN IMMEDIATE takes the write lock BEFORE reading the head, so two
-        # concurrent appends serialize instead of forking the hash chain
-        # (single-writer invariant enforced at the SQLite layer).
         conn.execute("BEGIN IMMEDIATE")
         try:
             row = conn.execute(
@@ -123,7 +117,6 @@ def append_event(
 
             created_at = int(time.time() * 1000)
             payload_c = _canonical(payload)
-            # UUID v5 idempotency: same payload at same chain position → same id.
             event_id = str(uuid.uuid5(_NS, f"{parent_hash}|{event_type}|{entity_ref}|{payload_c}"))
             envelope = f"{parent_hash}|{created_at}|{event_type}|{entity_ref}|{payload_c}"
             current_hash = hashlib.sha256(envelope.encode("utf-8")).hexdigest()

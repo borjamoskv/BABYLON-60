@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/agents.py
 """Sovereign Agent & EnneagramSubAgent definitions for the Continuous Improvement Engine.
 
 10 primary agents, each commanding 10 subagents (100 total).
@@ -89,7 +88,6 @@ class EnneagramSubAgent:
         self.mutations.append(mutation)
         self.generation += 1
 
-        # Evolution Tier Transition
         if self.fitness > 90.0:
             self.evolution_tier = "SINGULARITY"
         elif self.fitness > 75.0:
@@ -180,7 +178,6 @@ class EnneagramSovereign:
         return min(self.subagents, key=lambda s: s.fitness)
 
     def apply_mutation(self, mutation: Mutation) -> None:
-        # Ceiling enforcement by FitnessLandscape.clamp() - only floor here.
         self.fitness = max(0.0, self.fitness + mutation.delta_fitness)
         self.mutations.append(mutation)
         self.generation += 1

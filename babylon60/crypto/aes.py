@@ -53,7 +53,6 @@ class CortexEncrypter:
                 self.hkdf_salt = b"cortex_v6_tenant_isolation_salt"
         else:
             self.hkdf_salt = hkdf_salt
-        # Cache of derived keys per tenant
         self._tenant_keys: dict[str, bytes] = {}
 
     @property
@@ -96,7 +95,6 @@ class CortexEncrypter:
         nonce = os.urandom(_NONCE_LENGTH)
         ciphertext = aesgcm.encrypt(nonce, data.encode("utf-8"), None)
 
-        # We prepend a clear v6 prefix so we can detect it on decrypt
         combined = nonce + ciphertext
         return self.PREFIX + base64.b64encode(combined).decode("utf-8")
 
@@ -105,8 +103,6 @@ class CortexEncrypter:
         if not encrypted_data:
             return encrypted_data
 
-        # Legacy support: if it's not starting with our prefix, we assume it's plaintext
-        # This allows seamless migration for existing dbs
         if not encrypted_data.startswith(self.PREFIX):
             if self.strict_mode:
                 raise DecryptionPolicyError("Strict crypto mode active: data lacks encryption prefix in strict mode")

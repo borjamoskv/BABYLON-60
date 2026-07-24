@@ -124,5 +124,4 @@ async def synthesize_crystals(
         return {"fused_content": text_content}
     except (json.JSONDecodeError, KeyError, TypeError) as e:
         logger.error("Error parsing fused crystal: %s", e)
-        # Fallback to simple concatenation if JSON fails
         return {"fused_content": primary_content + "\n\n" + secondary_content, "error": str(e)}

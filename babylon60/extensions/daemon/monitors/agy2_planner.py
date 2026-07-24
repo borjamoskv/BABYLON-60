@@ -36,14 +36,12 @@ class AGY2PlannerMonitor:
             return alerts
 
         try:
-            # Glob all implementation_plan.md files in the brain directory
             for plan_file in self.brain_dir.glob("*/implementation_plan.md"):
                 try:
                     mtime = plan_file.stat().st_mtime
                     last = self._last_mtime.get(str(plan_file), 0.0)
                     if mtime > last:
                         self._last_mtime[str(plan_file)] = mtime
-                        # Process file
                         injected = await self._inject_context(plan_file)
                         if injected:
                             alerts.append(
@@ -55,7 +53,6 @@ class AGY2PlannerMonitor:
                                     tags=["agy2", "memory_injection"],
                                 )
                             )
-                            # Update mtime so we don't trigger immediately again
                             self._last_mtime[str(plan_file)] = plan_file.stat().st_mtime
                 except OSError:
                     continue
@@ -84,7 +81,6 @@ class AGY2PlannerMonitor:
             if "running event loop" not in str(e):
                 raise
 
-            # If we are already inside a running event loop, we cannot use asyncio.run
             if not hasattr(self, "_bg_tasks"):
                 self._bg_tasks: set = set()
 
@@ -103,7 +99,6 @@ class AGY2PlannerMonitor:
         if "## 🧠 CORTEX Semantic Context" in content:
             return False
 
-        # Parse Goal Description
         match = re.search(r"# Goal Description\n+(.*?)\n+##", content, re.DOTALL)
         if not match:
             return False
@@ -117,9 +112,6 @@ class AGY2PlannerMonitor:
         try:
             from babylon60.memory.memory_manager import MemoryManager
 
-            # We use the internal synchronous / async MemoryManager
-            # Since MemoryManager is typically synchronous or has async variants,
-            # we will just instantiate a local one or use the shared engine.
             memory = MemoryManager(engine=self.engine)
             results = await asyncio.to_thread(memory.search, query=goal, limit=5, fact_type=None)
 
@@ -127,7 +119,6 @@ class AGY2PlannerMonitor:
                 logger.debug("No CORTEX facts found for goal.")
                 return False
 
-            # Format injection
             injection = "\n\n## 🧠 CORTEX Semantic Context (Auto-Injected by C5-REAL)\n\n"
             injection += "> [!NOTE]\n> The following verified facts were retrieved from CORTEX Memory regarding your goal.\n\n"
 

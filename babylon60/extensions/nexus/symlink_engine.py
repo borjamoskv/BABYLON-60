@@ -57,13 +57,11 @@ class SymlinkEngine:
                 os.remove(target_path)
 
         elif os.path.exists(target_path):
-            # Physical redundancy detected! Context Rot.
             logger.critical(
                 "[Nexus] Physical redundancy detected at %s. Overwriting with symlink.", target_path
             )
             self._safe_backup(target_path)
 
-        # Ensure parent directory of target exists
         os.makedirs(os.path.dirname(target_path), exist_ok=True)
 
         os.symlink(source_path, target_path)

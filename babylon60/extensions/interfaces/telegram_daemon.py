@@ -19,8 +19,6 @@ logging.basicConfig(
 )
 logger = logging.getLogger("Antigravity-Telegram")
 
-# Identity Hygiene: ONLY allow specific Telegram User IDs
-# User must define CORTEX_TELEGRAM_WHITELIST="12345678,87654321"
 WHITELIST_ENV = os.environ.get("CORTEX_TELEGRAM_WHITELIST", "")
 AUTHORIZED_USERS = {int(uid.strip()) for uid in WHITELIST_ENV.split(",") if uid.strip().isdigit()}
 
@@ -45,7 +43,6 @@ async def handle_instruction(update: Update, context: ContextTypes.DEFAULT_TYPE)
     instruction = update.message.text  # pyright: ignore[reportOptionalMemberAccess]
     logger.info("Instruction received: %s...", instruction[:50])  # pyright: ignore[reportOptionalSubscript]
 
-    # Send ack
     status_msg = await context.bot.send_message(
         chat_id=update.effective_chat.id,
         text="⚙️ Procesando en matriz local...",  # pyright: ignore[reportOptionalMemberAccess]
@@ -53,8 +50,6 @@ async def handle_instruction(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     try:
         engine = CortexEngine()
-        # Direct integration with local execution matrix
-        # Here we bind the intent into the engine's memory VSA
         engine.memory.record(f"TELEGRAM_INTENT: {instruction}", "Local execution requested via TG.")  # pyright: ignore[reportOptionalMemberAccess]
 
         await context.bot.edit_message_text(

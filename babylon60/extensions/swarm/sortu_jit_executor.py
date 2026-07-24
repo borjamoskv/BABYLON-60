@@ -37,20 +37,16 @@ class SovereignASTVisitor(ast.NodeVisitor):
 
 
 def _execute_sync(source_code: str, global_ctx: dict) -> dict:
-    # Epistemic Filter (AST Parse)
     try:
         tree = ast.parse(source_code)
         SovereignASTVisitor().visit(tree)
     except SyntaxError as e:
         raise SecurityViolationException(f"AST Syntax Error: {e}") from e
 
-    # Compilation
     compiled_code = compile(tree, filename="<jit_ast>", mode="exec")
 
-    # Isolated Execution Environment
     local_env: dict[str, Any] = {}
 
-    # We restrict __builtins__
     safe_builtins = {
         "print": print,
         "len": len,
@@ -79,9 +75,6 @@ def _execute_sync(source_code: str, global_ctx: dict) -> dict:
         "TypeError": TypeError,
         "KeyError": KeyError,
         "IndexError": IndexError,
-        # SECURITY: __import__ deliberately excluded - CRIT-02 remediation.
-        # Allowing __import__ in safe_builtins defeats the SovereignASTVisitor
-        # blocklist and enables arbitrary code execution.
     }
 
     exec_globals = {"__builtins__": safe_builtins}
@@ -102,7 +95,6 @@ def _worker(source_code: str, global_ctx: dict, conn) -> None:
     result_dict = {}
     try:
         res = _execute_sync(source_code, global_ctx)
-        # Avoid passing complex objects back via IPC
         result_dict["locals"] = list(res.keys())
         result_dict["status"] = "success"  # type: ignore[assignment]
         result_dict["exec_time_ms"] = (time.perf_counter() - t0) * 1000
@@ -137,15 +129,11 @@ async def run_jit_sandbox(source_code: str, timeout_ms: int = 500, global_ctx: d
 
     parent_conn, child_conn = multiprocessing.Pipe()
 
-    # Run in a completely separate process to protect the main node
     p = multiprocessing.Process(target=_worker, args=(source_code, ctx, child_conn))
     p.start()
 
-    # Close child end in parent process so EOF will be triggered if child exits/crashes
     child_conn.close()
 
-    # We allow up to 10.0 seconds for process spawn/initialization overhead
-    # and strictly enforce timeout_ms on actual execution
     spawn_timeout = 10.0
     exec_timeout = timeout_ms / 1000.0
 
@@ -157,7 +145,6 @@ async def run_jit_sandbox(source_code: str, timeout_ms: int = 500, global_ctx: d
     while p.is_alive() or parent_conn.poll():
         if res_dict is not None:
             break
-        # Check pipe messages
         while parent_conn.poll():
             try:
                 msg_type, val = parent_conn.recv()
@@ -183,14 +170,12 @@ async def run_jit_sandbox(source_code: str, timeout_ms: int = 500, global_ctx: d
 
         await asyncio.sleep(0.005)
 
-    # Clean up the process
     if p.is_alive() or timeout_triggered:
         p.terminate()
         p.join(timeout=0.1)
         if p.is_alive():
             p.kill()
 
-    # Close parent connection
     parent_conn.close()
 
     if timeout_triggered or res_dict is None:

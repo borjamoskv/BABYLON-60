@@ -13,7 +13,6 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
-# CORTEX L2 Membrane
 from babylon60.engine import CortexEngine
 from babylon60.extensions.immune.membrane import ImmuneMembrane, Verdict
 from babylon60.memory.encoder import AsyncEncoder
@@ -41,7 +40,6 @@ def verify_token(
 
 app = FastAPI(title="Claude Code Router (CCR)")
 
-# CORS restricted to loopback origins only
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost", "http://127.0.0.1"],
@@ -58,7 +56,6 @@ logging.basicConfig(
 LOCAL_OPENAI_URL = os.getenv("CCR_OPENAI_URL", "http://localhost:11434/v1/chat/completions")
 LOCAL_MODEL = os.getenv("CCR_LOCAL_MODEL", "qwen2.5-coder:32b")
 
-# Lazy Singletons for Isothermal Membrane
 _encode_engine: AsyncEncoder | None = None
 _vector_db: SovereignVectorStoreL2 | None = None
 
@@ -87,7 +84,6 @@ async def _check_isothermal_redundancy(text: str) -> tuple[bool, float, str]:
     except Exception as e:  # noqa: BLE001
         logger.warning("Isothermal L2 check bypassed/failed: %s", e)
 
-    # Simulated fallback rule (Demonstration)
     if "refactor" in text.lower() and "utils.py" in text.lower():
         return (
             True,
@@ -115,31 +111,25 @@ def translate_anthropic_to_openai(anthropic_payload: dict) -> dict:
         "stream": anthropic_payload.get("stream", False),
     }
 
-    # Extract temperature/max_tokens
     if "temperature" in anthropic_payload:
         openai_payload["temperature"] = anthropic_payload["temperature"]
     if "max_tokens" in anthropic_payload:
         openai_payload["max_tokens"] = anthropic_payload["max_tokens"]
 
-    # Handle system prompt
     system_msg = anthropic_payload.get("system")
     if system_msg:
         if isinstance(system_msg, str):
             openai_payload["messages"].append({"role": "system", "content": system_msg})
         elif isinstance(system_msg, list):
-            # sometimes system is an array of text blocks
             sys_text = "".join(
                 block.get("text", "") for block in system_msg if block.get("type") == "text"
             )
             openai_payload["messages"].append({"role": "system", "content": sys_text})
 
-    # Translate messages
     for msg in anthropic_payload.get("messages", []):
         role = msg.get("role")
         content = msg.get("content")
 
-        # Note: this is a simplistic translation and only caters to pure text right now.
-        # Full MCP / Tool routing translation requires deeper schema mapping.
         if isinstance(content, list):
             text_content = "".join(
                 block.get("text", "") for block in content if block.get("type") == "text"
@@ -176,7 +166,6 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
         "Received Anthropic request: %s messages.", len(anthropic_payload.get("messages", []))
     )
 
-    # ─── 0. CAPTURA DE LA SEÑAL (Último Mensaje de Usuario) ───
     last_user_msg = ""
     for msg in reversed(anthropic_payload.get("messages", [])):
         if msg.get("role") == "user":
@@ -189,7 +178,6 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
                 last_user_msg = str(content)
             break
 
-    # ─── 1. EVALUACIÓN DE LA ISOTERMA (L2 Membrane) ───
     is_redundant, similitud, cached_resolution = await _check_isothermal_redundancy(last_user_msg)
 
     if is_redundant:
@@ -203,7 +191,6 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
         )
         return JSONResponse(content=_build_anthropic_response(response_text))
 
-    # ─── 1.5 CORTEX IMMUNE MEMBRANE (L3) ───
     if not hasattr(app.state, "immune_membrane"):
         db_path = os.getenv("CORTEX_DB_PATH", str(Path("~/.babylon60/cortex.db").expanduser()))
         engine = CortexEngine(db_path, auto_embed=False)
@@ -247,7 +234,6 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
             anth_resp = _build_anthropic_response(text)
             return JSONResponse(content=anth_resp)
 
-        # Streaming response generator
         async def stream_generator():
             async with client.stream("POST", LOCAL_OPENAI_URL, json=openai_payload) as resp:
                 if resp.status_code != 200:
@@ -274,7 +260,6 @@ async def messages_endpoint(request: Request, _token: str = Depends(verify_token
                         chunk = json.loads(data_str)
                         delta_text = chunk["choices"][0]["delta"].get("content", "")
                         if delta_text:
-                            # Anthropic content_block_delta format
                             event_data = {
                                 "type": "content_block_delta",
                                 "index": 0,

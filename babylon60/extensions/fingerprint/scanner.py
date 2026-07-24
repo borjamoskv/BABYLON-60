@@ -17,11 +17,9 @@ __all__ = ["FingerprintScanner"]
 
 logger = logging.getLogger("babylon60_extensions.fingerprint")
 
-# Active facts WHERE clause (mirrors shannon/scanner.py convention)
 _ACTIVE = "valid_until IS NULL AND is_quarantined = 0"
 _PROJECT_FILTER = " AND project = ?"
 
-# Confidence → weight mapping
 _CONF_WEIGHTS: dict[str, float] = {
     "C5": 1.0,
     "C4": 0.8,
@@ -160,7 +158,6 @@ class FingerprintScanner:
         """
         where, params = self._where(project)
         async with self._engine.session() as conn:
-            # Main aggregation
             cursor = await conn.execute(
                 "SELECT project, fact_type, COUNT(*) AS cnt, "  # nosec B608
                 "AVG(LENGTH(content)) AS avg_len, "
@@ -175,7 +172,6 @@ class FingerprintScanner:
             for row in rows:
                 proj, ftype, cnt, avg_len, last_seen = row
 
-                # Dominant source for this domain
                 cursor2 = await conn.execute(
                     "SELECT source, COUNT(*) AS c "  # nosec B608
                     f"FROM facts WHERE {where} AND project = ? AND fact_type = ? "
@@ -185,7 +181,6 @@ class FingerprintScanner:
                 src_row = await cursor2.fetchone()
                 dominant_source = src_row[0] if src_row else "unknown"
 
-                # Days since last fact in this domain
                 cursor3 = await conn.execute(
                     "SELECT CAST("  # nosec B608
                     "julianday('now') - julianday(?) AS REAL)",
@@ -194,7 +189,6 @@ class FingerprintScanner:
                 age_row = await cursor3.fetchone()
                 recency_days = float(age_row[0]) if age_row and age_row[0] else 0.0
 
-                # Confidence distribution for this domain
                 cursor4 = await conn.execute(
                     "SELECT confidence, COUNT(*) "  # nosec B608
                     f"FROM facts WHERE {where} AND project = ? AND fact_type = ? "
@@ -238,7 +232,6 @@ class FingerprintScanner:
                 result[(proj, ftype)] = round(cnt / weeks, 2)
             return result
 
-    # ── Internal ─────────────────────────────────────────────────
 
     def _where(self, project: str | None) -> tuple[str, list]:
         """Build WHERE clause and params."""

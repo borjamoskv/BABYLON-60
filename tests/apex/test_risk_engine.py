@@ -56,7 +56,6 @@ def test_rich_nlp_and_oversight_features() -> None:
     assert f.brief_summary_words == 350
     assert f.n_conditions == 4
     assert f.n_interventions == 3
-    # Verify the dictionary export and risk engine compatibility
     d = f.as_dict()
     assert d["has_dmc"] is True
     assert d["brief_summary_words"] == 350
@@ -93,9 +92,7 @@ def test_complex_oncology_phase3_is_high_or_critical() -> None:
 
 
 def test_tier_boundaries() -> None:
-    # normalized thresholds: 25 / 50 / 75
     assert assess(_mk()).tier == "LOW"
-    # construct a mid protocol
     mod = _mk(n_eligibility_criteria=25, phase="PHASE3")  # 16 + 10 = 26 raw -> 23 -> LOW/ MODERATE boundary check
     assert mod.n_eligibility_criteria == 25
     a = assess(mod)

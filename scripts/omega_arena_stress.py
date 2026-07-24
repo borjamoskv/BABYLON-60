@@ -30,25 +30,20 @@ def run_worker(worker_id, kernel, duration, stats, lock):
             choice = random.random()
             env_id = f"env_stress_{worker_id}"
             
-            # Workload probabilities
             if choice < 0.4:
-                # ATMS Propagation (Contradict)
                 stmt = f"Conjecture {uuid.uuid4()}"
                 kernel.assert_knowledge(stmt, f"sensor_{worker_id}", env_id)
                 kernel.contradict_knowledge(stmt, env_id)
                 atms_ops += 1
             elif choice < 0.7:
-                # Heavy ledger append
                 stmt = f"Blob {uuid.uuid4().hex * 10}"
                 kernel.assert_knowledge(stmt, f"sensor_{worker_id}", env_id)
                 ledger_ops += 1
             elif choice < 0.9:
-                # Ledger append
                 stmt = f"Fact {uuid.uuid4()}"
                 kernel.assert_knowledge(stmt, f"sensor_{worker_id}", env_id)
                 ledger_ops += 1
             else:
-                # Vault read
                 kernel.is_believed(f"Fact {uuid.uuid4()}")
                 kernel.contradiction_free(f"Fact {uuid.uuid4()}")
                 vault_read_ops += 1
@@ -125,7 +120,6 @@ def main():
     print(f"Vault Read ops: {stats['vault_read_ops']}")
     print(f"Panics: {stats['panics']}")
     
-    # Check SQLite Integrity
     try:
         conn = babylon60.database.core.connect(db_path)
         cur = conn.cursor()
@@ -139,7 +133,6 @@ def main():
         page_size = cur.fetchone()[0]
         print(f"DB Size: {(pages * page_size) / 1024:.2f} KB")
         
-        # Check WAL size
         if os.path.exists(f"{db_path}-wal"):
             wal_size = os.path.getsize(f"{db_path}-wal")
             print(f"WAL Size: {wal_size / 1024:.2f} KB")

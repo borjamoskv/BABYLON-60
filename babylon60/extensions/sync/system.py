@@ -57,7 +57,6 @@ async def sync_system(engine: CortexEngine, path: Path, result: SyncResult) -> N
 
     existing = await get_existing_contents(engine, "__system__")
 
-    # knowledge_global
     await _sync_fact_list(
         engine,
         existing,
@@ -69,7 +68,6 @@ async def sync_system(engine: CortexEngine, path: Path, result: SyncResult) -> N
         confidence="stated",
     )
 
-    # decisions_global
     await _sync_fact_list(
         engine,
         existing,
@@ -81,7 +79,6 @@ async def sync_system(engine: CortexEngine, path: Path, result: SyncResult) -> N
         confidence="verified",
     )
 
-    # Ecosistema
     eco = data.get("ecosystem", {})
     if eco:
         eco_content = (

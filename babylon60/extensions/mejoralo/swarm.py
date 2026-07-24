@@ -33,7 +33,6 @@ from babylon60.extensions.thinking.presets import OrchestraConfig, ThinkingMode
 
 logger = logging.getLogger("babylon60_extensions.mejoralo.swarm")
 
-# Sovereign Specialists (Level 130/100) - Aligned with kimi-swarm-1
 SPECIALISTS_PROMPTS = {
     "ArchitectPrime": (
         "You are the Guardian of Axioms. High-level structural integrity and 'Industrial Noir' "
@@ -89,7 +88,6 @@ class MejoraloSwarm:
 
     def __init__(self, level: int = 1):
         self.level = level
-        # Configuración optimizada para el enjambre (evitar 429)
         self.config = OrchestraConfig(
             min_models=1,
             max_models=2,
@@ -128,7 +126,6 @@ class MejoraloSwarm:
         swarm_system = self._build_swarm_system(self._select_specialists(findings_str), iteration)
         logger.info("🐝 Swarm (L%d) pensando en %s...", self.level, file_path.name)
 
-        # ✂️ Attempt surgical AST mode first (Python only)
         if file_path.suffix == ".py":
             result = await self._surgical_refactor(
                 file_path, content, findings, findings_str, scars_str, swarm_system
@@ -138,14 +135,12 @@ class MejoraloSwarm:
                 return result
             logger.info("⚠️ Modo quirúrgico fallido - fallback a archivo completo.")
 
-        # 📦 Full-file fallback
         base_prompt = self._build_prompt(file_path, content, findings_str, scars_str)
         result_content = await self._run_orchestra(base_prompt, swarm_system)
         if result_content:
             logger.info("✨ Síntesis completada para %s", file_path.name)
         return self._extract_code(result_content) if result_content else None
 
-    # ── Surgical AST Mode ──────────────────────────────────────────────────
 
     @staticmethod
     def _extract_infected_line(findings: list[str]) -> int | None:
@@ -155,7 +150,6 @@ class MejoraloSwarm:
         Returns the integer line number, or None if not parseable.
         """
         for finding in findings:
-            # Matches ':42 ->' or ':42 →'
             m = re.search(r":(\d+)\s*(?:->|→)", finding)
             if m:
                 return int(m.group(1))
@@ -185,7 +179,6 @@ class MejoraloSwarm:
             if end is None:
                 continue
             if start <= target_line <= end:
-                # Pick the innermost (smallest) enclosing node
                 if best is None:
                     best = node
                 else:
@@ -197,7 +190,6 @@ class MejoraloSwarm:
         if best is None:
             return None
 
-        # Extract raw source lines (1-indexed)
         start_idx = best.lineno - 1
         end_idx = getattr(best, "end_lineno", best.lineno)
         node_lines = lines[start_idx:end_idx]
@@ -219,20 +211,16 @@ class MejoraloSwarm:
         start_idx = node.lineno - 1
         end_idx = getattr(node, "end_lineno", node.lineno)
 
-        # Detect original indentation from first line of the node
         original_first_line = lines[start_idx] if start_idx < len(lines) else ""
         indent = len(original_first_line) - len(original_first_line.lstrip())
         indent_str = " " * indent
 
-        # Re-indent the patched node
         patch_lines = patched_node_source.splitlines(keepends=True)
         re_indented = [(indent_str + line if line.strip() else line) for line in patch_lines]
 
-        # Splice
         new_lines = lines[:start_idx] + re_indented + lines[end_idx:]
         result = "".join(new_lines)
 
-        # Validate the resulting file is still parseable
         try:
             ast.parse(result)
             return result
@@ -249,12 +237,10 @@ class MejoraloSwarm:
         swarm_system: str,
     ) -> str | None:
         """Execute surgical AST refactor: extract node, patch, reintegrate."""
-        # 1. Determine the infected line number
         target_line = self._extract_infected_line(findings)
         if target_line is None:
             return None
 
-        # 2. Extract the infected node
         extraction = self._extract_infected_node(content, target_line)
         if extraction is None:
             return None
@@ -269,7 +255,6 @@ class MejoraloSwarm:
             getattr(node, "end_lineno", "?"),
         )
 
-        # 3. Build a micro-prompt focused ONLY on the infected node
         micro_prompt = (
             f"SURGICAL-REFAC: Fix ONLY this {node_type} from {file_path.name}.\n"
             f"Do NOT change the signature or remove any public API.\n"
@@ -279,17 +264,14 @@ class MejoraloSwarm:
             "No wrapper, no imports, no module-level code."
         )
 
-        # 4. Run orchestra on micro-prompt
         result_content = await self._run_orchestra(micro_prompt, swarm_system)
         if not result_content:
             return None
 
-        # 5. Extract just the code block
         patched_node = self._extract_code(result_content)
         if not patched_node:
             return None
 
-        # 6. Validate extracted node is syntactically a single definition
         try:
             patched_tree = ast.parse(patched_node)
             top_level = [
@@ -307,10 +289,8 @@ class MejoraloSwarm:
             logger.warning("Surgical patch invalid syntax: %s", e)
             return None
 
-        # 7. Splice the patch back into the original file
         return self._surgical_patch_file(content, node, patched_node)
 
-    # ── Full-File Prompt Builder ───────────────────────────────────────────────
 
     def _read_source(self, file_path: Path) -> str | None:
         try:
@@ -373,18 +353,15 @@ class MejoraloSwarm:
             "ExergyWarden": ["exergy", "entropy", "c5-real", "slop", "yaml"],
         }
 
-        # Functional-style specialist selection
         dynamic = [s for s, kw in mapping.items() if any(k in fs_lower for k in kw)]
         active = (["ArchitectPrime", "CodeNinja"] + dynamic)[:squad_size]
 
-        # Force AwwwardsSovereign if explicitly requested
         if "awwwards" in fs_lower and "AwwwardsSovereign" not in active:
             if len(active) == squad_size:
                 active[-1] = "AwwwardsSovereign"
             else:
                 active.append("AwwwardsSovereign")
 
-        # Disentimiento Obligatorio: Inject Devil's Advocate for complex tasks
         if findings_count > DEVILS_ADVOCATE_THRESHOLD or self.level >= 2:
             if "DevilsAdvocate" not in active:
                 if len(active) == squad_size:
@@ -392,7 +369,6 @@ class MejoraloSwarm:
                 else:
                     active.append("DevilsAdvocate")
 
-        # Filling gaps if needed
         needed = squad_size - len(active)
         if needed > 0:
             remaining = [s for s in SPECIALISTS_PROMPTS if s not in active]
@@ -437,7 +413,6 @@ class MejoraloSwarm:
             logger.error("Swarm produced no valid code block.")
             return None
 
-        # 🔬 AST Validation (130/100 standard: never return broken syntax)
         try:
             ast.parse(clean_code)
             return clean_code

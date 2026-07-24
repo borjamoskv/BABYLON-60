@@ -2,8 +2,6 @@
 import json
 import uuid
 
-# CORTEX-Persist Visual Engine (ComfyUI)
-# MCP Tool Bridge
 
 
 def run_comfyui_workflow(workflow_json: str) -> str:
@@ -45,9 +43,6 @@ def run_comfyui_workflow(workflow_json: str) -> str:
             }
         )
 
-    # Note: For MCP synchrony, we don't open the WebSocket to block, we just queue it.
-    # In a full CORTEX extension, we'd spawn a background Thread/Async task.
-    # For now, we return the job ID.
     return json.dumps(
         {
             "status": "success",

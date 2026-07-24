@@ -1,8 +1,5 @@
 # C5-REAL: ANERGY TOKEN PURGE ENGINE
-# =================================================================================
-# SYS_ID: LEA_OMEGA (Loose End Annihilator)
 # REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution)
-# PROTOCOL: Anergy_Token_Purge -> Organizes Root Directory Entropy
 # [CORTEX-TAINT:borjamoskv:anergy_token_purge:2026-07-18T05:00:00Z]
 
 import os
@@ -20,7 +17,6 @@ ARCHIVE_DATA = os.path.join(ARCHIVE_ROOT, "data")
 ARCHIVE_DBS = os.path.join(ARCHIVE_ROOT, "dbs")
 AUDIT_YAML = os.path.join(PROJECT_ROOT, "cortex", "audits", "anergy_purge_audit.yaml")
 
-# Do not move these protected root files (Invariant Core)
 PROTECTED_FILES = {
     ".coderabbit.yaml", ".gitattributes", ".gitignore", ".gitmodules",
     "AGENTS.md", "Anergy_Audit.yml", "COLLAPSE_P0.sh", "Dockerfile", 
@@ -53,7 +49,6 @@ def categorize_and_move() -> Tuple[int, int, List[Dict[str, Any]]]:
         if item in PROTECTED_FILES:
             continue
             
-        # Classify by extension
         target_dir = None
         if item.endswith(".py"):
             target_dir = ARCHIVE_SCRIPTS
@@ -79,7 +74,6 @@ def main() -> None:
     ensure_dirs()
     count, total_bytes, actions = categorize_and_move()
     
-    # Generate deterministic Merkle root (Cortex Taint)
     payload = json.dumps(actions, sort_keys=True).encode("utf-8")
     cortex_taint = hashlib.sha3_256(payload).hexdigest()
     

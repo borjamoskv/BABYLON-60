@@ -92,11 +92,8 @@ class VirtualAgent:
         """Execute a task. C5-REAL when router is set, C4-SIM otherwise."""
         if self._router is not None:
             # ── C5-REAL path ──────────────────────────────────────────
-            # [K1] FAIL-FAST: No try/except masking. Execution failure must crash the node
-            # and be handled by the Byzantine Consensus (as a faulty node).
             from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
 
-            # War Council: Cognitive Diversity Mapping
             intent_map = {
                 "CODE": IntentProfile.CODE,
                 "SECURITY": IntentProfile.ARCHITECT,
@@ -120,7 +117,6 @@ class VirtualAgent:
 
             result = await self._router.execute_resilient(cortex_prompt)
 
-            # Result is Ok(str) | Err(str)
             if hasattr(result, "err") and result.err is not None:
                 raise RuntimeError(
                     f"C5-REAL Execution Failed for VirtualAgent {self.agent_id}: {result.err}"
@@ -131,7 +127,6 @@ class VirtualAgent:
 
             return str(result)
 
-        # ── C4-SIM path (testing scaffold / router unavailable) ───────
         if self._execution_delay > 0:
             await asyncio.sleep(self._execution_delay)
         return f"[C4-SIM] Result for {task_idx} - {self.specialty} Operation '{prompt}' completed"
@@ -151,7 +146,6 @@ class CentauroEngine:
         "INFRA",
     ]
 
-    # Class-level formation → squad size map (O(1) lookup, immutable)
     _FORMATION_SIZES: dict[str, int] = {
         Formation.BLITZ: 3,
         Formation.PHALANX: 7,
@@ -192,7 +186,6 @@ class CentauroEngine:
             orthogonal_router = self.router
             if self.router and hasattr(self.router, "fallbacks") and len(self.router.fallbacks) > 0:
                 orthogonal_router = copy.copy(self.router)
-                # Rotate primary to an orthogonal fallback to prevent Sybil Bias
                 fb_idx = i % len(self.router.fallbacks)
                 orthogonal_router._primary = self.router.fallbacks[fb_idx]
 
@@ -261,7 +254,6 @@ class CentauroEngine:
                     )
                     return (a_id, exc)
 
-        # Must wrap in asyncio.create_task so they can be explicitly cancelled later
         agent_tasks = [
             asyncio.create_task(_run_agent(a_id, agent)) for a_id, agent in squad.items()
         ]
@@ -279,7 +271,6 @@ class CentauroEngine:
                 logger.info("⚔️ [QUORUM] Consensus achieved early! Bypassing trailing latency.")
                 break
 
-        # Cancel trailing coroutines to avoid leak (Ω₂)
         for t in agent_tasks:
             if isinstance(t, asyncio.Task) and not t.done():
                 t.cancel()
@@ -300,7 +291,6 @@ class CentauroEngine:
         ctx_hash = cortex_hash(str(Path.cwd()).encode())[:8]
         mission_hash = cortex_hash(f"{mission}:{formation}:{ctx_hash}".encode())
 
-        # --- Thermal Heat-Sink (Multiplexing) ---
         mission_hash_str = str(mission_hash)
         if mission_hash_str in self._active_missions:
             logger.info(
@@ -313,11 +303,9 @@ class CentauroEngine:
         self._active_missions[mission_hash] = mission_future
 
         try:
-            # 🌌 [P0] Ultrathink Physics Collapse
             if formation == Formation.ULTRATHINK or epicenter_radius is not None:
                 from babylon60.engine.core.ultrathink_physics import UltrathinkPhysicsEngine
 
-                # Assume default P0 if explicitly ULTRATHINK but missing parameters
                 radius = epicenter_radius or 10
                 yield_val = exergy_yield or 60.0
 
@@ -335,9 +323,7 @@ class CentauroEngine:
             logger.info(
                 "Initiating LEGION Protocol. Mission: %s | Formation: %s", mission, formation
             )
-            # 🧬 Endocrine modulation: High ADRENALINE forces BLITZ regardless of intention
             adrenaline = ENDOCRINE.get_level(HormoneType.ADRENALINE)
-            # Do not force BLITZ if we are dealing with a P0 Singularity like LEGION_10K
             if adrenaline > 0.7 and formation not in [
                 Formation.BLITZ,
                 Formation.GHOST,
@@ -363,7 +349,6 @@ class CentauroEngine:
             result: CentauroMissionResult
             if winning:
                 logger.info("Consensus Achieved (UNANIMOUS or MAJORITY).")
-                # 🧬 Dopamine Reward
                 ENDOCRINE.pulse(HormoneType.DOPAMINE, 0.1, reason="Consensus Success")
                 result = {
                     "status": "success",

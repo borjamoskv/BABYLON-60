@@ -207,7 +207,6 @@ class CapatazOrchestrator:
         intent: SwarmIntent = SwarmIntent.DISCOVERY,
     ) -> str:
         """Execute completion and broadcast discovery via SignalBus (Ω₁₄)."""
-        # Simulated LLM call logic...
         result = "Success"
 
         if engine and hasattr(engine, "get_async_engine"):
@@ -267,7 +266,6 @@ class CapatazOrchestrator:
         task = SwarmTask(name=name, agent_name=agent_name, role=role, status=TaskStatus.RUNNING)
         self.tasks[task.id] = task
 
-        # Ω₁: RISK DETECTION
         risk = RiskLevel.LOW
         if changed_files:
             verifier = get_swarm_manager().verifier
@@ -286,11 +284,8 @@ class CapatazOrchestrator:
         try:
             kwargs = kwargs or {}
 
-            # Prefix sharing logic (extract system_prompt from args/kwargs if available)
             system_prompt = kwargs.get("system", "") if kwargs else ""
             if system_prompt:
-                # Derive tenant ID implicitly from OS for local executions,
-                # or use a default standard tenant wrapper
                 tenant_id = os.environ.get("CORTEX_TENANT_ID", "local-tenant")
                 provider_name = kwargs.get("provider", "default") if kwargs else "default"
                 model_name = kwargs.get("model", "default") if kwargs else "default"
@@ -302,10 +297,8 @@ class CapatazOrchestrator:
                     model_name=model_name,
                 )
 
-                # Pass cache_key downstream so provider can use it
                 kwargs["prefix_cache_key"] = slot.cache_key
 
-            # BROADCAST JIT DISCOVERY
             await self._execute_completion_with_tracking(
                 url="",
                 headers={},
@@ -335,7 +328,6 @@ class CapatazOrchestrator:
 
             result = await coro_func(*args, **kwargs)
 
-            # Ω₁: ELDER VERIFICATION GATE
             if risk != RiskLevel.LOW:
                 verifier = get_swarm_manager().verifier
                 v_res = await verifier.verify_proposal(str(result), risk)
@@ -344,7 +336,6 @@ class CapatazOrchestrator:
                     task.status = TaskStatus.FAILED
                     task.error = f"Elder rejection: {v_res.reason}"
 
-                    # EMIT NEGATIVE KNOWLEDGE SIGNAL
                     await self._execute_completion_with_tracking(
                         url="",
                         headers={},
@@ -388,7 +379,6 @@ class CapatazOrchestrator:
 
             logger.info("[%s] Capataz: Pre-heating KV Cache for swarm...", self.mission_id)
 
-            # Register the prefix so we get the deterministic cache_key
             slot = self._kv_registry.register(
                 mission_id=self.mission_id,
                 tenant_id=tenant_id,
@@ -397,7 +387,6 @@ class CapatazOrchestrator:
                 model_name="unknown",
             )
 
-            # Fire a dummy query to force prefill / cachedContent creation remotely
             provider = LLMProvider()
             await provider.complete(
                 prompt="[CORTEX KV Preheat]",
@@ -417,7 +406,6 @@ class CapatazOrchestrator:
 
     async def run_parallel(self, task_definitions: list[dict[str, Any]]) -> list[Any]:
         """Deploy multiple agents in parallel."""
-        # Ouroboros KV Cache Prefetch (AX-042)
         from collections import Counter
 
         system_prompts = []

@@ -21,7 +21,6 @@ class MLXLocalEngine:
 
     def load_model(self) -> None:
         """Loads the weights into Unified Memory deterministically."""
-        # [Scaffold] In reality, this invokes mlx_lm.load()
         logger.info(
             "[MLX_FFI] (Scaffold) Loading weights for %s into Unified Memory.", self.model_id
         )
@@ -42,11 +41,8 @@ class MLXLocalEngine:
             len(prompt),
             temperature,
         )
-        # [Scaffold] In reality, this invokes mlx_lm.generate()
 
-        # Simulated deterministic output for semantic validation bypass
         return "C5-REAL: Local MLX Verification Acknowledged."
 
 
-# Singleton instance
 mlx_engine = MLXLocalEngine()

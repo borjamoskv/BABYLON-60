@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from typing import Any
 
-# pyright: reportAttributeAccessIssue=false
 """Background loop methods for MoskvDaemon (Seal 8 LOC extraction)."""
 
 

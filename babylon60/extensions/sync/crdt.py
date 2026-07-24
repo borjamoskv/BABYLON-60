@@ -34,7 +34,6 @@ __all__ = [
     "MergeResult",
 ]
 
-# Fact types that use MV-Register (preserve both sides on conflict)
 _CRITICAL_TYPES = frozenset({"decision", "axiom", "rule", "belief"})
 
 
@@ -135,7 +134,6 @@ class CortexCRDT:
         """
         result = MergeResult()
 
-        # Index local facts for O(1) lookup
         local_index: dict[tuple[str, int], FactReplica] = {}
         for fact in local_facts:
             local_index[(fact.project, fact.fact_id)] = fact
@@ -144,7 +142,6 @@ class CortexCRDT:
             result.total_processed += 1
             key = (remote.project, remote.fact_id)
 
-            # Handle tombstones (deletions)
             if remote.is_tombstoned:
                 if key in local_index and not local_index[key].is_tombstoned:
                     result.tombstones_applied += 1
@@ -153,18 +150,14 @@ class CortexCRDT:
             local = local_index.get(key)
 
             if local is None:
-                # New fact - ADD
                 result.facts_added += 1
                 continue
 
             if local.content == remote.content:
-                # Identical - SKIP
                 result.facts_identical += 1
                 continue
 
-            # Content differs - resolve by type
             if remote.is_critical:
-                # MV-Register: preserve both, flag conflict
                 conflict = ConflictRecord(
                     fact_id=remote.fact_id,
                     fact_type=remote.fact_type,
@@ -186,11 +179,9 @@ class CortexCRDT:
                     remote.node_id,
                 )
             else:
-                # LWW-Register: highest HLC wins
                 if remote.hlc > local.hlc:
                     result.facts_updated += 1
                 elif remote.hlc == local.hlc:
-                    # Tie-break by node_id (deterministic)
                     if remote.node_id > local.node_id:
                         result.facts_updated += 1
                     else:
@@ -223,6 +214,5 @@ class CortexCRDT:
                 conflict.resolve_local()
             elif strategy == "remote":
                 conflict.resolve_remote()
-            # "manual" → leave as pending
 
         return conflicts

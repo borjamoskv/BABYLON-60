@@ -40,15 +40,11 @@ def register_defaults(engine: TriggerEngine) -> None:
     logger.info("Trigger registry: %d default triggers registered", count)
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  P0 - Singularity (Immediate, Cono de Luz)
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def _register_p0_triggers(engine: TriggerEngine) -> None:
     """P0 triggers fire immediately on a single signal match."""
 
-    # Worktree isolation failure - critical infrastructure collapse
     engine.register(
         TriggerCondition(
             id="worktree_isolation_failed",
@@ -80,7 +76,6 @@ def _register_p0_triggers(engine: TriggerEngine) -> None:
         )
     )
 
-    # Node death - swarm node stopped pulsing
     engine.register(
         TriggerCondition(
             id="node_dead",
@@ -110,7 +105,6 @@ def _register_p0_triggers(engine: TriggerEngine) -> None:
         )
     )
 
-    # Circuit breaker open - telemetry gate tripped
     engine.register(
         TriggerCondition(
             id="circuit_open",
@@ -141,15 +135,11 @@ def _register_p0_triggers(engine: TriggerEngine) -> None:
     )
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  P1 - Structural (Block Checkpoint, Geodésica)
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def _register_p1_triggers(engine: TriggerEngine) -> None:
     """P1 triggers fire at block checkpoints with moderate cooldown."""
 
-    # Node suspect - early warning
     engine.register(
         TriggerCondition(
             id="node_suspect",
@@ -173,7 +163,6 @@ def _register_p1_triggers(engine: TriggerEngine) -> None:
         )
     )
 
-    # Byzantine consensus failure
     engine.register(
         TriggerCondition(
             id="consensus_failed",
@@ -205,7 +194,6 @@ def _register_p1_triggers(engine: TriggerEngine) -> None:
         )
     )
 
-    # Worktree residue - zombie worktree detected after cleanup
     engine.register(
         TriggerCondition(
             id="worktree_residue",
@@ -230,15 +218,11 @@ def _register_p1_triggers(engine: TriggerEngine) -> None:
     )
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  P2 - Kinetic (Accumulator ≥ N)
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def _register_p2_triggers(engine: TriggerEngine) -> None:
     """P2 triggers require accumulation before firing."""
 
-    # Compact auto-trigger (replaces hardcoded logic in fact_hook.py)
     engine.register(
         TriggerCondition(
             id="compact_auto_trigger",
@@ -262,7 +246,6 @@ def _register_p2_triggers(engine: TriggerEngine) -> None:
         )
     )
 
-    # Ghost accumulation - multiple ghosts discovered → memory bridge
     engine.register(
         TriggerCondition(
             id="ghost_accumulation",

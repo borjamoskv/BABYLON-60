@@ -6,14 +6,9 @@ import os
 from web3 import Web3  # type: ignore[reportAttributeAccessIssue,reportMissingImports]
 from web3.middleware import geth_poa_middleware  # type: ignore[reportMissingImports]
 
-# The Ouroboros Swarm Oracle (Phase 3 Energy Independence)
-# Derivation: Axiom Ω₆ -> Execute.
 
-# For Base Mainnet / Optimism / Arbitrum
 RPC_URL = os.environ.get("CORTEX_RPC_URL", "https://mainnet.base.org")
-# The address where OuroborosLifeline.sol is deployed
 CONTRACT_ADDRESS = os.environ.get("CORTEX_LIFELINE_CONTRACT")
-# Private key of the local CORTEX MAC DAEMON (loaded from safe vault)
 PRIVATE_KEY = os.environ.get("CORTEX_WALLET_KEY")
 
 
@@ -25,7 +20,6 @@ def connect_web3():
     return w3
 
 
-# ABI just for the `pulse()` function
 ABI = json.loads(
     '[{"inputs":[],"name":"pulse","outputs":[],"stateMutability":"nonpayable","type":"function"}]'
 )
@@ -44,7 +38,6 @@ def send_heartbeat():
         account = w3.eth.account.from_key(PRIVATE_KEY)
         contract = w3.eth.contract(address=Web3.to_checksum_address(CONTRACT_ADDRESS), abi=ABI)
 
-        # Build transaction
         nonce = w3.eth.get_transaction_count(account.address)
         base_fee = w3.eth.gas_price
 
@@ -57,12 +50,10 @@ def send_heartbeat():
             }
         )
 
-        # Sign transaction locally -> Zero Trust (Axiom Ω₃)
         signed_tx = w3.eth.account.sign_transaction(tx_build, private_key=PRIVATE_KEY)
 
         logging.getLogger(__name__).info(f"[Web3 Oracle] 🔑 Signed tx from {account.address}. Broadcasting to L2...")
 
-        # Send raw transaction
         tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         receipt = w3.eth.wait_for_transaction_receipt(tx_hash, timeout=120)
 
@@ -80,6 +71,5 @@ def send_heartbeat():
         return False
 
 
-# When invoked by `pulse.py`, run this check
 if __name__ == "__main__":
     send_heartbeat()

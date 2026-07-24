@@ -36,7 +36,6 @@ def hooked_tool_execution(
                     logger.error("Tool execution timed out after %s seconds (async)", timeout_limit)
                     return f"[ERROR] Tool execution timed out after {timeout_limit} seconds"
             else:
-                # Wrap synchronous execution in asyncio.to_thread
                 try:
                     return await asyncio.wait_for(
                         asyncio.to_thread(func, *args, **kwargs), timeout=timeout_limit

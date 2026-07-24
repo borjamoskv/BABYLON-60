@@ -22,7 +22,6 @@ class ThermalEconomy:
     Enforces a 'field density' limit.
     """
 
-    # Maximum active ghosts allowed in a project topography
     MAX_FIELD_DENSITY = 50
 
     def __init__(self, sensor: TopographicSensor | None = None):

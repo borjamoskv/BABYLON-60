@@ -29,7 +29,6 @@ class OliverAgent:
         """Poll signals emitted by TOM and convert to material effects.
         Returns the number of effects emitted.
         """
-        # Consume unread finding signals from TOM
         signals = await self.bus.poll(
             event_type="sap:audit:finding",
             source="tom-tracker",
@@ -45,7 +44,6 @@ class OliverAgent:
             finding_type = payload.get("finding_type", "unknown")
             evidence = payload.get("evidence", {})
 
-            # Materiality evaluation matrix
             materiality_score = self._evaluate_materiality(severity, evidence)
 
             action = "LOG_ONLY"
@@ -81,7 +79,6 @@ class OliverAgent:
             score += 0.3
 
         amount = evidence.get("amount", 0)
-        # Assuming >= €10M is extremely material
         if amount >= 10_000_000:
             score += 0.4
         elif amount >= 1_000_000:

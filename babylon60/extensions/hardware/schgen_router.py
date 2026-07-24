@@ -45,15 +45,12 @@ class SchGenRouter:
         nodes: dict[str, NetlistNode] = {}
         connection_count = 0
 
-        # Deterministic generation based on semantic intent length
         len(semantic_intent.split())
 
         for i, comp in enumerate(available_components):
-            # Assign semantic roles based on position and intent
             role = "Power" if i == 0 else ("MCU" if i == 1 else "Peripheral")
             pins = 4 if role == "Peripheral" else (48 if role == "MCU" else 2)
 
-            # Form connections
             conns = []
             if role != "MCU" and any(n.semantic_role == "MCU" for n in nodes.values()):
                 conns.append("MCU")
@@ -63,7 +60,6 @@ class SchGenRouter:
                 component_id=comp, semantic_role=role, pins=pins, connections=conns
             )
 
-        # Calculate pseudo-density
         area_factor = max(1, len(available_components) * 1.5)
         density = min(1.0, (connection_count * 0.15) / area_factor)
 

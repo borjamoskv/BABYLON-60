@@ -88,6 +88,5 @@ class CriticAgent:
             )
         except (json.JSONDecodeError, KeyError) as e:
             logger.warning("Critic JSON parse failed: %s", e)
-            # If we can't parse, be conservative and approve
             approved = "true" in raw.lower() and "false" not in raw.lower()
             return CriticOutput(approved=approved, issues=[], suggestions=raw[:500])

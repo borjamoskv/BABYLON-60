@@ -78,7 +78,6 @@ class ContextFusion:
         if not retrieved_facts:
             return ""
 
-        # Fallback to direct string concatenation if no judge is available
         if not self._judge:
             return "\n".join(f.get("content", "") for f in retrieved_facts)
 
@@ -110,7 +109,6 @@ class ThoughtFusion:
 
     MIN_VALID_RESPONSES = 2
 
-    # ── Prompts del juez ─────────────────────────────────────────
 
     SYNTHESIS_SYSTEM = (
         "You are MOSKV-1 (Identity: The Sovereign Architect). You are a meta-reasoning judge. "
@@ -148,12 +146,10 @@ class ThoughtFusion:
         "Return ONLY the synthesized response."
     )
 
-    # ── High-agreement threshold ─────────────────────────────────
 
     HIGH_AGREEMENT_THRESHOLD = 0.85
     NEAR_IDENTICAL_THRESHOLD = 0.95
 
-    # ── Circuit breaker config ────────────────────────────────────
     JUDGE_MAX_RETRIES = 2
     JUDGE_TIMEOUT_S = 10.0
     JUDGE_BACKOFF_BASE = 0.5
@@ -162,7 +158,6 @@ class ThoughtFusion:
         self._judge = judge_provider
         self.history = ThinkingHistory()
 
-    # ── Primary API ──────────────────────────────────────────────
 
     async def fuse(
         self,
@@ -182,7 +177,6 @@ class ThoughtFusion:
                 [(r.provider, r.error) for r in failed],
             )
 
-        # Sin respuestas válidas
         if not valid:
             return FusedThought(
                 content="Error: todos los modelos fallaron.",
@@ -191,7 +185,6 @@ class ThoughtFusion:
                 sources=responses,
             )
 
-        # Una sola respuesta - no hay nada que fusionar
         if len(valid) == 1:
             result = FusedThought(
                 content=valid[0].content,
@@ -204,13 +197,10 @@ class ThoughtFusion:
             self.history.record(result)
             return result
 
-        # Pre-tokenizar (se reutiliza en agreement + majority)
         token_map = {id(r): _tokenize(r.content) for r in valid}
 
-        # Calcular acuerdo
         agreement = self._calculate_agreement_from_tokens([token_map[id(r)] for r in valid])
 
-        # Near-identical → early return con la mejor por latencia
         if agreement > self.NEAR_IDENTICAL_THRESHOLD:
             fastest = min(valid, key=lambda r: r.latency_ms)
             result = FusedThought(
@@ -227,7 +217,6 @@ class ThoughtFusion:
             self.history.record(result)
             return result
 
-        # Alto acuerdo o sin juez → majority
         if (
             agreement > self.HIGH_AGREEMENT_THRESHOLD
             or strategy == FusionStrategy.MAJORITY
@@ -237,7 +226,6 @@ class ThoughtFusion:
             self.history.record(result)
             return result
 
-        # Estrategias que requieren juez
         dispatch = {
             FusionStrategy.SYNTHESIS: self._fuse_synthesis,
             FusionStrategy.BEST_OF_N: self._fuse_best_of_n,
@@ -248,11 +236,9 @@ class ThoughtFusion:
         self.history.record(result)
         return result
 
-    # ── Circuit Breaker ──────────────────────────────────────────
 
     async def _judge_safe(self, prompt: str, system: str, **kwargs) -> str | None:
         """Llama al juez con retries + timeout. Devuelve None si falla."""
-        # Si no hay juez, fallar rápido
         if self._judge is None:
             return None
         for attempt in range(self.JUDGE_MAX_RETRIES + 1):
@@ -269,7 +255,6 @@ class ThoughtFusion:
                 await asyncio.sleep(self.JUDGE_BACKOFF_BASE * (2**attempt))
         return None
 
-    # ── Shared Scoring ───────────────────────────────────────────
 
     async def _score_response(
         self, r: ModelResponse, original_prompt: str
@@ -296,7 +281,6 @@ class ThoughtFusion:
             logger.warning("Score validate failed for %s: %s", r.label, e)
             return (r, 0.5)
 
-    # ── Agreement ────────────────────────────────────────────────
 
     def _calculate_agreement(self, responses: list[ModelResponse]) -> float:
         """Calcula agreement desde ModelResponse (public API)."""
@@ -317,7 +301,6 @@ class ThoughtFusion:
         ]
         return sum(similarities) / len(similarities) if similarities else 0.0
 
-    # ── MAJORITY ─────────────────────────────────────────────────
 
     def _fuse_majority(
         self,
@@ -368,7 +351,6 @@ class ThoughtFusion:
             },
         )
 
-    # ── SYNTHESIS ─────────────────────────────────────────────────
 
     async def _fuse_synthesis(
         self,
@@ -404,7 +386,6 @@ class ThoughtFusion:
         logger.error("Juez de síntesis falló tras retries - fallback a majority")
         return self._fuse_majority(valid, all_responses, agreement, FusionStrategy.SYNTHESIS)
 
-    # ── BEST_OF_N ─────────────────────────────────────────────────
 
     async def _fuse_best_of_n(
         self,
@@ -431,7 +412,6 @@ class ThoughtFusion:
             },
         )
 
-    # ── WEIGHTED SYNTHESIS ────────────────────────────────────────
 
     async def _fuse_weighted_synthesis(
         self,
@@ -470,7 +450,6 @@ class ThoughtFusion:
                     "all_scores": {r.label: round(s, 4) for r, s in scored},
                 },
             )
-        # Fallback: elegir la mejor de scoring
         best = max(scored, key=lambda x: x[1])
         return FusedThought(
             content=best[0].content,

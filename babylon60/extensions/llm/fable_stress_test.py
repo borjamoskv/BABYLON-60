@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Asynchronous Stress Test: Claude Fable 5 Agentic Orchestrator
 import asyncio
 import logging
 import os
@@ -9,11 +8,9 @@ from unittest.mock import patch
 
 import httpx
 
-# Ensure CORTEX path is available
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 
-# Mock generate_secure_taint_token to bypass crypto keys for PoC
 def mock_generate_secure_taint_token(*args, **kwargs):
     return (
         "taint:ed25519:fable-5-orchestrator:stress_harness:2026-06-28T00:00:00Z:nonce123:mock_sig"
@@ -90,7 +87,6 @@ async def run_stress_test(concurrency: int, total_requests: int):
 
     semaphore = asyncio.Semaphore(concurrency)
 
-    # Patch httpx.AsyncClient.post to intercept the API call
     with patch("httpx.AsyncClient.post", side_effect=simulate_fable_api_response):
         async with httpx.AsyncClient() as client:
             tasks = [stress_worker(client, i, semaphore) for i in range(total_requests)]
@@ -118,5 +114,4 @@ async def run_stress_test(concurrency: int, total_requests: int):
 
 
 if __name__ == "__main__":
-    # Invocamos 100 tareas asíncronas concurrentes, limitadas por un semáforo de 20
     asyncio.run(run_stress_test(concurrency=20, total_requests=100))

@@ -46,12 +46,10 @@ class EvaluationMonitor:
                 import sqlite3
 
                 try:
-                    # Total facts
                     cur.execute("SELECT COUNT(*) FROM facts_meta")
                     total_row = cur.fetchone()
                     total = total_row[0] if total_row else 0
 
-                    # Stale facts (> 180 days without subjective hit)
                     cur.execute(
                         "SELECT COUNT(*) FROM facts_meta WHERE last_accessed < datetime('now', '-180 days')"
                     )
@@ -61,14 +59,12 @@ class EvaluationMonitor:
                     stale_ratio = (stale_count / total) if total > 0 else 0.0
                 except sqlite3.OperationalError as e:
                     if "no such table: facts_meta" in str(e):
-                        # L2 sqlite-vec is not fully active yet
                         total = 0
                         stale_count = 0
                         stale_ratio = 0.0
                     else:
                         raise
 
-            # Heuristics Contradiction flag (0 for now, logic deferred to asynchronous batch LLM evaluation)
             contradictions = 0
 
             alerts.append(

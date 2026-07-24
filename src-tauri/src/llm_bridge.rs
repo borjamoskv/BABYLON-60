@@ -5,7 +5,6 @@ use crate::void::VoidLedger;
 use std::process::Command;
 use serde::Deserialize;
 
-#[derive(Deserialize, Debug)]
 struct LlmMutation {
     target_file: String,
     content: String,
@@ -18,17 +17,14 @@ struct LlmTask {
 }
 
 pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
-    // Ω25: Zero static HMAC fallback invariant.
     let _bft_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
         .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
 
     println!("🌉 [LLM_BRIDGE] Puente CORTEX (Agnóstico HTTP/REST/TCP) activo en 127.0.0.1:6006. Universal para Cursor, Claude Code, Copilot y MCP.");
     
-    // Ω9: Ignición determinista
     let listener = TcpListener::bind("127.0.0.1:6006").await.expect("Fallo al abrir puerto de puente CORTEX");
 
-    // Ω13: Serialización de escritura.
     let (tx, mut rx) = tokio::sync::mpsc::channel::<LlmTask>(100);
     let db_for_writer = db_state.clone();
 
@@ -36,15 +32,12 @@ pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
         while let Some(task) = rx.recv().await {
             let mutation = task.mutation;
             
-            // 1. Inyección física en disco
             if std::fs::write(&mutation.target_file, &mutation.content).is_ok() {
                 
-                // 2. Sello en CORTEX Ledger
                 // INV_BFT_03: causal taint
                 let taint = format!("LLM_BRIDGE:{}", mutation.target_file);
                 let _ = db_for_writer.write(&mutation.content, &taint);
 
-                // 3. Git Sentinel Autosync (BFT)
                 let _ = Command::new("git").args(["add", &mutation.target_file]).output();
                 let commit_out = Command::new("git")
                     .args(["-c", "commit.gpgsign=false", "commit", "-m", &mutation.commit_msg, "--no-verify"])
@@ -85,7 +78,6 @@ pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
                             return;
                         }
 
-                        // Parse agnostic JSON body
                         let json_str = if is_http {
                             if let Some(idx) = request_str.find("\r\n\r\n") {
                                 &request_str[idx + 4..]

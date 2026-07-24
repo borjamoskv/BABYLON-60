@@ -34,7 +34,6 @@ class ThermodynamicsOracle:
         self._running = False
         self._cores = os.cpu_count() or 1
 
-        # Load psutil if available to measure true thermodynamic footprint
         self._psutil = None
         try:
             import psutil
@@ -49,7 +48,6 @@ class ThermodynamicsOracle:
         self._running = True
         while self._running:
             try:
-                # Measure Event Loop Lag (Temporal Friction)
                 start_time = time.perf_counter()
                 await asyncio.sleep(0.1)
                 lag_ms = (time.perf_counter() - start_time - 0.1) * 1000.0
@@ -60,7 +58,6 @@ class ThermodynamicsOracle:
                 self._running = False
                 break
             except Exception as e:  # noqa: BLE001
-                # Log thermal noise error but don't choke the event loop
                 logger.error("[THERMODYNAMIC NOISE] %s", e)
             await asyncio.sleep(self.poll_interval)
 
@@ -89,22 +86,17 @@ class ThermodynamicsOracle:
 
                 logging.warning("Suppressed exception: %s", exc)
 
-        # Density factor of the Coroutine Swarm
         active_tasks = len(asyncio.all_tasks())
         swarm_density = active_tasks / 50.0  # Normalized (50 tasks = 1.0)
 
-        # Level 2 Exergy Calculation
-        # r = load, d = memory factor, f = friction (lag), t = task density
         r = round(utilization, 2)
         d = round(memory_percent / 100.0, 2)
         f = round(1.0 + (lag_ms / 100.0), 2)
         t = round(swarm_density, 2)
         s = 100  # Singularity constant
 
-        # Loss = r * (d * 1.5) * f * (1 + t^2) * S
         exergy_loss = round(r * (d * 1.5) * f * (1 + (t**2)) * s, 1)
 
-        # Red Queen Dynamic Polling (Axiom Ω₁₃)
         if exergy_loss > 50.0:
             self.poll_interval = max(5.0, self.base_poll_interval / 4.0)
         else:
@@ -116,7 +108,6 @@ class ThermodynamicsOracle:
         if is_death_spiral:
             purged_tasks = self._execute_annihilation_protocol()
 
-        # Trigger on pure overload, massive exergy loss, or dangerous event loop lock
         if utilization > self.thermal_threshold or exergy_loss > 90.0 or lag_ms > 500.0:
             severity = (
                 "CRITICAL"
@@ -130,7 +121,6 @@ class ThermodynamicsOracle:
                 else ""
             )
 
-            # Ω₂ Mandatory Mechanical Justification Format
             content = (
                 f"INCENDIO TERMODINÁMICO. Límite de exergía excedido.\\n\\n"
                 f"Claim: THERMODYNAMIC COLLAPSE [Severity: {severity}]\\n"
@@ -187,7 +177,6 @@ class ThermodynamicsOracle:
             except AttributeError:
                 coro_name = ""
 
-            # Safeguards to prevent system bricking
             is_critical = any(kw in task_name for kw in ("p0", "engine", "core", "server")) or any(
                 kw in coro_name for kw in ("start", "serve", "watch", "loop")
             )
@@ -196,5 +185,4 @@ class ThermodynamicsOracle:
                 task.cancel()
                 purged += 1
 
-        # Cooldown forced yield to allow tasks to process their CancelledError
         return purged

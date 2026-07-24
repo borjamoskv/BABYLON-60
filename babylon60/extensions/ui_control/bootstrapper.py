@@ -45,16 +45,13 @@ class PermsBootstrapper:
             )
             return status
 
-        # 1. Check & Prompt Accessibility
         try:
-            # AXIsProcessTrustedWithOptions prompts the user if not trusted
             options = {ApplicationServices.kAXTrustedCheckOptionPrompt: True}  # type: ignore
             trusted = ApplicationServices.AXIsProcessTrustedWithOptions(options)  # type: ignore
             status["accessibility"] = bool(trusted)
         except Exception as e:  # noqa: BLE001
             logger.error("Error checking accessibility permissions: %s", e)
 
-        # 2. Check & Prompt Screen Recording (macOS Catalina 10.15+)
         try:
             if hasattr(Quartz, "CGPreflightScreenCaptureAccess"):
                 has_rec = Quartz.CGPreflightScreenCaptureAccess()  # type: ignore
@@ -63,7 +60,6 @@ class PermsBootstrapper:
                     logger.info("Screen Recording permission missing. Requesting access...")
                     Quartz.CGRequestScreenCaptureAccess()  # type: ignore
             else:
-                # Fallback: check if we can capture a 1x1 region on main display
                 rect = Quartz.CGRectMake(0, 0, 1, 1)  # type: ignore
                 img = Quartz.CGWindowListCreateImage(  # type: ignore
                     rect,

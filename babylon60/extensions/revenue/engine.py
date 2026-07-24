@@ -95,7 +95,6 @@ class RevenueEngine:
             ", ".join(v.name for v in active),
         )
 
-        # Run all scans concurrently
         tasks = [v.scan() for v in active]
         scan_results = await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -110,13 +109,10 @@ class RevenueEngine:
                 continue
             all_opportunities.extend(result)
 
-        # Filter by minimum ROI
         viable = [opp for opp in all_opportunities if opp.roi_score >= self.min_roi]
 
-        # Sort by ROI descending
         viable.sort(key=lambda o: o.roi_score, reverse=True)
 
-        # Mark as evaluated
         for opp in viable:
             opp.status = OpportunityStatus.EVALUATED
 
@@ -244,7 +240,6 @@ class RevenueEngine:
         total_executed = 0
 
         for result in self.results:
-            # Find the opportunity to get the vector
             opp = next(
                 (o for o in self.opportunities if o.id == result.opportunity_id),
                 None,
@@ -270,7 +265,6 @@ class RevenueEngine:
                 total_revenue += result.revenue_actual
                 total_cost += result.cost_actual
 
-        # Serialize Decimals for JSON compatibility
         for entry in by_vector.values():
             entry["revenue"] = str(entry["revenue"])
             entry["cost"] = str(entry["cost"])

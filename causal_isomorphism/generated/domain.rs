@@ -1,15 +1,7 @@
-//! Auto-generated from F# Domain Kernel via Causal Isomorphism Transpiler
-//! Trilingual Regime: Type definitions and poset stubs for strike_rs
-//! Author: borjamoskv
-//!
-//! REGIME: Physics computation stays in F# Domain Kernel.
-//! REGIME: Only type definitions and DAG/hash operations emitted here.
 
 use blake3::Hasher;
 use serde::{Deserialize, Serialize};
 
-/// F# Discriminated Union: Gravity
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum Gravity {
     C5_ColapsoOntologico,
     C4_DegradacionGeometrica,
@@ -17,8 +9,6 @@ pub enum Gravity {
     C2_FriccionComputacional,
 }
 
-/// F# Discriminated Union: MembraneState
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub enum MembraneState {
     Stable { entropyLevel: f64 },
     Smoothing { variance: f64 },
@@ -56,29 +46,20 @@ impl CortexTaint for MembraneState {
     }
 }
 
-// @regime-blocked: applyThermalStress
-// Classification: STATE_TRANSITION — physics stays in F# Domain Kernel.
-// Rust receives the computed result via IPC/FFI boundary.
 
-// @regime-blocked: commitBoundary
-// Classification: COMMIT_BOUNDARY — anchoring belongs to Solidity/Anvil.
 
-/// genesisLedger — Pure query / validation
 pub fn genesis_ledger() -> LedgerState {
     todo!("Implement from F# Domain Kernel logic")
 }
 
-/// validateAndAppend — Pure query / validation
 pub fn validate_and_append(state: &LedgerState, parent: &str, claim: &str, payload: &str) -> Result<Tuple, ValidationError> {
     todo!("Implement from F# Domain Kernel logic")
 }
 
-/// getPath — Pure query / validation
 pub fn get_path(state: &LedgerState, head_id: &str) -> Result<StateNode list, String> {
     todo!("Implement from F# Domain Kernel logic")
 }
 
-/// runVerificationSuite — Pure query / validation
 pub fn run_verification_suite() -> () {
     todo!("Implement from F# Domain Kernel logic")
 }

@@ -53,7 +53,6 @@ class TLRUCache:
         if time.monotonic() - timestamp > self._ttl:
             del self._cache[key]
             return False
-        # Move to end on access (LRU refresh)
         self._cache.move_to_end(key)
         return True
 
@@ -61,11 +60,9 @@ class TLRUCache:
         """Insert or update a key. Evicts LRU entry if at capacity. O(1)."""
         now = time.monotonic()
         if key in self._cache:
-            # Update existing - move to end
             self._cache[key] = (now, value)
             self._cache.move_to_end(key)
             return
-        # Evict oldest if full
         if len(self._cache) >= self._maxsize:
             self._cache.popitem(last=False)
         self._cache[key] = (now, value)

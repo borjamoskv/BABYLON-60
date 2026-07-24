@@ -27,7 +27,6 @@ from dataclasses import dataclass
 
 __all__ = ["HLCTimestamp", "HybridLogicalClock"]
 
-# Maximum logical counter before forcing physical clock advance
 _MAX_LOGICAL = 0xFFFF  # 65535
 
 
@@ -130,7 +129,6 @@ class HybridLogicalClock:
         else:
             self._logical += 1
             if self._logical > _MAX_LOGICAL:
-                # Force physical advance to prevent logical overflow
                 self._physical_ms += 1
                 self._logical = 0
 

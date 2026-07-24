@@ -77,7 +77,6 @@ class GitHubCortexBridge:
             timeout=20.0,
         )
 
-    # ─── Public API ──────────────────────────────────────────────────
 
     async def sync_all(self, repo_filter: str | None = None) -> SyncResult:
         """Discover repos and sync all issues/PRs into CORTEX.
@@ -95,7 +94,6 @@ class GitHubCortexBridge:
             result.errors.append(f"GitHub API error: {exc.response.status_code}")
             return result
 
-        # Pre-load existing github_keys for O(1) dedup
         existing = await self._load_existing_keys()
 
         for repo_name in repos:
@@ -113,7 +111,6 @@ class GitHubCortexBridge:
         """Close the underlying HTTP client."""
         await self._client.aclose()
 
-    # ─── Repo Discovery ──────────────────────────────────────────────
 
     async def _discover_repos(self, repo_filter: str | None) -> list[str]:
         """List public repos for the owner. Returns full names (owner/repo)."""
@@ -132,13 +129,11 @@ class GitHubCortexBridge:
             if not batch:
                 break
             repos.extend(r["full_name"] for r in batch if not r.get("fork"))
-            # GitHub pagination ends on the first non-full page.
             if len(batch) < 100:
                 break
             page += 1
         return repos
 
-    # ─── Per-Repo Sync ───────────────────────────────────────────────
 
     async def _sync_repo(
         self,
@@ -167,7 +162,6 @@ class GitHubCortexBridge:
             for item in items:
                 await self._process_item(item, repo, existing, result)
 
-            # GitHub pagination ends on the first non-full page.
             if len(items) < 100:
                 break
             page += 1
@@ -186,7 +180,6 @@ class GitHubCortexBridge:
         state: str = item["state"]  # "open" or "closed"
 
         if key in existing:
-            # Already in CORTEX - check for crystallization
             if state == "closed":
                 await self._crystallize_decision(item, repo, existing[key])
                 result.crystallized += 1
@@ -194,18 +187,15 @@ class GitHubCortexBridge:
                 result.skipped += 1
             return
 
-        # New item - only store open ones as bridges
         if state == "open":
             await self._store_bridge(item, repo, key, is_pr)
             if is_pr:
                 result.prs_synced += 1
             else:
                 result.issues_synced += 1
-        # Closed items without a previous bridge are historical - skip
         else:
             result.skipped += 1
 
-    # ─── Store / Crystallize ─────────────────────────────────────────
 
     async def _store_bridge(
         self,
@@ -258,13 +248,11 @@ class GitHubCortexBridge:
         title = item["title"]
         closed_at = item.get("closed_at", now_iso())
 
-        # Deprecate the bridge fact
         await self._engine.deprecate(
             existing_fact_id,
             reason=f"crystallized:closed:{repo}#{item['number']}",
         )
 
-        # Store as decision
         content = f"[GitHub Resolved] {repo}#{item['number']}: {title}. Closed at {closed_at}."
         meta = {
             "github_key": _github_key(repo, item["number"]),
@@ -297,7 +285,6 @@ class GitHubCortexBridge:
         )
         return fact_id
 
-    # ─── Dedup Index ─────────────────────────────────────────────────
 
     async def _load_existing_keys(self) -> dict[str, int]:
         """Load all github_key → fact_id mappings from active bridge facts.

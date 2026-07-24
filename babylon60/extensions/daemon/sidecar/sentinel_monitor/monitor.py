@@ -87,7 +87,6 @@ class SentinelMonitor:
         self, session: aiohttp.ClientSession, action: str
     ) -> list[dict[str, Any]]:
         api_key = os.environ.get("ETHERSCAN_API_KEY", "")
-        # Use Etherscan API format
         params = {
             "module": "account",
             "action": action,
@@ -112,7 +111,6 @@ class SentinelMonitor:
         normal_txs = await self._fetch_txlist(session, "txlist")
         token_txs = await self._fetch_txlist(session, "tokentx")
 
-        # Combine and sort by block number
         all_txs = sorted(normal_txs + token_txs, key=lambda x: int(x.get("blockNumber", 0)))
 
         highest_block = self.last_block_scanned
@@ -124,11 +122,9 @@ class SentinelMonitor:
 
             from_addr = tx.get("from", "").lower()
             if from_addr == TARGET_ADDRESS.lower():
-                # Outbound translation detected!
                 to_addr = tx.get("to", "Unknown")
                 tx_hash = tx.get("hash", "Unknown")
 
-                # Determine asset and value
                 if "tokenSymbol" in tx:
                     asset = tx["tokenSymbol"]
                     decimals = int(tx.get("tokenDecimal", 18))
@@ -152,14 +148,8 @@ class SentinelMonitor:
         self.is_running = True
         logger.info("Sentinel Monitor started for %s", TARGET_ADDRESS)
 
-        # If we start from 0, we might get thousands of historical txs.
-        # In a real scenario, we'd initialize this to the current block.
-        # For this implementation, we assume we just want to watch forward,
-        # but Etherscan API is pagination-based.
-        # We'll just fetch once to establish the baseline block.
         api_key = os.environ.get("ETHERSCAN_API_KEY", "")
         async with aiohttp.ClientSession() as session:
-            # Get latest block as baseline
             try:
                 params = {"module": "proxy", "action": "eth_blockNumber", "apikey": api_key}
                 async with session.get(ETHERSCAN_API_URL, params=params) as resp:

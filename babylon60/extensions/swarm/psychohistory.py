@@ -16,7 +16,6 @@ DOMAINS = [
     "Cybersecurity & Infrastructure",
 ]
 
-# Create 50 unique biases (10 per domain)
 AGENT_BIASES = []
 for domain in DOMAINS:
     for i in range(10):
@@ -57,15 +56,11 @@ class PsychohistoryOrchestrator:
             years,
         )
 
-        # 1. Dispatch 50 agents
         perspectives = await self._gather_50_perspectives(scenario, years)
 
-        # 2. Byzantine Consensus (Resonance Calculation)
-        # Using a simplified semantic resonance based on keyword overlap or embedding proxy
         resonance_score = self._calculate_swarm_resonance(perspectives)
         logger.info("⚛️ [PSYCHOHISTORY] Swarm Resonance calculated: %.2f", resonance_score)
 
-        # 3. Crystallize Contingency (Synthesis)
         logger.info("⚡ [PSYCHOHISTORY] Hari Seldon Omega is collapsing the 50 perspectives.")
         crystal_plan = await self._hari_seldon_synthesis(
             scenario, years, perspectives, resonance_score, project
@@ -123,12 +118,9 @@ class PsychohistoryOrchestrator:
 
     def _calculate_swarm_resonance(self, perspectives: list[dict[str, str]]) -> float:
         """Calculates Byzantine agreement proxy (resonance) between 0.0 and 1.0."""
-        # This is a stochastic proxy: in a full implementation this would use embeddings
-        # We calculate it based on structural integrity of successful responses
         success_count = sum(1 for p in perspectives if "[ERROR]" not in p["perspective"])
         base_resonance = success_count / max(len(AGENT_BIASES), 1)
 
-        # Add some entropy jitter for realism if not 100%
         if base_resonance > 0.9:
             return 0.95
         return round(base_resonance * 0.85, 2)
@@ -143,7 +135,6 @@ class PsychohistoryOrchestrator:
     ) -> str:
         """The final synthesis agent that compiles the O(1) Crystal."""
 
-        # Compress the 50 perspectives into a massive context block
         compressed_context = "\n".join(
             [
                 f"[{p['domain']}] {p['agent_id']}: {p['perspective'][:300]}..."
@@ -184,7 +175,6 @@ class PsychohistoryOrchestrator:
             res.unwrap() if res.is_ok() else "SYSTEM FAILURE: Resonance collapse during synthesis."
         )
 
-        # Persist the Crystal to the Master Ledger
         crystal_hash = cortex_hash_truncated(final_crystal.encode(), length=16)
 
         await self.engine.store(

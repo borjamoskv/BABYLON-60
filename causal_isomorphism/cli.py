@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
-# causal_isomorphism/cli.py — CLI Entry Point
 # C5-REAL: Command-line interface for the Causal Isomorphism Transpiler
-# Author: Borja Moskv (borjamoskv)
 """
 CLI for the Causal Isomorphism Transpiler.
 
@@ -117,18 +115,15 @@ def main() -> int:
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
-    # transpile
     p_transpile = subparsers.add_parser("transpile", help="Transpile F# source to Solidity and Rust")
     p_transpile.add_argument("source", help="Path to F# source file")
     p_transpile.add_argument("-o", "--output", help="Output directory for generated files")
     p_transpile.add_argument("--print-sol", action="store_true", help="Print generated Solidity to stdout")
     p_transpile.add_argument("--print-rust", action="store_true", help="Print generated Rust to stdout")
 
-    # validate
     p_validate = subparsers.add_parser("validate", help="Validate F# source against Trilingual Regime")
     p_validate.add_argument("source", help="Path to F# source file")
 
-    # inspect
     p_inspect = subparsers.add_parser("inspect", help="Inspect the IR generated from F# source")
     p_inspect.add_argument("source", help="Path to F# source file")
 

@@ -56,7 +56,6 @@ class HeartbeatDaemon:
                 break
 
             try:
-                # Evaluer Cortisol (Sistema relajado)
                 cortisol = ENDOCRINE.get_level(HormoneType.CORTISOL)
                 if cortisol > 0.4:
                     logger.debug(
@@ -86,7 +85,6 @@ class HeartbeatDaemon:
 
         while not self._shutdown_event.is_set():
             try:
-                # 1. System Respiration check: How intensely should we act?
                 throttle_multiplier, swarm_size_limit, ok_to_run = (
                     SystemRespiration.get_current_state()
                 )
@@ -96,29 +94,23 @@ class HeartbeatDaemon:
                     await asyncio.sleep(self._poll_interval * 2)
                     continue
 
-                # 2. Pop next task
                 task = self.queue.pop()
                 if not task:
-                    # No tasks, enter shallow breath
                     await asyncio.sleep(self._poll_interval * throttle_multiplier)
                     continue
 
                 logger.info("Heartbeat processing task: %s (%s)", task["id"], task["type"])
 
-                # 3. Determine if it's a Physical Parity task
                 if task["type"] in ["PHYSICAL", "OS_COMMAND"]:
                     await self._handle_physical_task(task)
                     await asyncio.sleep(self._poll_interval * throttle_multiplier)
                     continue
 
-                # 4. Determine Formation based on task and respiration limits
                 formation = self._determine_formation(task["type"], swarm_size_limit)
 
-                # 5. Engage Centauro Swarm
                 prompt = self._build_prompt(task)
                 result = await self.engine.engage(mission=prompt, formation=formation)
 
-                # 6. Handle Result
                 if result.get("status") in ["success", "aleph_breakthrough"]:
                     self._deposit_to_iturria(task, result)  # type: ignore[type-error]
                     self.queue.mark_completed(task["id"])
@@ -128,7 +120,6 @@ class HeartbeatDaemon:
                     self.queue.mark_failed(task["id"], reason)
                     logger.warning("Task %s failed: %s", task["id"], reason)
 
-                # Cool down after heavy processing
                 await asyncio.sleep(self._poll_interval * throttle_multiplier)
 
             except asyncio.CancelledError:
@@ -152,7 +143,6 @@ class HeartbeatDaemon:
             self.queue.mark_failed(task["id"], "No physical command provided")
             return
 
-        # AX-III: Byzantine Auth (Verify, then Trust)
         is_authorized = await ByzantineAuthLayer.acquire_lock(
             intent="OS_COMMAND", payload=payload, zenith_score=float(payload.get("zenith", 0.0))
         )
@@ -195,7 +185,6 @@ class HeartbeatDaemon:
         else:
             target = Formation.BLITZ
 
-        # Ensure we don't spawn a LEVIATHAN if the system wants to sleep
         target_size = CentauroEngine._FORMATION_SIZES.get(target, 3)
         if target_size > max_size:
             logger.debug("Downgrading formation from %s due to system load.", target)

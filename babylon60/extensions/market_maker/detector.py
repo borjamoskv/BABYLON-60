@@ -50,7 +50,6 @@ class TrendDetector:
         for kw in keywords:
             sources: list[str] = []
 
-            # Simulated HTTP scanning for Phase 1 Engine
             if self._rng.random() > 0.4:
                 sources.append("google_trends")
             if self._rng.random() > 0.5:

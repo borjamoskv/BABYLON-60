@@ -79,14 +79,11 @@ class SAPSync:
         result = SAPSyncResult()
 
         try:
-            # Fetch from SAP
             entities = await self.client.read_entity_set(entity_set, filters=filters, top=top)
             logger.info("Fetched %d entities from SAP/%s", len(entities), entity_set)
 
-            # Get existing CORTEX facts for this entity set
             existing_facts = await self._get_sap_facts(project)
 
-            # Compute diff
             diff = self.mapper.diff_entities(
                 existing_facts,
                 entities,
@@ -94,11 +91,9 @@ class SAPSync:
                 self.client.config.base_url_normalized,
             )
 
-            # Store new entities
             for entity in diff.new:
                 await self._process_entity(entity, entity_set, project, result, is_update=False)
 
-            # Update modified entities
             for entity in diff.modified:
                 await self._process_entity(entity, entity_set, project, result, is_update=True)
 
@@ -209,13 +204,11 @@ class SAPSync:
         """
         combined = SAPSyncResult()
 
-        # Step 1: Pull (SAP → CORTEX)
         pull_result = await self.pull(entity_set, project, filters=filters, top=top)
         combined.pulled = pull_result.pulled
         combined.skipped = pull_result.skipped
         combined.errors.extend(pull_result.errors)
 
-        # Step 2: Push (CORTEX → SAP) - only if cortex_wins
         if conflict_strategy == "cortex_wins":
             push_result = await self.push(project, entity_set)
             combined.pushed = push_result.pushed
@@ -228,12 +221,10 @@ class SAPSync:
 
         return combined
 
-    # ─── Internal Helpers ────────────────────────────────────────────
 
     async def _get_sap_facts(self, project: str) -> list[dict[str, Any]]:
         """Retrieve existing SAP facts from CORTEX."""
         try:
-            # Try async engine first
             if hasattr(self.engine, "recall") and asyncio.iscoroutinefunction(
                 getattr(self.engine, "recall", None)
             ):
@@ -282,11 +273,9 @@ class SAPSync:
             URI: "BusinessPartnerSet('1000001')"
             Returns: "'1000001'"
         """
-        # Find the key between parentheses after entity set name
         marker = f"{entity_set}("
         idx = uri.find(marker)
         if idx < 0:
-            # Try without the full URI path
             for segment in uri.split("/"):
                 if "(" in segment:
                     start = segment.index("(")
@@ -300,4 +289,3 @@ class SAPSync:
         return uri[start:end]
 
 
-# Needed for async detection in _get_sap_facts / _store_fact

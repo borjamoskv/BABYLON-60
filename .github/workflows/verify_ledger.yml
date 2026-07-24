@@ -17,7 +17,6 @@ jobs:
       - name: Verify Ledger Trailer in Commits
         run: |
           echo "Verifying Ledger-Head and Ledger-Seq in recent commits..."
-          # Fetch the last 5 commits and check for trailers
           for commit in $(git rev-list -n 5 HEAD); do
             msg=$(git log -1 --format=%B $commit)
             if echo "$msg" | grep -q "Ledger-Head:"; then

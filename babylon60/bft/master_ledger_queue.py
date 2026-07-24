@@ -1,9 +1,5 @@
 # [C5-REAL] Cola auxiliar de escritura serializada (superficies NO-ledger).
-# LEY (AGENTS.md, escritor-único): este queue NO puede apuntar a la base del
-# Master Ledger — `BFTLedgerActor` es el ÚNICO escritor del ledger. Superficie
-# permitida: DBs auxiliares (telemetría, sidecars). Génesis ITERA-2: NEW-E
 # (durabilidad rival NORMAL→FULL vía babylon60.database.core) + INV_C5_07
-# (SIGKILL en done-callback → Zombie Writer Prevention).
 from __future__ import annotations
 
 import asyncio
@@ -36,7 +32,6 @@ class MasterLedgerQueue:
             logger.warning("BFT Single-Writer Loop Cancelled (Apoptosis)")
         elif task.exception():
             # INV_C5_07 (falla ruidosa): el crash se registra y aflora en el siguiente
-            # submit_transaction (Zombie Writer Prevention). Cero auto-necrosis del proceso.
             self._writer_failure = task.exception()
             logger.critical(f"FAIL-FAST: BFT writer task crashed: {self._writer_failure}")
 
@@ -53,7 +48,6 @@ class MasterLedgerQueue:
                     return
                 batch.append(payload)
             if batch:
-                # Atomicidad de lote explícita (la conexión es autocommit por diseño).
                 await self.db.execute("BEGIN IMMEDIATE")
                 for query, params in batch:
                     await self.db.execute(query, params)

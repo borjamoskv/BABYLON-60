@@ -56,25 +56,17 @@ class MetabolismEngine:
         """
         self.vitals.age += 1
 
-        # ── Signal Detection ──
         if total_alerts > 0:
-            # System is under stress or needs attention -> HIGH SIGNAL
             self.vitals.signal = min(2.0, self.vitals.signal + 0.3)
             self.vitals.entropy = max(0.0, self.vitals.entropy - 0.2)
         else:
-            # Nothing happening -> High Entropy (boredom)
             self.vitals.signal = max(0.1, self.vitals.signal - 0.1)
             self.vitals.entropy += 0.1
 
-        # ── Heart Rate Adjustment ──
-        # Formula: Heart rate scales directly with signal, inversely to entropy.
         self.vitals.heart_rate = max(0.1, self.vitals.signal - (self.vitals.entropy * 0.05))
 
-        # ── Wait Time Calculation ──
-        # Higher heart rate = shorter sleep time
         wait_time = self.base_interval / self.vitals.heart_rate
 
-        # Clamp to physical limits
         final_wait = max(self.min_interval, min(self.max_interval, wait_time))
 
         logger.info(

@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized — borjamoskv/BABYLON-60
-# Oracle Pool: Async Swarm + BFT Fallback Chain + Inference Ledger
-# Score: 1000/1000 — Zero external financial dependency.
 """
 OraclePool — Sovereign Async Inference Engine.
 
@@ -38,9 +36,7 @@ logger = logging.getLogger("babylon60_extensions.llm.oracle_pool")
 __all__ = ["OraclePool", "InferenceRecord", "OracleResult"]
 
 
-# ---------------------------------------------------------------------------
 # Inference Ledger — C5-REAL cryptographic seal per inference
-# ---------------------------------------------------------------------------
 
 
 @dataclass(frozen=True)
@@ -123,9 +119,6 @@ def _emit_to_audit(record: InferenceRecord) -> None:
         logger.warning("[InferenceLedger] emit failed (non-fatal): %s", exc)
 
 
-# ---------------------------------------------------------------------------
-# OracleResult — typed output carrier
-# ---------------------------------------------------------------------------
 
 
 @dataclass
@@ -138,9 +131,6 @@ class OracleResult:
     fallback_depth: int = 0  # 0 = primary, 1 = secondary, 2 = tertiary
 
 
-# ---------------------------------------------------------------------------
-# BFT Fallback Chain — ordered cascade with health state
-# ---------------------------------------------------------------------------
 
 
 @dataclass
@@ -168,9 +158,6 @@ class _NodeHealth:
         self.failures = max(0, self.failures - 1)
 
 
-# ---------------------------------------------------------------------------
-# OraclePool — 1000/1000 sovereign async engine
-# ---------------------------------------------------------------------------
 
 
 class OraclePool:
@@ -222,9 +209,6 @@ class OraclePool:
             self._emit_audit,
         )
 
-    # ------------------------------------------------------------------
-    # Public API
-    # ------------------------------------------------------------------
 
     async def call(
         self,
@@ -273,9 +257,6 @@ class OraclePool:
             for name, h in self._health.items()
         }
 
-    # ------------------------------------------------------------------
-    # Internal dispatch — BFT cascade
-    # ------------------------------------------------------------------
 
     async def _bounded(
         self,
@@ -360,7 +341,6 @@ class OraclePool:
                     exc,
                 )
 
-                # Emit failure record to ledger
                 if self._emit_audit:
                     record = _make_record(
                         prompt=prompt,
@@ -382,13 +362,9 @@ class OraclePool:
         """Return nodes ordered: healthy primary first, then healthy fallbacks."""
         healthy = [n for n in self._all_nodes if self._health[n.provider_name].is_healthy()]
         quarantined = [n for n in self._all_nodes if not self._health[n.provider_name].is_healthy()]
-        # Quarantined nodes appended last as emergency last-resort
         return healthy + quarantined
 
 
-# ---------------------------------------------------------------------------
-# Factory — sovereign default configuration
-# ---------------------------------------------------------------------------
 
 
 def build_sovereign_pool(

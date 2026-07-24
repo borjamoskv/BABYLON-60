@@ -54,7 +54,6 @@ class FrictionAnnihilatorAgent(EngineAwareMixin):
             logger.info("FrictionAnnihilator: Generating mutation to resolve friction...")
             fixed_code = await self.mutator.mutate_prompt(prompt, code_content)
 
-            # Ensure it is just code, not wrapped in markdown block
             fixed_code = fixed_code.strip()
             if fixed_code.startswith("```python"):
                 fixed_code = fixed_code[9:]
@@ -64,7 +63,6 @@ class FrictionAnnihilatorAgent(EngineAwareMixin):
                 fixed_code = fixed_code[:-3]
             fixed_code = fixed_code.strip()
 
-            # Annihilation: overwrite the file
             with open(target_path, "w", encoding="utf-8") as f:
                 f.write(fixed_code + "\n")
 
@@ -72,7 +70,6 @@ class FrictionAnnihilatorAgent(EngineAwareMixin):
                 "FrictionAnnihilator: Friction resolved. Exergy generated for %s", target_path.name
             )
 
-            # Persist the annihilation event to the ledger
             await self._engine.store(
                 project="SYSTEM",
                 content=f"Annihilated friction in {target_path.name}. Context: {context[:50]}...",

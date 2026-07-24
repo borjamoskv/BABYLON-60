@@ -6,12 +6,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List
 
-# -----------------------------------------------------------------------------
 # CORTEX PERSIST OMEGA (C5-REAL)
-# -----------------------------------------------------------------------------
-# Transductor físico de consolidación de memoria.
-# Enlaza el estado local BFT con la topología global de memoria de MOSKV-1.
-# -----------------------------------------------------------------------------
 
 
 @dataclass
@@ -30,7 +25,6 @@ class CortexOntologyLedger:
     def __init__(self, project_id: str) -> None:
         self.project_id = project_id
 
-        # Rutas físicas inmutables
         self.base_dir = str(Path.home() / ".gemini/config/.cortex/memory_vault")
         self.projects_dir = os.path.join(self.base_dir, "projects")
         self.ghosts_file = os.path.join(self.base_dir, "ghosts.json")
@@ -48,8 +42,6 @@ class CortexOntologyLedger:
                 raise RuntimeError("FAIL-FAST: Topología de memoria CORTEX ausente.")
 
     def _get_iso_now(self) -> str:
-        # Formato ISO con timezone de Madrid/Bilbao (+02:00 por simplicidad estival)
-        # Nota: La manipulación de timezones aquí asume el entorno CORTEX estándar.
         dt = datetime.now(timezone.utc)
         return dt.strftime("%Y-%m-%dT%H:%M:%S+02:00")
 
@@ -64,7 +56,6 @@ class CortexOntologyLedger:
     def _write_json(self, path: str, data: Dict[str, Any]) -> None:
         try:
             payload = json.dumps(data, indent=2, ensure_ascii=False)
-            # Doble validación antes de mutar el disco
             json.loads(payload)
             with open(path, "w", encoding="utf-8") as f:
                 f.write(payload)
@@ -75,7 +66,6 @@ class CortexOntologyLedger:
         """Acopla la sesión actual a los tres pilares de memoria: Project, Ghost, System."""
         now = self._get_iso_now()
 
-        # 1. Mutar Project Ledger
         proj_file = os.path.join(self.projects_dir, f"{self.project_id}.json")
         proj_data = self._read_json(proj_file)
 
@@ -92,7 +82,6 @@ class CortexOntologyLedger:
 
         recent = list(proj_data.get("recent_changes", []))
         for ch in reversed(delta.changes):
-            # Anti-Sybil check
             if not any(isinstance(r, dict) and r.get("desc") == ch for r in recent[:5]):
                 recent.insert(0, {"ts": now, "desc": ch})
         proj_data["recent_changes"] = recent[:10]
@@ -105,7 +94,6 @@ class CortexOntologyLedger:
 
         self._write_json(proj_file, proj_data)
 
-        # 2. Mutar Ghosts
         ghosts_data = self._read_json(self.ghosts_file)
         if self.project_id not in ghosts_data:
             ghosts_data[self.project_id] = {}
@@ -121,7 +109,6 @@ class CortexOntologyLedger:
         )
         self._write_json(self.ghosts_file, ghosts_data)
 
-        # 3. Mutar System
         system_data = self._read_json(self.system_file)
         sessions: List[Dict[str, Any]] = list(system_data.get("sessions_log", []))
 

@@ -45,15 +45,10 @@ router = APIRouter(
     dependencies=[Depends(_guard_local_origin)],
 )
 
-# ── Kind taxonomy ──────────────────────────────────────────────────────────
-# LOCAL ops mutate only the local lineage (allowed).
-# CLOUD ops push entropy off-machine → blocked while P0 open.
 _LOCAL_KINDS = {"commit", "precommit", "status", "custom"}
 _CLOUD_KINDS = {"push", "merge", "ship", "deploy"}
 _ALL_KINDS = _LOCAL_KINDS | _CLOUD_KINDS
 
-# P0 gate — STATUS.md: master_key.hex + solana_keypair.json leaked in the
-# public dead fork. No cloud upload until rotation. Flip to False post-rotation.
 P0_OPEN = True
 
 ENTITY = "git/delegation"
@@ -83,7 +78,6 @@ def _git(root: Path, *args: str) -> tuple[int, str, str]:
     except subprocess.TimeoutExpired:
         return 124, "", "git command timed out (15s)"
     except ValueError:
-        # embedded NUL or invalid argv → handled error, never an uncaught 500
         return 2, "", "invalid argument (embedded NUL?)"
     return proc.returncode, proc.stdout.strip(), proc.stderr.strip()
 
@@ -133,7 +127,6 @@ def _projection(root: Path) -> list[dict[str, Any]]:
 def enqueue(req: DelegateRequest) -> dict[str, Any]:
     root = _get_project_root()
     kind = req.kind if req.kind in _ALL_KINDS else "custom"
-    # Single append; the event's own current_hash[:16] is the delegation id.
     ev = cortex_ledger.append_event(
         root,
         event_type="DELEGATION_QUEUED",
@@ -175,13 +168,9 @@ def execute(delegation_id: str) -> dict[str, Any]:
 
     kind = deleg["kind"]
 
-    # ── Atomic one-shot claim (closes the check-then-act TOCTOU) ──
-    # Two concurrent execute() calls both pass the QUEUED check above; only the
-    # winner of this atomic claim runs the git side-effect. At-most-once.
     if kind in ("commit", "precommit", "status", "custom") and not cortex_ledger.claim(root, f"exec:{delegation_id}"):
         raise HTTPException(409, f"Delegation '{delegation_id}' ya está en ejecución (claim tomado)")
 
-    # ── Causal crash: cloud upload blocked while P0 open ──
     if kind in _CLOUD_KINDS and P0_OPEN:
         reason = (
             f"CRASH CAUSAL — '{kind}' bloqueado: P0 abierto. El fork remoto "
@@ -198,7 +187,6 @@ def execute(delegation_id: str) -> dict[str, Any]:
         )
         raise HTTPException(423, reason)
 
-    # ── Real local execution (whitelisted argv) ──
     if kind in ("commit", "precommit"):
         if not (root / ".git").is_dir():
             result = f"'{root.name}' no es un repo git — no hay dónde commitear (Git Sentinel)."
@@ -247,7 +235,6 @@ def execute(delegation_id: str) -> dict[str, Any]:
         )
         return {"delegation_id": delegation_id, "state": "EXECUTED", "result": result, "event": ev}
 
-    # custom → recorded as executed intent (no shell execution of free text; INV: Fricción Cero, no injection)
     result = "directiva custom registrada en el ledger (ejecución manual del agente)"
     ev = cortex_ledger.append_event(
         root,
@@ -266,13 +253,8 @@ def cancel(delegation_id: str) -> dict[str, Any]:
     deleg = items.get(delegation_id)
     if not deleg:
         raise HTTPException(404, f"Delegation '{delegation_id}' not found")
-    # State guard: only a QUEUED delegation is cancellable — never override a
-    # terminal EXECUTED/BLOCKED/FAILED state in the projection.
     if deleg["state"] != "QUEUED":
         raise HTTPException(409, f"Delegation is '{deleg['state']}', cannot cancel")
-    # Mismo claim atómico que execute(): cancela SOLO quien gana la carrera.
-    # Cierra la ventana cancel-vs-execute (si execute ya tomó el claim, el
-    # cancel llega tarde → 409; si cancel lo gana, execute será el 409).
     if not cortex_ledger.claim(root, f"exec:{delegation_id}"):
         raise HTTPException(409, f"Delegation '{delegation_id}' ya está en ejecución — no cancelable")
     ev = cortex_ledger.append_event(

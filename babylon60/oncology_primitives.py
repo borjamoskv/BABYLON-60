@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 CORTEX / BABYLON-60 :: oncology_primitives
 Modulo de datos: 300 primitivas de biologia molecular del cancer y dianas terapeuticas.

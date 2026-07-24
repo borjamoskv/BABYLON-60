@@ -72,7 +72,6 @@ class GenesisEngine:
         logger.info("GENESIS: Creating system '%s' (type=%s)", spec.name, spec.system_type)
         logger.info("═" * 60)
 
-        # 1. Assemble files
         created, failed = self.assembler.assemble(spec, self.root)
 
         logger.info(
@@ -81,13 +80,10 @@ class GenesisEngine:
             len(failed),
         )
 
-        # 2. Validate
         passed, errors = self.validator.validate(spec, created, self.root)
 
-        # 3. Calculate CHRONOS-1 yield
         hours_saved = self._calculate_chronos(spec, created)
 
-        # 4. Build result
         result = GenesisResult(
             spec=spec,
             files_created=created,
@@ -100,7 +96,6 @@ class GenesisEngine:
         logger.info(result.summary())
         logger.info("═" * 60)
 
-        # 5. Persist to CORTEX ledger
         self._persist_to_cortex(result)
 
         return result
@@ -142,7 +137,6 @@ class GenesisEngine:
             components=new_components,
         )
 
-        # Only render components whose files don't already exist
         created: list[str] = []
         failed: list[str] = []
         ordered = self.assembler._resolve_dependencies(new_components)
@@ -157,7 +151,6 @@ class GenesisEngine:
             rendered = template.render(system_name, comp)
             for rel_path_str, content in rendered.items():
                 rel_path = Path(rel_path_str)
-                # Guard against path traversal
                 if ".." in rel_path.parts or rel_path.is_absolute():
                     logger.error("Path traversal blocked in extend: %s", rel_path)
                     failed.append(f"{comp.name}: Path traversal blocked {rel_path_str}")
@@ -175,7 +168,6 @@ class GenesisEngine:
                 except OSError as e:
                     failed.append(f"{file_path}: {e}")
 
-        # Auto-generate test stubs if requested
         if auto_tests:
             test_files = self.assembler._generate_test_stubs(spec, existing_dir.parent)
             created.extend(test_files)
@@ -321,7 +313,6 @@ class GenesisEngine:
             rendered = template.render(spec.name, comp)
             result[comp.name] = list(rendered.keys())
 
-        # Add auto-generated files
         result["__auto__"] = ["__init__.py"]
         if spec.auto_tests:
             result["__auto__"].append("tests/")
@@ -347,10 +338,8 @@ class GenesisEngine:
         files_touched = len(created)
         codepaths_affected = sum(len(c.interfaces) for c in spec.components)
 
-        # Validation cost: 1 (trivial) to 5 (complex multi-system)
         validation_cost = min(5, max(1, len(spec.components)))
 
-        # Complexity: based on dependency depth + system type
         complexity = min(5, max(1, self._estimate_complexity(spec)))
 
         hours = (
@@ -371,14 +360,12 @@ class GenesisEngine:
         """
         base = len(spec.components)
 
-        # Dependency depth adds complexity
         max_depth = 0
         for comp in spec.components:
             depth = len(comp.dependencies)
             if depth > max_depth:
                 max_depth = depth
 
-        # System type multiplier
         type_weight = {
             "module": 1,
             "skill": 2,

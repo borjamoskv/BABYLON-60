@@ -15,14 +15,12 @@ from enum import Enum
 from typing import Any
 
 __all__ = [
-    # Exception hierarchy
     "SovereignAgentError",
     "SchemaIncompatibilityError",
     "ToolRegistrationError",
     "ModelUnavailableError",
     "AgentDegradedError",
     "AgentCalcificationError",
-    # Data contracts
     "DegradationLevel",
     "AgentAction",
     "AgentResult",
@@ -34,7 +32,6 @@ logger = logging.getLogger("babylon60_extensions.agent.degradation")
 _RECOVERY_DOCTOR = "Run `cortex doctor` to scan subsystem health"
 
 
-# ─── Degradation Level Taxonomy ──────────────────────────────────────────────
 
 
 class DegradationLevel(int, Enum):
@@ -60,7 +57,6 @@ class DegradationLevel(int, Enum):
         return ["☠️", "❌", "🟡", "✅", "💎"][self.value]
 
 
-# ─── Exception Hierarchy ─────────────────────────────────────────────────────
 
 
 class SovereignAgentError(Exception):
@@ -256,7 +252,6 @@ class AgentCalcificationError(SovereignAgentError):
         )
 
 
-# ─── Data Contracts ───────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)

@@ -42,7 +42,6 @@ def _get_systemd_unit() -> Path:
     return svc_dir / f"{BUNDLE_ID}.service"
 
 
-# ─── macOS ──────────────────────────────────────────────────────────
 
 
 def install_macos() -> None:
@@ -72,7 +71,6 @@ def uninstall_macos() -> None:
         console.print("[yellow]No launchd agent installed.[/]")
 
 
-# ─── Linux ──────────────────────────────────────────────────────────
 
 
 def install_linux() -> None:
@@ -115,7 +113,6 @@ def uninstall_linux() -> None:
         console.print("[yellow]No systemd unit installed.[/]")
 
 
-# ─── Windows ────────────────────────────────────────────────────────
 
 
 def install_windows() -> None:
@@ -124,8 +121,6 @@ def install_windows() -> None:
     python_path = sys.executable
     task_name = BUNDLE_ID.replace(".", "_")
 
-    # Target command: "python.exe" -m cortex.daemon_cli start
-    # We use double quotes for the python path in case it contains spaces
     target_cmd = f'"{python_path}" -m cortex.daemon_cli start'
 
     cmd = [

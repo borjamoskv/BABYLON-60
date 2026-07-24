@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/skill_bridge.py
 """AgentDomain ↔ MOSKV-1 Skill Mapping (Phase 5).
 
 Maps each evolution agent domain to the corresponding MOSKV-1 skill,
@@ -19,7 +18,6 @@ logger = logging.getLogger(__name__)
 
 _SKILLS_DIR = Path("~/.gemini/antigravity/skills").expanduser()
 
-# Canonical domain → skill mapping
 DOMAIN_SKILL_MAP: dict[AgentDomain, str] = {
     AgentDomain.FABRICATION: "aether-1",
     AgentDomain.ORCHESTRATION: "keter-omega",
@@ -33,7 +31,6 @@ DOMAIN_SKILL_MAP: dict[AgentDomain, str] = {
     AgentDomain.VERIFICATION: "mejoralo",
 }
 
-# Reverse mapping: skill → domain
 SKILL_DOMAIN_MAP: dict[str, AgentDomain] = {v: k for k, v in DOMAIN_SKILL_MAP.items()}
 
 

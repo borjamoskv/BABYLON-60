@@ -25,7 +25,6 @@ __all__ = ["SystemTemplate", "TemplateRegistry"]
 
 logger = logging.getLogger("babylon60_extensions.genesis.templates")
 
-# Type alias: a renderer takes (spec_name, component) and returns file content
 Renderer = Callable[[str, ComponentSpec], str]
 
 
@@ -59,14 +58,8 @@ class SystemTemplate:
         return result
 
 
-# ─────────────────────────────────────────────────────
-# Renderer functions (imported from template_renderers)
-# ─────────────────────────────────────────────────────
 
 
-# ─────────────────────────────────────────────────────
-# Template Registry
-# ─────────────────────────────────────────────────────
 
 
 class TemplateRegistry:

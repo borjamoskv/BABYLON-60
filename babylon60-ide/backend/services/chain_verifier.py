@@ -107,17 +107,14 @@ def verify_chain(db_path: str | Path) -> dict[str, Any]:
                 "errors": [],
             }
 
-            # Check Lamport monotonicity
             if row_dict["lamport_t"] <= last_lamport:
                 entry_status["valid"] = False
                 entry_status["errors"].append(f"Lamport {row_dict['lamport_t']} <= {last_lamport}")
 
-            # Check prev_hash linkage
             if row_dict["prev_hash"] != prev_hash:
                 entry_status["valid"] = False
                 entry_status["errors"].append("prev_hash chain break")
 
-            # Recompute hash
             computed = _compute_entry_hash(
                 event_id=row_dict["event_id"],
                 stream=row_dict["stream"],

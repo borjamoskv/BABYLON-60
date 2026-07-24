@@ -43,7 +43,6 @@ _WEIGHT_MAP = {"critical": 40, "high": 35, "medium": 15, "low": 10}
 def _collect_source_files(root: Path, extensions: set[str]) -> list[Path]:
     """Walk directory and collect source files, skipping SKIP_DIRS."""
     source_files: list[Path] = []
-    # codeql[py/path-injection] Validation occurs via is_safe_path upstream.
     for dirpath, dirs, files in os.walk(root):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRS]
         for f in files:
@@ -94,7 +93,6 @@ class McCabeVisitor(ast.NodeVisitor):
         self._check_complexity(node)
 
     def _check_complexity(self, node: ast.FunctionDef | ast.AsyncFunctionDef) -> None:
-        # Calculate McCabe for this scope
         comp = 1
         for child in ast.walk(node):
             if isinstance(child, _COMPLEXITY_NODES):
@@ -180,7 +178,6 @@ def _analyze_single_file(
     rel = str(sf.relative_to(root))
     large_file = f"{rel} ({loc} LOC)" if loc > MAX_LOC else None
 
-    # 130/100 Sovereign: McCabe + AST Structural Nesting for Python + Smart Polyglot
     if sf.suffix == ".py":
         comp = _analyze_python_complexity(content, rel)
     else:
@@ -205,7 +202,6 @@ def _hash_ast_subtree(node: ast.AST) -> int:
     Ignores identifiers and literals to detect structural clones, not variable renames.
     Returns a stable integer hash of the structural shape.
     """
-    # Use type name + sorted field names as signature
     parts: list[str] = [type(node).__name__]
     for field_name, value in ast.iter_fields(node):
         if field_name in ("lineno", "col_offset", "end_lineno", "end_col_offset"):
@@ -218,8 +214,6 @@ def _hash_ast_subtree(node: ast.AST) -> int:
         elif isinstance(value, ast.AST):
             parts.append(str(_hash_ast_subtree(value)))
         else:
-            # For constants and names, use the type only (ignore actual value)
-            # to detect structural ghosts even when variable names differ
             parts.append(type(value).__name__)
     return hash(tuple(parts))
 
@@ -243,7 +237,6 @@ def _detect_code_ghosts(source_files: list[Path], root: Path) -> list[str]:
     Returns:
         List of human-readable ghost finding strings.
     """
-    # hash → list[(rel_path, node_name, lineno)]
     hash_registry: dict[int, list[tuple[str, str, int]]] = {}
 
     for sf in source_files:
@@ -260,7 +253,6 @@ def _detect_code_ghosts(source_files: list[Path], root: Path) -> list[str]:
         for node in ast.walk(tree):
             if not isinstance(node, ast.FunctionDef | ast.AsyncFunctionDef):
                 continue
-            # Skip simple methods with only 1 statement (excluding docstring)
             non_doc_body = [
                 stmt
                 for stmt in node.body
@@ -277,7 +269,6 @@ def _detect_code_ghosts(source_files: list[Path], root: Path) -> list[str]:
                 continue
             if name.lower() in {"clear", "stop", "reset", "close", "reset_shown", "is_available"}:
                 continue
-            # Skip boilerplate database or wrapper helpers if the body is small
             body_size = sum(_count_subtree_nodes(stmt) for stmt in node.body)
             is_boilerplate = body_size < 60 or (
                 name.startswith("_") and not name.startswith("__") and body_size < 80
@@ -294,7 +285,6 @@ def _detect_code_ghosts(source_files: list[Path], root: Path) -> list[str]:
     for occurrences in hash_registry.values():
         if len(occurrences) < 2:
             continue
-        # Only report if the clones span different files or same file different names
         files_involved = {o[0] for o in occurrences}
         names_involved = {o[1] for o in occurrences}
         if len(files_involved) == 1 and len(names_involved) == 1:
@@ -337,7 +327,6 @@ def _analyze_files(
         security_findings.extend(sec)
         complexity_findings.extend(comp)
 
-    # Ghost detection runs after all files are collected (cross-file analysis)
     ghost_findings = _detect_code_ghosts(source_files, root)
 
     return (
@@ -364,7 +353,6 @@ def _score_dimensions(
     dimensions: list[DimensionResult] = []
     has_files = bool(source_files)
 
-    # 1. Integrity
     dimensions.append(
         DimensionResult(
             name="Integridad",
@@ -374,7 +362,6 @@ def _score_dimensions(
         )
     )
 
-    # 2. Architecture
     if not has_files:
         arch_score = 0
     else:
@@ -389,7 +376,6 @@ def _score_dimensions(
         )
     )
 
-    # 3. Security
     if not has_files:
         sec_score = 0
     else:
@@ -403,7 +389,6 @@ def _score_dimensions(
         )
     )
 
-    # 4. Complexity
     if not has_files:
         complexity_score = 0
     else:
@@ -419,7 +404,6 @@ def _score_dimensions(
         )
     )
 
-    # 13. Psi
     if not has_files:
         psi_score = 0
     else:
@@ -435,7 +419,6 @@ def _score_dimensions(
         )
     )
 
-    # Fantasmas (Code Ghosts) - Structural clones burning entropy
     if not has_files:
         ghost_score = 100  # No files = no ghosts
     else:
@@ -449,8 +432,6 @@ def _score_dimensions(
         )
     )
 
-    # 14. Sovereign Excellence (Sovereign Pass)
-    # Provides up to 30 bonus points for perfect code.
     sov_score = 0
     sov_findings = []
     if (
@@ -514,11 +495,9 @@ def scan(project: str, path: str | Path, deep: bool = False, brutal: bool = Fals
     if not is_safe_path(path):
         raise ValueError(f"Blocked unsafe path: {path}")
 
-    # codeql[py/path-injection] Validation occurs via is_safe_path upstream.
     import os
 
     base_dir = os.path.abspath(str(Path.cwd()))
-    # Lexical resolution to prevent filesystem sinks before validation
     target_str = os.path.abspath(os.path.expanduser(str(path)))
     if not target_str.startswith(os.path.abspath(str(base_dir))):
         raise ValueError(f"Blocked unsafe path: {path}")

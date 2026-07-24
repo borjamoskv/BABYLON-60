@@ -27,11 +27,9 @@ class SovereignFlake:
     - Lexicographical sorting (f"{id:019d}").
     """
 
-    # 2026-01-01T00:00:00.000Z as the Sovereign Epoch
     EPOCH = 1767225600000
 
     def __init__(self, node_id: int = 1):
-        # 10 bits max
         if node_id < 0 or node_id > 1023:
             raise ValueError("Node ID must be between 0 and 1023.")
 
@@ -46,7 +44,6 @@ class SovereignFlake:
         with self._lock:
             current_timestamp = int(time.monotonic() * 1000) + self.epoch_offset
 
-            # NTP drift backward: prevent causal violations by freezing logic time
             if current_timestamp < self.last_timestamp:
                 current_timestamp = self.last_timestamp
 
@@ -54,7 +51,6 @@ class SovereignFlake:
                 self.sequence = (self.sequence + 1) & 0xFFF  # 12 bits
 
                 if self.sequence == 0:
-                    # Sequence exhausted for this millisecond. Wait for next ms.
                     while current_timestamp <= self.last_timestamp:
                         current_timestamp = int(time.monotonic() * 1000) + self.epoch_offset
             else:
@@ -63,19 +59,11 @@ class SovereignFlake:
             self.last_timestamp = current_timestamp
             timestamp_diff = current_timestamp - self.EPOCH
 
-            # Construct 63-bit integer
-            # Timstamp: 41 bits (<< 22)
-            # Node: 10 bits (<< 12)
-            # Sequence: 12 bits
             return (timestamp_diff << 22) | (self.node_id << 12) | self.sequence
 
     def next_lexicographic_id(self) -> str:
         """Return the topological ID as a zero-padded string (19 digits)."""
-        # zero-pad to 19 characters to guarantee string-based (TEXT) alphabetical
-        # sorting perfectly matches numeric time-space ordering.
         return f"{self.next_id():019d}"
 
 
-# Global generator instance (Node ID 1 for standard instances)
-# Future: Pull from env vars CORTEX_NODE_ID for distributed swarms.
 flake_gen = SovereignFlake(node_id=1)

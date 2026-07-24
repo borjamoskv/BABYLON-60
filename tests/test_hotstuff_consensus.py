@@ -45,5 +45,4 @@ async def test_propose_exhausts_retries() -> None:
 
 def test_consensus_engine_stub_propose_noop() -> None:
     engine = ConsensusEngineStub()
-    # Should not raise
     engine.propose(b"noop")

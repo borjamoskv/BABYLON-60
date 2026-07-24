@@ -43,7 +43,6 @@ class AetherDaemon:
         self._lock = threading.Lock()
         self._completed: list[AetherAlert] = []
 
-    # ── Control ────────────────────────────────────────────────────────
 
     def start(self) -> None:
         """Start the polling loop (blocking). Run in a daemon thread."""
@@ -51,7 +50,6 @@ class AetherDaemon:
             "🤖 Aether daemon started (poll=%ds, max=%d)", self._poll_interval, self._max_concurrent
         )
 
-        # Start GitHub ingestor if configured
         if self._github_token and self._github_repos:
             gh_thread = threading.Thread(
                 target=self._github_poll_loop,
@@ -69,12 +67,10 @@ class AetherDaemon:
     def stop(self) -> None:
         self._stop_event.set()
 
-    # ── Internal loop ──────────────────────────────────────────────────
 
     def _tick(self) -> None:
         """Single poll cycle - spawn worker threads up to max_concurrent."""
         with self._lock:
-            # Clean up finished threads
             done = [tid for tid, t in self._active.items() if not t.is_alive()]
             for tid in done:
                 del self._active[tid]
@@ -130,7 +126,6 @@ class AetherDaemon:
                 logger.warning("GitHub ingestor error: %s", e)
             self._stop_event.wait(timeout=300)  # poll every 5 minutes
 
-    # ── Status for MoskvDaemon ─────────────────────────────────────────
 
     def pop_completed_alerts(self) -> list[AetherAlert]:
         """Return and clear the list of recently completed task alerts."""

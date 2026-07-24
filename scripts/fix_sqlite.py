@@ -10,10 +10,8 @@ def fix_sqlite():
             content = f.read()
             
         if 'babylon60.database.core.connect' in content:
-            # Replace babylon60.database.core.connect with babylon60.database.core.connect
             content = content.replace('babylon60.database.core.connect', 'babylon60.database.core.connect')
             
-            # Add import if missing
             if 'import babylon60.database.core' not in content:
                 content = 'import babylon60.database.core\n' + content
                 

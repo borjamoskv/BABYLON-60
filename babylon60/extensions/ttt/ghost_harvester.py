@@ -9,14 +9,9 @@ from datetime import datetime, timedelta, timezone
 
 logger = logging.getLogger("babylon60_extensions.ttt.ghost_harvester")
 
-# CORTEX DB Hardcoded Path for local daemon
 DB_PATH = os.path.expanduser("~/.babylon60/cortex.db")
 OUTPUT_PATH = os.path.expanduser("~/.babylon60/weights/dataset")
 
-# The Ouroboros TTT (Test-Time Training) Dataset Builder
-# Derivation: Axiom Ω₅ (Antifragile by Default)
-# Goal: Extract the previous 7 days of raw `error` and `decision` entries,
-# and format them into an instruction-following JSONL dataset for MLX fine-tuning.
 
 
 def ensure_folders():
@@ -57,9 +52,7 @@ def format_for_lora(rows):
     from babylon60.crypto.aes import CortexEncrypter
     from babylon60.crypto.keyring import get_master_key
 
-    # Try to load existing key via standard environment variable or default logic.
     if "CORTEX_MASTER_KEY" not in os.environ:
-        # Fallback to key file if exist
         key_path = os.path.expanduser("~/.babylon60/cortex.key")
         if os.path.exists(key_path):
             with open(key_path) as f:
@@ -77,7 +70,6 @@ def format_for_lora(rows):
     for row in rows:
         f_type, content, metadata = row
 
-        # Action only if encrypted
         if content.startswith("v6_aesgcm:"):
             try:
                 if crypto:

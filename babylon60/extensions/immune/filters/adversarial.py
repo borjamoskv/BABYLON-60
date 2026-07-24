@@ -23,19 +23,14 @@ class AdversarialFilter(ImmuneFilter):
 
     async def evaluate(self, signal: Any, context: dict[str, Any]) -> FilterResult:
         """Analyze signal origin and content for adversarial vectors."""
-        # Simple placeholder for real-time adversarial detection
-        # Vectors: Context Poisoning, Confirmation Bias, Ghost Loop, Hallucination Anchor
 
         is_external = context.get("is_external_source", False)
         target_path = context.get("target_path", "")
         context.get("previous_plan_hash", "")
 
-        # [A1] Context Poisoning (URL/External files)
         if is_external:
-            # We'd deep-scan for prompt-injection style patterns here
             pass
 
-        # [A4] Hallucination Anchor (Checking if files exist)
         if target_path:
             from pathlib import Path
 
@@ -48,8 +43,6 @@ class AdversarialFilter(ImmuneFilter):
                     metadata={"vector": "A4"},
                 )
 
-        # [A2] Confirmation Bias (Correlacion perfecta señal/intención)
-        # Placeholder correlation check
         if context.get("intent_correlation", 0.0) > 0.95:
             return FilterResult(
                 filter_id=self.filter_id,

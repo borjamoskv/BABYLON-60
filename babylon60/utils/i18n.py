@@ -21,7 +21,6 @@ from typing import Any, Final, NamedTuple
 
 logger = logging.getLogger(__name__)
 
-# Type Aliases
 TranslationKey = str
 TranslationMap = dict[str, str]
 LocaleData = dict[TranslationKey, TranslationMap]
@@ -35,17 +34,14 @@ class Lang(str, Enum):
     EU = "eu"
 
 
-# Constants
 DEFAULT_LANGUAGE: Final[Lang] = Lang.EN
 SUPPORTED_LANGUAGES: Final[frozenset[Lang]] = frozenset(Lang)
 _LANG_LOOKUP: Final[dict[str, Lang]] = {lang.value: lang for lang in Lang}
 _ASSET_PATH: Final[Path] = Path(__file__).parent.parent.parent / "config" / "translations.json"
 
-# Global holder for loaded translations. Swapped atomically.
 _TRANSLATIONS: LocaleData = {}
 _LOAD_LOCK: Final[threading.Lock] = threading.Lock()
 
-# Thread-local context for language overrides
 _LOCALT_CONTEXT: contextvars.ContextVar[Lang | None] = contextvars.ContextVar("cortex_locale", default=None)
 
 __all__ = [
@@ -63,7 +59,6 @@ __all__ = [
     "register_translation",  # New: Dynamic Injection
 ]
 
-# Overlays for runtime translations
 _OVERLAYS: LocaleData = {}
 _OVERLAY_LOCK: Final[threading.Lock] = threading.Lock()
 _REPORTED_MISSING: set[tuple[str, str]] = set()
@@ -76,7 +71,6 @@ def _load_translations() -> LocaleData:
         return _TRANSLATIONS
 
     with _LOAD_LOCK:
-        # Double-check lock pattern
         if _TRANSLATIONS:
             return _TRANSLATIONS
 
@@ -89,7 +83,6 @@ def _load_translations() -> LocaleData:
             raw_data = path.read_text(encoding="utf-8")
             data: LocaleData = json.loads(raw_data)
 
-            # Atomic swap to ensure thread-safe readers
             _TRANSLATIONS = data
             logger.debug("I18N: Synchronized %d keys from assets", len(_TRANSLATIONS))
         except (json.JSONDecodeError, OSError) as exc:
@@ -109,7 +102,6 @@ def register_translation(key: TranslationKey, lang: Lang | str, value: str) -> N
         if key not in _OVERLAYS:
             _OVERLAYS[key] = {}
         _OVERLAYS[key][normalized_lang.value] = value
-        # Invalidate specific cache entry
         _cached_trans.cache_clear()
     logger.info("I18N: Registered dynamic overlay for [%s] in [%s]", key, normalized_lang)
 
@@ -126,12 +118,10 @@ def _normalize_lang(lang: str | Lang | None) -> Lang:
     if not lang or not isinstance(lang, str):
         return DEFAULT_LANGUAGE
 
-    # Exact match lookup
     code = lang.lower().strip()
     if match := _LANG_LOOKUP.get(code):
         return match
 
-    # Primary tag extraction (e.g. "en-US" -> "en")
     primary = code.split("-", 1)[0][:2]
     return _LANG_LOOKUP.get(primary, DEFAULT_LANGUAGE)
 
@@ -142,7 +132,6 @@ def _cached_trans(key: TranslationKey, lang_code: Lang) -> str | None:
 
     Returns None if key is missing to distinguish from 'key as value'.
     """
-    # 0. Check Overlays (highest priority)
     with _OVERLAY_LOCK:
         if (entry := _OVERLAYS.get(key)) is not None:
             if (text := entry.get(lang_code.value)) is not None:
@@ -150,7 +139,6 @@ def _cached_trans(key: TranslationKey, lang_code: Lang) -> str | None:
             if lang_code != DEFAULT_LANGUAGE and (text := entry.get(DEFAULT_LANGUAGE.value)) is not None:
                 return text
 
-    # 1. Primary Language Lookup (Base Assets)
     translations = _load_translations()
     entry = translations.get(key)
 
@@ -160,7 +148,6 @@ def _cached_trans(key: TranslationKey, lang_code: Lang) -> str | None:
     if (text := entry.get(lang_code.value)) is not None:
         return text
 
-    # 2. Sovereign Fallback (to default language)
     if lang_code != DEFAULT_LANGUAGE:
         if (text := entry.get(DEFAULT_LANGUAGE.value)) is not None:
             logger.debug("I18N: Key [%s] falling back to [%s]", key, DEFAULT_LANGUAGE.value)
@@ -202,7 +189,6 @@ def _trigger_adaptive_repair(key: str, lang: Lang) -> None:
     except ImportError:
         return
 
-    # Module-level singleton pattern (avoids per-call instantiation)
     if not hasattr(_report_missing_key, "_llm"):
         _report_missing_key._llm = LLMManager()  # type: ignore[attr-defined]
 
@@ -245,12 +231,10 @@ def get_trans(key: TranslationKey, lang: Lang | str | None = None, **kwargs: Any
 
     O(1) lookup via LRU. Supports dynamic string interpolation.
     """
-    # Use override if active, else fallback to passed lang or default English
     target_lang = lang or _LOCALT_CONTEXT.get() or Lang.EN
     normalized_lang = _normalize_lang(target_lang)
     text = _cached_trans(key, normalized_lang)
 
-    # Fallback to key if no translation found
     if text is None:
         _report_missing_key(key, normalized_lang)
         text = key

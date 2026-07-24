@@ -7,11 +7,9 @@ Simulates high-entropy vs. high-exergy code changes and evaluates them using the
 import sys
 import os
 
-# Ensure the scripts directory is in path to import exergy agent
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exergy_optimizer_agent import evaluate_gelabp
 
-# Define mock diffs representing different development actions
 MOCK_DIFF_HIGH_ENTROPY = """
 diff --git a/database/connection.py b/database/connection.py
 index a123b45..c789d01 100644
@@ -50,7 +48,6 @@ def print_banner(title: str):  # type: ignore
 def run_poc():  # type: ignore
     print_banner("C5-REAL Exergy Agent Proof of Concept")
 
-    # Test Scenario 1: Bad code (leak + broad exception + weak pattern)
     print_banner("Scenario 1: Code Mutation containing High Entropy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_ENTROPY.strip()}\n")
     exergy, g, e, lev, a, b = evaluate_gelabp(MOCK_DIFF_HIGH_ENTROPY)
@@ -63,7 +60,6 @@ def run_poc():  # type: ignore
     print(f"Veredicto: {'🟢 PASS' if exergy >= 700.0 else '🔴 FAIL (Fallo síncrono provocado)'}")
     print()
 
-    # Test Scenario 2: Optimized code (invariant test addition + strict serialization)
     print_banner("Scenario 2: Code Mutation containing High Exergy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_EXERGY.strip()}\n")
     exergy2, g2, e2, l2, a2, b2 = evaluate_gelabp(MOCK_DIFF_HIGH_EXERGY)

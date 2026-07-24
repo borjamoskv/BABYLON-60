@@ -1,13 +1,10 @@
 #![allow(dead_code, unused_imports)]
 #![allow(clippy::items_after_test_module)]
 
-#[cfg(target_os = "linux")]
 use inotify::{Inotify, WatchMask};
 use ring::hmac;
 use rusqlite::{params, Connection};
-#[cfg(target_os = "linux")]
 use signal_hook::consts::signal::{SIGINT, SIGTERM};
-#[cfg(target_os = "linux")]
 use signal_hook::iterator::Signals;
 use std::env;
 use std::path::Path;
@@ -17,7 +14,6 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{SystemTime, UNIX_EPOCH};
 
-/// Serialización Canónica (Length-Prefixed)
 fn canonical_serialize(timestamp: u64, event: &str, payload: &str) -> Vec<u8> {
     let mut buf = Vec::new();
     buf.extend_from_slice(&timestamp.to_be_bytes());
@@ -28,7 +24,6 @@ fn canonical_serialize(timestamp: u64, event: &str, payload: &str) -> Vec<u8> {
     buf
 }
 
-/// Hashea un nodo hoja (Domain Separation 0x00)
 fn hash_leaf(key: &hmac::Key, prev_hash: &[u8], payload_bytes: &[u8]) -> Vec<u8> {
     let mut ctx = hmac::Context::with_key(key);
     ctx.update(&[0x00]); // Leaf domain prefix
@@ -37,7 +32,6 @@ fn hash_leaf(key: &hmac::Key, prev_hash: &[u8], payload_bytes: &[u8]) -> Vec<u8>
     ctx.sign().as_ref().to_vec()
 }
 
-/// Estructura compartida para el Ledger
 struct BftLedger {
     conn: Connection,
     last_hash: Vec<u8>,
@@ -54,7 +48,6 @@ impl BftLedger {
         let prev_hex = hex::encode(&self.last_hash);
         let curr_hex = hex::encode(&new_hash);
 
-        // Escritura Síncrona WAL
         self.conn.execute(
             "INSERT INTO transactions (timestamp, event_type, payload, prev_hash, curr_hash) VALUES (?1, ?2, ?3, ?4, ?5)",
             params![ts, event_type, payload, prev_hex, curr_hex],
@@ -87,7 +80,6 @@ impl BftLedger {
     }
 }
 
-#[cfg(target_os = "linux")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
@@ -106,10 +98,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
          );",
     )?;
 
-    // Recuperar estado previo (simulado como Genesis para esta corrida)
     let genesis = vec![0u8; 32];
     
-    // Generar clave HMAC desde entorno (en prod/c5-real vendría de HSM o env obligatorio)
     let env_key = std::env::var("CORTEX_BFT_KEY")
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
         .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
@@ -124,7 +114,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let shutdown_flag = Arc::new(AtomicBool::new(false));
 
-    // 1. Manejador de señales (Graceful SIGTERM/SIGINT)
     let mut signals = Signals::new([SIGINT, SIGTERM])?;
     let sf = Arc::clone(&shutdown_flag);
     thread::spawn(move || {
@@ -133,7 +122,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         }
     });
 
-    // 2. Monitoreo inotify de ~/.agent_persist
     let home = env::var("HOME").unwrap_or_else(|_| "/root".to_string());
     let agent_dir = format!("{}/.agent_persist", home);
     
@@ -166,7 +154,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         });
     }
 
-    // 3. Subproceso CLI (Bypass de recursión infinita)
     let real_cli = env::var("REAL_AGENT_PATH").unwrap_or_else(|_| "npx".to_string());
     let mut cmd = Command::new(&real_cli);
     if real_cli == "npx" {
@@ -179,7 +166,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .stderr(Stdio::inherit())
         .spawn()?;
 
-    // Espera activa controlada para manejar shutdown
     while !shutdown_flag.load(Ordering::SeqCst) {
         if let Ok(Some(_status)) = child.try_wait() {
             shutdown_flag.store(true, Ordering::SeqCst);
@@ -188,7 +174,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         thread::sleep(std::time::Duration::from_millis(100));
     }
 
-    // Cierre Causal
     if let Ok(mut l) = ledger.lock() {
         let root = l.compute_merkle_root();
         let _ = l.insert("CLOSURE_SEAL", &format!("ROOT:{}", root));
@@ -199,23 +184,18 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
-#[allow(dead_code)]
 fn hex_encode(data: &[u8]) -> String {
     data.iter().map(|b| format!("{:02x}", b)).collect()
 }
-// Stub para evitar dependencias extra si no usamos el crate hex
-#[allow(dead_code)]
 mod hex {
     pub fn encode(data: &[u8]) -> String {
         data.iter().map(|b| format!("{:02x}", b)).collect()
     }
 }
 
-#[cfg(test)]
 mod tests {
     use super::*;
 
-    #[test]
     fn test_canonical_serialize() {
         let buf = canonical_serialize(123456789, "TEST_EVENT", "payload_data");
         assert_eq!(&buf[0..8], &123456789u64.to_be_bytes());
@@ -223,7 +203,6 @@ mod tests {
         assert_eq!(&buf[12..22], b"TEST_EVENT");
     }
 
-    #[test]
     fn test_hash_leaf_domain_separation() {
         let key_bytes = vec![0x41; 32];
         let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
@@ -233,7 +212,6 @@ mod tests {
         assert_eq!(h1.len(), 32);
     }
 
-    #[test]
     fn test_bft_ledger_merkle_root() {
         let key_bytes = vec![0x42; 32];
         let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
@@ -268,7 +246,6 @@ mod tests {
     }
 }
 
-#[cfg(not(target_os = "linux"))]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("█▄ [C5-REAL] OS NO SOPORTADO PARA BFT_INTERCEPTOR");
     Ok(())

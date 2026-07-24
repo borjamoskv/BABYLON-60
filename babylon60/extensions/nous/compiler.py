@@ -23,7 +23,6 @@ class CortexASTNode(BaseModel):
 
 class NousCompiler:
     def __init__(self):
-        # Base compiler engine logic. Future iter will link LLM-driven parsing.
         pass
 
     def parse(self, raw_nous_text: str) -> NousIntent:

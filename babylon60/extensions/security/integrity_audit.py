@@ -31,9 +31,6 @@ __all__ = [
 ]
 
 
-# ═══════════════════════════════════════
-# Data Models
-# ═══════════════════════════════════════
 
 
 @dataclass(frozen=True)
@@ -86,9 +83,6 @@ class AuditReport:
         }
 
 
-# ═══════════════════════════════════════
-# Integrity Auditor
-# ═══════════════════════════════════════
 
 
 class IntegrityAuditor:
@@ -117,7 +111,6 @@ class IntegrityAuditor:
             async with connect_async_ctx(self._db_path) as db:
                 db.row_factory = aiosqlite.Row
 
-                # Get all facts ordered by ID
                 async with db.execute(
                     "SELECT id, content, hash, prev_hash, signature, meta "
                     "FROM facts ORDER BY id ASC"
@@ -130,10 +123,8 @@ class IntegrityAuditor:
                     report.duration_seconds = time.monotonic() - start
                     return report
 
-                # ── 1. Hash Chain Verification ──
                 report.chain_status = await self._verify_chain(facts)  # type: ignore[reportArgumentType]
 
-                # ── 2. Signature Verification ──
                 sig_failures = await self._verify_signatures(facts)  # type: ignore[reportArgumentType]
                 report.signature_failures = sig_failures
                 report.facts_with_signatures = sum(1 for f in facts if f["signature"])
@@ -193,7 +184,6 @@ class IntegrityAuditor:
             logger.error("Signature verification failed: %s", e)
             return []
 
-    # ── Internal Methods ──
 
     async def _verify_chain(self, facts: list[Any]) -> ChainStatus:
         """Verify SHA-256 hash chain continuity."""
@@ -220,10 +210,8 @@ class IntegrityAuditor:
         stored_hash = fact["hash"] or ""
         stored_prev = fact["prev_hash"] or ""
 
-        # Compute expected hash
         expected_hash = cortex_hash(content.encode("utf-8"))
 
-        # Check hash integrity
         if stored_hash and stored_hash != expected_hash:
             status.broken_links.append(
                 TamperedFact(
@@ -236,7 +224,6 @@ class IntegrityAuditor:
             )
             status.is_valid = False
 
-        # Check chain link
         if prev_hash is not None and stored_prev:
             if stored_prev != prev_hash:
                 status.broken_links.append(
@@ -250,7 +237,6 @@ class IntegrityAuditor:
                 )
                 status.is_valid = False
 
-        # Track for orphan detection
         if stored_hash:
             hash_index[stored_hash] = fact_id
         status.verified += 1
@@ -258,7 +244,6 @@ class IntegrityAuditor:
     def _detect_orphaned_facts(
         self, facts: list[Any], hash_index: dict[str, int], status: ChainStatus
     ) -> None:
-        # Detect orphaned facts (prev_hash points to non-existent fact)
         for fact in facts[1:]:  # Skip genesis fact
             stored_prev = fact["prev_hash"] or ""
             if stored_prev and stored_prev not in hash_index:
@@ -322,7 +307,6 @@ class IntegrityAuditor:
             logger.warning("Signature check error for fact %d: %s", fact["id"], e)
 
 
-# Convenience function
 async def quick_audit() -> AuditReport:
     """Run a quick integrity audit with default settings."""
     auditor = IntegrityAuditor()

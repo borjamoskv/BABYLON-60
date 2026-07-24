@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Cadastral Perimeter Check - Sovereign Territorial Radar.
 
 Cross-references zoning, ownership, and expropriation data to identify

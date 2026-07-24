@@ -48,10 +48,8 @@ class SystemAssembler:
         created: list[str] = []
         failed: list[str] = []
 
-        # Resolve dependency order
         ordered = self._resolve_dependencies(spec.components)
 
-        # Always generate __init__.py first
         init_path = target / "__init__.py"
         if not init_path.exists():
             init_content = self._generate_init(spec)
@@ -63,7 +61,6 @@ class SystemAssembler:
                 failed.append(f"{init_path}: {e}")
                 logger.error("Failed to create %s: %s", init_path, e)
 
-        # Render each component
         for component in ordered:
             template_name = component.template or component.component_type
             template = self.registry.get(template_name)
@@ -84,18 +81,14 @@ class SystemAssembler:
 
             for rel_path_str, content in rendered.items():
                 rel_path = Path(rel_path_str)
-                # Guard against path traversal
                 if ".." in rel_path.parts or rel_path.is_absolute():
                     logger.error("Path traversal blocked: %s", rel_path)
                     failed.append(f"{component.name}: Path traversal blocked {rel_path_str}")
                     continue
 
-                # Determine output location
                 if component.component_type == "test":
-                    # Tests go to a sibling test directory
                     file_path = base_dir.parent / "tests" / spec.name / rel_path
                 elif component.component_type == "cli_command":
-                    # CLI commands go to cortex/cli/
                     file_path = base_dir / "cli" / rel_path
                 else:
                     file_path = target / rel_path
@@ -109,12 +102,10 @@ class SystemAssembler:
                     failed.append(f"{file_path}: {e}")
                     logger.error("Failed to create %s: %s", file_path, e)
 
-        # Auto-generate test stubs if requested
         if spec.auto_tests:
             test_files = self._generate_test_stubs(spec, base_dir)
             created.extend(test_files)
 
-        # Auto-generate CLI stub if requested
         if spec.auto_cli:
             cli_files = self._generate_cli_stub(spec, base_dir)
             created.extend(cli_files)
@@ -127,7 +118,6 @@ class SystemAssembler:
         Uses Kahn's algorithm for O(V+E) deterministic ordering.
         Components with no dependencies come first.
         """
-        # Build adjacency and in-degree maps
         name_to_comp: dict[str, ComponentSpec] = {c.name: c for c in components}
         in_degree: dict[str, int] = {c.name: 0 for c in components}
         dependents: dict[str, list[str]] = {c.name: [] for c in components}
@@ -138,12 +128,10 @@ class SystemAssembler:
                     in_degree[comp.name] += 1
                     dependents[dep].append(comp.name)
 
-        # Kahn's algorithm
         queue = [name for name, deg in in_degree.items() if deg == 0]
         ordered: list[ComponentSpec] = []
 
         while queue:
-            # Sort for deterministic output
             queue.sort()
             current = queue.pop(0)
             ordered.append(name_to_comp[current])
@@ -153,7 +141,6 @@ class SystemAssembler:
                 if in_degree[dependent] == 0:
                     queue.append(dependent)
 
-        # If we didn't get all components, there's a cycle - append remaining
         if len(ordered) < len(components):
             remaining = {c.name for c in components} - {c.name for c in ordered}
             for name in sorted(remaining):
@@ -200,7 +187,6 @@ class SystemAssembler:
         test_dir = base_dir.parent / "tests" / spec.name
         test_dir.mkdir(parents=True, exist_ok=True)
 
-        # Create test __init__.py
         test_init = test_dir / "__init__.py"
         if not test_init.exists():
             try:

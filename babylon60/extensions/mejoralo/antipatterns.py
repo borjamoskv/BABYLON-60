@@ -35,7 +35,6 @@ from babylon60.extensions.mejoralo.models import AntipatternFinding, Antipattern
 __all__ = ["scan_antipatterns"]
 
 
-# Blocking calls that MUST NOT appear in async functions
 _BLOCKING_CALLS: dict[str, str] = {
     "print": "Use logging framework instead of bare print() (ANT-201)",
     "open": "Use aiofiles.open() or asyncio.to_thread(open, ...)",
@@ -55,14 +54,12 @@ _BLOCKING_CALLS: dict[str, str] = {
     "urllib.request.urlopen": "Use httpx.AsyncClient",
 }
 
-# Magic number whitelist - common constants that are acceptable
 _MAGIC_WHITELIST = {0, 1, 2, -1, 100, 0.5}
 
 
 logger = logging.getLogger("babylon60_extensions.mejoralo.antipatterns")
 
 
-# ── Scanner 3: Magic Literals ────────────────────────────────────────
 
 
 class _MagicLiteralVisitor(ast.NodeVisitor):
@@ -75,7 +72,6 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
         self._in_default = False
 
     def visit_Assign(self, node: ast.Assign) -> None:
-        # Module-level CONSTANT = 42 is fine
         if self._is_constant_assignment(node):
             return
         self._in_assignment = True
@@ -83,7 +79,6 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
         self._in_assignment = False
 
     def visit_arguments(self, node: ast.arguments) -> None:
-        # Default values are acceptable
         old = self._in_default
         self._in_default = True
         for default in node.defaults + node.kw_defaults:
@@ -96,15 +91,12 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
             return
 
         value = node.value
-        # Skip strings, None, booleans, Ellipsis
         if isinstance(value, str | bytes | bool | type(None) | type(...)):
             return
 
-        # Skip whitelisted values
         if isinstance(value, int | float) and value in _MAGIC_WHITELIST:
             return
 
-        # Check context - is this in a comparison, return, or arithmetic?
         self.findings.append(
             AntipatternFinding(
                 scanner="MagicLiteral",
@@ -127,10 +119,8 @@ class _MagicLiteralVisitor(ast.NodeVisitor):
         return False
 
 
-# ── Scanner 4: Import Graph → See cortex/mejoralo/_scanner_import_graph.py ──
 
 
-# ── Scanner 5: Implicit Assumptions ──────────────────────────────────
 
 
 class _ImplicitAssumptionVisitor(ast.NodeVisitor):
@@ -142,15 +132,11 @@ class _ImplicitAssumptionVisitor(ast.NodeVisitor):
 
     def visit_Subscript(self, node: ast.Subscript) -> None:
         """Detect dict/list access without guard: d["key"], l[0]."""
-        # Only flag direct string/int subscript on bare names
         if (
             isinstance(node.value, ast.Name)
             and isinstance(node.slice, ast.Constant)
             and isinstance(node.slice.value, str | int)
         ):
-            # Check if this is inside a try block (then it's guarded)
-            # We can't easily check ancestry in a simple visitor,
-            # so we flag all and let the user triage
             pass  # Intentionally not flagging - too noisy without context
         self.generic_visit(node)
 
@@ -204,7 +190,6 @@ class _ImplicitAssumptionVisitor(ast.NodeVisitor):
         """Too many parameters is a code smell (implicit complexity)."""
         args = node.args
         total = len(args.args) + len(args.posonlyargs) + len(args.kwonlyargs)
-        # Subtract 'self' or 'cls'
         if total > 0 and args.args and args.args[0].arg in ("self", "cls"):
             total -= 1
         if total > MAX_FUNC_PARAMS:
@@ -223,7 +208,6 @@ class _ImplicitAssumptionVisitor(ast.NodeVisitor):
             )
 
 
-# ── Scanner 6: Dead Code ─────────────────────────────────────────────
 
 
 class _DeadCodeVisitor(ast.NodeVisitor):
@@ -236,9 +220,7 @@ class _DeadCodeVisitor(ast.NodeVisitor):
     def _check_body(self, body: list[ast.stmt]) -> None:
         for i, stmt in enumerate(body):
             if isinstance(stmt, ast.Return | ast.Raise | ast.Break | ast.Continue):
-                # Check if there's code after this statement (in same block)
                 remaining = body[i + 1 :]
-                # Filter out pass statements and string literals (docstrings)
                 real_remaining = [
                     s
                     for s in remaining
@@ -291,7 +273,6 @@ class _DeadCodeVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-# ── Scanner 7: Floating Point (ANT-203) ──────────────────────────────
 
 class _FloatingPointVisitor(ast.NodeVisitor):
     """Detect usage of float instead of Decimal (ANT-203)."""
@@ -314,7 +295,6 @@ class _FloatingPointVisitor(ast.NodeVisitor):
             )
         self.generic_visit(node)
 
-# ── Scanner 8: Any Typing (ANT-021) ──────────────────────────────────
 
 class _AnyTypeVisitor(ast.NodeVisitor):
     """Detect usage of Any typing (ANT-021)."""
@@ -337,7 +317,6 @@ class _AnyTypeVisitor(ast.NodeVisitor):
             )
         self.generic_visit(node)
 
-# ── Orchestrator ─────────────────────────────────────────────────────
 
 
 def _scan_single_file(
@@ -354,7 +333,6 @@ def _scan_single_file(
 
     rel = str(filepath.relative_to(root))
 
-    # Run all visitors
     _BroadExceptionVisitor(rel, findings).visit(tree)
     _AsyncIntegrityVisitor(rel, findings).visit(tree)
     _MagicLiteralVisitor(rel, findings).visit(tree)
@@ -381,7 +359,6 @@ def _gather_python_files(root: Path) -> tuple[list[Path], Path] | None:
     return None
 
 
-# _run_graph_scanners → imported from _scanner_import_graph at module top
 
 
 def scan_antipatterns(
@@ -415,15 +392,12 @@ def scan_antipatterns(
     report.files_scanned = len(files)
     findings: list[AntipatternFinding] = []
 
-    # ── AST-based scanners (per file) ──
     for fp in files:
         _scan_single_file(fp, scan_root, findings)
 
-    # ── Import graph scanners (project-wide) ──
     if root.is_dir():
         _run_graph_scanners(scan_root, root_package, findings)
 
-    # ── Filter by configuration ──
     if not include_magic:
         findings = [f for f in findings if f.scanner != "MagicLiteral"]
     if not include_type_hints:

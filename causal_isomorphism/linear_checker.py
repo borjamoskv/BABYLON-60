@@ -1,6 +1,4 @@
-# causal_isomorphism/linear_checker.py — Linear and Affine Type Checker
 # C5-REAL: Static analysis pass for linear/affine/region constraints
-# Author: Borja Moskv (borjamoskv)
 """
 Verifies linear and affine type constraints on the Intermediate Representation (IR).
 
@@ -55,7 +53,6 @@ class LinearTypeChecker:
 
         violations: list[LinearViolation] = []
 
-        # Identify parameters with linear/affine constraints
         for param in func.params:
             is_linear = param.is_consumed or param.ir_type.is_linear
             is_affine = param.ir_type.is_affine
@@ -63,7 +60,6 @@ class LinearTypeChecker:
             if not (is_linear or is_affine):
                 continue
 
-            # Get the set of all usage counts across all branches
             usages = self._get_usage_paths(param.name, func.body)
 
             if is_linear:
@@ -141,14 +137,11 @@ class LinearTypeChecker:
                 return current
 
             case IRExprKind.MATCH:
-                # Count in match expression itself
                 match_expr_usages = self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
                 
-                # Match arms represent bifurcations, so we collect the union of usages in all arms
                 arm_usages: set[int] = set()
                 for arm in expr.match_arms:
                     if param_name in arm.pattern.bindings:
-                        # Shadowed
                         arm_usages.add(0)
                     else:
                         arm_usages.update(self._get_usage_paths(param_name, arm.body))

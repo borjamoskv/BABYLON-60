@@ -155,7 +155,6 @@ class EmbeddingModelHealthCheck(HealthCheck):
             from babylon60.embeddings.manager import EmbeddingManager
 
             provider = EmbeddingManager(engine=None)
-            # Quick sanity check
             vec = provider.embed("test")
             if vec is None or len(vec) == 0:
                 return DependencyAlert("embedding_model", "degraded", "Empty embedding returned")
@@ -170,7 +169,6 @@ class DependencyHealthMonitor:
     Usage:
         monitor = DependencyHealthMonitor()
         alerts = monitor.check()
-        # alerts is empty if all dependencies are healthy
     """
 
     def __init__(

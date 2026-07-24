@@ -36,14 +36,11 @@ class HiAgentTraceManager:
 
         logger.info("Compressing subgoal: %s from %d steps.", goal_name, len(self.current_trace))
 
-        # Placeholder for LLM-based hierarchical summarization
-        # e.g. "Attempted X, observed Y -> Concluded Z"
         crystal = {
             "goal": goal_name,
             "crystal": f"Compressed {len(self.current_trace)} interactions.",
         }
 
-        # Force Amnesia Local (Axiom Ω₁₃ Ghost Annihilation)
         self.flush_trace()
 
         return crystal

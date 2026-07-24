@@ -36,7 +36,6 @@ def harvest_logs() -> None:
         dest_filename = f"claude_local_log_{i:02d}_{rel_proj}_{file_path.name}"
         dest_path = TARGET_LOGS_DIR / dest_filename
 
-        # Copy to custody directory
         shutil.copy2(file_path, dest_path)
         sha256_hash, sha3_hash = compute_hashes(dest_path)
         size_kb = dest_path.stat().st_size / 1024.0

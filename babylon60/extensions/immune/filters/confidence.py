@@ -23,17 +23,9 @@ class ConfidenceFilter(ImmuneFilter):
     async def evaluate(self, signal: Any, context: dict[str, Any]) -> FilterResult:
         """Analyze if confidence level matches risks."""
 
-        # Confidence Level (C1-C5)
-        # 1- Hypothesis, 2- Speculative, 3- Inferred, 4- Probable, 5- Confirmed
         confidence = context.get("confidence_level", 3)
         reversibility = context.get("reversibility_level", 1)  # R-level from context
 
-        # Rule matrix (simplified)
-        # R0: C1+
-        # R1: C3+
-        # R2: C3+ (with HOLD for lower)
-        # R3: C5 only (otherwise HOLD/BLOCK)
-        # R4: C5 only + Override
 
         verdict = Verdict.PASS
         justification = f"C{confidence} is sufficient for R{reversibility}."

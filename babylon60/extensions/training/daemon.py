@@ -37,10 +37,8 @@ class AutonomousTrainingDaemon:
         self.verifier = AdapterVerifier()
         self.ttt_engine = TTTEngine(episodic_memory)
 
-        # Base model configuration matching TTTEngine
         self.base_model = base_model or self.ttt_engine.base_model
 
-        # Directories
         self.training_dir = Path.home() / ".babylon60" / "training"
         self.training_dir.mkdir(parents=True, exist_ok=True)
 
@@ -50,7 +48,6 @@ class AutonomousTrainingDaemon:
         self.archive_dir = self.training_dir / "adapters" / "archive"
         self.archive_dir.mkdir(parents=True, exist_ok=True)
 
-        # Background loop task
         self.is_running = False
         self._task: asyncio.Task | None = None
 
@@ -118,7 +115,6 @@ class AutonomousTrainingDaemon:
     def register_verified_adapter(self, adapter_path: Path, metrics: dict[str, Any]) -> None:
         """Registers the verified adapter and archives it for rollback lineage."""
         try:
-            # 1. Read existing adapter history to determine next version
             history = []
             if self.adapter_history_file.exists():
                 try:
@@ -131,7 +127,6 @@ class AutonomousTrainingDaemon:
             archive_subdir = self.archive_dir / f"adapters_v{next_version}"
             archive_subdir.mkdir(parents=True, exist_ok=True)
 
-            # 2. Copy current active adapter files to archive
             active_weights_safetensors = adapter_path / "adapters.safetensors"
             active_weights_npz = adapter_path / "weights.npz"
             active_config = adapter_path / "adapter_config.json"
@@ -143,7 +138,6 @@ class AutonomousTrainingDaemon:
             if active_config.exists():
                 shutil.copy2(active_config, archive_subdir / "adapter_config.json")
 
-            # 3. Log to lineage history
             timestamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
             entry = {
                 "version": next_version,
@@ -158,7 +152,6 @@ class AutonomousTrainingDaemon:
             with open(self.adapter_history_file, "w", encoding="utf-8") as f:
                 json.dump(history, f, indent=2)
 
-            # 4. Update the active verified registration file
             registry_data = {
                 "active_version": next_version,
                 "adapter_path": str(adapter_path.resolve()),
@@ -190,11 +183,9 @@ class AutonomousTrainingDaemon:
         """
         logger.info("🌙 Running autonomous training cycle...")
 
-        # ─── Step 1: Pre-compilation ──────────────────────────────────
         try:
             from babylon60.extensions.training.moskv1_dataset_compiler import MOSKV1DatasetCompiler
 
-            # Resolve workspace path automatically (pointing to the base directory of babylon60)
             workspace_path = Path(__file__).resolve().parents[3]
             logger.info("🔧 Pre-compiling static dataset from workspace: %s", workspace_path)
 
@@ -206,7 +197,6 @@ class AutonomousTrainingDaemon:
                 "Failed pre-compiling static dataset: %s. Continuing with existing files.", ce
             )
 
-        # ─── Step 2: Session Consolidation ────────────────────────────
         all_sessions = await self.get_all_session_ids()
         consolidated = self.load_consolidated_sessions()
 
@@ -219,11 +209,9 @@ class AutonomousTrainingDaemon:
         logger.info("🧪 Found %d new sessions for consolidation.", len(unconsolidated))
 
         try:
-            # Trigger nocturnal consolidation (MLX LoRA training subprocess)
             result = await self.ttt_engine.run_nocturnal_consolidation(unconsolidated)
 
             if result.get("status") == "success":
-                # Verify the generated adapter
                 adapter_path = self.ttt_engine.adapter_path
                 verify_res = self.verifier.verify_adapter(adapter_path, self.base_model)
 
@@ -235,7 +223,6 @@ class AutonomousTrainingDaemon:
                     }
                     self.register_verified_adapter(adapter_path, metrics)
 
-                    # Mark sessions as consolidated
                     new_consolidated = consolidated.union(unconsolidated)
                     self.save_consolidated_sessions(new_consolidated)
 
@@ -252,7 +239,6 @@ class AutonomousTrainingDaemon:
                     "processed_sessions": 0,
                 }
             if result.get("status") == "skipped":
-                # Even if skipped (e.g., no high reward data), we mark them as processed to avoid re-evaluating
                 new_consolidated = consolidated.union(unconsolidated)
                 self.save_consolidated_sessions(new_consolidated)
                 logger.info("⏭️ Consolidation skipped: %s", result.get("reason"))

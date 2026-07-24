@@ -35,8 +35,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.context")
 
-# ─── Weight Constants ────────────────────────────────────────────────
-# Weights reflect how strongly each signal type indicates active context.
 WEIGHT_RECENT_FACT = 0.9
 WEIGHT_ACTIVE_GHOST = 0.85
 WEIGHT_RECENT_TX = 0.7
@@ -45,7 +43,6 @@ WEIGHT_FS_RECENT = 0.4
 WEIGHT_GIT_COMMIT = 0.6
 
 
-# ─── Module-level Helpers ────────────────────────────────────────────
 
 
 def _recency_decay(rank: int, total: int) -> float:
@@ -72,12 +69,10 @@ def _infer_project_from_path(path: Path) -> str | None:
     """Try to infer project name from directory structure."""
     try:
         parts = path.resolve().parts
-        # Look for common project indicators
         for i, part in enumerate(parts):
             if part in ("projects", "src", "repos", "workspace"):
                 if i + 1 < len(parts):
                     return parts[i + 1]
-        # Fallback: use parent directory name
         if path.is_file():
             return path.parent.name
         return path.name
@@ -110,23 +105,19 @@ class ContextCollector:
         """Collect signals from all available sources."""
         signals: list[Signal] = []
 
-        # Database signals (always available)
         signals.extend(await self._collect_recent_facts())
         signals.extend(await self._collect_active_ghosts())
         signals.extend(await self._collect_recent_transactions())
         signals.extend(await self._collect_heartbeats())
 
-        # External signals (best-effort)
         signals.extend(self._collect_fs_recent())
 
         if self.git_enabled:
             signals.extend(self._collect_git_log())
 
-        # Sort by weight descending + recency, cap at max
         signals.sort(key=lambda s: (s.weight, s.timestamp), reverse=True)
         return signals[: self.max_signals]
 
-    # ─── Database Signals ────────────────────────────────────────────
 
     async def _collect_recent_facts(self, limit: int = 10) -> list[Signal]:
         """Collect the most recently stored/updated facts."""
@@ -241,7 +232,6 @@ class ContextCollector:
             for i, row in enumerate(rows)
         ]
 
-    # ─── External Signals ────────────────────────────────────────────
 
     def _collect_fs_recent(self, limit: int = 5) -> list[Signal]:
         """Collect recently modified files in workspace (best-effort)."""

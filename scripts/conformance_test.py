@@ -51,7 +51,6 @@ def create_crypto_vectors() -> None:
         "payload": {"action": "ping", "data": "pong"},
     }
 
-    # Generate canonical cbor
     cbor_bytes: bytes = cbor2.dumps(event_basic, canonical=True)
     cbor_hex: str = cbor_bytes.hex()
     sha3_hash: str = hashlib.sha3_256(cbor_bytes).hexdigest()
@@ -73,9 +72,7 @@ def test_replay_corruption() -> None:
         os.remove(db_path)
 
     ledger = BFT_Ledger(db_path)
-    # Generar data
     mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="mock")
-    # Valid signatures are checked in invoke_subagent, but we just insert manually or use mock
     from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256
 
     m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
@@ -85,16 +82,13 @@ def test_replay_corruption() -> None:
     )
     ledger.conn.commit()
 
-    # Ensure integrity is 100%
     if not ledger.audit_integrity():
         print("Initial integrity check failed!")
         sys.exit(1)
 
-    # Corrupt
     ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",))
     ledger.conn.commit()
 
-    # Audit should fail
     if ledger.audit_integrity():
         print("ERROR: Corruption was NOT detected!")
         sys.exit(1)

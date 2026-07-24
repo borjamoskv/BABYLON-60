@@ -32,7 +32,6 @@ class SystemLoadCollector:
             load_1m, _, _ = os.getloadavg()
             cores = os.cpu_count() or 4
 
-            # Load > Cores means processes are waiting for CPU
             ratio = load_1m / cores
 
             if ratio < 0.7:

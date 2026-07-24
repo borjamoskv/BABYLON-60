@@ -15,7 +15,6 @@ __all__ = ["TenantIsolator"]
 
 logger = logging.getLogger("babylon60_extensions.hypervisor.isolator")
 
-# Tenant ID: alphanumeric + hyphens + underscores, 1-128 chars
 _TENANT_PATTERN = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$")
 
 

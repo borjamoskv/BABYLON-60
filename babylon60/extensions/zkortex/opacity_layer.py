@@ -67,7 +67,6 @@ class SovereignOpacityLayer:
         self._proof_log: list[dict[str, Any]] = []
         logger.info("SovereignOpacityLayer initialized. Strategy: %s", opacity_strategy)
 
-    # ─── Ingestion ─────────────────────────────────────────────────────────────
 
     def ingest_facts(self, facts: list[str]) -> str:
         """
@@ -79,7 +78,6 @@ class SovereignOpacityLayer:
 
         Retorna: El Merkle Root público.
         """
-        # Fingerprinting: H("zkortex:fact:" || content)
         fingerprints = []
         for fact in facts:
             fp = cortex_hash(b"zkortex:fact:" + fact.encode())
@@ -92,7 +90,6 @@ class SovereignOpacityLayer:
         )
         return root
 
-    # ─── Proof Emission ────────────────────────────────────────────────────────
 
     def prove_knows_fact(self, fact_content: str) -> ZKMembershipProof | None:
         """
@@ -145,7 +142,6 @@ class SovereignOpacityLayer:
         self._log_proof("commitment", {"fact_id": fact_id})
         return commitment
 
-    # ─── Public Interface ──────────────────────────────────────────────────────
 
     @property
     def public_root(self) -> str | None:
@@ -171,7 +167,6 @@ class SovereignOpacityLayer:
             "timestamp": time.monotonic(),
         }
 
-    # ─── Internal ──────────────────────────────────────────────────────────────
 
     def _log_proof(self, proof_type: str, meta: dict[str, Any]) -> None:
         """Registro interno de auditoría - sin datos privados."""

@@ -27,14 +27,12 @@ __all__ = [
     "TasteVerdict",
 ]
 
-# --- Grade constants ---
 GRADE_GOAT = "GOAT"
 GRADE_STRONG = "strong"
 GRADE_FUNCTIONAL = "functional"
 GRADE_MEDIOCRE = "mediocre"
 GRADE_DEAD = "dead"
 
-# --- Thresholds ---
 _GRADE_THRESHOLDS: list[tuple[float, str]] = [
     (0.85, GRADE_GOAT),
     (0.70, GRADE_STRONG),
@@ -42,7 +40,6 @@ _GRADE_THRESHOLDS: list[tuple[float, str]] = [
     (0.30, GRADE_MEDIOCRE),
 ]
 
-# --- Dimension weights (taste + utility = 2x rest) ---
 _DEFAULT_WEIGHTS: dict[str, float] = {
     "precision": 1.0,
     "utility": 2.0,
@@ -53,7 +50,6 @@ _DEFAULT_WEIGHTS: dict[str, float] = {
     "taste": 2.0,
 }
 
-# --- Mediocrity signals ---
 _FILLER_PATTERNS: tuple[re.Pattern[str], ...] = (
     re.compile(r"\b(en resumen|en conclusi[oó]n|como hemos visto)\b", re.IGNORECASE),
     re.compile(r"\b(in summary|in conclusion|as we have seen|to summarize)\b", re.IGNORECASE),
@@ -146,7 +142,6 @@ class TasteEngine:
     ) -> None:
         self._weights = weights or dict(_DEFAULT_WEIGHTS)
         self._thresholds = grade_thresholds or list(_GRADE_THRESHOLDS)
-        # Pre-compute total weight for normalization
         self._total_weight = sum(self._weights.values())
 
     def evaluate(self, content: str, context: dict[str, Any] | None = None) -> TasteVerdict:
@@ -208,21 +203,17 @@ class TasteEngine:
         verdicts = [self.evaluate(idea, context) for idea in ideas]
         return sorted(verdicts, key=lambda v: v.composite_score, reverse=True)
 
-    # --- Dimension scorers ---
 
     def _score_precision(self, content: str, ctx: dict[str, Any]) -> TasteDimension:
         """Precision: factual/technical correctness signals."""
         score = 0.5  # Neutral baseline
         signals: list[str] = []
 
-        # Contradiction check: if existing_facts provided, compare
         existing = ctx.get("existing_facts", [])
         if existing:
-            # Having context to validate against raises baseline
             score += 0.15
             signals.append(f"context-aware ({len(existing)} facts)")
 
-        # Hedging language lowers precision confidence
         hedge_count = len(
             re.findall(r"\b(maybe|perhaps|might|could be|posiblemente|quizás)\b", content, re.I)
         )
@@ -233,7 +224,6 @@ class TasteEngine:
             score += 0.1
             signals.append("assertive")
 
-        # Concrete numbers/data boost precision
         data_count = len(re.findall(r"\b\d+\.?\d*\s*(%|ms|MB|GB|KB|Hz|fps|x)\b", content))
         if data_count >= 3:
             score += 0.2
@@ -254,7 +244,6 @@ class TasteEngine:
         score = 0.3  # Low baseline - prove utility
         signals: list[str] = []
 
-        # Actionable markers
         action_hits = sum(1 for p in _ACTIONABLE_MARKERS if p.search(content))
         action_ratio = action_hits / len(_ACTIONABLE_MARKERS)
         score += action_ratio * 0.5
@@ -263,7 +252,6 @@ class TasteEngine:
         elif action_hits >= 1:
             signals.append(f"some actionability ({action_hits})")
 
-        # Code blocks are strong utility signal
         code_blocks = len(re.findall(r"```", content))
         if code_blocks >= 4:
             score += 0.2
@@ -272,7 +260,6 @@ class TasteEngine:
             score += 0.1
             signals.append("has code")
 
-        # Length penalty for pure theory with no action
         word_count = len(content.split())
         if word_count > 500 and action_hits == 0:
             score -= 0.2
@@ -290,7 +277,6 @@ class TasteEngine:
         score = 0.5  # Neutral
         signals: list[str] = []
 
-        # Generic/filler patterns penalize novelty
         generic_hits = sum(1 for p in _GENERIC_PATTERNS if p.search(content))
         filler_hits = sum(1 for p in _FILLER_PATTERNS if p.search(content))
 
@@ -305,7 +291,6 @@ class TasteEngine:
             score -= 0.2
             signals.append(f"filler-heavy ({filler_hits})")
 
-        # Unique vocabulary density boosts novelty
         words = content.lower().split()
         if words:
             unique_ratio = len(set(words)) / len(words)
@@ -316,10 +301,8 @@ class TasteEngine:
                 score -= 0.15
                 signals.append(f"repetitive ({unique_ratio:.2f})")
 
-        # Existing facts comparison (semantic distance approximation)
         existing = ctx.get("existing_facts", [])
         if existing:
-            # Simple: check if content has low overlap with existing
             existing_text = " ".join(str(f) for f in existing).lower()
             existing_words = set(existing_text.split())
             content_words = set(content.lower().split())
@@ -342,7 +325,6 @@ class TasteEngine:
         score = 0.3  # Low baseline - depth must be proven
         signals: list[str] = []
 
-        # Depth markers
         depth_hits = sum(1 for p in _DEPTH_MARKERS if p.search(content))
         depth_ratio = depth_hits / len(_DEPTH_MARKERS)
         score += depth_ratio * 0.5
@@ -351,7 +333,6 @@ class TasteEngine:
         elif depth_hits >= 2:
             signals.append(f"some depth ({depth_hits})")
 
-        # Multi-layer structure (headers, lists)
         headers = len(re.findall(r"^#{1,4}\s", content, re.MULTILINE))
         lists = len(re.findall(r"^[\s]*[-*]\s", content, re.MULTILINE))
         if headers >= 3 and lists >= 5:
@@ -360,7 +341,6 @@ class TasteEngine:
         elif headers >= 1:
             score += 0.05
 
-        # Tables indicate comparative analysis
         tables = len(re.findall(r"\|.*\|.*\|", content))
         if tables >= 3:
             score += 0.1
@@ -378,7 +358,6 @@ class TasteEngine:
         score = 0.4  # Moderate baseline
         signals: list[str] = []
 
-        # Robustness markers
         robust_hits = sum(1 for p in _ROBUSTNESS_MARKERS if p.search(content))
         if robust_hits >= 4:
             score += 0.4
@@ -390,7 +369,6 @@ class TasteEngine:
             score -= 0.1
             signals.append("no error handling visible")
 
-        # Content that acknowledges limitations
         limitation_hits = len(
             re.findall(
                 r"\b(limitation|caveat|warning|caution|risk|danger|cuidado|riesgo)\b",
@@ -416,7 +394,6 @@ class TasteEngine:
         score = 0.4  # Moderate baseline
         signals: list[str] = []
 
-        # Reuse markers
         reuse_hits = sum(1 for p in _REUSE_MARKERS if p.search(content))
         if reuse_hits >= 4:
             score += 0.35
@@ -425,13 +402,11 @@ class TasteEngine:
             score += 0.15
             signals.append(f"some reuse ({reuse_hits})")
 
-        # Parameterized content (configurable = reusable)
         param_hits = len(re.findall(r"\{[a-zA-Z_]+\}|<[a-zA-Z_]+>|\$[A-Z_]+", content))
         if param_hits >= 3:
             score += 0.15
             signals.append(f"parameterized ({param_hits})")
 
-        # One-shot content that can't be reused
         word_count = len(content.split())
         if word_count < 30 and reuse_hits == 0:
             score -= 0.15
@@ -454,7 +429,6 @@ class TasteEngine:
         score = 0.5  # Neutral
         signals: list[str] = []
 
-        # Anti-mediocrity: penalize buzzwords + filler combo
         generic_hits = sum(1 for p in _GENERIC_PATTERNS if p.search(content))
         filler_hits = sum(1 for p in _FILLER_PATTERNS if p.search(content))
         mediocrity_score = generic_hits + filler_hits
@@ -469,10 +443,8 @@ class TasteEngine:
             score += 0.15
             signals.append("zero filler")
 
-        # Identity: user preferences alignment
         prefs = ctx.get("user_preferences", {})
         if prefs:
-            # Check if content aligns with declared preferences
             pref_keywords = [str(v).lower() for v in prefs.values() if isinstance(v, str)]
             content_lower = content.lower()
             matches = sum(1 for kw in pref_keywords if kw in content_lower)
@@ -481,7 +453,6 @@ class TasteEngine:
                 score += alignment * 0.2
                 signals.append(f"preference-aligned ({matches}/{len(pref_keywords)})")
 
-        # Singular voice: first-person assertions, concrete positions taken
         position_markers = len(
             re.findall(
                 r"\b(we choose|I recommend|the answer is|la respuesta es|"
@@ -496,13 +467,10 @@ class TasteEngine:
         elif position_markers >= 1:
             score += 0.05
 
-        # Information density (Shannon-inspired approximation)
-        # High entropy = high information content
         words = content.lower().split()
         if len(words) >= 20:
             unique = len(set(words))
             total = len(words)
-            # Approximate entropy
             freq: dict[str, int] = {}
             for w in words:
                 freq[w] = freq.get(w, 0) + 1
@@ -510,7 +478,6 @@ class TasteEngine:
 
             entropy_approx = calculate_distribution_entropy(freq, total)
 
-            # Normalize to 0-1 range (max entropy for N unique = log2(N))
             max_entropy = math.log2(unique) if unique > 1 else 1.0
             normalized = entropy_approx / max_entropy if max_entropy > 0 else 0.0
 
@@ -528,7 +495,6 @@ class TasteEngine:
             signal="; ".join(signals) if signals else "neutral taste",
         )
 
-    # --- Internal helpers ---
 
     def _composite(self, dims: tuple[TasteDimension, ...]) -> float:
         """Weighted average of all dimension scores."""
@@ -551,7 +517,6 @@ class TasteEngine:
         dims: tuple[TasteDimension, ...],
     ) -> str:
         """Generate a one-line human assessment."""
-        # Find weakest and strongest dimension
         if not dims:
             return "No dimensions evaluated."
 

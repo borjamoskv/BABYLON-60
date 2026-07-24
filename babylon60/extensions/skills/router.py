@@ -21,8 +21,6 @@ except ImportError:
 
 logger = logging.getLogger(__name__)
 
-# Minimum Procedural FOK to allow execution.
-# Below this, the router declares ignorance rather than hallucinating a skill.
 _FOK_GATE: Final[float] = 0.35
 
 
@@ -46,18 +44,12 @@ class SkillRouter:
 
         (Initial placeholder: simple search using manifest metadata).
         """
-        # Semantic search using the implemented search engine.
-        # If the intent explicitly names the alias or command, we match it first.
         candidates = self.registry.search(intent)
 
-        # ── Procedural Metamemory Gate ────────────────────────────────────
-        # Augment each candidate with its full capability surface before scoring.
-        # This lets FOK see *what a skill declares it can do* (not just its name).
         augmented_candidates = []
         for m in candidates:
             caps = [c.name for c in getattr(m, "capabilities", [])]
             tags = getattr(m, "tags", [])
-            # Synthesize a rich surface string the FOK heuristic can match against
             m.__dict__.update({"_fok_surface": " ".join([m.name, m.description, *caps, *tags])})
             augmented_candidates.append(m)
 
@@ -77,9 +69,7 @@ class SkillRouter:
                 )
             return []
 
-        # If we have a "god mode" or transcendent skill, prioritize it if applicable.
         if "create" in intent.lower() or "build" in intent.lower() or "project" in intent.lower():
-            # Attempt to force Keter or Aether/Genesis based on keywords.
             manifest = self.registry.get("keter-omega") or self.registry.get("aether-1")
             if manifest and manifest not in candidates:
                 candidates.insert(0, manifest)
@@ -88,8 +78,6 @@ class SkillRouter:
             logger.warning("[ROUTER] No skills found for intent: %s", intent)
             return []
 
-        # Re-rank candidates using ProceduralMemory (Striatal valuation)
-        # Auto-seed transcendent skills as permanent (no temporal decay)
         for m in candidates:
             if getattr(m, "is_transcendent", False) and not self.procedural_memory.get_engram(
                 m.slug
@@ -130,7 +118,6 @@ class SkillRouter:
 
             for req in node.requirements:
                 req_manifest = self.registry.get(req.skill_name)
-                # Or we could search by require.capability
                 if req_manifest:
                     _dfs(req_manifest)
 
@@ -147,7 +134,6 @@ class SkillRouter:
         if not candidates:
             return []
 
-        # Take the primary candidate
         primary = candidates[0]
         logger.info("[ROUTER] Primary elected: %s", primary.name)
 

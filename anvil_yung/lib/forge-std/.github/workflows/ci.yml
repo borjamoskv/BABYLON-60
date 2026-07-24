@@ -41,7 +41,6 @@ jobs:
               matrix+='{"toolchain":"'"$toolchain"'","flags":"'"$flags"'","prerelease":false},'
             done
           done
-          # prerelease (nightly only, svm-rs is not up to date on stable)
           if [ -n "$PRERELEASE" ]; then
             for flags in \
               "--use solc:${PRERELEASE}" \
@@ -71,7 +70,6 @@ jobs:
         with:
           version: ${{ matrix.toolchain }}
       - run: forge --version
-      # 3805: "This is a pre-release compiler version, please do not use it in production."
       - run: forge build -vvvvv --skip test --deny warnings ${{ matrix.prerelease && '--ignored-error-codes 3805' || '' }} ${{ matrix.flags }} --contracts 'test/compilation/*'
 
   test:

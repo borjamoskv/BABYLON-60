@@ -61,7 +61,6 @@ class EventLoopMixin:
 
         self._stop_event.set()
 
-        # Cancel all running tasks
 
         for task in asyncio.all_tasks():
             if task is not asyncio.current_task():
@@ -73,7 +72,6 @@ class EventLoopMixin:
         if self.scheduler is None:
             return
 
-        # Hot state TTL purge every 10 minutes
 
         if self.hot_state is not None:
             self.scheduler.add_recurring(
@@ -83,7 +81,6 @@ class EventLoopMixin:
                 priority=8,
             )
 
-        # CABLE-04a: daily pruning of the Ouroboros graph
         import sys
         from pathlib import Path
 
@@ -105,7 +102,6 @@ class EventLoopMixin:
             priority=6,
         )
 
-        # CABLE-04b: LLM absorption of reflections.md -> SKILL.md every 12h
         async def run_ouroboros_absorb():
             from ouroboros_absorb_runner import main as absorb_main
 
@@ -207,7 +203,6 @@ class EventLoopMixin:
                 )
             )
 
-        # [Zero-Toil] Inyección autónoma
         zero_toil = ZeroToilDaemon(repo_path=Path("."))
         tasks.append(asyncio.create_task(zero_toil.loop(), name="ZeroToilDaemon"))
         if getattr(self, "sentinel_oracle", None):
@@ -230,7 +225,6 @@ class EventLoopMixin:
                     self.sovereignty_runtime.start(), name="EventSovereigntyRuntime"
                 )
             )
-            # Ensure auth_requests table exists asynchronously at startup
             if (
                 hasattr(self.sovereignty_runtime, "auth_gateway")
                 and self.sovereignty_runtime.auth_gateway
@@ -257,17 +251,14 @@ class EventLoopMixin:
         """Async version of the main check loop."""
         while not self._shutdown:
             try:
-                # Run check in thread pool to not block the event loop
                 await asyncio.to_thread(self.check)
 
-                # Update hot state cycle counter
                 if self.hot_state is not None:
                     self.hot_state.increment("cycle_count")
 
             except Exception as e:  # noqa: BLE001
                 logger.error("Check loop error: %s", e)
 
-            # Async sleep instead of threading.Event.wait
             try:
                 await asyncio.sleep(interval)
             except asyncio.CancelledError:
@@ -294,7 +285,6 @@ class EventLoopMixin:
         if getattr(self, "sovereignty_runtime", None):
             await self.sovereignty_runtime.stop()
 
-        # Persist final state
         if self.hot_state is not None:
             self.hot_state.set("daemon.stopped_at", datetime.now(timezone.utc).isoformat())
 

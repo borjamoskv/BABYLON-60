@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/__init__.py
 """Continuous Evolution Engine for CORTEX Sovereign Swarm.
 
 10 agents × 10 subagents = 100 entities improving forever.

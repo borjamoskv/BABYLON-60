@@ -1,6 +1,4 @@
-# causal_isomorphism/parser_fsharp.py — F# AST Parser → IR
 # C5-REAL: Targeted parser for F# ontological subset used in BABYLON-60
-# Author: Borja Moskv (borjamoskv)
 """
 Parses F# source files into the Intermediate Representation (IR).
 
@@ -49,9 +47,6 @@ from causal_isomorphism.ir import (
 )
 
 
-# ============================================================
-# F# TYPE RESOLUTION
-# ============================================================
 FSHARP_TYPE_MAP: dict[str, IRType] = {
     "float": IR_FLOAT,
     "double": IR_FLOAT,
@@ -69,37 +64,29 @@ def resolve_fsharp_type(type_str: str) -> IRType:
     """Resolve an F# type annotation to an IRType."""
     type_str = type_str.strip()
 
-    # Handle Result<T, E>
     result_match = re.match(r"Result<(.+),\s*(.+)>", type_str)
     if result_match:
         ok_t = resolve_fsharp_type(result_match.group(1))
         err_t = resolve_fsharp_type(result_match.group(2))
         return ir_result(ok_t, err_t)
 
-    # Handle Map<K, V>
     map_match = re.match(r"Map<(.+),\s*(.+)>", type_str)
     if map_match:
         k_t = resolve_fsharp_type(map_match.group(1))
         v_t = resolve_fsharp_type(map_match.group(2))
         return ir_map(k_t, v_t)
 
-    # Handle tuple (T * U)
     if " * " in type_str:
         parts = [resolve_fsharp_type(p) for p in type_str.split(" * ")]
         return IRType(IRTypeKind.CUSTOM, custom_name="Tuple", type_params=tuple(parts))
 
-    # Check builtin map
     normalized = type_str.lower().strip()
     if normalized in FSHARP_TYPE_MAP:
         return FSHARP_TYPE_MAP[normalized]
 
-    # Custom type reference
     return ir_custom(type_str)
 
 
-# ============================================================
-# PARSER STATE MACHINE
-# ============================================================
 class ParserState(Enum):
     TOP_LEVEL = auto()
     IN_MODULE = auto()
@@ -144,7 +131,6 @@ def _classify_function(name: str, params: list[IRParam], body_lines: list[str]) 
     if "get" in name_lower or "query" in name_lower or "path" in name_lower:
         return FunctionClassification.PURE_QUERY
 
-    # Check body for state mutation indicators
     body_text = " ".join(body_lines)
     if "match" in body_text and any("Stable" in b or "Smoothing" in b or "Rollback" in b or "Apoptosis" in b for b in body_lines):
         return FunctionClassification.STATE_TRANSITION
@@ -161,7 +147,6 @@ class FSharpParser:
         ir_module = parser.parse_file(Path("domain_kernel/IRPAutomata.fs"))
     """
 
-    # ---- Regex patterns for F# constructs ----
     RE_NAMESPACE = re.compile(r"^namespace\s+(.+)")
     RE_OPEN = re.compile(r"^\s*open\s+(.+)")
     RE_MODULE = re.compile(r"^(\s*)module\s+(\w+)\s*=")
@@ -206,7 +191,6 @@ class FSharpParser:
             i = self._parse_line(i, line)
             i += 1
 
-        # Finalize any pending constructs
         self._finalize_pending()
 
         return self._root_module
@@ -215,16 +199,12 @@ class FSharpParser:
         """Parse a single line. Returns the (possibly advanced) line index."""
         stripped = line.strip()
 
-        # Skip empty lines and imports
         if not stripped or self.RE_COMMENT.match(line) or self.RE_OPEN.match(line):
-            # Capture doc comments for next function
             doc_match = self.RE_DOC_COMMENT.match(line)
             if doc_match and self._ctx.current_function is None:
-                # Store for next function
                 pass
             return idx
 
-        # Namespace declaration
         ns_match = self.RE_NAMESPACE.match(line)
         if ns_match:
             self._ctx.namespace = ns_match.group(1).strip()
@@ -232,7 +212,6 @@ class FSharpParser:
                 self._root_module.name = self._ctx.namespace.split(".")[-1]
             return idx
 
-        # Module declaration
         mod_match = self.RE_MODULE.match(line)
         if mod_match:
             self._finalize_pending()
@@ -248,13 +227,11 @@ class FSharpParser:
             self._ctx.indent_level = _get_indent(line)
             return idx
 
-        # Record type
         rec_match = self.RE_RECORD_START.match(line)
         if rec_match:
             self._finalize_pending()
             rec_name = rec_match.group(1)
             self._ctx.current_record = IRRecordType(name=rec_name)
-            # Parse inline fields
             field_matches = re.findall(r"(\w+)\s*:\s*([^;}\s]+(?:<[^>]+>)?)", line)
             for fname, ftype in field_matches:
                 if fname != rec_name:  # Skip the type name itself
@@ -265,13 +242,11 @@ class FSharpParser:
                 self._commit_record()
             return idx
 
-        # Discriminated union (multiline or inline)
         union_inline_match = self.RE_UNION_INLINE.match(line)
         if union_inline_match:
             self._finalize_pending()
             union_name = union_inline_match.group(1)
             self._ctx.current_union = IRDiscriminatedUnion(name=union_name)
-            # Parse the first case from this line
             rest = line[line.index("|"):]
             self._parse_union_case(rest)
             return idx
@@ -283,20 +258,15 @@ class FSharpParser:
             self._ctx.current_union = IRDiscriminatedUnion(name=union_name)
             return idx
 
-        # Union case lines (when inside a union definition)
         if self._ctx.current_union is not None:
             if stripped.startswith("|"):
                 self._parse_union_case(stripped)
                 return idx
-            # Non-case line while in union → union is complete
             self._commit_union()
-            # Fall through to parse this line normally
             return self._parse_line(idx, line)
 
-        # Record field lines
         if self._ctx.current_record is not None:
             if "}" in stripped:
-                # Parse any remaining fields
                 field_match = self.RE_RECORD_FIELD.match(stripped)
                 if field_match:
                     self._ctx.current_record.fields.append(
@@ -317,7 +287,6 @@ class FSharpParser:
                 )
             return idx
 
-        # Function definition
         fn_match = self.RE_LET_FN.match(line)
         if fn_match:
             self._finalize_pending()
@@ -328,7 +297,6 @@ class FSharpParser:
             params = self._parse_params(params_str)
             return_type = resolve_fsharp_type(return_type_str)
 
-            # Collect function body lines
             body_lines: list[str] = []
             fn_indent = _get_indent(line)
             rest_of_line = line[line.index("=") + 1:].strip()
@@ -374,10 +342,8 @@ class FSharpParser:
         if not stripped.startswith("|"):
             return
 
-        # Remove leading |
         content = stripped[1:].strip()
 
-        # Case with payload: CaseName of field1: type1 * field2: type2
         of_match = re.match(r"(\w+)\s+of\s+(.+)", content)
         if of_match:
             case_name = of_match.group(1)
@@ -388,7 +354,6 @@ class FSharpParser:
             )
             return
 
-        # Bare case: CaseName
         bare_match = re.match(r"(\w+)", content)
         if bare_match:
             case_name = bare_match.group(1)
@@ -400,7 +365,6 @@ class FSharpParser:
         """Parse union case payload: field1: type1 * field2: type2."""
         fields: list[tuple[str, IRType]] = []
 
-        # Split by * for tuple payloads
         parts = [p.strip() for p in payload_str.split("*")]
         for part in parts:
             colon_match = re.match(r"(\w+)\s*:\s*(.+)", part)
@@ -409,7 +373,6 @@ class FSharpParser:
                 ftype = resolve_fsharp_type(colon_match.group(2).strip())
                 fields.append((fname, ftype))
             else:
-                # Unnamed payload
                 ftype = resolve_fsharp_type(part)
                 fields.append(("value", ftype))
 
@@ -418,7 +381,6 @@ class FSharpParser:
     def _parse_params(self, params_str: str) -> list[IRParam]:
         """Parse function parameters: (p1: type1) (p2: type2)."""
         params: list[IRParam] = []
-        # Match parenthesized params
         for match in re.finditer(r"\((\w+)\s*:\s*([^)]+)\)", params_str):
             pname = match.group(1)
             ptype = resolve_fsharp_type(match.group(2).strip())
@@ -427,7 +389,6 @@ class FSharpParser:
 
     def _parse_function_body(self, body_lines: list[str]) -> IRExpr:
         """Parse function body into an IRExpr tree."""
-        # Find match expression
         match_var = ""
         arms: list[IRMatchArm] = []
         current_arm_body: list[str] = []
@@ -437,11 +398,9 @@ class FSharpParser:
         for line in body_lines:
             stripped = line.strip()
 
-            # Match expression start
             match_start = self.RE_MATCH_START.match(stripped)
             if match_start:
                 if in_match and current_pattern is not None:
-                    # Nested match — finalize outer arm
                     arm_body = self._lines_to_expr(current_arm_body)
                     arms.append(IRMatchArm(pattern=current_pattern, body=arm_body))
                     current_arm_body = []
@@ -452,10 +411,8 @@ class FSharpParser:
                 continue
 
             if in_match:
-                # Match case
                 case_match = self.RE_MATCH_CASE.match(stripped)
                 if case_match:
-                    # Finalize previous arm
                     if current_pattern is not None:
                         arm_body = self._lines_to_expr(current_arm_body)
                         arms.append(IRMatchArm(pattern=current_pattern, body=arm_body))
@@ -472,19 +429,16 @@ class FSharpParser:
                         is_wildcard=is_wildcard,
                     )
 
-                    # Check for inline body (after ->)
                     arrow_idx = stripped.index("->")
                     after_arrow = stripped[arrow_idx + 2:].strip()
                     if after_arrow:
                         current_arm_body = [after_arrow]
                     continue
 
-                # Body line of current arm
                 if current_pattern is not None:
                     current_arm_body.append(stripped)
                 continue
 
-        # Finalize last arm
         if current_pattern is not None:
             arm_body = self._lines_to_expr(current_arm_body)
             arms.append(IRMatchArm(pattern=current_pattern, body=arm_body))
@@ -497,18 +451,15 @@ class FSharpParser:
                 requires_permission=EmitPermission.PHYSICS_COMPUTATION,
             )
 
-        # Non-match body — treat as block
         return self._lines_to_expr(body_lines)
 
     def _extract_bindings(self, bindings_str: str) -> list[str]:
         """Extract variable bindings from a pattern match case."""
         bindings: list[str] = []
-        # Remove outer parens if present
         bindings_str = bindings_str.strip()
         if not bindings_str:
             return bindings
 
-        # Handle: e, (variance: float), h, etc.
         for part in re.findall(r"(\w+)", bindings_str):
             if part not in ("of", "with", "when", "as"):
                 bindings.append(part)
@@ -521,7 +472,6 @@ class FSharpParser:
 
         combined = " ".join(line_str.strip() for line_str in lines if line_str.strip())
 
-        # sprintf detection
         sprintf_match = self.RE_SPRINTF.match(combined)
         if sprintf_match:
             fmt = sprintf_match.group(1)
@@ -537,7 +487,6 @@ class FSharpParser:
                 requires_permission=EmitPermission.PURE_QUERY,
             )
 
-        # Constructor detection: TypeCase payload
         ctor_match = re.match(r"(\w+)\s+(.+)", combined)
         if ctor_match:
             case_name = ctor_match.group(1)
@@ -553,7 +502,6 @@ class FSharpParser:
                 requires_permission=EmitPermission.PHYSICS_COMPUTATION,
             )
 
-        # Variable or literal
         if combined.startswith('"') and combined.endswith('"'):
             return IRExpr(
                 kind=IRExprKind.LITERAL,

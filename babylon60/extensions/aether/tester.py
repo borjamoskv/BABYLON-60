@@ -51,34 +51,28 @@ class TesterAgent:
         """Heuristically determine if tests passed from output."""
         lower = output.lower()
 
-        # Pytest
         if "passed" in lower and "failed" not in lower and "error" not in lower:
             return True
         if "no tests ran" in lower or "no test" in lower:
             return True  # no tests = no failure from Aether's perspective
 
-        # npm / jest
         if "tests failed" in lower or "test suites failed" in lower:
             return False
         if "tests passed" in lower or "test suites passed" in lower:
             return True
 
-        # Cargo
         if "test result: ok" in lower:
             return True
         if "test result: failed" in lower:
             return False
 
-        # Go
         if "--- fail" in lower:
             return False
         if "ok  \t" in lower:
             return True
 
-        # Generic: no tests detected
         if "no test" in lower or "skip" in lower:
             return True
 
-        # Fallback: no explicit failure keywords
         no_fail_tokens = ("error", "fail", "exception", "traceback")
         return not any(t in lower for t in no_fail_tokens)

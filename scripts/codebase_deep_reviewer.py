@@ -25,7 +25,6 @@ def audit_py_file(file_path: Path) -> Dict[str, Any]:
     
     issues = []
     
-    # 1. AST Parse check for syntax errors
     try:
         tree = ast.parse(content, filename=str(file_path))
     except SyntaxError as e:
@@ -37,7 +36,6 @@ def audit_py_file(file_path: Path) -> Dict[str, Any]:
             "issues": issues
         }
         
-    # 2. Check for broad excepts (except Exception / except:)
     for node in ast.walk(tree):
         if isinstance(node, ast.ExceptHandler):
             if node.type is None:
@@ -47,7 +45,6 @@ def audit_py_file(file_path: Path) -> Dict[str, Any]:
                 if "bft" in str(rel_path) or "ledger" in str(rel_path):
                     issues.append(f"Line {node.lineno}: Broad 'except {node.type.id}:' in BFT module (INV_C5_19 violation).")
 
-    # 3. Check for synchronous sqlite3 calls in async functions
     for node in ast.walk(tree):
         if isinstance(node, ast.AsyncFunctionDef):
             for child in ast.walk(node):

@@ -32,20 +32,16 @@ pub async fn ignite_precognition_daemon(db_state: Arc<VoidLedger>) {
             
             let _ = db_state.write("PRECOGNITION_EVENT", &format!("Parálisis en {}", focus_data.ast_node_id));
 
-            // Simulación Asíncrona del Fix
             tokio::spawn(async move {
                 tokio::time::sleep(std::time::Duration::from_millis(150)).await;
                 println!("🌐 [UI_HUD] Proyectando holograma de refactorización (Transparencia 30%).");
                 
-                // Simulación input (Asentimiento) -> Pasa al DROP
                 tokio::time::sleep(std::time::Duration::from_millis(800)).await;
                 println!("✅ [INPUT] Confirmación cinética detectada (Asentimiento visual).");
                 
-                // Cuantización de Drop
                 dsp_clock::sync_drop_to_grid();
             });
             
-            // Reiniciar simulador para no spamear
             focus_data.focus_start = Instant::now() + std::time::Duration::from_secs(1000); 
         }
     }

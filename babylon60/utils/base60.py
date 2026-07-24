@@ -28,23 +28,13 @@ __all__ = [
     "encoded_length",
 ]
 
-# Custom Base-60 alphabet: 62 alphanumeric characters minus 'l' (lowercase L) and 'O' (uppercase O)
-# Note: Residual ambiguity (0/o, 1/I) is accepted by design to maintain Base-60 boundary.
 BASE60_ALPHABET = "0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ"
 BASE60_MAP = {char: idx for idx, char in enumerate(BASE60_ALPHABET)}
 
-# Mathematical constant for canonical width calculation: log2(60)
 _LOG2_60 = 5.906890595608519
 
 _CHECKSUM_LEN = 2
 
-# Chunked positional arithmetic for ENCODING: one bigint divmod extracts 8
-# sexagesimal digits at once (60**8 fits in a machine word), and each 8-digit
-# block is emitted as 4 lookups into a precomputed digit-pair table.
-# Empirical (32-byte payload, end-to-end bytes_to_base60): 2.2 us/op vs
-# 3.9 us/op with per-digit bigint divmod (~1.75x).
-# DECODING intentionally stays per-character: at ledger widths (44-47 chars)
-# the plain accumulation loop measured faster than both chunked variants.
 _CHUNK_BASE = 60**8  # 167_961_600_000_000
 _PAIR_BASE = 60 * 60
 _DIGIT_PAIRS = tuple(hi + lo for hi in BASE60_ALPHABET for lo in BASE60_ALPHABET)
@@ -157,8 +147,6 @@ def bytes_to_base60(data: bytes) -> str:
 
     encoded = _encode_positive(num)
     if len(encoded) >= char_len:
-        # Mathematically unreachable for correct widths; mirrors legacy
-        # rjust() no-truncation semantics as a safety invariant.
         return encoded
     return encoded.rjust(char_len, BASE60_ALPHABET[0])
 
@@ -185,7 +173,6 @@ def base60_to_bytes(s: str, expected_len: int) -> bytes:
             return b""
         raise ValueError("Cannot decode empty string to non-empty bytes.")
 
-    # Inline decode loop for maximum performance
     val = 0
     base60_map = BASE60_MAP
     char = ""

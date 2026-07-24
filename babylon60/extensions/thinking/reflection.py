@@ -34,10 +34,8 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60.reflection")
 
-# Fact types considered "learnable" for injection
 LEARNABLE_TYPES = ("reflection", "error", "meta_learning")
 
-# Default tags for auto-generated reflections
 AUTO_TAGS = ["post-mortem", "auto-generated"]
 
 
@@ -204,7 +202,6 @@ def format_injection_json(learnings: list[InjectedLearning]) -> str:
     return json.dumps(data, indent=2, ensure_ascii=False)
 
 
-# ─── Internal Helpers ────────────────────────────────────────────────
 
 
 def _hybrid_search_learnable(

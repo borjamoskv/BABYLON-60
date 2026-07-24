@@ -139,7 +139,6 @@ class ChronosEngine:
 
         multipliers = cls.COMPLEXITY_MULTIPLIERS[complexity]
 
-        # Base multipliers
         t_c = ai_time_secs * multipliers["t_c"]
         t_d = ai_time_secs * multipliers["t_d"]
         t_i = ai_time_secs * multipliers["t_i"]
@@ -148,7 +147,6 @@ class ChronosEngine:
 
         hst = t_c + t_d + t_i + t_b + t_p
 
-        # Baselines
         baseline_mins_human = {
             "low": 3 * 60,
             "medium": 15 * 60,
@@ -157,12 +155,10 @@ class ChronosEngine:
             "impossible": 1000000 * 60,
         }
 
-        # Take the maximum between math and human baseline reality
         hst = max(hst, baseline_mins_human[complexity])
 
         asym = hst / ai_time_secs if ai_time_secs > 0 else 0
 
-        # Select a random appropriate tip and anti-tip
         tip = random.choice(cls.TIPS_POOL[complexity])
         anti_tip = random.choice(cls.ANTI_TIPS_POOL[complexity])
 

@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Architectural Respiration (PULMONES).
 
@@ -85,7 +81,6 @@ def oxygenate(min_interval: float = 0.1):  # type: ignore
 
             deficit = target - time.monotonic()
             if deficit > 0:
-                # Use event wait to avoid 'time.sleep' pre-push blocking regex
                 threading.Event().wait(deficit)
             return func(*args, **kwargs)
 

@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/cortex_metrics.py
 """Real Telemetry from CORTEX DB - Afferent Signals for Fitness Computation.
 
 Replaces stochastic (random.uniform) fitness signals with empirical
@@ -60,9 +59,6 @@ logger = logging.getLogger(__name__)
 
 _DEFAULT_DB = Path("~/.babylon60/cortex.db").expanduser()
 
-# ── Afferent Routing Table ─────────────────────────────────────
-# Maps each AgentDomain to its primary CORTEX project(s).
-# Multi-project domains aggregate metrics across all listed projects.
 DOMAIN_PROJECT_MAP: dict[AgentDomain, list[str]] = {
     AgentDomain.FABRICATION: ["cortex", "naroa-2026"],
     AgentDomain.ORCHESTRATION: ["cortex"],
@@ -113,7 +109,6 @@ class DomainMetrics:
     cascade_depth_avg: float = 0.0
     _fetched_at: float = field(default_factory=time.time)
 
-    # ── Derived Signals ────────────────────────────────────────
 
     @property
     def error_rate(self) -> float:
@@ -186,7 +181,6 @@ class DomainMetrics:
             - self.llm_error_count * 2.5  # Ω₃: Critical failure (LLM out)
             - (self.avg_llm_latency_ms / 500.0)  # Latency pressure
         )
-        # Phasic recency bonus (dopaminergic salience)
         if self.last_decision_age_hours < 24:
             raw += 1.5
         elif self.last_decision_age_hours > 168:  # >1 week stale
@@ -211,11 +205,9 @@ class DomainMetrics:
         }
 
 
-# ── Tonic Baseline (homeostatic set-point) ─────────────────────
 _TONIC = DomainMetrics()
 
 
-# ── Async DB Queries ───────────────────────────────────────────
 
 
 async def fetch_domain_metrics(
@@ -245,7 +237,6 @@ async def fetch_domain_metrics(
     try:
         async with connect_async_ctx(str(db_path)) as conn:
             for project in projects:
-                # ── Fact counts by type ──
                 for fact_type, attr in (
                     ("error", "error_count"),
                     ("bridge", "bridge_count"),
@@ -260,7 +251,6 @@ async def fetch_domain_metrics(
                         if row:
                             setattr(m, attr, getattr(m, attr) + row[0])
 
-                # ── Total facts (density) ──
                 async with conn.execute(
                     "SELECT COUNT(*) FROM facts WHERE project = ?",
                     (project,),
@@ -269,7 +259,6 @@ async def fetch_domain_metrics(
                     if row:
                         m.fact_density += row[0]
 
-            # ── Open ghosts ──
             placeholders = ",".join("?" for _ in projects)
             async with conn.execute(
                 f"SELECT COUNT(*) FROM ghosts "  # nosec B608 - parameterized query
@@ -279,7 +268,6 @@ async def fetch_domain_metrics(
                 row = await cur.fetchone()
                 m.ghost_count = row[0] if row else 0
 
-            # ── Last decision recency (phasic salience) ──
             async with conn.execute(
                 f"SELECT MAX(created_at) FROM facts "  # nosec B608 - parameterized query
                 f"WHERE fact_type = 'decision' AND project IN ({placeholders})",
@@ -296,8 +284,6 @@ async def fetch_domain_metrics(
                     except Exception as exc:  # noqa: BLE001
                         logger.warning("Suppressed exception: %s", exc)
 
-            # ── LLM Telemetry (Afferent Cascade Signals) ──
-            # Measure terminal failures and average depth in the last hour
             hour_ago = time.monotonic() - 3600
             async with conn.execute(
                 f"SELECT COUNT(*), AVG(latency_ms), AVG(depth) FROM llm_telemetry "
@@ -306,9 +292,6 @@ async def fetch_domain_metrics(
             ) as cur:
                 row = await cur.fetchone()
                 if row:
-                    # Count only terminal errors (tier='none') for error_count
-                    # but we also want general latency/depth.
-                    # We'll re-query specifically for tier='none' for err count
                     pass
 
             async with conn.execute(
@@ -370,7 +353,6 @@ async def fetch_all_domain_metrics(
     return metrics
 
 
-# ── Sync Wrapper (backward compatibility) ──────────────────────
 
 
 class CortexMetrics:

@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX LLM - Cognitive Handoff Orchestrator.
 
@@ -36,7 +32,6 @@ from babylon60.extensions.llm._models import CortexPrompt, IntentProfile, Reason
 logger = logging.getLogger(__name__)
 
 
-# ─── Cognitive Reasoning Map (Axiom Ω₁₆) ────────────────────────────────────
 
 REASONING_MODE_MAP: dict[str, ReasoningMode | None] = {
     "architecture": ReasoningMode.DEEP_THINK,
@@ -51,7 +46,6 @@ REASONING_MODE_MAP: dict[str, ReasoningMode | None] = {
 }
 
 
-# ─── Internal Types ─────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -76,7 +70,6 @@ class _AuditResult:
     reason: str = ""
 
 
-# ─── CognitiveHandoff ──────────────────────────────────────────────────────
 
 
 class CognitiveHandoff:
@@ -91,7 +84,6 @@ class CognitiveHandoff:
       → architect (gpt-5.4, only if schema revision needed)
     """
 
-    # Empirical Provider Assignments (2026-06 Exergy Optimized)
     DEFAULT_ARCHITECT = "anthropic"  # claude-fable-5
     DEFAULT_AUDITOR_PREMIUM = "anthropic"  # claude-opus-4.8-thinking
     DEFAULT_AUDITOR_ECONOMIC = "z_ai"  # glm-5.2 (max)
@@ -123,12 +115,10 @@ class CognitiveHandoff:
         self._auditor_deepthink = self.DEFAULT_AUDITOR_DEEPTHINK
         self._infra = infra_provider
 
-        # Telemetry
         self._total_tokens = 0
         self._escalation_count = 0
         self._quarantine_count = 0
 
-    # ─── Public API ─────────────────────────────────────────────────────
 
     async def process_belief(
         self,
@@ -153,7 +143,6 @@ class CognitiveHandoff:
         ctx = context or []
         total_tokens = 0
 
-        # ── Step 1: Infrastructure prescreen ─────────────────────────
         prescreen = await self._infra_prescreen(belief, ctx)
         total_tokens += prescreen.tokens_used
 
@@ -169,13 +158,9 @@ class CognitiveHandoff:
                 reason="Infrastructure prescreen: low relevance, compact_and_forget",
             )
 
-        # ── Step 2: Auditor Economic (GLM-5.2 Max) ────────────────────
         audit = await self._auditor_economic_verify(belief, ctx)
         total_tokens += audit.tokens_used
 
-        # ── Step 3: BFT Guard (Escalate to Premium if needed) ────────
-        # Any contradiction detected by Economic tier MUST be escalated
-        # to the Premium tier to prevent Denial of Belief via hallucination.
         needs_premium = (
             audit.verdict == "UNCERTAIN"
             or audit.has_contradiction
@@ -207,14 +192,12 @@ class CognitiveHandoff:
                     reason=premium.reason,
                 )
 
-        # ── Step 4: Architect revision (if schema change needed) ─────
         if audit.needs_schema_revision:
             logger.info("Schema revision needed - dispatching to Architect")
             revised = await self._architect_revise(belief, audit)
             total_tokens += revised.cost_tokens
             return revised
 
-        # ── All clear ────────────────────────────────────────────────
         self._total_tokens += total_tokens
         return BeliefVerdict(
             action=VerdictAction.ACCEPT,
@@ -223,7 +206,6 @@ class CognitiveHandoff:
             reason="Belief passed all audit stages",
         )
 
-    # ─── Telemetry ──────────────────────────────────────────────────────
 
     @property
     def stats(self) -> dict:
@@ -234,7 +216,6 @@ class CognitiveHandoff:
             "quarantine_count": self._quarantine_count,
         }
 
-    # ─── Internal Pipeline Steps ────────────────────────────────────────
 
     async def _infra_prescreen(
         self,
@@ -249,7 +230,6 @@ class CognitiveHandoff:
         - Content length and complexity heuristics
         """
         if self._router is None:
-            # No router - heuristic fallback (for testing / offline)
             if belief.confidence_score <= 0.1:
                 return _PrescreenResult(action="compact_and_forget", tokens_used=0)
             return _PrescreenResult(action="audit", tokens_used=0)
@@ -272,8 +252,6 @@ class CognitiveHandoff:
 
         result = await self._router.route(prompt, provider_hint=drm["provider"])
         tokens = getattr(result, "tokens_used", 0)
-        # Parse infrastructure response
-        # In production, parse JSON response; here we default to audit
         return _PrescreenResult(action="audit", tokens_used=tokens)
 
     async def _auditor_economic_verify(
@@ -420,7 +398,6 @@ class CognitiveHandoff:
             reason="Architect schema revision completed",
         )
 
-    # ─── Utilities ──────────────────────────────────────────────────────
 
     def get_drm_route(self, tolerance_variance: float) -> dict[str, Any]:
         """[DRM-v1] Get target node, temperature, and reasoning mode based on Tolerance of Varianza.
@@ -429,7 +406,6 @@ class CognitiveHandoff:
         that strict determinism is inversely proportional to sequence length and scale.
         """
         if tolerance_variance <= 0.0:
-            # 0% Tolerance -> Gemini 3.5 Flash, LOW Temp, No Reasoning
             route = {
                 "provider": self._infra,
                 "temperature": 0.0,
@@ -437,7 +413,6 @@ class CognitiveHandoff:
                 "description": "DRM-v1: Preservación Estructural (0% Varianza)",
             }
         elif tolerance_variance <= 0.15:
-            # 15% Tolerance -> Gemini 3.1 Pro (or high-fidelity economic tier), LOW Temp
             route = {
                 "provider": self._auditor_economic,
                 "temperature": 0.0,
@@ -445,7 +420,6 @@ class CognitiveHandoff:
                 "description": "DRM-v1: Ingeniería Sistémica (15% Varianza)",
             }
         else:
-            # >90% Tolerance -> Premium Tier with reasoning (ULTRATHINK / o-series / GPT-5.5)
             route = {
                 "provider": self._auditor_premium,
                 "temperature": 0.5,

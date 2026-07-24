@@ -1,8 +1,6 @@
 # [C5-REAL] Exergy-Maximized
 from __future__ import annotations
 
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
 import asyncio
 import logging
 import re

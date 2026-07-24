@@ -54,7 +54,6 @@ def test_results_sections_excluded_entirely() -> None:
             {"version": 2, "date": "2022-02-01", "moduleLabels": ["Participant Flow", "Baseline Characteristics"]},
         ),
     )
-    # results-reporting versions are neither amendments nor admin updates
     assert h.n_substantive == 0 and h.n_administrative == 0
     assert not h.unknown_labels
 

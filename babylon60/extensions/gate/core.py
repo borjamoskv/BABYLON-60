@@ -49,7 +49,6 @@ class SovereignGate:
         secret: str | None = None,
         timeout: float = DEFAULT_TIMEOUT,
     ):
-        # Resolve policy from env if not provided
         if policy is None:
             env = os.environ.get("CORTEX_ENV", "dev").lower()
             policy = GatePolicy.ENFORCE if env == "prod" else GatePolicy.AUDIT_ONLY
@@ -83,7 +82,6 @@ class SovereignGate:
             int(self.timeout),
         )
 
-    # ─── Core API ─────────────────────────────────────────────────
 
     def request_approval(
         self,
@@ -101,7 +99,6 @@ class SovereignGate:
         """
         action_id = str(uuid.uuid4())[:12]
 
-        # Generate HMAC challenge
         payload = json.dumps(
             {
                 "id": action_id,
@@ -159,7 +156,6 @@ class SovereignGate:
             self._log_audit("ACTION_EXPIRED", action)
             raise GateExpired(f"Action {action_id} expired after {self.timeout}s")
 
-        # Verify HMAC signature
         if not hmac.compare_digest(signature, action.hmac_challenge):
             self._log_audit("INVALID_SIGNATURE", action)
             raise GateInvalidSignature(f"Invalid signature for action {action_id}")
@@ -201,7 +197,6 @@ class SovereignGate:
             self._log_audit("AUTO_APPROVED_AUDIT", action)
             return True
 
-        # ENFORCE mode - actual interactive prompt
         logging.getLogger(__name__).info(f"\n{'=' * 60}")
         logging.getLogger(__name__).info("⚡ SOVEREIGN GATE - L3 ACTION APPROVAL REQUIRED")
         logging.getLogger(__name__).info(f"{'=' * 60}")
@@ -262,7 +257,6 @@ class SovereignGate:
             self._log_audit("ACTION_EXPIRED_PRE_EXEC", action)
             raise GateExpired(f"Action {action_id} expired before execution")
 
-        # Execute
         logger.info("🚀 Gate: Executing approved action %s", action_id)
         result = subprocess.run(cmd, **kwargs)
         action.status = ActionStatus.EXECUTED
@@ -275,7 +269,6 @@ class SovereignGate:
         self._log_audit("ACTION_EXECUTED", action)
         return result
 
-    # ─── Query API ────────────────────────────────────────────────
 
     def get_pending(self) -> list[PendingAction]:
         """Return all pending actions, expiring stale ones first."""
@@ -304,7 +297,6 @@ class SovereignGate:
             "total_audit_entries": len(self._audit_log),
         }
 
-    # ─── Internal ─────────────────────────────────────────────────
 
     def _get_action(self, action_id: str) -> PendingAction:
         """Retrieve an action by ID or raise."""

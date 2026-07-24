@@ -30,13 +30,10 @@ class GmailMagicLinkExtractor:
             return None
 
         try:
-            # Conexión IMAP
             mail = imaplib.IMAP4_SSL(self.imap_server)
             mail.login(self.email_user, self.email_pass)
             mail.select("inbox")
 
-            # Buscar correos de Substack recientes
-            # Criterio: De substack.com
             status, messages = mail.search(
                 None, '(FROM "substack.com" SUBJECT "Sign in to Substack")'
             )
@@ -49,7 +46,6 @@ class GmailMagicLinkExtractor:
                 logger.warning("No se encontró ningún Magic Link en el Inbox.")
                 return None
 
-            # Coger el último (el ID más alto)
             latest_id = msg_ids[-1]
             status, msg_data = mail.fetch(latest_id, "(RFC822)")
             if status != "OK":
@@ -59,7 +55,6 @@ class GmailMagicLinkExtractor:
             raw_email = msg_data[0][1]  # type: ignore[index]
             msg = email.message_from_bytes(raw_email)  # type: ignore[arg-type]
 
-            # Extraer el cuerpo
             body = ""
             if msg.is_multipart():
                 for part in msg.walk():
@@ -73,7 +68,6 @@ class GmailMagicLinkExtractor:
                 if payload:
                     body = payload.decode(errors="ignore")  # type: ignore[union-attr]
 
-            # Buscar la URL de login. Suele estar en href="https://<dominio>.substack.com/login/confirm_login?..."
             match = re.search(r'href="(https://[^"]+substack\.com/login/confirm_login[^"]+)"', body)
             if match:
                 magic_link = match.group(1)

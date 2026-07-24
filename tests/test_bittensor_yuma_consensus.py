@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
 C5-REAL AUTOMATED VERIFICATION SUITE: BITTENSOR YUMA CONSENSUS & EXERGY ENGINE
 ==============================================================================
@@ -33,7 +32,6 @@ def test_compute_yuma_consensus_clipping_sybil() -> None:
 
     ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)
 
-    # Check Sybil miner consensus clipped to 0
     assert consensus[4] == 0.0, f"Sybil miner threshold should be clipped to 0, got {consensus[4]}"
     assert ranks[4] == 0.0, f"Sybil miner rank should be 0, got {ranks[4]}"
     assert dividends[3] == 0.0, f"Sybil validator dividend should be 0, got {dividends[3]}"
@@ -69,7 +67,6 @@ def test_multi_epoch_and_wal_persistence(tmp_path) -> None:  # type: ignore
     assert sim["epochs_executed"] == 5
     assert len(sim["history"]) == 5
 
-    # Check SQLite WAL persistence
     assert os.path.exists(db_file)
     conn = sqlite3.connect(db_file)
     try:

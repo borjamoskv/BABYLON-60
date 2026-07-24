@@ -55,12 +55,10 @@ class CircuitBreaker:
         """
         if self._state == "OPEN":
             if self._opened_at is None:
-                # Should never happen, but guard against None
                 self._opened_at = time.monotonic()
             elapsed = time.monotonic() - self._opened_at
             if elapsed < self.recovery_timeout:
                 raise RuntimeError("Circuit breaker is OPEN; request blocked")
-            # Timeout elapsed – move to HALF‑OPEN
             self._state = "HALF_OPEN"
             self._success_count = 0
             LOGGER.info("Circuit breaker transitioning to HALF_OPEN after timeout")
@@ -86,7 +84,6 @@ class CircuitBreaker:
             self._state = "OPEN"
             self._opened_at = time.monotonic()
             LOGGER.error("Circuit breaker OPENed due to failures")
-        # Reset success counter in case we were HALF_OPEN
         self._success_count = 0
 
     async def _record_success(self) -> None:
@@ -99,11 +96,9 @@ class CircuitBreaker:
                 self._opened_at = None
                 LOGGER.info("Circuit breaker CLOSED after successful half‑open trials")
         else:
-            # In CLOSED state just reset failure count on success
             self._failure_count = 0
 
 
-# Global instance used by the sidecar runner
 circuit_breaker = CircuitBreaker()
 
 
@@ -124,12 +119,10 @@ async def call_external_compact(
             from babylon60.compaction.compactor import compact
 
             if engine is not None:
-                # compact() is sync - run in thread to avoid blocking event loop
                 return await asyncio.to_thread(compact, engine, project)
         except Exception as exc:  # noqa: BLE001
             logging.warning("Suppressed exception: %s", exc)
 
-        # Fallback: direct SQLite WAL checkpoint
         if db_path:
 
             def _checkpoint():

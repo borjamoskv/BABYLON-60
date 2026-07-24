@@ -34,7 +34,6 @@ class GenomicStateTransducer:
     Enforces exact causal taint and fail-fast validation.
     """
 
-    # Mapping of canonical genes to their primary oncological primitive node IDs
     GENE_TO_PRIMITIVE_MAP: dict[str, str] = {
         "TP53": "ONC-046",  # Suppressor loss / DDR disruption
         "BRCA1": "ONC-151",  # HRD vulnerability / BRCA1_loss
@@ -65,18 +64,15 @@ class GenomicStateTransducer:
 
         state: dict[str, int] = dict(base_state) if base_state is not None else {}
 
-        # Evaluate TMB
         tmb_res: TMBResult = GenomicEvaluationEngine.evaluate_tmb(variants, target_region_mb=target_region_mb)
         if tmb_res.status == "TMB-High":
             state["ONC-146"] = 1  # Tumor Mutational Burden High node activation
 
-        # Evaluate APOBEC
         apobec_res: APOBECEnrichmentResult = GenomicEvaluationEngine.evaluate_apobec_enrichment(variants)
         if apobec_res.is_apobec_driven:
             state["ONC-148"] = 1  # APOBEC mutagenesis signature node activation
             state["ONC-150"] = 1  # Hypermutation cascade activation
 
-        # Map gene mutations to specific primitive activations
         mutated_genes: set[str] = set()
         for v in variants:
             gene = str(v.metadata.get("gene", "")).upper()
@@ -129,7 +125,6 @@ class GenomicStateTransducer:
         )
         state_matrix: dict[str, int] = base_transduction["state_matrix"]
 
-        # Evaluate LOH & HRD
         hrd_res: LOHHRDResult = GenomicEvaluationEngine.evaluate_loh_hrd(
             params.loh_events, params.total_regions, wgd_detected=params.wgd_detected
         )
@@ -138,7 +133,6 @@ class GenomicStateTransducer:
             if hrd_res.wgd_detected:
                 state_matrix["ONC-145"] = 1  # Whole Genome Duplication chromosomal instability node
 
-        # Evaluate ecDNA Amplicons
         ecdna_results: list[ECDNAAmpliconResult] = []
         if params.ecdna_records:
             if not isinstance(params.ecdna_records, list):

@@ -20,8 +20,6 @@ __all__ = ["WorkflowMonitor"]
 
 logger = logging.getLogger("moskv-daemon")
 
-# ─── Workflow Catalog ─────────────────────────────────────────────────
-# Each entry: (workflow_command, description, condition_tags)
 
 _WORKFLOW_CATALOG: list[tuple[str, str, list[str]]] = [
     ("/josu", "Autonomous ghost resolution and code sniping", ["ghosts"]),
@@ -37,7 +35,6 @@ _WORKFLOW_CATALOG: list[tuple[str, str, list[str]]] = [
     ("/deploy", "Deploy CORTEX services - API, daemon, or MCP", ["deploy"]),
 ]
 
-# Minimum seconds between re-evaluations
 _EVAL_INTERVAL = 600  # 10 minutes
 
 
@@ -68,7 +65,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
         self._last_eval: float = 0.0
         self._last_suggestions: list[WorkflowAlert] = []
 
-    # ─── Public API ───────────────────────────────────────────────
 
     def check(self) -> list[WorkflowAlert]:
         """Evaluate system state and return workflow recommendations."""
@@ -78,7 +74,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
 
         suggestions: list[WorkflowAlert] = []
 
-        # 1. Ghost accumulation → /josu
         ghost_count = self._count_stale_ghosts()
         if ghost_count >= self._min_ghosts_for_josu:
             suggestions.append(
@@ -95,7 +90,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
                 )
             )
 
-        # 2. Stale memory → /nightshift or /cortex-store
         memory_hours = self._memory_staleness_hours()
         if memory_hours is not None and memory_hours > self._memory_stale_hours:
             wf = "/nightshift" if memory_hours > 48 else "/cortex-store"
@@ -114,7 +108,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
                 )
             )
 
-        # 3. DB size / health check → /build or /test
         db_size_mb = self._db_size_mb()
         if db_size_mb is not None and db_size_mb > 100:
             suggestions.append(
@@ -130,7 +123,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
                 )
             )
 
-        # 4. High ghost count + stale memory → /immune
         if ghost_count >= 5 and memory_hours is not None and memory_hours > 24:
             suggestions.append(
                 WorkflowAlert(
@@ -146,7 +138,6 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
                 )
             )
 
-        # 5. Long time since last check → /status
         if not suggestions and memory_hours is not None and memory_hours > 6:
             suggestions.append(
                 WorkflowAlert(
@@ -158,14 +149,12 @@ class WorkflowMonitor(BaseMonitor[WorkflowAlert]):
                 )
             )
 
-        # Sort by priority (lower = more urgent)
         suggestions.sort(key=lambda a: a.priority)
 
         self._last_eval = now
         self._last_suggestions = suggestions
         return suggestions
 
-    # ─── Private Sensors ──────────────────────────────────────────
 
     def _count_stale_ghosts(self) -> int:
         """Count ghosts older than threshold hours."""

@@ -46,7 +46,6 @@ def main() -> None:
 
     print("🟢 [CORTEX-BRIDGE] Transducción iniciada. Ignición C5-REAL del VoidLedger Rust.")
     try:
-        # BFT_KEY fallback logic (Zero static fallback is strictly handled in Rust, but we warn here if not present)
         bft_key = os.environ.get("CORTEX_BFT_KEY") or os.environ.get("CORTEX_VAULT_KEY")
         if not bft_key:
             print(

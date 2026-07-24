@@ -18,7 +18,6 @@ async def run_benchmark(iterations: int = 10000) -> None:
 
     start_time: float = time.perf_counter()
 
-    # Pre-generar eventos para medir puramente el IO y el BFT Actor
     events: list[LedgerEvent] = [
         LedgerEvent(
             stream="benchmark",
@@ -33,10 +32,8 @@ async def run_benchmark(iterations: int = 10000) -> None:
         for i in range(iterations)
     ]
 
-    # Encolar todo de golpe
     futures: list[asyncio.Future[dict[str, Any]]] = [actor.append(event) for event in events]
 
-    # Esperar resolución
     results: list[dict[str, Any] | BaseException] = await asyncio.gather(*futures, return_exceptions=True)
 
     end_time: float = time.perf_counter()
@@ -44,7 +41,6 @@ async def run_benchmark(iterations: int = 10000) -> None:
 
     await actor.stop()
 
-    # Limpieza
     if db_path.exists():
         db_path.unlink()
     shm: Path = Path("benchmark_temp.db-shm")
@@ -54,7 +50,6 @@ async def run_benchmark(iterations: int = 10000) -> None:
     if wal.exists():
         wal.unlink()
 
-    # Métricas
     success: int = sum(1 for r in results if not isinstance(r, BaseException))
     errors: int = len(results) - success
     tps: float = success / total_time

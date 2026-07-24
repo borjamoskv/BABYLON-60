@@ -31,12 +31,8 @@ class ReversibilityFilter(ImmuneFilter):
 
     async def evaluate(self, signal: Any, context: dict[str, Any]) -> FilterResult:
         """Evaluate reversibility of the proposed intent/signal."""
-        # Simple R-level mapping for demonstration
-        # In a real scenario, we'd parse the intent details (files affected, command type)
         level: ReversibilityLevel = context.get("reversibility_level", ReversibilityLevel.R1)
 
-        # Blast radius calculation (heuristic)
-        # blast_radius = (archivos_afectados × 10) + (dependencias_downstream × 20) + (irreversibilidad × 50)
         arch_count = len(context.get("affected_paths", []))
         deps_count = context.get("downstream_dependencies_count", 0)
 

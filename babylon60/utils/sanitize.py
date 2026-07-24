@@ -19,7 +19,6 @@ __all__ = [
     "validate_pagination",
 ]
 
-# ─── Constants ────────────────────────────────────────────────────────
 
 _PROJECT_RE: Final = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_\-\.]{0,127}$")
 _TENANT_RE: Final = re.compile(r"^[a-z0-9_\-]{1,64}$", re.IGNORECASE)
@@ -42,14 +41,11 @@ ALLOWED_FACT_TYPES: Final = frozenset(
     }
 )
 
-# Characters that should never appear in any user input
 _DANGEROUS_CHARS: Final = frozenset({"\x00", "\r", "\n", "\t", "\x1b"})
 
-# Max query length to prevent DoS via massive FTS5 queries
 MAX_QUERY_LENGTH: Final = 2048
 
 
-# ─── Sanitizers ───────────────────────────────────────────────────────
 
 
 def sanitize_project_name(project: str) -> str:
@@ -66,7 +62,6 @@ def sanitize_project_name(project: str) -> str:
     if not project:
         raise ValueError("Project name cannot be empty")
 
-    # Normalize Unicode to prevent homoglyph attacks
     project = unicodedata.normalize("NFKC", project).strip()
 
     if any(c in project for c in _DANGEROUS_CHARS):
@@ -118,7 +113,6 @@ def sanitize_query(query: str) -> str:
 
     query = unicodedata.normalize("NFKC", query).strip()
 
-    # Remove control characters
     query = "".join(c for c in query if c not in _DANGEROUS_CHARS)
 
     if len(query) > MAX_QUERY_LENGTH:

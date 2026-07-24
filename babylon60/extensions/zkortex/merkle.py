@@ -120,7 +120,6 @@ class MerkleTree:
         self._elements = list(elements)
         self._leaves = [_leaf_hash(e) for e in elements]
 
-        # Padding a potencia de 2 con hoja vacía
         leaves = list(self._leaves)
         while len(leaves) & (len(leaves) - 1):  # no es potencia de 2
             leaves.append(_sha256(b"zkortex:empty_leaf"))
@@ -157,7 +156,6 @@ class MerkleTree:
         index = self._elements.index(element)
         proof_path: list[MerkleProofNode] = []
 
-        # Reconstruir el path por layers (el padding hace que el index sea correcto)
         current_index = index
         for layer in self._layers[:-1]:  # Todas excepto la raíz
             is_right = current_index % 2 == 0

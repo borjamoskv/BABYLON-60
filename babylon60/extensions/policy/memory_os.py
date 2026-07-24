@@ -34,11 +34,8 @@ class MemoryOS:
 
     def __init__(self):
         self._working_memory: dict[str, Any] = {}
-        # Fixed-size physical tensor array
         self._episodic_vsa_tensor: list[float] = [0.0] * VSA_DIMENSION
-        # Bounded episodic trace log (FIFO, max EPISODIC_TRACE_LIMIT entries)
         self._episodic_traces: deque[dict[str, Any]] = deque(maxlen=EPISODIC_TRACE_LIMIT)
-        # Semantic memory connects to ledger
         self._decay_rate = 0.99
         self._glial_daemon_task = None
 
@@ -67,17 +64,14 @@ class MemoryOS:
             self._working_memory[key] = value
             return True
         if tier == MemoryTier.EPISODIC:
-            # Map & Bind context into fixed-size VSA tensor (O(1) memory footprint)
             ctx_string = f"{key}:{value}"
             from babylon60.utils.base60 import decode_base60
 
             idx = decode_base60(cortex_hash(ctx_string.encode("utf-8"))) % VSA_DIMENSION
             self._episodic_vsa_tensor[idx] += 1.0
-            # Also record in bounded trace log for test observability
             self._episodic_traces.append({"key": key, "value": value})
             return True
         if tier == MemoryTier.SEMANTIC:
-            # Requires Maxwell's Demon (Mem0 pipeline)
             raise NotImplementedError(
                 "Semantic writes must pass through mem0_pipeline for exergy validation."
             )
@@ -89,7 +83,6 @@ class MemoryOS:
         bypassing expensive global searches.
         """
         logger.debug("Reading from %s memory: %s", tier.value, query)
-        # Search implementation based on tier
         return None
 
     async def flush(self, tier: MemoryTier):

@@ -44,7 +44,6 @@ def validate_genome(agent: AutopoieticAgent, genome: StrategyGenome) -> bool:
         )
         return False
 
-    # Check mutation rates are within bounds
     for mt, rate in genome.mutation_rates.items():
         if rate > agent.config.max_mutation_rate:
             genome.mutation_rates[mt] = agent.config.max_mutation_rate
@@ -82,7 +81,6 @@ def escalate_mutation_pressure(agent: AutopoieticAgent) -> None:
             agent.config.max_mutation_rate,
             current * 1.3,
         )
-    # Boost radical mutations specifically
     agent._genome.mutation_rates[MutationType.STRATEGY_SYNTHESIS] = min(
         0.5,
         agent._genome.mutation_rates.get(MutationType.STRATEGY_SYNTHESIS, 0.05) * 2.0,

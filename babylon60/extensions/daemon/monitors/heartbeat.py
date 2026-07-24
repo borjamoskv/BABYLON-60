@@ -57,7 +57,6 @@ class TrueHeartbeatMonitor:
                 current_payload = await response.text()
                 elapsed = (time.monotonic() - start) * 1000
 
-                # Core Logic: replace status==200 with semantic_drift > threshold
                 drift = self.semantic_drift(current_payload, self.past)
 
                 if drift > self.threshold:

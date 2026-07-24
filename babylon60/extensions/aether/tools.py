@@ -25,9 +25,6 @@ logger = logging.getLogger("babylon60_extensions.aether.tools")
 _MAX_OUTPUT = 8000  # chars truncated to avoid flooding context
 _BASH_TIMEOUT = 60  # seconds
 
-# ── Sovereign Command Guard (Ω₃: Byzantine Default) ──────────────────────
-# Destructive patterns that autonomous agents must NEVER execute.
-# Checked via substring match on the normalized command string.
 FORBIDDEN_BASH_PATTERNS: frozenset[str] = frozenset(
     {
         "rm -rf /",
@@ -87,7 +84,6 @@ class AgentToolkit:
 
         self.capability_guard = capability_guard
 
-        # Capability expansion (Standardizing high-level tokens to low-level methods)
         if allowed_tools is not None:
             expanded = set()
             mappings = {
@@ -113,7 +109,6 @@ class AgentToolkit:
         else:
             self.allowed_tools = None
 
-    # ── Path helpers ──────────────────────────────────────────────────
 
     def _safe_path(self, relative: str) -> Path:
         """Resolve a relative path, ensuring it stays inside repo_path."""
@@ -144,7 +139,6 @@ class AgentToolkit:
                 )
         return None
 
-    # ── File tools ────────────────────────────────────────────────────
 
     def read_file(self, path: str) -> str:
         """Read a file relative to repo root. Returns its text content."""
@@ -188,11 +182,9 @@ class AgentToolkit:
         except OSError as e:
             return f"[ERROR] {e}"
 
-    # ── Shell tools ───────────────────────────────────────────────────
 
     def bash(self, cmd: str, timeout: int = _BASH_TIMEOUT) -> str:
         """Run a shell command in the repo dir. Returns stdout+stderr."""
-        # ── Sovereign Command Guard (Ω₃) ──
         blocked = type(self)._sovereign_bash_guard(cmd)
         if blocked:
             return blocked
@@ -220,7 +212,6 @@ class AgentToolkit:
         except (ValueError, TypeError, OSError, KeyError) as e:
             return f"[ERROR] bash failed: {e}"
 
-    # ── Git tools ─────────────────────────────────────────────────────
 
     def git_diff(self) -> str:
         """Return current working tree diff."""
@@ -248,7 +239,6 @@ class AgentToolkit:
         """Push branch to origin."""
         return self.bash(f"git push -u origin {branch}")
 
-    # ── Web tool ──────────────────────────────────────────────────────
 
     def web_search(self, query: str) -> str:
         """Minimal DuckDuckGo instant answer lookup for the agent."""
@@ -270,13 +260,11 @@ class AgentToolkit:
     def autodidact_ingest(self, target_url: str, intent: str = "Aprender") -> str:
         """Semantic scalpel: ingest documentation using AUTODIDACT-Ω with a specific intent."""
         logger.info("🧠 autodidact_ingest: %s (Intent: %s)", target_url, intent)
-        # Inline import to avoid circular dependencies and unnecessary overhead
         try:
             import asyncio
 
             from babylon60.extensions.skills.autodidact.actuator import autodidact_pipeline
 
-            # Helper to run async in sync context
             def _run_async():
                 try:
                     loop = asyncio.get_event_loop()
@@ -295,15 +283,12 @@ class AgentToolkit:
         except (ValueError, TypeError, OSError, KeyError) as e:
             return f"[ERROR] Autodidact failed: {e}"
 
-    # ── Dispatch ──────────────────────────────────────────────────────
 
     @hooked_tool_execution(timeout_limit=5.0)
     def dispatch(self, tool_name: str, args: dict[str, str]) -> str:
         """Dispatch a tool call by name. Returns string result."""
 
-        # 0. Capability Guard Verification (Axiom Ω₄)
         if self.capability_guard:
-            # Map tools to their operative RiskTier
             if tool_name in {"read_file", "list_dir", "git_status", "git_log", "git_diff"}:
                 tier = RiskTier.TIER_1_LOCAL_SAFE
             elif tool_name in {"web_search", "autodidact_ingest"}:
@@ -316,13 +301,11 @@ class AgentToolkit:
                 tier = RiskTier.TIER_3_LOCAL_MUTATION
 
             try:
-                # We enforce that the required capability maps exactly to the tool name.
                 self.capability_guard.validate_action(tool_name, tier)
             except ValueError as e:
                 logger.warning("CapabilityGuard rejected '%s': %s", tool_name, e)
                 return f"[ERROR] CapabilityViolationError: {e}"
 
-        # Legacy fallback if no guard provided
         if self.allowed_tools is not None and tool_name not in self.allowed_tools:
             logger.warning("Tool %s intercepted: not in allowed_tools list.", tool_name)
             return (

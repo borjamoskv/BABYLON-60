@@ -20,16 +20,13 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
 
-# ── Constants ──────────────────────────────────────────────────────────────
 
-# AST nodes that are NEVER allowed in generated code (Ω₃: Zero Trust)
 FORBIDDEN_AST_NODES: frozenset[type] = frozenset(
     {
         ast.Global,  # No global state mutation
     }
 )
 
-# Function calls that are categorically banned
 FORBIDDEN_CALLS: frozenset[str] = frozenset(
     {
         "eval",
@@ -44,7 +41,6 @@ FORBIDDEN_CALLS: frozenset[str] = frozenset(
     }
 )
 
-# Module imports that require explicit whitelisting
 FORBIDDEN_IMPORTS: frozenset[str] = frozenset(
     {
         "os",
@@ -69,7 +65,6 @@ FORBIDDEN_IMPORTS: frozenset[str] = frozenset(
     }
 )
 
-# Whitelisted imports (safe standard library + cortex internals)
 ALLOWED_IMPORT_PREFIXES: frozenset[str] = frozenset(
     {
         "typing",
@@ -92,14 +87,12 @@ ALLOWED_IMPORT_PREFIXES: frozenset[str] = frozenset(
     }
 )
 
-# Complexity ceilings
 MAX_LOOP_DEPTH: int = 4
 MAX_FUNCTION_LINES: int = 80
 MAX_TOTAL_LINES: int = 500
 MAX_CYCLOMATIC_COMPLEXITY: int = 15
 
 
-# ── Enums ──────────────────────────────────────────────────────────────────
 
 
 class ValidationVerdict(str, Enum):
@@ -114,7 +107,6 @@ class ValidationVerdict(str, Enum):
     FAIL_PARSE = "fail_parse"
 
 
-# ── Data Model ─────────────────────────────────────────────────────────────
 
 
 @dataclass()
@@ -135,7 +127,6 @@ class ASTValidationResult:
         return f"❌ {self.verdict.value}: {'; '.join(self.violations)}"
 
 
-# ── ASTValidator ───────────────────────────────────────────────────────────
 
 
 class ASTValidator:
@@ -163,7 +154,6 @@ class ASTValidator:
 
     def validate(self, code: str) -> ASTValidationResult:
         """Run the full Static Analysis Gate on Python source code."""
-        # Phase 1: Parse
         try:
             tree = ast.parse(code)
         except SyntaxError as e:
@@ -172,7 +162,6 @@ class ASTValidator:
                 violations=[f"SyntaxError at line {e.lineno}: {e.msg}"],
             )
 
-        # Phase 2: Forbidden AST nodes
         node_violations = _check_forbidden_nodes(tree)
         if node_violations:
             return ASTValidationResult(
@@ -180,7 +169,6 @@ class ASTValidator:
                 violations=node_violations,
             )
 
-        # Phase 3: Forbidden function calls
         call_violations = self._check_calls(tree)
         if call_violations:
             return ASTValidationResult(
@@ -188,7 +176,6 @@ class ASTValidator:
                 violations=call_violations,
             )
 
-        # Phase 4: Import audit
         import_violations = self._check_imports(tree)
         if import_violations:
             return ASTValidationResult(
@@ -196,7 +183,6 @@ class ASTValidator:
                 violations=import_violations,
             )
 
-        # Phase 5: Complexity guard
         complexity_violations, stats = _check_complexity(tree, code)
         if complexity_violations:
             return ASTValidationResult(
@@ -245,7 +231,6 @@ class ASTValidator:
         )
 
 
-# ── Extracted pure functions ───────────────────────────────────────────────
 
 
 def _extract_call_name(node: ast.Call) -> str | None:

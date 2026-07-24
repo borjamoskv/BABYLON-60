@@ -23,7 +23,6 @@ from babylon60.extensions.evolution.agents import (
 
 logger = logging.getLogger(__name__)
 
-# Configuración
 DEFAULT_STATE_PATH: Final = Path("~/.babylon60/evolution_state.json").expanduser()
 MAX_BACKUPS: Final = 5
 SCHEMA_VERSION: Final = 2
@@ -91,7 +90,6 @@ def save_swarm(
             "agents": [_serialize_agent(a) for a in agents],
         }
 
-        # Guardado atómico del backup del ciclo
         cycle_path = _get_cycle_path(path, cycle)
         temp_path = cycle_path.with_suffix(".tmp")
 
@@ -100,10 +98,8 @@ def save_swarm(
 
         temp_path.replace(cycle_path)
 
-        # Actualizar puntero principal (Latest)
         shutil.copy2(cycle_path, path)
 
-        # Rotación: mantener solo los N más recientes
         all_backups = sorted(path.parent.glob("evolution_state_cycle_*.json"))
         if len(all_backups) > MAX_BACKUPS:
             for old in all_backups[:-MAX_BACKUPS]:
@@ -124,7 +120,6 @@ def load_swarm(path: Path = DEFAULT_STATE_PATH) -> tuple[list[EnneagramSovereign
     if not path.parent.exists():
         return None
 
-    # Intentamos cargar el principal primero, luego los backups ordenados por fecha descendente
     targets = [path] + sorted(
         path.parent.glob("evolution_state_cycle_*.json"),
         key=lambda x: x.stat().st_mtime,

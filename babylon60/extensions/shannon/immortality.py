@@ -31,17 +31,14 @@ __all__ = ["ImmortalityIndex"]
 
 logger = logging.getLogger("babylon60_extensions.shannon.immortality")
 
-# ── Weights ──────────────────────────────────────────────────────────
 _W_DIVERSITY = 0.25
 _W_CONTINUITY = 0.25
 _W_DENSITY = 0.20
 _W_QUALITY = 0.15
 _W_COVERAGE = 0.15
 
-# ── Density normalization: 5+ facts/active-day = perfect density ─────
 _DENSITY_CAP = 5.0
 
-# ── Thresholds ───────────────────────────────────────────────────────
 _THRESHOLD_IMMORTAL = 0.75
 _THRESHOLD_PARTIAL = 0.45
 
@@ -131,40 +128,32 @@ class ImmortalityIndex:
         """
         scanner = MemoryScanner(engine)
 
-        # ── Gather raw data ──────────────────────────────────────
         total = await scanner.total_active_facts(project)
         type_dist = await scanner.type_distribution(project)
         max_gap, total_span, active_days = await scanner.temporal_gap_days(project)
         weighted_sum, conf_total = await scanner.confidence_weight_sum(project)
         filled, theoretical = await scanner.domain_coverage()
 
-        # ── Edge case: empty database ────────────────────────────
         if total == 0:
             return _empty_result(project)
 
-        # ── δ (Diversity) ────────────────────────────────────────
         diversity = _clamp(normalized_entropy(type_dist))
 
-        # ── γ (Continuity) ───────────────────────────────────────
         if total_span > 0 and active_days >= 2:
             continuity = _clamp(1.0 - (max_gap / total_span))
         else:
             continuity = 1.0 if active_days >= 1 else 0.0
 
-        # ── ρ (Density) ──────────────────────────────────────────
         if active_days > 0:
             facts_per_day = total / active_days
             density = _clamp(facts_per_day / _DENSITY_CAP)
         else:
             density = 0.0
 
-        # ── κ (Quality) ──────────────────────────────────────────
         quality = _clamp(weighted_sum / conf_total)
 
-        # ── σ (Coverage) ─────────────────────────────────────────
         coverage = _clamp(filled / theoretical)
 
-        # ── Composite ι ──────────────────────────────────────────
         iota = (
             _W_DIVERSITY * diversity
             + _W_CONTINUITY * continuity

@@ -46,7 +46,6 @@ import aiosqlite
 
 from babylon60.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
 
-# Fixed namespace so UUID v5 idempotency keys are stable across machines/runs.
 CORTEX_NAMESPACE: uuid.UUID = uuid.uuid5(uuid.NAMESPACE_URL, "moskv://apex-trials/ledger/v1")
 GENESIS_PREV_HASH: str = "0" * 64
 DEFAULT_AGENT_ID: str = "apex-trials:amendment-engine"
@@ -123,7 +122,6 @@ class AmendmentLedger:
 
     def __init__(self, db_path: str | Path = "master_ledger.db") -> None:
         self.db_path = Path(db_path)
-        # Create schema and immutable triggers synchronously using sqlite3
         conn = sqlite3.connect(self.db_path, timeout=5.0)
         try:
             conn.execute("PRAGMA journal_mode=WAL;")
@@ -206,7 +204,6 @@ class AmendmentLedger:
                 )
                 res = await actor.append(event)
 
-                # Retrieve the inserted record
                 async with aiosqlite.connect(self.db_path) as db:
                     db.row_factory = aiosqlite.Row
                     async with db.execute(

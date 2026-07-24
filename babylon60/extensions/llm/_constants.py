@@ -1,12 +1,10 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 from __future__ import annotations
 
 from typing import Final
 
 _CONTENT_TYPE_JSON: Final[str] = "application/json"
 
-# Ω₁₇: Phantom Sovereignty - Deterministic Browser Profiles
 _BROWSER_PROFILES: Final[list[dict[str, str]]] = [
     {
         "User-Agent": (
@@ -35,7 +33,6 @@ _BROWSER_PROFILES: Final[list[dict[str, str]]] = [
     },
 ]
 
-# Ω₁₈: Ghost Filter - AI Signatures to scrub from responses
 _GHOST_SIGNATURES: Final[list[str]] = [
     r"(?i)as an ai( language)? model",
     r"(?i)i am an ai developed by (openai|google|deepseek|anthropic|mistral)",

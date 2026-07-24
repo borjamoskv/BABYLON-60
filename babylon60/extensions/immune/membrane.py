@@ -115,7 +115,6 @@ class ImmuneMembrane:
         has_block = any(r.verdict == Verdict.BLOCK for r in results)
         holds = sum(1 for r in results if r.verdict == Verdict.HOLD)
 
-        # Determine Verdict: Block > Multiple Holds > Single Hold > Pass
         if has_block:
             final_verdict = Verdict.BLOCK
         elif holds > 0:
@@ -123,7 +122,6 @@ class ImmuneMembrane:
         else:
             final_verdict = Verdict.PASS
 
-        # O(1) Score calculation
         total_score = sum(r.score * self._weights.get(r.filter_id, 0.05) for r in results)
 
         blast_radius = next(

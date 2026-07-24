@@ -15,16 +15,13 @@ def validate_luhmann_post() -> None:
 
     print(f"[🔍] Auditing: {target_file}")
 
-    # 1. Check for banned tables
     if "|" in content:
-        # Check if it contains markdown table indicators like '|---|' or similar
         lines = content.splitlines()
         for i, line in enumerate(lines):
             if "|" in line and ("--" in line or ":" in line):
                 print(f"[-] Validation Failed: Found markdown table on line {i + 1}: '{line}'")
                 sys.exit(1)
 
-    # 2. Check for mandatory keywords (case insensitive)
     keywords = [
         "exergía",
         "anergía",
@@ -43,7 +40,6 @@ def validate_luhmann_post() -> None:
             print(f"[-] Validation Failed: Missing mandatory keyword '{word}'")
             sys.exit(1)
 
-    # 3. Check for mandatory footer elements
     footer_header = "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):"
     if footer_header not in content:
         print("[-] Validation Failed: Missing exact footer header")

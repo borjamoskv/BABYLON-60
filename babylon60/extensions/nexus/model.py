@@ -45,14 +45,12 @@ class NexusWorldModel:
             "hook_errors": 0,
         }
 
-    # ─── Core Mutation Interface ─────────────────────────────────────
 
     async def mutate(self, mutation: WorldMutation) -> bool:
         """The ONLY entry point for changing the World Model.
 
         Returns True if mutation was applied, False if deduplicated.
         """
-        # Fast-path dedup (in-memory, TLRU handles TTL automatically)
         key = mutation.idempotency_key
         now = time.monotonic()
 
@@ -61,7 +59,6 @@ class NexusWorldModel:
             logger.debug("NEXUS DEDUP: %s (key=%s)", mutation.intent.name, key)
             return False
 
-        # Persist to SQLite (cross-process visible)
         inserted = await asyncio.get_running_loop().run_in_executor(None, self._db.insert, mutation)
 
         if not inserted:
@@ -82,11 +79,9 @@ class NexusWorldModel:
             key,
         )
 
-        # Fire hooks in parallel
         await self._dispatch_hooks(mutation)
         return True
 
-    # ─── Reactive Hooks (Parallel Dispatch) ───────────────────────────
 
     def on(self, intent: IntentType, callback: Any) -> None:
         """Register a reactive hook."""
@@ -108,7 +103,6 @@ class NexusWorldModel:
                 self._stats["hook_errors"] += 1
                 logger.error("Hook %s failed: %s", hook.__name__, exc)
 
-        # Parallel execution with concurrency limit
         sem = asyncio.Semaphore(_MAX_HOOK_CONCURRENCY)
 
         async def _throttled(hook):
@@ -117,7 +111,6 @@ class NexusWorldModel:
 
         await asyncio.gather(*[_throttled(h) for h in hooks])
 
-    # ─── Query Interface ──────────────────────────────────────────────
 
     async def query(
         self,
@@ -137,7 +130,6 @@ class NexusWorldModel:
             None, self._db.query, origin, intent, project, since, limit
         )
 
-    # ─── Lifecycle ─────────────────────────────────────────────────────
 
     def shutdown(self) -> None:
         """Clean up in-memory caches."""

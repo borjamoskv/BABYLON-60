@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX LLM Router - DNS-Inspired Resolver Caches.
 
@@ -28,7 +24,6 @@ _DEFAULT_NEG_CAPACITY: Final[int] = 1000
 _DEFAULT_POS_CAPACITY: Final[int] = 5000
 
 
-# ─── Negative Cache (RFC 2308) ─────────────────────────────────────────────
 
 
 class NegativeCache:
@@ -46,9 +41,6 @@ class NegativeCache:
     def record_failure(self, provider_name: str, intent: str, ttl: float | None = None) -> None:
         """NXDOMAIN - cache that this provider failed for this intent."""
         key = f"{provider_name}:{intent}"
-        # TLRUCache stores a value; we just store 1.0 as a placeholder since presence is what matters
-        # If a custom TTL is provided, we can't easily override it per-item in the current TLRUCache
-        # so we rely on the default_ttl set at init.
         self._cache[key] = 1.0
         logger.debug(
             "NXDOMAIN cached: %s for intent=%s",
@@ -114,9 +106,6 @@ class PositiveCache:
 
         Returns list of (provider_name, latency_ms) - fastest first.
         """
-        # TLRUCache doesn't expose internal items easily in a sorted way.
-        # We access the internal OrderedDict for this specific use case.
-        # Note: This is an architectural concession for the 'fastest first' requirement.
         now = time.monotonic()
         good: list[tuple[str, float]] = []
 
@@ -128,7 +117,6 @@ class PositiveCache:
             if pintent == intent and (now - ts <= self._cache.ttl):
                 good.append((pname, latency))
 
-        # Sort by latency - fastest first
         good.sort(key=lambda x: x[1])
         return good
 

@@ -85,7 +85,6 @@ def run_autocognition_audit() -> None:
                     approx_tokens = int(words * 1.33)
                     total_tokens += approx_tokens
 
-                    # Measure structured density (YAML, Markdown blocks, tables, code)
                     code_blocks = re.findall(r"```[\s\S]*?```", content)
                     yaml_claims = re.findall(r"Claim:[\s\S]*?Proof:[\s\S]*?\}", content)
                     table_rows = [r for r in content.splitlines() if r.strip().startswith("|")]
@@ -101,7 +100,6 @@ def run_autocognition_audit() -> None:
                     structured_tokens += struct_tokens
                     narrative_tokens += approx_tokens - struct_tokens
 
-                # Track commands to detect command repeats
                 for call in step.get("tool_calls", []):
                     if call.get("toolName") == "run_command":
                         args = call.get("arguments", {})
@@ -122,7 +120,6 @@ def run_autocognition_audit() -> None:
     print(f"[+] Command Repeat Index: {cmd_repeat_index} ({repeat_commands} duplicated shell executions)")
     print(f"[+] Tool Errors: {tool_errors}")
 
-    # Generate OP_TAINT_SEAL
     seal_payload = f"borjamoskv:autocognition_omega:{CONV_ID_SHORT}:{total_tokens}:{exergy_ratio}:{anergy_ratio}:{cmd_repeat_index}"
     sha3_seal = compute_sha3(seal_payload)
     sha256_seal = compute_sha256(seal_payload)
@@ -162,7 +159,6 @@ OP_TAINT_SEAL:
         f.write(audit_yaml)
     print(f"[+] Crystallized Autocognitive Audit Report at: {AUDIT_FILE}")
 
-    # Persist directly in Memory Vault L3_inference_cache
     print("[*] Sealing Autocognition crystal into Memory Vault (`cortex_memory.db`)...")
     conn = babylon60.database.core.connect_sync(DB_PATH)
     conn.execute("PRAGMA journal_mode = WAL;")

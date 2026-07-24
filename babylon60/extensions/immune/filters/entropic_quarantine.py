@@ -45,7 +45,6 @@ def _extract_text(signal: Any) -> str:
     if isinstance(signal, str):
         return signal
     if isinstance(signal, dict):
-        # Prefer 'content' key if present, otherwise serialize the whole dict
         if "content" in signal:
             return str(signal["content"])
         try:
@@ -71,7 +70,6 @@ class EntropicQuarantineFilter(ImmuneFilter):
         text = _extract_text(signal)
         entropy = _shannon_entropy(text)
 
-        # Context can override threshold (e.g. for structured data)
         high_t = float(context.get("entropy_high_threshold", HIGH_ENTROPY_THRESHOLD))
         mid_t = float(context.get("entropy_mid_threshold", MID_ENTROPY_THRESHOLD))
 
@@ -97,7 +95,6 @@ class EntropicQuarantineFilter(ImmuneFilter):
                 metadata={"entropy_bits": round(entropy, 4), "text_len": len(text)},
             )
 
-        # Below mid threshold - quarantine
         return FilterResult(
             filter_id=self.filter_id,
             verdict=Verdict.BLOCK,

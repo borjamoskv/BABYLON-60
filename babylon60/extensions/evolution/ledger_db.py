@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/ledger_db.py
 """SQLite-backed metrics and mutation ledger for sovereign agent evolution.
 
 Provides O(1) persistent storage for:
@@ -39,7 +38,6 @@ class EvolutionLedgerDB:
             conn.execute("PRAGMA journal_mode=WAL")
             conn.execute("PRAGMA synchronous=NORMAL")
 
-            # Mutation Ledger
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS mutations (
                     id            TEXT PRIMARY KEY,
@@ -54,7 +52,6 @@ class EvolutionLedgerDB:
                 )
             """)
 
-            # Metric Time Series
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS metrics (
                     id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -66,7 +63,6 @@ class EvolutionLedgerDB:
                 )
             """)
 
-            # Domain Evolution Tracking
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS domain_evolution (
                     domain      TEXT PRIMARY KEY,

@@ -23,7 +23,6 @@ REPORT_PATH = (
 )
 REPORT_FALLBACK = Path.home() / ".gemini" / "antigravity" / "brain"
 
-# 21 Sessions identified in babylon_unconsolidated_report.md
 UNCONSOLIDATED_SESSIONS = [
     (
         "114f02dc-e0e0-42cc-95f9-877713f80142",
@@ -124,7 +123,6 @@ def consolidate_vault() -> None:
     conn.execute("PRAGMA busy_timeout = 5000;")
     cursor = conn.cursor()
 
-    # Ensure L1 and L3 tables exist for memory vault indexing
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS L1_primitive_nodes (
             id TEXT PRIMARY KEY,
@@ -157,7 +155,6 @@ def consolidate_vault() -> None:
 
     consolidated_count = 0
     for session_id, ts, summary in UNCONSOLIDATED_SESSIONS:
-        # Check if already consolidated
         cursor.execute("SELECT session_id FROM vault_consolidations WHERE session_id = ?", (session_id,))
         if cursor.fetchone():
             continue
@@ -166,7 +163,6 @@ def consolidate_vault() -> None:
         taint_payload = f"borjamoskv:vault_consolidate:{session_id}:{ts}:{summary}"
         sha3_hash = compute_sha3(taint_payload)
 
-        # Insert into L1 primitive nodes as a consolidated memory crystal
         node_id = f"SESSION.{session_id[:8]}"
         cursor.execute(
             """
@@ -176,7 +172,6 @@ def consolidate_vault() -> None:
             (node_id, "CONSOLIDATED_SESSION", "VAULT_CRYSTAL", summary[:80], 1),
         )
 
-        # Insert into L3 inference cache for instant retrieval across sessions
         trace_json = json.dumps(
             {
                 "session_id": session_id,
@@ -193,7 +188,6 @@ def consolidate_vault() -> None:
             (sha3_hash, "CONSOLIDATION_ULTRA", node_id, "C5-REAL-VAULT-SYNC", trace_json, 1),
         )
 
-        # Record consolidation
         cursor.execute(
             """
             INSERT OR REPLACE INTO vault_consolidations (session_id, timestamp, summary, cortex_taint_hash)

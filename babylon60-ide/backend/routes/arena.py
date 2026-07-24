@@ -30,7 +30,6 @@ def get_leaderboard() -> dict[str, Any]:
 
     conn = connect_readonly(db_path)
     try:
-        # Get latest sync run
         run_cursor = conn.execute(
             "SELECT id, fetched_at, last_updated, latency_ms, entropy FROM sync_runs ORDER BY id DESC LIMIT 1"
         )
@@ -46,7 +45,6 @@ def get_leaderboard() -> dict[str, Any]:
             "entropy": run["entropy"],
         }
         
-        # Get models of that run
         models_cursor = conn.execute(
             "SELECT rank, model, vendor, score, votes FROM leaderboard_snapshots WHERE run_id = ? ORDER BY rank",
             (run_id,)
@@ -101,14 +99,12 @@ def get_conversations() -> dict[str, Any]:
             if not part:
                 continue
             
-            # Parse ID
             id_start = part.find("(ID: ")
             id_end = part.find(")")
             conv_id = "unknown"
             if id_start != -1 and id_end != -1:
                 conv_id = part[id_start + 5 : id_end]
                 
-            # Parse Prompt, Response, Toxicity
             prompt_marker = "Prompt:\n"
             prompt_start = part.find(prompt_marker)
             response_marker = "\n\nResponse:\n"

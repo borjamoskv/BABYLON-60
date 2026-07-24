@@ -28,7 +28,6 @@ __all__ = ["BayesianTrustUpdater", "Signal", "TrustUpdate"]
 logger = logging.getLogger("babylon60_extensions.trust")
 
 
-# Confidence → (α₀, β₀) priors - start from empirical base rates
 _PRIORS: dict[str, tuple[float, float]] = {
     "C5": (9.0, 1.0),  # Very strong prior toward trust
     "C4": (7.0, 3.0),
@@ -38,7 +37,6 @@ _PRIORS: dict[str, tuple[float, float]] = {
     "unknown": (2.0, 2.0),
 }
 
-# Posterior mean → confidence label thresholds
 _THRESHOLDS: list[tuple[float, str]] = [
     (0.85, "C5"),
     (0.70, "C4"),
@@ -47,7 +45,6 @@ _THRESHOLDS: list[tuple[float, str]] = [
     (0.00, "C1"),
 ]
 
-# Update weights per signal type
 _SIGNAL_WEIGHTS: dict[str, tuple[float, float]] = {
     "confirm": (2.0, 0.0),  # Strong evidence for
     "weak_confirm": (1.0, 0.0),  # Weak evidence for
@@ -129,7 +126,6 @@ class BayesianTrustUpdater:
         sig = Signal(signal) if isinstance(signal, str) else signal
         conn = await self._engine.get_conn()
 
-        # Fetch current state
         cursor = await conn.execute(
             "SELECT confidence, consensus_score FROM facts WHERE id = ? AND tenant_id = ?",
             (fact_id, tenant_id),
@@ -141,7 +137,6 @@ class BayesianTrustUpdater:
         old_conf: str = row[0] or "C3"
         old_score: float = float(row[1]) if row[1] is not None else 1.0
 
-        # Build posterior from prior + signal
         alpha0, beta0 = _PRIORS.get(old_conf, _PRIORS["C3"])
         d_alpha, d_beta = _SIGNAL_WEIGHTS[sig.value]
         alpha = alpha0 + d_alpha
@@ -150,10 +145,8 @@ class BayesianTrustUpdater:
         mean = _posterior_mean(alpha, beta)
         variance = _posterior_variance(alpha, beta)
         new_conf = _map_to_confidence(mean)
-        # consensus_score = posterior mean (bounded 0–1)
         new_score = round(mean, 4)
 
-        # Write back
         await conn.execute(
             "UPDATE facts SET confidence = ?, consensus_score = ? WHERE id = ? AND tenant_id = ?",
             (new_conf, new_score, fact_id, tenant_id),
@@ -239,7 +232,6 @@ def _upgrades_needed(current: str) -> dict:
     result = {}
     for target in order[idx + 1 :]:
         a0, b0 = _PRIORS.get(current, _PRIORS["C3"])
-        # Simulate confirms until posterior mean crosses next threshold
         threshold, _ = next(((t, lbl) for t, lbl in _THRESHOLDS if lbl == target), (0.85, "C5"))
         a, b = a0, b0
         needed = 0

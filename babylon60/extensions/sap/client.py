@@ -15,8 +15,6 @@ from typing import Any
 try:
     import defusedxml.ElementTree as ElementTree  # type: ignore[import-untyped]
 except ImportError:
-    # Fallback: stdlib (acceptable only for trusted internal SAP environments)
-    # Install defusedxml: pip install defusedxml
     import warnings
     from xml.etree import ElementTree  # type: ignore[assignment]
 
@@ -38,7 +36,6 @@ __all__ = [
 logger = logging.getLogger("babylon60_extensions.sap.client")
 
 
-# ─── Exceptions ──────────────────────────────────────────────────────
 
 
 class SAPConnectionError(Exception):
@@ -53,7 +50,6 @@ class SAPEntityError(Exception):
     """SAP entity operation failed."""
 
 
-# ─── Configuration ───────────────────────────────────────────────────
 
 
 @dataclass
@@ -78,7 +74,6 @@ class SAPConfig:
         return self.base_url.rstrip("/")
 
 
-# ─── Client ──────────────────────────────────────────────────────────
 
 
 class SAPClient:
@@ -109,10 +104,8 @@ class SAPClient:
             verify=True,
         )
 
-        # Authenticate
         auth_headers = await self._build_auth_headers()
 
-        # Fetch CSRF token via HEAD on service root
         try:
             resp = await self._http.head(
                 self.config.base_url_normalized,
@@ -145,7 +138,6 @@ class SAPClient:
             await self._http.aclose()
             self._http = None
 
-    # ─── Entity Operations ───────────────────────────────────────────
 
     async def read_entity_set(
         self,
@@ -185,7 +177,6 @@ class SAPClient:
         url = f"{self.config.base_url_normalized}/{entity_set}"
         data = await self._request("GET", url, params=params)
 
-        # OData V2 wraps results in d.results
         results = data.get("d", {})
         if isinstance(results, dict):
             return results.get("results", [])
@@ -255,7 +246,6 @@ class SAPClient:
         entity_sets: dict[str, list[str]] = {}
         try:
             root = ElementTree.fromstring(resp.text)  # nosec B314
-            # OData V2 namespace
             for entity_type in root.iter(
                 "{http://schemas.microsoft.com/ado/2008/09/edm}EntityType"
             ):
@@ -290,7 +280,6 @@ class SAPClient:
                 "error": str(e),
             }
 
-    # ─── Internal ────────────────────────────────────────────────────
 
     async def _build_auth_headers(self) -> dict[str, str]:
         """Build authentication headers based on config."""
@@ -389,7 +378,6 @@ class SAPClient:
             "Accept": "application/json",
         }
 
-        # Add CSRF for write operations
         if method in {"POST", "PUT", "PATCH", "DELETE"} and self._csrf_token:
             headers["x-csrf-token"] = self._csrf_token
 
@@ -411,7 +399,6 @@ class SAPClient:
 
         for attempt in range(self.config.max_retries):
             try:
-                # self._http is guaranteed non-None by _raw_request
                 resp = await self._http.request(  # type: ignore[reportOptionalMemberAccess]
                     method,
                     url,

@@ -19,7 +19,6 @@ from babylon60.storage.turbopuffer import TurbopufferVectorBackend
 
 logger = logging.getLogger("moskv-daemon.l2_drain")
 
-# 7 days in seconds
 MAX_AGE_SECONDS = 7 * 24 * 3600
 
 
@@ -43,7 +42,6 @@ class L2DrainMonitor:
 
     async def _ensure_backend(self) -> bool:
         if self._backend is None:
-            # Check if turbopuffer is active
             backend = await init_vector_backend()
             if not isinstance(backend, TurbopufferVectorBackend):
                 return False
@@ -56,7 +54,6 @@ class L2DrainMonitor:
         if now - last_run < self.interval_seconds:
             return None
 
-        # Verify backend
         if not await self._ensure_backend() or self._backend is None:
             return None
 
@@ -65,7 +62,6 @@ class L2DrainMonitor:
         try:
             conn = await self._engine.get_conn()
 
-            # Support Ouroboros dynamic threshold
             threshold_seconds = MAX_AGE_SECONDS
             try:
                 from babylon60.extensions.evolution.ouroboros_hook import get_dynamic_threshold
@@ -74,7 +70,6 @@ class L2DrainMonitor:
             except (ValueError, TypeError, OSError, KeyError):
                 pass
 
-            # Select facts that are HOT and updated_at is older than threshold
             query = """
                 SELECT f.id, f.tenant_id, v.embedding
                 FROM facts f
@@ -104,7 +99,6 @@ class L2DrainMonitor:
 
                 embedding = json.loads(json_row[0])
 
-                # 1. Upsert to Turbopuffer
                 await self._backend.upsert(
                     fact_id=fact_id,
                     embedding=embedding,
@@ -112,10 +106,8 @@ class L2DrainMonitor:
                     payload={"project": project},
                 )
 
-                # 2. Delete from sqlite-vec physically
                 await conn.execute("DELETE FROM fact_embeddings WHERE fact_id = ?", (fact_id,))
 
-                # 3. Mark as COLD
                 await conn.execute(
                     "UPDATE facts SET storage_tier = 'COLD' WHERE id = ?", (fact_id,)
                 )

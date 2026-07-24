@@ -36,7 +36,6 @@ class TrendDetector:
     )
 
     def __post_init__(self) -> None:
-        # Ensure maxlen matches window_size
         if self._scores.maxlen != self.window_size:
             object.__setattr__(
                 self,
@@ -58,7 +57,6 @@ class TrendDetector:
         if n < 2:
             return 0.0
 
-        # Simple OLS slope: Σ((x-x̄)(y-ȳ)) / Σ((x-x̄)²)
         x_mean = (n - 1) / 2.0
         y_mean = sum(self._scores) / n
 
@@ -92,7 +90,6 @@ class TrendDetector:
         """Number of samples in the buffer."""
         return len(self._scores)
 
-    # ─── SQLite Persistence ──────────────────────────────────
 
     @staticmethod
     def _ensure_table(conn: sqlite3.Connection) -> None:
@@ -144,7 +141,6 @@ class TrendDetector:
             conn = connect(db_path, timeout=5)
             try:
                 self._ensure_table(conn)
-                # SQLite isoformat comparison: "2024-..." < "2024-..."
                 from datetime import timedelta
 
                 cutoff = (
@@ -174,7 +170,6 @@ class TrendDetector:
                     (n,),
                 )
                 rows = cur.fetchall()
-                # Rows are newest-first; reverse for chronological push
                 for row in reversed(rows):
                     self.push(row["score"])
             finally:

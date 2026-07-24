@@ -28,8 +28,6 @@ impl Apex {
     }
 }
 
-// Execution: Initialization of the Trinity & CORTEX Bridge
-#[tokio::main]
 async fn main() {
     let state = Apex::init(); // Memory + Audio + Swarm + Antigravity
     
@@ -43,7 +41,6 @@ async fn main() {
         precognition::ignite_precognition_daemon(precog_state).await;
     });
 
-    // Antigravity execution
     tauri::Builder::default()
         .manage(state)
         .invoke_handler(tauri::generate_handler![

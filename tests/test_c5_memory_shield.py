@@ -36,7 +36,6 @@ def test_enforce_anti_debug_darwin() -> None:
 
     from babylon60.core.c5_memory_shield import enforce_anti_debug
 
-    # Should not raise or kill the process
     enforce_anti_debug()
 
 

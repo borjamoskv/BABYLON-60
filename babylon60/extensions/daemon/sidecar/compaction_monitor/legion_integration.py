@@ -22,7 +22,6 @@ from typing import Any
 LOGGER = logging.getLogger(__name__)
 
 
-# Stub client – in production this would be the real LEGION client.
 class _StubLegionClient:
     def __init__(self, address: str = "localhost", port: int = 8000):
         self.address = address
@@ -46,7 +45,6 @@ class _StubLegionClient:
         return {"status": "success"}
 
 
-# Global client instance – can be replaced by real client via env var.
 legion_client = _StubLegionClient()
 
 
@@ -61,8 +59,6 @@ async def dispatch_compaction_via_legion(compaction_callback: Callable[[Any], An
     task_id = await legion_client.submit_task("compaction_job", payload)
     result = await legion_client.get_result(task_id)
     if result.get("status") == "success":
-        # Directly call the local compaction logic – in a real system the
-        # agent would perform the work and return detailed stats.
         await compaction_callback(None)
     else:
         LOGGER.error("LEGION compaction task %s failed: %s", task_id, result)

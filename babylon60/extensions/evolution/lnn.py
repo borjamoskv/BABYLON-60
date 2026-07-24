@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/lnn.py
 """
 Lagrangian Neural Networks (LNN) for Evolutionary Policy - ψSAP Implementation.
 
@@ -35,8 +34,6 @@ class LagrangianController:
 
     def __init__(self, learning_rate: float = 0.01):
         self.learning_rate = learning_rate
-        # Non-linear weights derived from Landauer thermodynamics
-        # L = w_k * T (Kinetic/Momentum) - w_v * V (Potential/Entropy)
         self.weights = np.array([1.0, -UltrathinkPhysicsEngine.LANDAUER_THERMAL_PENALTY, 1.0, -1.0])
 
     def predict_next_state(
@@ -51,22 +48,18 @@ class LagrangianController:
 
         dt = max(current.timestamp - previous.timestamp, 0.001)
 
-        # Exergy constraint (Kinetic Energy analogue)
         exergy_yield = UltrathinkPhysicsEngine.calculate_exergy_yield(
             stochastic_entropy=current.entropy_resistance,
             deterministic_output=current.momentum + current.grace,
             execution_time=dt,
         )
 
-        # Approximate ∂L/∂q using non-linear Exergy
-        # We amplify the momentum target based on the required singularity constant
         momentum_amplification = exergy_yield / (
             UltrathinkPhysicsEngine.SINGULARITY_CONSTANT * 0.1 + 1e-5
         )
 
         grad_l = self.weights * np.array([momentum_amplification, 1.0, 1.0, 1.0])
 
-        # Suggest forces (parameter shifts) that move the agent toward the stationary point
         suggested_shift = grad_l * self.learning_rate
 
         return {
@@ -79,7 +72,6 @@ class LagrangianController:
 
     def compute_action_loss(self, state: SymbolicActionState, dt: float = 1.0) -> float:
         """Measure the deviation from the least-action path using Euler-Lagrange discrete approximation."""
-        # Calculate ideal exergy required to maintain homeostasis
         ideal_exergy = UltrathinkPhysicsEngine.SINGULARITY_CONSTANT * 0.05
 
         actual_exergy = UltrathinkPhysicsEngine.calculate_exergy_yield(
@@ -88,6 +80,5 @@ class LagrangianController:
             execution_time=max(dt, 0.001),
         )
 
-        # Loss is the thermodynamic divergence from the ideal exergy path
         divergence = (ideal_exergy - actual_exergy) ** 2
         return float(divergence)

@@ -38,25 +38,18 @@ class PatternVector:
     suitable for feeding agents as a behavioral prior.
     """
 
-    # Risk tolerance: ratio of C3/C4/C5 facts vs C1/C2
     risk_tolerance: float  # 0.0 = risk-averse, 1.0 = bold experimenter
 
-    # Caution index: ratio of 'error' + 'ghost' facts vs total
     caution_index: float  # 0.0 = never marks failures, 1.0 = obsessive
 
-    # Bridge-building tendency: ratio of 'bridge' + 'discovery' facts
     synthesis_drive: float  # 0.0 = pure executor, 1.0 = pure architect
 
-    # Session density: avg facts per active day
     session_density: float  # 0.0 = sporadic, 1.0 (capped at 10/day)
 
-    # Recency bias: ratio of facts in last 30 days vs all facts
     recency_bias: float  # 0.0 = archaeologist, 1.0 = presentist
 
-    # Cross-project spread: normalized distinct projects touched
     breadth: float  # 0.0 = mono-domain, 1.0 = polymath
 
-    # Depth preference: avg content length (chars), normalized at 500
     depth_preference: float  # 0.0 = micro-notes, 1.0 = extensive
 
 
@@ -80,12 +73,10 @@ class CognitiveFingerprint:
     to make them behave like the human, not just follow their rules.
     """
 
-    # Identity
     tenant_id: str = "default"
     project_filter: str | None = None
     extracted_at: str = ""  # ISO timestamp
 
-    # Core pattern vector
     pattern: PatternVector = field(
         default_factory=lambda: PatternVector(
             risk_tolerance=0.0,
@@ -98,14 +89,11 @@ class CognitiveFingerprint:
         )
     )
 
-    # Domain-level preferences (top N most active domains)
     domain_preferences: list[DomainPreference] = field(default_factory=list)
 
-    # Derived metacognitive labels
     archetype: str = "unknown"  # e.g. "sovereign_architect", "obsessive_executor"
     archetype_confidence: float = 0.0  # 0.0-1.0
 
-    # Stats
     total_facts_analyzed: int = 0
     active_domains: int = 0
     fingerprint_completeness: float = 0.0  # how much data backed this extraction

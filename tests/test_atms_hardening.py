@@ -6,8 +6,6 @@ import pytest
 try:
     from strike_rs import CortexKernel  # type: ignore[attr-defined]
 except ImportError:
-    # El núcleo Rust (PyO3) es opcional por diseño: solo existe si se compiló
-    # e instaló strike_rs en el entorno. En CI limpio no está -> skip honesto.
     pytest.skip(
         "strike_rs (núcleo PyO3 nativo) no compilado en este entorno",
         allow_module_level=True,
@@ -24,7 +22,6 @@ def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path) -> None:  # ty
     """
     db_file = str(tmp_path / "cortex_atms_hardening.db")
 
-    # Instance 1: Assert knowledge and contradiction
     kernel1 = CortexKernel(db_file)
 
     id1 = kernel1.assert_knowledge("Water is H2O", "sensor_py", "env_py")
@@ -33,7 +30,6 @@ def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path) -> None:  # ty
     assert kernel1.is_believed("Water is H2O") is True
     assert kernel1.contradiction_free("Water is H2O") is True
 
-    # Inject contradiction against a conjecture hypothesis
     taint_nogood = kernel1.contradict_knowledge("Alien hypothesis Y", "env_py")
     assert "TAINT:C5_REAL_RUST:NOGOOD:" in taint_nogood
 
@@ -41,7 +37,6 @@ def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path) -> None:  # ty
     assert kernel1.is_believed("Alien hypothesis Y") is False
     assert kernel1.contradiction_free("Alien hypothesis Y") is False
 
-    # Instance 2: Reopen from disk without any prior RAM state
     kernel2 = CortexKernel(db_file)
     assert kernel2.is_believed("Water is H2O") is True, "Replayed premise must be believed in new kernel instance"
     assert kernel2.contradiction_free("Water is H2O") is True

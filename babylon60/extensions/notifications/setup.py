@@ -46,14 +46,12 @@ def setup_notifications(cfg: CortexConfig) -> NotificationBus:
         )
         min_severity = EventSeverity.WARNING
 
-    # Telegram
     telegram = TelegramAdapter(
         token=cfg.TELEGRAM_TOKEN,
         chat_id=cfg.TELEGRAM_CHAT_ID,
     )
     bus.register(telegram, min_severity=min_severity)
 
-    # macOS (always attempt - is_configured handles platform check)
     bus.register(MacOSAdapter(), min_severity=EventSeverity.WARNING)
 
     logger.info(

@@ -143,7 +143,6 @@ def resume_context() -> dict[str, Any]:
     notes = _notes_projection(root, 1)
     last_note = notes[0] if notes else None
 
-    # Última delegación con su estado terminal (mini-proyección local).
     last_delegation: dict[str, Any] | None = None
     terminal: dict[str, str] = {}
     for ev in events:  # newest first: el primer QUEUED que veamos es el más reciente
@@ -162,7 +161,6 @@ def resume_context() -> dict[str, Any]:
                 "created_at": ev["created_at"],
             }
 
-    # ¿Dónde retomar? La ruta donde nació el último evento con contexto.
     suggested = "ledger"
     if last_note and last_note.get("route"):
         suggested = last_note["route"] if last_note["route"] != "alcove" else "ledger"

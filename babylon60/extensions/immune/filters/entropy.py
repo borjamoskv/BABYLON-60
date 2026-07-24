@@ -24,12 +24,9 @@ class EntropyFilter(ImmuneFilter):
     async def evaluate(self, signal: Any, context: dict[str, Any]) -> FilterResult:
         """Measure entropy change (H) pre-execution."""
 
-        # entropy_delta = complexity_added - complexity_removed
         comp_added = context.get("complexity_added", 0.0)
         comp_removed = context.get("complexity_removed", 0.0)
 
-        # 1 abstraction = 3.0, 1 dependency = 5.0, 1 LOC = 0.1, 1 file = 2.0
-        # In a real scenario, we'd use Astor/AST or lines count
 
         entropy_delta = comp_added - comp_removed
 
@@ -47,7 +44,6 @@ class EntropyFilter(ImmuneFilter):
                 f"Net entropy positive ({entropy_delta:.2f}). Justify why complexity is necessary."
             )
         elif entropy_delta < -5.0:
-            # Bonus pass for high entropy reduction
             justification = f"Major complexity reduction ({entropy_delta:.2f}). Bonus Pass (Ω₇)."
 
         return FilterResult(

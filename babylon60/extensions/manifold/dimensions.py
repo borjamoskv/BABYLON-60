@@ -33,8 +33,6 @@ class PerceptionDimension:
         logger.info("D1 (Perception): Gathering context and situational awareness.")
         state.messages.append("Context gathered from CORTEX and toolkit.")
 
-        # In a full implementation, this runs Semantic Search / CORTEX queries
-        # For now, it prepares the baseline prediction.
         state.convergence = min(1.0, state.convergence + 0.3)
         return {"context_gathered": True, "predictions": ["rate limit", "OOM"]}
 
@@ -63,7 +61,6 @@ class DecisionDimension:
                     logger.warning("Red Team sequence failed: %s", rt_err)
 
             state.convergence = 1.0  # Plan is stable
-            # Update the task plan so D3 can read it if needed directly
             task.plan = plan.to_prompt_str()
             return plan
         except Exception as e:  # noqa: BLE001
@@ -120,7 +117,6 @@ class ValidationDimension:
         try:
             critique = await self.critic.critique(task.description, toolkit)
 
-            # Run tests in executor to avoid blocking the asyncio event loop
             try:
                 test_result = await asyncio.get_event_loop().run_in_executor(
                     None, self.tester.run, toolkit

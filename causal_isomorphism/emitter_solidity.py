@@ -1,6 +1,4 @@
-# causal_isomorphism/emitter_solidity.py — IR → Solidity Emitter
 # C5-REAL: Regime-filtered Solidity code generation
-# Author: Borja Moskv (borjamoskv)
 """
 Emits Solidity 0.8.19+ contracts from IR modules.
 
@@ -37,9 +35,6 @@ from causal_isomorphism.ir import (
 )
 
 
-# ============================================================
-# TYPE MAPPING: IR → Solidity
-# ============================================================
 def ir_type_to_solidity(ir_type: IRType) -> str:
     """Map an IR type to its Solidity equivalent."""
     match ir_type.kind:
@@ -67,9 +62,6 @@ def ir_type_to_solidity(ir_type: IRType) -> str:
             return "bytes32"
 
 
-# ============================================================
-# SOLIDITY CODE GENERATION
-# ============================================================
 @dataclass
 class SolidityEmitter:
     """
@@ -83,7 +75,6 @@ class SolidityEmitter:
     _emitted_enums: set[str] = field(default_factory=set)
     _emitted_structs: set[str] = field(default_factory=set)
 
-    # Regime permissions for Solidity layer
     _permissions: frozenset[EmitPermission] = REGIME_PERMISSIONS[RegimeLayer.CONSENSUS]
 
     def emit_module(self, module: IRModule) -> str:
@@ -93,7 +84,6 @@ class SolidityEmitter:
         self._emitted_structs = set()
         self.indent = 0
 
-        # Header
         self._line("// SPDX-License-Identifier: MIT")
         self._line("pragma solidity ^0.8.19;")
         self._line("")
@@ -107,7 +97,6 @@ class SolidityEmitter:
         self._line(f"contract {contract_name} {{")
         self.indent += 1
 
-        # Emit all type definitions (enums and structs)
         for union in module.unions:
             self._emit_union(union)
 
@@ -122,13 +111,10 @@ class SolidityEmitter:
             for record in sub.records:
                 self._emit_record(record)
 
-        # Emit state storage for tagged unions
         self._emit_state_storage(module)
 
-        # Emit events
         self._emit_events(module)
 
-        # Emit functions (regime-filtered)
         for func in module.all_functions():
             self._emit_function(func)
 
@@ -146,7 +132,6 @@ class SolidityEmitter:
         self._line("")
 
         if union.is_simple_enum:
-            # Simple enum without payload
             self._line(f"enum {union.name} {{")
             self.indent += 1
             for i, case in enumerate(union.cases):
@@ -155,7 +140,6 @@ class SolidityEmitter:
             self.indent -= 1
             self._line("}")
         else:
-            # Tagged union: emit enum for tag + struct for data
             tag_name = f"{union.name}Tag"
             self._line(f"enum {tag_name} {{")
             self.indent += 1
@@ -166,12 +150,10 @@ class SolidityEmitter:
             self._line("}")
             self._line("")
 
-            # Struct with tag + flattened payload fields
             self._line(f"struct {union.name} {{")
             self.indent += 1
             self._line(f"{tag_name} tag;")
 
-            # Collect all unique payload types across cases
             if union.has_numeric_payload:
                 self._line("uint256 numericPayload;  // Scaled 1e18 for float precision")
             if union.has_string_payload:
@@ -200,13 +182,11 @@ class SolidityEmitter:
         self._line("")
         self._line("// ---- State Storage ----")
 
-        # For each tagged union, create a storage variable
         for union in module.unions:
             if not union.is_simple_enum:
                 var_name = self._camel_case(union.name)
                 self._line(f"{union.name} public {var_name};")
 
-        # Standard BFT anchoring state
         self._line("string public currentHead;")
         self._line("uint256 public latentSteps;")
         self._line("address public owner;")
@@ -226,7 +206,6 @@ class SolidityEmitter:
         self._line("event StateAnchored(string prevHead, string newHead, uint256 steps);")
         self._line("event ApoptosisLogged(string taint, string reason);")
 
-        # Constructor
         self._line("")
         self._line("// ---- Constructor ----")
         self._line("constructor(string memory genesisHash) {")
@@ -239,7 +218,6 @@ class SolidityEmitter:
 
     def _emit_function(self, func: IRFunction) -> None:
         """Emit a function, respecting regime boundaries."""
-        # REGIME FILTER: Block physics computation
         if func.classification == FunctionClassification.STATE_TRANSITION:
             self._line("")
             self._line(f"// @regime-blocked: {func.name}")
@@ -253,17 +231,14 @@ class SolidityEmitter:
             self._line("// Classification: HASH_COMPUTATION — BLAKE3/DAG operations stay in Rust strike_rs.")
             return
 
-        # COMMIT_BOUNDARY → emit as external function
         if func.classification == FunctionClassification.COMMIT_BOUNDARY:
             self._emit_commit_function(func)
             return
 
-        # VALIDATION → emit as internal with require()
         if func.classification == FunctionClassification.VALIDATION:
             self._emit_validation_function(func)
             return
 
-        # PURE_QUERY → emit as view function
         if func.classification == FunctionClassification.PURE_QUERY:
             self._emit_query_function(func)
             return
@@ -278,7 +253,6 @@ class SolidityEmitter:
         self._line(f"function {func.name}({params_sol}) external {{")
         self.indent += 1
 
-        # Emit body as state serialization
         if func.body is not None and func.body.kind == IRExprKind.MATCH:
             self._emit_commit_match_body(func)
         else:
@@ -318,7 +292,6 @@ class SolidityEmitter:
         self._line(f"function {func.name}({params_sol}) internal pure{returns} {{")
         self.indent += 1
 
-        # Emit validation guards from match arms
         if func.body is not None and func.body.kind == IRExprKind.MATCH:
             for arm in func.body.match_arms:
                 if arm.body is not None and arm.body.kind == IRExprKind.RETURN_ERROR:

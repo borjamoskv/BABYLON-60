@@ -39,7 +39,6 @@ __all__ = [
 ]
 
 
-# ── Rényi Entropy Family (Ledger Security) ──────────────────────────
 
 
 def renyi_entropy(distribution: dict[str, int], alpha: float) -> float:
@@ -67,16 +66,13 @@ def renyi_entropy(distribution: dict[str, int], alpha: float) -> float:
     if total <= 0:
         return 0.0
 
-    # α → 1 degenerates to Shannon
     if abs(alpha - 1.0) < 1e-10:
         return shannon_entropy(distribution)
 
-    # α = 0 → Hartley entropy
     if abs(alpha) < 1e-10:
         support = sum(1 for c in distribution.values() if c > 0)
         return math.log2(support) if support > 0 else 0.0
 
-    # General case
     sum_pa = sum((count / total) ** alpha for count in distribution.values() if count > 0)
 
     if sum_pa <= 0:
@@ -108,7 +104,6 @@ def min_entropy(distribution: dict[str, int]) -> float:
     return -math.log2(p_max)
 
 
-# ── Entropy Rate (Temporal Stationarity) ────────────────────────────
 
 
 def entropy_rate(
@@ -145,11 +140,9 @@ def entropy_rate(
         w_dist = {sorted_keys[j]: temporal_sequence[sorted_keys[j]] for j in range(i, i + window)}
         rates.append(shannon_entropy(w_dist))
 
-    # The rate converges to the limit - take the last window
     return rates[-1] if rates else 0.0
 
 
-# ── Compression Intelligence (Kolmogorov-Assembly Bridge) ───────────
 
 
 def compression_intelligence(text: str) -> float:
@@ -200,11 +193,9 @@ def assembly_index_proxy(text: str) -> float:
         return 0.0
 
     ratio = compression_intelligence(text)
-    # Each byte has 8 bits (log₂(256)), each "step" encodes ~8 bits
     return ratio * len(text) / 8.0
 
 
-# ── Data Processing Inequality Verification (Theorem T6) ───────────
 
 
 def dpi_verify(
@@ -265,7 +256,6 @@ def dpi_verify(
     }
 
 
-# ── Free Energy Divergence (Active Inference Guard) ─────────────────
 
 
 def free_energy_divergence(
@@ -290,7 +280,6 @@ def free_energy_divergence(
     """
     divergence = kl_divergence(claim_dist, evidence_dist)
 
-    # Complexity penalty: number of unsupported categories in claim
     claim_keys = set(claim_dist.keys())
     evidence_keys = set(evidence_dist.keys())
     unsupported = len(claim_keys - evidence_keys)
@@ -299,7 +288,6 @@ def free_energy_divergence(
     return divergence + complexity
 
 
-# ── Φ Proxy (Consciousness Ceiling - Theorem T5) ───────────────────
 
 
 def phi_proxy(

@@ -1,6 +1,3 @@
-# core_graph_ledger.py
-# Execution Protocol: Exergy-Optimized Ontology & DAG Ledger
-# Prefix: core_ (pure primitive, zero I/O, deterministic)
 
 from dataclasses import dataclass, asdict
 from typing import List

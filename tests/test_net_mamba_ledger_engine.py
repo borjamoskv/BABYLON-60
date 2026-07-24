@@ -1,5 +1,3 @@
-# test_net_mamba_ledger_engine.py
-# Prefix: test_ (empirical unit falsification for the audited engine)
 
 from core_graph_ledger import GraphLedger
 from cortex_bpe_tokenizer import BPETokenizer
@@ -25,7 +23,6 @@ def test_audited_generation_flow() -> None:
     assert cert.verify() is True
     assert cert.residual_microbits >= 0
 
-    # Ensure 6 nodes were created (prompt + 5 steps)
     assert len(ledger.crdt.state) == 6
 
 def test_mamba_ledger_fail_fast():

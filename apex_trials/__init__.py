@@ -14,7 +14,6 @@ from .features import StudyFeatures, extract_features
 from .ledger import AmendmentLedger, BabylonBFTLedgerAdapter, ChainVerification, LedgerEntry
 from .risk_engine import RiskAssessment, assess
 
-# Backwards compatibility aliases
 Copilot = Transducer
 CopilotResult = TransducerResult
 

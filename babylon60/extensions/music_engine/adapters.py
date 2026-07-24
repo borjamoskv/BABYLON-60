@@ -13,7 +13,6 @@ import httpx
 
 logger = logging.getLogger(__name__)
 
-# Constants
 DEFAULT_TIMEOUT_SUNO = 60.0
 DEFAULT_TIMEOUT_UDIO = 120.0
 DEFAULT_TIMEOUT_LYRIA = 30.0
@@ -48,7 +47,6 @@ class SunoV5Adapter(AudioAdapter):
 
     async def generate(self, prompt_matrix: dict[str, Any]) -> str:
         logger.info("Sending parametric matrix to Suno v5 API... BPM: %s", prompt_matrix.get("bpm"))
-        # Inject sonic vectors for premium texture
         sonic_v = prompt_matrix.get("sonic_vectors", {})
         enhanced_prompt = prompt_matrix.get("prompt_injection", "")
         if sonic_v:
@@ -100,7 +98,6 @@ class UdioV4Adapter(AudioAdapter):
 
     async def generate(self, prompt_matrix: dict[str, Any]) -> str:
         logger.info("Starting synthesis on Udio v4 API... Key: %s", prompt_matrix.get("key"))
-        # Inject sonic vectors for premium texture
         sonic_v = prompt_matrix.get("sonic_vectors", {})
         enhanced_prompt = prompt_matrix.get("prompt_injection", "")
         if sonic_v:
@@ -157,7 +154,6 @@ class Lyria3Adapter(AudioAdapter):
     """Adapter for Google DeepMind Lyria 3 (Specialization: B-Roll, Short Synthesis, Image-to-Audio)."""
 
     def __init__(self):
-        # Lyria generally uses GCP auth implicitly via service accounts
         self.project_id = os.environ.get("GOOGLE_CLOUD_PROJECT", "")
         self.client = httpx.AsyncClient(timeout=DEFAULT_TIMEOUT_LYRIA)
 
@@ -167,7 +163,6 @@ class Lyria3Adapter(AudioAdapter):
             logger.warning("GOOGLE_CLOUD_PROJECT missing for Lyria. Returning mock ID.")
             return "ari:cloud:lyria:job:5555"
 
-        # Inject sonic vectors for premium texture
         sonic_v = prompt_matrix.get("sonic_vectors", {})
         enhanced_prompt = prompt_matrix.get("prompt_injection", "")
         if sonic_v:
@@ -189,7 +184,6 @@ class Lyria3Adapter(AudioAdapter):
             return "ari:cloud:lyria:job:error"
 
     async def get_stems(self, job_id: str) -> dict[str, str]:
-        # Lyria might not support stem separation natively yet
         logger.warning("Lyria 3 does not support native stem separation. Returning master.")
         return {"master": f"https://storage.googleapis.com/lyria-out/{job_id.split(':')[-1]}.wav"}
 
@@ -220,16 +214,13 @@ class LocalMIDIAdapter(AudioAdapter):
         bpm = params.get("bpm", 128)
         bars = params.get("bars", 8)
 
-        # Generate layers
         groove = self._groove(bpm=bpm, bars=bars)
         harmony = self._harmony(bpm=bpm, bars=bars)
         texture = self._texture(bpm=bpm, bars=bars)
 
-        # Merge all tracks
         groove.tracks.extend(harmony.tracks)
         groove.tracks.extend(texture.tracks)
 
-        # Render WAV
         out_dir = os.path.expanduser("~/.babylon60/grammy/renders")
         os.makedirs(out_dir, exist_ok=True)
         fname = f"grammy_{uuid.uuid4().hex[:8]}.wav"

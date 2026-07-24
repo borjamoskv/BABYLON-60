@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Langbase Pipe with CORTEX Context.
 
@@ -23,7 +19,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.langbase.pipe")
 
-# Template for injecting CORTEX facts into the pipe's context
 CORTEX_CONTEXT_TEMPLATE = """## CORTEX Memory Context
 
 The following facts are retrieved from CORTEX sovereign memory.
@@ -31,7 +26,6 @@ Use them to ground your response. Cite [Fact #ID] when referencing.
 
 {facts}
 
-## User Query
 
 {query}"""
 
@@ -89,7 +83,6 @@ async def run_with_cortex_context(
     Returns:
         Dict with 'completion', 'sources', and 'facts_used'
     """
-    # 1. Search CORTEX memory
     search_results = await engine.search(
         query=query,
         top_k=top_k,
@@ -101,7 +94,6 @@ async def run_with_cortex_context(
         len(search_results),
     )
 
-    # 2. Build enriched message
     facts_text = _format_facts(search_results)
     enriched_content = CORTEX_CONTEXT_TEMPLATE.format(
         facts=facts_text,
@@ -110,7 +102,6 @@ async def run_with_cortex_context(
 
     messages = [{"role": "user", "content": enriched_content}]
 
-    # 3. Run the Langbase Pipe
     pipe_result = await client.run_pipe(
         name=pipe_name,
         messages=messages,
@@ -118,7 +109,6 @@ async def run_with_cortex_context(
         variables=variables,
     )
 
-    # 4. Build response with provenance
     sources = [
         {
             "fact_id": getattr(r, "fact_id", None),

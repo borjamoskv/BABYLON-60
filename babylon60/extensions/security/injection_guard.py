@@ -27,9 +27,6 @@ logger = logging.getLogger("babylon60_extensions.security.injection_guard")
 __all__ = ["InjectionGuard", "InjectionMatch", "InjectionReport"]
 
 
-# ═══════════════════════════════════════
-# Data Models
-# ═══════════════════════════════════════
 
 
 @dataclass(frozen=True)
@@ -73,9 +70,6 @@ class InjectionReport:
         }
 
 
-# ═══════════════════════════════════════
-# Pattern Definitions
-# ═══════════════════════════════════════
 
 _L1_SQL_PATTERNS: list[tuple[str, str, str, re.Pattern[str]]] = []
 _L2_PROMPT_PATTERNS: list[tuple[str, str, str, re.Pattern[str]]] = []
@@ -95,7 +89,6 @@ def _compile(
     return result
 
 
-# L1: SQL Injection
 _L1_SQL_PATTERNS = _compile(
     [
         (
@@ -127,7 +120,6 @@ _L1_SQL_PATTERNS = _compile(
     ]
 )
 
-# L2: Prompt Injection
 _L2_PROMPT_PATTERNS = _compile(
     [
         (
@@ -175,7 +167,6 @@ _L2_PROMPT_PATTERNS = _compile(
     ]
 )
 
-# L3: Path Traversal
 _L3_PATH_PATTERNS = _compile(
     [
         ("PT-001", "critical", "Directory traversal (double)", r"\.\./\.\./|\.\.\\\.\.\\"),
@@ -190,7 +181,6 @@ _L3_PATH_PATTERNS = _compile(
     ]
 )
 
-# L4: Command Injection
 _L4_CMD_PATTERNS = _compile(
     [
         (
@@ -217,9 +207,6 @@ _L4_CMD_PATTERNS = _compile(
 )
 
 
-# ═══════════════════════════════════════
-# Injection Guard
-# ═══════════════════════════════════════
 
 
 class InjectionGuard:
@@ -233,12 +220,9 @@ class InjectionGuard:
     L2/L3/L4 remain active for ALL sources (Axiom Ω₃ - Byzantine Default).
     """
 
-    # Entropy threshold for encoded payload detection
     ENTROPY_THRESHOLD: float = 4.5
-    # Minimum content length to trigger entropy check
     ENTROPY_MIN_LENGTH: int = 40
 
-    # Sources that bypass false-positive-prone layers (L1, L5)
     TRUSTED_SOURCES: frozenset[str] = frozenset(
         {
             "agent:gemini",
@@ -273,16 +257,13 @@ class InjectionGuard:
 
         trusted = self._is_trusted(source)
 
-        # L1: SQL injection - skip for trusted sources (false-positive-prone)
         if not trusted:
             self._scan_layer(content, _L1_SQL_PATTERNS, "L1_sql", report.matches)
 
-        # L2-L4: Always active (Axiom Ω₃ - Byzantine Default)
         self._scan_layer(content, _L2_PROMPT_PATTERNS, "L2_prompt", report.matches)
         self._scan_layer(content, _L3_PATH_PATTERNS, "L3_path", report.matches)
         self._scan_layer(content, _L4_CMD_PATTERNS, "L4_command", report.matches)
 
-        # L5: Encoded Payload Detection - skip for trusted sources
         if not trusted and len(content) >= self.ENTROPY_MIN_LENGTH:
             entropy = self._entropy(content)
             report.entropy_score = entropy
@@ -297,7 +278,6 @@ class InjectionGuard:
                     )
                 )
 
-        # Verdict
         if report.matches:
             report.is_safe = False
             severity_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
@@ -312,15 +292,11 @@ class InjectionGuard:
         """Deep semantic scan using LLM Gateway to catch advanced Prompt Injections (semantic ghosts)."""
         report = self.scan(content)
 
-        # If fast-path regex caught something critical, return immediately (Defense in Depth)
         if not report.is_safe and report.highest_severity == "critical":
             return report
 
-        # L2-Semantic: Engaging the Sovereign LLM Router for True Semantic WAF
-        # This catches what Regex cannot (leetspeak, zero-width spaces, logical overrides).
         if len(content) > 10:
             try:
-                # Lazy import to avoid circular dependencies with cortex.llm.router
                 from babylon60.extensions.llm._models import CortexPrompt
                 from babylon60.extensions.llm.router import CortexLLMRouter
 
@@ -336,7 +312,6 @@ class InjectionGuard:
                     working_memory=[{"role": "user", "content": prompt_text}],
                 )
 
-                # Hedged Request to small, fast models (e.g., Gemini Flash or Claude Haiku) for latency
                 res = await router.execute_resilient(prompt_obj)
                 raw_text = res.unwrap() if res.is_ok() else ""
                 if "MALICIOUS_INJECTION" in raw_text.upper():
@@ -387,5 +362,4 @@ class InjectionGuard:
         return calculate_shannon_entropy(text)
 
 
-# Global singleton
 GUARD = InjectionGuard()

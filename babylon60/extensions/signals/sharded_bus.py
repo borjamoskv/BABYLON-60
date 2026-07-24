@@ -88,7 +88,6 @@ class ShardedAsyncSignalBus:
         if not self._ready:
             await self.initialize()
 
-        # SSRF Protection: Validate any URLs in the payload
         if payload:
             for k, v in payload.items():
                 if isinstance(v, str) and (k.endswith("_url") or "callback" in k):

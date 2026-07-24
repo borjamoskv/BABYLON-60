@@ -22,7 +22,6 @@ def run_improved_mapping(matrix_path: Path, article_path: Path) -> dict:
 
     primitives = matrix_data.get("Centuria_Matrix", {}).get("Primitives", [])
     
-    # Analyze target article base values
     article_entropy = calculate_entropy(article_text)
     
     boltzmann_domains = {"SQLite_WAL", "Thread_Lock", "Memory_Page", "File_Descriptor", "BFT_Ledger"}
@@ -35,11 +34,9 @@ def run_improved_mapping(matrix_path: Path, article_path: Path) -> dict:
         domain = p.get("Domain")
         desc = p.get("Description", "")
         
-        # Calculate local entropy of the primitive declaration
         p_entropy = calculate_entropy(desc)
         total_entropy_accumulated += p_entropy
         
-        # Classification metric
         is_boltzmann = domain in boltzmann_domains
         thermo_vector = "BOLTZMANN_EQUILIBRIUM" if is_boltzmann else "PRIGOGINE_DISSIPATIVE"
         

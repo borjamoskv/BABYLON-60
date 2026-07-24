@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Proof of Concept: Claude Fable 5 Agentic Orchestration
 import asyncio
 import logging
 import os
@@ -7,11 +6,9 @@ import sys
 
 import httpx
 
-# Ensure CORTEX path is available
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 
-# Mock generate_secure_taint_token to bypass crypto keys for PoC
 def mock_generate_secure_taint_token(*args, **kwargs):
     return "taint:ed25519:fable-5-orchestrator:agentic_harness_01:2026-06-28T00:00:00Z:nonce123:mock_signature_abc123"
 
@@ -48,7 +45,6 @@ async def main():
     prompt = "Verify the last 3 entries in the CORTEX ledger."
     system_prompt = "You are an autonomous auditor. You MUST use the read_cortex_ledger tool."
 
-    # Mocking semaphore and circuit breaker for isolated PoC
     semaphore = asyncio.Semaphore(1)
 
     class DummyCircuitBreaker:
@@ -63,8 +59,6 @@ async def main():
             logging.getLogger(__name__).info(f"[*] Prompt: {prompt}")
             logging.getLogger(__name__).info("[*] Expected Tool: read_cortex_ledger")
 
-            # Note: This will fail with a 401 if ANTHROPIC_API_KEY is dummy
-            # but the structural binding is proven.
             result = await execute_fable_native(
                 client=client,
                 semaphore=semaphore,
@@ -78,7 +72,6 @@ async def main():
             )
             logging.getLogger(__name__).info(f"[+] Output: {result}")
         except ValueError as e:
-            # Expected if API key is invalid
             logging.getLogger(__name__).info(f"[-] Execution aborted (Expected if no valid API key): {str(e)}")
 
 

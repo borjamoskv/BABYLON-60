@@ -26,7 +26,6 @@ from babylon60.extensions.mejoralo.models import ScanResult
 
 logger = logging.getLogger("babylon60_extensions.agents.mejoralo_omega")
 
-# ── Constants ──────────────────────────────────────────────────────
 DEFAULT_CYCLE_INTERVAL = 120  # seconds between full cycles
 BASE_BACKOFF = 30  # base backoff seconds on stagnation
 MAX_BACKOFF = 600  # cap backoff at 10 minutes
@@ -58,7 +57,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
         self._consecutive_stagnant = 0
         self._score_history: list[int] = []
 
-        # Late-init engine (avoids import-time DB lock)
         self._mejoralo: Any = None
         self._agent_def: Any = None
 
@@ -116,7 +114,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
 
                 await self._execute_cycle()
 
-                # Adaptive sleep: base interval + exponential backoff on stagnation
                 sleep_time = self._compute_sleep(time.monotonic() - start_time)
                 if self._running and sleep_time > 0:
                     logger.debug("Sleeping %.1fs before next cycle...", sleep_time)
@@ -137,7 +134,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
 
         console.rule(f"[cyan]MEJORALO-Ω Cycle {self._cycle_count}")
 
-        # 1. Scan
         scan_result = self._mejoralo.scan(self.project, self.base_path)
         score_before = scan_result.score
         self._score_history.append(score_before)
@@ -155,7 +151,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
             f"Cycle {self._cycle_count}, stagnation: {self._consecutive_stagnant}[/]"
         )
 
-        # 2. Prioritize targets by Shannon entropy
         targets = self._select_targets(scan_result)
         if not targets:
             console.print("  [dim]No actionable targets found.[/]")
@@ -164,16 +159,13 @@ class MejoraloOmegaAgent(EngineAwareMixin):
 
         console.print(f"  [cyan]🎯 Targeting {len(targets)} files by entropy rank[/]")
 
-        # 3. Heal - escalate level based on stagnation
         level = self._escalation_level()
         success = self._mejoralo.heal(self.project, self.base_path, self.target_score, scan_result)
 
-        # 4. Verify - re-scan
         result_after = self._mejoralo.scan(self.project, self.base_path)
         score_after = result_after.score
         delta = score_after - score_before
 
-        # 5. Record + track stagnation
         self._mejoralo.record_session(
             self.project,
             score_before,
@@ -191,7 +183,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
             self._consecutive_stagnant = 0
             console.print(f"  [green]📈 Δ{delta:+d} → {score_after}[/]")
 
-        # 6. Absorb - persist learned pattern on success
         if success and delta > 0:
             await self._absorb_pattern(score_before, score_after)
 
@@ -208,11 +199,9 @@ class MejoraloOmegaAgent(EngineAwareMixin):
                 file_path = self._extract_file(finding)
                 if not file_path:
                     continue
-                # Accumulate entropy: low score = high entropy + more findings = more entropy
                 current = file_entropy.get(file_path, 0.0)
                 file_entropy[file_path] = current + dim_penalty * ENTROPY_SCORE_WEIGHT
 
-        # Normalize by findings count
         for dim in scan_result.dimensions:
             for finding in dim.findings:
                 fp = self._extract_file(finding)
@@ -244,7 +233,6 @@ class MejoraloOmegaAgent(EngineAwareMixin):
         base = max(0.0, self.cycle_interval - elapsed)
         if self._consecutive_stagnant <= 0:
             return base
-        # Exponential backoff: base_backoff * 2^(stagnation - 1), capped
         backoff = min(
             BASE_BACKOFF * math.pow(2, self._consecutive_stagnant - 1),
             MAX_BACKOFF,

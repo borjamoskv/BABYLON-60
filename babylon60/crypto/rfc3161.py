@@ -16,7 +16,6 @@ from typing import Any
 
 logger = logging.getLogger("babylon60.crypto.rfc3161")
 
-# Default public TSA URL
 DEFAULT_TSA_URL = os.environ.get("CORTEX_TSA_URL", "https://freetsa.org/tsr")
 
 
@@ -45,28 +44,18 @@ class RFC3161Client:
            hashedMessage                OCTET STRING
         }
         """
-        # SHA-256 OID: 2.16.840.1.101.3.4.2.1
-        # 06 09 60 86 48 01 65 03 04 02 01
         alg_oid = bytes([0x06, 0x09, 0x60, 0x86, 0x48, 0x01, 0x65, 0x03, 0x04, 0x02, 0x01])
-        # NULL parameter
-        # 05 00
         null_param = bytes([0x05, 0x00])
-        # AlgorithmIdentifier
         alg_id = bytes([0x30, len(alg_oid) + len(null_param)]) + alg_oid + null_param
 
-        # HashedMessage (OCTET STRING)
         hashed_msg = bytes([0x04, len(payload_hash)]) + payload_hash
 
-        # MessageImprint
         msg_imprint = bytes([0x30, len(alg_id) + len(hashed_msg)]) + alg_id + hashed_msg
 
-        # Version (INTEGER 1)
         version = bytes([0x02, 0x01, 0x01])
 
-        # CertReq (BOOLEAN TRUE to get the TSA's cert)
         cert_req = bytes([0x01, 0x01, 0xFF])
 
-        # Assemble TimeStampReq
         tsq_content = version + msg_imprint + cert_req
         tsq = bytes([0x30, len(tsq_content)]) + tsq_content
 

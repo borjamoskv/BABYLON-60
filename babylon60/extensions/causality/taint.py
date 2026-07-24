@@ -112,7 +112,6 @@ def propagate_taint(
     touched: set[str] = set()
     queue: list[str] = [start_fact_id]
 
-    # Mark origin as invalidated + tainted
     start = graph[start_fact_id]
     start.invalidated = True
     start.taint_status = TaintStatus.TAINTED
@@ -134,11 +133,9 @@ def propagate_taint(
 
             child = graph[child_id]
 
-            # Minimum: SUSPECT
             if child.taint_status == TaintStatus.CLEAN:
                 child.taint_status = TaintStatus.SUSPECT
 
-            # Escalation: ≥50% tainted parents → TAINTED
             parent_count = len(child.parents)
             if parent_count > 0:
                 tainted_parent_count = sum(

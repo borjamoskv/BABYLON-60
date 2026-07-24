@@ -44,26 +44,21 @@ class BCIMaestroBridge:
 
         method = getattr(self.maestro, instruction)
 
-        # Map 'app' or 'app_name' to target AppTarget if the method expects one
         app_name = args.get("app") or args.get("app_name") or args.get("target")
         if app_name and isinstance(app_name, str):
             args["target"] = AppTarget(name=app_name)
-            # Remove keys that might conflict
             args.pop("app", None)
             args.pop("app_name", None)
 
-        # Map x, y to Point if needed
         if "x" in args and "y" in args:
             args["point"] = Point(x=int(args["x"]), y=int(args["y"]))
             args.pop("x", None)
             args.pop("y", None)
 
         try:
-            # Handle if method is a coroutine or normal function
             if inspect.iscoroutinefunction(method):
                 result = await method(**args)
             elif callable(method):
-                # Check if it returns a coroutine (e.g. wrapped in lambda)
                 res = method(**args)
                 if asyncio.iscoroutine(res) or asyncio.isfuture(res):
                     result = await res

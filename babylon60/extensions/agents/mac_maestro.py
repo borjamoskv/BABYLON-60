@@ -78,7 +78,6 @@ class MacMaestroAgent:
 
         response = response_result.unwrap()
 
-        # Parse JSON
         script_data = self._parse_json_response(response)
         if not script_data or "script" not in script_data:
             return {"success": False, "error": f"Failed to parse JSON. Raw output: {response}"}
@@ -87,7 +86,6 @@ class MacMaestroAgent:
         explanation = script_data.get("explanation", "Extracted AppleScript.")
         logger.info("Generated AppleScript: %s", explanation)
 
-        # Execute via sovereign MaestroUI stack
         try:
             stdout = await self.maestro.run_applescript(script_code, require_success=True)
             success = True

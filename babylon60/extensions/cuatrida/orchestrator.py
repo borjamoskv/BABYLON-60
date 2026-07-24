@@ -40,8 +40,6 @@ class CuatridaOrchestrator:
         timestamp = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
         metadata = metadata or {}
 
-        # Dimension B: Hook into CORTEX ledger.
-        # Use provided connection if available to stay in the same transaction.
         if conn:
             from babylon60.memory.temporal import now_iso
             from babylon60.utils.canonical import canonical_json, compute_tx_hash
@@ -49,7 +47,6 @@ class CuatridaOrchestrator:
             dj = canonical_json(metadata)
             ts = now_iso()
 
-            # Previous hash from chain
             async with conn.execute(
                 "SELECT hash FROM transactions ORDER BY id DESC LIMIT 1"
             ) as cursor:
@@ -65,7 +62,6 @@ class CuatridaOrchestrator:
             )
             actual_tx_id = cursor.lastrowid
         else:
-            # Standalone fallback
             tx_res = await self.engine.write(  # pyright: ignore[reportAttributeAccessIssue]
                 "INSERT INTO transactions (project, action, detail, prev_hash, hash, timestamp) "
                 "VALUES (?, ?, ?, 'GENESIS', 'sha256:standalone_placeholder', ?)",
@@ -161,7 +157,6 @@ class CuatridaOrchestrator:
                 status = "error"
 
         self.metrics.latency_ms = latency
-        # Finitud density increases as latency decreases below 100ms
         self.metrics.finitud_density = max(0.1, min(1.0, 1.0 - (latency / 500.0)))
 
         metadata = {

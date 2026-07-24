@@ -27,25 +27,19 @@ from babylon60.utils.turboquant import optimize_vector_qjl
 
 logger = logging.getLogger("CORTEX.AUTODIDACT.SYNTHESIS")
 
-# ==============================================================================
-# 0. CONFIGURACIÓN SOBERANA (Ω₅: Antifragile by Default)
-# ==============================================================================
 ISOTHERMAL_THRESHOLD = 0.94  # Ω₂: Si es > 94% similar, Isoterma absoluta.
 GRADIENT_THRESHOLD = 0.85  # Entre 0.85 y 0.94 entra en fricción dialéctica.
 
-# LLM Synthesis Parameters
 DEFAULT_SYNTHESIS_TEMPERATURE = 0.0
 DEFAULT_SYNTHESIS_MAX_TOKENS = 4000
 MAX_RAW_DATA_INPUT = 180_000
 FALLBACK_CONTENT_LENGTH = 5000
 
-# Timeouts and Retries
 TIMEOUT_ENCODER = 10.0
 TIMEOUT_DISTILL = 90.0
 RETRIES_ENCODER = 2
 RETRIES_DISTILL = 1
 
-# Providers ordered by synthesis affinity (reasoning-heavy tasks)
 _SYNTHESIS_PROVIDERS: tuple[str, ...] = (
     "ollama",
     "kimi",
@@ -62,7 +56,6 @@ _SYNTHESIS_PROVIDERS: tuple[str, ...] = (
 encode_engine = AsyncEncoder()
 vector_db = SovereignVectorStoreL2(encoder=encode_engine)
 
-# Lazy singleton - built on first use
 _synthesis_router: CortexLLMRouter | None = None
 
 
@@ -104,9 +97,6 @@ def _get_synthesis_router() -> CortexLLMRouter:
     return _synthesis_router
 
 
-# ==============================================================================
-# 1. LA MEMBRANA SEMÁNTICA (Native CORTEX Embeddings) -> Tier 🔵
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_ENCODER, max_retries=RETRIES_ENCODER)
 async def generate_cortex_embedding(text: str) -> list[float]:
     """Genera el embedding usando el motor nativo de CORTEX (384-dim)."""
@@ -135,9 +125,6 @@ async def check_semantic_redundancy(text_snippet: str) -> tuple[bool, str | None
     return False, None
 
 
-# ==============================================================================
-# 2. EL CRISOL DE DESTILACIÓN (CortexLLMRouter Resiliente) -> Tier 🟢
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_DISTILL, max_retries=RETRIES_DISTILL)
 async def distill_sovereign_memo(
     raw_data: str, source_url: str, intent: str = ""
@@ -155,7 +142,6 @@ async def distill_sovereign_memo(
 
     router = _get_synthesis_router()
 
-    # ── Laser Intent Directive (The CORTEX Differentiator) ──
     if intent:
         intent_directive = (
             f"LASER FOCUS ON THE AGENT INTENT: '{intent}'. "
@@ -226,9 +212,6 @@ async def distill_sovereign_memo(
         return {"content_markdown": raw_data[:FALLBACK_CONTENT_LENGTH], "error": str(e)}
 
 
-# ==============================================================================
-# 3. THE TERMINAL PROTOCOL (AUTODIDACT-Ω Integration)
-# ==============================================================================
 async def execute_cognitive_synthesis(
     raw_data: str, source: str, force: bool = False, intent: str = ""
 ) -> str:
@@ -268,7 +251,6 @@ async def execute_cognitive_synthesis(
     total_extracted = len(entities) + len(primitivas) + len(invariantes)
     logger.info("✅ Distillation: %.1f%% noise removed. Entities/Items: %d", yield_efficiency, total_extracted)
 
-    # ── EPISTEMIC CONTRADICTION GUARD (Axioma Ω₁) ──
     from babylon60.guards.contradiction_guard import detect_contradictions
 
     conflict_report = await detect_contradictions(
@@ -293,7 +275,6 @@ async def execute_cognitive_synthesis(
     else:
         base_embedding = await encode_engine.encode(memo_content)
 
-    # Ingesting Axiom Ω₂ + TurboQuant (arXiv:2504.19874)
     final_embedding = optimize_vector_qjl(base_embedding, bits=3.5)
 
     memo_id = f"MEMO_{os.urandom(4).hex().upper()}"

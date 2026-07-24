@@ -20,15 +20,12 @@ def _render_skill_md(system_name: str, comp: ComponentSpec) -> str:
         category: genesis
         ---
 
-        # {title}
 
         > {description}
 
-        ## Usage
 
         Invoke via `/genesis` or programmatically via `GenesisEngine`.
 
-        ## Implementation
 
         Detailed implementation logic for this skill is extracted from the `ComponentSpec`.
     """)
@@ -43,9 +40,7 @@ def _render_workflow_md(system_name: str, comp: ComponentSpec) -> str:
         description: {description}
         ---
 
-        # {title} Workflow
 
-        ## Steps
 
         The execution flow for this {title} is derived from the autonomous orchestration engine.
     """)

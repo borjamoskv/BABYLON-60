@@ -11,9 +11,7 @@ from babylon60.genomics.engine import GenomicEvaluationEngine
 
 def test_algebraic_cardinality() -> None:
     """Verify combinatorial cardinality bounds."""
-    # Coordinate system: |BED| + |VCF|
     assert AlgebraicCardinality.sum_type_cardinality(1, 1) == 2
-    # Product: Boolean state per gene (2 ^ N)
     assert AlgebraicCardinality.exponential_type_cardinality(domain_cardinality=3, codomain_cardinality=2) == 8
 
 
@@ -33,7 +31,6 @@ def test_genomic_adts() -> None:
     coord: CoordinateSystem = VCF1Based(chrom="chr1", pos=12345, ref_len=1)
     var = SNV(ref="A", alt="T")
 
-    # Strictly constructed variant
     alg_var = AlgebraicGenomicVariant(coordinate=coord, variant=var, quality=99.9)
     assert isinstance(alg_var.coordinate, VCF1Based)
     assert isinstance(alg_var.variant, SNV)
@@ -41,13 +38,10 @@ def test_genomic_adts() -> None:
 
 def test_clonal_entropy_omega31() -> None:
     """Verify Rule Ω31 Shannon entropy computation on subclonal structures."""
-    # 3 subclones with normalized distribution [0.5, 0.25, 0.25]
     res = GenomicEvaluationEngine.evaluate_clonal_entropy([0.5, 0.25, 0.25])
     assert res.subclone_count == 3
-    # S = -(0.5*ln(0.5) + 0.25*ln(0.25) + 0.25*ln(0.25)) = 1.0397
     assert res.shannon_entropy == 1.0397
 
-    # Single clone (S = 0)
     res2 = GenomicEvaluationEngine.evaluate_clonal_entropy([1.0])
     assert res2.subclone_count == 1
     assert res2.shannon_entropy == 0.0
@@ -55,12 +49,10 @@ def test_clonal_entropy_omega31() -> None:
 
 def test_clonal_entropy_empty_and_invalid() -> None:
     """Verify robustness of clonal entropy under edge cases."""
-    # Empty subclone array
     res = GenomicEvaluationEngine.evaluate_clonal_entropy([])
     assert res.subclone_count == 0
     assert res.shannon_entropy == 0.0
 
-    # Zeroes and negatives are filtered
     res2 = GenomicEvaluationEngine.evaluate_clonal_entropy([1.0, 0.0, -0.5])
     assert res2.subclone_count == 1
     assert res2.shannon_entropy == 0.0

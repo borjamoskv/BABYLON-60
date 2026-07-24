@@ -64,7 +64,6 @@ class ZKOrtexProver:
 
         logger.info("ZKOrtexProver initialized. Session: %s", self._session_id)
 
-    # ─── Knowledge Management (Private) ──────────────────────────────────────
 
     def ingest(self, facts: list[str]) -> str:
         """
@@ -91,7 +90,6 @@ class ZKOrtexProver:
         """Número de hechos conocidos - solo accesible internamente."""
         return len(self._knowledge_base)
 
-    # ─── Commitment Generation ────────────────────────────────────────────────
 
     def commit_to_fact(
         self,
@@ -107,7 +105,6 @@ class ZKOrtexProver:
         """
         c, blinding = commit(fact_content)
         if metadata:
-            # Reemplazar con metadata (commitment es frozen, creamos nuevo)
             from babylon60.extensions.zkortex.commitment import KnowledgeCommitment as KC
 
             c = KC(commitment_hex=c.commitment_hex, metadata=metadata)
@@ -127,14 +124,11 @@ class ZKOrtexProver:
         if fact_id not in self._commitments:
             return None
         commitment, blinding = self._commitments[fact_id]
-        # Solo el Prover sabe el contenido original - aquí lo recuperaríamos
-        # de nuestra base de conocimiento interna
         logger.warning(
             "Commitment OPENED for fact_id='%s'. Opacity compromised for this fact.", fact_id
         )
         return blinding.hex(), commitment
 
-    # ─── Membership Proofs ────────────────────────────────────────────────────
 
     def prove_knows(self, fact: str, commitment_hex: str = "") -> ZKMembershipProof:
         """
@@ -156,7 +150,6 @@ class ZKOrtexProver:
         )
         return proof
 
-    # ─── Range Proofs ─────────────────────────────────────────────────────────
 
     def prove_knowledge_count_in_range(self, min_count: int, max_count: int) -> ZKRangeProof:
         """
@@ -174,7 +167,6 @@ class ZKOrtexProver:
         )
         return proof
 
-    # ─── Session Stats ────────────────────────────────────────────────────────
 
     def session_stats(self) -> dict[str, Any]:
         """Estadísticas de la sesión - sin datos privados."""

@@ -17,8 +17,6 @@ from ..services.chain_verifier import verify_chain
 
 router = APIRouter(prefix="/api/ledger", tags=["ledger"])
 
-# Memoización: la raíz es constante en runtime y la DB no cambia de sitio.
-# Se revalida .exists() por petición (barato) y se re-descubre si desapareció.
 _LEDGER_DB_CACHE: Path | None = None
 
 
@@ -40,9 +38,6 @@ def _discover_ledger_db(project_root: Path) -> Path | None:
     for c in candidates:
         if c.exists():
             return c
-    # Fallback: any .db with ledger_entries table. sorted() → elección
-    # determinista (glob() depende del filesystem). closing → sin fuga de
-    # conexión si execute lanza antes del close.
     for db_file in sorted(project_root.glob("*.db")):
         try:
             with contextlib.closing(connect_readonly(db_file)) as conn:

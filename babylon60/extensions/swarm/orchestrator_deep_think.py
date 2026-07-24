@@ -53,7 +53,6 @@ class DeepThinkOrchestrator:
             "valderrama_vision_omega",
         ]
 
-        # Local HDC Codec for orchestrator-level encoding if needed
         self.mem = ItemMemory(dim=DEFAULT_DIM, maxsize=5000)
         self.encoder = HDCEncoder(self.mem)
 
@@ -63,17 +62,14 @@ class DeepThinkOrchestrator:
         """
         logger.info("🌊 [DEEP THINK] Iniciando inyección de onda a los 10 Astros.")
 
-        # 1. Inyección 4D Simultánea con Válvula Termodinámica (Semaphore 3)
         sem = asyncio.Semaphore(3)
         vector_perspectives = await self._gather_vector_perspectives(waveform_context, project, sem)
 
         hvs = [p["hv"] for p in vector_perspectives if p["hv"] is not None]
         text_context = "\n".join([f"- {p['agent_id']}: {p['text']}" for p in vector_perspectives])
 
-        # 2. Tribunal Asíncrono - Diagnostics
         diagnostics = await self.minds_manager.convergence_pulse()
 
-        # 3. Colapso de Función (El 11º Astro)
         logger.info("⚡ [DEEP THINK] MARADONA_10_OMEGA ejecutando colapso de función.")
         final_truth = await self._maradona_synthesis(hvs, text_context, diagnostics, project)
 
@@ -99,14 +95,10 @@ class DeepThinkOrchestrator:
         if not agent:
             return {"agent_id": agent_id, "hv": None, "text": "Failed to manifest."}
 
-        # Override temporal knowledge to force immediate context evaluation
         prompt = f"WAVEFORM CONTEXT:\n{context}\n\nEVALUATE AND CONVERGE:"
 
         try:
             async with sem:
-                # Not all agents might have deliberate taking prompt, but we assume deliberate()
-                # or custom interact(). We'll wrap deliberate or send a cortex_prompt directly.
-                # BaseCortexAgent generic usage:
                 if hasattr(agent, "router"):
                     from babylon60.extensions.llm._models import CortexPrompt, IntentProfile
 
@@ -121,7 +113,6 @@ class DeepThinkOrchestrator:
                 else:
                     text_response = await agent.deliberate()
 
-            # Encode response to HDC vector and Bind Author (Vectorial Entanglement)
             from babylon60.memory.hdc.algebra import bind
 
             text_hv = self.encoder.encode_text(text_response[:2000])  # cap for speed
@@ -149,7 +140,6 @@ class DeepThinkOrchestrator:
         if not maradona:
             raise RuntimeError("Maradona failed to manifest for Deep Think synthesis.")
 
-        # Realizar el colapso matemático HDC (Umbral por defecto en majority algebra)
         if len(hvs) > 1:
             collapsed_hv = bundle(*hvs)
         elif len(hvs) == 1:
@@ -159,7 +149,6 @@ class DeepThinkOrchestrator:
 
         hv_signature = cortex_hash_truncated(collapsed_hv.tobytes(), length=16)
 
-        # Resonancia Bizantina (Consensus Calculation)
         from babylon60.memory.hdc.algebra import (
             similarity,  # type: ignore[reportAttributeAccessIssue]
         )

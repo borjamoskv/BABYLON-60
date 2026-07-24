@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Railway Oriented Programming (Result Monads).
 
@@ -19,7 +15,6 @@ Usage:
         except json.JSONDecodeError as e:
             return Err(f"JSON decode failed: {e}")
 
-    # Chain operations without try/except:
     result = parse_agent_output(llm_response)
     match result:
         case Ok(data):
@@ -112,7 +107,6 @@ class Err(Generic[E]):
         return f"Err({self.error!r})"
 
 
-# Union type for pattern matching and type narrowing
 Result = Ok[T] | Err[E]
 
 

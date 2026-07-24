@@ -38,7 +38,6 @@ class SecurityVisualSync:
 
             mood = self.MOODS.get(event_type, "calm")
 
-            # Construct the visual command for the Notch
             command = {
                 "type": "mood",
                 "value": mood,
@@ -50,7 +49,6 @@ class SecurityVisualSync:
             logger.debug("Visual signal [%s] broadcast to Notch", event_type)
 
         except ImportError:
-            # HUB not available (e.g. running outside API context)
             pass
         except (RuntimeError, OSError, AttributeError) as e:
             logger.error("Failed to emit security signal: %s", e)
@@ -67,5 +65,4 @@ class SecurityVisualSync:
             logger.warning("Suppressed exception: %s", exc)
 
 
-# Global Singleton
 SIGNAL = SecurityVisualSync()

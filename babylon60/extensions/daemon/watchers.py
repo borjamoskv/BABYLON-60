@@ -68,10 +68,8 @@ logger = logging.getLogger("babylon60.daemon.watchers")
 
 __all__ = ["WatchdogHub"]
 
-# Default patterns to watch
 DEFAULT_PATTERNS = ["*.py", "*.md", "*.json", "*.yaml", "*.yml", "*.toml"]
 
-# Directories always excluded from watching
 EXCLUDE_DIRS = {
     ".git",
     "__pycache__",
@@ -83,7 +81,6 @@ EXCLUDE_DIRS = {
     ".mypy_cache",
 }
 
-# Debounce window: ignore duplicate events within this many seconds
 DEBOUNCE_SECONDS = 1.0
 
 
@@ -107,16 +104,13 @@ class _UnifiedHandler(FileSystemEventHandler):
         """Check pattern match and debounce."""
         p = Path(path)
 
-        # Exclude dirs
         for part in p.parts:
             if part in EXCLUDE_DIRS:
                 return False
 
-        # Pattern match
         if not any(fnmatch.fnmatch(p.name, pat) for pat in self._patterns):
             return False
 
-        # Debounce
         now = time.monotonic()
         last = self._last_events.get(path, 0)
         if now - last < DEBOUNCE_SECONDS:
@@ -153,7 +147,6 @@ class _UnifiedHandler(FileSystemEventHandler):
 
         logger.debug("%s: %s", topic, path)
 
-        # Update hot state counter
         if self._hot_state is not None:
             try:
                 self._hot_state.increment("fs_events_total")
@@ -165,7 +158,6 @@ class _UnifiedHandler(FileSystemEventHandler):
             except Exception as e:  # noqa: BLE001
                 logger.debug("UnifiedHandler hot state increment/set failed: %s", e, exc_info=True)
 
-        # Publish to event bus (thread-safe via run_coroutine_threadsafe)
         if self._event_bus is not None and self._loop is not None:
             try:
                 asyncio.run_coroutine_threadsafe(
@@ -187,7 +179,6 @@ class WatchdogHub:
         )
         await hub.start()
 
-        # ... hub publishes fs.modified/created/deleted to EventBus ...
 
         await hub.stop()
     """
@@ -273,7 +264,6 @@ class WatchdogHub:
         resolved = Path(path).expanduser().resolve()
         if resolved not in self._paths:
             self._paths.append(resolved)
-            # If already running, hot-schedule
             if self._observer is not None and self._handler is not None:
                 if resolved.exists() and resolved.is_dir():
                     self._observer.schedule(

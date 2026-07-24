@@ -44,7 +44,6 @@ class DailyShieldMonitor:
         alerts: list[dict[str, Any]] = []
         now = datetime.fromtimestamp(time.time(), tz=timezone.utc)
 
-        # Skip if already ran within interval
         if self._last_scan:
             hours_since = (now - self._last_scan).total_seconds() / 3600
             if hours_since < self.SCAN_INTERVAL_HOURS:
@@ -56,7 +55,6 @@ class DailyShieldMonitor:
 
         logger.info("🛡️ DAILY SHIELD - Starting security pipeline")
 
-        # ── Phase 1: Threat Feed Update ──
         feed_report = await self._update_feeds()
         if feed_report:
             alerts.append(
@@ -67,7 +65,6 @@ class DailyShieldMonitor:
                 }
             )
 
-        # ── Phase 2: Integrity Audit ──
         audit_report = await self._run_audit()
         if audit_report:
             severity = "info" if audit_report.get("is_clean") else "critical"
@@ -84,7 +81,6 @@ class DailyShieldMonitor:
                     audit_report,
                 )
 
-        # ── Phase 3: Anomaly Report ──
         anomaly_stats = self._get_anomaly_stats()
         if anomaly_stats:
             alerts.append(
@@ -120,7 +116,6 @@ class DailyShieldMonitor:
         """Last scan report."""
         return self._last_report
 
-    # ── Internal Methods ──
 
     async def _update_feeds(self) -> dict[str, Any] | None:
         """Update threat intelligence feeds."""
@@ -180,4 +175,3 @@ class DailyShieldMonitor:
             logger.warning("Suppressed exception: %s", exc)
 
 
-# Notification is best-effort

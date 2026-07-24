@@ -32,7 +32,6 @@ from typing import Any, TypeAlias, TypeVar
 from babylon60.extensions.swarm.error_ghost_pipeline import ErrorGhostPipeline
 from babylon60.utils.result import Err, Result
 
-# Optional LangSmith - graceful degradation, never a hard dep
 try:
     from langsmith.run_trees import RunTree  # pyright: ignore[reportMissingImports]
 
@@ -45,19 +44,14 @@ logger = logging.getLogger("babylon60_extensions.swarm.telemetry_gate")
 
 T = TypeVar("T")
 
-# ── Allowlist for safe kwarg keys to send to traces ────────────────────
 _SAFE_KWARG_PREFIXES = frozenset(
     {"query", "prompt", "model", "temperature", "max_tokens", "tool", "agent", "name"}
 )
 
 
-# Evaluator signature: (inputs: dict, output: Any) -> float [0.0 – 1.0]
 EvaluatorFn: TypeAlias = Callable[[dict[str, Any], Any], float]
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Exceptions
-# ═════════════════════════════════════════════════════════════════════════
 
 
 class StochasticDetonationError(Exception):
@@ -83,9 +77,6 @@ class CircuitOpenError(Exception):
         )
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Tracing Bootstrap
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def init_sovereign_tracing(project_name: str = "cortex-master-swarm") -> None:
@@ -93,11 +84,7 @@ def init_sovereign_tracing(project_name: str = "cortex-master-swarm") -> None:
     logger.warning("RADAR-Ω: init_sovereign_tracing is deprecated. Telemetry is fully local.")
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Core: Evaluator Protocol & Combinators
-# ═════════════════════════════════════════════════════════════════════════
 
-# NOTE: EvaluatorFn type alias defined above (line 54)
 
 
 def exact_match_evaluator(expected_keys: list[str]) -> EvaluatorFn:
@@ -147,9 +134,6 @@ def compose_or(*evaluators: EvaluatorFn) -> EvaluatorFn:
     return _eval
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Circuit Breaker State (per tool_name, in-process)
-# ═════════════════════════════════════════════════════════════════════════
 
 _circuit_state: dict[str, int] = {}  # tool_name → consecutive failures
 _CIRCUIT_BREAKER_LIMIT = 3
@@ -175,9 +159,6 @@ def circuit_reset(tool_name: str) -> None:
     logger.info("Circuit breaker reset for %s", tool_name)
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  PII-safe kwargs extractor (allowlist, not denylist)
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def _sanitize_kwargs(kwargs: dict[str, Any]) -> dict[str, Any]:
@@ -189,9 +170,6 @@ def _sanitize_kwargs(kwargs: dict[str, Any]) -> dict[str, Any]:
     }
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Sync Gate Decorator
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def sovereign_quality_gate(
@@ -212,7 +190,6 @@ def sovereign_quality_gate(
     def decorator(func: Callable[..., Result]) -> Callable[..., Result]:
         @wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> Result:
-            # ── Circuit breaker check ──────────────────────────────
             if _circuit_is_open(tool_name):
                 err = CircuitOpenError(tool_name, _CIRCUIT_BREAKER_LIMIT)
                 logger.error(str(err))
@@ -228,7 +205,6 @@ def sovereign_quality_gate(
                 _circuit_record_failure(tool_name)
                 _end_run_tree(run_tree, error=str(exc), latency_ms=elapsed * 1000)
                 logger.exception("Gate [%s]: unhandled exception", tool_name)
-                # 150/100: Capture in ghost pipeline
                 ErrorGhostPipeline().capture_sync(
                     exc, source=f"gate:sync:{tool_name}", project="CORTEX_SWARM"
                 )
@@ -244,9 +220,6 @@ def sovereign_quality_gate(
     return decorator
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Async Gate Decorator
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def sovereign_quality_gate_async(
@@ -274,7 +247,6 @@ def sovereign_quality_gate_async(
                 _circuit_record_failure(tool_name)
                 _end_run_tree(run_tree, error=str(exc), latency_ms=elapsed * 1000)
                 logger.exception("Gate [%s]: unhandled exception (async)", tool_name)
-                # 150/100: Capture in ghost pipeline
                 await ErrorGhostPipeline().capture(
                     exc, source=f"gate:async:{tool_name}", project="CORTEX_SWARM"
                 )
@@ -290,9 +262,6 @@ def sovereign_quality_gate_async(
     return decorator
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Shared internals
-# ═════════════════════════════════════════════════════════════════════════
 
 
 def _maybe_create_run_tree(tool_name: str, args: tuple, kwargs: dict[str, Any]) -> Any | None:
@@ -346,23 +315,19 @@ def _evaluate_and_finalize(
     """Score the result, update circuit breaker, emit trace."""
     latency_ms = elapsed_s * 1000
 
-    # ── Inner Result already failed ────────────────────────────────
     if isinstance(result, Err):
         _circuit_record_failure(tool_name)
         _end_run_tree(run_tree, error=repr(result.error), latency_ms=latency_ms)
         return result
 
-    # ── Unwrap Ok value ────────────────────────────────────────────
     output_val = result.value  # type: ignore[union-attr]
 
-    # ── Evaluate ───────────────────────────────────────────────────
     score = 1.0
     if evaluator is not None:
         try:
             score = evaluator(kwargs, output_val)
         except (TypeError, ValueError, KeyError, AttributeError) as eval_exc:
             logger.warning("Evaluator crashed for [%s]: %s", tool_name, eval_exc)
-            # 150/100: Evaluator crash is a high-entropy event
             ErrorGhostPipeline().capture_sync(
                 eval_exc, source=f"gate:evaluator:{tool_name}", project="CORTEX_SWARM"
             )
@@ -375,7 +340,6 @@ def _evaluate_and_finalize(
         _end_run_tree(run_tree, error=str(det), latency_ms=latency_ms)
         return Err(str(det))
 
-    # ── Success path ───────────────────────────────────────────────
     _circuit_record_success(tool_name)
     _end_run_tree(
         run_tree,

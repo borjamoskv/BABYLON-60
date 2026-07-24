@@ -25,24 +25,20 @@ class DomainOrigin(Enum):
 class IntentType(Enum):
     """O(1) intent classification."""
 
-    # MailTV
     EMAIL_INTERCEPTED = auto()
     EMAIL_REPLIED = auto()
     EMAIL_ARCHIVED = auto()
     SENDER_CLASSIFIED = auto()
-    # Moltbook
     POST_PUBLISHED = auto()
     KARMA_LAUNDERED = auto()
     SHADOWBAN_DETECTED = auto()
     ENGAGEMENT_SPIKE = auto()
-    # CORTEX Core
     DECISION_STORED = auto()
     GHOST_DETECTED = auto()
     GHOST_WATCH_TRIGGER = auto()
     BRIDGE_FORMED = auto()
     HEARTBEAT_PULSE = auto()
     SLEEP_CYCLE_TRIGGERED = auto()
-    # SAP Audit
     ANOMALY_DETECTED = auto()
     AUDIT_COMPLETED = auto()
 

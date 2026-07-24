@@ -8,7 +8,6 @@ Extracted to maintain O(1) complexity in the core engine.
 
 import re
 
-# ── Commit type detection heuristics ──────────────────────────────────────────
 
 TYPE_SIGNALS: dict[str, list[str]] = {
     "feat": ["new file", "added", "create", "implement", "introduce", "add"],
@@ -22,13 +21,11 @@ TYPE_SIGNALS: dict[str, list[str]] = {
     "chore": ["bump", "update", "upgrade", "dependency", "cleanup", "misc"],
 }
 
-# Precompiled O(1) regex for ultra-fast matching
 TYPE_REGEX = {
     ctype: re.compile(r"\b(?:" + "|".join(map(re.escape, signals)) + r")\b", re.IGNORECASE)
     for ctype, signals in TYPE_SIGNALS.items()
 }
 
-# ── Metaphorical templates per commit type ────────────────────────────────────
 
 TEMPLATES: dict[str, list[str]] = {
     "feat": [
@@ -206,7 +203,6 @@ TEMPLATES: dict[str, list[str]] = {
     ],
 }
 
-# ── Emoji signatures per commit type ──────────────────────────────────────────
 
 EMOJI_MAP: dict[str, list[str]] = {
     "feat": ["⚡", "🧬", "🔮", "🌱", "🏗️", "💎", "🚀", "🔥", "✨", "🧊"],
@@ -221,7 +217,6 @@ EMOJI_MAP: dict[str, list[str]] = {
     "revert": ["⏪", "🔙", "↩️", "🕐"],
 }
 
-# ── Scope extraction from file paths ─────────────────────────────────────────
 
 SCOPE_MAP: dict[str, str] = {
     "engine": "engine",

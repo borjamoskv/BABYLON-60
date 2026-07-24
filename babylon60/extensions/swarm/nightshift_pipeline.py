@@ -32,7 +32,6 @@ from typing import Any
 logger = logging.getLogger("babylon60_extensions.swarm.nightshift_pipeline")
 
 
-# ── Pipeline Nodes ───────────────────────────────────────────────────────
 
 
 class PlannerNode:
@@ -49,12 +48,10 @@ class PlannerNode:
         if not isinstance(target, str):
             return str(target)
 
-        # 1. URL extraction
         url_match = re.search(r'https?://[^\s<>"]+|www\.[^\s<>"]+', target)
         if url_match:
             return url_match.group(0)
 
-        # 2. JSON unpacking
         if target.strip().startswith("{"):
             try:
                 data = json.loads(target)
@@ -62,9 +59,7 @@ class PlannerNode:
             except (ValueError, TypeError, KeyError, OSError, RuntimeError) as exc:
                 logger.warning("Suppressed exception: %s", exc)
 
-        # 3. Artifact header stripping
         clean = re.sub(r"═══.*?═══", "", target).strip()
-        # 4. Remove leading/trailing markdown code blocks
         clean = re.sub(r"^```\w*\n|```$", "", clean).strip()
 
         return clean[:500]
@@ -79,7 +74,6 @@ class PlannerNode:
         plan: list[dict[str, Any]] = []
 
         for i, target in enumerate(targets):
-            # Support both CrystalTarget objects and raw dicts
             if hasattr(target, "target"):
                 plan.append(
                     {
@@ -103,7 +97,6 @@ class PlannerNode:
                     }
                 )
             elif isinstance(target, str):
-                # Plain string target - wrap as quick_read
                 plan.append(
                     {
                         "id": f"crystal-{int(time.monotonic())}-{i}",
@@ -208,7 +201,6 @@ class ValidatorNode:
 
     name = "validator"
 
-    # Confidence levels
     C5_CONFIRMED = "C5"
     C4_PROBABLE = "C4"
     C3_INFERRED = "C3"
@@ -233,8 +225,6 @@ class ValidatorNode:
             state["validation_reason"] = "All crystallization tasks failed. Human review required."
             return state
 
-        # For crystal generation, individual success is sufficient
-        # Each crystal is independently validated by AUTODIDACT's redundancy check
         if len(failed) == 0:
             state["confidence"] = self.C5_CONFIRMED
         elif len(successful) > len(failed):
@@ -304,7 +294,6 @@ class HumanGateNode:
         return state
 
 
-# ── Pipeline Assembly ────────────────────────────────────────────────────
 
 
 class NightShiftPipeline:

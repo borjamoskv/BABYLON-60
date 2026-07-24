@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Semantic Router (KETER-∞ Ola 3).
 
@@ -24,10 +20,8 @@ Usage::
 
     router = SemanticRouter()
     mode = router.classify("Fix the bug in auth.py where tokens expire")
-    # → ThinkingMode.CODE
 
     mode = router.classify("What's the root cause of the OOM?")
-    # → ThinkingMode.DEEP_REASONING
 """
 
 from __future__ import annotations
@@ -43,7 +37,6 @@ __all__ = ["RouteDecision", "SemanticRouter"]
 logger = logging.getLogger("babylon60_extensions.thinking.semantic_router")
 
 
-# ─── Signal Sets ────────────────────────────────────────────────────
 
 _CODE_EXTENSIONS = frozenset(
     {
@@ -208,7 +201,6 @@ _CODE_PATTERN_RE = re.compile(
 )
 
 
-# ─── Data Models ─────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -224,7 +216,6 @@ class RouteDecision:
         return f"RouteDecision({self.mode.value}, conf={self.confidence:.2f})"
 
 
-# ─── Semantic Router ─────────────────────────────────────────────────
 
 
 class SemanticRouter:
@@ -273,7 +264,6 @@ class SemanticRouter:
         """Classify multiple prompts."""
         return [self.classify(p) for p in prompts]
 
-    # ── Signal Extraction ────────────────────────────────────────
 
     def _extract_signals(self, prompt: str) -> dict[str, float]:
         """Extract all signal dimensions from the prompt."""
@@ -281,7 +271,6 @@ class SemanticRouter:
         words = set(re.findall(r"\b\w+\b", lower))
         word_count = max(len(words), 1)
 
-        # Code signals
         code_keyword_hits = len(words & _CODE_KEYWORDS)
         code_file_hits = len(_CODE_FILE_RE.findall(prompt))
         code_block_hits = len(_CODE_BLOCK_RE.findall(prompt))
@@ -296,15 +285,12 @@ class SemanticRouter:
             ),
         )
 
-        # Creative signals
         creative_hits = len(words & _CREATIVE_KEYWORDS)
         creative_score = min(1.0, (creative_hits / word_count) * 3.0)
 
-        # Reasoning signals
         reasoning_hits = len(words & _REASONING_KEYWORDS)
         reasoning_score = min(1.0, (reasoning_hits / word_count) * 3.0)
 
-        # Speed signals (short prompts, direct questions)
         is_short = len(prompt.split()) <= 8
         is_speed_pattern = bool(_SPEED_PATTERNS.match(prompt.strip()))
         speed_score = 0.0
@@ -315,7 +301,6 @@ class SemanticRouter:
         elif is_speed_pattern:
             speed_score = 0.3
 
-        # Length penalty: very long prompts → reasoning
         length_boost = min(0.2, len(prompt) / 5000)
 
         return {
@@ -325,7 +310,6 @@ class SemanticRouter:
             "speed": round(speed_score, 3),
         }
 
-    # ── Decision Logic ───────────────────────────────────────────
 
     def _decide(self, signals: dict[str, float]) -> tuple[ThinkingMode, float, str]:
         """Select mode from signals using threshold-based priority."""
@@ -334,7 +318,6 @@ class SemanticRouter:
         reasoning = signals["reasoning"]
         speed = signals["speed"]
 
-        # Priority: Code > Creative > Reasoning > Speed > Default
         if code >= self._code_threshold and code >= creative and code >= reasoning:
             return ThinkingMode.CODE, min(1.0, 0.5 + code), f"code signals: {code:.2f}"
 
@@ -355,5 +338,4 @@ class SemanticRouter:
         if speed >= 0.5:
             return ThinkingMode.SPEED, min(1.0, 0.4 + speed), f"speed signals: {speed:.2f}"
 
-        # Default: deep reasoning (safest fallback)
         return ThinkingMode.DEEP_REASONING, 0.5, "no dominant signal → deep reasoning"

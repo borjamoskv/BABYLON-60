@@ -72,21 +72,17 @@ class DriftMonitorDaemon:
             signature_dir=signature_dir,
         )
 
-        # Load baseline
         baseline = monitor.load_baseline()
 
-        # Read embeddings from sqlite-vec
         embeddings = self._read_embeddings()
         if embeddings is None or embeddings.shape[0] < 10:
             return []
 
-        # If no baseline exists, create one silently
         if baseline is None:
             monitor.checkpoint(embeddings)
             logger.info("DriftMonitor: Created initial baseline (n=%d)", embeddings.shape[0])
             return []
 
-        # Compute health
         result = monitor.health(embeddings, baseline)
         health = result["topological_health"]
 
@@ -124,7 +120,6 @@ class DriftMonitorDaemon:
                 conn.enable_load_extension(True)
             sqlite_vec.load(conn)
 
-            # Check table exists
             cursor = conn.execute(
                 "SELECT 1 FROM sqlite_master WHERE type='table' AND name='vec_facts'"
             )
@@ -132,7 +127,6 @@ class DriftMonitorDaemon:
                 conn.close()
                 return None
 
-            # Count vectors
             cursor = conn.execute("SELECT COUNT(*) FROM vec_facts")
             total = cursor.fetchone()[0]
 
@@ -140,11 +134,9 @@ class DriftMonitorDaemon:
                 conn.close()
                 return None
 
-            # Read embeddings (sample if too many)
             if total <= self.max_sample:
                 cursor = conn.execute("SELECT embedding FROM vec_facts")
             else:
-                # Random sample via rowid
                 cursor = conn.execute(
                     "SELECT embedding FROM vec_facts ORDER BY RANDOM() LIMIT ?",
                     (self.max_sample,),
@@ -156,7 +148,6 @@ class DriftMonitorDaemon:
             if not rows:
                 return None
 
-            # Convert binary blobs to numpy array
             vectors = [np.frombuffer(row[0], dtype=np.float32) for row in rows]
             return np.vstack(vectors)
 

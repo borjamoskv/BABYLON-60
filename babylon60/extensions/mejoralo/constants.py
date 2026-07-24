@@ -43,15 +43,12 @@ __all__ = [
     "SWARM_TEMPERATURE_STEP",
     "SWARM_TIMEOUT_SECONDS",
     "TOTAL_SCANNER_COUNT",
-    # Ghost detection
     "GHOST_SIMILARITY_THRESHOLD",
     "GHOST_MIN_SUBTREE_SIZE",
     "GHOST_PENALTY_PER_FINDING",
-    # CHRONOS-1 Yield
     "CHRONOS_HOURS_PER_FILE",
     "CHRONOS_HOURS_PER_CODEPATH",
     "CHRONOS_COMPLEXITY_DIVISOR",
-    # Taint Circuit Breaker
     "TAINT_TAG",
 ]
 
@@ -61,8 +58,6 @@ STACK_MARKERS = {
     "swift": "Package.swift",
 }
 
-# Patterns for the Psi dimension (toxic code markers)
-# Split strings to avoid self-detection
 PSI_TERMS = [
     "HAC" + "K",
     "FIX" + "ME",
@@ -75,8 +70,6 @@ PSI_TERMS = [
 ]
 PSI_PATTERNS = re.compile(r"\b(" + "|".join(PSI_TERMS) + r")\b", re.IGNORECASE)
 
-# Patterns for the Security dimension
-# Split risky keywords to avoid self-detection
 SEC_TERMS = [
     r"eval\s*\(",
     r"innerH" + "TML",
@@ -91,18 +84,15 @@ SECURITY_PATTERNS = re.compile(
 
 MAX_LOC = 1500  # Lines of code threshold for architecture dimension
 
-# ─── Relentless Loop Constants ───────────────────────────────────────
 INMEJORABLE_SCORE = 95  # The "inmejorable" threshold - perfection
 STAGNATION_LIMIT = 3  # Consecutive no-progress iterations before escalating
 MIN_PROGRESS = 2  # Minimum score delta to count as progress
 HARD_ITERATION_CAP = 30  # Absolute safety net - capped at 30 cycles for chronos
 
-# ─── Heal Engine Constants ───────────────────────────────────────────
 PYTEST_TIMEOUT_SECONDS = 120  # Max seconds for a pytest run during healing
 ESCALATION_ITER_L2 = 5  # Iteration threshold to escalate to Level 2
 ESCALATION_ITER_L3 = 15  # Iteration threshold to escalate to Level 3
 
-# ─── Swarm Constants ─────────────────────────────────────────────────
 SWARM_TIMEOUT_SECONDS = 240.0  # Timeout for ThoughtOrchestra synthesis
 SWARM_BASE_TEMPERATURE = 0.1  # Base temperature, scales with level
 SWARM_TEMPERATURE_STEP = 0.1  # Temperature increment per escalation level
@@ -110,7 +100,6 @@ SWARM_SQUAD_SIZES: dict[int, int] = {1: 3, 2: 5}  # Level → specialist count
 SWARM_DEFAULT_SQUAD_SIZE = 6  # Fallback squad size for Level 3+
 DEVILS_ADVOCATE_THRESHOLD = 3  # Findings count to inject Devil's Advocate
 
-# ─── Scan & Scoring Constants ──────────────────────────────────────────
 MCCABE_THRESHOLD = 10  # Max cyclomatic complexity per function
 NESTING_DEPTH_LIMIT = 6  # Max structural nesting depth
 INDENT_NESTING_THRESHOLD = 24  # Char indent for polyglot nesting warning
@@ -121,7 +110,6 @@ SOVEREIGN_BONUS_FACTOR = 0.3  # Multiplier for sovereign bonus (max +30)
 MAX_FINDINGS_ARCH = 10  # Cap on reported architecture findings
 MAX_FINDINGS_COMPLEXITY = 15  # Cap on reported complexity findings
 
-# ─── Heal Prompts Constants ───────────────────────────────────────────
 FILES_PER_ITERATION: dict[int, int] = {1: 1, 2: 3}  # Level → files
 FILES_PER_ITERATION_DEFAULT = 5  # Fallback for Level 3+
 HEAL_TEMPERATURES: dict[int, float] = {
@@ -130,31 +118,25 @@ HEAL_TEMPERATURES: dict[int, float] = {
     3: 0.3,
 }  # Level → LLM temperature
 
-# ─── Antipattern Constants ─────────────────────────────────────────
 MAX_FUNC_PARAMS = 5  # Max recommended parameters per function
 MAX_FAN_OUT = 12  # Max allowed import fan-out per module
 TOTAL_SCANNER_COUNT = 6  # Number of antipattern scanners
 
-# ─── Ghost Detection Constants ────────────────────────────────────
 GHOST_SIMILARITY_THRESHOLD = 0.80  # AST subtree hashes that match ≥80% = ghost
 GHOST_MIN_SUBTREE_SIZE = 10  # Minimum number of AST nodes in a subtree to check
 GHOST_PENALTY_PER_FINDING = 8  # Score penalty per code ghost discovered
 
-# ─── CHRONOS-1 Yield Constants ─────────────────────────────────────
 CHRONOS_HOURS_PER_FILE = 6  # Hours per healed file (linear term)
 CHRONOS_HOURS_PER_CODEPATH = 12  # Hours per codepath affected
 CHRONOS_COMPLEXITY_DIVISOR = 3  # Divisor for cyclomatic_complexity_delta
 
-# ─── Taint Circuit Breaker ──────────────────────────────────────────
 TAINT_TAG = "mejoralo-tainted"  # CORTEX tag for permanently blacklisted files
 
-# ─── Daemon Constants ─────────────────────────────────────────────
 DAEMON_DEFAULT_SCAN_INTERVAL = 1800  # 30 minutes between scans
 DAEMON_DEFAULT_TARGET_SCORE = 100  # 100 = Sovereign standard
 DAEMON_DIM_SCORE_THRESHOLD = 7  # Dimension score below this triggers query
 
 
-# File extensions to scan per stack
 SCAN_EXTENSIONS = {
     "node": {".js", ".ts", ".jsx", ".tsx", ".mjs", ".cjs"},
     "python": {".py"},
@@ -162,7 +144,6 @@ SCAN_EXTENSIONS = {
     "unknown": {".js", ".ts", ".py", ".swift"},
 }
 
-# Directories to always skip
 SKIP_DIRS = {
     ".git",
     "node_modules",

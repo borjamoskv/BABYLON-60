@@ -1,11 +1,8 @@
 # C5-REAL
-# MOSKV-1 APEX SINGULARITY
-# FALSACIÓN EMPÍRICA: MAMBA BLOCK TOPOLOGY
 
 import sys
 import os
 
-# Add parent directory to path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cortex_mamba_block import MambaBlock
 
@@ -18,7 +15,6 @@ def test_mamba_block_forward() -> None:
 
     block = MambaBlock(d_model=d_model, d_state=d_state)
 
-    # Sequence of 50 tokens, each of dimension 8
     sequence = [[0.5] * d_model for _ in range(seq_len)]
 
     out = block.forward(sequence)
@@ -42,12 +38,10 @@ def test_mamba_block_causality() -> None:
     out_a = block.forward(seq_a)
     out_b = block.forward(seq_b)
 
-    # t < 10 must be identical
     for t in range(10):
         for i in range(d_model):
             assert abs(out_a[t][i] - out_b[t][i]) < 1e-9, "Violación Causal: Filtro de información temporal roto."
 
-    # t >= 10 must diverge
     diverged = False
     for i in range(d_model):
         if abs(out_a[10][i] - out_b[10][i]) > 1e-9:

@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """SovereignLLM: Zero-Trust LLM Access.
 
@@ -54,13 +50,11 @@ __all__ = ["Inquisitor", "SovereignLLM", "SovereignResult"]
 
 logger = logging.getLogger("babylon60_extensions.llm.sovereign")
 
-# Default signature for template fallback - override via constructor
 _DEFAULT_SIGNATURE = (
     "---\nby borjamoskv.com | MOSKV Systems\nSovereign Architecture · Industrial Noir 2026"
 )
 
 
-# ─── Result ──────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -82,9 +76,7 @@ class SovereignResult:
         return not self.is_template
 
 
-# ─── Provider Priority ──────────────────────────────────────────────
 
-# Ordered by: cost-efficiency → reliability → speed
 _REMOTE_PRIORITY: list[str] = [
     "gemini",  # 1M ctx, cheap, fast
     "qwen",  # 131K ctx, very cheap
@@ -116,7 +108,6 @@ _LOCAL_PRIORITY: list[str] = [
 ]
 
 
-# ─── SovereignLLM ─────────────────────────────────────────────────
 
 
 class SovereignLLM:
@@ -148,7 +139,6 @@ class SovereignLLM:
         self._signature = signature
         self._providers_cache: dict[str, LLMProvider] = {}
 
-    # ── Context Manager (D4 fix) ─────────────────────────────
 
     async def __aenter__(self) -> SovereignLLM:
         return self
@@ -156,7 +146,6 @@ class SovereignLLM:
     async def __aexit__(self, *exc) -> None:
         await self.close()
 
-    # ── Public API ────────────────────────────────────────────
 
     async def generate(
         self,
@@ -178,10 +167,8 @@ class SovereignLLM:
         """
         chain: list[str] = []
         errors: list[str] = []
-        # D3 fix: cache presets once per generate() call
         presets = load_presets()
 
-        # ── Layer 1: ThoughtOrchestra (if available) ──────────
         if self._use_orchestra:
             result = await self._try_orchestra(
                 prompt,
@@ -193,7 +180,6 @@ class SovereignLLM:
             if result:
                 return result
 
-        # ── Layer 2: Direct provider fallback chain ───────────
         provider_order = self._build_priority_chain()
         for provider_name in provider_order:
             result = await self._try_provider(
@@ -208,7 +194,6 @@ class SovereignLLM:
             if result:
                 return result
 
-        # ── Layer 3: Local models ─────────────────────────────
         for local_name in _LOCAL_PRIORITY:
             result = await self._try_provider(
                 local_name,
@@ -223,7 +208,6 @@ class SovereignLLM:
             if result:
                 return result
 
-        # ── Layer 4: Template engine (ZERO connectivity) ──────
         logger.warning(
             "SovereignLLM: ALL providers failed (%d attempts). Using template fallback.",
             len(chain),
@@ -238,7 +222,6 @@ class SovereignLLM:
             error_log=errors,
         )
 
-    # ── Internal ──────────────────────────────────────────────
 
     async def _try_orchestra(
         self,
@@ -250,7 +233,6 @@ class SovereignLLM:
     ) -> SovereignResult | None:
         """Attempt ThoughtOrchestra. Returns None on failure."""
         try:
-            # Lazy import to avoid circular deps
             from babylon60.extensions.thinking.orchestra import ThoughtOrchestra
 
             chain.append("orchestra")
@@ -274,7 +256,6 @@ class SovereignLLM:
             errors.append("orchestra: import failed")
         except asyncio.TimeoutError:
             errors.append(f"orchestra: timeout ({self._timeout}s)")
-        # D1 fix: specific exceptions instead of bare Exception
         except (OSError, ValueError, KeyError, RuntimeError) as e:
             errors.append(f"orchestra: {e!r}")
 
@@ -294,7 +275,6 @@ class SovereignLLM:
         try:
             if provider_name not in self._providers_cache:
                 if provider_name == "vllm_native":
-                    # Carga bypass OOM a traves de Extractor KV 3.5b (arXiv:2504.19874)
                     from babylon60.extensions.llm.vllm_edge import NativeVLLMProvider
 
                     self._providers_cache[provider_name] = NativeVLLMProvider()  # type: ignore[reportArgumentType]
@@ -385,7 +365,6 @@ class SovereignLLM:
 
         return result
 
-    # D7 fix: signature is configurable, not hardcoded
     def _template_fallback(self, prompt: str) -> str:
         """Zero-connectivity template. Uses prompt echo with framing.
 
@@ -405,7 +384,6 @@ class SovereignLLM:
         self._providers_cache.clear()
 
 
-# ─── El Inquisidor (Red Team) ──────────────────────────────────────────────
 
 
 class Inquisitor(SovereignLLM):

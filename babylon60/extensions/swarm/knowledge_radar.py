@@ -30,14 +30,12 @@ except ImportError:
 
 logger = logging.getLogger("babylon60_extensions.swarm.knowledge_radar")
 
-# ── Default Paths ─────────────────────────────────────────────────────────
 
 _DEFAULT_QUEUE_PATH = (
     Path(__file__).resolve().parents[2] / "cortex_iturria" / "nightshift_queue.yaml"
 )
 
 
-# ── Data Models ───────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -57,7 +55,6 @@ class CrystalTarget:
         return self.priority
 
 
-# ── Source 1: Curated YAML Queue ──────────────────────────────────────────
 
 
 def scan_curated_queue(queue_path: Path | str | None = None) -> list[CrystalTarget]:
@@ -104,7 +101,6 @@ def scan_curated_queue(queue_path: Path | str | None = None) -> list[CrystalTarg
         return []
 
 
-# ── Source 2: Ghost Knowledge Gaps ────────────────────────────────────────
 
 
 async def scan_ghost_gaps(cortex_db: Any) -> list[CrystalTarget]:
@@ -116,7 +112,6 @@ async def scan_ghost_gaps(cortex_db: Any) -> list[CrystalTarget]:
     targets: list[CrystalTarget] = []
 
     try:
-        # Query via the CortexEngine/DB interface
         if hasattr(cortex_db, "recall"):
             results = await cortex_db.recall(
                 query="knowledge gap unresolved",
@@ -141,22 +136,17 @@ async def scan_ghost_gaps(cortex_db: Any) -> list[CrystalTarget]:
         for r in results or []:
             content = getattr(r, "content", "") if hasattr(r, "content") else str(r)
 
-            # --- Ω₄ Aesthetic Cleaning (Parser) ---
-            # 1. Try to extract URL from content
             url_match = re.search(r'https?://[^\s<>"]+|www\.[^\s<>"]+', content)
             if url_match:
                 target_str = url_match.group(0)
-            # 2. Try to parse as JSON if it looks like it
             elif content.strip().startswith("{"):
                 try:
                     data = json.loads(content)
-                    # Extract common fields
                     target_str = (
                         data.get("url") or data.get("target") or data.get("query") or content[:500]
                     )
                 except json.JSONDecodeError:
                     target_str = content[:500]
-            # 3. Strip artifact headers
             else:
                 target_str = re.sub(r"═══.*?═══", "", content).strip()
                 target_str = target_str[:500]
@@ -179,7 +169,6 @@ async def scan_ghost_gaps(cortex_db: Any) -> list[CrystalTarget]:
     return targets
 
 
-# ── Source 3: Semantic Gap Detection ──────────────────────────────────────
 
 
 async def scan_semantic_gaps(cortex_db: Any, min_facts: int = 5) -> list[CrystalTarget]:
@@ -222,7 +211,6 @@ async def scan_semantic_gaps(cortex_db: Any, min_facts: int = 5) -> list[Crystal
     return targets
 
 
-# ── Merge & Prioritize ────────────────────────────────────────────────────
 
 
 def deduplicate_targets(targets: list[CrystalTarget]) -> list[CrystalTarget]:
@@ -261,7 +249,6 @@ def merge_and_prioritize(
     return result
 
 
-# ── Public API ────────────────────────────────────────────────────────────
 
 
 async def discover(
@@ -281,10 +268,8 @@ async def discover(
     """
     logger.info("📡 [RADAR] Starting full spectrum scan (max=%d)", max_targets)
 
-    # Source 1: Always available
     curated = scan_curated_queue(queue_path)
 
-    # Sources 2 & 3: Only if DB is available
     ghosts: list[CrystalTarget] = []
     semantic: list[CrystalTarget] = []
 

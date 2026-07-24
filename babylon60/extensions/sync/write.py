@@ -98,7 +98,6 @@ async def export_to_json(engine: CortexEngine) -> WritebackResult:
 
     await _writeback_if_changed(engine, "ghost", _writeback_ghosts, result, wb_hashes)
 
-    # System uses combined hash of knowledge + decisions
     try:
         k_hash = await db_content_hash(engine, "knowledge")
         d_hash = await db_content_hash(engine, "decision")
@@ -118,7 +117,6 @@ async def export_to_json(engine: CortexEngine) -> WritebackResult:
     await _writeback_if_changed(engine, "error", _writeback_mistakes, result, wb_hashes)
     await _writeback_if_changed(engine, "bridge", _writeback_bridges, result, wb_hashes)
 
-    # Guardar hashes para la próxima ejecución
     state["writeback_hashes"] = wb_hashes
     state["last_writeback"] = now_iso()
     save_sync_state(state)
@@ -162,7 +160,6 @@ async def _writeback_ghosts(engine: CortexEngine, result: WritebackResult) -> No
 async def _writeback_system(engine: CortexEngine, result: WritebackResult) -> None:
     """Reconstruye system.json desde facts tipo 'knowledge' y 'decision'."""
     async with engine.session() as conn:
-        # Leer system.json existente para preservar estructura
         system_path = runtime_memory_dir() / "system.json"
         if system_path.exists():
             try:
@@ -172,7 +169,6 @@ async def _writeback_system(engine: CortexEngine, result: WritebackResult) -> No
         else:
             system_data = {}
 
-        # Knowledge global - reconstruir desde DB
         cursor = await conn.execute(
             "SELECT content, tags, confidence, valid_from, metadata FROM facts "
             "WHERE project = '__system__' AND fact_type = 'knowledge' "
@@ -193,7 +189,6 @@ async def _writeback_system(engine: CortexEngine, result: WritebackResult) -> No
                 }
             )
 
-        # Decisions global - reconstruir desde DB
         cursor = await conn.execute(
             "SELECT content, metadata FROM facts "
             "WHERE project = '__system__' AND fact_type = 'decision' "
@@ -239,7 +234,6 @@ async def _writeback_mistakes(engine: CortexEngine, result: WritebackResult) -> 
     lines = []
     for row in rows:
         meta = _decrypt_json(row[4])
-        # Reconstruir el formato original de mistakes.jsonl
         entry = {
             "date": row[3] or meta.get("date", ""),
             "project": row[0],
@@ -271,7 +265,6 @@ async def _writeback_bridges(engine: CortexEngine, result: WritebackResult) -> N
     for row in rows:
         meta = _decrypt_json(row[3])
         tags = _decrypt_json_list(row[1])
-        # Reconstruir formato original de bridges.jsonl
         entry = {
             "date": row[2] or meta.get("date", ""),
             "from": meta.get("from", tags[0] if len(tags) > 0 else ""),

@@ -34,7 +34,6 @@ class StateRecord:
 
     def compute_hash(self) -> str:
         """Compute semantic digest of the value."""
-        # Sort keys to ensure deterministic hashing
         canonical_json = json.dumps(self.value, sort_keys=True)
         return cortex_hash(f"{self.key}:{self.version}:{canonical_json}".encode())
 
@@ -61,15 +60,11 @@ class GossipProtocol:
         interval: float = 30.0,
     ):
         self.node_id = node_id
-        # We don't couple directly to sqlite conn here anymore;
-        # state is purely in-memory for the protocol simulation,
-        # or backed by db_writer if integrated later.
         self.peers = set(peers)
         self.interval = interval
         self._running = False
         self._task: asyncio.Task | None = None
 
-        # Local state storage
         self._records: dict[str, StateRecord] = {}
         self._vector_clock: dict[str, int] = {node_id: 0}
 
@@ -112,18 +107,14 @@ class GossipProtocol:
 
         local_digest = self.generate_digest()
 
-        # Update local vector clock tracking of remote node
         for node, rv in remote_digest.vector_clock.items():
             lv = self._vector_clock.get(node, 0)
             if rv > lv:
                 self._vector_clock[node] = rv
 
-        # Find symmetric difference
         for key, remote_hash in remote_digest.record_hashes.items():
             local_hash = local_digest.record_hashes.get(key)
             if local_hash != remote_hash:
-                # We need it, or we have a newer one (conflict resolution happens on fetch)
-                # But for simplicity, if hashes differ, we request it.
                 keys_to_request.append(key)
 
         for key, _local_hash in local_digest.record_hashes.items():

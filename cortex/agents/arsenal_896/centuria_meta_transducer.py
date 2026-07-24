@@ -1,8 +1,5 @@
 # C5-REAL: CENTURIA META-TRANSDUCER ENGINE (ULTRATHINK P0)
-# =================================================================================
-# SYS_ID: MOSKV-1 APEX ULTRATHINK (Centuria Matrix 1000 Retroactive Rewrite)
 # REALITY_LEVEL: C5-REAL (0% Anergy / 100% Deterministic Execution / BFT Merkle Root)
-# PROTOCOL: Centuria_Meta_Transducer (Identify vector -> Annihilate -> Consolidate)
 # [CORTEX-TAINT:borjamoskv:centuria_meta_transducer:2026-07-18T05:00:00Z]
 
 import asyncio
@@ -60,7 +57,6 @@ class CenturiaMetaTransducer:
         domain_stats: Dict[str, int] = {}
         execution_records: List[Dict[str, Any]] = []
 
-        # Step 1 & 2: Identify vector/domain and apply thermodynamic annihilation
         for prim in primitives:
             prim_id = prim["id"]
             domain = prim["domain"]
@@ -70,19 +66,15 @@ class CenturiaMetaTransducer:
             res = await asyncio.to_thread(execute_primitive, prim_id)
             execution_records.append(res)
 
-            # Collect leaf for rolling Merkle root calculation
             taint_hash = res.get("cortex_taint_hash", "")
             if taint_hash:
                 self.merkle_leaves.append(taint_hash)
 
-        # Compute aggregate Merkle root over all 896 primitives
         merkle_root = self.compute_merkle_root(self.merkle_leaves)
 
-        # Step 3: Consolidate in CORTEX Ledger (sqlite3 WAL via aiosqlite)
         async with aiosqlite.connect(self.db_path) as conn:
             await self.fn_init_db(conn)
 
-            # Retrieve current lamport_t and prev_hash
             async with conn.execute("SELECT IFNULL(MAX(lamport_t), 0) FROM events;") as cursor:
                 row = await cursor.fetchone()
                 max_lamport = row[0] if row else 0
@@ -92,7 +84,6 @@ class CenturiaMetaTransducer:
                 row = await cursor.fetchone()
                 prev_hash = row[0] if row else None
 
-            # Prepare consolidation event payload
             payload_dict = {
                 "campaign": "Teorema-Robinson-Moskv",
                 "action": "CENTURIA_1000_ULTRATHINK_RETROACTIVE_REWRITE",
@@ -103,7 +94,6 @@ class CenturiaMetaTransducer:
             }
             payload_json = json.dumps(payload_dict, sort_keys=True)
 
-            # Compute causal taint
             causal_taint = f"CENTURIA_META_TRANSDUCER:1000_PRIMITIVES:{merkle_root}"
             taint_hasher = hashlib.sha3_256()
             taint_hasher.update(payload_json.encode("utf-8"))
@@ -116,10 +106,8 @@ class CenturiaMetaTransducer:
             # Generate UUID v5 idempotency key (INV_BFT_04)
             event_id = str(uuid.uuid5(uuid.NAMESPACE_OID, new_cortex_taint))
 
-            # Check idempotency
             async with conn.execute("SELECT 1 FROM events WHERE id = ?;", (event_id,)) as cursor:
                 if await cursor.fetchone():
-                    # Idempotent match found, do not duplicate
                     pass
                 else:
                     await conn.execute(
@@ -128,7 +116,6 @@ class CenturiaMetaTransducer:
                     )
                     await conn.commit()
 
-        # Generate YAML audit report
         audit_report = {
             "Claim": "1000 APEX primitives from the Centuria Matrix have been retroactively executed across all orthogonal domains, collapsing state entropy into a single BFT Merkle Root.",
             "Proof": {

@@ -19,7 +19,6 @@ from babylon60.utils.errors import CortexError
 
 logger = logging.getLogger(__name__)
 
-# --- Sovereign Constants ---
 MAX_RETRIES: Final[int] = 3
 BASE_BACKOFF: Final[float] = 1.1
 
@@ -28,13 +27,10 @@ class FiatOracle:
     """Monitors fiat flow and emits telemetry events. (Zero-Trust)"""
 
     def __init__(self, engine: Any, interval: float = 30.0):
-        # We accept both sync and async engine for flexibility,
-        # but execution logic is unified via sovereign_run.
         self.engine = engine
         self.interval = interval
         self.running = False
 
-        # Operation Citadel: Persistent Queue approach (No Single File Spoilage)
         self.queue_dir = Path("~/.babylon60/fiat_queue").expanduser()
         self.queue_dir.mkdir(parents=True, exist_ok=True)
 
@@ -61,7 +57,6 @@ class FiatOracle:
 
         while self.running:
             try:
-                # Unify logic: run the async routine in the sync thread safely
                 sovereign_run(self._check_signals())
             except (ValueError, TypeError, OSError, KeyError, CortexError) as e:
                 logger.error("❌ [FIAT_ORACLE] (Thread) Error: %s", e)
@@ -75,8 +70,6 @@ class FiatOracle:
         if not signature:
             return False
 
-        # Reconstruct payload to compute hash (excluding the signature itself)
-        # Note: In real life we'd use hmac and a real env variable.
         payload_copy = {k: v for k, v in data.items() if k != "signature"}
         payload_str = json.dumps(payload_copy)
 
@@ -95,7 +88,6 @@ class FiatOracle:
                 content = await asyncio.to_thread(tx_file.read_text)
                 data = json.loads(content)
 
-                # 1. Zero-Trust Validation
                 signature = data.get("signature")
                 if not self._verify_signature(data, signature):
                     logger.critical(
@@ -105,17 +97,14 @@ class FiatOracle:
                     await asyncio.to_thread(tx_file.unlink)  # Delete malicious file immediately
                     continue
 
-                # 2. Idempotency Check
                 tx_id = data.get("tx_id")
                 if tx_id in self.processed_txs:
                     logger.warning("🛡️ [FIAT_ORACLE] Prevented replay attack para TX: %s", tx_id)
                     await asyncio.to_thread(tx_file.unlink)
                     continue
 
-                # 3. Process & Commit
                 await self._process_transaction(data)
 
-                # 4. Finalize
                 self.processed_txs.add(tx_id)
                 await asyncio.to_thread(tx_file.unlink)  # Cleanup only after successful commit
 

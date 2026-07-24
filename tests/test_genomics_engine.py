@@ -165,9 +165,7 @@ def test_genomic_transducer_integration_with_oncology_transducer() -> None:
     assert state_matrix.get("ONC-143") == 1  # HRD node
     assert state_matrix.get("ONC-154") == 1  # ecDNA amplification node
 
-    # Verify execution inside Boolean network simulation (`simulate_boolean_network`)
     G = nx.DiGraph()
-    # Create directed edges among activated oncogenic/suppressor nodes to model causal propagation
     G.add_edges_from(
         [
             ("ONC-046", "ONC-143"),  # TP53 loss promotes HRD / DDR instability
@@ -180,6 +178,5 @@ def test_genomic_transducer_integration_with_oncology_transducer() -> None:
     history, nodes = simulate_boolean_network(G, state_matrix, steps=3)
     assert len(history) >= 2
     assert "ONC-046" in nodes
-    # Ensure initial state vector preserved node activations
     assert history[0][nodes.index("ONC-046")] == 1
     assert history[0][nodes.index("ONC-019")] == 1

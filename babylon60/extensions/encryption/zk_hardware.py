@@ -25,7 +25,6 @@ except ImportError:
 
 logger = logging.getLogger("babylon60.encryption.zk")
 
-# 12-byte nonce for ChaCha20
 NONCE_SIZE: Final[int] = 12
 
 
@@ -41,14 +40,12 @@ class ZeroKnowledgeShield:
         if ChaCha20Poly1305 is None:
             raise ImportError("cryptography package is required for Zero-Knowledge Shield.")
 
-        # Default to environment variable or secure random bytes if running in simulation
         if hardware_key_material is None:
             hw_seed_env = os.environ.get("CORTEX_HW_SEED")
             self._master_seed = hw_seed_env.encode("utf-8") if hw_seed_env else os.urandom(32)
         else:
             self._master_seed = hardware_key_material
 
-        # Derive a 32-byte key for ChaCha20-Poly1305 using HKDF
         hkdf = HKDF(  # pyright: ignore[reportOptionalCall]
             algorithm=hashes.SHA256(),  # pyright: ignore[reportOptionalMemberAccess]
             length=32,
@@ -65,7 +62,6 @@ class ZeroKnowledgeShield:
         """
         nonce = os.urandom(NONCE_SIZE)
         ciphertext = self._cipher.encrypt(nonce, plaintext.encode("utf-8"), None)
-        # Prepend nonce to ciphertext and base64 encode for storage
         encrypted_payload = base64.b64encode(nonce + ciphertext).decode("utf-8")
         return encrypted_payload
 

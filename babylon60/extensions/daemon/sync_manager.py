@@ -41,17 +41,14 @@ class CortexSyncManager:
             stats = {}
 
             try:
-                # 1. MerklePulse: Differential Sync (Read: Memory -> DB)
                 self._last_sync_result = await self._merkle_pulse_sync()
                 stats["sync"] = self._last_sync_result.total if self._last_sync_result else 0
 
-                # 2. Write-back (Export: DB -> Memory)
                 self._last_wb_result = await self._run_export_to_json()
                 stats["writeback"] = (
                     self._last_wb_result.items_exported if self._last_wb_result else 0
                 )
 
-                # 3. Snapshot (DB Export)
                 await self._run_export_snapshot()
                 stats["snapshot"] = True
 
@@ -70,7 +67,6 @@ class CortexSyncManager:
         from babylon60.extensions.sync.common import MEMORY_DIR
 
         persisted_state = load_sync_state()
-        # 1. Detect changes using hashes
         changed_files = []
         for f in ["ghosts.json", "system.json", "mistakes.jsonl", "bridges.jsonl"]:
             path = MEMORY_DIR / f
@@ -83,7 +79,6 @@ class CortexSyncManager:
             logger.debug("MerklePulse: No memory changes detected")
             return SyncResult()
 
-        # 2. Process only changed files
         logger.info("MerklePulse: Detected changes in %d files", len(changed_files))
         return await self._run_sync_memory()
 

@@ -26,6 +26,5 @@ if __name__ == "__main__":
     import asyncio
     from pathlib import Path
 
-    # Test boot sequence via proxy
     orchestrator = PhoenixOrchestrator()
     asyncio.run(orchestrator.ignite([Path(__file__)]))

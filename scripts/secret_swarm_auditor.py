@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 # C5-REAL: Swarm Thread Dispatcher for TOP SECRET Auditing (ULTRATHINK P0 - ITERATION 3)
-# Vector: BFT_STATE_LOOP, SARIF Integration, Delta Scanning, Zero-Anergy Whitelisting
 import os
 import re
 import math
@@ -10,7 +9,6 @@ import argparse
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import List, Dict, Any
 
-# Exclusión de Anergía (Directorios ruidosos o binarios)
 EXCLUDE_DIRS = {
     ".git",
     ".venv",
@@ -59,7 +57,6 @@ EXCLUDE_EXTS = {
     ".rmeta",
 }
 
-# Patrones Top Secret
 PATTERNS = {
     "AWS_ACCESS_KEY": r"AKIA[0-9A-Z]{16}",
     "RSA_PRIVATE_KEY": r"-----BEGIN RSA PRIVATE KEY-----",
@@ -71,7 +68,6 @@ PATTERNS = {
     "GENERIC_SECRET": r'(?i)(password|secret|api_key|access_token)[\s:=]+[\'"]([^\'"]{8,})[\'"]',
 }
 
-# Whitelist de Anergía para Cadenas de Alta Entropía
 WHITELIST_ENTROPY = [
     r"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx",
     r"0123456789abcdefghijklmnopqrstuvwxyz",
@@ -81,7 +77,6 @@ WHITELIST_ENTROPY = [
     r"0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ",  # BASE60_ALPHABET (constante pública de diseño, utils/base60.py)
 ]
 
-# Valores literales conocidos como NO-secretos (ejemplos oficiales de documentación
 # o dummies de test auto-descritos). C5-REAL: cada entrada justificada inline.
 WHITELIST_VALUES = {
     "AKIAIOSFODNN7EXAMPLE",  # Clave de ejemplo oficial de la documentación de AWS (no es real)
@@ -110,7 +105,6 @@ def is_whitelisted(line: str) -> bool:
 
 def scan_file(filepath: str) -> List[Dict[str, Any]]:
     findings: List[Dict[str, Any]] = []
-    # Auto-evasión
     if "secret_swarm_auditor.py" in filepath or not os.path.isfile(filepath):
         return findings
 
@@ -119,7 +113,6 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
             lines = f.readlines()
 
         for i, line in enumerate(lines):
-            # Check Patterns
             for p_name, p_regex in PATTERNS.items():
                 for match in re.finditer(p_regex, line):
                     secret_val = match.group(0)
@@ -142,7 +135,6 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
                         }
                     )
 
-            # Check Entropy
             if not is_whitelisted(line):
                 words = re.findall(r"\b[a-zA-Z0-9+/=]{20,}\b", line)
                 for w in words:
@@ -251,7 +243,6 @@ def main():  # type: ignore
             if res:
                 all_findings.extend(res)
 
-    # CI PR Annotations
     in_ci = os.environ.get("GITHUB_ACTIONS") == "true"
     if all_findings:
         for f in all_findings:
@@ -259,12 +250,10 @@ def main():  # type: ignore
             if in_ci:
                 print(f"::error file={rel_path},line={f['line']}::[C5-REAL] Secret Detected: {f['type']} ({f['hash']})")
 
-    # SARIF Output
     if args.sarif:
         export_sarif(all_findings, root, os.path.join(root, "secret_audit.sarif"))
         print("[*] Reporte SARIF generado: secret_audit.sarif")
 
-    # BFT State
     if all_findings:
         print("[!] ANERGÍA DETECTADA. Fricción estructural encontrada.")
         exit(1)

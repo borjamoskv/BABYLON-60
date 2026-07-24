@@ -36,7 +36,6 @@ logger = logging.getLogger("babylon60.handoff")
 HANDOFF_VERSION = "1.3"
 DEFAULT_HANDOFF_PATH = CORTEX_DIR / "handoff.json"
 
-# Limits
 MAX_DECISIONS = 10
 MAX_ERRORS = 5
 MAX_GHOSTS = 20
@@ -56,7 +55,6 @@ async def generate_handoff(
         Handoff dictionary ready for serialization.
     """
     async with engine.session() as conn:
-        # ── Hot Decisions (last N, ordered by recency) ────────────────────
         async with conn.execute(
             "SELECT id, project, content, created_at, "
             "tenant_id, parent_decision_id "
@@ -83,7 +81,6 @@ async def generate_handoff(
             for r in decision_rows
         ]
 
-        # ── Active Ghosts ─────────────────────────────────────────────────
         async with conn.execute(
             "SELECT id, project, reference, context "
             "FROM ghosts "
@@ -97,7 +94,6 @@ async def generate_handoff(
             {"id": r[0], "project": r[1], "reference": r[2], "context": r[3]} for r in ghost_rows
         ]
 
-        # ── Recent Errors ─────────────────────────────────────────────────
         async with conn.execute(
             "SELECT id, project, content, created_at, "
             "tenant_id, parent_decision_id "
@@ -120,13 +116,11 @@ async def generate_handoff(
             for r in error_rows
         ]
 
-        # ── Causal Episodes (Epoch 8 - WHY context) ────────────────────
         causal_episodes_data: list[dict[str, Any]] = []
         try:
             from babylon60.memory.episodic import CausalTracer
 
             tracer = CausalTracer(conn)
-            # Trace causal chains for each hot decision
             seen_roots: set[int] = set()
             for d in hot_decisions:
                 try:
@@ -148,7 +142,6 @@ async def generate_handoff(
         except (RuntimeError, ImportError, OSError) as e:
             logger.debug("Causal episode tracing skipped: %s", e)
 
-        # ── Causal Chains (compact DAG via get_causal_chain) ──────────
         causal_chains: list[dict[str, Any]] = []
         try:
             seen_chain_roots: set[int] = set()
@@ -181,7 +174,6 @@ async def generate_handoff(
         except Exception as e:  # noqa: BLE001
             logger.debug("Causal chain extraction skipped: %s", e)
 
-        # ── Active Projects (with activity in last 24h) ───────────────
         async with conn.execute(
             "SELECT DISTINCT project FROM facts "
             "WHERE created_at >= datetime('now', '-1 day') "
@@ -192,7 +184,6 @@ async def generate_handoff(
 
         active_projects = [r[0] for r in project_rows]
 
-        # ── Stats summary ─────────────────────────────────────────────
         async with conn.execute("SELECT COUNT(*) FROM facts WHERE valid_until IS NULL") as cursor:
             total_active = (await cursor.fetchone())[0]  # type: ignore[reportOptionalSubscript]
 
@@ -204,7 +195,6 @@ async def generate_handoff(
     db_path = Path(engine._db_path)
     db_size_mb = round(db_path.stat().st_size / (1024 * 1024), 2) if db_path.exists() else 0.0
 
-    # ── Session metadata (from caller) ────────────────────────────
     session = {
         "focus_projects": [],
         "pending_work": [],
@@ -213,7 +203,6 @@ async def generate_handoff(
     if session_meta:
         session.update(session_meta)
 
-    # ── Cognitive Fingerprint (v1.3) - Behavioral prior for receiving agent ─
     cognitive_fingerprint: dict = {}
     try:
         from babylon60.extensions.fingerprint.extractor import FingerprintExtractor

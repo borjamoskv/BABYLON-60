@@ -21,15 +21,12 @@ from babylon60.crypto.hash_registry import cortex_hash
 logger = logging.getLogger("babylon60_extensions.swarm.code_smith")
 
 
-# ── Constants ──────────────────────────────────────────────────────────────
 
-# Re-exported from ast_validator for backward compatibility
 from babylon60.extensions.swarm.ast_validator import (
     ASTValidationResult,
     ASTValidator,
 )
 
-# ── Enums ──────────────────────────────────────────────────────────────────
 
 
 class SmithPhase(str, Enum):
@@ -44,7 +41,6 @@ class SmithPhase(str, Enum):
     ROLLBACK = "rollback"
 
 
-# ── Protocols ──────────────────────────────────────────────────────────────
 
 
 class SandboxExecutor(Protocol):
@@ -67,7 +63,6 @@ class CodeGenerator(Protocol):
     async def generate_tests(self, code: str, context: str) -> str: ...
 
 
-# ── Data Models ────────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -165,7 +160,6 @@ class KGVTracker:
         return file_path in self._versions
 
 
-# ── Local Process Sandbox (Fallback) ──────────────────────────────────────
 
 
 class LocalProcessSandbox:
@@ -244,7 +238,6 @@ class LocalProcessSandbox:
         shutil.rmtree(self._tmp_dir, ignore_errors=True)
 
 
-# ── The Code Smith ────────────────────────────────────────────────────────
 
 
 class CodeSmith:
@@ -302,7 +295,6 @@ class CodeSmith:
         self._operation_count += 1
         start = time.monotonic()
 
-        # Capture rollback target before modification
         kgv = self._kgv_tracker.get(change_request.target_file)
         rollback_hash = kgv.commit_hash if kgv else ""
 
@@ -314,7 +306,6 @@ class CodeSmith:
         )
 
         try:
-            # ── Phase 1: GENERATE ──────────────────────────────────
             result.phase_reached = SmithPhase.EDIT
             logger.info(
                 "🔨 CodeSmith [%d]: Generating code for '%s' → %s",
@@ -330,7 +321,6 @@ class CodeSmith:
                 result.error = "Generator produced empty code"
                 return result
 
-            # ── Phase 2: VALIDATE (Static Analysis Gate) ───────────
             result.phase_reached = SmithPhase.VALIDATE
             validation = self._validator.validate(generated_code)
             result.validation = validation
@@ -342,13 +332,10 @@ class CodeSmith:
 
             logger.info("✅ CodeSmith: AST validation passed. %s", validation.stats)
 
-            # ── Phase 3: TEST (Sandbox Execution) ──────────────────
             result.phase_reached = SmithPhase.TEST
 
-            # Generate test code
             test_code = await self._generator.generate_tests(generated_code, change_request.context)
 
-            # Write both to sandbox
             await self._sandbox.write_file(
                 "skill_module.py",
                 generated_code,
@@ -358,7 +345,6 @@ class CodeSmith:
                 test_code,
             )
 
-            # Run tests in sandbox
             test_result = await self._sandbox.run_command(
                 "python -m pytest test_skill_module.py -v --tb=short",
                 timeout_s=30.0,
@@ -374,7 +360,6 @@ class CodeSmith:
 
             logger.info("✅ CodeSmith: Tests passed in %.1fms", test_result.duration_ms)
 
-            # ── Phase 4: COMMIT ────────────────────────────────────
             result.phase_reached = SmithPhase.COMMIT
             commit_hash = hashlib.sha256(
                 f"{change_request.skill_id}:{time.monotonic()}:{generated_code[:100]}".encode()
@@ -383,7 +368,6 @@ class CodeSmith:
             result.commit_hash = commit_hash
             result.success = True
 
-            # Record as new KGV
             self._kgv_tracker.record(change_request.target_file, generated_code, commit_hash)
 
             logger.info(
@@ -400,7 +384,6 @@ class CodeSmith:
             result.duration_ms = (time.monotonic() - start) * 1000
             self._history.append(result)
 
-            # Cleanup sandbox (best-effort)
             try:
                 await self._sandbox.cleanup()
             except (ValueError, TypeError, KeyError, OSError, RuntimeError) as exc:
@@ -430,7 +413,6 @@ class CodeSmith:
         Returns:
             SmithResult - same pipeline, triggered by error instead of request.
         """
-        # Extract the crashing function from the traceback
         crash_context = self._extract_crash_context(error_trace)
 
         change_request = ChangeRequest(
@@ -448,10 +430,8 @@ class CodeSmith:
     def _extract_crash_context(error_trace: str) -> str:
         """Extract the most relevant crash info from a traceback."""
         lines = error_trace.strip().split("\n")
-        # Last line is usually the error message
         if lines:
             error_line = lines[-1].strip()
-            # Find the last file reference
             file_refs = [line.strip() for line in lines if "File " in line]
             if file_refs:
                 return f"{file_refs[-1]} → {error_line}"

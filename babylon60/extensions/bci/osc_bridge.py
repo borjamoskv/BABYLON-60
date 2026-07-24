@@ -54,7 +54,6 @@ class AetherOscBridge:
     def _handle_physical_telemetry(self, address: str, *args: Any) -> None:
         """Callback for incoming hardware telemetry."""
         logger.info("OSC-RX [Physical -> Cortex]: %s | %s", address, args)
-        # In the future, inject this directly into Cortex-Persist Causal Engine
 
     async def start(self) -> None:
         """Binds the asynchronous OSC server to listen for hardware inputs."""
@@ -65,11 +64,9 @@ class AetherOscBridge:
         loop = asyncio.get_running_loop()
         self.server = AsyncIOOSCUDPServer((self.rx_ip, self.rx_port), self.dispatcher, loop)
 
-        # Start receiver
         self.transport, _ = await self.server.create_serve_endpoint()  # type: ignore
         logger.info("Aether OSC Bridge RX Bound to udp://%s:%s", self.rx_ip, self.rx_port)
 
-        # Start generic UDP sender for TX
         class OSCSenderProtocol(asyncio.DatagramProtocol):
             """Protocol for sending OSC messages over UDP."""
 

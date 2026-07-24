@@ -41,7 +41,6 @@ class _AstAnalyzer(ast.NodeVisitor):
         self._current_function = node.name
         self.call_graph[node.name] = set()
 
-        # Calculate cyclomatic complexity roughly
         complexity = 1
         for child in ast.walk(node):
             if isinstance(
@@ -71,7 +70,6 @@ class _AstAnalyzer(ast.NodeVisitor):
         elif isinstance(node.func, ast.Attribute):
             if isinstance(node.func.value, ast.Name):
                 self.used_imports.add(node.func.value.id)
-                # Check for __all__.append("name") or __all__.extend(["name"])
                 if node.func.value.id == "__all__" and node.func.attr in ("append", "extend"):
                     for arg in node.args:
                         if isinstance(arg, ast.Constant) and isinstance(arg.value, str):
@@ -155,7 +153,6 @@ class _DeadCodePurge(ast.NodeTransformer):
 
     def visit_FunctionDef(self, node):
         if node.name in self.dead_funcs and not node.name.startswith("__"):
-            # Never purge decorators or __init__ style
             return None
         self.generic_visit(node)
         return node
@@ -176,7 +173,6 @@ class _DocstringInjector(ast.NodeTransformer):
                 )
                 node.body.insert(0, doc_node)
 
-        # Add return type None if missing and no return statements yield values
         has_returns = any(isinstance(n, ast.Return) and n.value is not None for n in ast.walk(node))
         if not node.returns and not has_returns and node.name != "__init__":
             node.returns = ast.Constant(value=None)
@@ -202,7 +198,6 @@ class _EntropyAnnihilator(ast.NodeTransformer):
         self.logger_name = "logger"
 
     def visit_Module(self, node):
-        # Scan for existing loggers first
         for stmt in node.body:
             if isinstance(stmt, ast.Assign) and isinstance(stmt.value, ast.Call):
                 if getattr(stmt.value.func, "attr", "") == "getLogger":

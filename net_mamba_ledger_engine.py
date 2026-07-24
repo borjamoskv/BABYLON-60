@@ -1,6 +1,3 @@
-# net_mamba_ledger_engine.py
-# Execution Protocol: Exergy-Optimized Ontology & DAG Ledger Integration
-# Prefix: net_ (network/inference orchestration layer with strict DAG tracking)
 
 from typing import List, Tuple
 from core_graph_ledger import GraphLedger, StateNode
@@ -40,15 +37,12 @@ class MambaLedgerEngine:
         assert isinstance(prompt, str) and len(prompt) > 0, "Fail-fast: prompt must be non-empty str"
         assert max_new_tokens > 0, "Fail-fast: max_new_tokens must be positive"
 
-        # 1. Encode initial prompt
         prompt_ids = self.tokenizer.encode(prompt)
         assert len(prompt_ids) > 0, "Fail-fast: encoded prompt cannot be empty"
 
-        # 2. Record prompt genesis in ledger if not already anchored
         prompt_payload = {"type": "prompt", "text": prompt, "ids": prompt_ids}
         prompt_hash = hash_evidence(prompt_payload)
         
-        # Check if parent is genesis or latest head
         parent_id = self.ledger.genesis_id
         prompt_node = self.ledger.mut_append_node(
             parent_id=parent_id,
@@ -60,13 +54,10 @@ class MambaLedgerEngine:
         generated_nodes: List[StateNode] = [prompt_node]
         current_parent_id = prompt_node.node_id
 
-        # 3. Step-by-step autoregressive loop with ledger attachment
         for step in range(max_new_tokens):
-            # Forward pass through Mamba SSM
             logits_seq = self.network.forward(current_tokens)
             next_token_logits = logits_seq[-1]
 
-            # Softmax & Top-K sampling
             from cortex_mamba_inference import softmax, top_k_sampling
             probs = softmax(next_token_logits, temperature)
             next_token_id = top_k_sampling(probs, k=k)
@@ -74,7 +65,6 @@ class MambaLedgerEngine:
             current_tokens.append(next_token_id)
             token_str = self.tokenizer.decode([next_token_id])
 
-            # Append state node to DAG ledger
             step_claim = f"Step {step+1}: token {next_token_id}"
             micro_probs = [int(float(p) * 1_000_000) for p in probs[:5]]
             step_payload = {"step": step, "token": next_token_id, "str": token_str, "probs_hash": hash_evidence(micro_probs)}
@@ -88,10 +78,8 @@ class MambaLedgerEngine:
             generated_nodes.append(node)
             current_parent_id = node.node_id
 
-        # 4. Decode full sequence
         final_text = self.tokenizer.decode(current_tokens)
         
-        # 5. Generate ClosureCertificate (Thermodynamic Proof)
         crdt_entropy = self.ledger.crdt.measure_entropy()
         cert = ClosureCertificate(
             evidence_hash=prompt_hash,

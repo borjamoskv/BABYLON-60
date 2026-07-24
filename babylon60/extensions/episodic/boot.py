@@ -36,12 +36,9 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.episodic.boot")
 
-# Boot payload target size (characters)
 MAX_BOOT_CHARS: Final[int] = 4000
-# Default lookback window for episodes
 DEFAULT_LOOKBACK_HOURS: Final[int] = 48
 
-# Event-type → emoji mapping (immutable)
 _EVENT_EMOJI: Final[dict[str, str]] = {
     "decision": "⚡",
     "error": "🔴",
@@ -54,7 +51,6 @@ _EVENT_EMOJI: Final[dict[str, str]] = {
 }
 
 
-# ─── Models ──────────────────────────────────────────────────────────
 
 
 @dataclass()
@@ -108,7 +104,6 @@ class BootPayload:
         return "\n".join(lines)
 
 
-# ─── Markdown Section Renderers ──────────────────────────────────────
 
 
 def _render_episodes(lines: list[str], episodes: list[Episode]) -> None:
@@ -161,7 +156,6 @@ def _render_semantic_recalls(lines: list[str], recalls: list[dict] | None) -> No
     lines.append("")
 
 
-# ─── Boot Generator ─────────────────────────────────────────────────
 
 
 async def generate_session_boot(
@@ -186,34 +180,27 @@ async def generate_session_boot(
     """
     memory = EpisodicMemory(conn)
 
-    # 1. Compute lookback timestamp
     cutoff = datetime.fromtimestamp(time.time(), tz=timezone.utc) - timedelta(hours=lookback_hours)
     since_iso = cutoff.strftime("%Y-%m-%dT%H:%M:%S")
 
-    # 2. Recall recent episodes
     episodes = await memory.recall(
         project=project_hint,
         since=since_iso,
         limit=top_k,
     )
 
-    # 3. Detect patterns
     patterns = await memory.detect_patterns(
         project=project_hint,
         min_occurrences=2,
         limit=5,
     )
 
-    # 4. Inject reflections (best-effort)
     reflections = await _get_reflections(conn, project_hint, top_k=5)
 
-    # 5. Context inference (best-effort)
     active_project, confidence, summary = await _get_context_inference(conn, project_hint)
 
-    # 6. Total count
     total = await memory.count(project=project_hint)
 
-    # 7. L2 Semantic Recall (best-effort)
     semantic_recalls = await _get_semantic_recalls(project_hint, top_k=5)
 
     return BootPayload(
@@ -229,7 +216,6 @@ async def generate_session_boot(
     )
 
 
-# ─── Helper Queries ──────────────────────────────────────────────────
 
 
 async def _get_reflections(

@@ -38,11 +38,9 @@ from typing import Any
 
 logger = logging.getLogger("compaction-sidecar")
 
-# ── Platform capability flags (cheap, no I/O) ────────────────────────────────
 _PLATFORM = platform.system()
 _IS_LINUX = _PLATFORM == "Linux"
 
-# Probe psutil availability without importing at module level in workers
 try:
     import psutil as _psutil_probe  # type: ignore[import]  # noqa: F401
 
@@ -52,7 +50,6 @@ except ModuleNotFoundError:
     logger.debug("psutil not installed - memory pressure sampling will use fallback")
 
 
-# ── MemorySnapshot ────────────────────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -86,7 +83,6 @@ class MemorySnapshot:
         return self.rss_bytes / 1_048_576
 
 
-# ── MemoryPressureAlert ───────────────────────────────────────────────────────
 
 
 @dataclass
@@ -108,9 +104,6 @@ class MemoryPressureAlert:
         )
 
 
-# ── Worker functions (run in ThreadPoolExecutor) ──────────────────────────────
-# NOTE: These functions are called from threads, not coroutines. They must be
-# synchronous, avoid asyncio, and handle all exceptions internally.
 
 
 def _collect_snapshot() -> MemorySnapshot:
@@ -129,7 +122,6 @@ def _collect_snapshot() -> MemorySnapshot:
             logger.warning("Suppressed exception: %s", exc)
 
     if _IS_LINUX:
-        # Lazy import: ctypes.CDLL("libc.so.6") only attempted on Linux
         try:
             from babylon60.extensions.daemon.sidecar.compaction_monitor.memory_wrapper import (
                 get_mallinfo2,
@@ -166,7 +158,6 @@ def _do_malloc_trim() -> bool:
         return False
 
 
-# ── MemoryPressureMonitor ─────────────────────────────────────────────────────
 
 AlertCallback = Callable[[MemoryPressureAlert], Coroutine[Any, Any, None]]
 
@@ -216,7 +207,6 @@ class MemoryPressureMonitor:
         self._running = False
         self._task: asyncio.Task[None] | None = None
 
-    # ── Public API ────────────────────────────────────────────────────────────
 
     def start(self, loop: asyncio.AbstractEventLoop | None = None) -> None:
         """Schedule the monitoring coroutine on *loop* (or the running loop).
@@ -243,7 +233,6 @@ class MemoryPressureMonitor:
         if self._task and not self._task.done():
             self._task.cancel()
             try:
-                # Give it a moment to finish cleanup
                 await asyncio.wait_for(self._task, timeout=1.0)
             except Exception as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
@@ -256,7 +245,6 @@ class MemoryPressureMonitor:
         loop = asyncio.get_running_loop()
         return await loop.run_in_executor(self._executor, _collect_snapshot)
 
-    # ── Internal loop ─────────────────────────────────────────────────────────
 
     async def _loop(self) -> None:
         while self._running:
@@ -329,6 +317,4 @@ class MemoryPressureMonitor:
                 logger.warning("use_legion=True but 'legion' is not installed; alert dropped")
 
 
-# ── Backward-compat alias ─────────────────────────────────────────────────────
-# Keep old name importable during transition; will be removed in v7.
 AsyncCompactionMonitor = MemoryPressureMonitor

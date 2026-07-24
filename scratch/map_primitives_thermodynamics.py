@@ -13,7 +13,6 @@ def classify_primitives(yaml_path: Path) -> dict:
         
     primitives = data.get("Centuria_Matrix", {}).get("Primitives", [])
     
-    # Classification logic based on thermodynamic domains
     boltzmann_domains = {"SQLite_WAL", "Thread_Lock", "Memory_Page", "File_Descriptor", "BFT_Ledger"}
     prigogine_domains = {"AST", "DOM", "Git_Sentinel", "Subagent_Swarm", "RLHF_Subtext", "KV_Cache", "MCTS_Search", "V8_Engine", "Rust_Compiler", "TCP_IP"}
     
@@ -43,7 +42,6 @@ def classify_primitives(yaml_path: Path) -> dict:
         else:
             unclassified_list.append(info)
             
-    # Subsample lists for JSON output to prevent token saturation (keeping it ULTRATHIN)
     return {
         "summary": {
             "total_primitives": len(primitives),
@@ -63,7 +61,6 @@ def main():
     try:
         report = classify_primitives(yaml_path)
         
-        # Calculate verification hash of this mapping
         payload = json.dumps(report, sort_keys=True)
         v_hash = hashlib.sha3_256(payload.encode()).hexdigest()
         

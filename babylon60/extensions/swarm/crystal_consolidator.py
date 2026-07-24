@@ -28,7 +28,6 @@ from babylon60.extensions.swarm.crystal_thermometer import CrystalVitals
 
 logger = logging.getLogger("babylon60_extensions.swarm.crystal_consolidator")
 
-# ── Thresholds ────────────────────────────────────────────────────────────
 
 SEMANTIC_MERGE_THRESHOLD = 0.92  # Cosine similarity for merge
 MIN_AGE_FOR_PURGE_DAYS = 14
@@ -36,7 +35,6 @@ MIN_AGE_FOR_PROMOTE_DAYS = 7
 RE_EMBED_AGE_DAYS = 30
 
 
-# ── Result Model ──────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -73,7 +71,6 @@ class ConsolidationResult:
         }
 
 
-# ── Strategy 1: Cold Purge ────────────────────────────────────────────────
 
 
 async def _execute_cold_purge(
@@ -98,7 +95,6 @@ async def _execute_cold_purge(
         try:
             if not dry_run:
                 cursor = db_conn.cursor()
-                # Soft delete: mark as deprecated in metadata
                 cursor.execute(
                     """
                     UPDATE facts_meta
@@ -111,7 +107,6 @@ async def _execute_cold_purge(
                     """,
                     (time.monotonic(), v.temperature, v.resonance, v.fact_id),
                 )
-                # Actually remove from vector index for recall hygiene
                 cursor.execute(
                     "DELETE FROM vec_facts WHERE rowid IN "
                     "(SELECT rowid FROM facts_meta WHERE id = ?)",
@@ -134,7 +129,6 @@ async def _execute_cold_purge(
             result.errors += 1
 
 
-# ── Strategy 2: Semantic Merge ────────────────────────────────────────────
 
 
 async def _execute_semantic_merge(
@@ -150,12 +144,10 @@ async def _execute_semantic_merge(
     """
     from babylon60.extensions.swarm.crystal_synthesis import synthesize_crystals
 
-    # Only merge crystals that have embeddings available
     mergeable = [v for v in vitals if v.recommendation != "PURGE"]
     if len(mergeable) < 2:
         return
 
-    # Load content and embeddings
     try:
         cursor = db_conn.cursor()
         data: dict[str, dict[str, Any]] = {}
@@ -202,7 +194,6 @@ async def _execute_semantic_merge(
             sim = float(np.dot(vec_a, vec_b) / (norm_a * norm_b))
 
             if sim >= SEMANTIC_MERGE_THRESHOLD:
-                # Alchemist Merge: Fuse content via LLM
                 logger.info("🔗 [MERGE] Collided: %s (~%.4f) %s", id_a, sim, id_b)
 
                 try:
@@ -214,12 +205,10 @@ async def _execute_semantic_merge(
 
                     if not dry_run:
                         cursor = db_conn.cursor()
-                        # Update primary with fused content
                         cursor.execute(
                             "UPDATE facts_meta SET content = ?, updated_at = ? WHERE id = ?",
                             (new_content, time.monotonic(), id_a),
                         )
-                        # Delete the secondary
                         cursor.execute(
                             "DELETE FROM vec_facts WHERE rowid IN "
                             "(SELECT rowid FROM facts_meta WHERE id = ?)",
@@ -242,7 +231,6 @@ async def _execute_semantic_merge(
                     continue
 
 
-# ── Strategy 3: Diamond Promotion ─────────────────────────────────────────
 
 
 async def _execute_diamond_promotion(
@@ -288,7 +276,6 @@ async def _execute_diamond_promotion(
             result.errors += 1
 
 
-# ── Strategy 4: Heuristic Integration (Right-Brain) ───────────────────────
 
 
 async def _execute_heuristic_integration(
@@ -307,13 +294,11 @@ async def _execute_heuristic_integration(
 
     heuristic_engine = HeuristicEngine()
 
-    # Ingest ambient signals from crystals to form associations
     for v in vitals:
         heuristic_engine.ingest_ambient_signal(
             {"source": v.fact_id, "temperature": v.temperature, "resonance": v.resonance}
         )
 
-    # Simulate low-stress FreeEnergyState to trigger daydreaming during REM sleep
     fep_state = FreeEnergyState(domain=AgentDomain.MEMORY, surprise=0.1, free_energy=0.2)
 
     insights = heuristic_engine.daydream(fep_state)
@@ -328,7 +313,6 @@ async def _execute_heuristic_integration(
             logger.info("💡 Suggestion: %s", insight.get("payload"))
 
 
-# ── Public API ────────────────────────────────────────────────────────────
 
 
 async def consolidate(
@@ -365,20 +349,15 @@ async def consolidate(
     if not vitals:
         return result
 
-    # Strategy 1: Cold Purge
     await _execute_cold_purge(db_conn, vitals, result, dry_run)
 
-    # Strategy 2: Semantic Merge (skip purged crystals)
     remaining = [v for v in vitals if v.recommendation != "PURGE"]
     await _execute_semantic_merge(db_conn, remaining, result, dry_run)
 
-    # Strategy 3: Diamond Promotion
     await _execute_diamond_promotion(db_conn, remaining, result, dry_run)
 
-    # Strategy 4: Heuristic Integration (Right-Brain)
     await _execute_heuristic_integration(db_conn, vitals, result, dry_run)
 
-    # Count skipped
     result.skipped = result.total_scanned - (result.purged + result.merged + result.promoted)
 
     logger.info(

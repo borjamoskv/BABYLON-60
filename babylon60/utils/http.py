@@ -36,13 +36,11 @@ from typing import Any
 
 logger = logging.getLogger("babylon60.http")
 
-# ─── Constants ───────────────────────────────────────────────────────────
 
 _DEFAULT_MAX_RETRIES = 5
 _DEFAULT_BASE_DELAY = 2.0  # seconds - doubles each attempt (exponential)
 
 
-# ─── Mixin ───────────────────────────────────────────────────────────────
 
 
 class HttpRetryMixin:
@@ -53,7 +51,6 @@ class HttpRetryMixin:
     - `self._provider`: `str` (used in log messages only)
     """
 
-    # Override in subclass if needed
     _max_retries: int = _DEFAULT_MAX_RETRIES
     _base_delay: float = _DEFAULT_BASE_DELAY
 
@@ -173,7 +170,6 @@ class HttpRetryMixin:
         )
 
 
-# ─── Standalone function (for non-OOP clients) ──────────────────────────
 
 
 async def _do_standalone_post(

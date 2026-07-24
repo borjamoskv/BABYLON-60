@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX LLM Router - DNSSEC Intent Validation.
 
@@ -23,7 +19,6 @@ from babylon60.extensions.llm._models import IntentProfile
 __all__ = ["DriftSignal", "IntentValidator"]
 
 
-# ─── DNSSEC (Intent Validation) ────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -76,13 +71,10 @@ class IntentValidator:
     Axiom: Ω₃ (Byzantine Default) - verify, then trust. Never reversed.
     """
 
-    # Minimum response length to attempt validation
     _MIN_VALIDATION_LENGTH: int = 50
 
-    # Confidence threshold for flagging drift
     _DRIFT_CONFIDENCE_THRESHOLD: float = 0.6
 
-    # ── Signal patterns (compiled once) ─────────────────────────────
 
     _CODE_SIGNALS: tuple[re.Pattern[str], ...] = (
         re.compile(r"```\w*\n"),  # code fences
@@ -124,7 +116,6 @@ class IntentValidator:
         Returns a DriftSignal with detection results. GENERAL intent
         always passes (no signal required).
         """
-        # GENERAL never drifts - it accepts everything
         if requested_intent is IntentProfile.GENERAL:
             return DriftSignal(
                 provider=provider_name,
@@ -135,7 +126,6 @@ class IntentValidator:
                 evidence="GENERAL intent - no validation required",
             )
 
-        # Too short to validate meaningfully
         if len(response) < self._MIN_VALIDATION_LENGTH:
             return DriftSignal(
                 provider=provider_name,
@@ -146,21 +136,17 @@ class IntentValidator:
                 evidence=f"Response too short ({len(response)} chars) for validation",
             )
 
-        # Score each domain
         scores = {
             IntentProfile.CODE: self._score(response, self._CODE_SIGNALS),
             IntentProfile.REASONING: self._score(response, self._REASONING_SIGNALS),
             IntentProfile.CREATIVE: self._score(response, self._CREATIVE_SIGNALS),
         }
 
-        # Detected intent = highest scoring domain
         detected = max(scores, key=lambda k: scores[k])
         detected_score = scores[detected]
         requested_score = scores.get(requested_intent, 0.0)
 
-        # Confidence: how much stronger is the detected signal vs requested
         if detected_score == 0.0:
-            # No signals at all - can't determine, benefit of the doubt
             return DriftSignal(
                 provider=provider_name,
                 requested_intent=requested_intent,
@@ -180,7 +166,6 @@ class IntentValidator:
                 evidence=f"Matched: {detected.value} score={detected_score:.2f}",
             )
 
-        # Drift detected - response doesn't match requested intent
         drift_confidence = detected_score - requested_score
         is_drift = drift_confidence >= self._DRIFT_CONFIDENCE_THRESHOLD
 

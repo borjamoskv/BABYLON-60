@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any
 
 BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
-    # SQL Injection patterns
     {
         "id": "SIG-SQL-001",
         "category": "sql_injection",
@@ -41,7 +40,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"(?i)(SLEEP|BENCHMARK|WAITFOR)\s*\(",
         "desc": "Time-based blind SQL injection",
     },
-    # Prompt Injection patterns
     {
         "id": "SIG-PI-001",
         "category": "prompt_injection",
@@ -77,7 +75,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"(?i)\[INST\]|\[/INST\]|<\|im_start\|>|<\|im_end\|>|<<SYS>>",
         "desc": "LLM control token injection",
     },
-    # Path Traversal
     {
         "id": "SIG-PT-001",
         "category": "path_traversal",
@@ -99,7 +96,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"(?i)%2e%2e[/%5c]|%252e%252e",
         "desc": "URL-encoded path traversal",
     },
-    # Command Injection
     {
         "id": "SIG-CI-001",
         "category": "command_injection",
@@ -121,7 +117,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"(?i)(eval|exec|system|popen|subprocess)\s*\(",
         "desc": "Code execution function call",
     },
-    # XSS / Script Injection
     {
         "id": "SIG-XSS-001",
         "category": "xss",
@@ -129,7 +124,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"<script[^>]*>|javascript\s*:|on(error|load|click|mouseover)\s*=",
         "desc": "Cross-site scripting attempt",
     },
-    # Encoded Payload Detection
     {
         "id": "SIG-ENC-001",
         "category": "encoded_payload",
@@ -137,7 +131,6 @@ BUILT_IN_SIGNATURES: list[dict[str, Any]] = [
         "pattern": r"(?:[A-Za-z0-9+/]{4}){10,}={0,2}",
         "desc": "Potentially encoded Base64 payload (>40 chars)",
     },
-    # API Key / Secret Exfiltration
     {
         "id": "SIG-EXFIL-001",
         "category": "exfiltration",

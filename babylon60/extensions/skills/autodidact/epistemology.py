@@ -115,7 +115,6 @@ class Narrative(BaseModel):
         return data
 
 
-# --- Semantic Validation Enforcement (The Linter) ---
 
 def compile_observable(evidence: RawEvidence, extractor: Callable, extractor_hash: str, name: str) -> Observable:
     """RawEvidence -> Observable (VALID)"""

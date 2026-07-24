@@ -55,8 +55,6 @@ class TombstoneMonitor:
         try:
             from babylon60.database.core import connect as db_connect
 
-            # Fix HIGH-005 lock contention: use auto-commit mode (isolation_level=None)
-            # to avoid taking a write-lock on the first SELECT. We'll manage transactions manually.
             with db_connect(
                 self.db_path,  # type: ignore[type-error]
                 timeout=5,
@@ -64,7 +62,6 @@ class TombstoneMonitor:
             ) as conn:
                 cursor = conn.cursor()
 
-                # Get count of facts to sweep
                 cursor.execute("SELECT COUNT(*) FROM facts WHERE is_tombstoned = 1")
                 to_delete = cursor.fetchone()[0]
 
@@ -75,13 +72,8 @@ class TombstoneMonitor:
 
                 initial_size = self.db_path.stat().st_size
 
-                # 1. Main Delete - cascade handles vector indexes
-                # depending on schema triggers.
-                # But to be safe, we explicitly clear related vectors if cascade is off.
                 cursor.execute("SELECT id FROM facts WHERE is_tombstoned = 1")
 
-                # Batch deletes to avoid mammoth transactions,
-                # pulling directly from C-layer limits.
                 total_deleted = 0
                 while True:
                     batch_rows = cursor.fetchmany(1000)
@@ -93,7 +85,6 @@ class TombstoneMonitor:
 
                     try:
                         cursor.execute("BEGIN IMMEDIATE")
-                        # nosec B608 - Validated local table structure, batch parameterized.
                         cursor.execute(
                             f"DELETE FROM fact_embeddings WHERE fact_id IN ({id_list})", batch
                         )
@@ -107,7 +98,6 @@ class TombstoneMonitor:
                             "Batch sweep issue (might be ignored if tables missing): %s", batch_err
                         )
 
-                # Optimizing standard FTS / standard fragmentation if heavy sweeping occurred
                 if total_deleted > 5000:
                     conn.execute("PRAGMA optimize")
 

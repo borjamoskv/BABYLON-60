@@ -38,9 +38,6 @@ __all__ = [
 logger = logging.getLogger("babylon60_extensions.signals.trigger_engine")
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Enums
-# ═════════════════════════════════════════════════════════════════════════
 
 
 class EventHorizonPriority(str, Enum):
@@ -66,9 +63,6 @@ class ActionType(str, Enum):
     CUSTOM = "custom"
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Data Models
-# ═════════════════════════════════════════════════════════════════════════
 
 
 @dataclass
@@ -124,9 +118,6 @@ class TriggerResult:
     cooldown_remaining_s: float = 0.0
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Accumulator Entry
-# ═════════════════════════════════════════════════════════════════════════
 
 
 @dataclass
@@ -137,9 +128,6 @@ class _AccumulatorEntry:
     last_fired: float = 0.0
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  Action Handler Protocol
-# ═════════════════════════════════════════════════════════════════════════
 
 
 class TriggerActionHandler:
@@ -169,9 +157,6 @@ class TriggerActionHandler:
         logger.info("ACTION custom: %s", handler_name)
 
 
-# ═════════════════════════════════════════════════════════════════════════
-#  TriggerEngine
-# ═════════════════════════════════════════════════════════════════════════
 
 
 class TriggerEngine:
@@ -209,7 +194,6 @@ class TriggerEngine:
                 else:
                     self._exact_routes[pattern].append(trigger)
 
-    # ── Registration ───────────────────────────────────────────────
 
     def register(self, trigger: TriggerCondition) -> None:
         """Register a trigger condition. Overwrites if id already exists."""
@@ -238,7 +222,6 @@ class TriggerEngine:
         with self._lock:
             return list(self._triggers.values())
 
-    # ── Evaluation ─────────────────────────────────────────────────
 
     async def evaluate(self, signal: Signal) -> list[TriggerResult]:
         """Evaluate all registered triggers against a signal.
@@ -250,19 +233,15 @@ class TriggerEngine:
         now = time.monotonic()
 
         with self._lock:
-            # 1. Gather matching triggers preserving original insertion order
             matched: dict[str, TriggerCondition] = {}
 
-            # Exact match lookup
             for trigger in self._exact_routes.get(signal.event_type, []):
                 matched[trigger.id] = trigger
 
-            # Wildcard match lookup
             for pattern, trigger in self._wildcard_routes:
                 if fnmatch.fnmatch(signal.event_type, pattern):
                     matched[trigger.id] = trigger
 
-            # Preserve registration order (order of keys in self._triggers)
             trigger_ids_order = {tid: idx for idx, tid in enumerate(self._triggers.keys())}
             triggers = sorted(matched.values(), key=lambda t: trigger_ids_order[t.id])
 
@@ -270,7 +249,6 @@ class TriggerEngine:
             if not trigger.enabled:
                 continue
 
-            # Predicate evaluation (fine-grained payload filter)
             try:
                 if not trigger.predicate(signal):
                     continue
@@ -294,15 +272,12 @@ class TriggerEngine:
         with self._lock:
             acc = self._accumulators[trigger.id]
 
-            # Prune expired timestamps from accumulator window
             cutoff = now - trigger.accumulator_window_s
             acc.timestamps = [t for t in acc.timestamps if t > cutoff]
 
-            # Record this signal
             acc.timestamps.append(now)
             current_count = len(acc.timestamps)
 
-            # Check accumulator threshold
             if current_count < trigger.accumulator_threshold:
                 return TriggerResult(
                     trigger_id=trigger.id,
@@ -312,7 +287,6 @@ class TriggerEngine:
                     accumulator_count=current_count,
                 )
 
-            # Check cooldown
             elapsed_since_last = now - acc.last_fired
             if trigger.cooldown_s > 0 and elapsed_since_last < trigger.cooldown_s:
                 remaining = trigger.cooldown_s - elapsed_since_last
@@ -325,11 +299,9 @@ class TriggerEngine:
                     cooldown_remaining_s=remaining,
                 )
 
-            # FIRE - reset accumulator and record fire time
             acc.timestamps.clear()
             acc.last_fired = now
 
-        # Dispatch actions (outside lock)
         dispatched = await self._dispatch_actions(trigger, signal)
 
         logger.info(
@@ -349,7 +321,6 @@ class TriggerEngine:
             accumulator_count=0,
         )
 
-    # ── Action Dispatch ────────────────────────────────────────────
 
     async def _dispatch_actions(self, trigger: TriggerCondition, signal: Signal) -> int:
         """Execute all actions for a fired trigger. Returns count dispatched."""
@@ -420,7 +391,6 @@ class TriggerEngine:
                 **{**cfg, **ctx},
             )
 
-    # ── Helpers ────────────────────────────────────────────────────
 
     @staticmethod
     def _event_matches(event_type: str, patterns: list[str]) -> bool:

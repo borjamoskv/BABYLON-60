@@ -41,7 +41,6 @@ class IMessageAdapter(BaseAdapter):
             f"{event.body}"
         )
 
-        # Escape double quotes for AppleScript
         applescript_msg = message.replace('"', '\\"')
 
         script = f'''

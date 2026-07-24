@@ -190,10 +190,8 @@ def c5_real_colapso() -> None:
     print(" MOSKV-1 APEX — C5-REAL STATE MONITOR (MEJORALO)")
     print("=" * 60)
 
-    # Brutalismo Cinético
     kinetic_purge_protocol()
 
-    # Phase 1: Git
     git_report = audit_git_entropy()
     print(f"\n[GIT] HEAD: {git_report['head']} | Branch: {git_report['branch']}")
     print(f"[GIT] Commits: {git_report['commits']} | Tag: {git_report['last_tag']}")
@@ -202,7 +200,6 @@ def c5_real_colapso() -> None:
         for f in git_report["dirty_files"][:10]:
             print(f"      ↳ {f}")
 
-    # Phase 2: BFT Database Census
     db_census = audit_databases()
     total_nodes = 0
     print("\n[BFT] Censo de Bases de Datos:")
@@ -215,17 +212,14 @@ def c5_real_colapso() -> None:
             print(f"  {db_name:30s} → ERROR")
     print(f"  {'TOTAL':30s} → {total_nodes:>8,} nodos")
 
-    # Phase 3: Linter
     ruff_report = audit_ruff()
     print(f"\n[RUFF] Errores: {ruff_report['total_errors']} | Fixable: {ruff_report['fixable']}")
 
-    # Phase 4: Tests
     test_report = audit_tests()
     print(
         f"[TEST] Archivos de test: {test_report['test_files']} | Estado: {test_report['status']} | Passed: {test_report.get('passed', 0)}"
     )
 
-    # Phase 5: Crystallize
     status_hash = crystallize_status(
         {
             "git": git_report,
@@ -236,12 +230,10 @@ def c5_real_colapso() -> None:
     )
     print(f"\n[HASH] STATUS.md SHA3-256: {status_hash[:24]}...")
 
-    # Phase 6: Mutate STATUS.md + Git Sentinel
     print("[GIT SENTINEL] Forzando colapso...")
     append_mutation("[PENDING]", status_hash)
     sentinel_hash = git_sentinel_commit(status_hash)
 
-    # Rewrite [PENDING] → actual hash
     with open(STATUS_FILE, "r") as file_in:
         content = file_in.read()
     content = content.replace("`[PENDING]`", f"`{sentinel_hash}`")

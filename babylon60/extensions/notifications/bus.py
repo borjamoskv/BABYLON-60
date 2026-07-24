@@ -12,7 +12,6 @@ Design principles:
 
 Wire-up::
 
-    # In cortex/api.py startup:
     from babylon60.extensions.notifications import get_notification_bus
     bus = get_notification_bus()
     bus.register(TelegramAdapter())
@@ -55,7 +54,6 @@ class NotificationBus:
     """
 
     def __init__(self) -> None:
-        # list of (adapter, min_severity_index)
         self._adapters: list[tuple[BaseAdapter, int]] = []
 
     def register(
@@ -116,7 +114,6 @@ class NotificationBus:
         return f"NotificationBus(adapters={self.adapter_names})"
 
 
-# ─── Process-level singleton ─────────────────────────────────────────
 
 _bus: NotificationBus | None = None
 _bus_lock = threading.Lock()

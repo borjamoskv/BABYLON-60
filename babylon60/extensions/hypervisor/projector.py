@@ -41,7 +41,6 @@ class EventProjector:
         """
         tasks: list[asyncio.Task[Any]] = []
 
-        # 1. Semantic Mutator pulse (topological shift)
         tasks.append(
             asyncio.create_task(
                 self._emit_semantic_pulse(fact_id),
@@ -49,7 +48,6 @@ class EventProjector:
             )
         )
 
-        # 2. Digital Endocrine signal (Neural-Growth)
         tasks.append(
             asyncio.create_task(
                 self._signal_endocrine("neural_growth", 0.3),
@@ -57,7 +55,6 @@ class EventProjector:
             )
         )
 
-        # 3. Autopoiesis songline verification
         tasks.append(
             asyncio.create_task(
                 self._verify_songlines(project),
@@ -65,7 +62,6 @@ class EventProjector:
             )
         )
 
-        # All fire-and-forget - gather with return_exceptions
         results = await asyncio.gather(*tasks, return_exceptions=True)
         for i, result in enumerate(results):
             if isinstance(result, BaseException):
@@ -81,7 +77,6 @@ class EventProjector:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-    # ── Private side-effect implementations ───────────────────────
 
     async def _emit_semantic_pulse(self, fact_id: int) -> None:
         """Emit a topological pulse to the SemanticMutator if available."""
@@ -106,7 +101,6 @@ class EventProjector:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-    # Endocrine not installed - degrade gracefully
 
     async def _verify_songlines(self, project: str) -> None:
         """Trigger autopoiesis songline verification if available."""
@@ -119,4 +113,3 @@ class EventProjector:
             logger.warning("Suppressed exception: %s", exc)
 
 
-# Autopoiesis not installed - degrade gracefully

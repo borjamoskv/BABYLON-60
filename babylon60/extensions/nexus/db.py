@@ -98,7 +98,6 @@ class NexusDB:
             conn.commit()
             return True
         except sqlite3.IntegrityError:
-            # Duplicate idempotency_key → already processed
             return False
 
     def query(

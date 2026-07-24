@@ -65,7 +65,6 @@ class HealthLoop:
                 drift,
             )
 
-            # Grade change detection via enum comparison
             if self._last_grade is not None and hs.grade != self._last_grade:
                 self._on_grade_change(
                     self._last_grade,
@@ -73,7 +72,6 @@ class HealthLoop:
                     hs.score,
                 )
 
-            # Alert on degradation
             if hs.grade < DEGRADE_THRESHOLD:
                 self._alert_degraded(hs.score, hs.grade)
 

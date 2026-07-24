@@ -75,14 +75,11 @@ class L0IdentityForge:
         """
         self.storage_dir.mkdir(parents=True, exist_ok=True)
 
-        # TRNG Seed for Ed25519
         seed = os.urandom(32)
 
-        # Salt for KDF
         salt = os.urandom(16)
         kek = self._derive_kek(passphrase, salt)
 
-        # AES-GCM Encryption
         aesgcm = AESGCM(kek)
         nonce = os.urandom(_NONCE_LENGTH)
         ciphertext = aesgcm.encrypt(nonce, seed, None)
@@ -93,12 +90,10 @@ class L0IdentityForge:
             "ciphertext_b64": base64.b64encode(ciphertext).decode("ascii"),
         }
 
-        # Write to disk securely (0600)
         self.seed_path.touch(mode=0o600, exist_ok=True)
         with open(self.seed_path, "w", encoding="utf-8") as f:
             json.dump(payload, f)
 
-        # Ensure permissions are strictly 0600
         self.seed_path.chmod(0o600)
 
         logger.info("L0 Identity Forged and encrypted via Argon2id.")
@@ -175,14 +170,12 @@ class StateRootAccumulator:
         if lamport_tick <= latest_lamport:
             raise ValueError("Lamport tick must be strictly monotonically increasing.")
 
-        # Accumulative Hash Chain: SHA-256( prev_root || event_hash || lamport )
         hasher = hashlib.sha256()
         hasher.update(prev_root)
         hasher.update(event_hash)
         hasher.update(str(lamport_tick).encode("utf-8"))
         new_root = hasher.digest()
 
-        # Sign the new root
         priv_bytes = base64.b64decode(private_key_b64)
         priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)
         signature = priv_key.sign(new_root)
@@ -214,7 +207,6 @@ class StateRootAccumulator:
         for row in rows:
             lamport, event_hash, root, signature = row
 
-            # 1. Verify Hash
             hasher = hashlib.sha256()
             hasher.update(prev_root)
             hasher.update(event_hash)
@@ -225,7 +217,6 @@ class StateRootAccumulator:
                 logger.error(f"Chain broken at tick {lamport}. Tampering detected!")
                 return False
 
-            # 2. Verify Signature
             try:
                 pub_key.verify(signature, root)
             except InvalidSignature:
@@ -266,7 +257,6 @@ class IdentityAnchorManager:
         node_id = bytes_to_base60(hashlib.sha256(pub_bytes).digest())
         lamport = 0
 
-        # Self signature: Ed25519(node_id || pubkey || lamport)
         priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)
 
         msg = node_id.encode("utf-8") + pub_bytes + str(lamport).encode("utf-8")

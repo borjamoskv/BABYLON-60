@@ -26,7 +26,6 @@ class AtomicMailbox:
         """Lazy load async connection."""
         if self._conn is None:
             self._conn = await connect_async(self.db_path)
-            # Ensure table exists
             await self._conn.execute("""
                 CREATE TABLE IF NOT EXISTS messages (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,

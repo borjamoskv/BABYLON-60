@@ -117,28 +117,23 @@ def main(argv: list[str] | None = None) -> int:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    # enqueue
     p_enqueue = sub.add_parser("enqueue", help="Add a task to the queue")
     p_enqueue.add_argument("repo", help="Path to the git repository")
     p_enqueue.add_argument("title", help="Short task title")
     p_enqueue.add_argument("--description", "-d", default="", help="Full task description")
     p_enqueue.set_defaults(func=cmd_enqueue)
 
-    # status
     p_status = sub.add_parser("status", help="List all tasks")
     p_status.set_defaults(func=cmd_status)
 
-    # logs
     p_logs = sub.add_parser("logs", help="Show task logs")
     p_logs.add_argument("task_id", help="Task ID")
     p_logs.set_defaults(func=cmd_logs)
 
-    # cancel
     p_cancel = sub.add_parser("cancel", help="Cancel a pending task")
     p_cancel.add_argument("task_id", help="Task ID")
     p_cancel.set_defaults(func=cmd_cancel)
 
-    # run (foreground)
     p_run = sub.add_parser("run", help="Run next pending task in foreground")
     p_run.add_argument("--provider", default="qwen", help="LLM provider")
     p_run.set_defaults(func=cmd_run)

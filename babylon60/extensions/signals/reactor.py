@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """CORTEX Signal Reactor (L2 Consciousness).
 
@@ -53,7 +49,6 @@ class SignalReactor:
         Returns:
            The number of signals processed.
         """
-        # We poll as 'reactor' consumer
         signals = self.bus.poll(consumer="reactor", limit=20)
         if not signals:
             return 0
@@ -63,7 +58,6 @@ class SignalReactor:
             try:
                 await self._dispatch(signal)
                 processed += 1
-                # Small breath between signals to avoid flooding the loop
                 await breathe(0.01)
             except (ValueError, AttributeError, RuntimeError, OSError) as e:
                 logger.exception(
@@ -81,7 +75,6 @@ class SignalReactor:
         Signals are evaluated by the TriggerEngine first.
         Unmatched events fall through to hardcoded reflexes.
         """
-        # --- TriggerEngine evaluation (declarative) ---
         te = self._get_trigger_engine()
         if te is not None:
             try:
@@ -92,7 +85,6 @@ class SignalReactor:
                     signal.event_type,
                 )
 
-        # --- Hardcoded reflexes (legacy fallback) ---
         etype = signal.event_type
 
         if etype == "compact:needed":
@@ -157,7 +149,6 @@ class SignalReactor:
 
             logger.info("Reactor triggering autonomous compaction for [%s]", project)
 
-            # compact is already async
             result = await compact(engine=self.engine, project=project, dry_run=False)
 
             if result:

@@ -11,7 +11,6 @@ if TYPE_CHECKING:
     from babylon60.extensions.llm._cascade import CascadeManager
     from babylon60.extensions.llm._models import BaseProvider, CortexPrompt
 
-# Cost class ordering for tiebreaking (cheaper first)
 COST_ORDER: dict[str, int] = {
     "free": 0,
     "low": 1,
@@ -20,7 +19,6 @@ COST_ORDER: dict[str, int] = {
     "variable": 4,
 }
 
-# Tier ordering (higher quality first)
 TIER_ORDER: dict[str, int] = {
     "frontier": 0,
     "high": 1,

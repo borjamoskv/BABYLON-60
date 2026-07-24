@@ -49,7 +49,6 @@ class TaaSMarketplace:
         job_id = f"job_taas_{uuid.uuid4().hex[:12]}"
         self._jobs[job_id] = req
 
-        # Simple pricing logic based on SLA
         base_cost = 10.0
         if req.sla.requires_zk_proof:
             base_cost += 25.0
@@ -66,13 +65,10 @@ class TaaSMarketplace:
 
         req = self._jobs[job_id]
 
-        # Simulate job execution on the swarm
-        # In a real environment, this delegates to SwarmManager or AS-OS Kernel
         # Here we mock the deterministic C5-REAL execution
 
         proof_payload = None
         if req.sla.requires_zk_proof:
-            # We interact with AS-OS Kernel ZK representation (placeholder)
             proof_payload = f"zk_proof_ed25519_{uuid.uuid4().hex}"
 
         res = JobExecutionResult(

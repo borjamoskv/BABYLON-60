@@ -10,10 +10,8 @@ Axiom: "I verify, then trust. Never reversed."
 Usage:
     from babylon60.extensions.swarm.swarm_heartbeat import SWARM_HEARTBEAT
 
-    # In each daemon thread's main loop:
     SWARM_HEARTBEAT.pulse("neural_sync", "NeuralSync")
 
-    # In the monitor check cycle:
     dead_nodes = SWARM_HEARTBEAT.reap(timeout_seconds=120)
 """
 
@@ -88,7 +86,6 @@ class SwarmHeartbeat:
                 node.last_pulse = now
                 node.pulse_count += 1
                 node.miss_count = 0
-                # Resurrect if was SUSPECT/DEAD
                 if node.status != NodeStatus.ALIVE:
                     logger.info(
                         "🫀 RESURRECTION: %s (%s → ALIVE) after %d misses",
@@ -254,5 +251,4 @@ class SwarmHeartbeat:
             self._registry.clear()
 
 
-# ── Module-level singleton ─────────────────────────────────────────────
 SWARM_HEARTBEAT = SwarmHeartbeat()

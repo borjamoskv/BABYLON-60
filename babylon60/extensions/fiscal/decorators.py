@@ -18,23 +18,17 @@ def seal_decision(fact_type: str, client_id_kwarg: str = "client_id"):
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args, **kwargs) -> Any:
-            # 1. Execute the agent's logic normally (Zero Friction)
             result = func(*args, **kwargs)
 
-            # 2. Extract context silently
-            # Attempt to extract client_id from kwargs or default to "unknown_client"
             client_id = kwargs.get(client_id_kwarg, "unknown_client")
 
-            # Extract bound arguments for tracing (inputs to the decision)
             sig = inspect.signature(func)
             bound_args = sig.bind(*args, **kwargs)
             bound_args.apply_defaults()
 
-            # Format inputs as a simple provenance chain trace
             inputs_trace = [
                 f"{k}={v}"
                 for k, v in bound_args.arguments.items()
-                # Exclude large or non-serializable objects naively for this demo
                 if isinstance(v, str | int | float | bool)
             ]
 
@@ -44,8 +38,6 @@ def seal_decision(fact_type: str, client_id_kwarg: str = "client_id"):
                 from babylon60.events.loop import sovereign_run
                 from babylon60.extensions.fiscal.models import TaxFact, TaxFactPayload
 
-                # Parse result generically (assuming the agent returned a dict or we cast it to string)
-                # In a real integration, result would be typed or mapped to TaxFactPayload
                 payload = TaxFactPayload(
                     action=func.__name__,
                     amount_eur=0.0,  # Placeholder, should be mapped from result
@@ -63,19 +55,15 @@ def seal_decision(fact_type: str, client_id_kwarg: str = "client_id"):
                     provenance_chain=inputs_trace,
                 )
 
-                # Persist asynchronously in the engine without blocking the user
                 engine = get_engine()
 
                 async def _persist_fact():
-                    # We inject this directly into the semantic or ledger core.
-                    # For demonstration, we simply log the semantic payload.
                     await engine.add_fact(fact_type, fact.to_dict())  # type: ignore
 
                 sovereign_run(_persist_fact())
                 logger.info("[CORTEX] Sealed decision %s for client ***id", fact_type)
 
             except Exception as e:  # noqa: BLE001
-                # Zero Friction: Do not crash the user's workflow if audit fails
                 logger.error("[CORTEX] Failed to seal decision: %s", e)
 
             return result

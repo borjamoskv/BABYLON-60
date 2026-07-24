@@ -44,7 +44,6 @@ async def propose_with_backoff(
             log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
             return True
         except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
-            # Deterministic integer backoff calculation
             wait_ms: int = BASE_BACKOFF_MS * (2 ** (attempt - 1))
             log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait_ms}ms")
             await asyncio.sleep(wait_ms / 1000.0)
@@ -58,7 +57,6 @@ async def main() -> None:
     total_tasks: int = 1000
     successes: int = 0
     
-    # Use nanoseconds for deterministic tracking without floats
     t0_ns: int = time.monotonic_ns()
 
     tasks: list[asyncio.Task[bool]] = [
@@ -71,8 +69,6 @@ async def main() -> None:
     elapsed_ns: int = time.monotonic_ns() - t0_ns
     elapsed_ms: int = elapsed_ns // 1_000_000
     
-    # Avoid float throughput if possible, but for display it's fine.
-    # Let's do integer ops.
     throughput: int = (successes * 1000) // elapsed_ms if elapsed_ms > 0 else 0
     
     log.info(f"Completed: {successes}/{total_tasks} proposals in {elapsed_ms}ms")

@@ -198,7 +198,6 @@ class TimingTracker:
                 date_map[r[0]] = r[1]
         return [{"date": d, "seconds": date_map[d]} for d in sorted(date_map.keys())]
 
-    # ─── Internal Helpers ─────────────────────────────────────────
 
     def _summarize(self, date_pattern: str, project: str | None) -> TimeSummary:
         """Build summary for entries matching a date pattern."""

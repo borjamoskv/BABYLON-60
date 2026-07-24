@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/db_persistence.py
 """Database Persistence for Evolution State - Long-Term Memory Consolidation.
 
 Replaces JSON file persistence with CORTEX DB storage, implementing
@@ -50,7 +49,6 @@ logger = logging.getLogger(__name__)
 
 _DEFAULT_DB = Path("~/.babylon60/cortex.db").expanduser()
 
-# DDL for the evolution_state table (complementary learning systems store)
 CREATE_EVOLUTION_STATE = """
 CREATE TABLE IF NOT EXISTS evolution_state (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,

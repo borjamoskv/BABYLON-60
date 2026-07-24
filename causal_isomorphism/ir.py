@@ -1,6 +1,4 @@
-# causal_isomorphism/ir.py — Intermediate Representation
 # C5-REAL: Language-agnostic typed AST for cross-regime transmutation
-# Author: Borja Moskv (borjamoskv)
 """
 Typed Intermediate Representation (IR) for the Causal Isomorphism Transpiler.
 
@@ -14,9 +12,6 @@ from dataclasses import dataclass, field
 from enum import Enum, auto
 
 
-# ============================================================
-# REGIME LAYER CLASSIFICATION
-# ============================================================
 class RegimeLayer(Enum):
     """Which layer of the Trilingual Regime a construct belongs to."""
     ONTOLOGY = "fsharp"          # F# Domain Kernel — type discrimination
@@ -36,7 +31,6 @@ class EmitPermission(Enum):
     PURE_QUERY = auto()          # Read-only state queries
 
 
-# Per-layer permission matrix (Regime enforcement)
 REGIME_PERMISSIONS: dict[RegimeLayer, frozenset[EmitPermission]] = {
     RegimeLayer.ONTOLOGY: frozenset({
         EmitPermission.TYPE_DEFINITION,
@@ -61,9 +55,6 @@ REGIME_PERMISSIONS: dict[RegimeLayer, frozenset[EmitPermission]] = {
 }
 
 
-# ============================================================
-# TYPE SYSTEM
-# ============================================================
 class IRTypeKind(Enum):
     FLOAT = "float"
     INT = "int"
@@ -97,7 +88,6 @@ class IRType:
         return f"IRType({self.kind.value})"
 
 
-# Convenience constructors
 IR_FLOAT = IRType(IRTypeKind.FLOAT)
 IR_INT = IRType(IRTypeKind.INT)
 IR_STRING = IRType(IRTypeKind.STRING)
@@ -118,15 +108,11 @@ def ir_map(key_type: IRType, val_type: IRType) -> IRType:
     return IRType(IRTypeKind.MAP, type_params=(key_type, val_type))
 
 
-# ============================================================
-# AST NODE TYPES
-# ============================================================
 @dataclass
 class IRUnionCase:
     """A single case of a discriminated union."""
     name: str
     payload_fields: list[tuple[str, IRType]] = field(default_factory=list)
-    # [(field_name, type)] — empty for bare enum cases
 
 
 @dataclass
@@ -170,9 +156,6 @@ class IRRecordType:
     fields: list[IRRecordField] = field(default_factory=list)
 
 
-# ============================================================
-# EXPRESSIONS
-# ============================================================
 class IRExprKind(Enum):
     LITERAL = auto()
     VARIABLE = auto()
@@ -209,49 +192,36 @@ class IRExpr:
     """Language-agnostic expression node."""
     kind: IRExprKind
 
-    # LITERAL
     literal_value: str = ""
     literal_type: IRType | None = None
 
-    # VARIABLE
     variable_name: str = ""
 
-    # FIELD_ACCESS
     object_expr: IRExpr | None = None
     field_name: str = ""
 
-    # CONSTRUCTOR
     type_name: str = ""
     case_name: str = ""
     constructor_args: list[IRExpr] = field(default_factory=list)
 
-    # FUNCTION_CALL
     function_name: str = ""
     call_args: list[IRExpr] = field(default_factory=list)
 
-    # BINARY_OP
     op: str = ""
     left: IRExpr | None = None
     right: IRExpr | None = None
 
-    # STRING_FORMAT
     format_string: str = ""
     format_args: list[IRExpr] = field(default_factory=list)
 
-    # MATCH
     match_expr: IRExpr | None = None
     match_arms: list[IRMatchArm] = field(default_factory=list)
 
-    # BLOCK
     statements: list[IRExpr] = field(default_factory=list)
 
-    # Regime classification
     requires_permission: EmitPermission = EmitPermission.PURE_QUERY
 
 
-# ============================================================
-# FUNCTIONS
-# ============================================================
 @dataclass
 class IRParam:
     """Function parameter."""
@@ -282,9 +252,6 @@ class IRFunction:
     doc_comment: str = ""
 
 
-# ============================================================
-# MODULE (TOP-LEVEL CONTAINER)
-# ============================================================
 @dataclass
 class IRModule:
     """Top-level compilation unit. One F# module → one IRModule."""

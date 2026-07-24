@@ -17,7 +17,6 @@ from babylon60.database.core import connect as db_connect
 
 logger = logging.getLogger("babylon60_extensions.swarm.budget")
 
-# 2026 Sovereign Pricing (Exergy-Optimized)
 COST_PRICING = {
     "gemini": {"input": 0.000075, "output": 0.000225},  # Flash 2.5
     "qwen": {"input": 0.00005, "output": 0.0002},  # Qwen 2.5
@@ -102,7 +101,6 @@ class SwarmBudgetManager:
         except sqlite3.Error as e:
             logger.error("Budget: Failed to report usage: %s", e)
 
-        # Immediate enforcement of Ω₃
         self.check_budget(mission_id)
 
     def check_budget(self, mission_id: str):
@@ -147,7 +145,6 @@ class SwarmBudgetManager:
             return []
 
 
-# Single instance for the process
 _instance = None
 
 

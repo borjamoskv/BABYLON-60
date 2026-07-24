@@ -8,31 +8,24 @@ use crate::atms::Atms;
 use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use crate::publisher::{Publisher, ExportFormat};
 
-#[derive(Clone)]
 struct CortexKernelInner {
     ledger: Arc<Mutex<MasterLedger>>,
     atms: Arc<Mutex<Atms>>,
 }
 
-#[pyclass]
-#[derive(Clone)]
 pub struct CortexKernel {
     inner: CortexKernelInner,
 }
 
-#[pymethods]
 impl CortexKernel {
-    #[new]
     pub fn new(db_path: &str) -> PyResult<Self> {
         let ledger = MasterLedger::new(db_path)
             .map_err(|e| PyRuntimeError::new_err(format!("Ledger init failed: {}", e)))?;
         
-        // Carga síncrona obligatoria desde disco (Rule Ω4)
         let state = ledger.replay_to_atms_state()
             .map_err(|e| PyRuntimeError::new_err(format!("Failed to replay Ledger state: {}", e)))?;
 
         let mut atms = Atms::new();
-        // Reconstruct ATMS nodes from historical assertions in causal order
         if let Ok(assertions) = ledger.get_all_assertions() {
             for (_id, stmt_hash, just_hash, _env) in assertions {
                 if let (Ok(stmt), Ok(just)) = (ledger.get_statement(&stmt_hash), ledger.get_justification(&just_hash)) {
@@ -41,7 +34,6 @@ impl CortexKernel {
                 }
             }
         }
-        // Reconstruct nogoods and trigger contradiction propagation
         for nogood_hash in &state.nogoods {
             if let Ok(stmt) = ledger.get_statement(nogood_hash) {
                 let node_id = if let Some(node_id) = atms.find_node_by_datum(&stmt.content) {
@@ -85,18 +77,15 @@ impl CortexKernel {
                 }
             };
 
-            // Master Ledger (SQLite)
             let taint = ledger.assert_knowledge(&js, &environment_id)
                 .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error: {}", e)))?;
             
-            // ATMS Memory
             atms.install(&js);
             
             Ok(taint)
         })
     }
 
-    /// Inyecta una contradicción (nogood) en el Kernel y propaga DDB en ATMS
     pub fn contradict_knowledge(&self, py: Python<'_>, content: String, environment_id: String) -> PyResult<String> {
         let inner = self.inner.clone();
         
@@ -114,7 +103,6 @@ impl CortexKernel {
                 justification: Justification::Conjecture,
             };
             
-            // Ensure statement is recorded in Master Ledger so nogood replay can find it
             ledger.assert_knowledge(&js, &environment_id)
                 .map_err(|e| PyRuntimeError::new_err(format!("C5-REAL FATAL: Ledger error asserting knowledge for nogood: {}", e)))?;
 
@@ -133,7 +121,6 @@ impl CortexKernel {
         })
     }
 
-    /// Verifica si una proposición es creída en el punto fijo ATMS actual
     pub fn is_believed(&self, py: Python<'_>, content: String) -> PyResult<bool> {
         let inner = self.inner.clone();
         py.allow_threads(move || {
@@ -146,7 +133,6 @@ impl CortexKernel {
         })
     }
 
-    /// Descarga en tiempo de ejecución la obligación de no-contradicción
     pub fn contradiction_free(&self, py: Python<'_>, content: String) -> PyResult<bool> {
         let inner = self.inner.clone();
         py.allow_threads(move || {
@@ -159,7 +145,6 @@ impl CortexKernel {
         })
     }
 
-    /// Exporta el subgrafo BFT como Markdown o JSON
     pub fn publish(&self, py: Python<'_>, environment_id: String, format: String) -> PyResult<String> {
         let inner = self.inner.clone();
         py.allow_threads(move || {
@@ -177,19 +162,15 @@ impl CortexKernel {
     }
 }
 
-/// A Python module implemented in Rust.
-#[pymodule]
 fn strike_rs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<CortexKernel>()?;
     Ok(())
 }
 
-#[cfg(test)]
 mod tests {
     use super::*;
     use std::fs;
 
-    #[test]
     fn test_cortex_kernel_atms_hardening_and_replay() {
         let db_path = "target/test_cortex_kernel_replay.db";
         let _ = fs::remove_file(db_path);

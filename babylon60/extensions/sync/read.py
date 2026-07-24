@@ -66,7 +66,6 @@ async def sync_memory(engine: CortexEngine) -> SyncResult:
         engine, MEMORY_DIR / "bridges.jsonl", "bridges_hash", state, _sync_bridges, result
     )
 
-    # Guardar estado para la próxima ejecución
     state["last_sync"] = result.synced_at
     save_sync_state(state)
 
@@ -92,7 +91,6 @@ async def _sync_ghosts(engine: CortexEngine, path: Path, result: SyncResult) -> 
         result.errors.append(f"Error leyendo ghosts.json: {e}")
         return
 
-    # Deprecar ghosts anteriores (son snapshots temporales)
     async with engine.session() as conn:
         try:
             await conn.execute(
@@ -104,7 +102,6 @@ async def _sync_ghosts(engine: CortexEngine, path: Path, result: SyncResult) -> 
         except sqlite3.Error as e:
             result.errors.append(f"Error deprecando ghosts antiguos: {e}")
 
-    # Insertar snapshot actual de cada proyecto
     for project_name, ghost_data in data.items():
         content = (
             f"GHOST: {project_name} | "

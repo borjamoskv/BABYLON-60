@@ -49,7 +49,6 @@ CREATE INDEX IF NOT EXISTS idx_hot_kv_ttl ON hot_kv(ttl_expires)
     WHERE ttl_expires IS NOT NULL;
 """
 
-# Default metrics initialized on first boot
 _DEFAULT_METRICS = {
     "uptime_start": 0.0,
     "cycle_count": 0.0,
@@ -101,7 +100,6 @@ class HotStateDB:
     def _init_db(self) -> None:
         with self._conn() as conn:
             conn.executescript(_SCHEMA)
-            # Initialize default metrics
             now = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
             for key, val in _DEFAULT_METRICS.items():
                 conn.execute(
@@ -111,7 +109,6 @@ class HotStateDB:
                     """,
                     (key, val, now),
                 )
-            # Record boot time
             conn.execute(
                 """
                 UPDATE hot_metrics SET value = ?, updated_at = ?
@@ -141,7 +138,6 @@ class HotStateDB:
         except (json.JSONDecodeError, OSError) as e:
             logger.warning("Failed to migrate legacy state: %s", e)
 
-    # ─── KV Operations ────────────────────────────────────────────
 
     def set(self, key: str, value: Any, ttl_s: float | None = None) -> None:
         """Set or update a key-value pair. Value is JSON-serialized."""
@@ -182,7 +178,6 @@ class HotStateDB:
         if row is None:
             return default
 
-        # Check TTL
         if row["ttl_expires"] and row["ttl_expires"] < now:
             self.delete(key)
             return default
@@ -223,7 +218,6 @@ class HotStateDB:
             logger.debug("Purged %d expired keys", count)
         return count
 
-    # ─── Metrics ──────────────────────────────────────────────────
 
     def increment(self, metric: str, delta: float = 1.0) -> float:
         """Atomically increment a metric counter. Returns new value."""
@@ -263,14 +257,12 @@ class HotStateDB:
             rows = conn.execute("SELECT key, value FROM hot_metrics").fetchall()
         result = {r["key"]: r["value"] for r in rows}
 
-        # Compute live uptime
         boot = result.get("uptime_start", 0)
         if boot > 0:
             result["uptime_s"] = round(time.monotonic() - boot, 1)
 
         return result
 
-    # ─── Query & Export ───────────────────────────────────────────
 
     def query(self, sql: str, params: tuple = ()) -> list[dict]:
         """Execute arbitrary SQL against the hot state. Read-only recommended."""

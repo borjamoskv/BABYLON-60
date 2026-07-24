@@ -87,7 +87,6 @@ class GitHubAuditorDaemon:
         logger.info("🛡️ [AUDITOR] Mitigando CodeQL #%s: %s", alert_num, finding_str)
 
         try:
-            # ULTRATHINK P0 Mode (Level 2 Swarm for security)
             swarm = MejoraloSwarm(level=2)
             result_code = await swarm.refactor_file(file_path=file_path, findings=[finding_str])
 
@@ -96,7 +95,6 @@ class GitHubAuditorDaemon:
                 file_path.write_text(result_code, encoding="utf-8")
                 logger.info("✅ [AUDITOR] AST Mutado para CodeQL #%s.", alert_num)
 
-                # Git Sentinel: Commit criptográfico (bypass Context Guard si es necesario)
                 commit_msg = f"[bridge] fix(security): resolve CodeQL alert #{alert_num}"
                 await self._git_commit(file_path, commit_msg)
             else:

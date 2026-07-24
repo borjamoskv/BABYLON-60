@@ -35,7 +35,6 @@ class _BroadExceptionVisitor(ast.NodeVisitor):
 
     def visit_ExceptHandler(self, node: ast.ExceptHandler) -> None:
         if node.type is None:
-            # Bare `except:`
             self.findings.append(
                 AntipatternFinding(
                     scanner="BroadException",

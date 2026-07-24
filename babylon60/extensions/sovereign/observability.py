@@ -13,9 +13,6 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Any
 
-# ---------------------------------------------------------------------------
-# Power-level scoring (target: 1300/1000)
-# ---------------------------------------------------------------------------
 
 logger = logging.getLogger(__name__)
 
@@ -110,9 +107,6 @@ def compute_power(scores: dict[str, float], multiplier: float = 1.3) -> PowerLev
     return PowerLevel(dimensions=dims)
 
 
-# ---------------------------------------------------------------------------
-# OpenTelemetry bootstrap
-# ---------------------------------------------------------------------------
 
 _tracer = None
 _meter = None
@@ -145,19 +139,16 @@ def init_telemetry(service_name: str = "cortex-sovereign") -> None:
 
         resource = Resource.create({"service.name": service_name})
 
-        # Traces
         tp = TracerProvider(resource=resource)
         tp.add_span_processor(BatchSpanProcessor(OTLPSpanExporter()))
         trace.set_tracer_provider(tp)
         _tracer = trace.get_tracer(service_name)
 
-        # Metrics
         reader = PeriodicExportingMetricReader(OTLPMetricExporter(), export_interval_millis=15000)
         mp = MeterProvider(resource=resource, metric_readers=[reader])
         metrics.set_meter_provider(mp)
         _meter = metrics.get_meter(service_name)
 
-        # Register sovereign power gauge
         _meter.create_observable_gauge(
             "babylon60.extensions.sovereign.power_level",
             callbacks=[_power_gauge_callback],
@@ -186,9 +177,6 @@ def _power_gauge_callback(_options: Any) -> Any:
         yield Observation(_latest_power.power, {"version": "v5"})
 
 
-# ---------------------------------------------------------------------------
-# Security scanner integration
-# ---------------------------------------------------------------------------
 
 
 @dataclass
@@ -214,7 +202,6 @@ def run_security_scans(target: str = "cortex/") -> SecurityReport:
 
     report = SecurityReport()
 
-    # Bandit
     try:
         result = subprocess.run(
             ["bandit", "-r", target, "-f", "json", "-q"],
@@ -235,7 +222,6 @@ def run_security_scans(target: str = "cortex/") -> SecurityReport:
     except (OSError, subprocess.TimeoutExpired, ValueError) as e:
         report.details.append(f"[bandit] scan failed: {e}")
 
-    # Safety
     try:
         result = subprocess.run(
             ["safety", "check", "--json"],

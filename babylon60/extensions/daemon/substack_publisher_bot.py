@@ -16,7 +16,6 @@ class SubstackPublisherBot:
     """
 
     def __init__(self, cdp_url="http://localhost:9222"):
-        # Loopback boundary enforcement to block remote hijacking / DNS rebinding
         from urllib.parse import urlparse
 
         parsed = urlparse(cdp_url)
@@ -27,7 +26,6 @@ class SubstackPublisherBot:
             )
         self.cdp_url = cdp_url
         self.base_url = "https://substack.com"
-        # Cambiar por el dominio del usuario si es necesario
         self.publish_url = "https://borjamoskv.substack.com/publish"
 
     async def inject_essay(self, title: str, markdown_content: str):
@@ -42,17 +40,14 @@ class SubstackPublisherBot:
                 context = browser.contexts[0]
                 page = await context.new_page()
 
-                # Navegar a publicar
                 logger.info("Navegando al editor: %s", self.publish_url)
                 await page.goto(self.publish_url)
 
-                # Detección de Auth Wall
                 if "login" in page.url or await page.locator("input[name='email']").count() > 0:
                     logger.warning(
                         "Sesión caducada. Desplegando bypass Autodidact (IMAP Magic Link)..."
                     )
 
-                    # Pedir Magic Link
                     if await page.locator("input[name='email']").count() > 0:
                         email_input = os.getenv("CORTEX_EMAIL_USER")
                         await page.fill("input[name='email']", email_input)
@@ -62,7 +57,6 @@ class SubstackPublisherBot:
                         )
                         await asyncio.sleep(10)
 
-                    # Extraer Link
                     extractor = GmailMagicLinkExtractor()
                     magic_link = extractor.extract_latest_magic_link()
 
@@ -75,25 +69,17 @@ class SubstackPublisherBot:
                     await page.goto(magic_link)
                     await page.wait_for_load_state("networkidle")
 
-                    # Re-navegar
                     await page.goto(self.publish_url)
 
                 logger.info("Sesión confirmada. Preparando lienzo...")
 
-                # Inyección en Título
-                # Substack usa un textarea o un div contenteditable para el título
                 title_locator = page.locator("textarea[placeholder='Title'], h1.editor-title")
                 if await title_locator.count() > 0:
                     await title_locator.first.fill(title)
 
-                # Inyección en Cuerpo (ProseMirror contenteditable)
-                # Playwright no soporta markdown nativo inyectado en ProseMirror fácilmente,
-                # la forma más robusta es simular pegar desde el portapapeles o fill
                 editor_locator = page.locator(".ProseMirror")
                 await editor_locator.click()
 
-                # Simulamos escribir markdown puro. Substack suele parsearlo si se pega o se tipea.
-                # Para evitar tipear lentamente, usamos inserción en DOM o pegado.
                 await page.evaluate(
                     """
                     (content) => {
@@ -113,7 +99,6 @@ class SubstackPublisherBot:
 
                 logger.info("[C5-REAL] Ensayo inyectado en Substack.")
 
-                # Guardar Borrador (Substack lo auto-guarda, pero forzamos por si acaso)
                 logger.info(
                     "Estado guardado como Borrador. Pendiente de Aserción Manual para Publish."
                 )
@@ -127,5 +112,4 @@ class SubstackPublisherBot:
 
 
 if __name__ == "__main__":
-    # Test
     pass

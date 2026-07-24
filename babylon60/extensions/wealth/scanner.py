@@ -15,7 +15,6 @@ from typing import Any, Protocol
 
 log = logging.getLogger(__name__)
 
-# Viability thresholds
 _MIN_NET_RATE_8H = Decimal("0.0002")  # 0.02% cada 8h ≈ 22% APR
 _MIN_LIQUIDITY = Decimal("100000")
 

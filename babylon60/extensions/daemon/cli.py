@@ -74,7 +74,6 @@ def setup_logging(verbose: bool = False) -> None:
     )
 
 
-# ─── Click Group ────────────────────────────────────────────────────────
 
 
 @click.group(invoke_without_command=True)
@@ -141,7 +140,6 @@ def _build_daemon(ctx: click.Context) -> MoskvDaemon:
     )
 
 
-# ─── Commands ─────────────────────────────────────────────────────────
 
 
 @cli.command()
@@ -159,7 +157,6 @@ def check(ctx: click.Context) -> None:
     daemon = _build_daemon(ctx)
     status = daemon.check()
 
-    # Header
     console.print()
     console.print(
         Panel(
@@ -168,7 +165,6 @@ def check(ctx: click.Context) -> None:
         )
     )
 
-    # Sites
     site_table = Table(title="▸ Sites", show_header=True, header_style="bold")
     site_table.add_column("Status", width=4)
     site_table.add_column("URL", style="cyan")
@@ -185,7 +181,6 @@ def check(ctx: click.Context) -> None:
         console.print("  [dim]No sites configured. Use --sites or daemon_config.json[/]")
     console.print()
 
-    # Ghosts
     console.print("[bold]▸ Stale Projects[/]")
     if status.stale_ghosts:
         for g in status.stale_ghosts:
@@ -194,7 +189,6 @@ def check(ctx: click.Context) -> None:
         console.print("  [green]✅ All projects active[/]")
     console.print()
 
-    # Memory
     console.print("[bold]▸ CORTEX Memory[/]")
     if status.memory_alerts:
         for m in status.memory_alerts:
@@ -203,11 +197,9 @@ def check(ctx: click.Context) -> None:
         console.print("  [green]✅ Memory fresh[/]")
     console.print()
 
-    # Duration
     console.print(f"  [dim]Check completed in {status.check_duration_ms:.0f}ms[/]")
     console.print()
 
-    # Summary
     if status.all_healthy:
         console.print(Panel("[bold green]✅ ALL SYSTEMS NOMINAL[/]", border_style="green"))
     else:
@@ -230,11 +222,9 @@ def status(as_json: bool) -> None:
             console.print("[yellow]No daemon status found. Run 'moskv-daemon check' first.[/]")
         sys.exit(1)
 
-    # JSON mode: dump and exit
     if as_json:
         import json
 
-        # Enrich with telemetry if available
         try:
             from babylon60.telemetry import collector  # type: ignore[reportAttributeAccessIssue]
 
@@ -250,7 +240,6 @@ def status(as_json: bool) -> None:
         click.echo(json.dumps(last, indent=2, ensure_ascii=False))
         sys.exit(0 if last.get("all_healthy") else 1)
 
-    # Rich table mode (existing behavior)
     table = Table(title="MOSKV-1 - Last Status", show_header=True, header_style="bold")
     table.add_column("Field", style="cyan")
     table.add_column("Value")

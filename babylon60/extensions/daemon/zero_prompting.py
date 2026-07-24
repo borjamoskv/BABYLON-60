@@ -94,7 +94,6 @@ class ZeroPromptingDaemon:
         """Rigorously measures if the mutation improved the metrics."""
         state_after = await self._observe()
         entropy_diff = state_before["entropy_score"] - state_after["entropy_score"]
-        # Allow evolution if entropy improved OR action executed completely
         net_positive = entropy_diff > 0 or action_result.get("success", False)
         return {
             "net_positive": net_positive,

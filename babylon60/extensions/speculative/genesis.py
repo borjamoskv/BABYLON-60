@@ -46,7 +46,6 @@ __all__ = [
 logger = logging.getLogger("babylon60.extensions.speculative.genesis")
 
 
-# ─── Agent Blueprint ─────────────────────────────────────────────
 
 
 @dataclass
@@ -116,7 +115,6 @@ class SpawnedAgent:
         }
 
 
-# ─── Agent Species Templates ────────────────────────────────────
 
 
 class AgentSpecies:
@@ -257,7 +255,6 @@ class AgentSpecies:
         )
 
 
-# ─── Genesis Engine ──────────────────────────────────────────────
 
 
 class GenesisEngine:
@@ -282,7 +279,6 @@ class GenesisEngine:
         self._graveyard: list[dict[str, Any]] = []
         self._generation_counter = 0
 
-    # ── Registry ──────────────────────────────────────────────
 
     def register_blueprint(self, blueprint: AgentBlueprint) -> str:
         """Register a new agent blueprint in the species registry."""
@@ -303,7 +299,6 @@ class GenesisEngine:
     def registry_keys(self) -> list[str]:
         return list(self._registry.keys())
 
-    # ── Spawning ──────────────────────────────────────────────
 
     def spawn(
         self,
@@ -344,7 +339,6 @@ class GenesisEngine:
         self.register_blueprint(blueprint)
         return self.spawn(blueprint)
 
-    # ── Evolution ─────────────────────────────────────────────
 
     def evolve_population(
         self,
@@ -370,12 +364,10 @@ class GenesisEngine:
             logger.info("GENESIS: Population too small for evolution (%d agents)", len(live_agents))
             return events
 
-        # Sort by fitness
         ranked = sorted(
             live_agents, key=lambda a: a.blueprint.genome.lineage.avg_fitness, reverse=True
         )
 
-        # Mutations on top performers
         for agent in ranked[:mutations_per_cycle]:
             child_genome = self.mutator.mutate(agent.blueprint.genome)
             child_blueprint = AgentBlueprint(
@@ -396,7 +388,6 @@ class GenesisEngine:
                 }
             )
 
-        # Crossover between top pairs
         if random.random() < crossover_probability and len(ranked) >= 2:
             parent_a = ranked[0]
             parent_b = ranked[1]
@@ -420,7 +411,6 @@ class GenesisEngine:
                 }
             )
 
-        # Cull if over capacity
         while len(self._population) > self.population_cap:
             self._cull_weakest()
             events.append({"type": "cull", "generation": self._generation_counter})
@@ -446,12 +436,10 @@ class GenesisEngine:
         else:
             combined_tree = seq(*trees)
 
-        # Merge parameters (last writer wins for conflicts)
         merged_params: dict[str, Any] = {}
         for g in genomes:
             merged_params.update(g.parameters)
 
-        # Average mutation rates
         merged_rates: dict[str, float] = {}
         for mt_key in genomes[0].mutation_rates:
             rates = [g.mutation_rates.get(mt_key, 0.05) for g in genomes]
@@ -470,7 +458,6 @@ class GenesisEngine:
 
         return hybrid
 
-    # ── Population Management ─────────────────────────────────
 
     def _cull_weakest(self) -> None:
         """Remove the weakest agent from the population."""
@@ -509,7 +496,6 @@ class GenesisEngine:
             return True
         return False
 
-    # ── Reporting ─────────────────────────────────────────────
 
     def census(self) -> dict[str, Any]:
         """Full population census."""

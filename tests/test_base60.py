@@ -6,11 +6,9 @@ def test_base60_integer() -> None:
     assert base60.encode_base60(0) == "0"
     assert base60.decode_base60("0") == 0
 
-    # 60
     assert base60.encode_base60(60) == "10"
     assert base60.decode_base60("10") == 60
 
-    # Large integer
     num = 12345678901234567890
     encoded = base60.encode_base60(num)
     assert base60.decode_base60(encoded) == num

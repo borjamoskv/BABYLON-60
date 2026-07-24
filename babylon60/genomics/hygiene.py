@@ -99,7 +99,6 @@ class FASTASequenceValidator:
         gc_count = upper_seq.count("C") + upper_seq.count("G")
         gc_content = float(gc_count) / float(seq_len) if seq_len > 0 else 0.0
 
-        # Cryptographic anchor using SHA3-256 per Rule Ω24
         sha3_hash = hashlib.sha3_256(upper_seq.encode("utf-8")).hexdigest()
 
         return {

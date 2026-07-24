@@ -85,7 +85,6 @@ class ComplexityCompressor:
         )
 
 
-# ── Private helpers ──────────────────────────────────────────────────
 
 
 def _normalize_score(score: float | None) -> float:
@@ -100,7 +99,6 @@ def _parse_iso(iso_str: str | None) -> datetime:
     if not iso_str:
         return _now()
     try:
-        # Handle both naive and aware datetime strings
         dt = datetime.fromisoformat(iso_str)
         if dt.tzinfo is None:
             dt = dt.replace(tzinfo=timezone.utc)

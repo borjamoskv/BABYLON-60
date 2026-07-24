@@ -134,7 +134,6 @@ async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path, monkeypatch)
 def test_inv_c5_10_pynacl_serialization() -> None:
     """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""
     hits = _scan({".py"}, r"\._seed\b|\._public_key\b")  # type: ignore
-    # Filter out library self-references if any
     hits = [
         h
         for h in hits
@@ -145,7 +144,6 @@ def test_inv_c5_10_pynacl_serialization() -> None:
 
 def test_inv_c5_11_gh_purge_constraints() -> None:
     """INV_C5_11 — Abort git push --mirror/mirror-rewrites if gh auth fails or Broken pipe detected."""
-    # Scan for Option B retries in error catching blocks
     hits = _scan({".py", ".sh"}, r"git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B")  # type: ignore
     assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)  # type: ignore
 
@@ -197,10 +195,8 @@ def test_inv_c5_15_sync_vault_uuids() -> None:
 
 def test_inv_c5_16_terminal_seal_protocol() -> None:
     """INV_C5_16 — Terminal Seal Protocol verification in CLI and scripts."""
-    # Temporarily bypass PRUNE checks for extensions directory to detect wal_checkpoint
     rx = re.compile(r"PRAGMA\s+wal_checkpoint\(TRUNCATE\)|CORTEX-TAINT:borjamoskv:seal:")
     hits = []
-    # Explicitly scan extensions directory for seal protocol markers
     for f in ROOT.rglob("*.py"):
         if ".venv" in f.parts or "node_modules" in f.parts or "target" in f.parts:
             continue

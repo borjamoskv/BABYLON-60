@@ -28,7 +28,6 @@ async function pulse() {
   const reds = (sentinel?.warnings || []).filter((w) => w.level === 'red').length;
   const ambers = (sentinel?.warnings || []).filter((w) => w.level === 'amber').length;
 
-  // Badge: ledger entry count; color encodes lineage health (Git Sentinel).
   let color = '#3E3B4F'; // offline
   let text = '';
   if (online) {
@@ -65,7 +64,6 @@ chrome.runtime.onStartup?.addListener(() => {
 chrome.alarms.onAlarm.addListener((a) => {
   if (a.name === POLL_ALARM) pulse();
 });
-// Allow popup/content to request an immediate refresh.
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type === 'b60-refresh') {
     pulse().then(() => sendResponse({ ok: true }));

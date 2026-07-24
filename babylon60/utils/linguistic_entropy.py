@@ -18,10 +18,8 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-# ─── Slop patterns corpus ────────────────────────────────────────────────────
 
 _SLOP_PATTERNS: list[tuple[str, float]] = [
-    # (regex, severity_weight)
     (r"Aquí tienes el código", 1.0),
     (r"Espero que esto ayude", 1.0),
     (r"Por supuesto[,.]?", 0.8),
@@ -64,60 +62,45 @@ def _sentences(text: str) -> list[str]:
     return [s for s in parts if s]
 
 
-# ─── Core data model ─────────────────────────────────────────────────────────
 
 
 @dataclass
 class LinguisticEntropyReport:
-    # Raw counts
     char_count: int = 0
     word_count: int = 0
     sentence_count: int = 0
     unique_words: int = 0
 
-    # Shannon entropies
     char_entropy: float = 0.0
     word_entropy: float = 0.0
     bigram_entropy: float = 0.0
     trigram_entropy: float = 0.0
 
-    # Lexical diversity
     ttr: float = 0.0  # Type-Token Ratio
     mattr: float = 0.0  # Moving Average TTR (window=50)
 
-    # Sentence metrics
     avg_sentence_length: float = 0.0  # words per sentence
     sentence_length_variance: float = 0.0
 
-    # Burstiness (Goh-Barabási): B ∈ [-1, 1]
-    # B = 1.0 → highly bursty (sporadic unique usage)
-    # B = 0.0 → Poisson-like
-    # B = -1.0 → hyper-regular (robotic repetition)
     burstiness: float = 0.0
 
-    # Context rot: rolling window entropy delta
     context_rot_score: float = 0.0  # 0.0 = no rot, 1.0 = maximum decay
 
-    # Slop
     slop_weight_total: float = 0.0
     slop_instances: list[dict[str, Any]] = field(default_factory=list)
     slop_density: float = 0.0  # slop_weight / word_count
 
-    # Final composite
     exergy_score: float = 0.0  # 0.0 = pure anergy, 1.0 = max exergy
 
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
-        # Round floats for clean output
         for k, v in d.items():
             if isinstance(v, float):
                 d[k] = round(v, 4)
-        # Convenience computed field for CLI consumers
         d["slop_instances_count"] = len(self.slop_instances)
         return d
 
 
-# ─── Detector ────────────────────────────────────────────────────────────────
 
 
 class LinguisticEntropyDetector:
@@ -132,7 +115,6 @@ class LinguisticEntropyDetector:
             (re.compile(pattern, re.IGNORECASE), weight) for pattern, weight in _SLOP_PATTERNS
         ]
 
-    # ── Shannon utilities ───────────────────────────────────────────────
 
     @staticmethod
     def _shannon(items: list[str]) -> float:
@@ -156,7 +138,6 @@ class LinguisticEntropyDetector:
         trigrams = [f"{words[i]} {words[i + 1]} {words[i + 2]}" for i in range(len(words) - 2)]
         return round(self._shannon(trigrams), 4)
 
-    # ── Lexical diversity ───────────────────────────────────────────────
 
     @staticmethod
     def calculate_ttr(words: list[str]) -> float:
@@ -174,7 +155,6 @@ class LinguisticEntropyDetector:
         ttrs = [len(set(words[i : i + window])) / window for i in range(len(words) - window + 1)]
         return round(sum(ttrs) / len(ttrs), 4)
 
-    # ── Sentence metrics ────────────────────────────────────────────────
 
     @staticmethod
     def _sentence_metrics(text: str) -> tuple[float, float]:
@@ -187,7 +167,6 @@ class LinguisticEntropyDetector:
         var = statistics.pvariance(lengths) if len(lengths) > 1 else 0.0
         return round(avg, 4), round(var, 4)
 
-    # ── Burstiness (Goh-Barabási) ───────────────────────────────────────
 
     @staticmethod
     def _burstiness(words: list[str]) -> float:
@@ -216,7 +195,6 @@ class LinguisticEntropyDetector:
             return 0.0
         return round((sigma - mu) / (sigma + mu), 4)
 
-    # ── Context rot ─────────────────────────────────────────────────────
 
     @staticmethod
     def _context_rot(text: str, window_size: int = 100) -> float:
@@ -241,7 +219,6 @@ class LinguisticEntropyDetector:
         if len(windows) < 2:
             return 0.0
 
-        # Compute the cumulative decay: how much entropy drops from first to last window
         first_half = windows[: len(windows) // 2]
         second_half = windows[len(windows) // 2 :]
         h_first = sum(first_half) / len(first_half)
@@ -252,7 +229,6 @@ class LinguisticEntropyDetector:
         decay = max(0.0, (h_first - h_second) / h_first)
         return round(min(decay, 1.0), 4)
 
-    # ── Slop detection ──────────────────────────────────────────────────
 
     def detect_slop(self, text: str) -> list[dict[str, Any]]:
         results: list[dict[str, Any]] = []
@@ -269,7 +245,6 @@ class LinguisticEntropyDetector:
                 )
         return results
 
-    # ── Full analysis ───────────────────────────────────────────────────
 
     def analyze(self, text: str) -> LinguisticEntropyReport:
         """
@@ -321,10 +296,8 @@ class LinguisticEntropyDetector:
         """
         exergy: float = 1.0
 
-        # — Slop density penalty —
         exergy -= min(r.slop_density * 4.0, 0.40)
 
-        # — Word entropy penalty (long texts only: >30 words) —
         if r.word_count >= 30:
             if r.word_entropy < 3.0:
                 exergy -= 0.20
@@ -333,16 +306,13 @@ class LinguisticEntropyDetector:
             elif r.word_entropy < 4.5:
                 exergy -= 0.06
 
-        # — Burstiness penalty: very negative burstiness = robotic repetition —
         if r.burstiness < -0.5:
             exergy -= 0.15
         elif r.burstiness < -0.2:
             exergy -= 0.08
 
-        # — Context rot penalty —
         exergy -= r.context_rot_score * 0.15
 
-        # — MATTR penalty (lexical stagnation in long texts) —
         if r.word_count > 100 and r.mattr < 0.40:
             exergy -= 0.10
         elif r.word_count > 50 and r.mattr < 0.50:

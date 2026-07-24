@@ -1,6 +1,4 @@
 # [C5-REAL] 896-Primitive Space Algebra Verification
-# AESTHETIC: Industrial Noir 2026
-# ENTROPY DECAY PREVENTED: Strict typing, Dataclasses, Fail-Fast
 
 from dataclasses import dataclass
 from typing import Final, Set

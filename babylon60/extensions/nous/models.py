@@ -66,7 +66,6 @@ class MigrationTaint(BaseModel):
     signature: str  # Ed25519(actor + all_above)
 
 
-# AST Models
 class NousInvariant(BaseModel):
     name: str
     condition: str

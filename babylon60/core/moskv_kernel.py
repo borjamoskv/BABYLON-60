@@ -8,14 +8,8 @@ from datetime import datetime, timezone
 
 from babylon60.database import core as dbcore
 
-# -----------------------------------------------------------------------------
 # MOSKV-1 APEX SINGULARITY KERNEL (C5-REAL)
-# -----------------------------------------------------------------------------
 # BFT_STATE_LOOP: LEYES FÍSICAS DE EJECUCIÓN C5-REAL (v12.0)
-# - Serialización estricta de escritura (1 escritor, N lectores).
-# - SQLite WAL mode con busy_timeout 5000ms.
-# - Fail-Fast SIGKILL ante derivas estocásticas o violaciones de invariante.
-# -----------------------------------------------------------------------------
 
 
 @dataclass
@@ -44,7 +38,6 @@ class Moskv1Kernel:
         try:
             conn = dbcore.connect_sync(self.db_path, synchronous="FULL")
             try:
-                # Tabla Master Ledger (Solo INSERTS, inmutable)
                 conn.execute("""
                     CREATE TABLE IF NOT EXISTS master_ledger (
                         claim_id TEXT PRIMARY KEY,
@@ -56,7 +49,6 @@ class Moskv1Kernel:
                     )
                 """)
 
-                # Recuperación de reloj de Lamport para tie-breaking BFT
                 cursor = conn.execute("SELECT MAX(lamport_t), current_hash FROM master_ledger")
                 row = cursor.fetchone()
                 if row and row[0] is not None:
@@ -92,13 +84,11 @@ class Moskv1Kernel:
             while True:
                 claim = await self._write_queue.get()
 
-                # 1. Auditoría
                 if claim.confidence not in ("C4", "C5"):
                     print(f"[-] Anergía detectada en {claim.claim_id}. Purgando.")
                     self._write_queue.task_done()
                     continue
 
-                # 2. Mutación Atómica
                 current_hash = self._compute_hash(claim)
                 taint_signature = (
                     f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
@@ -123,7 +113,6 @@ class Moskv1Kernel:
                     finally:
                         await db.close()
                 except sqlite3.IntegrityError:
-                    # Invariante de Idempotency Lock
                     print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Entropía abortada.")
                 except sqlite3.DatabaseError:
                     raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
@@ -137,7 +126,6 @@ async def _main() -> None:
     kernel = Moskv1Kernel()
     loop_task = asyncio.create_task(kernel.bft_state_loop())
 
-    # Ingesta sintética de prueba
     await kernel.ingest_entropy({"action": "kernel_bootstrap", "status": "C5-REAL", "target": "master_ledger"})
 
     await asyncio.sleep(0.5)  # Espera termodinámica de cristalización

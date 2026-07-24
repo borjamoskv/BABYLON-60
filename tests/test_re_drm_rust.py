@@ -16,19 +16,15 @@ def test_re_drm_rust_bft_verification() -> None:
     completing P2P BFT consensus across 896 RE/DRM primitives in < 150ms
     and writing correctly to the SQLite WAL database.
     """
-    # 0. Clean old database to prevent cross-run pollution
     if os.path.exists(DB_PATH):
         try:
             os.remove(DB_PATH)
         except OSError:
             pass
 
-    # 1. Run the Rust compiler/executor
     print("[*] Launching native Rust BFT verifier...")
     env = os.environ.copy()
     env["PYO3_USE_ABI3_FORWARD_COMPATIBILITY"] = "1"
-    # Hermético: enlaza pyo3 contra el MISMO intérprete que ejecuta pytest
-    # (evita que pyo3-build-config herede un Python del sistema obsoleto).
     env["PYO3_PYTHON"] = sys.executable
     res = subprocess.run(
         ["cargo", "run", "--manifest-path", "strike_rs/Cargo.toml", "--bin", "re_drm_896_bft"],
@@ -41,23 +37,19 @@ def test_re_drm_rust_bft_verification() -> None:
     assert res.returncode == 0, f"Rust binary failed: {res.stderr}"
     assert "[PASS] 896/896 RE/DRM Primitives in Rust par-par consensus" in res.stdout
 
-    # 2. Check Database persistence
     assert os.path.exists(DB_PATH), "Database re_drm_bft_ledger.db should exist"
 
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
 
-    # Check tables
     cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='re_drm_p2p_ledger'")
     table_exists = cursor.fetchone()
     assert table_exists is not None, "re_drm_p2p_ledger table must exist in the database"
 
-    # Verify counts
     cursor.execute("SELECT count(*) FROM re_drm_p2p_ledger")
     row_count = cursor.fetchone()[0]
     assert row_count == 896, f"Expected 896 entries in database, got {row_count}"
 
-    # Verify byzantine consensus matches count
     cursor.execute("SELECT count(*) FROM re_drm_p2p_ledger WHERE quorum_match='3/3'")
     unanimous = cursor.fetchone()[0]
     cursor.execute("SELECT count(*) FROM re_drm_p2p_ledger WHERE quorum_match='2/3'")

@@ -1,8 +1,3 @@
-//! VECTOR A.2: Master Ledger & ATMS Hardening
-//!
-//! Elevates the append-only ledger into a verifiable Causal Hash Chain.
-//! Acts as a Transactional Local Ledger (SQLite WAL mode), reconstructing 
-//! the ATMS in-memory state via deterministic replay.
 
 use crate::omega0::{JustifiedStatement, Statement, Justification};
 use rusqlite::{params, Connection, Result};
@@ -19,7 +14,6 @@ pub struct MasterLedger {
     pub(crate) conn: Connection,
 }
 
-#[derive(Debug, Clone, PartialEq)]
 pub struct AtmsState {
     pub environments: HashMap<String, HashSet<String>>, // environment_id -> set(statement_hashes)
     pub nogoods: HashSet<String>, // statement_hashes that form contradictions
@@ -62,7 +56,6 @@ impl MasterLedger {
             [],
         )?;
 
-        // Replaced ledger_assertions with Causal Hash Chain constraints
         tx.execute(
             "CREATE TABLE IF NOT EXISTS ledger_assertions (
                 id TEXT PRIMARY KEY,
@@ -77,7 +70,6 @@ impl MasterLedger {
             [],
         )?;
 
-        // Replaced atms_nogoods with append-only causal log
         tx.execute(
             "CREATE TABLE IF NOT EXISTS atms_nogoods_log (
                 nogood_hash TEXT PRIMARY KEY,
@@ -216,7 +208,6 @@ impl MasterLedger {
         Ok(cortex_taint)
     }
 
-    /// Verifies the entire ledger causal chain from genesis. If tampered, aborts process (SIGKILL equivalent).
     pub fn verify_chain(&self, environment_id: &str) -> Result<bool> {
         let mut stmt = self.conn.prepare(
             "SELECT statement_hash, justification_hash, lamport_t, prev_hash, cortex_taint 
@@ -249,14 +240,12 @@ impl MasterLedger {
         Ok(true)
     }
 
-    /// Reconstructs the ATMS state purely from the causal event log.
     pub fn replay_to_atms_state(&self) -> Result<AtmsState> {
         let mut state = AtmsState {
             environments: HashMap::new(),
             nogoods: HashSet::new(),
         };
 
-        // Replay Assertions
         let mut stmt = self.conn.prepare(
             "SELECT environment_id, statement_hash FROM ledger_assertions ORDER BY lamport_t ASC"
         )?;
@@ -267,7 +256,6 @@ impl MasterLedger {
             state.environments.entry(env).or_default().insert(stmt_hash);
         }
 
-        // Replay Nogoods
         let mut stmt2 = self.conn.prepare(
             "SELECT nogood_hash FROM atms_nogoods_log ORDER BY lamport_t ASC"
         )?;
@@ -326,12 +314,10 @@ impl MasterLedger {
     }
 }
 
-#[cfg(test)]
 mod tests {
     use super::*;
     use crate::omega0::Modality;
 
-    #[test]
     fn test_hash_chain_and_atms_replay() {
         let mut ledger = MasterLedger::new(":memory:").unwrap();
 
@@ -355,10 +341,8 @@ mod tests {
         let s1_hash = MasterLedger::hash_statement(&js1.statement);
         ledger.assert_nogood(&s1_hash, "master").unwrap();
 
-        // Verify chain
         assert!(ledger.verify_chain("master").is_ok());
 
-        // Replay ATMS
         let state = ledger.replay_to_atms_state().unwrap();
         assert!(state.environments.get("master").unwrap().contains(&s1_hash));
         assert!(state.environments.get("master").unwrap().contains(&MasterLedger::hash_statement(&js2.statement)));

@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
 """
 CORTEX Training Extension — MOSKV-1 Cognitive Kernel Pipeline.
 
@@ -14,12 +13,10 @@ a local LLM fine-tuned on CORTEX workspace knowledge:
 Usage:
     from babylon60.extensions.training import MOSKV1DatasetCompiler, MOSKV1Core
 
-    # Compile dataset
     compiler = MOSKV1DatasetCompiler("/path/to/workspace")
     compiler.compile_full_dataset()
     compiler.export_sharegpt(split=True)
 
-    # Inference
     core = MOSKV1Core()
     result = await core.infer("query", db_conn)
 """

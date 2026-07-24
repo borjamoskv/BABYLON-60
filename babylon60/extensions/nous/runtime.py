@@ -46,7 +46,6 @@ class NousRuntime:
                 "❌ [NOUS] C5-REAL constraint: Cannot execute migration without a successful dry run."
             )
 
-        # 1. Crystallize Taint
         manifest_hash = cortex_hash(ast.model_dump_json().encode())
         dry_run_hash = cortex_hash(dry_run_result.model_dump_json().encode())
         predicted_state_hash = hashlib.sha256(
@@ -67,7 +66,6 @@ class NousRuntime:
 
         operations = SQLSynthesizer.synthesize(ast)
 
-        # 2. State Mutation
         async with self.engine.transaction() as tx:
             for op in operations:
                 logger.debug("Executing: %s", op.sql_up)
@@ -75,7 +73,6 @@ class NousRuntime:
 
             logger.info("✅ [NOUS] Migration %s applied.", ast.metadata.version)
 
-        # 3. Seal Ledger
         ast_dict = [op.model_dump() for op in ast.operations]
         ledger_hash = self.ledger.record_mutation(
             intent_desc=f"Migration {ast.metadata.version} by {ast.metadata.author}. Taint: {taint.signature}",

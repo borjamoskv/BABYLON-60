@@ -10,11 +10,9 @@ def validate_ast_sandbox(source_code: str) -> bool:
     try:
         tree = ast.parse(source_code)
         for node in ast.walk(tree):
-            # 1. Bloqueo de atributos dunder
             if isinstance(node, ast.Attribute):
                 if isinstance(node.attr, str) and node.attr.startswith("__") and node.attr.endswith("__"):
                     raise SecurityError(f"Acceso a atributo dunder prohibido: {node.attr}")
-            # 2. Bloqueo de funciones de introspección dinámica
             if isinstance(node, ast.Name) and node.id in (
                 "getattr",
                 "setattr",
@@ -24,7 +22,6 @@ def validate_ast_sandbox(source_code: str) -> bool:
                 "__import__",
             ):
                 raise SecurityError(f"Llamada a función de introspección prohibida: {node.id}")
-            # 3. Bloqueo de importaciones no autorizadas (Denegación por defecto)
             if isinstance(node, (ast.Import, ast.ImportFrom)):
                 raise SecurityError("Importación no permitida en entorno sandboxed")
         return True

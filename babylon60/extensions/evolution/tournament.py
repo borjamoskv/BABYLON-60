@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/tournament.py
 """Tournament Selection & Speciation for the Evolution Engine.
 
 Advanced evolutionary operators:
@@ -46,14 +45,12 @@ def run_tournament(
     if len(agent.subagents) < tournament_size:
         return None
 
-    # Sample without replacement
     contestants = _rng.sample(agent.subagents, tournament_size)
     contestants.sort(key=lambda s: s.fitness, reverse=True)
 
     winner = contestants[0]
     loser = contestants[-1]
 
-    # Knowledge transfer: loser absorbs 15-30% of the gap
     gap = winner.fitness - loser.fitness
     if gap < 2.0:
         return None  # Too close, no meaningful transfer

@@ -1,4 +1,3 @@
-# [C4-SIM]
 """
 Gamification AI (Dopamine Loop).
 
@@ -21,13 +20,10 @@ class FlowStateModulator:
         ratio = observed_latency_ms / max(1, self.target_latency_ms)
 
         if ratio < 0.5:
-            # Too easy, increase friction
             return 1.2
         elif ratio > 1.5:
-            # Too hard, decrease friction
             return 0.8
         else:
-            # Flow state achieved
             return 1.0
 
     def generate_stochastic_reward(self, exergy_expenditure: float) -> dict:
@@ -37,7 +33,6 @@ class FlowStateModulator:
         """
         base_probability = min(0.9, exergy_expenditure * 0.1)
 
-        # Stochastic trigger
         reward_triggered = random.random() < base_probability
 
         if reward_triggered:

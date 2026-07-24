@@ -83,7 +83,6 @@ class RiskManager:
     All thresholds in Decimal - zero float drift.
     """
 
-    # Absolute limits (Decimal - without precision loss)
     MAX_POSITION_PCT = Decimal("0.05")  # 5% per position
     MAX_DAILY_LOSS_PCT = Decimal("0.02")  # Daily stop -2%
     MAX_DRAWDOWN_PCT = Decimal("0.10")  # Total stop -10%
@@ -188,11 +187,6 @@ class RiskManager:
         """Rejects if implicit leverage exceeds MAX_LEVERAGE."""
         if position.size <= 0 or position.entry_price <= 0:
             return False
-        # Leverage = notional / margin (size is margin, entry_price * size = notional)
-        # Simplified: if position explicitly carries leverage info, check it.
-        # For now, we check if size * entry_price / size > MAX_LEVERAGE conceptually.
-        # The real check: position.size is the margin; notional = entry_price * contracts.
-        # We approximate: if the stop distance is tighter than 1/MAX_LEVERAGE, leverage is too high.
         risk_per_unit = abs(position.entry_price - position.stop_loss)
         if risk_per_unit == 0:
             log.warning("Stop loss = entry price, infinite leverage.")
@@ -234,7 +228,6 @@ class RiskManager:
             "🚨 CIRCUIT BREAKER ACTIVATED. %dh pause.",
             reset_seconds // 3600,
         )
-        # Auto-reset via background thread
         if self._cb_timer is not None:
             self._cb_timer.cancel()
         self._cb_timer = threading.Timer(

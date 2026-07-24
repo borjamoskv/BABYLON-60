@@ -27,7 +27,6 @@ class SovereignTriad:
         self.exa_key = os.getenv("EXA_API_KEY", "")
         self.braintrust_key = os.getenv("BRAINTRUST_API_KEY", "")
 
-        # Tiempos de colapso - la Red no tiene paciencia.
         self.timeout_s = 15.0
 
     async def extract_url_jina(self, target_url: str) -> str:
@@ -108,7 +107,6 @@ class SovereignTriad:
             "query": query,
             "useAutoprompt": True,
             "numResults": num_results,
-            # Se puede añadir "contents": {"text": True, "highlights": True} para obtener snippets
             "contents": {"text": True},
         }
 
@@ -142,9 +140,6 @@ class SovereignTriad:
             logger.warning("BRAINTRUST_API_KEY no detectada. Skipeando telémetría.")
             return False
 
-        # Endpoint asumiendo el estándar de ingest de Braintrust (simplificado para el script O(1))
-        # Nota: Braintrust recomienda usar su SDK, pero para trazas ligeras HTTP puro sirve.
-        # Generalmente, necesitas crear un experimento primero, pero podemos loggear eventos a un proyecto.
         url = "https://api.braintrustdata.com/v1/log"
         headers = {
             "Authorization": f"Bearer {self.braintrust_key}",
@@ -176,9 +171,6 @@ class SovereignTriad:
                 return False
 
 
-# =====================================================================
-# EJECUCIÓN TÁCTICA (TEST INDIVIDUAL)
-# =====================================================================
 if __name__ == "__main__":
 
     async def run_triad_test():
@@ -195,8 +187,6 @@ if __name__ == "__main__":
         logging.getLogger(__name__).info(f"Exa: Encontrados {len(exa_res)} nodos.\n")
 
         logging.getLogger(__name__).info("--- 3. Test Braintrust Telemetry ---")
-        # braintrust_res = await triad.log_braintrust_trace("Aether-Agent-Test", "Test Run", "hello", "world")
-        # print(f"Braintrust Log Status: {braintrust_res}")
         logging.getLogger(__name__).info("Braintrust no comprobado en este script local para evitar ruido.\n")
 
     asyncio.run(run_triad_test())

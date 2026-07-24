@@ -29,7 +29,6 @@ class DiscoveryProvider:
     de CORTEX para que el Red Team Swarm inyecte caos.
     """
 
-    # Namespaces críticos que deben ser asediados por defecto
     CRITICAL_NAMESPACES = [
         "cortex.memory.manager",
         "cortex.memory.working",
@@ -72,7 +71,6 @@ class DiscoveryProvider:
         """Extrae funciones y métodos públicos del módulo."""
         surfaces = []
 
-        # 1. Escanear clases (ej. CortexMemoryManager)
         for name, obj in inspect.getmembers(module, inspect.isclass):
             if obj.__module__ != ns_name:
                 continue
@@ -84,18 +82,13 @@ class DiscoveryProvider:
             ):
                 if func_name.startswith("_"):
                     continue
-                # Saltar estáticos por ahora
                 if "self" not in inspect.signature(func_obj).parameters:
                     continue
 
                 seed = self._generate_seed_inputs(func_obj)
                 if seed is not None:
-                    # Envoltorio para instanciación (esto es complejo: el Red Team
-                    # debería usar instancias reales si el engine las tiene,
-                    # o intentar instanciar con mocks).
                     surfaces.append((f"{ns_name}.{name}", func_obj, seed))
 
-        # 2. Escanear funciones a nivel de módulo
         for name, obj in inspect.getmembers(module, inspect.isfunction):  # type: ignore[assignment]
             if obj.__module__ != ns_name:
                 continue
@@ -121,12 +114,10 @@ class DiscoveryProvider:
             if name == "self" or name == "cls":
                 continue
 
-            # Si tiene valor por defecto, lo usamos como semilla
             if param.default is not inspect.Parameter.empty:
                 seed[name] = param.default
                 continue
 
-            # Mapeo básico de tipos para semillas
             if isinstance(param.annotation, type) and issubclass(param.annotation, str):
                 seed[name] = "seed_data"
             elif isinstance(param.annotation, type) and issubclass(param.annotation, int):
@@ -140,8 +131,6 @@ class DiscoveryProvider:
             elif isinstance(param.annotation, type) and issubclass(param.annotation, list):
                 seed[name] = ["val"]
             else:
-                # Si es un tipo complejo sin default, no podemos generar una semilla segura
                 seed[name] = "byzantine_placeholder"
 
-        # Si el 100% de los parámetros tienen semilla (o son opcionales), es un candidato.
         return seed

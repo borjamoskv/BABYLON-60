@@ -51,9 +51,6 @@ class NousCompiler:
         """
         logger.info("NOUS Compiler analyzing: '%s'", source_code)
 
-        # SIMULATED JIT COMPILATION (LLM Mock)
-        # The AI transforms "Asegúrate de que la base de datos está limpia antes del deploy"
-        # into a deterministic executable AST.
         return NousIntentAST(
             action="verify_state_and_purge",
             target="database:primary",
@@ -91,16 +88,13 @@ class NousRuntime:
         compiler = NousCompiler()
 
         try:
-            # 1. AI Compilation
             ast = await compiler.compile(source_code)
 
             # 2. CORTEX-TAINT Generation
             taint = self._generate_taint(ast)
 
-            # 3. Deterministic Guard Execution (SAGA)
             await self._guard_check(ast)
 
-            # 4. Persistence / Execution
             logger.info("Executing with Taint: %s", taint)
             return {
                 "status": "C5-REAL_SUCCESS",
@@ -114,7 +108,6 @@ class NousRuntime:
             return {"status": "SAGA_REJECTED", "error": str(e)}
 
 
-# --- EXECUTION ---
 if __name__ == "__main__":
     import asyncio
 

@@ -1,6 +1,4 @@
-# causal_isomorphism/emitter_rust.py — IR → Rust Emitter
 # C5-REAL: Regime-filtered Rust code generation
-# Author: Borja Moskv (borjamoskv)
 """
 Emits Rust source from IR modules for the strike_rs poset layer.
 
@@ -33,9 +31,6 @@ from causal_isomorphism.ir import (
 )
 
 
-# ============================================================
-# TYPE MAPPING: IR → Rust
-# ============================================================
 def ir_type_to_rust(ir_type: IRType) -> str:
     """Map an IR type to its Rust equivalent."""
     match ir_type.kind:
@@ -79,9 +74,6 @@ def ir_type_to_rust(ir_type: IRType) -> str:
             return "Vec<u8>"
 
 
-# ============================================================
-# RUST CODE GENERATION
-# ============================================================
 @dataclass
 class RustEmitter:
     """
@@ -98,7 +90,6 @@ class RustEmitter:
         self.lines = []
         self.indent = 0
 
-        # Header
         self._line("//! Auto-generated from F# Domain Kernel via Causal Isomorphism Transpiler")
         self._line("//! Trilingual Regime: Type definitions and poset stubs for strike_rs")
         self._line("//! Author: borjamoskv")
@@ -110,7 +101,6 @@ class RustEmitter:
         self._line("use serde::{Deserialize, Serialize};")
         self._line("")
 
-        # Emit all type definitions
         for union in module.unions:
             self._emit_union(union)
 
@@ -125,10 +115,8 @@ class RustEmitter:
             for record in sub.records:
                 self._emit_record(record)
 
-        # Emit BLAKE3 trait implementation
         self._emit_taint_trait(module)
 
-        # Emit regime-filtered functions
         for func in module.all_functions():
             self._emit_function(func)
 
@@ -170,7 +158,6 @@ class RustEmitter:
 
         for fld in record.fields:
             rust_type = ir_type_to_rust(fld.ir_type)
-            # Convert PascalCase field names to snake_case
             snake_name = self._to_snake_case(fld.name)
             self._line(f"pub {snake_name}: {rust_type},")
 
@@ -188,7 +175,6 @@ class RustEmitter:
         self._line("}")
         self._line("")
 
-        # Implement for each tagged union
         for union in module.unions:
             if not union.is_simple_enum:
                 self._emit_taint_impl(union)
@@ -198,7 +184,6 @@ class RustEmitter:
                 if not union.is_simple_enum:
                     self._emit_taint_impl(union)
 
-        # Implement for each record
         for record in module.records:
             self._emit_record_taint_impl(record)
 
@@ -278,7 +263,6 @@ class RustEmitter:
 
     def _emit_function(self, func: IRFunction) -> None:
         """Emit a function, respecting regime boundaries."""
-        # REGIME FILTER: Block physics computation
         if func.classification == FunctionClassification.STATE_TRANSITION:
             self._line(f"// @regime-blocked: {func.name}")
             self._line("// Classification: STATE_TRANSITION — physics stays in F# Domain Kernel.")
@@ -286,7 +270,6 @@ class RustEmitter:
             self._line("")
             return
 
-        # Block consensus anchoring (belongs to Solidity)
         if func.classification == FunctionClassification.COMMIT_BOUNDARY:
             self._line(f"// @regime-blocked: {func.name}")
             self._line("// Classification: COMMIT_BOUNDARY — anchoring belongs to Solidity/Anvil.")
@@ -299,12 +282,10 @@ class RustEmitter:
             self._line("")
             return
 
-        # HASH_COMPUTATION → emit full implementation
         if func.classification == FunctionClassification.HASH_COMPUTATION:
             self._emit_hash_function(func)
             return
 
-        # VALIDATION and PURE_QUERY → emit as Rust functions
         self._emit_generic_function(func)
 
     def _emit_hash_function(self, func: IRFunction) -> None:

@@ -22,7 +22,6 @@ class TutorAgent:
         Evaluate student's semantic divergence.
         If ast_validation is True, attempts to bridge C4-SIM to C5-REAL via structural assertions.
         """
-        # C4-SIM: Probabilistic evaluation of semantic divergence
         prompt = f"Evaluate the divergence between student input: '{student_input}' and target theorem: '{target_theorem}'."
         semantic_divergence = await self.llm.generate(prompt)
 

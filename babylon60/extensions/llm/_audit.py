@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 from __future__ import annotations
 
 import re
@@ -14,7 +13,6 @@ def spectral_audit(text: str) -> bool:
     if not text:
         return False
 
-    # 1. Refusal patterns (Fatal for sovereignty)
     _REFUSALS = [
         r"(?i)i (cannot|can't) (fulfill|comply|do|provide)",
         r"(?i)i'm sorry, (but|i cannot)",
@@ -30,8 +28,6 @@ def spectral_audit(text: str) -> bool:
         if re.search(pattern, text):
             return False
 
-    # 2. Length Audit: unusually short responses after system prompts are suspect
-    # Allow explicitly accepted sovereign short words and structured JSON arrays/objects
     clean_text = text.strip().upper()
     if (
         clean_text in ("CLEAN", "TRUE", "FALSE", "YES", "NO", "[]")

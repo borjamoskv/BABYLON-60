@@ -29,12 +29,10 @@ class EpistemicBreakerDaemon:
         self.max_entropy_threshold = max_entropy_threshold
         self.is_running = False
 
-        # Internal state to track entropy derivative
         self._last_fact_count = 0
         self._last_error_count = 0
         self._last_evaluation_time = datetime.fromtimestamp(time.time(), tz=timezone.utc)
 
-        # System State
         self.circuit_open = False  # False = System is awake and acting. True = Sleep/Compressing.
 
     async def _measure_entropy(self) -> float:
@@ -64,9 +62,7 @@ class EpistemicBreakerDaemon:
         error_density = min(error_count / active, 1.0)
         deprecation_ratio = min(deprecated / total, 1.0)
 
-        # Growth rate: compare current fact count to last snapshot
         delta = max(active - self._last_fact_count, 0)
-        # Normalize: >200 new facts per cycle → saturated
         growth_rate = min(delta / 200.0, 1.0)
         self._last_fact_count = active
 
@@ -88,7 +84,6 @@ class EpistemicBreakerDaemon:
         )
         self.circuit_open = True
 
-        # Record the event in the sovereign ledger for auditing (Falla Bizantina)
         try:
             await self.engine.store(
                 "cortex-core",
@@ -106,8 +101,6 @@ class EpistemicBreakerDaemon:
             "   (Simulating structural prune)"
         )
 
-        # Execute deep structural compression (Ω₁₃) via autodidact-omega
-        # payload when system limits reached.
         await asyncio.sleep(15)  # Cooldown: compress graph and reconstruct bounds.
 
         logger.info(
@@ -115,7 +108,6 @@ class EpistemicBreakerDaemon:
         )
         self.circuit_open = False
 
-        # Record wakeup
         try:
             await self.engine.store(
                 "cortex-core",
@@ -139,7 +131,6 @@ class EpistemicBreakerDaemon:
 
         while self.is_running:
             try:
-                # 1. Measure the current state of chaos
                 entropy = await self._measure_entropy()
 
                 if entropy >= self.max_entropy_threshold:
@@ -148,7 +139,6 @@ class EpistemicBreakerDaemon:
                         entropy,
                         self.max_entropy_threshold,
                     )
-                    # 2. If it exceeds limits, trip the breaker.
                     await self._trigger_sleep_cycle()
                 else:
                     logger.debug("Epistemic load nominal: %.3f", entropy)
@@ -156,7 +146,6 @@ class EpistemicBreakerDaemon:
             except Exception as e:  # noqa: BLE001
                 logger.error("Error in Epistemic Breaker loop: %s", e)
 
-            # Wait for next scan, adjust if circuit is currently open
             if self.is_running:
                 await asyncio.sleep(self.check_interval_seconds)
 

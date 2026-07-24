@@ -20,7 +20,6 @@ class EvolutionaryFalsifier:
     Popperian criterion: a claim is scientific only if it is falsifiable.
     """
 
-    # Patterns that indicate unfalsifiable claims
     _UNFALSIFIABLE_PATTERNS = (
         "always works",
         "never fails",
@@ -34,7 +33,6 @@ class EvolutionaryFalsifier:
         "impossible to test",
     )
 
-    # Patterns that indicate testable, falsifiable claims
     _FALSIFIABLE_INDICATORS = (
         "if",
         "when",
@@ -69,7 +67,6 @@ class EvolutionaryFalsifier:
         if not lower or len(lower) < 5:
             return False
 
-        # Check for unfalsifiable patterns
         for pattern in self._UNFALSIFIABLE_PATTERNS:
             if pattern in lower:
                 logger.debug(
@@ -79,20 +76,16 @@ class EvolutionaryFalsifier:
                 )
                 return False
 
-        # Check for falsifiable indicators
         for indicator in self._FALSIFIABLE_INDICATORS:
             if indicator in lower:
                 return True
 
-        # Numeric claims are generally falsifiable
         if any(c.isdigit() for c in claim):
             return True
 
-        # Short claims without indicators are suspect
         if len(lower) < 30:
             return False
 
-        # Default: give benefit of doubt for longer claims
         return True
 
     def falsify_target(self, target_func: Callable, seed_inputs: dict[str, Any]) -> bool:
@@ -107,10 +100,7 @@ class EvolutionaryFalsifier:
 
         for _idx, mutant in enumerate(mutations):
             try:
-                # Execution
                 target_func(**mutant)
-                # In a real Red Team environment, we also validate if the result
-                # matches the structural boundaries (tether.md), not just if it didn't raise.
             except Exception as e:  # noqa: BLE001
                 failures += 1
                 self._capture_autopsy(target_func.__name__, mutant, e)
@@ -129,13 +119,11 @@ class EvolutionaryFalsifier:
         """
         mutations = [base_inputs]
 
-        # Mutation 1: The Void (empty/none values)
         void_mutant = copy.deepcopy(base_inputs)
         for k in void_mutant.keys():
             void_mutant[k] = None
         mutations.append(void_mutant)
 
-        # Mutation 2: Boundary Saturation (massive strings / numbers)
         sat_mutant = copy.deepcopy(base_inputs)
         for k, v in sat_mutant.items():
             if isinstance(v, str):
@@ -144,7 +132,6 @@ class EvolutionaryFalsifier:
                 sat_mutant[k] = v * 10e9
         mutations.append(sat_mutant)
 
-        # Mutation 3: Type Confusion (Byzantine payload)
         type_mutant = copy.deepcopy(base_inputs)
         for k, v in type_mutant.items():
             if isinstance(v, dict):

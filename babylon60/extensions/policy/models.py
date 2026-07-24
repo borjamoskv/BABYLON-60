@@ -36,12 +36,6 @@ class ActionItem:
         return f"ActionItem(v={self.value:.3f} [{self.action_type}] {self.description[:60]})"
 
 
-# ── Reward Mapping ──────────────────────────────────────────────────
-# Base reward per fact_type.  Higher = more actionable.
-# Ghost and error are high because they represent incomplete/broken state.
-# Bridge is medium - proven pattern transfer opportunity.
-# Decision is low - already resolved.
-# Knowledge is lowest - informational, no action needed.
 
 REWARD_MAP: dict[str, float] = {
     "ghost": 0.70,
@@ -51,7 +45,6 @@ REWARD_MAP: dict[str, float] = {
     "knowledge": 0.10,
 }
 
-# Action type mapping from fact_type
 ACTION_TYPE_MAP: dict[str, str] = {
     "ghost": "resolve_ghost",
     "error": "fix_error",

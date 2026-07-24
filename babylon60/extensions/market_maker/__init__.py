@@ -42,7 +42,6 @@ __all__ = [
 
 def __getattr__(name: str) -> object:
     """Lazy imports for all public symbols."""
-    # Models
     if name in (
         "Experiment",
         "ExperimentStatus",
@@ -70,7 +69,6 @@ def __getattr__(name: str) -> object:
         }
         return _map[name]
 
-    # Components
     if name == "TrendDetector":
         from babylon60.extensions.market_maker.detector import TrendDetector
 

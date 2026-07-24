@@ -40,7 +40,6 @@ class CircuitBreaker:
         try:
             result = await breaker.call(verify_integrity_async)
         except RuntimeError:
-            # Circuit is open - system in degraded mode
             pass
 
     State transitions:

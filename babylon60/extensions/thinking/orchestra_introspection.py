@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Thought Orchestra: Introspection Mixin.
 
@@ -36,7 +32,6 @@ class OrchestraIntrospectionMixin:
         - self.think(prompt, mode, strategy) -> FusedThought
     """
 
-    # ── Convenience Think Methods ─────────────────────────────────
 
     async def quick_think(self, prompt: str) -> FusedThought:
         """Pensamiento rápido. Retorna solo el contenido."""
@@ -75,18 +70,13 @@ class OrchestraIntrospectionMixin:
         """
         from babylon60.extensions.llm.sovereign import Inquisitor
 
-        # Phase 1: Hypothesis Synthesis
         hypothesis = await self.think(  # type: ignore[reportAttributeAccessIssue]
             prompt, mode="omega", strategy="synthesis"
         )
 
-        # Phase 2: Inquisitorial Siege (Asymmetry Ω₅)
         inquisitor = Inquisitor()
         siege = await inquisitor.asediar(hypothesis.content, original_prompt=prompt)
 
-        # Phase 3: Truth Folding (with Multi-round Refinement Ω₅)
-        # Extend ORP to multi-round adversarial refinement if confidence < 0.8 after first siege.
-        # (Ghost 3181 resolution)
         refinement_prompt = (
             f"ORIGINAL INTENT: {prompt}\n\n"
             f"PROPOSED HYPOTHESIS: {hypothesis.content}\n\n"
@@ -99,7 +89,6 @@ class OrchestraIntrospectionMixin:
             refinement_prompt, mode="deep_reasoning", strategy="synthesis"
         )
 
-        # Logic for Multi-round Refinement (Ω₅)
         if final_thought.confidence < 0.8:
             logger.info(
                 "🛡️ [ORP] Low confidence (%.2f). Starting second round of adversarial refinement.",
@@ -116,7 +105,6 @@ class OrchestraIntrospectionMixin:
                 refinement_prompt_2, mode="deep_reasoning", strategy="synthesis"
             )
 
-        # Merge metadata
         final_thought.meta.update(
             {
                 "orp_active": True,
@@ -128,7 +116,6 @@ class OrchestraIntrospectionMixin:
         )
         return final_thought
 
-    # ── Introspection Properties ──────────────────────────────────
 
     @property
     def available_modes(self) -> list[str]:
@@ -193,7 +180,6 @@ class OrchestraIntrospectionMixin:
             / total
         )
 
-        # Proveedor que más gana
         winner_counts: dict[str, int] = {}
         for r in self.history:  # type: ignore[reportAttributeAccessIssue]
             if r.winner:

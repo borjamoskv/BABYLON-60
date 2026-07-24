@@ -25,14 +25,11 @@ class TrendsOracle:
         self.config = config
         self.running = False
 
-        # Initialize pytrends with basic config (hl='en-US' or target region)
-        # Using a timeout to prevent hanging
         self.pytrends = TrendReq(hl="en-US", tz=360, timeout=(10, 25))
 
         # In-memory dedup cache: "geo:category:type:keyword" -> expiry timestamp
         self._cache: dict[str, float] = {}
 
-        # Keep track of latest alerts to hand off to the Monitor
         self._latest_alerts: list[TrendsAlert] = []
 
     def _is_cached(self, cache_key: str, now: float) -> bool:
@@ -57,7 +54,6 @@ class TrendsOracle:
         self.running = True
         logger.info("📈 [TRENDS_ORACLE] Activated. Monitoring global entropy (DEFCON 2).")
 
-        # Keep track of individual cycle intervals
         last_realtime = 0.0
         last_daily = 0.0
 
@@ -67,7 +63,6 @@ class TrendsOracle:
                 self._clean_cache(now)
 
                 tasks = []
-                # 1. Realtime trends (if enabled)
                 if (
                     self.config.enable_realtime
                     and (now - last_realtime) >= self.config.realtime_interval
@@ -75,7 +70,6 @@ class TrendsOracle:
                     tasks.append(self._poll_realtime())
                     last_realtime = now
 
-                # 2. Daily searches
                 if (now - last_daily) >= self.config.daily_interval:
                     tasks.append(self._poll_daily())
                     last_daily = now
@@ -86,7 +80,6 @@ class TrendsOracle:
             except Exception as e:  # noqa: BLE001
                 logger.error("❌ [TRENDS_ORACLE] Loop Error: %s", e)
 
-            # Wait before the next check. A fast loop checking intervals.
             await asyncio.sleep(15.0)
 
     def run_sync_loop(self) -> None:
@@ -102,7 +95,6 @@ class TrendsOracle:
                 now = time.monotonic()
                 self._clean_cache(now)
 
-                # 1. Realtime trends
                 if (
                     self.config.enable_realtime
                     and (now - last_realtime) >= self.config.realtime_interval
@@ -110,7 +102,6 @@ class TrendsOracle:
                     self._poll_realtime_sync()
                     last_realtime = now
 
-                # 2. Daily searches
                 if (now - last_daily) >= self.config.daily_interval:
                     self._poll_daily_sync()
                     last_daily = now
@@ -124,9 +115,6 @@ class TrendsOracle:
         """Gracefully stop the oracle loop."""
         self.running = False
 
-    # -------------------------------------------------------------
-    # Polling Logic wrappers (with synchronous pytrends backends)
-    # -------------------------------------------------------------
 
     def _poll_realtime_sync(self):
         """Fetch and process realtime trending searches."""
@@ -136,13 +124,10 @@ class TrendsOracle:
         for geo in self.config.geos:
             target_geo = geo if geo else "US"  # pytrends requires a valid geo for realtime
             try:
-                # pytrends realtime is sometimes fragile with pure empty geos
                 df = self.pytrends.realtime_trending_searches(pn=target_geo)
                 if df is not None and not df.empty:
-                    # Dataframe schema varies, but usually: 'title', 'entityNames', 'articleUrls'
                     if "title" in df.columns:
                         for idx, row in df.iterrows():
-                            # Limiting to top 20
                             if idx > 20:  # type: ignore[reportOperatorIssue]
                                 break
                             title = str(row["title"])
@@ -174,7 +159,6 @@ class TrendsOracle:
             try:
                 df = self.pytrends.trending_searches(pn=target_geo)
                 if df is not None and not df.empty:
-                    # 'df' has one column: 0 -> the term
                     for term in df[0][:15]:  # Take top 15
                         keyword = str(term)
                         traffic = "Trending Daily"
@@ -190,7 +174,6 @@ class TrendsOracle:
 
         if alerts:
             self._latest_alerts.extend(alerts)
-            # Keep array size manageable
             self._latest_alerts = self._latest_alerts[-50:]
             logger.info("📉 [TRENDS_ORACLE] Processed %d new daily trends.", len(alerts))
 
@@ -200,9 +183,6 @@ class TrendsOracle:
     async def _poll_daily(self):
         await asyncio.to_thread(self._poll_daily_sync)
 
-    # -------------------------------------------------------------
-    # Explicit Queries (e.g. for CLI/Agents)
-    # -------------------------------------------------------------
 
     def fetch_interest_over_time(
         self, keywords: list[str], geo: str = "", timeframe: str = "today 1-m"
@@ -225,9 +205,6 @@ class TrendsOracle:
             base_backoff=self.config.base_backoff,
         )
 
-    # -------------------------------------------------------------
-    # CORTEX Persistence
-    # -------------------------------------------------------------
 
     def _store_and_emit(
         self, keyword: str, traffic: str, geo: str, category: int, trend_type: str
@@ -236,7 +213,6 @@ class TrendsOracle:
         iso_now = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
         geo_str = geo if geo else "Global"
 
-        # 1. Create Fact Payload
         meta = {
             "keyword": keyword,
             "traffic_volume": traffic,
@@ -248,7 +224,6 @@ class TrendsOracle:
 
         content = f"Trending Search [{trend_type}]: {keyword} ({geo_str})"
 
-        # 2. Store Fact Resiliently (if engine available)
         if self.engine and hasattr(self.engine, "store"):
             try:
                 self.engine.store(
@@ -259,9 +234,7 @@ class TrendsOracle:
                 )
             except Exception as e:  # noqa: BLE001
                 logger.error("⚙️ [TRENDS_ORACLE] DB lock o error almacenando fact: %s", e)
-                # We still emit the alert even if storage failed
 
-        # 3. Form Alert
         return TrendsAlert(
             keyword=keyword,
             traffic_volume=traffic,
@@ -285,14 +258,12 @@ def _execute_with_backoff(func, max_retries: int = 3, base_backoff: float = 1.5)
         try:
             return func()
         except RequestException as e:
-            # 429 means Too Many Requests
             if "429" in str(e):
                 delay = (base_backoff**attempt) + random.uniform(0.5, 2.5)
                 logger.warning("⏳ [TRENDS_ORACLE] Rate limit (429). Retrying in %.1fs...", delay)
                 threading.Event().wait(delay)  # noqa: TID251 # Threaded sync backoff
                 last_error = e
             else:
-                # Re-raise other HTTP errors
                 raise e
 
     logger.error("💀 [TRENDS_ORACLE] Failed after %d attempts: %s", max_retries, last_error)

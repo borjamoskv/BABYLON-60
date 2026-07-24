@@ -52,25 +52,20 @@ class AlmaEngine:
 
     async def pulse(self, mock_wisdom: float | None = None) -> SoulState:
         """Calculate the current soul state based on real-time metrics."""
-        # 1. Anxiety: Ledger violations, HTTP 500s, Thalamus filtering
         ledger_violations = metrics._counters.get("cortex_ledger_violations_total", 0)
         http_errors = sum(v for k, v in metrics._counters.items() if 'status="5' in k)
         anxiety_raw = min(1.0, (ledger_violations * 0.15) + (http_errors * 0.1))
 
-        # 2. Energy: Request throughput, background tasks
         requests = metrics._counters.get("cortex_http_requests_total", 0)
         bg_tasks = (
             len(self._memory._background_tasks) if hasattr(self._memory, "_background_tasks") else 0
         )
         energy_raw = min(1.0, (requests / 150.0) + (bg_tasks / 15.0))
 
-        # 3. Wisdom: Facts stored in L2/L3 (Bridges, Decisions)
         wisdom_raw = mock_wisdom if mock_wisdom is not None else await self._calculate_wisdom()
 
-        # 4. Synergy: Success rate, latency
         synergy_raw = self._calculate_synergy()
 
-        # Combine and Smooth
         state = self._apply_smoothing(anxiety_raw, energy_raw, wisdom_raw, synergy_raw)
         self._last_state = state
 
@@ -87,7 +82,6 @@ class AlmaEngine:
     async def _calculate_wisdom(self) -> float:
         """Estimate wisdom based on high-value facts."""
         try:
-            # Connect to DB and count bridges/decisions
             async with connect_async_ctx(str(DB_PATH)) as db:
                 query = (
                     "SELECT COUNT(*) FROM memory_events "

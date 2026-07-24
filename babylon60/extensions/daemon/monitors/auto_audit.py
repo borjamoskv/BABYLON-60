@@ -43,14 +43,12 @@ class AutoAuditMonitor(BaseMonitor[AutoAuditAlert]):
 
         alerts: list[AutoAuditAlert] = []
         try:
-            # Gather db_path dynamically to support test vs prod environments
             db_path = getattr(self._engine, "db_path", None)
             if not db_path or not db_path.exists():
                 return alerts
 
             with babylon60.database.core.connect(db_path) as conn:
                 cursor = conn.cursor()
-                # Filter for active (not soft-deleted) facts
                 cursor.execute(
                     "SELECT COUNT(*) FROM facts WHERE fact_type = 'ghost' AND valid_until IS NULL"
                 )
@@ -61,7 +59,6 @@ class AutoAuditMonitor(BaseMonitor[AutoAuditAlert]):
                 )
                 error_count = cursor.fetchone()[0]
 
-                # Metric 3: Stagnation Detection (Ω₆)
                 cursor.execute(
                     "SELECT COUNT(*) FROM facts WHERE created_at > datetime('now', '-24 hours')"
                 )

@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 """CORTEX LLM Result Cache - Persistent Semantic Deduplication.
 
 Prevents redundant expensive API calls during audits, tests, or iterative runs.
@@ -23,7 +22,6 @@ from babylon60.database.core import connect as db_connect
 
 logger = logging.getLogger("babylon60_extensions.llm.cache")
 
-# Default cache TTL: 24 hours
 _DEFAULT_TTL: int = 86400
 
 
@@ -95,7 +93,6 @@ class ResultCache:
 
     def _make_hash(self, prompt: dict[str, Any]) -> str:
         """Deterministic SHA256 of the prompt components."""
-        # Sort keys to ensure stability
         canonical = json.dumps(prompt, sort_keys=True)
         return cortex_hash(canonical.encode())
 

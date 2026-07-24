@@ -38,7 +38,6 @@ class IdentityBootstrap:
     @staticmethod
     async def bootstrap_genesis(conn: Any, tenant_id: str = "cortex-swarm-0") -> None:
         """Inject the GENESIS block if cortex_ledger is empty."""
-        # Assume cortex_ledger is already created by migration
         async with conn.execute("SELECT COUNT(*) FROM cortex_ledger") as cursor:
             count = (await cursor.fetchone())[0]
 

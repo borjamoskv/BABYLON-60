@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/sovereign/endocrine.py
 """Digital Endocrine system for adaptive Sovereign behavior.
 
 Modulates agent hyperparameters (temperature, response mode) based on virtual
@@ -43,30 +42,24 @@ class DigitalEndocrine:
             metadata = {}
         words: set[str] = set(message.lower().split())
 
-        # Damping factor (Exponential Moving Average)
         alpha = 0.3
 
-        # Stress Response
         if words & {"urgente", "error", "fallo", "crash", "critical", "panic"}:
             state["cortisol"] = min(1.0, state["cortisol"] + (0.45 * alpha))
             state["dopamine"] = max(0.0, state["dopamine"] - (0.25 * alpha))
 
-        # Creative Stimulus
         if words & {"ideas", "brainstorm", "explora", "innovar", "imagina"}:
             state["dopamine"] = min(1.0, state["dopamine"] + (0.4 * alpha))
             state["cortisol"] = max(0.0, state["cortisol"] - (0.2 * alpha))
 
-        # Dopamine/Serotonin Reward
         if words & {"gracias", "bien", "mejorado", "perfecto", "genial"}:
             state["serotonin"] = min(1.0, state["serotonin"] + (0.3 * alpha))
             state["dopamine"] = min(1.0, state["dopamine"] + (0.1 * alpha))
 
-        # Trust/Collaboration (Oxytocin)
         if words & {"colaborar", "equipo", "juntos", "unificado", "nexus"}:
             state["oxytocin"] = min(1.0, state["oxytocin"] + (0.4 * alpha))
             state["serotonin"] = min(1.0, state["serotonin"] + (0.15 * alpha))
 
-        # Threat Detection
         if words & {"inseguro", "desconocido", "riesgo", "bypass", "vulnerabilidad"}:
             state["adrenaline"] = min(1.0, state["adrenaline"] + (0.5 * alpha))
 

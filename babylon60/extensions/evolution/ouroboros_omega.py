@@ -73,15 +73,12 @@ class OuroborosOmega:
         analyzer.loc = len(code.splitlines())
         analyzer.visit(tree)
 
-        # Reverse edges
         called_by: dict[str, set[str]] = {func: set() for func in analyzer.func_nodes}  # type: ignore[misc]
         for caller, callees in analyzer.call_graph.items():
             for callee in callees:
                 if callee in called_by:
                     called_by[callee].add(caller)
 
-        # Identify dead functions (internal only for now, ignoring public API if they have no calls inside the module)
-        # Note: This is simplified, real implementation would scan the whole project for references
         dead_funcs_candidates = {
             f
             for f, callers in called_by.items()
@@ -109,7 +106,6 @@ class OuroborosOmega:
 
         unused_imports = analyzer.imports - analyzer.used_imports
 
-        # Verify unused imports against tests/ directory to prevent systemic necrosis
         if unused_imports:
             import subprocess
 
@@ -118,26 +114,20 @@ class OuroborosOmega:
             if tests_dir.exists():
                 for imp in unused_imports:
                     try:
-                        # Use ripgrep to check if the symbol is used in tests
                         subprocess.check_output(
                             ["rg", "-qw", imp, str(tests_dir)], stderr=subprocess.DEVNULL
                         )
-                        # If rg finds it (exit 0), it's used in tests -> preserve it
                         logger.info("Preserving implicitly used import (Test Dependency): %s", imp)
                     except subprocess.CalledProcessError:
                         verified_unused.add(imp)
                 unused_imports = verified_unused
 
-        # Calculate Entropy & Exergy (Landauer's Razor)
-        # 1 bit of unstructured data ~ k_B T ln(2)
-        # We consider unused imports and dead code as pure entropy generation (dS_gen)
         dS_gen = (len(dead_funcs) * 10.0) + (len(unused_imports) * 5.0)
 
         loc_penalty = max(0, (analyzer.loc - 500) * 0.05)
         complexity_penalty = sum(max(0, c - 15) for c in analyzer.mccabe.values()) * 2.0
         nesting_penalty = sum(max(0, n - 4) for n in analyzer.nesting.values()) * 3.0
 
-        # Total Entropy Score represents structural degradation
         entropy = min(
             100.0,
             loc_penalty + complexity_penalty + dS_gen + nesting_penalty,
@@ -164,11 +154,9 @@ class OuroborosOmega:
         logger.info("Ouroboros-Omega starting atomic cycle on %s", self.target_path.name)
 
         try:
-            # 1. ANALYSIS
             base_diagnosis = await self.diagnose()
             logger.info("Phase 1 [Analysis] Complete. Entropy: %.2f", base_diagnosis.entropy_score)
 
-            # ── Phase 1.5: P0 Vulnerability Extraction (Deepthink-R1 Cluster) ──
             p0_report = None
             if self.p0_scan:
                 logger.info("Phase 1.5 [P0 Scan] Dispatching to Deepthink-R1 cluster...")
@@ -192,7 +180,6 @@ class OuroborosOmega:
 
             tree = ast.parse(self.original_source)
 
-            # 2. EXTRACTION
             is_init_py = self.target_path.name == "__init__.py"
             purger = _DeadCodePurge(
                 base_diagnosis.dead_interfaces,
@@ -202,7 +189,6 @@ class OuroborosOmega:
             ast.fix_missing_locations(mutated_tree)
             logger.info("Phase 2 [Extraction] Complete.")
 
-            # 3. RECONSTRUCTION
             injector = _DocstringInjector()
             mutated_tree = injector.visit(mutated_tree)
             evasion = _EntropyAnnihilator()
@@ -210,7 +196,6 @@ class OuroborosOmega:
             ast.fix_missing_locations(mutated_tree)
             logger.info("Phase 3 [Reconstruction] Complete.")
 
-            # 4. SCALING (Non-destructive)
             if base_diagnosis.blocking_calls:
                 logger.warning(
                     "Phase 4 [Scaling]: Detected blocking I/O: %s", base_diagnosis.blocking_calls
@@ -218,7 +203,6 @@ class OuroborosOmega:
 
             mutated_source = ast.unparse(mutated_tree)
 
-            # 5. VERIFICATION
             try:
                 ast.parse(mutated_source)  # Syntax
                 compile(mutated_source, filename="<ast>", mode="exec")  # Bytecode
@@ -241,13 +225,11 @@ class OuroborosOmega:
 
             logger.info("Phase 5 [Verification] Complete. Entropy delta: %.2f", entropy_delta)
 
-            # ── TERMINAL STATE 4: REMOTE MUTATION (SWARM AST BROADCAST) ──
             if not self.dry_run:
                 try:
                     import os
                     import sys
 
-                    # Path to cortex-core relative to cortex/extensions/evolution
                     cortex_core_path = os.path.abspath(
                         os.path.join(os.path.dirname(__file__), "../../../cortex-core")
                     )
@@ -274,7 +256,6 @@ class OuroborosOmega:
                 except Exception as e:  # noqa: BLE001
                     logger.error("Terminal State 4 dispatch failed: %s", e)
 
-            # COMMIT
             if self.dry_run:
                 return {"status": "DRY_RUN", "delta": entropy_delta, "new_code": mutated_source}
 

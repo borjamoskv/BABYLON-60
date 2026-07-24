@@ -66,7 +66,6 @@ class _DebouncedHandler(FileSystemEventHandler):  # type: ignore[reportGeneralTy
 
         self._last_events[path] = now
 
-        # Classify
         ev_type = (
             event.event_type
             if event.event_type in {"created", "modified", "deleted", "moved"}
@@ -98,7 +97,6 @@ class FileActivityObserver:
     Usage:
         observer = FileActivityObserver("/path/to/workspace")
         observer.start()
-        # ... events flow to the callback
         observer.stop()
 
     If a ``signal_bus`` is provided, file events are also emitted

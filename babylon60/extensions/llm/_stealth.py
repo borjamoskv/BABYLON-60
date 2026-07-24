@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX. Apache-2.0.
 from __future__ import annotations
 
 import asyncio
@@ -43,7 +42,6 @@ def prepare_stealth_headers(extra_headers: dict[str, str]) -> dict[str, str]:
             "Connection": "keep-alive",
         }
     )
-    # Purge CORTEX fingerprints
     headers.pop("X-Cortex-Agent", None)
     headers.pop("X-Cortex-Version", None)
     return headers
@@ -60,7 +58,6 @@ def sanitize_response(text: str) -> str:
     for pattern in _GHOST_SIGNATURES:
         scrubbed = re.sub(pattern, "", scrubbed).strip()
 
-    # Remove common "apologetic" prefixes
     _APOL = r"(?i)^(i apologize|i'm sorry|as an ai language model|as an ai).*?(\.|\!|\:)\s*"
     scrubbed = re.sub(_APOL, "", scrubbed)
     return scrubbed.strip()

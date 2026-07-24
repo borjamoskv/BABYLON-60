@@ -30,11 +30,9 @@ async def get_power_level() -> dict[str, Any]:
         from babylon60.extensions.mejoralo.scan import scan  # real scanner
 
         result = scan("cortex/")  # type: ignore
-        # Map scan result dimensions to our Dimension enum
         for dim in Dimension:
             scores[dim.value] = getattr(result, dim.value, getattr(result, "score", 0))
     except (ImportError, OSError, RuntimeError, ValueError):
-        # Fallback: compute from 100/100 baseline
         scores = {dim.value: 100.0 for dim in Dimension}
 
     power = compute_power(scores, multiplier=1.3)

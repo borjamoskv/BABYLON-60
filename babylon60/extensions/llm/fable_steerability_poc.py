@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Proof of Concept: Steerability & Negative Constraints (Fable 5)
 import asyncio
 import logging
 import os
@@ -8,11 +7,9 @@ from unittest.mock import patch
 
 import httpx
 
-# Ensure CORTEX path is available
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../../..")))
 
 
-# Mock generate_secure_taint_token
 def mock_generate_secure_taint_token(*args, **kwargs):
     return (
         "taint:ed25519:fable-5-orchestrator:steerability_01:2026-06-28T00:00:00Z:nonce123:mock_sig"
@@ -39,21 +36,18 @@ async def capture_fable_payload(*args, **kwargs):
     """Intercepts the payload to verify Steerability structures before hitting the network."""
     request_json = kwargs.get("json", {})
 
-    # Validation 1: Negative constraints injected into the system prompt
     system_prompt = request_json.get("system", "")
     assert "DO NOT USE PYTHON 2" in system_prompt, "System prompt lacks negative constraint!"
 
     # Validation 2: CORTEX-TAINT is present
     assert "[CORTEX-TAINT]" in system_prompt, "Taint marker missing!"
 
-    # Validation 3: tool_choice is forced to 'auto' for steerability
     assert request_json.get("tool_choice", {}).get("type") == "auto", (
         "Steerability force tool_choice missing!"
     )
 
     logging.getLogger(__name__).info("[+] Steerability Assertions Passed (L1 Payload Level).")
 
-    # Return a mocked success
     return httpx.Response(
         200,
         json={

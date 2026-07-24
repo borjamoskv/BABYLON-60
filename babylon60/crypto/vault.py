@@ -38,7 +38,6 @@ class Vault:
             self._keys[1] = key
             return
 
-        # Load multiple keys if available (format: 1:base64,2:base64)
         env_keys = os.environ.get("CORTEX_VAULT_KEYS")
         if env_keys:
             for part in env_keys.split(","):
@@ -56,7 +55,6 @@ class Vault:
             if self._keys:
                 return
 
-        # Fallback to single key
         env_key = os.environ.get("CORTEX_VAULT_KEY")
         if not env_key:
             return
@@ -81,7 +79,6 @@ class Vault:
         aad = context_hash.encode("utf-8") if context_hash else None
         ciphertext = aesgcm.encrypt(nonce, data.encode("utf-8"), aad)
 
-        # Format: base64(version_byte + nonce + ciphertext)
         version_byte = bytes([self._primary_version])
         return base64.b64encode(version_byte + nonce + ciphertext).decode("utf-8")
 
@@ -94,7 +91,6 @@ class Vault:
             raw = base64.b64decode(encrypted_data)
             version = raw[0]
 
-            # Try new versioned + AAD format first
             if version in self._keys and len(raw) > 13:
                 nonce = raw[1:13]
                 ciphertext = raw[13:]
@@ -107,7 +103,6 @@ class Vault:
                 except InvalidTag:
                     pass  # Fallthrough to try legacy
 
-            # Try legacy format (no version byte, no AAD)
             nonce = raw[:12]
             ciphertext = raw[12:]
             key_v1 = self._keys.get(1)

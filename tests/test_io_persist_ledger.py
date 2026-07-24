@@ -1,5 +1,3 @@
-# test_io_persist_ledger.py
-# Prefix: test_ (empirical falsification for the persistence layer)
 
 import pytest
 from core_graph_ledger import GraphLedger
@@ -14,7 +12,6 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     """
     db_file = str(tmp_path) + "/test_ledger.db"
 
-    # Phase 1: Build in-memory DAG and persist
     ledger = GraphLedger()
     n1 = ledger.mut_append_node(
         parent_id=ledger.genesis_id, claim="Genesis node", payload_hash=hash_evidence("payload_genesis")
@@ -32,17 +29,14 @@ def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     assert persist.io_node_count() == 3
     persist.close()
 
-    # Phase 2: Destroy RAM state completely
     del ledger
     del persist
 
-    # Phase 3: Reload from disk into a fresh GraphLedger
     persist2 = LedgerPersist(db_file)
     restored = persist2.io_load_ledger()
 
     assert len(restored.crdt.state) == 3
 
-    # Verify path integrity: trace from n3 back to genesis
     path = restored.core_get_path(n3.node_id)
     assert len(path) == 3
     assert path[0].node_id == n1.node_id
@@ -85,7 +79,6 @@ def test_orphan_detection(tmp_path: object) -> None:
             payload_hash TEXT NOT NULL
         )
     """)
-    # Insert a node whose parent doesn't exist and isn't genesis
     fake_parent = "f" * 64
     conn_raw.execute("INSERT INTO dag_nodes VALUES (?, ?, ?, ?)", ("a" * 64, fake_parent, "orphan", "b" * 64))
     conn_raw.commit()

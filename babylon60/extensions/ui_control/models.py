@@ -5,7 +5,6 @@ from dataclasses import dataclass, field
 logger = logging.getLogger("babylon60_extensions.ui_control")
 
 
-# ─── Exceptions ──────────────────────────────────────────────────
 
 
 class UIControlError(Exception):
@@ -33,7 +32,6 @@ class UITimeoutError(UIControlError):
     """When an element or condition is not met within the allotted time."""
 
 
-# ─── Data Models ─────────────────────────────────────────────────
 
 
 @dataclass
@@ -85,7 +83,6 @@ class KeyCombo:
 
     def to_applescript(self) -> str:
         """Converts to AppleScript keystroke fragment."""
-        # Special keys use 'key code' instead of 'keystroke'
         special = SPECIAL_KEY_MAP.get(self.key)
         if special is not None:
             action = f"key code {special}"
@@ -113,7 +110,6 @@ class WindowInfo:
     index: int = 1
 
 
-# ─── Key Maps ────────────────────────────────────────────────────
 
 SPECIAL_KEY_MAP: dict[str, int] = {
     "return": 36,

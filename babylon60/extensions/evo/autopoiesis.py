@@ -44,7 +44,6 @@ class AutopoiesisEngine:
         func_name = func.__name__
 
         def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
-            # KAIROS-Ω: Medición de pureza termodinámica (CPU-bound, purgado I/O noise).
             start_t = time.clock_gettime_ns(time.CLOCK_THREAD_CPUTIME_ID)
             try:
                 result = func(*args, **kwargs)
@@ -71,7 +70,6 @@ class AutopoiesisEngine:
             self._history[func_name]["failures"] += 1
             ENDOCRINE.pulse(HormoneType.CORTISOL, 0.05)
         else:
-            # Reward stability
             if latency < self.observation_window_ms:
                 ENDOCRINE.pulse(HormoneType.NEURAL_GROWTH, 0.01)
                 ENDOCRINE.pulse(HormoneType.CORTISOL, -0.01)
@@ -85,7 +83,6 @@ class AutopoiesisEngine:
         if len(lats) < 10:
             return False
 
-        # If the last 5 latencies are consistently > 2x the historical average
         lats_list = list(lats)
         historical_avg = sum(lats_list[:-5]) / max(len(lats_list[:-5]), 1)
         recent_avg = sum(lats_list[-5:]) / 5.0
@@ -122,8 +119,6 @@ class AutopoiesisEngine:
                 node_count,
             )
 
-            # The Cooldown (Anti-Death Spiral): Clear the rapid latencies
-            # to prevent infinite recursion of Cortisol in the same process.
             if func_name in self._history:
                 self._history[func_name]["latencies"].clear()
 
@@ -137,10 +132,8 @@ class AutopoiesisEngine:
         """
         logger.info("[AutopoiesisEngine] mutate() triggered — target=%r", target)
         try:
-            # Delegate to the internal compiler if available
             if hasattr(self, "_compiler") and self._compiler:  # type: ignore
                 return self._compiler.run_cycle(target=target)  # type: ignore
-            # Fallback: mark target for next observe_and_mutate pass
             self._pending_targets = getattr(self, "_pending_targets", [])
             self._pending_targets.append(target)
             return {"status": "queued", "target": target}

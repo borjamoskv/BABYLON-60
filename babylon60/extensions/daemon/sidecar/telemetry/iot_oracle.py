@@ -37,7 +37,6 @@ class IoTOracle:
         self.poll_interval = poll_interval
         self._running = False
         self.enable_simulated_sensors = enable_simulated_sensors
-        # Simulates R-Value dropping in an Earthship MMX or a Robocar friction event.
         self._sim_temp = 22.0
 
     async def start(self) -> None:
@@ -62,7 +61,6 @@ class IoTOracle:
         if not self.enable_simulated_sensors:
             return  # In production, this would poll over MQTT / WebSocket to NXP
 
-        # Simulated Earthship or Robocar thermal friction
         self._sim_temp -= 0.1  # Entropy drop
 
         if self._sim_temp < 18.0:
@@ -89,7 +87,6 @@ class IoTOracle:
         )
 
         try:
-            # We must handle both sync and async engine types depending on how sidecars are initialized
             if hasattr(self.engine, "store") and asyncio.iscoroutinefunction(self.engine.store):
                 await self.engine.store(
                     project="earthship_mmx",

@@ -47,19 +47,15 @@ class GenesisValidator:
         """
         errors: list[str] = []
 
-        # 1. Check all expected files exist
         file_errors = self._check_files_exist(created_files)
         errors.extend(file_errors)
 
-        # 2. Check Python syntax validity
         syntax_errors = self._check_python_syntax(created_files)
         errors.extend(syntax_errors)
 
-        # 3. Check __init__.py exists in the target
         init_errors = self._check_init_exists(spec, created_files, base_dir)
         errors.extend(init_errors)
 
-        # 4. Check component count matches expectation
         count_errors = self._check_component_count(spec, created_files)
         errors.extend(count_errors)
 
@@ -127,11 +123,8 @@ class GenesisValidator:
         errors: list[str] = []
         non_test_components = [c for c in spec.components if c.component_type != "test"]
 
-        # For non-module types (skill, agent, workflow) the generated files
-        # may be .md, .yaml, etc. - count all files with system name in path.
         system_files = [f for f in files if spec.name in f]
 
-        # We expect at least 1 file per non-test component + __init__.py
         min_expected = len(non_test_components) + 1  # +1 for __init__.py
 
         if len(system_files) < min_expected:

@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Metacognitive Boundary Layer.
 
@@ -41,19 +37,14 @@ from babylon60.memory.metamemory import MemoryCard, MetaJudgment, Verdict
 
 logger = logging.getLogger("babylon60_extensions.llm.metacognitive_boundary")
 
-# ─── Constants ────────────────────────────────────────────────────────
 
-# Confidence threshold below which we hard-block an overconfident response
 _ABSTAIN_CONFIDENCE_CAP: float = 0.2
 
-# Max characters of epistemic preamble injected into the system prompt
 _MAX_PREAMBLE_CHARS: int = 1200
 
-# Minimum verdict confidence to allow a RESPOND verdict through
 _RESPOND_CONFIDENCE_FLOOR: float = 0.5
 
 
-# ─── Calibration Signal ───────────────────────────────────────────────
 
 
 class EpistemicSignal(str, Enum):
@@ -65,7 +56,6 @@ class EpistemicSignal(str, Enum):
     TOT = "tip_of_tongue"  # FOK high but retrieval blocked
 
 
-# ─── Metacognitive Context ────────────────────────────────────────────
 
 
 @dataclass(frozen=True)
@@ -114,7 +104,6 @@ class MetacognitiveContext:
         ]
 
 
-# ─── Context Factory ─────────────────────────────────────────────────
 
 
 def build_metacognitive_context(
@@ -154,7 +143,6 @@ def build_metacognitive_context(
     )
 
 
-# ─── Preamble Generator ──────────────────────────────────────────────
 
 
 def build_epistemic_preamble(ctx: MetacognitiveContext) -> str:
@@ -226,7 +214,6 @@ def build_epistemic_preamble(ctx: MetacognitiveContext) -> str:
     else:
         lines.append("Memory evidence: NONE - no engrams retrieved for this query.")
 
-    # Verdict-specific instruction
     if ctx.verdict == Verdict.RESPOND:
         lines.append(
             "INSTRUCTION: Memory evidence is sufficient. Respond with calibrated confidence."
@@ -245,11 +232,9 @@ def build_epistemic_preamble(ctx: MetacognitiveContext) -> str:
     lines.append("--- [END EPISTEMIC STATE] ---")
 
     preamble = "\n".join(lines)
-    # Hard cap - Ω₂: entropic asymmetry
     return preamble[:_MAX_PREAMBLE_CHARS]
 
 
-# ─── System Prompt Injector ──────────────────────────────────────────
 
 
 def inject_epistemic_preamble(
@@ -268,7 +253,6 @@ def inject_epistemic_preamble(
     return preamble
 
 
-# ─── Retrieval Plan Enforcer ─────────────────────────────────────────
 
 
 RETRIEVAL_PLAN_SUFFIX = """
@@ -293,7 +277,6 @@ def append_retrieval_plan_request(user_message: str) -> str:
     return f"{user_message}{RETRIEVAL_PLAN_SUFFIX}"
 
 
-# ─── Consistency Verifier ────────────────────────────────────────────
 
 
 def verify_retrieval_plan_declared(response: str) -> bool:
@@ -368,7 +351,6 @@ def check_confidence_consistency(
     return consistent
 
 
-# ─── Public API ──────────────────────────────────────────────────────
 
 __all__ = [
     "EpistemicSignal",

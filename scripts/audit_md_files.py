@@ -24,10 +24,8 @@ def audit_file(file_path: Path) -> Dict[str, Any]:
     lines = content.splitlines()
     size_bytes = file_path.stat().st_size
     
-    # 1. Heading check
     h1_count = len([line for line in lines if line.startswith("# ")])
     
-    # 2. Internal link validation
     link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
     broken_links = []
     links_found = 0
@@ -47,12 +45,10 @@ def audit_file(file_path: Path) -> Dict[str, Any]:
         if not target_path.exists():
             broken_links.append((link_target, clean_target))
             
-    # 3. Provenance & Invariant Check
     has_c5 = "C5-REAL" in content or "C5" in content
     has_cortex_taint = "CORTEX-TAINT" in content
     has_inv = "INV_" in content or "Ω" in content
     
-    # 4. Exergy signal estimation
     word_count = len(re.findall(r'\w+', content))
     code_block_count = len(re.findall(r'```', content)) // 2
     

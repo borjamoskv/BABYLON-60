@@ -16,60 +16,40 @@ struct AppState {
     ledger: Mutex<CortexLedger>,
 }
 
-// ═══════════════════════════════════════════════════════
-//  LEDGER IPC
-// ═══════════════════════════════════════════════════════
 
-#[tauri::command]
 fn get_ledger_events(state: State<AppState>, limit: u32) -> Result<Vec<CortexEvent>, String> {
     let ledger = state.ledger.lock().unwrap();
     ledger.get_events(limit).map_err(|e| e.to_string())
 }
 
-#[tauri::command]
 fn append_ledger_event(state: State<AppState>, event_type: String, payload: Value) -> Result<CortexEvent, String> {
     let ledger = state.ledger.lock().unwrap();
     ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
 }
 
-// ═══════════════════════════════════════════════════════
-//  INFERENCE IPC (LOCAL SILICON / MLX / OLLAMA)
-// ═══════════════════════════════════════════════════════
 
-#[tauri::command]
 fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
     run_local_inference(&prompt, model, base_url, temperature)
 }
 
-#[tauri::command]
 fn get_local_inference_status() -> Result<Value, String> {
     check_local_status()
 }
 
-// ═══════════════════════════════════════════════════════
-//  KINETIC BIND RAW — Ontology IPC Bridge
-// ═══════════════════════════════════════════════════════
 
-#[tauri::command]
 fn list_ontology_vectors() -> Vec<VectorEntry> {
     kernel::list_vectors()
 }
 
-#[tauri::command]
 fn dispatch_vector(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
     kernel::dispatch_3d(domain, primitive, modifier)
 }
 
-// ═══════════════════════════════════════════════════════
-//  BOOT SEQUENCE
-// ═══════════════════════════════════════════════════════
 
-#[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     let db_path = "cortex.db";
     let ledger_instance = CortexLedger::new(db_path).expect("Failed to initialize CortexLedger");
 
-    // [ AXIOMA: NOMENCLATURE_IS_STRUCTURE ] — init_kernel boots 3D semantic + 4D tensor
     kernel::init_kernel();
 
     let ctx_db = context::init_db().expect("Failed to initialize cognitive state db");

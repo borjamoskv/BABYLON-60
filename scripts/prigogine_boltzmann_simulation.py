@@ -6,20 +6,16 @@ from typing import Any
 
 
 def run_boltzmann_entropy_simulation(steps: int = 200, num_particles: int = 1000) -> list[dict[str, Any]]:
-    # Grid 10x10 (100 cells)
     grid_size = 10
-    # Particles start concentrated in cell (0,0) - low entropy
     particles = [[0, 0] for _ in range(num_particles)]
 
     history = []
 
     for step in range(steps):
-        # Count particles per cell
         counts: dict[tuple[int, int], int] = {}
         for x, y in particles:
             counts[(x, y)] = counts.get((x, y), 0) + 1
 
-        # Calculate entropy S = -sum(p_i * ln(p_i))
         entropy = 0.0
         for pos, count in counts.items():
             p = count / num_particles
@@ -27,7 +23,6 @@ def run_boltzmann_entropy_simulation(steps: int = 200, num_particles: int = 1000
 
         history.append({"step": step, "entropy": round(entropy, 5), "unique_cells_occupied": len(counts)})
 
-        # Move particles randomly (periodic boundary conditions)
         for i in range(num_particles):
             dx, dy = random.choice([(0, 1), (0, -1), (1, 0), (-1, 0), (0, 0)])
             particles[i][0] = (particles[i][0] + dx) % grid_size
@@ -39,7 +34,6 @@ def run_boltzmann_entropy_simulation(steps: int = 200, num_particles: int = 1000
 def run_prigogine_brusselator(
     steps: int = 2000, dt: float = 0.01, a: float = 1.0, b: float = 3.0
 ) -> list[dict[str, Any]]:
-    # Initial state off-equilibrium
     x = 1.5
     y = 2.0
 
@@ -49,9 +43,6 @@ def run_prigogine_brusselator(
         if step % 10 == 0:
             history.append({"step": step, "x": round(x, 5), "y": round(y, 5), "r": round(math.sqrt(x**2 + y**2), 5)})
 
-        # Brusselator equations:
-        # dx/dt = a + x^2 * y - b * x - x
-        # dy/dt = b * x - x^2 * y
         dx = (a + (x**2) * y - b * x - x) * dt
         dy = (b * x - (x**2) * y) * dt
 
@@ -64,9 +55,7 @@ def run_prigogine_brusselator(
 def main():  # type: ignore
     random.seed(42)  # Determinism anchor
 
-    # Run Boltzmann
     b_history = run_boltzmann_entropy_simulation()
-    # Run Prigogine
     p_history = run_prigogine_brusselator()
 
     results = {
@@ -77,7 +66,6 @@ def main():  # type: ignore
         "brusselator_stable_orbit_detected": len(set(round(h["x"], 1) for h in p_history[-50:])) <= 5,
     }
 
-    # Compute SHA3-256 of results
     payload = json.dumps(results, sort_keys=True)
     results_hash = hashlib.sha3_256(payload.encode()).hexdigest()
 

@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# cortex/evolution/free_energy.py
 """Variational Free Energy Monitor - Fristonian Formalization of CORTEX.
 
 Phase 3 cornerstone: makes explicit what the 8 improvement strategies
@@ -46,11 +45,6 @@ from babylon60.extensions.evolution.cortex_metrics import CortexMetrics, DomainM
 logger = logging.getLogger(__name__)
 
 
-# ── Homeostatic Set-Points (Prior Preferences) ────────────────
-# These define the "preferred state" p(θ) - the attractor basin
-# the domain seeks to maintain. A sovereign-grade agent has:
-#   error_count → 0, ghost_count → 0, health_score → 1.0,
-#   bridge_count → high, decision_count → high
 
 _PRIOR = DomainMetrics()  # Tonic baseline: all zeros, health=0.5
 
@@ -98,7 +92,6 @@ class StrategyEFE:
         }
 
 
-# ── Core Computation ──────────────────────────────────────────
 
 
 def _kl_bernoulli(q: float, p: float) -> float:
@@ -127,16 +120,12 @@ def compute_complexity(metrics: DomainMetrics) -> float:
     Higher complexity = the domain's state has diverged further from
     the tonic baseline, requiring more "cognitive effort" to maintain.
     """
-    # Health channel: KL divergence between observed and prior health
     health_kl = _kl_bernoulli(metrics.health_score, _PRIOR.health_score)
 
-    # Error pressure: normalized by diminishing returns (log scale)
     error_pressure = math.log1p(metrics.error_count) * 0.8
 
-    # Ghost pressure: debt accumulation
     ghost_pressure = math.log1p(metrics.ghost_count) * 0.5
 
-    # Bridge relief: cross-domain integration reduces complexity
     bridge_relief = min(1.0, metrics.bridge_count * 0.1)
 
     complexity = health_kl + error_pressure + ghost_pressure - bridge_relief
@@ -150,13 +139,10 @@ def compute_accuracy(metrics: DomainMetrics) -> float:
     and decision success rate. Higher accuracy means the domain's
     model is doing a good job predicting what happens.
     """
-    # fitness_delta ∈ [-5, +5] → rescale to [0, 1]
     delta_norm = (metrics.fitness_delta + 5.0) / 10.0
 
-    # decision_success_rate ∈ [0, 1] - already normalized
     dsr = metrics.decision_success_rate
 
-    # Weighted combination: 60% delta signal, 40% crystallized knowledge
     accuracy = 0.6 * delta_norm + 0.4 * dsr
     return accuracy
 
@@ -168,13 +154,10 @@ def compute_surprise(metrics: DomainMetrics) -> float:
     The agent's goal is to minimize surprise by acting on the world
     (active inference) or updating its model (perceptual inference).
     """
-    # Inverse health is surprise → perfect health = 0 surprise
     health_surprise = -math.log(max(1e-8, metrics.health_score))
 
-    # Error surprise: each error is an unexpected observation
     error_surprise = metrics.error_count * 0.3
 
-    # Ghost surprise: each ghost is unresolved uncertainty
     ghost_surprise = metrics.ghost_count * 0.2
 
     return health_surprise + error_surprise + ghost_surprise
@@ -203,7 +186,6 @@ def compute_free_energy(metrics: DomainMetrics) -> FreeEnergyState:
     )
 
 
-# ── Strategy Selection via Expected Free Energy ───────────────
 
 
 def compute_strategy_efe(
@@ -222,13 +204,9 @@ def compute_strategy_efe(
 
     Lower G = better strategy (we minimize expected free energy).
     """
-    # Pragmatic value: expected fitness improvement relative to
-    # how far from sovereign-grade we are
     sovereign_gap = max(0.01, 1.0 - metrics.health_score)
     pragmatic = mutation_delta * sovereign_gap
 
-    # Epistemic value: strategies that fire in uncertain domains
-    # (high ghost_count, low decision_count) have higher info gain
     uncertainty = math.log1p(metrics.ghost_count + 1) / (
         math.log1p(metrics.decision_count + 1) + 1e-8
     )
@@ -244,7 +222,6 @@ def compute_strategy_efe(
     )
 
 
-# ── FreeEnergyMonitor - Orchestration Layer ───────────────────
 
 
 class FreeEnergyMonitor:
@@ -272,7 +249,6 @@ class FreeEnergyMonitor:
         for domain, metrics in all_metrics.items():
             states[domain] = compute_free_energy(metrics)
 
-        # Record history for trend analysis
         self._history.append(states)
         if len(self._history) > self._max_history:
             self._history = self._history[-self._max_history :]

@@ -1,6 +1,4 @@
 // C5-REAL: LOCAL INFERENCE MOTOR (TRANSFORMERS / MLX / LLAMA.CPP)
-// =================================================================================
-// SYS_ID: MOSKV-1 APEX ULTRATHINK P0 (Tauri v2 / Rust Agnostic Inference Layer)
 // REALITY_LEVEL: C5-REAL (Zero-Network Policy / Local Silicon / WAL Ledger Audit)
 // [CORTEX-TAINT:borjamoskv:inference_motor:2026-07-18T05:00:00Z]
 
@@ -11,14 +9,12 @@ use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use serde::{Deserialize, Serialize};
 use crate::void::VoidLedger;
 
-#[derive(Serialize, Debug)]
 struct OllamaRequest {
     model: String,
     prompt: String,
     stream: bool,
 }
 
-#[derive(Deserialize, Debug)]
 struct OllamaResponse {
     response: Option<String>,
     error: Option<String>,
@@ -26,7 +22,6 @@ struct OllamaResponse {
     eval_duration: Option<u64>,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct InferenceAuditRecord {
     pub status: String,
     pub model_used: String,
@@ -55,12 +50,10 @@ impl LocalInferenceMotor {
         }
     }
 
-    /// Execute local inference via zero-network raw TCP socket to localhost
     pub async fn execute_inference(&self, prompt: &str, requested_model: Option<&str>) -> Result<InferenceAuditRecord, String> {
         let primary_model = requested_model.unwrap_or(&self.default_model);
         let _start_time = Instant::now();
 
-        // Try primary model first
         match self.send_raw_http_post(primary_model, prompt).await {
             Ok(record) => {
                 let _ = self.audit_to_ledger(&record, prompt);
@@ -68,7 +61,6 @@ impl LocalInferenceMotor {
             }
             Err(primary_err) => {
                 println!("⚠️ [INFERENCE_MOTOR] Fallo en modelo primario ({}): {}. Activando CascadeRouter fallback a {}...", primary_model, primary_err, self.fallback_model);
-                // Circuit Breaker / Graceful Degradation to fallback local model
                 match self.send_raw_http_post(&self.fallback_model, prompt).await {
                     Ok(mut fallback_record) => {
                         fallback_record.status = format!("C5-REAL_FALLBACK_FROM_{}", primary_model);
@@ -118,7 +110,6 @@ impl LocalInferenceMotor {
             &resp_str
         };
 
-        // Check HTTP status code
         if !resp_str.starts_with("HTTP/1.1 200") && !resp_str.starts_with("HTTP/1.0 200") {
             return Err(format!("HTTP Error response: {}", body_str.trim().chars().take(200).collect::<String>()));
         }
@@ -157,8 +148,6 @@ impl LocalInferenceMotor {
     }
 }
 
-// Tauri commands exposed to frontend / IPC
-#[tauri::command]
 pub async fn infer_local_command(
     prompt: String,
     model_type: Option<String>,
@@ -168,7 +157,6 @@ pub async fn infer_local_command(
     motor.execute_inference(&prompt, model_type.as_deref()).await
 }
 
-#[tauri::command]
 pub async fn check_inference_health_command(
     state: tauri::State<'_, crate::Apex>,
 ) -> Result<String, String> {
@@ -189,13 +177,11 @@ pub async fn check_inference_health_command(
     }
 }
 
-#[cfg(test)]
 mod tests {
     use super::*;
     use std::sync::Arc;
     use crate::void::VoidLedger;
 
-    #[test]
     fn test_local_inference_motor_init() {
         if let Ok(db) = VoidLedger::init() {
             let motor = LocalInferenceMotor::new(Arc::new(db));

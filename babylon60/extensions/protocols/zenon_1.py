@@ -30,13 +30,10 @@ class CognitiveIteration:
     iteration_id: int
     decision_candidate: str
 
-    # 1. Valor (V): Certeza, información nueva útil.
     value_produced: float
 
-    # 2. Coste (C): Tokens, tiempo de CPU, complejidad termodinámica de la decisión.
     computational_cost: float
 
-    # 3. Entropía (S): Índice de confusión o discrepancia semántica en el texto generado.
     entropy_score: float
 
     @property
@@ -87,21 +84,15 @@ class ZenonDetector:
             iteration.entropy_score,
         )
 
-        # Necesitamos algo de historia para derivar el ΔV
         if len(self.history) < 2:
             return None
 
-        # ==========================================
-        # SIGNAL 1: CONVERGENCIA DE DELTA VALOR (S1)
-        # ==========================================
-        # Verificamos las últimas 'N' iteraciones para ver si el ΔV cayó por debajo de ε
         if len(self.history) > self.convergence_n:
             recent_deltas = [
                 self.history[i].value_produced - self.history[i - 1].value_produced
                 for i in range(-self.convergence_n, 0)
             ]
 
-            # Si todas las iteraciones recientes tuvieron una mejora marginal insignificante
             if all(d_v < self.epsilon for d_v in recent_deltas):
                 logger.warning(
                     "[ZENÓN-1] ALERTA S1: Convergencia de V detectada. ΔV %.4f < %s.",
@@ -116,16 +107,11 @@ class ZenonDetector:
                     message="El agua dejó de calentarse, pero el fuego sigue encendido (Convergencia ΔV).",
                 )
 
-        # ==========================================
-        # SIGNAL 2: INVERSIÓN DEL RATIO DE ZENÓN (S2)
-        # ==========================================
-        # Gastar más energía evaluando que el valor resultante derivado
         if iteration.zeno_ratio > 1.0:
             logger.warning(
                 "[ZENÓN-1] ALERTA S2: Coste computacional supera el valor semántico. Ratio Z = %.2f.",
                 iteration.zeno_ratio,
             )
-            # Se permite 1 anomalía, pero si la decadencia es estricta, colapsa
             return ZenoExhaustionException(
                 signal=ZenonSignal.ZENO_RATIO_INVERTED,
                 iteration_k=iteration.iteration_id,
@@ -134,14 +120,9 @@ class ZenonDetector:
                 message="Pensar está siendo energéticamente más costoso que el valor de la decisión generada.",
             )
 
-        # ==========================================
-        # SIGNAL 3: INVERSIÓN ENTRÓPICA (S3)
-        # ==========================================
-        # Más reflexión = Más confusión.
         if len(self.history) > self.max_entropy_inversions:
             inversion_count = 0
             for i in range(-self.max_entropy_inversions, 0):
-                # Entropía subiendo = Empeoramiento. (Debería bajar o ser constante).
                 if self.history[i].entropy_score > self.history[i - 1].entropy_score:
                     inversion_count += 1
 
@@ -177,24 +158,18 @@ class ZenonColapseEngine:
             "[ZENÓN-1 Colapse] FASE 1: FREEZE ejecutada. Recursión congelada en iteración K."
         )
 
-        # FASE 2: SELECT -> Buscar qué iteración maximizó el Valor Absoluto asumiendo ratios estables.
         best_candidate = max(k_history, key=lambda x: (x.value_produced, -x.entropy_score))
         logger.info(
             "[ZENÓN-1 Colapse] FASE 2: SELECT completada. Seleccionada iteración %s.",
             best_candidate.iteration_id,
         )
 
-        # FASE 3: EXECUTE / LEARN se devuelven al Orquestador Principal o Motor Legión
         return best_candidate
 
 
-# =========================================================================
-# Ejemplo de uso Termodinámico en un Loop Meta-Cognitivo
-# =========================================================================
 if __name__ == "__main__":
     detector = ZenonDetector()
 
-    # Simulando reflexiones de un enjambre (V: Value, C: Cost, S: Entropy)
     simulated_loop = [
         CognitiveIteration(
             1, "Opcion A - Borrador", value_produced=10.0, computational_cost=1.5, entropy_score=0.9
@@ -232,7 +207,6 @@ if __name__ == "__main__":
             logging.getLogger(__name__).info(f"\\n🚨 COLAPSO ZENÓN (Señal: {exhaustion_error.signal.name})")
             logging.getLogger(__name__).info(f"Razón: {exhaustion_error.message}")
 
-            # Forzar colapso
             best_decision = ZenonColapseEngine.colapse(detector)
             logging.getLogger(__name__).info(
                 f"🎯 EJECUCIÓN SOBERANA: Procediendo implacablemente con output de la Iteración {best_decision.iteration_id}"

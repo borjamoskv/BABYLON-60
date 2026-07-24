@@ -202,7 +202,6 @@ def _run_delta_testing(
     base_dir = path_obj.parent if path_obj.is_file() else path_obj
     pytest_cmd = [sys.executable, "-m", "pytest"]
 
-    # Deduce specific tests by searching tests/ for the file stem
     stem = Path(top_file_rel).stem
     tests_dir = base_dir / "tests"
     matched_tests = []

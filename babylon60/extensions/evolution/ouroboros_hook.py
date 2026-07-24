@@ -8,7 +8,6 @@ Tripartite Memory architecture (L1/L2/L3).
 
 from typing import Any
 
-# Default 7 days
 DEFAULT_MAX_AGE_SECONDS = 7 * 24 * 3600
 
 
@@ -19,7 +18,6 @@ async def get_dynamic_threshold(conn: Any, project: str) -> int:
     has overridden the compaction threshold due to high entropy.
     """
     try:
-        # Check if there is an Ouroboros config fact overriding the threshold
         cursor = await conn.execute(
             """
             SELECT content FROM facts

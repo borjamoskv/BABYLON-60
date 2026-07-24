@@ -14,14 +14,10 @@ logger = logging.getLogger("CORTEX.AUTODIDACT.FETCHERS")
 
 ERR_PREFIX = "[ERROR]"
 
-# ==============================================================================
-# 0. CONFIGURACIÓN DURA (Zero-Trust)
-# ==============================================================================
 
 EXA_API_KEY = os.getenv("EXA_API_KEY")
 ASSEMBLYAI_API_KEY = os.getenv("ASSEMBLYAI_API_KEY")
 
-# Timeouts and Retries
 TIMEOUT_JINA = 8.0
 
 TIMEOUT_EXA = 10.0
@@ -31,15 +27,11 @@ TIMEOUT_GIDATU = 45.0
 RETRIES_STANDARD = 2
 RETRIES_QUICK = 1
 
-# Defaults
 DEFAULT_CRAWL_DEPTH = 2
 DEFAULT_CRAWL_LIMIT = 10
 DEFAULT_SEARCH_RESULTS = 5
 
 
-# ==============================================================================
-# 1. JINA READER (O(1) Markdown Extraction) -> Tier 🔵
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_JINA, max_retries=RETRIES_QUICK)
 async def fetch_jina_markdown(url: str) -> str:
     """Extrae Markdown de una URL directa."""
@@ -51,14 +43,8 @@ async def fetch_jina_markdown(url: str) -> str:
         return response.text
 
 
-# ==============================================================================
-# 2. (REMOVED - Firecrawl purged. Jina + Playwright cover all cases.)
-# ==============================================================================
 
 
-# ==============================================================================
-# 3. EXA.AI SEARCH (Neural Search) -> Tier 🟢
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_EXA, max_retries=RETRIES_STANDARD)
 async def fetch_exa_search(query: str, num_results: int = DEFAULT_SEARCH_RESULTS) -> dict[str, Any]:
     """Búsqueda neuronal."""
@@ -84,9 +70,6 @@ async def fetch_exa_search(query: str, num_results: int = DEFAULT_SEARCH_RESULTS
         return response.json()
 
 
-# ==============================================================================
-# 4. ASSEMBLY AI (El Vector Acústico) -> Tier 🟡
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_ASSEMBLY, max_retries=RETRIES_STANDARD)
 async def fetch_assemblyai_transcript(audio_url: str) -> str:
     """Ingesta acústica."""
@@ -103,9 +86,6 @@ async def fetch_assemblyai_transcript(audio_url: str) -> str:
         return f"[TRANSCRIPT_ID_PENDING]: {transcript_id}"
 
 
-# ==============================================================================
-# 5. GIDATU (Physical Layer Bypass) -> Tier 🔴
-# ==============================================================================
 @sovereign_circuit_breaker(timeout=TIMEOUT_GIDATU, max_retries=RETRIES_QUICK)
 async def fetch_gidatu_browser(url: str) -> str:
     """Línea de defensa visual."""
@@ -116,7 +96,6 @@ async def fetch_gidatu_browser(url: str) -> str:
 def _unwrap(res: Any) -> Any:
     """Pulmones envuelve el resultado en un dict con 'status' y 'data'. Lo desempaquetamos."""
     if isinstance(res, dict) and "status" in res and "data" in res:
-        # Es un wrapper de éxito de Circuit Breaker
         if res["status"] == "success":
             return res.get("data")
     if isinstance(res, dict) and res.get("status") == "queued":
@@ -124,14 +103,10 @@ def _unwrap(res: Any) -> Any:
     return res
 
 
-# ==============================================================================
-# ⚡ EL PATRÓN ORQUESTADOR (Orchestrator Pattern)
-# ==============================================================================
 async def execute_cognitive_acquisition(intent_type: str, target: str) -> Any:
     """Extrae, asimila y retorna el Cristal Cognitivo (Markdown)."""
     try:
         parsed = urlparse(target)
-        # Handle local files directly
         if parsed.scheme == "file":
             file_path = Path(parsed.path)
             if not file_path.exists():

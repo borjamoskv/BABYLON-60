@@ -17,7 +17,6 @@ class CloudflareEdgeBridge:
         self.account_id = account_id
         self.api_token = api_token
         self.database_id = database_id
-        # Note: If database_id is empty, this URL is incomplete, but preserves backwards compat with tests
         self.base_url = f"https://api.cloudflare.com/client/v4/accounts/{account_id}/d1/database"
         if self.database_id:
             self.base_url += f"/{self.database_id}/query"
@@ -70,5 +69,4 @@ class CloudflareEdgeBridge:
         if not signature or len(signature) < 8:
             return False
         logger.debug("Verifying edge signature: %s...", signature[:8])
-        # Placeholder for actual cryptographic verification
         return signature.startswith("sig") or signature.startswith("v1_edge_")

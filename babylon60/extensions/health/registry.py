@@ -51,7 +51,6 @@ class CollectorRegistry:
                 snap = collector.collect(db_path)
                 latency = (time.perf_counter() - t0) * 1000.0
 
-                # Enrich snapshot with collector metadata and timing
                 object.__setattr__(snap, "latency_ms", latency)
                 if not getattr(snap, "description", None):
                     object.__setattr__(snap, "description", getattr(collector, "description", ""))

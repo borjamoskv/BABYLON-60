@@ -74,7 +74,6 @@ class ZKOrtexVerifier:
             proof: La ZKMembershipProof generada por el Prover.
             element_to_verify: El elemento cuya membresía se verifica.
         """
-        # Si tenemos un root pinned, verifica que el proof usa el mismo root
         if self._expected_root and proof.root != self._expected_root:
             return VerificationResult(
                 is_valid=False,

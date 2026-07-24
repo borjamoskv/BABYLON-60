@@ -40,7 +40,6 @@ __all__ = ["VEXRunner"]
 logger = logging.getLogger("babylon60_extensions.vex")
 
 
-# Type alias for tool executor functions.
 ToolExecutor = Callable[[str, dict[str, Any]], Coroutine[Any, Any, dict[str, Any]]]
 
 
@@ -87,7 +86,6 @@ class VEXRunner:
             source=plan.source,
         )
 
-        # Record the plan itself as a transaction.
         await self._record_plan_transaction(plan)
 
         logger.info(
@@ -99,7 +97,6 @@ class VEXRunner:
         all_succeeded = True
 
         for step in plan.steps:
-            # 1. TETHER CHECK
             if self._tether_checks and step.tether_check:
                 violation = await self._check_tether(step)
                 if violation:
@@ -116,7 +113,6 @@ class VEXRunner:
                     all_succeeded = False
                     break
 
-            # 2. EXECUTE STEP
             result = await self._execute_step(step, plan.task_id)
             receipt.add_step(result)
 
@@ -128,19 +124,14 @@ class VEXRunner:
                     step.step_id,
                     result.error,
                 )
-                # Don't break - continue to record remaining steps as skipped
-                # unless it's critical. For now, we stop on first failure.
                 break
 
-        # 3. FINALIZE
         if receipt.status != VEXStatus.ABORTED:
             receipt.status = VEXStatus.COMPLETED if all_succeeded else VEXStatus.PARTIAL
         receipt.completed_at = _now_iso()
 
-        # 4. MERKLE CHECKPOINT
         receipt.merkle_root = await self._create_checkpoint(plan.task_id)
 
-        # 5. RECORD RECEIPT as a fact
         await self._persist_receipt(receipt)
 
         logger.info(
@@ -185,12 +176,10 @@ class VEXRunner:
 
         completed_at = _now_iso()
 
-        # Record in the hash-chained ledger.
         tx_hash = await self._record_step_transaction(
             task_id, step, success, output, error, elapsed_ms
         )
 
-        # Persist as CORTEX fact.
         fact_id = await self._persist_step_fact(task_id, step, success, output, tx_hash)
 
         return StepResult(
@@ -205,7 +194,6 @@ class VEXRunner:
             fact_id=fact_id,
         )
 
-    # ─── Ledger Integration ───────────────────────────────────────
 
     async def _record_plan_transaction(self, plan: TaskPlan) -> None:
         """Record the plan as the first transaction in the chain."""
@@ -242,7 +230,6 @@ class VEXRunner:
         try:
             conn = await self._engine.get_conn()
 
-            # Get prev hash for this task.
             cursor = await conn.execute(
                 "SELECT hash FROM transactions WHERE project = ? ORDER BY id DESC LIMIT 1",
                 (task_id,),
@@ -288,7 +275,6 @@ class VEXRunner:
             logger.debug("Merkle checkpoint skipped: %s", exc)
         return None
 
-    # ─── Memory Integration ───────────────────────────────────────
 
     async def _persist_step_fact(
         self,
@@ -342,26 +328,21 @@ class VEXRunner:
         except Exception as exc:  # noqa: BLE001
             logger.error("Failed to persist receipt: %s", exc)
 
-    # ─── Tether Integration ───────────────────────────────────────
 
     async def _check_tether(self, step: PlannedStep) -> str | None:
         """Check if a step violates tether boundaries.
 
         Returns violation reason or None if allowed.
         """
-        # Phase 1: basic tool allowlist check.
-        # Phase 2: full tether.md parsing with path/budget/entropy checks.
         dangerous_tools = frozenset(("shell_exec", "file_write", "network_request"))
 
         if step.tool in dangerous_tools:
-            # For now just log - full tether enforcement comes in Phase 2.
             logger.info(
                 "VEX tether: tool %s requires elevated permissions",
                 step.tool,
             )
         return None  # No violation in Phase 1
 
-    # ─── Default Executor ─────────────────────────────────────────
 
     async def _default_executor(self, tool: str, args: dict[str, Any]) -> dict[str, Any]:
         """Default tool executor: delegates to CORTEX engine operations."""

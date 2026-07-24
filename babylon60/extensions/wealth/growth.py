@@ -48,7 +48,6 @@ class GrowthEngine:
         results = await asyncio.gather(*tasks)
         raw = [signal for sublist in results for signal in sublist]
 
-        # Deduplicate by target_url - highest alpha_score wins
         deduped = self._deduplicate(raw)
 
         sorted_signals = sorted(deduped, key=lambda x: x.alpha_score, reverse=True)

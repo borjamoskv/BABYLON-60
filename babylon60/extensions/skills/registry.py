@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """SkillRegistry - Auto-registration and parsing of manifests.
 
@@ -24,7 +20,6 @@ except ImportError:
     yaml = None
     YAMLError = Exception
 
-# ─── Constants ──────────────────────────────────────────────────────────────
 from babylon60.core.paths import SKILLS_DIR as SKILLS_BASE_DIR
 from babylon60.extensions.skills.taxonomy import (
     is_transcendent_skill,
@@ -37,7 +32,6 @@ SKILL_FILENAME = "SKILL.md"
 FRONTMATTER_PATTERN = re.compile(r"^---\s*\n(.*?)\n---", re.DOTALL)
 
 
-# ─── Dataclasses ─────────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -63,7 +57,6 @@ class RequirementDeclaration:
 class SkillManifest:
     """Complete representation of a skill parsed from its SKILL.md."""
 
-    # ── Identity ──
     name: str
     path: Path
     description: str = ""
@@ -74,27 +67,22 @@ class SkillManifest:
     created: str = ""
     updated: str = ""
 
-    # ── Activation ──
     trigger: str = ""
     aliases: list[str] = field(default_factory=list)
 
-    # ── Graph ──
     depends_on: list[str] = field(default_factory=list)
     capabilities: list[CapabilityDeclaration] = field(default_factory=list)
     requirements: list[RequirementDeclaration] = field(default_factory=list)
     tags: list[str] = field(default_factory=list)
 
-    # ── Composition ──
     composable_with: list[str] = field(default_factory=list)  # positive affinities
     incompatible_with: list[str] = field(default_factory=list)  # conflicts
     amplifies: list[str] = field(default_factory=list)  # whom it amplifies
     amplified_by: list[str] = field(default_factory=list)  # who amplifies it
 
-    # ── Fitness (calculated at runtime by NOOSPHERE) ──
     fitness_score: float = -1.0  # -1 = not calculated yet
     usage_count: int = 0
 
-    # ── Raw metadata ──
     _raw_frontmatter: dict[str, Any] = field(default_factory=dict, repr=False)
 
     @property
@@ -123,7 +111,6 @@ class SkillManifest:
         return self.slug == other.slug
 
 
-# ─── Registry ────────────────────────────────────────────────────────────────
 
 
 class SkillRegistry:
@@ -145,7 +132,6 @@ class SkillRegistry:
         self._registry: dict[str, SkillManifest] = {}
         self._loaded = False
 
-    # ── Loading ────────────────────────────────────────────────────────────
 
     def load(self, force_reload: bool = False) -> SkillRegistry:
         """Scans the filesystem and builds the catalog of manifests.
@@ -171,8 +157,6 @@ class SkillRegistry:
                 discovered += 1
             except (ValueError, YAMLError, KeyError):
                 failed += 1
-                # Skills with malformed frontmatter are registered with a name
-                # derived from the directory to not lose visibility
                 fallback = SkillManifest(
                     name=skill_dir.name,
                     path=skill_file,
@@ -237,7 +221,6 @@ class SkillRegistry:
         """Forces filesystem rescan (asynchronous)."""
         return await self.aload(force_reload=True)
 
-    # ── Access ─────────────────────────────────────────────────────────────
 
     def get(self, name: str) -> SkillManifest | None:
         """Gets a manifest by name (case-insensitive, slug-normalized)."""
@@ -295,14 +278,12 @@ class SkillRegistry:
             "total": self.count,
         }
 
-    # ── Parsing ────────────────────────────────────────────────────────────
 
     def _parse_skill_file(self, path: Path) -> SkillManifest:
         """Parses a SKILL.md and extracts the YAML frontmatter."""
         content = path.read_text(encoding="utf-8")
         match = FRONTMATTER_PATTERN.match(content)
         if not match:
-            # Skill without frontmatter - name derived from directory
             return SkillManifest(
                 name=path.parent.name,
                 path=path,
@@ -318,7 +299,6 @@ class SkillRegistry:
         """Builds a SkillManifest from the parsed YAML dict."""
         name = str(raw.get("name", path.parent.name))
 
-        # ── Declared capabilities ──
         capabilities = []
         for cap in raw.get("capabilities", []):
             if isinstance(cap, str):
@@ -333,7 +313,6 @@ class SkillRegistry:
                     )
                 )
 
-        # ── Declared requirements ──
         requirements = []
         for req in raw.get("requires", []):
             if isinstance(req, str):
@@ -347,7 +326,6 @@ class SkillRegistry:
                     )
                 )
 
-        # ── Normalized aliases ──
         aliases_raw = raw.get("aliases", [])
         aliases = [str(a).lstrip("/") for a in aliases_raw]
 

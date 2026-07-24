@@ -166,9 +166,6 @@ class BFTLedgerActor:
                         f"INV_BFT_LEAN_02 (causal_antisymm): Hash chain cycle or break detected at seq {seq}"
                     )
                 # INV_C5_05 (verificador vivo): el hash-chain se computa sobre los BYTES
-                # ALMACENADOS (cifrados o no) — exactamente lo que el INSERT firmó vía
-                # c5_compute_hash(stored_payload). La verificación no requiere la clave
-                # del vault y valida bajo toda condición, cifrado incluido.
                 computed_hash = _compute_entry_hash(
                     event_id=event_id,
                     stream=stream,
@@ -204,7 +201,6 @@ class BFTLedgerActor:
                     break
                 if isinstance(get_res[0], BaseException):
                     # INV_C5_07 (falla ruidosa): el fallo mata al WORKER y aflora en el
-                    # supervisor (Zombie Actor Prevention en append()); cero auto-necrosis.
                     raise RuntimeError("FAIL-FAST: General Exception intercepted on queue get.") from get_res[0]
                 event, future = get_res[0]
                 process_res = await asyncio.gather(self._process(db, event, future), return_exceptions=True)

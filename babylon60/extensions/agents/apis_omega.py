@@ -63,9 +63,7 @@ class ApisOmegaAgent(EngineAwareMixin):
         """Lightweight check to verify if the key is actually functional."""
         try:
             async with httpx.AsyncClient(timeout=5.0) as client:
-                # Standard OpenAI-compatible /models check
                 headers = {"Authorization": f"Bearer {key}"}
-                # Anthropic needs different headers
                 if "anthropic" in provider.lower():
                     headers = {"x-api-key": key, "anthropic-version": "2023-06-01"}
 
@@ -149,7 +147,6 @@ class ApisOmegaAgent(EngineAwareMixin):
 
         if audit["missing"]:
             report.append("## 🚨 Missing Neural Links")
-            # Group by tier
             frontier_missing = [m for m in audit["missing"] if m["tier"] == "frontier"]
             if frontier_missing:
                 report.append("### Frontier (CRITICAL)")
@@ -178,7 +175,6 @@ class ApisOmegaAgent(EngineAwareMixin):
 
         summary = "\n".join(report)
 
-        # Persist to CORTEX
         await self._engine.store(
             project="SYSTEM",
             content=summary,

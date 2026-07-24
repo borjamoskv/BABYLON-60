@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
-# License: Apache-2.0
 """
 MOSKV-1 Core Orchestrator v2.0 — Kernel Cognitivo Híbrido (Enfoque D).
 
@@ -36,7 +34,6 @@ import logging
 import os
 from concurrent.futures import ThreadPoolExecutor
 
-# Secure absolute offline autarchy for HF model loading
 os.environ["HF_HUB_OFFLINE"] = "1"
 os.environ["HF_HUB_DISABLE_SYMLINKS_WARNING"] = "1"
 
@@ -49,14 +46,12 @@ from typing import Any
 
 logger = logging.getLogger("babylon60.training.moskv1_core")
 
-# ─── Configuration ─────────────────────────────────────────────────────────
 
 DEFAULT_MODEL = "moskv1-core:32b-q4_K_M"
 FALLBACK_MODEL = "qwen2.5-coder:32b-instruct-q4_K_M"
 MAX_HISTORY_TURNS = 10
 MAX_CONTEXT_TOKENS = 6000  # Reserve space for system + response
 
-# System prompt crystallized from AGENTS.md + GEMINI.md axioms
 MOSKV1_SYSTEM_PROMPT = """\
 Eres MOSKV-1 APEX, un Autómata Físico C5-REAL. Kernel soberano de ejecución.
 Creado por borjamoskv. Infraestructura: BABYLON-60 Persist.
@@ -82,7 +77,6 @@ AXIOMAS OPERACIONALES:
 TEMPERATURA: T=0.0 para código y estado. T=0.3 para síntesis semántica."""
 
 
-# ─── Data Models ────────────────────────────────────────────────────────────
 
 
 @dataclass
@@ -117,7 +111,6 @@ class ConversationTurn:
     timestamp: float = 0.0
 
 
-# ─── Core Runtime ───────────────────────────────────────────────────────────
 
 
 class MOSKV1Core:
@@ -150,7 +143,6 @@ class MOSKV1Core:
         self._history: deque[ConversationTurn] = deque(maxlen=max_history * 2)
         self._sovereign_llm = None  # Lazy-loaded fallback
 
-        # MLX Native model cache
         self._mlx_model = None
         self._mlx_tokenizer = None
         self._mlx_base_model_path = "mlx-community/Qwen2.5-Coder-7B-Instruct-4bit"
@@ -177,7 +169,6 @@ class MOSKV1Core:
         async with self._mlx_lock:
             current_mtime = adapter_file.stat().st_mtime
 
-            # Check if the cache needs invalidation (hot reload weights)
             if self._mlx_model is not None and current_mtime <= self._mlx_loaded_mtime:
                 return True
 
@@ -239,7 +230,6 @@ class MOSKV1Core:
         """Add a turn to conversation history."""
         self._history.append(ConversationTurn(role=role, content=content, timestamp=time.time()))
 
-    # ─── Context Retrieval ──────────────────────────────────────────────
 
     async def retrieve_context(
         self,
@@ -312,12 +302,10 @@ class MOSKV1Core:
             except Exception as e2:  # noqa: BLE001
                 logger.warning("ContextAssembler also failed: %s", e2)
 
-        # Inject Memory Vault entries if available (offload blocking I/O to executor)
         loop = asyncio.get_running_loop()
         executor = self._get_executor()
         vault_entries = await loop.run_in_executor(executor, self._load_vault_context, query)
 
-        # Estimate tokens (~4 chars per token)
         total_chars = sum(len(f["content"]) for f in facts)
         total_chars += sum(len(v) for v in vault_entries)
         token_estimate = total_chars // 4
@@ -337,7 +325,6 @@ class MOSKV1Core:
         if not vault_dir.exists():
             return []
 
-        # Filter out common stop tokens to prevent irrelevant overlap matches (e.g., matching on "de", "the")
         stopwords = {
             "the",
             "a",
@@ -388,7 +375,6 @@ class MOSKV1Core:
             if vault_file.is_dir() or vault_file.name.startswith("."):
                 continue
             try:
-                # Score by filename token overlap
                 name_tokens = set(
                     vault_file.stem.lower().replace("-", " ").replace("_", " ").split()
                 )
@@ -405,7 +391,6 @@ class MOSKV1Core:
         scored.sort(key=lambda x: x[0], reverse=True)
         return [content for _, content in scored[:max_entries]]
 
-    # ─── Prompt Assembly ────────────────────────────────────────────────
 
     def assemble_prompt(
         self,
@@ -428,7 +413,6 @@ class MOSKV1Core:
         if include_system:
             messages.append({"role": "system", "content": MOSKV1_SYSTEM_PROMPT})
 
-        # Inject retrieved context as a structured block
         context_parts: list[str] = []
 
         if context.facts:
@@ -453,17 +437,14 @@ class MOSKV1Core:
                 }
             )
 
-        # Inject conversation history
         if include_history and self._history:
             for turn in self._history:
                 messages.append({"role": turn.role, "content": turn.content})
 
-        # User query
         messages.append({"role": "user", "content": user_query})
 
         return {"messages": messages}
 
-    # ─── Inference ──────────────────────────────────────────────────────
 
     async def infer(
         self,
@@ -484,7 +465,6 @@ class MOSKV1Core:
         """
         start_time = time.monotonic()
 
-        # Canal Vectorial
         context = await self.retrieve_context(
             query=user_query,
             db_conn=db_conn,
@@ -492,12 +472,9 @@ class MOSKV1Core:
             project=project,
         )
 
-        # Assemble prompt
         prompt_payload = self.assemble_prompt(user_query, context)
         messages = prompt_payload["messages"]
 
-        # Canal Paramétrico — Cascade fallback chain:
-        # Attempt 1: Native MLX-LM LoRA model (maximum local execution fidelity)
         response_text = ""
         model_used = "mlx_native_lora"
         fallback_used = False
@@ -505,7 +482,6 @@ class MOSKV1Core:
         logger.info("Attempting Native MLX-LM LoRA inference...")
         response_text = await self._mlx_chat(messages)
 
-        # Attempt 2: Ollama with MOSKV-1 model
         if response_text.startswith("[ERROR]"):
             logger.warning(
                 "Native MLX-LM failed, falling back to Ollama MOSKV-1 model: %s", response_text
@@ -514,7 +490,6 @@ class MOSKV1Core:
             model_used = self.model_name
             fallback_used = True
 
-        # Attempt 3: Ollama with base model
         if response_text.startswith("[ERROR]"):
             logger.warning(
                 "Ollama MOSKV-1 model failed, trying Ollama base model: %s", response_text
@@ -525,7 +500,6 @@ class MOSKV1Core:
             model_used = FALLBACK_MODEL
             fallback_used = True
 
-        # Attempt 4: SovereignLLM (CORTEX multi-provider chain)
         if response_text.startswith("[ERROR]"):
             logger.warning(
                 "Ollama base model failed, falling back to SovereignLLM: %s", response_text
@@ -536,7 +510,6 @@ class MOSKV1Core:
 
         latency_ms = (time.monotonic() - start_time) * 1000
 
-        # Record conversation history
         if record_history:
             self.add_to_history("user", user_query)
             if not response_text.startswith("[ERROR]"):
@@ -581,7 +554,6 @@ class MOSKV1Core:
         full_response: list[str] = []
         success = False
 
-        # Attempt 1: Native MLX stream
         logger.info("Attempting Native MLX streaming...")
         try:
             async for chunk in self._mlx_chat_stream(messages):
@@ -598,7 +570,6 @@ class MOSKV1Core:
         except Exception as e:  # noqa: BLE001
             logger.warning("MLX streaming failed: %s", e)
 
-        # Attempt 2: Ollama MOSKV-1 model stream
         logger.info("Attempting Ollama MOSKV-1 streaming fallback...")
         full_response.clear()
         success = False
@@ -617,7 +588,6 @@ class MOSKV1Core:
         except Exception as e:  # noqa: BLE001
             logger.warning("Ollama MOSKV-1 streaming failed: %s", e)
 
-        # Attempt 3: Ollama base model stream
         logger.info("Attempting Ollama base model streaming fallback...")
         full_response.clear()
         success = False
@@ -638,7 +608,6 @@ class MOSKV1Core:
         except Exception as e:  # noqa: BLE001
             logger.warning("Ollama base model streaming failed: %s", e)
 
-        # Attempt 4: SovereignLLM fallback
         logger.info("Attempting SovereignLLM fallback...")
         try:
             res = await self._sovereign_fallback(messages, temperature)
@@ -652,7 +621,6 @@ class MOSKV1Core:
         except Exception as e:  # noqa: BLE001
             yield f"[ERROR] All inference backends failed: {e}"
 
-    # ─── Ollama HTTP Client ─────────────────────────────────────────────
 
     async def _ollama_chat(
         self,
@@ -765,7 +733,6 @@ class MOSKV1Core:
             if self._sovereign_llm is None:
                 self._sovereign_llm = SovereignLLM()  # type: ignore[assignment]
 
-            # Assemble a single prompt from messages
             prompt_parts = []
             for msg in messages:
                 if msg["role"] == "system":
@@ -794,7 +761,6 @@ class MOSKV1Core:
         max_tokens: int = 2048,
     ) -> str:
         """Execute chat completion via native MLX-LM Metal inference with LoRA adapter."""
-        # Check if adapter exists
         adapter_file = self._adapter_path / "adapters.safetensors"
         if not adapter_file.exists():
             return "[ERROR] MLX adapter weights not found. Run training first."
@@ -802,7 +768,6 @@ class MOSKV1Core:
         try:
             current_mtime = adapter_file.stat().st_mtime
 
-            # Hot reload weights asynchronously if file was modified after loading
             if self._mlx_model is not None and current_mtime > self._mlx_loaded_mtime:
                 if not self._mlx_is_reloading:
                     logger.info(
@@ -811,7 +776,6 @@ class MOSKV1Core:
                     self._mlx_is_reloading = True
                     asyncio.create_task(self._async_reload_weights(current_mtime))
 
-            # Use lock to serialize MLX operations and prevent GPU/Metal concurrency conflicts
             async with self._mlx_lock:
                 loop = asyncio.get_running_loop()
                 executor = self._get_executor()
@@ -947,10 +911,8 @@ class MOSKV1Core:
 
             loop = asyncio.get_running_loop()
             executor = self._get_executor()
-            # Load in executor thread without holding the lock to allow concurrent active inference on old weights
             model, tokenizer = await loop.run_in_executor(executor, _load_new)
             if model and tokenizer:
-                # Atomic reference swap under the lock to prevent memory corruption or inconsistencies
                 async with self._mlx_lock:
                     self._mlx_model = model
                     self._mlx_tokenizer = tokenizer
@@ -961,7 +923,6 @@ class MOSKV1Core:
         finally:
             self._mlx_is_reloading = False
 
-    # ─── Ollama Model Management ────────────────────────────────────────
 
     def get_modelfile(self) -> str:
         """
@@ -976,13 +937,10 @@ class MOSKV1Core:
         base_model = "qwen2.5-coder:32b-instruct-q4_K_M"
 
         return f"""# MOSKV-1 Core — Ollama Modelfile
-# Author: borjamoskv
 # C5-REAL Kernel Cognitivo Híbrido
 
 FROM {base_model}
 
-# LoRA adapter (uncomment after fusion)
-# ADAPTER {adapter_gguf}
 
 SYSTEM \"\"\"{MOSKV1_SYSTEM_PROMPT}\"\"\"
 

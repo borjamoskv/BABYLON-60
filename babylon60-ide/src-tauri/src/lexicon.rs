@@ -2,14 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::convert::TryFrom;
 use std::fmt;
 
-// ═══════════════════════════════════════════════════════
-//  LEXICON — 10,000-Primitive Action Space (4D Tensor)
-//  Vector = [Domain][Primitive][Modifier][Target]
-// ═══════════════════════════════════════════════════════
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[repr(u8)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Domain {
     Source   = 0,
     Matrix   = 1,
@@ -37,9 +30,6 @@ impl TryFrom<u8> for Domain {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[repr(u8)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Primitive {
     Init   = 0, Mutate = 1, Bind   = 2, Query  = 3, Stream = 4,
     Commit = 5, Sync   = 6, Halt   = 7, Fork   = 8, Join   = 9,
@@ -59,9 +49,6 @@ impl TryFrom<u8> for Primitive {
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[repr(u8)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Modifier {
     Raw       = 0, Atomic    = 1, Persist   = 2, Ephemeral = 3, Async     = 4,
     Sync      = 5, Quantized = 6, Mapped    = 7, Wrapped   = 8, Locked    = 9,
@@ -81,10 +68,6 @@ impl TryFrom<u8> for Modifier {
     }
 }
 
-/// 4th Dimension — Target axis (bridged from Teorema-Robinson-Moskv)
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
-#[repr(u8)]
-#[serde(rename_all = "SCREAMING_SNAKE_CASE")]
 pub enum Target {
     Local    = 0, Network  = 1, Swarm    = 2, Ledger   = 3, Memory   = 4,
     Dispatch = 5, Ui       = 6, System   = 7, Bft      = 8, Core     = 9,
@@ -104,12 +87,7 @@ impl TryFrom<u8> for Target {
     }
 }
 
-// ═══════════════════════════════════════════════════════
-//  VectorPath — 3D semantic address (backward-compat)
-//  VectorPath4D — Full 4D tensor (10,000-space)
-// ═══════════════════════════════════════════════════════
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct VectorPath {
     pub domain:    Domain,
     pub primitive: Primitive,
@@ -120,13 +98,11 @@ impl VectorPath {
     pub const fn new(domain: Domain, primitive: Primitive, modifier: Modifier) -> Self {
         Self { domain, primitive, modifier }
     }
-    /// D*100 + P*10 + M → 0..999
     pub fn index(&self) -> usize {
         (self.domain as usize * 100) + (self.primitive as usize * 10) + self.modifier as usize
     }
 }
 
-#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct VectorPath4D {
     pub domain:    Domain,
     pub primitive: Primitive,
@@ -143,20 +119,17 @@ impl VectorPath4D {
             target:    Target::try_from(t)?,
         })
     }
-    /// D*1000 + P*100 + M*10 + T → 0..9999
     pub fn index(&self) -> usize {
         (self.domain as usize * 1000)
             + (self.primitive as usize * 100)
             + (self.modifier as usize * 10)
             + self.target as usize
     }
-    /// Collapse 4D → 3D for backward-compat lookup
     pub fn to_3d(&self) -> VectorPath {
         VectorPath::new(self.domain, self.primitive, self.modifier)
     }
 }
 
-// ─── Display impls ───────────────────────────────────────
 
 impl fmt::Display for VectorPath {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

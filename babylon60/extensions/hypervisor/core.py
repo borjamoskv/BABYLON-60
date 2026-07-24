@@ -58,7 +58,6 @@ class AgencyHypervisor:
         The handle is the tenant's ONLY interface.
         All complexity is hidden behind this membrane.
         """
-        # Get-or-create isolator (one per tenant, O(1) lookup)
         if tenant not in self._isolators:
             self._isolators[tenant] = TenantIsolator(tenant)
 
@@ -68,9 +67,6 @@ class AgencyHypervisor:
             hypervisor=self,
         )
 
-    # ── Internal methods called by AgentHandle ────────────────────
-    # Named with underscore prefix: tenant code cannot call these
-    # because they only have access to the AgentHandle.
 
     async def _do_remember(
         self,
@@ -86,7 +82,6 @@ class AgencyHypervisor:
         """The real remember() - store + compress + project side-effects."""
         isolator = self._isolators[tenant]
 
-        # 1. Store via engine (isolator injects tenant_id)
         fact_id = await self._engine.store(
             **isolator.scope_kwargs(
                 project=project,
@@ -98,13 +93,11 @@ class AgencyHypervisor:
             ),
         )
 
-        # 2. Fire invisible side-effects (non-blocking)
         try:
             await self._projector.on_remember(fact_id, project, content)
         except (RuntimeError, ValueError, TypeError, OSError) as e:
             logger.debug("Projector on_remember failed for fact %d: %s", fact_id, e)
 
-        # 3. Compress to Receipt (tenant never sees fact_id as int)
         return self._compressor.to_receipt(fact_id, project)
 
     async def _do_recall(
@@ -118,7 +111,6 @@ class AgencyHypervisor:
         """The real recall() - search + compress results."""
         isolator = self._isolators[tenant]
 
-        # Search via engine
         results = await self._engine.search(
             **isolator.scope_kwargs(
                 query=query,
@@ -127,13 +119,11 @@ class AgencyHypervisor:
             ),
         )
 
-        # Fire lightweight side-effects
         try:
             await self._projector.on_recall(query, project)
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-        # Handle fuse mode returning a string instead of list
         if isinstance(results, str):
             return [
                 Memory(
@@ -146,7 +136,6 @@ class AgencyHypervisor:
                 )
             ]
 
-        # Compress SearchResults → Memory objects
         return [self._compressor.search_result_to_memory(r) for r in results[:limit]]
 
     async def _do_reflect(
@@ -159,7 +148,6 @@ class AgencyHypervisor:
         isolator = self._isolators[tenant]
         tid = isolator.tenant_id
 
-        # Gather internal stats
         try:
             facts = await self._engine.recall(
                 project=project,
@@ -168,7 +156,6 @@ class AgencyHypervisor:
             )
             active_count = len(facts)
 
-            # Get full stats for count
             stats = await self._engine.stats()
             active_count = stats.get("active_facts", active_count)
 
@@ -177,7 +164,6 @@ class AgencyHypervisor:
             active_count = 0
             last_activity = None
 
-        # Verify ledger integrity
         chain_valid = True
         try:
             if hasattr(self._engine, "verify_ledger"):
@@ -188,7 +174,6 @@ class AgencyHypervisor:
         except (RuntimeError, ValueError, TypeError, OSError):
             chain_valid = False
 
-        # Compress to HealthReport
         return self._compressor.to_health_report(
             active_count=active_count,
             last_activity_iso=last_activity,

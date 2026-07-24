@@ -107,7 +107,6 @@ class ExecutorAgent:
             state.iterations += 1
             logger.info("⚙️  Executor iteration %d/%d", state.iterations, _MAX_ITERATIONS)
 
-            # Build prompt from message history
             prompt = self._build_prompt(state.messages)
 
             response = await self._llm.complete(
@@ -125,7 +124,6 @@ class ExecutorAgent:
                 logger.info("✅ Executor signalled <done/> at iteration %d", state.iterations)
                 break
 
-            # Parse and dispatch tool call
             tool_call = self._parse_tool_call(response)
             if tool_call:
                 state.last_tool = tool_call.name
@@ -139,7 +137,6 @@ class ExecutorAgent:
                     }
                 )
             else:
-                # No tool call found - prompt agent to use a tool or finish
                 state.messages.append(
                     {
                         "role": "user",

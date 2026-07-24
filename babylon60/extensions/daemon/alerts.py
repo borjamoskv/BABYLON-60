@@ -73,7 +73,6 @@ class AlertHandlerMixin:
         - auto_mejoralo / entropy_monitor attributes (for dispatch)
     """
 
-    # ─── Simple Alerts ────────────────────────────────────────────
 
     def _alert_sites(self, sites: list) -> None:
         for site in sites:
@@ -105,7 +104,6 @@ class AlertHandlerMixin:
             if self._should_alert(f"disk:{da.path}"):  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
                 logger.warning("Disk space low on %s", da.path)
 
-    # ─── Complex Alerts ───────────────────────────────────────────
 
     def _alert_mejoralo(self, alerts: list) -> None:
         """Sovereign Alert: Unified monitor for MEJORAlo score degradation."""
@@ -126,7 +124,6 @@ class AlertHandlerMixin:
             )
             Notifier.notify("☢️ MEJORAlo Brutal Mode", msg, sound="Basso")
 
-            # Sovereign Auto-Heal: Dispatch Brutal Scan
             self._dispatch_warm_repair(alert.project, brutal=False if alert.score >= 30 else True)
 
     def _alert_entropy(self, alerts: list) -> None:
@@ -234,7 +231,6 @@ class AlertHandlerMixin:
     def _alert_security(self, alerts: list) -> None:
         """Handles security alerts (fraud/anomalies detected by VectorStoreL2)."""
         for alert in alerts:
-            # We use the IP address and similarity signature to debounce alerts
             dedup_key = f"security:{alert.ip_address}:{alert.similarity_score}"
             if self._should_alert(dedup_key):  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
                 logger.warning(
@@ -327,7 +323,6 @@ class AlertHandlerMixin:
     def _alert_auto_immune(self, alerts: list[str]) -> None:
         """Handler for AutoImmuneMonitor detecting stale ghosts."""
         for task_id in alerts:
-            # We only alert once per ghost dispatched
             if self._should_alert(f"auto_immune:{task_id}"):  # type: ignore[reportAttributeAccessIssue]  # noqa: E501
                 logger.info("🛡️ Auto-Immune System dispatched ghost resolution task: %s", task_id)
 

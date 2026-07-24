@@ -113,7 +113,6 @@ async def _handle_failure(
 ) -> None:
     breaker._on_failure()
 
-    # ─── MONITOR (error detected) ─────────────────
     agent._phase = HealingPhase.MONITORING
     agent._total_errors += 1
     ENDOCRINE.pulse(
@@ -122,7 +121,6 @@ async def _handle_failure(
         reason=f"Error in {subsystem}: {type(error).__name__}",
     )
 
-    # ─── DIAGNOSE ─────────────────────────────────
     healing_event = await diagnose_and_repair(
         agent=agent,
         error=error,
@@ -135,7 +133,6 @@ async def _handle_failure(
     if healing_event:
         agent._event_history.append(healing_event)
 
-    # ─── COOLDOWN ─────────────────────────────────
     if attempt < agent.config.max_healing_attempts - 1:
         agent._phase = HealingPhase.COOLDOWN
         await asyncio.sleep(agent.config.cooldown_after_repair_s)
@@ -199,16 +196,13 @@ async def diagnose_and_repair(
     cycle_start: int,
 ) -> HealingEvent | None:
     """Internal: diagnose error and apply repair strategy."""
-    # ─── DIAGNOSE ─────────────────────────────────────────
     agent._phase = HealingPhase.DIAGNOSING
     error_sig = f"{type(error).__name__}: {str(error)[:500]}"
 
     diagnosis: dict[str, Any]
     if agent._rust_engine is not None:
-        # Fast-path: Rust diagnosis
         diagnosis = dict(agent._rust_engine.diagnose(error_sig, subsystem))  # pyright: ignore[reportAttributeAccessIssue]
     else:
-        # Fallback: Python diagnosis
         diagnosis = python_diagnose(error_sig, subsystem)
 
     anomaly_class = diagnosis.get("anomaly_class", "UnclassifiedError")
@@ -228,7 +222,6 @@ async def diagnose_and_repair(
         is_recurring,
     )
 
-    # ─── REPAIR ───────────────────────────────────────────
     agent._phase = HealingPhase.REPAIRING
     repair_result: RepairResult | None = None
 
@@ -263,7 +256,6 @@ async def diagnose_and_repair(
                 repair_result.message[:100],  # pyright: ignore[reportOptionalMemberAccess]
             )
 
-    # ─── Build Event ──────────────────────────────────────
     total_cycle_ms = (time.perf_counter_ns() - cycle_start) / 1e6
 
     event = HealingEvent(
@@ -340,11 +332,9 @@ async def start_daemon(
         try:
             agent._phase = HealingPhase.MONITORING
 
-            # Health probe
             await probe_system_health(agent, engine)
             cortisol = ENDOCRINE.get_level(HormoneType.CORTISOL)
 
-            # Thresholds
             if cortisol > agent.config.cortisol_alarm_threshold:
                 logger.warning(
                     "[AUTOCURATIVE] ⚠️ Cortisol alarm: %.3f > %.3f",
@@ -357,7 +347,6 @@ async def start_daemon(
                     reason="Cortisol alarm threshold exceeded",
                 )
 
-            # Check circuit breakers
             for name, breaker in agent._breakers.items():
                 if breaker.state == CircuitState.OPEN:
                     logger.warning(

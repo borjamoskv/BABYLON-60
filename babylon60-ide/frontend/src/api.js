@@ -1,4 +1,3 @@
-// BABYLON60 IDE — API client
 const API_BASE = '';
 
 export async function get(path) {
@@ -38,8 +37,6 @@ export function connectWebSocket(path, onMessage, onError) {
     };
     ws.onerror = (e) => onError?.(e);
     ws.onclose = () => {
-      // Reconnect only if not closed on purpose (avoids zombie sockets
-      // piling up every time the user leaves the Swarm route).
       if (!controller.closed) setTimeout(dial, 3000);
     };
   };

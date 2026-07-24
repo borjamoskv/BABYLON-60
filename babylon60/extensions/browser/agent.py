@@ -41,17 +41,14 @@ class SovereignBrowserAgent:
             for step in range(self.max_steps):
                 LOG.info("BROWSER-Ω: Step %d/%d", step + 1, self.max_steps)
 
-                # 1. Observe
                 parse_result = await self.engine.parse_dom()
                 dom_tree = parse_result.get("dom", "")
                 if not dom_tree:
                     LOG.warning("BROWSER-Ω: No interactive elements found.")
 
-                # 2. Reason
                 action = await self._decide_next_action(dom_tree)
                 LOG.info("BROWSER-Ω: Decided action -> %s", action)
 
-                # 3. Act
                 cmd = action.get("cmd")
                 if cmd == "done":
                     LOG.info("BROWSER-Ω: Objective complete. Result: %s", action.get("result"))
@@ -111,7 +108,6 @@ CURRENT INTERACTIVE DOM:
 What is your next action?
 """
         try:
-            # We use the CORTEX LLMProvider's complete method
             response_text = await self.llm.complete(
                 prompt=user_prompt,
                 system=system_prompt,
@@ -120,8 +116,6 @@ What is your next action?
                 intent=IntentProfile.REASONING,
             )
 
-            # The LLM should return a JSON string, let's parse it
-            # Strip any markdown blocks if present
             clean_text = response_text.strip()
             if clean_text.startswith("```json"):
                 clean_text = clean_text[7:-3].strip()
@@ -134,5 +128,3 @@ What is your next action?
             raise ValueError(
                 f"BROWSER-Ω: Invalid JSON structure from LLM -> {decode_err}"
             ) from decode_err
-        # General exceptions intentionally bubble up to elevate API/network failures
-        # to the CORTEX orchestrator immediately instead of masking them.

@@ -16,11 +16,9 @@ async def run_automata():
     """
     try:
         async with async_playwright() as p:
-            # Conectar a la sesión del usuario (Donde ya está logueado en Substack)
             logger.info("Intentando conectar al navegador local (CDP puerto 9222)...")
             browser = await p.chromium.connect_over_cdp("http://localhost:9222")
 
-            # Obtener el contexto y la pestaña activa
             contexts = browser.contexts
             if not contexts:
                 logger.error(
@@ -31,12 +29,10 @@ async def run_automata():
             context = contexts[0]
             pages = context.pages
 
-            # Buscamos la pestaña que tenga "substack.com/profile/subscribers" abierta, o usamos la primera activa
             target_page = None
             for page in pages:
                 parsed_url = urllib.parse.urlparse(page.url)
                 hostname = parsed_url.hostname or ""
-                # codeql[py/incomplete-url-substring-sanitization]
                 if hostname == "substack.com" or hostname.endswith(".substack.com"):
                     target_page = page
                     break
@@ -50,11 +46,8 @@ async def run_automata():
 
             logger.info("Auditoría activa en la URL: %s", target_page.url)
 
-            # Validar que estamos en la lista de suscriptores/oyentes
             logger.info("Escaneando el DOM en busca de oyentes...")
 
-            # Substack cambia las clases, pero los botones de seguir suelen tener el texto "Follow" o una clase específica.
-            # Localizamos todos los botones que contengan el texto "Follow" o "Seguir".
             follow_buttons = await target_page.locator("button:has-text('Follow')").all()
             seguir_buttons = await target_page.locator("button:has-text('Seguir')").all()
 
@@ -62,7 +55,6 @@ async def run_automata():
 
             if not buttons_to_click:
                 logger.warning("No se encontraron botones de Follow sin pulsar en la vista actual.")
-                # Opcional: Hacer scroll para cargar más
                 await target_page.mouse.wheel(0, 1000)
                 await asyncio.sleep(2)
             else:
@@ -70,13 +62,10 @@ async def run_automata():
 
                 for i, button in enumerate(buttons_to_click):
                     try:
-                        # Comprobar si el botón sigue visible y habilitado
                         if await button.is_visible() and await button.is_enabled():
-                            # El click en cascada. AX-042 (Eficiencia).
                             await button.click()
                             logger.info(" -> Nodo %s sincronizado (Followed).", i + 1)
 
-                            # Pausa estocástica (1 a 3 segundos) para engañar a los sistemas antibot de Substack
                             await asyncio.sleep(random.uniform(1.2, 3.1))
                         else:
                             logger.info(
@@ -86,7 +75,6 @@ async def run_automata():
                         logger.error("Fricción al sincronizar nodo %s: %s", i + 1, e)
 
             logger.info("Auditoría de pantalla completada.")
-            # Desconectarse limpiamente
             await browser.close()
 
     except Exception as e:  # noqa: BLE001

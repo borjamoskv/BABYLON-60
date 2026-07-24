@@ -29,8 +29,6 @@ class DemandValidator:
         if experiment.mvp is None:
             raise ValueError("MVP required for validation.")
 
-        # Simulate traffic: $20 spend at ~$0.5 CPC = ~40 visitors
-        # Conversion rate random between 0.005 and 0.05
         conversion_rate = Decimal(str(round(self._rng.uniform(0.005, 0.05), 4)))
         visitors = int(self.MAX_SPEND / Decimal("0.50"))
         signups = int(Decimal(visitors) * conversion_rate)

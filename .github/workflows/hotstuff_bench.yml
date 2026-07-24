@@ -11,9 +11,6 @@ on:
       - 'ultrathink/**'
 
 jobs:
-  # NOTA: el job rust-tests fue eliminado — el crate `cortex/consensus` no
-  # existe en este linaje (nunca fue vendorizado). El núcleo Rust vivo es
-  # strike_rs, cubierto por tests/test_re_drm_rust.py en la suite pytest.
   python-tests:
     name: Python Integration Tests
     runs-on: ubuntu-latest

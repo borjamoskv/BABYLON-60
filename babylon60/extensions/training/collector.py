@@ -103,7 +103,6 @@ class TrajectoryCollector:
         metadata: dict[str, Any] = {}
 
         for ep in episodes:
-            # Aggregate all metadata from all episodes
             meta_dict = ep.meta if isinstance(ep.meta, dict) else {}
             if meta_dict:
                 try:

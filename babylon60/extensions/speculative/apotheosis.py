@@ -91,7 +91,6 @@ class ApotheosisEngine(ApotheosisAuditsMixin):
         self._healer_mode = True
         self._cortex = cortex_engine
 
-        # 150/100: Predictive Inertia State
         self._cognitive_weight: float = 0.0
         self._inertia_threshold: float = 0.7
         self._memory_manager = None
@@ -174,7 +173,6 @@ class ApotheosisEngine(ApotheosisAuditsMixin):
             bicameral.log_bio(
                 f"Ω Cycle. Entropy={entropy_found}. Sleep: {duration:.1f}s", signal="Ω"
             )
-            # Bypass sleep during high-adrenaline state
             if adrenaline > 0.8:
                 bicameral.log_bio("Adrenal Overdrive: Bypassing sleep.", signal="⚡")
                 continue
@@ -206,8 +204,6 @@ class ApotheosisEngine(ApotheosisAuditsMixin):
                     keter = KeterEngine(self.workspace)  # type: ignore[reportCallIssue]
                     for action in critical_actions:
                         if action.description not in self._ignited_tasks:
-                            # 🛡️ IMMUNE-SYSTEM-v1: Sovereign Arbiter (Ω₆)
-                            # Intercept signal before ignition
                             context = {
                                 "reversibility_level": 1,  # Policy actions are R1
                                 "confidence_level": 5 if action.value > 0.95 else 4,
@@ -268,7 +264,6 @@ class ApotheosisEngine(ApotheosisAuditsMixin):
                         if self._healer_mode and self._apply_cognitive_dampening():
                             await self._heal_file_or_prune(py_file, entropy)
 
-            # Autopoietic Transfiguration
             growth = ENDOCRINE.get_level(HormoneType.NEURAL_GROWTH)
             if growth > 0.7:
                 for html_file in self.workspace.rglob("index.html"):
@@ -346,7 +341,6 @@ class ApotheosisEngine(ApotheosisAuditsMixin):
         self.is_active = True
         _loop = loop or asyncio.get_running_loop()
 
-        # Mount Event Horizon Watcher
         self._file_event_queue = asyncio.Queue()
         event_handler = _WorkspaceEventHandler(_loop, self._file_event_queue)
 

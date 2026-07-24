@@ -39,7 +39,6 @@ class CommitPoet:
         """Set deterministic seed for reproducible generation."""
         self._rng = random.Random(value)
 
-    # ── Public API ────────────────────────────────────────────────────────
 
     def compose(
         self,
@@ -68,9 +67,7 @@ class CommitPoet:
 
         message = f"{detected_type}({scope}): {body} {emoji}"
 
-        # Truncate to 72 chars (git best practice) - preserve emoji at end
         if len(message) > 72:
-            # Recalculate with trimmed body
             prefix = f"{detected_type}({scope}): "
             suffix = f" {emoji}"
             max_body = 72 - len(prefix) - len(suffix)
@@ -140,7 +137,6 @@ class CommitPoet:
             )
             response = response.strip().replace("\n", " ")
 
-            # Simple validation: must follow the format or at least start with type
             if re.match(r"^[a-z]+\(.+\):", response):
                 self._history.append(response)
                 return response
@@ -150,7 +146,6 @@ class CommitPoet:
         except Exception as e:  # noqa: BLE001
             logger.warning("Failed to generate commit via LLM (%s), falling back to heuristics.", e)
 
-        # Fallback to local heuristic composition
         return self.compose(diff_summary, files, commit_type=commit_type)
 
     def compose_batch(
@@ -204,7 +199,6 @@ class CommitPoet:
         Returns:
             A poetic but informative docstring-style comment.
         """
-        # Detect the nature of the code
         if "class " in code:
             return self._narrate_class(code, context)
         if "def " in code:
@@ -283,7 +277,6 @@ class CommitPoet:
         type_label = commit_type.upper()
         return f"- {emoji} **{type_label}**({scope}): {description}"
 
-    # ── Type detection ────────────────────────────────────────────────────
 
     def _detect_type(self, diff_summary: str, files: list[str]) -> str:
         """Detect commit type from diff summary and file paths using O(1) regex matching."""
@@ -296,7 +289,6 @@ class CommitPoet:
                 scores[commit_type] = matches
 
         if not scores:
-            # Heuristic fallback based on file extensions / paths
             if any("test" in f.lower() for f in files):
                 return "test"
             if any(f.endswith((".md", ".rst", ".txt")) for f in files):
@@ -307,7 +299,6 @@ class CommitPoet:
 
         return max(scores, key=lambda k: scores[k])
 
-    # ── Scope extraction ──────────────────────────────────────────────────
 
     def _extract_scope(self, files: list[str]) -> str:
         """Extract the most relevant scope from changed file paths in O(N)."""
@@ -326,20 +317,17 @@ class CommitPoet:
         if scope_counts:
             return max(scope_counts, key=lambda k: scope_counts[k])
 
-        # Fallback: use the parent directory of the first file
         first_parent = Path(files[0]).parent.name
         if first_parent and first_parent != ".":
             return first_parent
 
         return "core"
 
-    # ── Template selection ────────────────────────────────────────────────
 
     def _select_template(self, commit_type: str, scope: str) -> str:
         """Select a metaphorical template and inject scope."""
         templates = TEMPLATES.get(commit_type, TEMPLATES["chore"])
 
-        # Anti-repetition: filter out recently used templates
         recent_bodies = set(self._history[-10:]) if self._history else set()
         available = [t for t in templates if t.format(scope=scope) not in recent_bodies]
 
@@ -349,14 +337,12 @@ class CommitPoet:
         template = self._rng.choice(available)
         return template.format(scope=scope)
 
-    # ── Emoji selection ───────────────────────────────────────────────────
 
     def _select_emoji(self, commit_type: str) -> str:
         """Select a signature emoji for the commit type."""
         emojis = EMOJI_MAP.get(commit_type, ["🔄"])
         return self._rng.choice(emojis)
 
-    # ── Code narration helpers ────────────────────────────────────────────
 
     def _narrate_class(self, code: str, context: str) -> str:
         """Generate a sovereign docstring for a class definition."""
@@ -476,7 +462,6 @@ def generate_candidates(
         List of sovereign commit messages.
     """
     poet = CommitPoet()
-    # Use a hash of the diff as seed for session-level consistency
     from babylon60.utils.base60 import decode_base60
 
     seed_val = decode_base60(cortex_hash_truncated(diff_summary.encode(), length=8))

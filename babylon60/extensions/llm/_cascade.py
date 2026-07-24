@@ -31,13 +31,9 @@ class CascadeManager:
     def __init__(self, negative_ttl: float = 300.0, positive_ttl: float = 600.0):
         self.negative_ttl = negative_ttl
         self.positive_ttl = positive_ttl
-        # provider_name -> timestamp of failure
         self._nxdomain_cache: dict[str, float] = {}
-        # provider_name -> consecutive failures (thermodynamic decay)
         self._nxdomain_failures: dict[str, int] = {}
-        # provider_name -> (timestamp, latency)
         self._a_records: dict[str, tuple[float, float]] = {}
-        # prefix_hash -> {provider_name: timestamp}
         self._kv_affinity: dict[str, dict[str, float]] = {}
 
     def set_nx_record(self, provider_name: str) -> None:
@@ -68,7 +64,6 @@ class CascadeManager:
         nx_at = self._nxdomain_cache.get(provider_name)
         if nx_at:
             failures = self._nxdomain_failures.get(provider_name, 1)
-            # Thermodynamic decay: exponential backoff based on consecutive failures
             effective_ttl = self.negative_ttl * (2 ** (failures - 1))
             if (time.monotonic() - nx_at) < effective_ttl:
                 return True
@@ -85,7 +80,6 @@ class CascadeManager:
         if prefix_hash and prefix_hash in self._kv_affinity:
             affinity_providers = list(self._kv_affinity[prefix_hash].keys())
 
-        # Sort: KV Affinity -> Low Latency -> Unknown
         with_affinity: list[tuple[BaseProvider, float]] = []
         known_good: list[tuple[BaseProvider, float]] = []
         unknown: list[BaseProvider] = []

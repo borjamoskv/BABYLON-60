@@ -27,7 +27,6 @@ __all__ = [
 ]
 
 
-# ─── 1. CTO Escéptico (90 segundos, sin EU AI Act, sin métricas) ─────
 
 PITCH_CTO_SKEPTIC = """\
 "La última vez que tu equipo deployó un agente en producción - ¿cuánto tiempo \
@@ -52,7 +51,6 @@ prefieres construirlo tú cuando ya sea urgente, o instalarlo hoy cuando aún es
 """
 
 
-# ─── 2. Developer usando Mem0 (≤280 chars, GitHub comment) ──────────
 
 PITCH_MEMO_DEV = """\
 Mem0 guarda lo que tu agente recuerda. CORTEX responde a la pregunta \
@@ -62,7 +60,6 @@ que Mem0 no puede: ¿cómo sabes que ese recuerdo es el original?
 """
 
 
-# ─── 3. Open Source Contributor (primera frase falseable) ───────────
 
 PITCH_OS_CONTRIBUTOR = """\
 El WBFT de CORTEX rechaza nodos con reputación-score < 0.6 usando ponderación \
@@ -71,7 +68,6 @@ lee cortex/consensus/wbft.py línea 147 y dime si estoy equivocado.\
 """
 
 
-# ─── 4. Director de Compliance bancario (cero jerga técnica) ────────
 
 PITCH_COMPLIANCE_DIRECTOR = """\
 Imagina que cada decisión que toma tu agente de IA queda sellada en un sobre \
@@ -87,7 +83,6 @@ no fue modificada. Podemos demostrarlo en dos minutos."\
 """
 
 
-# ─── 5. VC que ya dijo "no" (4 frases, sin métricas, sin refutar) ───
 
 PITCH_VC_FOLLOWUP = """\
 La última vez hablamos de timing. Tienes razón en que el mercado no está listo.
@@ -101,7 +96,6 @@ Solo quería que lo supieras antes de que llegue por otra vía.\
 """
 
 
-# ─── 6. Periodista de TechCrunch / Wired (lede sin producto ni empresa) ─
 
 PITCH_JOURNALIST = """\
 En 2026, la pregunta más cara del mundo de la IA no es "¿qué sabe el agente?" \
@@ -111,7 +105,6 @@ Una startup española está apostando a que esa pregunta valdrá €30 millones 
 la primera vez que un regulador europeo se la haga a una empresa sin respuesta.\
 """
 
-# ─── 7. TOM (The Tracker / El Rastreador) ───────────────────────────
 
 PITCH_TOM = """\
 "Los números no mienten. Las personas sí. Scan completado: 145.230 registros \
@@ -121,7 +114,6 @@ fósil de la transacción."\
 """
 
 
-# ─── 8. OLIVER (The Hammer / El Ejecutor) ─────────────────────────────
 
 PITCH_OLIVER = """\
 "No hay hallazgo sin efecto. Si no tiene consecuencia, no es auditoría, \
@@ -130,7 +122,6 @@ Expediente CNMV sellado. La materialidad es de €11.78M. ¿Siguiente objetivo?"
 """
 
 
-# ─── 9. LYNX (The Pattern Weaver / El Tejedor de Patrones) ─────────────
 
 PITCH_LYNX = """\
 "El caos es solo un patrón que no has escalado lo suficiente. Detectada \

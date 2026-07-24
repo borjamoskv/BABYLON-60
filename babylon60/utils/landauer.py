@@ -20,8 +20,6 @@ class LandauerAnalyzer(ast.NodeVisitor):
             self.stats[key] += 1
         self.complexity += 1
 
-        # Track complexity for the current stack of nodes (Func/Class)
-        # All parents in the stack inherit the complexity of their sub-nodes
         for item in self._current_node_stack:
             item["complexity"] += 1
 
@@ -72,7 +70,6 @@ class LandauerAnalyzer(ast.NodeVisitor):
         self._visit_node(node, "decisions")  # type: ignore
 
     def visit_BoolOp(self, node):  # type: ignore
-        # AND/OR operators increase branching paths
         for _ in range(len(node.values) - 1):
             self._visit_node(node, "decisions")  # type: ignore
 
@@ -114,12 +111,8 @@ def calculate_calcification(file_path: Path) -> dict | None:  # type: ignore
         analyzer.visit(tree)
 
         loc = len(content.splitlines())
-        # Landauer metric: Entropy displacement vs Reduction
-        # High complexity in low LOC is 'dense' (good),
-        # High complexity in high LOC is 'bloated' (calcified).
         calcification_score = (analyzer.complexity * loc) / 100
 
-        # Calculate scores for individual nodes
         for node in analyzer.node_metrics:
             node_loc = node["end_line"] - node["start_line"] + 1
             node["score"] = round((node["complexity"] * node_loc) / 10, 2)
@@ -142,7 +135,6 @@ def audit_calcification(directory: Path, limit: int = 10) -> list[dict]:  # type
     results = []
     skip_dirs = {".venv", "venv", ".cortex", ".git", "__pycache__", "node_modules"}
     for root, dirs, files in os.walk(directory):
-        # Skip directories in-place
         dirs[:] = [d for d in dirs if d not in skip_dirs]
         for file in files:
             if file.endswith(".py") and not file.startswith("__"):
@@ -150,5 +142,4 @@ def audit_calcification(directory: Path, limit: int = 10) -> list[dict]:  # type
                 if res:
                     results.append(res)
 
-    # Sort by calcification score (descending)
     return sorted(results, key=lambda x: x["score"], reverse=True)[:limit]

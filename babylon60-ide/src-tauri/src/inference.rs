@@ -3,12 +3,8 @@ use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 use sha2::{Digest, Sha256};
 
-// ═══════════════════════════════════════════════════════
 //  INFERENCE KERNEL — C5-REAL Local Transformers/MLX/Ollama
-//  Rule: Zero-Network Policy (Strict localhost boundary)
-// ═══════════════════════════════════════════════════════
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InferenceConfig {
     pub model: String,
     pub base_url: String,
@@ -27,7 +23,6 @@ impl Default for InferenceConfig {
     }
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InferenceResult {
     pub text: String,
     pub model: String,
@@ -38,7 +33,6 @@ pub struct InferenceResult {
 }
 
 /// Enforces the C5-REAL Zero-Network Policy.
-/// Traps and purges any attempt to route to hyperscalers.
 pub fn validate_local_endpoint(url: &str) -> Result<(), String> {
     let lower = url.to_lowercase();
     if lower.contains("openai.com")
@@ -61,14 +55,12 @@ pub fn validate_local_endpoint(url: &str) -> Result<(), String> {
     Ok(())
 }
 
-/// Computes SHA256 invariant of generated output text.
 fn compute_hash(text: &str) -> String {
     let mut hasher = Sha256::new();
     hasher.update(text.as_bytes());
     hex::encode(hasher.finalize())
 }
 
-/// Synchronous local inference via Ollama / MLX-LM local REST socket (`127.0.0.1:11434`).
 pub fn run_local_inference(
     prompt: &str,
     model: Option<String>,
@@ -87,7 +79,6 @@ pub fn run_local_inference(
     let endpoint = format!("{}/chat/completions", config.base_url.trim_end_matches('/'));
     let start_time = Instant::now();
 
-    // Prepare payload compatible with local OpenAI-format sockets (MLX / Ollama / vLLM)
     let payload = json!({
         "model": config.model,
         "messages": [
@@ -105,7 +96,6 @@ pub fn run_local_inference(
         "stream": false
     });
 
-    // Simple HTTP client over std or curl fallback for pure local loopback without heavy reqwest async overhead
     let client = std::process::Command::new("curl")
         .arg("-s")
         .arg("-X")
@@ -163,7 +153,6 @@ pub fn run_local_inference(
     })
 }
 
-/// Checks availability of local silicon endpoints (`127.0.0.1:11434` and `/api/tags`).
 pub fn check_local_status() -> Result<Value, String> {
     let output = std::process::Command::new("curl")
         .arg("-s")

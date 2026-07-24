@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# SPDX-License-Identifier: Apache-2.0
 """Cadastral Perimeter Check - Sovereign Territorial Engine.
 
 Cross-references zoning law, ownership records, and expropriation status
@@ -35,9 +34,6 @@ from babylon60.extensions.skills.cadastral.models import (
 
 logger = logging.getLogger(__name__)
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# RISK FIELD CONSTANTS - Gravitational curvature per zone
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 _ZONE_RISK_WEIGHT: dict[ZoneClassification, float] = {
     ZoneClassification.ABANDONED_PUBLIC: 0.05,
@@ -88,9 +84,6 @@ def _haversine_km(c1: Coordinate, c2: Coordinate) -> float:
     return r_earth * 2 * math.asin(math.sqrt(a))
 
 
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-# ENGINE
-# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 class CadastralEngine:
@@ -106,7 +99,6 @@ class CadastralEngine:
         self._parcels: dict[str, Parcel] = {}
         self._scan_count: int = 0
 
-    # ── Registration ──────────────────────────────────────────────────────
 
     def register_parcel(self, parcel: Parcel) -> None:
         """Register a parcel in the engine's spatial index."""
@@ -119,7 +111,6 @@ class CadastralEngine:
             self.register_parcel(p)
         return len(parcels)
 
-    # ── Risk Scoring ──────────────────────────────────────────────────────
 
     def assess_risk(self, parcel: Parcel) -> RiskAssessment:
         """Compute a composite risk score for a single parcel.
@@ -159,7 +150,6 @@ class CadastralEngine:
             recommendation=recommendation,
         )
 
-    # ── Perimeter Scan ────────────────────────────────────────────────────
 
     def scan_perimeter(
         self,
@@ -195,7 +185,6 @@ class CadastralEngine:
             elif assessment.risk == RiskLevel.FORBIDDEN:
                 forbidden_count += 1
 
-            # Blind-spot detection
             if assessment.risk_score <= _BLIND_SPOT_THRESHOLD:
                 gaps = self._detect_legal_gaps(parcel, assessment)
                 if gaps:
@@ -211,7 +200,6 @@ class CadastralEngine:
                     )
                     blind_spots.append(spot)
 
-        # Compute entropy reduction
         total = len(assessments)
         entropy_before = math.log2(max(1, len(self._parcels)))
         entropy_after = math.log2(max(1, total)) if total > 0 else 0.0
@@ -232,7 +220,6 @@ class CadastralEngine:
         logger.info("[CADASTRAL] %s", report.summary)
         return report
 
-    # ── Blind-Spot Analysis ───────────────────────────────────────────────
 
     def _detect_legal_gaps(self, parcel: Parcel, assessment: RiskAssessment) -> list[str]:
         """Identify specific legal gaps that create a blind spot."""
@@ -273,7 +260,6 @@ class CadastralEngine:
             return 0.4  # C2
         return 0.2  # C1
 
-    # ── Recommendations ───────────────────────────────────────────────────
 
     def _generate_recommendation(self, risk: RiskLevel, parcel: Parcel) -> str:
         """Generate a sovereign recommendation based on risk level."""
@@ -300,7 +286,6 @@ class CadastralEngine:
         }
         return recs.get(risk, "UNKNOWN: Classification failed, manual review required.")
 
-    # ── Telemetry ─────────────────────────────────────────────────────────
 
     def get_status(self) -> dict[str, Any]:
         """Return engine telemetry."""

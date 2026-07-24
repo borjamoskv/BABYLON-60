@@ -1,5 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# pyright: reportMissingImports=false, reportAttributeAccessIssue=false, reportOptionalMemberAccess=false
 import asyncio
 import logging
 import time
@@ -19,7 +18,6 @@ if TYPE_CHECKING:
 
 logger = logging.getLogger("babylon60_extensions.ui_control.accessibility")
 
-# Default max depth for tree traversals
 DEFAULT_MAX_DEPTH = 8
 
 
@@ -56,7 +54,6 @@ class AccessibilityEngine:
             return value
         return None
 
-    # ─── Find by Identifier ─────────────────────────────────────
 
     def find_element(self, app_name: str, identifier: str) -> AXElement | None:
         """
@@ -68,7 +65,6 @@ class AccessibilityEngine:
             return None
         return self._search_by_attribute(app_ref, "AXIdentifier", identifier)
 
-    # ─── Find by Title ──────────────────────────────────────────
 
     def find_element_by_title(
         self,
@@ -87,10 +83,8 @@ class AccessibilityEngine:
         result = self._search_by_attribute(app_ref, "AXTitle", title, max_depth)
         if result:
             return result
-        # Fallback: AXDescription
         return self._search_by_attribute(app_ref, "AXDescription", title, max_depth)
 
-    # ─── Find by Role ───────────────────────────────────────────
 
     def find_elements_by_role(
         self,
@@ -130,7 +124,6 @@ class AccessibilityEngine:
             for child in children:
                 self._collect_by_role(child, target_role, results, depth + 1, max_depth)
 
-    # ─── Tree Dump ──────────────────────────────────────────────
 
     def dump_tree(
         self,
@@ -168,7 +161,6 @@ class AccessibilityEngine:
             for child in children:
                 self._traverse_tree(child, elements, depth + 1, max_depth)
 
-    # ─── Value Operations ───────────────────────────────────────
 
     def get_value(self, element: AXElement) -> str | None:
         """Reads AXValue from an element (text fields, sliders, etc)."""
@@ -189,7 +181,6 @@ class AccessibilityEngine:
             return InteractionResult(success=True)
         return InteractionResult(success=False, error=f"AXError setting value: {error}")
 
-    # ─── Wait for Element ───────────────────────────────────────
 
     async def wait_for_element(
         self,
@@ -240,7 +231,6 @@ class AccessibilityEngine:
                 await asyncio.sleep(poll_interval)
             return None
 
-    # ─── Actions ────────────────────────────────────────────────
 
     async def perform_click(self, element: AXElement) -> InteractionResult:
         """Performs a default action (click) on the element."""
@@ -252,7 +242,6 @@ class AccessibilityEngine:
             return InteractionResult(success=True)
         return InteractionResult(success=False, error=f"AXError: {error}")
 
-    # ─── Internal Helpers ───────────────────────────────────────
 
     def _search_by_attribute(
         self,

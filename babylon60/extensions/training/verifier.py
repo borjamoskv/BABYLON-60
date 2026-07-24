@@ -1,6 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# Author: borjamoskv
-# License: Apache-2.0
 """
 Adapter Verifier v2.0 — Control de Integridad Estructural y Numérica de Adaptadores LoRA.
 
@@ -65,7 +63,6 @@ class AdapterVerifier:
                 "metrics": {},
             }
 
-        # Check structural files
         config_file = path / "adapter_config.json"
         weights_npz = path / "weights.npz"
         weights_safetensors = path / "adapters.safetensors"
@@ -86,7 +83,6 @@ class AdapterVerifier:
                 "metrics": {},
             }
 
-        # Load and validate config JSON
         try:
             with open(config_file, encoding="utf-8") as f:
                 config_data = json.load(f)
@@ -116,7 +112,6 @@ class AdapterVerifier:
                 config_base_model,
             )
 
-        # ─── Mathematical and Structural Integrity Check (NaN/Inf & Shape Scan) ──────────────────────
         nan_detected = False
         inf_detected = False
         tensor_count = 0
@@ -124,7 +119,6 @@ class AdapterVerifier:
         numerical_scan_skipped = False
         shapes = {}
 
-        # Try scanning safetensors
         if has_safetensors:
             if weights_safetensors.stat().st_size == 0:
                 return {
@@ -166,7 +160,6 @@ class AdapterVerifier:
                     "metrics": {},
                 }
 
-        # Try scanning NPZ
         if has_npz:
             if weights_npz.stat().st_size == 0:
                 return {
@@ -212,7 +205,6 @@ class AdapterVerifier:
                 },
             }
 
-        # Collect LoRA pairs for rank and shape alignment checks
         if shapes:
             lora_pairs: dict[str, Any] = {}
             for key, shape in shapes.items():
@@ -248,7 +240,6 @@ class AdapterVerifier:
                         lora_pairs[base] = {}
                     lora_pairs[base][part] = (key, shape)
 
-            # Validate each LoRA pair
             layer_pattern = re.compile(r"(?:^|\.)layers?\.(\d+)(?:\.|$)")
             for base, parts in lora_pairs.items():
                 if "a" not in parts:
@@ -342,7 +333,6 @@ class AdapterVerifier:
                                 "metrics": {},
                             }
 
-        # Loading Check
         load_success = False
         import_error_msg = None
         try:
@@ -353,7 +343,6 @@ class AdapterVerifier:
             import_error_msg = str(e)
             logger.info("mlx_lm not available. Falling back to simulated verification.")
 
-        # Compile validation metrics
         metrics = {
             "validation_loss": config_data.get("validation_loss", 0.0),
             "iters": config_data.get("iters", 0),

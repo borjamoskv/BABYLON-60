@@ -16,7 +16,6 @@ import re
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Any, Final
 
-# Import the router from the engine
 from babylon60.engine.causal.taint_engine import MHCAntigenRouter, canonicalize_content
 from babylon60.utils.base60 import bytes_to_base60
 
@@ -37,21 +36,17 @@ class IHelpPurgeDaemon:
         self.agent_id: Final[str] = "t_cell_alpha_purge"
         self.mhc_router: MHCAntigenRouter = mhc_router
 
-        # Import dynamically to avoid circular dependencies
         from babylon60.routes.telemetry import BASE_MAFIA_NODES
 
-        # Escape all regex characters in the nodes, and convert whitespace in nodes to \s+
         escaped_nodes: list[str] = []
         for node in BASE_MAFIA_NODES:
             escaped: str = re.escape(node)
             cleaned: str = re.sub(r"(\\ )|\s+", r"\\s+", escaped)
             escaped_nodes.append(cleaned)
 
-        # Regex signature targeting the specific Anergy vectors
         pattern: str = "|".join(escaped_nodes)
         self.antigen_signature: Final[str] = rf"(?i)\b({pattern})\b"
 
-        # Bind the daemon to the MHC router
         self.mhc_router.register_t_cell(self.agent_id, self.antigen_signature)
         logger.info(
             "[%s] Armed and actively monitoring Swarm ingest paths for %s.",
@@ -74,7 +69,6 @@ class IHelpPurgeDaemon:
             ) as cursor:
                 row = await cursor.fetchone()
         except sqlite3.OperationalError:
-            # Create agents table if missing
             from babylon60.database.schema_extensions import CREATE_AGENTS
 
             with causal_write(conn):
@@ -146,7 +140,6 @@ class IHelpPurgeDaemon:
         from babylon60.database.core import connect_async
         from babylon60.engine.causal.taint_engine import generate_secure_taint_token
 
-        # Auto-defense check against denial-of-service payload attacks
         if len(payload) > self.MAX_PAYLOAD_BYTES:
             logger.warning(
                 "[%s] Payload size (%s bytes) exceeds threshold. Truncating payload.",
@@ -159,8 +152,6 @@ class IHelpPurgeDaemon:
         waste_bytes: int = len(canonical)
         payload_hash: str = bytes_to_base60(hashlib.sha3_256(canonical).digest())
 
-        # Calculate theoretical compute cycles saved (Anergy eliminated)
-        # Assuming ~4 tokens per word, 1 token ~ 3 bytes
         tokens_saved: int = waste_bytes // 3
 
         logger.warning(
@@ -177,11 +168,9 @@ class IHelpPurgeDaemon:
         )
         conn = await connect_async(db_path)
         try:
-            # Initialize EnterpriseAuditLedger
             ledger = EnterpriseAuditLedger(conn)
             await ledger.ensure_table()
 
-            # Check and register agent identity
             km = KeyManager(service_name="cortex_agents")
             pub_key: str | None = km.get_public_key_b64(self.agent_id)
             if not pub_key:
@@ -201,7 +190,6 @@ class IHelpPurgeDaemon:
                 private_key_b64=priv_key_b64,
             )
 
-            # Write PHAGOCYTOSIS to Master Ledger
             await ledger.log_action(
                 tenant_id="global",
                 actor_role="daemon",
@@ -211,7 +199,6 @@ class IHelpPurgeDaemon:
                 status="SUCCESS",
             )
 
-            # Update daemon reputation (Success hit)
             await self._update_daemon_reputation(conn, is_hit=True)
         except Exception as ex:  # noqa: BLE001
             logger.error("[***id")
@@ -245,7 +232,6 @@ class IHelpPurgeDaemon:
         from babylon60.database.core import connect_async
         from babylon60.routes.telemetry import BASE_MAFIA_NODES
 
-        # Filter out non-domains (e.g. names with spaces or no dots)
         domains: list[str] = [node for node in BASE_MAFIA_NODES if "." in node and " " not in node]
 
         db_path: str = os.environ.get("CORTEX_DB_PATH") or os.path.expanduser(
@@ -256,7 +242,6 @@ class IHelpPurgeDaemon:
             ledger = EnterpriseAuditLedger(conn)
             await ledger.ensure_table()
 
-            # Ensure daemon registration on startup check
             from babylon60.crypto.keys import KeyManager
 
             km = KeyManager(service_name="cortex_agents")
@@ -270,15 +255,11 @@ class IHelpPurgeDaemon:
             async def check_domain(hostname: str) -> None:
                 async with semaphore:
                     try:
-                        # 1. DNS check
                         await asyncio.get_running_loop().getaddrinfo(hostname, None)
 
-                        # 2. HTTP and RSS check
                         async with httpx.AsyncClient(timeout=5.0) as client:
-                            # HTTP check
                             await client.get(f"https://{hostname}")
 
-                            # RSS feed validation check
                             feed_content: str | None = None
                             for path in ["/feed", "/rss"]:
                                 try:
@@ -290,7 +271,6 @@ class IHelpPurgeDaemon:
                                     continue
 
                             if feed_content and re.search(self.antigen_signature, feed_content):
-                                # Trigger phagocytosis
                                 await self.phagocytize(
                                     feed_content, source_agent=f"rss_feed:{hostname}"
                                 )
@@ -299,7 +279,6 @@ class IHelpPurgeDaemon:
                         logger.error(
                             "[%s] Domain checkout failed for %s: %s", self.agent_id, hostname, e
                         )
-                        # Log FORENSIC_ANOMALY to Master Ledger
                         await ledger.log_action(
                             tenant_id="global",
                             actor_role="system",
@@ -308,7 +287,6 @@ class IHelpPurgeDaemon:
                             resource=hostname,
                             status="ANOMALY",
                         )
-                        # Penalize agent reputation on telemetry anomaly
                         await self._update_daemon_reputation(conn, is_hit=False)
 
             await asyncio.gather(*(check_domain(d) for d in domains))
@@ -318,6 +296,5 @@ class IHelpPurgeDaemon:
         return {"status": "completed", "checked_domains": len(domains)}
 
 
-# Initialization hook for daemon loader
 def init_daemon(mhc_router: MHCAntigenRouter) -> IHelpPurgeDaemon:
     return IHelpPurgeDaemon(mhc_router)

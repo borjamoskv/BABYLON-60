@@ -55,7 +55,6 @@ class BrowserEngine:
         self._page = await self._context.new_page()
 
         assert self._page is not None
-        # Override navigator.webdriver
         await self._page.add_init_script(
             "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
         )
@@ -92,8 +91,6 @@ class BrowserEngine:
         if not self._page:
             return {"dom": "", "stats": {}}
 
-        # A Javascript snippet that locates all interactive or semantic elements,
-        # sets a unique attribute `data-cortex-id`, and builds a simplified text representation.
         js_script = """
         () => {
             let idCounter = 1;
@@ -130,11 +127,9 @@ class BrowserEngine:
 
                 if (discarded) return;
 
-                // Assign ID
                 const cortexId = idCounter++;
                 el.setAttribute('data-cortex-id', cortexId);
 
-                // Extract useful text
                 let text = el.innerText || el.value || el.placeholder ||
                            el.getAttribute('aria-label') || '';
                 text = text.trim().replace(/\\n/g, ' ');
@@ -167,7 +162,6 @@ class BrowserEngine:
             stats.get("discarded_opacity"),
         )
 
-        # Asimetría Semántica: Alarma de 2º orden
         if total > 50:
             discard_ratio = (total - accepted) / total
             if discard_ratio > 0.8:

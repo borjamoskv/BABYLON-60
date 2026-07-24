@@ -1,8 +1,4 @@
 # [C5-REAL] Exergy-Maximized
-# This file is part of CORTEX.
-# Licensed under the Apache License, Version 2.0.
-# See top-level LICENSE file for details.
-# Change Date: 2030-01-01 (Transitions to Apache 2.0)
 
 """Langbase Sync.
 
@@ -91,7 +87,6 @@ async def sync_to_langbase(
     """
     mem_name = memory_name or f"cortex-{project}"
 
-    # 1. Ensure memory exists
     try:
         await client.create_memory(
             name=mem_name,
@@ -99,16 +94,13 @@ async def sync_to_langbase(
         )
         logger.info("Created Langbase memory: %s", mem_name)
     except (OSError, RuntimeError) as e:
-        # Memory might already exist - that's fine
         if "already exists" not in str(e).lower() and "409" not in str(e):
             logger.warning("Memory creation note: %s", e)
 
-    # 2. Recall facts from CORTEX
     facts = await engine.recall(project=project, limit=limit)
     if not facts:
         return {"synced": 0, "errors": 0, "memory": mem_name, "message": "No facts to sync"}
 
-    # 3. Upload each fact as a document
     synced = 0
     errors = 0
     error_details: list[str] = []

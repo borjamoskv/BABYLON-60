@@ -24,7 +24,6 @@ __all__ = [
 
 logger = logging.getLogger("babylon60_extensions.security.abac")
 
-# Attribute constants for policy conditions
 ATTR_SUBJECT_ROLE = "subject.role"
 
 
@@ -69,9 +68,7 @@ class Policy:
     priority: int = 0
 
 
-# Default policies - deny-by-default, then layer allows
 DEFAULT_POLICIES: list[Policy] = [
-    # Tenant isolation: users can only access their own tenant's data
     Policy(
         name="tenant-isolation",
         effect=Effect.DENY,
@@ -80,7 +77,6 @@ DEFAULT_POLICIES: list[Policy] = [
         conditions={"subject.tenant_id": "__MISMATCH__"},
         priority=100,
     ),
-    # Viewers can read facts
     Policy(
         name="viewer-read-facts",
         effect=Effect.ALLOW,
@@ -89,7 +85,6 @@ DEFAULT_POLICIES: list[Policy] = [
         conditions={ATTR_SUBJECT_ROLE: "viewer"},
         priority=10,
     ),
-    # Agents can read and write facts
     Policy(
         name="agent-write-facts",
         effect=Effect.ALLOW,
@@ -106,7 +101,6 @@ DEFAULT_POLICIES: list[Policy] = [
         conditions={ATTR_SUBJECT_ROLE: "agent"},
         priority=10,
     ),
-    # Admins can do everything
     Policy(
         name="admin-full-access",
         effect=Effect.ALLOW,
@@ -115,7 +109,6 @@ DEFAULT_POLICIES: list[Policy] = [
         conditions={ATTR_SUBJECT_ROLE: "admin"},
         priority=50,
     ),
-    # System role: unrestricted
     Policy(
         name="system-unrestricted",
         effect=Effect.ALLOW,
@@ -171,7 +164,6 @@ class ABACEvaluator:
             logger.debug("No policies matched - deny by default")
             return AccessDecision.DENIED
 
-        # Among applicable, highest priority wins. If tied, DENY wins.
         top_priority = applicable[0].priority
         top_policies = [p for p in applicable if p.priority == top_priority]
 
@@ -180,7 +172,6 @@ class ABACEvaluator:
                 logger.info("Access DENIED by policy '%s'", p.name)
                 return AccessDecision.DENIED
 
-        # All top-priority policies are ALLOW
         logger.debug("Access GRANTED by policy '%s'", top_policies[0].name)
         return AccessDecision.GRANTED
 
@@ -216,12 +207,9 @@ class ABACEvaluator:
     def _match_single_condition(self, key: str, expected: Any, ctx: AccessContext) -> bool:
         actual = self._resolve_attribute(key, ctx)
 
-        # Special: tenant isolation check
         if expected == "__MISMATCH__":
             sub_tenant = ctx.subject.get("tenant_id")
             res_tenant = ctx.resource.get("tenant_id")
-            # If ANY tenant is missing, or they don't explicitly match,
-            # we consider it a mismatch, triggering the DENY policy.
             if sub_tenant != res_tenant or not sub_tenant or not res_tenant:
                 return True
             return False
@@ -253,5 +241,4 @@ class ABACEvaluator:
         return source.get(attr)
 
 
-# Global evaluator instance
 ABAC = ABACEvaluator()

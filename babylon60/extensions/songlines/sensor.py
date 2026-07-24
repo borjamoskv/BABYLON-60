@@ -40,11 +40,9 @@ class TopographicSensor:
         resonances = []
         ignored = {".git", ".venv", "__pycache__", ".pytest_cache", "node_modules", ".cortex"}
 
-        # 1. Faster recursive scan avoiding ignored directories
         for root, dirs, files in os.walk(root_dir):
             dirs[:] = [d for d in dirs if d not in ignored]
 
-            # Check for fallback manifests in this directory
             if ".songlines" in files:
                 manifest_path = Path(root) / ".songlines"
                 resonances.extend(self._scan_single_manifest(manifest_path))
@@ -62,7 +60,6 @@ class TopographicSensor:
                 file_ghosts = self._read_ghosts_from_file(path)
                 resonances.extend(file_ghosts)
 
-        # 2. Deduplicate and clean (by ghost ID)
         unique_ghosts = {}  # type: ignore[var-annotated]
         for ghost in resonances:
             gid = ghost["id"]
@@ -87,7 +84,6 @@ class TopographicSensor:
 
     def _get_attr_names(self, file_path: Path) -> list[str]:
         """Fetch matching attribute names via os or CLI."""
-        # 1. Try native os.listxattr (Linux mostly)
         if hasattr(os, "listxattr"):
             try:
                 # type: ignore[reportAttributeAccessIssue]
@@ -95,7 +91,6 @@ class TopographicSensor:
             except OSError:
                 import logging
 
-        # 1.5 Try native python xattr package (macOS mostly) if installed
         try:
             import xattr  # pyright: ignore[reportMissingImports]
 
@@ -108,7 +103,6 @@ class TopographicSensor:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-        # 2. Try xattr CLI (Chronos Sniper: added timeout)
         try:
             out = subprocess.check_output(
                 ["xattr", str(file_path)], stderr=subprocess.DEVNULL, timeout=2.0
@@ -123,14 +117,12 @@ class TopographicSensor:
 
     def _get_attr_payload(self, file_path: Path, attr: str) -> bytes | None:
         """Fetch attribute content via os or CLI."""
-        # 1. Try native os.getxattr
         if hasattr(os, "getxattr"):
             try:
                 return os.getxattr(str(file_path), attr)  # type: ignore[reportAttributeAccessIssue]
             except OSError:
                 import logging
 
-        # 1.5 Try native python xattr package (macOS mostly) if installed
         try:
             import xattr  # pyright: ignore[reportMissingImports]
 
@@ -142,7 +134,6 @@ class TopographicSensor:
         except Exception as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
-        # 2. Try xattr CLI -p (Chronos Sniper: added timeout)
         try:
             return subprocess.check_output(
                 ["xattr", "-p", attr, str(file_path)], stderr=subprocess.DEVNULL, timeout=2.0
@@ -155,7 +146,6 @@ class TopographicSensor:
     ) -> GhostTrace | None:
         """Decode payload and handle decay/evaporation."""
         try:
-            # Entropy Demon Guard: Handle malformed UTF-8 or unexpected JSON
             payload_str = payload_bytes.decode("utf-8", errors="replace")
             ghost = json.loads(payload_str)
 

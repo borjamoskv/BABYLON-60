@@ -4,7 +4,6 @@ import os
 import json
 import sqlite3
 
-# Evitar dependencias externas complejas para garantizar la portabilidad (Ω23)
 def get_db_path():
     project_root = os.getenv("PORTAL_PROJECT_ROOT", os.getcwd())
     return os.path.join(project_root, "portal_reveng_ledger.db")
@@ -46,7 +45,6 @@ def query_ledger(query_type, param):
         return {"error": str(e)}
 
 def main():
-    # Estructura simple de RPC para integraciones de IDE agénticos
     if len(sys.argv) < 3:
         print(json.dumps({"error": "Usage: mcp_symbol_helper.py [search|get_details] [param]"}))
         sys.exit(1)

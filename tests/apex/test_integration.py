@@ -34,9 +34,7 @@ def test_end_to_end_score_and_ledger(tmp_path) -> None:  # type: ignore
         assert result.assessment.tier in ("LOW", "MODERATE", "HIGH", "CRITICAL")
         assert result.ledger_entry.entry_hash
         assert ledger.verify_chain().valid
-        # history plane present for this long-running completed trial
         assert result.history is not None and result.history.n_versions >= 1
-        # report renders to self-contained HTML
         html = render_report(result)
         assert html.startswith("<!DOCTYPE html>") and "APEX" in html and "localStorage" not in html
 
