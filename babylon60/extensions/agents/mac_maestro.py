@@ -61,9 +61,9 @@ class MacMaestroAgent:
 
         logger.info("Mac Maestro processing instruction: %s", instruction)
 
-        prompt = CortexPrompt(  # type: ignore[call-arg]
-            system=SYSTEM_PROMPT,  # type: ignore[call-arg]
-            prompt=instruction,  # type: ignore[call-arg]
+        prompt = CortexPrompt(
+            system_instruction=SYSTEM_PROMPT,
+            working_memory=[{"role": "user", "content": instruction}],
             intent=IntentProfile.CODE,
             temperature=0.1,
         )
