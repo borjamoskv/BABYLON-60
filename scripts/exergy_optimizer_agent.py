@@ -246,7 +246,8 @@ def check_consolidation_need() -> ConsolidationDecision:
                     try:
                         with open(transcript, "r", encoding="utf-8") as tf:
                             for line in tf:
-                                if not line.strip(): continue
+                                if not line.strip():
+                                    continue
                                 try:
                                     step = json.loads(line)
                                     text = f"{step.get('content', '')} {step.get('thinking', '')} {str(step.get('tool_calls', ''))}".lower()

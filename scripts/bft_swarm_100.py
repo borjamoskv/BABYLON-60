@@ -7,7 +7,6 @@ Validates SQLite WAL busy_timeout=5000ms and EIP-1153 invariants under extreme c
 import asyncio
 import sqlite3
 import time
-import os
 import uuid
 from pathlib import Path
 from dataclasses import dataclass
@@ -96,7 +95,7 @@ async def main():
     await asyncio.gather(*tasks)
     
     print("\n# SWARM COLLAPSE METRICS")
-    print(f"Total Agents : 100")
+    print("Total Agents : 100")
     print(f"Successes    : {metrics.successes}")
     print(f"Deadlocks    : {metrics.deadlocks} (SQLite WAL contention)")
     print(f"Other Errors : {metrics.failures}")
