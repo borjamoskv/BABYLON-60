@@ -15,6 +15,24 @@ class BFTLexicon:
             self.db_path = Path(__file__).parent.parent.parent / "cortex_lexicon.db"
         else:
             self.db_path = db_path
+        self._init_schema()
+
+    def _init_schema(self):
+        with self._get_conn() as conn:
+            conn.execute('''
+                CREATE TABLE IF NOT EXISTS lexicon_nodes (
+                    concept_hash TEXT PRIMARY KEY,
+                    canonical_name TEXT NOT NULL
+                )
+            ''')
+            conn.execute('''
+                CREATE TABLE IF NOT EXISTS lexicon_edges (
+                    source_hash TEXT,
+                    relation_type TEXT,
+                    target_hash TEXT,
+                    PRIMARY KEY (source_hash, relation_type, target_hash)
+                )
+            ''')
 
     def _get_conn(self) -> sqlite3.Connection:
         # INV_BFT_02: WAL mode, busy_timeout=5000ms
