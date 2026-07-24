@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 from cryptography.fernet import Fernet
 import aiosqlite
+import babylon60.database.core
 
 
 class BFTCausalInvariantError(RuntimeError):
@@ -129,7 +130,8 @@ class BFTLedgerActor:
         return future
 
     async def verify_chain(self) -> bool:
-        async with aiosqlite.connect(self._db_path) as db:
+        db = await babylon60.database.core.connect(self._db_path)
+        try:
             await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
             cursor = await db.execute("SELECT * FROM ledger_entries ORDER BY seq ASC")
             rows = await cursor.fetchall()
@@ -187,14 +189,13 @@ class BFTLedgerActor:
                 last_lamport = lamport_t
                 expected_seq += 1
             return True
+        finally:
+            await db.close()
 
     async def _worker(self) -> None:
-        async with aiosqlite.connect(self._db_path, isolation_level=None, timeout=5.0) as db:
+        db = await babylon60.database.core.connect(self._db_path)
+        try:
             await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
-            await db.execute("PRAGMA journal_mode=WAL")
-            await db.execute("PRAGMA synchronous=FULL")
-            await db.execute("PRAGMA foreign_keys=ON")
-            await db.execute("PRAGMA busy_timeout=5000")
             await self._init_db(db)
             while True:
                 await asyncio.sleep(0)
@@ -219,6 +220,8 @@ class BFTLedgerActor:
                         f"FAIL-FAST: General Exception intercepted on process: {process_res[0]}"
                     ) from process_res[0]
                 self._queue.task_done()
+        finally:
+            await db.close()
 
     async def _init_db(self, db: aiosqlite.Connection) -> None:
         await db.execute(

@@ -48,7 +48,7 @@ class SwarmBoard:
 
     def __init__(self, db_path: str):
         self.db_path = db_path
-        self._conn = babylon60.database.core.connect(db_path)
+        self._conn = babylon60.database.core.connect_sync(db_path)
         self.bus = SignalBus(self._conn)
 
         # Agent state tracking: source -> state dict
