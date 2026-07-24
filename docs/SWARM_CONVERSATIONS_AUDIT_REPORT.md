@@ -2,71 +2,71 @@
 > **Status:** Executed via Parallel Swarm | **Git Sentinel:** UNCRYSTALLIZED (sin cristalizar)
 
 ## 1. METRICS & THERMODYNAMIC EXERGY MATRIX
-- **Total Sessions Audited:** 73
-- **Total User Prompts:** 210
-- **Total Model Turns:** 2978
-- **Total Tool Executions:** 1354
-- **Total Physical Code Edits:** 209
-- **Mean Swarm Exergy Score:** `69.26/1000.0`
-- **Total Invariants Discovered:** 61
+- **Total Sessions Audited:** 234
+- **Total User Prompts:** 372
+- **Total Model Turns:** 4111
+- **Total Tool Executions:** 1585
+- **Total Physical Code Edits:** 210
+- **Mean Swarm Exergy Score:** `120.03/1000.0`
+- **Total Invariants Discovered:** 62
 
 ## 2. DISCOVERED INVARIANTS IN CONVERSATION CORPUS
 - `INV_BFT_02`
 - `INV_BFT_03`
-- `INV_C5_01_`
-- `INV_C5_03`
-- `INV_C5_04`
-- `INV_C5_07`
+- `INV_BFT_04`
+- `INV_C5_`
+- `INV_C5_01`
+- `INV_C5_02`
+- `INV_C5_05`
+- `INV_C5_08`
 - `INV_C5_10`
-- `INV_C5_10_P`
 - `INV_C5_11`
 - `INV_C5_12`
 - `INV_C5_13`
 - `INV_C5_14`
-- `INV_C5_15`
 - `INV_C5_16`
 - `INV_C5_17`
 - `INV_C5_18`
-- `INV_C5_18_BFT_F`
 - `INV_C5_19`
+- `INV_C5_2`
 - `INV_C5_20`
-- `INV_C5_20_K`
 - `INV_C5_21`
 - `INV_C5_22`
 - `INV_C5_23`
 - `INV_C5_24`
 - `INV_C5_25`
+- `INV_NEXUS_LINK`
 - `INV_R11`
-- `Ω1`
 - `Ω10`
-- `Ω100`
-- `Ω101`
+- `Ω11`
+- `Ω13`
+- `Ω132`
 
 ## 3. TOP HIGH-EXERGY SESSION TRAJECTORIES
 | Rank | Session ID | Exergy Score | Turns | Tools | Edits | Initial Prompt |
 |:---:|:---|:---:|:---:|:---:|:---:|:---|
-| 1 | `3298c8d5-ccbc-41f9-8c4d-e022597558d2` | **358.82** | 17 | 6 | 0 | <USER_REQUEST> sigue /goal  + 100 agentes AUDITORI... |
-| 2 | `b069e30a-2faf-46ea-82c7-30374ac9a854` | **310.47** | 43 | 20 | 3 | <USER_REQUEST> rradican la pereza cognitiva y las ... |
-| 3 | `df22b925-34a4-4351-a837-1cb5c08682f6` | **175.76** | 33 | 14 | 0 | <USER_REQUEST> Audit conversation logs for Content... |
-| 4 | `12ff7a83-f7d8-47ff-89fe-9c76260e2c32` | **158.14** | 86 | 40 | 8 | <USER_REQUEST> sigue TODO /goal  </USER_REQUEST> <... |
-| 5 | `782963a3-a769-48a4-ab01-8f2d736bbdc4` | **112.28** | 114 | 54 | 8 | <USER_REQUEST> REVISAR TODAS LAS INVARIANTEs en bu... |
-| 6 | `5c1a2264-0790-47cf-9ac7-2024c7ef0488` | **109.85** | 198 | 89 | 14 | <USER_REQUEST> FABLE 5 esta conCLAUDE CODE trabaja... |
-| 7 | `24155e5f-158e-4446-bc5d-a8fe889c1075` | **104.08** | 245 | 116 | 24 | <USER_REQUEST> .agents/AGENTS.md AUDITORIA ULTRATH... |
-| 8 | `b1319e96-f888-4fb6-a1d2-8ae11a958bf3` | **102.8** | 125 | 64 | 11 | <USER_REQUEST> piensa en ti. ULTRATHI K </USER_REQ... |
-| 9 | `dfb5d2ac-adbc-4121-bf03-415770399043` | **101.43** | 35 | 14 | 3 | <USER_REQUEST> COMO OPTIIMAR Y MAXIMIZAR LA EXERGI... |
-| 10 | `a073eb0d-229e-4a53-8ace-a20686c751a1` | **100.0** | 3 | 1 | 1 | <USER_REQUEST> PREparame una dieta TDAH </USER_REQ... |
-| 11 | `4d7d55e3-8bc6-42be-89f6-915866a19f97` | **100.0** | 1 | 0 | 0 | <USER_REQUEST> Execute C5-REAL physical audit on c... |
-| 12 | `ac7bfc80-dfe2-4c68-85d6-6f6723e5d0fd` | **100.0** | 7 | 1 | 1 | <USER_REQUEST> invariantes y antipatrone y primiti... |
-| 13 | `4b0ebe10-57e7-41fc-93dc-6f686ca717cf` | **100.0** | 0 | 0 | 0 | <USER_REQUEST> Execute C5-REAL physical audit on c... |
-| 14 | `7832857c-de80-4819-9b75-925aa334b9ba` | **100.0** | 1 | 0 | 0 | <USER_REQUEST>  que es esto </USER_REQUEST> <ADDIT... |
-| 15 | `af0d26e2-00a9-484e-9e6f-0e31e8600f42` | **100.0** | 1 | 0 | 0 | <USER_REQUEST> Execute C5-REAL physical audit on c... |
-| 16 | `1a5b34f6-b03b-4644-9ef2-df5d0301f014` | **100.0** | 1 | 0 | 0 | <USER_REQUEST> Execute C5-REAL physical audit on c... |
-| 17 | `aba4111e-a3a3-408e-8bf0-4c8ae0775213` | **99.22** | 64 | 29 | 4 | <USER_REQUEST> ULTRATHINK: SIGO TENTIENDO PROBLEMA... |
-| 18 | `f366077d-e395-4057-a5a2-9878be0b42b3` | **96.62** | 133 | 57 | 6 | <USER_REQUEST>  Qwen3.7-Max   2. DeepSeek-R1: Ince... |
-| 19 | `666f787f-5849-4f43-ac45-8bbd07a6af74` | **95.85** | 289 | 140 | 30 | <USER_REQUEST> todos /goal  </USER_REQUEST> <ADDIT... |
-| 20 | `567058e5-4a4f-4460-b7b8-af114bbd8556` | **94.04** | 277 | 140 | 39 | <USER_REQUEST> https://www.youtube.com/shorts/4XhI... |
-| 21 | `1bfec996-4232-4c3f-a9bf-4f5847e14d5c` | **90.0** | 70 | 41 | 13 | <USER_REQUEST> Your task is to fix ALL mypy strict... |
-| 22 | `2ef88ae1-b04b-4f9f-89d8-6e1cd2c61457` | **88.89** | 18 | 7 | 1 | <USER_REQUEST> mejoralo ULTRATHINK </USER_REQUEST>... |
-| 23 | `d1be05c4-d976-4498-8adb-b30e6c49f449` | **83.33** | 3 | 1 | 0 | <USER_REQUEST> Execute C5-REAL physical audit on c... |
-| 24 | `403a4e69-7e98-4fdf-89a4-456778e0d989` | **82.21** | 104 | 47 | 8 | <USER_REQUEST> mejoralo </USER_REQUEST> <ADDITIONA... |
-| 25 | `4881285e-ff9a-4d73-8fa4-c45c5567bc41` | **78.0** | 25 | 12 | 1 | <USER_REQUEST> purga entropia </USER_REQUEST> <ADD... |
+| 1 | `55eb7af4-15a9-4fe0-b6bf-ec57b4cc7585` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 89. Re-audit the 27th... |
+| 2 | `20bd30c7-60fa-4896-84c3-a8bff4d7f8d6` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 50. Identify the 50th... |
+| 3 | `380c89a9-8cdd-44fb-888d-94d8ae6697f3` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 6. Identify the 6th d... |
+| 4 | `dd07de04-271e-477b-bc1d-f5ac1b31ca43` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 31. Identify the 31st... |
+| 5 | `c65e7a61-9719-49a1-9926-bbefba51ff9e` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 97. Re-audit the 35th... |
+| 6 | `145b20b0-28e8-4399-9541-d6a91761ea79` | **420.0** | 0 | 0 | 0 | <USER_REQUEST> You are Agent 100. Re-audit the 38t... |
+| 7 | `a71c5fca-763c-4732-9a2e-05edfe856236` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 32. Identify the 32nd... |
+| 8 | `a1010852-48ae-489e-98fb-8ef5dcc61780` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 49. Identify the 49th... |
+| 9 | `18a55625-4ed7-4dd3-a487-ce01aaac4607` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 8. Identify the 8th d... |
+| 10 | `6f258066-9f92-4350-af9e-fea2cdcb582a` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 10. Identify the 10th... |
+| 11 | `31eaf9a0-6dd0-465a-b798-edb4cf637828` | **420.0** | 2 | 0 | 0 | <USER_REQUEST> You are Agent 99. Re-audit the 37th... |
+| 12 | `2663ad91-0b64-4933-98d5-4dc35cbb3db8` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 11. Identify the 11th... |
+| 13 | `62e09d2b-9b56-4fed-b16d-b4720514402e` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 77. Re-audit the 15th... |
+| 14 | `07c4eb9d-3d74-430f-99c3-47eeaf3c40ab` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 24. Identify the 24th... |
+| 15 | `eb01faed-1fef-4c93-8e58-b64e75c9e15b` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 92. Re-audit the 30th... |
+| 16 | `ba33844e-edd9-4061-aa22-3dff37d94c8b` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 88. Re-audit the 26th... |
+| 17 | `7250cbc6-07ba-4f76-a801-d91bde9d3e4c` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 91. Re-audit the 29th... |
+| 18 | `a836de65-a0b5-4b76-9f71-b875a43a866f` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 17. Identify the 17th... |
+| 19 | `bc537b53-c1ba-4795-bd81-3b048ffa8c3a` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 90. Re-audit the 28th... |
+| 20 | `971a7dd1-a4cf-4344-9dfb-56d964b77ade` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 98. Re-audit the 36th... |
+| 21 | `ed857f9e-568b-4b16-97f5-9b4403a9c157` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 62. Identify the 62nd... |
+| 22 | `5bff7815-ac18-45bf-bac4-3dea6579db79` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 18. Identify the 18th... |
+| 23 | `cd945b94-f717-4ed4-acf8-5d7a4949cc42` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 2. Identify the 2nd d... |
+| 24 | `e60819c7-c231-45a6-81a8-a8aef9936904` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 58. Identify the 58th... |
+| 25 | `f0b8fbeb-128b-4bd6-99bf-a318b58361f7` | **420.0** | 3 | 0 | 0 | <USER_REQUEST> You are Agent 7. Identify the 7th d... |

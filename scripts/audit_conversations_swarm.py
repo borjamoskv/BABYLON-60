@@ -43,7 +43,7 @@ def audit_single_session(session_dir: Path) -> Dict[str, Any]:
                     continue
                 try:
                     data = json.loads(line)
-                except Exception:
+                except json.JSONDecodeError:
                     continue
                 
                 step_type = data.get("type")
@@ -83,7 +83,7 @@ def audit_single_session(session_dir: Path) -> Dict[str, Any]:
                 if "/goal" in content:
                     unfulfilled_goals.append("/goal directive present")
 
-    except Exception as e:
+    except OSError as e:
         return {"session_id": session_id, "status": f"ERROR: {str(e)}"}
 
     # Exergy calculation (Density of actionable tool calls + C5 invariants per turn)
