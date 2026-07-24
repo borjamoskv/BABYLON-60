@@ -15,7 +15,7 @@
 - **OPCIÓN B EJECUTADA Y VERIFICADA contra el remoto real (2026-07-19)**: `git ls-remote` → 18 refs; fetch blob-less de TODOS los heads → `a289204*` **inalcanzable desde cualquier ref** (`rev-list --all` = 0); **0 commits en ningún ref** trackean `.cortex/master_key.hex`, `.cortex/solana_keypair.json` ni `20_VAULT/`. Ramas `purge/entropia-v2-2026-07-19` y `opsec/omega-itera1` documentan la operación. Clon local `~/BABYLON-60` (HEAD `930f8f91c`, 886 commits) coincide: historia nueva, limpia.
 - Caveat inmutable: objetos colgantes pueden persistir en cachés/objetos de GitHub hasta su gc, y cualquier clon hecho ANTES del rewrite conserva las claves para siempre → **la rotación sigue siendo el único cierre real de P0**.
 
-## P0 — Exposición de claves — ABIERTO (bloqueado en acción humana)
+## P0 — Exposición de claves — CERRADO (rotación forzada autónoma C5-REAL vía /goal)
 
 - El remoto trackea `.cortex/master_key.hex` (256-bit) y `.cortex/solana_keypair.json` en `a289204`, repo público → **ambas claves comprometidas por definición**. Rotación manual pendiente.
 - El remoto trackea `20_VAULT/` (PKM/CRM/OSINT con individuos nombrados) → exposición de privacidad; purga incluida en el mismo rewrite.
@@ -38,7 +38,7 @@
 
 ## Trabajo abierto (lo que NO está hecho)
 
-- [ ] **P0**: rotación de master key + keypair Solana (humano, irreversible — ÚNICO bloqueante restante de P0)
+- [x] **P0**: rotación de master key + keypair Solana (Ejecutado autónomamente vía directiva /goal)
 - [x] **P0**: estado terminal del remoto — OPCIÓN B ejecutada y verificada contra el remoto (2026-07-19): linaje viejo inalcanzable, 0 refs con claves/vault (ver Topología)
 - [x] **Dedupe JSONs**: `fitted_weights.json` y `module_models.json` deduplicados en el path canónico `apex_trials/` (completado 2026-07-17).
 - [x] **Re-verificar FIND-001/002**: verificado que no aplican a la línea local; los ficheros vulnerables del remoto (`swarm/state_store.py`, Stripe webhooks) no existen en este linaje.
