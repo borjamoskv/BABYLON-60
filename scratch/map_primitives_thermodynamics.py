@@ -75,7 +75,7 @@ def main():
         }
         
         print(json.dumps(output, indent=2))
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         print(json.dumps({"error": str(e)}))
         sys.exit(1)
 

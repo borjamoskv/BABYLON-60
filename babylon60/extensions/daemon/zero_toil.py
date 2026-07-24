@@ -47,7 +47,7 @@ class ZeroToilDaemon:
                                 purged_bytes += os.path.getsize(os.path.join(dirpath, filename))
                         shutil.rmtree(path)
                         logger.info(f"[ZERO-TOIL] Apoptosis executed on {path}")
-                    except Exception as e:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                         logger.error(f"[ZERO-TOIL] Failed apoptosis on {path}: {e}")
         return purged_bytes
 
@@ -75,7 +75,7 @@ class ZeroToilDaemon:
                     logger.info(f"[ZERO-TOIL] Sesión {conv_id} cristalizada exitosamente.")
                 else:
                     logger.error(f"[ZERO-TOIL] Fallo en cristalización: {stderr.decode()}")
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error(f"[ZERO-TOIL] Excepción en cierre asíncrono: {e}")
 
     async def _check_task_collapse(self):
@@ -113,7 +113,7 @@ class ZeroToilDaemon:
                                 asyncio.create_task(
                                     self.execute_semantic_closer(conv_dir.name, transcript)
                                 )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error(f"[ZERO-TOIL] Error al verificar task.md: {e}")
 
     async def loop(self):

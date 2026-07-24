@@ -36,7 +36,7 @@ class SovereignASTVisitor(ast.NodeVisitor):
         self.generic_visit(node)
 
 
-def _execute_sync(source_code: str, global_ctx: dict) -> dict:
+def _execute_sync(source_code: str, global_ctx: dict) -> dict[str, Any]:
     try:
         tree = ast.parse(source_code)
         SovereignASTVisitor().visit(tree)
@@ -107,7 +107,7 @@ def _worker(source_code: str, global_ctx: dict, conn) -> None:
         else:
             result_dict["status"] = "failed"
             result_dict["error"] = f"AssertionError: {str(e)}"
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         result_dict["status"] = "failed"
         result_dict["error"] = f"{type(e).__name__}: {str(e)}"
 

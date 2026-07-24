@@ -8,6 +8,7 @@ Rule-based intent inference from file activity statistics.
 from collections import defaultdict
 from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 from babylon60.extensions.perception.base import (
     MIN_EVENTS_FOR_INFERENCE,
@@ -31,7 +32,7 @@ def _rule(intent: str, emotion: str, confidence: str):
     return decorator
 
 
-def compute_event_stats(events: list[FileEvent]) -> dict:
+def compute_event_stats(events: list[FileEvent]) -> dict[str, Any]:
     """Compute statistical features from a window of events."""
     if not events:
         return {"total": 0}

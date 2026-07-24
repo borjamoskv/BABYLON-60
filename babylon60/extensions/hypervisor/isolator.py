@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import logging
 import re
+from typing import Any
 
 __all__ = ["TenantIsolator"]
 
@@ -36,7 +37,7 @@ class TenantIsolator:
     def tenant_id(self) -> str:
         return self._tenant_id
 
-    def scope_kwargs(self, **kwargs: object) -> dict:
+    def scope_kwargs(self, **kwargs: object) -> dict[str, Any]:
         """Inject tenant_id into any engine call kwargs.
 
         If someone tries to override tenant_id, it's silently corrected.

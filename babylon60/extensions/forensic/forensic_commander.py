@@ -1,5 +1,6 @@
 # [C5-REAL] Exergy-Maximized
 import logging
+from typing import Any
 
 from babylon60.extensions.forensic.forensic_strike_config import STRIKE_V1, MissionProfile
 from babylon60.swarm.swarm_10k import SwarmCommander
@@ -53,7 +54,7 @@ class ForensicCommander(SwarmCommander):
 
         logger.info("💎 STRIKE CRYSTALLIZED: 10,000 forensic agents active.")
 
-    async def synthesize_audit_report(self) -> dict:
+    async def synthesize_audit_report(self) -> dict[str, Any]:
         """Aggregate audit findings from all mission shards."""
         report = {"strike_id": self.strike_id, "status": "active", "mission_results": {}}
 

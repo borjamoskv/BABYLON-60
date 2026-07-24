@@ -100,7 +100,7 @@ class TopographicSensor:
             except OSError:
                 import logging  # noqa: F401
 
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
         try:
@@ -131,7 +131,7 @@ class TopographicSensor:
             except OSError:
                 import logging  # noqa: F401
 
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
         try:
@@ -172,12 +172,12 @@ class TopographicSensor:
                 # type: ignore[reportAttributeAccessIssue]
                 os.removexattr(str(file_path), attr_name)  # type: ignore[reportAttributeAccessIssue]
                 return
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
         try:
             subprocess.run(["xattr", "-d", attr_name, str(file_path)], capture_output=True)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
     def _scan_single_manifest(self, manifest: Path) -> list[GhostTrace]:
@@ -197,6 +197,6 @@ class TopographicSensor:
                         ghost["strength"] = strength
                         ghost["source_file"] = str(manifest.parent / filename)
                         results.append(ghost)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         return results

@@ -122,7 +122,7 @@ class EpistemicMonitor(BaseMonitor[WorkflowAlert]):
 
             self._last_mean_confidence = stats.mean_retrieval_confidence
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to evaluate epistemic certainty: %s", e)
 
         suggestions.sort(key=lambda a: a.priority)

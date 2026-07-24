@@ -125,7 +125,7 @@ class L2DrainMonitor:
                     message=f"Migración L2: {drained_count} vectores movidos a Turbopuffer.",
                 )
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("L2 Drain failed on %s: %s", project, e)
 
         return None

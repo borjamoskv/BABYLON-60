@@ -46,7 +46,7 @@ class TrajectoryCollector:
         """
         try:
             episodes: list[Episode] = await self.episodic.get_session_timeline(session_id)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to retrieve timeline for session %s: %s", session_id, e)
             return None
 
@@ -107,7 +107,7 @@ class TrajectoryCollector:
             if meta_dict:
                 try:
                     metadata.update(meta_dict)
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.warning("Failed to update metadata dictionary with %s: %s", meta_dict, e)
 
             if ep.event_type == "decision":

@@ -62,7 +62,7 @@ async def execute_stream(
                     yield chunk
                     yielded_any = True
                 return
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             latency = time.monotonic() - start_time
             last_exc = e
             if yielded_any:

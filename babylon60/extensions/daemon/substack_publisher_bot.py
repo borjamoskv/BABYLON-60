@@ -106,7 +106,7 @@ class SubstackPublisherBot:
                 await page.close()
                 await browser.disconnect()
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Fallo crítico en CDP Inyector: %s", e)
             raise RuntimeError("C5-REAL Publisher Bot Failed") from e
 

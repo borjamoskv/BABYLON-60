@@ -42,7 +42,7 @@ class TestASTSandboxEvasion:
             validate_ast_sandbox("getattr((), '__' + 'class' + '__')")
 
     def test_exception_based_type_extraction(self) -> None:
-        payload = "try:\n    1 / 0\nexcept Exception as e:\n    t = e.__class__.__base__"
+        payload = "try:\n    1 / 0\nexcept (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:\n    t = e.__class__.__base__"
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_sandbox(payload)
 

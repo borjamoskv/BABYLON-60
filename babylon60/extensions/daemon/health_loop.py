@@ -86,7 +86,7 @@ class HealthLoop:
                 "metrics": [{"name": m.name, "value": m.value} for m in metrics],
             }
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Health tick failed: %s", e)
             return None
 
@@ -140,7 +140,7 @@ class HealthLoop:
         if self._notify_fn:
             try:
                 self._notify_fn(title, body)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.debug("Notification failed: %s", e)
             return
         try:
@@ -170,5 +170,5 @@ class HealthLoop:
                 meta=data,
                 confidence="C5",
             )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("Health persist failed: %s", e)

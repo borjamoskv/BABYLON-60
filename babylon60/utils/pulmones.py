@@ -193,7 +193,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                         return {"status": "queued", "reason": "max_retries_exceeded"}
                     await asyncio.sleep(2**attempt)  # Exponential backoff
 
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.critical(
                         "💀 [PULMONES] Falla interna no recuperable en %s: %s",
                         func.__name__,

@@ -10,7 +10,7 @@ Bidirectional synchronization between CORTEX facts and Langbase Memory.
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 __all__ = ["enrich_from_langbase", "sync_to_langbase"]
 
@@ -69,7 +69,7 @@ async def sync_to_langbase(
     memory_name: str | None = None,
     *,
     limit: int = 500,
-) -> dict:
+) -> dict[str, Any]:
     """Export CORTEX facts to Langbase Memory.
 
     Creates a Memory set named 'cortex-{project}' (or custom name)
@@ -159,7 +159,7 @@ async def enrich_from_langbase(
     *,
     top_k: int = 5,
     target_project: str = "langbase-enrichment",
-) -> dict:
+) -> dict[str, Any]:
     """Search Langbase Memory and store results as CORTEX facts.
 
     Useful for importing external knowledge into CORTEX.

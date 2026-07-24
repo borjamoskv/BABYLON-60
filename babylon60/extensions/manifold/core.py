@@ -215,5 +215,5 @@ class TesseractManifold:
                 capture_output=True,
                 timeout=5,
             )
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)

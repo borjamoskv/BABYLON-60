@@ -9,6 +9,8 @@ Each signal represents a contextual cue from a specific source.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
+
 
 __all__ = ["InferenceResult", "Signal"]
 
@@ -33,7 +35,7 @@ class Signal:
     timestamp: str
     weight: float = 0.5
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "source": self.source,
             "signal_type": self.signal_type,
@@ -64,7 +66,7 @@ class InferenceResult:
     top_signals: list[Signal] = field(default_factory=list)
     projects_ranked: list[tuple[str, float]] = field(default_factory=list)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "active_project": self.active_project,
             "confidence": self.confidence,

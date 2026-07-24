@@ -116,7 +116,7 @@ def safe(fn: Callable[..., T]) -> Callable[..., Result[T, str]]:
     def wrapper(*args: Any, **kwargs: Any) -> Result[T, str]:
         try:
             return Ok(fn(*args, **kwargs))
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             tb = traceback.format_exception(type(exc), exc, exc.__traceback__)
             return Err(f"{type(exc).__name__}: {exc}\n{''.join(tb[-3:])}")
 
@@ -131,7 +131,7 @@ def safe_async(fn: Callable[..., Any]) -> Callable[..., Any]:
     async def wrapper(*args: Any, **kwargs: Any) -> Result[T, str]:
         try:
             return Ok(await fn(*args, **kwargs))
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             tb = traceback.format_exception(type(exc), exc, exc.__traceback__)
             return Err(f"{type(exc).__name__}: {exc}\n{''.join(tb[-3:])}")
 

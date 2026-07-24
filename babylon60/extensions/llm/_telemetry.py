@@ -90,7 +90,7 @@ class CascadeTelemetry:
                 source="llm_telemetry",
                 meta=meta,
             )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Ω₄ Persistence Stall: Could not write LLM telemetry: %s", e)
 
     def stats(self) -> dict[str, Any]:

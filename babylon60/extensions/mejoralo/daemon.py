@@ -78,7 +78,7 @@ class MejoraloDaemon:
             self._loop_task.cancel()
             try:
                 await self._loop_task
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
             self._loop_task = None
         logger.info("Sovereign Daemon: Ouroboros cycle paused.")

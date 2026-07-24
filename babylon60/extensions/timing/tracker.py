@@ -8,6 +8,7 @@ import sqlite3
 import threading
 import time
 from datetime import datetime, timedelta, timezone
+from typing import Any
 
 from babylon60.extensions.timing.models import (
     DEFAULT_GAP_SECONDS,
@@ -249,7 +250,7 @@ class TimingTracker:
         except (json.JSONDecodeError, TypeError):
             return []
 
-    def _safe_json_dict(self, val) -> dict:
+    def _safe_json_dict(self, val) -> dict[str, Any]:
         """Safely decode JSON dict, returning {} on failure."""
         if not val:
             return {}

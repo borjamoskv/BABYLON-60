@@ -101,7 +101,7 @@ class EvolutionaryFalsifier:
         for _idx, mutant in enumerate(mutations):
             try:
                 target_func(**mutant)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 failures += 1
                 self._capture_autopsy(target_func.__name__, mutant, e)
 

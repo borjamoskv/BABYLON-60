@@ -200,7 +200,7 @@ class IHelpPurgeDaemon:
             )
 
             await self._update_daemon_reputation(conn, is_hit=True)
-        except Exception as ex:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as ex:  # noqa: BLE001
             logger.error("[***id")
             raise ex
         finally:
@@ -275,7 +275,7 @@ class IHelpPurgeDaemon:
                                     feed_content, source_agent=f"rss_feed:{hostname}"
                                 )
 
-                    except Exception as e:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                         logger.error(
                             "[%s] Domain checkout failed for %s: %s", self.agent_id, hostname, e
                         )

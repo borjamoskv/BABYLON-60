@@ -14,7 +14,7 @@ import json
 import logging
 import re
 from pathlib import Path
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from babylon60.memory.temporal import now_iso
 
@@ -301,7 +301,7 @@ def _write_vault(
 async def export_obsidian(
     engine: CortexEngine,
     vault_path: Path | None = None,
-) -> dict:
+) -> dict[str, Any]:
     """Export CORTEX memory as an interconnected Obsidian vault.
 
     Args:

@@ -131,7 +131,7 @@ class RaftNode:
                 task.cancel()
                 try:
                     await task
-                except Exception as exc:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                     logger.warning("Suppressed exception: %s", exc)
         self._election_task = None
         self._heartbeat_task = None
@@ -308,7 +308,7 @@ class RaftNode:
                 granted = task.result()
                 if granted:
                     votes_received += 1
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.debug("Vote request failed: %s", exc)
 
         if self.current_term != term or self.role != NodeRole.CANDIDATE:
@@ -411,7 +411,7 @@ class RaftNode:
                 self._heartbeat_task.cancel()
                 try:
                     await self._heartbeat_task
-                except Exception as exc:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                     logger.warning("Suppressed exception: %s", exc)
 
             self.role = NodeRole.LEADER

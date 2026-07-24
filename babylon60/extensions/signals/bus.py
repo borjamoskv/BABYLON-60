@@ -7,6 +7,7 @@ import logging
 import sqlite3
 import time
 from datetime import datetime, timedelta, timezone
+from typing import Any
 
 import aiosqlite
 
@@ -103,7 +104,7 @@ class AsyncSignalBus:
 
         try:
             self._conn._signals_ready = True  # type: ignore
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         self._ready = True
 
@@ -235,7 +236,7 @@ class AsyncSignalBus:
             limit=limit,
         )
 
-    async def stats(self, tenant_id: str = "default") -> dict:
+    async def stats(self, tenant_id: str = "default") -> dict[str, Any]:
         await self.ensure_table()
         result: dict = {
             "session_emitted": self.session_emitted,
@@ -331,7 +332,7 @@ class SignalBus:
 
         try:
             self._conn._signals_ready = True  # type: ignore
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         self._ready = True
 
@@ -454,7 +455,7 @@ class SignalBus:
         cursor = self._conn.execute(query, params)
         return [signal_from_row(tuple(row)) for row in cursor.fetchall()]
 
-    def stats(self, tenant_id: str = "default") -> dict:
+    def stats(self, tenant_id: str = "default") -> dict[str, Any]:
         self.ensure_table()
         result: dict = {
             "session_emitted": self.session_emitted,

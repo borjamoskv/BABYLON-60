@@ -54,7 +54,7 @@ async def main():
 
             core = MOSKV1Core()
             await core.warmup()
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logging.warning("Pre-warmup skipped or failed: %s", e)
 
         await daemon.start()

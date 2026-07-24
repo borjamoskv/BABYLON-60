@@ -7,6 +7,8 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
+from typing import Any
+
 
 
 class TaskStatus(str, Enum):
@@ -55,7 +57,7 @@ class AgentTask:
     github_issue_number: int | None = None
     github_repo: str | None = None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "id": self.id,
             "title": self.title,

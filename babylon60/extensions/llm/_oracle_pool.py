@@ -115,7 +115,7 @@ def _emit_to_audit(record: InferenceRecord) -> None:
                 "error": record.error,
             },
         )
-    except Exception as exc:  # noqa: BLE001 — audit must never crash caller
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001 — audit must never crash caller
         logger.warning("[InferenceLedger] emit failed (non-fatal): %s", exc)
 
 
@@ -330,7 +330,7 @@ class OraclePool:
                     fallback_depth=depth,
                 )
 
-            except Exception as exc:  # noqa: BLE001 — cascade must not die here
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001 — cascade must not die here
                 latency_ms = (time.monotonic() - t0) * 1000
                 health.record_failure()
                 logger.error(
@@ -400,7 +400,7 @@ def build_sovereign_pool(
     for cfg in _default_fallbacks:
         try:
             fallbacks.append(LLMProvider(provider=cfg["provider"], model=cfg.get("model")))
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("[OraclePool] Skipping fallback %s: %s", cfg, exc)
 
     return OraclePool(primary=primary, fallbacks=fallbacks)

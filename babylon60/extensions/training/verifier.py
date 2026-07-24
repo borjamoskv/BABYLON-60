@@ -40,7 +40,7 @@ class AdapterVerifier:
             }
         try:
             path = Path(adapter_path)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             return {
                 "success": False,
                 "error": f"Invalid adapter path: {e}",
@@ -152,7 +152,7 @@ class AdapterVerifier:
                 logger.warning(
                     "safetensors or numpy not installed. Skipping deep safetensors numerical scan."
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Failed to open safetensors file: %s", e)
                 return {
                     "success": False,
@@ -186,7 +186,7 @@ class AdapterVerifier:
             except ImportError:
                 numerical_scan_skipped = True
                 logger.warning("numpy not installed. Skipping deep NPZ numerical scan.")
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Failed to open NPZ file: %s", e)
                 return {
                     "success": False,

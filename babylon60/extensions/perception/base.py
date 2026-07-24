@@ -12,7 +12,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 
 __all__ = [
     "BehavioralSnapshot",
@@ -106,7 +106,7 @@ class BehavioralSnapshot:
     summary: str
     timestamp: str
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """JSON-serializable representation."""
         return {
             "intent": self.intent,

@@ -107,7 +107,7 @@ class ImmuneMembrane:
                 meta=meta,
             )
             logger.info("TriageReport autonomously persisted to Ledger.")
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to autonomously persist TriageReport: %s", e)
 
     def _triage(self, results: list[FilterResult]) -> TriageReport:

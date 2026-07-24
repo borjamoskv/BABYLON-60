@@ -88,7 +88,7 @@ class AutonomousTrainingDaemon:
                         return [row[0] for row in cursor.fetchall() if row[0]]
 
                     return await asyncio.to_thread(_query)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to query distinct session IDs: %s", e)
         return []
 
@@ -100,7 +100,7 @@ class AutonomousTrainingDaemon:
             with open(self.consolidated_sessions_file, encoding="utf-8") as f:
                 data = json.load(f)
                 return set(data)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to load consolidated sessions: %s", e)
             return set()
 
@@ -109,7 +109,7 @@ class AutonomousTrainingDaemon:
         try:
             with open(self.consolidated_sessions_file, "w", encoding="utf-8") as f:
                 json.dump(list(sessions), f, indent=2)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to save consolidated sessions: %s", e)
 
     def register_verified_adapter(self, adapter_path: Path, metrics: dict[str, Any]) -> None:
@@ -120,7 +120,7 @@ class AutonomousTrainingDaemon:
                 try:
                     with open(self.adapter_history_file, encoding="utf-8") as f:
                         history = json.load(f)
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.error("Failed to read adapter history: %s", e)
 
             next_version = len(history) + 1
@@ -168,7 +168,7 @@ class AutonomousTrainingDaemon:
                 next_version,
                 adapter_path,
             )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed to register and archive verified adapter: %s", e)
 
     async def run_cycle(self) -> dict[str, Any]:
@@ -192,7 +192,7 @@ class AutonomousTrainingDaemon:
             compiler = MOSKV1DatasetCompiler(workspace_path, min_exergy=0.45)
             compiler.compile_full_dataset()
             logger.info("✅ Pre-compilation complete.")
-        except Exception as ce:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as ce:  # noqa: BLE001
             logger.error(
                 "Failed pre-compiling static dataset: %s. Continuing with existing files.", ce
             )
@@ -254,7 +254,7 @@ class AutonomousTrainingDaemon:
                 "processed_sessions": 0,
             }
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Exception during training cycle: %s", e)
             return {"status": "error", "error": str(e), "processed_sessions": 0}
 
@@ -277,7 +277,7 @@ class AutonomousTrainingDaemon:
                 await self._task
             except asyncio.CancelledError:
                 pass
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
         logger.info("🛑 Autonomous Training Daemon stopped.")
 
@@ -286,6 +286,6 @@ class AutonomousTrainingDaemon:
         while self.is_running:
             try:
                 await self.run_cycle()
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Error in daemon loop: %s", e)
             await asyncio.sleep(self.interval_seconds)

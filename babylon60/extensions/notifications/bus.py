@@ -102,7 +102,7 @@ class NotificationBus:
         """Wrap adapter.send() so exceptions never escape the bus."""
         try:
             await adapter.send(event)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.error("Adapter '%s' raised unexpectedly: %s", adapter.name, exc)
 
     @property

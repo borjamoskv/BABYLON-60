@@ -68,7 +68,7 @@ def remove_target(tree: AgentOp, target: str) -> AgentOp:
     return result
 
 
-def _process_complex_node(variant: str, data: dict, target: str) -> dict:
+def _process_complex_node(variant: str, data: dict, target: str) -> dict[str, Any]:
     if variant == "Cond":
         return {
             "predicate": data.get("predicate"),

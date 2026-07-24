@@ -58,7 +58,7 @@ class CollectorRegistry:
                     object.__setattr__(snap, "remediation", getattr(collector, "remediation", ""))
 
                 results.append(snap)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 latency = (time.perf_counter() - t0) * 1000.0
                 logger.warning(
                     "Collector %s failed: %s",

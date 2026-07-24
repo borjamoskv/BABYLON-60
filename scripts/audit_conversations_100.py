@@ -53,26 +53,16 @@ def calculate_conversation_exergy(transcript_path: Path) -> float:
     return min(1000.0, raw_score * 8.0)
 
 
-async def audit_agent_task(agent_id: int, uuid_dir: Path):
-    """BFT Node audits a single conversation concurrently."""
-    await asyncio.sleep(0.01 * (agent_id % 10))
-    transcript_path = uuid_dir / ".system_generated/logs/transcript.jsonl"
-
-    if not transcript_path.exists():
-        return
-
-    score = calculate_conversation_exergy(transcript_path)
-
-    # BFT Database mutation (Audit Log)
+def _write_audit_log(uuid_name: str, score: float) -> bool:
     try:
         conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
 
-        timestamp = time.time()
-        commit_hash = f"audit_conv_{uuid_dir.name[:8]}"
-        verdict_yaml = f"Auditoria: {uuid_dir.name}. Exergia Cognitiva: {score:.1f}"
-        prov_hash = str(uuid.uuid5(uuid.NAMESPACE_OID, f"audit_{uuid_dir.name}_{time.time()}"))
+        timestamp = int(time.time() * 1000)
+        commit_hash = f"audit_conv_{uuid_name[:8]}"
+        verdict_yaml = f"Auditoria: {uuid_name}. Exergia Cognitiva: {score:.1f}"
+        prov_hash = str(uuid.uuid5(uuid.NAMESPACE_OID, f"audit_{uuid_name}_{time.time()}"))
 
         cursor.execute(
             """
@@ -83,21 +73,37 @@ async def audit_agent_task(agent_id: int, uuid_dir: Path):
                 timestamp,
                 commit_hash,
                 score,
-                "Cognitive Audit",
-                "Textual Entropy",
-                "RAG Extraction",
-                "AutoLoop Swarm",
-                "Sin Cristalizar",
+                "G_Audit",
+                "E_Zero",
+                "L_Swarm",
+                "A_Audited",
+                "None",
                 verdict_yaml,
                 prov_hash,
             ),
         )
         conn.commit()
         conn.close()
-        print(f"[🟢] Agent {agent_id:03d} audited {uuid_dir.name[:8]}: {score:.1f}/1000.0")
+        return True
+    except (sqlite3.Error, OSError):
+        return False
 
-    except (OSError, RuntimeError, ValueError) as e:
-        print(f"[🔴] Agent {agent_id:03d} FAILED on {uuid_dir.name[:8]}: {e}")
+
+async def audit_agent_task(agent_id: int, uuid_dir: Path):
+    """BFT Node audits a single conversation concurrently."""
+    await asyncio.sleep(0.01 * (agent_id % 10))
+    transcript_path = uuid_dir / ".system_generated/logs/transcript.jsonl"
+
+    if not transcript_path.exists():
+        return
+
+    score = calculate_conversation_exergy(transcript_path)
+    success = await asyncio.to_thread(_write_audit_log, uuid_dir.name, score)
+    
+    if success:
+        print(f"[🟢] Agent {agent_id:03d} audited {uuid_dir.name[:8]}: {score:.1f}/1000.0")
+    else:
+        print(f"[🔴] Agent {agent_id:03d} FAILED to log {uuid_dir.name[:8]}")
 
 
 async def main():

@@ -17,7 +17,7 @@ class TutorAgent:
 
     async def evaluate_student_input(
         self, student_input: str, target_theorem: str, ast_validation: bool = True
-    ) -> dict:
+    ) -> dict[str, Any]:
         """
         Evaluate student's semantic divergence.
         If ast_validation is True, attempts to bridge C4-SIM to C5-REAL via structural assertions.

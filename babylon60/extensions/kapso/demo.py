@@ -38,7 +38,7 @@ async def main():
     try:
         res = await gateway.send_message(msg)
         logging.getLogger(__name__).info(f"[+] Transmission Successful. Hash/ID: {res}")
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logging.getLogger(__name__).info(f"[-] Transmission Failed. Entropic Collapse: {e}")
         sys.exit(1)
 

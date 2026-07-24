@@ -49,7 +49,7 @@ class PermsBootstrapper:
             options = {ApplicationServices.kAXTrustedCheckOptionPrompt: True}  # type: ignore
             trusted = ApplicationServices.AXIsProcessTrustedWithOptions(options)  # type: ignore
             status["accessibility"] = bool(trusted)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Error checking accessibility permissions: %s", e)
 
         try:
@@ -68,7 +68,7 @@ class PermsBootstrapper:
                     Quartz.kCGWindowImageDefault,  # type: ignore
                 )
                 status["screen_recording"] = img is not None
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Error checking screen recording permissions: %s", e)
 
         logger.info(

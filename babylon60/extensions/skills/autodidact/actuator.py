@@ -96,6 +96,6 @@ async def daemon_ingesta_soberana(
         return {"estado": "FALLO", "error": str(e)}
 
 
-async def autodidact_pipeline(target: str, intent: str = "Aprender", force: bool = False) -> dict:
+async def autodidact_pipeline(target: str, intent: str = "Aprender", force: bool = False) -> dict[str, Any]:
     """Interface O(1) para compatibilidad de herramientas."""
     return await daemon_ingesta_soberana(target, intent, force)

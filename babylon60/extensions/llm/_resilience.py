@@ -136,7 +136,7 @@ async def resilient_call(
                     attempt,
                 )
                 return result
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             latency = time.monotonic() - start_time
             last_exc = e
 

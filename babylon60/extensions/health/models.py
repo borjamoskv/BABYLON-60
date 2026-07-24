@@ -5,6 +5,7 @@ import enum
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from typing import Any
 
 
 class Grade(enum.Enum):
@@ -133,7 +134,7 @@ class HealthScore:
         """Not Failed (score >= 40)."""
         return self.grade > Grade.FAILED
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to dict for JSON/MCP output."""
         return {
             "score": round(self.score, 2),
@@ -166,7 +167,7 @@ class HealthReport:
         """True if warnings exist or grade is DEGRADED/FAILED."""
         return bool(self.warnings) or self.score.grade <= Grade.DEGRADED
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to dict."""
         return {
             "score": self.score.to_dict(),

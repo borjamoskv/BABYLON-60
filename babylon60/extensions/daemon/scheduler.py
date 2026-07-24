@@ -244,7 +244,7 @@ class SovereignScheduler:
         while self._running:
             try:
                 await self._tick()
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Scheduler tick error: %s", e)
 
             try:
@@ -253,7 +253,7 @@ class SovereignScheduler:
                     timeout=self._tick_interval,
                 )
                 break  # stop_event was set
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
         logger.info("SovereignScheduler stopped")
@@ -299,7 +299,7 @@ class SovereignScheduler:
                         source="daemon:scheduler",
                         actor_id="scheduler",
                     )
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.debug("Scheduler failed to log trigger to Ledger: %s", e)
 
             try:
@@ -307,7 +307,7 @@ class SovereignScheduler:
             except asyncio.TimeoutError:
                 error = "Timeout (300s)"
                 logger.warning("Task %s timed out", entry.name)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 error = str(e)
                 logger.error("Task %s failed: %s", entry.name, e)
 
@@ -341,7 +341,7 @@ class SovereignScheduler:
                             "source": "scheduler",
                         },
                     )
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.debug(
                         "Scheduler event bus publish failed: %s", e, exc_info=True
                     )  # bus errors must not kill scheduler
@@ -356,7 +356,7 @@ class SovereignScheduler:
                             "ok": not error,
                         },
                     )
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.debug("Scheduler hot state set failed: %s", e, exc_info=True)
 
             level = "✅" if not error else "❌"

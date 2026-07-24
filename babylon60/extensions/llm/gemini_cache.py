@@ -77,7 +77,7 @@ class GeminiCacheGateway:
                     e.response.status_code,
                     e.response.text[:200],
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning("Gemini cache HTTP execution error: %s", e)
 
         return None

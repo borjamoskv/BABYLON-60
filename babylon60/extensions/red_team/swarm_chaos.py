@@ -93,7 +93,7 @@ class RedTeamSwarm:
                             "🦾 [RED-TEAM] Surface survived. Immunity confirmed for %s.",
                             func.__name__,
                         )
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.error(
                         "❌ [RED-TEAM] Red Team internal failure (Byzantine Swarm Error): %s", e
                     )

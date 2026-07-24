@@ -4,6 +4,8 @@ from __future__ import annotations
 
 import dataclasses
 from dataclasses import dataclass, field
+from typing import Any
+
 
 from babylon60.core.paths import (
     AGENT_DIR,
@@ -344,7 +346,7 @@ class DaemonStatus:
             )
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         raw = dataclasses.asdict(self)
         raw["all_healthy"] = self.all_healthy
         raw["check_duration_ms"] = round(self.check_duration_ms, 1)

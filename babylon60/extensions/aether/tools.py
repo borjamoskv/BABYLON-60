@@ -332,6 +332,6 @@ class AgentToolkit:
             return f"[ERROR] Unknown tool: {tool_name}"
         try:
             return fn(args)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.exception("Tool dispatch error [%s]", tool_name)
             return f"[ERROR] {tool_name} raised: {e}"

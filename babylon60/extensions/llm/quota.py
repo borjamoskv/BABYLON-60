@@ -306,5 +306,5 @@ class SovereignQuotaManager:
         try:
             with _db(self.db_path) as conn:
                 conn.execute("UPDATE quota_bucket SET timeouts = timeouts + 1 WHERE id = 1")
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)

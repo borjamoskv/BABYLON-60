@@ -24,7 +24,7 @@ def get_db_connection(path: Path = DB_PATH) -> sqlite3.Connection:
 def init_ledger() -> None:
     with get_db_connection() as conn:
         conn.execute(
-            "\n            CREATE TABLE IF NOT EXISTS ouroboros_events (\n                event_id TEXT PRIMARY KEY,\n                protocol TEXT NOT NULL,\n                target TEXT,\n                exergy_delta REAL NOT NULL,\n                timestamp INTEGER NOT NULL,\n                causal_hash TEXT NOT NULL\n            )\n        "
+            "\n            CREATE TABLE IF NOT EXISTS ouroboros_events (\n                event_id TEXT PRIMARY KEY,\n                protocol TEXT NOT NULL,\n                target TEXT,\n                exergy_delta INTEGER NOT NULL,\n                timestamp INTEGER NOT NULL,\n                causal_hash TEXT NOT NULL\n            )\n        "
         )
 
 

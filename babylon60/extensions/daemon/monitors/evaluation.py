@@ -77,6 +77,6 @@ class EvaluationMonitor:
             )
             return alerts
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("EvaluationMonitor error: %s", e)
             return []

@@ -93,7 +93,7 @@ def _seal_visual(p: Path) -> ShipSeal:
             components = data.get("components_tested", len(data.get("tests", [])))
             status = data.get("status", "OK")
             detail = f"Visual Proof: {components} components rendered | Status: {status}"
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             detail = f"Found visual_proof.json (parse error: {e})"
     elif screenshots:
         detail = f"Found {len(screenshots)} screenshots"
@@ -134,7 +134,7 @@ def _seal_a11y(p: Path, stack: str) -> ShipSeal:
             content = hf.read_text(errors="replace").lower()
             if "<img" in content and 'alt="' not in content:
                 a11y_findings.append(f"{hf.name}: missing alt tags")
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
     return ShipSeal(

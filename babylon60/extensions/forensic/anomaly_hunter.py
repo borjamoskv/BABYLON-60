@@ -76,7 +76,7 @@ class AnomalyHunterEngine:
         chain = await self.cortex.get_causal_chain(fact.id)
         return chain if chain else []
 
-    async def run_full_scan(self) -> dict:
+    async def run_full_scan(self) -> dict[str, Any]:
         """NightShift entry point: full parallel scan."""
         threshold = datetime.fromtimestamp(time.time(), tz=timezone.utc) - self.window
         time_filter = threshold.isoformat()
@@ -264,7 +264,7 @@ class AnomalyHunterEngine:
                 },
             )
 
-    def generate_report(self) -> dict:
+    def generate_report(self) -> dict[str, Any]:
         by_type = {}
         for a in self.anomalies:
             by_type[a.type] = by_type.get(a.type, 0) + 1

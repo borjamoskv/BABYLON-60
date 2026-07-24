@@ -139,10 +139,10 @@ def emit_fact_stored(
                     project,
                     unconsumed,
                 )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("compact:needed check failed: %s", e)
 
         conn.close()
 
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.debug("fact:stored signal emission failed: %s", e)

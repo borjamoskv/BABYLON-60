@@ -8,6 +8,7 @@ import asyncio
 import hashlib
 import logging
 import time
+from typing import Any
 
 from babylon60.utils.base60 import bytes_to_base60
 
@@ -23,7 +24,7 @@ SQUADS = [
 ]
 
 
-async def agent_task(agent_id: int, squad: str) -> dict:
+async def agent_task(agent_id: int, squad: str) -> dict[str, Any]:
     """Micro-task representing a single agent's execution cycle."""
     await asyncio.sleep(0.05)
 

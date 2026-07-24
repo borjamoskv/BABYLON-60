@@ -103,7 +103,7 @@ class NousRuntime:
                 "side_effects": "Simulated deterministic state mutation.",
             }
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("NOUS Runtime Panic: %s", str(e))
             return {"status": "SAGA_REJECTED", "error": str(e)}
 

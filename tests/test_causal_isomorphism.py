@@ -532,7 +532,7 @@ def main() -> int:
             try:
                 test_fn()  # type: ignore[operator]
                 passed += 1
-            except Exception as e:
+            except (AssertionError, RuntimeError, ValueError) as e:
                 failed += 1
                 name = getattr(test_fn, "__name__", str(test_fn))
                 print(f"  ❌ {name}: {e}")

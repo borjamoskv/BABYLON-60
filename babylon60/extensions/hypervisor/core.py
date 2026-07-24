@@ -121,7 +121,7 @@ class AgencyHypervisor:
 
         try:
             await self._projector.on_recall(query, project)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
         if isinstance(results, str):

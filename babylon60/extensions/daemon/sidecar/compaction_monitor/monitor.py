@@ -118,7 +118,7 @@ def _collect_snapshot() -> MemorySnapshot:
             rss, vms = mi.rss, mi.vms
             vm = _p.virtual_memory()
             sys_avail, sys_total = vm.available, vm.total
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
     if _IS_LINUX:
@@ -129,7 +129,7 @@ def _collect_snapshot() -> MemorySnapshot:
 
             info = get_mallinfo2()
             arena, free_b = info.arena, info.fordblks
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
     return MemorySnapshot(
@@ -234,7 +234,7 @@ class MemoryPressureMonitor:
             self._task.cancel()
             try:
                 await asyncio.wait_for(self._task, timeout=1.0)
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
         self._executor.shutdown(wait=False, cancel_futures=True)
@@ -253,12 +253,12 @@ class MemoryPressureMonitor:
                     await self._tick()
                 except asyncio.CancelledError:
                     raise
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.error("Sample loop crashed: %s", e)
             except asyncio.CancelledError:
                 self._running = False
                 raise  # Re-raise to allow task to be cleanly cancelled
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.exception("MemoryPressureSidecar tick error: %s", exc)
             try:
                 await asyncio.sleep(self.interval)

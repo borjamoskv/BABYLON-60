@@ -63,7 +63,7 @@ async def execute_circuit_trip(gap_description: str, cortex_engine: CortexEngine
             summary="SYSTEM HALTED: Entropy spike detected. Entering autodidact mode.",
             meta={"gap_identified": gap_description},
         )
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("Failed to persist halt event: %s", e)
 
     try:

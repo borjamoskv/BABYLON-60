@@ -91,7 +91,7 @@ class LangbaseClient:
         *,
         json_body: dict | None = None,
         timeout: float | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Make an authenticated request to Langbase API."""
         try:
             resp = await self._client.request(
@@ -125,7 +125,7 @@ class LangbaseClient:
         *,
         thread_id: str | None = None,
         variables: list[dict[str, str]] | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Run a Langbase Pipe (AI agent).
 
         Args:
@@ -163,7 +163,7 @@ class LangbaseClient:
         model: str | None = None,
         system_prompt: str = "",
         memory: list[dict] | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Create a new Pipe (AI agent).
 
         Args:
@@ -198,7 +198,7 @@ class LangbaseClient:
         name: str,
         *,
         description: str = "",
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Create a new Memory set for RAG.
 
         Args:
@@ -211,7 +211,7 @@ class LangbaseClient:
             json_body={"name": name, "description": description},
         )
 
-    async def delete_memory(self, name: str) -> dict:
+    async def delete_memory(self, name: str) -> dict[str, Any]:
         """Delete a Memory set."""
         return await self._request("DELETE", f"/memory/{name}")
 
@@ -246,7 +246,7 @@ class LangbaseClient:
         filename: str,
         *,
         meta: dict | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Upload a document to a Memory set.
 
         Args:
@@ -293,7 +293,7 @@ class LangbaseClient:
         )
         return result if isinstance(result, list) else result.get("data", [])
 
-    async def crawl_url(self, url: str) -> dict:
+    async def crawl_url(self, url: str) -> dict[str, Any]:
         """Crawl a URL via Langbase Tools API.
 
         Args:
@@ -310,7 +310,7 @@ class LangbaseClient:
         )
 
 
-    async def status(self) -> dict:
+    async def status(self) -> dict[str, Any]:
         """Check Langbase API connectivity.
 
         Returns:

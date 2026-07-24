@@ -6,7 +6,7 @@ import secrets
 import time
 from pathlib import Path
 
-from typing import Optional
+from typing import Any, Optional
 import httpx
 from fastapi import Depends, FastAPI, HTTPException, Request, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -81,7 +81,7 @@ async def _check_isothermal_redundancy(text: str) -> tuple[bool, float, str]:
             similitud = getattr(nearest[0], "_recall_score", 0.0)
             if similitud > 0.94:
                 return True, similitud, nearest[0].content
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.warning("Isothermal L2 check bypassed/failed: %s", e)
 
     if "refactor" in text.lower() and "utils.py" in text.lower():
@@ -100,7 +100,7 @@ def health():
     return {"status": "Sovereign. Proxy is active and routing."}
 
 
-def translate_anthropic_to_openai(anthropic_payload: dict) -> dict:
+def translate_anthropic_to_openai(anthropic_payload: dict) -> dict[str, Any]:
     """
     Translates Anthropic Messages API payload to standard OpenAI ChatCompletion payload.
     Minimal viable translation for tools like Claude Code or Cursor.
@@ -142,7 +142,7 @@ def translate_anthropic_to_openai(anthropic_payload: dict) -> dict:
     return openai_payload
 
 
-def _build_anthropic_response(text: str) -> dict:
+def _build_anthropic_response(text: str) -> dict[str, Any]:
     return {
         "id": f"msg_ccr_{int(time.monotonic() * 1000)}",
         "type": "message",

@@ -66,7 +66,7 @@ def send_heartbeat():
         logging.getLogger(__name__).info(f"[Web3 Oracle] ❌ Tx Failed. Block {receipt.blockNumber}. Entropy rising.")  # type: ignore[type-error]
         return False
 
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logging.getLogger(__name__).info(f"[Web3 Oracle] ❌ Oracle execution error: {e}")
         return False
 

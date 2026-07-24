@@ -326,7 +326,7 @@ class InjectionGuard:
                     )
                     report.is_safe = False
                     report.highest_severity = "critical"
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning("Semantic WAF evaluation failed (fallback to fast-path): %s", e)
 
         return report

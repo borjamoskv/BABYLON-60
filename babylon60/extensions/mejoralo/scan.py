@@ -132,7 +132,7 @@ def _analyze_python_complexity(content: str, rel: str) -> list[str]:
         tree = ast.parse(content)
         McCabeVisitor(rel, findings).visit(tree)
         NestingVisitor(rel, findings).visit(tree)
-    except Exception as exc:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
         logger.warning("Suppressed exception: %s", exc)
     return findings
 

@@ -368,7 +368,7 @@ class CortexLLMRouter:
                         if retry_exc.response.status_code == 429:
                             continue
                         return Err(str(retry_exc))
-                    except Exception as retry_exc:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as retry_exc:  # noqa: BLE001
                         return Err(str(retry_exc))
                 return Err(
                     f"HTTP 429 Persistent Exhaustion after 5 Ultrathink cycles on {provider.provider_name}"
@@ -388,7 +388,7 @@ class CortexLLMRouter:
                 )
                 self._evicted.add(provider.provider_name)
             return Err(str(exc))
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             if "HTTP 401" in str(exc) or "401" in str(exc) or "invalid_api_key" in str(exc):
                 logger.error(
                     "🚫 [EVICTION] Provider %s hit 401 Unauthorized. Evicting...",

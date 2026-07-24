@@ -84,9 +84,9 @@ def init_db() -> None:
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS ledger (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            timestamp REAL NOT NULL,
+            timestamp INTEGER NOT NULL,
             commit_hash TEXT NOT NULL,
-            exergy_score REAL NOT NULL,
+            exergy_score INTEGER NOT NULL,
             gradient TEXT NOT NULL,
             entropy TEXT NOT NULL,
             leverage TEXT NOT NULL,
@@ -220,7 +220,7 @@ def check_consolidation_need() -> ConsolidationDecision:
     Checks brain folders and memory vault files to determine if consolidation is required.
     """
     if not BRAIN_DIR.exists():
-        return Stable(last_timestamp=time.time())
+        return Stable(last_timestamp = int(time.time() * 1000))
 
     consolidated_ids: Set[str] = set()
     if VAULT_DIR.exists():
@@ -283,7 +283,7 @@ def check_consolidation_need() -> ConsolidationDecision:
             reason=f"High accumulated KV Cache/Session Entropy: {unconsolidated_count} unconsolidated sessions detected.",
             pending_count=unconsolidated_count,
         )
-    return Stable(last_timestamp=time.time())
+    return Stable(last_timestamp = int(time.time() * 1000))
 
 
 def main() -> None:
@@ -308,7 +308,7 @@ def main() -> None:
     except subprocess.SubprocessError:
         commit_hash = "unknown"
 
-    timestamp = time.time()
+    timestamp = int(time.time() * 1000)
     prov_payload = f"{timestamp}:{commit_hash}:{verdict.score.value}".encode("utf-8")
     digest = hashlib.sha3_256(prov_payload).digest()
 

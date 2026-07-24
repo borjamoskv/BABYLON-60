@@ -9,6 +9,7 @@ from the CORTEX Ledger.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
+from typing import Any
 
 __all__ = ["CognitiveFingerprint", "DomainPreference", "PatternVector"]
 
@@ -98,7 +99,7 @@ class CognitiveFingerprint:
     active_domains: int = 0
     fingerprint_completeness: float = 0.0  # how much data backed this extraction
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to JSON-safe dict for agent injection."""
         return {
             "tenant_id": self.tenant_id,

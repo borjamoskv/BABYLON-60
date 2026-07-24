@@ -102,7 +102,7 @@ class GitHubAuditorDaemon:
                     "❌ [AUDITOR] El Enjambre no pudo sintetizar mitigación para CodeQL #%s",
                     alert_num,
                 )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("⚠️ [AUDITOR] Falla asimétrica en #%s: %s", alert_num, e)
 
     async def _git_commit(self, filepath: Path, message: str) -> None:

@@ -77,7 +77,7 @@ class TrendsOracle:
                 if tasks:
                     await asyncio.gather(*tasks)
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("❌ [TRENDS_ORACLE] Loop Error: %s", e)
 
             await asyncio.sleep(15.0)
@@ -106,7 +106,7 @@ class TrendsOracle:
                     self._poll_daily_sync()
                     last_daily = now
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("❌ [TRENDS_ORACLE] (Thread) Error: %s", e)
 
             threading.Event().wait(15.0)  # noqa: TID251 # Threaded sync loop  # noqa: TID251 # Threaded sync loop
@@ -140,7 +140,7 @@ class TrendsOracle:
                                     alerts.append(alert)
                                 self._mark_cached(cache_key, now)
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning(
                     "⚠️ [TRENDS_ORACLE] Realtime query failed for '%s': %s", target_geo, e
                 )
@@ -169,7 +169,7 @@ class TrendsOracle:
                             if alert:
                                 alerts.append(alert)
                             self._mark_cached(cache_key, now)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning("⚠️ [TRENDS_ORACLE] Daily query failed for '%s': %s", target_geo, e)
 
         if alerts:
@@ -232,7 +232,7 @@ class TrendsOracle:
                     fact_type="trend",
                     meta=meta,
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("⚙️ [TRENDS_ORACLE] DB lock o error almacenando fact: %s", e)
 
         return TrendsAlert(

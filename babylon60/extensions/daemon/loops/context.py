@@ -45,7 +45,7 @@ async def capture_context(state, project_name: str, speak_func):
                     }
                     await speak_func(state, f"Contexto capturado para {project_name}: {app_name}.")
                     state.save_state()
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("Capture Context Error: %s", e)
 
 
@@ -84,7 +84,7 @@ async def restore_context(state, project_name: str, speak_func):
                 script = f'tell application "{app_name}" to activate'
                 await run_osascript(script)
             await asyncio.sleep(0.5)
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Restore Error (%s): %s", app_name, e)
 
 
@@ -111,7 +111,7 @@ async def gidatu_loop(state):
                             f"to get name of window 1"
                         )
                         win_title = await run_osascript(title_script)
-                    except Exception as exc:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                         logger.warning("Suppressed exception: %s", exc)
                 state.daemons["gidatu"]["window_title"] = win_title
 
@@ -128,7 +128,7 @@ async def gidatu_loop(state):
                     state.daemons["gidatu"]["current_context"] = new_context
 
                 await asyncio.sleep(2)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Gidatu Loop Error: %s", e)
                 await asyncio.sleep(5)
     except asyncio.CancelledError:

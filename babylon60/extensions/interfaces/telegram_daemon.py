@@ -57,7 +57,7 @@ async def handle_instruction(update: Update, context: ContextTypes.DEFAULT_TYPE)
             message_id=status_msg.message_id,
             text="✅ Ejecutado. Instrucción procesada en Engine local.",
         )
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("Execution failed: %s", e)
         await context.bot.edit_message_text(
             chat_id=update.effective_chat.id,  # pyright: ignore[reportOptionalMemberAccess]

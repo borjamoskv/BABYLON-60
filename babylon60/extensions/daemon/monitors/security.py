@@ -144,7 +144,7 @@ class SecurityMonitor:
                 "INSERT INTO threat_intel (ip_address, reason, confidence) VALUES (?, ?, ?)",
                 (alert.ip_address, alert.summary, alert.confidence),
             )
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
     def check(self) -> list[SecurityAlert]:

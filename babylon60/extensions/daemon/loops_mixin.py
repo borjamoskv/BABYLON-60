@@ -88,7 +88,7 @@ class LoopsMixin:
             res = method()
             if asyncio.iscoroutine(res):
                 await res
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("%s loop error: %s", name, e)
 
     def _auto_sync(self, status: DaemonStatus) -> None:
@@ -113,7 +113,7 @@ class LoopsMixin:
                     wb_result.files_written,
                     wb_result.items_exported,
                 )
-        except Exception as e:  # noqa: BLE001 — top-level loop crash barrier
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001 — top-level loop crash barrier
             status.errors.append(f"Memory sync error: {e}")
             logger.exception("Memory sync failed")
 
@@ -145,7 +145,7 @@ class LoopsMixin:
                 alerts = await asyncio.to_thread(self.neural_monitor.check)
                 if alerts:
                     self._alert_neural(alerts)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.debug("Neural loop error: %s", e)
             try:
                 await asyncio.sleep(1.0)
@@ -188,7 +188,7 @@ class LoopsMixin:
                     current_interval = base_interval
                     if self._shared_engine:
                         await asyncio.to_thread(health.persist_snapshot, self._shared_engine, data)
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 current_interval = min(current_interval * 2, max_interval)
                 logger.error(
                     "Health loop critical error: %s. Backing off to %.1fs", e, current_interval

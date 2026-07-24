@@ -51,7 +51,7 @@ def query_ledger(query_type, param):
 
         conn.close()
         return results
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         return {"error": str(e)}
 
 

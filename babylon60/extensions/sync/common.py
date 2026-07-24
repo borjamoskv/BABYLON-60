@@ -95,7 +95,7 @@ class WritebackResult:
         return self.files_written > 0
 
 
-def load_sync_state() -> dict:
+def load_sync_state() -> dict[str, Any]:
     """Loads the state of the last synchronization (file hashes)."""
     sync_state_file = runtime_sync_state_file()
     if sync_state_file.exists():
@@ -142,7 +142,7 @@ def atomic_write(path: Path, content: str) -> None:
     except OSError:
         try:
             os.unlink(tmp_path)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         raise
 

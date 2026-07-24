@@ -76,7 +76,7 @@ class TTTEngine:
                         "🗑️ Discarding low-quality trajectory: %s (Reward: %.2f)", sid, reward
                     )
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Failed to process trajectory %s: %s", sid, e)
 
         if not golden_trajectories:
@@ -231,7 +231,7 @@ class TTTEngine:
             logger.info("✅ MLX LoRA completed successfully.")
             return {"status": "success", "output": stdout_str[-500:]}
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Exception during MLX execution: %s", e)
             if process is not None and process.returncode is None:
                 try:

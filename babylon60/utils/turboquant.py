@@ -83,7 +83,7 @@ def optimize_vector_qjl(
             return [float(x) for x in int8_scaled[0]]
         return int8_scaled.tolist()  # type: ignore[no-any-return]
 
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("TurboQuant failure (Exergy Shield bypassed): %s", e)
         return [0.0] * len(vector)
 
@@ -110,6 +110,6 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
         if not is_2d:
             return [float(x) for x in rotated[0]]
         return rotated.tolist()  # type: ignore[no-any-return]
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("TurboQuant query encoding failure: %s", e)
         return vector

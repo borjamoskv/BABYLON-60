@@ -159,7 +159,7 @@ class HypothesisEngineTool:
                 f"domain={domain}, method={method}). "
                 f"The swarm verifies, the ledger remembers."
             )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Hypothesis engine failure: %s", e)
             return f"❌ HYPOTHESIS ENGINE FAILURE: {e}"
 

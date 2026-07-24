@@ -6,6 +6,8 @@ Dynamically modulates Flow State difficulty by injecting/removing friction varia
 """
 
 import random
+from typing import Any
+
 
 
 class FlowStateModulator:
@@ -26,7 +28,7 @@ class FlowStateModulator:
         else:
             return 1.0
 
-    def generate_stochastic_reward(self, exergy_expenditure: float) -> dict:
+    def generate_stochastic_reward(self, exergy_expenditure: float) -> dict[str, Any]:
         """
         Generates a stochastic reward based on exergy spent.
         Variable ratio reinforcement schedule.

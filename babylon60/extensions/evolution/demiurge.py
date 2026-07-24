@@ -146,7 +146,7 @@ class DemiurgeCompiler:
                     "code": generated_code,
                 }
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("Ghost recorded: %s", intent[:30])
             return {"status": "ERROR", "reason": str(e)}
 

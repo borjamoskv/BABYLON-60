@@ -67,7 +67,7 @@ class BCI_Daemon:
 
         except asyncio.IncompleteReadError:
             logging.getLogger(__name__).info("[BCI] ❌ Byte buffer terminated unexpectedly.")
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logging.getLogger(__name__).info(f"[BCI] ❌ Error processing intent: {e}")
             writer.write(b"\x00")
         finally:
@@ -122,14 +122,14 @@ class BCI_Transmitter:
                 return True
             return False
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logging.getLogger(__name__).info(f"[BCI-CLIENT] Failed to inject intent: {e}")
             return False
         finally:
             try:
                 writer.close()
                 await writer.wait_closed()
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logging.getLogger(__name__).warning("Suppressed exception: %s", exc)
 
 

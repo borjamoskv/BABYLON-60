@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 import logging
 import sqlite3
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from babylon60.crypto.aes import get_default_encrypter
 from babylon60.crypto.hash_registry import cortex_hash
@@ -27,7 +27,7 @@ if TYPE_CHECKING:
 logger = logging.getLogger("babylon60_extensions.sync")
 
 
-def _decrypt_json(val: str | None) -> dict:
+def _decrypt_json(val: str | None) -> dict[str, Any]:
     if not val or not str(val).strip():
         return {}
     if str(val).startswith("v6_aesgcm:"):

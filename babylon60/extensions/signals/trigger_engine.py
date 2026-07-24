@@ -329,7 +329,7 @@ class TriggerEngine:
             try:
                 await self._dispatch_single(action, trigger, signal)
                 dispatched += 1
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error(
                     "Action dispatch failed for trigger %s, action %s: %s",
                     trigger.id,

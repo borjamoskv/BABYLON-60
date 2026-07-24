@@ -146,7 +146,7 @@ class GlasswingVulnerabilityScanner:
                 "description": "Failed to parse json model output",
                 "raw_output": response_text,
             }
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Failed parsing Mythos security report: %s", e)
             return {"status": "FAIL", "error": str(e)}
 

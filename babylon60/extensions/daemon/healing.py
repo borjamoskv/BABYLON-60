@@ -65,7 +65,7 @@ class HealingMixin:
     _healed_total: int
     _shared_engine: Any
 
-    def _load_config(self) -> dict:
+    def _load_config(self) -> dict[str, Any]:
         return {}
 
     def _heal_monitor(self, attr: str, monitor_name: str) -> None:

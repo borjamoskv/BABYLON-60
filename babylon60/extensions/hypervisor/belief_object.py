@@ -13,6 +13,7 @@ import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
+from typing import Any
 
 __all__ = [
     "BeliefConfidence",
@@ -166,7 +167,7 @@ class BeliefObject:
     def is_quarantined(self) -> bool:
         return self.state == BeliefStatus.QUARANTINED
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         """Serialize to dict for SQLite/JSON storage."""
         return {
             "belief_id": self.belief_id,

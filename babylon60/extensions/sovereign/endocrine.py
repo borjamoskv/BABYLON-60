@@ -9,6 +9,7 @@ contextual cues and system health metrics.
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -93,7 +94,7 @@ class DigitalEndocrine:
             return "expansive"
         return "balanced"
 
-    def to_dict(self, tenant_id: str = "default") -> dict:
+    def to_dict(self, tenant_id: str = "default") -> dict[str, Any]:
         """Return the current biological state of the agent."""
         state = self._get_state(tenant_id)
         return {

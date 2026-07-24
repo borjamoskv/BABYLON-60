@@ -77,6 +77,6 @@ class GmailMagicLinkExtractor:
             logger.warning("No se encontró el regex del Magic Link en el cuerpo.")
             return None
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Fricción termodinámica en conexión IMAP: %s", e)
             return None

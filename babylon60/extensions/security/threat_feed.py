@@ -170,7 +170,7 @@ class ThreatFeedEngine:
             ts = data.get("last_update")
             if ts:
                 return datetime.fromisoformat(ts)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         return None
 

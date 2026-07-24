@@ -101,7 +101,7 @@ class CortexSyncManager:
         await export_snapshot(self._engine)
 
     @property
-    def status(self) -> dict:
+    def status(self) -> dict[str, Any]:
         """Returns the status of the last sync operations."""
         return {
             "last_sync_total": (self._last_sync_result.total if self._last_sync_result else 0),

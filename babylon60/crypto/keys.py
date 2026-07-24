@@ -88,7 +88,7 @@ class KeyManager:
                 keyring.set_password(self.service_name, actor_id, private_bytes.decode("utf-8"))
             else:
                 raise ImportError("keyring package is not installed")
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Keyring set_password failed, falling back to in-memory storage: %s", e)
             if self.service_name not in self._fallback_keyring:
                 self._fallback_keyring[self.service_name] = {}
@@ -119,7 +119,7 @@ class KeyManager:
                     private_pem = keyring.get_password(self.service_name, actor_id)
                 else:
                     logger.warning("OS Keyring is not available (keyring package is not installed).")
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning(
                     "Fallo en OS Keyring (get_password) para actor %s: %s",
                     actor_id,
@@ -152,7 +152,7 @@ class KeyManager:
                     keyring.delete_password(self.service_name, actor_id)
                 else:
                     logger.warning("OS Keyring is not available (keyring package is not installed).")
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning(
                     "Fallo en OS Keyring (delete_password) para actor %s: %s",
                     actor_id,

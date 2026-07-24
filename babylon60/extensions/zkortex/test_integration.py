@@ -133,7 +133,7 @@ def test_range_proof_honesty() -> None:
     try:
         prove_range(200, 10, 100)
         raise AssertionError("Should have raised ValueError")
-    except Exception as exc:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
         import logging
 
         logging.warning("Suppressed exception: %s", exc)

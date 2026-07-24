@@ -208,7 +208,7 @@ class CognitiveHandoff:
 
 
     @property
-    def stats(self) -> dict:
+    def stats(self) -> dict[str, Any]:
         """Return telemetry counters."""
         return {
             "total_tokens": self._total_tokens,

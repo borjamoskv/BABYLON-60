@@ -202,11 +202,11 @@ class ContextInference:
             projects_data = []
             try:
                 signals_data = json.loads(row[5]) if row[5] else []
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
             try:
                 projects_data = json.loads(row[6]) if row[6] else []
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
             results.append(

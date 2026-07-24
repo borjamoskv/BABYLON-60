@@ -79,7 +79,7 @@ def main():
             "hash": v_hash
         }
         print(json.dumps(output, indent=2))
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         print(json.dumps({"error": str(e)}))
 
 if __name__ == "__main__":

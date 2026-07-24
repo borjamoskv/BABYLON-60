@@ -63,7 +63,7 @@ def seal_decision(fact_type: str, client_id_kwarg: str = "client_id"):
                 sovereign_run(_persist_fact())
                 logger.info("[CORTEX] Sealed decision %s for client ***id", fact_type)
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("[CORTEX] Failed to seal decision: %s", e)
 
             return result

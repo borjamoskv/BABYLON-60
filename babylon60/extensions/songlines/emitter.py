@@ -55,7 +55,7 @@ class ResonanceEmitter:
                 os.setxattr(str(target_file), attr_name, encoded_payload)  # type: ignore[reportAttributeAccessIssue]
                 logger.info("Embedded ghost %s on %s (os.setxattr)", ghost_id, target_file.name)
                 return
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
         try:
@@ -68,7 +68,7 @@ class ResonanceEmitter:
             )
             logger.info("Embedded ghost %s on %s (xattr cli)", ghost_id, target_file.name)
             return
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
 
         self._fallback_embed(target_file, attr_name, encoded_payload)
@@ -81,7 +81,7 @@ class ResonanceEmitter:
             try:
                 with open(songline_file) as f:
                     data = json.load(f)
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
         file_key = target_file.name

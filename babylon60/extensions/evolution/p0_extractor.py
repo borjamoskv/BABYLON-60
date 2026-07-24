@@ -169,7 +169,7 @@ class P0VulnerabilityExtractor:
                 report.high_count,
                 target_file,
             )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("P0 extraction failed for %s: %s", target_file, e)
             report.status = f"failed: {e}"
 
@@ -365,7 +365,7 @@ class P0VulnerabilityExtractor:
                                 function_name=obj.get("function_name", ""),
                             )
                         )
-                    except Exception as exc:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                         logger.warning("Suppressed exception: %s", exc)
                     start = -1
 

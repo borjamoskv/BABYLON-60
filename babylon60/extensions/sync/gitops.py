@@ -24,7 +24,7 @@ def _get_cortex_dir(repo_path: Path) -> Path:
     return cortex_dir
 
 
-def _load_knowledge(json_path: Path) -> dict:
+def _load_knowledge(json_path: Path) -> dict[str, Any]:
     if json_path.exists():
         try:
             return json.loads(json_path.read_text(encoding="utf-8"))

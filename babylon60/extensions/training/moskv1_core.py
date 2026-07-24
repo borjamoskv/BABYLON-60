@@ -186,7 +186,7 @@ class MOSKV1Core:
                         self._mlx_base_model_path, adapter_path=str(self._adapter_path)
                     )
                     return model, tokenizer
-                except Exception as e:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                     logger.error("Warmup failed: %s", e)
                     return None, None
 
@@ -206,7 +206,7 @@ class MOSKV1Core:
         if self._sovereign_llm is not None:
             try:
                 await self._sovereign_llm.close()
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Failed to close SovereignLLM: %s", e)
             finally:
                 self._sovereign_llm = None
@@ -276,7 +276,7 @@ class MOSKV1Core:
                         }
                     )
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Hybrid search failed, trying ContextAssembler: %s", e)
             try:
                 from babylon60.context.assembler import ContextAssembler
@@ -299,7 +299,7 @@ class MOSKV1Core:
                                 "source": "context_assembler",
                             }
                         )
-            except Exception as e2:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e2:  # noqa: BLE001
                 logger.warning("ContextAssembler also failed: %s", e2)
 
         loop = asyncio.get_running_loop()
@@ -567,7 +567,7 @@ class MOSKV1Core:
                 self.add_to_history("user", user_query)
                 self.add_to_history("assistant", "".join(full_response))
                 return
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("MLX streaming failed: %s", e)
 
         logger.info("Attempting Ollama MOSKV-1 streaming fallback...")
@@ -585,7 +585,7 @@ class MOSKV1Core:
                 self.add_to_history("user", user_query)
                 self.add_to_history("assistant", "".join(full_response))
                 return
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Ollama MOSKV-1 streaming failed: %s", e)
 
         logger.info("Attempting Ollama base model streaming fallback...")
@@ -605,7 +605,7 @@ class MOSKV1Core:
                 self.add_to_history("user", user_query)
                 self.add_to_history("assistant", "".join(full_response))
                 return
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Ollama base model streaming failed: %s", e)
 
         logger.info("Attempting SovereignLLM fallback...")
@@ -618,7 +618,7 @@ class MOSKV1Core:
                 return
             else:
                 yield res
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             yield f"[ERROR] All inference backends failed: {e}"
 
 
@@ -668,7 +668,7 @@ class MOSKV1Core:
         except aiohttp.ClientError as e:
             logger.error("Ollama connection error: %s", e)
             return f"[ERROR] Connection failed: {e}"
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Ollama inference failed: %s", e)
             return f"[ERROR] Inference failed: {e}"
 
@@ -717,7 +717,7 @@ class MOSKV1Core:
                                 return
                         except json.JSONDecodeError:
                             continue
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Ollama streaming failed: %s", e)
             yield f"[ERROR] Stream failed: {e}"
 
@@ -751,7 +751,7 @@ class MOSKV1Core:
             )
             return result if isinstance(result, str) else str(result)
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("SovereignLLM fallback failed: %s", e)
             return f"[ERROR] All inference backends failed: {e}"
 
@@ -817,7 +817,7 @@ class MOSKV1Core:
         except ImportError as e:
             logger.warning("mlx_lm not available for native inference: %s", e)
             return f"[ERROR] mlx_lm import failed: {e}"
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Native MLX inference failed: %s", e)
             return f"[ERROR] MLX inference exception: {e}"
 
@@ -877,7 +877,7 @@ class MOSKV1Core:
                             max_tokens=max_tokens,
                         ):
                             loop.call_soon_threadsafe(q.put_nowait, chunk)
-                    except Exception as e:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                         loop.call_soon_threadsafe(q.put_nowait, e)
                     finally:
                         loop.call_soon_threadsafe(q.put_nowait, None)
@@ -896,7 +896,7 @@ class MOSKV1Core:
                     if chunk:
                         yield chunk
                 await gen_task
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             yield f"[ERROR] MLX streaming exception: {e}"
 
     async def _async_reload_weights(self, target_mtime: float) -> None:
@@ -918,7 +918,7 @@ class MOSKV1Core:
                     self._mlx_tokenizer = tokenizer
                     self._mlx_loaded_mtime = target_mtime
                     logger.info("Background Reload: Success! Atomic model weights swap complete.")
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Background weight reload failed: %s", e)
         finally:
             self._mlx_is_reloading = False
@@ -992,7 +992,7 @@ TEMPLATE \"\"\"{{{{ if .System }}}}<|im_start|>system
                     error = await resp.text()
                     logger.error("Failed to create Ollama model: %s", error[:200])
                     return False
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("Ollama model creation failed: %s", e)
             return False
 

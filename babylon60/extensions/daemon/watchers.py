@@ -155,7 +155,7 @@ class _UnifiedHandler(FileSystemEventHandler):
                     payload,
                     ttl_s=3600,
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.debug("UnifiedHandler hot state increment/set failed: %s", e, exc_info=True)
 
         if self._event_bus is not None and self._loop is not None:
@@ -164,7 +164,7 @@ class _UnifiedHandler(FileSystemEventHandler):
                     self._event_bus.publish(topic, payload),
                     self._loop,
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.debug("UnifiedHandler event bus publish failed: %s", e, exc_info=True)
 
 

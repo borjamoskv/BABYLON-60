@@ -9,7 +9,7 @@ and a composite health score.
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from babylon60.extensions.shannon.analyzer import (
     dead_weight,
@@ -45,7 +45,7 @@ _WEIGHTS = {
 }
 
 
-def _entropy_block(distribution: dict[str, int]) -> dict:
+def _entropy_block(distribution: dict[str, int]) -> dict[str, Any]:
     """Build an entropy analysis block for a single dimension."""
     h = shannon_entropy(distribution)
     h_max = max_entropy(len(distribution))
@@ -179,7 +179,7 @@ class EntropyReport:
     async def analyze(
         engine: CortexEngine,
         project: str | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Run complete entropy analysis and return structured results.
 
         Args:

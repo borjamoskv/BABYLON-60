@@ -110,5 +110,5 @@ class HedgedRequestStrategy:
                 if not t.done():
                     try:
                         await t
-                    except Exception as exc:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                         logger.warning("Suppressed exception: %s", exc)

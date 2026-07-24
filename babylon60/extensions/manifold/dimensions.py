@@ -57,13 +57,13 @@ class DecisionDimension:
                 try:
                     await self.redteam.siege(task.description, toolkit)
                     state.messages.append("Red Team pre-execution siege generated.")
-                except Exception as rt_err:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as rt_err:  # noqa: BLE001
                     logger.warning("Red Team sequence failed: %s", rt_err)
 
             state.convergence = 1.0  # Plan is stable
             task.plan = plan.to_prompt_str()
             return plan
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("D2 Failed: %s", e)
             state.messages.append(f"Error: {e}")
             state.convergence = 0.0
@@ -94,7 +94,7 @@ class CreationDimension:
             state.messages.append(f"Execution result: {result[:50]}...")
             state.convergence = 0.8  # Needs validation to reach 1.0
             return result
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("D3 Failed: %s", e)
             state.messages.append(f"Error: {e}")
             state.convergence = 0.0
@@ -121,7 +121,7 @@ class ValidationDimension:
                 test_result = await asyncio.get_event_loop().run_in_executor(
                     None, self.tester.run, toolkit
                 )
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.warning("Tester failed (%s) - ignoring", e)
                 test_result = None
 
@@ -132,7 +132,7 @@ class ValidationDimension:
             state.messages.append(msg)
 
             return {"approved": passed, "critique": critique, "tests": test_result}
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("D4 Failed: %s", e)
             state.messages.append(f"Error: {e}")
             state.convergence = 0.0

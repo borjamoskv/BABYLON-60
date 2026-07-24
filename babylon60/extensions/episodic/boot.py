@@ -19,7 +19,7 @@ import sqlite3
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING, Final
+from typing import TYPE_CHECKING, Any, Final
 
 from babylon60.extensions.episodic.main import Episode, EpisodicMemory, Pattern
 from babylon60.memory.temporal import now_iso
@@ -67,7 +67,7 @@ class BootPayload:
     total_episodes: int
     semantic_recalls: list[dict] | None = None  # L2 vector results
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> dict[str, Any]:
         result = {
             "timestamp": self.timestamp,
             "active_project": self.active_project,

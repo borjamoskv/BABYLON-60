@@ -26,6 +26,6 @@ class TrendsMonitor(BaseMonitor[TrendsAlert]):
         try:
             alerts = self._oracle.consume_alerts()
             return alerts
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.error("TrendsMonitor check failed: %s", e)
             return []

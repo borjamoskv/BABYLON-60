@@ -105,15 +105,26 @@ def audit_single_session(session_dir: Path) -> Dict[str, Any]:
         return {"session_id": session_id, "status": f"ERROR: {str(e)}"}
 
     # Mathematical Exergy Calculation (Thermodynamic state transitions)
-    base_exergy = (code_edits * 25.0) + (c5_assertions * 15.0) + (len(invariants_found) * 20.0)
-    # Penalize by structural anergy (errors, loops)
+    # Physical mutations weight most (commits, code edits)
+    # Agent activity (turns, tools) proves sustained execution
+    # C5-REAL assertions prove epistemic rigor
+    # Invariant coverage proves BFT compliance
+    base_exergy = (
+        (code_edits * 25.0)          # Physical disk writes: highest value
+        + (c5_assertions * 15.0)      # C5-REAL sovereign assertions
+        + (len(invariants_found) * 20.0)  # Active invariant coverage
+        + (min(tool_calls_count, 50) * 3.0)   # Tool execution density (capped)
+        + (min(model_turns, 100) * 2.0)        # Agent turn activity (capped)
+    )
+    # Penalize by structural anergy (errors, repeated loops)
     net_exergy = base_exergy - structural_anergy
 
     # Normalize with minimum bounds
     exergy_score = min(1000.0, max(0.0, net_exergy))
 
-    if exergy_score == 0 and len(user_messages) > 0 and structural_anergy == 0:
-        exergy_score = 420.0  # Base line reading session
+    # Baseline for active sessions with zero physical edits (pure analysis/reading)
+    if exergy_score < 420.0 and len(user_messages) > 0 and model_turns > 2:
+        exergy_score = max(exergy_score, 420.0)  # Base line active session
 
     return {
         "session_id": session_id,

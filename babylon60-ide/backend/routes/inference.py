@@ -74,7 +74,7 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         )
         with urllib.request.urlopen(req_obj, timeout=30.0) as resp:
             resp_data = json.loads(resp.read().decode("utf-8"))
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         raise HTTPException(status_code=503, detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}")
 
     latency_ms = int((time.perf_counter() - start_time) * 1000)
@@ -158,5 +158,5 @@ def generate_mamba(req: MambaInferenceRequest) -> dict[str, Any]:
             "provider": "NATIVE_MAMBA_SSM_LEDGER_ENGINE",
             "vocab_size": len(tokenizer.vocab),
         }
-    except Exception as e:
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         raise HTTPException(status_code=500, detail=f"Native Mamba inference failed: {str(e)}")

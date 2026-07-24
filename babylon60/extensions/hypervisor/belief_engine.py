@@ -161,7 +161,7 @@ class BeliefEngine:
                             source_id,
                             verdict.model,
                         )
-                except Exception as exc:  # noqa: BLE001
+                except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                     logger.error("Failed to execute Epistemic Slashing: %s", exc)
 
         elif verdict.action == VerdictAction.ACCEPT:
@@ -253,7 +253,7 @@ class BeliefEngine:
             self._cache[cache_key] = beliefs
             return beliefs[: self._max_context]
 
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Failed to load belief context: %s", exc)
             return []
 
@@ -320,7 +320,7 @@ class BeliefEngine:
                 belief_data = meta.get("belief_object")
                 if belief_data:
                     context.append(BeliefObject.from_dict(belief_data))
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.error("Failed to load unbounded context for cascade: %s", exc)
             return
 

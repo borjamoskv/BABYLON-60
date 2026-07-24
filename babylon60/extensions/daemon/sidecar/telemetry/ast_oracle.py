@@ -140,7 +140,7 @@ class ASTOracle:
                 mtime = py_file.stat().st_mtime
                 self._mtimes[target_str] = mtime
                 self._cache[target_str] = self._extract_semantic_nodes(py_file)
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
     async def _process_events(self) -> None:

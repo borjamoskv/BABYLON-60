@@ -48,7 +48,7 @@ class CanaryMonitor:
             try:
                 st = path.stat()
                 self._last_stats[path] = max(st.st_atime, st.st_mtime)
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
 
     async def check_async(self) -> list[SecurityAlert]:

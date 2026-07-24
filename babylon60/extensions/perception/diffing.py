@@ -52,7 +52,7 @@ class DiffManager:
                 content = p.read_text(encoding="utf-8", errors="replace")
 
             new_lines = content.splitlines()
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("Failed to read file for diffing: %s (%s)", path, e)
             return None
 

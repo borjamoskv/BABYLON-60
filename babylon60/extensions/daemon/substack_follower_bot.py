@@ -71,13 +71,13 @@ async def run_automata():
                             logger.info(
                                 " -> Nodo %s ignorado (Botón oculto o deshabilitado).", i + 1
                             )
-                    except Exception as e:  # noqa: BLE001
+                    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                         logger.error("Fricción al sincronizar nodo %s: %s", i + 1, e)
 
             logger.info("Auditoría de pantalla completada.")
             await browser.close()
 
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("Fallo crítico en el Automata CDP: %s", e)
         logger.info("¿Has iniciado Google Chrome con el puerto abierto en la terminal?")
 

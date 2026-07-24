@@ -21,30 +21,18 @@ class SwarmMetrics:
     deadlocks: int = 0
 
 
-async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
-    """
-    Simulates a C5-REAL Transducer writing to the ledger concurrently.
-    Must adhere to INV_BFT_02: WAL + busy_timeout=5000ms.
-    """
+def _write_swarm_node_record(agent_id: int) -> str:
     try:
-        # Give a slight jitter to simulate real network/swarm conditions
-        await asyncio.sleep(0.01 * (agent_id % 10))
-
-        # We must use synchronous sqlite3 carefully or wrap it in a thread,
-        # but for this stress test we want to hit the WAL contention explicitly.
-        # Following INV_BFT_02: timeout must be high enough to survive 100 concurrent actors.
         conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
         conn.execute("PRAGMA journal_mode=WAL;")
-
         cursor = conn.cursor()
 
-        timestamp = time.time()
+        timestamp = int(time.time() * 1000)
         commit_hash = f"swarm_mitosis_{agent_id:03d}"
         exergy_score = 1000.0
         verdict_yaml = f"Agent {agent_id} achieved convergence."
         prov_hash = str(uuid.uuid5(uuid.NAMESPACE_OID, f"agent_{agent_id}_{time.time()}"))
 
-        # Mutation
         cursor.execute(
             """
             INSERT INTO ledger (timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml, prov_hash)
@@ -65,32 +53,36 @@ async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
         )
         conn.commit()
         conn.close()
-        metrics.successes += 1
-        print(f"[🟢] Agent {agent_id:03d} converged.")
+        return "SUCCESS"
 
     except sqlite3.OperationalError as e:
         if "database is locked" in str(e).lower() or "busy" in str(e).lower():
-            metrics.deadlocks += 1
-            print(f"[🔴] Agent {agent_id:03d} DEADLOCK: {e}")
-        else:
-            metrics.failures += 1
-            print(f"[🔴] Agent {agent_id:03d} FAILED: {e}")
+            return f"DEADLOCK: {e}"
+        return f"FAILED: {e}"
     except (OSError, RuntimeError, ValueError) as e:
+        return f"FATAL: {e}"
+
+
+async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
+    await asyncio.sleep(0.01 * (agent_id % 10))
+    res = await asyncio.to_thread(_write_swarm_node_record, agent_id)
+    if res == "SUCCESS":
+        metrics.successes += 1
+    elif res.startswith("DEADLOCK"):
+        metrics.deadlocks += 1
+    else:
         metrics.failures += 1
-        print(f"[🔴] Agent {agent_id:03d} FATAL: {e}")
 
 
 async def main():
     print("🔋 Igniting BFT Swarm Mitosis: 100 Concurrent Agents...")
 
-    # Ensure DB is ready
     if not DB_PATH.exists():
         print("❌ Ledger DB does not exist. Run exergy optimizer first.")
         return
 
     metrics = SwarmMetrics()
 
-    # Spawn 100 concurrent BFT agents
     tasks = []
     for i in range(1, 101):
         tasks.append(asyncio.create_task(bft_agent_task(i, metrics)))
@@ -103,7 +95,6 @@ async def main():
     print(f"Deadlocks    : {metrics.deadlocks} (SQLite WAL contention)")
     print(f"Other Errors : {metrics.failures}")
 
-    # Assert C5-REAL physical convergence
     if metrics.successes == 100:
         print("\n✅ INV_BFT_02 VERIFIED: SQLite WAL busy_timeout survived 100 concurrent writers.")
         exit(0)
@@ -114,3 +105,4 @@ async def main():
 
 if __name__ == "__main__":
     asyncio.run(main())
+

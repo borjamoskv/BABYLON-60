@@ -124,7 +124,7 @@ class EventLoopMixin:
         for sig in (signal.SIGTERM, signal.SIGINT):
             try:
                 loop.add_signal_handler(sig, self._signal_shutdown)
-            except Exception as exc:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
                 logger.warning("Suppressed exception: %s", exc)
         logger.info("🚀 MOSKV-1 Sovereign Daemon starting (interval=%ds)", interval)
         if self.hot_state is not None:
@@ -242,7 +242,7 @@ class EventLoopMixin:
         )
         try:
             await asyncio.gather(*tasks, return_exceptions=True)
-        except Exception as exc:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:  # noqa: BLE001
             logger.warning("Suppressed exception: %s", exc)
         finally:
             await self._sovereign_shutdown()
@@ -256,7 +256,7 @@ class EventLoopMixin:
                 if self.hot_state is not None:
                     self.hot_state.increment("cycle_count")
 
-            except Exception as e:  # noqa: BLE001
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
                 logger.error("Check loop error: %s", e)
 
             try:

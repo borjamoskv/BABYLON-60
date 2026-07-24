@@ -27,7 +27,7 @@ async def verify_webhook(request: Request):
     if keyring is not None:
         try:
             expected_token = keyring.get_password("cortex_v6", "kapso_verify_token")
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.warning("Fallo al acceder al OS Keyring para kapso_verify_token: %s", e)
 
     if not expected_token:
@@ -60,6 +60,6 @@ async def receive_webhook(request: Request):
         # Enforce CORTEX-TAINT and route to Sovereign Swarm or event bus
 
         return {"status": "received"}
-    except Exception as e:  # noqa: BLE001
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
         logger.error("Error processing Kapso Webhook: %s", e)
         return {"status": "error"}

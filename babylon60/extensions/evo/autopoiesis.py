@@ -125,7 +125,7 @@ class AutopoiesisEngine:
         except (TypeError, OSError):
             logger.error("Function source unavailable for mutation of '%s'.", func_name)
 
-    def mutate(self, target: str = "default") -> dict:
+    def mutate(self, target: str = "default") -> dict[str, Any]:
         """
         Public trigger for OmegaDaemon compatibility.
         Dispatches an AST mutation cycle via OuroborosCompiler.

@@ -19,7 +19,7 @@ Scale: 0% (total entropic decay) → 100% (functional immortality).
 from __future__ import annotations
 
 import logging
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from babylon60.extensions.shannon.analyzer import normalized_entropy
 from babylon60.extensions.shannon.scanner import MemoryScanner
@@ -115,7 +115,7 @@ class ImmortalityIndex:
     async def compute(
         engine: CortexEngine,
         project: str | None = None,
-    ) -> dict:
+    ) -> dict[str, Any]:
         """Run the complete immortality analysis.
 
         Args:
@@ -206,7 +206,7 @@ class ImmortalityIndex:
         }
 
 
-def _empty_result(project: str | None) -> dict:
+def _empty_result(project: str | None) -> dict[str, Any]:
     """Return a zeroed-out result for an empty database."""
     zero_dim = {
         name: {"score": 0.0, "pct": 0.0, "bar": _dimension_bar(0.0), "weight": w}

@@ -164,7 +164,7 @@ class ImmuneArbiter:
                         f" ({echo_count}/{len(actions)} actions"
                         " mirror the signal)."
                     )
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("F2 degraded to heuristic: %s", e)
             score = 70.0
             justification = f"Degraded: {e}"
@@ -218,7 +218,7 @@ class ImmuneArbiter:
                 score -= 10.0
                 justification += f" {len(dead_ends)} dead-end output(s)."
 
-        except Exception as e:  # noqa: BLE001
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001
             logger.debug("F3 degraded to heuristic: %s", e)
             score = 75.0
             justification = f"Degraded: {e}"

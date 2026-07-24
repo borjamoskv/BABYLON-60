@@ -1,5 +1,6 @@
 # [C5-REAL] Exergy-Maximized
 import logging
+from typing import Any
 
 from babylon60.extensions.swarm.sortu_jit_executor import run_jit_sandbox
 
@@ -7,7 +8,7 @@ logger = logging.getLogger("babylon60.autodidact.actuator")
 logging.basicConfig(level=logging.INFO)
 
 
-async def autodidact_ingest(source_code: str, expected_yield_gain: float, metadata: dict) -> dict:
+async def autodidact_ingest(source_code: str, expected_yield_gain: float, metadata: dict) -> dict[str, Any]:
     """
     Sovereign Autodidact-Omega Actuator Pipeline (v4.0)
     1. Parse and JIT execute

@@ -119,7 +119,7 @@ async def check_semantic_redundancy(text_snippet: str) -> tuple[bool, str | None
                 msg = f"🛡️ [ENTROPIC SHIELD] ❄️ Zona Isoterma Alcanzada (ΔS={similitud:.4f})."
                 logger.warning(msg)
                 return True, nearest[0].id
-    except Exception as e:  # noqa: BLE001 - redundancy check failure must not crash synthesis
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001 - redundancy check failure must not crash synthesis
         logger.error("Error checking redundancy L2: %s", e)
 
     return False, None
@@ -207,7 +207,7 @@ async def distill_sovereign_memo(
             "entities": [],
             "axiomatic_resonance": "Fail JSON",
         }
-    except Exception as e:  # noqa: BLE001 - parsing failure must fall back to raw content
+    except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:  # noqa: BLE001 - parsing failure must fall back to raw content
         logger.error("Error parsing crystal: %s", e)
         return {"content_markdown": raw_data[:FALLBACK_CONTENT_LENGTH], "error": str(e)}
 

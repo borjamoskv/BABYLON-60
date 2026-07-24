@@ -112,13 +112,13 @@ class CortexLangGraphSupervisor:
         try:
             async for state_update in self.compiled_app.astream(initial_state):
                 yield state_update
-        except Exception as e:
+        except (ValueError, TypeError, RuntimeError) as e:
+            logger.error("☠️ [SUPERVISOR] Fallo de Ejecución Duradera: %s", e)
+            raise LangGraphSupervisorError(f"Colapso en grafo: {e}") from e
+        except OSError as e:
             error_msg = str(e).upper()
             if "RESOURCE_EXHAUSTED" in error_msg or "429" in error_msg or "RATE LIMIT" in error_msg:
                 fallback_state = await self.fallback_local_execution(initial_state)
                 yield fallback_state
-            elif isinstance(e, (ValueError, TypeError, RuntimeError)):
-                logger.error("☠️ [SUPERVISOR] Fallo de Ejecución Duradera: %s", e)
-                raise LangGraphSupervisorError(f"Colapso en grafo: {e}") from e
             else:
-                raise LangGraphSupervisorError(f"Falla crítica desconocida: {e}") from e
+                raise LangGraphSupervisorError(f"Falla crítica de red: {e}") from e
