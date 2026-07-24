@@ -242,3 +242,9 @@ def test_inv_c5_20_kinetic_purge_protocol():
     hits_sigkill = _scan({".py", ".sh"}, r'kill\s+-9|SIGKILL')
     assert hits_osascript, "INV_C5_20 violated: Missing Mach VM cache drop via osascript purge"
     assert hits_sigkill, "INV_C5_20 violated: Missing SIGKILL (-9) on rogue daemons"
+
+
+def test_inv_c5_21_stub():
+    """INV_C5_21 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_21
+    pass
