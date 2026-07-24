@@ -90,7 +90,7 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ---
 
-## Active C5 Invariant Registry (INV_C5_01 — INV_C5_21)
+## Active C5 Invariant Registry (INV_C5_01 — INV_C5_22)
 
 Full definitions and execution protocols are synchronized between `ETHOS.md` and `.agents/AGENTS.md`.
 
@@ -101,7 +101,7 @@ Full definitions and execution protocols are synchronized between `ETHOS.md` and
 - **INV_C5_01 – INV_C5_07:** Cryptographic truth, sovereign keys, single hash primitive, Ed25519 signatures, live validator, Lean model linkage, loud failure.
 - **INV_C5_08:** EIP-1153 transient reentrancy locks (`tload`/`tstore` validation).
 - **INV_C5_09:** Python 3.12+ testing isolation via `.venv` and `BypassSandbox: true`.
-- **INV_C5_10 – INV_C5_21:** PyNaCl serialization, remote purge, symlink depth, autopoiesis alignment, exergy agent, vault sync, seal protocol, ultrathink, BFT float exclusion, fail-fast orchestration, kinetic purge, and `/goal` exergy maximization (see `.agents/AGENTS.md`).
+- **INV_C5_10 – INV_C5_22:** PyNaCl serialization, remote purge, symlink depth, autopoiesis alignment, exergy agent, vault sync, seal protocol, ultrathink, BFT float exclusion, fail-fast orchestration, kinetic purge, `/goal` exergy maximization, and Kimi K3 interleaved execution (see `.agents/AGENTS.md`).
 - **Ω30 · PYO3 FORWARD ABI INVARIANT:** Enforce `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` on mixed Rust/Python builds.
 
 

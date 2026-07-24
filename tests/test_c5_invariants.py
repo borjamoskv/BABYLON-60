@@ -265,3 +265,13 @@ def test_inv_c5_21_goal_exergy_maximization() -> None:
     assert "INV_C5_21" in content, "INV_C5_21 rule definition missing in .agents/AGENTS.md"
     assert "Oracle" in content, "INV_C5_21 missing Oracle clause"
     assert "Mitosis" in content, "INV_C5_21 missing Swarm Mitosis clause"
+
+
+def test_inv_c5_22_kimi_k3_interleaved_execution() -> None:
+    """INV_C5_22 — Kimi K3 Interleaved Long-Horizon Execution Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_22 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_22" in content, "INV_C5_22 rule definition missing in .agents/AGENTS.md"
+    assert "Kimi" in content or "Interleaved" in content, "INV_C5_22 missing Interleaved clause"
+
