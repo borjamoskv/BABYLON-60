@@ -2,7 +2,7 @@ import pytest
 import asyncio
 from typing import Tuple
 from babylon60.bft.lexicon import BFTLexicon
-from babylon60.bft.abilities import BFTAbilityHandler, AbilityViolation
+from babylon60.bft.abilities import BFTAbilityHandler, AbilityViolation, _claimed_abilities
 
 @pytest.fixture
 def bft_env() -> Tuple[BFTLexicon, BFTAbilityHandler]:
@@ -11,20 +11,28 @@ def bft_env() -> Tuple[BFTLexicon, BFTAbilityHandler]:
     return lex, handler
 
 @pytest.mark.asyncio
-async def test_ability_isolation(bft_env: Tuple[BFTLexicon, BFTAbilityHandler]) -> None:
+async def test_ability_isolation_context(bft_env: Tuple[BFTLexicon, BFTAbilityHandler]) -> None:
     lex, handler = bft_env
     
-    # Mock an IO operation (e.g. write to disk)
     async def mock_io_write(data: str) -> bool:
         return True
         
     io_hash = handler.hash_io
     handler.register_handler(io_hash, mock_io_write)
     
-    # Try to execute IO without claiming the ability (Should Fail-Fast)
+    # Baseline: no abilities claimed (Should Fail-Fast)
     with pytest.raises(AbilityViolation):
-        await handler.execute_with_abilities([], io_hash, "malicious_data")
+        await handler.execute(io_hash, "malicious_data")
         
-    # Execute IO while explicitly claiming the ability (Should Succeed)
-    res = await handler.execute_with_abilities([io_hash], io_hash, "authorized_data")
-    assert res is True
+    # Claim the ability in the current context
+    token = handler.claim_abilities(frozenset([io_hash]))
+    try:
+        # Execution succeeds implicitly inside the context
+        res = await handler.execute(io_hash, "authorized_data")
+        assert res is True
+    finally:
+        handler.release_abilities(token)
+        
+    # Out of context: Should Fail-Fast again
+    with pytest.raises(AbilityViolation):
+        await handler.execute(io_hash, "malicious_data_2")

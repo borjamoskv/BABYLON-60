@@ -1,10 +1,11 @@
 """
 C5-REAL Algebraic Effects (Abilities) Interceptor.
-Mimics Unison's capability isolation inside Python via BFT Lexicon Hashes.
+Mimics Unison's capability isolation inside Python via BFT Lexicon Hashes and ContextVars.
 """
 import asyncio
 import inspect
-from typing import Any, Callable, Dict, TypeVar, List
+from contextvars import ContextVar
+from typing import Any, Callable, Dict, TypeVar, FrozenSet, Optional
 from babylon60.bft.lexicon import BFTLexicon
 
 T = TypeVar('T')
@@ -13,10 +14,13 @@ class AbilityViolation(Exception):
     """Raised when a function attempts an effect without claiming the Ability."""
     pass
 
+# BFT Context variable for scoping abilities physically per coroutine/thread
+_claimed_abilities: ContextVar[FrozenSet[str]] = ContextVar("_claimed_abilities", default=frozenset())
+
 class BFTAbilityHandler:
     def __init__(self, lexicon: BFTLexicon) -> None:
         self.lexicon = lexicon
-        # Load capability hashes
+        # Load capability hashes (deterministic O(1) resolution)
         self.hash_io = lexicon.get_concept_hash("TYPE::Ability::IO")
         self.hash_state = lexicon.get_concept_hash("TYPE::Ability::State")
         self.hash_exception = lexicon.get_concept_hash("TYPE::Ability::Exception")
@@ -27,14 +31,25 @@ class BFTAbilityHandler:
         """Injects the physical execution layer for a specific ability."""
         self.handlers[ability_hash] = handler_fn
 
-    async def execute_with_abilities(self, 
-                                     claimed_abilities: List[str], 
-                                     effect_hash: str, 
-                                     *args: Any, **kwargs: Any) -> Any:
+    def claim_abilities(self, abilities: FrozenSet[str]) -> object:
         """
-        Executes a side-effect if and only if the caller explicitly claimed the ability.
+        Creates a context manager token to enforce capability isolation.
+        Usage: token = handler.claim_abilities(frozenset([handler.hash_io]))
+               _claimed_abilities.set(abilities)
         """
-        if effect_hash not in claimed_abilities:
+        return _claimed_abilities.set(abilities)
+
+    def release_abilities(self, token: object) -> None:
+        """Resets the ability context."""
+        _claimed_abilities.reset(token) # type: ignore
+
+    async def execute(self, effect_hash: str, *args: Any, **kwargs: Any) -> Any:
+        """
+        Executes a side-effect if and only if the current context holds the capability.
+        """
+        active_claims = _claimed_abilities.get()
+        
+        if effect_hash not in active_claims:
             effect_name = self.lexicon.resolve_hash(effect_hash) or effect_hash
             raise AbilityViolation(f"C5-REAL: Execution halted. Missing Ability: {effect_name}")
             
