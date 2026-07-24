@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { invoke } from '@tauri-apps/api/tauri';
+import { invoke } from '@tauri-apps/api/core';
 import { FileItem, PROJECT_FILES } from "./data/projectFiles";
 import { Theme, THEMES } from "./data/themes";
 import { DatabaseTable, SwarmNode, INITIAL_SWARM, MOCK_TABLES } from "./data/mockState";
