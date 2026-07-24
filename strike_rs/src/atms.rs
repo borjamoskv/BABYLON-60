@@ -533,7 +533,6 @@ mod tests {
 // ──────────────────────────────────────────────────────────
 // LAWS — structural invariants of the label algebra (proptest).
 // ──────────────────────────────────────────────────────────
-
 #[cfg(test)]
 mod laws {
     use super::*;
