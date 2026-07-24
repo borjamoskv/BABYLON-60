@@ -5,6 +5,8 @@ Mimics Unison's capability isolation inside Python via BFT Lexicon Hashes and Co
 import asyncio
 import inspect
 import contextlib
+import contextvars
+import typing
 from contextvars import ContextVar
 from typing import Any, Callable, Dict, TypeVar, FrozenSet, Optional
 from babylon60.bft.lexicon import BFTLexicon
@@ -32,18 +34,18 @@ class BFTAbilityHandler:
         """Injects the physical execution layer for a specific ability."""
         self.handlers[ability_hash] = handler_fn
 
-    def claim_abilities(self, abilities: FrozenSet[str]) -> object:
+    def claim_abilities(self, abilities: FrozenSet[str]) -> contextvars.Token[FrozenSet[str]]:
         """
         Creates a context manager token to enforce capability isolation.
         """
         return _claimed_abilities.set(abilities)
 
-    def release_abilities(self, token: object) -> None:
+    def release_abilities(self, token: contextvars.Token[FrozenSet[str]]) -> None:
         """Resets the ability context."""
-        _claimed_abilities.reset(token) # type: ignore
+        _claimed_abilities.reset(token)
 
     @contextlib.contextmanager
-    def abilities_scope(self, abilities: FrozenSet[str]):
+    def abilities_scope(self, abilities: FrozenSet[str]) -> typing.Iterator[None]:
         """Pythonic context manager for O(1) ability scoping without try/finally boilerplate."""
         token = self.claim_abilities(abilities)
         try:
@@ -68,4 +70,7 @@ class BFTAbilityHandler:
         handler = self.handlers[effect_hash]
         if inspect.iscoroutinefunction(handler):
             return await handler(*args, **kwargs)
-        return handler(*args, **kwargs)
+        # Prevent event loop blocking by offloading synchronous side-effects
+        import functools
+        func = functools.partial(handler, *args, **kwargs)
+        return await asyncio.to_thread(func)
