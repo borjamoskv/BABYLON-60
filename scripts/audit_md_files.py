@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
-import os
 import re
 from pathlib import Path
-import yaml
 from typing import Dict, List, Any
 
 REPO_ROOT = Path("/Users/borjafernandezangulo/30_BABYLON-60").resolve()
@@ -27,7 +25,7 @@ def audit_file(file_path: Path) -> Dict[str, Any]:
     size_bytes = file_path.stat().st_size
     
     # 1. Heading check
-    h1_count = len([l for l in lines if l.startswith("# ")])
+    h1_count = len([line for line in lines if line.startswith("# ")])
     
     # 2. Internal link validation
     link_pattern = re.compile(r'\[([^\]]+)\]\(([^)]+)\)')
@@ -96,7 +94,7 @@ def main():
     empty_files = [r for r in results if r["status"] == "EMPTY"]
     warn_files = [r for r in results if len(r["issues"]) > 0]
     
-    print(f"=== MOSKV-1 APEX MD AUDIT SUMMARY ===")
+    print("=== MOSKV-1 APEX MD AUDIT SUMMARY ===")
     print(f"Total Markdown Files: {total_files}")
     print(f"Total Disk Volume: {total_bytes / 1024:.2f} KB ({total_lines} lines, {total_words} words)")
     print(f"Files with Issues/Warnings: {len(warn_files)}")

@@ -3,7 +3,7 @@
 # Prefix: core_ (pure primitive, zero I/O, deterministic)
 
 from dataclasses import dataclass, asdict
-from typing import Dict, List
+from typing import List
 import time
 from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.crdt import CRDTMap

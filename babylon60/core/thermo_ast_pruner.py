@@ -1,5 +1,3 @@
-import os
-import signal
 import ast
 from typing import Optional
 import argparse

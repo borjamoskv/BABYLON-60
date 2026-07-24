@@ -1,4 +1,3 @@
-import os
 import sqlite3
 import subprocess
 from pathlib import Path

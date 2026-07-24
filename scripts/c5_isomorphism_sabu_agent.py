@@ -14,7 +14,7 @@ class IsomorphismAuditorC5:
 
     def _init_db(self) -> None:
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute(
                 "\n                CREATE TABLE IF NOT EXISTS isomorphism_ledger (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    graph_a_id TEXT NOT NULL,\n                    graph_b_id TEXT NOT NULL,\n                    isomorphic INTEGER NOT NULL,\n                    degree_sequence TEXT NOT NULL,\n                    gelabp_trace_hash TEXT NOT NULL,\n                    attestation_timestamp TEXT NOT NULL\n                )\n            "
             )
@@ -134,7 +134,7 @@ class IsomorphismAuditorC5:
         trace_raw = json.dumps(gelabp_matrix, sort_keys=True) + str(deg_sabu)
         trace_hash = hashlib.sha3_256(trace_raw.encode("utf-8")).hexdigest()
         attestation_time = datetime.datetime.now(datetime.timezone.utc).isoformat()
-        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute(
                 "\n                INSERT INTO isomorphism_ledger (\n                    graph_a_id, graph_b_id, isomorphic, degree_sequence, gelabp_trace_hash, attestation_timestamp\n                ) VALUES (?, ?, ?, ?, ?, ?)\n            ",
                 (

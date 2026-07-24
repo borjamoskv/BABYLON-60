@@ -1,7 +1,7 @@
 import ast
-from typing import Any, Dict
+from typing import Any
 
-def canonicalize_ast(node: ast.AST) -> Dict[str, Any]:
+def canonicalize_ast(node: Any) -> Any:
     """
     Ω165 / Ω174: Deterministic, Python-version agnostic AST serialization.
     Converts a Python AST into a strict canonical dictionary schema, shielding

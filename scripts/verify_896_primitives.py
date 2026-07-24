@@ -2,8 +2,6 @@
 # AESTHETIC: Industrial Noir 2026
 # ENTROPY DECAY PREVENTED: Strict typing, Dataclasses, Fail-Fast
 
-import os
-import signal
 from dataclasses import dataclass
 from typing import Final, Set
 

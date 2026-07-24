@@ -1,6 +1,4 @@
 import asyncio
-import os
-import signal
 import sqlite3
 import hashlib
 import json

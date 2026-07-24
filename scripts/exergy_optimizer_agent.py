@@ -1,4 +1,3 @@
-import babylon60.database.core
 #!/usr/bin/env python3
 """
 [C5-REAL] Exergy Optimizer Agent.
@@ -6,6 +5,7 @@ Parses changes, evaluates them using the GELABP thermodynamic framework,
 implements strict algebraic typing, and determines when memory consolidation is required.
 """
 
+import babylon60.database.core
 import sys
 from pathlib import Path
 

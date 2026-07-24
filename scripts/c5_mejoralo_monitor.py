@@ -1,4 +1,3 @@
-import babylon60.database.core
 #!/usr/bin/env python3
 """
 MOSKV-1 APEX SINGULARITY — C5-REAL STATE MONITOR (MEJORALO)
@@ -7,6 +6,7 @@ Transductor autónomo de estado. Audita entropía de disco, BFT Ledger,
 linter, test suite y cristaliza el resultado en STATUS.md + Git Sentinel.
 """
 
+import babylon60.database.core
 import hashlib
 import sqlite3
 import subprocess
@@ -83,7 +83,7 @@ def audit_databases() -> dict[str, dict[str, int]]:
     for db_path in sorted(db_paths):
         rel_name = str(db_path.relative_to(ROOT_DIR))
         try:
-            conn = babylon60.database.core.connect(str(db_path), timeout=2.0)
+            conn = babylon60.database.core.connect_sync(db_path)
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
             tables = [t[0] for t in conn.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()]

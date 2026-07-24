@@ -24,7 +24,7 @@ def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
     sanitized = _sanitize_objects(evidence)
     return cbor2.dumps(sanitized)
 
-def hash_evidence(evidence: dict[str, Any] | str | int | bytes) -> str:
+def hash_evidence(evidence: dict[str, Any] | str | int | bytes | list[Any]) -> str:
     """
     Calcula el hash determinista usando SHA-256 sobre CBOR.
     """

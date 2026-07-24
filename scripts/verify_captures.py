@@ -1,6 +1,4 @@
 import json
-import os
-import signal
 import urllib.error
 import urllib.request
 from typing import Any

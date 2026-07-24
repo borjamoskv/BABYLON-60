@@ -1,4 +1,3 @@
-import babylon60.database.core
 #!/usr/bin/env python3
 """
 C5-REAL SOVEREIGN CONSOLIDATION PROTOCOL — BABYLON-60 MEMORY VAULT
@@ -7,6 +6,7 @@ and local agent logs into the C5-REAL Memory Vault (`cortex_memory.db` & Master 
 Enforces Rule Ω1 (WAL/busy_timeout) and Rule Ω11 (CORTEX-TAINT signature).
 """
 
+import babylon60.database.core
 import hashlib
 import json
 from pathlib import Path

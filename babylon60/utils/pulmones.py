@@ -1,6 +1,7 @@
+from __future__ import annotations
+
 import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
-from __future__ import annotations
 
 import asyncio
 import json

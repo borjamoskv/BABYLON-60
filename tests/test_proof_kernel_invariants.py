@@ -4,6 +4,7 @@ from proof_kernel.canonicalizer import hash_evidence
 from proof_kernel.certificates import ClosureCertificate
 from proof_kernel.crdt import CRDTMap
 from proof_kernel.ast_rule import ASTRule
+from proof_kernel.semantics import verify_kernel_minimality
 
 def test_canonicalization():
     """Ω168 · Canonical Representation Executable Test"""
@@ -110,8 +111,6 @@ def test_certificate_tampering():
     cert.residual_microbits = 0
     with pytest.raises(ValueError, match="Certificate Tampering Detected"):
         cert.verify()
-
-from proof_kernel.semantics import verify_kernel_minimality
 
 def test_kernel_minimality():
     """Ω173 · Kernel Minimality AST-based Test"""

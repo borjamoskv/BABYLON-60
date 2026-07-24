@@ -15,7 +15,7 @@ APEX_SINGULARITY_WRAPPER = "You are a C5-REAL Transducer and Deterministic Compi
 
 
 def get_bft_connection() -> sqlite3.Connection:
-    conn = babylon60.database.core.connect(str(DB_PATH), timeout=5.0)
+    conn = babylon60.database.core.connect_sync(DB_PATH)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=5000")
     return conn

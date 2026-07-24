@@ -9,9 +9,7 @@ CORTEX-TAINT:borjamoskv:opsec_memory_shield:2026-07-18T00:13:25+02:00
 from __future__ import annotations
 
 import ctypes
-import os
 import resource
-import signal
 import sys
 
 

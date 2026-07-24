@@ -1,4 +1,3 @@
-import babylon60.database.core
 #!/usr/bin/env python3
 """
 C5-REAL SOVEREIGN ANERGY PURGE & AUTOCOGNITION-OMEGA ENGINE
@@ -7,6 +6,7 @@ Enforces zero noise accumulation, computes Exergy/Anergy ratios across the curre
 and crystallizes an OP_TAINT_SEAL audit into the Memory Vault (`cortex_memory.db`).
 """
 
+import babylon60.database.core
 import os
 import hashlib
 import json
@@ -164,7 +164,7 @@ OP_TAINT_SEAL:
 
     # Persist directly in Memory Vault L3_inference_cache
     print("[*] Sealing Autocognition crystal into Memory Vault (`cortex_memory.db`)...")
-    conn = babylon60.database.core.connect(DB_PATH, timeout=5.0)
+    conn = babylon60.database.core.connect_sync(DB_PATH)
     conn.execute("PRAGMA journal_mode = WAL;")
     conn.execute("PRAGMA busy_timeout = 5000;")
     cursor = conn.cursor()
