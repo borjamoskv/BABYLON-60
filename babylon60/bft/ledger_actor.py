@@ -105,10 +105,16 @@ def _compute_entry_hash_wrapper(
 
 
 class BFTLedgerActor:
-    def __init__(self, db_path: Path) -> None:
+    def __init__(self, db_path: Path, lexicon: Optional['babylon60.bft.lexicon.BFTLexicon'] = None) -> None:
         self._db_path = db_path
         self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue()
         self._task: Optional[asyncio.Task[None]] = None
+        
+        if lexicon is None:
+            from babylon60.bft.lexicon import BFTLexicon
+            self.lexicon = BFTLexicon()
+        else:
+            self.lexicon = lexicon
 
     async def start(self) -> None:
         self._task = asyncio.create_task(self._worker())
@@ -234,7 +240,7 @@ class BFTLedgerActor:
         )
 
     async def _execute_insert_tx(
-        self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, stored_payload: str, created_at: str
+        self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, semantic_hash: str, stored_payload: str, created_at: str
     ) -> tuple[int, str]:
         await db.execute("BEGIN IMMEDIATE")
         cursor = await db.execute("SELECT seq, entry_hash FROM ledger_entries WHERE event_id = ?", (event_id,))
@@ -248,7 +254,7 @@ class BFTLedgerActor:
                 event_id,
                 event.stream,
                 event.entity_id,
-                event.event_type,
+                semantic_hash,
                 stored_payload,
                 event.source_db,
                 event.source_table,
@@ -257,7 +263,7 @@ class BFTLedgerActor:
                 event_id,
                 event.stream,
                 event.entity_id,
-                event.event_type,
+                semantic_hash,
                 stored_payload,
                 event.source_db,
                 event.source_table,
@@ -296,8 +302,20 @@ class BFTLedgerActor:
             stored_payload = f"C5ENC:{stored_payload}"
         else:
             stored_payload = payload_json
+        # INV_BFT_LEAN_05: Semantic Strictness via Lexicon Transduction
+        from babylon60.bft.lexicon import LEXICON_NAMESPACE
+        if len(event.event_type) != 36:
+            semantic_hash = str(uuid.uuid5(LEXICON_NAMESPACE, f"TYPE::{event.event_type}"))
+        else:
+            semantic_hash = event.event_type
+            
+        if not self.lexicon.resolve_hash(semantic_hash):
+            raise BFTCausalInvariantError(
+                f"INV_BFT_LEAN_05 (semantic_strict): event_type '{event.event_type}' (Hash: {semantic_hash}) is not registered in Lexicon DAG."
+            )
+
         tx_res = await asyncio.gather(
-            self._execute_insert_tx(db, event_id, event, stored_payload, created_at), return_exceptions=True
+            self._execute_insert_tx(db, event_id, event, semantic_hash, stored_payload, created_at), return_exceptions=True
         )
         if isinstance(tx_res[0], BaseException):
             exc = tx_res[0]
