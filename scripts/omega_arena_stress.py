@@ -7,6 +7,7 @@ import threading
 import time
 import traceback
 import uuid
+from typing import Any
 
 import babylon60.database.core
 
@@ -22,7 +23,7 @@ except ImportError:
     sys.exit(1)
 
 
-def run_worker(worker_id, kernel, duration, stats, lock):
+def run_worker(worker_id: int, kernel: Any, duration: int, stats: dict[str, int], lock: threading.Lock) -> None:
     end_time = time.time() + duration
 
     ops = 0
@@ -69,7 +70,7 @@ def run_worker(worker_id, kernel, duration, stats, lock):
         stats["workers_done"] += 1
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Omega Arena Lite - Stress test for GIL-Bypass")
     parser.add_argument("--workers", type=int, default=10, help="Number of concurrent workers")
     parser.add_argument("--duration", type=str, default="1m", help="Duration of test (e.g. 1m, 10s)")
@@ -93,7 +94,7 @@ def main():
     print(f"Duration: {duration_sec}s")
 
     try:
-        kernel = strike_rs.CortexKernel(db_path)
+        kernel = strike_rs.CortexKernel(db_path)  # type: ignore[attr-defined]
     except RuntimeError as e:
         print(f"FATAL: Failed to init CortexKernel: {e}")
         return
@@ -120,7 +121,7 @@ def main():
     print(f"Panics: {stats['panics']}")
 
     try:
-        conn = babylon60.database.core.connect(db_path)
+        conn = babylon60.database.core.connect(db_path)  # type: ignore[attr-defined]
         cur = conn.cursor()
         cur.execute("PRAGMA integrity_check")
         res = cur.fetchone()[0]
