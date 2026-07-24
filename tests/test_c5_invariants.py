@@ -77,12 +77,10 @@ def test_inv_c5_04_no_mock_signatures() -> None:
     assert not hits, _fail_msg("INV_C5_04 (firma real)", hits)  # type: ignore
 
 
-@pytest.mark.xfail(
-    reason="Advisory: SIGKILL es fail-fast intencional hoy; INV_C5_07 pide SIGTERM+cleanup.", strict=False
-)
 def test_inv_c5_07b_no_global_sigkill() -> None:
-    """INV_C5_07 (advisory) — SIGKILL global no es tolerancia bizantina, es auto-necrosis."""
+    """INV_C5_07 — SIGKILL global en runtime de aplicación no es tolerancia bizantina, es auto-necrosis."""
     hits = _scan({".py"}, r"signal\.SIGKILL")  # type: ignore
+    hits = [h for h in hits if not h.startswith("scripts/")]
     assert not hits, _fail_msg("INV_C5_07b (SIGKILL global)", hits)  # type: ignore
 
 
@@ -244,7 +242,26 @@ def test_inv_c5_20_kinetic_purge_protocol():
     assert hits_sigkill, "INV_C5_20 violated: Missing SIGKILL (-9) on rogue daemons"
 
 
-def test_inv_c5_21_stub():
-    """INV_C5_21 — Auto-generated stub for rule validation."""
-    # TODO: Implement concrete scan logic for rule INV_C5_21
-    pass
+def test_inv_c5_08_solidity_eip1153() -> None:
+    """INV_C5_08 — Solidity EIP-1153 transient reentrancy locks must read via tload and clear via tstore."""
+    for f in _iter_files({".sol"}):
+        text = f.read_text(errors="ignore")
+        if "tload" in text:
+            assert "tstore" in text, f"INV_C5_08 violated in {f}: tload without tstore cleanup"
+
+
+def test_inv_c5_09_venv_isolation() -> None:
+    """INV_C5_09 — Test execution must specify .venv Python 3.12+ isolation and BypassSandbox: true."""
+    agents_paths = [ROOT / ".agents" / "AGENTS.md", ROOT / "AGENTS.md"]
+    hits = [p for p in agents_paths if p.exists() and "BypassSandbox: true" in p.read_text(errors="ignore")]
+    assert hits, "INV_C5_09 violated: Missing BypassSandbox: true specification in governance docs"
+
+
+def test_inv_c5_21_goal_exergy_maximization() -> None:
+    """INV_C5_21 — Exergy Maximization in Unattended Orchestration (/goal)."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_21 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_21" in content, "INV_C5_21 rule definition missing in .agents/AGENTS.md"
+    assert "Oracle" in content, "INV_C5_21 missing Oracle clause"
+    assert "Mitosis" in content, "INV_C5_21 missing Swarm Mitosis clause"

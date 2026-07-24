@@ -90,22 +90,20 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ---
 
-## Added Session Invariants (2026-07-17)
+## Active C5 Invariant Registry (INV_C5_01 — INV_C5_21)
 
-### Solidity EIP-1153 Transient Reentrancy Locks
-- **INV_C5_08:** Any EIP-1153 transient reentrancy lock must read the status slot via `tload`, revert with custom errors on collision, and clear the slot via `tstore(slot, 0)` upon execution exit. Storing values without validation is prohibited.
+Full definitions and execution protocols are synchronized between `ETHOS.md` and `.agents/AGENTS.md`.
 
-### Python 3.12+ Testing Environment Isolation
-- **INV_C5_09:** Test execution must run against `.venv` (Python 3.12) synced with `uv sync --all-extras` and executed with `BypassSandbox: true` to bypass dynamic loading limitations.
+### Core System & BFT Invariants
+- **INV_BFT_02:** Never call `sqlite3` synchronously inside an async event loop (WAL + `busy_timeout=5000ms`).
+- **INV_BFT_03:** Every insert must include `causal_taint` (`who/when/why`).
+- **INV_BFT_04:** Use UUID v5 idempotency keys. Reject duplicates silently.
+- **INV_C5_01 – INV_C5_07:** Cryptographic truth, sovereign keys, single hash primitive, Ed25519 signatures, live validator, Lean model linkage, loud failure.
+- **INV_C5_08:** EIP-1153 transient reentrancy locks (`tload`/`tstore` validation).
+- **INV_C5_09:** Python 3.12+ testing isolation via `.venv` and `BypassSandbox: true`.
+- **INV_C5_10 – INV_C5_21:** PyNaCl serialization, remote purge, symlink depth, autopoiesis alignment, exergy agent, vault sync, seal protocol, ultrathink, BFT float exclusion, fail-fast orchestration, kinetic purge, and `/goal` exergy maximization (see `.agents/AGENTS.md`).
+- **Ω30 · PYO3 FORWARD ABI INVARIANT:** Enforce `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` on mixed Rust/Python builds.
 
-### Memory Vault Session Synchronizer
-- **INV_C5_15:** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
-
-### PyO3 Forward ABI Compatibility (Anti-Deadlock)
-- **Ω30 · PYO3 FORWARD ABI INVARIANT:** Queda estrictamente prohibido ejecutar validaciones `cargo check` o compilaciones `cargo build` en repositorios mixtos Rust/Python sin la declaración explícita de `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1`. La omisión causa necrosis de compilación al resolver contra intérpretes 3.14+ o sandboxes de `uv`, considerándose Anergía clase C4-SIM.
-
-### BFT Deterministic Float Exclusion
-- **INV_C5_18:** Floating-point numbers (`float`) are strictly prohibited in BFT consensus payloads, state mutation timestamps, and cryptographic serialization due to IEEE 754 non-determinism. Timestamps must use `int` or `INTEGER` columns, and `canonicalize_cbor` must recursively enforce float exclusion.
 
 ### Proof Kernel Specification
 El núcleo epistemológico ha sido extraído a su propia especificación formal (Proof Assistant Kernel).

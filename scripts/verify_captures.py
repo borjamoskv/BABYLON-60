@@ -19,7 +19,6 @@ def check_wayback(url: str) -> None:
             else:
                 print(f"[✓] No captures found for {url} via Wayback Machine.")
     except (urllib.error.URLError, json.JSONDecodeError, OSError, ValueError):
-        os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError("FAIL-FAST: General Exception intercepted.")
 
 

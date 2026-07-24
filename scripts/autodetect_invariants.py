@@ -21,16 +21,24 @@ def main():  # type: ignore
         print(f"❌ Test file not found at: {test_file}")
         sys.exit(1)
 
-    # 1. Parse rule definitions from AGENTS.md
-    with open(agents_file, "r") as f:
-        agents_content = f.read()
+    rule_files = [
+        os.path.join(root_dir, ".agents", "AGENTS.md"),
+        os.path.join(root_dir, "AGENTS.md"),
+        os.path.join(root_dir, "ETHOS.md"),
+    ]
 
-    # Find patterns like INV_C5_XX
-    rule_matches = re.findall(r"\bINV_C5_(\d+)\b", agents_content)
-    defined_invariants = sorted(list(set(int(x) for x in rule_matches)))
+    defined_invariants_set = set()
+    for rf in rule_files:
+        if os.path.exists(rf):
+            with open(rf, "r") as f:
+                content = f.read()
+            matches = re.findall(r"\bINV_C5_(\d+)\b", content)
+            defined_invariants_set.update(int(x) for x in matches)
+
+    defined_invariants = sorted(list(defined_invariants_set))
 
     print(
-        f"🔍 Found {len(defined_invariants)} invariant definitions in AGENTS.md: {[f'INV_C5_{x:02d}' for x in defined_invariants]}"
+        f"🔍 Found {len(defined_invariants)} invariant definitions across rule files: {[f'INV_C5_{x:02d}' for x in defined_invariants]}"
     )
 
     # 2. Parse test functions from test_c5_invariants.py

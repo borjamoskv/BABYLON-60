@@ -25,7 +25,6 @@ def get_git_commit_hash() -> str:
         )
         return res.stdout.strip()
     except (subprocess.SubprocessError, OSError):
-        os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError("FAIL-FAST: General Exception intercepted.")
 
 
@@ -240,7 +239,6 @@ def cmd_iter(args: argparse.Namespace) -> None:
                     if res.returncode == 0 and res.stdout.strip() == "commit":
                         m["status"] = "DONE"
                 except (subprocess.SubprocessError, OSError):
-                    os.kill(os.getpid(), signal.SIGKILL)
                     raise RuntimeError("FAIL-FAST: General Exception intercepted.")
             if m.get("status") == "DONE":
                 done_ms += 1

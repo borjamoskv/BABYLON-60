@@ -76,11 +76,11 @@ def verify_bijectivity() -> None:
             seen_coords.add(coord)
         except ValueError as e:
             print(f"[-] FATAL: Invariant violated during verification: {e}")
-            os.kill(os.getpid(), signal.SIGKILL)
+            raise RuntimeError(f"FAIL-FAST: {e}")
 
     if len(seen_indices) != TOTAL_PRIMITIVES or len(seen_coords) != TOTAL_PRIMITIVES:
         print("[-] FATAL: Topological fracture. Missing mappings.")
-        os.kill(os.getpid(), signal.SIGKILL)
+        raise RuntimeError("FAIL-FAST: Topological fracture. Missing mappings.")
 
     print("[+] C5-REAL Verification SUCCESS: 896-Primitive algebra is strictly bijective.")
     print(f"    - Invariants mapped: {len(seen_coords)}")

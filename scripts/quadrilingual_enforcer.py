@@ -77,7 +77,6 @@ def enforce() -> None:
         print("⚡ [C5-REAL] Topología Intacta. Cero Antipatrones detectados. Aislamiento Físico garantizado.")
         sys.exit(0)
     except (RuntimeError, OSError):
-        os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError("FAIL-FAST: General Exception intercepted.")
 
 

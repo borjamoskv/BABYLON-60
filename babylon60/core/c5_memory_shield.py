@@ -16,8 +16,8 @@ import sys
 
 
 def _kill_self() -> None:
-    """Immediate process termination. No cleanup, no handler, no trace."""
-    os.kill(os.getpid(), signal.SIGKILL)
+    """Immediate process termination. Clean exit without core dump."""
+    sys.exit(1)
 
 
 def enforce_no_coredump() -> None:

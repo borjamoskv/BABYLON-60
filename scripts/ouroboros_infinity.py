@@ -65,7 +65,6 @@ def execute_pulse() -> dict[str, Any]:
                     if len(alarms) < 3:
                         alarms.append(f"High LOC ({lines}): {f.relative_to(PROJECT_ROOT)}")
             except OSError:
-                os.kill(os.getpid(), signal.SIGKILL)
                 raise RuntimeError("FAIL-FAST: General Exception intercepted.")
     uncommitted = 0
     try:
@@ -73,7 +72,6 @@ def execute_pulse() -> dict[str, Any]:
         if uncommitted > 15:
             alarms.append(f"High uncommitted drift ({uncommitted} files)")
     except (subprocess.SubprocessError, OSError):
-        os.kill(os.getpid(), signal.SIGKILL)
         raise RuntimeError("FAIL-FAST: General Exception intercepted.")
     entropy_score = min(100, int(large_files * 2 + uncommitted * 1.5))
     status = "🟢 SOBERANO" if entropy_score < 20 else "🟡 DERIVA" if entropy_score < 40 else "🔴 COLAPSO"
@@ -104,7 +102,6 @@ def execute_crystallize(target_md_path: str | None = None) -> dict[str, Any]:
                         if "### Ouroboros Auto-Injection" in content or "Auto-Injection" in content:
                             targets.append(md)
                     except OSError:
-                        os.kill(os.getpid(), signal.SIGKILL)
                         raise RuntimeError("FAIL-FAST: General Exception intercepted.")
     total_injections = 0
     consolidated_files: list[dict[str, object]] = []

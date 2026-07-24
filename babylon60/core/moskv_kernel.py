@@ -67,7 +67,6 @@ class Moskv1Kernel:
             finally:
                 conn.close()
         except (sqlite3.DatabaseError, OSError, ValueError):
-            os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError("FAIL-FAST: Fallo catastrófico en boot BFT.")
 
     async def ingest_entropy(self, payload: Dict[str, Any], confidence: str = "C5") -> str:
@@ -129,7 +128,6 @@ class Moskv1Kernel:
                     # Invariante de Idempotency Lock
                     print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Entropía abortada.")
                 except sqlite3.DatabaseError:
-                    os.kill(os.getpid(), signal.SIGKILL)
                     raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
 
                 self._write_queue.task_done()

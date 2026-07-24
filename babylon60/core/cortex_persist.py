@@ -46,7 +46,6 @@ class CortexOntologyLedger:
         for p in paths:
             if not os.path.exists(p):
                 print(f"[-] FATAL: Ontological path missing: {p}")
-                os.kill(os.getpid(), signal.SIGKILL)
                 raise RuntimeError("FAIL-FAST: Topología de memoria CORTEX ausente.")
 
     def _get_iso_now(self) -> str:
@@ -61,7 +60,6 @@ class CortexOntologyLedger:
             with open(path, "r", encoding="utf-8") as f:
                 return cast(Dict[str, Any], dict(json.load(f)))
         except (json.JSONDecodeError, OSError):
-            os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError(f"FAIL-FAST: Corrupción en vector de memoria {path}")
 
     def _write_json(self, path: str, data: Dict[str, Any]) -> None:
@@ -72,7 +70,6 @@ class CortexOntologyLedger:
             with open(path, "w", encoding="utf-8") as f:
                 f.write(payload)
         except (json.JSONDecodeError, OSError):
-            os.kill(os.getpid(), signal.SIGKILL)
             raise RuntimeError(f"FAIL-FAST: Fallo de cristalización en {path}")
 
     def crystallize_session(self, delta: SessionDelta) -> None:
