@@ -1,6 +1,5 @@
 import ast
 import uuid
-import sys
 import sqlite3
 import time
 from pathlib import Path
@@ -47,7 +46,7 @@ def main() -> None:
         conn.commit()
     t1 = time.time()
     
-    print(f"[*] Ingestión Ontológica (INV_C5_27) Completada.")
+    print("[*] Ingestión Ontológica (INV_C5_27) Completada.")
     print(f"[*] {ops} Formal AST Nodes asimilados en {t1-t0:.3f}s.")
     print("[*] S/N Ratio: 1.00 (Exergía Pura)")
 
