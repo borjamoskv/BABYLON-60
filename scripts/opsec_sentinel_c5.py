@@ -32,7 +32,7 @@ class OpsecSentinelC5:
         self._init_db()
 
     def _init_db(self) -> None:
-        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
             conn.execute(
@@ -89,7 +89,7 @@ class OpsecSentinelC5:
         details: list[dict[str, str]] = []
         violations_found: int = 0
         ignore_dirs: set[str] = {".git", ".venv", "node_modules", "scratch", "__pycache__", "target", "build", "dist", ".mypy_cache", "cortex_persist.egg-info"}
-        with babylon60.database.core.connect(self.db_path, timeout=5.0) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             for root, dirs, files in os.walk(self.workspace):
                 dirs[:] = [d for d in dirs if d not in ignore_dirs]
                 for file in files:
