@@ -29,8 +29,10 @@ EXCLUDE_DIRS = {
     "BABYLON-60-fixes",
     "target",
     "claude_code_local_logs",
+    "audit",
 }
 EXCLUDE_EXTS = {
+    ".csv",
     ".png",
     ".jpg",
     ".jpeg",
