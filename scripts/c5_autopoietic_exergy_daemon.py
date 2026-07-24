@@ -78,7 +78,7 @@ def run_mapek_loop():
                     subprocess.run(["killall", "-9", "mediaanalysisd", "studentd"], capture_output=True)
                     print("  [-] Executed Kinetic OS Purge.")
             
-        except Exception as e:
+        except (OSError, subprocess.SubprocessError) as e:
             print(f"[!] Daemon Fault: {e}")
             
         time.sleep(POLL_INTERVAL)
