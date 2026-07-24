@@ -1,14 +1,14 @@
-import json
+import cbor2
 from typing import Any, Callable
-from proof_kernel.canonicalizer import canonicalize, hash_evidence
+from proof_kernel.canonicalizer import canonicalize_cbor, hash_evidence
 
 def replay(evidence: dict[str, Any], proof_pipeline: Callable[[dict[str, Any]], dict[str, Any]]) -> dict[str, Any]:
     """
     Reconstruye una prueba derivando un nuevo estado epistémico 
-    exclusivamente desde la representación canónica de la evidencia.
+    exclusivamente desde la representación canónica de la evidencia (CBOR).
     """
-    canonical_ev_str = canonicalize(evidence)
-    canonical_evidence = json.loads(canonical_ev_str)
+    canonical_ev_bytes = canonicalize_cbor(evidence)
+    canonical_evidence = cbor2.loads(canonical_ev_bytes)
     return proof_pipeline(canonical_evidence)
 
 def verify_replay_determinism(evidence: dict[str, Any], proof_pipeline: Callable[[dict[str, Any]], dict[str, Any]]) -> bool:

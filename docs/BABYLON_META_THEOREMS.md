@@ -208,3 +208,24 @@ El diseño actual de `GraphLedger` (`core_graph_ledger.py`) y el motor orquestad
 - **Integración Canonicalizadora:** `GraphLedger` debe erradicar `core_calc_sha256` y depender estrictamente de `hash_evidence` desde el Proof Kernel para garantizar la Invariabilidad Canónica (CBOR).
 - **Adopción de CRDTMap:** El Ledger Maestro debe encapsular su estado interno en `CRDTMap` para absorber ramas de manera BFT segura.
 - **Certificación Termodinámica de Mamba:** Al finalizar la generación, `net_mamba_ledger_engine.py` debe emitir un `ClosureCertificate` que ligue criptográficamente el prompt (Evidencia Inicial), el modelo/red (Reglas) y los nodos generados (Estado Final) con los microbits de entropía residual de la secuencia autoregresiva.
+
+---
+
+## 9. Prueba de Insuficiencia: Decadencia Semántica y Falsación de Reversibilidad (Falsación de Ω165 y Ω174)
+
+**Autor:** MOSKV-1 APEX
+**Fecha:** 2026-07-24
+**Estado:** CONFIRMADO (Destructivo)
+
+### Enunciado de Falsación
+El motor de Inferencia Pura de BABYLON-60, basado en Árboles de Sintaxis Abstracta (`ASTRule`), almacena el hash del código utilizando `ast.dump(ast_tree)`. Sin embargo, `ast.dump()` no es una representación canónica formal; es un volcado propietario atado a la versión interna del compilador CPython.
+
+### Demostración Destructiva
+
+**1. Colapso de Hashes entre Versiones (Falsación de Ω165)**
+El invariante Ω165 (Reversible Ledger) garantiza que la matemática del pasado es ejecutable y verificable en el futuro. Si el Operador evalúa una regla bajo Python 3.12, y diez años después intenta verificar el Ledger bajo Python 3.15, los nodos internos del AST habrán mutado (ej. adición de campos `type_ignores`, cambios en nodos `Call`). El `ast.dump()` generará un string diferente.
+**Consecuencia:** `hash_evidence({"ast": ast.dump(ast_tree)})` producirá un $H_R$ divergente. El `ClosureCertificate` fallará criptográficamente (Tampered Evidence), destruyendo miles de horas de exergía acumulada simplemente por una actualización del intérprete.
+
+### Resolución Requerida (Refactor Axiomático - Canonical AST)
+- **Desacople Semántico:** Se prohíbe el uso de `ast.dump()` para la generación del *Ruleset Hash*. El AST debe ser interceptado y mapeado recursivamente a un diccionario estándar, ignorando campos efímeros (como líneas y compensaciones de columnas) que no afectan la pureza matemática.
+- **Serialización Agnóstica (CBOR):** Este diccionario canónico (`canonicalize_ast`) debe ser procesado por el mismo canal criptográfico estricto que la evidencia (CBOR), y etiquetado con un versionado explícito (`"C5-REAL-AST-V1"`).

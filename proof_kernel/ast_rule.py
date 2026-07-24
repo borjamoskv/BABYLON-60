@@ -19,9 +19,15 @@ class ASTRule:
             source = f"def {self.name}(state):\n    pass"
             
         self.ast_tree = ast.parse(source)
-        self.ast_dump = ast.dump(self.ast_tree)
+        
+        from proof_kernel.canonical_ast import canonicalize_ast
+        self.canonical_schema = canonicalize_ast(self.ast_tree)
         self.ast_node_count = len(list(ast.walk(self.ast_tree)))
-        self.ruleset_hash = hash_evidence({"ast": self.ast_dump})
+        
+        self.ruleset_hash = hash_evidence({
+            "version": "C5-REAL-AST-V1",
+            "ast_schema": self.canonical_schema
+        })
         
         self._audit_purity()
         
