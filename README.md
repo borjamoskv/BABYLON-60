@@ -92,7 +92,7 @@ async def main() -> None:
                 source_pk="0x99",
             )
         )
-        print(f"Ledger Hash Sealed: {result["entry_hash"]}")
+        print(f"Ledger Hash Sealed: {result['entry_hash']}")
         
         # O(N) verification of cryptographic causality
         await actor.verify_chain() 
@@ -128,8 +128,9 @@ flowchart TD
 If you operate on this repository, you must adhere strictly to the rules established in [`AGENTS.md`](AGENTS.md):
 1. **Cero Anergía**: Commits must serve physical state mutation. No "Green Theater" or apologies.
 2. **Git Sentinel**: Any disk write must trigger an autonomous commit loop.
-3. **Strict Typing**: Python `3.10+` with `mypy --strict`. `dict[str, Any]` minimum parameterization. 
+3. **Strict Typing**: Python `3.12+` with `mypy --strict`. `dict[str, Any]` minimum parameterization. 
 4. **Rust Purity**: When compiling `strike_rs`, ensure `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` is active to prevent C5-REAL build necrosis.
+5. **Kimi k1.5 Execution Protocol (`INV_C5_22`)**: Eradicate cognitive laziness and premature pauses; continuously interleave reasoning with multi-step tool execution until full convergence.
 
 ---
 
