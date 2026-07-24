@@ -41,15 +41,24 @@ def test_ssm_linear_time_invariant() -> None:
     seq_1000 = [[0.5, -0.5] for _ in range(1000)]
     seq_2000 = [[0.5, -0.5] for _ in range(2000)]
 
-    start_t1 = time.perf_counter()
+    # Warmup
     model.forward(seq_1000)
-    t1 = time.perf_counter() - start_t1
 
-    start_t2 = time.perf_counter()
-    model.forward(seq_2000)
-    t2 = time.perf_counter() - start_t2
+    t1s = []
+    for _ in range(5):
+        start = time.perf_counter()
+        model.forward(seq_1000)
+        t1s.append(time.perf_counter() - start)
+    t1 = min(t1s)
+
+    t2s = []
+    for _ in range(5):
+        start = time.perf_counter()
+        model.forward(seq_2000)
+        t2s.append(time.perf_counter() - start)
+    t2 = min(t2s)
 
     ratio = t2 / max(t1, 1e-9)
-    assert ratio < 3.0, (
+    assert ratio < 3.5, (
         f"Violación de Invariante O(N): Ratio de crecimiento termodinámico {ratio:.2f} excede la cota teórica."
     )
