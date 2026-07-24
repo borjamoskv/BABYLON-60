@@ -234,8 +234,8 @@ function setupSpine() {
     if (!withLabels) btn.dataset.tooltip = r.tip;
     btn.setAttribute('aria-label', r.tip);
     btn.innerHTML = withLabels
-      ? `<span class="spine-glyph">${r.icon}</span><span class="spine-label">${r.label}</span>`
-      : r.icon;
+      ? `<span class="spine-glyph">${escapeHtml(r.icon)}</span><span class="spine-label">${escapeHtml(r.label)}</span>`
+      : escapeHtml(r.icon);
     btn.addEventListener('click', () => navigate(r.id));
     spine.appendChild(btn);
   });
@@ -512,15 +512,18 @@ function renderPaletteResults(query = '') {
   container.innerHTML = `
     <div class="palette-section-label">Commands</div>
     ${paletteFiltered.map((cmd, i) => {
+      const safeLabel = escapeHtml(cmd.label);
+      const safeDesc = escapeHtml(cmd.desc);
+      const safeShortcut = escapeHtml(cmd.shortcut);
       const labelHighlighted = query
-        ? cmd.label.replace(new RegExp(`(${escapeRegExp(query)})`, 'gi'), '<span class="palette-match">$1</span>')
-        : cmd.label;
+        ? safeLabel.replace(new RegExp(`(${escapeRegExp(escapeHtml(query))})`, 'gi'), '<span class="palette-match">$1</span>')
+        : safeLabel;
       return `
         <div class="palette-item ${i === paletteSelected ? 'selected' : ''}" data-index="${i}">
-          <span class="palette-item-icon">${cmd.icon}</span>
+          <span class="palette-item-icon">${escapeHtml(cmd.icon)}</span>
           <span class="palette-item-label">${labelHighlighted}</span>
-          <span class="palette-item-desc">${cmd.desc}</span>
-          ${cmd.shortcut ? `<span class="palette-item-shortcut">${cmd.shortcut}</span>` : ''}
+          <span class="palette-item-desc">${safeDesc}</span>
+          ${cmd.shortcut ? `<span class="palette-item-shortcut">${safeShortcut}</span>` : ''}
         </div>
       `;
     }).join('')}
@@ -695,7 +698,7 @@ function showAgentModal({ icon = '⬡', message, actions = [] }) {
   ];
 
   actionsEl.innerHTML = finalActions.map((a, i) =>
-    `<button class="btn ${a.primary ? 'btn-primary' : ''}" style="font-size:0.65rem" data-action-idx="${i}">${a.label}</button>`
+    `<button class="btn ${a.primary ? 'btn-primary' : ''}" style="font-size:0.65rem" data-action-idx="${i}">${escapeHtml(a.label)}</button>`
   ).join('');
 
   actionsEl.querySelectorAll('button').forEach(btn => {
@@ -827,7 +830,8 @@ function setupRouter() {
   registerRoute('sentinel',  renderSentinelPage);
 
   window.addEventListener('hashchange', () => {
-    const hash = window.location.hash.replace('#', '');
+    const rawHash = window.location.hash.replace('#', '');
+    const hash = rawHash.replace(/[^a-zA-Z0-9_-]/g, '');
     if (hash) navigate(hash);
   });
 }
@@ -863,8 +867,8 @@ function setFocusHeader({ breadcrumb = '', actions = '' } = {}) {
 function setBreadcrumb(...parts) {
   return parts.map((p, i) =>
     i < parts.length - 1
-      ? `<span class="breadcrumb-item">${p}</span><span class="breadcrumb-sep"> › </span>`
-      : `<span class="breadcrumb-item current">${p}</span>`
+      ? `<span class="breadcrumb-item">${escapeHtml(p)}</span><span class="breadcrumb-sep"> › </span>`
+      : `<span class="breadcrumb-item current">${escapeHtml(p)}</span>`
   ).join('');
 }
 
@@ -984,8 +988,8 @@ async function renderCanvasPage(container) {
     div.className = 'canvas-node-card';
     div.style.position = 'relative';
     div.innerHTML = `
-      <div class="canvas-node-type">${node.type}</div>
-      <div class="canvas-node-name">${node.name}</div>
+      <div class="canvas-node-type">${escapeHtml(node.type)}</div>
+      <div class="canvas-node-name">${escapeHtml(node.name)}</div>
       <div class="canvas-node-meta">${escapeHtml(node.meta)}</div>
       <div class="canvas-node-status" style="background:${colors[node.status] || colors.idle};box-shadow:0 0 5px ${colors[node.status] || colors.idle}"></div>
     `;
@@ -1200,7 +1204,7 @@ async function openEntryDetail(seq) {
 
     const field = (label, value, cls = '') => `
       <div class="detail-field">
-        <div class="detail-field-label">${label}</div>
+        <div class="detail-field-label">${escapeHtml(label)}</div>
         <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
       </div>`;
 
@@ -1651,12 +1655,12 @@ function renderSwarmAgents() {
   el.innerHTML = agents.map(a => `
     <div class="agent-card">
       <div class="agent-card-header">
-        <span class="agent-name">${a.name}</span>
-        <span class="agent-status-pill ${a.status}">${a.status.toUpperCase()}</span>
+        <span class="agent-name">${escapeHtml(a.name)}</span>
+        <span class="agent-status-pill ${escapeHtml(a.status)}">${escapeHtml(a.status.toUpperCase())}</span>
       </div>
       <div class="agent-task">${escapeHtml(a.task)}</div>
       <div class="agent-progress">
-        <div class="agent-progress-fill ${a.status === 'done' ? 'done' : ''}" style="width:${a.progress}%"></div>
+        <div class="agent-progress-fill ${a.status === 'done' ? 'done' : ''}" style="width:${Math.min(100, Math.max(0, Number(a.progress) || 0))}%"></div>
       </div>
     </div>
   `).join('');
@@ -1877,11 +1881,11 @@ function renderDelegationList(items) {
     const blocked = CLOUD.has(d.kind);
     return `
     <div class="delegation-item">
-      <span class="delegation-state" style="color:${STATE_COLORS[d.state] || 'var(--dust-dim)'};background:transparent;border:1px solid currentColor">${d.state}</span>
+      <span class="delegation-state" style="color:${STATE_COLORS[d.state] || 'var(--dust-dim)'};background:transparent;border:1px solid currentColor">${escapeHtml(d.state)}</span>
       <span class="delegation-kind-tag" title="${blocked ? 'op de nube — bloqueada por P0' : 'op local'}">${escapeHtml(d.kind)}${blocked ? ' ⛔' : ''}</span>
       <span class="delegation-text">${escapeHtml(d.directive)}${d.result ? ` <span style="color:var(--dust-faint)">— ${escapeHtml(String(d.result).slice(0, 80))}</span>` : ''}</span>
-      ${canExec ? `<button class="btn delegation-exec" data-exec="${d.delegation_id}" style="font-size:0.56rem;padding:2px 7px">▶ EJECUTAR</button>` : ''}
-      ${canExec ? `<span class="delegation-del" data-del="${d.delegation_id}" title="Cancelar">✕</span>` : ''}
+      ${canExec ? `<button class="btn delegation-exec" data-exec="${escapeHtml(d.delegation_id)}" style="font-size:0.56rem;padding:2px 7px">▶ EJECUTAR</button>` : ''}
+      ${canExec ? `<span class="delegation-del" data-del="${escapeHtml(d.delegation_id)}" title="Cancelar">✕</span>` : ''}
     </div>`;
   }).join('');
   el.querySelectorAll('[data-exec]').forEach(b => b.addEventListener('click', () => executeDelegation(b.dataset.exec)));

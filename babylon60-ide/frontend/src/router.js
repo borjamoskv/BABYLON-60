@@ -1,13 +1,20 @@
 // BABYLON60 IDE — Client-side router
-const routes = {};
+const routes = Object.create(null);
 let currentRoute = null;
 
 export function registerRoute(name, renderFn) {
-  routes[name] = renderFn;
+  if (typeof name === 'string' && typeof renderFn === 'function') {
+    routes[name] = renderFn;
+  }
 }
 
 export function navigate(name) {
   if (currentRoute === name) return;
+
+  if (!Object.prototype.hasOwnProperty.call(routes, name) || typeof routes[name] !== 'function') {
+    return;
+  }
+
   currentRoute = name;
 
   // Update sidebar
@@ -17,7 +24,7 @@ export function navigate(name) {
 
   // Render content
   const main = document.getElementById('main-content');
-  if (routes[name]) {
+  if (main) {
     main.innerHTML = '';
     routes[name](main);
   }
@@ -29,7 +36,7 @@ export function navigate(name) {
 // Force re-render of the current route (used after cognitive-mode switch)
 export function rerender() {
   const main = document.getElementById('main-content');
-  if (currentRoute && routes[currentRoute] && main) {
+  if (currentRoute && main && Object.prototype.hasOwnProperty.call(routes, currentRoute) && typeof routes[currentRoute] === 'function') {
     main.innerHTML = '';
     routes[currentRoute](main);
   }
@@ -40,6 +47,8 @@ export function getCurrentRoute() {
 }
 
 export function getInitialRoute() {
-  const hash = location.hash.replace('#', '');
-  return hash && routes[hash] ? hash : 'ledger';
+  const rawHash = location.hash.replace('#', '');
+  const hash = rawHash.replace(/[^a-zA-Z0-9_-]/g, '');
+  return hash && Object.prototype.hasOwnProperty.call(routes, hash) && typeof routes[hash] === 'function' ? hash : 'ledger';
 }
+
