@@ -285,3 +285,21 @@ def test_inv_c5_23_epistemic_grounding() -> None:
     assert "Epistemic" in content or "Semi-Formal" in content, "INV_C5_23 missing Epistemic clause"
 
 
+def test_inv_c5_24_git_commit_signature_fallback() -> None:
+    """INV_C5_24 — Git Commit Signature Fallback Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_24 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_24" in content, "INV_C5_24 rule definition missing in .agents/AGENTS.md"
+    assert "gpgsign=false" in content, "INV_C5_24 missing gpgsign=false fallback clause"
+
+
+def test_inv_c5_25_dynamic_brain_vault_scanning() -> None:
+    """INV_C5_25 — Dynamic Brain Memory Vault Scanning Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_25 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_25" in content, "INV_C5_25 rule definition missing in .agents/AGENTS.md"
+    assert "belongs_to_babylon" in content, "INV_C5_25 missing belongs_to_babylon filtering clause"
+
+
