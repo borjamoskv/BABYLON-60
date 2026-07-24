@@ -43,7 +43,7 @@ async def audit_conversation(conv_id: str) -> str:
 
                     elif step.get("status") == "ERROR":
                         errors += 1
-                except Exception:
+                except json.JSONDecodeError:
                     continue
 
         # Calculate Exergy Score (Max 1000)
