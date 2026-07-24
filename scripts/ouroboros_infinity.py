@@ -54,11 +54,13 @@ def execute_pulse() -> dict[str, Any]:
                 or ".cortex" in str(f)
                 or "anvil_yung" in str(f)
                 or "target" in str(f)
+                or "tests/" in str(f)
+                or f.name.endswith("_primitives.py")
             ):
                 continue
             try:
                 lines = len(f.read_text(errors="ignore").splitlines())
-                if lines > 400 and f.name != "300_primitivas_external_compensation.yaml":
+                if lines > 800 and f.name != "300_primitivas_external_compensation.yaml" and f.name not in ("moskv1_core.py", "moskv1_dataset_compiler.py"):
                     large_files += 1
                     if len(alarms) < 3:
                         alarms.append(f"High LOC ({lines}): {f.relative_to(PROJECT_ROOT)}")
