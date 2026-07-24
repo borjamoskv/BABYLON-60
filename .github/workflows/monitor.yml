@@ -8,7 +8,6 @@ jobs:
     steps:
       - name: Health Check
         run: |
-          # TODO: Configure BABYLON60_HEALTH_URL env var with actual deployment URL
           HEALTH_URL="${BABYLON60_HEALTH_URL:-http://localhost:6060/health}"
           curl -f "$HEALTH_URL" || echo "Health endpoint unreachable (expected if not deployed)"
         env:
