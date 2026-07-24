@@ -208,12 +208,12 @@ def test_inv_c5_16_terminal_seal_protocol() -> None:
 
 
 def test_inv_c5_17_autodidact_omega_bypass() -> None:
-    """INV_C5_17 — Autodidact Omega & Ultrathink Bypass."""
+    """INV_C5_17 — Autodidact Omega & Ultrathink Protocol."""
     local_agents = ROOT / ".agents/AGENTS.md"
     found = False
     if local_agents.exists():
         text = local_agents.read_text(errors="ignore")
-        if "INV_C5_17" in text and "Ultrathink Bypass" in text:
+        if "INV_C5_17" in text and "Ultrathink Protocol" in text:
             found = True
     assert found, "INV_C5_17 missing in local AGENTS.md"
 
