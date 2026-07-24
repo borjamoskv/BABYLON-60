@@ -8,13 +8,11 @@ use crate::atms::Atms;
 use crate::omega0::{Statement, Modality, Justification, JustifiedStatement};
 use crate::publisher::{Publisher, ExportFormat};
 
-#[derive(Clone)]
 struct CortexKernelInner {
     ledger: Arc<Mutex<MasterLedger>>,
     atms: Arc<Mutex<Atms>>,
 }
 
-#[pyclass]
 pub struct CortexKernel {
     inner: CortexKernelInner,
 }

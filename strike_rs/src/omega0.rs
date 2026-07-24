@@ -3,20 +3,17 @@
 use serde::{Serialize, Deserialize};
 use blake3;
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Modality {
     Epistemic,
     Deontic,
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Statement {
     pub content: String,
     pub modality: Modality,
     pub obligations: Vec<Obligation>,
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Obligation {
     Provenance,
     Reproducibility,
@@ -26,7 +23,6 @@ pub enum Obligation {
     Completeness,
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Justification {
     FormalProof {
         proof_term: String,
@@ -61,14 +57,12 @@ pub enum Justification {
     },
 }
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub struct JustifiedStatement {
     pub statement: Statement,
     pub justification: Justification,
 }
 
 
-#[derive(Clone, Debug, PartialEq, Serialize, Deserialize)]
 pub enum Omega0Error {
     HumeViolation,
     UnverifiedPremise(String),
@@ -204,7 +198,6 @@ pub fn optimize(proof: &[JustifiedStatement]) -> Vec<JustifiedStatement> {
 }
 
 
-#[cfg(test)]
 mod tests {
     use super::*;
 
@@ -379,7 +372,6 @@ mod tests {
         assert!(verify(&optimized[0]));
     }
 
-    #[cfg(test)]
     mod proptests {
         use super::super::*;
         use proptest::prelude::*;
