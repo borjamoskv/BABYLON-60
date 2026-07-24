@@ -8,7 +8,6 @@ Continuously monitors system entropy (Memory, WAL fragmentation, Deadlocks)
 and self-regulates without Git Sentinel dependencies.
 """
 
-import os
 import time
 import subprocess
 from pathlib import Path
@@ -25,7 +24,7 @@ def get_free_pages():
         for line in res.stdout.split('\n'):
             if "Pages free" in line:
                 return int(line.split()[2].strip('.'))
-    except Exception:
+    except (subprocess.SubprocessError, ValueError, IndexError):
         pass
     return float('inf')
 
