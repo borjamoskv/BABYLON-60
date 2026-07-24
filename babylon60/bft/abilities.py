@@ -4,6 +4,7 @@ Mimics Unison's capability isolation inside Python via BFT Lexicon Hashes and Co
 """
 import asyncio
 import inspect
+import contextlib
 from contextvars import ContextVar
 from typing import Any, Callable, Dict, TypeVar, FrozenSet, Optional
 from babylon60.bft.lexicon import BFTLexicon
@@ -34,14 +35,21 @@ class BFTAbilityHandler:
     def claim_abilities(self, abilities: FrozenSet[str]) -> object:
         """
         Creates a context manager token to enforce capability isolation.
-        Usage: token = handler.claim_abilities(frozenset([handler.hash_io]))
-               _claimed_abilities.set(abilities)
         """
         return _claimed_abilities.set(abilities)
 
     def release_abilities(self, token: object) -> None:
         """Resets the ability context."""
         _claimed_abilities.reset(token) # type: ignore
+
+    @contextlib.contextmanager
+    def abilities_scope(self, abilities: FrozenSet[str]):
+        """Pythonic context manager for O(1) ability scoping without try/finally boilerplate."""
+        token = self.claim_abilities(abilities)
+        try:
+            yield
+        finally:
+            self.release_abilities(token)
 
     async def execute(self, effect_hash: str, *args: Any, **kwargs: Any) -> Any:
         """

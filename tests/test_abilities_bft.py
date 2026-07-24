@@ -25,13 +25,10 @@ async def test_ability_isolation_context(bft_env: Tuple[BFTLexicon, BFTAbilityHa
         await handler.execute(io_hash, "malicious_data")
         
     # Claim the ability in the current context
-    token = handler.claim_abilities(frozenset([io_hash]))
-    try:
+    with handler.abilities_scope(frozenset([io_hash])):
         # Execution succeeds implicitly inside the context
         res = await handler.execute(io_hash, "authorized_data")
         assert res is True
-    finally:
-        handler.release_abilities(token)
         
     # Out of context: Should Fail-Fast again
     with pytest.raises(AbilityViolation):
