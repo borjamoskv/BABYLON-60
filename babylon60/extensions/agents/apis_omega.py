@@ -15,7 +15,7 @@ from typing import Any
 
 import httpx
 
-from babylon60.agents.mixins import EngineAwareMixin
+from babylon60.extensions.agents.mixins import EngineAwareMixin
 
 logger = logging.getLogger("babylon60_extensions.agents.apis_omega")
 

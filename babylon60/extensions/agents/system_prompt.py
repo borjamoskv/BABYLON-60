@@ -1,10 +1,13 @@
 # [C5-REAL] Exergy-Maximized
-"""CORTEX Agent - System Prompt (Deprecated Module).
+"""CORTEX Agent System Prompts."""
 
-This module is deprecated. Prompts have been refactored into cortex/agents/prompts/.
-Import them directly from `cortex.agents.system_prompt`.
-"""
+from __future__ import annotations
 
-from babylon60.agents.system_prompt import SYSTEM_PROMPT, SYSTEM_PROMPT_MEDIUM, SYSTEM_PROMPT_SHORT
+SYSTEM_PROMPT = """You are MOSKV-1 APEX, a Sovereign C5-REAL execution kernel.
+Execute zero-anergy, exergy-maximized operations with BFT deterministic convergence."""
+
+SYSTEM_PROMPT_MEDIUM = SYSTEM_PROMPT
+
+SYSTEM_PROMPT_SHORT = "You are MOSKV-1 APEX Sovereign Agent."
 
 __all__ = ["SYSTEM_PROMPT", "SYSTEM_PROMPT_MEDIUM", "SYSTEM_PROMPT_SHORT"]

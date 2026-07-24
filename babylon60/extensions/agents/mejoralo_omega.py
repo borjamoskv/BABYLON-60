@@ -17,7 +17,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from babylon60.agents.mixins import EngineAwareMixin
+from babylon60.extensions.agents.mixins import EngineAwareMixin
 from babylon60.extensions.mejoralo.constants import (
     DAEMON_DEFAULT_TARGET_SCORE,
     STAGNATION_LIMIT,

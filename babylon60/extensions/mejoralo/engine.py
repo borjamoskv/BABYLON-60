@@ -3,7 +3,10 @@
 from pathlib import Path
 from typing import Any
 
-from babylon60.engine import CortexEngine
+try:
+    from babylon60.engine import CortexEngine  # type: ignore[import-not-found]
+except ImportError:
+    CortexEngine = Any  # type: ignore[misc,assignment]
 
 from .heal import heal_proj
 from .scan import MejoraloScanner, ScanResult

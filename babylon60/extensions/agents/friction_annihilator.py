@@ -12,10 +12,14 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from babylon60.agents.mixins import EngineAwareMixin
-from babylon60.engine.smte.llm_mutator import (
-    LLMMutator,  # pyright: ignore[reportAttributeAccessIssue]
-)
+from babylon60.extensions.agents.mixins import EngineAwareMixin
+try:
+    from babylon60.engine.smte.llm_mutator import LLMMutator  # type: ignore[import-not-found]
+except ImportError:
+    class LLMMutator:  # type: ignore[no-redef]
+        """Fallback mutator stub when smte engine is absent."""
+        async def mutate_prompt(self, prompt: str, code: str) -> str:
+            return code
 
 logger = logging.getLogger("babylon60_extensions.agents.friction_annihilator")
 
