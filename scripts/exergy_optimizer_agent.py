@@ -20,6 +20,7 @@ import sqlite3  # noqa: E402
 import hashlib  # noqa: E402
 import time  # noqa: E402
 import subprocess  # noqa: E402
+import json  # noqa: E402
 
 # Invariants
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
@@ -247,7 +248,24 @@ def check_consolidation_need() -> ConsolidationDecision:
                     continue
                 transcript = entry / ".system_generated/logs/transcript.jsonl"
                 if transcript.exists():
-                    unconsolidated_count += 1
+                    belongs_to_babylon = False
+                    keywords = ["babylon", "30_babylon-60", "babylon60", "cortex-persist", "cortex.db", "teorema", "robinson", "moskv"]
+                    try:
+                        with open(transcript, "r", encoding="utf-8") as tf:
+                            for line in tf:
+                                if not line.strip(): continue
+                                try:
+                                    step = json.loads(line)
+                                    text = f"{step.get('content', '')} {step.get('thinking', '')} {str(step.get('tool_calls', ''))}".lower()
+                                    if any(kw in text for kw in keywords):
+                                        belongs_to_babylon = True
+                                        break
+                                except json.JSONDecodeError:
+                                    pass
+                    except OSError:
+                        pass
+                    if belongs_to_babylon:
+                        unconsolidated_count += 1
     except OSError:
         pass
 
