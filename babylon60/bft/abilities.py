@@ -3,6 +3,7 @@ C5-REAL Algebraic Effects (Abilities) Interceptor.
 Mimics Unison's capability isolation inside Python via BFT Lexicon Hashes.
 """
 import asyncio
+import inspect
 from typing import Any, Callable, Dict, TypeVar, List
 from babylon60.bft.lexicon import BFTLexicon
 
@@ -42,6 +43,6 @@ class BFTAbilityHandler:
             raise NotImplementedError(f"C5-REAL: No physical handler registered for {effect_name}")
             
         handler = self.handlers[effect_hash]
-        if asyncio.iscoroutinefunction(handler):
+        if inspect.iscoroutinefunction(handler):
             return await handler(*args, **kwargs)
         return handler(*args, **kwargs)
