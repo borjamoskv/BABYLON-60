@@ -146,7 +146,7 @@ def main():
             try:
                 res = future.result()
                 results.append(res)
-            except Exception as exc:
+            except (RuntimeError, OSError, ValueError) as exc:
                 results.append({"session_id": futures[future].name, "status": f"FAILED: {exc}"})
 
     valid_results = [r for r in results if r.get("status") == "OK"]

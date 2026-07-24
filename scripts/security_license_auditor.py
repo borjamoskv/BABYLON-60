@@ -20,7 +20,7 @@ def main() -> int:
             print("✅ Zero vulnerabilities detected in Python dependencies.")
         else:
             print(f"🟡 Audit warning/findings:\n{res.stdout}\n{res.stderr}")
-    except Exception as e:
+    except (OSError, subprocess.SubprocessError) as e:
         print(f"ℹ️ Skipping live pip audit execution: {e}")
 
     print("⚙️ Verifying repository license integrity...")
@@ -32,7 +32,7 @@ def main() -> int:
             else:
                 print("🔴 Missing license classifier in pyproject.toml.")
                 return 1
-    except Exception as e:
+    except OSError as e:
         print(f"🔴 Error reading pyproject.toml: {e}")
         return 1
 

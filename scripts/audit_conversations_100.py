@@ -96,7 +96,7 @@ async def audit_agent_task(agent_id: int, uuid_dir: Path):
         conn.close()
         print(f"[🟢] Agent {agent_id:03d} audited {uuid_dir.name[:8]}: {score:.1f}/1000.0")
 
-    except Exception as e:
+    except (OSError, RuntimeError, ValueError) as e:
         print(f"[🔴] Agent {agent_id:03d} FAILED on {uuid_dir.name[:8]}: {e}")
 
 

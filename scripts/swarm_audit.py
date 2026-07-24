@@ -70,7 +70,7 @@ async def audit_conversation(conv_id: str) -> str:
         report += f"  - Errors: {errors}\n\n"
 
         return report
-    except Exception as e:
+    except (OSError, RuntimeError, ValueError) as e:
         return f"## Agent Audit: {conv_id}\n- **Status**: 🔴 FATAL ERROR\n- **Error**: {str(e)}\n\n"
 
 

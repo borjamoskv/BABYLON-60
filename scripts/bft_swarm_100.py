@@ -75,7 +75,7 @@ async def bft_agent_task(agent_id: int, metrics: SwarmMetrics):
         else:
             metrics.failures += 1
             print(f"[🔴] Agent {agent_id:03d} FAILED: {e}")
-    except Exception as e:
+    except (OSError, RuntimeError, ValueError) as e:
         metrics.failures += 1
         print(f"[🔴] Agent {agent_id:03d} FATAL: {e}")
 
