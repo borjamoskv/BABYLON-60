@@ -9,6 +9,8 @@ PROTOCOL: Async BFT payload dispatch with integer-based deterministic backoff.
 import asyncio
 import logging
 import time
+import os
+import re
 
 logging.basicConfig(
     level=logging.INFO,
@@ -54,13 +56,28 @@ async def propose_with_backoff(
 
 async def main() -> None:
     engine: ConsensusEngineStub = get_consensus_engine()
-    total_tasks: int = 1000
+    
+    # Load mapped components as payloads
+    map_file = "docs/C5_SKILLS_BRIDGES_MAP.md"
+    payloads = []
+    if os.path.exists(map_file):
+        with open(map_file, "r", encoding="utf-8") as f:
+            for line in f:
+                match = re.search(r'\*\*(.+)\*\*', line)
+                if match:
+                    payloads.append(f"EXEC_VECTOR:{match.group(1)}".encode("utf-8"))
+    
+    if not payloads:
+        log.warning("No mapped vectors found, falling back to dummy tasks.")
+        payloads = [f"task-{i}".encode("utf-8") for i in range(1000)]
+        
+    total_tasks: int = len(payloads)
     successes: int = 0
     
     t0_ns: int = time.monotonic_ns()
 
     tasks: list[asyncio.Task[bool]] = [
-        asyncio.create_task(propose_with_backoff(engine, f"task-{i}".encode("utf-8"), i))
+        asyncio.create_task(propose_with_backoff(engine, payloads[i], i))
         for i in range(total_tasks)
     ]
     results: list[bool] = await asyncio.gather(*tasks)
