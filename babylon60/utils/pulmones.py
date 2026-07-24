@@ -54,7 +54,7 @@ class PulmonesQueue:
             raise last_error
 
     def _init_db_at(self, path: Path) -> None:
-        with babylon60.database.core.connect(path) as conn:
+        with babylon60.database.core.connect_sync(path) as conn:
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS fallback_queue (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -74,7 +74,7 @@ class PulmonesQueue:
         payload = json.dumps({"args": args, "kwargs": kwargs})
         next_retry = time.monotonic() + delay
         try:
-            with babylon60.database.core.connect(self.db_path) as conn:
+            with babylon60.database.core.connect_sync(self.db_path) as conn:
                 conn.execute(
                     "INSERT INTO fallback_queue (target_func, payload, next_retry_at) VALUES (?, ?, ?)",
                     (func_name, payload, next_retry),
@@ -89,7 +89,7 @@ class PulmonesQueue:
                 try:
                     self._init_db_at(self._fallback_path)
                     self.db_path = self._fallback_path
-                    with babylon60.database.core.connect(self.db_path) as conn:
+                    with babylon60.database.core.connect_sync(self.db_path) as conn:
                         conn.execute(
                             "INSERT INTO fallback_queue (target_func, payload, next_retry_at) VALUES (?, ?, ?)",
                             (func_name, payload, next_retry),

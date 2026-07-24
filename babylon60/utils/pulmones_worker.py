@@ -24,7 +24,7 @@ class PulmonesWorker:
     def _fetch_ripe_tasks(self) -> list:  # type: ignore
         """O(1) fetch gracias al índice idx_next_retry."""
         now = time.monotonic()
-        with babylon60.database.core.connect(self.db_path) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
             cursor = conn.execute(
                 """
@@ -39,7 +39,7 @@ class PulmonesWorker:
             return [dict(row) for row in cursor.fetchall()]
 
     def _remove_task(self, task_id: int):  # type: ignore
-        with babylon60.database.core.connect(self.db_path) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute("DELETE FROM fallback_queue WHERE id = ?", (task_id,))
 
     def _penalize_task(self, task_id: int, retries: int):  # type: ignore
@@ -49,7 +49,7 @@ class PulmonesWorker:
         delay = min(60 * (2**retries), 3600)
         next_retry = time.monotonic() + delay
 
-        with babylon60.database.core.connect(self.db_path) as conn:
+        with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute(
                 "UPDATE fallback_queue SET retries = ?, next_retry_at = ? WHERE id = ?",
                 (new_retries, next_retry, task_id),
