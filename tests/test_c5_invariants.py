@@ -77,6 +77,13 @@ def test_inv_c5_04_no_mock_signatures() -> None:
     assert not hits, _fail_msg("INV_C5_04 (firma real)", hits)  # type: ignore
 
 
+def test_inv_c5_07a_no_broad_except() -> None:
+    """INV_C5_07 — Loud Failure: except Exception is strictly prohibited."""
+    hits = _scan({".py"}, r'except\s+Exception\s*\w*\s*:')
+    hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h]
+    assert not hits, _fail_msg("INV_C5_07a (Generic except Exception: found)", hits)
+
+
 def test_inv_c5_07b_no_global_sigkill() -> None:
     """INV_C5_07 — SIGKILL global en runtime de aplicación no es tolerancia bizantina, es auto-necrosis."""
     hits = _scan({".py"}, r"signal\.SIGKILL")  # type: ignore
@@ -227,11 +234,10 @@ def test_inv_c5_18_bft_float_exclusion() -> None:
 
 
 
-def test_inv_c5_19_orchestration_fail_fast():
-    """INV_C5_19 — BFT orchestration is strictly prohibited from capturing generic exceptions."""
-    hits = _scan({".py"}, r'except\s+Exception\s*\w*\s*:')
-    hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h]
-    assert not hits, _fail_msg("INV_C5_19 (Generic except Exception: found)", hits)
+def test_inv_c5_19_memory_convergence():
+    """INV_C5_19 — BFT orchestration memory convergence must collapse into memory_vault."""
+    hits = _scan({".py"}, r'memory_vault')
+    assert hits, "INV_C5_19 violated: memory_vault convergence missing"
 
 
 def test_inv_c5_20_kinetic_purge_protocol():
