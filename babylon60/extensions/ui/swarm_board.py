@@ -1,4 +1,3 @@
-import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """Swarm Kanban Board (TUI).
 
@@ -8,6 +7,7 @@ Listens to the CORTEX SignalBus for state changes.
 
 from __future__ import annotations
 
+import babylon60.database.core
 import sqlite3
 import threading
 import time

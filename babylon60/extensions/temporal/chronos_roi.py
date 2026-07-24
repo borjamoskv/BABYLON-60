@@ -1,4 +1,3 @@
-import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """
 CHRONOS-1 ROI Engine (Sovereign Efficiency Quantification).
@@ -13,6 +12,7 @@ ROI = Saved_Value / Interaction_Cost
 
 from __future__ import annotations
 
+import babylon60.database.core
 import logging
 import os
 import sqlite3

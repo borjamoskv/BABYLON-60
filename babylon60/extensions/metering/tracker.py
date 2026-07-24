@@ -1,4 +1,3 @@
-import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """CORTEX Metering - Usage Tracker.
 
@@ -8,6 +7,7 @@ Designed for O(1) inserts and O(1) aggregation via pre-computed monthly buckets.
 
 from __future__ import annotations
 
+import babylon60.database.core
 import logging
 import sqlite3
 import time

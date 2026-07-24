@@ -1,4 +1,3 @@
-import babylon60.database.core
 # [C5-REAL] Exergy-Maximized
 """CORTEX Billing Core - Causal Metering & Economic Entropy Engine.
 
@@ -8,6 +7,7 @@ implements SQLite database persistence, and computes net exergy.
 
 from __future__ import annotations
 
+import babylon60.database.core
 import json
 import logging
 import sqlite3
