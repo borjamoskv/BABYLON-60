@@ -80,7 +80,7 @@ ConsolidationDecision = Union[TriggerConsolidation, Stable]
 
 def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-    conn = babylon60.database.core.connect(str(DB_PATH), timeout=5.0)
+    conn = babylon60.database.core.connect_sync(str(DB_PATH))
     conn.execute("PRAGMA journal_mode=WAL;")
     cursor = conn.cursor()
     cursor.execute("""
@@ -328,7 +328,7 @@ ProvSignature: "{prov_hash}"
 
     # Write to database
     try:
-        conn = babylon60.database.core.connect(str(DB_PATH), timeout=5.0)
+        conn = babylon60.database.core.connect_sync(str(DB_PATH))
         conn.execute("PRAGMA journal_mode=WAL;")
         cursor = conn.cursor()
         cursor.execute(
