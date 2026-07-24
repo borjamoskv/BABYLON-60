@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Tuple
 import math
 
 # ==========================================
@@ -12,11 +13,11 @@ class MetabolicReputationEngine:
     Si lambda = 0, el sistema acumula oligarquías parasitarias (C4-SIM).
     Si lambda > 0, el sistema exige trabajo exérgico continuo para mantener autoridad.
     """
-    def __init__(self, decay_rate=0.05):
+    def __init__(self, decay_rate: Any = 0.05) -> None:
         self.decay_rate = decay_rate
-        self.nodes = {}
+        self.nodes: dict[Any, Any] = {}
 
-    def inject_work(self, node_id, fitness_score, dt=1):
+    def inject_work(self, node_id: Any, fitness_score: Any, dt: Any = 1) -> Any:
         # 1. Aplicar decaimiento termodinámico sobre la reputación acumulada
         current_rep = self.nodes.get(node_id, {"reputation": 0.0, "last_active": 0})
         
@@ -32,12 +33,12 @@ class MetabolicReputationEngine:
         }
         return new_rep
 
-    def evaluate_authority(self, node_id, current_time):
+    def evaluate_authority(self, node_id: Any, current_time: Any) -> Any:
         current_rep = self.nodes.get(node_id, {"reputation": 0.0, "last_active": current_time})
         dt = current_time - current_rep["last_active"]
         return current_rep["reputation"] * math.exp(-self.decay_rate * dt)
 
-def run_c8_1_simulation():
+def run_c8_1_simulation() -> None:
     print("=====================================================")
     print(" C8.1 ADVERSARIAL REPUTATION (METABOLIC DECAY)")
     print(" Vector: Rent-Seeking Capital vs Continuous Exergy")

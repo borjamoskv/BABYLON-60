@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Tuple
 """
 Unit tests for C5-REAL Quad-Pillar Kernel (Ω159).
 Verifies System, Orchestration, Memory, and Determinism pillars.
@@ -19,14 +20,14 @@ from cortex.quad_pillar_kernel import (
 )
 
 @pytest.fixture
-def temp_db():
+def temp_db() -> Any:
     with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
         db_path = tmp.name
     yield db_path
     if os.path.exists(db_path):
         os.remove(db_path)
 
-def test_pillar_1_system():
+def test_pillar_1_system() -> None:
     sys_p = SystemPillar()
     state = sys_p.inspect_system_state()
     assert state["os_type"] in ["Darwin", "Linux", "Windows"]
@@ -35,29 +36,29 @@ def test_pillar_1_system():
     assert "rss_memory" in state
     assert isinstance(state["rss_memory"], int)
 
-def test_pillar_1_sovereignty_fail():
+def test_pillar_1_sovereignty_fail() -> None:
     sys_p = SystemPillar()
     with pytest.raises(QuadPillarException, match="Sovereignty Violation"):
         sys_p.verify_environment_sovereignty("NON_EXISTENT_C5_KEY_12345")
 
-def test_pillar_2_orchestration_async(temp_db):
+def test_pillar_2_orchestration_async(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     hash_res = asyncio.run(orch.dispatch_task({"task_id": "test_async"}))
     assert len(hash_res) == 64  # SHA3-256 length
 
-def test_pillar_2_orchestration_fallback_on_429(temp_db):
+def test_pillar_2_orchestration_fallback_on_429(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     hash_res = asyncio.run(orch.dispatch_task({"task_id": "test_fallback"}, simulate_rate_limit=True))
     assert len(hash_res) == 64
 
-def test_pillar_3_memory_sharding():
+def test_pillar_3_memory_sharding() -> None:
     mem = MemoryPillar()
     shard_rules = mem.get_shard_rules("L15_Diamond")
     assert "Ω159" in shard_rules
     assert "Ω156" in shard_rules
     assert "Ω1" in shard_rules
 
-def test_pillar_3_memory_4tier_schema():
+def test_pillar_3_memory_4tier_schema() -> None:
     mem = MemoryPillar()
     entry = mem.record_4tier_entry(
         evidence={"measurement": 42.0, "hash": "abc123sha3"},
@@ -68,7 +69,7 @@ def test_pillar_3_memory_4tier_schema():
     assert entry["tier_1_evidence"]["measurement"] == 42.0
     assert entry["tier_2_repository_state"]["branch"] == "master"
 
-def test_pillar_4_determinism_disk_hash(temp_db):
+def test_pillar_4_determinism_disk_hash(temp_db: Any) -> None:
     det = DeterminismPillar(db_file=temp_db)
     with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
         tmp.write(b"C5-REAL DISK GROUND TRUTH")
@@ -81,7 +82,7 @@ def test_pillar_4_determinism_disk_hash(temp_db):
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
 
-def test_pillar_4_idempotency_lock(temp_db):
+def test_pillar_4_idempotency_lock(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     det = DeterminismPillar(db_file=temp_db)
     
@@ -95,7 +96,7 @@ def test_pillar_4_idempotency_lock(temp_db):
     # Checking an unknown hash should pass
     assert det.check_idempotency_lock("00000000000000000000000000") is True
 
-def test_pillar_4_causal_hierarchy(temp_db):
+def test_pillar_4_causal_hierarchy(temp_db: Any) -> None:
     det = DeterminismPillar(db_file=temp_db)
     assert det.validate_causal_hierarchy(
         topology="cortex/quad_pillar_kernel.py",
@@ -108,7 +109,7 @@ def test_pillar_4_causal_hierarchy(temp_db):
             topology="same", mechanism="same", etiology="different"
         )
 
-def test_unified_quad_pillar_kernel(temp_db):
+def test_unified_quad_pillar_kernel(temp_db: Any) -> None:
     kernel = QuadPillarKernel(db_file=temp_db)
     audit = kernel.audit_quad_pillars()
     assert audit["pillar_1_system"]["status"] == "C5_REAL_ACTIVE"

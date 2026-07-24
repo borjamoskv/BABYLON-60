@@ -1,14 +1,15 @@
+from typing import Any, Dict, List, Tuple
 import hashlib
 
 # ==========================================
 # C7.2 VALIDATOR & FITNESS ENGINE
 # ==========================================
 class BranchValidator:
-    def verify_hash(self, lamport_t, nonce, payload, prev_hash):
+    def verify_hash(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
         data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
         return hashlib.sha3_256(data).hexdigest()
 
-    def is_cryptographically_valid(self, chain):
+    def is_cryptographically_valid(self, chain: Any) -> Any:
         expected_prev = chain[0]["prev_hash"] if chain else "GENESIS_HASH"
         last_lamport = chain[0]["lamport_t"] - 1 if chain else 0
         
@@ -32,7 +33,7 @@ class FitnessFunction:
     RC: Reconstruction Cost (Compute overhead to verify)
     CD: Causal Debt (Ad-hoc patching, spam, low exergy signals)
     """
-    def evaluate(self, chain):
+    def evaluate(self, chain: Any) -> Any:
         pp = 0
         rc = len(chain) * 0.5  # Base compute cost per node
         cd = 0
@@ -59,7 +60,7 @@ class FitnessFunction:
             "CD": cd
         }
 
-def create_event(lamport_t, payload, prev_hash):
+def create_event(lamport_t: Any, payload: Any, prev_hash: Any) -> Any:
     nonce = hashlib.sha256(payload.encode()).hexdigest()
     data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
     block_hash = hashlib.sha3_256(data).hexdigest()
@@ -71,7 +72,7 @@ def create_event(lamport_t, payload, prev_hash):
         "block_hash": block_hash
     }
 
-def run_c7_2():
+def run_c7_2() -> None:
     print("=====================================================")
     print(" C7.2 ADVERSARIAL LEGITIMACY (HISTORY COMPETITION)")
     print(" Vector: Honest Fork vs Longest Valid History Trap")

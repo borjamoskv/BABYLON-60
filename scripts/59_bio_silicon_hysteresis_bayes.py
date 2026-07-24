@@ -17,9 +17,9 @@ class GenericIRQChipL2:
     """Ω161: Abstraction layer between raw peripheral IRQs (L1) and Cortex decision unit (L3)."""
     def __init__(self, fixed_bandwidth: int = 100):
         self.fixed_bandwidth = fixed_bandwidth
-        self.sample_buffer = []
+        self.sample_buffer: list[float] = []
 
-    def ingest_peripheral_signal(self, raw_irq_frequency: float) -> dict:
+    def ingest_peripheral_signal(self, raw_irq_frequency: float) -> dict[str, float]:
         """Translates chaotic L1 frequency into a stabilized structural signature."""
         self.sample_buffer.append(raw_irq_frequency)
         if len(self.sample_buffer) > 10:
@@ -69,7 +69,7 @@ class BayesianCortexL3:
         self.prior_threat = prior_threat
         self.belief_state = prior_threat
 
-    def update_belief(self, signature: dict, shedding_active: bool) -> float:
+    def update_belief(self, signature: dict[str, float], shedding_active: bool) -> float:
         """P(Threat | Evidence) = P(Evidence | Threat) * P(Threat) / P(Evidence)"""
         raw_freq = signature["mean_freq"]
 
@@ -92,7 +92,7 @@ class BayesianCortexL3:
         return self.belief_state
 
 
-def run_bio_silicon_verification():
+def run_bio_silicon_verification() -> None:
     print("=" * 60)
     print("⚡ [C5-REAL] VERIFYING INVARIANTS Ω160, Ω161, Ω162")
     print("=" * 60)

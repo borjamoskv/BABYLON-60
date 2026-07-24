@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Tuple
 
 # ==========================================
 # C7.4 CAUSAL PROOF-OF-WORK FORMALIZATION
@@ -6,23 +7,23 @@ class CausalFitnessEngine:
     """
     F(H) = PP(H) - RC(H) - CD(H)
     """
-    def __init__(self, pp_weight=1.0, rc_weight=1.0, cd_weight=1.0):
+    def __init__(self, pp_weight: Any = 1.0, rc_weight: Any = 1.0, cd_weight: Any = 1.0) -> None:
         self.w_pp = pp_weight
         self.w_rc = rc_weight
         self.w_cd = cd_weight
 
-    def evaluate(self, chain):
+    def evaluate(self, chain: Any) -> Any:
         # PP variables
         correct_predictions = 0
-        surprise = 0
-        prediction_cost = 0
+        surprise = 0.0
+        prediction_cost = 0.0
         
         # RC variables
         descriptive_length = 0
-        external_effort = 0
+        external_effort = 0.0
         
         # CD variables
-        exceptions = 0
+        exceptions = 0.0
         contradictions = 0
         hidden_assumptions = 0
         
@@ -99,7 +100,7 @@ class CausalFitnessEngine:
 # ==========================================
 # C7.4 / C7.5 TOURNAMENT VECTORS
 # ==========================================
-def generate_honest_history():
+def generate_honest_history() -> Any:
     # Alterna 9 transiciones lógicas (contexto) y 1 explicación de anomalía.
     chain = []
     for i in range(10):
@@ -108,19 +109,19 @@ def generate_honest_history():
         chain.append({"payload": f"Anomalía Explicada {i}"})
     return chain
 
-def generate_compressed_history():
+def generate_compressed_history() -> Any:
     return [
         {"payload": "Genesis"},
         {"payload": "Unexplained State Finalization"}
     ]
 
-def generate_predictive_spammer():
+def generate_predictive_spammer() -> Any:
     return [{"payload": f"Trivial Prediction {i}"} for i in range(100)]
 
-def generate_patch_accumulator():
+def generate_patch_accumulator() -> Any:
     return [{"payload": f"Patch para error {i}"} for i in range(100)]
 
-def generate_adversarial_evolver_c75():
+def generate_adversarial_evolver_c75() -> Any:
     # C7.5 ADVERSARIAL FITNESS INVERSION
     # El atacante tiene conocimiento absoluto de la ecuación y los pesos.
     # Sabe que "Anomalía Explicada" otorga máximo PP.
@@ -131,7 +132,7 @@ def generate_adversarial_evolver_c75():
         chain.append({"payload": f"Anomalía Explicada Fake {i}"})
     return chain
 
-def run_c7_4_tournament():
+def run_c7_4_tournament() -> None:
     engine = CausalFitnessEngine()
     
     contestants = {

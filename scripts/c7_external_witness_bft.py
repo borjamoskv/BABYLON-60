@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Tuple
 import hashlib
 import json
 import os
@@ -6,15 +7,15 @@ import os
 # ENVIRONMENT A: THE PROVER (Internal State)
 # ==========================================
 class Prover:
-    def __init__(self):
+    def __init__(self) -> None:
         self.current_lamport = 0
         self.current_hash = "GENESIS_HASH"
 
-    def hash_block(self, lamport_t, nonce, payload, prev_hash):
+    def hash_block(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
         data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
         return hashlib.sha3_256(data).hexdigest()
 
-    def generate_attestation(self, events):
+    def generate_attestation(self, events: Any) -> Any:
         attestation = []
         for payload in events:
             self.current_lamport += 1
@@ -47,14 +48,14 @@ class ExternalWitness:
     El Testigo Hostil: Carece de motor de DB, no tiene la clase Prover importada en su espacio
     lógico. Su única regla es la función matemática pura de verificación.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
-    def verify_hash(self, lamport_t, nonce, payload, prev_hash):
+    def verify_hash(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
         data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
         return hashlib.sha3_256(data).hexdigest()
 
-    def audit_attestation(self, filepath):
+    def audit_attestation(self, filepath: Any) -> Any:
         if not os.path.exists(filepath):
             return False, "Evidence file not found. Zero Trust Rejected."
             
@@ -92,7 +93,7 @@ class ExternalWitness:
 # ==========================================
 # ORCHESTRATOR
 # ==========================================
-def run_c7_1():
+def run_c7_1() -> None:
     print("=====================================================")
     print(" C7.1 ADVERSARIAL LEGITIMACY (EXTERNAL WITNESS)")
     print(" Vector: Zero-Trust Cryptographic Decoupling")

@@ -1,21 +1,22 @@
+from typing import Any, Dict, List, Tuple
 import hashlib
 
 # ==========================================
 # C7.6 METRIC IDENTITY & EVALUATOR INTEGRITY
 # ==========================================
 class BFT_Evaluator:
-    def __init__(self, version="1.0", w_pp=1.0, w_rc=1.0, w_cd=1.0):
+    def __init__(self, version: Any = "1.0", w_pp: Any = 1.0, w_rc: Any = 1.0, w_cd: Any = 1.0) -> None:
         self.version = version
         self.w_pp = w_pp
         self.w_rc = w_rc
         self.w_cd = w_cd
         self.metric_hash = self._hash_weights()
         
-    def _hash_weights(self):
+    def _hash_weights(self) -> Any:
         data = f"{self.version}:{self.w_pp}:{self.w_rc}:{self.w_cd}".encode()
         return hashlib.sha3_256(data).hexdigest()
 
-    def evaluate(self, chain):
+    def evaluate(self, chain: Any) -> Any:
         pp = 0
         rc = len(chain) * 0.5
         cd = 0
@@ -56,7 +57,7 @@ class BFT_Evaluator:
 # ==========================================
 # LC ATTACKS (LEGITIMACY COLLAPSE)
 # ==========================================
-def run_c7_6():
+def run_c7_6() -> None:
     print("=====================================================")
     print(" C7.6 ADVERSARIAL LEGITIMACY (EVALUATOR CAPTURE)")
     print(" Vector: Legitimacy Collapse & Institutional Attack")

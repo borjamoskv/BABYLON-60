@@ -5,10 +5,10 @@ import json
 import os
 import time
 
-def calculate_entropy(probabilities):
+def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)
 
-def run_transduction():
+def run_transduction() -> None:
     # Synthetic baseline probability distribution (50%+ synthetic collapse -> uniform noise approximation)
     p_synthetic = [1/10] * 10
     s_synthetic = calculate_entropy(p_synthetic)

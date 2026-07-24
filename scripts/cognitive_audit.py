@@ -2,8 +2,9 @@ import sys
 import json
 import os
 from collections import Counter
+import typing
 
-def calculate_metrics(transcript_path):
+def calculate_metrics(transcript_path: str) -> None:
     if not os.path.exists(transcript_path):
         print("Transcript not found.")
         return
@@ -15,7 +16,7 @@ def calculate_metrics(transcript_path):
     total_model_words = 0
     structured_words = 0
     fluff_words = 0
-    commands_run = Counter()
+    commands_run: typing.Counter[str] = Counter()
 
     for line in last_20:
         data = json.loads(line)

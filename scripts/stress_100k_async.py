@@ -7,7 +7,7 @@ import time
 import os
 import sys
 import numpy as np
-from typing import List
+from typing import List, Any, Awaitable, Sequence
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -69,7 +69,7 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     return float(time.perf_counter_ns() - t0)
 
 
-async def batched_gather(coros: list, batch_size: int = MICRO_BATCH) -> List[float]:
+async def batched_gather(coros: Sequence[Awaitable[Any]], batch_size: int = MICRO_BATCH) -> List[float]:
     """Execute coroutines in micro-batches to prevent WAL lock starvation (Ω10/Ω13)."""
     results: List[float] = []
     for i in range(0, len(coros), batch_size):

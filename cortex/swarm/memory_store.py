@@ -39,7 +39,7 @@ class AgentMemory:
             from chromadb.config import Settings
 
             try:
-                import posthog  # type: ignore[import-not-found]  # pyright: ignore[reportMissingImports]
+                import posthog  # pyright: ignore[reportMissingImports]
                 posthog.disabled = True
 
                 def _silent_capture(*args: Any, **kwargs: Any) -> None:

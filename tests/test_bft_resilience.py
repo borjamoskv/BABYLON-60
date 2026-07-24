@@ -24,14 +24,16 @@ TEST_DB_PATH = ".cortex/test_cortex_resilience.db"
 # Override DB_PATH for tests
 init_ledger_mod.DB_PATH = TEST_DB_PATH  # type: ignore[attr-defined]
 
-def setup_module(module):
+from typing import Any
+
+def setup_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
     if not os.path.exists(".cortex"):
         os.makedirs(".cortex")
-    init_ledger_mod.init_ledger()  # type: ignore[attr-defined]
+    init_ledger_mod.init_ledger()
 
-def teardown_module(module):
+def teardown_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
 
@@ -40,13 +42,13 @@ def hash_payload(lamport_t: int, agent_id: str, prev_hash: str) -> str:
     return hashlib.sha3_256(data).hexdigest()
 
 class MasterLedgerWriter:
-    def __init__(self):
-        self.queue = asyncio.Queue()
+    def __init__(self) -> None:
+        self.queue: asyncio.Queue[Any] = asyncio.Queue()
         self.conn = sqlite3.connect(TEST_DB_PATH, timeout=5.0)
         self.conn.execute("PRAGMA journal_mode = WAL;")
         self.conn.execute("PRAGMA busy_timeout = 5000;")
         
-    async def writer_loop(self):
+    async def writer_loop(self) -> None:
         while True:
             item = await self.queue.get()
             if item is None:
@@ -63,12 +65,12 @@ class MasterLedgerWriter:
                 print(f"Error inserting {lamport_t}: {e}")
             self.queue.task_done()
             
-    def close(self):
+    def close(self) -> None:
         self.conn.close()
 
-def test_wal_contention():
+def test_wal_contention() -> None:
     # Enforces Ω13: single writer, multiple producers
-    async def run_contention():
+    async def run_contention() -> None:
         writer = MasterLedgerWriter()
         writer_task = asyncio.create_task(writer.writer_loop())
         
@@ -105,7 +107,7 @@ def test_wal_contention():
         
     asyncio.run(run_contention())
 
-def test_chain_integrity():
+def test_chain_integrity() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)
     cursor = conn.cursor()
     cursor.execute("SELECT lamport_t, agent_id, payload_hash, prev_hash FROM bft_ledger ORDER BY lamport_t ASC")
@@ -127,7 +129,7 @@ def test_chain_integrity():
         
     conn.close()
 
-def test_intentional_corruption_prevention():
+def test_intentional_corruption_prevention() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)
     
     # Test update trigger (Ω11)

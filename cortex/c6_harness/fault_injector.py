@@ -24,7 +24,7 @@ class DeterministicChaosMonkey:
                 pass
         return False
 
-def chaos_orchestrator(target_pid: int, target_campaigns: Dict[str, int], shared_phase: Any, stop_event: Any) -> None: # type: ignore
+def chaos_orchestrator(target_pid: int, target_campaigns: Dict[str, int], shared_phase: Any, stop_event: Any) -> None: 
     """Runs in a separate thread/process to assassinate the target deterministically."""
     monkey = DeterministicChaosMonkey(target_campaigns)
     

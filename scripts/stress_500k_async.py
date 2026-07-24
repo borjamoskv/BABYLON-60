@@ -7,7 +7,7 @@ import time
 import os
 import sys
 import numpy as np
-from typing import List
+from typing import List, Any
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
@@ -90,7 +90,7 @@ async def run_categorical_engine_task(idx: int) -> float:
 _cat_engine_instance = None
 
 
-def _get_cat_engine():  # type: ignore[no-untyped-def]
+def _get_cat_engine() -> Any:
     global _cat_engine_instance
     if _cat_engine_instance is None:
         _cat_engine_instance = __import__(

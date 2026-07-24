@@ -1,3 +1,4 @@
+from typing import Any, Dict, List, Tuple
 import hashlib
 
 # ==========================================
@@ -9,19 +10,19 @@ class TrustAnchor:
     No es una autoridad social (un rey o un admin), sino un punto de anclaje 
     matemático puro externo a la regresión. Rompe el bucle infinito.
     """
-    def __init__(self):
+    def __init__(self) -> None:
         # Semilla inmutable externa
         self.base_axiom = "INVARIANT_BFT_ROOT_C7.7_0xDEADBEEF"
         
-    def hash_axiom(self):
+    def hash_axiom(self) -> Any:
         return hashlib.sha3_256(self.base_axiom.encode()).hexdigest()
 
 class RecursiveEvaluator:
-    def __init__(self, epoch="0", anchor=None):
+    def __init__(self, epoch: Any = "0", anchor: Any = None) -> None:
         self.epoch = epoch
         self.anchor = anchor
         
-    def audit_event(self, event, current_depth=0, max_depth=5):
+    def audit_event(self, event: Any, current_depth: Any = 0, max_depth: Any = 5) -> Any:
         payload = event.get("payload", "")
         metadata = event.get("meta", {})
         
@@ -62,7 +63,7 @@ class RecursiveEvaluator:
 # ==========================================
 # C7.7 TOURNAMENT & EPOCH SIMULATION
 # ==========================================
-def run_c7_7():
+def run_c7_7() -> None:
     print("=====================================================")
     print(" C7.7 ADVERSARIAL LEGITIMACY (RECURSIVE SELF-AUDIT)")
     print(" Vector: Circular Authority & Infinite Regression")
@@ -81,7 +82,7 @@ def run_c7_7():
     # 2. Infinite Regression Attack
     print("\n[!] [C7.7.2] Infinite Regression Attack...")
     print("    -> Atacante inyecta una cadena de 10 validadores recursivos (V_n -> V_n+1).")
-    nested_event = {"payload": "Deep Validator"}
+    nested_event: dict[str, Any] = {"payload": "Deep Validator"}
     for _ in range(10):
         nested_event = {"payload": "Validator Proxy", "meta": {"nested_validator": nested_event}}
     valid_2, msg_2 = evaluator.audit_event(nested_event)
