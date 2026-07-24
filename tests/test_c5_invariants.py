@@ -211,11 +211,12 @@ def test_inv_c5_17_autodidact_omega_bypass() -> None:
     """INV_C5_17 — Autodidact Omega & Ultrathink Protocol."""
     local_agents = ROOT / ".agents/AGENTS.md"
     found = False
+    text = ""
     if local_agents.exists():
         text = local_agents.read_text(errors="ignore")
         if "INV_C5_17" in text and "Ultrathink Protocol" in text:
             found = True
-    assert found, "INV_C5_17 missing in local AGENTS.md"
+    assert found, f"INV_C5_17 missing in local AGENTS.md. Path: {local_agents}, Exists: {local_agents.exists()}, Text preview: {text[:100]}"
 
 
 def test_inv_c5_18_bft_float_exclusion() -> None:
