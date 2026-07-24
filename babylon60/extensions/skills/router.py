@@ -12,8 +12,12 @@ import logging
 from typing import Any, Final
 
 from babylon60.extensions.skills.registry import SkillManifest, SkillRegistry
-from babylon60.memory.metamemory import MetamemoryMonitor
-from babylon60.memory.procedural import ProceduralMemory
+try:
+    from babylon60.memory.metamemory import MetamemoryMonitor
+    from babylon60.memory.procedural import ProceduralMemory
+except ImportError:
+    MetamemoryMonitor = None  # type: ignore[assignment,misc]
+    ProceduralMemory = None  # type: ignore[assignment,misc]
 
 logger = logging.getLogger(__name__)
 
@@ -30,8 +34,8 @@ class SkillRouter:
 
     def __init__(self, registry: SkillRegistry | None = None) -> None:
         self.registry = registry or SkillRegistry().load()
-        self.metamemory = MetamemoryMonitor()
-        self.procedural_memory = ProceduralMemory()
+        self.metamemory = MetamemoryMonitor() if MetamemoryMonitor else None
+        self.procedural_memory = ProceduralMemory() if ProceduralMemory else None
 
     def route_intent(
         self, intent: str, context: dict[str, Any] | None = None
