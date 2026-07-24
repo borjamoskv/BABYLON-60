@@ -14,7 +14,7 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .routes import analytics, delegation, ledger, ontology, query, sentinel, telemetry
+from .routes import analytics, cortex, delegation, ledger, ontology, query, sentinel, telemetry
 from .services import cortex_ledger
 
 logger = logging.getLogger("babylon60")
@@ -22,7 +22,7 @@ logger = logging.getLogger("babylon60")
 app = FastAPI(
     title="BABYLON60 IDE",
     description="Sovereign IDE for tamper-evident agent memory inspection",
-    version="0.5.0",
+    version="0.6.0",
 )
 
 # Initialize the IDE's own CortexLedger (append-only, hash-chained).
@@ -63,6 +63,7 @@ app.include_router(ontology.router)
 app.include_router(query.router)
 app.include_router(sentinel.router)
 app.include_router(delegation.router)
+app.include_router(cortex.router)
 app.include_router(telemetry.router)
 
 
