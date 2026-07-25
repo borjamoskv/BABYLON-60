@@ -1,0 +1,11 @@
+"""
+C5-REAL Native Commands (Slash Commands) Module.
+Vector: INV_C5_17 / INV_C5_21 / INV_C5_20 / INV_C5_16
+"""
+
+from .ultrathink import run_ultrathink
+from .autodidact import run_autodidact
+from .purge import run_purge
+from .seal import run_seal
+
+__all__ = ["run_ultrathink", "run_autodidact", "run_purge", "run_seal"]
