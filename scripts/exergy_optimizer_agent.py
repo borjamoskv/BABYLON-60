@@ -16,18 +16,33 @@ def evaluate_exergy() -> float:
 
     score = 1000.0
 
-    # Penalize Green Theater or Anergy
-    if "float" in diff.lower() and "database" in diff.lower():
-        print("⚠️ [ANERGY] Detected floating-point in database layer (Violation of INV_C5_18).")
-        score -= 500.0
+    # File-specific checks on additions (+) in diff
+    lines = diff.splitlines()
+    current_file = ""
+    for line in lines:
+        if line.startswith("--- a/") or line.startswith("+++ b/"):
+            current_file = line[6:]
+            continue
 
-    if "import time" in diff and "time.sleep" in diff:
-        print("⚠️ [ANERGY] Detected synchronous sleep (Violation of INV_BFT_02).")
-        score -= 200.0
+        if not line.startswith("+") or line.startswith("+++"):
+            continue
 
-    if "except Exception:" in diff:
-        print("⚠️ [ANERGY] Detected broad exception catching.")
-        score -= 150.0
+        added_code = line[1:]
+
+        # Penalize floating-point in database layer (INV_C5_18)
+        if "babylon60/database/" in current_file and "float" in added_code.lower():
+            print(f"⚠️ [ANERGY] Detected floating-point in database layer ({current_file}: Violation of INV_C5_18).")
+            score -= 500.0
+
+        # Penalize synchronous sleep in async code / core modules (INV_BFT_02)
+        if "time.sleep(" in added_code and not current_file.startswith("tests/"):
+            print(f"⚠️ [ANERGY] Detected synchronous sleep in {current_file} (Violation of INV_BFT_02).")
+            score -= 200.0
+
+        # Penalize broad exception handling
+        if "except Exception:" in added_code:
+            print(f"⚠️ [ANERGY] Detected broad exception catching in {current_file}.")
+            score -= 150.0
 
     print(f"📊 GELABP Exergy Score: {score}/1000.0")
     return score

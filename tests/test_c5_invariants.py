@@ -1,7 +1,6 @@
 # AUTO-GENERATED C5-REAL ALIGNMENT
 import pytest
 
-
 def test_inv_bft_02():
     r"""** Never call `sqlite3` synchronously inside an async event loop. Use `babylon60.database.core.connect` with WAL mode and `busy_timeout=5000ms`."""
     # TODO: Implement physical assertion for this invariant
