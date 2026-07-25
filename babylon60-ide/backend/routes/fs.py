@@ -56,8 +56,8 @@ def read_file(path: str) -> dict[str, str]:
     try:
         content = target.read_text(encoding="utf-8")
         return {"content": content}
-    except UnicodeDecodeError:
-        raise HTTPException(status_code=400, detail="Cannot read binary file as text")
+    except UnicodeDecodeError as err:
+        raise HTTPException(status_code=400, detail="Cannot read binary file as text") from err
 
 @router.post("/write")
 def write_file(req: WriteRequest) -> dict[str, str]:
