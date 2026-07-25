@@ -5,7 +5,7 @@ use strike_rs::omega0::{Statement, Modality, Justification, JustifiedStatement};
 #[test]
 fn test_integration_full_bft_ledger_to_atms_flow() {
     let db_path = ":memory:";
-    let mut ledger = MasterLedger::new(db_path).unwrap();
+    let mut ledger = MasterLedger::new(db_path).expect("C5-REAL: Strict Unwrapping Enforced");
     let mut atms = Atms::new();
 
     // 1. Inyectar Statement Epistémico
@@ -22,7 +22,7 @@ fn test_integration_full_bft_ledger_to_atms_flow() {
     let env_id = "env_bft_test";
     
     // 2. Aserción en Master Ledger
-    let taint1 = ledger.assert_knowledge(&js1, env_id).unwrap();
+    let taint1 = ledger.assert_knowledge(&js1, env_id).expect("C5-REAL: Strict Unwrapping Enforced");
     assert!(taint1.contains("-") || taint1.starts_with("TAINT"));
     
     // 3. Instalación en ATMS
@@ -40,7 +40,7 @@ fn test_integration_full_bft_ledger_to_atms_flow() {
         justification: Justification::Conjecture,
     };
     
-    let taint2 = ledger.assert_knowledge(&js2, env_id).unwrap();
+    let taint2 = ledger.assert_knowledge(&js2, env_id).expect("C5-REAL: Strict Unwrapping Enforced");
     assert!(taint2.contains("-") || taint2.starts_with("TAINT"));
     
     let node2 = atms.add_assumption(&stmt2.content);
@@ -48,7 +48,7 @@ fn test_integration_full_bft_ledger_to_atms_flow() {
 
     // 5. Inyectar contradicción desde el ledger al ATMS
     let stmt2_hash = MasterLedger::hash_statement(&stmt2);
-    let taint_nogood = ledger.assert_nogood(&stmt2_hash, env_id).unwrap();
+    let taint_nogood = ledger.assert_nogood(&stmt2_hash, env_id).expect("C5-REAL: Strict Unwrapping Enforced");
     assert!(taint_nogood.contains(":NOGOOD:"));
 
     atms.contradict(&[node2]);
