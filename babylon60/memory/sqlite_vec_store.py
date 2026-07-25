@@ -1,6 +1,6 @@
+import asyncio
 import logging
 import math
-import asyncio
 from typing import Any
 
 from .models import CortexFactModel
