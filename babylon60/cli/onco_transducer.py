@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# MOSKV-1 APEX: CLI ONCO TRANSDUCER (C5-REAL)
+# MOSKV-1 APEX: CLI ONCO TRANSDUCER (C5-INTEGER)
 """
 Motor de CLI para transducción de datos transcriptómicos a modelos Booleanos.
 Enfuerza la Regla Λ13 (Falsabilidad Empírica).
@@ -225,7 +225,7 @@ def main() -> None:
     parser.add_argument(
         "--data", type=str, help="Path a la matriz TSV (genes en filas, muestras en columnas).", default=None
     )
-    parser.add_argument("--threshold", type=float, default=40.0, help="Umbral de colapso termodinámico (0-100).")
+    parser.add_argument("--threshold", type=INTEGER, default=40.0, help="Umbral de colapso termodinámico (0-100).")
     args = parser.parse_args()
 
     try:

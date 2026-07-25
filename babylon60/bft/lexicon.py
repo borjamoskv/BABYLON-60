@@ -1,5 +1,5 @@
 """
-Semantic DAG BFT Lexicon (C5-REAL)
+Semantic DAG BFT Lexicon (C5-INTEGER)
 """
 import sqlite3
 import uuid

@@ -63,7 +63,7 @@ class PulmonesWorker:
         module = import_module(module_path)
         return getattr(module, func_name)
 
-    async def _execute_task(self, task: dict):  # type: ignore
+    async def _execute_task(self, task: dict[str, typing.Any]):  # type: ignore
         task_id = task["id"]
         payload = json.loads(task["payload"])
 

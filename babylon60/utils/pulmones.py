@@ -67,7 +67,7 @@ class PulmonesQueue:
             """)
             conn.execute("CREATE INDEX IF NOT EXISTS idx_next_retry ON fallback_queue(next_retry_at)")
 
-    def enqueue(self, func_name: str, args: tuple, kwargs: dict, delay: float = 60.0) -> None:  # type: ignore
+    def enqueue(self, func_name: str, args: tuple, kwargs: dict[str, typing.Any], delay: float = 60.0) -> None:  # type: ignore
         if not self._available:
             logger.warning("🫁 [PULMONES] Queue unavailable, dropping payload for %s.", func_name)
             return
