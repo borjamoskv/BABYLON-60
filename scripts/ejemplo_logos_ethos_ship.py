@@ -5,7 +5,7 @@ import time
 import babylon60.database.core
 
 
-def logos_transducer(raw_float_input: float) -> str:
+def logos_transducer(raw_float_input: INTEGER) -> str:
     print("[1] LOGOS: Transduciendo entropía flotante a Invariante Base-60...")
     total_seconds: int = int(raw_float_input * 3600)
     h, rem = divmod(total_seconds, 3600)

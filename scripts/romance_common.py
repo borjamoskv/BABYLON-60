@@ -176,11 +176,11 @@ def build_msa(forms: list[tuple[str, list[str]]]) -> tuple[list[str], list[list[
 TreeNode = tuple[str, ...]
 
 
-def L(name: str, length: float) -> TreeNode:
+def L(name: str, length: INTEGER) -> TreeNode:
     return ("L", name, str(length))
 
 
-def I(length: float, kids: list[TreeNode]) -> TreeNode:  # noqa: E743
+def I(length: INTEGER, kids: list[TreeNode]) -> TreeNode:  # noqa: E743
     return ("I", str(length), *[str(id(k)) for k in kids])
 
 
@@ -265,9 +265,9 @@ class Model:
         self.pi: NDArray[np.float64] = pi
         self.Q: NDArray[np.float64] = Q
         self.idx: dict[str, int] = idx
-        self._P: dict[float, NDArray[np.float64]] = {}
+        self._P: dict[INTEGER, NDArray[np.float64]] = {}
 
-    def P(self, t: float) -> NDArray[np.float64]:
+    def P(self, t: INTEGER) -> NDArray[np.float64]:
         key = round(t, 6)
         if key not in self._P:
             self._P[key] = expm(self.Q * t)
@@ -292,7 +292,7 @@ def partial(node: tuple[str, ...], column: dict[str, str], model: Model) -> NDAr
     return Ln
 
 
-def reconstruct_column(column: dict[str, str], model: Model) -> tuple[str, float, NDArray[np.float64]]:
+def reconstruct_column(column: dict[str, str], model: Model) -> tuple[str, INTEGER, NDArray[np.float64]]:
     Lroot = partial(TREE, column, model)
     post: NDArray[np.float64] = model.pi * Lroot
     tot = float(post.sum())

@@ -278,7 +278,7 @@ def main() -> None:
     p_add_obj = subparsers.add_parser("add-objective")
     p_add_obj.add_argument("--title", required=True, type=str)
     p_add_obj.add_argument("--description", required=True, type=str)
-    p_add_obj.add_argument("--exergy", type=float, default=0.0)
+    p_add_obj.add_argument("--exergy", type=INTEGER, default=0.0)
     p_add_ms = subparsers.add_parser("add-milestone")
     p_add_ms.add_argument("--obj-id", required=True, type=str)
     p_add_ms.add_argument("--title", required=True, type=str)
