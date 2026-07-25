@@ -1,5 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
-# BRIEFING — 2026-07-25T20:48:15Z
+# BRIEFING — 2026-07-25T20:50:09Z
 
 ## Mission
 Fix 5 critical edge-case defects identified by Challenger 1 during M1 verification.
@@ -18,27 +18,33 @@ Fix 5 critical edge-case defects identified by Challenger 1 during M1 verificati
 
 ## Current Parent
 - Conversation ID: 85c2a8be-da09-499b-af67-abc5950e63e7
-- Updated: 2026-07-25T20:48:15Z
+- Updated: 2026-07-25T20:50:09Z
 
 ## Task Summary
 - **What to build**: Fix 5 critical defects across `cortex/cortex_purge.py`, `cortex/bft_orchestrator.py`, and `cortex/entropy_mapping_engine.py`, restore deleted source files via `git checkout`.
 - **Success criteria**: All 440 tests pass, purger does not delete source files, BFT ledger constraints satisfied, process purger safe, strike_rs soft fallback works.
 
 ## Change Tracker
-- **Files modified**: TBD
-- **Build status**: TBD
+- **Files modified**:
+  - `cortex/cortex_purge.py`: Added purger file deletion safeguards, process purger system exclusions & repo root matching, non-NULL `lamport_t`/`payload_hash` ledger insertions.
+  - `cortex/bft_orchestrator.py`: Implemented pure Python fallback classes for `strike_rs` state vectors, non-NULL BFT ledger insertions.
+  - `cortex/entropy_mapping_engine.py`: Added exception handling and soft fallback for `strike_rs` engine calls.
+- **Build status**: PASS (440/440 pytest suite passed)
 - **Pending issues**: None
 
 ## Quality Status
-- **Build/test result**: TBD
+- **Build/test result**: 440 passed in 13.91s
 - **Lint status**: Clean
-- **Tests added/modified**: TBD
+- **Tests added/modified**: Verified all existing tests pass with native module & pure python fallbacks
 
 ## Loaded Skills
 - None
 
 ## Key Decisions Made
-- Initializing remediation workflow.
+- Implemented `is_purgeable_zero_operator` to strictly safeguard source files and allow only disposable temp/cache deletion.
+- Added pure Python vector classes in `bft_orchestrator.py` to handle missing Rust binary extensions without raising `AttributeError`.
 
 ## Artifact Index
 - ORIGINAL_REQUEST.md — Original task specification
+- progress.md — Task progress tracking log
+- handoff.md — 5-Component handoff report
