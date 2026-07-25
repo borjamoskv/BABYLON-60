@@ -122,7 +122,7 @@ ignore = ["E743", "E501"]
 python_version = "3.12"
 explicit_package_bases = true
 disallow_any_generics = false
-exclude = ["^scratch/", "^anvil_yung/", "^babylon60/extensions/"]
+exclude = ["^scratch/", "^anvil_yung/", "^babylon60/extensions/", "^cortex/moskv-swarm/"]
 ignore_missing_imports = true
 
 # Legacy vendorizado (babylon60/extensions): excluido de packaging y lint.
