@@ -8,7 +8,6 @@ from cortex.gemini_live_client import (
     GeminiLiveClient,
 )
 
-
 class TestAudioStreamConfig:
     def test_default_config_valid(self) -> None:
         config = AudioStreamConfig()
@@ -32,7 +31,6 @@ class TestAudioStreamConfig:
     def test_invalid_bit_depth_raises(self) -> None:
         with pytest.raises(AudioFormatMismatchError, match="Bit depth MUST be 16"):
             AudioStreamConfig(bit_depth=24)
-
 
 class TestGeminiLiveClient:
     def test_create_session_success(self) -> None:

@@ -9,7 +9,6 @@ from pathlib import Path
 
 DASHBOARD_PATH = str(Path(__file__).resolve().parent / "escohotado_dashboard.html")
 
-
 def test_dashboard_file_integrity() -> None:
     assert os.path.exists(DASHBOARD_PATH)
     with open(DASHBOARD_PATH, "r", encoding="utf-8") as f:

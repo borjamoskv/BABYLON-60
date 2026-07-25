@@ -2,7 +2,6 @@
 from pathlib import Path
 import subprocess
 
-
 def is_binary(path: Path) -> bool:
     try:
         with open(path, "tr") as check_file:
@@ -13,7 +12,6 @@ def is_binary(path: Path) -> bool:
     except OSError:
         return True  # if it fails to open, consider it binary/skip
 
-
 def get_comment_syntax(ext: str) -> str:
     if ext in {".py", ".yml", ".yaml", ".sh", ".rb", ".conf", ".toml"}:
         return "#"
@@ -23,12 +21,10 @@ def get_comment_syntax(ext: str) -> str:
         return "<!--"
     return ""
 
-
 def get_comment_close(ext: str) -> str:
     if ext in {".html", ".md", ".xml", ".svg"}:
         return " -->\n"
     return "\n"
-
 
 def apply_itera_operator(content: str, ext: str) -> str:
     lines = content.split("\n")
@@ -46,7 +42,6 @@ def apply_itera_operator(content: str, ext: str) -> str:
         mutated_content = f"{c_open}{header}{c_close}" + mutated_content
 
     return mutated_content
-
 
 def global_itera() -> None:
     root = Path(".")
@@ -144,7 +139,6 @@ def global_itera() -> None:
             print(f"C5-REAL Hash: {res.stdout.strip()}")
         except Exception as e:
             print(f"Git Sentinel handled elsewhere or failed: {e}")
-
 
 if __name__ == "__main__":
     global_itera()

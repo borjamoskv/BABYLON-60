@@ -11,7 +11,6 @@ sys.path.append(PROJECT_ROOT)
 
 from cortex.swarm.memory_store import AgentMemory  # noqa: E402
 
-
 def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
     try:
         memory = AgentMemory()
@@ -21,7 +20,6 @@ def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
         return ("OK", worker_id, elapsed)
     except sqlite3.Error as e:
         return ("ERROR", worker_id, str(e))
-
 
 def run_stress_test(num_requests: int = 1000, max_workers: int = 100) -> None:
     print(f"Iniciando asedio C5-REAL SQLite WAL BFT | Requests: {num_requests} | Concurrency: {max_workers}")
@@ -58,7 +56,6 @@ def run_stress_test(num_requests: int = 1000, max_workers: int = 100) -> None:
     else:
         print("\nResiliencia Topológica Confirmada (C5-REAL).")
         sys.exit(0)
-
 
 if __name__ == "__main__":
     run_stress_test(num_requests=1000, max_workers=100)

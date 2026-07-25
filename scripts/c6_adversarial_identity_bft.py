@@ -9,7 +9,6 @@ import uuid
 DB_PATH = "c6_adversarial_ledger.db"
 WAL_TARGET_SIZE_MB = 25  # Force a large WAL to widen the checkpoint window
 
-
 def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event) -> None:
     """
     Inyecta entropía masiva sin hacer checkpoint explícito para inflar el WAL.
@@ -42,7 +41,6 @@ def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event)
         except sqlite3.Error:
             pass
 
-
 def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.synchronize.Event) -> None:
     """
     Fuerza el vaciado del WAL al archivo DB principal.
@@ -54,7 +52,6 @@ def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.s
         conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
     except sqlite3.Error:
         pass
-
 
 def c6_adversarial_orchestrator() -> None:
     print("=====================================================")
@@ -141,7 +138,6 @@ def c6_adversarial_orchestrator() -> None:
 
     except sqlite3.DatabaseError as e:
         print(f"\n[-] C6 RESULT: ERROR ESTRUCTURAL CATASTRÓFICO. La base de datos es ilegible. Exception: {e}")
-
 
 if __name__ == "__main__":
     # Prevenimos fork issues en macOS activando explicit spawn

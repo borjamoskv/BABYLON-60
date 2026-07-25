@@ -12,7 +12,6 @@ import time
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 def main() -> None:
     start_time = time.perf_counter()
     print("🧪 Running Go Test Suite...")
@@ -27,7 +26,6 @@ def main() -> None:
         elapsed = time.perf_counter() - start_time
         print(f"❌ Go tests fallaron con código {e.returncode} después de {elapsed:.4f}s.")
         sys.exit(e.returncode)
-
 
 if __name__ == "__main__":
     main()

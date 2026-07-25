@@ -14,14 +14,12 @@ from cortex.cam.effects import EffectsAlgebra, EffectType
 from cortex.cam.hypergraph import CAM2Hypergraph
 from cortex.cam.types import EdgeOrder, EdgeType, EpistemicState
 
-
 @dataclass
 class CAMState:
     graph: CAM2Hypergraph = field(default_factory=CAM2Hypergraph)
     ledger: list[dict[str, str]] = field(default_factory=list)
     capabilities: dict[str, set[str]] = field(default_factory=dict)
     conformance_profile: str = "CAM 2.0 Evolutionary"
-
 
 class CAMAbstractMachine:
     def __init__(self, profile: str = "CAM 2.0 Evolutionary") -> None:

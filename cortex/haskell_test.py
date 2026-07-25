@@ -3,7 +3,6 @@
 import unittest
 from cortex.haskell import dispatch_haskell, HaskellStateVector
 
-
 class TestHaskellKernel(unittest.TestCase):
     def test_haskell_coverage(self) -> None:
         vec = HaskellStateVector()
@@ -16,7 +15,6 @@ class TestHaskellKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Haskell Primitives.")
-
 
 if __name__ == "__main__":
     unittest.main()

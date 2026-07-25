@@ -35,7 +35,6 @@ except ImportError:
 
             return SimpleStrategy()
 
-
 from cortex.mcts_vnode_compiler import (
     ASTTheorem,
     calculate_shannon_entropy,
@@ -47,7 +46,6 @@ from cortex.mcts_vnode_compiler import (
     _generate_cortex_taint,
     _mcts_expansion_worker,
 )
-
 
 class TestCalculateShannonEntropy:
     def test_empty_bytes_returns_zero(self) -> None:
@@ -80,7 +78,6 @@ class TestCalculateShannonEntropy:
         for x in [1, 2, 10, 256, 1000, 65535, 100000]:
             assert abs(_fast_log2(x) - math.log2(x)) < 1e-9
 
-
 class TestEphemeralVNodePhysical:
     def test_valid_python_code_passes(self) -> None:
         vnode = EphemeralVNodePhysical("vnode-test-01")
@@ -111,7 +108,6 @@ class TestEphemeralVNodePhysical:
         assert is_valid is False
         assert entropy == 0.0
         assert nodes == 0
-
 
 class TestMCTSNodeAndUCT:
     def test_unvisited_node_uct_score_is_inf(self) -> None:
@@ -152,7 +148,6 @@ class TestMCTSNodeAndUCT:
         assert node.prune_if_anergy(entropy_threshold=3.0) is True
         assert node.is_pruned is True
         assert node.uct_score() == -float("inf")
-
 
 class TestASTTheoremAndInvariants:
     def test_ast_theorem_valid_construction(self) -> None:
@@ -218,7 +213,6 @@ class TestASTTheoremAndInvariants:
                 pruned_branches=-1,
             )
 
-
 class TestMCTSExpansionWorker:
     def test_worker_returns_ast_theorem_for_valid_step(self) -> None:
         result = _mcts_expansion_worker(("maximize_exergy", 42))
@@ -236,7 +230,6 @@ class TestMCTSExpansionWorker:
         expected = hashlib.sha3_256(result.payload.encode("utf-8")).hexdigest()
         assert result.code_hash == expected
         assert 0.0 <= result.exergy_ratio <= 10.0
-
 
 class TestL3InferenceEnginePhysical:
     def test_compile_theorem_returns_valid_theorem(self) -> None:
@@ -273,7 +266,6 @@ class TestL3InferenceEnginePhysical:
         taint = _generate_cortex_taint("abc123hash")
         assert taint.startswith("CORTEX-TAINT:borjamoskv:mcts:")
         assert len(taint.split(":")) == 4
-
 
 class TestCoverageEdgeCases:
     def test_shannon_entropy_without_numpy_fallback(self, monkeypatch: pytest.MonkeyPatch) -> None:

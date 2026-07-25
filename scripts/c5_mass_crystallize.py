@@ -2,14 +2,12 @@
 from pathlib import Path
 import subprocess
 
-
 def get_comment_syntax(ext: str) -> str:
     if ext in {".py", ".yml"}:
         return "# C5-REAL EXERGY CERTIFIED\n"
     elif ext in {".js", ".ts", ".go", ".rs"}:
         return "// C5-REAL EXERGY CERTIFIED\n"
     return ""
-
 
 def crystallize_files() -> None:
     root = Path(".")
@@ -53,7 +51,6 @@ def crystallize_files() -> None:
         )
         res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
         print(f"Commit Hash: {res.stdout.strip()}")
-
 
 if __name__ == "__main__":
     crystallize_files()

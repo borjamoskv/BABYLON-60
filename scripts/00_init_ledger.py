@@ -10,7 +10,6 @@ from cortex_env import get_bft_key
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
 
-
 def init_ledger() -> None:
     # Validate BFT key presence via cortex_env (Ω25)
     get_bft_key()
@@ -75,7 +74,6 @@ def init_ledger() -> None:
     conn.commit()
     conn.close()
     print(f"Master Ledger inicializado en {DB_PATH}. WAL activo. Inmutabilidad enforzada (Ω11).")
-
 
 if __name__ == "__main__":
     init_ledger()

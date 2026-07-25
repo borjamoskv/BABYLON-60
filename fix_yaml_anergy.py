@@ -5,7 +5,6 @@ import re
 
 print("Purgando Anergía Sintáctica en YAML...")
 
-
 def fix_yaml(filepath):
     with open(filepath, "r") as f:
         content = f.read()
@@ -24,7 +23,6 @@ def fix_yaml(filepath):
 
     with open(filepath, "w") as f:
         f.write(content)
-
 
 yaml_files = glob.glob("**/*.yaml", recursive=True) + glob.glob("**/*.yml", recursive=True)
 for yf in yaml_files:

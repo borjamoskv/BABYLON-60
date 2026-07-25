@@ -29,7 +29,6 @@ init_ledger_mod.DB_PATH = TEST_DB_PATH  # type: ignore[attr-defined]
 
 from typing import Any
 
-
 def setup_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
@@ -37,16 +36,13 @@ def setup_module(module: Any) -> None:
         os.makedirs(".cortex")
     init_ledger_mod.init_ledger()
 
-
 def teardown_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
 
-
 def hash_payload(lamport_t: int, agent_id: str, prev_hash: str) -> str:
     data = f"{lamport_t}:{agent_id}:{prev_hash}".encode("utf-8")
     return hashlib.sha3_256(data).hexdigest()
-
 
 class MasterLedgerWriter:
     def __init__(self) -> None:
@@ -74,7 +70,6 @@ class MasterLedgerWriter:
 
     def close(self) -> None:
         self.conn.close()
-
 
 def test_wal_contention() -> None:
     # Enforces Ω13: single writer, multiple producers
@@ -115,7 +110,6 @@ def test_wal_contention() -> None:
 
     asyncio.run(run_contention())
 
-
 def test_chain_integrity() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)
     cursor = conn.cursor()
@@ -137,7 +131,6 @@ def test_chain_integrity() -> None:
         prev_hash_expected = payload_hash
 
     conn.close()
-
 
 def test_intentional_corruption_prevention() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)

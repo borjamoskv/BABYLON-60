@@ -10,7 +10,6 @@ from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
 logger = logging.getLogger("cortex.active_inference")
 
-
 @dataclasses.dataclass(frozen=True)
 class ActiveInferenceResult:
     """Representación inmutable de la energía libre variacional F = D_KL - E[ln p(O|S)]."""
@@ -21,7 +20,6 @@ class ActiveInferenceResult:
 
     def __iter__(self) -> Iterator[float]:
         return iter((self.free_energy, self.d_kl, self.expected_log_likelihood))
-
 
 class UnifiedActiveInferenceEngine:
     """Motor unificado de Inferencia Activa C5-REAL (Falta de energía libre variacional F)."""

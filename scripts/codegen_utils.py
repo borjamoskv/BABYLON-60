@@ -12,7 +12,6 @@ import os
 import re
 from typing import Any, Dict
 
-
 def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int, str]]:
     """Parse a 1000-primitive YAML taxonomy into (domains, primitives, modifiers)."""
     with open(yaml_path, encoding="utf-8") as f:
@@ -60,7 +59,6 @@ def parse_yaml(yaml_path: str) -> tuple[dict[int, str], dict[int, str], dict[int
 
     return domains, primitives, modifiers
 
-
 def write_output(path: str, lines: list[Any]) -> None:
     """Atomically write generated source lines to *path*, creating parent dirs (Ω41)."""
     dir_name = os.path.dirname(path)
@@ -80,7 +78,6 @@ def write_output(path: str, lines: list[Any]) -> None:
         raise e
     print(f"Generated: {path}")
 
-
 def get_ledger_hash(ledger_path: str = "mundo_f_ledger.yml") -> str | None:
     """AP-2: Canonical ledger hash function. Import this — DO NOT redefine.
 
@@ -91,7 +88,6 @@ def get_ledger_hash(ledger_path: str = "mundo_f_ledger.yml") -> str | None:
             return hashlib.sha256(f.read()).hexdigest()
     except FileNotFoundError:
         return None
-
 
 # METADATA CONFIGURATIONS FOR DRY PARALLEL GENERATOR (AP-R1)
 CODEGEN_CONFIGS: Dict[str, Dict[str, Any]] = {

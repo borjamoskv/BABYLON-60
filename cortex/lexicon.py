@@ -10,7 +10,6 @@ import re
 from pathlib import Path
 from typing import Dict, List, Optional
 
-
 class LexiconEntry:
     """Represents a validated term or invariant within the C5-REAL ontology."""
 
@@ -27,7 +26,6 @@ class LexiconEntry:
             "category": self.category,
             "description": self.description,
         }
-
 
 class LexiconEngine:
     """Engine for loading and querying C5-REAL ontology and invariant definitions."""
@@ -78,15 +76,12 @@ class LexiconEngine:
         q = query.lower()
         return [entry for entry in self.terms.values() if q in entry.term.lower() or q in entry.description.lower()]
 
-
 # Singleton instance for quick execution
 default_lexicon = LexiconEngine()
-
 
 def lookup_term(term: str) -> Optional[Dict[str, str]]:
     entry = default_lexicon.get_term(term)
     return entry.to_dict() if entry else None
-
 
 def lookup_invariant(inv_id: str) -> Optional[str]:
     return default_lexicon.get_invariant(inv_id)

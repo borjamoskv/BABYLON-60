@@ -13,7 +13,6 @@ SEC_PER_BAR = SEC_PER_BEAT * 4
 TOTAL_BARS = 32
 TOTAL_LENGTH_SEC = TOTAL_BARS * SEC_PER_BAR
 
-
 def normalize(audio):
     peak = np.max(np.abs(audio))
     if peak > 0:
@@ -21,19 +20,16 @@ def normalize(audio):
         return audio * (10 ** (-0.1 / 20) / peak)
     return audio
 
-
 def butter_lowpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
     normal_cutoff = cutoff / nyq
     b, a = butter(order, normal_cutoff, btype="low", analog=False)
     return b, a
 
-
 def lowpass_filter(data, cutoff, fs, order=5):
     b, a = butter_lowpass(cutoff, fs, order=order)
     y = lfilter(b, a, data)
     return y
-
 
 def butter_highpass(cutoff, fs, order=5):
     nyq = 0.5 * fs
@@ -41,12 +37,10 @@ def butter_highpass(cutoff, fs, order=5):
     b, a = butter(order, normal_cutoff, btype="high", analog=False)
     return b, a
 
-
 def highpass_filter(data, cutoff, fs, order=5):
     b, a = butter_highpass(cutoff, fs, order=order)
     y = lfilter(b, a, data)
     return y
-
 
 def get_kick():
     length_sec = 0.5
@@ -59,7 +53,6 @@ def get_kick():
     kick = (kick * env + click * 0.2) * 0.8
     return kick
 
-
 def get_closed_hat():
     length_sec = 0.1
     t = np.linspace(0, length_sec, int(SAMPLE_RATE * length_sec), endpoint=False)
@@ -67,7 +60,6 @@ def get_closed_hat():
     noise = highpass_filter(noise, 6000, SAMPLE_RATE, order=3)
     env = np.exp(-t * 60)
     return noise * env * 0.4
-
 
 def get_open_hat():
     length_sec = 0.3
@@ -77,7 +69,6 @@ def get_open_hat():
     env = np.exp(-t * 15)
     return noise * env * 0.5
 
-
 def get_snare():
     length_sec = 0.3
     t = np.linspace(0, length_sec, int(SAMPLE_RATE * length_sec), endpoint=False)
@@ -85,7 +76,6 @@ def get_snare():
     noise = np.random.randn(len(t))
     noise = highpass_filter(noise, 1500, SAMPLE_RATE) * np.exp(-t * 25)
     return (tone * 0.3 + noise * 0.7) * 0.6
-
 
 def generate_tone(freq, length_sec, shape="square"):
     t = np.linspace(0, length_sec, int(SAMPLE_RATE * length_sec), endpoint=False)
@@ -96,7 +86,6 @@ def generate_tone(freq, length_sec, shape="square"):
     elif shape == "sine":
         return np.sin(2 * np.pi * freq * t)
 
-
 def get_bass_note(freq, length_sec=0.25):
     t = np.linspace(0, length_sec, int(SAMPLE_RATE * length_sec), endpoint=False)
     saw1 = generate_tone(freq, length_sec, "saw")
@@ -105,7 +94,6 @@ def get_bass_note(freq, length_sec=0.25):
     tone = lowpass_filter(tone, 800, SAMPLE_RATE, order=2)
     env = np.exp(-t * 8)
     return tone * env * 0.7
-
 
 def get_chord(freqs, length_sec=0.3):
     t = np.linspace(0, length_sec, int(SAMPLE_RATE * length_sec), endpoint=False)
@@ -120,12 +108,10 @@ def get_chord(freqs, length_sec=0.3):
     env = np.exp(-t * 5)
     return chord_filtered * env * 0.4
 
-
 # Create empty mix
 t_total = np.linspace(0, TOTAL_LENGTH_SEC, int(SAMPLE_RATE * TOTAL_LENGTH_SEC), endpoint=False)
 mix_l = np.zeros(len(t_total))
 mix_r = np.zeros(len(t_total))
-
 
 def add_to_mix(audio, start_sec, pan=0.0):
     start_idx = int(start_sec * SAMPLE_RATE)
@@ -139,7 +125,6 @@ def add_to_mix(audio, start_sec, pan=0.0):
 
     mix_l[start_idx:end_idx] += audio * pan_l
     mix_r[start_idx:end_idx] += audio * pan_r
-
 
 # Drum elements
 kick = get_kick()
@@ -245,7 +230,6 @@ for bar in range(TOTAL_BARS):
         add_to_mix(vocal_chop, bar_start + SEC_PER_BEAT * 0.75, pan=0.3)
         add_to_mix(vocal_chop2, bar_start + SEC_PER_BEAT * 3.25, pan=-0.3)
 
-
 # Mixdown & Master
 mix_l = normalize(mix_l)
 mix_r = normalize(mix_r)
@@ -268,13 +252,11 @@ audio_mono = (mix_l + mix_r) / 2.0
 
 fft_data = []
 
-
 def get_band_energy(freqs, Pxx, f_min, f_max):
     idx = np.logical_and(freqs >= f_min, freqs <= f_max)
     if not np.any(idx):
         return 0.0
     return float(np.sum(Pxx[idx]))
-
 
 # Process frame by frame
 for i in range(num_frames):

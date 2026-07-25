@@ -7,7 +7,6 @@ Prevents Undefined Behaviour by verifying actual effects against declared effect
 from dataclasses import dataclass, field
 import enum
 
-
 class EffectType(enum.Enum):
     KNOWLEDGE_READ = "knowledge:read"
     KNOWLEDGE_WRITE = "knowledge:write"
@@ -16,7 +15,6 @@ class EffectType(enum.Enum):
     FILESYSTEM_WRITE = "filesystem:write"
     NETWORK_SEND = "network:send"
     NETWORK_RECV = "network:recv"
-
 
 @dataclass
 class EffectsAlgebra:

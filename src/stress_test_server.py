@@ -8,7 +8,6 @@ app = FastAPI()
 
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "cortex_bft_ledger.db")
 
-
 def init_db():
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
@@ -19,9 +18,7 @@ def init_db():
     conn.commit()
     conn.close()
 
-
 init_db()
-
 
 @app.get("/api/stress")
 def stress():
@@ -31,7 +28,6 @@ def stress():
     conn.commit()
     conn.close()
     return {"exergy": "max"}
-
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8080, log_level="warning")

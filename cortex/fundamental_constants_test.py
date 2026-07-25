@@ -3,7 +3,6 @@
 import unittest
 from cortex.fundamental_constants import dispatch_constants, ConstantsStateVector
 
-
 class TestConstantsKernel(unittest.TestCase):
     def test_constants_coverage(self) -> None:
         vec = ConstantsStateVector()
@@ -16,7 +15,6 @@ class TestConstantsKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Constants Primitives.")
-
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,7 +7,6 @@ from typing import Dict, Tuple, Set
 # C5-REAL NEUROMORPHIC PRIMITIVES (V2 - STDP & LEAKY INTEGRATE-AND-FIRE)
 # Bypass Von Neumann CPU/Memory segregation. Memory (SQLite WAL) dictates routing weights in real-time.
 
-
 class STDPMemristor:
     """
     Invariante Físico de Memoria + Resistencia con Plasticidad STDP.
@@ -95,7 +94,6 @@ class STDPMemristor:
         finally:
             conn.close()
 
-
 class LeakySpikingNode:
     """
     Leaky Integrate-and-Fire (LIF).
@@ -140,7 +138,6 @@ class LeakySpikingNode:
         self.last_update_ts = time.time()
 
         return spiked_energy
-
 
 class SelfHealingMesh:
     """

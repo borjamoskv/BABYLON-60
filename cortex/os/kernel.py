@@ -12,7 +12,6 @@ from cortex.os.memory import MemoryHierarchy, MemoryTier
 from cortex.os.scheduler import CognitiveScheduler, ProcessTask
 from cortex.os.syscalls import SyscallRequest, SyscallResponse, SyscallType
 
-
 class CortexMicrokernel:
     def __init__(self) -> None:
         # The 5 Primitive State Graphs

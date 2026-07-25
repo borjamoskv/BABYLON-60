@@ -3,7 +3,6 @@
 
 from cortex.lexicon import LexiconEngine, lookup_invariant
 
-
 def test_lexicon_load_invariants():
     engine = LexiconEngine()
     # Test lookup of known invariant Ω179
@@ -25,12 +24,10 @@ def test_lexicon_load_invariants():
     assert inv_187 is not None
     assert "KERNEL AXIOMATIZATION PROTOCOL" in inv_187
 
-
 def test_lookup_invariant_function():
     inv_178 = lookup_invariant("Ω178")
     assert inv_178 is not None
     assert "KOLMOGOROV PROOF ENGINE INVARIANT" in inv_178
-
 
 def test_lexicon_term_search():
     engine = LexiconEngine()

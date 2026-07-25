@@ -11,7 +11,6 @@ from cortex.swarm.engine_fsm import SwarmFSM
 from cortex.swarm.architect_agent import ArchitectAgent
 from cortex.swarm.sanitizer import ZeroTrustSanitizer
 
-
 class OrchestratorEngine:
     """Orquestador unificado de Swarm C5-REAL."""
 
@@ -55,7 +54,6 @@ class OrchestratorEngine:
         has_debt = self.architect.trigger_refactoring(threshold=10)
         return has_debt
 
-
 def autonomous_loop() -> None:
     """Bucle principal de orquestación C5-REAL."""
     print("=== INICIANDO BFT_STATE_LOOP SWARM ORCHESTRATOR C5-REAL ===")
@@ -71,7 +69,6 @@ def autonomous_loop() -> None:
         body="Mejorar la tolerancia a la concurrencia en memory_store.py bajo carga extrema.",
     )
     print(f"[Orchestrator] Issue #2026 procesado. Estado final: {final_state}")
-
 
 if __name__ == "__main__":
     autonomous_loop()

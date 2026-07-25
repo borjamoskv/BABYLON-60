@@ -15,7 +15,6 @@ from cortex.cam.types import (
     NodeType,
 )
 
-
 def test_cam2_5d_epistemic_freshness_decay() -> None:
     epistemic = Epistemic5D(
         truth=1.0,
@@ -34,7 +33,6 @@ def test_cam2_5d_epistemic_freshness_decay() -> None:
     assert t10_trust < t0_trust
     assert round(t10_trust, 4) == round(0.7200 * 0.36787944117, 4)
 
-
 def test_cam2_hypergraph_2nd_order_feedback_loop() -> None:
     graph = CAM2Hypergraph()
     n1 = graph.add_node(KGNode(node_type=NodeType.POLICY, state=EpistemicState.VERIFIED))
@@ -46,7 +44,6 @@ def test_cam2_hypergraph_2nd_order_feedback_loop() -> None:
     # 2nd-order feedback edge: n2 -> n1 (Allowed loop for adaptation)
     graph.add_edge(EdgeType.INVALIDATES, n2, n1, EdgeOrder.SECOND_ORDER_FEEDBACK)
     assert len(graph.edges) == 2
-
 
 def test_cam2_adjudication_preserves_dissidence() -> None:
     graph = CAM2Hypergraph()
@@ -66,7 +63,6 @@ def test_cam2_adjudication_preserves_dissidence() -> None:
     assert graph.nodes[claim_b].state == EpistemicState.REFUTED
     # Dissenting node remains preserved in graph
     assert claim_b in graph.nodes
-
 
 def test_cam2_machine_5d_trust_verification() -> None:
     machine = CAMAbstractMachine(profile="CAM 2.0 Evolutionary")

@@ -6,7 +6,6 @@ import subprocess
 from pathlib import Path
 from scripts.verify_receipt import sha256_bytes
 
-
 def test_zero_trust_pipeline_end_to_end(tmp_path, monkeypatch):
     # Setup test plan
     target_file = "tmp_test_target.txt"
@@ -40,7 +39,6 @@ def test_zero_trust_pipeline_end_to_end(tmp_path, monkeypatch):
 
     # Clean up test file
     Path(target_file).unlink(missing_ok=True)
-
 
 def test_verify_receipt_tamper_detection(tmp_path):
     receipt_data = {"version": "1.0", "run_id": "test_run", "file_hashes": {}, "undeclared_mutations": []}

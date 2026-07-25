@@ -11,7 +11,6 @@ FILES = [
     "cortex/quad_pillar_kernel_test.py",
 ]
 
-
 def add_typing(file):
     with open(file, "r") as f:
         content = f.read()
@@ -64,7 +63,6 @@ def add_typing(file):
 
     with open(file, "w") as f:
         f.write(new_content)
-
 
 for f in FILES:
     add_typing(f)

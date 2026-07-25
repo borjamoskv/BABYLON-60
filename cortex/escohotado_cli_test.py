@@ -6,7 +6,6 @@ Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).
 
 from cortex.escohotado_cli import query_chaos_db, query_econ_db, query_substance_db
 
-
 def test_cli_ledger_queries() -> None:
     chaos_data = query_chaos_db()
     econ_data = query_econ_db()

@@ -13,10 +13,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 def sha256_bytes(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
-
 
 def sha256_file(path: Path) -> str | None:
     if not path.exists():
@@ -26,7 +24,6 @@ def sha256_file(path: Path) -> str | None:
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
-
 
 def git_toplevel() -> Path:
     r = subprocess.run(
@@ -38,13 +35,11 @@ def git_toplevel() -> Path:
         raise RuntimeError("Not inside a git repository.")
     return Path(r.stdout.strip()).resolve()
 
-
 def safe_resolve(repo_root: Path, rel: str) -> Path:
     target = (repo_root / rel).resolve()
     if repo_root not in target.parents and target != repo_root:
         raise ValueError(f"Path escapes repo: {rel!r}")
     return target
-
 
 def main():
     ap = argparse.ArgumentParser(description="Verify receipt JSON integrity vs disk")
@@ -129,7 +124,6 @@ def main():
 
     print(json.dumps(result, indent=2, ensure_ascii=False))
     sys.exit(0 if result["PASS"] else 1)
-
 
 if __name__ == "__main__":
     main()

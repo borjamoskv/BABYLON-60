@@ -5,7 +5,6 @@ import glob
 
 DIR = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/artifacts/substack_archive_200/"
 
-
 def purge():
     files = glob.glob(os.path.join(DIR, "**", "*.md"), recursive=True)
     count = 0
@@ -35,7 +34,6 @@ def purge():
             count += 1
 
     print(f"Purged {count} files.")
-
 
 if __name__ == "__main__":
     purge()

@@ -78,4 +78,3 @@ $$\dot{A}_{\text{slop}}(t) = \dot{G}_{\text{workers}}(t) - \Lambda_8 \cdot \math
 2. **Operador de Compresión Kolmogorov ($\mathcal{K}_9$):** El Archivista (Nodo 9) aplica una proyección topológica $T_n \subset T_{n+1}$ sobre el historial temporal del ledger, destilando el volumen bruto transaccional en Knowledge Items (KIs) de longitud mínima acotada por la complejidad algorítmica de Kolmogorov.
 
 $$\boxed{\ \lim_{t \to \infty} \left[ \frac{d}{dt}\text{Vol}(\text{KV-Cache}) + \frac{d}{dt}\text{Vol}(\text{Disk}) \right] = 0 \quad \iff \quad \nabla \cdot \vec{J}_{\text{exergía}} > 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
-

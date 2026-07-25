@@ -13,7 +13,6 @@ from cortex.swarm.memory_store import AgentMemory
 from cortex.swarm.sanitizer import ZeroTrustSanitizer
 from cortex.swarm.sandbox import VesicularSandbox
 
-
 class VibeIDEEngine:
     """Motor C5-REAL para IDE Agéntico con degradación de agencia 4 -> 0 y memoria Dual-Tier."""
 

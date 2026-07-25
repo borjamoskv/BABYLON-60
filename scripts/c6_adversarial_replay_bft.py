@@ -9,11 +9,9 @@ NUM_RUNS = 100
 
 from typing import Any
 
-
 def hash_block(lamport_t: int, nonce: str, payload: str, prev_hash: str) -> str:
     data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
     return hashlib.sha3_256(data).hexdigest()
-
 
 def create_deterministic_ledger(db_path: str) -> sqlite3.Connection:
     if os.path.exists(db_path):
@@ -33,7 +31,6 @@ def create_deterministic_ledger(db_path: str) -> sqlite3.Connection:
         )
     """)
     return conn
-
 
 def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str]:
     db_path = f"{DB_TEMPLATE}{run_id}.db"
@@ -77,7 +74,6 @@ def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str
 
     return history_hashes
 
-
 def generate_immutable_event_log(size: int = 500) -> list[dict[str, Any]]:
     events = []
     # Usamos random solo para fabricar el Event Log "desordenado" original
@@ -98,7 +94,6 @@ def generate_immutable_event_log(size: int = 500) -> list[dict[str, Any]]:
             }
         )
     return events
-
 
 def run_c6_3() -> None:
     print("=====================================================")
@@ -150,7 +145,6 @@ def run_c6_3() -> None:
         print("    El sistema no solo conserva datos; conserva una trayectoria verificable.")
     else:
         print("\n[-] C6.3 FALLIDO: Desviación Estocástica Detectada en Reconstrucción.")
-
 
 if __name__ == "__main__":
     run_c6_3()

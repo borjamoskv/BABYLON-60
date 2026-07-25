@@ -6,10 +6,8 @@ import sqlite3
 import time
 import math
 
-
 def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)
-
 
 def ultrathink_audit(filepath: str) -> None:
     if not os.path.exists(filepath):
@@ -79,7 +77,6 @@ def ultrathink_audit(filepath: str) -> None:
         print("[Ledger] Master Ledger no detectado. Modo efímero.")
 
     print("\n[ULTRATHINK P0] Auditoría Completada. Estado: CERO ANERGÍA. Propuesta sellada físicamente.")
-
 
 if __name__ == "__main__":
     ultrathink_audit(sys.argv[1])

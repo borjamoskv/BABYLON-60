@@ -40,7 +40,6 @@ MODIFIERS = {
     9: "SHADOW",
 }
 
-
 class PlaywrightStateVector:
     def __init__(self) -> None:
         self.browser_active = [False] * 64
@@ -50,14 +49,12 @@ class PlaywrightStateVector:
         self.network_idle_state = [True] * 64
         self.execution_count = 0
 
-
 def resolve_playwright_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"PW-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
-
 
 def dispatch_playwright(d: int, p: int, m: int, vec: PlaywrightStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_playwright_identity(d, p, m)

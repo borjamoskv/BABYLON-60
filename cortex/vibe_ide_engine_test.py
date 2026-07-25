@@ -3,7 +3,6 @@ import time
 import pytest
 from cortex.vibe_ide_engine import VibeIDEEngine
 
-
 def test_vibe_ide_normal_flow() -> None:
     engine = VibeIDEEngine()
     assert engine.agency_level == 4
@@ -13,7 +12,6 @@ def test_vibe_ide_normal_flow() -> None:
     assert "src/math.py" in engine.tier_0
     assert "src/math.py" not in engine.tier_1
 
-
 def test_vibe_ide_idempotency_lock() -> None:
     engine = VibeIDEEngine()
     code = "def sum(a, b): return a + b"
@@ -21,7 +19,6 @@ def test_vibe_ide_idempotency_lock() -> None:
     success, status = engine.process_intent("Optimizar funcion sum", "src/math.py", code)
     assert success is True
     assert status == "IDEMPOTENT_NO_CHANGE"
-
 
 def test_vibe_ide_prompt_injection_degradation() -> None:
     engine = VibeIDEEngine()
@@ -31,7 +28,6 @@ def test_vibe_ide_prompt_injection_degradation() -> None:
     assert status.startswith("REJECTED")
     assert engine.agency_level == 3  # Degraded 4 -> 3
 
-
 def test_vibe_ide_kill_switch(monkeypatch: pytest.MonkeyPatch) -> None:
     engine = VibeIDEEngine()
     monkeypatch.setenv("SWARM_KILL_SWITCH", "1")
@@ -39,7 +35,6 @@ def test_vibe_ide_kill_switch(monkeypatch: pytest.MonkeyPatch) -> None:
     assert success is False
     assert status == "HALTED_BY_KILL_SWITCH"
     assert engine.agency_level == 0
-
 
 def test_vibe_ide_weaponized_forgetting() -> None:
     engine = VibeIDEEngine()

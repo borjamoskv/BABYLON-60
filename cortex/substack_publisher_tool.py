@@ -63,7 +63,6 @@ SUBSTACK_CATALOG = [
     ),
 ]
 
-
 def format_signature_block(count: int = 4) -> str:
     """Generates the mandatory signature block with random Substack catalog embeds."""
     mandatory_link = SUBSTACK_CATALOG[0]
@@ -79,13 +78,11 @@ def format_signature_block(count: int = 4) -> str:
 
     return block
 
-
 def purge_latex_math(text: str) -> str:
     """Replaces raw LaTeX $ math delimiters with clean Unicode equivalents."""
     text = re.sub(r"\$S = -\\sum p_i \\ln p_i\$", "S = -∑ p_i ln(p_i)", text)
     text = re.sub(r"\$([a-zA-Z0-9_\-\+\*\/\=\<\>\(\)]+)\$", r"\1", text)
     return text
-
 
 def convert_tables_to_lists(text: str) -> str:
     """Converts raw Markdown tables (|---|) to structured bold lists."""
@@ -119,14 +116,12 @@ def convert_tables_to_lists(text: str) -> str:
 
     return "\n".join(new_lines)
 
-
 def process_markdown_for_substack(raw_md: str) -> str:
     cleaned = purge_latex_math(raw_md)
     cleaned = convert_tables_to_lists(cleaned)
     if "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima" not in cleaned:
         cleaned += "\n\n---\n\n" + format_signature_block()
     return cleaned
-
 
 if __name__ == "__main__":
     test_text = "Here is a test: $S = -\\sum p_i \\ln p_i$"

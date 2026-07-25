@@ -40,7 +40,6 @@ MODIFIERS = {
     9: "EPIDEMIC_PURGE",
 }
 
-
 class CognitiveChainVector:
     def __init__(self) -> None:
         self.homeostasis_energy = [1.0] * 64
@@ -50,14 +49,12 @@ class CognitiveChainVector:
         self.language_entropy = [0.0] * 64
         self.execution_count = 0
 
-
 def resolve_neuro_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"NEURO-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
-
 
 def dispatch_neuro_chain(d: int, p: int, m: int, vec: CognitiveChainVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_neuro_identity(d, p, m)

@@ -10,7 +10,6 @@ from cortex.swarm.engine_fsm import run_fsm_cycle
 from cortex.swarm.architect_agent import ArchitectAgent
 from cortex.swarm.memory_store import AgentMemory
 
-
 def main() -> None:
     parser = argparse.ArgumentParser(description="MOSKV-1 Sovereign Swarm CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -57,7 +56,6 @@ def main() -> None:
         print("=== BFT MASTER LEDGER RECENT DECISIONS ===")
         for r in records:
             print(r)
-
 
 if __name__ == "__main__":
     main()

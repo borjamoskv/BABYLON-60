@@ -7,7 +7,6 @@ from __future__ import annotations
 import unittest
 from cortex.deliverability_validator import DeliverabilityValidator
 
-
 class TestDeliverabilityValidator(unittest.TestCase):
     def test_valid_syntax(self) -> None:
         self.assertTrue(DeliverabilityValidator.validate_syntax("test.user@gmail.com"))
@@ -28,7 +27,6 @@ class TestDeliverabilityValidator(unittest.TestCase):
         res_bad = DeliverabilityValidator.validate_email("bad_email", verify_dns=False)
         self.assertFalse(res_bad.is_valid_syntax)
         self.assertEqual(res_bad.error_reason, "INVALID_SYNTAX")
-
 
 if __name__ == "__main__":
     unittest.main()

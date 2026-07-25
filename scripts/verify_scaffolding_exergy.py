@@ -12,7 +12,6 @@ import json
 from dataclasses import dataclass
 from typing import Dict, Any
 
-
 @dataclass
 class ModelScaffoldingProfile:
     model_name: str
@@ -23,7 +22,6 @@ class ModelScaffoldingProfile:
     coding_eval_score: float  # e.g., SWE-bench Verified %
     kv_cache_dissipation_rate: float  # J/token equivalent or relative entropy sink
     rl_post_training_density: float  # Relative alignment weight embedding (0.0 to 1.0)
-
 
 def calculate_epistemic_efficiency(profile: ModelScaffoldingProfile, baseline_tokens: int = 800) -> float:
     """
@@ -48,7 +46,6 @@ def calculate_epistemic_efficiency(profile: ModelScaffoldingProfile, baseline_to
         return float("inf")
 
     return round(stable_knowledge / dissipated_energy, 4)
-
 
 def run_scaffolding_audit() -> Dict[str, Any]:
     profiles = [
@@ -118,7 +115,6 @@ def run_scaffolding_audit() -> Dict[str, Any]:
         "to post-training RL weights (density 0.95) and strict JSON Schema contracts (33 tools)."
     )
     return audit_results
-
 
 if __name__ == "__main__":
     result = run_scaffolding_audit()

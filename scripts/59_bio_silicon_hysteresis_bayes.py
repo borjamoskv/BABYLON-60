@@ -14,7 +14,6 @@ import random
 import json
 import hashlib
 
-
 class GenericIRQChipL2:
     """Ω161: Abstraction layer between raw peripheral IRQs (L1) and Cortex decision unit (L3)."""
 
@@ -38,7 +37,6 @@ class GenericIRQChipL2:
             "bounded_rate": min(mean_freq, self.fixed_bandwidth),
         }
         return signature
-
 
 class StatefulHysteresisGateL1:
     """Ω160: Dual threshold hysteresis (V_high / V_low) with non-linear sigmoidal attenuation E(x) = x^eta / (1 + x^eta)."""
@@ -65,7 +63,6 @@ class StatefulHysteresisGateL1:
             return passed_load, True
         else:
             return load_value, False
-
 
 class BayesianCortexL3:
     """Ω162: Bayesian Threat Inference on Belief State P(Threat | Evidence)."""
@@ -95,7 +92,6 @@ class BayesianCortexL3:
 
         self.belief_state = max(0.001, min(0.999, posterior))
         return self.belief_state
-
 
 def run_bio_silicon_verification() -> None:
     print("=" * 60)
@@ -174,7 +170,6 @@ def run_bio_silicon_verification() -> None:
     print(f"✓ Attestation written to: {output_path}")
     print(f"  SHA3-256 Digest: {digest}")
     print("=" * 60)
-
 
 if __name__ == "__main__":
     run_bio_silicon_verification()

@@ -17,7 +17,6 @@ if PROJECT_ROOT not in sys.path:
 
 from scripts.gemini_pool_manager import GeminiProPoolManager, EpistemicPoolHalt  # noqa: E402
 
-
 def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> None:
     print("============================================================")
     print(f"  BENCHMARK SIMULATION: {num_slots} CUENTAS PRO | {total_requests} PETICIONES")
@@ -75,7 +74,6 @@ def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> No
         for slot_id, count in dispatched_counts.items():
             print(f"   └── Slot #{slot_id:02d}: {count} peticiones procesadas")
         print("============================================================\n")
-
 
 if __name__ == "__main__":
     run_simulated_benchmark()

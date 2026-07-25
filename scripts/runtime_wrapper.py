@@ -16,10 +16,8 @@ from pathlib import Path
 
 MAX_TIMEOUT = 300
 
-
 def sha256_bytes(b: bytes) -> str:
     return hashlib.sha256(b).hexdigest()
-
 
 def sha256_file(path: Path) -> str | None:
     if not path.exists():
@@ -29,7 +27,6 @@ def sha256_file(path: Path) -> str | None:
         for chunk in iter(lambda: f.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
-
 
 def git_toplevel() -> Path:
     r = subprocess.run(
@@ -41,23 +38,19 @@ def git_toplevel() -> Path:
         raise RuntimeError("Not inside a git repository.")
     return Path(r.stdout.strip()).resolve()
 
-
 def git_head() -> str:
     r = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
     return r.stdout.strip() if r.returncode == 0 else "no-commits"
 
-
 def git_diff_name_only() -> list[str]:
     r = subprocess.run(["git", "diff", "--name-only"], capture_output=True, text=True)
     return sorted(set(x.strip() for x in r.stdout.splitlines() if x.strip()))
-
 
 def safe_resolve(repo_root: Path, rel: str) -> Path:
     target = (repo_root / rel).resolve()
     if repo_root not in target.parents and target != repo_root:
         raise ValueError(f"Path escapes repo root: {rel!r}")
     return target
-
 
 def action_write_file(repo_root: Path, a: dict) -> dict:
     rel = a["path"]
@@ -88,7 +81,6 @@ def action_write_file(repo_root: Path, a: dict) -> dict:
         "post_hash": post_hash,
         "changed": pre_hash != post_hash,
     }
-
 
 def action_run_python(repo_root: Path, a: dict) -> dict:
     script_rel = a["script"]
@@ -126,7 +118,6 @@ def action_run_python(repo_root: Path, a: dict) -> dict:
         raise RuntimeError(f"Script failed rc={proc.returncode}: {script_rel}\nstderr: {proc.stderr[:500]}")
 
     return result
-
 
 def main():
     ap = argparse.ArgumentParser(description="Zero-Trust Runtime Wrapper")
@@ -235,7 +226,6 @@ def main():
     if undeclared:
         sys.exit(2)
     sys.exit(0)
-
 
 if __name__ == "__main__":
     main()

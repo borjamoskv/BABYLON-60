@@ -28,7 +28,6 @@ CLAIM_PATTERNS = [
 
 METRIC_NO_SOURCE_RE = re.compile(r"\b(ATP(?:\s+SAVED)?|EXERGY|ANERGIA|COHERENCE)\s*[:=+]\s*[+-]?\d+", re.IGNORECASE)
 
-
 def shannon_entropy(s: str) -> float:
     """Calculate character Shannon entropy."""
     if not s:
@@ -36,7 +35,6 @@ def shannon_entropy(s: str) -> float:
     counts = Counter(s)
     n = len(s)
     return -sum((c / n) * math.log2(c / n) for c in counts.values())
-
 
 def byte_pair_monotonic_ratio(h: str) -> float:
     """Ratio of strictly ascending consecutive byte pairs."""
@@ -47,13 +45,11 @@ def byte_pair_monotonic_ratio(h: str) -> float:
     ascending = sum(1 for a, b in zip(vals, vals[1:]) if b > a)
     return ascending / (len(vals) - 1)
 
-
 def nibble_run_score(h: str) -> float:
     """Score sequential nibbles (0,1,2,3 / a,b,c,d)."""
     vals = [int(c, 16) for c in h]
     runs = sum(1 for a, b in zip(vals, vals[1:]) if b == (a + 1) % 16)
     return runs / max(len(vals) - 1, 1)
-
 
 def analyze_hex(h: str) -> dict:
     """Analyze hex string for synthetic generation signatures."""
@@ -80,12 +76,10 @@ def analyze_hex(h: str) -> dict:
         "suspect": len(flags) > 0,
     }
 
-
 def commit_exists(sha: str) -> bool:
     """Check if a commit hash exists in local git ledger."""
     r = subprocess.run(["git", "cat-file", "-t", sha], capture_output=True, text=True)
     return r.returncode == 0 and r.stdout.strip() == "commit"
-
 
 def scan_text(text: str) -> dict:
     """Scan payload text for all synthetic artifact classes."""
@@ -119,7 +113,6 @@ def scan_text(text: str) -> dict:
         findings["sourceless_metrics"].append(m.group(0))
 
     return findings
-
 
 def main():
     parser = argparse.ArgumentParser(description="Detect synthetic theater artifacts.")
@@ -160,7 +153,6 @@ def main():
 
     print(json.dumps(result, indent=2, ensure_ascii=False))
     sys.exit(1 if fail else 0)
-
 
 if __name__ == "__main__":
     main()

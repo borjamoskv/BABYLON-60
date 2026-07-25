@@ -13,7 +13,6 @@ import urllib.error
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 def validate_gemini_key(api_key: str) -> bool:
     """Valida una clave API consultando los modelos disponibles."""
     url = f"https://generativelanguage.googleapis.com/v1beta/models?key={api_key}"
@@ -25,7 +24,6 @@ def validate_gemini_key(api_key: str) -> bool:
             return len(models) > 0
     except (urllib.error.HTTPError, urllib.error.URLError, TimeoutError):
         return False
-
 
 def append_keys_to_env(keys: list[str]) -> int:
     """Valida y añade claves verificadas a .env."""
@@ -66,7 +64,6 @@ def append_keys_to_env(keys: list[str]) -> int:
         print("\n⚠️ No se añadieron claves nuevas.")
 
     return valid_added
-
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:

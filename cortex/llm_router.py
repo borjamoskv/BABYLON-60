@@ -8,18 +8,15 @@ from typing import List, TypedDict, Any
 
 __all__ = ["C5LLMRouter"]
 
-
 class RouteConfig(TypedDict, total=False):
     name: str
     url: str
     models: List[str]
 
-
 class EpistemicHalt(Exception):
     """Exclusión rígida de excepciones mudas (Ω26)."""
 
     pass
-
 
 def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     """Parseador de YAML para ontología de rutas (Ω15)."""
@@ -67,7 +64,6 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     from typing import cast
 
     return cast(List[RouteConfig], routes)
-
 
 class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""

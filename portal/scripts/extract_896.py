@@ -2,7 +2,6 @@
 import json
 import os
 
-
 def extract():
     out_path = "../src/data/primitives.json"
 
@@ -41,7 +40,6 @@ def extract():
 
     except Exception as e:
         print(f"Failed to extract: {e}")
-
 
 if __name__ == "__main__":
     extract()

@@ -5,7 +5,6 @@ import os
 from collections import Counter
 import typing
 
-
 def calculate_metrics(transcript_path: str) -> None:
     if not os.path.exists(transcript_path):
         print("Transcript not found.")
@@ -57,7 +56,6 @@ def calculate_metrics(transcript_path: str) -> None:
     print(f"  anergy_ratio: {anergy_ratio:.2f}")
     print(f"  repeated_commands: {repeated_cmds}")
     print("```")
-
 
 if __name__ == "__main__":
     conv_id = sys.argv[1] if len(sys.argv) > 1 else "380ff690-d630-42f7-a5c7-cca8694d58a0"

@@ -11,7 +11,6 @@ os.chdir(PROJECT_ROOT)
 from cortex.swarm.engine_fsm import run_fsm_cycle  # noqa: E402
 from scripts.codegen_utils import get_ledger_hash  # noqa: E402
 
-
 def itera_100() -> None:
     print("=== CORTEX-OMEGA: INICIANDO BUCLE ITERA 100 (TERCER COROLARIO) ===")
     start_time = time.time()
@@ -83,7 +82,6 @@ def itera_100() -> None:
         import sys
 
         sys.exit(1)
-
 
 if __name__ == "__main__":
     itera_100()

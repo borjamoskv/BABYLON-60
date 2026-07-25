@@ -7,7 +7,6 @@ from typing import Any
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
-
 def _obliterate_node(abs_path: str, rel_path: str) -> bool:
     """Atomic execution primitive for a single Swarm node."""
     try:
@@ -19,7 +18,6 @@ def _obliterate_node(abs_path: str, rel_path: str) -> bool:
     except OSError as e:
         logging.error(f"[SWARM NODE] Failed to purge {rel_path}: {e}")
         return False
-
 
 def obliterate_zero_operators(target_dir: str) -> None:
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -68,7 +66,6 @@ def obliterate_zero_operators(target_dir: str) -> None:
             logging.info(f"GIT_SENTINEL: Obliteration committed to ledger. Hash: {git_hash}")
         except subprocess.CalledProcessError as e:
             logging.error(f"Git Sentinel failed to commit obliteraton: {e}")
-
 
 if __name__ == "__main__":
     # [Ω23] Abs path ban. Usar project_root.
