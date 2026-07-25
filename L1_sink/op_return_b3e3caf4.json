@@ -1,13 +1,1 @@
-{
-  "protocol": "BFT_MERKLE_L1_SINK",
-  "timestamp": 1783897192,
-  "inputs": [
-    "73a6fcb56e5eac156b79b31ba939dc20583452166d7c2b93368c58dffaa7668a"
-  ],
-  "merkle_root": "b3e3caf4fa587fcf302f8061261cfae98147cb072ef6e4dfb7e8c5da0be078c3",
-  "op_return_hex": "62336533636166346661353837666366333032663830363132363163666165393831343763623037",
-  "status": "FROZEN_C5_REAL",
-  "iterations": 10000,
-  "computation_time_ms": 4.469871520996094,
-  "metadata": "Motor de puente CDP YouTube destruido y destilado estructuralmente tras 10000 iteraciones SHA-256."
-}
+{"protocol":"BFT_MERKLE_L1_SINK","timestamp":1783897192,"inputs":["73a6fcb56e5eac156b79b31ba939dc20583452166d7c2b93368c58dffaa7668a"],"merkle_root":"b3e3caf4fa587fcf302f8061261cfae98147cb072ef6e4dfb7e8c5da0be078c3","op_return_hex":"62336533636166346661353837666366333032663830363132363163666165393831343763623037","status":"FROZEN_C5_REAL","iterations":10000,"computation_time_ms":4.469871520996094,"metadata":"Motor de puente CDP YouTube destruido y destilado estructuralmente tras 10000 iteraciones SHA-256."}
