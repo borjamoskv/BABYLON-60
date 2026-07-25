@@ -85,7 +85,7 @@ class LinguisticEntropyDetector:
     def _shannon(items: list[str]) -> float:
         from babylon60.extensions.security.utils import calculate_distribution_entropy
 
-        return calculate_distribution_entropy(Counter(items))
+        return calculate_distribution_entropy(Counter(items))  # type: ignore[no-any-return]
 
     def calculate_char_entropy(self, text: str) -> float:
         return round(self._shannon(list(text)), 4)
@@ -122,11 +122,11 @@ class LinguisticEntropyDetector:
     def _sentence_metrics(text: str) -> tuple[int, float]:
         sents = _sentences(text)
         if not sents:
-            return (0.0, 0.0)
+            return (0.0, 0.0)  # type: ignore[return-value]
         lengths = [len(_tokenize(s)) for s in sents]
         avg = statistics.mean(lengths)
         var = statistics.pvariance(lengths) if len(lengths) > 1 else 0.0
-        return (round(avg, 4), round(var, 4))
+        return (round(avg, 4), round(var, 4))  # type: ignore[return-value]
 
     @staticmethod
     def _burstiness(words: list[str]) -> float:

@@ -8,7 +8,7 @@ import os
 try:
     import keyring
 except ImportError:
-    keyring = None
+    keyring = None  # type: ignore[assignment]
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
@@ -32,7 +32,7 @@ def _get_passphrase() -> bytes:
     if os.environ.get("CORTEX_TESTING"):
         pp = os.environ.get("CORTEX_KDF_PASSPHRASE", "c5_real_test_passphrase")
     else:
-        pp = os.environ.get("CORTEX_KDF_PASSPHRASE")
+        pp = os.environ.get("CORTEX_KDF_PASSPHRASE")  # type: ignore[assignment]
         if not pp:
             raise ValueError(
                 "KDF-0 Violation: CORTEX_KDF_PASSPHRASE environment variable is required to cryptographically unwrap the L0 Master Key."

@@ -54,7 +54,7 @@ def optimize_vector_qjl(
         int8_scaled = np.clip(np.round(normalized * 255.0) - 128.0, -128, 127).astype(np.int8)
         if not is_2d:
             return [float(x) for x in int8_scaled[0]]
-        return int8_scaled.tolist()
+        return int8_scaled.tolist()  # type: ignore[no-any-return]
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         logger.error("TurboQuant failure (Exergy Shield bypassed): %s", e)
         return [0.0] * len(vector)
@@ -76,7 +76,7 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
             rotated = np.matmul(arr, q.T)
         if not is_2d:
             return [float(x) for x in rotated[0]]
-        return rotated.tolist()
+        return rotated.tolist()  # type: ignore[no-any-return]
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
         logger.error("TurboQuant query encoding failure: %s", e)
         return vector

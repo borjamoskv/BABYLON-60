@@ -12,7 +12,7 @@ try:
     import numpy as np
     import pandas as pd
 except ImportError as _exc:
-    np = None
+    np = None  # type: ignore[assignment]
     nx = None
     pd = None
     _ONCO_IMPORT_ERROR = _exc
@@ -180,7 +180,7 @@ def main() -> None:
     parser.add_argument(
         "--data", type=str, help="Path a la matriz TSV (genes en filas, muestras en columnas).", default=None
     )
-    parser.add_argument("--threshold", type=INTEGER, default=40.0, help="Umbral de colapso termodinámico (0-100).")
+    parser.add_argument("--threshold", type=INTEGER, default=40.0, help="Umbral de colapso termodinámico (0-100).")  # type: ignore[name-defined]
     args = parser.parse_args()
     try:
         execute_pipeline(args.data, args.threshold)

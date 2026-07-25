@@ -29,10 +29,10 @@ def dequantize_int8(data: bytes) -> list[float]:
         raise RuntimeError("numpy required for embedding decompression")
     scale = struct.unpack("f", data[:4])[0]
     quantized = np.frombuffer(data[4:], dtype=np.int8)
-    return (quantized.astype(np.float32) * scale / 127.0).tolist()
+    return (quantized.astype(np.float32) * scale / 127.0).tolist()  # type: ignore[no-any-return]
 
 
-def compression_ratio(dim: int = 384) -> dict:
+def compression_ratio(dim: int = 384) -> dict:  # type: ignore[type-arg]
     original_float32 = dim * 4
     original_json = dim * 7
     compressed = 4 + dim

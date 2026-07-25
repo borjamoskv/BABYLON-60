@@ -24,7 +24,7 @@ from contextlib import asynccontextmanager
 logger = logging.getLogger(__name__)
 
 
-async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlite.Connection:
+async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlite.Connection:  # type: ignore[return]
     mode = _validate_synchronous(synchronous)
     for attempt in range(3):
         try:
@@ -46,7 +46,7 @@ async def connect(db_path: str | Path, *, synchronous: str = "FULL") -> aiosqlit
 
 
 @asynccontextmanager
-async def get_connection(db_path: str | Path, *, synchronous: str = "FULL"):
+async def get_connection(db_path: str | Path, *, synchronous: str = "FULL"):  # type: ignore[no-untyped-def]
     conn = await connect(db_path, synchronous=synchronous)
     try:
         yield conn

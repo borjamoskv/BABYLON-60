@@ -19,7 +19,7 @@ class PulmonesWorker:
         self.running = False
         self.batch_size = 5
 
-    def _fetch_ripe_tasks(self) -> list:
+    def _fetch_ripe_tasks(self) -> list:  # type: ignore[type-arg]
         now = time.monotonic()
         with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.row_factory = sqlite3.Row
@@ -29,11 +29,11 @@ class PulmonesWorker:
             )
             return [dict(row) for row in cursor.fetchall()]
 
-    def _remove_task(self, task_id: int):
+    def _remove_task(self, task_id: int):  # type: ignore[no-untyped-def]
         with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute("DELETE FROM fallback_queue WHERE id = ?", (task_id,))
 
-    def _penalize_task(self, task_id: int, retries: int):
+    def _penalize_task(self, task_id: int, retries: int):  # type: ignore[no-untyped-def]
         new_retries = retries + 1
         delay = min(60 * 2**retries, 3600)
         next_retry = time.monotonic() + delay
@@ -44,12 +44,12 @@ class PulmonesWorker:
             )
         logger.warning("⏳ Tarea %s penalizada. Reintento %s en %ss.", task_id, new_retries, delay)
 
-    async def _resolve_target(self, target_func_path: str):
+    async def _resolve_target(self, target_func_path: str):  # type: ignore[no-untyped-def]
         module_path, func_name = target_func_path.rsplit(".", 1)
         module = import_module(module_path)
         return getattr(module, func_name)
 
-    async def _execute_task(self, task: dict[str, typing.Any]):
+    async def _execute_task(self, task: dict[str, typing.Any]):  # type: ignore[no-untyped-def]
         task_id = task["id"]
         payload = json.loads(task["payload"])
         try:
@@ -64,7 +64,7 @@ class PulmonesWorker:
             logger.error("❌ Fallo crónico en tarea %s: %s", task_id, str(e))
             self._penalize_task(task_id, task["retries"])
 
-    async def start_loop(self, poll_interval: float = 30.0):
+    async def start_loop(self, poll_interval: float = 30.0):  # type: ignore[no-untyped-def]
         self.running = True
         logger.info("🫁 [WORKER] PULMONES Daemon iniciado. Escaneando hipoxia de red...")
         while self.running:

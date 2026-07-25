@@ -11,8 +11,8 @@ try:
     _HAS_AESGCM = True
 except ImportError:
     _HAS_AESGCM = False
-    AESGCM = None
-    InvalidTag = Exception
+    AESGCM = None  # type: ignore[misc,assignment]
+    InvalidTag = Exception  # type: ignore[misc,assignment]
 
 
 class Vault:

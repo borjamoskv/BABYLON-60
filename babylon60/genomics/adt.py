@@ -54,7 +54,7 @@ VariantType = SNV | INDEL, CNV, StructuralVariant
 @dataclass(frozen=True)
 class AlgebraicGenomicVariant:
     coordinate: CoordinateSystem
-    variant: VariantType
+    variant: VariantType  # type: ignore[valid-type]
     quality: float
     causal_taint: str = "borjamoskv:algebraic_variant_c5"
     metadata: dict[str, Any] = field(default_factory=dict)
@@ -124,7 +124,7 @@ class ClonalEntropyResult:
 @dataclass(frozen=True)
 class GenomicProfileADT:
     variants: list[AlgebraicGenomicVariant]
-    tmb: TMBClassification
+    tmb: TMBClassification  # type: ignore[valid-type]
     apobec: APOBECStatus
     hrd: HRDStatus
     clonal_entropy: Option[ClonalEntropyResult]

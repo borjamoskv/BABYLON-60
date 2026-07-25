@@ -23,7 +23,7 @@ def verify_offline_key(key_str: str) -> bool:
         return False
 
 
-def main():
+def main():  # type: ignore[no-untyped-def]
     if len(sys.argv) < 2:
         print("Usage: python3 -m babylon60.cli.verify_license <SOVEREIGN_LICENSE_KEY>")
         sys.exit(1)
@@ -34,4 +34,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main()  # type: ignore[no-untyped-call]
