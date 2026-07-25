@@ -14,6 +14,14 @@ from typing import Any
 REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "nocturnal_audit.log"
 
+def get_python_exe() -> str:
+    if Path(sys.executable).exists():
+        return sys.executable
+    local_venv = REPO_DIR / ".venv" / "bin" / "python3"
+    if local_venv.exists():
+        return str(local_venv)
+    return sys.executable
+
 def run_cmd(cmd: str | list[str]) -> bool:
     cmd_str = cmd if isinstance(cmd, str) else " ".join(cmd)
     print(f"[*] Executing Audit Command: {cmd_str}")
@@ -30,20 +38,22 @@ def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
     print(f"⚡ NOCTURNAL AUDIT ITERATION #{iteration_num} | {timestamp}")
     print("==================================================")
 
+    py_exe = get_python_exe()
+
     # Plane 1: Invariant Auto-alignment
-    align_ok = run_cmd([sys.executable, "scripts/autodetect_invariants.py"])
+    align_ok = run_cmd([py_exe, "scripts/autodetect_invariants.py"])
 
     # Plane 2: Memory Vault Synchronization
-    sync_ok = run_cmd([sys.executable, "scripts/sync_vault_uuids.py"])
+    sync_ok = run_cmd([py_exe, "scripts/sync_vault_uuids.py"])
 
     # Plane 3: GELABP Exergy Matrix Evaluation
-    exergy_ok = run_cmd([sys.executable, "scripts/exergy_optimizer_agent.py"])
+    exergy_ok = run_cmd([py_exe, "scripts/exergy_optimizer_agent.py"])
 
     # Plane 4: Complete Pytest Validation
-    pytest_ok = run_cmd([sys.executable, "-m", "pytest", "-v", "tests/", "-k", "not test_nocturnal_audit_scheduler"])
+    pytest_ok = run_cmd([py_exe, "-m", "pytest", "-v", "tests/", "-k", "not test_nocturnal_audit_scheduler"])
 
     # Plane 5: Secret Swarm Audit
-    secret_ok = run_cmd([sys.executable, "scripts/secret_swarm_auditor.py"])
+    secret_ok = run_cmd([py_exe, "scripts/secret_swarm_auditor.py"])
 
     status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok and secret_ok) else "FAILED"
     
