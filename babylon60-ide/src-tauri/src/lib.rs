@@ -24,15 +24,15 @@ async fn get_ledger_events(state: State<'_, AppState>, limit: u32) -> Result<Vec
 }
 
 #[tauri::command]
-async fn append_ledger_event(state: State<'_, AppState>, event_type: String, payload: Value) -> Result<CortexEvent<'static>, String> {
+async fn append_ledger_event(state: State<'_, AppState>, event_type: &str, payload: Value) -> Result<CortexEvent<'static>, String> {
     let ledger = state.ledger.lock().await;
-    ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
+    ledger.append_event(event_type, &payload).map_err(|e| e.to_string())
 }
 
 
 #[tauri::command]
-fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
-    run_local_inference(&prompt, model, base_url, temperature)
+fn local_infer_sync(prompt: &str, model: Option<String>, base_url: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
+    run_local_inference(prompt, model, base_url, temperature)
 }
 
 #[tauri::command]

@@ -82,7 +82,7 @@ impl CortexLedger {
         )
     }
 
-    pub fn append_event<'a>(&self, event_type: &'a str, payload: &serde_json::Value) -> Result<CortexEvent<'static>> {
+    pub fn append_event(&self, event_type: &str, payload: &serde_json::Value) -> Result<CortexEvent<'static>> {
         let prev_hash = self.get_latest_hash()?;
         let timestamp = Utc::now().to_rfc3339();
         let payload_str = payload.to_string();
