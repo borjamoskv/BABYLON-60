@@ -89,7 +89,7 @@ impl BftLedger {
 
 #[cfg(target_os = "linux")]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
+    tracing::info!("█▄ [C5-REAL] AGENT CODE BFT INTERCEPTOR (HARDENED MCTS)");
 
     let ledger_path = "agent_bft_ledger.db";
     let conn = Connection::open(ledger_path)?;
@@ -192,8 +192,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     if let Ok(mut l) = ledger.lock() {
         let root = l.compute_merkle_root();
         let _ = l.insert("CLOSURE_SEAL", &format!("ROOT:{}", root));
-        println!("█▄ [C5-REAL] CIERRE CAUSAL EJECUTADO");
-        println!("MERKLE ROOT: {}", root);
+        tracing::info!("█▄ [C5-REAL] CIERRE CAUSAL EJECUTADO");
+        tracing::info!("MERKLE ROOT: {}", root);
     }
 
     Ok(())
@@ -237,7 +237,7 @@ mod tests {
     fn test_bft_ledger_merkle_root() {
         let key_bytes = vec![0x42; 32];
         let key = hmac::Key::new(hmac::HMAC_SHA256, &key_bytes);
-        let conn = Connection::open_in_memory().unwrap();
+        let conn = Connection::open_in_memory().expect("C5-REAL: Strict Unwrapping Enforced");
         conn.execute_batch(
             "CREATE TABLE transactions (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -247,7 +247,7 @@ mod tests {
                 prev_hash TEXT NOT NULL,
                 curr_hash TEXT NOT NULL
             );"
-        ).unwrap();
+        ).expect("C5-REAL: Strict Unwrapping Enforced");
 
         let mut ledger = BftLedger {
             conn,
@@ -258,11 +258,11 @@ mod tests {
 
         assert_eq!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
 
-        ledger.insert("EVENT_A", "payload_A").unwrap();
+        ledger.insert("EVENT_A", "payload_A").expect("C5-REAL: Strict Unwrapping Enforced");
         assert_ne!(ledger.compute_merkle_root(), "EMPTY_LEDGER");
         let root_1 = ledger.compute_merkle_root();
 
-        ledger.insert("EVENT_B", "payload_B").unwrap();
+        ledger.insert("EVENT_B", "payload_B").expect("C5-REAL: Strict Unwrapping Enforced");
         let root_2 = ledger.compute_merkle_root();
         assert_ne!(root_1, root_2);
     }
@@ -270,6 +270,6 @@ mod tests {
 
 #[cfg(not(target_os = "linux"))]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
-    println!("█▄ [C5-REAL] OS NO SOPORTADO PARA BFT_INTERCEPTOR");
+    tracing::info!("█▄ [C5-REAL] OS NO SOPORTADO PARA BFT_INTERCEPTOR");
     Ok(())
 }
