@@ -10,7 +10,7 @@ DB_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), "cortex_bft_l
 
 
 def init_db():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA busy_timeout=5000")
     conn.execute(
@@ -25,7 +25,7 @@ init_db()
 
 @app.get("/api/stress")
 def stress():
-    conn = sqlite3.connect(DB_PATH)
+    conn = sqlite3.connect(DB_PATH, timeout=5.0)
     conn.execute("PRAGMA busy_timeout=5000")
     conn.execute('INSERT INTO stress_log (pulse) VALUES ("C5-REAL-STRESS")')
     conn.commit()

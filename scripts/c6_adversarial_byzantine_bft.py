@@ -11,13 +11,14 @@ class BFTLedger:
     def __init__(self, db_path: str) -> None:
         self.db_path = db_path
         # Usamos isolation_level=None para autocommit puro en WAL
-        self.conn = sqlite3.connect(db_path, isolation_level=None)
+        self.conn = sqlite3.connect(db_path, timeout=5.0, isolation_level=None)
         self._init_db()
         self.audit_log: list[str] = []
 
     def _init_db(self) -> None:
         self.conn.execute("PRAGMA journal_mode=WAL")
         self.conn.execute("PRAGMA synchronous=NORMAL")
+        self.conn.execute("PRAGMA busy_timeout=5000")
 
         self.conn.execute("""
             CREATE TABLE IF NOT EXISTS bft_ledger (
@@ -105,12 +106,11 @@ class BFTLedger:
         cursor = self.conn.execute(
             "SELECT lamport_t, nonce, payload, prev_hash, block_hash FROM bft_ledger ORDER BY lamport_t ASC"
         )
-        rows = cursor.fetchall()
 
         expected_prev = "GENESIS_HASH"
         last_t = 0
 
-        for row in rows:
+        for row in cursor:
             t, n, p, p_h, b_h = row
 
             # Verificar BFT-03 en el validador a posteriori

@@ -6,15 +6,15 @@
 package main
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"fmt"
 	"math/rand"
 	"os"
 	"sort"
-	"time"
-	"crypto/sha256"
-	"encoding/hex"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // ============================================================
@@ -22,8 +22,8 @@ import (
 // ============================================================
 
 type Literal struct {
-	Atom     string
-	Negated  bool
+	Atom    string
+	Negated bool
 }
 
 type Clause []Literal
@@ -87,16 +87,18 @@ func resolve(c1, c2 Clause, l Literal) (Clause, bool) {
 // generateContradiction genera un conjunto de 4 cláusulas insatisfacibles
 // sobre un átomo aleatorio seleccionado de un pool de 26 letras.
 func generateContradiction(rng *rand.Rand) []Clause {
-	atoms := []string{"p","q","r","s","t","u","v","w","x","y"}
+	atoms := []string{"p", "q", "r", "s", "t", "u", "v", "w", "x", "y"}
 	a1 := atoms[rng.Intn(len(atoms))]
 	a2 := atoms[rng.Intn(len(atoms))]
-	for a2 == a1 { a2 = atoms[rng.Intn(len(atoms))] }
+	for a2 == a1 {
+		a2 = atoms[rng.Intn(len(atoms))]
+	}
 
 	return []Clause{
 		{{a1, false}, {a2, false}},
-		{{a1, true},  {a2, false}},
+		{{a1, true}, {a2, false}},
 		{{a1, false}, {a2, true}},
-		{{a1, true},  {a2, true}},
+		{{a1, true}, {a2, true}},
 	}
 }
 
@@ -131,15 +133,21 @@ func tryRefute(clauses []Clause) bool {
 				}
 			}
 		}
-		if !added { break }
+		if !added {
+			break
+		}
 	}
 	return false
 }
 
 func clauseEq(a, b Clause) bool {
-	if len(a) != len(b) { return false }
+	if len(a) != len(b) {
+		return false
+	}
 	for i := range a {
-		if a[i] != b[i] { return false }
+		if a[i] != b[i] {
+			return false
+		}
 	}
 	return true
 }
@@ -184,7 +192,7 @@ func main() {
 			failed++
 		}
 
-		if (i+1) % 100_000 == 0 {
+		if (i+1)%100_000 == 0 {
 			elapsed := time.Since(start)
 			fmt.Printf("  [%d/%d] — elapsed: %v — refuted: %d — failed: %d\n",
 				i+1, N, elapsed.Round(time.Millisecond), refuted, failed)
@@ -195,7 +203,9 @@ func main() {
 	sort.Slice(latencies, func(i, j int) bool { return latencies[i] < latencies[j] })
 
 	totalNs := int64(0)
-	for _, l := range latencies { totalNs += l }
+	for _, l := range latencies {
+		totalNs += l
+	}
 	avgNs := totalNs / int64(len(latencies))
 
 	fmt.Printf("\n╔══════════════════════════════════════════════════════╗\n")

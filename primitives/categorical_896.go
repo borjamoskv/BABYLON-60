@@ -8,10 +8,10 @@ import (
 
 // CategoricalPrimitiveGo represents a C5-REAL categorical logic primitive in Go.
 type CategoricalPrimitiveGo struct {
-	ID        int
-	Code      string
-	DomainID  string
-	Type      string
+	ID         int
+	Code       string
+	DomainID   string
+	Type       string
 	Blake3Hash string
 }
 
@@ -39,10 +39,10 @@ func (p *Categorical896Processor) populateDefaults() {
 		domIdx := (i - 1) / 112
 		domID := domains[domIdx]
 		p.primitives[i] = CategoricalPrimitiveGo{
-			ID:        i,
-			Code:      "P" + domID,
-			DomainID:  domID,
-			Type:      "CATEGORICAL_GO",
+			ID:         i,
+			Code:       "P" + domID,
+			DomainID:   domID,
+			Type:       "CATEGORICAL_GO",
 			Blake3Hash: "c5real_hash",
 		}
 	}

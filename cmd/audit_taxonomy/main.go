@@ -90,10 +90,18 @@ func main() {
 	}
 
 	for i := 0; i < 10; i++ {
-		if _, ok := domains[i]; !ok { errors = append(errors, fmt.Sprintf("Audit Error: Missing domain index %d", i)) }
-		if _, ok := primitives[i]; !ok { errors = append(errors, fmt.Sprintf("Audit Error: Missing primitive index %d", i)) }
-		if _, ok := modifiers[i]; !ok { errors = append(errors, fmt.Sprintf("Audit Error: Missing modifier index %d", i)) }
-		if _, ok := targets[i]; !ok { errors = append(errors, fmt.Sprintf("Audit Error: Missing target index %d", i)) }
+		if _, ok := domains[i]; !ok {
+			errors = append(errors, fmt.Sprintf("Audit Error: Missing domain index %d", i))
+		}
+		if _, ok := primitives[i]; !ok {
+			errors = append(errors, fmt.Sprintf("Audit Error: Missing primitive index %d", i))
+		}
+		if _, ok := modifiers[i]; !ok {
+			errors = append(errors, fmt.Sprintf("Audit Error: Missing modifier index %d", i))
+		}
+		if _, ok := targets[i]; !ok {
+			errors = append(errors, fmt.Sprintf("Audit Error: Missing target index %d", i))
+		}
 	}
 
 	auditStatus := "SUCCESS"
@@ -267,13 +275,21 @@ func Dispatch(d, p, m, t byte) error {
 	report.WriteString(fmt.Sprintf("## Estado de Auditoría: %s\n\n", auditStatus))
 	report.WriteString("### Parámetros Generativos:\n")
 	report.WriteString(fmt.Sprintf("- **Dominios:** %d/10\n", len(domains)))
-	for i := 0; i < 10; i++ { report.WriteString(fmt.Sprintf("  - %d: %s\n", i, domains[i])) }
+	for i := 0; i < 10; i++ {
+		report.WriteString(fmt.Sprintf("  - %d: %s\n", i, domains[i]))
+	}
 	report.WriteString(fmt.Sprintf("- **Primitivas:** %d/10\n", len(primitives)))
-	for i := 0; i < 10; i++ { report.WriteString(fmt.Sprintf("  - %d: %s\n", i, primitives[i])) }
+	for i := 0; i < 10; i++ {
+		report.WriteString(fmt.Sprintf("  - %d: %s\n", i, primitives[i]))
+	}
 	report.WriteString(fmt.Sprintf("- **Modificadores:** %d/10\n", len(modifiers)))
-	for i := 0; i < 10; i++ { report.WriteString(fmt.Sprintf("  - %d: %s\n", i, modifiers[i])) }
+	for i := 0; i < 10; i++ {
+		report.WriteString(fmt.Sprintf("  - %d: %s\n", i, modifiers[i]))
+	}
 	report.WriteString(fmt.Sprintf("- **Targets:** %d/10\n", len(targets)))
-	for i := 0; i < 10; i++ { report.WriteString(fmt.Sprintf("  - %d: %s\n", i, targets[i])) }
+	for i := 0; i < 10; i++ {
+		report.WriteString(fmt.Sprintf("  - %d: %s\n", i, targets[i]))
+	}
 
 	report.WriteString("\n### Errores Encontrados:\n")
 	if len(errors) == 0 {
