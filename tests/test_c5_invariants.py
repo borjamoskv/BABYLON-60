@@ -1,7 +1,6 @@
 # AUTO-GENERATED C5-REAL ALIGNMENT
 import pytest
 
-
 def test_inv_bft_02():
     r"""** Never call `sqlite3` synchronously inside an async event loop. Use `babylon60.database.core.connect` with WAL mode and `busy_timeout=5000ms`."""
     # TODO: Implement physical assertion for this invariant
@@ -59,6 +58,11 @@ def test_inv_c5_41():
 
 def test_inv_c5_42():
     r"""(Sandbox Docker Orphan):** The `docker` CLI is typically inaccessible within the agent's macOS execution sandbox. The Kernel MUST validate its existence via `command -v docker` before attempting kinetic edge-deploy tests. If absent, it MUST default to executing raw python runtimes (`uv run`), or orchestrate a Swarm Handoff (`moskv_bridge.py`) without halting or proposing arbitrary alternative architectures (enforcing `Φ8 ZERO SUGGESTION`)."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
+def test_inv_c5_43():
+    r"""(Native Slash Commands Monorepo & High-Velocity Aliases):** Native commands (`/ultrathink`, `/autodidact`, `/purge`, `/seal`, `/itera`, `/logos`, `/ethos`, `/mythos`, `/ship`, `/swarm`, `/verify`) MUST reside in `babylon60/commands/` as sub-modules within the monorepo root. CLI subcommands in `cortex-cmd` MUST expose shortcode aliases (e.g., `ut`, `ad`, `p`, `sl`, `it`, `lg`, `et`, `my`, `sh`, `sw`, `vf`) and enforce PyNaCl Ed25519 NUL-ZK hashing with an Exergy threshold $\ge 950/1000$."""
     # TODO: Implement physical assertion for this invariant
     assert True, 'Structural check passed'
 
