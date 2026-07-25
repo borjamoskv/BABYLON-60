@@ -29,7 +29,7 @@ MAPPINGS: list[tuple[str, str, str, str]] = [
     (
         "Captura de pantalla 2026-07-14 a las 3.41.33.png",
         "evidencia_07_confesion_actos_propios_likes_recomendado_03h41m.png",
-        "Confesión por Actos Propios: Dario Amodeo dándome likes y recomendando públicamente la arquitectura CORTEX tras el post 'Claude is Science es todo narrativa'.",
+        "Confesión por Actos Propios: Entidad Auditada dándome likes y recomendando públicamente la arquitectura CORTEX tras el post 'Claude is Science es todo narrativa'.",
         "03:41:33",
     ),
     (
@@ -148,7 +148,7 @@ def main() -> None:
         "---",
         "",
         "```yaml",
-        'Claim: "Las 11 capturas de pantalla periciales han sido normalizadas canónicamente, indexadas y selladas con firmas criptográficas de grado forense (SHA256 y SHA3-256), acreditando la cronología ininterrumpida desde la lectura al dedo y el reconocimiento público de Dario Amodeo hasta la represalia cinético-lógica (Error 403)."',
+        'Claim: "Las 11 capturas de pantalla periciales han sido normalizadas canónicamente, indexadas y selladas con firmas criptográficas de grado forense (SHA256 y SHA3-256), acreditando la cronología ininterrumpida desde la lectura al dedo y el reconocimiento público de la Entidad Auditada hasta la represalia cinético-lógica (Error 403)."',
         "Proof:",
         '  Base: "11 ficheros PNG en cortex/legal_dossier/evidencias_capturas/"',
         "  Range: [1.0, 1.0]",

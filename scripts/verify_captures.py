@@ -20,7 +20,7 @@ def check_wayback(url: str) -> None:
         raise RuntimeError('FAIL-FAST: General Exception intercepted.') from None
 
 def main() -> None:
-    urls: list[str] = ['substack.com/@borjamoskv', 'linkedin.com/in/dario-amodei', 'linkedin.com/in/darioamodei', 'github.com/borjamoskv/Teorema-Robinson-Moskv']
+    urls: list[str] = ['substack.com/@borjamoskv', 'github.com/borjamoskv/Teorema-Robinson-Moskv']
     for u in urls:
         check_wayback(u)
 if __name__ == '__main__':

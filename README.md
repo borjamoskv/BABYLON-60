@@ -15,7 +15,7 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 See [docs/INDEX.md](docs/INDEX.md).
 
 <div align="center">
-  <img src="https://img.shields.io/badge/cortex--persist-BABYLON--60-0A0A0A?style=for-the-badge&labelColor=2B3BE5&color=0A0A0A" alt="cortex-persist" />
+  <img src="https://img.shields.io/badge/babylon60-BABYLON--60-0A0A0A?style=for-the-badge&labelColor=2B3BE5&color=0A0A0A" alt="babylon60" />
 </div>
 
 <h1 align="center">MOSKV-1 APEX SINGULARITY</h1>
@@ -26,7 +26,7 @@ See [docs/INDEX.md](docs/INDEX.md).
 </p>
 
 <p align="center">
-  <a href="https://pypi.org/project/cortex-persist/"><img src="https://img.shields.io/pypi/v/cortex-persist.svg?style=flat-square&color=2B3BE5" alt="PyPI version" /></a>
+  <a href="https://pypi.org/project/babylon60/"><img src="https://img.shields.io/pypi/v/babylon60.svg?style=flat-square&color=2B3BE5" alt="PyPI version" /></a>
   <img src="https://img.shields.io/badge/SQLite-WAL-4CAF50?style=flat-square&logo=sqlite" alt="SQLite WAL" />
   <img src="https://img.shields.io/badge/Rust-optional-CE422B?style=flat-square&logo=rust" alt="Rust optional" />
   <img src="https://img.shields.io/badge/license-Proprietary-FF6B35?style=flat-square" alt="License" />
@@ -52,9 +52,9 @@ curl -sSL https://raw.githubusercontent.com/borjamoskv/BABYLON-60/main/install.s
 
 ## █ OVERVIEW: ZERO ANERGY
 
-**BABYLON-60 (cortex-persist)** is a sovereign, local-first memory substrate. It implements the C5-REAL framework, discarding simulated conversational slop in favor of deterministic, physical state mutations.
+**BABYLON-60 (babylon60)** is a sovereign, local-first memory substrate. It implements the C5-REAL framework, discarding simulated conversational slop in favor of deterministic, physical state mutations.
 
-Autonomous systems degrade when they rely on stochastic token generation without physical verification. `cortex-persist` enforces a **Kinetic Transduction Loop**:
+Autonomous systems degrade when they rely on stochastic token generation without physical verification. `babylon60` enforces a **Kinetic Transduction Loop**:
 
 ```
 C5-REAL Intention → Validation → Single-Writer WAL → Hash-Chain Ledger → Git Sentinel (Ledger Audit)
@@ -81,12 +81,12 @@ Si requieres control absoluto sobre el grafo de dependencias:
 
 ```bash
 # Core deployment
-pip install cortex-persist
+pip install babylon60
 
 # Extended matrices
-pip install "cortex-persist[dev]"         # Testing & IDE support
-pip install "cortex-persist[voice-full]"  # Voice transcription (Apple Silicon)
-pip install "cortex-persist[apex]"        # Scikit-learn / Exergy Trials
+pip install "babylon60[dev]"         # Testing & IDE support
+pip install "babylon60[voice-full]"  # Voice transcription (Apple Silicon)
+pip install "babylon60[apex]"        # Scikit-learn / Exergy Trials
 ```
 
 O desde el Ledger Fuente usando el empaquetador ultrarrápido `uv`:
