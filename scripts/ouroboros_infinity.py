@@ -1,3 +1,4 @@
+import logging
 import argparse
 import hashlib
 import json
@@ -6,9 +7,7 @@ import subprocess
 import time
 from pathlib import Path
 from typing import Any
-
 import babylon60.database.core
-
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 DB_PATH: Path = PROJECT_ROOT / 'scripts' / 'cib_master_ledger.db'
 CORTEX_DB_PATH: Path = PROJECT_ROOT / 'cortex' / 'engine' / 'nexus_anchors.db'
@@ -34,7 +33,7 @@ def log_event(protocol: str, target: str, exergy_delta: int) -> str:
     return causal_hash
 
 def execute_pulse() -> dict[str, Any]:
-    print('[OUROBOROS-∞] Executing Pulse (Entropy & Citadel Audit)...')
+    logging.info('[OUROBOROS-∞] Executing Pulse (Entropy & Citadel Audit)...')
     alarms: list[str] = []
     large_files = 0
     for ext in ['*.py', '*.rs', '*.ts', '*.md']:
@@ -63,7 +62,7 @@ def execute_pulse() -> dict[str, Any]:
     return result
 
 def execute_crystallize(target_md_path: str | None=None) -> dict[str, Any]:
-    print('[OUROBOROS-∞] Executing CRYSTALLIZE Protocol (Linear Entropy Devourer)...')
+    logging.info('[OUROBOROS-∞] Executing CRYSTALLIZE Protocol (Linear Entropy Devourer)...')
     targets: list[Path] = []
     if target_md_path:
         p = Path(target_md_path)
@@ -87,7 +86,7 @@ def execute_crystallize(target_md_path: str | None=None) -> dict[str, Any]:
         if injections > 0:
             total_injections += injections
             consolidated_files.append({'file': str(md), 'linear_injections_found': injections})
-            print(f'  -> Found {injections} linear injections in {md.name}. Ready for semantic merge.')
+            logging.info(f'  -> Found {injections} linear injections in {md.name}. Ready for semantic merge.')
     exergy_gained = float(total_injections * 50.0)
     hash_id = log_event('CRYSTALLIZE', str(targets[0] if targets else 'global'), exergy_gained)
     return {'status': 'CRISTALIZADO', 'files_scanned': len(targets), 'total_linear_injections_detected': total_injections, 'exergy_gained': exergy_gained, 'ledger_hash': hash_id, 'details': consolidated_files}
@@ -101,10 +100,10 @@ def main() -> None:
     args = parser.parse_args()
     if args.command == 'pulse' or not args.command:
         res = execute_pulse()
-        print(f'\nResult: {json.dumps(res, indent=2, ensure_ascii=False)}')
+        logging.info(f'\nResult: {json.dumps(res, indent=2, ensure_ascii=False)}')
     elif args.command == 'crystallize':
         res = execute_crystallize(args.target)
-        print(f'\nResult: {json.dumps(res, indent=2, ensure_ascii=False)}')
+        logging.info(f'\nResult: {json.dumps(res, indent=2, ensure_ascii=False)}')
     else:
         parser.print_help()
 if __name__ == '__main__':
