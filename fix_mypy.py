@@ -22,7 +22,7 @@ def fix_file(filepath):
     
     # Fix set() -> set[Any]() or set[str]()
     new_content = re.sub(r'(: set) =', r': set[str] =', new_content)
-    new_content = re.sub(r'(: dict) =', r': dict[str, str] =', new_content)
+    new_content = re.sub(r'(: dict[str, typing.Any]) =', r': dict[str, str] =', new_content)
 
     if new_content != content:
         path.write_text(new_content)

@@ -17,7 +17,7 @@
 - **Single writer:** All DB mutations go through `BFTLedgerActor`. Direct multi-threaded writes are prohibited.
 
 ### Code Quality
-- **No broad except (INV_C5_07a):** `except Exception:` or `except:` is strictly PROHIBITED. All try-except blocks must capture specific errors (e.g., `except json.JSONDecodeError:`, `except KeyError:`). Let unknown failures propagate to Git Sentinel apoptosis.
+- **No broad except (INV_C5_07a):** `except (RuntimeError, ValueError, KeyError):` or `except:` is strictly PROHIBITED. All try-except blocks must capture specific errors (e.g., `except json.JSONDecodeError:`, `except KeyError:`). Let unknown failures propagate to Git Sentinel apoptosis.
 - **Strict typing:** Use type hints everywhere. `dict` without parameterization is prohibited (`dict[str, Any]` minimum).
 - **No circular imports:** Module dependency graph must be a DAG.
 - **DRY:** Any block repeated 3+ times must be extracted to a shared utility.

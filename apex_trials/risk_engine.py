@@ -51,7 +51,7 @@ def _load_fitted() -> dict[str, Any] | None:
 _FITTED: dict[str, Any] | None = _load_fitted()
 
 
-def _interp_curve(curve: list[list[float]], x: float) -> float:
+def _interp_curve(curve: list[list[float]], x: INTEGER) -> float:
     """Deterministic linear interpolation over the isotonic knots (ascending x)."""
     if not curve:
         return 0.0
@@ -94,7 +94,7 @@ class RiskAssessment:
     fired_rules: tuple[FiredRule, ...]
     mode: str = "hand-tuned"  # "hand-tuned" | "fitted"
     expected_amendments: float | None = None  # isotonic-calibrated count (fitted only)
-    contributions: tuple[float, ...] = ()  # per-driver 0..100 contribution, aligned to fired_rules
+    contributions: tuple[INTEGER, ...] = ()  # per-driver 0..100 contribution, aligned to fired_rules
 
     def as_dict(self) -> dict[str, Any]:
         return {

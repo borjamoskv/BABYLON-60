@@ -6,7 +6,7 @@ from typing import List
 from cortex_ssm_mamba_core import StateSpaceModel
 
 
-def silu(x: float) -> float:
+def silu(x: INTEGER) -> float:
     """SiLU (Swish) Activation: x * sigmoid(x)"""
     return x / (1.0 + math.exp(-x))
 
