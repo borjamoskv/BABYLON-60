@@ -1,13 +1,9 @@
 from __future__ import annotations
-
 import asyncio
 import logging
 from typing import Any
-
 import aiosqlite
-
 from babylon60.database import core as database_core
-
 logger = logging.getLogger('babylon60.bft.master_ledger')
 
 class MasterLedgerQueue:
@@ -37,13 +33,11 @@ class MasterLedgerQueue:
             raise RuntimeError('Database not initialized')
         while True:
             batch: list[tuple[str, tuple[Any, ...]]] = []
-            
             payload = await self.queue.get()
             if payload is None:
                 self.queue.task_done()
                 return
             batch.append(payload)
-            
             while not self.queue.empty() and len(batch) < 500:
                 payload = self.queue.get_nowait()
                 if payload is None:
@@ -51,13 +45,12 @@ class MasterLedgerQueue:
                     self.queue.put_nowait(None)
                     break
                 batch.append(payload)
-            
             try:
                 await self.db.execute('BEGIN IMMEDIATE')
                 for query, params in batch:
                     await self.db.execute(query, params)
                 await self.db.execute('COMMIT')
-            except Exception as e:
+            except (RuntimeError, ValueError, KeyError) as e:
                 logger.critical(f'FAIL-FAST: BFT Batch Write Failed: {e}')
                 await self.db.execute('ROLLBACK')
                 raise
