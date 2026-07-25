@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import re
 
 with open('.agents/AGENTS.md', 'r') as f:
