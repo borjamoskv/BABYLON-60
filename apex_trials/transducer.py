@@ -57,9 +57,18 @@ class Transducer:
             "fired_rules": [r.as_dict() for r in assessment.fired_rules],
             "contributions": list(assessment.contributions),
         }
+        def _sanitize(d: Any) -> Any:
+            if isinstance(d, float):
+                return str(d)
+            if isinstance(d, dict):
+                return {k: _sanitize(v) for k, v in d.items()}
+            if isinstance(d, (list, tuple)):
+                return [_sanitize(x) for x in d]
+            return d
+
         top_drivers = "+".join(r.driver.split()[0].lower() for r in assessment.fired_rules if r.points > 0) or "none"
         causal_taint = f"apex-amendment-engine:{assessment.model_version}|{assessment.tier.lower()}({assessment.score})|{top_drivers}"
-        entry = self.ledger.append(payload=payload, causal_taint=causal_taint)
+        entry = self.ledger.append(payload=_sanitize(payload), causal_taint=causal_taint)
         module_risks = predict_module_risks(features)
         return CopilotResult(
             features=features, assessment=assessment, ledger_entry=entry, history=history, module_risks=module_risks
