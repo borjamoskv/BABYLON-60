@@ -1,6 +1,6 @@
+import logging
 import os
 import subprocess
-import logging
 
 logger = logging.getLogger("babylon60.commands.seal")
 

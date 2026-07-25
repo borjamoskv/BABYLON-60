@@ -1,7 +1,7 @@
+import logging
 import os
 import subprocess
 import time
-import logging
 from typing import Any
 
 logger = logging.getLogger("babylon60.commands.ultrathink")
