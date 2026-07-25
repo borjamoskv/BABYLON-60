@@ -4,6 +4,7 @@ use tauri::{State, command};
 use rusqlite::{Connection, Result as SqlResult, params};
 use chrono::{DateTime, Utc};
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CognitiveState {
     pub session_start: DateTime<Utc>,
     pub route_history: Vec<(String, DateTime<Utc>, u64)>,
@@ -25,12 +26,14 @@ pub struct CognitiveState {
     pub next_optimal_transformation: String,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub enum CognitiveWeather {
     Clear,
     Fog,
     Storm,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct ContinuityMetrics {
     pub focus_pct: f64,
     pub context_pct: f64,
@@ -38,6 +41,7 @@ pub struct ContinuityMetrics {
     pub reentry_time_ms: u64,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct AttentionBudget {
     pub total: u64,
     pub spent: u64,
@@ -97,11 +101,13 @@ pub fn init_db() -> SqlResult<Connection> {
     Ok(conn)
 }
 
+#[tauri::command]
 pub fn get_cognitive_state(state: State<'_, ContextState>) -> Result<CognitiveState, String> {
     let inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     Ok(inner.current_state.clone())
 }
 
+#[tauri::command]
 pub fn checkpoint(state: State<'_, ContextState>) -> Result<(), String> {
     let inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     let state_json = serde_json::to_string(&inner.current_state).map_err(|e| e.to_string())?;
@@ -112,6 +118,7 @@ pub fn checkpoint(state: State<'_, ContextState>) -> Result<(), String> {
     Ok(())
 }
 
+#[tauri::command]
 pub fn restore_checkpoint(state: State<'_, ContextState>, id: i64) -> Result<(), String> {
     let mut inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     let state_json: String = {
@@ -124,6 +131,7 @@ pub fn restore_checkpoint(state: State<'_, ContextState>, id: i64) -> Result<(),
     Ok(())
 }
 
+#[tauri::command]
 pub fn get_continuity_metrics(state: State<'_, ContextState>) -> Result<ContinuityMetrics, String> {
     let inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     let switches = inner.current_state.context_switches;
@@ -137,6 +145,7 @@ pub fn get_continuity_metrics(state: State<'_, ContextState>) -> Result<Continui
     })
 }
 
+#[tauri::command]
 pub fn get_cognitive_weather(state: State<'_, ContextState>) -> Result<CognitiveWeather, String> {
     let inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     let e = inner.current_state.e_entropy;
@@ -151,6 +160,7 @@ pub fn get_cognitive_weather(state: State<'_, ContextState>) -> Result<Cognitive
     }
 }
 
+#[tauri::command]
 pub fn record_context_switch(state: State<'_, ContextState>, reason: String) -> Result<(), String> {
     let mut inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     inner.current_state.context_switches += 1;
@@ -158,6 +168,7 @@ pub fn record_context_switch(state: State<'_, ContextState>, reason: String) -> 
     Ok(())
 }
 
+#[tauri::command]
 pub fn get_attention_budget(state: State<'_, ContextState>) -> Result<AttentionBudget, String> {
     let inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     let spent = (inner.current_state.context_switches as u64) * 10;

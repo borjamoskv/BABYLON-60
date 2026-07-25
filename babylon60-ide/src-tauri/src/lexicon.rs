@@ -3,6 +3,7 @@ use std::convert::TryFrom;
 use std::fmt;
 
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Domain {
     Source   = 0,
     Matrix   = 1,
@@ -30,6 +31,7 @@ impl TryFrom<u8> for Domain {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Primitive {
     Init   = 0, Mutate = 1, Bind   = 2, Query  = 3, Stream = 4,
     Commit = 5, Sync   = 6, Halt   = 7, Fork   = 8, Join   = 9,
@@ -49,6 +51,7 @@ impl TryFrom<u8> for Primitive {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Modifier {
     Raw       = 0, Atomic    = 1, Persist   = 2, Ephemeral = 3, Async     = 4,
     Sync      = 5, Quantized = 6, Mapped    = 7, Wrapped   = 8, Locked    = 9,
@@ -68,6 +71,7 @@ impl TryFrom<u8> for Modifier {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub enum Target {
     Local    = 0, Network  = 1, Swarm    = 2, Ledger   = 3, Memory   = 4,
     Dispatch = 5, Ui       = 6, System   = 7, Bft      = 8, Core     = 9,
@@ -88,6 +92,7 @@ impl TryFrom<u8> for Target {
 }
 
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct VectorPath {
     pub domain:    Domain,
     pub primitive: Primitive,
@@ -103,6 +108,7 @@ impl VectorPath {
     }
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
 pub struct VectorPath4D {
     pub domain:    Domain,
     pub primitive: Primitive,

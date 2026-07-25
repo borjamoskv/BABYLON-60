@@ -3,6 +3,7 @@ use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};
 use chrono::Utc;
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct CortexEvent {
     pub id: Option<i64>,
     pub timestamp: String,

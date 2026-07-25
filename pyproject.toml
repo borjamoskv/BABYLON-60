@@ -9,6 +9,7 @@ description = "CORTEX C5-REAL execution kernel (BABYLON-60): BFT ledgers, onco-t
 readme = "README.md"
 authors = [{ name = "Borja Moskv (borjamoskv)" }]
 requires-python = ">=3.10"
+license = { text = "Proprietary License (Sovereign Exclusion License v1.0)" }
 classifiers = [
     "License :: Other/Proprietary License",
     "Programming Language :: Python :: 3",

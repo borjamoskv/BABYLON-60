@@ -25,12 +25,14 @@ fn default_4d_handler(v: &VectorPath4D) {
 }
 
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct VectorEntry {
     pub path:        VectorPath,
     pub index:       usize,
     pub description: String,
 }
 
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct DispatchResult {
     pub vector: String,
     pub index:  usize,

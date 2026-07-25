@@ -23,6 +23,7 @@ impl Default for InferenceConfig {
     }
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct InferenceResult {
     pub text: String,
     pub model: String,

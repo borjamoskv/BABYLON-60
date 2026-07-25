@@ -17,30 +17,36 @@ struct AppState {
 }
 
 
+#[tauri::command]
 fn get_ledger_events(state: State<AppState>, limit: u32) -> Result<Vec<CortexEvent>, String> {
     let ledger = state.ledger.lock().unwrap();
     ledger.get_events(limit).map_err(|e| e.to_string())
 }
 
+#[tauri::command]
 fn append_ledger_event(state: State<AppState>, event_type: String, payload: Value) -> Result<CortexEvent, String> {
     let ledger = state.ledger.lock().unwrap();
     ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
 }
 
 
+#[tauri::command]
 fn local_infer_sync(prompt: String, model: Option<String>, base_url: Option<String>, temperature: Option<f32>) -> Result<InferenceResult, String> {
     run_local_inference(&prompt, model, base_url, temperature)
 }
 
+#[tauri::command]
 fn get_local_inference_status() -> Result<Value, String> {
     check_local_status()
 }
 
 
+#[tauri::command]
 fn list_ontology_vectors() -> Vec<VectorEntry> {
     kernel::list_vectors()
 }
 
+#[tauri::command]
 fn dispatch_vector(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
     kernel::dispatch_3d(domain, primitive, modifier)
 }
@@ -71,8 +77,6 @@ pub fn run() {
             get_local_inference_status,
             list_ontology_vectors,
             dispatch_vector,
-            kernel::dispatch,
-            kernel::list_vectors,
             context::get_cognitive_state,
             context::checkpoint,
             context::restore_checkpoint,
