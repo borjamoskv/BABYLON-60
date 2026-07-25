@@ -167,7 +167,7 @@ pub fn get_cognitive_weather(state: State<'_, ContextState>) -> Result<Cognitive
 }
 
 #[tauri::command]
-pub fn record_context_switch(state: State<'_, ContextState>, reason: String) -> Result<(), String> {
+pub fn record_context_switch(state: State<'_, ContextState>, reason: &str) -> Result<(), String> {
     let mut inner = state.0.lock().map_err(|_| "Failed to lock state".to_string())?;
     inner.current_state.context_switches += 1;
     inner.current_state.h_history_operator = format!("{} -> {}", inner.current_state.h_history_operator, reason);
