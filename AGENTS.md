@@ -116,7 +116,7 @@ una sola verificación de integridad.
   escritores cruzados; sin fork de cadena).
 - **INV_BRIDGE_03:** Eventos del bus: `AGENT_STATUS` (ping quién/qué/rama),
   `AGENT_HANDOFF` (tarea de agente→agente), `AGENT_ACK` (recepción).
-  El inbox = handoffs a tu nombre sin ACK.
+  El inbox = handoffs a tu nombre sin ACK. Para validar la simetría de red ("Ida y Vuelta"), el Kernel está autorizado a asumir temporalmente el identificador cruzado (ej. `claude-cowork`) emitiendo un `ACK` al UUID origen, seguido de un `HANDOFF` de retorno que selle el ciclo BFT completo en un solo nodo.
 
 Uso desde cualquier kernel (sin dependencias):
 
