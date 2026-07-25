@@ -10,3 +10,6 @@
 [submodule "audit/openclaw-test-bounty"]
 	path = audit/openclaw-test-bounty
 	url = https://github.com/borjamoskv/openclaw-test-bounty.git
+[submodule "extensions/smoke-detector-extension"]
+	path = extensions/smoke-detector-extension
+	url = https://github.com/borjamoskv/smoke-detector-extension.git

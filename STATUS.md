@@ -49,6 +49,7 @@
 - [x] IDE sidecar: añadir `babylon60_ide.db*` al `.gitignore` del repo real (es el ledger local del IDE, no debe subir).
 - [x] Swarm Intelligence: asimilación nativa del orquestador (MOSKV-SWARM) como submódulo anclado en `cortex/moskv-swarm` para coordinar el Agent Bus físico.
 - [x] OpenClaw Pipeline: integración estática del test bounty en `audit/openclaw-test-bounty` para aislamiento y tolerancia bizantina en la validación externa.
+- [x] Extensiones (MV3): anclaje topológico de `smoke-detector-extension` en `extensions/smoke-detector-extension` para preservar la pureza del C5-REAL en los satélites de navegador.
 - [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
 - [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — asimilación inicial: el kernel MOSKV-1 APEX ha sido clonado como submódulo nativo en `src-tauri` y `sqlite-vec` ha sido inyectado en `Cargo.toml`.
 
