@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import logging
 import struct
-
 from typing import Any
 
 __all__ = ["compression_ratio", "dequantize_int8", "quantize_int8"]

@@ -187,6 +187,15 @@ class BFTLedgerActor:
         self._queue.put_nowait((event, future))
         return future
 
+    async def verify_zk_attestation(self, attestation: dict[str, Any]) -> bool:
+        """
+        Verifies a NUL-ZK attestation payload for BFT consensus.
+        Enforces INV_C5_18 (no floats) and INV_C5_33 (safe subprocess execution).
+        """
+        from babylon60.crypto.zk_verifier import verify_zk_attestation
+
+        return verify_zk_attestation(attestation)
+
     async def verify_chain(self) -> bool:
         db = await babylon60.database.core.connect(self._db_path)
         try:

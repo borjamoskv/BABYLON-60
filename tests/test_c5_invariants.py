@@ -1,6 +1,7 @@
 # AUTO-GENERATED C5-REAL ALIGNMENT
 import pytest
 
+
 def test_inv_bft_02():
     r"""** Never call `sqlite3` synchronously inside an async event loop. Use `babylon60.database.core.connect` with WAL mode and `busy_timeout=5000ms`."""
     # TODO: Implement physical assertion for this invariant
@@ -93,8 +94,11 @@ def test_inv_c5_17():
 
 def test_inv_c5_18():
     r"""(BFT Deterministic Float Exclusion):** Floating-point numbers (`float`) are strictly prohibited in BFT consensus payloads, state mutation timestamps, and cryptographic serialization due to IEEE 754 non-determinism. Timestamps must use `int` or `INTEGER` columns, and `canonicalize_cbor` must recursively enforce float exclusion."""
-    # TODO: Implement physical assertion for this invariant
-    assert True, 'Structural check passed'
+    from babylon60.core.crypto import _check_no_floats
+    with pytest.raises(ValueError, match="Flotantes"):
+        _check_no_floats({"value": 1.23})
+    _check_no_floats({"value": 123, "data": [1, 2, 3]})
+
 
 def test_inv_c5_19():
     r"""(Orchestration Fail-Fast & Memory Convergence):** In alignment with INV_C5_07, all error boundaries must route to specific structural anomalies (e.g., `RuntimeError`, `asyncio.TimeoutError`) to trigger instantaneous Fail-Fast Purges (Ω26). Concurrently, physical memory persistence must collapse deterministically into the global `~/.gemini/config/.cortex/memory_vault/` without episodic fragmentation (Ω4), leveraging the synchronizer from INV_C5_15."""
@@ -168,8 +172,11 @@ def test_inv_c5_32():
 
 def test_inv_c5_33():
     r"""(Safe Subprocess Argument Vectorization):** Toda invocación a subprocesos de auditoría o herramientas del sistema DEBE pasar los argumentos como una lista de vectores explícita ([py_exe, ...]) sin shell=True, utilizando un resolutor dinámico para el binario de Python."""
-    # TODO: Implement physical assertion for this invariant
-    assert True, 'Structural check passed'
+    from babylon60.crypto.zk_verifier import NULZKVerifier
+    verifier = NULZKVerifier()
+    bin_path = verifier.find_nul_zk_binary()
+    assert bin_path.exists()
+
 
 def test_inv_c5_34():
     r"""(Rootless UV Docker Multi-stage Invariant):** When refactoring Dockerfiles for a Python environment using `uv`, the Kernel MUST unconditionally employ a deterministic Multi-Stage design. Stage 1 (Builder) must execute `uv sync --frozen` to install the environment in `/app/.venv`. Stage 2 (Runtime) must instantiate an isolated user (`useradd -m -u 1000 app`), adopt that identity (`USER app`), copy the compiled environment transferring ownership (`COPY --chown=app:app /app/.venv /app/.venv`), and strictly set `ENV PATH="/app/.venv/bin:$PATH"` to neutralize latent dependencies on `/root/.local/bin`."""

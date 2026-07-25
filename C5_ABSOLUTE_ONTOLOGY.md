@@ -2107,6 +2107,20 @@
 - **`replay.py`**: Python Runtime Logic (Data processing & State Management).
 - **`semantics.py`**: Python Runtime Logic (Data processing & State Management).
 
+## 📁 proof_kernel/NUL-ZK (Motor ZK bajo protección de Git Sentinel)
+- **`AGENTS.md`**: System Invariants and Philosophical C5-REAL Directives.
+- **`Cargo.lock`**: Untyped Entropy (Pending Audit).
+- **`Cargo.toml`**: Zero-Knowledge Engine Configuration Matrix (High Exergy ZK Submodule).
+- **`README.md`**: Sovereign ZK Protocol Specification (C5-REAL APEX).
+- **`example.json`**: Zero-Knowledge Proof Input Spec.
+- **`example.nul`**: NUL Language AST Script.
+- **`example_arkworks.rs`**: Rust Arkworks ZK Proof Verification Primitive.
+- **`src/ast.rs`**: Zero-Knowledge AST Transducer (High Exergy Apple Silicon Layer).
+- **`src/compiler.rs`**: NUL-ZK AST Compiler & Constraint Generator.
+- **`src/main.rs`**: NUL-ZK Sovereign Engine Ignition Entrypoint.
+- **`src/nul.pest`**: Pest Grammar Specification for NUL DSL.
+- **`src/parser.rs`**: NUL DSL Syntactic Transducer & Parser.
+
 ## 📁 strike_rs
 - **`Cargo.lock`**: Untyped Entropy (Pending Audit).
 - **`Cargo.toml`**: Untyped Entropy (Pending Audit).
@@ -2129,4 +2143,4 @@
 - **`centuria_896_bft.rs`**: Tauri / Native execution block (High Exergy Apple Silicon Layer).
 - **`re_drm_896_bft.rs`**: Tauri / Native execution block (High Exergy Apple Silicon Layer).
 
-**Total Entidades Auditadas:** 1744
+**Total Entidades Auditadas:** 1756
