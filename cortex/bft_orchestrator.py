@@ -16,9 +16,63 @@ Rule references: R10 (persistence), Ω11 (immutability), Ω17 (type annotations)
 """
 
 import asyncio
-import sqlite3
 import hashlib
+import hmac
+import importlib.util
+import os
+import sqlite3
+import sys
 import time
+
+_PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, _PROJECT_ROOT)
+
+from cortex_env import get_bft_key
+
+# Import schema creation logic from scripts/00_init_ledger.py for deduplication
+try:
+    _spec = importlib.util.spec_from_file_location(
+        "init_ledger_mod", os.path.join(_PROJECT_ROOT, "scripts", "00_init_ledger.py")
+    )
+    if _spec and _spec.loader:
+        _mod = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(_mod)
+        init_bft_ledger_tables = _mod.init_bft_ledger_tables
+    else:
+        raise ImportError("Failed to load spec")
+except Exception:
+    def init_bft_ledger_tables(conn: sqlite3.Connection) -> None:
+        conn.execute("PRAGMA journal_mode=WAL;")
+        conn.execute("PRAGMA busy_timeout=5000;")
+        conn.executescript("""
+        CREATE TABLE IF NOT EXISTS bft_ledger (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            agent_id TEXT,
+            lamport_t INTEGER,
+            payload_hash TEXT,
+            step_index INTEGER,
+            domain INTEGER,
+            primitive INTEGER,
+            modifier INTEGER,
+            prev_hash TEXT NOT NULL UNIQUE,
+            current_hash TEXT,
+            cortex_taint TEXT NOT NULL
+        );
+
+        CREATE TRIGGER IF NOT EXISTS prevent_ledger_update
+        BEFORE UPDATE ON bft_ledger
+        BEGIN
+            SELECT RAISE(ABORT, 'EpistemicHalt: Modificación de ledger inmutable prohibida / Ledger updates are forbidden (Ω11).');
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS prevent_ledger_delete
+        BEFORE DELETE ON bft_ledger
+        BEGIN
+            SELECT RAISE(ABORT, 'EpistemicHalt: Borrado de ledger inmutable prohibido / Ledger deletions are forbidden (Ω11).');
+        END;
+        """)
 
 try:
     import strike_rs  # type: ignore
@@ -42,42 +96,11 @@ DB_PATH = ".cortex/cortex.db"
 
 def init_bft_database() -> None:
     """Initializes SQLite Master Ledger with WAL, busy_timeout, and write protection triggers (R10, Ω11)."""
+    db_dir = os.path.dirname(DB_PATH)
+    if db_dir and not os.path.exists(db_dir):
+        os.makedirs(db_dir, exist_ok=True)
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
-    # Enable WAL mode and set busy_timeout
-    conn.execute("PRAGMA journal_mode=WAL;")
-    conn.execute("PRAGMA busy_timeout=5000;")
-
-    # Create ledger table enforcing UNIQUE(prev_hash)
-    conn.execute("""
-    CREATE TABLE IF NOT EXISTS bft_ledger (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        step_index INTEGER NOT NULL,
-        domain INTEGER NOT NULL,
-        primitive INTEGER NOT NULL,
-        modifier INTEGER NOT NULL,
-        prev_hash TEXT NOT NULL UNIQUE,
-        current_hash TEXT NOT NULL,
-        cortex_taint TEXT NOT NULL
-    );
-    """)
-
-    # Create triggers to block UPDATE and DELETE operations via RAISE(ABORT) (Ω11)
-    conn.execute("""
-    CREATE TRIGGER IF NOT EXISTS prevent_ledger_update
-    BEFORE UPDATE ON bft_ledger
-    BEGIN
-        SELECT RAISE(ABORT, 'Ledger updates are forbidden. Immutability violation.');
-    END;
-    """)
-
-    conn.execute("""
-    CREATE TRIGGER IF NOT EXISTS prevent_ledger_delete
-    BEFORE DELETE ON bft_ledger
-    BEGIN
-        SELECT RAISE(ABORT, 'Ledger deletions are forbidden. Immutability violation.');
-    END;
-    """)
-
+    init_bft_ledger_tables(conn)
     conn.commit()
     conn.close()
 
@@ -86,26 +109,15 @@ class BFTNode:
 
     def __init__(self, node_id: int) -> None:
         self.node_id = node_id
-        self.state_vector = strike_rs.StateVector()
-        self.cognitive_chain_vector = strike_rs.CognitiveChainVector()
-        self.tts_harness_state = strike_rs.TTSHarnessState()
-        self.arm64_re_matrix = strike_rs.Arm64ReMatrix()
+        if strike_rs is not None:
+            self.state_vector = strike_rs.StateVector()
+            self.cognitive_chain_vector = strike_rs.CognitiveChainVector()
+            self.tts_harness_state = strike_rs.TTSHarnessState()
+            self.arm64_re_matrix = strike_rs.Arm64ReMatrix()
         self.is_healthy = True
 
     def compute_state_hash(self) -> str:
         """Computes the state hash of the node using HMAC-SHA3-256 for cryptographic integrity (Ω24, Ω25)."""
-        import hmac
-        import sys
-
-        # Resolve cortex_env dynamically or via sys.path to enforce Ω25
-        try:
-            from cortex_env import get_bft_key
-        except ImportError:
-            import os
-
-            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-            from cortex_env import get_bft_key
-
         bft_key = get_bft_key()
 
         # Read attributes from the Rust PyO3 classes
@@ -234,10 +246,11 @@ class BFTOrchestrator:
             if not node.is_healthy:
                 continue
             try:
-                strike_rs.dispatch_state_observer(d, p, m, node.state_vector)
-                strike_rs.dispatch_neuro_chain(d, p, m, node.cognitive_chain_vector)
-                strike_rs.dispatch_tts_harness(d, p, m, node.tts_harness_state)
-                strike_rs.dispatch_arm64_re(d, p, m, node.arm64_re_matrix)
+                if strike_rs is not None:
+                    strike_rs.dispatch_state_observer(d, p, m, node.state_vector)
+                    strike_rs.dispatch_neuro_chain(d, p, m, node.cognitive_chain_vector)
+                    strike_rs.dispatch_tts_harness(d, p, m, node.tts_harness_state)
+                    strike_rs.dispatch_arm64_re(d, p, m, node.arm64_re_matrix)
                 hashes[node.node_id] = node.compute_state_hash()
             except (OSError, RuntimeError, ValueError) as e:
                 node.is_healthy = False
@@ -272,19 +285,6 @@ class BFTOrchestrator:
 
     def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11, Ω113)."""
-        import hmac
-        import sys
-        import os
-
-        # Resolve cortex_env dynamically or via sys.path to enforce Ω25
-        try:
-            from cortex_env import get_bft_key
-        except ImportError:
-            import os
-
-            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-            from cortex_env import get_bft_key
-
         bft_key = get_bft_key()
 
         # Ω113 + Ω25: Dynamic Causal Taint seeded by Sovereign Key

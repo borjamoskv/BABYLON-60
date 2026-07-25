@@ -1,13 +1,16 @@
 # C5-REAL EXERGY CERTIFIED
-import os
-import sys
+import ast
 import hashlib
+import os
 import sqlite3
+import sys
 import time
-import math
 
-def calculate_entropy(probabilities: list[float]) -> float:
-    return -sum(p * math.log(p) for p in probabilities if p > 0)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from cortex.entropy_mapping_engine import ThermodynamicEntropyEngine
 
 def ultrathink_audit(filepath: str) -> None:
     if not os.path.exists(filepath):
@@ -24,14 +27,28 @@ def ultrathink_audit(filepath: str) -> None:
         1 for w in words if w.startswith("Ω") or w.isupper() or w in {"C5-REAL", "AST", "Ledger", "Exergía"}
     )
 
-    # Entropy calculation mapping
-    # Assume background noise (synthetic) is uniform over 10 categories
-    p_synthetic = [0.1] * 10
-    s_synthetic = calculate_entropy(p_synthetic)
+    # Dynamic AST and categorical entropy mapping via ThermodynamicEntropyEngine
+    engine = ThermodynamicEntropyEngine()
+    domain_counts: dict[str, int] = {}
+    try:
+        tree = ast.parse(content)
+        for node in ast.walk(tree):
+            cat = node.__class__.__name__
+            domain_counts[cat] = domain_counts.get(cat, 0) + 1
+    except SyntaxError:
+        for w in words:
+            cat = "Structural" if (w.startswith("Ω") or w.isupper()) else "Standard"
+            domain_counts[cat] = domain_counts.get(cat, 0) + 1
 
-    # C5-REAL mapping for this proposal
-    p_c5 = [0.70, 0.15, 0.10, 0.04, 0.01, 0, 0, 0, 0, 0]
-    s_c5 = calculate_entropy(p_c5)
+    if not domain_counts:
+        domain_counts = {"Default": 1}
+
+    thermo_state = engine.map_domain_entropy(domain_counts)
+    s_c5 = thermo_state.shannon_entropy
+
+    n_categories = max(1, len(domain_counts))
+    p_synthetic = [1.0 / n_categories] * n_categories
+    s_synthetic = engine.compute_shannon_entropy(p_synthetic)
 
     exergy_delta = s_synthetic - s_c5
     exergy_ratio = (structural_tokens / max(total_words, 1)) * 100
@@ -79,4 +96,7 @@ def ultrathink_audit(filepath: str) -> None:
     print("\n[ULTRATHINK P0] Auditoría Completada. Estado: CERO ANERGÍA. Propuesta sellada físicamente.")
 
 if __name__ == "__main__":
-    ultrathink_audit(sys.argv[1])
+    if len(sys.argv) > 1:
+        ultrathink_audit(sys.argv[1])
+    else:
+        print("Usage: python3 scripts/ultrathink_learning.py <filepath>")

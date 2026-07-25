@@ -198,15 +198,104 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
     intention, step = args
     vnode = EphemeralVNodePhysical(f"vnode-{step}")
 
-    branch_payload = (
-        f"def synthesized_theorem_{step}(x: int = {step}) -> int:\n"
-        f"    '''Physical C5-REAL theorem synthesized under intention: {intention}'''\n"
-        f"    assert isinstance(x, int), 'Input must be integer'\n"
-        f"    # Topological invariant assert\n"
-        f"    matrix = [i**2 + {step} for i in range(max(1, min({step} + 2, 10)))]\n"
-        f"    entropy_proxy = sum(matrix) / max(1, len(matrix))\n"
-        f"    return int(entropy_proxy + (x ** 2))\n"
+    func_name = f"synthesized_theorem_{step}"
+    docstring_node = ast.Expr(
+        value=ast.Constant(value=f"Physical C5-REAL theorem synthesized under intention: {intention}")
     )
+    assert_node = ast.Assert(
+        test=ast.Call(
+            func=ast.Name(id="isinstance", ctx=ast.Load()),
+            args=[ast.Name(id="x", ctx=ast.Load()), ast.Name(id="int", ctx=ast.Load())],
+            keywords=[],
+        ),
+        msg=ast.Constant(value="Input must be integer"),
+    )
+    min_call = ast.Call(
+        func=ast.Name(id="min", ctx=ast.Load()),
+        args=[
+            ast.BinOp(left=ast.Constant(value=step), op=ast.Add(), right=ast.Constant(value=2)),
+            ast.Constant(value=10),
+        ],
+        keywords=[],
+    )
+    max_call = ast.Call(
+        func=ast.Name(id="max", ctx=ast.Load()),
+        args=[ast.Constant(value=1), min_call],
+        keywords=[],
+    )
+    range_call = ast.Call(
+        func=ast.Name(id="range", ctx=ast.Load()),
+        args=[max_call],
+        keywords=[],
+    )
+    comp_elt = ast.BinOp(
+        left=ast.BinOp(left=ast.Name(id="i", ctx=ast.Load()), op=ast.Pow(), right=ast.Constant(value=2)),
+        op=ast.Add(),
+        right=ast.Constant(value=step),
+    )
+    comprehension = ast.comprehension(
+        target=ast.Name(id="i", ctx=ast.Store()),
+        iter=range_call,
+        ifs=[],
+        is_async=0,
+    )
+    matrix_assign = ast.Assign(
+        targets=[ast.Name(id="matrix", ctx=ast.Store())],
+        value=ast.ListComp(elt=comp_elt, generators=[comprehension]),
+    )
+    sum_call = ast.Call(
+        func=ast.Name(id="sum", ctx=ast.Load()),
+        args=[ast.Name(id="matrix", ctx=ast.Load())],
+        keywords=[],
+    )
+    len_call = ast.Call(
+        func=ast.Name(id="len", ctx=ast.Load()),
+        args=[ast.Name(id="matrix", ctx=ast.Load())],
+        keywords=[],
+    )
+    max_len_call = ast.Call(
+        func=ast.Name(id="max", ctx=ast.Load()),
+        args=[ast.Constant(value=1), len_call],
+        keywords=[],
+    )
+    entropy_assign = ast.Assign(
+        targets=[ast.Name(id="entropy_proxy", ctx=ast.Store())],
+        value=ast.BinOp(left=sum_call, op=ast.Div(), right=max_len_call),
+    )
+    x_sq = ast.BinOp(
+        left=ast.Name(id="x", ctx=ast.Load()),
+        op=ast.Pow(),
+        right=ast.Constant(value=2),
+    )
+    sum_expr = ast.BinOp(
+        left=ast.Name(id="entropy_proxy", ctx=ast.Load()),
+        op=ast.Add(),
+        right=x_sq,
+    )
+    return_stmt = ast.Return(
+        value=ast.Call(
+            func=ast.Name(id="int", ctx=ast.Load()),
+            args=[sum_expr],
+            keywords=[],
+        )
+    )
+    func_def = ast.FunctionDef(
+        name=func_name,
+        args=ast.arguments(
+            posonlyargs=[],
+            args=[ast.arg(arg="x", annotation=ast.Name(id="int", ctx=ast.Load()))],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[ast.Constant(value=step)],
+        ),
+        body=[docstring_node, assert_node, matrix_assign, entropy_assign, return_stmt],
+        decorator_list=[],
+        returns=ast.Name(id="int", ctx=ast.Load()),
+    )
+    module_ast = ast.Module(body=[func_def], type_ignores=[])
+    ast.fix_missing_locations(module_ast)
+    branch_payload = ast.unparse(module_ast)
+
 
     is_valid, entropy, nodes = vnode.execute_physical_test(branch_payload)
     if is_valid and entropy > 3.5:  # Filtro físico estricto

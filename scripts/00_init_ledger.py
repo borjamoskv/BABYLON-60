@@ -3,59 +3,61 @@ import sqlite3
 import os
 import sys
 
-# Append root directory to path to import cortex_env
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
 from cortex_env import get_bft_key
 
 CORTEX_DIR = ".cortex"
 DB_PATH = os.path.join(CORTEX_DIR, "cortex.db")
+
+def init_bft_ledger_tables(conn: sqlite3.Connection) -> None:
+    """Single source of truth for SQLite BFT Master Ledger schema and triggers (Ω11, Ω12, R10)."""
+    conn.execute("PRAGMA journal_mode = WAL;")
+    conn.execute("PRAGMA synchronous = NORMAL;")
+    conn.execute("PRAGMA busy_timeout = 5000;")
+
+    conn.executescript("""
+    CREATE TABLE IF NOT EXISTS bft_ledger (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+        agent_id TEXT,
+        lamport_t INTEGER,
+        payload_hash TEXT,
+        step_index INTEGER,
+        domain INTEGER,
+        primitive INTEGER,
+        modifier INTEGER,
+        prev_hash TEXT NOT NULL UNIQUE,
+        current_hash TEXT,
+        cortex_taint TEXT NOT NULL
+    );
+
+    CREATE TRIGGER IF NOT EXISTS prevent_ledger_update
+    BEFORE UPDATE ON bft_ledger
+    BEGIN
+        SELECT RAISE(ABORT, 'EpistemicHalt: Modificación de ledger inmutable prohibida / Ledger updates are forbidden (Ω11).');
+    END;
+
+    CREATE TRIGGER IF NOT EXISTS prevent_ledger_delete
+    BEFORE DELETE ON bft_ledger
+    BEGIN
+        SELECT RAISE(ABORT, 'EpistemicHalt: Borrado de ledger inmutable prohibido / Ledger deletions are forbidden (Ω11).');
+    END;
+    """)
 
 def init_ledger() -> None:
     # Validate BFT key presence via cortex_env (Ω25)
     get_bft_key()
 
     if not os.path.exists(CORTEX_DIR):
-        os.makedirs(CORTEX_DIR)
+        os.makedirs(CORTEX_DIR, exist_ok=True)
 
-    # Conectar y establecer PRAGMAS físicos (Ω10)
     conn = sqlite3.connect(DB_PATH, timeout=5.0)
+    init_bft_ledger_tables(conn)
+
     cursor = conn.cursor()
-
-    # Tolerancia a concurrencia extrema (WAL + Busy Timeout 5000ms)
-    cursor.execute("PRAGMA journal_mode = WAL;")
-    cursor.execute("PRAGMA synchronous = NORMAL;")
-    cursor.execute("PRAGMA busy_timeout = 5000;")
-
-    # Estructura del Ledger Inmutable (Ω11, Ω12)
-    cursor.executescript("""
-    CREATE TABLE IF NOT EXISTS bft_ledger (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        agent_id TEXT NOT NULL,
-        lamport_t INTEGER NOT NULL,
-        payload_hash TEXT NOT NULL,
-        prev_hash TEXT NOT NULL,
-        cortex_taint TEXT NOT NULL,
-        UNIQUE(prev_hash),
-        UNIQUE(lamport_t, agent_id)
-    );
-
-    -- Trigger de Inmutabilidad: Evita Updates
-    CREATE TRIGGER IF NOT EXISTS prevent_ledger_update
-    BEFORE UPDATE ON bft_ledger
-    BEGIN
-        SELECT RAISE(ABORT, 'EpistemicHalt: Modificación de ledger inmutable prohibida (Ω11).');
-    END;
-
-    -- Trigger de Inmutabilidad: Evita Deletes
-    CREATE TRIGGER IF NOT EXISTS prevent_ledger_delete
-    BEFORE DELETE ON bft_ledger
-    BEGIN
-        SELECT RAISE(ABORT, 'EpistemicHalt: Borrado de ledger inmutable prohibido (Ω11).');
-    END;
-    """)
-
-    # Inyectar el bloque Génesis si está vacío
     cursor.execute("SELECT COUNT(*) FROM bft_ledger")
     if cursor.fetchone()[0] == 0:
         print("[IGNICIÓN] Inicializando Bloque Génesis del Master Ledger...")

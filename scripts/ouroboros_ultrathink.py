@@ -1,22 +1,48 @@
 # C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
-import math
+import ast
 import hashlib
 import json
 import os
+import sys
 import time
 
-def calculate_entropy(probabilities: list[float]) -> float:
-    return -sum(p * math.log(p) for p in probabilities if p > 0)
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+from cortex.entropy_mapping_engine import ThermodynamicEntropyEngine
+
+def compute_workspace_ast_domain_counts() -> dict[str, int]:
+    domain_counts: dict[str, int] = {}
+    cortex_dir = os.path.join(PROJECT_ROOT, "cortex")
+    if os.path.exists(cortex_dir):
+        for root, _dirs, files in os.walk(cortex_dir):
+            for file in files:
+                if file.endswith(".py"):
+                    full_path = os.path.join(root, file)
+                    try:
+                        with open(full_path, "r", encoding="utf-8") as f:
+                            tree = ast.parse(f.read())
+                        for node in ast.walk(tree):
+                            cat = node.__class__.__name__
+                            domain_counts[cat] = domain_counts.get(cat, 0) + 1
+                    except (SyntaxError, OSError):
+                        pass
+    if not domain_counts:
+        domain_counts = {"DefaultDomain": 100}
+    return domain_counts
 
 def run_transduction() -> None:
-    # Synthetic baseline probability distribution (50%+ synthetic collapse -> uniform noise approximation)
-    p_synthetic = [1 / 10] * 10
-    s_synthetic = calculate_entropy(p_synthetic)
+    engine = ThermodynamicEntropyEngine()
+    domain_counts = compute_workspace_ast_domain_counts()
 
-    # C5-REAL Empirical grounded state distribution (concentrated on invariant AST branches)
-    p_c5 = [0.65, 0.20, 0.10, 0.03, 0.01, 0.005, 0.003, 0.001, 0.0005, 0.0005]
-    s_c5 = calculate_entropy(p_c5)
+    thermo_state = engine.map_domain_entropy(domain_counts)
+    s_c5 = thermo_state.shannon_entropy
+
+    n_categories = max(1, len(domain_counts))
+    p_synthetic = [1.0 / n_categories] * n_categories
+    s_synthetic = engine.compute_shannon_entropy(p_synthetic)
 
     exergy_delta = s_synthetic - s_c5
 
@@ -38,7 +64,7 @@ def run_transduction() -> None:
             "S_Synthetic": round(s_synthetic, 6),
             "S_C5_Real": round(s_c5, 6),
             "Exergy_Delta_Nats": round(exergy_delta, 6),
-            "Formula": "S = -sum(p_i * ln(p_i))",
+            "Formula": "S = -sum(p_i * ln(p_i)) via ThermodynamicEntropyEngine",
         },
         "Mapped_Heuristics": heuristics,
         "Status": "SINGULARITY_TRANSDUCED_C5_REAL",
@@ -48,9 +74,7 @@ def run_transduction() -> None:
     taint_sha3 = hashlib.sha3_256(raw_json.encode("utf-8")).hexdigest()
     payload["CORTEX_TAINT"] = f"taint:borjamoskv:ouroboros:{int(time.time())}:{taint_sha3}"
 
-    output_path = (
-        "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ouroboros_ultrathink_transduction.yaml"
-    )
+    output_path = os.path.join(PROJECT_ROOT, "cortex", "ouroboros_ultrathink_transduction.yaml")
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     yaml_out = []
@@ -66,7 +90,7 @@ def run_transduction() -> None:
         else:
             yaml_out.append(f'{k}: "{v}"')
 
-    with open(output_path, "w") as f:
+    with open(output_path, "w", encoding="utf-8") as f:
         f.write("\n".join(yaml_out) + "\n")
 
     print(f"Crystallized: {output_path}")
