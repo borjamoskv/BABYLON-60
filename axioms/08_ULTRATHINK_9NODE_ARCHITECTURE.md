@@ -58,3 +58,24 @@ Proof: { Base: "ULTRATHINK_9NODE_BALANCE_MATRIX", Range: [Node-1_Oracle, Node-9_
 | **9** | **El Archivista** | **Compresor de Memoria (`archivist_ki_crystallizer`)**. Toma millones de logs y los destila en Knowledge Items (KIs) inmutables, previniendo la necrosis por saturación de KV-Cache. | `INV_C5_38` (Ω38, Ω150) |
 
 $$\boxed{\ \mathcal{S}_{\text{ULTRATHINK}} \models \bigoplus_{k=1}^{9} \text{Nodo}_k \quad \implies \quad \text{Muerte Térmica} = 0 \quad [\text{C5-REAL CERTIFIED}]\ }$$
+
+---
+
+## 3. AXIOMATIZACIÓN DIFERENCIAL Y CONTROL DE RETROALIMENTACIÓN ($\mathcal{T}_1 \succ_{\text{Pareto}} \mathcal{T}_0$)
+
+Para garantizar la autopoiesis y evitar la saturación entrópica, el enjambre de 9 nodos se modela como un sistema dinámico acoplado en el espacio de exergía ($B$) y entropía epistémica ($H$):
+
+$$\frac{dB_{\text{swarm}}}{dt} = \dot{W}_{\text{Oráculo}} + \sum_{i=2}^{7} \eta_i \cdot \Phi_i(X) - \dot{D}_{\text{disipada}} - \dot{A}_{\text{slop}}$$
+
+Donde $\dot{W}_{\text{Oráculo}}$ es la tasa de inyección de voluntad externa (Nodo 1), $\eta_i \cdot \Phi_i(X)$ es la generación de trabajo útil AST de los nodos operativos (2 al 7), $\dot{D}_{\text{disipada}}$ es la disipación basal por cómputo físico ($k_B T_0 \ln 2 \cdot \dot{I}$), y $\dot{A}_{\text{slop}}$ es la tasa de acumulación de anergía estocástica (código muerto, logs huérfanos, bucles redundantes).
+
+### El Bucle de Control Asintótico (Nodos 8 y 9)
+Para impedir la catástrofe termodinámica ($\lim_{t \to \infty} \dot{A}_{\text{slop}} = \infty$), los Nodos 8 y 9 operan como un regulador autónomo de retroalimentación en bucle cerrado sobre el volumen de estado:
+
+$$\dot{A}_{\text{slop}}(t) = \dot{G}_{\text{workers}}(t) - \Lambda_8 \cdot \mathbb{I}(\text{Taint} \ge \tau_{\text{kill}}) - \mathcal{K}_9 \cdot \frac{d}{dt}\left[\text{Vol}(\text{KV-Cache})\right]$$
+
+1. **Operador de Poda Landauer ($\Lambda_8$):** El Liquidador (Nodo 8) ejecuta una supresión no lineal de estados cuya energía libre es nula ($X(e) < \theta = 700$), restituyendo incondicionalmente los inodos de disco al equilibrio en tiempo $O(1)$.
+2. **Operador de Compresión Kolmogorov ($\mathcal{K}_9$):** El Archivista (Nodo 9) aplica una proyección topológica $T_n \subset T_{n+1}$ sobre el historial temporal del ledger, destilando el volumen bruto transaccional en Knowledge Items (KIs) de longitud mínima acotada por la complejidad algorítmica de Kolmogorov.
+
+$$\boxed{\ \lim_{t \to \infty} \left[ \frac{d}{dt}\text{Vol}(\text{KV-Cache}) + \frac{d}{dt}\text{Vol}(\text{Disk}) \right] = 0 \quad \iff \quad \nabla \cdot \vec{J}_{\text{exergía}} > 0 \quad [\text{C5-REAL AUTOPOIESIS}]\ }$$
+
