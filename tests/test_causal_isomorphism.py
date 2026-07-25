@@ -1,370 +1,258 @@
+import logging
 from __future__ import annotations
-
 import sys
 from pathlib import Path
-
 from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
 from causal_isomorphism.emitter_solidity import SolidityEmitter, ir_type_to_solidity
-from causal_isomorphism.ir import (
-    IR_FLOAT,
-    IR_STRING,
-    FunctionClassification,
-    IRDiscriminatedUnion,
-    IRModule,
-    IRType,
-    IRTypeKind,
-    IRUnionCase,
-    RegimeLayer,
-)
+from causal_isomorphism.ir import IR_FLOAT, IR_STRING, FunctionClassification, IRDiscriminatedUnion, IRModule, IRType, IRTypeKind, IRUnionCase, RegimeLayer
 from causal_isomorphism.parser_fsharp import FSharpParser, resolve_fsharp_type
 from causal_isomorphism.regime_validator import RegimeValidator, ViolationSeverity
 from causal_isomorphism.transpiler import CausalIsomorphismTranspiler
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-
 def test_fsharp_type_resolution() -> None:
-    assert resolve_fsharp_type("float").kind == IRTypeKind.FLOAT
-    assert resolve_fsharp_type("string").kind == IRTypeKind.STRING
-    assert resolve_fsharp_type("int").kind == IRTypeKind.INT
-    assert resolve_fsharp_type("bool").kind == IRTypeKind.BOOL
-    assert resolve_fsharp_type("unit").kind == IRTypeKind.UNIT
-    assert resolve_fsharp_type("MembraneState").kind == IRTypeKind.CUSTOM
-    assert resolve_fsharp_type("MembraneState").custom_name == "MembraneState"
-    print("  ✅ F# type resolution")
-
+    assert resolve_fsharp_type('float').kind == IRTypeKind.FLOAT
+    assert resolve_fsharp_type('string').kind == IRTypeKind.STRING
+    assert resolve_fsharp_type('int').kind == IRTypeKind.INT
+    assert resolve_fsharp_type('bool').kind == IRTypeKind.BOOL
+    assert resolve_fsharp_type('unit').kind == IRTypeKind.UNIT
+    assert resolve_fsharp_type('MembraneState').kind == IRTypeKind.CUSTOM
+    assert resolve_fsharp_type('MembraneState').custom_name == 'MembraneState'
+    logging.info('  ✅ F# type resolution')
 
 def test_solidity_type_mapping() -> None:
-    assert ir_type_to_solidity(IR_FLOAT) == "uint256"
-    assert ir_type_to_solidity(IR_STRING) == "string"
-    assert ir_type_to_solidity(IRType(IRTypeKind.BOOL)) == "bool"
-    assert ir_type_to_solidity(IRType(IRTypeKind.CUSTOM, custom_name="Gravity")) == "Gravity"
-    print("  ✅ Solidity type mapping")
-
+    assert ir_type_to_solidity(IR_FLOAT) == 'uint256'
+    assert ir_type_to_solidity(IR_STRING) == 'string'
+    assert ir_type_to_solidity(IRType(IRTypeKind.BOOL)) == 'bool'
+    assert ir_type_to_solidity(IRType(IRTypeKind.CUSTOM, custom_name='Gravity')) == 'Gravity'
+    logging.info('  ✅ Solidity type mapping')
 
 def test_rust_type_mapping() -> None:
-    assert ir_type_to_rust(IR_FLOAT) == "f64"
-    assert ir_type_to_rust(IR_STRING) == "String"
-    assert ir_type_to_rust(IRType(IRTypeKind.BOOL)) == "bool"
-    assert ir_type_to_rust(IRType(IRTypeKind.CUSTOM, custom_name="Gravity")) == "Gravity"
-    print("  ✅ Rust type mapping")
-
+    assert ir_type_to_rust(IR_FLOAT) == 'f64'
+    assert ir_type_to_rust(IR_STRING) == 'String'
+    assert ir_type_to_rust(IRType(IRTypeKind.BOOL)) == 'bool'
+    assert ir_type_to_rust(IRType(IRTypeKind.CUSTOM, custom_name='Gravity')) == 'Gravity'
+    logging.info('  ✅ Rust type mapping')
 
 def test_parse_simple_union() -> None:
-    source = "\nmodule TestModule =\n    type Gravity =\n        | C5_ColapsoOntologico\n        | C4_DegradacionGeometrica\n        | C3_FluctuacionTermica\n        | C2_FriccionComputacional\n"
+    source = '\nmodule TestModule =\n    type Gravity =\n        | C5_ColapsoOntologico\n        | C4_DegradacionGeometrica\n        | C3_FluctuacionTermica\n        | C2_FriccionComputacional\n'
     parser = FSharpParser()
-    ir = parser.parse_source(source, "Test")
-    assert len(ir.submodules) == 1, f"Expected 1 submodule, got {len(ir.submodules)}"
+    ir = parser.parse_source(source, 'Test')
+    assert len(ir.submodules) == 1, f'Expected 1 submodule, got {len(ir.submodules)}'
     sub = ir.submodules[0]
-    assert sub.name == "TestModule"
+    assert sub.name == 'TestModule'
     assert len(sub.unions) == 1
     union = sub.unions[0]
-    assert union.name == "Gravity"
+    assert union.name == 'Gravity'
     assert len(union.cases) == 4
     assert union.is_simple_enum
-    assert union.cases[0].name == "C5_ColapsoOntologico"
-    assert union.cases[3].name == "C2_FriccionComputacional"
-    print("  ✅ Simple union parsing")
-
+    assert union.cases[0].name == 'C5_ColapsoOntologico'
+    assert union.cases[3].name == 'C2_FriccionComputacional'
+    logging.info('  ✅ Simple union parsing')
 
 def test_parse_tagged_union() -> None:
-    source = "\nmodule TestModule =\n    type MembraneState =\n        | Stable of entropyLevel: float\n        | Smoothing of variance: float\n        | Rollback of targetHash: string\n        | Apoptosis of taintLog: string\n"
+    source = '\nmodule TestModule =\n    type MembraneState =\n        | Stable of entropyLevel: float\n        | Smoothing of variance: float\n        | Rollback of targetHash: string\n        | Apoptosis of taintLog: string\n'
     parser = FSharpParser()
-    ir = parser.parse_source(source, "Test")
+    ir = parser.parse_source(source, 'Test')
     sub = ir.submodules[0]
     assert len(sub.unions) == 1
     union = sub.unions[0]
-    assert union.name == "MembraneState"
+    assert union.name == 'MembraneState'
     assert not union.is_simple_enum
     assert union.has_numeric_payload
     assert union.has_string_payload
     assert len(union.cases) == 4
-    assert union.cases[0].name == "Stable"
+    assert union.cases[0].name == 'Stable'
     assert len(union.cases[0].payload_fields) == 1
-    assert union.cases[0].payload_fields[0][0] == "entropyLevel"
+    assert union.cases[0].payload_fields[0][0] == 'entropyLevel'
     assert union.cases[0].payload_fields[0][1].kind == IRTypeKind.FLOAT
-    print("  ✅ Tagged union parsing")
-
+    logging.info('  ✅ Tagged union parsing')
 
 def test_parse_record_type() -> None:
-    source = "\nmodule TestModule =\n    type StateNode = {\n        NodeId: string\n        ParentId: string\n        ClaimSummary: string\n        PayloadHash: string\n    }\n"
+    source = '\nmodule TestModule =\n    type StateNode = {\n        NodeId: string\n        ParentId: string\n        ClaimSummary: string\n        PayloadHash: string\n    }\n'
     parser = FSharpParser()
-    ir = parser.parse_source(source, "Test")
+    ir = parser.parse_source(source, 'Test')
     sub = ir.submodules[0]
     assert len(sub.records) == 1
     record = sub.records[0]
-    assert record.name == "StateNode"
+    assert record.name == 'StateNode'
     assert len(record.fields) == 4
-    assert record.fields[0].name == "NodeId"
+    assert record.fields[0].name == 'NodeId'
     assert record.fields[0].ir_type.kind == IRTypeKind.STRING
-    print("  ✅ Record type parsing")
-
+    logging.info('  ✅ Record type parsing')
 
 def test_parse_function_with_match() -> None:
     source = '\nmodule TestModule =\n    type Gravity =\n        | C5_ColapsoOntologico\n        | C2_FriccionComputacional\n\n    type MembraneState =\n        | Stable of entropyLevel: float\n        | Apoptosis of taintLog: string\n\n    let applyThermalStress (currentState: MembraneState) (gravity: Gravity) : MembraneState =\n        match gravity with\n        | C2_FriccionComputacional ->\n            Stable 0.01\n        | C5_ColapsoOntologico ->\n            Apoptosis "TAINT:C5_REAL_TRUNCATED"\n'
     parser = FSharpParser()
-    ir = parser.parse_source(source, "Test")
+    ir = parser.parse_source(source, 'Test')
     sub = ir.submodules[0]
     assert len(sub.functions) >= 1
     func = sub.functions[0]
-    assert func.name == "applyThermalStress"
+    assert func.name == 'applyThermalStress'
     assert func.classification == FunctionClassification.STATE_TRANSITION
     assert len(func.params) == 2
-    print("  ✅ Function with pattern matching")
-
+    logging.info('  ✅ Function with pattern matching')
 
 def test_regime_blocks_physics_in_solidity() -> None:
     from causal_isomorphism.ir import IRFunction, IRParam, ir_custom
-
-    func = IRFunction(
-        name="applyThermalStress",
-        params=[
-            IRParam(name="state", ir_type=ir_custom("MembraneState")),
-            IRParam(name="gravity", ir_type=ir_custom("Gravity")),
-        ],
-        return_type=ir_custom("MembraneState"),
-        classification=FunctionClassification.STATE_TRANSITION,
-    )
-    module = IRModule(name="Test", source_layer=RegimeLayer.ONTOLOGY, functions=[func])
+    func = IRFunction(name='applyThermalStress', params=[IRParam(name='state', ir_type=ir_custom('MembraneState')), IRParam(name='gravity', ir_type=ir_custom('Gravity'))], return_type=ir_custom('MembraneState'), classification=FunctionClassification.STATE_TRANSITION)
+    module = IRModule(name='Test', source_layer=RegimeLayer.ONTOLOGY, functions=[func])
     validator = RegimeValidator()
     report = validator.validate(module, RegimeLayer.CONSENSUS)
-    assert "applyThermalStress" in report.blocked_functions
+    assert 'applyThermalStress' in report.blocked_functions
     assert len(report.violations) >= 1
     assert report.violations[0].severity == ViolationSeverity.ERROR
-    assert "Physics" in report.violations[0].message or "physics" in report.violations[0].message.lower()
-    print("  ✅ Regime blocks physics in Solidity")
-
+    assert 'Physics' in report.violations[0].message or 'physics' in report.violations[0].message.lower()
+    logging.info('  ✅ Regime blocks physics in Solidity')
 
 def test_regime_permits_commit_in_solidity() -> None:
     from causal_isomorphism.ir import IRFunction, IRParam, ir_custom
-
-    func = IRFunction(
-        name="commitBoundary",
-        params=[IRParam(name="state", ir_type=ir_custom("MembraneState"))],
-        return_type=IR_STRING,
-        classification=FunctionClassification.COMMIT_BOUNDARY,
-    )
-    module = IRModule(name="Test", source_layer=RegimeLayer.ONTOLOGY, functions=[func])
+    func = IRFunction(name='commitBoundary', params=[IRParam(name='state', ir_type=ir_custom('MembraneState'))], return_type=IR_STRING, classification=FunctionClassification.COMMIT_BOUNDARY)
+    module = IRModule(name='Test', source_layer=RegimeLayer.ONTOLOGY, functions=[func])
     validator = RegimeValidator()
     report = validator.validate(module, RegimeLayer.CONSENSUS)
-    assert "commitBoundary" in report.permitted_functions
-    print("  ✅ Regime permits commit in Solidity")
-
+    assert 'commitBoundary' in report.permitted_functions
+    logging.info('  ✅ Regime permits commit in Solidity')
 
 def test_regime_blocks_hash_in_solidity() -> None:
     from causal_isomorphism.ir import IRFunction
-
-    func = IRFunction(name="computeTaint", classification=FunctionClassification.HASH_COMPUTATION)
-    module = IRModule(name="Test", functions=[func])
+    func = IRFunction(name='computeTaint', classification=FunctionClassification.HASH_COMPUTATION)
+    module = IRModule(name='Test', functions=[func])
     validator = RegimeValidator()
     report = validator.validate(module, RegimeLayer.CONSENSUS)
-    assert "computeTaint" in report.blocked_functions
-    print("  ✅ Regime blocks hash computation in Solidity")
-
+    assert 'computeTaint' in report.blocked_functions
+    logging.info('  ✅ Regime blocks hash computation in Solidity')
 
 def test_regime_permits_hash_in_rust() -> None:
     from causal_isomorphism.ir import IRFunction
-
-    func = IRFunction(name="computeTaint", classification=FunctionClassification.HASH_COMPUTATION)
-    module = IRModule(name="Test", functions=[func])
+    func = IRFunction(name='computeTaint', classification=FunctionClassification.HASH_COMPUTATION)
+    module = IRModule(name='Test', functions=[func])
     validator = RegimeValidator()
     report = validator.validate(module, RegimeLayer.THERMODYNAMICS)
-    assert "computeTaint" in report.permitted_functions
-    print("  ✅ Regime permits hash computation in Rust")
-
+    assert 'computeTaint' in report.permitted_functions
+    logging.info('  ✅ Regime permits hash computation in Rust')
 
 def test_solidity_emitter_simple_enum() -> None:
-    union = IRDiscriminatedUnion(
-        name="Gravity",
-        cases=[
-            IRUnionCase(name="C5_ColapsoOntologico"),
-            IRUnionCase(name="C4_DegradacionGeometrica"),
-            IRUnionCase(name="C3_FluctuacionTermica"),
-            IRUnionCase(name="C2_FriccionComputacional"),
-        ],
-    )
-    module = IRModule(name="Test", unions=[union])
+    union = IRDiscriminatedUnion(name='Gravity', cases=[IRUnionCase(name='C5_ColapsoOntologico'), IRUnionCase(name='C4_DegradacionGeometrica'), IRUnionCase(name='C3_FluctuacionTermica'), IRUnionCase(name='C2_FriccionComputacional')])
+    module = IRModule(name='Test', unions=[union])
     emitter = SolidityEmitter()
     output = emitter.emit_module(module)
-    assert "enum Gravity" in output
-    assert "C5_ColapsoOntologico" in output
-    assert "C2_FriccionComputacional" in output
-    assert "pragma solidity ^0.8.19" in output
-    print("  ✅ Solidity simple enum emission")
-
+    assert 'enum Gravity' in output
+    assert 'C5_ColapsoOntologico' in output
+    assert 'C2_FriccionComputacional' in output
+    assert 'pragma solidity ^0.8.19' in output
+    logging.info('  ✅ Solidity simple enum emission')
 
 def test_solidity_emitter_tagged_union() -> None:
-    union = IRDiscriminatedUnion(
-        name="MembraneState",
-        cases=[
-            IRUnionCase(name="Stable", payload_fields=[("entropyLevel", IR_FLOAT)]),
-            IRUnionCase(name="Smoothing", payload_fields=[("variance", IR_FLOAT)]),
-            IRUnionCase(name="Rollback", payload_fields=[("targetHash", IR_STRING)]),
-            IRUnionCase(name="Apoptosis", payload_fields=[("taintLog", IR_STRING)]),
-        ],
-    )
-    module = IRModule(name="Test", unions=[union])
+    union = IRDiscriminatedUnion(name='MembraneState', cases=[IRUnionCase(name='Stable', payload_fields=[('entropyLevel', IR_FLOAT)]), IRUnionCase(name='Smoothing', payload_fields=[('variance', IR_FLOAT)]), IRUnionCase(name='Rollback', payload_fields=[('targetHash', IR_STRING)]), IRUnionCase(name='Apoptosis', payload_fields=[('taintLog', IR_STRING)])])
+    module = IRModule(name='Test', unions=[union])
     emitter = SolidityEmitter()
     output = emitter.emit_module(module)
-    assert "enum MembraneStateTag" in output
-    assert "struct MembraneState" in output
-    assert "uint256 numericPayload" in output
-    assert "string stringPayload" in output
-    print("  ✅ Solidity tagged union emission")
-
+    assert 'enum MembraneStateTag' in output
+    assert 'struct MembraneState' in output
+    assert 'uint256 numericPayload' in output
+    assert 'string stringPayload' in output
+    logging.info('  ✅ Solidity tagged union emission')
 
 def test_rust_emitter_enum() -> None:
-    union = IRDiscriminatedUnion(
-        name="Gravity", cases=[IRUnionCase(name="C5_ColapsoOntologico"), IRUnionCase(name="C2_FriccionComputacional")]
-    )
-    module = IRModule(name="Test", unions=[union])
+    union = IRDiscriminatedUnion(name='Gravity', cases=[IRUnionCase(name='C5_ColapsoOntologico'), IRUnionCase(name='C2_FriccionComputacional')])
+    module = IRModule(name='Test', unions=[union])
     emitter = RustEmitter()
     output = emitter.emit_module(module)
-    assert "pub enum Gravity" in output
-    assert "C5_ColapsoOntologico" in output
-    assert "#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]" in output
-    assert "use blake3::Hasher;" in output
-    print("  ✅ Rust enum emission")
-
+    assert 'pub enum Gravity' in output
+    assert 'C5_ColapsoOntologico' in output
+    assert '#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]' in output
+    assert 'use blake3::Hasher;' in output
+    logging.info('  ✅ Rust enum emission')
 
 def test_rust_emitter_taint_trait() -> None:
-    union = IRDiscriminatedUnion(
-        name="MembraneState",
-        cases=[
-            IRUnionCase(name="Stable", payload_fields=[("entropyLevel", IR_FLOAT)]),
-            IRUnionCase(name="Apoptosis", payload_fields=[("taintLog", IR_STRING)]),
-        ],
-    )
-    module = IRModule(name="Test", unions=[union])
+    union = IRDiscriminatedUnion(name='MembraneState', cases=[IRUnionCase(name='Stable', payload_fields=[('entropyLevel', IR_FLOAT)]), IRUnionCase(name='Apoptosis', payload_fields=[('taintLog', IR_STRING)])])
+    module = IRModule(name='Test', unions=[union])
     emitter = RustEmitter()
     output = emitter.emit_module(module)
-    assert "pub trait CortexTaint" in output
-    assert "impl CortexTaint for MembraneState" in output
-    assert "fn compute_taint(&self) -> String" in output
-    assert "TAINT:C5_REAL_RUST" in output
-    print("  ✅ Rust CortexTaint trait generation")
-
+    assert 'pub trait CortexTaint' in output
+    assert 'impl CortexTaint for MembraneState' in output
+    assert 'fn compute_taint(&self) -> String' in output
+    assert 'TAINT:C5_REAL_RUST' in output
+    logging.info('  ✅ Rust CortexTaint trait generation')
 
 def test_full_pipeline_irpautomata() -> None:
-    source_path = PROJECT_ROOT / "domain_kernel" / "IRPAutomata.fs"
+    source_path = PROJECT_ROOT / 'domain_kernel' / 'IRPAutomata.fs'
     if not source_path.exists():
-        print(f"  ⚠️  Skipping: {source_path} not found")
+        logging.info(f'  ⚠️  Skipping: {source_path} not found')
         return
-    output_dir = PROJECT_ROOT / "causal_isomorphism" / "generated"
+    output_dir = PROJECT_ROOT / 'causal_isomorphism' / 'generated'
     transpiler = CausalIsomorphismTranspiler()
     result = transpiler.transpile_file(source_path, output_dir)
-    assert result.ir_module.name in ("Domain", "IRPAutomata")
+    assert result.ir_module.name in ('Domain', 'IRPAutomata')
     all_unions = result.ir_module.all_types()
     union_names = [u.name for u in all_unions if isinstance(u, IRDiscriminatedUnion)]
-    assert "Gravity" in union_names, f"Gravity not found in {union_names}"
-    assert "MembraneState" in union_names, f"MembraneState not found in {union_names}"
-    assert "pragma solidity" in result.solidity_output
-    assert "enum Gravity" in result.solidity_output
-    assert "C5_ColapsoOntologico" in result.solidity_output
-    assert "applyThermalStress" in result.solidity_report.blocked_functions
-    assert "pub enum Gravity" in result.rust_output
-    assert "blake3" in result.rust_output
+    assert 'Gravity' in union_names, f'Gravity not found in {union_names}'
+    assert 'MembraneState' in union_names, f'MembraneState not found in {union_names}'
+    assert 'pragma solidity' in result.solidity_output
+    assert 'enum Gravity' in result.solidity_output
+    assert 'C5_ColapsoOntologico' in result.solidity_output
+    assert 'applyThermalStress' in result.solidity_report.blocked_functions
+    assert 'pub enum Gravity' in result.rust_output
+    assert 'blake3' in result.rust_output
     assert Path(result.solidity_path).exists()
     assert Path(result.rust_path).exists()
     assert Path(result.report_path).exists()
-    print(result.full_report())
-    print("  ✅ Full pipeline on IRPAutomata.fs")
-
+    logging.info(result.full_report())
+    logging.info('  ✅ Full pipeline on IRPAutomata.fs')
 
 def test_linear_type_checker() -> None:
     from causal_isomorphism.ir import IRExpr, IRExprKind, IRFunction, IRMatchArm, IRParam, IRPattern, IRType, IRTypeKind
     from causal_isomorphism.linear_checker import LinearTypeChecker
-
-    p1 = IRParam(name="x", ir_type=IRType(IRTypeKind.INT, is_linear=True))
-    body1 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="x")
-    f1 = IRFunction(name="f1", params=[p1], body=body1)
+    p1 = IRParam(name='x', ir_type=IRType(IRTypeKind.INT, is_linear=True))
+    body1 = IRExpr(kind=IRExprKind.VARIABLE, variable_name='x')
+    f1 = IRFunction(name='f1', params=[p1], body=body1)
     checker = LinearTypeChecker()
     violations = checker.check_function(f1)
-    assert not violations, f"Expected no violations, got: {violations}"
-    body2 = IRExpr(kind=IRExprKind.LITERAL, literal_value="42", literal_type=IR_FLOAT)
-    f2 = IRFunction(name="f2", params=[p1], body=body2)
+    assert not violations, f'Expected no violations, got: {violations}'
+    body2 = IRExpr(kind=IRExprKind.LITERAL, literal_value='42', literal_type=IR_FLOAT)
+    f2 = IRFunction(name='f2', params=[p1], body=body2)
     violations = checker.check_function(f2)
     assert len(violations) == 1
-    assert "must be consumed exactly once" in violations[0].message
-    assert "Found 0" in violations[0].message
-    body3 = IRExpr(
-        kind=IRExprKind.BINARY_OP,
-        op="+",
-        left=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
-        right=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"),
-    )
-    f3 = IRFunction(name="f3", params=[p1], body=body3)
+    assert 'must be consumed exactly once' in violations[0].message
+    assert 'Found 0' in violations[0].message
+    body3 = IRExpr(kind=IRExprKind.BINARY_OP, op='+', left=IRExpr(kind=IRExprKind.VARIABLE, variable_name='x'), right=IRExpr(kind=IRExprKind.VARIABLE, variable_name='x'))
+    f3 = IRFunction(name='f3', params=[p1], body=body3)
     violations = checker.check_function(f3)
     assert len(violations) == 1
-    assert "Found 2" in violations[0].message
-    p2 = IRParam(name="y", ir_type=IRType(IRTypeKind.INT, is_affine=True))
-    f4 = IRFunction(name="f4", params=[p2], body=body1)
-    body4 = IRExpr(kind=IRExprKind.VARIABLE, variable_name="y")
-    f4 = IRFunction(name="f4", params=[p2], body=body4)
+    assert 'Found 2' in violations[0].message
+    p2 = IRParam(name='y', ir_type=IRType(IRTypeKind.INT, is_affine=True))
+    f4 = IRFunction(name='f4', params=[p2], body=body1)
+    body4 = IRExpr(kind=IRExprKind.VARIABLE, variable_name='y')
+    f4 = IRFunction(name='f4', params=[p2], body=body4)
     violations = checker.check_function(f4)
     assert not violations
-    f5 = IRFunction(name="f5", params=[p2], body=body2)
+    f5 = IRFunction(name='f5', params=[p2], body=body2)
     violations = checker.check_function(f5)
     assert not violations
-    body6 = IRExpr(
-        kind=IRExprKind.BINARY_OP,
-        op="+",
-        left=IRExpr(kind=IRExprKind.VARIABLE, variable_name="y"),
-        right=IRExpr(kind=IRExprKind.VARIABLE, variable_name="y"),
-    )
-    f6 = IRFunction(name="f6", params=[p2], body=body6)
+    body6 = IRExpr(kind=IRExprKind.BINARY_OP, op='+', left=IRExpr(kind=IRExprKind.VARIABLE, variable_name='y'), right=IRExpr(kind=IRExprKind.VARIABLE, variable_name='y'))
+    f6 = IRFunction(name='f6', params=[p2], body=body6)
     violations = checker.check_function(f6)
     assert len(violations) == 1
-    arm1 = IRMatchArm(pattern=IRPattern(case_name="A"), body=IRExpr(kind=IRExprKind.VARIABLE, variable_name="x"))
-    arm2 = IRMatchArm(pattern=IRPattern(case_name="B"), body=body2)
-    body7 = IRExpr(
-        kind=IRExprKind.MATCH,
-        match_expr=IRExpr(kind=IRExprKind.VARIABLE, variable_name="state"),
-        match_arms=[arm1, arm2],
-    )
-    f7 = IRFunction(name="f7", params=[p1], body=body7)
+    arm1 = IRMatchArm(pattern=IRPattern(case_name='A'), body=IRExpr(kind=IRExprKind.VARIABLE, variable_name='x'))
+    arm2 = IRMatchArm(pattern=IRPattern(case_name='B'), body=body2)
+    body7 = IRExpr(kind=IRExprKind.MATCH, match_expr=IRExpr(kind=IRExprKind.VARIABLE, variable_name='state'), match_arms=[arm1, arm2])
+    f7 = IRFunction(name='f7', params=[p1], body=body7)
     violations = checker.check_function(f7)
     assert len(violations) == 1
-    print("  ✅ Linear type checker logic")
-
+    logging.info('  ✅ Linear type checker logic')
 
 def main() -> int:
-    print("╔══════════════════════════════════════════════════════════╗")
-    print("║  CAUSAL ISOMORPHISM TRANSPILER — VERIFICATION SUITE    ║")
-    print("╚══════════════════════════════════════════════════════════╝")
-    print()
-    test_groups: list[tuple[str, list[object]]] = [
-        ("Type Resolution", [test_fsharp_type_resolution, test_solidity_type_mapping, test_rust_type_mapping]),
-        (
-            "F# Parser",
-            [test_parse_simple_union, test_parse_tagged_union, test_parse_record_type, test_parse_function_with_match],
-        ),
-        (
-            "Regime Validator",
-            [
-                test_regime_blocks_physics_in_solidity,
-                test_regime_permits_commit_in_solidity,
-                test_regime_blocks_hash_in_solidity,
-                test_regime_permits_hash_in_rust,
-            ],
-        ),
-        (
-            "Emitters",
-            [
-                test_solidity_emitter_simple_enum,
-                test_solidity_emitter_tagged_union,
-                test_rust_emitter_enum,
-                test_rust_emitter_taint_trait,
-            ],
-        ),
-        ("Linear Type Checker", [test_linear_type_checker]),
-        ("Integration", [test_full_pipeline_irpautomata]),
-    ]
+    logging.info('╔══════════════════════════════════════════════════════════╗')
+    logging.info('║  CAUSAL ISOMORPHISM TRANSPILER — VERIFICATION SUITE    ║')
+    logging.info('╚══════════════════════════════════════════════════════════╝')
+    logging.info()
+    test_groups: list[tuple[str, list[object]]] = [('Type Resolution', [test_fsharp_type_resolution, test_solidity_type_mapping, test_rust_type_mapping]), ('F# Parser', [test_parse_simple_union, test_parse_tagged_union, test_parse_record_type, test_parse_function_with_match]), ('Regime Validator', [test_regime_blocks_physics_in_solidity, test_regime_permits_commit_in_solidity, test_regime_blocks_hash_in_solidity, test_regime_permits_hash_in_rust]), ('Emitters', [test_solidity_emitter_simple_enum, test_solidity_emitter_tagged_union, test_rust_emitter_enum, test_rust_emitter_taint_trait]), ('Linear Type Checker', [test_linear_type_checker]), ('Integration', [test_full_pipeline_irpautomata])]
     total = 0
     passed = 0
     failed = 0
     for group_name, tests in test_groups:
-        print(f"\n── {group_name} ──")
+        logging.info(f'\n── {group_name} ──')
         for test_fn in tests:
             total += 1
             try:
@@ -372,16 +260,14 @@ def main() -> int:
                 passed += 1
             except (AssertionError, RuntimeError, ValueError) as e:
                 failed += 1
-                name = getattr(test_fn, "__name__", str(test_fn))
-                print(f"  ❌ {name}: {e}")
-    print(f"\n{'=' * 50}")
-    print(f"Results: {passed}/{total} passed, {failed} failed")
+                name = getattr(test_fn, '__name__', str(test_fn))
+                logging.info(f'  ❌ {name}: {e}')
+    logging.info(f"\n{'=' * 50}")
+    logging.info(f'Results: {passed}/{total} passed, {failed} failed')
     if failed == 0:
-        print("✅ ALL TESTS PASSED — C5-REAL VERIFIED")
+        logging.info('✅ ALL TESTS PASSED — C5-REAL VERIFIED')
     else:
-        print("❌ FAILURES DETECTED")
+        logging.info('❌ FAILURES DETECTED')
     return 0 if failed == 0 else 1
-
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())

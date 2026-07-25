@@ -180,7 +180,7 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
 }
 
 fn main() {
-    println!("[C5-REAL] Initiating RE/DRM P2P BFT consensus check...");
+    tracing::info!("[C5-REAL] Initiating RE/DRM P2P BFT consensus check...");
     let start_time = SystemTime::now();
 
     // Resolve db path to the dedicated ledger
@@ -277,14 +277,14 @@ fn main() {
     }
 
     let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
-    println!("[C5-REAL] RE/DRM Empirical verification completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
-    println!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
+    tracing::info!("[C5-REAL] RE/DRM Empirical verification completed: {}/896 primitives in {:.2} ms.", total_verified, elapsed);
+    tracing::info!("          Quorum 3/3 (Unanimous): {} | Quorum 2/3 (BFT Tolerant): {}", quorum_3of3, quorum_2of3);
 
     if total_verified == 896 {
-        println!("[PASS] 896/896 RE/DRM Primitives in Rust par-par consensus (BFT topology 100% verified).");
+        tracing::info!("[PASS] 896/896 RE/DRM Primitives in Rust par-par consensus (BFT topology 100% verified).");
         std::process::exit(0);
     } else {
-        eprintln!("[FAIL] P2P Rust verification incomplete ({}/896). Aborting.", total_verified);
+        etracing::info!("[FAIL] P2P Rust verification incomplete ({}/896). Aborting.", total_verified);
         std::process::exit(1);
     }
 }
