@@ -28,7 +28,8 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
         with open(filepath, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
             if isinstance(data, dict) and "routes" in data:
-                return data["routes"]
+                from typing import cast
+                return cast(List[RouteConfig], data["routes"])
     except ImportError:
         pass
 

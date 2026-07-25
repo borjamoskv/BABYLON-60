@@ -9,7 +9,7 @@ import math
 def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)
 
-def ultrathink_audit(filepath: str):
+def ultrathink_audit(filepath: str) -> None:
     if not os.path.exists(filepath):
         print(f"Error: {filepath} not found.")
         sys.exit(1)

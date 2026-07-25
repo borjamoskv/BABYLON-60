@@ -2,7 +2,7 @@ import os
 import subprocess
 import time
 
-def get_banned_dirs():
+def get_banned_dirs() -> set[str]:
     return {
         ".git",
         "node_modules",
@@ -20,7 +20,7 @@ def get_banned_dirs():
         "tmp_fastapi_pkg",
     }
 
-def maximize_exergy_python(file_path):
+def maximize_exergy_python(file_path: str) -> None:
     try:
         # Run ruff to fix linting and formatting (Max Exergy)
         subprocess.run(["ruff", "check", "--fix", "--unsafe-fixes", file_path], capture_output=True)
@@ -28,7 +28,7 @@ def maximize_exergy_python(file_path):
     except Exception as e:
         print(f"Error optimizando Python en {file_path}: {e}")
 
-def maximize_exergy_generic(file_path):
+def maximize_exergy_generic(file_path: str) -> None:
     # Inyectar sello estructural C5-REAL si es un archivo de texto soportado
     if file_path.endswith((".md", ".yaml", ".yml", ".txt", ".js", ".ts", ".css", ".html")):
         try:
@@ -51,7 +51,7 @@ def maximize_exergy_generic(file_path):
         except Exception as e:
             print(f"Error procesando {file_path}: {e}")
 
-def iterate_and_maximize(root_dir):
+def iterate_and_maximize(root_dir: str) -> None:
     print("=== INICIANDO MITOSIS LEGION: ITERACION A-Z EXERGIA MAXIMA ===")
 
     # Recorrer directorios de forma alfabética

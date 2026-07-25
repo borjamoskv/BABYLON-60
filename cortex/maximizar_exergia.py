@@ -22,7 +22,7 @@ IGNORE_DIRS = {
     "scratch",
 }
 
-def get_comment_syntax(filename):
+def get_comment_syntax(filename: str) -> str | None:
     ext = os.path.splitext(filename)[1].lower()
     if ext in {".py", ".sh", ".toml", ".yaml", ".yml", ".rb"}:
         return "#"
@@ -34,7 +34,7 @@ def get_comment_syntax(filename):
         return "/*"
     return None
 
-def close_comment_syntax(filename):
+def close_comment_syntax(filename: str) -> str:
     ext = os.path.splitext(filename)[1].lower()
     if ext in {".html", ".xml", ".md", ".vtt", ".srt"}:
         return "-->"
@@ -42,7 +42,7 @@ def close_comment_syntax(filename):
         return "*/"
     return ""
 
-def maximize_exergy(filepath):
+def maximize_exergy(filepath: str) -> bool:
     try:
         with open(filepath, "r", encoding="utf-8") as f:
             content = f.read()
@@ -69,7 +69,7 @@ def maximize_exergy(filepath):
         return True
     return False
 
-def main():
+def main() -> None:
     print("Iniciando Transducción C5-REAL (A->Z)...")
     mutated_files = 0
     for root, dirs, files in os.walk(ROOT_DIR, topdown=True):

@@ -9,7 +9,7 @@ def get_comment_syntax(ext: str) -> str:
         return "// C5-REAL EXERGY CERTIFIED\n"
     return ""
 
-def crystallize_files():
+def crystallize_files() -> None:
     root = Path(".")
     extensions = {".py", ".go", ".rs", ".js", ".ts", ".yml"}
     exclude_dirs = {".venv", "node_modules", ".git", "target", "dist", "build"}

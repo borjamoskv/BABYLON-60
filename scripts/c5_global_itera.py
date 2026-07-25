@@ -43,7 +43,7 @@ def apply_itera_operator(content: str, ext: str) -> str:
 
     return mutated_content
 
-def global_itera():
+def global_itera() -> None:
     root = Path(".")
     exclude_dirs = {
         ".venv",
