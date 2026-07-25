@@ -13,3 +13,6 @@
 [submodule "extensions/smoke-detector-extension"]
 	path = extensions/smoke-detector-extension
 	url = https://github.com/borjamoskv/smoke-detector-extension.git
+[submodule "audit/uniswap-v4-eip1153-audit"]
+	path = audit/uniswap-v4-eip1153-audit
+	url = https://github.com/borjamoskv/uniswap-v4-eip1153-audit.git
