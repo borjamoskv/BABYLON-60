@@ -3,14 +3,16 @@ use serde::{Deserialize, Serialize};
 use sha2::{Sha256, Digest};
 use chrono::Utc;
 
+use std::borrow::Cow;
+
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct CortexEvent {
+pub struct CortexEvent<'a> {
     pub id: Option<i64>,
-    pub timestamp: String,
-    pub event_type: String,
-    pub payload: String,
-    pub prev_hash: String,
-    pub event_hash: String,
+    pub timestamp: Cow<'a, str>,
+    pub event_type: Cow<'a, str>,
+    pub payload: Cow<'a, str>,
+    pub prev_hash: Cow<'a, str>,
+    pub event_hash: Cow<'a, str>,
 }
 
 pub struct CortexLedger {
@@ -80,7 +82,7 @@ impl CortexLedger {
         )
     }
 
-    pub fn append_event(&self, event_type: &str, payload: &serde_json::Value) -> Result<CortexEvent> {
+    pub fn append_event<'a>(&self, event_type: &'a str, payload: &serde_json::Value) -> Result<CortexEvent<'static>> {
         let prev_hash = self.get_latest_hash()?;
         let timestamp = Utc::now().to_rfc3339();
         let payload_str = payload.to_string();
@@ -100,15 +102,15 @@ impl CortexLedger {
 
         Ok(CortexEvent {
             id: Some(self.conn.last_insert_rowid()),
-            timestamp,
-            event_type: event_type.to_string(),
-            payload: payload_str,
-            prev_hash,
-            event_hash,
+            timestamp: Cow::Owned(timestamp),
+            event_type: Cow::Owned(event_type.to_string()),
+            payload: Cow::Owned(payload_str),
+            prev_hash: Cow::Owned(prev_hash),
+            event_hash: Cow::Owned(event_hash),
         })
     }
 
-    pub fn get_events(&self, limit: u32) -> Result<Vec<CortexEvent>> {
+    pub fn get_events(&self, limit: u32) -> Result<Vec<CortexEvent<'static>>> {
         let mut stmt = self.conn.prepare(
             "SELECT id, timestamp, event_type, payload, prev_hash, event_hash
              FROM cortex_events ORDER BY id DESC LIMIT ?1"
@@ -117,11 +119,11 @@ impl CortexLedger {
         let event_iter = stmt.query_map(params![limit], |row| {
             Ok(CortexEvent {
                 id: row.get(0)?,
-                timestamp: row.get(1)?,
-                event_type: row.get(2)?,
-                payload: row.get(3)?,
-                prev_hash: row.get(4)?,
-                event_hash: row.get(5)?,
+                timestamp: Cow::Owned(row.get(1)?),
+                event_type: Cow::Owned(row.get(2)?),
+                payload: Cow::Owned(row.get(3)?),
+                prev_hash: Cow::Owned(row.get(4)?),
+                event_hash: Cow::Owned(row.get(5)?),
             })
         })?;
 

@@ -4,7 +4,7 @@ pub mod ledger;
 pub mod context;
 pub mod inference;
 
-use std::sync::Mutex;
+use tokio::sync::Mutex;
 use tauri::State;
 use serde_json::Value;
 use ledger::{CortexLedger, CortexEvent};
@@ -18,14 +18,14 @@ struct AppState {
 
 
 #[tauri::command]
-fn get_ledger_events(state: State<AppState>, limit: u32) -> Result<Vec<CortexEvent>, String> {
-    let ledger = state.ledger.lock().unwrap();
+async fn get_ledger_events(state: State<'_, AppState>, limit: u32) -> Result<Vec<CortexEvent<'static>>, String> {
+    let ledger = state.ledger.lock().await;
     ledger.get_events(limit).map_err(|e| e.to_string())
 }
 
 #[tauri::command]
-fn append_ledger_event(state: State<AppState>, event_type: String, payload: Value) -> Result<CortexEvent, String> {
-    let ledger = state.ledger.lock().unwrap();
+async fn append_ledger_event(state: State<'_, AppState>, event_type: String, payload: Value) -> Result<CortexEvent<'static>, String> {
+    let ledger = state.ledger.lock().await;
     ledger.append_event(&event_type, &payload).map_err(|e| e.to_string())
 }
 
