@@ -109,7 +109,7 @@ impl TaintEngine {
             sorted_indices.push(node);
             let mut neighbors = self.graph.neighbors(node).detach();
             while let Some(target) = neighbors.next_node(&self.graph) {
-                let deg = in_degree.get_mut(&target).unwrap();
+                let deg = in_degree.get_mut(&target).expect("C5-REAL: Strict Unwrapping Enforced");
                 *deg -= 1;
                 if *deg == 0 {
                     zero_in_degree.insert((self.graph[target].id.clone(), target));

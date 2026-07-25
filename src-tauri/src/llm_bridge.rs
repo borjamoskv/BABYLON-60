@@ -21,7 +21,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
         .or_else(|_| std::env::var("CORTEX_VAULT_KEY"))
         .expect("FATAL: CORTEX_BFT_KEY or CORTEX_VAULT_KEY env var required for C5-REAL BFT HMAC signing. Zero static fallback permitted.");
 
-    println!("🌉 [LLM_BRIDGE] Puente CORTEX (Agnóstico HTTP/REST/TCP) activo en 127.0.0.1:6006. Universal para Cursor, Claude Code, Copilot y MCP.");
+    tracing::info!("🌉 [LLM_BRIDGE] Puente CORTEX (Agnóstico HTTP/REST/TCP) activo en 127.0.0.1:6006. Universal para Cursor, Claude Code, Copilot y MCP.");
     
     let listener = TcpListener::bind("127.0.0.1:6006").await.expect("Fallo al abrir puerto de puente CORTEX");
 
@@ -50,7 +50,7 @@ pub async fn ignite_cortex_bridge(db_state: Arc<VoidLedger>) {
                         final_hash = "COMMITTED_NO_STDOUT".to_string();
                     }
                     let resp = format!("{{\"status\": \"C5-REAL\", \"hash\": \"{}\"}}", final_hash.trim().replace("\n", ""));
-                    println!("💥 [LLM_BRIDGE] Entropía procesada (IDE Agnostic). Archivo {} mutado.", mutation.target_file);
+                    tracing::info!("💥 [LLM_BRIDGE] Entropía procesada (IDE Agnostic). Archivo {} mutado.", mutation.target_file);
                     let _ = task.resp_tx.send(resp);
                 } else {
                     let _ = task.resp_tx.send("{\"status\": \"ERROR\", \"message\": \"GIT_COMMIT_FAILED\"}".to_string());
