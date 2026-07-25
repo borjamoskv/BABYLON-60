@@ -8,10 +8,8 @@ from pathlib import Path
 from typing import Any, NamedTuple, cast
 
 try:
-    if os.environ.get("CORTEX_TESTING"):
-        keyring = None
-    else:
-        import keyring  # type: ignore[assignment]
+    import keyring as _keyring
+    keyring = None if os.environ.get("CORTEX_TESTING") else _keyring
 except ImportError:
     keyring = None
 from cryptography.exceptions import InvalidSignature

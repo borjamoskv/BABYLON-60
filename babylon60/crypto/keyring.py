@@ -8,7 +8,7 @@ import os
 try:
     import keyring
 except ImportError:
-    keyring = None  # type: ignore[assignment]
+    keyring = None
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
