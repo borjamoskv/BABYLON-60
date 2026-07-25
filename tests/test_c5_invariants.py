@@ -325,3 +325,22 @@ def test_inv_c5_27_high_density_ontological_ingestion() -> None:
     content = agents_path.read_text(errors="ignore")
     assert "INV_C5_27" in content, "INV_C5_27 rule definition missing in .agents/AGENTS.md"
     assert "S/N ≥ 0.80" in content or "S/N >= 0.80" in content, "INV_C5_27 missing Signal/Noise (S/N) ratio restriction"
+
+
+def test_inv_c5_28_tauri_ipc_type_derive() -> None:
+    """INV_C5_28 — Tauri IPC Type Derive Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_28 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_28" in content, "INV_C5_28 rule definition missing in .agents/AGENTS.md"
+    assert "Serialize" in content and "Deserialize" in content, "INV_C5_28 missing Serialize/Deserialize requirement"
+
+
+def test_inv_c5_29_pypi_proprietary_license_alignment() -> None:
+    """INV_C5_29 — PyPI Proprietary License Alignment Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_29 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_29" in content, "INV_C5_29 rule definition missing in .agents/AGENTS.md"
+    assert "license" in content, "INV_C5_29 missing license metadata clause"
+
