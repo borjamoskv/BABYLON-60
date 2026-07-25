@@ -1,5 +1,7 @@
-"""Property-based tests for BABYLON-60 crypto primitives."""
+import os
 import pytest
+
+os.environ['CORTEX_TESTING'] = '1'
 
 try:
     from hypothesis import given, settings
