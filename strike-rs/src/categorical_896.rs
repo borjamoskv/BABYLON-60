@@ -12,6 +12,12 @@ pub struct RustCategoricalEngine {
     total_primitives: usize,
 }
 
+impl Default for RustCategoricalEngine {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[pymethods]
 impl RustCategoricalEngine {
     #[new]
@@ -43,8 +49,14 @@ impl RustCategoricalEngine {
     /// Fast zero-alloc diagrammatic collision detector (D6 561..=672 vs D7 673..=784)
     pub fn detect_collisions_fast(&self, active_ids: Vec<usize>) -> Vec<(usize, usize)> {
         let set: HashSet<usize> = active_ids.into_iter().collect();
-        let d6_items: Vec<&usize> = set.iter().filter(|&&id| id >= 561 && id <= 672).collect();
-        let d7_items: Vec<&usize> = set.iter().filter(|&&id| id >= 673 && id <= 784).collect();
+        let d6_items: Vec<&usize> = set
+            .iter()
+            .filter(|&&id| (561..=672).contains(&id))
+            .collect();
+        let d7_items: Vec<&usize> = set
+            .iter()
+            .filter(|&&id| (673..=784).contains(&id))
+            .collect();
 
         let mut collisions = Vec::new();
         for &c_id in &d6_items {
