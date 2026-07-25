@@ -28,7 +28,7 @@ def main() -> None:
                     dest_file = os.path.join(vault_dir, f"{conv_id}.jsonl")
                     shutil.copy2(transcript, dest_file)
                     synced_count += 1
-        except Exception as e:
+        except (OSError, UnicodeDecodeError) as e:
             print(f"Error reading {transcript}: {e}")
 
     print(f"🟢 Synchronized {synced_count} relevant session logs into Memory Vault.")
