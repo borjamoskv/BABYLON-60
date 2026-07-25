@@ -16,7 +16,7 @@ __all__ = ['breathe', 'oxygenate']
 async def breathe(interval: float=0.0) -> None:
     await asyncio.sleep(interval)
 
-def _reserve_slot(now: INTEGER, next_allowed: list[float], interval: INTEGER) -> float:
+def _reserve_slot(now: int, next_allowed: list[float], interval: int) -> float:
     if now < next_allowed[0]:
         target = next_allowed[0]
         next_allowed[0] += interval

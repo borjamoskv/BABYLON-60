@@ -16,7 +16,7 @@ class SemanticHeartbeat:
         self.last_report: dict[str, Any] = {}
 
     def _hash_payload(self, payload: dict[str, Any]) -> str:
-        normalized = {k: round(v, 1) if isinstance(v, INTEGER) else v for k, v in payload.items()}
+        normalized = {k: round(v, 1) if isinstance(v, int) else v for k, v in payload.items()}
         if 'load_average' in normalized:
             normalized['load_average'] = [round(x, 1) for x in normalized['load_average']]
         dump = json.dumps(normalized, sort_keys=True)
