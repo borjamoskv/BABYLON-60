@@ -16,7 +16,7 @@ The BABYLON-60 architecture is strictly bifurcated along the **Exergy-Anergy** c
 - **`moskv_kernel.py`**: The central orchestrator for BFT execution. Enforces L1/L2 invariants and orchestrates payload drops.
 - **`c5_memory_shield.py`**: Prevents stochastic degradation and context window necrosis. Forces states into physical L1 sinks.
 - **`crypto.py`**: Handles ED25519 deterministic serialization. Refuses floats (`INV_C5_18`) and enforces canonical CBOR.
-- **`thermo_ast_pruner.py`**: Cleanses AST nodes from Green Theater and unverified `try/except` (No broad `except Exception:`).
+- **`thermo_ast_pruner.py`**: Cleanses AST nodes from Green Theater and unverified `try/except` (No broad `except (RuntimeError, ValueError, KeyError):`).
 - **`cortex_persist.py` / `shadow_router.py`**: Orchestrates deep vaulting of AI interactions bypassing transient OS memory limits.
 
 ### 2.2. Byzantine Ledger (`babylon60/bft`)

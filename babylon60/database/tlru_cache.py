@@ -41,7 +41,7 @@ class TLRUCache:
             raise ValueError(f"maxsize must be >= 1, got {maxsize}")
         if ttl <= 0:
             raise ValueError(f"ttl must be > 0, got {ttl}")
-        self._cache: OrderedDict[str, tuple[float, float]] = OrderedDict()
+        self._cache: OrderedDict[str, tuple[INTEGER, float]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl
 
@@ -56,7 +56,7 @@ class TLRUCache:
         self._cache.move_to_end(key)
         return True
 
-    def __setitem__(self, key: str, value: float) -> None:
+    def __setitem__(self, key: str, value: INTEGER) -> None:
         """Insert or update a key. Evicts LRU entry if at capacity. O(1)."""
         now = time.monotonic()
         if key in self._cache:

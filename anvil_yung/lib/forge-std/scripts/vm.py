@@ -207,7 +207,7 @@ class Function:
         self.selector_bytes = selector_bytes
 
     @staticmethod
-    def from_dict(d: dict) -> "Function":
+    def from_dict(d: dict[str, typing.Any]) -> "Function":
         return Function(
             d["id"],
             d["description"],
@@ -233,7 +233,7 @@ class Cheatcode:
         self.safety = safety
 
     @staticmethod
-    def from_dict(d: dict) -> "Cheatcode":
+    def from_dict(d: dict[str, typing.Any]) -> "Cheatcode":
         return Cheatcode(
             Function.from_dict(d["func"]),
             str(d["group"]),
@@ -253,7 +253,7 @@ class Error:
         self.declaration = declaration
 
     @staticmethod
-    def from_dict(d: dict) -> "Error":
+    def from_dict(d: dict[str, typing.Any]) -> "Error":
         return Error(**d)
 
 
@@ -268,7 +268,7 @@ class Event:
         self.declaration = declaration
 
     @staticmethod
-    def from_dict(d: dict) -> "Event":
+    def from_dict(d: dict[str, typing.Any]) -> "Event":
         return Event(**d)
 
 
@@ -292,7 +292,7 @@ class Enum:
         self.variants = variants
 
     @staticmethod
-    def from_dict(d: dict) -> "Enum":
+    def from_dict(d: dict[str, typing.Any]) -> "Enum":
         return Enum(
             d["name"],
             d["description"],
@@ -322,7 +322,7 @@ class Struct:
         self.fields = fields
 
     @staticmethod
-    def from_dict(d: dict) -> "Struct":
+    def from_dict(d: dict[str, typing.Any]) -> "Struct":
         return Struct(
             d["name"],
             d["description"],
@@ -352,7 +352,7 @@ class Cheatcodes:
         self.cheatcodes = cheatcodes
 
     @staticmethod
-    def from_dict(d: dict) -> "Cheatcodes":
+    def from_dict(d: dict[str, typing.Any]) -> "Cheatcodes":
         return Cheatcodes(
             errors=[Error.from_dict(e) for e in d["errors"]],
             events=[Event.from_dict(e) for e in d["events"]],

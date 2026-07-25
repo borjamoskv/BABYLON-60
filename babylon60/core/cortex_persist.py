@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
-# CORTEX PERSIST OMEGA (C5-REAL)
+# CORTEX PERSIST OMEGA (C5-INTEGER)
 
 
 @dataclass
