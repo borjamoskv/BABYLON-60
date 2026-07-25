@@ -17,6 +17,10 @@ async def connect(db_path: str | Path, *, synchronous: str='FULL') -> aiosqlite.
     await db.execute(f'PRAGMA synchronous={mode}')
     await db.execute('PRAGMA foreign_keys=ON')
     await db.execute(f'PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}')
+    # SOTA Exergy Optimizations
+    await db.execute('PRAGMA mmap_size=30000000000')
+    await db.execute('PRAGMA temp_store=MEMORY')
+    await db.execute('PRAGMA cache_size=-64000')
     return db
 
 def connect_sync(db_path: str | Path, *, synchronous: str='FULL') -> sqlite3.Connection:
@@ -26,4 +30,8 @@ def connect_sync(db_path: str | Path, *, synchronous: str='FULL') -> sqlite3.Con
     conn.execute(f'PRAGMA synchronous={mode}')
     conn.execute('PRAGMA foreign_keys=ON')
     conn.execute(f'PRAGMA busy_timeout={_BUSY_TIMEOUT_MS}')
+    # SOTA Exergy Optimizations
+    conn.execute('PRAGMA mmap_size=30000000000')
+    conn.execute('PRAGMA temp_store=MEMORY')
+    conn.execute('PRAGMA cache_size=-64000')
     return conn
