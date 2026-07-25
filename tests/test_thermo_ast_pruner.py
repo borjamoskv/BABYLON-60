@@ -10,12 +10,11 @@ def test_anergia_purger_removes_constants() -> None:
     assert 'Docstring that should be pruned' not in code_out
     assert 'x = 10' in code_out
 
-def test_anergia_purger_injects_sigkill(tmp_path) -> None:
-    source = '\ntry:\n    x = 1 / 0\nexcept (RuntimeError, ValueError, KeyError):\n    pass\n'
+def test_anergia_purger_injects_fail_fast(tmp_path) -> None:
+    source = '\ntry:\n    x = 1 / 0\nexcept Exception:\n    pass\n'
     tree = ast.parse(source)
     purger = AnergiaPurger()
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
-    assert 'signal.SIGKILL' in code_out
-    assert 'os.kill' in code_out
+    assert 'raise RuntimeError' in code_out
     assert 'FAIL-FAST: General Exception intercepted.' in code_out

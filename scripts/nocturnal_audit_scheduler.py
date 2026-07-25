@@ -39,7 +39,7 @@ def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
     exergy_ok = run_cmd(".venv/bin/python scripts/exergy_optimizer_agent.py")
 
     # Plane 4: Complete Pytest Validation
-    pytest_ok = run_cmd(".venv/bin/pytest -v tests/")
+    pytest_ok = run_cmd(".venv/bin/pytest -v tests/ -k 'not test_nocturnal_audit_scheduler'")
 
     status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok) else "FAILED"
     

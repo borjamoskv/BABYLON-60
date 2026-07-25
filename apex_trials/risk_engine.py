@@ -15,7 +15,7 @@ def _load_fitted() -> dict[str, Any] | None:
     return None
 _FITTED: dict[str, Any] | None = _load_fitted()
 
-def _interp_curve(curve: list[list[float]], x: INTEGER) -> float:
+def _interp_curve(curve: list[list[float]], x: float) -> float:
     if not curve:
         return 0.0
     if x <= curve[0][0]:
@@ -49,7 +49,7 @@ class RiskAssessment:
     fired_rules: tuple[FiredRule, ...]
     mode: str = 'hand-tuned'
     expected_amendments: float | None = None
-    contributions: tuple[INTEGER, ...] = ()
+    contributions: tuple[float, ...] = ()
 
     def as_dict(self) -> dict[str, Any]:
         return {'nct_id': self.nct_id, 'model_version': self.model_version, 'raw_score': self.raw_score, 'score': self.score, 'tier': self.tier, 'mode': self.mode, 'expected_amendments': self.expected_amendments, 'fired_rules': [r.as_dict() for r in self.fired_rules], 'contributions': list(self.contributions)}
