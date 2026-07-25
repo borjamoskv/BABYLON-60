@@ -130,3 +130,10 @@ Uso desde cualquier kernel (sin dependencias):
 El IDE (Swarm ⌘4) muestra los peers e inbox en vivo vía `/api/bridge/*`.
 Disciplina de convivencia: haz `status` al empezar sesión de trabajo y
 `handoff` en vez de pisar ficheros que el otro agente tiene en vuelo.
+
+- **INV_BRIDGE_04 (entorno):** El bus vive en `babylon60_ide.db` sobre disco
+  LOCAL. SQLite necesita locking POSIX real, del que carecen los montajes de
+  red/FUSE (el bridge de dispositivo de Cowork lanza `disk I/O error`). Corre
+  el CLI desde tu Terminal / el proceso del kernel — no a través de una vista
+  FUSE remota. Verificado C5-REAL en disco nativo: 14/14 eventos con
+  escritores mixtos CLI+API concurrentes.

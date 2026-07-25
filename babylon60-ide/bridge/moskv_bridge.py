@@ -66,10 +66,28 @@ def canonical(data) -> str:
 def connect(db: Path) -> sqlite3.Connection:
     conn = sqlite3.connect(str(db), timeout=5.0, isolation_level=None)
     conn.row_factory = sqlite3.Row
-    conn.execute("PRAGMA journal_mode=WAL")
-    conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute("PRAGMA busy_timeout=5000")
-    conn.executescript(DDL)
+    # WAL necesita shared-memory (-shm): en montajes de red/FUSE (p.ej. el
+    # bridge de dispositivo) lanza "disk I/O error". Degradamos a DELETE
+    # journal, que solo requiere el fichero — igual de correcto para el bus,
+    # solo menos concurrente. El backend del IDE (disco local) sí usa WAL.
+    try:
+        conn.execute("PRAGMA journal_mode=WAL")
+        conn.execute("PRAGMA synchronous=NORMAL")
+        conn.execute("PRAGMA busy_timeout=5000")
+        conn.executescript(DDL)
+    except sqlite3.OperationalError:
+        try:
+            conn.execute("PRAGMA journal_mode=DELETE")
+            conn.execute("PRAGMA busy_timeout=5000")
+            conn.executescript(DDL)
+        except sqlite3.OperationalError as e:
+            conn.close()
+            raise SystemExit(
+                "MOSKV BRIDGE: 'disk I/O error' — este sistema de ficheros no soporta "
+                "escritura SQLite (montaje de red/FUSE, p.ej. el bridge de Cowork). "
+                "Ejecuta el bridge desde tu disco LOCAL real (tu Terminal / el proceso "
+                "del kernel), donde vive babylon60_ide.db de verdad."
+            ) from e
     return conn
 
 
