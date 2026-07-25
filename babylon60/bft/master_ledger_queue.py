@@ -32,28 +32,34 @@ class MasterLedgerQueue:
         if self.db is None:
             raise RuntimeError('Database not initialized')
         while True:
-            await asyncio.sleep(0)
             batch: list[tuple[str, tuple[Any, ...]]] = []
+            
+            payload = await self.queue.get()
+            if payload is None:
+                self.queue.task_done()
+                return
+            batch.append(payload)
+            
             while not self.queue.empty() and len(batch) < 500:
                 payload = self.queue.get_nowait()
                 if payload is None:
                     self.queue.task_done()
-                    return
+                    self.queue.put_nowait(None)
+                    break
                 batch.append(payload)
-            if batch:
+            
+            try:
                 await self.db.execute('BEGIN IMMEDIATE')
                 for query, params in batch:
                     await self.db.execute(query, params)
                 await self.db.execute('COMMIT')
+            except Exception as e:
+                logger.critical(f'FAIL-FAST: BFT Batch Write Failed: {e}')
+                await self.db.execute('ROLLBACK')
+                raise
+            finally:
                 for _ in batch:
                     self.queue.task_done()
-            else:
-                payload = await self.queue.get()
-                if payload is None:
-                    self.queue.task_done()
-                    return
-                self.queue.put_nowait(payload)
-                self.queue.task_done()
 
     async def submit_transaction(self, query: str, parameters: tuple[Any, ...]) -> None:
         if self._writer_task is not None and self._writer_task.done() and (not self._writer_task.cancelled()):
