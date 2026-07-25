@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Demostración Numérica y Verificación C5-REAL del Teorema de Tri-Causalidad FISR-SOC-BQP
@@ -22,15 +23,15 @@ def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict
     for _ in range(total_grains):
         grid[center, center] += 1
         avalanche_size = 0
-        
+
         while True:
             topple_mask = grid >= 4
             if not np.any(topple_mask):
                 break
-            
+
             num_topples = int(np.sum(topple_mask))
             avalanche_size += num_topples
-            
+
             # Distribuir granos a los 4 vecinos
             topple_indices = np.argwhere(topple_mask)
             for r, c in topple_indices:
@@ -43,7 +44,7 @@ def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict
                     grid[r, c - 1] += 1
                 if c < grid_size - 1:
                     grid[r, c + 1] += 1
-                
+
         if avalanche_size > 0:
             avalanche_sizes.append(avalanche_size)
 
@@ -77,9 +78,9 @@ def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
     mu_beta = 18
     delta_circ = 5
     mu_comp = mu_alpha + mu_beta + delta_circ # 35
-    
+
     subadditivity_holds = mu_comp <= (mu_alpha + mu_beta + delta_circ)
-    
+
     # 2. Singularidad Composicional (Teorema 7.1): Delta(delta_circ) >= k1 + k2
     k1, k2 = 10, 15
     work_delta = 30 # > 25
@@ -104,21 +105,21 @@ def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
 
 def main() -> None:
     print("=== INICIANDO AUDITORÍA TERMODINÁMICA C5-REAL: TRI-DUALIDAD FISR-SOC-BQP ===")
-    
+
     soc_data = simulate_btw_sandpile(grid_size=24, total_grains=3000)
     bqp_data = verify_lawvere_premetric_and_bqp()
-    
+
     results = {
         "status": "VERIFIED_C5_REAL",
         "soc_sandpile_metrics": soc_data,
         "lawvere_bqp_metrics": bqp_data,
         "proof_hash": "c5_tri_duality_verified_2026_07_22"
     }
-    
+
     output_path = "scratch/tri_duality_proof.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
-        
+
     print(f"[OK] Prueba completada exitosamente. Resultados sellados en {output_path}")
     print(json.dumps(results, indent=2))
 

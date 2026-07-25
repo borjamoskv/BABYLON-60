@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Unit tests for C5-REAL CESL 1.0 Compiler.
 """

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit test for Substack Post Formatting Invariants (substack-moskv-omega).
 Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy).

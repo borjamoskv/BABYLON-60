@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C6-REAL Orchestrator and Auditor."""
 import hashlib
 from typing import Dict, Optional
@@ -11,15 +12,15 @@ def generate_witness_hash(data: Dict[str, str]) -> str:
     return m.hexdigest()
 
 def generate_attestation(
-    experiment_id: str, 
-    environment: Dict[str, str], 
-    attacks_injected: int, 
+    experiment_id: str,
+    environment: Dict[str, str],
+    attacks_injected: int,
     storage_recovery: Optional[RecoveryResult] = None,
     byzantine_result: Optional[ByzantineResult] = None,
     replay_result: Optional[ReplayResult] = None
 ) -> C6Attestation:
     """Synthesizes the execution results into the final Temporal Identity C6 Attestation."""
-    
+
     # Evaluate Storage
     if storage_recovery:
         safety_pass = storage_recovery.integrity_ok
@@ -49,7 +50,7 @@ def generate_attestation(
         replay_deterministic = replay_result.intermediate_identity_pass and replay_result.causal_alignment_pass
     else:
         replay_deterministic = True
-        
+
     # Witness hash computation based on results
     witness_data = {
         "exp": experiment_id,
@@ -61,7 +62,7 @@ def generate_attestation(
         "replay": str(replay_deterministic)
     }
     witness_hash = generate_witness_hash(witness_data)
-    
+
     return C6Attestation(
         experiment_id=experiment_id,
         environment=environment,

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX-OS Syscall Interface & Handlers.
 Defines system calls: Observe, Measure, Verify, Persist, Search, Compile, Execute, Rollback, Audit, Learn.

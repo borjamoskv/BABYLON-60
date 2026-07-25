@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # [Segundo Experimento C5] Registro de Laboratorio Público
 
 **Fecha:** 2026-07-21

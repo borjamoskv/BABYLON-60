@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM-5.0 Minimal Instruction Families & Structural Error Model.
 Instruction Families: READ, WRITE, CONTROL.

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Tests for cortex/invariant_sentinel.py
 Achieves >90% coverage for Invariant Sentinel module.
@@ -62,7 +63,7 @@ class TestInvariantSentinel(unittest.TestCase):
         self, mock_exists: MagicMock, mock_walk: MagicMock
     ) -> None:
         user_home = os.path.expanduser("~")
-        
+
         # Setup mock directory walk:
         # Level 0: root containing ignored dirs and normal files
         # Level 5: deep directory to hit depth >= 5 prune condition
@@ -71,7 +72,7 @@ class TestInvariantSentinel(unittest.TestCase):
             ("./subfolder", ["deep_sub"], ["sub.ts"]),
             ("./1/2/3/4/5", ["too_deep"], ["deep.py"]),
         ]
-        
+
         def mock_exists_side_effect(path: str) -> bool:
             if path == RULES_FILE:
                 return True

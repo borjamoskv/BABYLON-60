@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import sys
 import json
 import os
@@ -24,7 +25,7 @@ def calculate_metrics(transcript_path: str) -> None:
             content = data["content"]
             words = content.split()
             total_model_words += len(words)
-            
+
             in_code_block = False
             for c_line in content.split('\n'):
                 if c_line.startswith("```") or c_line.startswith(">"):

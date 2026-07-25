@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 "use strict";(function(){try{var e=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{};e.SENTRY_RELEASE={id:"e0f338aea51a130071b62788fee794575c1b9d0e"}}catch{}})();try{(function(){var e=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{},t=new e.Error().stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]="2a855c3e-68fb-445f-bd56-ffb7a8bc94a1",e._sentryDebugIdIdentifier="sentry-dbid-2a855c3e-68fb-445f-bd56-ffb7a8bc94a1")})()}catch{}const N=require("electron"),F=require("electron/renderer");function cs(){var e;return"frameToken"in F.webFrame&&F.webFrame.top&&"frameToken"in F.webFrame.top?F.webFrame.top.frameToken===F.webFrame.frameToken:((e=F.webFrame.top)==null?void 0:e.routingId)===F.webFrame.routingId}const as={findInPage(e,t){return N.ipcRenderer.invoke("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_findInPage",e,t)},stopFindInPage(){return N.ipcRenderer.invoke("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_stopFindInPage")},endFindSession(){return N.ipcRenderer.invoke("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_endFindSession")},onStepToMatch(e){const t=(n,r)=>e(r);return N.ipcRenderer.on("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_stepToMatch",t),()=>{N.ipcRenderer.removeListener("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_stepToMatch",t)}},onFocusInput(e){const t=n=>e();return N.ipcRenderer.on("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_focusInput",t),()=>{N.ipcRenderer.removeListener("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_focusInput",t)}},onBlurInput(e){const t=n=>e();return N.ipcRenderer.on("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_blurInput",t),()=>{N.ipcRenderer.removeListener("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.internal.findInPage_$_FindInPage_$_blurInput",t)}}},us=e=>{cs()&&(e["claude.internal.findInPage"]=e["claude.internal.findInPage"]||{},e["claude.internal.findInPage"].FindInPage=as)},Zr={};us(Zr);for(const[e,t]of Object.entries(Zr))N.contextBridge.exposeInMainWorld(e,t);function fs(){var t;let e;try{e=new URL(window.location.href)}catch{return!1}return!!(("frameToken"in F.webFrame&&F.webFrame.top&&"frameToken"in F.webFrame.top?F.webFrame.top.frameToken===F.webFrame.frameToken:((t=F.webFrame.top)==null?void 0:t.routingId)===F.webFrame.routingId)&&((e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin)==="https://claude.ai"||(e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin)==="https://preview.claude.ai"||(e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin)==="https://claude.com"||(e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin)==="https://preview.claude.com"||e.hostname==="localhost"||(e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin).endsWith(".ant.dev")||e.hostname==="localhost"||e.protocol==="file:"||(e.origin==="null"||e.origin===null?`${e.protocol}//${e.host}`:e.origin)==="app://localhost"))}const ls={getInitialLocale(){return N.ipcRenderer.invoke("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.hybrid_$_DesktopIntl_$_getInitialLocale")},requestLocaleChange(e){return N.ipcRenderer.invoke("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.hybrid_$_DesktopIntl_$_requestLocaleChange",e)},onLocaleChanged(e){const t=(n,r,o)=>e(r,o);return N.ipcRenderer.on("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.hybrid_$_DesktopIntl_$_localeChanged",t),()=>{N.ipcRenderer.removeListener("$eipc_message$_9944ee55-080d-4360-a52a-09816004be13_$_claude.hybrid_$_DesktopIntl_$_localeChanged",t)}}},ds=e=>{fs()&&(e["claude.hybrid"]=e["claude.hybrid"]||{},e["claude.hybrid"].DesktopIntl=ls)},Lr={};ds(Lr);for(const[e,t]of Object.entries(Lr))N.contextBridge.exposeInMainWorld(e,t);const y=typeof __SENTRY_DEBUG__>"u"||__SENTRY_DEBUG__,S=globalThis,se="10.27.0";function rt(){return ot(S),S}function ot(e){const t=e.__SENTRY__=e.__SENTRY__||{};return t.version=t.version||se,t[se]=t[se]||{}}function ve(e,t,n=S){const r=n.__SENTRY__=n.__SENTRY__||{},o=r[se]=r[se]||{};return o[e]||(o[e]=t())}const ps=["debug","info","warn","error","log","assert","trace"],hs="Sentry Logger ",Ke={};function we(e){if(!("console"in S))return e();const t=S.console,n={},r=Object.keys(Ke);r.forEach(o=>{const s=Ke[o];n[o]=t[o],t[o]=s});try{return e()}finally{r.forEach(o=>{t[o]=n[o]})}}function _s(){Bt().enabled=!0}function gs(){Bt().enabled=!1}function Fr(){return Bt().enabled}function ms(...e){Ut("log",...e)}function ys(...e){Ut("warn",...e)}function bs(...e){Ut("error",...e)}function Ut(e,...t){y&&Fr()&&we(()=>{S.console[e](`${hs}[${e}]:`,...t)})}function Bt(){return y?ve("loggerSettings",()=>({enabled:!1})):{enabled:!1}}const g={enable:_s,disable:gs,isEnabled:Fr,log:ms,warn:ys,error:bs},jr=50,Q="?",gn=/\(error: (.*)\)/,mn=/captureMessage|captureException/;function xr(...e){const t=e.sort((n,r)=>n[0]-r[0]).map(n=>n[1]);return(n,r=0,o=0)=>{const s=[],i=n.split(`
 `);for(let c=r;c<i.length;c++){let a=i[c];a.length>1024&&(a=a.slice(0,1024));const u=gn.test(a)?a.replace(gn,"$1"):a;if(!u.match(/\S*Error: /)){for(const f of t){const l=f(u);if(l){s.push(l);break}}if(s.length>=jr+o)break}}return Mr(s.slice(o))}}function Es(e){return Array.isArray(e)?xr(...e):e}function Mr(e){if(!e.length)return[];const t=Array.from(e);return/sentryWrapped/.test(Fe(t).function||"")&&t.pop(),t.reverse(),mn.test(Fe(t).function||"")&&(t.pop(),mn.test(Fe(t).function||"")&&t.pop()),t.slice(0,jr).map(n=>({...n,filename:n.filename||Fe(t).filename,function:n.function||Q}))}function Fe(e){return e[e.length-1]||{}}const ht="<anonymous>";function ee(e){try{return!e||typeof e!="function"?ht:e.name||ht}catch{return ht}}function yn(e){const t=e.exception;if(t){const n=[];try{return t.values.forEach(r=>{r.stacktrace.frames&&n.push(...r.stacktrace.frames)}),n}catch{return}}}function Ur(e){return"__v_isVNode"in e&&e.__v_isVNode?"[VueVNode]":"[VueViewModel]"}const Je={},bn={};function fe(e,t){Je[e]=Je[e]||[],Je[e].push(t)}function le(e,t){if(!bn[e]){bn[e]=!0;try{t()}catch(n){y&&g.error(`Error while instrumenting ${e}`,n)}}}function U(e,t){const n=e&&Je[e];if(n)for(const r of n)try{r(t)}catch(o){y&&g.error(`Error while triggering instrumentation handler.
 Type: ${e}
@@ -28,7 +29,7 @@ If init has been called in the preload and contextIsolation is disabled, is not 
             })));
           }
         }
-        
+
         if (${I}.value === undefined) {
           if (${R} in input) {
             newResult[${R}] = undefined;
@@ -36,7 +37,7 @@ If init has been called in the preload and contextIsolation is disabled, is not 
         } else {
           newResult[${R}] = ${I}.value;
         }
-        
+
       `):_n?d.write(`
         if (${I}.issues.length) {
           payload.issues = payload.issues.concat(${I}.issues.map(iss => ({
@@ -44,7 +45,7 @@ If init has been called in the preload and contextIsolation is disabled, is not 
             path: iss.path ? [${R}, ...iss.path] : [${R}]
           })));
         }
-        
+
         if (${I}.value === undefined) {
           if (${R} in input) {
             newResult[${R}] = undefined;
@@ -52,7 +53,7 @@ If init has been called in the preload and contextIsolation is disabled, is not 
         } else {
           newResult[${R}] = ${I}.value;
         }
-        
+
       `):d.write(`
         const ${I}_present = ${R} in input;
         if (${I}.issues.length) {

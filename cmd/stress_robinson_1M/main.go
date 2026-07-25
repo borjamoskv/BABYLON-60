@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // Package stress — C5-REAL Robinson Resolution Stress Harness
 // 1,000,000 iterations de resolución sobre el motor Go nativo.
 // Sin I/O de red (Σ15 compliant). Puro CPU/WAM.

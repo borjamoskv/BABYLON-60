@@ -63,3 +63,28 @@ render-check.png
 # Spotlight exclusion markers
 **/.metadata_never_index
 tmp_chroma_pkg/
+
+# UV Python cache
+.uv_python/
+
+# Hypothesis test cache
+.hypothesis/
+
+# Terraform state and providers
+.terraform/
+*.tfstate
+*.tfstate.backup
+.terraform.lock.hcl
+
+# Python egg-info
+*.egg-info/
+
+# FastAPI temp packages
+tmp_fastapi_pkg/
+
+# Attestation proofs
+c7_*.json
+
+# Post-commit hook logs
+post-commit.log
+post-commit.json

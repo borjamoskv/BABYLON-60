@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: dom_css_transducer
 description: DOM CSS Transducer (Modo Píxel) - Colapsa ideas visuales en interfaces directamente con latencia cero.

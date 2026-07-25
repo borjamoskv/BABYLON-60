@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Pruebas unitarias para GeminiProPoolManager (C5-REAL)."""
 
 import os

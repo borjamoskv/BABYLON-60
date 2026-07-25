@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # █ CORTEX AUDIT: PYCHARM 2026.1.4
 > STATE: C5-REAL | TARGET: JVM_MEMORY_PRESSURE
 > DATE: 2026
@@ -10,4 +11,4 @@
 La UI pesada roba ciclos atencionales. Las barras de progreso ("Waiting Bars") son fatales para la hiperfocalización. Violas la regla de Antigravity Constraints (`"waiting_bars": false`).
 
 ## 3. Veredicto C5-REAL
-**Descartado para ejecución de Transductores (MOSKV-1).** Su runtime es un lastre termodinámico. 
+**Descartado para ejecución de Transductores (MOSKV-1).** Su runtime es un lastre termodinámico.

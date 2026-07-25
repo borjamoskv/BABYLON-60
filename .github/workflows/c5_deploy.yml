@@ -1,12 +1,20 @@
-name: C5-REAL Soverign Cloud Allocation (GCP)
+# C5-REAL EXERGY CERTIFIED
+name: C5-REAL Sovereign Cloud Allocation (GCP)
+
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
-      - master
+    branches: [ main, master ]
     paths:
       - 'infra/**'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'infra/**'
+
+concurrency:
+  group: infra-deploy
+  cancel-in-progress: false
 
 env:
   PROJECT_ID: cortex-babylon-60
@@ -14,18 +22,17 @@ env:
   WORKLOAD_IDENTITY_PROVIDER: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
 
 jobs:
-  terraform-apply:
-    name: "ULTRATHINK BFT Infra Execution"
+  terraform-plan:
+    name: "Terraform Plan & Validate"
     runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Authenticate via Workload Identity Federation (C5-REAL Zero-Trust)
+      - name: Authenticate via Workload Identity Federation
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
@@ -33,16 +40,53 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+        working-directory: ./infra
 
       - name: Terraform Init
         run: terraform init
+        working-directory: ./infra
+
+      - name: Terraform Validate
+        run: terraform validate
         working-directory: ./infra
 
       - name: Terraform Plan
         run: terraform plan -out=tfplan
         working-directory: ./infra
 
-      - name: Terraform Apply (Auto-Approve / R7 Override)
-        run: terraform apply -auto-approve tfplan
+  terraform-apply:
+    name: "Terraform Apply (R7 Override)"
+    needs: terraform-plan
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Authenticate via Workload Identity Federation
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: 'c5-deployer@cortex-babylon-60.iam.gserviceaccount.com'
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.0
+
+      - name: Terraform Init
+        run: terraform init
         working-directory: ./infra
 
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        working-directory: ./infra

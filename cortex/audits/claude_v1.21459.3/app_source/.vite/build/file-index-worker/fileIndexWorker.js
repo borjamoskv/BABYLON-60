@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 "use strict";
 Object.defineProperty(exports, Symbol.toStringTag, { value: "Module" });
 const path = require("node:path");

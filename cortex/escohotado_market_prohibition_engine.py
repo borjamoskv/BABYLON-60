@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX Escohotado Market & Prohibition Economics Engine (C5-REAL)
 Models the formal economics of prohibitionism ('Historia General de las Drogas')

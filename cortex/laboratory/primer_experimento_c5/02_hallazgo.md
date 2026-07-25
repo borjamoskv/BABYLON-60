@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Hallazgos Empíricos
 
 ## A. Mapa termodinámico de la audiencia (659 suscriptores)

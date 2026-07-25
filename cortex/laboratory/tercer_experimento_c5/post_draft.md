@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # 🏛️ Más Allá del Bloqueo: Concurrencia Pura en SQLite WAL y la Exergía del Memristor
 
 En el diseño de sistemas cognitivos soberanos (C5-REAL), la persistencia del estado es el sumidero termodinámico por excelencia. Toda decisión tomada por un enjambre de subagentes debe colapsar tarde o temprano en el disco duro, marcando el fin de la disipación estocástica y consolidando el ledger inmutable.

@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import * as net from 'net';
 import { ipcMain, WebContents } from 'electron';
 import { StringDecoder } from 'string_decoder';
@@ -26,7 +27,7 @@ export class IpcSocketBridge {
   private isConnected = false;
 
   // Límite de seguridad termodinámica para la cache NDJSON (10MB)
-  private readonly MAX_BUFFER_SIZE = 10 * 1024 * 1024; 
+  private readonly MAX_BUFFER_SIZE = 10 * 1024 * 1024;
 
   constructor() {
     if (!process.env.CORTEX_IPC_SOCKET) {
@@ -64,7 +65,7 @@ export class IpcSocketBridge {
       this.isConnected = true;
       this.retryCount = 0;
       console.log(`[C5-REAL] Electron connected to Agent Igor IPC at ${this.socketPath}`);
-      
+
       // Vaciar cola de peticiones pendientes acumuladas durante el arranque
       while (this.payloadQueue.length > 0) {
         const pending = this.payloadQueue.shift();
@@ -110,7 +111,7 @@ export class IpcSocketBridge {
     // Invariante Ω45: Fragmentación NDJSON y Prevención de Corrupción UTF-8
     this.client.on('data', (data) => {
       this.buffer += this.decoder.write(data);
-      
+
       if (this.buffer.length > this.MAX_BUFFER_SIZE) {
         console.warn(`[C5-REAL] Warning: NDJSON Buffer overflow (>${this.MAX_BUFFER_SIZE} bytes). Clearing buffer.`);
         this.buffer = '';
@@ -165,7 +166,7 @@ export class IpcSocketBridge {
     ipcMain.on('agent:send-ast', (event, astData: Record<string, unknown>) => {
       this.sendPayload({ type: 'AST', data: astData });
     });
-    
+
     ipcMain.on('agent:send-aom', (event, aomData: Record<string, unknown>) => {
       this.sendPayload({ type: 'AOM', data: aomData });
     });

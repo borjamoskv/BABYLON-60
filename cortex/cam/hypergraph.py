@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM 2.0 Evolutionary Hypergraph.
 Supports 1st-order causal edges (acyclic) and 2nd-order metadata feedback edges (cyclic adaptation).

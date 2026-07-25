@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import unittest
 from cortex.cognitive_state_observer import CognitiveStateObserver
 

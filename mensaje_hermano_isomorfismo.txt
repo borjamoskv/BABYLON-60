@@ -21,7 +21,7 @@ En la médula espinal, las células inmunes llamadas microglías están normalme
 
 3. La Trampa Predictiva (Por qué el dolor se vuelve crónico):
 
-El cerebro no reacciona al daño puro; calcula la PROBABILIDAD de daño basándose en lo que cree que está pasando (Inferencia Bayesiana). El dolor crónico (o la alodinia) ocurre cuando este modelo predictivo se desconecta de la realidad y se atasca en un bucle infinito de retroalimentación. 
+El cerebro no reacciona al daño puro; calcula la PROBABILIDAD de daño basándose en lo que cree que está pasando (Inferencia Bayesiana). El dolor crónico (o la alodinia) ocurre cuando este modelo predictivo se desconecta de la realidad y se atasca en un bucle infinito de retroalimentación.
 
 En redes, esto se conoce formalmente como Colapso Congestivo (RFC 2914). El enrutador (el cerebro) se asusta tanto que se convierte él mismo en la fuente del problema, amplificando cualquier roce como si fuera letal.
 

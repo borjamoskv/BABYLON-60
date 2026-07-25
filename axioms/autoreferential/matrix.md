@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 Domain: Autoreferential Systems (Autopoiesis)
 Dimension: 3D Latent Space [10 x 10 x 10]

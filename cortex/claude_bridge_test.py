@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Test suite for CORTEX Claude Code Bridge (C5-REAL).
 """

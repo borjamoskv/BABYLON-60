@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit tests for Escohotado Unified CLI Transducer.
 Rule Compliance: Ω10 (SQLite Isolation), Ω26 (Specific Exception Handling).

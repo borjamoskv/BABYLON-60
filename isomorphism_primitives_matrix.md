@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Arquitecturas de Resiliencia Silicio-Bio: Un Modelo de Isomorfismo entre el Dolor Crónico y las Tormentas de Interrupciones
 
 ## MATRIZ DE PRIMITIVAS ARQUITECTÓNICAS COMUNES: El ADN Universal del Diseño Resiliente

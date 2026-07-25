@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Sandbox Isolation Engine
 Encapsula la ejecución de código generado por el Swarm para evitar necrosis estructural en `main`.

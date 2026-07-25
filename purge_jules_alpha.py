@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import re
 import glob
@@ -18,9 +19,9 @@ purged_count = 0
 for filepath in md_files:
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     new_content = purge_taint(content)
-    
+
     if new_content != content:
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(new_content)

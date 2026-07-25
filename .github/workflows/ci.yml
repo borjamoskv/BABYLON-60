@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 name: CI
 
 on:
@@ -6,43 +7,56 @@ on:
   pull_request:
     branches: [ main, master ]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set up Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+          cache: 'pip'
+
       - name: Install dependencies
         run: |
-          python -m venv .venv
-          source .venv/bin/activate
-          pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install ruff black mypy pytest-cov pip-audit mkdocstrings[python] mkdocs-material
+
       - name: Lint with ruff
-        run: |
-          source .venv/bin/activate
-          ruff check .
+        run: ruff check .
+
       - name: Formatting check with black
-        run: |
-          source .venv/bin/activate
-          black --check .
+        run: black --check .
+
       - name: Type check with mypy
-        run: |
-          source .venv/bin/activate
-          mypy --strict .
+        run: mypy .
+
       - name: Run tests with coverage
-        run: |
-          source .venv/bin/activate
-          pytest -q --cov=cortex
+        run: pytest -q --cov=cortex --cov-report=xml
+
       - name: Security audit
-        run: |
-          source .venv/bin/activate
-          pip-audit
+        run: pip-audit
+
       - name: Build documentation
-        run: |
-          source .venv/bin/activate
-          mkdocs build
+        run: mkdocs build
+
+      - name: Upload coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage.xml
+          retention-days: 14

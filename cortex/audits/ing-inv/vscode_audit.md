@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Reverse Engineering Audit: VSCode (darwin-arm64)
 
 ## Executive Summary

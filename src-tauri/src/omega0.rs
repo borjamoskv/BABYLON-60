@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Kernel Ω₀ — Irreducible Epistemological Kernel
 //!
 //! Formal basis: Martin-Löf Typing Judgement  ⊢ t : T

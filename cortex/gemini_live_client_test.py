@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Unit tests for cortex.gemini_live_client (C5-REAL)."""
 
 import pytest

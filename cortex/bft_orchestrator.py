@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 bft_orchestrator — Byzantine Fault-Tolerant Consensus Orchestrator (C5-REAL / Ω17 / Ω26).
 
@@ -97,7 +98,7 @@ class BFTNode:
         """Computes the state hash of the node using HMAC-SHA3-256 for cryptographic integrity (Ω24, Ω25)."""
         import hmac
         import sys
-        
+
         # Resolve cortex_env dynamically or via sys.path to enforce Ω25
         try:
             from cortex_env import get_bft_key
@@ -105,9 +106,9 @@ class BFTNode:
             import os
             sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
             from cortex_env import get_bft_key
-            
+
         bft_key = get_bft_key()
-        
+
         # Read attributes from the Rust PyO3 classes
         state_data = (
             f"states:{self.state_vector.states},"
@@ -324,7 +325,7 @@ class BFTOrchestrator:
         import hmac
         import sys
         import os
-        
+
         # Resolve cortex_env dynamically or via sys.path to enforce Ω25
         try:
             from cortex_env import get_bft_key
@@ -332,14 +333,14 @@ class BFTOrchestrator:
             import os
             sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
             from cortex_env import get_bft_key
-            
+
         bft_key = get_bft_key()
 
         # Ω113 + Ω25: Dynamic Causal Taint seeded by Sovereign Key
         raw_payload = f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
         dynamic_hash = hmac.new(bft_key.encode("utf-8"), raw_payload, hashlib.sha3_256).hexdigest()
         taint = f"CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{dynamic_hash}"
-        
+
         with self._get_connection() as conn:
             try:
                 conn.execute(

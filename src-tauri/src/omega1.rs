@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Omega 1 — Knowledge Graph Rewriting System
 //!
 //! Iteration over Kernel Ω₀.

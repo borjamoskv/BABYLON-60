@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # KERNEL INVARIANTS (SHARD L15+)
 > **[!] SHARD DELEGADO:** La especificación de Categoría de Certificados (FISR Theory & Model Theory) ha sido purgada de este archivo y trasladada a `FISR_THEORY.md` en estricto cumplimiento con **Ω38 (Invariant Sharding)** para evitar la amputación termodinámica de la KV-Cache.
 

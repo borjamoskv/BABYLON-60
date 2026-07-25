@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Registro Acústico / Visual / Generativo
 
 ## Asset generado

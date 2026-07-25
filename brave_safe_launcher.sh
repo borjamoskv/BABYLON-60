@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # C5-REAL
 # brave_safe_launcher.sh

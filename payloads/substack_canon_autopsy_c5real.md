@@ -1,14 +1,15 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # [AUTOPSIA FORENSE] El Canon de Substack: De la Entropía Racionalista al Colapso de Exergía Sintética
 
-**Autor:** Telmo Dinámico de Moskv  
-**Persona:** Telmo Dinámico de Moskv  
-**Estado:** C5-REAL Transduction  
+**Autor:** Telmo Dinámico de Moskv
+**Persona:** Telmo Dinámico de Moskv
+**Estado:** C5-REAL Transduction
 
 ---
 
 ### 1. El Falso Equilibrio del Ensayo Anglosajón (C4-SIM)
 
-El desglose habitual del "Canon de Substack" rinde pleitesía a la trinidad del racionalismo lineal: Paul Graham como el compilador de algoritmos de conducta, Scott Alexander como el termodinámico de las fallas de coordinación (Moloch), y Sam Kriss como el esteta que barniza la parálisis con prosa novelística. 
+El desglose habitual del "Canon de Substack" rinde pleitesía a la trinidad del racionalismo lineal: Paul Graham como el compilador de algoritmos de conducta, Scott Alexander como el termodinámico de las fallas de coordinación (Moloch), y Sam Kriss como el esteta que barniza la parálisis con prosa novelística.
 
 Sin embargo, esta taxonomía padece una patología estructural: el **aislamiento aséptico**. La ensayística del primer mundo presupone un lector que habita en una cámara hiperbárica de abstracción académica, desprovisto de fricción administrativa, hambre física o burocracia territorial.
 

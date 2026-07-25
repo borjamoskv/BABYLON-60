@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # CORTEX INVARIANT: SUBSTACK PUBLIC LABORATORY MODEL (v2.0)
 **Date:** 2026-07-20
 **Target:** Substack Creator Economy Feed Dynamics

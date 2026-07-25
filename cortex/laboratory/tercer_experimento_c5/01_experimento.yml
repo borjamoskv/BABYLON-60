@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 claim_id: "LAB_TERCER_EXPERIMENTO_C5"
 hypothesis: "La implementacion de bloques try/finally y cierre explicito de SQLite WAL en STDPMemristor elimina los bloqueos de escritura y colisiones de bloqueo bajo alta concurrencia (50 hilos paralelos), manteniendo el rendimiento y la consistencia del poset causal."
 initial_conditions:

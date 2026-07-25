@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit test suite for Full Substack Archive Catalog Transduction (23 Articles).
 Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy), Ω23 (Relative Paths).

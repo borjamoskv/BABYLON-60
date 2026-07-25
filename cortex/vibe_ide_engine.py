@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Vibe Code IDE Engine
 Motor físico determinista que implementa la arquitectura Vibe Code de 10 principios.

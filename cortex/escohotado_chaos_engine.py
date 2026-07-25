@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX Escohotado Chaos & Thermodynamic Simulation Engine (C5-REAL)
 Models the non-linear dynamics of self-organizing vs state-coerced systems

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: bft_node_alpha
 description: BFT Node Alpha (Sintaxis y Tipos) - Validador aislado del Consenso BFT contra las leyes del AST.

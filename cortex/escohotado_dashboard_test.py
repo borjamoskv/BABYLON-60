@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit test to verify Escohotado C5-REAL HTML Dashboard integrity.
 Rule Compliance: Ω11 (AST / HTML syntax invariant).

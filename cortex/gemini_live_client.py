@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C5-REAL Gemini Multimodal Live API & Protocol Transducer (v1.0).
 
 Enforces:

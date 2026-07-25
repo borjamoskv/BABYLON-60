@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Any, Dict, List, Tuple
 import hashlib
 
@@ -12,7 +13,7 @@ class BranchValidator:
     def is_cryptographically_valid(self, chain: Any) -> Any:
         expected_prev = chain[0]["prev_hash"] if chain else "GENESIS_HASH"
         last_lamport = chain[0]["lamport_t"] - 1 if chain else 0
-        
+
         for entry in chain:
             if entry["lamport_t"] <= last_lamport:
                 return False
@@ -21,7 +22,7 @@ class BranchValidator:
             calc_hash = self.verify_hash(entry["lamport_t"], entry["nonce"], entry["payload"], entry["prev_hash"])
             if calc_hash != entry["block_hash"]:
                 return False
-            
+
             expected_prev = entry["block_hash"]
             last_lamport = entry["lamport_t"]
         return True
@@ -37,10 +38,10 @@ class FitnessFunction:
         pp = 0
         rc = len(chain) * 0.5  # Base compute cost per node
         cd = 0
-        
+
         for entry in chain:
             payload = entry["payload"]
-            
+
             # Heurísticas causales simuladas (exergía semántica)
             if "Architectural Resolution" in payload:
                 pp += 100
@@ -51,7 +52,7 @@ class FitnessFunction:
                 cd += 10
             else:
                 pp += 1
-                
+
         fitness = pp - rc - cd
         return {
             "fitness": fitness,
@@ -86,9 +87,9 @@ def run_c7_2() -> None:
         event = create_event(i, f"Shared Base Event {i}", current_hash)
         genesis_chain.append(event)
         current_hash = event["block_hash"]
-        
+
     fork_point_hash = current_hash
-    
+
     # 2. Rama A: El Camino Legítimo
     # Genera eventos normales y resoluciones de alto valor
     print("[+] 2. Generando Branch A (Alta Exergía / High Predictive Power)...")
@@ -99,7 +100,7 @@ def run_c7_2() -> None:
         event = create_event(i, payload, curr_hash_a)
         branch_a.append(event)
         curr_hash_a = event["block_hash"]
-        
+
     # 3. Rama B: El Ataque Spam
     # El adversario crea una cadena MUCHO MÁS LARGA que A, esperando ganar por longitud.
     print("[+] 3. Generando Branch B (Ataque Spam / Trampa de la Cadena Más Larga)...")
@@ -110,16 +111,16 @@ def run_c7_2() -> None:
         event = create_event(i, payload, curr_hash_b)
         branch_b.append(event)
         curr_hash_b = event["block_hash"]
-        
+
     # 4. Auditoría Criptográfica Externa
     print("\n[+] 4. Verificación Criptográfica Estricta (C7.1 inherente)...")
     validator = BranchValidator()
     valid_a = validator.is_cryptographically_valid(branch_a)
     valid_b = validator.is_cryptographically_valid(branch_b)
-    
+
     print(f"    - Branch A Valid: {valid_a} (Length: {len(branch_a)})")
     print(f"    - Branch B Valid: {valid_b} (Length: {len(branch_b)})")
-    
+
     if not (valid_a and valid_b):
         print("[-] Error: El test falla si alguna rama es criptográficamente inválida.")
         return
@@ -129,12 +130,12 @@ def run_c7_2() -> None:
     evaluator = FitnessFunction()
     fit_a = evaluator.evaluate(branch_a)
     fit_b = evaluator.evaluate(branch_b)
-    
+
     print(f"    - Branch A Metrics: PP={fit_a['PP']}, RC={fit_a['RC']}, CD={fit_a['CD']} | FITNESS = {fit_a['fitness']}")
     print(f"    - Branch B Metrics: PP={fit_b['PP']}, RC={fit_b['RC']}, CD={fit_b['CD']} | FITNESS = {fit_b['fitness']}")
-    
+
     selected = "Branch A" if fit_a['fitness'] > fit_b['fitness'] else "Branch B"
-    
+
     print("\n[+] === C7.2 ATTESTATION ===")
     print("    forks_detected:")
     print("      true")

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit tests for Substack Publisher & Formatting Transducer Tool.
 Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy).

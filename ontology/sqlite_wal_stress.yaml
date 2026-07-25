@@ -1,5 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 Claim: "SQLite WAL Stress Test Invariant"
-Proof: 
+Proof:
   Base: "Concurrencia Física en Disco (Write-Ahead Log) vs Simulaciones Teóricas"
   Range: "[SQLite_BUSY Lockout Prevention, BFT Consensus Assurance]"
   Confidence: C5-REAL

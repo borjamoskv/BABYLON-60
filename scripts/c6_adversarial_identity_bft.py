@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import sqlite3
 import multiprocessing
 import os
@@ -17,7 +18,7 @@ def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
     conn.execute("PRAGMA wal_autocheckpoint=0") # Bloquea el checkpoint automático
-    
+
     conn.execute("""
         CREATE TABLE IF NOT EXISTS bft_ledger (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,7 +27,7 @@ def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event)
         )
     """)
     ready_event.set()
-    
+
     lamport = 0
     # Usamos transacciones en bloque para saturar el I/O rápido
     while True:
@@ -57,18 +58,18 @@ def c6_adversarial_orchestrator() -> None:
     print(" C6 ADVERSARIAL IDENTITY VERIFICATION (BFT/WAL)")
     print(" Vector: kill_during_checkpoint")
     print("=====================================================\n")
-    
+
     if os.path.exists(DB_PATH): os.remove(DB_PATH)
     wal_path = DB_PATH + "-wal"
     if os.path.exists(wal_path): os.remove(wal_path)
-        
+
     ready_event = multiprocessing.Event()
     writer = multiprocessing.Process(target=writer_process, args=(DB_PATH, ready_event))
     writer.start()
-    
+
     ready_event.wait()
     print(f"[+] [T0] Writer spawned (PID: {writer.pid}). Inflating WAL to {WAL_TARGET_SIZE_MB}MB...")
-    
+
     # 1. Esperamos a que el WAL acumule suficiente deuda I/O
     target_bytes = WAL_TARGET_SIZE_MB * 1024 * 1024
     while True:
@@ -78,19 +79,19 @@ def c6_adversarial_orchestrator() -> None:
                 print(f"[+] [T1] WAL alcanzó {size / (1024*1024):.2f} MB.")
                 break
         time.sleep(0.01)
-        
+
     # 2. Desplegamos al Checkpointer
     start_checkpoint_event = multiprocessing.Event()
     checkpointer = multiprocessing.Process(target=checkpointer_process, args=(DB_PATH, start_checkpoint_event))
     checkpointer.start()
     print(f"[+] [T2] Checkpointer spawned (PID: {checkpointer.pid}). Initiating PRAGMA wal_checkpoint(TRUNCATE)...")
-    
+
     start_checkpoint_event.set()
-    
-    # 3. Ventana Crítica de Asesinato: calculamos un sleep microscópico para acertar 
+
+    # 3. Ventana Crítica de Asesinato: calculamos un sleep microscópico para acertar
     # en mitad de la transferencia física WAL -> DB.
-    time.sleep(0.05) 
-    
+    time.sleep(0.05)
+
     print("\n[!] [T3] === INYECTANDO SIGKILL MASIVO (OS.KILL) ===")
     try:
         if writer.pid is not None and checkpointer.pid is not None:
@@ -99,38 +100,38 @@ def c6_adversarial_orchestrator() -> None:
         print("[!] Procesos decapitados a nivel de Kernel.")
     except ProcessLookupError:
         print("[-] Procesos ya terminaron antes del SIGKILL.")
-    
+
     writer.join()
     checkpointer.join()
-    
+
     # 4. Verificación Ontológica C6
     print("\n[+] [T4] Verificando Identidad BFT post-destrucción...")
-    
+
     try:
         conn = sqlite3.connect(DB_PATH, timeout=5.0)
         cursor = conn.cursor()
-        
+
         # Integridad estructural
         cursor.execute("PRAGMA integrity_check")
         integrity = cursor.fetchone()[0]
-        
+
         # Estado lógico (conservación de filas)
         cursor.execute("SELECT COUNT(*) FROM bft_ledger")
         count = cursor.fetchone()[0]
-        
+
         # Recuperación de la línea temporal
         cursor.execute("SELECT MAX(lamport_t) FROM bft_ledger")
         max_lamport = cursor.fetchone()[0]
-        
+
         print(f"    - PRAGMA integrity_check : {integrity}")
         print(f"    - Filas recuperadas      : {count}")
         print(f"    - Lamport T Máximo       : {max_lamport}")
-        
+
         if integrity == "ok" and count > 0:
             print("\n[+] C6 RESULT: IDENTIDAD CONSERVADA. El WAL fue truncado violentamente pero SQLite restauró el Master Ledger sin corrupción de punteros.")
         else:
             print("\n[-] C6 RESULT: CORRUPCIÓN DETECTADA. La Base de Datos sufrió pérdida de identidad.")
-            
+
     except sqlite3.DatabaseError as e:
         print(f"\n[-] C6 RESULT: ERROR ESTRUCTURAL CATASTRÓFICO. La base de datos es ilegible. Exception: {e}")
 

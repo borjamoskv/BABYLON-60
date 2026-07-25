@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # FISR Certificate Calculus — The Renormalization Operator (v18.3)
 
 ## 1. Thermodynamic Rejection of By-Design Closure (Option A)

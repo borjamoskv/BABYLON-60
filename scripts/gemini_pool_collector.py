@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CORTEX Gemini PRO Key Collector & Validator (C5-REAL).

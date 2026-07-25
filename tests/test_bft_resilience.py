@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import asyncio
 import sqlite3
 import pytest
@@ -47,7 +48,7 @@ class MasterLedgerWriter:
         self.conn = sqlite3.connect(TEST_DB_PATH, timeout=5.0)
         self.conn.execute("PRAGMA journal_mode = WAL;")
         self.conn.execute("PRAGMA busy_timeout = 5000;")
-        
+
     async def writer_loop(self) -> None:
         while True:
             item = await self.queue.get()
@@ -64,7 +65,7 @@ class MasterLedgerWriter:
                 self.conn.rollback()
                 print(f"Error inserting {lamport_t}: {e}")
             self.queue.task_done()
-            
+
     def close(self) -> None:
         self.conn.close()
 
@@ -73,38 +74,38 @@ def test_wal_contention() -> None:
     async def run_contention() -> None:
         writer = MasterLedgerWriter()
         writer_task = asyncio.create_task(writer.writer_loop())
-        
+
         # Pre-fetch genesis hash
         c = writer.conn.cursor()
         c.execute("SELECT payload_hash FROM bft_ledger WHERE lamport_t = 0")
         genesis_hash = c.fetchone()[0]
-        
+
         # We will enqueue 100 writes concurrently
         prev = genesis_hash
-        
+
         for i in range(1, 101):
             lamport_t = i
             agent_id = f"AGENT_{i%3}"
             phash = hash_payload(lamport_t, agent_id, prev)
             taint = f"CORTEX-TAINT:test:{i}"
-            
+
             # Enqueue item
             await writer.queue.put((agent_id, lamport_t, phash, prev, taint))
             prev = phash
-            
+
         # Wait for all to be processed
         await writer.queue.join()
-        
+
         # Stop writer
         await writer.queue.put(None)
         await writer_task
-        
+
         # Verify count
         c.execute("SELECT COUNT(*) FROM bft_ledger")
         count = c.fetchone()[0]
         assert count == 101 # genesis + 100
         writer.close()
-        
+
     asyncio.run(run_contention())
 
 def test_chain_integrity() -> None:
@@ -112,12 +113,12 @@ def test_chain_integrity() -> None:
     cursor = conn.cursor()
     cursor.execute("SELECT lamport_t, agent_id, payload_hash, prev_hash FROM bft_ledger ORDER BY lamport_t ASC")
     rows = cursor.fetchall()
-    
+
     assert len(rows) > 0
-    
+
     # Genesis
     assert rows[0][1] == "ROOT_OPERATOR_UID0"
-    
+
     # Chain verification
     prev_hash_expected = rows[0][2] # Genesis payload hash
     for row in rows[1:]:
@@ -126,20 +127,20 @@ def test_chain_integrity() -> None:
         # recalc hash
         assert payload_hash == hash_payload(lamport_t, agent_id, prev_hash)
         prev_hash_expected = payload_hash
-        
+
     conn.close()
 
 def test_intentional_corruption_prevention() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)
-    
+
     # Test update trigger (Ω11)
     with pytest.raises(sqlite3.IntegrityError) as exc:
         conn.execute("UPDATE bft_ledger SET payload_hash = 'CORRUPT' WHERE lamport_t = 0")
     assert "Modificación de ledger inmutable prohibida" in str(exc.value)
-    
+
     # Test delete trigger (Ω11)
     with pytest.raises(sqlite3.IntegrityError) as exc:
         conn.execute("DELETE FROM bft_ledger WHERE lamport_t = 0")
     assert "Borrado de ledger inmutable prohibido" in str(exc.value)
-    
+
     conn.close()

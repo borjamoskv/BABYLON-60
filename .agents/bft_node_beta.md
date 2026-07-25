@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: bft_node_beta
 description: BFT Node Beta (Sandbox y Ejecución) - Validador físico aislado que ejecuta tests para validar hipótesis en la realidad.

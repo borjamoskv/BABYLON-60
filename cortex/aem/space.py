@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM-5.0 Minimal Object Memory Space.
 Provides allocation, lookup, and release over opaque Handles.

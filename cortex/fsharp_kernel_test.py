@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest integration test for F# Sovereign Ontology (net10.0).
 Rule Compliance: Ω117 (Multi-Language BFT Audit).

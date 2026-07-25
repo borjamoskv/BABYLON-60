@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 "use strict";
 const node_fs = require("node:fs");
 const node_os = require("node:os");

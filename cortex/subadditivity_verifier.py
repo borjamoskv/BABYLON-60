@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL FISR Subadditivity Theorem Verifier & Lawvere Metric Transducer (v18.4)
 ================================================================================

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # █▄ CENTURIA MATRIX: 1000 GITHUB WEBHOOK/MCP PRIMITIVES (C5-REAL)
 
 Invariante: Mapeo ortogonal de 10 dominios de eventos GitHub contra 100 arquetipos APEX.

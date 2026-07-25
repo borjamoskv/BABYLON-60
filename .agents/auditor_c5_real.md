@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: auditor_c5_real
 description: Auditor C5-REAL (ULTRATHINK P0) - Ejecuta el BFT State Loop sobre cada mutación propuesta.

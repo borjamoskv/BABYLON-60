@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CORTEX Escohotado Unified CLI Transducer (C5-REAL)

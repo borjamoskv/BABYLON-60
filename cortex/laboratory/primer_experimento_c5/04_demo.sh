@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # Experiment: primer_experimento_c5
 # Execution transcript: Run the subscriber audit and feed analysis.

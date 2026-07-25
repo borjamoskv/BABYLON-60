@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Experimento 2: Micro‑post técnico
 
 Definir un prototipo de micro‑post que incluya código ejecutable y un asset visual (ej. captura de pantalla).

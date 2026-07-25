@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Audit Report: Claude Science (com.anthropic.operon)
 
 ## Executive Summary

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX-OS Epistemic Cognitive Scheduler.
 Schedules process tasks based on Priority * InfoGain * RiskReduction / TokenCost.

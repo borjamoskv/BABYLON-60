@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C6-REAL Attestation & Invariants."""
 from dataclasses import dataclass
 from typing import Dict
@@ -29,18 +30,18 @@ class C6Attestation:
     experiment_id: str
     environment: Dict[str, str]
     attacks_injected: int
-    
+
     # Booleans replace scores
     safety_pass: bool
     durability_pass: bool
     recovery_pass: bool
     byzantine_pass: bool
-    
+
     # Specifics
     committed_tx_loss: int
     corruption_detected: bool
     replay_deterministic: bool
-    
+
     witness_hash: str
 
     def to_yaml_str(self) -> str:

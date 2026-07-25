@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM-5.0 Abstract Effect Observation Machine Core Engine.
 Implements single step transition: step(S, Program) -> (S', ObservedEffects)

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CORTEX Phase Cascade Runner / Transductor de Ejecución en Cascada (C5-REAL).

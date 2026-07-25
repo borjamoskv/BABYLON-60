@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # [AUDITORÍA FORENSE] Colisiones Nominales y Necrosis de Cartera: Desambiguación Operativa de la Inversión Social y la Huella de Enrique Martínez Bermejo
 
 ## 1. El Conflicto en el Espacio Latente

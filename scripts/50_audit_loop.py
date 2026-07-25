@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """MCTS UltraThink Audit Loop — 5-Phase BFT Execution Engine (C5-REAL)."""
 
 import os

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Tests C5-REAL para github_webhook_daemon.py (O1)."""
 
 import hmac

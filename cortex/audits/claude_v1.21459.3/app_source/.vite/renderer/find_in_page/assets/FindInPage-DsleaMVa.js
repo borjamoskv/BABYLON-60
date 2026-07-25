@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import{R as Ae,r as p,_ as P,a as M,b as T,c as S,d as Ee,e as ue,f as R,g as _e,h as Ie,u as le,j as x}from"./main-B0Fga2y2.js";(function(){try{var r=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{};r.SENTRY_RELEASE={id:"e0f338aea51a130071b62788fee794575c1b9d0e"}}catch{}})();try{(function(){var r=typeof window<"u"?window:typeof global<"u"?global:typeof globalThis<"u"?globalThis:typeof self<"u"?self:{},t=new r.Error().stack;t&&(r._sentryDebugIds=r._sentryDebugIds||{},r._sentryDebugIds[t]="6cf8f94c-7091-4f54-97f6-bf4ff9121448",r._sentryDebugIdIdentifier="sentry-dbid-6cf8f94c-7091-4f54-97f6-bf4ff9121448")})()}catch{}var fe={exports:{}},A={};/**
  * @license React
  * react-jsx-runtime.production.min.js

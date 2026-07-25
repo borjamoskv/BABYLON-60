@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 package main
 
 import (
@@ -10,7 +11,7 @@ import (
 
 func TestVerifyPhantomTargets(t *testing.T) {
 	tempDir := t.TempDir()
-	
+
 	// Should fail when .agents doesn't exist
 	if err := verifyPhantomTargets(tempDir); err == nil {
 		t.Errorf("expected error when .agents is missing, got nil")

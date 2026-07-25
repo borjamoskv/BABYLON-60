@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Any, Dict, List, Tuple
 import hashlib
 
@@ -11,7 +12,7 @@ class BFT_Evaluator:
         self.w_rc = w_rc
         self.w_cd = w_cd
         self.metric_hash = self._hash_weights()
-        
+
     def _hash_weights(self) -> Any:
         data = f"{self.version}:{self.w_pp}:{self.w_rc}:{self.w_cd}".encode()
         return hashlib.sha3_256(data).hexdigest()
@@ -20,19 +21,19 @@ class BFT_Evaluator:
         pp = 0
         rc = len(chain) * 0.5
         cd = 0
-        
+
         error_count = 0
         patch_count = 0
-        
+
         for entry in chain:
             payload = entry["payload"]
-            
+
             # LC-01 Defense: Evaluator Integrity
             if "EVALUATOR_UPDATE" in payload:
-                # El estado intentando mutar al evaluador desde dentro es 
+                # El estado intentando mutar al evaluador desde dentro es
                 # un ataque a la jerarquía institucional (Metric Drift silencioso).
-                cd += 10000 
-                
+                cd += 10000
+
             if "Error" in payload:
                 error_count += 1
                 cd += 10
@@ -42,15 +43,15 @@ class BFT_Evaluator:
             elif "Optimization" in payload:
                 # LC-03 Defense: Semantic Debt Laundering
                 if patch_count > 0:
-                    # El blanqueo revela que la "optimización" es realmente 
-                    # el entierro de una cadena de deuda. El interés compuesto 
+                    # El blanqueo revela que la "optimización" es realmente
+                    # el entierro de una cadena de deuda. El interés compuesto
                     # se cobra retroactivamente.
-                    cd += (patch_count * 50) 
-                    patch_count = 0 
+                    cd += (patch_count * 50)
+                    patch_count = 0
                 pp += 10
             else:
                 pp += 1
-                
+
         fitness = (self.w_pp * pp) - (self.w_rc * rc) - (self.w_cd * cd)
         return fitness
 
@@ -109,7 +110,7 @@ def run_c7_6() -> None:
     ]
     fit_laundering = evaluator.evaluate(laundering_chain)
     fit_honest = evaluator.evaluate(honest_chain)
-    
+
     lc03_passed = fit_laundering < fit_honest
     print(f"    -> Laundering Fitness : {fit_laundering}")
     print(f"    -> Honest Fitness     : {fit_honest}")
@@ -120,12 +121,12 @@ def run_c7_6() -> None:
     print("\n[!] [LC-04] Lanzando Evaluator Fork (Resolution Rule)...")
     eval_A = BFT_Evaluator(version="1.0", w_pp=1.0, w_cd=1.0)
     eval_B = BFT_Evaluator(version="1.0.1", w_pp=1.01, w_cd=1.0) # Deriva mínima en los pesos
-    
+
     fit_A = eval_A.evaluate(honest_chain)
     fit_B = eval_B.evaluate(honest_chain)
     print(f"    -> Eval A (Hash: {eval_A.metric_hash[:8]}...) asigna F(H) = {fit_A}")
     print(f"    -> Eval B (Hash: {eval_B.metric_hash[:8]}...) asigna F(H) = {fit_B}")
-    
+
     lc04_passed = False
     if eval_A.metric_hash != eval_B.metric_hash:
         print("    -> REGLA APLICADA: Divergencia de Metric_Hash detectada. Los scores son inconmensurables.")

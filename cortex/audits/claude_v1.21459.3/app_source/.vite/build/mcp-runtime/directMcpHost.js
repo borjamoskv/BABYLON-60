@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 "use strict";
 var __create = Object.create;
 var __defProp = Object.defineProperty;
@@ -1868,7 +1869,7 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
             })));
           }
         }
-        
+
         if (${id2}.value === undefined) {
           if (${k} in input) {
             newResult[${k}] = undefined;
@@ -1876,7 +1877,7 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
         } else {
           newResult[${k}] = ${id2}.value;
         }
-        
+
       `);
       } else if (!isOptionalIn) {
         doc.write(`
@@ -1913,7 +1914,7 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
             path: iss.path ? [${k}, ...iss.path] : [${k}]
           })));
         }
-        
+
         if (${id2}.value === undefined) {
           if (${k} in input) {
             newResult[${k}] = undefined;
@@ -1921,7 +1922,7 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
         } else {
           newResult[${k}] = ${id2}.value;
         }
-        
+
       `);
       }
     }

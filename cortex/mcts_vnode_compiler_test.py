@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """Tests C5-REAL para mcts_vnode_compiler.py (v3.0 - OMEGATRON APEX).
 
 Enforces:

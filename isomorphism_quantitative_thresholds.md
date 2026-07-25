@@ -1,6 +1,7 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Matriz de Umbrales Cuantitativos: Isomorfismo Bio-Silicio (C5-REAL)
 
-> **[CORTEX-TAINT: ORIGIN]** 
+> **[CORTEX-TAINT: ORIGIN]**
 > Destilación termodinámica de payload externo (Deep Research). Extracción de aserciones estructurales y purga de ruido estocástico (C4-SIM). Cristalización de límites de livelock y presupuestos NAPI.
 
 La investigación de máxima profundidad sobre el isomorfismo Bio-Silicio revela que la analogía funcional se sostiene empíricamente a través de umbrales cuantitativos exactos. La transición de un estado homeostático a un colapso en cascada ocurre bajo límites matemáticos convergentes en ambos sustratos.

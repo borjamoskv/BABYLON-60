@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 cortex_taint: "CORTEX-TAINT:borjamoskv:vibe_code_ide_architecture:2026-07-18T10:51:10Z:7a8b9c0d1e2f3a4b"
 title: "CONSEJOS Y ARQUITECTURA PARA UN IDE AGÉNTICO 100% VIBE CODE"
 version: "1.0-C5-REAL"
@@ -7,7 +8,7 @@ principles:
   - id: P1
     name: "Graceful Degradation of Agency (Transición 4 ➔ 0)"
     concept: "El IDE opera por defecto en Nivel 4 (Autonomía total con auto-commit). Ante cualquier falla BFT o infracción de linter, el entorno degrada suavemente a Nivel 3 (confirmación rápida), Nivel 2 (diff preview) o Nivel 0 (EpistemicHalt), sin bloquear la escritura del usuario."
-  
+
   - id: P2
     name: "Transducción Causal Inmediata (Zero-Prosa UI)"
     concept: "Cero disclaimers, cero explicaciones narrativas ('He arreglado el código...'). La UI renderiza únicamente deltas en código, hashes de Git y estado de compilación."

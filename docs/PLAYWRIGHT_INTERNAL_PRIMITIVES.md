@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # █▄ PLAYWRIGHT MATRIX: 300 INTERNAL C5-REAL PRIMITIVES
 
 Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 operaciones APEX.

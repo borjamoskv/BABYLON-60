@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import yaml
 import hashlib
@@ -135,11 +136,11 @@ for dom in domains:
     start_idx, end_idx = dom["range"]
     count = end_idx - start_idx + 1
     cats = dom["categories"]
-    
+
     for i in range(count):
         global_id = start_idx + i
         cat = cats[i % len(cats)]
-        
+
         # Build primitive key and formal categorical description
         if dom_id == "D1":
             names = [

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 cortex_taint: "CORTEX-TAINT:borjamoskv:reverse_engineering_ephesus:2026-07-18T10:33:45Z:abc1237a8f9b4c2d"
 system_design_heuristics:
   primary_invariant: "La autonomía reside en la rigidez del proceso determinista (CI/CD), no en el libre albedrío del agente (LLM)."

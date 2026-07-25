@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Experiment: tercer_experimento_c5
@@ -53,7 +54,7 @@ def execute() -> None:
     target_ops = 100000
     if len(sys.argv) > 1:
         target_ops = int(sys.argv[1])
-        
+
     threads = 50
     ops_per_iter = 2
     n_iters = target_ops // (threads * ops_per_iter)

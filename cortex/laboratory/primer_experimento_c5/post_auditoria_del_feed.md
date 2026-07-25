@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # [INFORME FORENSE] La Auditoría del Feed: Termodinámica de la Atención en un Mercado de Personalidades Recurrentes
 
 #C5-REAL #LAB_PRIMER_EXPERIMENTO

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Invariant Sentinel
 Autonomously detects state drifts and updates invariants to prevent false halts.

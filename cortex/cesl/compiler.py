@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL CESL 1.0 (C5 Engineering Specification Language) Compiler & Transducer.
 Parses .cesl specifications into AST and IR, validates invariant completeness,

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import os
 import re
 
@@ -33,7 +34,7 @@ for root, dirs, files in os.walk(root_dir):
                     content = file.read()
             except (OSError, UnicodeDecodeError):
                 continue
-            
+
             orig = content
             content = p1.sub('', content)
             content = p2.sub('', content)
@@ -42,11 +43,11 @@ for root, dirs, files in os.walk(root_dir):
             content = p5.sub('', content)
             content = p6.sub('', content)
             content = p7.sub('', content)
-            
+
             # Clean up empty list items or double pipes
             content = content.replace('||', '|')
             content = re.sub(r'\|\s*\|', '|', content)
-            
+
             if content != orig:
                 with open(path, 'w', encoding='utf-8') as file:
                     file.write(content)

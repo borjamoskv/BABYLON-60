@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit tests for CORTEX Escohotado Chaos & Thermodynamic Engine.
 Rule Compliance: Ω31 (Entropy Verification), Ω26 (Specific Exception Handling).

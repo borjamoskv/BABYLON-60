@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 codegen_utils.py — Shared primitives for YAML-to-code generation pipeline.
 Extracted from generate_*.py scripts (C5-REAL DRY enforcement).

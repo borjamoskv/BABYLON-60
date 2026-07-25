@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM 2.0 Abstract Machine Execution Engine.
 Manages state tuple: CAM_State = <Hypergraph, Ledger, Queue, Caps, Clock, EffectsLog, ConformanceProfile>

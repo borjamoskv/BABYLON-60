@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 scripts/59_bio_silicon_hysteresis_bayes.py
@@ -103,7 +104,7 @@ def run_bio_silicon_verification() -> None:
 
     # Simulation loop across 50 time steps with stochastic burst
     simulation_results = []
-    
+
     # Deterministic seed for reproducible verification
     random.seed(42)
 

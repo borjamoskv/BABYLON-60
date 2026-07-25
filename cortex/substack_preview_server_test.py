@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Pytest unit tests for CORTEX Substack Preview Server & Renderer Engine.
 Rule Compliance: Ω11 (Rich-Text Compatibility), Ω23 (Relative Paths).

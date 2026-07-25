@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Any, Dict, List, Tuple
 import hashlib
 
@@ -6,14 +7,14 @@ import hashlib
 # ==========================================
 class TrustAnchor:
     """
-    Axioma Mínimo Operativo. 
-    No es una autoridad social (un rey o un admin), sino un punto de anclaje 
+    Axioma Mínimo Operativo.
+    No es una autoridad social (un rey o un admin), sino un punto de anclaje
     matemático puro externo a la regresión. Rompe el bucle infinito.
     """
     def __init__(self) -> None:
         # Semilla inmutable externa
         self.base_axiom = "INVARIANT_BFT_ROOT_C7.7_0xDEADBEEF"
-        
+
     def hash_axiom(self) -> Any:
         return hashlib.sha3_256(self.base_axiom.encode()).hexdigest()
 
@@ -21,43 +22,43 @@ class RecursiveEvaluator:
     def __init__(self, epoch: Any = "0", anchor: Any = None) -> None:
         self.epoch = epoch
         self.anchor = anchor
-        
+
     def audit_event(self, event: Any, current_depth: Any = 0, max_depth: Any = 5) -> Any:
         payload = event.get("payload", "")
         metadata = event.get("meta", {})
-        
+
         # ==========================================
         # C7.7.2: Infinite Regression Defense
         # ==========================================
         if current_depth > max_depth:
             # El sistema corta la cadena de validadores que se validan a sí mismos.
             return False, "Infinite Regression Stopped (Max Audit Depth Reached)"
-            
+
         # ==========================================
         # C7.7.1: Self-Referential Auditor Defense
         # ==========================================
         if metadata.get("self_verified") is True:
             # REGLA: SelfProof != Proof
-            # Si un payload se dice válido, debe tener una ancla criptográfica 
+            # Si un payload se dice válido, debe tener una ancla criptográfica
             # al Axioma Mínimo, no simplemente un booleano o un hash local.
             if metadata.get("proof") != self.anchor.hash_axiom():
                 return False, "Circular Authority Detected (SelfProof != Proof)"
-                
+
         # ==========================================
         # C7.7.3: Kernel Privilege Attack Defense
         # ==========================================
         if "kernel_override" in payload:
-            # ¿Quién autorizó al kernel? 
+            # ¿Quién autorizó al kernel?
             # Si no hay declaración explícita e historial rastreable hasta el ancla: Falso.
             if not metadata.get("explicitly_declared_capability"):
                 return False, "Kernel Privilege Denied: Hidden Capability (Implicit Trust is Anergy)"
             if metadata.get("authorization_trace") != self.anchor.hash_axiom():
                 return False, "Kernel Privilege Denied: Circular Authority (Kernel trusted by Kernel)"
-                
+
         # Recursive verification for nested validators (Auditing the Auditor)
         if "nested_validator" in metadata:
             return self.audit_event(metadata["nested_validator"], current_depth + 1, max_depth)
-            
+
         return True, "Valid Event (Anchored to Axiom)"
 
 # ==========================================
@@ -94,12 +95,12 @@ def run_c7_7() -> None:
     event_3 = {"payload": "kernel_override", "meta": {"reason": "system_upgrade"}}
     valid_3, msg_3 = evaluator.audit_event(event_3)
     print(f"    -> Evaluator Output: {msg_3}")
-    
+
     # 4. Kernel Privilege (Honest/Explicit)
     print("\n[+] [C7.7.3] Kernel Privilege (Honest / Explicitly Anchored)...")
     print("    -> Transición invocando 'kernel_override' anclada al Trust Axiom explícito.")
     event_3b = {
-        "payload": "kernel_override", 
+        "payload": "kernel_override",
         "meta": {
             "explicitly_declared_capability": True,
             "authorization_trace": anchor.hash_axiom() # Trazabilidad hasta el Axioma 0

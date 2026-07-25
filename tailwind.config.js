@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [

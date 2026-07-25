@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Swarm Orchestrator
 Transduce issues y tareas de GitHub en PRs autónomos procesados por la FSM y evaluados por el Architect Agent.

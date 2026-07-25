@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # SUBSTACK EDITORIAL STRATEGY: LABORATORIO PÚBLICO
 # C5-REAL Publication Strategy derived from Feed Thermodynamic Analysis
 # Date: 2026-07-20
@@ -55,7 +56,7 @@ content_types:
     length: "800-1500 palabras"
     structure: "6-step loop (Experimento → Hallazgo → Código → Demo → Track → Reflexión)"
     purpose: "Pieza nuclear. Deja un asset reutilizable en el repositorio."
-    
+
   - type: "MICRO-POST (Signal Burst)"
     frequency: "3-4x/semana"
     length: "20-80 palabras"

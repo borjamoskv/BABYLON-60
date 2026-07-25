@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # HALLAZGO: ESTABILIDAD CONCURRENTE DEL MEMRISTOR
 
 Se ha verificado empíricamente la estabilidad de escritura concurrente de la base de datos de memristores en modo WAL bajo alta concurrencia:

@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Arquitecturas de Resiliencia Silicio-Bio: Un Modelo de Isomorfismo entre el Dolor Crónico y las Tormentas de Interrupciones
 
 Este informe presenta una investigación profunda sobre el isomorfismo funcional entre la fisiopatología del dolor crónico/nocicepción y los mecanismos de telemetría de interrupciones en sistemas distribuidos asíncronos. La investigación se basa exclusivamente en fuentes técnicas primarias, incluyendo código fuente del kernel de Linux, especificaciones de arquitectura de procesadores (ARM64/ARM GIC, x86_64 APIC), artículos académicos de IEEE, ACM y Nature Neuroscience, y documentos IETF (RFCs). El objetivo es identificar primitivas arquitectónicas comunes, invariantes estructurales bajo estrés y antipatrones erróneos a través de una triangulación rigurosa de evidencia técnica.

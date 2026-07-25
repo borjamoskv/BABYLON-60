@@ -1,9 +1,10 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.5)
 
-**Autor:** borjamoskv  
-**Kernel:** MOSKV-1 APEX  
-**Clasificación:** C5-REAL Mathematical Extension Specification  
-**Estado:** Formal Addendum Integrated (Critical Path Identified: $\mathcal{P} \xrightarrow{\pi} \mathcal{C} \Rightarrow |\cdot| \Rightarrow \mu \Rightarrow R_k^\mathcal{A} \Rightarrow \kappa \Rightarrow PRF$)  
+**Autor:** borjamoskv
+**Kernel:** MOSKV-1 APEX
+**Clasificación:** C5-REAL Mathematical Extension Specification
+**Estado:** Formal Addendum Integrated (Critical Path Identified: $\mathcal{P} \xrightarrow{\pi} \mathcal{C} \Rightarrow |\cdot| \Rightarrow \mu \Rightarrow R_k^\mathcal{A} \Rightarrow \kappa \Rightarrow PRF$)
 
 ---
 
@@ -11,7 +12,7 @@
 
 Se adopta el siguiente criterio:
 
-> Ninguna nueva estructura se introduce por elegancia.  
+> Ninguna nueva estructura se introduce por elegancia.
 > Una estructura sólo se incorpora si es necesaria para demostrar un resultado objetivo o para evitar una ambigüedad semántica que bloquee teoremas posteriores.
 
 ---

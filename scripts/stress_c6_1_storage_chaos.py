@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C6.1 Storage Chaos — kill_during_checkpoint validation."""
 
 import multiprocessing
@@ -33,10 +34,10 @@ def init_db() -> None:
 def writer_and_checkpointer_loop() -> None:
     """Runs continuous writes and periodic explicit WAL checkpoints."""
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
-    # Lower wal_autocheckpoint so it happens frequently, 
+    # Lower wal_autocheckpoint so it happens frequently,
     # but we will also trigger it explicitly to maximize kill probability during the checkpoint.
-    conn.execute("PRAGMA wal_autocheckpoint = 100;") 
-    
+    conn.execute("PRAGMA wal_autocheckpoint = 100;")
+
     idx = 0
     while True:
         try:
@@ -48,68 +49,68 @@ def writer_and_checkpointer_loop() -> None:
             cursor.execute("INSERT INTO stress_log (tx_data, status) VALUES (?, ?)", (f"payload_{idx}_A", "PARTIAL"))
             cursor.execute("INSERT INTO stress_log (tx_data, status) VALUES (?, ?)", (f"payload_{idx}_B", "COMMITTED"))
             conn.commit()
-            
+
             # Explicitly force a WAL checkpoint to create contention and vulnerability
             # RESTART will block until all readers are finished and then checkpoint
             if idx % 50 == 0:
                 conn.execute("PRAGMA wal_checkpoint(RESTART);")
-                
+
         except sqlite3.Error:
             pass
-            
+
         idx += 1
 
 def run_chaos(duration_sec: int = 15, kill_interval: float = 0.2) -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
     print("║  C6.1 STORAGE CHAOS — kill_during_checkpoint                     ║")
     print("╚══════════════════════════════════════════════════════════════════╝")
-    
+
     init_db()
-    
+
     start_time = time.time()
     crashes = 0
-    
+
     print(f"\n[C6.1] Iniciando asedio kill_during_checkpoint (Duración: {duration_sec}s)...")
     while time.time() - start_time < duration_sec:
         p = multiprocessing.Process(target=writer_and_checkpointer_loop)
         p.start()
-        
+
         # Sleep a fraction to let it build some WAL and start checkpointing
         time.sleep(kill_interval)
-        
+
         if p.is_alive() and p.pid is not None:
             os.kill(p.pid, signal.SIGKILL)
             p.join()
             crashes += 1
             print(f"  💥 SIGKILL inyectado en vuelo (Crash #{crashes})")
-            
+
     # Audit
     print("\n[!] Asedio completado. Verificando Invariantes C6.1...")
     conn = sqlite3.connect(DB_PATH)
-    
+
     cursor = conn.cursor()
     cursor.execute("PRAGMA integrity_check;")
     integrity = cursor.fetchone()[0]
-    
+
     cursor.execute("SELECT COUNT(*) FROM stress_log")
     total_tx = cursor.fetchone()[0]
-    
+
     cursor.execute("SELECT COUNT(*) FROM stress_log WHERE status = 'PARTIAL'")
     partial_count = cursor.fetchone()[0]
-    
+
     cursor.execute("SELECT COUNT(*) FROM stress_log WHERE status = 'COMMITTED'")
     committed_count = cursor.fetchone()[0]
-    
+
     conn.close()
-    
+
     leaks = partial_count - committed_count
-    
+
     print(f"  Crashes Inyectados                 : {crashes}")
     print(f"  Operaciones Totales (Filas)        : {total_tx:,}")
     print(f"  Integrity Check del FS             : {integrity.upper()}")
     print(f"  Filas PARTIAL / COMMITTED          : {partial_count:,} / {committed_count:,}")
     print(f"  Transacciones Huérfanas (Fugas)    : {leaks}")
-    
+
     if integrity == "ok" and leaks == 0:
         print("\n✓ C6.1 STORAGE CHAOS: SUPERADO.")
         print("  - safety: database_not_corrupted = TRUE")

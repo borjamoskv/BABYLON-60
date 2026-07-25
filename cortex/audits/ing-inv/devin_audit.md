@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Reverse Engineering Audit: Devin (darwin-arm64-3.4.27)
 
 ## Executive Summary

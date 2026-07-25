@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # NOMENCLATURA ACTIVA: NIVEL OMEGA (ULTRATHINK P0)
 > **ESTACIÓN: BILBAO | MODO: LINGUISTIC COMPILING**
 > Nivel de Realidad: C5-REAL (Exergía Máxima)
@@ -19,7 +20,7 @@ pub struct Symbol<T> {
 
 /// El sistema no hace "lookups" de texto. Siente la topología.
 /// Ejecuta búsqueda por similitud de coseno; la intención del Operador
-/// colapsa sobre el puntero, ignorando typos (ruido estocástico) pero 
+/// colapsa sobre el puntero, ignorando typos (ruido estocástico) pero
 /// castigando implacablemente la ambigüedad ontológica.
 pub fn resolve(input: &str) -> Symbol<Entity> {
     let query_vec = embed(input); // Proyección hiperdimensional

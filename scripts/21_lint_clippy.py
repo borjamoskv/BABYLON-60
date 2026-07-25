@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 CORTEX Rust Clippy Linter (C5-REAL).

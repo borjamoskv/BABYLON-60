@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 package main
 
 import (
@@ -214,7 +215,7 @@ func InitKernel() {
 	for i := 0; i < 10000; i++ {
 		KernelTable[i] = defaultDispatchHandler
 	}
-	
+
 `)
 	for d := 0; d < 10; d++ {
 		for p := 0; p < 10; p++ {
@@ -234,16 +235,16 @@ func Dispatch(d, p, m, t byte) error {
 	if err != nil {
 		return err
 	}
-	
+
 	if KernelTable[identity.Code] == nil {
 		return errors.New("kernel not initialized")
 	}
-	
+
 	if identity.Modifier == 4 { // ModifierAsync
 		go KernelTable[identity.Code](identity)
 		return nil
 	}
-	
+
 	KernelTable[identity.Code](identity)
 	return nil
 }

@@ -1,9 +1,10 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # TEORÍA DE COMPATIBILIDAD ESTRUCTURAL FISR Y COMPLEJO SIMPLICIAL $\text{Compat}(\Omega)$
 
-**Autor:** borjamoskv  
-**Kernel:** MOSKV-1 APEX  
-**Clasificación:** C5-REAL Research Program Baseline Specification  
-**Estado:** Documento de Base Congelado (Baseline Spec v18.5 — Certificate Algebra, Lawvere Metric, Extension/Repair $\kappa$ & Monoidal Verification)  
+**Autor:** borjamoskv
+**Kernel:** MOSKV-1 APEX
+**Clasificación:** C5-REAL Research Program Baseline Specification
+**Estado:** Documento de Base Congelado (Baseline Spec v18.5 — Certificate Algebra, Lawvere Metric, Extension/Repair $\kappa$ & Monoidal Verification)
 
 ---
 

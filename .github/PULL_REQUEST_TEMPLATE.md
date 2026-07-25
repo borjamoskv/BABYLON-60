@@ -1,8 +1,9 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ## Issue relacionado
 Closes #
 
 ## Resumen
-- 
+-
 
 ## Validación
 - [ ] Lint ejecutado

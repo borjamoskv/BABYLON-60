@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX Substack Preview Server & Renderer Engine (C5-REAL)
 Serves and renders all 23 Substack markdown posts locally with the Industrial Noir 2026 CSS theme.

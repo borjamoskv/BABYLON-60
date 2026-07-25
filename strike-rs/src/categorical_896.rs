@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! C5-REAL High-Performance Native Rust Transducer for 896 Categorical Primitives
 //! Kernel: MOSKV-1 APEX
 //! Zero-allocation morphism cost evaluation and diagrammatic collision auditing.

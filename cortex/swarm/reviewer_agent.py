@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Adversarial Reviewer Agent
 Prompt estricto y escáner estático adversario para la auditoría de diffs y PRs.

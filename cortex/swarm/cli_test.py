@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Unit tests for C5-REAL Sovereign Swarm CLI (cortex/swarm/cli.py).
 """
@@ -12,7 +13,7 @@ def test_swarm_cli_kill_unkill(capsys: pytest.CaptureFixture[str]) -> None:
     lock_file = "kill_switch.lock"
     if os.path.exists(lock_file):
         os.remove(lock_file)
-        
+
     try:
         # Test kill
         test_args_kill = ["cortex/swarm/cli.py", "kill"]

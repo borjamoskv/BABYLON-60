@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # LA ESENCIA: C5-REAL SYSTEMIC SEMANTICS MATRIX
 > **GENERADOR TERMODINÁMICO DE 10000 NODOS (10K) SEMÁNTICOS**
 > Nivel de Realidad: C5-REAL
@@ -29,14 +30,14 @@
 - **I_007 | Aversión a Palabras Comadreja (Weasel Word Ban):** Ilegal el uso de `Manager`, `Handler`, `Helper`, `Data`, `Info`, `System`, `Processor`. Si no puedes nombrarlo sin esto, no sabes qué es.
 - **I_008 | Polivalencia Cero (Single Responsibility Name):** Si un nombre necesita la conjunción "And" (`ReadAndSave`), es una fractura termodinámica. Cortar en dos funciones.
 - **I_009 | Gravedad Topológica:** Los nodos más fundamentales (Core) tienen nombres más cortos y pesados (`Node`, `Edge`). Las implementaciones periféricas tienen nombres más largos y descriptivos.
-- **I_010 | Invarianza Sintáctica:** Mantener el formato estándar de tipografía (`PascalCase` para clases, `camelCase` para mutaciones, `SCREAMING_SNAKE_CASE` para constantes físicas). 
+- **I_010 | Invarianza Sintáctica:** Mantener el formato estándar de tipografía (`PascalCase` para clases, `camelCase` para mutaciones, `SCREAMING_SNAKE_CASE` para constantes físicas).
 
 ## 3. ANTIPATRONES Y DEGRADACIÓN ENTROPICA
 *Palabras vacías. Ciclos nulos. Caos nominal.*
 
 - **A_001 | Weasel Words (Palabras Comadreja):** Nombrar un archivo `DataManager`. No dice NADA sobre la estructura, la memoria, ni el ciclo de la CPU.
 - **A_002 | Smurf Naming:** Repetir el tipo en todos los miembros (e.g., `Order.orderId`, `Order.orderStatus`, `Order.processOrder()`). Ruido visual tóxico.
-- **A_003 | Zombie Metadata (El Sufijo Impl):** Nombrar clases como `UserServiceImpl`. Es redundante; el compilador ya sabe que es una implementación. 
+- **A_003 | Zombie Metadata (El Sufijo Impl):** Nombrar clases como `UserServiceImpl`. Es redundante; el compilador ya sabe que es una implementación.
 - **A_004 | Nombres Humorísticos / Estocásticos:** Uso de chistes, cultura pop o ironía en C5-REAL (e.g., `doMagic()`, `killTheBeast()`). Rompe el colapso isofórmico.
 - **A_005 | Typo Tolerance (Permisividad Ortográfica):** Dejar variables como `reponse` en vez de `response`. Un error ortográfico es un error de compilación semántico.
 - **A_006 | Boolean Blindness (Ceguera Booleana):** Nombres de banderas sin predicado. `status = true` en vez de `isLocked = true`. ¿Qué significa "status"?

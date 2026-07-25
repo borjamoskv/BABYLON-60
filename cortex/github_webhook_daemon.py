@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C5-REAL Sovereign GitHub Webhook Daemon (N=1 Perceptor)."""
 
 import os

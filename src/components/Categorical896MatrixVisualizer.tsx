@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import React, { useState, useMemo } from 'react';
 import primitivesData from '../primitives.json';
 
@@ -38,8 +39,8 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
     let base = allPrimitives;
     if (searchQuery.trim().length > 0) {
       const q = searchQuery.toLowerCase();
-      base = base.filter(p => 
-        p.code.toLowerCase().includes(q) || 
+      base = base.filter(p =>
+        p.code.toLowerCase().includes(q) ||
         p.description.toLowerCase().includes(q) ||
         p.category.toLowerCase().includes(q)
       );
@@ -86,13 +87,13 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             </h2>
             <span style={{ fontSize: '13px', color: '#B4B9DF', marginTop: '4px', display: 'block' }}>C5-REAL Transducer Engine · Mapeo Topológico</span>
           </div>
-          <div style={{ 
-            backgroundColor: 'rgba(59, 77, 255, 0.1)', 
-            padding: '6px 12px', 
-            borderRadius: '6px', 
-            border: '1px solid rgba(59, 77, 255, 0.3)', 
-            fontSize: '12px', 
-            color: '#3B4DFF', 
+          <div style={{
+            backgroundColor: 'rgba(59, 77, 255, 0.1)',
+            padding: '6px 12px',
+            borderRadius: '6px',
+            border: '1px solid rgba(59, 77, 255, 0.3)',
+            fontSize: '12px',
+            color: '#3B4DFF',
             fontWeight: '600',
             fontFamily: 'monospace'
           }}>
@@ -191,7 +192,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
             const pId = primitive.id;
             const isSelected = selectedPrimitiveId === pId;
             const isHovered = hoveredPrimitive === pId;
-            
+
             let bgColor = '#161A36';
             let textColor = '#888888';
             let borderColor = '#1E255E';
@@ -243,11 +244,11 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
 
         {/* Primitive Detail Inspector */}
         {selectedPrimitiveData && (
-          <div style={{ 
-            marginTop: '24px', 
-            backgroundColor: '#0F1226', 
-            padding: '20px', 
-            borderRadius: '8px', 
+          <div style={{
+            marginTop: '24px',
+            backgroundColor: '#0F1226',
+            padding: '20px',
+            borderRadius: '8px',
             border: '1px solid #1E255E',
             display: 'flex',
             flexDirection: 'column',
@@ -259,7 +260,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
                 CERTIFICACIÓN C5-REAL ACTIVA
               </div>
             </div>
-            
+
             <div style={{ fontSize: '20px', color: '#FFFFFF', fontWeight: '700', fontFamily: 'monospace', wordBreak: 'break-all' }}>
               [P-{String(selectedPrimitiveData.id).padStart(3, '0')}] :: {selectedPrimitiveData.code}
             </div>
@@ -268,7 +269,7 @@ export const Categorical896MatrixVisualizer: React.FC = () => {
               <span style={{ backgroundColor: '#161A36', padding: '4px 8px', borderRadius: '4px', border: '1px solid #2E3866' }}>Type: {selectedPrimitiveData.type}</span>
               <span style={{ backgroundColor: '#161A36', padding: '4px 8px', borderRadius: '4px', border: '1px solid #2E3866' }}>{selectedPrimitiveData.category}</span>
             </div>
-            
+
             <div style={{ fontSize: '14px', color: '#E0E0E0', lineHeight: '1.6', backgroundColor: '#0A0B14', padding: '16px', borderRadius: '6px', borderLeft: '3px solid #3B4DFF' }}>
               {selectedPrimitiveData.description}
             </div>

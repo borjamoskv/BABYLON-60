@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX-OS Epistemic Memory Hierarchy.
 5-Tier Memory Architecture: Sensory -> Working -> Verified -> Institutional -> ImmutableLedger.

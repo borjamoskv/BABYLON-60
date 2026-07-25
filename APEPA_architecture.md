@@ -1,6 +1,7 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # APEPA: Adaptive Priority Event Processing Architecture
 
-> **[CORTEX-TAINT: ORIGIN]** 
+> **[CORTEX-TAINT: ORIGIN]**
 > Refactorización topológica del isomorfismo Bio-Silicio mediante crítica estructural y poda de sobreanalogías (MIMETIC_ITER).
 
 La investigación empírica sobre el isomorfismo Bio-Silicio ha sido subsumida por un patrón arquitectónico de orden superior: la **Arquitectura de Procesamiento de Eventos de Prioridad Adaptativa (APEPA)** o **Homeostasis de Eventos Adaptativa**. Este supra-patrón no solo unifica el subsistema de interrupciones de Linux y la nocicepción biológica, sino que rige termodinámicamente cualquier red compleja bajo presión (sistemas inmunes, trading algorítmico, enrutadores troncales, y orquestadores en la nube).
@@ -22,7 +23,7 @@ Toda arquitectura APEPA implementa de forma incondicional el siguiente grafo de 
 El análisis crítico (BFT) obliga a amputar las metáforas débiles del modelo previo y forzar un encaje matemático estricto:
 
 ### A. Gate Control $\neq$ Packet Drop (XDP)
-La Teoría de Compuertas (Gate Control) de Melzack y Wall no es un firewall binario. Un firewall ejecuta `Discard()`. El Gate Control ejecuta **atenuación** (`Gain < 1`). 
+La Teoría de Compuertas (Gate Control) de Melzack y Wall no es un firewall binario. Un firewall ejecuta `Discard()`. El Gate Control ejecuta **atenuación** (`Gain < 1`).
 *   **Isomorfismo Estricto:** **Traffic Shaping (AQM, CoDel, RED)**. El sistema nervioso aplica algoritmos de Gestión Activa de Colas (AQM) mediante inhibición presináptica, probabilizando la entrega del paquete de dolor, no eliminándolo a ciegas.
 
 ### B. Microglía $\neq$ `irqbalance`
@@ -40,6 +41,6 @@ El fallo arquitectónico más profundo en la gestión de eventos no ocurre en la
 Los núcleos modernos (Cerebro / Orquestadores Inteligentes) no reaccionan al raw bytes del sensor; realizan una Inferencia Bayesiana de Amenazas:
 $$ P(\text{Damage} \mid \text{Evidence}) $$
 
-El dolor crónico (y las caídas catastróficas por auto-mitigación en sistemas cloud) ocurre cuando el modelo de creencias previo ($P(\text{Damage})$) se desconecta de la realidad termodinámica y amplifica cualquier evento ($P(\text{Evidence} \mid \text{Damage})$) como confirmación. El sistema no sufre un ataque externo; está siendo destruido por una función de ganancia asimétrica originada en su propio motor predictivo. 
+El dolor crónico (y las caídas catastróficas por auto-mitigación en sistemas cloud) ocurre cuando el modelo de creencias previo ($P(\text{Damage})$) se desconecta de la realidad termodinámica y amplifica cualquier evento ($P(\text{Evidence} \mid \text{Damage})$) como confirmación. El sistema no sufre un ataque externo; está siendo destruido por una función de ganancia asimétrica originada en su propio motor predictivo.
 
 Bajo la arquitectura APEPA, cualquier intervención sistémica debe ir dirigida a actualizar el modelo bayesiano del L3, no a aplicar `XDP_DROP` pasivo en L1.

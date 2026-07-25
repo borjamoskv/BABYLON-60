@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 C5-REAL Sovereign Protocol: Substack Public Laboratory Compiler (v2.0)

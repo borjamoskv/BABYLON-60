@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # C5-REAL Sovereign Cognitive Continuity State Observer Engine
 import math
 from typing import List, Dict, Any, Tuple

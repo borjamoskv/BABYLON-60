@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import unittest
 from cortex.kimi import (
     KimiK3TrajectoryEvaluator,

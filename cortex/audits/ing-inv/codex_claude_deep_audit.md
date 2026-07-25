@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # C5-REAL Deep Audit: OpenAI Codex vs. Anthropic Claude
 
 This document details the reverse engineering mapping of **OpenAI Codex** (packaged in `Codex.dmg` as `ChatGPT.app`) and **Anthropic Claude** (packaged in `Claude.dmg`).

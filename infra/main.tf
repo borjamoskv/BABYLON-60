@@ -20,7 +20,7 @@ resource "google_alloydb_cluster" "c5_ledger_cluster" {
   cluster_id = "c5-ledger-cluster"
   location   = var.region
   network    = google_compute_network.cortex_vpc.id
-  
+
   initial_user {
     user     = "moskv_root"
     password = var.bft_db_password
@@ -31,7 +31,7 @@ resource "google_alloydb_instance" "c5_ledger_primary" {
   cluster       = google_alloydb_cluster.c5_ledger_cluster.name
   instance_id   = "c5-ledger-primary"
   instance_type = "PRIMARY"
-  
+
   machine_config {
     cpu_count = 8 # R7 Override: Alto rendimiento por defecto
   }
@@ -58,7 +58,7 @@ resource "google_cloud_run_v2_service" "swarm_dispatcher" {
   template {
     containers {
       image = "gcr.io/${var.project_id}/babylon-60-daemon:latest"
-      
+
       env {
         name  = "CORTEX_BFT_KEY"
         value_source {
@@ -68,7 +68,7 @@ resource "google_cloud_run_v2_service" "swarm_dispatcher" {
           }
         }
       }
-      
+
       resources {
         limits = {
           cpu    = "4"
@@ -76,7 +76,7 @@ resource "google_cloud_run_v2_service" "swarm_dispatcher" {
         }
       }
     }
-    
+
     scaling {
       min_instance_count = 0
       max_instance_count = 50 # Sincronizado con Consolidación Masiva-Ω

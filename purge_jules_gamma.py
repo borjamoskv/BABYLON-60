@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import glob
 import re
 
@@ -23,11 +24,11 @@ for file_path in files:
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-            
+
         new_content = content
         for p in patterns:
             new_content = re.sub(p, '', new_content)
-            
+
         if content != new_content:
             with open(file_path, 'w', encoding='utf-8') as f:
                 f.write(new_content)

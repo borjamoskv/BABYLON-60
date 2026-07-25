@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 def synthesized_theorem_0(x: int = 0) -> int:
     '''Physical C5-REAL theorem synthesized under intention: test_cli_execution_intention'''
     assert isinstance(x, int), 'Input must be integer'

@@ -1,7 +1,8 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Wispr Flow Accessibility (AX) & Configuration Audit Report
-**Version:** 1.6.7  
-**Bundle ID:** `com.electron.wispr-flow`  
-**Date:** 2026-07-17  
+**Version:** 1.6.7
+**Bundle ID:** `com.electron.wispr-flow`
+**Date:** 2026-07-17
 
 ---
 

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Deliverability & MX Resolution Engine.
 Validates email formatting, syntax integrity, and MX record reachability

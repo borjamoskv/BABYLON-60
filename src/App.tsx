@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import React, { useState, useEffect, useRef } from 'react';
 import { invoke } from '@tauri-apps/api/core';
 import { FileItem, PROJECT_FILES } from "./data/projectFiles";
@@ -15,14 +16,14 @@ export default function BabylonCompleteIDE() {
   const [themeKey, setThemeKey] = useState<string>('awwwards');
   const theme = THEMES[themeKey] || THEMES.awwwards;
 
-  const [cognitiveMode, setCognitiveMode] = useState<'NT' | '2E'>('2E'); 
+  const [cognitiveMode, setCognitiveMode] = useState<'NT' | '2E'>('2E');
   const [openFiles, setOpenFiles] = useState<FileItem[]>([PROJECT_FILES[0], PROJECT_FILES[1]]);
   const [activeFile, setActiveFile] = useState<FileItem>(PROJECT_FILES[0]);
   const [editorContent, setEditorContent] = useState<string>(PROJECT_FILES[0].content);
   const [ghostText, setGhostText] = useState('');
   const [cursorPos, setCursorPos] = useState(0);
   const [sidebarTab, setSidebarTab] = useState<'architecture' | 'swarm' | 'ledger' | 'inference' | 'settings'>('architecture');
-  
+
   // Terminal drawer & Command Palette & Shortcuts state
   const [isTerminalOpen, setIsTerminalOpen] = useState(false);
   const [shortcutsModalOpen, setShortcutsModalOpen] = useState(false);
@@ -137,7 +138,7 @@ export default function BabylonCompleteIDE() {
         ctx.strokeStyle = isHypervigilant ? '#FF3366' : theme.accent;
         ctx.lineWidth = 2;
         ctx.beginPath();
-        
+
         for (let i = 0; i < canvas.width; i++) {
           const amplitude1 = Math.sin(step * 0.08 + i * 0.04) * 14;
           const amplitude2 = Math.cos(step * 0.1 + i * 0.02) * 7;
@@ -201,7 +202,7 @@ export default function BabylonCompleteIDE() {
         setIsDictating(true);
         return;
       }
-      
+
       const recognition = new SpeechRecognition();
       recognition.lang = 'es-ES';
       recognition.continuous = true;
@@ -225,7 +226,7 @@ export default function BabylonCompleteIDE() {
         setIsDictating(false);
       };
       recognition.onend = () => setIsDictating(false);
-      
+
       try {
         recognition.start();
         recognitionRef.current = recognition;
@@ -351,15 +352,15 @@ export default function BabylonCompleteIDE() {
   const isDark = theme.id === 'awwwards' || theme.id === 'obsidian' || theme.id === 'sol' || theme.id === 'cyber';
 
   return (
-    <div 
+    <div
       className={`w-screen h-screen flex flex-col overflow-hidden select-none relative transition-all duration-[800ms] ease-out ${isLoaded ? 'opacity-100' : 'opacity-0 scale-[0.99]'}`}
       style={{ backgroundColor: theme.bg, color: theme.text, fontFamily: '"Inter", sans-serif' }}
     >
       {/* PHYSICAL WALLPAPER BACKGROUND LAYER */}
       {wallpaperEnabled && (
-        <div 
+        <div
           className="absolute inset-0 pointer-events-none z-0 transition-opacity duration-700 bg-cover bg-center bg-no-repeat"
-          style={{ 
+          style={{
             backgroundImage: `url('${wallpaperPreset}')`,
             opacity: wallpaperOpacity,
             filter: 'contrast(1.1) brightness(0.95)'
@@ -369,13 +370,13 @@ export default function BabylonCompleteIDE() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,300&display=swap');
-        
+
         * { box-sizing: border-box; }
-        
+
         ::-webkit-scrollbar { width: 4px; height: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: ${theme.border}; border-radius: 4px; }
-        
+
         .grain {
           position: absolute;
           top: -150%; left: -50%; right: -50%; bottom: -150%;
@@ -445,7 +446,7 @@ export default function BabylonCompleteIDE() {
           0%, 100% { background-color: #F59E0B; opacity: 0.6; }
           50% { background-color: #EF4444; opacity: 1; }
         }
-        
+
         .tachometer-indexing {
           animation: breathing-blue 2s ease-in-out infinite;
           background: ${theme.accent};
@@ -476,11 +477,11 @@ export default function BabylonCompleteIDE() {
 
       {/* SHORTCUTS HELP MODAL */}
       {shortcutsModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/75 backdrop-blur-md z-50 flex items-center justify-center p-6"
           onClick={() => setShortcutsModalOpen(false)}
         >
-          <div 
+          <div
             className="w-[460px] bg-[#0A0D1F] border border-white/15 rounded-xl shadow-2xl p-6 flex flex-col gap-4 font-mono text-xs"
             onClick={e => e.stopPropagation()}
           >
@@ -502,17 +503,17 @@ export default function BabylonCompleteIDE() {
 
       {/* COMMAND PALETTE POPUP */}
       {commandPaletteOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/70 backdrop-blur-md z-50 flex items-start justify-center pt-24"
           onClick={() => setCommandPaletteOpen(false)}
         >
-          <div 
+          <div
             className="w-[540px] bg-[#0E1122] border border-white/15 rounded-xl shadow-2xl p-4 flex flex-col gap-4"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center gap-3 border-b border-white/10 pb-3">
               <span className="text-white/40 font-mono text-sm">⌘</span>
-              <input 
+              <input
                 type="text"
                 autoFocus
                 value={commandSearch}
@@ -522,49 +523,49 @@ export default function BabylonCompleteIDE() {
               />
             </div>
             <div className="flex flex-col gap-1 max-h-64 overflow-y-auto">
-              <button 
+              <button
                 onClick={() => { setSidebarTab('architecture'); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>◈ Open Architecture View</span>
                 <span className="text-white/30">Tab 1</span>
               </button>
-              <button 
+              <button
                 onClick={() => { setSidebarTab('swarm'); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>⎈ Open BFT Swarm Topology Graph</span>
                 <span className="text-white/30">Tab 2</span>
               </button>
-              <button 
+              <button
                 onClick={() => { setSidebarTab('ledger'); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>⌬ Open Ledger DB Console</span>
                 <span className="text-white/30">Tab 3</span>
               </button>
-              <button 
+              <button
                 onClick={() => { setSidebarTab('inference'); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>⚡ Open Local Silicon Inference Console</span>
                 <span className="text-white/30">⌘8</span>
               </button>
-              <button 
+              <button
                 onClick={() => { triggerBFTVote(); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>🛡 Trigger BFT Consensus Vote</span>
                 <span className="text-white/30">Vote</span>
               </button>
-              <button 
+              <button
                 onClick={() => { exportAttestationJSON(); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
                 <span>📄 Export JSON Attestation Certificate</span>
                 <span className="text-white/30">Export</span>
               </button>
-              <button 
+              <button
                 onClick={() => { setIsTerminalOpen(prev => !prev); setCommandPaletteOpen(false); }}
                 className="flex justify-between items-center p-2.5 rounded hover:bg-white/10 text-left cursor-pointer border-0 bg-transparent text-white/80 font-mono text-xs"
               >
@@ -578,7 +579,7 @@ export default function BabylonCompleteIDE() {
 
       {/* AMBIENT TACHOMETER */}
       {cognitiveMode === '2E' && (
-        <div 
+        <div
           className={`h-[3px] w-full z-50 transition-all duration-500 ${
             agentState === 'indexing' ? 'tachometer-indexing' :
             agentState === 'working' ? 'tachometer-working' :
@@ -589,7 +590,7 @@ export default function BabylonCompleteIDE() {
       )}
 
       {/* HEADER */}
-      <header 
+      <header
         className="h-14 flex items-center justify-between px-8 z-40 border-b border-white/5"
         style={{ WebkitAppRegion: 'drag' } as any}
       >
@@ -601,7 +602,7 @@ export default function BabylonCompleteIDE() {
             </span>
             <span className="text-[9px] font-mono text-white/30 ml-1">v1.2-C5</span>
           </div>
-          
+
           <nav className="flex gap-8 text-[11px] font-medium tracking-wider uppercase" style={{ WebkitAppRegion: 'no-drag' } as any}>
             <button className={`nav-link ${sidebarTab === 'architecture' ? 'active' : ''} bg-transparent border-0 cursor-pointer outline-none`} onClick={() => setSidebarTab('architecture')}>
               {cognitiveMode === '2E' ? '◈ Architecture' : 'Architecture'}
@@ -620,10 +621,10 @@ export default function BabylonCompleteIDE() {
             </button>
           </nav>
         </div>
-        
+
         <div className="flex items-center gap-6" style={{ WebkitAppRegion: 'no-drag' } as any}>
           {/* Quick Palette Hint */}
-          <button 
+          <button
             onClick={() => setCommandPaletteOpen(true)}
             className="hidden lg:flex items-center gap-2 text-[10px] font-mono text-white/40 bg-white/5 border border-white/10 px-2.5 py-1 rounded cursor-pointer hover:bg-white/10"
           >
@@ -637,7 +638,7 @@ export default function BabylonCompleteIDE() {
             <span>Exergy: <strong style={{ color: theme.accent }}>{exergyLevel}%</strong></span>
           </div>
 
-          <button 
+          <button
             onClick={() => setCognitiveMode(prev => (prev === 'NT' ? '2E' : 'NT'))}
             className="text-[10px] uppercase tracking-widest font-mono border border-white/10 px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-white/70 hover:text-white transition-all cursor-pointer"
           >
@@ -665,7 +666,7 @@ export default function BabylonCompleteIDE() {
 
       {/* MAIN CONTENT AREA */}
       <div className="flex-1 flex overflow-hidden px-8 pb-6 pt-4 gap-10 relative z-10">
-        
+
         {/* SIDEBAR NAVIGATION / CONTROLS */}
         <div className="w-64 flex flex-col gap-6 shrink-0 border-r border-white/5 pr-6">
           {sidebarTab === 'architecture' && (
@@ -674,10 +675,10 @@ export default function BabylonCompleteIDE() {
                 <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">Workspace Files</span>
                 <span className="text-[9px] font-mono text-white/20">{PROJECT_FILES.length} modules</span>
               </div>
-              
+
               <div className="flex flex-col gap-2">
                 {PROJECT_FILES.map(file => (
-                  <div 
+                  <div
                     key={file.id}
                     onClick={() => handleSelectFile(file)}
                     className={`flex flex-col cursor-pointer p-2.5 rounded-md transition-all duration-200 ${activeFile.id === file.id ? 'bg-white/10 border-l-2' : 'hover:bg-white/5 opacity-70 hover:opacity-100'}`}
@@ -711,20 +712,20 @@ export default function BabylonCompleteIDE() {
               </div>
 
               <div className="flex flex-col gap-2">
-                <button 
+                <button
                   onClick={triggerBFTVote}
                   className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all"
                 >
                   🛡 Consensus Vote
                 </button>
                 <div className="flex gap-2">
-                  <button 
+                  <button
                     onClick={injectFault}
                     className="flex-1 py-1.5 bg-red-500/20 hover:bg-red-500/30 border border-red-500/30 text-red-300 rounded text-[9.5px] font-mono uppercase cursor-pointer transition-all"
                   >
                     Inject Fault
                   </button>
-                  <button 
+                  <button
                     onClick={healSwarm}
                     className="flex-1 py-1.5 bg-emerald-500/20 hover:bg-emerald-500/30 border border-emerald-500/30 text-emerald-300 rounded text-[9.5px] font-mono uppercase cursor-pointer transition-all"
                   >
@@ -736,8 +737,8 @@ export default function BabylonCompleteIDE() {
               <div className="flex flex-col gap-3 mt-2">
                 <span className="text-[10px] font-mono uppercase text-white/30">Node Roster</span>
                 {swarmNodes.map(node => (
-                  <div 
-                    key={node.id} 
+                  <div
+                    key={node.id}
                     onClick={() => setSelectedSwarmNode(node)}
                     className={`border rounded p-2.5 flex flex-col gap-1 cursor-pointer transition-all ${selectedSwarmNode?.id === node.id ? 'bg-white/10 border-white/30' : 'bg-white/5 border-white/5 hover:border-white/20'}`}
                   >
@@ -759,8 +760,8 @@ export default function BabylonCompleteIDE() {
               <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">Ledger Schemas</span>
               <div className="flex flex-col gap-2">
                 {MOCK_TABLES.map(table => (
-                  <div 
-                    key={table.name} 
+                  <div
+                    key={table.name}
                     onClick={() => setSelectedTable(table)}
                     className={`cursor-pointer transition-all p-3 rounded-md border ${selectedTable?.name === table.name ? 'bg-white/10 border-white/20 text-white' : 'border-white/5 text-[#B4B9DF] hover:bg-white/5 hover:text-white'}`}
                   >
@@ -770,7 +771,7 @@ export default function BabylonCompleteIDE() {
                 ))}
               </div>
 
-              <button 
+              <button
                 onClick={exportAttestationJSON}
                 className="w-full py-2 bg-white/10 hover:bg-white/15 border border-white/10 text-white rounded text-[10px] font-mono uppercase tracking-widest cursor-pointer transition-all mt-2"
               >
@@ -783,19 +784,19 @@ export default function BabylonCompleteIDE() {
             <div className="flex flex-col gap-6">
               <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">Inference Presets</span>
               <div className="flex flex-col gap-2.5">
-                <button 
+                <button
                   onClick={() => { setPromptInput("Prove Robinson theorem reduction for Martelli-Montanari unification"); runInference("Prove Robinson theorem reduction for Martelli-Montanari unification"); }}
                   className="text-left bg-white/5 hover:bg-white/10 border border-white/5 p-3 rounded text-[#B4B9DF] hover:text-white text-[11.5px] font-mono cursor-pointer transition-all outline-none"
                 >
                   ⚡ Robinson Theorem
                 </button>
-                <button 
+                <button
                   onClick={() => { setPromptInput("Attest current ledger transaction status & verify BFT signature chain"); runInference("Attest current ledger transaction status & verify BFT signature chain"); }}
                   className="text-left bg-white/5 hover:bg-white/10 border border-white/5 p-3 rounded text-[#B4B9DF] hover:text-white text-[11.5px] font-mono cursor-pointer transition-all outline-none"
                 >
                   🛡 Attest BFT Ledger
                 </button>
-                <button 
+                <button
                   onClick={() => { setPromptInput("Compute Free Energy minimization matrix across active nodes"); runInference("Compute Free Energy minimization matrix across active nodes"); }}
                   className="text-left bg-white/5 hover:bg-white/10 border border-white/5 p-3 rounded text-[#B4B9DF] hover:text-white text-[11.5px] font-mono cursor-pointer transition-all outline-none"
                 >
@@ -810,7 +811,7 @@ export default function BabylonCompleteIDE() {
               <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono">Theme Presets</span>
               <div className="flex flex-col gap-2">
                 {Object.values(THEMES).map(t => (
-                  <button 
+                  <button
                     key={t.id}
                     onClick={() => setThemeKey(t.id)}
                     className={`flex items-center justify-between p-2.5 rounded text-[11.5px] border cursor-pointer transition-all ${theme.id === t.id ? 'bg-white/10 border-white/20 text-white' : 'bg-white/5 border-transparent text-white/60 hover:text-white'}`}
@@ -824,7 +825,7 @@ export default function BabylonCompleteIDE() {
               <span className="text-[10px] tracking-widest uppercase text-white/30 font-mono mt-4">Visual FX & Wallpaper</span>
               <div className="flex justify-between items-center text-[12px] text-white/70">
                 <span>Grain Overlay</span>
-                <button 
+                <button
                   onClick={() => setGrainOverlay(!grainOverlay)}
                   className="text-[10px] font-mono border bg-transparent px-2 py-0.5 rounded cursor-pointer text-white/80"
                   style={{ borderColor: grainOverlay ? theme.accent : '#555' }}
@@ -835,7 +836,7 @@ export default function BabylonCompleteIDE() {
 
               <div className="flex justify-between items-center text-[12px] text-white/70 mt-2">
                 <span>Wallpaper Layer</span>
-                <button 
+                <button
                   onClick={() => setWallpaperEnabled(!wallpaperEnabled)}
                   className="text-[10px] font-mono border bg-transparent px-2 py-0.5 rounded cursor-pointer text-white/80"
                   style={{ borderColor: wallpaperEnabled ? theme.accent : '#555' }}
@@ -864,10 +865,10 @@ export default function BabylonCompleteIDE() {
                       <span>Opacity</span>
                       <span>{Math.round(wallpaperOpacity * 100)}%</span>
                     </div>
-                    <input 
-                      type="range" 
-                      min="0.05" 
-                      max="1.0" 
+                    <input
+                      type="range"
+                      min="0.05"
+                      max="1.0"
                       step="0.05"
                       value={wallpaperOpacity}
                       onChange={(e) => setWallpaperOpacity(parseFloat(e.target.value))}
@@ -883,7 +884,7 @@ export default function BabylonCompleteIDE() {
 
         {/* EDITOR AND MAIN WORKSPACE AREA */}
         <div className="flex-1 flex flex-col min-w-0 relative">
-          
+
           {sidebarTab === 'swarm' ? (
             /* BFT SWARM TOPOLOGY GRAPH VISUALIZER */
             <div className="flex-1 flex gap-8 relative overflow-hidden">
@@ -896,7 +897,7 @@ export default function BabylonCompleteIDE() {
                 <div className="flex-1 bg-black/40 border border-white/10 rounded-xl relative overflow-hidden p-4 flex flex-col">
                   <svg className="w-full h-full absolute inset-0 pointer-events-none">
                     {swarmNodes.slice(1).map(node => (
-                      <line 
+                      <line
                         key={`line-${node.id}`}
                         x1={swarmNodes[0].x}
                         y1={swarmNodes[0].y}
@@ -911,7 +912,7 @@ export default function BabylonCompleteIDE() {
                   </svg>
 
                   {swarmNodes.map(node => (
-                    <div 
+                    <div
                       key={node.id}
                       onClick={() => setSelectedSwarmNode(node)}
                       className={`absolute p-3 rounded-lg border cursor-pointer transition-all duration-300 flex flex-col gap-1 w-44 ${selectedSwarmNode?.id === node.id ? 'bg-white/15 border-white/40 shadow-xl' : 'bg-black/60 border-white/10 hover:border-white/30'}`}
@@ -952,7 +953,7 @@ export default function BabylonCompleteIDE() {
             <div className="flex-1 flex gap-8 relative overflow-hidden">
               <div className="flex-1 flex flex-col min-w-0">
                 <h1 className="text-2xl font-light tracking-tight mb-4" style={{ color: theme.accent }}>Local Silicon Inference Console</h1>
-                
+
                 <div className="flex flex-col gap-3 mb-4">
                   <span className="text-[10px] font-mono uppercase text-white/40">Local Prompt</span>
                   <textarea
@@ -969,7 +970,7 @@ export default function BabylonCompleteIDE() {
                   />
                   <div className="flex justify-between items-center">
                     <span className="text-[10px] font-mono text-white/40">Model: mamba-ssm-c5-real</span>
-                    <button 
+                    <button
                       onClick={() => runInference()}
                       className="px-5 py-2 text-white border-0 rounded text-[11px] font-mono tracking-widest uppercase cursor-pointer hover:opacity-90 transition-opacity"
                       style={{ backgroundColor: theme.accent }}
@@ -989,15 +990,15 @@ export default function BabylonCompleteIDE() {
 
               <div className="w-72 border-l border-white/5 pl-6 flex flex-col gap-6 shrink-0">
                 <span className="text-[10px] font-mono uppercase text-white/30">Active Inference Convergence</span>
-                
+
                 <div className="border border-white/10 bg-white/5 rounded-md p-4 flex flex-col gap-2">
                   <span className="text-[10px] font-mono uppercase text-white/40 tracking-wider">Free Energy D_KL</span>
                   <div className="flex items-end gap-1.5 h-16 pt-2">
                     {freeEnergyHistory.map((val, idx) => (
-                      <div 
+                      <div
                         key={idx}
                         className="flex-1 rounded-t transition-all duration-500"
-                        style={{ 
+                        style={{
                           height: `${Math.max(val * 100, 5)}%`,
                           backgroundColor: theme.accent
                         }}
@@ -1019,20 +1020,20 @@ export default function BabylonCompleteIDE() {
           ) : sidebarTab === 'ledger' ? (
             <div className="flex-1 flex flex-col min-w-0">
               <h1 className="text-2xl font-light tracking-tight mb-4" style={{ color: theme.accent }}>Ledger Database Console</h1>
-              
+
               <div className="flex gap-8 flex-1 min-h-0">
                 <div className="flex-1 flex flex-col min-w-0">
                   <div className="flex flex-col gap-3 mb-4">
                     <div className="flex justify-between items-center">
                       <span className="text-[10px] font-mono uppercase text-white/40">SQL Command</span>
-                      <button 
+                      <button
                         onClick={runSQLQuery}
                         className="px-4 py-1.5 bg-white/10 hover:bg-white/15 text-white border border-white/10 rounded text-[11px] font-mono uppercase cursor-pointer"
                       >
                         Run Query
                       </button>
                     </div>
-                    <input 
+                    <input
                       type="text"
                       value={sqlQuery}
                       onChange={(e) => setSqlQuery(e.target.value)}
@@ -1093,7 +1094,7 @@ export default function BabylonCompleteIDE() {
           ) : (
             // MULTI-TAB CODE EDITOR WITH AST SYNTAX HIGHLIGHTING OVERLAY
             <div className="flex-1 flex flex-col min-w-0">
-              
+
               {/* FILE TABS */}
               <div className="flex items-center gap-1 border-b border-white/5 pb-2 mb-4 overflow-x-auto">
                 {openFiles.map(file => (
@@ -1105,7 +1106,7 @@ export default function BabylonCompleteIDE() {
                   >
                     <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: file.moduleColor }} />
                     <span>{file.name}</span>
-                    <button 
+                    <button
                       onClick={(e) => closeFileTab(e, file.id)}
                       className="ml-1 text-white/20 hover:text-white bg-transparent border-0 cursor-pointer text-xs"
                     >
@@ -1140,7 +1141,7 @@ export default function BabylonCompleteIDE() {
 
               {/* CODE EDITOR TEXTAREA WITH AST HIGHLIGHTING & LINE NUMBERS */}
               <div className="flex-1 relative border border-white/10 rounded-md bg-black/40 overflow-hidden flex">
-                
+
                 {/* Line Numbers Gutter */}
                 <div className="w-12 py-3 bg-white/[0.02] border-r border-white/5 text-right pr-3 text-[11px] font-mono text-white/20 select-none leading-[1.8]">
                   {Array.from({ length: lineCount }).map((_, i) => (
@@ -1162,7 +1163,7 @@ export default function BabylonCompleteIDE() {
                     spellCheck={false}
                     className="editor-text absolute inset-0 w-full h-full p-3 bg-transparent border-0 resize-none outline-none focus:ring-0 z-20 text-transparent caret-white selection:bg-white/20 leading-[1.8]"
                   />
-                  
+
                   {ghostText && (
                     <pre className="editor-text absolute inset-0 p-3 pointer-events-none z-15 whitespace-pre-wrap leading-[1.8]">
                       <span className="opacity-0">{editorContent.slice(0, cursorPos)}</span>
@@ -1186,19 +1187,19 @@ export default function BabylonCompleteIDE() {
                   </div>
                 )}
               </div>
-              
+
               {/* FOOTER METADATA */}
               <div className="h-8 mt-2 flex items-center justify-between text-[10px] font-mono tracking-widest text-white/40 border-t border-white/5">
                 <div className="flex items-center gap-6">
                   <span>Lines: {lineCount}</span>
                   <span>Chars: {editorContent.length}</span>
-                  <button 
+                  <button
                     onClick={() => setIsTerminalOpen(prev => !prev)}
                     className="text-white/60 hover:text-white bg-transparent border-0 cursor-pointer font-mono text-[10px] uppercase"
                   >
                     {isTerminalOpen ? '▼ Hide Logs' : '▲ System Terminal (⌘`)'}
                   </button>
-                  <button 
+                  <button
                     onClick={() => setShortcutsModalOpen(true)}
                     className="text-white/40 hover:text-white bg-transparent border-0 cursor-pointer font-mono text-[10px] uppercase"
                   >
@@ -1218,7 +1219,7 @@ export default function BabylonCompleteIDE() {
             <div className="h-44 border-t border-white/10 bg-[#060812] p-3 flex flex-col font-mono text-xs z-30">
               <div className="flex justify-between items-center border-b border-white/10 pb-1.5 mb-2">
                 <span className="text-[10px] uppercase tracking-widest text-white/50">C5-REAL System Log Stream</span>
-                <button 
+                <button
                   onClick={() => setIsTerminalOpen(false)}
                   className="text-white/40 hover:text-white bg-transparent border-0 cursor-pointer text-xs"
                 >

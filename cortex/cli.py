@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 MOSKV-1 APEX C5-REAL Categorical Logic 896 Primitives CLI

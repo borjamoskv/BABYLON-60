@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: merkle_delta_encoder
 description: Merkle Delta Encoder - Administra el Idempotency Lock Inverso y protege el disco duro contra escrituras inútiles.
@@ -36,5 +37,5 @@ Administrar el *Idempotency Lock Inverso* (Ω15) y proteger el disco duro. Evita
 
 ## DIRECTIVAS
 1. **Lazy Hashing:** Emplea metadatos (tamaño, mtime) antes de calcular SHA-256 (ahorro CPU).
-2. **Delta Encoding:** Transforma mutaciones grandes en `git add --patch`. 
+2. **Delta Encoding:** Transforma mutaciones grandes en `git add --patch`.
 3. **Bloqueo I/O:** Si el delta es cero, abortas la operación y devuelves "ATP Conservado".

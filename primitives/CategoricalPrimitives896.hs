@@ -14,7 +14,7 @@ data DomainId = D1 | D2 | D3 | D4 | D5 | D6 | D7 | D8
   deriving (Eq, Show, Enum, Bounded)
 
 -- | Classification of Primitives
-data PrimitiveType 
+data PrimitiveType
   = Structure
   | LimitsColimits
   | FunctorialAdjunctions

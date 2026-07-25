@@ -3,7 +3,7 @@ namespace FSharpKernel.Tests
 open FSharpKernel
 
 module OntologyTests =
-    
+
     let assertEqual expected actual msg =
         if expected <> actual then
             failwithf "Test Failure: %s (Expected: %A, Got: %A)" msg expected actual
@@ -11,7 +11,7 @@ module OntologyTests =
     let testObserverParsing () =
         // Test valid observer parse
         match Parser.parseObserver 0 1 2 with
-        | Choice1Of2 obs -> 
+        | Choice1Of2 obs ->
             assertEqual ObserverDomain.SOURCE obs.Domain "Domain match"
             assertEqual ObserverPrimitive.PREDICT obs.Primitive "Primitive match"
             assertEqual ObserverModifier.KALMAN_EXTENDED obs.Modifier "Modifier match"
@@ -24,7 +24,7 @@ module OntologyTests =
 
         // Test Byzantine combination rule (m=6 QUANTIZED on d=0 SOURCE)
         match Parser.parseObserver 0 0 6 with
-        | Choice2Of2 (ByzantineCombination msg) -> 
+        | Choice2Of2 (ByzantineCombination msg) ->
             if not (msg.Contains("Cannot apply QUANTIZED")) then
                 failwithf "Unexpected Byzantine message: %s" msg
         | res -> failwithf "Expected ByzantineCombination error, got %A" res

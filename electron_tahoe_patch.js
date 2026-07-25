@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 // C5-REAL
 // electron_tahoe_patch.js
 // Inject at the top of main.js: require('./electron_tahoe_patch.js')

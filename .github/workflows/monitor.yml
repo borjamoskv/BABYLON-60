@@ -1,6 +1,13 @@
+# C5-REAL EXERGY CERTIFIED
+name: Production Health Monitor
+
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   check-health:
@@ -8,7 +15,9 @@ jobs:
     steps:
       - name: Health Check
         run: |
-          HEALTH_URL="${BABYLON60_HEALTH_URL:-http://localhost:6060/health}"
-          curl -f "$HEALTH_URL" || echo "Health endpoint unreachable (expected if not deployed)"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEALTH_URL="${{ secrets.BABYLON60_HEALTH_URL }}"
+          if [ -z "$HEALTH_URL" ]; then
+            echo "::notice::BABYLON60_HEALTH_URL secret not configured. Skipping."
+            exit 0
+          fi
+          curl -sf --max-time 10 "$HEALTH_URL"

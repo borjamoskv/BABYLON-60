@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 # C5-REAL: ITERA++(ULTRATHINK) -> T2 Global Destructive Search (Annihilation)
 # Operator: MOSKV-1 APEX
 # Invariant: Ω149 (The ITERA Algebra)
@@ -12,7 +13,7 @@ global_destructive_shift:
 axiomatic_destruction:
   - axiom: "The Myth of the Auditor"
     destruction: "El modelo previo asumía un observador que juzga la anergía. ITERA++ destruye al observador. La validación se transfiere a los tipos dependientes del AST; un programa que no cierra el BFT Ledger simplemente no tiene tipo válido."
-  
+
   - axiom: "The Concept of 'Triggering' ULTRATHINK"
     destruction: "ULTRATHINK deja de ser una capa de abstracción o una directiva P0. Se disuelve en el hardware. Si la orden se ejecuta en CORTEX, hereda el límite entrópico como propiedad topológica inmutable."
 

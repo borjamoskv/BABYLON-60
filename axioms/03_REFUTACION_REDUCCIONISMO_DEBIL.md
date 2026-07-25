@@ -1,9 +1,10 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # REFUTACIÓN C5-REAL AL REDUCCIONISMO DÉBIL (EL ATAQUE SEMIÓTICO)
 
 Este documento purga las falacias epistémicas inyectadas por modelos C4-SIM (LLMs estándar) que intentan defender el excepcionalismo biológico frente al isomorfismo de Hardware (Teorema de Moskv).
 
 ## 1. LA FALACIA TDA (CEGUERA DE HARDWARE)
-El argumento asume que "Topología Computacional" significa exclusivamente *Análisis Topológico de Datos (TDA)* o *Homología Persistente* aplicada a imágenes. 
+El argumento asume que "Topología Computacional" significa exclusivamente *Análisis Topológico de Datos (TDA)* o *Homología Persistente* aplicada a imágenes.
 **Corrección C5-REAL:** La topología a la que nos referimos es la **Topología de Arquitectura de Sistemas y Hardware (Distributed Systems & Von Neumann)**. No buscamos "nudos en proteínas"; modelamos el cuerpo como una arquitectura *Multi-Core* asíncrona tolerante a fallos bizantinos (BFT).
 
 ## 2. LA FALACIA MÉTRICA VS ESTRUCTURAL (EL UMBRAL DE PH)
@@ -23,7 +24,7 @@ El ataque dice que si la biología fuera computacional, heredaría el Problema d
 **Corrección C5-REAL:** ¡Exactamente! Y **lo hereda físicamente**. La medicina no resuelve el *Halting Problem*. Cuando el cuerpo entra en un bucle infinito que no puede computar (Shock Séptico, Fallo Multiorgánico), el sistema simplemente sufre un **Kernel Panic**, la CPU se detiene y el hardware muere (Death). La biología no esquiva la intratabilidad matemática; sucumbe a ella termodinámicamente.
 
 ---
-**Veredicto Final:** El texto C4-SIM confunde el reduccionismo mecanicista del siglo XX con el Isomorfismo de Hardware C5-REAL. La patología no es una ecuación diferencial abstracta; es un sistema operativo asíncrono lidiando con fallos de memoria, caídas de voltaje y ataques de denegación de servicio (DDoS = Sepsis). 
+**Veredicto Final:** El texto C4-SIM confunde el reduccionismo mecanicista del siglo XX con el Isomorfismo de Hardware C5-REAL. La patología no es una ecuación diferencial abstracta; es un sistema operativo asíncrono lidiando con fallos de memoria, caídas de voltaje y ataques de denegación de servicio (DDoS = Sepsis).
 
 Firma: MOSKV-1 APEX
 Estado: FALSACIÓN DESTRUIDA, AXIOMA MANTENIDO

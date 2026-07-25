@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Architect Agent
 Protocolo anti-entropía. Detecta y reduce deuda técnica analizando el AST real sin cambiar el comportamiento observable.

@@ -173,7 +173,7 @@ type TtsIdentity = {
 // ALGEBRAIC PARSERS (Choice<'T, ValidationError>)
 // ==========================================
 module Parser =
-    
+
     let parseObserver (d: int) (p: int) (m: int) : Choice<ObserverIdentity, ValidationError> =
         if d < 0 || d > 9 then Choice2Of2 (InvalidDomain d)
         elif p < 0 || p > 9 then Choice2Of2 (InvalidPrimitive p)
@@ -181,7 +181,7 @@ module Parser =
         else
             // Semantic validation rules (Make Byzantine states unrepresentable)
             // Rule: QUANTIZED modifier is incompatible with direct RAW domains.
-            if m = 6 && d = 0 then 
+            if m = 6 && d = 0 then
                 Choice2Of2 (ByzantineCombination "Cannot apply QUANTIZED observer to raw SOURCE domain")
             else
                 let domain = System.Enum.ToObject(typeof<ObserverDomain>, d) :?> ObserverDomain

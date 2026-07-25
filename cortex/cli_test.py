@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Unit tests for MOSKV-1 APEX C5-REAL Categorical Logic 896 Primitives CLI (cortex/cli.py).
 """

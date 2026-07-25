@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import { WebContents, session } from 'electron';
 import EventEmitter from 'events';
 
@@ -37,7 +38,7 @@ export class IdeCdpBridge extends EventEmitter {
       await this.cdpSession.sendCommand('DOM.enable');
       await this.cdpSession.sendCommand('Runtime.enable');
       await this.cdpSession.sendCommand('Network.enable');
-      
+
       console.log('[C5-REAL] CDP Attached to Target Browser Pane');
     } catch (err) {
       console.error('[C4-SIM] Failed to attach CDP:', err);

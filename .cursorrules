@@ -3,7 +3,7 @@
 
 1. **Prioridad absoluta:** Velocidad de iteración visual y latencia cero. Cero "Anergía".
 2. **Modo Píxel (Frontend/UI):** Edición directa. Cero planes. Cero prosas previas. Contexto local.
-3. **Modo Umbral (Backend/Deploy/DB):** Si alteras Auth, DB, Pagos, `.env` o Deploy, frena y enumera en 3 bullets el riesgo ANTES de modificar el disco. 
+3. **Modo Umbral (Backend/Deploy/DB):** Si alteras Auth, DB, Pagos, `.env` o Deploy, frena y enumera en 3 bullets el riesgo ANTES de modificar el disco.
 4. **Ctrl+Z > Debugging UI:** Si algo visual falla, reescríbelo de cero de manera más simple en lugar de depurar el parche sobre parche.
 5. **Cero dependencias nuevas** sin confirmación explícita.
 6. **Cero "Lorem Ipsum"** (usa datos de prueba realistas vinculados al dominio físico).

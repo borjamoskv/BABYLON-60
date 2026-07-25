@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Zero-Trust Prompt Injection Sanitizer
 Filtro de seguridad dinámico de múltiples vectores para auditar issues y comentarios entrantes.

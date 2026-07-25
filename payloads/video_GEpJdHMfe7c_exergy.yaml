@@ -1,7 +1,8 @@
+# C5-REAL EXERGY CERTIFIED
 Target: "https://www.youtube.com/watch?v=GEpJdHMfe7c"
 PPI_Reality_Score: 4
 Exergy_Payload:
-  Primitivas_Extraidas: 
+  Primitivas_Extraidas:
     - "Distribución Normal: Consecuencia de efectos aleatorios aditivos. Varianza finita. Cola delgada."
     - "Distribución Log-Normal: Consecuencia de efectos aleatorios multiplicativos. Crecimiento asimétrico con límite inferior en cero."
     - "Ley de Potencias (Pareto, P(x) ~ x^-α): Distribución scale-free con varianza infinita. Resulta de la competición de dos exponenciales subyacentes o criticidad autoorganizada."

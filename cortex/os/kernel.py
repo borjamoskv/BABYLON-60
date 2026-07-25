@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX-OS v4.0 Microkernel Core (<300 LOC).
 Maintains 5 State Graphs, Syscall Dispatcher, Process Table, Memory Hierarchy, and Immune Interrupts.

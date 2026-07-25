@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 import asyncio
 import sqlite3
 import time
@@ -176,16 +177,16 @@ class SelfHealingMesh:
         """Búsqueda BFS de ruta sustituta que evite nodos muertos (Métrica de Lawvere)."""
         if start_node in self.dead_nodes or end_node in self.dead_nodes:
             return []
-        
+
         queue = [[start_node]]
         visited = {start_node}
-        
+
         while queue:
             path = queue.pop(0)
             curr = path[-1]
             if curr == end_node:
                 return path
-            
+
             for (pre, post) in self.synapses.keys():
                 if pre == curr and post not in visited and post not in self.dead_nodes:
                     visited.add(post)
@@ -216,7 +217,7 @@ class SelfHealingMesh:
         if not path or len(path) < 2:
             print(f"[SelfHealingMesh] Imposible reparar ruta {start_node}->{end_node}. Métrica Lawvere = inf.")
             return False
-        
+
         current_energy = energy
         for i in range(len(path) - 1):
             hop_pre, hop_post = path[i], path[i+1]

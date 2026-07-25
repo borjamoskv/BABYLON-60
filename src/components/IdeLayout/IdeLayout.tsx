@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 import React, { useState, useEffect } from 'react';
 
 /**
@@ -39,13 +40,13 @@ export const IdeLayout: React.FC = () => {
 
       {/* 3. Browser Pane Transparente (30% si está abierto) */}
       {isBrowserOpen && (
-        <div 
-          id="browser-pane-container" 
+        <div
+          id="browser-pane-container"
           style={{ width: '30%', borderLeft: '1px solid var(--border, #2E3866)', position: 'relative' }}
         >
-          {/* 
-            Este contenedor es un "agujero" en React. 
-            El Main Process de Electron proyectará el WebContentsView nativo exactamente sobre estas coordenadas 
+          {/*
+            Este contenedor es un "agujero" en React.
+            El Main Process de Electron proyectará el WebContentsView nativo exactamente sobre estas coordenadas
             midiendo el boundingClientRect de este div.
           */}
         </div>

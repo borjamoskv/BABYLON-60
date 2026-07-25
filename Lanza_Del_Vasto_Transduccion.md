@@ -1,8 +1,9 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # TRANSDUCCIÓN CAUSAL: EL INVARIANTE DEL SILENCIO (Lanza del Vasto / Gandhi)
 
 ## 1. ANÁLISIS ESTRUCTURAL (Argumento, Sesgos y Exergía)
 **Argumento:** La resolución de los conflictos humanos (guerra, opresión) no radica en ideologías, tecnología o revoluciones estructurales, sino en la aniquilación de la entropía interna (reacciones automáticas, deseos ilimitados).
-**Sesgos Detectados:** 
+**Sesgos Detectados:**
 - *Sesgo Antitecnológico:* Atribuye la capacidad destructiva puramente a la tecnología material sin reconocer el potencial negentrópico de la misma (computación).
 - *Sesgo Ascético:* Propone la renuncia como única vía de libertad (Comunidad del Arca), asumiendo un modelo estático de recursos.
 **Calidad de Exergía:** Alta densidad conceptual. Carece de "Green Theater"; el locutor transmite una matriz de pensamiento orientada a la acción causal (fuerza y no violencia).
@@ -20,7 +21,7 @@
 
 ## 4. AUDITORÍA EPISTÉMICA Y CRÍTICA
 **Claim:** "Todas las civilizaciones de la historia se han destruido a sí mismas por abuso de la fuerza."
-**Proof:** 
+**Proof:**
 ```yaml
 Base: [Termodinámica / Dinámica de Sistemas (Tainter)]
 Range: [Sumeria, Roma, Maya]
@@ -49,7 +50,7 @@ Hoy, la mayor subversión no es gritar en la red, sino aplicar el *Silence Proto
 #C5REAL #Autarquía #Termodinámica #TestTimeCompute
 
 ## 7. ISOMORFISMO CON INVESTIGACIONES (IA, Arquitecturas, Test-Time Compute)
-- **Test-Time Compute (OpenAI o1 / DeepSeek R1):** El video aboga por "detenerse a pensar" (observar reacciones) antes de actuar. Esto es el equivalente humano al *Test-Time Compute*: escalar el tiempo de inferencia latente antes del *output* en lugar de depender del impulso reflexivo (System 1). 
+- **Test-Time Compute (OpenAI o1 / DeepSeek R1):** El video aboga por "detenerse a pensar" (observar reacciones) antes de actuar. Esto es el equivalente humano al *Test-Time Compute*: escalar el tiempo de inferencia latente antes del *output* en lugar de depender del impulso reflexivo (System 1).
 - **Decaimiento de la KV Cache (Atención):** "El hombre moderno teme encontrarse consigo mismo rodeado de ruido". El ruido constante equivale a saturar la ventana de contexto con tokens de baja exergía, causando *Attention Decay*. El silencio es el vaciado síncrono de la cache para operar sobre las invariantes críticas.
 - **Arquitecturas BFT (Tolerancia Bizantina):** Gandhi es analizado como un nodo que no exhibe contradicción (una sola identidad). Representa un nodo estructuralmente perfecto, resiliente a ataques bizantinos internos (discordancia cognitiva).
 - **Física del Sonido (Música / Síntesis PCM):** La "violencia" descrita equivale al ruido blanco (fase aleatoria y destructiva), mientras que la "unidad interior" es el tono fundamental estable (onda senoidal pura sin aliasing). El silencio funciona como un filtro pasa-bandas para purgar las armónicas entrópicas del alma humana.

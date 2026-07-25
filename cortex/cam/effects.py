@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM 1.0 Effects Algebra & Safety Enforcer.
 Prevents Undefined Behaviour by verifying actual effects against declared effects.

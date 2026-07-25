@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """C6.1 Recovery Cycle Integration Test."""
 import os
 import sys
@@ -14,12 +15,12 @@ def test_recovery_idempotence() -> None:
     db_path = os.path.join(PROJECT_ROOT, ".cortex", "integration_test.db")
     if os.path.exists(db_path):
         os.remove(db_path)
-        
+
     conn = sqlite3.connect(db_path)
     conn.execute("CREATE TABLE stress_log (id INTEGER, tx_data TEXT, status TEXT)")
     conn.commit()
     conn.close()
-    
+
     res = analyze_sqlite_recovery(db_path)
     assert res.recovery_idempotent, "R(R(S)) != R(S)"
     print("✓ Recovery Idempotence: PASS")

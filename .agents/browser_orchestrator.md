@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: browser_orchestrator
 description: Browser Orchestrator - Orquestador principal de automatización de navegador vía CDP.

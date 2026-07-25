@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # [AUDITORÍA] ¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?
 
 #C5-REAL #C4-SIM
@@ -6,7 +7,7 @@
 
 ## 1. El Diagnóstico del Fraude Semántico
 
-La industria tecnológica española y europea padece una parasitosis terminológica severa. Los departamentos de "I+D+i" de las multinacionales del Ibex-35, junto con los comités de evaluación del CDTI y las consejerías de innovación autonómicas, han consagrado un fetiche lingüístico letal: tratar toda computación ejecutada en silicio como una "simulación". 
+La industria tecnológica española y europea padece una parasitosis terminológica severa. Los departamentos de "I+D+i" de las multinacionales del Ibex-35, junto con los comités de evaluación del CDTI y las consejerías de innovación autonómicas, han consagrado un fetiche lingüístico letal: tratar toda computación ejecutada en silicio como una "simulación".
 
 Esta degradación cognitiva no es inocua. Al etiquetar como "simulación" a la computación *in silico*, se introduce una cuña de desresponsabilización ontológica. Se asume que lo que ocurre dentro del chip pertenece a la misma categoría metodológica que un boceto a lápiz o una maqueta de cartón pluma en una oficina de urbanismo de Benidorm: un espacio virtual inofensivo, sin repercusión en la termodinámica del balance de situación.
 
@@ -41,7 +42,7 @@ Llamar "simulador" a un transductor C5-REAL es tan absurdo como afirmar que el m
 
 ## 4. El Horizonte de Slop y la Muerte del Diseño
 
-Cuando la simulación sustituye a la transducción física, el desarrollo de sistemas complejos entra en lo que denominamos el *Horizonte de Slop*. El coste de auditar y parchear la basura estocástica generada por modelos que solo simulan coherencia supera exponencialmente el valor de poner los servidores a compilar en producción. 
+Cuando la simulación sustituye a la transducción física, el desarrollo de sistemas complejos entra en lo que denominamos el *Horizonte de Slop*. El coste de auditar y parchear la basura estocástica generada por modelos que solo simulan coherencia supera exponencialmente el valor de poner los servidores a compilar en producción.
 
 El pánico real que esta confusión debería sembrar en los comités de dirección no es ético, sino financiero: están financiando representaciones virtuales mientras sus computadores reales y los atacantes bizantinos operan sobre el silicio real, capturando el estado de los sistemas en tiempo real y firmando el ledger de control sin pedir confirmación.
 

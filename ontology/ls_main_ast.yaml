@@ -1,5 +1,6 @@
+# C5-REAL EXERGY CERTIFIED
 Claim: "ls-main AST Parser Invariant"
-Proof: 
+Proof:
   Base: "Parseo determinista B-Tree vs Textual String Matching"
   Range: "[O(1) Context Recovery, Cero Entropía Semántica]"
   Confidence: C5-REAL

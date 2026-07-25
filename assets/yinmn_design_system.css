@@ -1,22 +1,23 @@
+/* C5-REAL EXERGY CERTIFIED */
 /* BABYLON-60 Design System Tokens (Industrial Noir 2026) */
 :root {
   --color-bg: #0a0a0a;
   --color-surface: #121212;
   --color-border: #222222;
-  
+
   /* Primary Accent: YInMn Blue (Vibrant, high-exergy cobalt) */
   --color-yinmn-blue: #2b3be5;
   --color-yinmn-blue-glow: rgba(43, 59, 229, 0.4);
-  
+
   /* Secondary Accents */
   --color-terminal-green: #00ff41;
   --color-slop-red: #ff3333;
   --color-orange-purge: #ff5500;
-  
+
   /* Typography */
   --font-family-sans: "Humanist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-family-mono: "Fira Code", "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
-  
+
   /* Layout constraints */
   --border-radius-industrial: 2px; /* Sharp, rigid brutalist lines */
 }

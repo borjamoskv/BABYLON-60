@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 Unit and Property-Based Tests for cortex/entropy_mapping_engine.py (ULTRATHINK Ω31)
 """

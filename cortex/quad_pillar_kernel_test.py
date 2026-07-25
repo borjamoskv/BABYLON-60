@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 from typing import Any, Dict, List, Tuple
 """
 Unit tests for C5-REAL Quad-Pillar Kernel (Ω159).
@@ -86,14 +87,14 @@ def test_pillar_4_determinism_disk_hash(temp_db: Any) -> None:
 def test_pillar_4_idempotency_lock(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     det = DeterminismPillar(db_file=temp_db)
-    
+
     # Dispatch a task to create a ledger entry
     payload_hash = asyncio.run(orch.dispatch_task({"task_id": "idem_test"}))
-    
+
     # Verify that trying to run or check this hash raises the lock
     with pytest.raises(QuadPillarIdempotencyError, match="Idempotency Lock"):
         det.check_idempotency_lock(payload_hash)
-        
+
     # Checking an unknown hash should pass
     assert det.check_idempotency_lock("00000000000000000000000000") is True
 

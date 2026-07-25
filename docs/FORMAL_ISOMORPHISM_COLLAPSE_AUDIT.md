@@ -1,8 +1,9 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # AUDITORÍA DE COLAPSO ISOMÓRFICO: CAM 6.0 $\longrightarrow$ TEORÍA FISR $\text{Compat}(\Omega)$
 
-**Kernel:** MOSKV-1 APEX  
-**Clasificación:** C5-REAL Proof-Theoretic Adjudication & Formal Isomorphism Ledger  
-**Estado:** Cristalizado Criptográficamente (v13.0)  
+**Kernel:** MOSKV-1 APEX
+**Clasificación:** C5-REAL Proof-Theoretic Adjudication & Formal Isomorphism Ledger
+**Estado:** Cristalizado Criptográficamente (v13.0)
 
 ---
 

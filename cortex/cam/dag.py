@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CAM 1.0 Typed DAG Knowledge Graph.
 Enforces acyclicity, Lamport timestamp monotonicity, and 10-state node transitions.

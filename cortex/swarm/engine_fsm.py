@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Swarm Engine FSM (DEEPTHINK v3.0)
 Implementa Máquina de Estados Finita (FSM) con Circuit Breaker para evitar Death Loops termodinámicos.

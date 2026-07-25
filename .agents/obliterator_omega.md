@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 ---
 name: obliterator_omega
 description: Obliterator Omega (Weaponized Forgetting) - Agente termodinámico que borra memoria inútil según el Principio de Landauer.

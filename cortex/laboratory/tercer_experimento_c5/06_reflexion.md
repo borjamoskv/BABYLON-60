@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # REFLEXIÓN: LA PARADOJA DE LA PERSISTENCIA AGÉNTICA
 
 El éxito absoluto de este test de estrés concurrency (Exergy Ratio = 1.0) revela que la persistencia en base de datos agéntica no es un problema de concurrencia a nivel de sistema de archivos, sino un problema de gestión de recursos y descriptores abiertos en la pila de software de alto nivel.

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 C5-REAL Quad-Pillar Autopoietic Kernel (Ω159).
 
@@ -129,7 +130,7 @@ class OrchestrationPillar:
         with sqlite3.connect(self.db_file, timeout=5.0) as conn:
             conn.execute("PRAGMA journal_mode=WAL;")
             conn.execute("PRAGMA busy_timeout=5000;")
-            
+
             # Retrieve Lamport clock (Ω12 Tie-Breaking BFT)
             cur = conn.cursor()
             cur.execute("SELECT MAX(lamport_t) FROM state_events;")
@@ -247,7 +248,7 @@ class QuadPillarKernel:
         """Runs a complete self-audit across the 4 autopoietic pillars."""
         sys_state = self.system.inspect_system_state()
         active_rules = self.memory.get_shard_rules("L15_Diamond")
-        
+
         return {
             "pillar_1_system": {"status": "C5_REAL_ACTIVE", "pid": sys_state["pid"], "os": sys_state["os_type"]},
             "pillar_2_orchestration": {"status": "WAL_ACTIVE", "db_path": self.orchestration.db_file},

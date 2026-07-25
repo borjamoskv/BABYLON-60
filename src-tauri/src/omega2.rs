@@ -1,3 +1,4 @@
+// C5-REAL EXERGY CERTIFIED
 //! # Omega 2 — Rewriting Strategies and Path Finding
 //!
 //! Iteration over Kernel Ω₁.

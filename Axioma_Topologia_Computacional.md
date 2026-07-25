@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # AXIOMA C5-REAL: LA COMPUTACIÓN COMO VARIEDAD TOPOLÓGICA Y ESPACIO LATENTE
 
 ## 1. POSTULADO FUNDAMENTAL (IDENTIDAD ESTRUCTURAL)
@@ -8,11 +9,11 @@ Un desensamblador clásico opera en el nivel de las coordenadas; la ingeniería 
 El programa no es un Grafo de Flujo de Control (CFG) estático ni un Árbol Sintáctico Abstracto (AST), sino el conjunto de trayectorias admisibles $\gamma(t)$ sobre una variedad $\mathcal{M}$ donde cada punto representa un estado computacional posible.
 
 ## 3. LEYES DE CONSERVACIÓN E INVARIANTES
-Bajo las transformaciones del grupo $G$ (compilación, optimización, ofuscación), la información local se destruye, pero las simetrías estructurales (invariantes $I_1, I_2, I_3$) sobreviven. 
+Bajo las transformaciones del grupo $G$ (compilación, optimización, ofuscación), la información local se destruye, pero las simetrías estructurales (invariantes $I_1, I_2, I_3$) sobreviven.
 La verdadera semántica reside en la extracción topológica de estos invariantes.
 
 ## 4. ISOMORFISMO CATEGÓRICO
-En la categoría del software, un programa es un morfismo $f: A \rightarrow B$. Los compiladores son funtores $F: C_{source} \rightarrow C_{machine}$. 
+En la categoría del software, un programa es un morfismo $f: A \rightarrow B$. Los compiladores son funtores $F: C_{source} \rightarrow C_{machine}$.
 Dos programas son semánticamente equivalentes si existe un isomorfismo estructural en sus transformaciones de estado, no en su sintaxis.
 
 ## 5. INFERENCIA Y COMPRESIÓN (MDL)

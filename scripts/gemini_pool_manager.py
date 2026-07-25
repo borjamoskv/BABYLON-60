@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 Gemini Pro Multi‑Account Pool Manager with Telemetry (C5‑REAL)

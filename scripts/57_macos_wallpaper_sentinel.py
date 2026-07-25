@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env python3
 """
 C5-REAL macOS Wallpaper Sentinel & Self-Healing Transducer

@@ -1,3 +1,4 @@
+# C5-REAL EXERGY CERTIFIED
 """
 CORTEX: Sovereign C5-REAL Execution Kernel.
 """
