@@ -1,41 +1,46 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [HASKELL-1000-SPACE] Haskell Generative Pure Functional Taxonomy
-Proof: { Base: "Combinatorial Pure Functional Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+Claim: "[HASKELL-1000-SPACE] Haskell Generative Pure Functional Taxonomy"
+Proof:
+  {
+    Base: "Combinatorial Pure Functional Matrix [10 D x 10 P x 10 M]",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formula: "LazyEval -> MonadicState -> CategoryTheory -> Concurrency -> FFI = 1000 Pure Primitives"
 
 Domains_Context:
-  0: "LAZY_EVAL"          # Lazy Evaluation and Thunk Forcing
-  1: "MONAD_TRANS"        # Monad Transformer Stack State
-  2: "TYPE_CLASS"         # Typeclass Polymorphism Constraints
-  3: "STM_CONCUR"         # Software Transactional Memory / Concurrency
-  4: "FUNCTOR_CAT"        # Category Theory Structures (Functor/Applicative)
-  5: "PARSER_MONAD"       # Monadic Parsing and Token Consumption
-  6: "PURE_MATH"          # Pure Mathematical & Numeric Transformations
-  7: "FIBER_THREAD"       # MVar / Chan / Lightweight Spark Scheduling
-  8: "FFI_SYSTEM"         # Foreign Function Interface and C Struct Binding
-  9: "COMPILER_GHC"       # GHC Core Primitives and Rewrite Rules
+  0: "LAZY_EVAL" # Lazy Evaluation and Thunk Forcing
+  1: "MONAD_TRANS" # Monad Transformer Stack State
+  2: "TYPE_CLASS" # Typeclass Polymorphism Constraints
+  3: "STM_CONCUR" # Software Transactional Memory / Concurrency
+  4: "FUNCTOR_CAT" # Category Theory Structures (Functor/Applicative)
+  5: "PARSER_MONAD" # Monadic Parsing and Token Consumption
+  6: "PURE_MATH" # Pure Mathematical & Numeric Transformations
+  7: "FIBER_THREAD" # MVar / Chan / Lightweight Spark Scheduling
+  8: "FFI_SYSTEM" # Foreign Function Interface and C Struct Binding
+  9: "COMPILER_GHC" # GHC Core Primitives and Rewrite Rules
 
 Primitives_Action:
-  0: "THUNK_FORCE"        # Force thunk evaluation via seq or deepseq
-  1: "BIND_EVAL"          # Monadic bind execution (>>=)
-  2: "MAP_APPLY"          # Map over structure or apply applicative context
-  3: "TX_ATOMIC"          # Perform atomic state transactions
-  4: "REDUCE_FOLD"        # Fold values over algebraic structures
-  5: "PARSE_TOKEN"        # Run parser token evaluation
-  6: "STATE_MUTATE"       # Read/Write/Modify state within State Monad
-  7: "LIFT_EFFECT"        # Lift operation through monad stack layers
-  8: "FORK_SPARK"         # Fork IO thread or trigger lazy parallel spark
-  9: "FFI_CALL"           # Execute foreign/unsafe external call
+  0: "THUNK_FORCE" # Force thunk evaluation via seq or deepseq
+  1: "BIND_EVAL" # Monadic bind execution (>>=)
+  2: "MAP_APPLY" # Map over structure or apply applicative context
+  3: "TX_ATOMIC" # Perform atomic state transactions
+  4: "REDUCE_FOLD" # Fold values over algebraic structures
+  5: "PARSE_TOKEN" # Run parser token evaluation
+  6: "STATE_MUTATE" # Read/Write/Modify state within State Monad
+  7: "LIFT_EFFECT" # Lift operation through monad stack layers
+  8: "FORK_SPARK" # Fork IO thread or trigger lazy parallel spark
+  9: "FFI_CALL" # Execute foreign/unsafe external call
 
 Modifiers_Constraint:
-  0: "RAW"                # Direct pass-through, zero wrapper overhead
-  1: "STRICT"             # Force evaluation strictness (deepseq, !, seq)
-  2: "LAZY"               # Lazy deferred evaluation via thunks
-  3: "READER_ENV"         # Injected read-only environment (ReaderT)
-  4: "WRITER_LOG"         # Accumulative state logging (WriterT)
-  5: "EXCEPT_ERR"         # Explicit error state short-circuiting (ExceptT)
-  6: "STM_RETRY"          # Software Transactional Memory transaction retry
-  7: "PARALLEL"           # Direct CPU parallel spark scheduling (par)
-  8: "CONT_CPS"           # Continuation Passing Style execution (ContT)
-  9: "IO_UNSAFE"          # Unsafe IO operations from pure code (unsafePerformIO)
+  0: "RAW" # Direct pass-through, zero wrapper overhead
+  1: "STRICT" # Force evaluation strictness (deepseq, !, seq)
+  2: "LAZY" # Lazy deferred evaluation via thunks
+  3: "READER_ENV" # Injected read-only environment (ReaderT)
+  4: "WRITER_LOG" # Accumulative state logging (WriterT)
+  5: "EXCEPT_ERR" # Explicit error state short-circuiting (ExceptT)
+  6: "STM_RETRY" # Software Transactional Memory transaction retry
+  7: "PARALLEL" # Direct CPU parallel spark scheduling (par)
+  8: "CONT_CPS" # Continuation Passing Style execution (ContT)
+  9: "IO_UNSAFE" # Unsafe IO operations from pure code (unsafePerformIO)

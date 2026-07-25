@@ -1,41 +1,46 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [KIMI-1000-SPACE] Kimi Desktop and Daimon Core Orthogonal Primitives
-Proof: { Base: "Combinatorial Agent Execution Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+Claim: "[KIMI-1000-SPACE] Kimi Desktop and Daimon Core Orthogonal Primitives"
+Proof:
+  {
+    Base: "Combinatorial Agent Execution Matrix [10 D x 10 P x 10 M]",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formula: "DaimonCore -> KaosExec -> KosongLLM -> OpenClawShim -> GatewayAPI -> LanceDB -> PythonRun = 1000 Kimi Primitives"
 
 Domains_Context:
-  0: "DAIMON_CORE"        # Daimon Core runtime manager (Node/Python lifecycle)
-  1: "KAOS_EXEC"          # Kaos Execution sandboxing & local processes
-  2: "KOSONG_LLM"         # Kosong LLM prompting, tokens and tools gateway
-  3: "ACP_ADAPTER"        # Agent Client Protocol mapping and routing
-  4: "OPENCLAW_SHIM"      # OpenClaw API shims & legacy messenger plugin integrations
-  5: "GATEWAY_API"        # WebSockets and SSE communications bridge
-  6: "WEBBRIDGE_DESK"     # WebBridge Desktop automated controls (Canvas & UI clickers)
-  7: "MEMORY_LANCEDB"     # LanceDB and local SQLite state memory anchors
-  8: "PYTHON_RUN"         # Managed Python environment via UV
-  9: "OBS_DIAGNOSTICS"    # Observability event stream and logs analyzer
+  0: "DAIMON_CORE" # Daimon Core runtime manager (Node/Python lifecycle)
+  1: "KAOS_EXEC" # Kaos Execution sandboxing & local processes
+  2: "KOSONG_LLM" # Kosong LLM prompting, tokens and tools gateway
+  3: "ACP_ADAPTER" # Agent Client Protocol mapping and routing
+  4: "OPENCLAW_SHIM" # OpenClaw API shims & legacy messenger plugin integrations
+  5: "GATEWAY_API" # WebSockets and SSE communications bridge
+  6: "WEBBRIDGE_DESK" # WebBridge Desktop automated controls (Canvas & UI clickers)
+  7: "MEMORY_LANCEDB" # LanceDB and local SQLite state memory anchors
+  8: "PYTHON_RUN" # Managed Python environment via UV
+  9: "OBS_DIAGNOSTICS" # Observability event stream and logs analyzer
 
 Primitives_Action:
-  0: "INIT_RUNTIME"       # Initialize environments, run onboarding checks
-  1: "EXEC_SHELL"         # Execute subshell commands or managed interpreters
-  2: "RESOLVE_SKILL"      # Discover, verify, and unpack skill packages
-  3: "STATE_MUTATE"       # Read, write, or alter local session database
-  4: "COMPOSE_PROMPT"     # Assemble prompt context blocks dynamically
-  5: "QUERY_VECTOR"       # Execute search query against local vector indices
-  6: "STREAM_GATEWAY"     # Output token streams or status events
-  7: "SECURE_TAINT"       # Run OPSEC sanitization or taint-flow audit
-  8: "SYNCHRONIZE_UV"     # Run UV lock resolution, check local wheels
-  9: "PURGE_ARCHIVE"      # Clear log indexes, database WALs, and dump files
+  0: "INIT_RUNTIME" # Initialize environments, run onboarding checks
+  1: "EXEC_SHELL" # Execute subshell commands or managed interpreters
+  2: "RESOLVE_SKILL" # Discover, verify, and unpack skill packages
+  3: "STATE_MUTATE" # Read, write, or alter local session database
+  4: "COMPOSE_PROMPT" # Assemble prompt context blocks dynamically
+  5: "QUERY_VECTOR" # Execute search query against local vector indices
+  6: "STREAM_GATEWAY" # Output token streams or status events
+  7: "SECURE_TAINT" # Run OPSEC sanitization or taint-flow audit
+  8: "SYNCHRONIZE_UV" # Run UV lock resolution, check local wheels
+  9: "PURGE_ARCHIVE" # Clear log indexes, database WALs, and dump files
 
 Modifiers_Constraint:
-  0: "RAW"                # Unwrapped direct command execution
-  1: "SECURE"             # Strict sandbox isolation environment
-  2: "BYPASS"             # Bypass sandbox constraints with explicit permissions
-  3: "ATOMIC"             # Transact state with connection locking (busy_timeout 5000ms)
-  4: "EPHEMERAL"          # Perform in-memory transaction with no disk persistence
-  5: "MANAGED"            # Enforce override control by the master application
-  6: "OBFUSCATED"         # Compile with JavaScript obfuscator routines
-  7: "BFT_CONSENSUS"      # Validate state transition via BFT multi-verification
-  8: "CACHED"             # Short-circuit through local memory cache
-  9: "ASYNC_WAL"          # Execute via async queues with WAL journaling
+  0: "RAW" # Unwrapped direct command execution
+  1: "SECURE" # Strict sandbox isolation environment
+  2: "BYPASS" # Bypass sandbox constraints with explicit permissions
+  3: "ATOMIC" # Transact state with connection locking (busy_timeout 5000ms)
+  4: "EPHEMERAL" # Perform in-memory transaction with no disk persistence
+  5: "MANAGED" # Enforce override control by the master application
+  6: "OBFUSCATED" # Compile with JavaScript obfuscator routines
+  7: "BFT_CONSENSUS" # Validate state transition via BFT multi-verification
+  8: "CACHED" # Short-circuit through local memory cache
+  9: "ASYNC_WAL" # Execute via async queues with WAL journaling

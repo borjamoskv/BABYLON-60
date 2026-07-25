@@ -1,6 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [Colapso Estructural: C5-REAL (KINETIC) vs C4-SIM (SLOP)]
-Proof:
+Claim: "[Colapso Estructural: C5-REAL (KINETIC) vs C4-SIM (SLOP)]
+Proof:"
   Base: Scanner de Singularidad P0 (ultrathink_scanner.py) ejecutado sobre /Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv
   Range: [0, 15]
   Confidence: C5-REAL

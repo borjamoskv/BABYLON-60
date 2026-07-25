@@ -1,6 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [DICKIE-BUSH-OPERATOR-PATTERNS] High-Exergy Operating Heuristics
-Proof: { Base: "25+ Structural Posts Analysis (@dickiebush)", Confidence: C5-REAL }
+Claim: "[DICKIE-BUSH-OPERATOR-PATTERNS] High-Exergy Operating Heuristics"
+Proof:
+  { Base: "25+ Structural Posts Analysis (@dickiebush)", Confidence: C5-REAL }
 
 Operational_Invariants:
   1_Deep_Work_Block: "4 Hours Fasted Morning Focus > Complex Notion Systems"

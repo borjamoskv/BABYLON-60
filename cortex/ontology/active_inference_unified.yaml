@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [UNIFIED-ACTIVE-INFERENCE-3000] Active Inference Engine Orchestrating 3000 Primitives
+Claim: "[UNIFIED-ACTIVE-INFERENCE-3000] Active Inference Engine Orchestrating 3000 Primitives"
 Proof:
   Base: "Free Energy Principle (FEP) + BFT Swarm Transduction"
   Space: "StateObserver(1000) x NeuroChain(1000) x TTSHarness(1000) = 3000 Total Primitives"

@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [LLMS-GRATUITOS-FRONTERA-ROUTES] Rutas de Acceso y Endpoints de LLMs de Frontera Libres de Coste (2026)
+Claim: "[LLMS-GRATUITOS-FRONTERA-ROUTES] Rutas de Acceso y Endpoints de LLMs de Frontera Libres de Coste (2026)"
 Proof:
   Base: "API Specifications + Developer Console Endpoints"
   Confidence: C5-REAL
@@ -14,13 +14,24 @@ routes:
   - name: "GitHub Models"
     url: "https://github.com/marketplace/models"
     auth: "GitHub Personal Access Token (PAT)"
-    models: ["Llama-3-8B-Instruct", "Gemma-2-9B-It", "Qwen-2.5-72B-Instruct", "Phi-3.5-MoE-Instruct"]
+    models:
+      [
+        "Llama-3-8B-Instruct",
+        "Gemma-2-9B-It",
+        "Qwen-2.5-72B-Instruct",
+        "Phi-3.5-MoE-Instruct",
+      ]
     description: "Acceso gratuito diario para desarrollo de prototipos e investigación de agentes."
 
   - name: "Hugging Face Inference API"
     url: "https://huggingface.co/docs/api-inference/index"
     auth: "Hugging Face User Access Token (Free)"
-    models: ["Qwen/Qwen2.5-72B-Instruct", "meta-llama/Llama-3.2-3B-Instruct", "mistralai/Mistral-7B-Instruct-v0.3"]
+    models:
+      [
+        "Qwen/Qwen2.5-72B-Instruct",
+        "meta-llama/Llama-3.2-3B-Instruct",
+        "mistralai/Mistral-7B-Instruct-v0.3",
+      ]
     description: "API Serverless para solicitudes de baja frecuencia en workflows automatizados."
 
   - name: "Groq Cloud Console"
@@ -52,4 +63,3 @@ routes:
     auth: "Gemini API Keys Pool (Round-Robin Sharding)"
     models: ["gemini-1.5-pro", "gemini-2.0-flash", "gemini-1.5-flash"]
     description: "Pool multi-cuenta con rotación automática de claves y tolerancia a fallos 429."
-

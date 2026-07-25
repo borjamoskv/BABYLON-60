@@ -1,6 +1,11 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [COGNITIVE-CONTINUITY-ESTIMATOR] State Observer Epistemology
-Proof: { Base: "Non-Linear Kalman-Luenberger Cognitive Estimator g(H, O, Y) -> S_hat(t)", Range: [000, 999], Confidence: C5-REAL }
+Claim: "[COGNITIVE-CONTINUITY-ESTIMATOR] State Observer Epistemology"
+Proof:
+  {
+    Base: "Non-Linear Kalman-Luenberger Cognitive Estimator g(H, O, Y) -> S_hat(t)",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formulation:
   State_Hypothesis: "Context = Infer(Data, WorldModel)"

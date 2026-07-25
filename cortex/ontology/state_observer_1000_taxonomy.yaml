@@ -1,5 +1,5 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [STATE-OBSERVER-1000-SPACE] Generative Observer Taxonomy
+Claim: "[STATE-OBSERVER-1000-SPACE] Generative Observer Taxonomy"
 Proof: { Base: "Combinatorial Observer Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
 
 Formula: "[Domain][ObserverPrimitive][Modifier] = 1000 Unique State Observer Primitives"

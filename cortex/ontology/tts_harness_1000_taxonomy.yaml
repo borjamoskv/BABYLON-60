@@ -1,41 +1,46 @@
 # C5-REAL EXERGY CERTIFIED
-Claim: [TTS-HARNESS-1000-SPACE] Test-Time Scaling & Agentic Harness Taxonomy
-Proof: { Base: "Combinatorial TTS/Harness Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+Claim: "[TTS-HARNESS-1000-SPACE] Test-Time Scaling & Agentic Harness Taxonomy"
+Proof:
+  {
+    Base: "Combinatorial TTS/Harness Matrix [10 D x 10 P x 10 M]",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formula: "[TTSDomain][TTSPrimitive][TTSModifier] = 1000 Unique TTS & Harness Primitives"
 
 Domains_Context:
-  0: "ENTROPY_ALLOC"     # Dynamic Per-Problem Compute Allocation
-  1: "LATENT_LOOKAHEAD"  # Continuous Latent MCTS Space Search
-  2: "POLICY_IMPROVE"    # Online Inference Policy Refinement
+  0: "ENTROPY_ALLOC" # Dynamic Per-Problem Compute Allocation
+  1: "LATENT_LOOKAHEAD" # Continuous Latent MCTS Space Search
+  2: "POLICY_IMPROVE" # Online Inference Policy Refinement
   3: "HARNESS_DISCOVERY" # Meta-Harness Automated Code Search
-  4: "PROGRAMMATIC_JIT"  # Sandboxed Direct Python/JIT Execution
-  5: "SWARM_GRAPH"       # Self-Assembling BFT Multi-Agent Graph
-  6: "TRI_TIER_MEMORY"   # Temporal Knowledge Graph & Vector Sinks
-  7: "INFO_KV_EVICTION"  # Forward Influence Entropy Cache Purge
-  8: "STAGE_DECOUPLE"    # Decoupled Prefill/Decoding Optimization
-  9: "VECTOR_QUANT"      # Pre-Decoder Quantization & Latent Sinks
+  4: "PROGRAMMATIC_JIT" # Sandboxed Direct Python/JIT Execution
+  5: "SWARM_GRAPH" # Self-Assembling BFT Multi-Agent Graph
+  6: "TRI_TIER_MEMORY" # Temporal Knowledge Graph & Vector Sinks
+  7: "INFO_KV_EVICTION" # Forward Influence Entropy Cache Purge
+  8: "STAGE_DECOUPLE" # Decoupled Prefill/Decoding Optimization
+  9: "VECTOR_QUANT" # Pre-Decoder Quantization & Latent Sinks
 
 Primitives_Action:
-  0: "INIT"              # Instantiate MCTS Budget & Harness State
-  1: "EXPAND"            # Expand Latent Tree Children
-  2: "EVALUATE"          # Evaluate Invariant & Reward Function
-  3: "BACKPROP"          # Backpropagate Search Value
-  4: "PRUNE"             # Negative Early Exit Branch Pruning
-  5: "QUANTIZE"          # Online KV Memory Quantization
-  6: "ASSERT_BFT"        # Assert Swarm Byzantine Agreement N >= 3
-  7: "EXECUTE_SANDBOX"   # Execute Sandboxed Code Direct Action
+  0: "INIT" # Instantiate MCTS Budget & Harness State
+  1: "EXPAND" # Expand Latent Tree Children
+  2: "EVALUATE" # Evaluate Invariant & Reward Function
+  3: "BACKPROP" # Backpropagate Search Value
+  4: "PRUNE" # Negative Early Exit Branch Pruning
+  5: "QUANTIZE" # Online KV Memory Quantization
+  6: "ASSERT_BFT" # Assert Swarm Byzantine Agreement N >= 3
+  7: "EXECUTE_SANDBOX" # Execute Sandboxed Code Direct Action
   8: "RECONSTRUCT_STATE" # Cognitive Observer State Re-Estimation g(H,O,Y)
-  9: "FLUSH_LEDGER"      # Immutable Commit Receipt in Git Sentinel
+  9: "FLUSH_LEDGER" # Immutable Commit Receipt in Git Sentinel
 
 Modifiers_Constraint:
-  0: "RAW"               # Zero-Latency Pass-Through
-  1: "ATOMIC"            # Thread-Isolated Execution
-  2: "ADAPTIVE_COT"      # Dynamic CoT Token Length Allocation
-  3: "RETRO_ATTENTION"   # Retrospective Output Attention Correction
+  0: "RAW" # Zero-Latency Pass-Through
+  1: "ATOMIC" # Thread-Isolated Execution
+  2: "ADAPTIVE_COT" # Dynamic CoT Token Length Allocation
+  3: "RETRO_ATTENTION" # Retrospective Output Attention Correction
   4: "FORWARD_INFLUENCE" # Predictive Entropy Influence Metric
-  5: "TURBO_QUANT"       # 4x/5x Vector Memory Quantization
-  6: "META_PROPOSER"     # Automated Agentic Harness Proposer
-  7: "FEEDFORWARD_OPEN"  # Anticipatory Open-Loop Control
-  8: "SLIDING_WINDOW"    # Dynamic Sliding Attention Mask
-  9: "EPIDEMIC_PURGE"    # Entropic Token & Slop Annihilation
+  5: "TURBO_QUANT" # 4x/5x Vector Memory Quantization
+  6: "META_PROPOSER" # Automated Agentic Harness Proposer
+  7: "FEEDFORWARD_OPEN" # Anticipatory Open-Loop Control
+  8: "SLIDING_WINDOW" # Dynamic Sliding Attention Mask
+  9: "EPIDEMIC_PURGE" # Entropic Token & Slop Annihilation
