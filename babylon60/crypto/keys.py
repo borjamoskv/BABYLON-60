@@ -55,11 +55,11 @@ class KeyManager:
         private_bytes = private_key.private_bytes(encoding=serialization.Encoding.PEM, format=serialization.PrivateFormat.PKCS8, encryption_algorithm=serialization.NoEncryption())
         public_bytes = public_key.public_bytes(encoding=serialization.Encoding.OpenSSH, format=serialization.PublicFormat.OpenSSH)
         try:
-            if keyring is not None:
+            if keyring is not None and not os.environ.get('CORTEX_TESTING'):
                 keyring.set_password(self.service_name, actor_id, private_bytes.decode('utf-8'))
             else:
-                raise ImportError('keyring package is not installed')
-        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
+                raise ImportError('keyring package is not installed or CORTEX_TESTING active')
+        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError, ImportError) as e:
             logger.warning('Keyring set_password failed, falling back to in-memory storage: %s', e)
             if self.service_name not in self._fallback_keyring:
                 self._fallback_keyring[self.service_name] = {}
@@ -78,11 +78,11 @@ class KeyManager:
         private_pem = self._fallback_keyring.get(self.service_name, {}).get(actor_id)
         if not private_pem:
             try:
-                if keyring is not None:
+                if keyring is not None and not os.environ.get('CORTEX_TESTING'):
                     private_pem = keyring.get_password(self.service_name, actor_id)
                 else:
-                    logger.warning('OS Keyring is not available (keyring package is not installed).')
-            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
+                    logger.warning('OS Keyring is not available (keyring package is not installed or CORTEX_TESTING active).')
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError, ImportError) as e:
                 logger.warning('Fallo en OS Keyring (get_password) para actor %s: %s', actor_id, e, exc_info=True)
         if not private_pem:
             return None
@@ -96,11 +96,11 @@ class KeyManager:
             self._metadata[actor_id]['revoked'] = True
             self._save_metadata()
             try:
-                if keyring is not None:
+                if keyring is not None and not os.environ.get('CORTEX_TESTING'):
                     keyring.delete_password(self.service_name, actor_id)
                 else:
-                    logger.warning('OS Keyring is not available (keyring package is not installed).')
-            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
+                    logger.warning('OS Keyring is not available (keyring package is not installed or CORTEX_TESTING active).')
+            except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError, ImportError) as e:
                 logger.warning('Fallo en OS Keyring (delete_password) para actor %s: %s', actor_id, e, exc_info=True)
             if self.service_name in self._fallback_keyring:
                 self._fallback_keyring[self.service_name].pop(actor_id, None)
