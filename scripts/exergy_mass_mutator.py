@@ -4,14 +4,15 @@
 Incorporates real-time GELABP Exergy Delta scoring and ultra-parallel IO thread pooling.
 """
 import ast
+import json
 import os
 import re
-import sys
-import json
 import subprocess
+import sys
 import threading
-from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+
 
 class ExergyTransformer(ast.NodeTransformer):
     def __init__(self):
@@ -130,7 +131,7 @@ def apply_ast_mutations(file_path: Path) -> tuple[bool, float]:
             return True, transformer.exergy_gained
     except SyntaxError:
         pass
-    except Exception as e:
+    except Exception:
         pass
     return False, 0.0
 

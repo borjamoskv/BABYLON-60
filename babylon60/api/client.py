@@ -2,7 +2,9 @@
 BABYLON-60 C5-REAL Transducer API Client
 """
 from typing import Any
+
 import httpx
+
 
 class CortexClient:
     def __init__(self, base_url: str = "http://localhost:8000"):

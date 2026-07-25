@@ -4,7 +4,6 @@ import os
 import subprocess
 import sys
 from pathlib import Path
-from typing import Any
 
 from babylon60.skills.compiler import SkillASTCompiler
 from babylon60.skills.recorder import SkillSessionRecorder
@@ -50,7 +49,7 @@ def handle_skill_cli(args: argparse.Namespace) -> None:
         if not session_file.exists():
             print(f"🔴 [FATAL] Sesión {args.session_id} no encontrada en {storage_dir}", file=sys.stderr)
             sys.exit(1)
-        with open(session_file, "r", encoding="utf-8") as f:
+        with open(session_file, encoding="utf-8") as f:
             session_data = json.load(f)
         session = SkillTelemetrySession.from_dict(session_data)
         compiler = SkillASTCompiler()
@@ -66,7 +65,7 @@ def handle_skill_cli(args: argparse.Namespace) -> None:
         if not skill_file.exists():
             print(f"🔴 [FATAL] Skill {args.skill_id} no encontrada en {storage_dir}", file=sys.stderr)
             sys.exit(1)
-        with open(skill_file, "r", encoding="utf-8") as f:
+        with open(skill_file, encoding="utf-8") as f:
             skill_data = json.load(f)
         skill = SkillDefinition.from_dict(skill_data)
         engine = SkillReplayEngine()

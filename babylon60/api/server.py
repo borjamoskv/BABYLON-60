@@ -1,11 +1,12 @@
 """
 BABYLON-60 C5-REAL Transducer API Server
 """
+import hashlib
+from typing import Any
+
 import uvicorn
 from fastapi import FastAPI
-from typing import Any
 from pydantic import BaseModel
-import hashlib
 
 app = FastAPI(title="BABYLON-60 API", description="C5-REAL Execution Kernel")
 

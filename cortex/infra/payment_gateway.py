@@ -13,7 +13,7 @@ STRIPE_WEBHOOK_SECRET = os.environ.get("STRIPE_WEBHOOK_SECRET", "whsec_mock_c5_r
 class PaymentGatewayHandler(BaseHTTPRequestHandler):
     gate = SovereignLicenseGate()
 
-    def _set_headers(self, status: int = 200, content_type: str = "application/json"):
+    def _set_headers(self, status: int = 200, content_type: str = "application/json") -> None:
         self.send_response(status)
         self.send_header("Content-Type", content_type)
         self.send_header("Access-Control-Allow-Origin", "*")
@@ -21,10 +21,10 @@ class PaymentGatewayHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization")
         self.end_headers()
 
-    def do_OPTIONS(self):
+    def do_OPTIONS(self) -> None:
         self._set_headers(200)
 
-    def do_GET(self):
+    def do_GET(self) -> None:
         parsed = urlparse(self.path)
         if parsed.path == "/health":
             self._set_headers(200)
@@ -36,7 +36,7 @@ class PaymentGatewayHandler(BaseHTTPRequestHandler):
             self._set_headers(404)
             self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
 
-    def do_POST(self):
+    def do_POST(self) -> None:
         parsed = urlparse(self.path)
         content_len = int(self.headers.get("Content-Length", 0))
         body_bytes = self.rfile.read(content_len) if content_len > 0 else b""
@@ -72,7 +72,7 @@ class PaymentGatewayHandler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps({"error": "Endpoint not found"}).encode("utf-8"))
 
 
-def run_payment_server(port: int = 8060):
+def run_payment_server(port: int = 8060) -> None:
     server = HTTPServer(("0.0.0.0", port), PaymentGatewayHandler)
     print(f"[+] CORTEX PAYMENT GATEWAY active on port {port} (C5-REAL)")
     try:

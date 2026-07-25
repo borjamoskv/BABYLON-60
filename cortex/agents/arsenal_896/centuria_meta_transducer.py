@@ -119,7 +119,7 @@ class CenturiaMetaTransducer:
         return current_level[0].hex()
 
 
-async def main():
+async def main() -> None:
     print("💥 [CENTURIA_META_TRANSDUCER] Iniciando reescritura retroactiva ULTRATHINK (896 primitivas)...")
     transducer = CenturiaMetaTransducer()
     report = await transducer.execute_retroactive_rewrite()
