@@ -23,9 +23,20 @@ def _check_no_floats(data: Any) -> None:
             _check_no_floats(v)
 
 
+def _sort_dict_lexicographically(data: Any) -> Any:
+    if isinstance(data, dict):
+        return {k: _sort_dict_lexicographically(data[k]) for k in sorted(data.keys(), key=str)}
+    elif isinstance(data, list):
+        return [_sort_dict_lexicographically(v) for v in data]
+    elif isinstance(data, tuple):
+        return tuple(_sort_dict_lexicographically(v) for v in data)
+    return data
+
+
 def canonicalize_cbor(data: dict[str, Any]) -> bytes:
     _check_no_floats(data)
-    return cbor2.dumps(data, canonical=True)
+    sorted_data = _sort_dict_lexicographically(data)
+    return cbor2.dumps(sorted_data)
 
 
 def hash_sha3_256(data: bytes) -> str:
