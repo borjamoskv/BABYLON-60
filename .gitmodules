@@ -22,3 +22,6 @@
 [submodule "apps/FinMind"]
 	path = apps/FinMind
 	url = https://github.com/borjamoskv/FinMind.git
+[submodule "proof_kernel/NUL-ZK"]
+	path = proof_kernel/NUL-ZK
+	url = https://github.com/borjamoskv/NUL-ZK.git

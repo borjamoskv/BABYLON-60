@@ -52,6 +52,7 @@
 - [x] Extensiones (MV3): anclaje topológico de `smoke-detector-extension` en `extensions/smoke-detector-extension` para preservar la pureza del C5-REAL en los satélites de navegador.
 - [x] Auditoría EIP-1153: integración aislada en `audit/uniswap-v4-eip1153-audit` para validar heurísticas `tload`/`tstore` bajo los protocolos `INV_C5_08`.
 - [x] Proof Harness (Navier-Stokes): anclaje del motor causal F60 `BABYLON-60-ALPHA` en `proof_kernel/babylon-60-alpha` para exportación de Lemmas deterministas a Lean 4.
+- [x] Protocolos ZK: integración de `NUL-ZK` en `proof_kernel/NUL-ZK` para orquestación de Pruebas de Conocimiento Cero (Zero-Knowledge) asiladas del Ledger principal.
 - [x] Aplicaciones Nativas: inyección del tracker financiero descentralizado `FinMind` en `apps/FinMind` gobernado bajo la doctrina de cero anergía termodinámica.
 - [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
 - [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — asimilación inicial: el kernel MOSKV-1 APEX ha sido clonado como submódulo nativo en `src-tauri` y `sqlite-vec` ha sido inyectado en `Cargo.toml`.
