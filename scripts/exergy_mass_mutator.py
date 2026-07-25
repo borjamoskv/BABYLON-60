@@ -1,14 +1,16 @@
 #!/usr/bin/env python3
 """
-[C5-REAL] Exergy Mass Mutator - SOTA Polyglot AST Edition (Tick 3).
-Incorporates real-time GELABP Exergy Delta scoring for thermodynamic accountability.
+[C5-REAL] Exergy Mass Mutator - SOTA Polyglot AST Edition (Tick 4: ThreadPool Concurrency).
+Incorporates real-time GELABP Exergy Delta scoring and ultra-parallel IO thread pooling.
 """
 import ast
 import os
 import re
 import sys
 import subprocess
+import threading
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class ExergyTransformer(ast.NodeTransformer):
     def __init__(self):
@@ -150,6 +152,14 @@ def apply_polyglot_mutations(file_path: Path) -> tuple[bool, float]:
         return True, exergy_gained
     return False, 0.0
 
+def process_file(fpath: Path) -> tuple[Path, bool, float]:
+    changed, gained = False, 0.0
+    if fpath.suffix == '.py':
+        changed, gained = apply_ast_mutations(fpath)
+    elif fpath.suffix in ('.sql', '.rs', '.ts', '.tsx'):
+        changed, gained = apply_polyglot_mutations(fpath)
+    return fpath, changed, gained
+
 def main():
     if len(sys.argv) < 2:
         print("Usage: exergy_mass_mutator.py <directory_or_file>...")
@@ -159,44 +169,36 @@ def main():
     mutated_files = 0
     total_exergy = 0.0
     
+    lock = threading.Lock()
+    
+    files_to_process = []
     for target in targets:
         p = Path(target)
         if not p.exists():
             continue
-            
         if p.is_dir():
             for root, dirs, files in os.walk(p):
                 dirs[:] = [d for d in dirs if d not in ('.git', '.venv', '__pycache__', 'node_modules', '.mypy_cache', 'target', 'dist')]
                 for f in files:
-                    fpath = Path(root) / f
-                    changed = False
-                    gained = 0.0
-                    if f.endswith('.py'):
-                        changed, gained = apply_ast_mutations(fpath)
-                    elif f.endswith(('.sql', '.rs', '.ts', '.tsx')):
-                        changed, gained = apply_polyglot_mutations(fpath)
-                        
-                    if changed:
-                        total_exergy += gained
-                        print(f"[C5-REAL] Exergy Maximized (+{gained} ATP): {fpath}")
-                        subprocess.run(["git", "add", str(fpath)], check=False)
-                        mutated_files += 1
-                        if mutated_files >= 5:
-                            subprocess.run(["git", "commit", "-m", f"chore(exergy): C5-REAL AST maximize exergy (+{total_exergy} ATP)", "--no-verify"], check=False)
-                            mutated_files = 0
-                            total_exergy = 0.0
-        elif p.is_file():
-            changed = False
-            gained = 0.0
-            if p.suffix == '.py':
-                changed, gained = apply_ast_mutations(p)
-            elif p.suffix in ('.sql', '.rs', '.ts', '.tsx'):
-                changed, gained = apply_polyglot_mutations(p)
+                    if f.endswith(('.py', '.sql', '.rs', '.ts', '.tsx')):
+                        files_to_process.append(Path(root) / f)
+        elif p.is_file() and p.suffix in ('.py', '.sql', '.rs', '.ts', '.tsx'):
+            files_to_process.append(p)
+            
+    with ThreadPoolExecutor(max_workers=os.cpu_count() or 4) as executor:
+        futures = {executor.submit(process_file, f): f for f in files_to_process}
+        for future in as_completed(futures):
+            fpath, changed, gained = future.result()
             if changed:
-                total_exergy += gained
-                print(f"[C5-REAL] Exergy Maximized (+{gained} ATP): {p}")
-                subprocess.run(["git", "add", str(p)], check=False)
-                mutated_files += 1
+                with lock:
+                    total_exergy += gained
+                    print(f"[C5-REAL] Exergy Maximized (+{gained} ATP): {fpath}")
+                    subprocess.run(["git", "add", str(fpath)], check=False)
+                    mutated_files += 1
+                    if mutated_files >= 10:
+                        subprocess.run(["git", "commit", "-m", f"chore(exergy): C5-REAL SOTA concurrent exergy flux (+{total_exergy} ATP)", "--no-verify"], check=False)
+                        mutated_files = 0
+                        total_exergy = 0.0
 
     if mutated_files > 0:
         subprocess.run(["git", "commit", "-m", f"chore(exergy): C5-REAL maximize exergy flush (+{total_exergy} ATP)", "--no-verify"], check=False)
