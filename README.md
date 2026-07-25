@@ -16,6 +16,10 @@
   <img src="https://img.shields.io/badge/license-Proprietary-FF6B35?style=flat-square" alt="License" />
 </p>
 
+<p align="center">
+  <a href="https://codespaces.new/borjamoskv/BABYLON-60"><img src="https://github.com/codespaces/badge.svg" alt="Open in GitHub Codespaces" /></a>
+</p>
+
 <br/>
 
 ## ⚡ 1-CLICK KINETIC DEPLOYMENT
