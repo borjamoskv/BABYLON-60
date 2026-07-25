@@ -1,19 +1,3 @@
-# BABYLON-60
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Python 3.12](https://img.shields.io/badge/python-3.12-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-
-## Installation & Quick Start
-```bash
-uv sync --all-extras
-```
-
-## Architecture Overview
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
-
-## Contributing
-See [docs/INDEX.md](docs/INDEX.md).
-
 <div align="center">
   <img src="https://img.shields.io/badge/babylon60-BABYLON--60-0A0A0A?style=for-the-badge&labelColor=2B3BE5&color=0A0A0A" alt="babylon60" />
 </div>
