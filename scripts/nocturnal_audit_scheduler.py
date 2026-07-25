@@ -14,11 +14,13 @@ from typing import Dict, Any
 REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "nocturnal_audit.log"
 
-def run_cmd(cmd: str) -> bool:
-    print(f"[*] Executing Audit Command: {cmd}")
-    res = subprocess.run(cmd, shell=True, cwd=str(REPO_DIR), capture_output=True, text=True)
+def run_cmd(cmd: str | list[str]) -> bool:
+    cmd_str = cmd if isinstance(cmd, str) else " ".join(cmd)
+    print(f"[*] Executing Audit Command: {cmd_str}")
+    use_shell = isinstance(cmd, str)
+    res = subprocess.run(cmd, shell=use_shell, cwd=str(REPO_DIR), capture_output=True, text=True)
     if res.returncode != 0:
-        print(f"[-] ERROR in '{cmd}':\n{res.stderr}")
+        print(f"[-] ERROR in '{cmd_str}':\n{res.stderr}\n{res.stdout}")
         return False
     return True
 
@@ -29,19 +31,19 @@ def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
     print("==================================================")
 
     # Plane 1: Invariant Auto-alignment
-    align_ok = run_cmd(f"{sys.executable} scripts/autodetect_invariants.py")
+    align_ok = run_cmd([sys.executable, "scripts/autodetect_invariants.py"])
 
     # Plane 2: Memory Vault Synchronization
-    sync_ok = run_cmd(f"{sys.executable} scripts/sync_vault_uuids.py")
+    sync_ok = run_cmd([sys.executable, "scripts/sync_vault_uuids.py"])
 
     # Plane 3: GELABP Exergy Matrix Evaluation
-    exergy_ok = run_cmd(f"{sys.executable} scripts/exergy_optimizer_agent.py")
+    exergy_ok = run_cmd([sys.executable, "scripts/exergy_optimizer_agent.py"])
 
     # Plane 4: Complete Pytest Validation
-    pytest_ok = run_cmd(f"{sys.executable} -m pytest -v tests/ -k 'not test_nocturnal_audit_scheduler'")
+    pytest_ok = run_cmd([sys.executable, "-m", "pytest", "-v", "tests/", "-k", "not test_nocturnal_audit_scheduler"])
 
     # Plane 5: Secret Swarm Audit
-    secret_ok = run_cmd(f"{sys.executable} scripts/secret_swarm_auditor.py")
+    secret_ok = run_cmd([sys.executable, "scripts/secret_swarm_auditor.py"])
 
     status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok and secret_ok) else "FAILED"
     
