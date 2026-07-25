@@ -40,7 +40,7 @@ impl VoidLedger {
         )?;
 
         let embedder = TextEmbedding::try_new(InitOptions::new(EmbeddingModel::BGESmallENV15))
-        .unwrap();
+        .expect("C5-REAL: Strict Unwrapping Enforced");
 
         Ok(Self {
             conn: Mutex::new(conn),
@@ -49,11 +49,11 @@ impl VoidLedger {
     }
 
     pub fn write(&self, payload: &str, causal_taint: &str) -> Result<()> {
-        let mut embedder = self.embedder.lock().unwrap();
-        let vec = &embedder.embed(vec![payload], None).unwrap()[0];
+        let mut embedder = self.embedder.lock().expect("C5-REAL: Strict Unwrapping Enforced");
+        let vec = &embedder.embed(vec![payload], None).expect("C5-REAL: Strict Unwrapping Enforced")[0];
         let vec_bytes: Vec<u8> = vec.iter().flat_map(|f| f.to_le_bytes()).collect();
 
-        let conn = self.conn.lock().unwrap();
+        let conn = self.conn.lock().expect("C5-REAL: Strict Unwrapping Enforced");
         conn.execute("BEGIN IMMEDIATE", [])?;
 
         let mut stmt = conn.prepare("SELECT IFNULL(MAX(lamport_t), 0) FROM events")?;
