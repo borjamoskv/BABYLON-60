@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-import os
 import glob
-import json
+import os
 import shutil
+
 
 def main() -> None:
     print("⚡ [C5-REAL] Memory Vault Session Synchronizer (INV_C5_15 / INV_C5_25)")
@@ -21,7 +21,7 @@ def main() -> None:
     for transcript in transcripts:
         conv_id = transcript.split("/")[-4]
         try:
-            with open(transcript, "r") as f:
+            with open(transcript) as f:
                 content = f.read()
                 # Dynamic scan for workspace relevance keywords (INV_C5_25)
                 if "belongs_to_babylon" in content or "BABYLON-60" in content:

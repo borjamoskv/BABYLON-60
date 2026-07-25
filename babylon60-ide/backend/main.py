@@ -14,7 +14,20 @@ from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
-from .routes import analytics, arena, bridge, cortex, delegation, fs, inference, ledger, ontology, query, sentinel, telemetry
+from .routes import (
+    analytics,
+    arena,
+    bridge,
+    cortex,
+    delegation,
+    fs,
+    inference,
+    ledger,
+    ontology,
+    query,
+    sentinel,
+    telemetry,
+)
 from .services import cortex_ledger
 
 logger = logging.getLogger("babylon60")

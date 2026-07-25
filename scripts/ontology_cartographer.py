@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 import os
-import json
-from pathlib import Path
 from datetime import datetime
+from pathlib import Path
 
 ROOT = Path(__file__).parent.parent.resolve()
 OUTPUT = ROOT / "C5_ABSOLUTE_ONTOLOGY.md"

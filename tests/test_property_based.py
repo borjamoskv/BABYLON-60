@@ -13,7 +13,7 @@ except ImportError:
     HAS_HYPOTHESIS = False
     import functools
 
-    def given(*a: object, **kw: object) -> object:  # type: ignore[no-redef]
+    def given(*a: object, **kw: object) -> object:
         def dec(fn):
             @functools.wraps(fn)
             def wrapper(*args, **kwargs):
@@ -27,9 +27,9 @@ except ImportError:
         def __getattr__(self, name):
             return lambda *a, **kw: None
 
-    st = _St()  # type: ignore[assignment]
+    st = _St()
 
-    def settings(**kw: object) -> object:  # type: ignore[no-redef]
+    def settings(**kw: object) -> object:
         def dec(fn):
             return fn
 

@@ -1,6 +1,5 @@
 import os
 import sqlite3
-
 from pathlib import Path
 
 from scripts.bittensor_yuma_consensus_c5 import (

@@ -2,6 +2,7 @@
 import os
 import re
 
+
 def main() -> None:
     print("⚡ [C5-REAL] Autopoietic Invariant Alignment (INV_C5_13)")
     rule_files = ["AGENTS.md", ".agents/AGENTS.md", "ETHOS.md"]
@@ -9,7 +10,7 @@ def main() -> None:
     
     for rf in rule_files:
         if os.path.exists(rf):
-            with open(rf, "r") as f:
+            with open(rf) as f:
                 content = f.read()
                 matches = re.findall(r"(INV_[A-Z0-9_]+):?\s*(.+)", content)
                 for code, desc in matches:

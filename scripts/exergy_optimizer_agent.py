@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-import sys
 import subprocess
+import sys
+
 
 def evaluate_exergy() -> float:
     print("⚡ [C5-REAL] Exergy Optimization Agent (INV_C5_14)")
