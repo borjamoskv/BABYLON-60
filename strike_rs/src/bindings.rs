@@ -1,7 +1,7 @@
 #![allow(unsafe_op_in_unsafe_fn)]
 use pyo3::prelude::*;
 use pyo3::exceptions::PyRuntimeError;
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, Mutex, RwLock};
 
 use crate::ledger::MasterLedger;
 use crate::atms::Atms;
@@ -11,7 +11,7 @@ use crate::publisher::{Publisher, ExportFormat};
 #[derive(Clone)]
 struct CortexKernelInner {
     ledger: Arc<Mutex<MasterLedger>>,
-    atms: Arc<Mutex<Atms>>,
+    atms: Arc<RwLock<Atms>>,
 }
 
 #[pyclass]
@@ -60,7 +60,7 @@ impl CortexKernel {
         Ok(Self {
             inner: CortexKernelInner {
                 ledger: Arc::new(Mutex::new(ledger)),
-                atms: Arc::new(Mutex::new(atms)),
+                atms: Arc::new(RwLock::new(atms)),
             }
         })
     }
@@ -71,7 +71,7 @@ impl CortexKernel {
         
         py.allow_threads(move || {
             let mut ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
-            let mut atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            let mut atms = inner.atms.write().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS rwlock poisoned"))?;
 
             let js = JustifiedStatement {
                 statement: Statement {
@@ -102,7 +102,7 @@ impl CortexKernel {
         
         py.allow_threads(move || {
             let mut ledger = inner.ledger.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: Ledger mutex poisoned"))?;
-            let mut atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            let mut atms = inner.atms.write().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS rwlock poisoned"))?;
 
             let stmt = Statement {
                 content: content.clone(),
@@ -137,7 +137,7 @@ impl CortexKernel {
     pub fn is_believed(&self, py: Python<'_>, content: String) -> PyResult<bool> {
         let inner = self.inner.clone();
         py.allow_threads(move || {
-            let atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            let atms = inner.atms.read().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS rwlock poisoned"))?;
             if let Some(node_id) = atms.find_node_by_datum(&content) {
                 Ok(atms.is_believed(node_id))
             } else {
@@ -150,7 +150,7 @@ impl CortexKernel {
     pub fn contradiction_free(&self, py: Python<'_>, content: String) -> PyResult<bool> {
         let inner = self.inner.clone();
         py.allow_threads(move || {
-            let atms = inner.atms.lock().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS mutex poisoned"))?;
+            let atms = inner.atms.read().map_err(|_| PyRuntimeError::new_err("C5-REAL FATAL: ATMS rwlock poisoned"))?;
             if let Some(node_id) = atms.find_node_by_datum(&content) {
                 Ok(atms.contradiction_free(node_id))
             } else {

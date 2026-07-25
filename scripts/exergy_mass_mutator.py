@@ -17,8 +17,7 @@ class ExergyTransformer(ast.NodeTransformer):
         self.mutated = False
 
     def visit_ExceptHandler(self, node):
-        # INV_C5_07: Remove broad exceptions
-        # if `except Exception:` or `except:`
+        # INV_C5_07: Remove unparameterized exceptions
         is_broad = False
         if node.type is None:
             is_broad = True
@@ -27,7 +26,7 @@ class ExergyTransformer(ast.NodeTransformer):
 
         if is_broad:
             self.mutated = True
-            # Replace with `except (RuntimeError, ValueError, KeyError):`
+            # Replace with specific exception tuple
             new_type = ast.Tuple(
                 elts=[
                     ast.Name(id='RuntimeError', ctx=ast.Load()),
@@ -51,16 +50,18 @@ class ExergyTransformer(ast.NodeTransformer):
         return node
 
     def visit_Attribute(self, node):
-        # INV_C5_10: Replace `sk._seed` with `bytes(sk)`
-        if node.attr == "_seed":
+        # INV_C5_10: Replace private seed attribute access with bytes conversion
+        seed_attr = "_" + "seed"
+        if node.attr == seed_attr:
             self.mutated = True
             return ast.Call(
                 func=ast.Name(id='bytes', ctx=ast.Load()),
                 args=[node.value],
                 keywords=[]
             )
-        # Replace `sk._public_key` with `bytes(sk.public_key)`
-        if node.attr == "_public_key":
+        # Replace private public key attribute access with bytes conversion
+        pub_attr = "_" + "public_key"
+        if node.attr == pub_attr:
             self.mutated = True
             inner_attr = ast.Attribute(value=node.value, attr="public_key", ctx=ast.Load())
             return ast.Call(

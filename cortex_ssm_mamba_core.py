@@ -1,5 +1,5 @@
 import math
-from typing import Tuple
+from typing import Any, Tuple
 import numpy as np
 import numpy.typing as npt
 
@@ -19,16 +19,17 @@ class StateSpaceModel:
         B_bar = self.delta * self.B
         return A_bar, B_bar
 
-    def forward(self, sequence: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+    def forward(self, sequence: npt.NDArray[np.float64] | list[Any]) -> npt.NDArray[np.float64]:
         A_bar, B_bar = self._discretize_zoh()
         h: npt.NDArray[np.float64] = np.zeros(self.state_dim, dtype=np.float64)
         
-        seq_len = sequence.shape[0]
+        seq_arr: npt.NDArray[np.float64] = np.asarray(sequence, dtype=np.float64)
+        seq_len = seq_arr.shape[0]
         output_seq: npt.NDArray[np.float64] = np.zeros((seq_len, self.input_dim), dtype=np.float64)
         
         for t in range(seq_len):
-            h = A_bar @ h + B_bar @ sequence[t]
-            output_seq[t] = self.C @ h + self.D @ sequence[t]
+            h = A_bar @ h + B_bar @ seq_arr[t]
+            output_seq[t] = self.C @ h + self.D @ seq_arr[t]
             
         return output_seq
 

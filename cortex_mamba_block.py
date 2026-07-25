@@ -31,11 +31,12 @@ class MambaBlock:
             
         return out_seq
 
-    def forward(self, sequence: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
-        seq_len = sequence.shape[0]
+    def forward(self, sequence: npt.NDArray[np.float64] | List[List[float]]) -> npt.NDArray[np.float64]:
+        seq_arr: npt.NDArray[np.float64] = np.asarray(sequence, dtype=np.float64)
+        seq_len = seq_arr.shape[0]
         
-        x_proj = sequence @ self.W_x.T
-        z_proj = sequence @ self.W_in.T
+        x_proj = seq_arr @ self.W_x.T
+        z_proj = seq_arr @ self.W_in.T
         
         x_conv = self._causal_conv1d(x_proj)
         x_act = silu(x_conv)

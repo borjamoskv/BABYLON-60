@@ -10,9 +10,10 @@ def _check_no_floats(data: Any) -> None:
     if isinstance(data, float):
         raise ValueError('Flotantes (float) están estrictamente prohibidos en el payload BFT (IEEE 754 no-determinismo).')
     elif isinstance(data, dict):
-        for v in data.values():
+        for k, v in data.items():
+            _check_no_floats(k)
             _check_no_floats(v)
-    elif isinstance(data, (list, tuple)):
+    elif isinstance(data, (list, tuple, set, frozenset)):
         for v in data:
             _check_no_floats(v)
 
