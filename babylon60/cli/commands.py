@@ -12,6 +12,7 @@ from babylon60.commands.ship import run_ship
 from babylon60.commands.swarm import run_swarm
 from babylon60.commands.ultrathink import run_ultrathink
 from babylon60.commands.verify import run_verify
+from babylon60.commands.browser import run_browser
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("babylon60.cli.commands")
@@ -63,6 +64,11 @@ def main() -> None:
     # verify
     subparsers.add_parser("verify", aliases=["vf", "audit"], help="BFT Ledger Cryptographic Verification")
 
+    # browser
+    br_parser = subparsers.add_parser("browser", aliases=["br", "web"], help="C5-REAL Web Diagnostics / Headless DOM Extraction")
+    br_parser.add_argument("url", type=str, help="URL to extract entropy from")
+    br_parser.add_argument("--no-dom", action="store_true", help="Skip full HTML DOM extraction")
+
     args = parser.parse_args()
 
     cmd = args.command
@@ -88,6 +94,8 @@ def main() -> None:
         run_swarm(args.task, args.count)
     elif cmd in ["verify", "vf", "audit"]:
         run_verify()
+    elif cmd in ["browser", "br", "web"]:
+        run_browser(args.url, extract_dom=not args.no_dom)
 
 if __name__ == "__main__":
     main()

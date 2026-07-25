@@ -4,19 +4,21 @@ Vector: INV_C5_17 / INV_C5_21 / INV_C5_22
 """
 
 import pytest
+
 from babylon60.commands import (
-    run_ultrathink,
     run_autodidact,
-    run_purge,
-    run_seal,
+    run_ethos,
     run_itera,
     run_logos,
-    run_ethos,
     run_mythos,
+    run_purge,
+    run_seal,
     run_ship,
     run_swarm,
-    run_verify
+    run_ultrathink,
+    run_verify,
 )
+
 
 def test_logos_transduction():
     payload = run_logos("Test Operator Intent")
@@ -42,3 +44,10 @@ def test_itera_loop():
 
 def test_purge_protocol():
     run_purge() # Execute kinetic purge test
+
+def test_browser_diagnostics():
+    from babylon60.commands.browser import run_browser
+    # We test it against a lightweight internal payload or public mock
+    res = run_browser("http://example.com", extract_dom=True)
+    assert res["status"] == "success"
+    assert res["bytes_extracted"] > 0
