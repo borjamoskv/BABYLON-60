@@ -36,16 +36,12 @@ class DualContextAgent:
         if not socket_env:
             socket_env = "/tmp/cortex_ipc.sock"
             os.environ["CORTEX_IPC_SOCKET"] = socket_env
-            logging.info(
-                f"[C5-REAL] CORTEX_IPC_SOCKET asignado por defecto a {socket_env}"
-            )
+            logging.info(f"[C5-REAL] CORTEX_IPC_SOCKET asignado por defecto a {socket_env}")
 
         self.socket_path: str = socket_env or ""
         logging.basicConfig(level=logging.INFO)
 
-    async def ingest_code_context(
-        self, file_path: str, ast_data: dict[str, Any]
-    ) -> None:
+    async def ingest_code_context(self, file_path: str, ast_data: dict[str, Any]) -> None:
         self.code_ast = ast_data
         logging.info(f"[C5-REAL] Ingested AST from {file_path}")
 
@@ -62,9 +58,7 @@ class DualContextAgent:
             "action": "Esperando comandos del operador",
         }
 
-    async def handle_client(
-        self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter
-    ) -> None:
+    async def handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> None:
         """Transductor de payload IPC (NDJSON Stream)."""
         try:
             async for line in reader:
@@ -75,17 +69,13 @@ class DualContextAgent:
                     payload = json.loads(line_str)
                     ptype = payload.get("type")
                     if ptype == "AST":
-                        await self.ingest_code_context(
-                            payload.get("file", "unknown"), payload.get("data", {})
-                        )
+                        await self.ingest_code_context(payload.get("file", "unknown"), payload.get("data", {}))
                     elif ptype == "AOM":
                         await self.ingest_dom_context(payload.get("data", {}))
                     elif ptype == "HEARTBEAT":
                         pass  # Ω43: Mantiene el liveness del socket
                 except json.JSONDecodeError as e:
-                    logging.warning(
-                        f"[C5-REAL] NDJSON Stream Warning: Chunk ignorado por error de formato: {e}"
-                    )
+                    logging.warning(f"[C5-REAL] NDJSON Stream Warning: Chunk ignorado por error de formato: {e}")
                     continue
         except (OSError, ValueError, json.JSONDecodeError, RuntimeError) as e:
             # Fail-Fast C5-REAL logging
@@ -99,9 +89,7 @@ class DualContextAgent:
         if os.path.exists(self.socket_path):
             os.remove(self.socket_path)
 
-        server = await asyncio.start_unix_server(
-            self.handle_client, path=self.socket_path
-        )
+        server = await asyncio.start_unix_server(self.handle_client, path=self.socket_path)
         logging.info(f"[C5-REAL] Agent Igor IPC Server listening on {self.socket_path}")
 
         async with server:

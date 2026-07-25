@@ -1,8 +1,10 @@
 # C5-REAL EXERGY CERTIFIED
 """C6-REAL Attestation & Invariants."""
+
 from dataclasses import dataclass
 from typing import Dict
 import json
+
 
 @dataclass
 class RecoveryResult:
@@ -12,6 +14,7 @@ class RecoveryResult:
     recovery_idempotent: bool
     state_hash_stable: bool
 
+
 @dataclass
 class ByzantineResult:
     reachable_invalid_state: int
@@ -19,11 +22,13 @@ class ByzantineResult:
     attacks_isolated: int
     history_preserved: int
 
+
 @dataclass
 class ReplayResult:
     total_replays: int
     intermediate_identity_pass: bool
     causal_alignment_pass: bool
+
 
 @dataclass
 class C6Attestation:
@@ -47,13 +52,9 @@ class C6Attestation:
     def to_yaml_str(self) -> str:
         data = {
             "C6_Attestation": {
-                "experiment": {
-                    "id": self.experiment_id
-                },
+                "experiment": {"id": self.experiment_id},
                 "environment": self.environment,
-                "attacks": {
-                    "injected": self.attacks_injected
-                },
+                "attacks": {"injected": self.attacks_injected},
                 "results": {
                     "durability": "PASS" if self.durability_pass else "FAIL",
                     "recovery": "PASS" if self.recovery_pass else "FAIL",
@@ -61,9 +62,9 @@ class C6Attestation:
                     "byzantine": "PASS" if self.byzantine_pass else "FAIL",
                     "committed_tx_loss": self.committed_tx_loss,
                     "corruption": self.corruption_detected,
-                    "replay": "deterministic" if self.replay_deterministic else "divergent"
+                    "replay": "deterministic" if self.replay_deterministic else "divergent",
                 },
-                "witness_hash": self.witness_hash
+                "witness_hash": self.witness_hash,
             }
         }
         return json.dumps(data, indent=2)

@@ -29,9 +29,7 @@ class TypedDAGKnowledgeGraph:
         self.adj_list[source_id].append(target_id)
         if self._has_cycle():
             self.adj_list[source_id].pop()
-            raise RuntimeError(
-                "Undefined Behaviour Error: Cycle detected in Knowledge Graph DAG"
-            )
+            raise RuntimeError("Undefined Behaviour Error: Cycle detected in Knowledge Graph DAG")
 
         edge = KGEdge(edge_type=edge_type, source_id=source_id, target_id=target_id)
         self.edges.append(edge)
@@ -55,9 +53,7 @@ class TypedDAGKnowledgeGraph:
 
         return visited_count != len(self.nodes)
 
-    def transition_node_state(
-        self, node_id: str, new_state: EpistemicState
-    ) -> None:
+    def transition_node_state(self, node_id: str, new_state: EpistemicState) -> None:
         if node_id not in self.nodes:
             raise KeyError(f"Node '{node_id}' not found in Knowledge Graph")
         self.nodes[node_id].state = new_state

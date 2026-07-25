@@ -37,12 +37,8 @@ def test_cam2_5d_epistemic_freshness_decay() -> None:
 
 def test_cam2_hypergraph_2nd_order_feedback_loop() -> None:
     graph = CAM2Hypergraph()
-    n1 = graph.add_node(
-        KGNode(node_type=NodeType.POLICY, state=EpistemicState.VERIFIED)
-    )
-    n2 = graph.add_node(
-        KGNode(node_type=NodeType.OBSERVATION, state=EpistemicState.MEASURED)
-    )
+    n1 = graph.add_node(KGNode(node_type=NodeType.POLICY, state=EpistemicState.VERIFIED))
+    n2 = graph.add_node(KGNode(node_type=NodeType.OBSERVATION, state=EpistemicState.MEASURED))
 
     # 1st-order causal edge: n1 -> n2
     graph.add_edge(EdgeType.DEPENDS_ON, n1, n2, EdgeOrder.FIRST_ORDER_CAUSAL)
@@ -54,12 +50,8 @@ def test_cam2_hypergraph_2nd_order_feedback_loop() -> None:
 
 def test_cam2_adjudication_preserves_dissidence() -> None:
     graph = CAM2Hypergraph()
-    claim_a = graph.add_node(
-        KGNode(node_type=NodeType.CLAIM, content="Market Trend Up")
-    )
-    claim_b = graph.add_node(
-        KGNode(node_type=NodeType.CLAIM, content="Market Trend Down")
-    )
+    claim_a = graph.add_node(KGNode(node_type=NodeType.CLAIM, content="Market Trend Up"))
+    claim_b = graph.add_node(KGNode(node_type=NodeType.CLAIM, content="Market Trend Down"))
 
     adj = graph.adjudicate_conflict(
         claim_a_id=claim_a,

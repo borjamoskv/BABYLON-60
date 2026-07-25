@@ -1,9 +1,11 @@
 # C5-REAL EXERGY CERTIFIED
 """C6-REAL Deterministic Fault Injector (Chaos Monkey)."""
+
 import os
 import signal
 import time
 from typing import Dict, Any
+
 
 class DeterministicChaosMonkey:
     def __init__(self, target_campaigns: Dict[str, int]):
@@ -25,12 +27,13 @@ class DeterministicChaosMonkey:
                 pass
         return False
 
+
 def chaos_orchestrator(target_pid: int, target_campaigns: Dict[str, int], shared_phase: Any, stop_event: Any) -> None:
     """Runs in a separate thread/process to assassinate the target deterministically."""
     monkey = DeterministicChaosMonkey(target_campaigns)
 
     while not stop_event.is_set():
-        current_phase = shared_phase.value.decode('utf-8').strip('\x00')
+        current_phase = shared_phase.value.decode("utf-8").strip("\x00")
         if current_phase and monkey.try_inject_fault(target_pid, current_phase):
             break  # Target is dead
         time.sleep(0.001)  # 1ms resolution polling

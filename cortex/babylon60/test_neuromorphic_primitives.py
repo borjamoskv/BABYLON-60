@@ -29,9 +29,7 @@ async def test_neuromorphic_v2() -> None:
             start_time = time.time()
             energy = await motor.wait_and_fire()
             elapsed = time.time() - start_time
-            print(
-                f"[MotorB] ¡Spike recibido! Energía disipada: {energy:.2f}. Bloqueo duró {elapsed:.4f}s"
-            )
+            print(f"[MotorB] ¡Spike recibido! Energía disipada: {energy:.2f}. Bloqueo duró {elapsed:.4f}s")
             # Post-spike: registra el disparo para STDP Hebbiano (Potenciación)
             w = synapse.register_post_spike()
             print(f"[Sinapsis A->B] Plasticidad Causal (STDP): Nuevo peso = {w:.2f}")
@@ -44,14 +42,10 @@ async def test_neuromorphic_v2() -> None:
         await mesh.route_pulse("SensorA", "MotorB", 5.0)
         print(f"[MotorB] Energía antes de leak: {motor.current_potential:.2f}")
 
-        await asyncio.sleep(
-            2.0
-        )  # Esperar para que se fugue (leak rate 2.0/s -> 4.0 leak)
+        await asyncio.sleep(2.0)  # Esperar para que se fugue (leak rate 2.0/s -> 4.0 leak)
 
         print(f"[MotorB] Energía tras Leak de 2s: {motor.current_potential:.2f}")
-        assert motor.current_potential <= 2.0, (
-            "La fuga termodinámica (LIF) no funcionó correctamente."
-        )
+        assert motor.current_potential <= 2.0, "La fuga termodinámica (LIF) no funcionó correctamente."
 
         # Ahora sí, disparamos superando el umbral rápido
         print("[SensorA] Inyectando pulso de 15.0 rápidamente...")
@@ -66,9 +60,7 @@ async def test_neuromorphic_v2() -> None:
         await mesh.route_pulse("SensorA", "MotorB", 10.0)
         print("[C5-REAL] Pulso abortado correctamente por nodo inerte.")
 
-        print(
-            "[C5-REAL] VERIFICACIÓN COMPLETADA (V2). Invariantes STDP y LIF validados físicamente."
-        )
+        print("[C5-REAL] VERIFICACIÓN COMPLETADA (V2). Invariantes STDP y LIF validados físicamente.")
     finally:
         for suffix in ["", "-wal", "-shm"]:
             p = f"{db_path}{suffix}"
@@ -115,4 +107,3 @@ async def test_auto_healing_mesh() -> None:
 
 if __name__ == "__main__":
     asyncio.run(test_neuromorphic_v2())
-

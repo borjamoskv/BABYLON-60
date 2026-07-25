@@ -45,9 +45,7 @@ class CAM2Hypergraph:
             self.causal_adj[source_id].append(target_id)
             if self._has_causal_cycle():
                 self.causal_adj[source_id].pop()
-                raise RuntimeError(
-                    "Undefined Behaviour Error: Cycle detected in 1st-order causal edges"
-                )
+                raise RuntimeError("Undefined Behaviour Error: Cycle detected in 1st-order causal edges")
         else:
             self.feedback_adj[source_id].append(target_id)
 

@@ -73,11 +73,7 @@ class IPFS_Prompt_Ledger:
 if __name__ == "__main__":
     ledger = IPFS_Prompt_Ledger()
     # Simulación de cristalización
-    ledger.pin_invariant(
-        "FRONTEND_REACT", "Regla React: Prohibido useEffect sin dependencias físicas."
-    )
-    ledger.pin_invariant(
-        "BFT_CONSENSUS", "Regla BFT: Mutar el estado exige quorum de 3 subagentes."
-    )
+    ledger.pin_invariant("FRONTEND_REACT", "Regla React: Prohibido useEffect sin dependencias físicas.")
+    ledger.pin_invariant("BFT_CONSENSUS", "Regla BFT: Mutar el estado exige quorum de 3 subagentes.")
 
     print(ledger.generate_bootstrap_prompt())
