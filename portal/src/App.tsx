@@ -7,12 +7,21 @@ import {
   BookOpen,
   Zap,
   ShieldCheck,
-  Code
+  Code,
+  Search
 } from 'lucide-react';
 import './App.css';
+import primitivesData from './data/primitives.json';
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const filteredPrimitives = primitivesData.filter(p =>
+    p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    p.domain.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="app-container">
@@ -121,16 +130,110 @@ function App() {
             <h2 className="hero-title" style={{ fontSize: '3rem', marginBottom: '2rem' }}>
               Explorador 896
             </h2>
-            <div className="glass-panel" style={{ padding: '2rem' }}>
-              <p style={{ color: 'var(--text-secondary)' }}>
-                [ Módulo en construcción. Conexión IPC con categorical_896_engine.py requerida para renderizado AST... ]
-              </p>
+
+            <div className="search-bar">
+              <Search size={20} style={{ color: 'var(--text-secondary)' }} />
+              <input
+                type="text"
+                placeholder="Buscar por ID, nombre o dominio..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="search-input"
+              />
+              <span className="results-count">{filteredPrimitives.length} / 896</span>
+            </div>
+
+            <div className="glass-panel table-container">
+              <table className="primitives-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Nombre de Primitiva</th>
+                    <th>Dominio</th>
+                    <th>Exergía (η)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredPrimitives.slice(0, 100).map((p) => (
+                    <tr key={p.id}>
+                      <td className="mono">{p.id}</td>
+                      <td>{p.name}</td>
+                      <td>
+                        <span className="domain-badge">{p.domain}</span>
+                      </td>
+                      <td className="mono" style={{ color: p.exergy >= 0.9 ? 'var(--status-exergy)' : 'var(--status-warning)' }}>
+                        {p.exergy.toFixed(3)}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              {filteredPrimitives.length > 100 && (
+                <div className="table-footer">
+                  Mostrando los primeros 100 resultados.
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'resolution' && (
+          <div className="animate-fade-in">
+            <h2 className="hero-title" style={{ fontSize: '3rem', marginBottom: '2rem' }}>
+              Robinson Resolution Engine
+            </h2>
+
+            <div className="dashboard-grid" style={{ marginTop: 0 }}>
+              <div className="card glass-panel" style={{ gridColumn: 'span 2' }}>
+                <div className="card-header">
+                  <Network size={24} />
+                  <h3 className="card-title">Simulador de Refutación Causal</h3>
+                </div>
+                <p className="metric-label" style={{ marginBottom: '1rem' }}>
+                  Colapso de Hipótesis Falsables a Cláusula Vacía (□)
+                </p>
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                  <div style={{ display: 'flex', gap: '1rem', padding: '1rem', background: 'var(--bg-core)', borderRadius: '6px', border: '1px solid var(--border-subtle)' }}>
+                    <div className="mono" style={{ color: 'var(--status-warning)' }}>C1: P(x) ∨ Q(y)</div>
+                    <div style={{ color: 'var(--text-secondary)' }}>+</div>
+                    <div className="mono" style={{ color: 'var(--status-error)' }}>C2: ¬P(A) ∨ R(z)</div>
+                    <div style={{ color: 'var(--text-secondary)' }}>→ (Unificación θ = {'{x/A}'})</div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ width: '2px', height: '30px', background: 'var(--border-glow)' }}></div>
+                  </div>
+
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div style={{ padding: '1rem 2rem', background: 'rgba(43, 59, 229, 0.1)', border: '1px solid var(--accent-primary)', borderRadius: '6px' }}>
+                      <span className="mono" style={{ color: 'var(--text-primary)', fontSize: '1.2rem' }}>Res(C1, C2) = Q(y) ∨ R(z)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="card glass-panel">
+                <div className="card-header">
+                  <ShieldCheck size={24} />
+                  <h3 className="card-title">Métrica Lean 4</h3>
+                </div>
+                <div style={{ marginTop: 'auto' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                    <span className="mono" style={{ fontSize: '0.85rem' }}>Proof Trace</span>
+                    <span className="mono" style={{ color: 'var(--status-exergy)', fontSize: '0.85rem' }}>VALIDATED</span>
+                  </div>
+                  <div style={{ width: '100%', height: '4px', background: 'var(--bg-core)', borderRadius: '2px' }}>
+                    <div style={{ width: '100%', height: '100%', background: 'var(--status-exergy)', borderRadius: '2px', boxShadow: '0 0 10px var(--status-exergy)' }}></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
 
         {/* Other tabs remain placeholders for now */}
-        {(activeTab !== 'dashboard' && activeTab !== 'primitives') && (
+        {(activeTab !== 'dashboard' && activeTab !== 'primitives' && activeTab !== 'resolution') && (
           <div className="animate-fade-in">
             <h2 className="hero-title" style={{ fontSize: '3rem', marginBottom: '2rem' }}>
               {activeTab.charAt(0).toUpperCase() + activeTab.slice(1)}
