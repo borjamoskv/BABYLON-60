@@ -54,7 +54,7 @@ def verify_bijectivity() -> None:
             seen_coords.add(coord)
         except ValueError as e:
             print(f'[-] FATAL: Invariant violated during verification: {e}')
-            raise RuntimeError(f'FAIL-FAST: {e}')
+            raise RuntimeError(f'FAIL-FAST: {e}') from e
     if len(seen_indices) != TOTAL_PRIMITIVES or len(seen_coords) != TOTAL_PRIMITIVES:
         print('[-] FATAL: Topological fracture. Missing mappings.')
         raise RuntimeError('FAIL-FAST: Topological fracture. Missing mappings.')

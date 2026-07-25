@@ -3,8 +3,6 @@ from pathlib import Path
 
 import babylon60.database.core
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(PROJECT_ROOT))
 import hashlib
 import json
 import re
@@ -13,6 +11,9 @@ import subprocess
 import time
 from dataclasses import dataclass
 from typing import Union
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(PROJECT_ROOT))
 
 DB_PATH = Path.home() / '.babylon60/exergy_agent_ledger.db'
 VAULT_DIR = Path.home() / '.gemini/config/.cortex/memory_vault'
@@ -45,7 +46,7 @@ class ExergyFailed:
     score: ExergyScore
     gelabp: GELABP
     reasons: list[str]
-ExergyVerdict = Union[ExergyPassed, ExergyFailed]
+ExergyVerdict = ExergyPassed | ExergyFailed
 
 @dataclass(frozen=True)
 class TriggerConsolidation:
@@ -55,7 +56,7 @@ class TriggerConsolidation:
 @dataclass(frozen=True)
 class Stable:
     last_timestamp: float
-ConsolidationDecision = Union[TriggerConsolidation, Stable]
+ConsolidationDecision = TriggerConsolidation | Stable
 
 def init_db() -> None:
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)

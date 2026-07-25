@@ -20,7 +20,7 @@ def get_git_commit_hash() -> str:
         res = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
         return res.stdout.strip()
     except (subprocess.SubprocessError, OSError):
-        raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+        raise RuntimeError('FAIL-FAST: General Exception intercepted.') from None
 
 def run_git_sentinel(commit_msg: str) -> str:
     try:
@@ -213,7 +213,7 @@ def cmd_iter(args: argparse.Namespace) -> None:
                     if res.returncode == 0 and res.stdout.strip() == 'commit':
                         m['status'] = 'DONE'
                 except (subprocess.SubprocessError, OSError):
-                    raise RuntimeError('FAIL-FAST: General Exception intercepted.')
+                    raise RuntimeError('FAIL-FAST: General Exception intercepted.') from None
             if m.get('status') == 'DONE':
                 done_ms += 1
         if total_ms > 0:

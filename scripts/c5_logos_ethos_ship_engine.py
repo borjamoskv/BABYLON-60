@@ -84,7 +84,7 @@ class BFTMasterLedgerWAL:
                 return taint_hash
             except sqlite3.IntegrityError as e:
                 conn.rollback()
-                raise RuntimeError(f'[SIGKILL_State_Purge] BFT/WAL integrity violation: {e}')
+                raise RuntimeError(f'[SIGKILL_State_Purge] BFT/WAL integrity violation: {e}') from e
 
     def verify_ledger_integrity(self) -> bool:
         with babylon60.database.core.connect_sync(self.db_path) as conn:
