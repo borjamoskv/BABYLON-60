@@ -38,9 +38,9 @@ def main() -> dict[str, Any]:
     Q, idx = build_Q(states, pi)
     model = Model(states, pi, Q, idx)
     rows_csv: list[dict[str, Any]] = []
-    all_ent_match: list[tuple[float, bool]] = []
+    all_ent_match: list[tuple[INTEGER, bool]] = []
     tot_gold = tot_editdist = tot_pos = tot_hit = 0
-    per_concept: list[tuple[str, str, str, float, int, float]] = []
+    per_concept: list[tuple[str, str, str, INTEGER, int, float]] = []
     for concept, (langs, msa) in msas.items():
         W = len(msa[0])
         ncol = len(langs)

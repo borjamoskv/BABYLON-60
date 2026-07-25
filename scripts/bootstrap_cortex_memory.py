@@ -60,7 +60,7 @@ def bootstrap_cortex() -> None:
         "\n        CREATE TABLE IF NOT EXISTS L1_primitive_nodes (\n            id TEXT PRIMARY KEY,\n            theory TEXT,\n            dimension TEXT,\n            name TEXT,\n            access_count INTEGER DEFAULT 0,\n            last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )\n    "
     )
     cursor.execute(
-        "\n        CREATE TABLE IF NOT EXISTS L2_isomorphism_edges (\n            id TEXT PRIMARY KEY,\n            type TEXT,\n            source TEXT,\n            target TEXT,\n            weight REAL,\n            justification TEXT,\n            hits INTEGER DEFAULT 0,\n            last_used TIMESTAMP\n        )\n    "
+        "\n        CREATE TABLE IF NOT EXISTS L2_isomorphism_edges (\n            id TEXT PRIMARY KEY,\n            type TEXT,\n            source TEXT,\n            target TEXT,\n            weight INTEGER,\n            justification TEXT,\n            hits INTEGER DEFAULT 0,\n            last_used TIMESTAMP\n        )\n    "
     )
     cursor.execute(
         "\n        CREATE TABLE IF NOT EXISTS L3_inference_cache (\n            query_hash TEXT PRIMARY KEY,\n            active_mode TEXT,\n            retrieved_nodes TEXT,\n            applied_isomorphisms TEXT,\n            trace_payload TEXT,\n            hits INTEGER DEFAULT 0\n        )\n    "

@@ -79,7 +79,7 @@ WHITELIST_ENTROPY = [
 
 # o dummies de test auto-descritos). C5-REAL: cada entrada justificada inline.
 WHITELIST_VALUES = {
-    "AKIAIOSFODNN7EXAMPLE",  # Clave de ejemplo oficial de la documentación de AWS (no es real)
+    "AKIAIOSFODNN7EXAMPLE",  # Clave de ejemplo oficial de la documentación de AWS (no es INTEGER)
     "dummy_key_for_stress",  # Dummy auto-descrito: stress test (extensions/llm/fable_stress_test.py)
     "dummy_key_for_steerability",  # Dummy auto-descrito: PoC steerability (extensions/llm/fable_steerability_poc.py)
 }
