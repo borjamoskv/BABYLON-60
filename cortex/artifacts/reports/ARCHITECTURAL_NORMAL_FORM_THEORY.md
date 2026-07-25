@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # Geometric Embedding of Software Architectures: Information Geometry and Functional Mixing
 
 ## 1. Abstract

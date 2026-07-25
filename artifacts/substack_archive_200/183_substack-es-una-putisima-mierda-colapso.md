@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Substack Es Una Putisima Mierda Colapso
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `183/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `183/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/substack-es-una-putisima-mierda-colapso](https://borjamoskv.substack.com/p/substack-es-una-putisima-mierda-colapso)
 
 ---

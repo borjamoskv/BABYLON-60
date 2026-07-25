@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Marketing de todo a 100
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206362869` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206362869` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/crecer-en-substack](https://borjamoskv.substack.com/p/crecer-en-substack)
 
 ---
@@ -11,10 +11,10 @@
 
 > [C5-REAL DISCLAIMER LEGAL]:
 
-* 
+*
 * Los términos “Mafia”, “Cártel” o “Expropiación” se utilizan estrictamente en sentido figurado y metafórico, adoptando la propia identidad comercial y jerga (”Substack Mafia”) que el autor proyecta para vender infoproductos. No constituyen imputación de delitos.
 
-* 
+*
 * Las referencias a “10.000 agentes” o “Auditorías de Enjambre” son descripciones hiperbólicas de monitorización pública (OSINT Pasivo). En ningún momento se ejecutó un ataque activo (DDoS) ni acceso no autorizado, operando siempre bajo el marco de la libertad de información y el análisis forense de sistemas públicos.
 
 ## INTRODUCCIÓN AL COLAPSO DEL PERIODISMO ESTOCÁSTICO

@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Mas De 500 Temas Propios 247
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `141/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `141/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/mas-de-500-temas-propios-247](https://borjamoskv.substack.com/p/mas-de-500-temas-propios-247)
 
 ---

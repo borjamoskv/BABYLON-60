@@ -11,7 +11,7 @@ El mandato `ITERA DEEPTHINK` obliga a responder a las tres propiedades formales 
 ---
 
 ## 2. Demostración Topológica
-Sea $M$ el conjunto finito de todas las abstracciones válidas de un código fuente que preservan el conjunto de invariantes causales $\Omega$. 
+Sea $M$ el conjunto finito de todas las abstracciones válidas de un código fuente que preservan el conjunto de invariantes causales $\Omega$.
 
 1.  **Lema de Existencia:** Al ser un conjunto finito evaluado mediante una métrica de geometría de la información sobre un simplex probabilístico acotado, el funcional continuo $E(A)$ siempre posee al menos un mínimo global.
 2.  **Lema de No-Unicidad:** La función de energía $E(A)$ en espacios de alta dimensionalidad no garantiza convexidad estricta. El funcional puede poseer múltiples degeneraciones, mínimos locales y valles topológicos equivalentes. Se descarta enfáticamente la noción de una "única forma normal" arquitectónica.

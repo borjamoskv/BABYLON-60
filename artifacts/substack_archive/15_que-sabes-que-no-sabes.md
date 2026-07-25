@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] ¿Qué sabes que no sabes?
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206485710` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206485710` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/que-sabes-que-no-sabes](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
 
 ---

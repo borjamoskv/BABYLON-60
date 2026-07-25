@@ -1,15 +1,15 @@
 # [AUDITORÍA C5-REAL] 🛑 LOS CINCO DÓLARES DE KANT: MINORÍA DE EDAD, FUGAZI Y EL MEME DEL “UNC” 💸
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206724716` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206724716` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 
 ---
 
 ## 1. Contenido Transducido e Invariantes de Estructura
 
-# 
+#
 
 > “La ilustración es la salida del hombre de su minoría de edad. Minoría de edad es la incapacidad de servirse del propio entendimiento sin la dirección de otro.”— Immanuel Kant (1784) 🧠
 

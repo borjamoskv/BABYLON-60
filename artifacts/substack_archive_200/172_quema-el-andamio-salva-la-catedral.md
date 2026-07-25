@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Quema El Andamio Salva La Catedral
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `172/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `172/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/quema-el-andamio-salva-la-catedral](https://borjamoskv.substack.com/p/quema-el-andamio-salva-la-catedral)
 
 ---

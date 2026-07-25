@@ -1,15 +1,15 @@
 # [AUDITORÍA C5-REAL] CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207570288` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207570288` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 
 ---
 
 ## 1. Contenido Transducido e Invariantes de Estructura
 
-# 
+#
 
 Fecha del informe: 18 de julio de 2026 · Método: análisis directo del repositorio y del paquete publicado, prueba funcional en entorno aislado, verificación cruzada con fuentes públicas
 

@@ -1,7 +1,7 @@
 # [AUDITORÍA C5-REAL] Olvida la Computación Cuántica: La Superioridad Termodinámica del Chip Neuromórfico
 
-> **El mito del cúbit criogénico frente al colapso de la Ley de Moore y el hardware in-memory.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
+> **El mito del cúbit criogénico frente al colapso de la Ley de Moore y el hardware in-memory.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
 > *Ledger Hash:* `b2b230546`| *Realidad:* `#C5-REAL`
 
 ---

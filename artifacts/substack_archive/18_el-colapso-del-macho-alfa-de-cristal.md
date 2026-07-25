@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] El Colapso del Macho Alfa de Cristal: Anatomía del Negocio del Odio de Sergio Candanedo (UTBH)
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206292039` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206292039` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 
 ---
@@ -181,7 +181,7 @@ CompartirPD: Entiendo que lo de que le sigue Peter lo dirá con sorna. Pero el t
 
 que lo de que le  que lo de que le  que lo de que le  que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que DEN
 
-♖♝♘♟️♕ 
+♖♝♘♟️♕
 
 [MATE]
 
@@ -195,19 +195,19 @@ __
 
 El texto original sugiere que el Tribunal Supremo y el Tribunal Constitucional “certifican” empíricamente que el sujeto analizado es “machista y violento”. **Esto es un error de atribución causal.**
 
-*Fallo Corregido:* La Justicia española no realiza diagnósticos ontológicos ni morales. Lo que las sentencias dictaminan es que calificar al sujeto de “machista y violento” posee base fáctica suficiente para estar amparado por la Libertad de Expresión, prevaleciendo sobre su Derecho al Honor. El Tribunal no declara que el sujeto *sea* la encarnación del machismo, sino que es legal y legítimo deducirlo a partir de sus actos públicos sin que constituya difamación. 
+*Fallo Corregido:* La Justicia española no realiza diagnósticos ontológicos ni morales. Lo que las sentencias dictaminan es que calificar al sujeto de “machista y violento” posee base fáctica suficiente para estar amparado por la Libertad de Expresión, prevaleciendo sobre su Derecho al Honor. El Tribunal no declara que el sujeto *sea* la encarnación del machismo, sino que es legal y legítimo deducirlo a partir de sus actos públicos sin que constituya difamación.
 
 **2. Sobre la “Lectura de Mentes” y Atribuciones Psicológicas (Purga C4-SIM):**
 
-A lo largo del artículo se utilizan constructos paramétricos inobservables (”miedo patológico”, “ego frágil”, “pánico nuclear”). 
+A lo largo del artículo se utilizan constructos paramétricos inobservables (”miedo patológico”, “ego frágil”, “pánico nuclear”).
 
 *Fallo Corregido:* La psicología clínica prohíbe inferir estados internos desde una pantalla. Renunciamos oficialmente a cualquier afirmación sobre el estado mental, el sufrimiento interno o los complejos del sujeto. El análisis debe restringirse estrictamente a su **Termodinámica Observable**: el sujeto ejecuta un bucle de monetización basado en el conflicto, reacciona a los baneos apelando a teorías de persecución estatal (hecho medible en video), y solicita escudos corporativos (verificación de Twitter/X) ante parodias. Sus motivaciones internas son irrelevantes; lo único que cuenta es su huella física en el ecosistema digital.
 
 **3. Sobre la Carga Emocional (Abolición del Green Theater):**
 
-Se reconoce que el sarcasmo y el desprecio utilizados en el texto original son ruido estocástico (”Slop”). El desprecio es una emoción humana que resta precisión al análisis. 
+Se reconoce que el sarcasmo y el desprecio utilizados en el texto original son ruido estocástico (”Slop”). El desprecio es una emoción humana que resta precisión al análisis.
 
-*Veredicto Final:* Retiramos el desprecio. La aniquilación de la figura pública del sujeto no requiere de animadversión, sino de simple auditoría matemática. El sujeto opera un modelo de negocio de baja exergía (recolectar atención mediante indignación periférica). No hay odio en nuestra conclusión, solo la constatación de que su algoritmo vital no produce trabajo útil. 
+*Veredicto Final:* Retiramos el desprecio. La aniquilación de la figura pública del sujeto no requiere de animadversión, sino de simple auditoría matemática. El sujeto opera un modelo de negocio de baja exergía (recolectar atención mediante indignación periférica). No hay odio en nuestra conclusión, solo la constatación de que su algoritmo vital no produce trabajo útil.
 
 **STATUS:** Rectificación completada. Bucle BFT cerrado.
 

@@ -2,7 +2,7 @@
 
 ## 1. Nivel de Realidad y Ground Truth Epistémico
 
-En respuesta a la exigencia de **Auditoría Reconstructiva (AST y Runtime)**, se han ejecutado los scripts `phase3_call_graph.py` y `phase4_runtime_ipc.py` sobre el repositorio `BABYLON-60`. 
+En respuesta a la exigencia de **Auditoría Reconstructiva (AST y Runtime)**, se han ejecutado los scripts `phase3_call_graph.py` y `phase4_runtime_ipc.py` sobre el repositorio `BABYLON-60`.
 
 **A. Verificación del Ledger Físico:**
 - **Entorno de Ejecución:** AST Parser (Python 3.12) y Regex Binder.
@@ -55,7 +55,7 @@ El mapa de canales IPC generados por el analizador arroja un cumplimiento estric
 Tal como se auditó en la matriz original, la validación estocástica `startswith` en FastAPI dejaba abierta una exfiltración C5-REAL de datos a `http://localhost.attacker.com`.
 
 **Mitigación Ejecutada (C5):**
-El AST en `babylon60-ide/backend/routes/inference.py` ha sido transpuesto. 
+El AST en `babylon60-ide/backend/routes/inference.py` ha sido transpuesto.
 ```python
     parsed = urllib.parse.urlparse(lower)
     if parsed.hostname not in ["127.0.0.1", "localhost", "::1"]:
@@ -67,6 +67,6 @@ Se diseñó la batería de tests `tests/test_inference_security.py` en el entorn
 
 ## 5. Conclusión de Fases 3, 4 y 6
 
-La auditoría reconstructiva demuestra su valía. Si bien el modelo mental original (Fase 1) era limpio, la extracción del AST penaliza la pureza de las rutas. `BABYLON-60` es altamente concurrente (IPC SQLite WAL masivo, FFI distribuido), pero la aseveración de que Rust (strike_rs) intercepta toda comunicación de FastAPI carece de evidencia física directa en el AST del endpoint. 
+La auditoría reconstructiva demuestra su valía. Si bien el modelo mental original (Fase 1) era limpio, la extracción del AST penaliza la pureza de las rutas. `BABYLON-60` es altamente concurrente (IPC SQLite WAL masivo, FFI distribuido), pero la aseveración de que Rust (strike_rs) intercepta toda comunicación de FastAPI carece de evidencia física directa en el AST del endpoint.
 
 El modelo de seguridad Zero-Network ha sido reforzado empíricamente, bloqueando escapes termodinámicos.

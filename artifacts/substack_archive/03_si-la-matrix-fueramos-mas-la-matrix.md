@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Si la Matrix fuéramos más, la Matrix serían ellos
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207729420` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207729420` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
 
 ---

@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Las 20 Cosas Mas Bestias Que Hemos
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `119/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `119/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/las-20-cosas-mas-bestias-que-hemos](https://borjamoskv.substack.com/p/las-20-cosas-mas-bestias-que-hemos)
 
 ---

@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] El "síndrome del sabio": Cómo los sesgos cognitivos engañan a las mentes más brillantes.
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207230231` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207230231` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos](https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos)
 
 ---

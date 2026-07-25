@@ -11,10 +11,10 @@ import { createServer } from 'vite';
 
   const browser = await chromium.launch();
   const page = await browser.newPage();
-  
+
   page.on('console', msg => console.log('DEV_BROWSER_CONSOLE:', msg.type(), msg.text()));
   page.on('pageerror', error => console.error('DEV_BROWSER_ERROR:', error));
-  
+
   try {
     await page.goto('http://localhost:5173', { waitUntil: 'networkidle' });
     const content = await page.content();

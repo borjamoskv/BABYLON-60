@@ -164,7 +164,7 @@ graph TD
     subgraph DB [Persistencia Local]
         SQLite[SQLite WAL / cortex.db]
     end
-    
+
     User -->|Modificaciones & Eventos AST| MV3
     MV3 -->|Forward Pass| Vite
     Vite -->|Local Loopback HTTP| API

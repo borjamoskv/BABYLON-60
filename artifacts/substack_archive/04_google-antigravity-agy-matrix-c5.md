@@ -2,9 +2,9 @@
 
 > **Texto filosófico sobre la Matrix, sistemas distribuidos, Tolerancia Bizantina y el control estadístico de la sociedad. Estética dark mode, programación y ciberseguridad.
 
-**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207723433` | *Realidad:* `#C5-REAL`  
+**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207723433` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
 
 ---

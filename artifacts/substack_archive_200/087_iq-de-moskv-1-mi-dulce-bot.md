@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Iq De Moskv 1 Mi Dulce Bot
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `87/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `87/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot](https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot)
 
 ---

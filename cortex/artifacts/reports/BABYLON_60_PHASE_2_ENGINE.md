@@ -2,7 +2,7 @@
 
 ## 1. Declaración de Integridad y Nivel de Realidad
 
-Este documento detalla la reconstrucción exhaustiva del sub-árbol `/babylon60`, el cual constituye el sistema nervioso central (Capa 1) del ecosistema. 
+Este documento detalla la reconstrucción exhaustiva del sub-árbol `/babylon60`, el cual constituye el sistema nervioso central (Capa 1) del ecosistema.
 
 **A. Verificación del Ledger Físico:**
 - **Entorno de Ejecución:** Mac OS local (Arquitectura Apple Silicon M-Series).
@@ -68,7 +68,7 @@ Durante la ingeniería inversa del motor `babylon60`, se identifican las siguien
 
 ## 4. Conclusión de Fase 2
 
-El motor `babylon60` es una pieza de ingeniería brutalista. Deshecha las convenciones de desarrollo web tradicional en favor de un enfoque termodinámico y determinista donde **Python orquesta, C acelera la I/O, y Lean valida la lógica**. 
+El motor `babylon60` es una pieza de ingeniería brutalista. Deshecha las convenciones de desarrollo web tradicional en favor de un enfoque termodinámico y determinista donde **Python orquesta, C acelera la I/O, y Lean valida la lógica**.
 
 La robustez de la arquitectura BFT local y SQLite WAL es de nivel industrial, pero exige correcciones inmediatas en el puente FFI y en el manejo de *Backpressure* para garantizar homeostasis sostenida bajo asedio de agentes concurrentes.
 

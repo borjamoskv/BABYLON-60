@@ -1,7 +1,7 @@
 # [AUDITORÍA C5-REAL] La Termodinámica de la Libertad: Autopsia Causal de Antonio Escohotado
 
-> **Monismo de proceso, atractores no lineales y la renta de ilegalidad del prohibicionismo.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
+> **Monismo de proceso, atractores no lineales y la renta de ilegalidad del prohibicionismo.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
 > *Ledger Hash:* `a59ec8be3`| *Realidad:* `#C5-REAL`
 
 ---

@@ -11,6 +11,7 @@ import numpy as np
 
 from typing import Any
 
+
 def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict[str, Any]:
     """
     Simulación determinista del modelo de pila de arena Bak-Tang-Wiesenfeld (BTW 2D).
@@ -66,8 +67,9 @@ def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict
         "total_avalanches": len(avalanche_sizes),
         "max_avalanche_size": int(np.max(avalanche_sizes)) if avalanche_sizes else 0,
         "mean_avalanche_size": float(np.mean(avalanche_sizes)) if avalanche_sizes else 0.0,
-        "empirical_power_law_tau": float(tau)
+        "empirical_power_law_tau": float(tau),
     }
+
 
 def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
     """
@@ -77,19 +79,19 @@ def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
     mu_alpha = 12
     mu_beta = 18
     delta_circ = 5
-    mu_comp = mu_alpha + mu_beta + delta_circ # 35
+    mu_comp = mu_alpha + mu_beta + delta_circ  # 35
 
     subadditivity_holds = mu_comp <= (mu_alpha + mu_beta + delta_circ)
 
     # 2. Singularidad Composicional (Teorema 7.1): Delta(delta_circ) >= k1 + k2
     k1, k2 = 10, 15
-    work_delta = 30 # > 25
+    work_delta = 30  # > 25
     compositional_singularity = work_delta >= (k1 + k2)
 
     # 3. BQP Grover Query Lower Bound: k_quantum = floor(pi/4 * sqrt(N)) vs Classical N/2
     N = 1_000_000
-    quantum_queries = math.floor((math.pi / 4) * math.sqrt(N)) # ~ 785
-    classical_queries = N // 2 # 500,000
+    quantum_queries = math.floor((math.pi / 4) * math.sqrt(N))  # ~ 785
+    classical_queries = N // 2  # 500,000
     speedup_ratio = classical_queries / quantum_queries
 
     return {
@@ -100,8 +102,9 @@ def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
         "compositional_singularity_active": compositional_singularity,
         "bqp_grover_queries": quantum_queries,
         "classical_queries": classical_queries,
-        "quantum_speedup_ratio": round(speedup_ratio, 2)
+        "quantum_speedup_ratio": round(speedup_ratio, 2),
     }
+
 
 def main() -> None:
     print("=== INICIANDO AUDITORÍA TERMODINÁMICA C5-REAL: TRI-DUALIDAD FISR-SOC-BQP ===")
@@ -113,7 +116,7 @@ def main() -> None:
         "status": "VERIFIED_C5_REAL",
         "soc_sandpile_metrics": soc_data,
         "lawvere_bqp_metrics": bqp_data,
-        "proof_hash": "c5_tri_duality_verified_2026_07_22"
+        "proof_hash": "c5_tri_duality_verified_2026_07_22",
     }
 
     output_path = "scratch/tri_duality_proof.json"
@@ -122,6 +125,7 @@ def main() -> None:
 
     print(f"[OK] Prueba completada exitosamente. Resultados sellados en {output_path}")
     print(json.dumps(results, indent=2))
+
 
 if __name__ == "__main__":
     main()

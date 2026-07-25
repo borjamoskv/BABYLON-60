@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] El Tema No Es Cuando La Va A Superar
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `56/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `56/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-tema-no-es-cuando-la-va-a-superar](https://borjamoskv.substack.com/p/el-tema-no-es-cuando-la-va-a-superar)
 
 ---

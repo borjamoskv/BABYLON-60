@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207236133` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207236133` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
 
 ---

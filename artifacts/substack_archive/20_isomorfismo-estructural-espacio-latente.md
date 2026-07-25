@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] ISOMORFISMO ESTRUCTURAL: ESPACIO LATENTE, TDAH Y EL COLAPSO DEL ORDEN
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206265200` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206265200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
 
 ---

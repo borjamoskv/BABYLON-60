@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Colisión Termodinámica en Artxanda
 
-> **El Límite de la Percepción Satelital y la Autocinesis de Polaris**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206646585` | *Realidad:* `#C5-REAL`  
+> **El Límite de la Percepción Satelital y la Autocinesis de Polaris**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206646585` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/fallo-hardware-artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
 
 ---
@@ -63,11 +63,11 @@ C. Prueba de Esfericidad
 
 No hay misticismo, solo biología y física rozando sus fronteras bajo condiciones de baja entropía lumínica. La percepción es, a fin de cuentas, una máquina que adivina. En Artxanda, esa noche, la máquina falló de la forma más bella posible. La próxima vez, busca la “W” de Casiopea como anclaje espacial, o simplemente, disfruta de cómo tu propio cerebro te intenta reconstruir la gravedad de un sistema que no comprende sin telemetría externa.
 
-### 
+###
 
-Compartir### 
+Compartir###
 
-### 
+###
 
 Suscríbete ahora### UPDATE: La Confirmación del Terminador Terrestre
 

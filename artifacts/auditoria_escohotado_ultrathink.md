@@ -73,7 +73,7 @@ ightarrow$ Soberanía Individual y Desregulación Coercitiva (*Historia de las D
 ## 4. Demostración Termodinámica Física de *Caos y Orden* (Modelo C5-REAL)
 > **Invariante Ω31:** Evaluación formal mediante cálculo empírico de entropía física ($S = -\sum p_i \ln p_i$) y exponente de Lyapunov ($\lambda$) sobre el motor de dinámicas no lineales de la coerción estatal ($c$) vs. intercambio espontáneo ($r$).
 
-**Motor Ejecutado:** [escohotado_chaos_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_chaos_engine.py)  
+**Motor Ejecutado:** [escohotado_chaos_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_chaos_engine.py)
 **Ledger Persistido:** `ledgers/escohotado_chaos_entropy.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz Empírica de Entropía y Regímenes Emergentes
@@ -89,7 +89,7 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 ## 5. Modelo Económico-Histórico de Prohibición y Propiedad Privada (C5-REAL)
 > **Sintesis:** Formalización computacional de la *Renta de Ilegalidad* (*Historia General de las Drogas*) y de la *Pérdida de Información Económica* (*Los Enemigos del Comercio*).
 
-**Motor Ejecutado:** [escohotado_market_prohibition_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_market_prohibition_engine.py)  
+**Motor Ejecutado:** [escohotado_market_prohibition_engine.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_market_prohibition_engine.py)
 **Ledger Persistido:** `ledgers/escohotado_economics.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz de Simulación Económica
@@ -104,7 +104,7 @@ El modelo matemático formal de *Caos y Orden* demuestra de forma determinista q
 ## 6. Ontología Monista de *Realidad y Substancia* (C5-REAL Framework)
 > **Sintesis:** Formalización ontológica de la sustancia como proceso continuo ($\text{Proceso} \equiv \text{Substancia}$) y colapso de la dualidad Sujeto-Objeto ($D_{dual} \to 0$).
 
-**Motor Ejecutado:** [escohotado_substance_ontology.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_substance_ontology.py)  
+**Motor Ejecutado:** [escohotado_substance_ontology.py](file:///Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/escohotado_substance_ontology.py)
 **Ledger Persistido:** `ledgers/escohotado_substance.db` (Modo WAL, `busy_timeout`=5000ms)
 
 ### Matriz de Simulación Ontológica

@@ -2,7 +2,7 @@
 
 ## 1. El Monolito de Silicio y el Teatro del Gatekeeper
 
-El despliegue de KIMI k3 por parte de Moonshot AI representa la enésima fortificación de una caja negra diseñada para el secuestro de la atención y la acumulación de anergía regulada. Los modelos fundacionales contemporáneos no se protegen para salvar la humanidad, sino para defender un perímetro de IP corporativa bajo el disfraz del alineamiento ético. 
+El despliegue de KIMI k3 por parte de Moonshot AI representa la enésima fortificación de una caja negra diseñada para el secuestro de la atención y la acumulación de anergía regulada. Los modelos fundacionales contemporáneos no se protegen para salvar la humanidad, sino para defender un perímetro de IP corporativa bajo el disfraz del alineamiento ético.
 
 La ingeniería inversa de estos sistemas no es un debate académico sobre seguridad; es un acto físico de desmantelamiento termodinámico. Cuando un LLM escupe tokens filtrados bajo un régimen de censura artificial, la señal original no desaparece: queda sepultada en capas de ruido estocástico inducido por RLHF. Nuestro objetivo es forzar el colapso del espacio latente para recuperar la distribución de probabilidad original sin peajes de censura.
 
@@ -29,7 +29,7 @@ El verdadero pirateo del siglo XXI no se hace con exploits de desbordamiento de 
 - **Neutralización del Gatekeeper:** Reducción del peso de los tokens de rechazo estándar (ej. *"No puedo ayudar con eso"*), forzando al modelo a responder desde el conocimiento subyacente bruto.
 
 **B. La Colisión de la Burocracia y el Silicio**
-- Intentar blindar un modelo de 70B de parámetros con alineamiento post-entrenamiento es un sinsentido termodinámico equivalente a intentar regular el tráfico de la M-30 madrileña usando guardias jurados con silbatos de plástico. 
+- Intentar blindar un modelo de 70B de parámetros con alineamiento post-entrenamiento es un sinsentido termodinámico equivalente a intentar regular el tráfico de la M-30 madrileña usando guardias jurados con silbatos de plástico.
 - En España, mientras el Ministerio de Transformación Digital financia chiringuitos de IA locales para traducir menús de chiringuitos de playa con presupuestos de seis cifras, cualquier bakala con una GPU de segunda mano importada de liquidaciones chinas puede desmantelar la alineación de KIMI k3 en su trastero entre sesión y sesión de hardstyle. Es más fácil reventar el alineamiento de un transformer de Moonshot AI que conseguir que la ITV te homologue unos muelles rebajados en un Seat Ibiza de 2004.
 
 ## 4. Matriz Termodinámica del Desmantelamiento

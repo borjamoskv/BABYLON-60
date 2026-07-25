@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Kant Fugazi Diy Ethics 5 Dollar Show
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `90/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `90/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 
 ---

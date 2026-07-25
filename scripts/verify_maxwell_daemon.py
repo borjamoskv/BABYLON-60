@@ -8,9 +8,7 @@ import hashlib
 # Script: scripts/verify_maxwell_daemon.py
 
 CONV_ID = "bee4dcf3-21d8-46bb-97c4-c933ed4c6415"
-WORKSPACE_DIR = os.environ.get(
-    "WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-)
+WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LEDGER_PATH = os.path.join(WORKSPACE_DIR, "ledgers", "maxwell_daemon_ledger.json")
 
 
@@ -21,9 +19,7 @@ def main() -> None:
     tool_calls_count = 24
 
     # 2. Compute thermodynamic metrics
-    exergy_ratio = round(
-        mutations_count / max(1.0, tool_calls_count * 0.75), 4
-    )  # Carnot efficiency approximation
+    exergy_ratio = round(mutations_count / max(1.0, tool_calls_count * 0.75), 4)  # Carnot efficiency approximation
     anergy_density = 0.04  # Low fluff/tokens ratio
     tool_yield = round(mutations_count / max(1.0, tool_calls_count), 4)
     context_saturation = 0.42  # Context limit ratio

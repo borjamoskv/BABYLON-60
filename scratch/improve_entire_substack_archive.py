@@ -51,9 +51,9 @@ def elevate_post(post: dict, catalog: list) -> str:
 
     md = f"""# [AUDITORÍA C5-REAL] {title}
 
-> **{subtitle}**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `{post["id"]}` | *CORTEX-TAINT:* `borjamoskv:archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`  
+> **{subtitle}**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `{post["id"]}` | *CORTEX-TAINT:* `borjamoskv:archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [{url}]({url})
 
 ---

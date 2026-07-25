@@ -35,7 +35,7 @@ A través de la *Invariant Preservation Matrix*, clasificamos algorítmicamente 
 
 ## 3. Extracción Algorítmica y el Falso Kernel
 
-Al ejecutar los algoritmos clásicos de *Betweenness Centrality* y *Articulation Points* sobre el Grafo de Dependencias ($G_d$), el sistema arrojó un "Kernel Estructural" compuesto por más de **150 archivos** (incluyendo módulos como `dsp_apotheosis.py` o `autodidact_actuator.py`). 
+Al ejecutar los algoritmos clásicos de *Betweenness Centrality* y *Articulation Points* sobre el Grafo de Dependencias ($G_d$), el sistema arrojó un "Kernel Estructural" compuesto por más de **150 archivos** (incluyendo módulos como `dsp_apotheosis.py` o `autodidact_actuator.py`).
 
 Esto es una anomalía termodinámica. Significa que, a nivel de código ($G_d$), la arquitectura está masivamente enredada y acoplada.
 Sin embargo, al proyectar la arquitectura sobre el Grafo Semántico ($G_\Omega$), el **Kernel Semántico Real ($K$)** colapsa a únicamente **17 archivos** (BFT, Crypto, Database, Rust).
@@ -52,7 +52,7 @@ El resultado central de esta auditoría se enuncia en el siguiente teorema de eq
 > Sea $A$ la arquitectura completa de BABYLON-60 (797 archivos).
 > Sea $K \subset A$ el subconjunto formado exclusivamente por los módulos BFT, Criptografía, Base de Datos y FFI Rust (17 archivos).
 > Sea $\Omega = \{\Omega_1, \Omega_2, \Omega_3, \Omega_4, \Omega_5\}$ el conjunto de Invariantes Fundamentales.
-> 
+>
 > Demostramos que:
 > $$ Preserve(K, \Omega) = Preserve(A, \Omega) $$
 

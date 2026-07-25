@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Lo Que De Verdad Importa De Una Croquetia
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `128/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `128/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/lo-que-de-verdad-importa-de-una-croquetia](https://borjamoskv.substack.com/p/lo-que-de-verdad-importa-de-una-croquetia)
 
 ---

@@ -60,7 +60,7 @@ Acorde al pipeline extraído y al Fan-out de los submódulos:
 
 ## 6. Conclusión de Fase 2
 
-La radiografía cuantitativa AST demuestra que `BABYLON-60` padece de **deriva arquitectónica** asimétrica. 
+La radiografía cuantitativa AST demuestra que `BABYLON-60` padece de **deriva arquitectónica** asimétrica.
 Si bien el diseño *conceptual* es superior (Lean, Rust, BFT), la implementación física en Python ha generado ciclos SCC irresolubles en la capa agéntica (`orchestra`, `daemon`, `hypervisor`) y God Objects de más de 3000 líneas (`oncology_primitives.py`).
 
 ⚡ *Fase 3: Mitigación Física y Refactorización del Grafo SCC.*

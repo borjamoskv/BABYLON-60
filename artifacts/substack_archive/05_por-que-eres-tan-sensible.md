@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] ¿POR QUÈ ERES TAN SENSIBLE?
 
-> **(tócate los huevos)**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207683313` | *Realidad:* `#C5-REAL`  
+> **(tócate los huevos)**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207683313` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/por-que-eres-tan-sensible](https://borjamoskv.substack.com/p/por-que-eres-tan-sensible)
 
 ---

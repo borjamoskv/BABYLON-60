@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Desmontando a David Domínguez: Autopsia Forense (de A a la Z)
 
-> **Generado el: 2026-07-16 16:09:36 UTC **  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `207293463` | *Realidad:* `#C5-REAL`  
+> **Generado el: 2026-07-16 16:09:36 UTC **
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `207293463` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
 
 ---

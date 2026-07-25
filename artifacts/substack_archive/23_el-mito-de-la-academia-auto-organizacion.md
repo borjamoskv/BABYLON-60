@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] EL MITO DE LA ACADEMIA: AUTO-ORGANIZACIÓN DESCENTRALIZADA
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `205136381` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `205136381` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
 
 ---

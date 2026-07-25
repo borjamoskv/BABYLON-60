@@ -50,9 +50,9 @@ def elevate_single_post(post: dict, catalog: list, index: int) -> str:
 
     md = f"""# [AUDITORÍA C5-REAL] {title}
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `{index}/200` | *CORTEX-TAINT:* `borjamoskv:200archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `{index}/200` | *CORTEX-TAINT:* `borjamoskv:200archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [{url}]({url})
 
 ---

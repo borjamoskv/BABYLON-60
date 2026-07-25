@@ -40,13 +40,13 @@ Sustituimos la definición abstracta de "código feo" por una medición de fricc
 
 $$ \text{Technical Debt} = Complexity(I_{actual}) - Complexity(Minimal(\Omega)) $$
 
-La deuda es la distancia (entropía) entre la complejidad de la implementación actual y el *Hitting Set* óptimo requerido para preservar los invariantes. 
+La deuda es la distancia (entropía) entre la complejidad de la implementación actual y el *Hitting Set* óptimo requerido para preservar los invariantes.
 
 ---
 
 ## 4. Certificado de Extracción (Commit Actual)
 
-He ejecutado un *Algoritmo de Hitting Set (NP-Hard)* sobre la topología del repositorio, obteniendo un transversal exacto en fuerza bruta combinatoria. 
+He ejecutado un *Algoritmo de Hitting Set (NP-Hard)* sobre la topología del repositorio, obteniendo un transversal exacto en fuerza bruta combinatoria.
 
 El resultado certifica que la intersección absoluta de los 5 Invariantes colapsa topológicamente a un Kernel de tamaño $K=1$ (`consensus_ledger.py`), dado que este operador actúa como el hipernodo que abarca tanto el aislamiento BFT como el Write-Ahead-Log.
 

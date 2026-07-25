@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Borja Moskv _ Dj Set Julio Y Medio
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `19/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `19/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/borja-moskv-_-dj-set-julio-y-medio](https://borjamoskv.substack.com/p/borja-moskv-_-dj-set-julio-y-medio)
 
 ---

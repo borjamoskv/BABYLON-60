@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia
 
-> **Auditoría Causal e Invariantes de Estructura C5-REAL.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `206277568` | *Realidad:* `#C5-REAL`  
+> **Auditoría Causal e Invariantes de Estructura C5-REAL.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `206277568` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 
 ---

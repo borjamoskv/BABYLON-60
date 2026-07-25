@@ -1,7 +1,7 @@
 # [AUDITORÍA C5-REAL] La Gran Necrosis Ontológica: La Epidemia del Slop Sintético
 
-> **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
+> **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
 > *Ledger Hash:* `0c9844b8f`| *Realidad:* `#C5-REAL`
 
 ---

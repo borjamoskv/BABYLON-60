@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: The Axiomatic Kernel (Iteración Ω∞)
 
 > "¿Cuál es la mínima especificación matemática desde la que podría regenerarse íntegramente el sistema?"

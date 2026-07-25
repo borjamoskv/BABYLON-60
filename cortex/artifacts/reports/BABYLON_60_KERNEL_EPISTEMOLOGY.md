@@ -1,6 +1,7 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: Teorema Epistemológico del Kernel (Fase Ω-2)
 
-Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** ($\Omega = C \circ V \circ T \circ O$). 
+Este teorema refuta la premisa de que BABYLON-60 es un software monolítico y lo clasifica formalmente como una **Máquina de Transición de Estados Verificable** ($\Omega = C \circ V \circ T \circ O$).
 
 Dejamos de analizar el código imperativo (`event -> handler -> effect`) para auditar la tubería causal (`constraint -> solve -> proof -> materialize`).
 
@@ -52,6 +53,6 @@ Fase Axiomática (Objetivo):
 Specification -> Solver (Swarm) -> Witness (AST) -> Verifier -> Ledger
 ```
 
-El Verificador debe convertirse en el hilo principal (`Main Thread`). La aplicación no ejecuta cambios; la aplicación **propone un testigo matemático** que el Verificador resuelve. 
+El Verificador debe convertirse en el hilo principal (`Main Thread`). La aplicación no ejecuta cambios; la aplicación **propone un testigo matemático** que el Verificador resuelve.
 
 Esta es la Ley de Robinson-Moskv que gobierna los sistemas aislados.

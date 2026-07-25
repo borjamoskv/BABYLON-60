@@ -23,8 +23,8 @@ def generate_neuromorphic_post() -> str:
 
     return f"""# [AUDITORÍA C5-REAL] Olvida la Computación Cuántica: La Superioridad Termodinámica del Chip Neuromórfico
 
-> **El mito del cúbit criogénico frente al colapso de la Ley de Moore y el hardware in-memory.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
+> **El mito del cúbit criogénico frente al colapso de la Ley de Moore y el hardware in-memory.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
 > *Ledger Hash:* `b2b230546` | *CORTEX-TAINT:* `borjamoskv:neuromorphic:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`
 
 ---
@@ -99,8 +99,8 @@ def generate_necrosis_post() -> str:
 
     return f"""# [AUDITORÍA C5-REAL] La Gran Necrosis Ontológica: La Epidemia del Slop Sintético
 
-> **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
+> **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
 > *Ledger Hash:* `0c9844b8f` | *CORTEX-TAINT:* `borjamoskv:necrosis:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`
 
 ---

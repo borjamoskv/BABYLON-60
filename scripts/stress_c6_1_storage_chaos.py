@@ -14,6 +14,7 @@ if PROJECT_ROOT not in sys.path:
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "stress_c6_1.db")
 
+
 def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     if os.path.exists(DB_PATH):
@@ -30,6 +31,7 @@ def init_db() -> None:
     """)
     conn.commit()
     conn.close()
+
 
 def writer_and_checkpointer_loop() -> None:
     """Runs continuous writes and periodic explicit WAL checkpoints."""
@@ -59,6 +61,7 @@ def writer_and_checkpointer_loop() -> None:
             pass
 
         idx += 1
+
 
 def run_chaos(duration_sec: int = 15, kill_interval: float = 0.2) -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -119,6 +122,7 @@ def run_chaos(duration_sec: int = 15, kill_interval: float = 0.2) -> None:
     else:
         print("\n⚠ ANERGÍA DETECTADA: Corrupción o fuga transaccional.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_chaos()

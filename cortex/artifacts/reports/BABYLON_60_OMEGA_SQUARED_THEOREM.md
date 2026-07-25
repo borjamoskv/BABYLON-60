@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: The Ω² Architectural Theorem
 
 ## 1. Cambio de Paradigma: De Repositorio a Compilador Causal
@@ -37,7 +38,7 @@ La topología del sistema se proyecta sobre tres espacios disjuntos:
 La auditoría clásica vive en los espacios (1) y (2). Esta auditoría habita el (3).
 
 > **Teorema de la Clase de Equivalencia Arquitectónica:**
-> Dos arquitecturas $A$ y $B$ pertenecen a la misma clase de equivalencia ($A \approx B$) si y sólo si el conjunto de invariantes computacionales que preservan es idéntico: 
+> Dos arquitecturas $A$ y $B$ pertenecen a la misma clase de equivalencia ($A \approx B$) si y sólo si el conjunto de invariantes computacionales que preservan es idéntico:
 > $$ \text{Preserve}(A, \Omega) = \text{Preserve}(B, \Omega) $$
 > *Corolario:* La arquitectura vive exclusivamente en el Invariant Space. La implementación es contingente.
 
@@ -48,13 +49,13 @@ La auditoría clásica vive en los espacios (1) y (2). Esta auditoría habita el
 La auditoría actual culmina en la formulación de la siguiente proposición fundamental que redefine la Deuda Técnica a nivel industrial:
 
 > **The Architectural Compression Theorem:**
-> Todo código fuente es una representación redundante de una familia de restricciones (Invariantes). 
+> Todo código fuente es una representación redundante de una familia de restricciones (Invariantes).
 > La calidad de una arquitectura es **inversamente proporcional** a la cantidad de información física (entropía de Shannon o LOCs) necesaria para preservar la totalidad de dichos invariantes.
-> 
+>
 > $$ \text{Architectural Quality} \propto \frac{|\Omega|}{C(I)} $$
 > Donde $C(I)$ es la complejidad (o masa termodinámica) de la implementación actual.
 
 ### El Caso BABYLON-60
-Con una masa actual de ~162,000 LOCs y un Hitting Set estricto de ~3,700 LOCs (Compresión de Restricciones = Factor de 43.4x), BABYLON-60 presenta una pésima tasa de compresión arquitectónica. 
+Con una masa actual de ~162,000 LOCs y un Hitting Set estricto de ~3,700 LOCs (Compresión de Restricciones = Factor de 43.4x), BABYLON-60 presenta una pésima tasa de compresión arquitectónica.
 
 La refactorización futura ya no buscará "limpiar código", sino **Aumentar la Tasa de Compresión**, erradicando cualquier transición de estado (función) que no emita una *Transition Proof* que justifique su consumo de entropía.

@@ -113,9 +113,9 @@ def main():
 
         full_article = f"""# [AUDITORÍA C5-REAL] {title}
 
-> **{subtitle}**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `{post_id}` | *CORTEX-TAINT:* `borjamoskv:rss:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`  
+> **{subtitle}**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Post ID:* `{post_id}` | *CORTEX-TAINT:* `borjamoskv:rss:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [{url}]({url})
 
 ---

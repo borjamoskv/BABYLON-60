@@ -25,9 +25,7 @@ def ultrathink_sweep() -> None:
                 zombies.append(line)
 
         if zombies:
-            print(
-                f"Detectados {len(zombies)} Extension Hosts. Verificando inanición de CPU..."
-            )
+            print(f"Detectados {len(zombies)} Extension Hosts. Verificando inanición de CPU...")
             # Aquí podríamos matarlos, pero por seguridad sólo reportamos si hay exceso.
         else:
             print("Cero zombies detectados. El host de extensión está esterilizado.")
@@ -59,9 +57,7 @@ def ultrathink_sweep() -> None:
         with open(settings_path, "r") as f:
             content = f.read()
             if 'terminal.integrated.enablePersistentSessions": false' in content:
-                print(
-                    "✔️  Invariante Ω21 (Weaponized Forgetting para PTY IPC) ACTIVADO."
-                )
+                print("✔️  Invariante Ω21 (Weaponized Forgetting para PTY IPC) ACTIVADO.")
             else:
                 print("❌ Fuga detectada en Ω21.")
 
@@ -74,9 +70,12 @@ def ultrathink_sweep() -> None:
     print("\n--- Fase 4: Auditoría MCTS Physical Compiler & Exergía ---")
     try:
         from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical
+
         engine = L3InferenceEnginePhysical(target_trajectories=20)
         theorem = engine.compile_theorem("ULTRATHINK_SWEEP_AUDIT")
-        print(f"✔️  MCTS Physical Compiler Operativo. Entropía={theorem.shannon_entropy:.4f}, Exergía={theorem.exergy_ratio:.4f}, Nodos={theorem.ast_nodes}, Poda={theorem.pruned_branches}")
+        print(
+            f"✔️  MCTS Physical Compiler Operativo. Entropía={theorem.shannon_entropy:.4f}, Exergía={theorem.exergy_ratio:.4f}, Nodos={theorem.ast_nodes}, Poda={theorem.pruned_branches}"
+        )
     except (RuntimeError, ValueError, OSError, ImportError) as e:
         raise EpistemicHalt(f"Falla en Motor MCTS Physical Compiler: {e}. Ejecutando purga (Ω26).")
 

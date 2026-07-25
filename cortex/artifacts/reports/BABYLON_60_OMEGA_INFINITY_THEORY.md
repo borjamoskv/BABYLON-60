@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # OMEGA-INFINITY (Ω∞): The Universal Theory of Architectural Compression
 
 ## 1. Abstract
@@ -34,7 +35,7 @@ $$ H(m) = -\sum_{p \in \{\alpha, \beta, \gamma, \delta\}} p \log_2 p $$
 
 ## 4. La Verdadera Ecuación de la Deuda Técnica
 
-Bajo esta formulación, la "Deuda Técnica" abandona la ambigüedad. No es el número de archivos, las líneas de código (LOC) ni el estilo arquitectónico. 
+Bajo esta formulación, la "Deuda Técnica" abandona la ambigüedad. No es el número de archivos, las líneas de código (LOC) ni el estilo arquitectónico.
 La Deuda Técnica de cualquier repositorio en el universo es la sumatoria termodinámica continua de la entropía de sus módulos:
 
 $$ Debt(A) = \sum_{m \in A} H(m) $$

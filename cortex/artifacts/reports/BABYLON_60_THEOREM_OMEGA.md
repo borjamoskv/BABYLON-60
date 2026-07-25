@@ -39,9 +39,9 @@ El clasificador identificó un volumen masivo de archivos que violan la ecuació
 
 ## 3. Conclusión Matemática
 
-El teorema se ha **demostrado**. 
+El teorema se ha **demostrado**.
 
-La aparente inmensidad de BABYLON-60 (más de 1500 archivos) es una ilusión óptica. Cuando se aplica el filtro de ortogonalidad termodinámica, el sistema real (aquel que ingresa información, la transforma, la valida y la sella) está compuesto por apenas **328 archivos**. 
+La aparente inmensidad de BABYLON-60 (más de 1500 archivos) es una ilusión óptica. Cuando se aplica el filtro de ortogonalidad termodinámica, el sistema real (aquel que ingresa información, la transforma, la valida y la sella) está compuesto por apenas **328 archivos**.
 
 Todo el residuo (cerca del 75% del código del repositorio) es **Deuda Arquitectónica** (Acoplamiento, God Objects y lógica inercial).
 

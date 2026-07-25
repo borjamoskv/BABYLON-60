@@ -1,3 +1,4 @@
+<!-- C5-REAL EXERGY CERTIFIED -->
 # BABYLON-60: Factorized Architecture Theory (Ω³)
 
 ## 1. Abstract

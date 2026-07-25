@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Mafia Ia Fraude Substack Colapso Modelos
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `135/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `135/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/mafia-ia-fraude-substack-colapso-modelos](https://borjamoskv.substack.com/p/mafia-ia-fraude-substack-colapso-modelos)
 
 ---

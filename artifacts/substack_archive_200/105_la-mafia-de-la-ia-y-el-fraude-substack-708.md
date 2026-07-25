@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] La Mafia De La Ia Y El Fraude Substack 708
 
-> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**  
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Índice Sitemap:* `105/200` | *Realidad:* `#C5-REAL`  
+> **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
+> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
+> *Índice Sitemap:* `105/200` | *Realidad:* `#C5-REAL`
 > *URL Canónica:* [https://borjamoskv.substack.com/p/la-mafia-de-la-ia-y-el-fraude-substack-708](https://borjamoskv.substack.com/p/la-mafia-de-la-ia-y-el-fraude-substack-708)
 
 ---
