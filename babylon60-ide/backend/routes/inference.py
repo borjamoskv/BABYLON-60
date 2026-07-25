@@ -20,6 +20,7 @@ class InferenceRequest(BaseModel):
     base_url: str = Field(default="http://127.0.0.1:11434/v1", description="Local socket endpoint")
     temperature: float = Field(default=0.2, ge=0.0, le=2.0)
     max_tokens: int = Field(default=1024, ge=1, le=8192)
+    system_prompt: str | None = Field(default=None, description="Optional system prompt override")
 
 
 def validate_zero_network(url: str) -> None:
@@ -48,7 +49,7 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon.",
+                "content": req.system_prompt if req.system_prompt else "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon.",
             },
             {"role": "user", "content": req.prompt},
         ],
