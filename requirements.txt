@@ -82,7 +82,7 @@ ruff==0.15.22
 shellingham==1.5.4
 six==1.17.0
 starlette==0.46.2
--e git+ssh://git@github.com/borjamoskv/Teorema-Robinson-Moskv.git@86b5f4c88f2214a597abc6179226d8ee671b1c0f#egg=strike_rs&subdirectory=strike-rs
+-e ./strike-rs
 tenacity==9.1.4
 tokenizers==0.23.1
 tqdm==4.69.0
