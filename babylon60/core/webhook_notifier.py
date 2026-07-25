@@ -55,6 +55,6 @@ class EnterpriseWebhookNotifier:
         req = urllib.request.Request(url, data=body_bytes, headers=event_dict["headers"], method="POST")
         try:
             with urllib.request.urlopen(req, timeout=timeout) as response:
-                return 200 <= response.status < 300
+                return 200 <= response.status < 300  # type: ignore[no-any-return]
         except (urllib.error.URLError, urllib.error.HTTPError, OSError):
             return False

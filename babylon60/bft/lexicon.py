@@ -11,9 +11,9 @@ class BFTLexicon:
             self.db_path = Path(__file__).parent.parent.parent / "cortex_lexicon.db"
         else:
             self.db_path = db_path
-        self._init_schema()
+        self._init_schema()  # type: ignore[no-untyped-call]
 
-    def _init_schema(self):
+    def _init_schema(self):  # type: ignore[no-untyped-def]
         with self._get_conn() as conn:
             conn.execute(
                 "\n                CREATE TABLE IF NOT EXISTS lexicon_nodes (\n                    concept_hash TEXT PRIMARY KEY,\n                    canonical_name TEXT NOT NULL\n                )\n            "

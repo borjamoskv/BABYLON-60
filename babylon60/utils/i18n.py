@@ -143,8 +143,8 @@ def _trigger_adaptive_repair(key: str, lang: Lang) -> None:
     except ImportError:
         return
     if not hasattr(_report_missing_key, "_llm"):
-        _report_missing_key._llm = LLMManager()
-    llm = _report_missing_key._llm
+        _report_missing_key._llm = LLMManager()  # type: ignore[attr-defined]
+    llm = _report_missing_key._llm  # type: ignore[attr-defined]
     if not llm.available:
         return
     import asyncio

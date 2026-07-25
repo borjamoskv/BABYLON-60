@@ -27,7 +27,7 @@ def _reserve_slot(now: int, next_allowed: list[float], interval: int) -> float:
     return target
 
 
-def oxygenate(min_interval: float = 0.1):
+def oxygenate(min_interval: float = 0.1):  # type: ignore[no-untyped-def]
     async_lock = asyncio.Lock()
     sync_lock = threading.Lock()
     next_allowed_time = [time.monotonic()]
@@ -38,24 +38,24 @@ def oxygenate(min_interval: float = 0.1):
             @functools.wraps(func)
             async def async_wrapper(*args: Any, **kwargs: Any) -> Any:
                 async with async_lock:
-                    target = _reserve_slot(time.monotonic(), next_allowed_time, min_interval)
+                    target = _reserve_slot(time.monotonic(), next_allowed_time, min_interval)  # type: ignore[arg-type]
                 deficit = target - time.monotonic()
                 if deficit > 0:
                     logger.debug("Oxygenating %s: breathing for %.3fs", func.__name__, deficit)
                     await breathe(deficit)
                 return await func(*args, **kwargs)
 
-            return async_wrapper
+            return async_wrapper  # type: ignore[return-value]
 
         @functools.wraps(func)
         def sync_wrapper(*args: Any, **kwargs: Any) -> Any:
             with sync_lock:
-                target = _reserve_slot(time.monotonic(), next_allowed_time, min_interval)
+                target = _reserve_slot(time.monotonic(), next_allowed_time, min_interval)  # type: ignore[arg-type]
             deficit = target - time.monotonic()
             if deficit > 0:
                 threading.Event().wait(deficit)
             return func(*args, **kwargs)
 
-        return sync_wrapper
+        return sync_wrapper  # type: ignore[return-value]
 
     return decorator

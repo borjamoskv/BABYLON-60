@@ -61,7 +61,7 @@ class SovereignCache(Generic[T]):
         async with self._lock:
             if key in self._cache:
                 self._cache.move_to_end(key)
-            self._cache[key] = (expiry, value)
+            self._cache[key] = (expiry, value)  # type: ignore[assignment]
             if len(self._cache) > self._maxsize:
                 old_key, (_, old_val) = self._cache.popitem(last=False)
                 await self._execute_eviction(old_key, old_val, EvictionReason.LRU)

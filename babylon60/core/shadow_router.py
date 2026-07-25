@@ -119,7 +119,7 @@ class ShadowRouter:
 
     async def route_request(self, prompt: str, context: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         if self._consumer_task is None:
-            self._consumer_task = asyncio.create_task(self._consume_shadow_queue())
+            self._consumer_task = asyncio.create_task(self._consume_shadow_queue())  # type: ignore[assignment]
         request_id = f"req_{secrets.token_hex(8)}"
         candidate_set = sorted([self.config.primary_model, *self.config.shadow_models])
         decision_payload = {

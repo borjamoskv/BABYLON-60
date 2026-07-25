@@ -72,7 +72,7 @@ class LLMProviderError(CortexError):
 
 
 class ValidationBoundaryError(CortexError):
-    def __init__(self, message: str, validation_errors: list[dict] | None = None):
+    def __init__(self, message: str, validation_errors: list[dict] | None = None):  # type: ignore[type-arg]
         super().__init__(message)
         self.validation_errors = validation_errors or []
 

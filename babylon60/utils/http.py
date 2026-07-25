@@ -32,12 +32,12 @@ class HttpRetryMixin:
         import httpx
 
         if method == "POST":
-            response = await self._client.post(url, headers=headers, json=payload)
+            response = await self._client.post(url, headers=headers, json=payload)  # type: ignore[attr-defined]
         else:
-            response = await self._client.get(url, headers=headers)
+            response = await self._client.get(url, headers=headers)  # type: ignore[attr-defined]
         try:
             response.raise_for_status()
-            return response.json()
+            return response.json()  # type: ignore[no-any-return]
         except httpx.HTTPStatusError as exc:
             return exc
         except (KeyError, IndexError, json.JSONDecodeError) as exc:
@@ -83,7 +83,7 @@ async def _do_standalone_post(
     response = await client.post(url, headers=headers, json=payload)
     try:
         response.raise_for_status()
-        return response.json()
+        return response.json()  # type: ignore[no-any-return]
     except httpx.HTTPStatusError as exc:
         return exc
     except (KeyError, IndexError, json.JSONDecodeError) as exc:

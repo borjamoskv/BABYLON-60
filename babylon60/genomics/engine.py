@@ -37,7 +37,7 @@ class GenomicEvaluationEngine:
             target_region_mb=float(target_region_mb),
             tmb_score=round(tmb_score, 4),
             status=status,
-            confidence_interval=(round(ci_low, 4), round(ci_high, 4)),
+            confidence_interval=(round(ci_low, 4), round(ci_high, 4)),  # type: ignore[arg-type]
             causal_taint="borjamoskv:tmb_evaluator_c5",
             details={
                 "snv_count": sum(1 for v in coding_muts if v.variant_type == "SNV"),

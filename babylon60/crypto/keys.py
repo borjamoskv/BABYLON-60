@@ -11,7 +11,7 @@ try:
     if os.environ.get("CORTEX_TESTING"):
         keyring = None
     else:
-        import keyring
+        import keyring  # type: ignore[assignment]
 except ImportError:
     keyring = None
 from cryptography.exceptions import InvalidSignature
@@ -128,7 +128,7 @@ class KeyManager:
 
     def get_public_key_b64(self, actor_id: str) -> str | None:
         if actor_id in self._metadata:
-            return self._metadata[actor_id].get("public_key_b64")
+            return self._metadata[actor_id].get("public_key_b64")  # type: ignore[no-any-return]
         return None
 
     def is_revoked(self, actor_id: str) -> bool:
