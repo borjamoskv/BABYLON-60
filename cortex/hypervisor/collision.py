@@ -1,8 +1,71 @@
 # C5-REAL EXERGY CERTIFIED
-'''Collision primitives for teleonomic control within the Cortex hypervisor.
-Implements purpose‑driven (teleonomic) collision detection and resolution.
-All operations are logged to the C5‑REAL ledger via the QuadPillarKernel.
-'''\n\nimport logging\nfrom typing import Tuple, List\n\nlogger = logging.getLogger(__name__)\n\n\nclass CollisionPrimitive:\n    """Teleonomic collision primitive.
-\n    Provides methods to detect and resolve collisions in a deterministic,
-    purpose‑driven manner, integrating with the Quad‑Pillar kernel for
-    physical ledger anchoring (Ω156, Φ1).\n    """\n\n    def __init__(self, arena_bounds: Tuple[int, int]):\n        self.min_x, self.max_x = arena_bounds\n        logger.info(f"[Collision] Initialized arena bounds: {arena_bounds}")\n\n    def detect_collision(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:\n        """Detect overlapping coordinates and return them."""\n        seen = {}\n        collisions = []\n        for idx, coord in enumerate(positions):\n            if coord in seen:\n                collisions.append(coord)\n                logger.debug(f"[Collision] Detected collision at {coord} (indices {seen[coord]}, {idx})")\n            else:\n                seen[coord] = idx\n        return collisions\n\n    def resolve_collision(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:\n        """Resolve collisions by shifting later entities right, wrapping within bounds."""\n        new_positions = positions.copy()\n        collisions = self.detect_collision(positions)\n        for coord in collisions:\n            indices = [i for i, c in enumerate(positions) if c == coord]\n            for shift_idx in indices[1:]:\n                x, y = new_positions[shift_idx]\n                x = x + 1 if x < self.max_x else self.min_x\n                new_positions[shift_idx] = (x, y)\n                logger.info(f"[Collision] Resolved collision for index {shift_idx} to {(x, y)}")\n        return new_positions\n\n    def enforce_teleonomy(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:\n        """Full teleonomic pipeline: detect, ledger, resolve, return positions."""\n        from cortex.quad_pillar_kernel import QuadPillarKernel\n\n        collisions = self.detect_collision(positions)\n        if collisions:\n            logger.warning(f"[Collision] Teleonomic enforcement: {len(collisions)} collisions detected")\n            kernel = QuadPillarKernel()\n            kernel.memory.record_4tier_entry(\n                evidence={"type": "collision_detection", "count": len(collisions)},\n                repo_state={"arena": (self.min_x, self.max_x)},\n                recorded_hypothesis={"action": "resolve_collision"},\n                governance={"framework": "C5-REAL", "module": "hypervisor.collision"}\n            )\n            return self.resolve_collision(positions)\n        logger.info("[Collision] No collisions detected – teleonomy satisfied")\n        return positions\n
+"""Collision primitives for teleonomic control within the Cortex hypervisor.
+
+Implements purpose-driven (teleonomic) collision detection and resolution.
+All operations are logged to the C5-REAL ledger via the QuadPillarKernel.
+"""
+
+import logging
+from typing import List, Tuple
+
+logger = logging.getLogger(__name__)
+
+
+class CollisionPrimitive:
+    """Teleonomic collision primitive.
+
+    Provides methods to detect and resolve collisions in a deterministic,
+    purpose-driven manner, integrating with the Quad-Pillar kernel for
+    physical ledger anchoring (Ω156, Φ1).
+    """
+
+    def __init__(self, arena_bounds: Tuple[int, int]):
+        self.min_x, self.max_x = arena_bounds
+        logger.info(f"[Collision] Initialized arena bounds: {arena_bounds}")
+
+    def detect_collision(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
+        """Detect overlapping coordinates and return them."""
+        seen = {}
+        collisions = []
+        for idx, coord in enumerate(positions):
+            if coord in seen:
+                collisions.append(coord)
+                logger.debug(
+                    f"[Collision] Detected collision at {coord} (indices {seen[coord]}, {idx})"
+                )
+            else:
+                seen[coord] = idx
+        return collisions
+
+    def resolve_collision(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
+        """Resolve collisions by shifting later entities right, wrapping within bounds."""
+        new_positions = positions.copy()
+        collisions = self.detect_collision(positions)
+        for coord in collisions:
+            indices = [i for i, c in enumerate(positions) if c == coord]
+            for shift_idx in indices[1:]:
+                x, y = new_positions[shift_idx]
+                x = x + 1 if x < self.max_x else self.min_x
+                new_positions[shift_idx] = (x, y)
+                logger.info(f"[Collision] Resolved collision for index {shift_idx} to {(x, y)}")
+        return new_positions
+
+    def enforce_teleonomy(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
+        """Full teleonomic pipeline: detect, ledger, resolve, return positions."""
+        from cortex.quad_pillar_kernel import QuadPillarKernel
+
+        collisions = self.detect_collision(positions)
+        if collisions:
+            logger.warning(
+                f"[Collision] Teleonomic enforcement: {len(collisions)} collisions detected"
+            )
+            kernel = QuadPillarKernel()
+            kernel.memory.record_4tier_entry(
+                evidence={"type": "collision_detection", "count": len(collisions)},
+                repo_state={"arena": (self.min_x, self.max_x)},
+                recorded_hypothesis={"action": "resolve_collision"},
+                governance={"framework": "C5-REAL", "module": "hypervisor.collision"},
+            )
+            return self.resolve_collision(positions)
+        logger.info("[Collision] No collisions detected – teleonomy satisfied")
+        return positions
