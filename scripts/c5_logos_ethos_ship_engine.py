@@ -1,3 +1,4 @@
+import logging
 import hashlib
 import os
 import sqlite3
@@ -6,9 +7,7 @@ import sys
 import time
 from decimal import getcontext
 from typing import Literal
-
 import babylon60.database.core
-
 StateKind = Literal['C5_Real_Atomic', 'C4_Simulated_Buffer']
 getcontext().prec = 38
 
@@ -43,7 +42,7 @@ class PhysicalMembraneState:
             raise TypeError(f'[SIGKILL_State_Purge] Illegal state unrepresentable: {state_type}')
         if state_type == 'C4_Simulated_Buffer':
             raise RuntimeError('[SIGKILL_State_Purge] C4-SIM state rejected by C5-REAL physical membrane during SHIP.')
-        if len(payload_hash) != 64 or not all(c in string.hexdigits for c in payload_hash):
+        if len(payload_hash) != 64 or not all((c in string.hexdigits for c in payload_hash)):
             raise ValueError(f'[SIGKILL_State_Purge] Invalid payload_hash: Must be 64-char SHA3-256 hex. Got: {payload_hash}')
         if lamport_clock <= 0:
             raise ValueError(f'[SIGKILL_State_Purge] lamport_clock must be strictly positive. Got: {lamport_clock}')
@@ -105,17 +104,17 @@ class BFTMasterLedgerWAL:
             return True
 
 def run_c5_verification_suite() -> int:
-    print('[+] Igniting C5-REAL Verification Suite: LOGOS, ETHOS, SHIP...')
+    logging.info('[+] Igniting C5-REAL Verification Suite: LOGOS, ETHOS, SHIP...')
     coord = SexagesimalCoordinate(12, 30, 0)
     div_coord = coord.divide_exact_by(15)
     assert div_coord.to_string() == '0:50:00_BASE60', f'Unexpected coord: {div_coord.to_string()}'
-    print('[✓] PRIMITIVA-LOGOS-001: Base-60 Sexagesimal Exact Divisibility verified.')
+    logging.info('[✓] PRIMITIVA-LOGOS-001: Base-60 Sexagesimal Exact Divisibility verified.')
     try:
         PhysicalMembraneState('C4_Simulated_Buffer', 'hash123', 1)
         raise AssertionError('Should have rejected C4_Simulated_Buffer')
     except RuntimeError as e:
         assert 'rejected by C5-REAL' in str(e)
-    print('[✓] PRIMITIVA-LOGOS-002: F# Algebraic Membrane / Illegal State rejection verified.')
+    logging.info('[✓] PRIMITIVA-LOGOS-002: F# Algebraic Membrane / Illegal State rejection verified.')
     root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     scratch_dir = os.path.join(root_dir, 'scratch')
     os.makedirs(scratch_dir, exist_ok=True)
@@ -128,8 +127,8 @@ def run_c5_verification_suite() -> int:
     t3 = ledger.append_c5_transaction('CLAIM: SHIP_DISK_COMMITTED', 103, 'borjamoskv')
     assert len(t1) == 64 and len(t2) == 64 and (len(t3) == 64)
     assert ledger.verify_ledger_integrity() is True
-    print(f'[✓] PRIMITIVA-ETHOS-003 & SHIP-004: BFT/WAL Master Ledger & SHA3-256 Taint Chain verified. Head: {t3[:16]}...')
-    print('[+] ALL 4 CORE PRIMITIVES AND LOGOS-ETHOS-SHIP TRIAD VERIFIED 100% C5-REAL.')
+    logging.info(f'[✓] PRIMITIVA-ETHOS-003 & SHIP-004: BFT/WAL Master Ledger & SHA3-256 Taint Chain verified. Head: {t3[:16]}...')
+    logging.info('[+] ALL 4 CORE PRIMITIVES AND LOGOS-ETHOS-SHIP TRIAD VERIFIED 100% C5-REAL.')
     return 0
 if __name__ == '__main__':
     sys.exit(run_c5_verification_suite())

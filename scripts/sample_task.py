@@ -1,2 +1,3 @@
+import logging
 def sample_run() -> None:
-    print("Execution C5-REAL successful.")
+    logging.info('Execution C5-REAL successful.')
