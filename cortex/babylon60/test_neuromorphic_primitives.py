@@ -5,6 +5,7 @@ import time
 import pytest
 from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh
 
+
 @pytest.mark.anyio
 async def test_neuromorphic_v2() -> None:
     print("[C5-REAL] Inicializando Malla Neuromórfica V2 (STDP + LIF)...")
@@ -69,6 +70,7 @@ async def test_neuromorphic_v2() -> None:
                 except OSError:
                     pass
 
+
 @pytest.mark.anyio
 async def test_auto_healing_mesh() -> None:
     import uuid
@@ -101,6 +103,7 @@ async def test_auto_healing_mesh() -> None:
                     os.remove(p)
                 except OSError:
                     pass
+
 
 if __name__ == "__main__":
     asyncio.run(test_neuromorphic_v2())

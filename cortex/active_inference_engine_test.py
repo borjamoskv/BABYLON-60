@@ -2,6 +2,7 @@
 import unittest
 from .active_inference_engine import UnifiedActiveInferenceEngine
 
+
 class TestUnifiedActiveInferenceEngine(unittest.TestCase):
     def test_3000_primitives_orquestated(self) -> None:
         engine = UnifiedActiveInferenceEngine()
@@ -16,6 +17,7 @@ class TestUnifiedActiveInferenceEngine(unittest.TestCase):
         print(
             f"✅ Python Unified Active Inference: 3000/3000 Primitives (1000 Tri-Dispatches) verified. Free Energy: {engine.free_energy:.6f}, D_KL: {engine.d_kl:.6f}"
         )
+
 
 if __name__ == "__main__":
     unittest.main()

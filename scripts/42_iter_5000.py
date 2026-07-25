@@ -10,6 +10,7 @@ os.chdir(PROJECT_ROOT)
 
 from cortex.swarm.engine_fsm import run_fsm_cycle  # noqa: E402
 
+
 def itera_5000() -> None:
     print("=== CORTEX-OMEGA: IGNICIÓN DE BUCLE ITERA 5000 (TEST DE ENDURANCIA TERMODINÁMICA) ===")
 
@@ -70,6 +71,7 @@ def itera_5000() -> None:
 
     if failure_count > 0:
         sys.exit(1)
+
 
 if __name__ == "__main__":
     itera_5000()

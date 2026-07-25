@@ -63,6 +63,7 @@ PHASES = {
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def run_script(script_name: str) -> bool:
     script_path = os.path.join(PROJECT_ROOT, "scripts", script_name)
     if not os.path.exists(script_path):
@@ -91,6 +92,7 @@ def run_script(script_name: str) -> bool:
         print(f"💥 [CRITICAL] Excepción al lanzar {script_name}: {e}")
         return False
 
+
 def run_script_captured(script_name: str) -> tuple[bool, float, str, str]:
     script_path = os.path.join(PROJECT_ROOT, "scripts", script_name)
     if not os.path.exists(script_path):
@@ -104,6 +106,7 @@ def run_script_captured(script_name: str) -> tuple[bool, float, str, str]:
         return res.returncode == 0, elapsed, res.stdout, res.stderr
     except (OSError, ValueError, subprocess.SubprocessError) as e:
         return False, 0.0, "", f"Excepción: {str(e)}"
+
 
 def run_scripts_parallel(scripts: list[str]) -> bool:
     print(f"\n⚡ [PARALELO] Lanzando {len(scripts)} scripts en paralelo...")
@@ -125,6 +128,7 @@ def run_scripts_parallel(scripts: list[str]) -> bool:
                 if stderr.strip():
                     print(f"--- Stderr {script} ---\n{stderr.strip()}")
     return success
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Orquestador de Cascada de Fases C5-REAL.")
@@ -211,6 +215,7 @@ def main() -> None:
     if not success:
         sys.exit(1)
     sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

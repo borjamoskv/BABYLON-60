@@ -12,6 +12,7 @@ from cortex.entropy_mapping_engine import (
     ThermodynamicState,
 )
 
+
 class TestThermodynamicEntropyEngine(unittest.TestCase):
     def setUp(self) -> None:
         self.engine = ThermodynamicEntropyEngine()
@@ -81,6 +82,7 @@ class TestThermodynamicEntropyEngine(unittest.TestCase):
         # S <= ln(N)
         max_s = math.log(len(probs))
         self.assertLessEqual(s, max_s + 1e-9)
+
 
 if __name__ == "__main__":
     unittest.main()

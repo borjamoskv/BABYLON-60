@@ -40,6 +40,7 @@ MODIFIERS = {
     9: "IO_UNSAFE",
 }
 
+
 class HaskellStateVector:
     def __init__(self) -> None:
         self.thunk_depth = [0.1] * 64
@@ -49,12 +50,14 @@ class HaskellStateVector:
         self.compile_cost = [0.0] * 64
         self.execution_count = 0
 
+
 def resolve_haskell_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"HS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
+
 
 def dispatch_haskell(d: int, p: int, m: int, vec: HaskellStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_haskell_identity(d, p, m)

@@ -6,6 +6,7 @@ import uuid
 
 DB_PATH = "c6_byzantine_ledger.db"
 
+
 class BFTLedger:
     def __init__(self, db_path: str) -> None:
         self.db_path = db_path
@@ -133,6 +134,7 @@ class BFTLedger:
 
         return True, "Chain Intact"
 
+
 def run_c6_2() -> None:
     print("=====================================================")
     print(" C6.2 ADVERSARIAL IDENTITY VERIFICATION (BYZANTINE)")
@@ -198,6 +200,7 @@ def run_c6_2() -> None:
         )
     else:
         print("\n[-] C6.2 FALLIDO: La arquitectura no soportó la inyección Bizantina.")
+
 
 if __name__ == "__main__":
     run_c6_2()

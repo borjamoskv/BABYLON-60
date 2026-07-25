@@ -30,9 +30,7 @@ class CollisionPrimitive:
         for idx, coord in enumerate(positions):
             if coord in seen:
                 collisions.append(coord)
-                logger.debug(
-                    f"[Collision] Detected collision at {coord} (indices {seen[coord]}, {idx})"
-                )
+                logger.debug(f"[Collision] Detected collision at {coord} (indices {seen[coord]}, {idx})")
             else:
                 seen[coord] = idx
         return collisions
@@ -56,9 +54,7 @@ class CollisionPrimitive:
 
         collisions = self.detect_collision(positions)
         if collisions:
-            logger.warning(
-                f"[Collision] Teleonomic enforcement: {len(collisions)} collisions detected"
-            )
+            logger.warning(f"[Collision] Teleonomic enforcement: {len(collisions)} collisions detected")
             kernel = QuadPillarKernel()
             kernel.memory.record_4tier_entry(
                 evidence={"type": "collision_detection", "count": len(collisions)},

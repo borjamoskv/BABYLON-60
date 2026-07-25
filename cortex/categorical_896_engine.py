@@ -38,6 +38,7 @@ except ImportError:
 # 1. DOMAIN TYPES & PRIMITIVE STRUCTURE
 # ═══════════════════════════════════════════════════════════════
 
+
 class DomainType(Enum):
     STRUCTURE = auto()
     LIMITS_COLIMITS = auto()
@@ -47,6 +48,7 @@ class DomainType(Enum):
     COLLISION_OBSTRUCTION = auto()
     ANTIPATTERNS = auto()
     FIBERED_COMPATIBILITY_METRICS = auto()
+
 
 DOMAIN_TYPE_MAP: Dict[str, DomainType] = {
     "STRUCTURE": DomainType.STRUCTURE,
@@ -69,6 +71,7 @@ DOMAIN_RANGES: Dict[str, Tuple[int, int]] = {
     "D7": (673, 784),
     "D8": (785, 896),
 }
+
 
 @dataclass(frozen=True)
 class CategoricalPrimitive:
@@ -109,9 +112,11 @@ class CategoricalPrimitive:
             DomainType.FIBERED_COMPATIBILITY_METRICS,
         )
 
+
 # ═══════════════════════════════════════════════════════════════
 # 2. LAWVERE METRIC & COST ALGEBRA
 # ═══════════════════════════════════════════════════════════════
+
 
 @dataclass
 class CostValuation:
@@ -150,6 +155,7 @@ class CostValuation:
             return CostValuation.infinity()
         return CostValuation(value=self.value + other.value + delta_otimes)
 
+
 @dataclass
 class MorphismCert:
     """A certificate c in Cert(alpha) with cost |c|."""
@@ -158,9 +164,11 @@ class MorphismCert:
     cost: CostValuation
     domain_id: str
 
+
 # ═══════════════════════════════════════════════════════════════
 # 3. SIMPLICIAL COMPATIBILITY COMPLEX Compat(Omega)
 # ═══════════════════════════════════════════════════════════════
+
 
 class CompatProperty(Enum):
     """Vertices of Compat(Omega) = {F, I, S, R_k}"""
@@ -169,6 +177,7 @@ class CompatProperty(Enum):
     I = "MonoidalInvariant"  # alpha*(P otimes Q) ~= alpha*(P) otimes alpha*(Q)  # noqa: E741
     S = "Synchronous"  # alpha*(Box_t P) = Box_t(alpha* P)
     R_k = "BudgetBound"  # forall alpha in A(M), mu(alpha) <= k
+
 
 @dataclass
 class CompatFace:
@@ -182,6 +191,7 @@ class CompatFace:
 
     def is_subface_of(self, other: "CompatFace") -> bool:
         return self.properties.issubset(other.properties)
+
 
 class CompatComplex:
     r"""
@@ -230,9 +240,11 @@ class CompatComplex:
             dim_counts[d] = dim_counts.get(d, 0) + 1
         return sum((-1) ** k * count for k, count in dim_counts.items())
 
+
 # ═══════════════════════════════════════════════════════════════
 # 4. MAIN ENGINE
 # ═══════════════════════════════════════════════════════════════
+
 
 class Categorical896Engine:
     """
@@ -649,6 +661,7 @@ class Categorical896Engine:
                 "cortex_taint": thermo.cortex_taint,
             },
         }
+
 
 # ═══════════════════════════════════════════════════════════════
 # 5. ENTRYPOINT

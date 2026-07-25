@@ -5,14 +5,15 @@ import re
 
 print("Purgando Anergía Sintáctica en YAML...")
 
+
 def fix_yaml(filepath):
-    with open(filepath, 'r') as f:
+    with open(filepath, "r") as f:
         content = f.read()
 
     # Fix Claim: [XXX] YYY -> Claim: "[XXX] YYY"
-    content = re.sub(r'^(Claim:\s+)(\[.*?\]\s+.*?)$', r'\1"\2"', content, flags=re.MULTILINE)
+    content = re.sub(r"^(Claim:\s+)(\[.*?\]\s+.*?)$", r'\1"\2"', content, flags=re.MULTILINE)
     # Fix Assertion: [XXX] YYY -> Assertion: "[XXX] YYY"
-    content = re.sub(r'^(Assertion:\s+)(\[.*?\]\s+.*?)$', r'\1"\2"', content, flags=re.MULTILINE)
+    content = re.sub(r"^(Assertion:\s+)(\[.*?\]\s+.*?)$", r'\1"\2"', content, flags=re.MULTILINE)
 
     # Fix Isomorphisms: - "A" -> "B" (YAML doesn't allow -> unquoted if it looks weird, wait, prettier complained about:
     # - "Cordura" -> "Cadena Principal..."
@@ -21,10 +22,11 @@ def fix_yaml(filepath):
     # So it parses as: - (string) -> (string). That's invalid YAML. It should be: - '"Cordura" -> "Cadena Principal"'
     content = re.sub(r'^(- \s*)("[^"]+"\s*->\s*"[^"]+")(\s*)$', r"\1'\2'\3", content, flags=re.MULTILINE)
 
-    with open(filepath, 'w') as f:
+    with open(filepath, "w") as f:
         f.write(content)
 
-yaml_files = glob.glob('**/*.yaml', recursive=True) + glob.glob('**/*.yml', recursive=True)
+
+yaml_files = glob.glob("**/*.yaml", recursive=True) + glob.glob("**/*.yml", recursive=True)
 for yf in yaml_files:
     if os.path.isfile(yf):
         fix_yaml(yf)

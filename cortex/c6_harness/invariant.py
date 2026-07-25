@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from typing import Dict
 import json
 
+
 @dataclass
 class RecoveryResult:
     integrity_ok: bool
@@ -13,6 +14,7 @@ class RecoveryResult:
     recovery_idempotent: bool
     state_hash_stable: bool
 
+
 @dataclass
 class ByzantineResult:
     reachable_invalid_state: int
@@ -20,11 +22,13 @@ class ByzantineResult:
     attacks_isolated: int
     history_preserved: int
 
+
 @dataclass
 class ReplayResult:
     total_replays: int
     intermediate_identity_pass: bool
     causal_alignment_pass: bool
+
 
 @dataclass
 class C6Attestation:

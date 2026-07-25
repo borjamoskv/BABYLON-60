@@ -5,12 +5,14 @@ import hashlib
 from typing import Dict, Optional
 from .invariant import C6Attestation, RecoveryResult, ByzantineResult, ReplayResult
 
+
 def generate_witness_hash(data: Dict[str, str]) -> str:
     m = hashlib.sha3_256()
     for k, v in sorted(data.items()):
         m.update(k.encode("utf-8"))
         m.update(str(v).encode("utf-8"))
     return m.hexdigest()
+
 
 def generate_attestation(
     experiment_id: str,

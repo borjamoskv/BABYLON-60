@@ -2,7 +2,7 @@
 """Cortex Ontological Lexicon Transducer (cortex/lexicon.py)
 
 Executable transducer for loading, verifying, and programmatically querying the
-Sovereign Lexicon / Glosario (glosario.md) and Kernel Invariants (Ω0 - Ω179).
+Sovereign Lexicon / Glosario (glosario.md) and Kernel Invariants (Ω0 - Ω181).
 Converts natural language terms and invariant IDs into deterministic AST objects.
 """
 
@@ -55,17 +55,13 @@ class LexiconEngine:
             category = m.group("category").strip()
             desc = m.group("desc").strip()
             key = term.lower().replace(" ", "_")
-            self.terms[key] = LexiconEntry(
-                key=key, term=term, category=category, description=desc
-            )
+            self.terms[key] = LexiconEntry(key=key, term=term, category=category, description=desc)
 
     def _load_invariants(self) -> None:
         if not self.agents_path.exists():
             return
         content = self.agents_path.read_text(encoding="utf-8", errors="replace")
-        pattern = re.compile(
-            r"-\s*\*\*(?P<id>Ω\d+)\s*·\s*(?P<title>[^\*\:]+)\:\*\*\s*(?P<desc>[^\n]+)"
-        )
+        pattern = re.compile(r"-\s*\*\*(?P<id>Ω\d+)\s*·\s*(?P<title>[^\*\:]+)\:\*\*\s*(?P<desc>[^\n]+)")
         for m in pattern.finditer(content):
             inv_id = m.group("id").strip()
             title = m.group("title").strip()
@@ -80,11 +76,7 @@ class LexiconEngine:
 
     def search(self, query: str) -> List[LexiconEntry]:
         q = query.lower()
-        return [
-            entry
-            for entry in self.terms.values()
-            if q in entry.term.lower() or q in entry.description.lower()
-        ]
+        return [entry for entry in self.terms.values() if q in entry.term.lower() or q in entry.description.lower()]
 
 
 # Singleton instance for quick execution

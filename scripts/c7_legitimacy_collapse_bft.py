@@ -2,6 +2,7 @@
 from typing import Any
 import hashlib
 
+
 # ==========================================
 # C7.6 METRIC IDENTITY & EVALUATOR INTEGRITY
 # ==========================================
@@ -54,6 +55,7 @@ class BFT_Evaluator:
 
         fitness = (self.w_pp * pp) - (self.w_rc * rc) - (self.w_cd * cd)
         return fitness
+
 
 # ==========================================
 # LC ATTACKS (LEGITIMACY COLLAPSE)
@@ -155,6 +157,7 @@ def run_c7_6() -> None:
         print("    contra la historia que él mismo debe validar.")
     else:
         print("\n[-] C7.6 FALLIDO: Brecha Institucional (Goodhart Meta) detectada.")
+
 
 if __name__ == "__main__":
     run_c7_6()

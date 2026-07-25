@@ -2,6 +2,7 @@
 from typing import Any
 import hashlib
 
+
 # ==========================================
 # C7.7 TRUST ANCHOR & RECURSIVE EVALUATOR
 # ==========================================
@@ -18,6 +19,7 @@ class TrustAnchor:
 
     def hash_axiom(self) -> Any:
         return hashlib.sha3_256(self.base_axiom.encode()).hexdigest()
+
 
 class RecursiveEvaluator:
     def __init__(self, epoch: Any = "0", anchor: Any = None) -> None:
@@ -61,6 +63,7 @@ class RecursiveEvaluator:
             return self.audit_event(metadata["nested_validator"], current_depth + 1, max_depth)
 
         return True, "Valid Event (Anchored to Axiom)"
+
 
 # ==========================================
 # C7.7 TOURNAMENT & EPOCH SIMULATION
@@ -138,6 +141,7 @@ def run_c7_7() -> None:
         print("    fue preservado, neutralizando la auto-certificación y la regresión infinita.")
     else:
         print("\n[-] C7.7 FALLIDO: Inconsistencia recursiva. El Kernel se privilegió a sí mismo.")
+
 
 if __name__ == "__main__":
     run_c7_7()

@@ -6,6 +6,7 @@ import os
 import hashlib
 from .invariant import RecoveryResult
 
+
 def _get_db_hash(db_path: str) -> str:
     """Computes SHA3-256 of the database file."""
     if not os.path.exists(db_path):
@@ -15,6 +16,7 @@ def _get_db_hash(db_path: str) -> str:
         while chunk := f.read(8192):
             m.update(chunk)
     return m.hexdigest()
+
 
 def analyze_sqlite_recovery(db_path: str) -> RecoveryResult:
     """Performs cold-restart audit of SQLite WAL and checks invariants including idempotence."""

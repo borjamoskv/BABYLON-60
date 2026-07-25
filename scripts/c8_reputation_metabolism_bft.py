@@ -2,6 +2,7 @@
 from typing import Any
 import math
 
+
 # ==========================================
 # C8 REPUTATION METABOLISM & THERMODYNAMIC DECAY
 # ==========================================
@@ -36,6 +37,7 @@ class MetabolicReputationEngine:
         current_rep = self.nodes.get(node_id, {"reputation": 0.0, "last_active": current_time})
         dt = current_time - current_rep["last_active"]
         return current_rep["reputation"] * math.exp(-self.decay_rate * dt)
+
 
 def run_c8_1_simulation() -> None:
     print("=====================================================")
@@ -89,6 +91,7 @@ def run_c8_1_simulation() -> None:
         print("    la legitimidad regresa a cero.")
     else:
         print("\n[-] C8.1 FALLIDO: El sistema sufre de acumulación oligárquica.")
+
 
 if __name__ == "__main__":
     run_c8_1_simulation()

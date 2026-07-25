@@ -3,6 +3,7 @@ import os
 import json
 from collections import defaultdict
 
+
 def summarize_graphs() -> None:
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     base_dir = os.path.join(project_root, "cortex", "artifacts", "reports")
@@ -57,6 +58,7 @@ def summarize_graphs() -> None:
     with open(f"{base_dir}/BABYLON_60_MATH_SUMMARY.json", "w") as f:
         json.dump(summary, f, indent=2)
     print(f"Summary written to {base_dir}/BABYLON_60_MATH_SUMMARY.json")
+
 
 if __name__ == "__main__":
     summarize_graphs()

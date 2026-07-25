@@ -6,8 +6,10 @@ import json
 import os
 import time
 
+
 def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)
+
 
 def run_transduction() -> None:
     # Synthetic baseline probability distribution (50%+ synthetic collapse -> uniform noise approximation)
@@ -72,6 +74,7 @@ def run_transduction() -> None:
     print(f"Crystallized: {output_path}")
     print(f"SHA3-256 Taint: {taint_sha3}")
     print(f"S_Synthetic: {s_synthetic:.6f} nats | S_C5: {s_c5:.6f} nats | Delta: {exergy_delta:.6f} nats")
+
 
 if __name__ == "__main__":
     run_transduction()

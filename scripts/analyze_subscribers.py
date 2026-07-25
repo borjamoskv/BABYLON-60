@@ -13,6 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import yaml
 from cortex.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary
 
+
 def main() -> None:
     if len(sys.argv) > 1:
         csv_path = Path(sys.argv[1])
@@ -72,6 +73,7 @@ def main() -> None:
         yaml.dump(audit_report, f, default_flow_style=False, allow_unicode=True)
 
     print(f"[OK] Audit receipt written to: {report_file}")
+
 
 if __name__ == "__main__":
     main()

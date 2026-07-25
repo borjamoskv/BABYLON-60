@@ -10,9 +10,11 @@ if not TARGET_DIR:
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUTPUT_JSON = os.path.join(PROJECT_ROOT, "cortex", "artifacts", "reports", "BABYLON_60_EPISTEMOLOGY.json")
 
+
 def scan_file(filepath: str) -> str:
     with open(filepath, "r", encoding="utf-8", errors="ignore") as f:
         return f.read()
+
 
 def classify_files(target_dir: str) -> dict[str, list[str]]:
     classification: dict[str, list[str]] = {
@@ -73,6 +75,7 @@ def classify_files(target_dir: str) -> dict[str, list[str]]:
 
     return classification
 
+
 def main() -> None:
     print("[*] Starting OMEGA-2 Epistemic Forensics Prober...")
     results = classify_files(TARGET_DIR)
@@ -89,6 +92,7 @@ def main() -> None:
         json.dump(results, f, indent=2)
 
     print(f"[+] Output written to {OUTPUT_JSON}")
+
 
 if __name__ == "__main__":
     main()

@@ -8,15 +8,18 @@ from typing import List, TypedDict, Any
 
 __all__ = ["C5LLMRouter"]
 
+
 class RouteConfig(TypedDict, total=False):
     name: str
     url: str
     models: List[str]
 
+
 class EpistemicHalt(Exception):
     """Exclusión rígida de excepciones mudas (Ω26)."""
 
     pass
+
 
 def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
     """Parseador de YAML para ontología de rutas (Ω15)."""
@@ -25,22 +28,24 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
 
     try:
         import yaml
+
         with open(filepath, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f)
             if isinstance(data, dict) and "routes" in data:
                 from typing import cast
+
                 return cast(List[RouteConfig], data["routes"])
     except ImportError:
         pass
 
     routes = []
-    current_route: Any = {}
 
     with open(filepath, "r", encoding="utf-8") as f:
         content = f.read()
 
     # Parse simple routes manually if PyYAML is not installed
     import re
+
     route_blocks = content.split("- name:")
     for block in route_blocks[1:]:
         lines = block.strip().splitlines()
@@ -60,7 +65,9 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
         routes.append(route_obj)
 
     from typing import cast
+
     return cast(List[RouteConfig], routes)
+
 
 class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""

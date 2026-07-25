@@ -14,6 +14,7 @@ from cortex.escohotado_substance_ontology import (
 
 TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_substance.db")
 
+
 def test_substance_state_monism() -> None:
     # C5-REAL Monistic Process Reality: Low dualism, high actuality and potentiality
     res_c5 = compute_substance_state(potentiality=1.0, actuality=1.0, dualism_separation=0.0)
@@ -24,6 +25,7 @@ def test_substance_state_monism() -> None:
     res_dual = compute_substance_state(potentiality=1.0, actuality=1.0, dualism_separation=0.9)
     assert res_dual["substance_exergy_density"] == 0.1
     assert "CARTESIAN_KANTIAN_DUALIST_SPLIT" in res_dual["ontological_regime"]
+
 
 def test_grid_execution_and_persistence() -> None:
     if os.path.exists(TEST_DB):

@@ -8,6 +8,7 @@ from cortex.os.memory import MemoryTier
 from cortex.os.scheduler import CognitiveScheduler, ProcessTask
 from cortex.os.syscalls import SyscallRequest, SyscallType
 
+
 def test_cortex_microkernel_spawn_and_syscalls() -> None:
     kernel = CortexMicrokernel()
     pid = kernel.spawn_process("AuditorAgent", capabilities={"Syscall_OBSERVE", "Syscall_VERIFY", "Syscall_AUDIT"})
@@ -48,6 +49,7 @@ def test_cortex_microkernel_spawn_and_syscalls() -> None:
     assert res_denied.success is False
     assert "Permission Denied" in res_denied.error
 
+
 def test_epistemic_memory_promotion_and_gc() -> None:
     kernel = CortexMicrokernel()
     kernel.memory.store("temp_1", "junk_data", MemoryTier.SENSORY, confidence=0.1)
@@ -57,6 +59,7 @@ def test_epistemic_memory_promotion_and_gc() -> None:
     stats = kernel.gc.collect()
     assert stats["purged_sensory"] == 1
     assert stats["deduplicated_working"] == 1
+
 
 def test_cognitive_scheduler_priority_queue() -> None:
     scheduler = CognitiveScheduler()

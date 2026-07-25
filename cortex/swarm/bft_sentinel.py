@@ -4,9 +4,11 @@ import subprocess
 import os
 import sys
 
+
 def get_repo_path() -> str:
     # Asume que este archivo está en cortex/swarm/
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 
 def run_sentinel() -> None:
     repo_path = get_repo_path()
@@ -45,6 +47,7 @@ def run_sentinel() -> None:
 
         # 3. Termodinámica: Prevenir saturación de I/O
         time.sleep(5)
+
 
 if __name__ == "__main__":
     # Prevenir ejecución si no estamos en un repo git

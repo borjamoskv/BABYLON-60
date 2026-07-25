@@ -40,6 +40,7 @@ MODIFIERS = {
     9: "BFT_CONSENSUS",
 }
 
+
 class ConstantsStateVector:
     def __init__(self) -> None:
         self.planck_scale_ratio = [1.616255e-35] * 64
@@ -49,12 +50,14 @@ class ConstantsStateVector:
         self.singularity_density = [0.0] * 64
         self.execution_count = 0
 
+
 def resolve_constants_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"CONST-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
+
 
 def dispatch_constants(d: int, p: int, m: int, vec: ConstantsStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_constants_identity(d, p, m)

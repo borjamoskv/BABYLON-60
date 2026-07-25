@@ -9,6 +9,7 @@ State: Executable C5-REAL Test Suite for Baseline v18.4
 from hypothesis import given, strategies as st
 from cortex.subadditivity_verifier import CertificateCategoryP, Morphism, Certificate
 
+
 def test_identity_zero_cost_axiom() -> None:
     cat = CertificateCategoryP()
     cat.add_identity_certificate("A")
@@ -17,12 +18,14 @@ def test_identity_zero_cost_axiom() -> None:
     mu_id = cat.compute_mu(id_morphism)
     assert mu_id == 0.0
 
+
 def test_infimum_empty_convention() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha_uncertified", "A", "B")
 
     mu_val = cat.compute_mu(alpha)
     assert mu_val == float("inf")
+
 
 def test_subadditivity_sequential_with_contextual_delta() -> None:
     def friction_fn(m1: Morphism, m2: Morphism) -> float:
@@ -42,6 +45,7 @@ def test_subadditivity_sequential_with_contextual_delta() -> None:
     assert lhs == 6.5
     assert rhs == 6.5
 
+
 def test_kappa_repair_operator() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "X", "Y")
@@ -58,6 +62,7 @@ def test_kappa_repair_operator() -> None:
 
     kappa_val = cat.compute_kappa_repair_operator(alpha, predicate_R)
     assert kappa_val == 1.5
+
 
 def test_kappa_monotonicity_theorem_2_1() -> None:
     cat = CertificateCategoryP()
@@ -83,6 +88,7 @@ def test_kappa_monotonicity_theorem_2_1() -> None:
     assert kappa_weak == 2.0
     assert kappa_weak <= kappa_strict
 
+
 def test_prf_s_soundness_and_prf_c_completeness() -> None:
     cat = CertificateCategoryP()
     alpha = Morphism("alpha", "A", "B")
@@ -103,6 +109,7 @@ def test_prf_s_soundness_and_prf_c_completeness() -> None:
     completeness_ok = cat.verify_prf_c_relative_completeness(basics, k)
     assert completeness_ok is True
 
+
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
@@ -115,6 +122,7 @@ def test_property_sequential_subadditivity(cost1: float, cost2: float) -> None:
     cat.add_certificate(Certificate("c2", beta, cost2))
     ok, lhs, rhs = cat.verify_sequential_subadditivity(alpha, beta)
     assert ok is True
+
 
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
@@ -129,6 +137,7 @@ def test_property_monoidal_subadditivity(cost1: float, cost2: float) -> None:
     ok, lhs, rhs = cat.verify_monoidal_subadditivity(alpha, beta)
     assert ok is True
 
+
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
@@ -142,6 +151,7 @@ def test_property_lawvere_triangle_inequality(cost1: float, cost2: float) -> Non
     ok, lhs, rhs = cat.verify_lawvere_triangle_inequality(alpha, beta)
     assert ok is True
 
+
 @given(dummy=st.integers(min_value=0, max_value=100))
 def test_property_identity_cost(dummy: int) -> None:
     cat = CertificateCategoryP()
@@ -150,9 +160,11 @@ def test_property_identity_cost(dummy: int) -> None:
     mu_id = cat.compute_mu(id_morphism)
     assert mu_id == 0.0
 
+
 # ========================================================================
 # THEOREM 3: LAWVERE PREMETRIC FORMAL VERIFICATION
 # ========================================================================
+
 
 def test_lawvere_premetric_reflexivity() -> None:
     """Thm 3 Part 1: mu(id_X) = 0 for all objects X."""
@@ -161,6 +173,7 @@ def test_lawvere_premetric_reflexivity() -> None:
         cat.add_identity_certificate(obj)
         id_m = Morphism(f"id_{obj}", obj, obj)
         assert cat.compute_mu(id_m) == 0.0, f"Reflexivity failed for {obj}"
+
 
 def test_lawvere_premetric_triangle_3chain() -> None:
     """Thm 3 Part 2: Triangle inequality over a 3-chain A->B->C->D."""
@@ -193,6 +206,7 @@ def test_lawvere_premetric_triangle_3chain() -> None:
     # Transitive bound
     assert mu_abc <= cat.compute_mu(alpha) + cat.compute_mu(beta) + cat.compute_mu(gamma)
 
+
 @given(
     cost1=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
@@ -219,9 +233,11 @@ def test_property_lawvere_transitivity(cost1: float, cost2: float, cost3: float)
     mu_abc = cat.compute_mu(comp_abc)
     assert mu_abc <= cost1 + cost2 + cost3 + 1e-9  # epsilon for float
 
+
 # ========================================================================
 # THEOREM 4: PRF-S SOUNDNESS VERIFICATION
 # ========================================================================
+
 
 def test_prf_s_soundness_structural() -> None:
     """Thm 4: If each alpha in A(M) has cert with cost <= k, then M |= FISR_k^A."""
@@ -252,6 +268,7 @@ def test_prf_s_soundness_structural() -> None:
     # Full engine verification
     assert cat.verify_prf_s_soundness(transitions, k) is True
 
+
 def test_prf_s_soundness_fails_over_budget() -> None:
     """Thm 4 contrapositive: If a cert exceeds k, soundness fails."""
     cat = CertificateCategoryP()
@@ -260,9 +277,11 @@ def test_prf_s_soundness_fails_over_budget() -> None:
 
     assert cat.verify_prf_s_soundness([alpha], k=5.0) is False
 
+
 # ========================================================================
 # THEOREM 5: SEPARATION THEOREM VERIFICATION
 # ========================================================================
+
 
 def test_separation_empty_fiber() -> None:
     """Thm 5: Model with empty Cert(alpha) is non-FISR for all k."""
@@ -283,6 +302,7 @@ def test_separation_empty_fiber() -> None:
 
     kappa = cat.compute_kappa_repair_operator(alpha, budget_any_k)
     assert kappa == float("inf")
+
 
 def test_separation_boundary_nonempty_fiber() -> None:
     """Boundary: Model with Cert(alpha) non-empty IS FISR for k >= mu(alpha)."""

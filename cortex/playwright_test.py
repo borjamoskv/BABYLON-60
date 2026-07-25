@@ -3,6 +3,7 @@
 import unittest
 from cortex.playwright import dispatch_playwright, PlaywrightStateVector
 
+
 class TestPlaywrightKernel(unittest.TestCase):
     def test_playwright_coverage(self) -> None:
         vec = PlaywrightStateVector()
@@ -15,6 +16,7 @@ class TestPlaywrightKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Playwright Primitives.")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -20,17 +20,20 @@ import strike_rs  # type: ignore[import-untyped]  # noqa: E402
 
 MICRO_BATCH = 500  # Concurrency cap per asyncio.gather to avoid WAL/FD saturation
 
+
 async def run_neuromorphic_task(mesh: SelfHealingMesh, idx: int) -> float:
     t0 = time.perf_counter_ns()
     pulse_val = 5.0 + (idx % 20)
     await mesh.route_pulse("SensorA", "MotorB", pulse_val)
     return float(time.perf_counter_ns() - t0)
 
+
 def run_active_inference_task(engine: UnifiedActiveInferenceEngine, idx: int) -> float:
     t0 = time.perf_counter_ns()
     d, p, m = idx % 10, (idx // 10) % 10, (idx // 100) % 10
     fe, dkl, ell = engine.step(d, p, m)
     return float(time.perf_counter_ns() - t0)
+
 
 def run_rust_strike_task(
     sv: strike_rs.StateVector,
@@ -44,6 +47,7 @@ def run_rust_strike_task(
     strike_rs.dispatch_neuro_chain(d, p, m, cv)
     strike_rs.dispatch_tts_harness(d, p, m, ts)
     return float(time.perf_counter_ns() - t0)
+
 
 async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     t0 = time.perf_counter_ns()
@@ -65,6 +69,7 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     await asyncio.to_thread(_db_op)
     return float(time.perf_counter_ns() - t0)
 
+
 async def batched_gather(coros: Sequence[Awaitable[Any]], batch_size: int = MICRO_BATCH) -> List[float]:
     """Execute coroutines in micro-batches to prevent WAL lock starvation (Ω10/Ω13)."""
     results: List[float] = []
@@ -73,6 +78,7 @@ async def batched_gather(coros: Sequence[Awaitable[Any]], batch_size: int = MICR
         res = await asyncio.gather(*batch)
         results.extend(res)
     return results
+
 
 async def main() -> None:
     total_ops = 100000
@@ -198,6 +204,7 @@ async def main() -> None:
             fp = p + ext
             if os.path.exists(fp):
                 os.remove(fp)
+
 
 if __name__ == "__main__":
     asyncio.run(main())

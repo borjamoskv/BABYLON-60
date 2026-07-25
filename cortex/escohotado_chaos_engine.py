@@ -18,6 +18,7 @@ from typing import Dict, List, Any
 
 DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db")
 
+
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path, timeout=5.0)
@@ -38,6 +39,7 @@ def init_db(db_path: str = DB_PATH) -> None:
             );
         """)
     conn.close()
+
 
 def compute_entropy(trajectory: List[float], num_bins: int = 50) -> float:
     """Computes exact Shannon/Gibbs entropy S = -sum(p_i * ln(p_i))."""
@@ -66,6 +68,7 @@ def compute_entropy(trajectory: List[float], num_bins: int = 50) -> float:
 
     return entropy
 
+
 def compute_lyapunov(trajectory: List[float], r: float, c: float) -> float:
     """Computes the Lyapunov exponent to quantify chaos vs stability."""
     if len(trajectory) < 2:
@@ -81,6 +84,7 @@ def compute_lyapunov(trajectory: List[float], r: float, c: float) -> float:
             valid_points += 1
 
     return sum_log_deriv / valid_points if valid_points > 0 else 0.0
+
 
 def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, transient: int = 500) -> Dict[str, Any]:
     """
@@ -123,6 +127,7 @@ def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, tran
         "cortex_taint": f"borjamoskv:escohotado_chaos:{cortex_taint[:16]}",
     }
 
+
 def run_simulation_grid(r_values: List[float], c_values: List[float], db_path: str = DB_PATH) -> List[Dict[str, Any]]:
     init_db(db_path)
     results = []
@@ -155,6 +160,7 @@ def run_simulation_grid(r_values: List[float], c_values: List[float], db_path: s
 
     conn.close()
     return results
+
 
 if __name__ == "__main__":
     r_range = [2.5, 3.2, 3.7, 3.9]

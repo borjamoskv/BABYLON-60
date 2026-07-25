@@ -12,6 +12,7 @@ import time
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def run_cmd(name: str, cmd: list[str]) -> bool:
     print(f"🧹 Running {name}...")
     try:
@@ -30,6 +31,7 @@ def run_cmd(name: str, cmd: list[str]) -> bool:
         if e.stderr:
             print(e.stderr.decode("utf-8"))
         return False
+
 
 def main() -> None:
     start_time = time.perf_counter()
@@ -63,6 +65,7 @@ def main() -> None:
     else:
         print(f"❌ Formateo falló después de {elapsed:.4f}s.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

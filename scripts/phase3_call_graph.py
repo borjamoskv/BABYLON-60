@@ -5,8 +5,10 @@ import json
 from collections import defaultdict
 from typing import Any
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 class CallGraphVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
@@ -37,6 +39,7 @@ class CallGraphVisitor(ast.NodeVisitor):
             self.module_calls.add(func_name)
 
         self.generic_visit(node)
+
 
 def main() -> None:
     target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -82,6 +85,7 @@ def main() -> None:
         json.dump(global_call_graph, f, indent=2)
 
     print(out_json)
+
 
 if __name__ == "__main__":
     main()

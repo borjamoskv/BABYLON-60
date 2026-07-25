@@ -34,6 +34,7 @@ LN_2 = math.log(2.0)  # Natural log of 2
 T_REF = 298.15  # Standard Reference Temperature (K)
 LANDAUER_LIMIT = K_B * T_REF * LN_2  # ~2.853e-21 J/bit
 
+
 @dataclass(frozen=True)
 class ThermodynamicState:
     domain_counts: Dict[str, int]
@@ -46,12 +47,14 @@ class ThermodynamicState:
     blake3_hash: str
     cortex_taint: str
 
+
 try:
     import strike_rs  # type: ignore
 
     RUST_ENGINE_AVAILABLE = True
 except ImportError:
     RUST_ENGINE_AVAILABLE = False
+
 
 class ThermodynamicEntropyEngine:
     """
@@ -159,6 +162,7 @@ class ThermodynamicEntropyEngine:
             blake3_hash=h_val,
             cortex_taint=taint,
         )
+
 
 if __name__ == "__main__":
     engine = ThermodynamicEntropyEngine()

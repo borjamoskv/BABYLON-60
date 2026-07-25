@@ -5,8 +5,10 @@ import json
 from collections import defaultdict
 from typing import Any
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 class ComplexityVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
@@ -32,6 +34,7 @@ class ComplexityVisitor(ast.NodeVisitor):
         self.complexity += 1
         self.generic_visit(node)
 
+
 class ImportVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
         self.imports: set[str] = set()
@@ -43,6 +46,7 @@ class ImportVisitor(ast.NodeVisitor):
     def visit_ImportFrom(self, node: Any) -> None:
         if node.module:
             self.imports.add(node.module)
+
 
 def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
     index_counter = [0]
@@ -78,6 +82,7 @@ def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
         if node not in index:
             strongconnect(node)
     return result
+
 
 def main() -> None:
     target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -191,6 +196,7 @@ def main() -> None:
         json.dump(report, f, indent=2)
 
     print(out_json)
+
 
 if __name__ == "__main__":
     main()

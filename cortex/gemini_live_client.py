@@ -24,20 +24,24 @@ OUTPUT_SAMPLE_RATE_HZ = 24000
 AUDIO_CHANNELS = 1  # Mono
 AUDIO_BIT_DEPTH = 16  # 16-bit PCM
 
+
 class GeminiLiveProtocolError(Exception):
     """Base exception for Gemini Live API protocol errors."""
 
     pass
+
 
 class AudioFormatMismatchError(GeminiLiveProtocolError):
     """Raised when audio configuration violates 16kHz/24kHz PCM standards."""
 
     pass
 
+
 class EphemeralTokenExpiredError(GeminiLiveProtocolError):
     """Raised when an ephemeral key or auth token expires."""
 
     pass
+
 
 @dataclasses.dataclass(frozen=True)
 class AudioStreamConfig:
@@ -56,6 +60,7 @@ class AudioStreamConfig:
         if self.bit_depth != 16:
             raise AudioFormatMismatchError(f"Bit depth MUST be 16-bit PCM, got {self.bit_depth}")
 
+
 @dataclasses.dataclass
 class GeminiLiveSession:
     session_id: str
@@ -70,6 +75,7 @@ class GeminiLiveSession:
             seed = f"{self.session_id}:{self.model_name}:{time.time_ns()}"
             digest = hashlib.sha3_256(seed.encode("utf-8")).hexdigest()[:16]
             self.cortex_taint = f"CORTEX-TAINT:borjamoskv:gemini_live:{digest}"
+
 
 class GeminiLiveClient:
     """Client Transducer for Gemini Multimodal Live API WSS streams."""

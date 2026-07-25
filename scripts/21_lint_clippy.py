@@ -12,6 +12,7 @@ import time
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def run_clippy(manifest_name: str, manifest_path: str) -> bool:
     print(f"🔎 Running cargo clippy on {manifest_name}...")
     cmd = ["cargo", "clippy", "--manifest-path", manifest_path, "--", "-D", "warnings"]
@@ -24,6 +25,7 @@ def run_clippy(manifest_name: str, manifest_path: str) -> bool:
     except subprocess.CalledProcessError as e:
         print(f"❌ Clippy warnings or compilation errors detected in {manifest_name} (exit code {e.returncode}).")
         return False
+
 
 def main() -> None:
     start_time = time.perf_counter()
@@ -41,6 +43,7 @@ def main() -> None:
     else:
         print(f"❌ Falló auditoría de Rust Clippy en {elapsed:.4f}s.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

@@ -16,6 +16,7 @@ if PROJECT_ROOT not in sys.path:
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "stress_c6.db")
 
+
 def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     if os.path.exists(DB_PATH):
@@ -35,6 +36,7 @@ def init_db() -> None:
     """)
     conn.commit()
     conn.close()
+
 
 def worker_loop(worker_id: int) -> None:
     """Tight loop of SQLite inserts. Designed to be SIGKILLed randomly."""
@@ -58,6 +60,7 @@ def worker_loop(worker_id: int) -> None:
             pass  # Ignore lock timeouts, simply retry
 
         idx += 1
+
 
 def run_siege(duration_sec: int = 20, num_workers: int = 8, kill_interval: float = 0.5) -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -142,6 +145,7 @@ def run_siege(duration_sec: int = 20, num_workers: int = 8, kill_interval: float
         print("  La arquitectura de WAL y persistencia es estructuralmente invulnerable a muertes de proceso.")
     else:
         print("\n⚠ ANERGÍA DETECTADA: Integridad comprometida bajo stress de colapso de proceso.")
+
 
 if __name__ == "__main__":
     run_siege(duration_sec=30, num_workers=8, kill_interval=0.2)

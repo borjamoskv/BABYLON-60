@@ -15,6 +15,7 @@ from cortex.cam.types import (
     KGNode,
 )
 
+
 class CAM2Hypergraph:
     def __init__(self) -> None:
         self.nodes: dict[str, KGNode] = {}

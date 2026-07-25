@@ -14,6 +14,7 @@ from cortex.escohotado_market_prohibition_engine import (
 
 TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_econ.db")
 
+
 def test_simulation_bounds_and_monotonies() -> None:
     # Legal market & full property rights -> zero risk premium above 1, 100% purity, zero violence, zero info loss
     res_free = simulate_prohibition_and_property(enforcement=0.0, property_rights=1.0)
@@ -29,6 +30,7 @@ def test_simulation_bounds_and_monotonies() -> None:
     assert res_totalitarian["purity_index"] <= 0.15
     assert res_totalitarian["black_market_violence_index"] == 20.0
     assert res_totalitarian["information_loss_index"] == 1.0
+
 
 def test_grid_execution_and_persistence() -> None:
     if os.path.exists(TEST_DB):

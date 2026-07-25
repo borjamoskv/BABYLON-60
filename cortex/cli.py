@@ -15,6 +15,7 @@ import json
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from cortex.categorical_896_engine import Categorical896Engine
 
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="C5-REAL Categorical Logic 896 Primitives Transducer CLI")
     subparsers = parser.add_subparsers(dest="command", help="Sub-commands")
@@ -67,6 +68,7 @@ def main() -> None:
             sys.exit(1)
     else:
         parser.print_help()
+
 
 if __name__ == "__main__":
     main()

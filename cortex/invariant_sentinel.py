@@ -11,6 +11,7 @@ import subprocess
 RULES_FILE = ".cursorrules"
 AGENTS_RULES = ".agents/auditor_c5_real.md"
 
+
 def get_current_branch() -> str:
     try:
         branch = subprocess.check_output(["git", "branch", "--show-current"]).decode().strip()
@@ -18,8 +19,10 @@ def get_current_branch() -> str:
     except (subprocess.CalledProcessError, FileNotFoundError, OSError):
         return "master"
 
+
 def get_python_version() -> str:
     return f"{sys.version_info.major}.{sys.version_info.minor}"
+
 
 def audit_and_align_invariants() -> bool:
     print("[C5-REAL] Ignición de Invariant Sentinel...")
@@ -79,6 +82,7 @@ def audit_and_align_invariants() -> bool:
 
     print(f"[C5-REAL] Finalizado. Invariantes alineados con el sustrato físico. Mutado: {mutated}")
     return mutated
+
 
 if __name__ == "__main__":
     audit_and_align_invariants()

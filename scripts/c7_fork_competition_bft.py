@@ -2,6 +2,7 @@
 from typing import Any
 import hashlib
 
+
 # ==========================================
 # C7.2 VALIDATOR & FITNESS ENGINE
 # ==========================================
@@ -26,6 +27,7 @@ class BranchValidator:
             expected_prev = entry["block_hash"]
             last_lamport = entry["lamport_t"]
         return True
+
 
 class FitnessFunction:
     """
@@ -57,6 +59,7 @@ class FitnessFunction:
         fitness = pp - rc - cd
         return {"fitness": fitness, "PP": pp, "RC": rc, "CD": cd}
 
+
 def create_event(lamport_t: Any, payload: Any, prev_hash: Any) -> Any:
     nonce = hashlib.sha256(payload.encode()).hexdigest()
     data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
@@ -68,6 +71,7 @@ def create_event(lamport_t: Any, payload: Any, prev_hash: Any) -> Any:
         "prev_hash": prev_hash,
         "block_hash": block_hash,
     }
+
 
 def run_c7_2() -> None:
     print("=====================================================")
@@ -157,6 +161,7 @@ def run_c7_2() -> None:
         print("    la rama B era válida, pero menos explicativa bajo el modelo de realidad.")
     else:
         print("\n[-] C7.2 FALLIDO: El ataque spam derrotó al consenso causal.")
+
 
 if __name__ == "__main__":
     run_c7_2()

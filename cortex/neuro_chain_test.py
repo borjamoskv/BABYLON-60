@@ -3,6 +3,7 @@
 import unittest
 from cortex.neuro_chain import dispatch_neuro_chain, CognitiveChainVector
 
+
 class TestNeuroKernel(unittest.TestCase):
     def test_neuro_coverage(self) -> None:
         vec = CognitiveChainVector()
@@ -15,6 +16,7 @@ class TestNeuroKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Neuro Primitives.")
+
 
 if __name__ == "__main__":
     unittest.main()

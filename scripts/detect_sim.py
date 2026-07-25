@@ -26,9 +26,7 @@ CLAIM_PATTERNS = [
     r"\bCommit_Hash:",
 ]
 
-METRIC_NO_SOURCE_RE = re.compile(
-    r"\b(ATP(?:\s+SAVED)?|EXERGY|ANERGIA|COHERENCE)\s*[:=+]\s*[+-]?\d+", re.IGNORECASE
-)
+METRIC_NO_SOURCE_RE = re.compile(r"\b(ATP(?:\s+SAVED)?|EXERGY|ANERGIA|COHERENCE)\s*[:=+]\s*[+-]?\d+", re.IGNORECASE)
 
 
 def shannon_entropy(s: str) -> float:
@@ -85,9 +83,7 @@ def analyze_hex(h: str) -> dict:
 
 def commit_exists(sha: str) -> bool:
     """Check if a commit hash exists in local git ledger."""
-    r = subprocess.run(
-        ["git", "cat-file", "-t", sha], capture_output=True, text=True
-    )
+    r = subprocess.run(["git", "cat-file", "-t", sha], capture_output=True, text=True)
     return r.returncode == 0 and r.stdout.strip() == "commit"
 
 
@@ -111,9 +107,7 @@ def scan_text(text: str) -> dict:
 
     for pat in CLAIM_PATTERNS:
         for m in re.finditer(pat, text, re.IGNORECASE):
-            snippet = text[max(0, m.start() - 40) : m.end() + 60].replace(
-                "\n", " "
-            )
+            snippet = text[max(0, m.start() - 40) : m.end() + 60].replace("\n", " ")
             findings["unbacked_claims"].append(
                 {
                     "pattern": pat,
@@ -128,9 +122,7 @@ def scan_text(text: str) -> dict:
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Detect synthetic theater artifacts."
-    )
+    parser = argparse.ArgumentParser(description="Detect synthetic theater artifacts.")
     parser.add_argument("target", help="File path to inspect")
     parser.add_argument(
         "--strict",
@@ -147,14 +139,8 @@ def main():
     text = p.read_text(encoding="utf-8", errors="replace")
     findings = scan_text(text)
 
-    hard_fail = (
-        len(findings["synthetic_hashes"]) > 0
-        or len(findings["unverifiable_commits"]) > 0
-    )
-    soft_fail = (
-        len(findings["unbacked_claims"]) > 0
-        or len(findings["sourceless_metrics"]) > 0
-    )
+    hard_fail = len(findings["synthetic_hashes"]) > 0 or len(findings["unverifiable_commits"]) > 0
+    soft_fail = len(findings["unbacked_claims"]) > 0 or len(findings["sourceless_metrics"]) > 0
 
     fail = hard_fail or (args.strict and soft_fail)
 

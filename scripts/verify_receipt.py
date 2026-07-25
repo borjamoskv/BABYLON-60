@@ -47,9 +47,7 @@ def safe_resolve(repo_root: Path, rel: str) -> Path:
 
 
 def main():
-    ap = argparse.ArgumentParser(
-        description="Verify receipt JSON integrity vs disk"
-    )
+    ap = argparse.ArgumentParser(description="Verify receipt JSON integrity vs disk")
     ap.add_argument("receipt_path", help="Path to receipt JSON file")
     args = ap.parse_args()
 
@@ -67,9 +65,7 @@ def main():
     # 1. Self-hash integrity
     stored_self_hash = receipt.get("self_hash")
     receipt_copy = {k: v for k, v in receipt.items() if k != "self_hash"}
-    recomputed = sha256_bytes(
-        json.dumps(receipt_copy, sort_keys=True).encode("utf-8")
-    )
+    recomputed = sha256_bytes(json.dumps(receipt_copy, sort_keys=True).encode("utf-8"))
     ok_self = recomputed == stored_self_hash
     checks.append(
         {
@@ -89,9 +85,7 @@ def main():
             fp = safe_resolve(repo_root, rel)
         except ValueError as e:
             errors.append(str(e))
-            checks.append(
-                {"check": f"file_hash:{rel}", "pass": False, "error": str(e)}
-            )
+            checks.append({"check": f"file_hash:{rel}", "pass": False, "error": str(e)})
             continue
 
         actual_hash = sha256_file(fp)
@@ -126,9 +120,7 @@ def main():
         errors.append(f"UNDECLARED_MUTATIONS: {undeclared}")
 
     result = {
-        "receipt": (
-            str(rp.relative_to(repo_root)) if repo_root in rp.parents else str(rp)
-        ),
+        "receipt": (str(rp.relative_to(repo_root)) if repo_root in rp.parents else str(rp)),
         "PASS": len(errors) == 0,
         "errors": errors,
         "checks": checks,

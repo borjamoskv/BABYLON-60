@@ -30,6 +30,7 @@ REQUIRED_FILES: list[str] = [
     "manifest.json",
 ]
 
+
 def shannon_entropy(text: str) -> float:
     """Calculate Shannon entropy in bits/char."""
     if not text:
@@ -42,6 +43,7 @@ def shannon_entropy(text: str) -> float:
         if p > 0:
             entropy -= p * math.log2(p)
     return entropy
+
 
 def validate_experiment(lab_dir: Path) -> dict[str, object]:
     """Validate a single experiment directory. Returns audit report."""
@@ -110,6 +112,7 @@ def validate_experiment(lab_dir: Path) -> dict[str, object]:
 
     return report
 
+
 def main() -> None:
     if len(sys.argv) < 2:
         # Validate all experiments
@@ -161,6 +164,7 @@ def main() -> None:
     else:
         print("\n[C5-REAL] All experiments validated. Exergy confirmed.")
         sys.exit(0)
+
 
 if __name__ == "__main__":
     main()

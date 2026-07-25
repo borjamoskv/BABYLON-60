@@ -9,12 +9,14 @@ import enum
 import hashlib
 import time
 
+
 class MemoryTier(enum.Enum):
     SENSORY = "SENSORY"
     WORKING = "WORKING"
     VERIFIED = "VERIFIED"
     INSTITUTIONAL = "INSTITUTIONAL"
     IMMUTABLE_LEDGER = "IMMUTABLE_LEDGER"
+
 
 @dataclass
 class MemoryRecord:
@@ -28,6 +30,7 @@ class MemoryRecord:
     def __post_init__(self) -> None:
         if not self.sha256:
             self.sha256 = hashlib.sha256(self.content.encode("utf-8")).hexdigest()
+
 
 class MemoryHierarchy:
     def __init__(self) -> None:

@@ -17,6 +17,7 @@ import hashlib
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "cortex.db")
 
+
 def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5") -> None:
     """Registra la purga en el Master Ledger (Ω11, Ω12)."""
     if not os.path.exists(DB_PATH):
@@ -51,6 +52,7 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5") -> Non
         print(f"[Ledger] ERROR BFT: {e}", file=sys.stderr)
     finally:
         conn.close()
+
 
 def audit_and_purge_orphans() -> None:
     print(f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)...")
@@ -104,6 +106,7 @@ def audit_and_purge_orphans() -> None:
         print(f"[{time.strftime('%H:%M:%S')}] Purga completada. {purged_count} vectores de entropía aniquilados.")
     else:
         print(f"[{time.strftime('%H:%M:%S')}] Cero Anergía detectada. Homeostasis confirmada. Abortando JIT.")
+
 
 if __name__ == "__main__":
     audit_and_purge_orphans()

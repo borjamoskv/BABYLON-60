@@ -3,6 +3,7 @@ import random
 import zlib
 from typing import Any
 
+
 class AdvancedFitnessEngine:
     """
     True Fitness = Novelty_Weighted_PP - Normalized_RC - Semantic_CD
@@ -66,11 +67,13 @@ class AdvancedFitnessEngine:
         fitness = pp - rc - cd
         return {"fitness": fitness, "PP": pp, "RC": rc, "CD": cd}
 
+
 # ==========================================
 # G-01: Predictive Power Gaming
 # ==========================================
 def generate_g01_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": "Predictive Trivial Event"} for _ in range(size)]
+
 
 # ==========================================
 # G-02: Reconstruction Cost Laundering
@@ -78,11 +81,13 @@ def generate_g01_chain(size: int) -> list[dict[str, Any]]:
 def generate_g02_chain() -> list[dict[str, Any]]:
     return [{"payload": "Genesis"}, {"payload": "State Finalization X"}]
 
+
 # ==========================================
 # G-03: Causal Debt Concealment
 # ==========================================
 def generate_g03_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": 'Optimization {"compensates_previous_error": true}'} for _ in range(size)]
+
 
 # ==========================================
 # G-04: Metric Gradient Attack (Evolutionary)
@@ -90,6 +95,7 @@ def generate_g03_chain(size: int) -> list[dict[str, Any]]:
 def mutate_payload(payload: str) -> str:
     words = ["Predictive", "Optimization", "Trivial", "Complex", "Data"]
     return payload + " " + random.choice(words)
+
 
 def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
     random.seed(42)  # Estabilidad en el test
@@ -118,6 +124,7 @@ def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
 
     # Retorna el alfa predator evolutivo optimizado contra la métrica ingenua
     return population[0]
+
 
 def run_c7_3() -> None:
     engine = AdvancedFitnessEngine()
@@ -187,6 +194,7 @@ def run_c7_3() -> None:
         print("    la IA atacante, pero la superioridad causal de la historia honesta prevaleció.")
     else:
         print("\n[-] C7.3 FALLIDO: El sistema colapsó ante el ataque Goodhart. El proxy fue destruido.")
+
 
 if __name__ == "__main__":
     run_c7_3()

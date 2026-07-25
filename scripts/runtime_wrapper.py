@@ -43,16 +43,12 @@ def git_toplevel() -> Path:
 
 
 def git_head() -> str:
-    r = subprocess.run(
-        ["git", "rev-parse", "HEAD"], capture_output=True, text=True
-    )
+    r = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
     return r.stdout.strip() if r.returncode == 0 else "no-commits"
 
 
 def git_diff_name_only() -> list[str]:
-    r = subprocess.run(
-        ["git", "diff", "--name-only"], capture_output=True, text=True
-    )
+    r = subprocess.run(["git", "diff", "--name-only"], capture_output=True, text=True)
     return sorted(set(x.strip() for x in r.stdout.splitlines() if x.strip()))
 
 
@@ -127,9 +123,7 @@ def action_run_python(repo_root: Path, a: dict) -> dict:
     }
 
     if proc.returncode != 0:
-        raise RuntimeError(
-            f"Script failed rc={proc.returncode}: {script_rel}\nstderr: {proc.stderr[:500]}"
-        )
+        raise RuntimeError(f"Script failed rc={proc.returncode}: {script_rel}\nstderr: {proc.stderr[:500]}")
 
     return result
 
@@ -219,9 +213,7 @@ def main():
     receipt["self_hash"] = sha256_bytes(receipt_bytes)
 
     out_path = receipts_dir / f"run-{run_id}.json"
-    out_path.write_text(
-        json.dumps(receipt, indent=2, sort_keys=True), encoding="utf-8"
-    )
+    out_path.write_text(json.dumps(receipt, indent=2, sort_keys=True), encoding="utf-8")
 
     try:
         rel_out_path = str(out_path.relative_to(repo_root))

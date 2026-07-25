@@ -3,6 +3,7 @@
 import math
 from typing import List, Dict, Any, Tuple
 
+
 class AttractorLandscape:
     """Represents the cognitive state space as a Lyapunov potential energy field V(S)."""
 
@@ -18,6 +19,7 @@ class AttractorLandscape:
     def gradient_V(self, state: List[float]) -> List[float]:
         """Calculates grad V(S) = S - S_attractor."""
         return [state[i] - self.attractor[i] for i in range(self.dims)]
+
 
 class CognitiveStateObserver:
     """

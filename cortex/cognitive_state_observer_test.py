@@ -2,6 +2,7 @@
 import unittest
 from cortex.cognitive_state_observer import CognitiveStateObserver
 
+
 class TestCognitiveStateObserver(unittest.TestCase):
     def test_attractor_convergence_and_divergence_minimization(self) -> None:
         observer = CognitiveStateObserver(dims=10)
@@ -31,6 +32,7 @@ class TestCognitiveStateObserver(unittest.TestCase):
         print(
             f"✅ Cognitive Observer Convergence Test PASS: Initial Div={initial_div:.6f} -> Final Div={current_div:.6f}"
         )
+
 
 if __name__ == "__main__":
     unittest.main()

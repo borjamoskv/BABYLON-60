@@ -6,6 +6,7 @@ import sqlite3
 import pytest
 from cortex.bft_orchestrator import BFTOrchestrator, DB_PATH, strike_rs
 
+
 @pytest.mark.skipif(strike_rs is None, reason="strike_rs nativo no está disponible en este entorno.")
 class TestBFTOrchestrator(unittest.TestCase):
     def setUp(self) -> None:
@@ -119,6 +120,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         self.assertIn("Ledger deletions are forbidden", str(ctx.exception))
 
         conn.close()
+
 
 if __name__ == "__main__":
     unittest.main()

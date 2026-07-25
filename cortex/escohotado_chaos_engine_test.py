@@ -15,6 +15,7 @@ from cortex.escohotado_chaos_engine import (
 
 TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_chaos.db")
 
+
 def test_entropy_computation() -> None:
     # Monotonic constant sequence -> Zero entropy
     seq_constant = [0.5] * 100
@@ -25,6 +26,7 @@ def test_entropy_computation() -> None:
     s = compute_entropy(seq_var)
     assert s > 1.0
 
+
 def test_simulation_system_regimes() -> None:
     # Coercive collapse case
     res_freeze = simulate_system(r=2.5, c=0.5)
@@ -33,6 +35,7 @@ def test_simulation_system_regimes() -> None:
     # Complex self-organization case
     res_chaos = simulate_system(r=3.9, c=0.0)
     assert res_chaos["entropy_s"] > 1.0
+
 
 def test_grid_execution_and_db_persistence() -> None:
     if os.path.exists(TEST_DB):

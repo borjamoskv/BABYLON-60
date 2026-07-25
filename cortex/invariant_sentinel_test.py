@@ -18,6 +18,7 @@ from cortex.invariant_sentinel import (
     RULES_FILE,
 )
 
+
 class TestInvariantSentinel(unittest.TestCase):
     @patch("subprocess.check_output")
     def test_get_current_branch_success(self, mock_check_output: MagicMock) -> None:
@@ -102,6 +103,7 @@ class TestInvariantSentinel(unittest.TestCase):
         with patch("builtins.open", side_effect=custom_open):
             result = audit_and_align_invariants()
             self.assertFalse(result)
+
 
 if __name__ == "__main__":
     unittest.main()

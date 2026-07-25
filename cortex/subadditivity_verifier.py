@@ -9,11 +9,13 @@ State: Executable C5-REAL Proof Verification Engine for Baseline v18.4
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple, Callable
 
+
 @dataclass(frozen=True)
 class Morphism:
     name: str
     src: str
     tgt: str
+
 
 @dataclass(frozen=True)
 class Certificate:
@@ -24,6 +26,7 @@ class Certificate:
     def __post_init__(self) -> None:
         if self.cost < 0:
             raise ValueError(f"Cost valuation must be non-negative, got {self.cost}")
+
 
 class CertificateCategoryP:
     """

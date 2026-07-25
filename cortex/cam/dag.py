@@ -7,6 +7,7 @@ Enforces acyclicity, Lamport timestamp monotonicity, and 10-state node transitio
 from collections import defaultdict, deque
 from cortex.cam.types import EdgeType, EpistemicState, KGEdge, KGNode
 
+
 class TypedDAGKnowledgeGraph:
     def __init__(self) -> None:
         self.nodes: dict[str, KGNode] = {}

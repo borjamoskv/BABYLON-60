@@ -1,8 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 """Unit tests for cortex.lexicon module."""
 
-import pytest
-from cortex.lexicon import LexiconEngine, lookup_invariant, lookup_term
+from cortex.lexicon import LexiconEngine, lookup_invariant
 
 
 def test_lexicon_load_invariants():
@@ -11,6 +10,15 @@ def test_lexicon_load_invariants():
     inv_179 = engine.get_invariant("Ω179")
     assert inv_179 is not None
     assert "ZERO-TRUST RUNTIME VERIFICATION INVARIANT" in inv_179
+
+    # Test new ULTRATHINK P0 Invariants Ω180 and Ω181
+    inv_180 = engine.get_invariant("Ω180")
+    assert inv_180 is not None
+    assert "TOOL METADATA BOUNDARY INVARIANT" in inv_180
+
+    inv_181 = engine.get_invariant("Ω181")
+    assert inv_181 is not None
+    assert "ULTRATHINK P0 HARNESS CONVERGENCE INVARIANT" in inv_181
 
 
 def test_lookup_invariant_function():

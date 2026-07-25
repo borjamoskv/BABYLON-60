@@ -30,20 +30,24 @@ if not logger.handlers:
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)
 
+
 class MCTSCompilerError(Exception):
     """Base exception for MCTS Compiler errors."""
 
     pass
+
 
 class FalsificationThresholdError(MCTSCompilerError):
     """Raised when physical falsification criteria are not met."""
 
     pass
 
+
 class MCTSTreeSearchError(MCTSCompilerError):
     """Raised when MCTS tree search fails to converge within trajectory budget."""
 
     pass
+
 
 @dataclasses.dataclass(frozen=True)
 class ASTTheorem:
@@ -73,13 +77,16 @@ class ASTTheorem:
                     f"Ω123 Invariant Violation: code_hash {self.code_hash[:8]}... does not match computed payload SHA3-256 {computed_hash[:8]}..."
                 )
 
+
 # Precomputed log2 table for byte counts 1..65536 to accelerate entropy math
 _LOG2_TABLE: List[float] = [0.0] + [math.log2(i) for i in range(1, 65537)]
+
 
 def _fast_log2(x: int) -> float:
     if x < len(_LOG2_TABLE):
         return _LOG2_TABLE[x]
     return math.log2(x)
+
 
 @functools.lru_cache(maxsize=4096)
 def calculate_shannon_entropy(data: bytes) -> float:
@@ -108,6 +115,7 @@ def calculate_shannon_entropy(data: bytes) -> float:
                 entropy += -p_x * (_fast_log2(count) - log2_len)
 
     return max(0.0, min(8.0, entropy))
+
 
 class EphemeralVNodePhysical:
     """Sandbox físico para compilación de AST y cálculo de exergía."""
@@ -138,6 +146,7 @@ class EphemeralVNodePhysical:
             return is_valid, entropy, node_count
         except SyntaxError:
             return False, entropy, 0
+
 
 class MCTSNode:
     """Nodo explícito de árbol MCTS con cálculo de UCT (Upper Confidence Bound
@@ -188,11 +197,13 @@ class MCTSNode:
         self.visits += 1
         self.value += reward
 
+
 def _generate_cortex_taint(payload_hash: str) -> str:
     """Invariante Ω113: Inyecta traza causal dinámica derivada del entorno."""
     entropy_seed = f"{payload_hash}:{os.getpid()}:{time.time_ns()}"
     digest = hashlib.sha3_256(entropy_seed.encode("utf-8")).hexdigest()[:16]
     return f"CORTEX-TAINT:borjamoskv:mcts:{digest}"
+
 
 def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
     intention, step = args
@@ -224,6 +235,7 @@ def _mcts_expansion_worker(args: Tuple[str, int]) -> Optional[ASTTheorem]:
             exergy_ratio=exergy_ratio,
         )
     return None
+
 
 class L3InferenceEnginePhysical:
     """Motor de Inferencia L3 acoplado a MCTS con árbol de decisión UCT y
@@ -309,6 +321,7 @@ class L3InferenceEnginePhysical:
             f"C5-REAL: Imposible colapsar un teorema válido tras evaluar {self.target} trayectorias MCTS."
         )
 
+
 def enforce_ide_theorem_physical(intention: str) -> None:
     engine = L3InferenceEnginePhysical(target_trajectories=10000)
     theorem = engine.compile_theorem(intention)
@@ -323,6 +336,7 @@ def enforce_ide_theorem_physical(intention: str) -> None:
         f"AST_Nodes: {theorem.ast_nodes}, Confidence: C5-REAL, VNode: {theorem.ephemeral_vnode}, "
         f"Taint: {theorem.cortex_taint} }}"
     )
+
 
 if __name__ == "__main__":
     enforce_ide_theorem_physical(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{time.time()}")

@@ -11,6 +11,7 @@ CONV_ID = "bee4dcf3-21d8-46bb-97c4-c933ed4c6415"
 WORKSPACE_DIR = os.environ.get("WORKSPACE_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 LEDGER_PATH = os.path.join(WORKSPACE_DIR, "ledgers", "maxwell_daemon_ledger.json")
 
+
 def main() -> None:
     # 1. Parse active mutations from the git history to measure actual useful work
     # We mutated 11 files in naroagutierrezgil.com and 1 file in Teorema-Robinson-Moskv (enhance_assets.py in website directory)
@@ -79,6 +80,7 @@ def main() -> None:
             indent=2,
         )
     )
+
 
 if __name__ == "__main__":
     main()

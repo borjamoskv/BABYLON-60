@@ -15,6 +15,7 @@ os.chdir(PROJECT_ROOT)
 
 from cortex.llm_router import C5LLMRouter, EpistemicHalt  # noqa: E402
 
+
 class AuditState(TypedDict):
     payload: str
     target_path: str
@@ -23,6 +24,7 @@ class AuditState(TypedDict):
     bft_passed: bool
     hash_delta: str
 
+
 def phase_1_latent_friction(prompt: str) -> str:
     """Fase 1: Colapso de prosa a sintaxis formal (Φ2)."""
     anergy_tokens = ["Aquí tienes", "Espero", "Creo que"]
@@ -30,11 +32,13 @@ def phase_1_latent_friction(prompt: str) -> str:
         raise EpistemicHalt("Green Theater detectado (Φ2).")
     return prompt.strip()
 
+
 def phase_2_phantom_target(target_path: str) -> None:
     """Fase 2: Verificación de existencia física (Ω22/Ω27)."""
     parent = os.path.dirname(target_path)
     if parent and not os.path.exists(parent):
         raise EpistemicHalt(f"Phantom Target: Ruta base inalcanzable {parent}")
+
 
 def phase_3_idempotency_lock(target_path: str, payload: str) -> bool:
     """Fase 3: Conservación Termodinámica (Ω15)."""
@@ -54,6 +58,7 @@ def phase_3_idempotency_lock(target_path: str, payload: str) -> bool:
         print(f"[ATP Ahorrado] Colisión de Hash (Idempotencia) en {target_path}. Abortando I/O.")
         return True
     return False
+
 
 def phase_4_bft_consensus(state: AuditState) -> bool:
     """Fase 4: Auditoría de Máquina (f <= 1) usando inferencia de frontera."""
@@ -90,6 +95,7 @@ def phase_4_bft_consensus(state: AuditState) -> bool:
         state["bft_passed"] = True
         return True
 
+
 def phase_5_git_sentinel(target_path: str, payload: str) -> str:
     """Fase 5: Cristalización de Traza (R4)."""
     with open(target_path, "w", encoding="utf-8") as f:
@@ -111,6 +117,7 @@ def phase_5_git_sentinel(target_path: str, payload: str) -> str:
         return result.stdout.strip()
     except subprocess.CalledProcessError as e:
         raise EpistemicHalt(f"Fallo Git Sentinel: {e.stderr}")
+
 
 def execute_bft_state_loop(prompt: str, target_path: str, payload: str) -> Optional[str]:
     print(f"[{time.strftime('%H:%M:%S')}] Iniciando ULTRATHINK P0 Audit Loop...")
@@ -135,6 +142,7 @@ def execute_bft_state_loop(prompt: str, target_path: str, payload: str) -> Optio
 
     print(f"[{time.strftime('%H:%M:%S')}] Mutación Cristalizada. C5-REAL Hash: {commit_hash}")
     return commit_hash
+
 
 def write_to_cortex_ledger(commit_hash: str, payload: str, agent_id: str = "auditor_c5") -> None:
     db_path = ".cortex/cortex.db"
@@ -170,6 +178,7 @@ def write_to_cortex_ledger(commit_hash: str, payload: str, agent_id: str = "audi
         raise EpistemicHalt(f"Violación de Inmutabilidad en Master Ledger: {e}")
     finally:
         conn.close()
+
 
 if __name__ == "__main__":
     print("Módulo ULTRATHINK P0 Audit Loop (C5-REAL) cargado.")

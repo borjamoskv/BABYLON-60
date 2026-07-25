@@ -90,6 +90,7 @@ READ_ONLY_COMMANDS: tuple[str, ...] = (
     "git show",
 )
 
+
 def classify_tool_call(tool: dict[str, Any]) -> str:
     """Classify a single tool call as 'exergy' or 'anergy'."""
     name = tool.get("name", "")
@@ -108,6 +109,7 @@ def classify_tool_call(tool: dict[str, Any]) -> str:
 
     # Unknown tool → conservative: anergy
     return "anergy"
+
 
 def classify_step(step: dict[str, Any]) -> dict[str, Any]:
     """Classify a transcript step and return enriched record."""
@@ -160,6 +162,7 @@ def classify_step(step: dict[str, Any]) -> dict[str, Any]:
         "tool_classifications": tool_classifications,
         "reason": f"tools: {', '.join(tool_names)}",
     }
+
 
 def compute_anergy_ratio(transcript_path: Path) -> dict[str, Any]:
     """Compute the Anergy Ratio A(n) for a transcript."""
@@ -225,6 +228,7 @@ def compute_anergy_ratio(transcript_path: Path) -> dict[str, Any]:
         "classified_steps": classified,
     }
 
+
 def main() -> None:
     if len(sys.argv) < 2:
         print(f"Usage: {sys.argv[0]} <transcript.jsonl> [--output results.json]")
@@ -278,6 +282,7 @@ def main() -> None:
         with open(output_path, "w") as f:
             json.dump(compact, f, indent=2)
         print(f"\n  Results written to: {output_path}")
+
 
 if __name__ == "__main__":
     main()

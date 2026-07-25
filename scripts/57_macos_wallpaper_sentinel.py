@@ -38,6 +38,7 @@ PRESETS: dict[str, str] = {
 LABEL_DAEMON = "com.c5real.wallpaper_sentinel"
 PLIST_PATH = os.path.expanduser(f"~/Library/LaunchAgents/{LABEL_DAEMON}.plist")
 
+
 def execute_cmd(cmd: list[str]) -> Tuple[int, str]:
     """Executes a command safely returning exit code and stdout/stderr."""
     try:
@@ -47,9 +48,11 @@ def execute_cmd(cmd: list[str]) -> Tuple[int, str]:
     except (subprocess.SubprocessError, OSError) as e:
         return 1, str(e)
 
+
 def log(msg: str) -> None:
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     print(f"[{timestamp}] [C5-SENTINEL] {msg}")
+
 
 def purge_wallpaper_cache() -> None:
     """Purges com.apple.wallpaper video store cache & resets plist defaults."""
@@ -68,12 +71,14 @@ def purge_wallpaper_cache() -> None:
 
     execute_cmd(["defaults", "delete", "com.apple.wallpaper"])
 
+
 def restart_wallpaper_daemons() -> None:
     """Flushes memory buffers by restarting WallpaperAgent and Dock."""
     log("Restarting WallpaperAgent & Dock daemons...")
     execute_cmd(["killall", "WallpaperAgent"])
     execute_cmd(["killall", "Dock"])
     time.sleep(1.5)
+
 
 def apply_wallpaper(wallpaper_path: str) -> bool:
     """Applies target wallpaper across all displays using AppleScript POSIX file binding."""
@@ -112,12 +117,14 @@ def apply_wallpaper(wallpaper_path: str) -> bool:
         log(f"ERROR: All AppleScript binding attempts failed: {out2}")
         return False
 
+
 def heal_wallpaper(wallpaper_path: str = DEFAULT_WALLPAPER) -> bool:
     """Executes full C5-REAL self-healing sequence."""
     log("Initiating macOS wallpaper self-healing sequence...")
     purge_wallpaper_cache()
     restart_wallpaper_daemons()
     return apply_wallpaper(wallpaper_path)
+
 
 def install_daemon(preset: str) -> None:
     """Installs launchd agent for hourly wallpaper enforcement."""
@@ -163,6 +170,7 @@ def install_daemon(preset: str) -> None:
     else:
         log(f"Failed to load daemon: {out}")
 
+
 def uninstall_daemon() -> None:
     """Uninstalls launchd agent."""
     if os.path.exists(PLIST_PATH):
@@ -172,6 +180,7 @@ def uninstall_daemon() -> None:
     else:
         log("No daemon installation found.")
 
+
 def check_status() -> None:
     """Checks launchd daemon status."""
     code, out = execute_cmd(["launchctl", "list", LABEL_DAEMON])
@@ -179,6 +188,7 @@ def check_status() -> None:
         log(f"Daemon Active:\n{out}")
     else:
         log("Daemon is not loaded.")
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="C5-REAL macOS Wallpaper Sentinel")
@@ -206,6 +216,7 @@ def main() -> None:
     else:
         success = heal_wallpaper(wallpaper_path)
         sys.exit(0 if success else 1)
+
 
 if __name__ == "__main__":
     main()

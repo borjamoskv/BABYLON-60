@@ -11,6 +11,7 @@ import numpy as np
 
 from typing import Any
 
+
 def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict[str, Any]:
     """
     Simulación determinista del modelo de pila de arena Bak-Tang-Wiesenfeld (BTW 2D).
@@ -69,6 +70,7 @@ def simulate_btw_sandpile(grid_size: int = 32, total_grains: int = 5000) -> dict
         "empirical_power_law_tau": float(tau),
     }
 
+
 def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
     """
     Verifica las desigualdades de subaditividad de Lawvere y el límite BQP de Grover.
@@ -103,6 +105,7 @@ def verify_lawvere_premetric_and_bqp() -> dict[str, Any]:
         "quantum_speedup_ratio": round(speedup_ratio, 2),
     }
 
+
 def main() -> None:
     print("=== INICIANDO AUDITORÍA TERMODINÁMICA C5-REAL: TRI-DUALIDAD FISR-SOC-BQP ===")
 
@@ -122,6 +125,7 @@ def main() -> None:
 
     print(f"[OK] Prueba completada exitosamente. Resultados sellados en {output_path}")
     print(json.dumps(results, indent=2))
+
 
 if __name__ == "__main__":
     main()

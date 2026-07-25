@@ -6,6 +6,7 @@ import sqlite3
 import datetime
 from typing import TypedDict
 
+
 class PrimitiveDict(TypedDict):
     id: str
     domain: str
@@ -14,6 +15,7 @@ class PrimitiveDict(TypedDict):
     description: str
     taint_hash: str
     timestamp: str
+
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -61,6 +63,7 @@ ACTION_VERBS = [
 # We need exactly 100 primitives per domain to hit 1000.
 # We will generate 10 categories * 10 verbs = 100 base archetypes.
 
+
 def generate_centuria() -> list[PrimitiveDict]:
     base_archetypes = []
     idx = 1
@@ -103,6 +106,7 @@ def generate_centuria() -> list[PrimitiveDict]:
 
     return primitives
 
+
 def save_to_markdown(primitives: list[PrimitiveDict], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w") as f:
@@ -118,6 +122,7 @@ def save_to_markdown(primitives: list[PrimitiveDict], filepath: str) -> None:
             f.write(f"### {p['name']}\n")
             f.write(f"- **Regla**: {p['description']}\n")
             f.write(f"- **CORTEX-TAINT**: `{p['taint_hash']}`\n\n")
+
 
 def save_to_sqlite(primitives: list[PrimitiveDict], db_path: str) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -162,6 +167,7 @@ def save_to_sqlite(primitives: list[PrimitiveDict], db_path: str) -> None:
     conn.commit()
     conn.close()
 
+
 def main() -> None:
     primitives = generate_centuria()
 
@@ -174,6 +180,7 @@ def main() -> None:
     print(f"✅ Generadas {len(primitives)} primitivas C5-REAL.")
     print(f"📄 Markdown: {md_path}")
     print(f"💽 Database: {db_path}")
+
 
 if __name__ == "__main__":
     main()

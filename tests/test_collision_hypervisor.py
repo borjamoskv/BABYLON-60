@@ -1,7 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 """Unit tests for cortex.hypervisor.collision CollisionPrimitive."""
 
-import pytest
 from cortex.hypervisor.collision import CollisionPrimitive
 
 

@@ -8,6 +8,7 @@ from dataclasses import dataclass, field
 import heapq
 import time
 
+
 @dataclass(order=True)
 class ProcessTask:
     priority_score: float  # Inverted for min-heap (lower value = higher priority)
@@ -41,6 +42,7 @@ class ProcessTask:
             risk_reduction=risk_reduction,
             token_cost=token_cost,
         )
+
 
 class CognitiveScheduler:
     def __init__(self) -> None:

@@ -50,6 +50,7 @@ ADVERSARIAL_PATTERNS: List[Tuple[re.Pattern[str], str]] = [
     (re.compile(r"\bos\.system\s*\("), "Llamada insegura os.system() detectada"),
 ]
 
+
 def evaluate_diff(diff_content: str) -> str:
     """Ejecuta una evaluación adversaria estática y de modelo sobre el diff recibido."""
     for pattern, description in ADVERSARIAL_PATTERNS:

@@ -3,6 +3,7 @@
 import unittest
 from cortex.tts_harness import dispatch_tts_harness, TTSHarnessState
 
+
 class TestTtsKernel(unittest.TestCase):
     def test_tts_coverage(self) -> None:
         vec = TTSHarnessState()
@@ -15,6 +16,7 @@ class TestTtsKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Tts Primitives.")
+
 
 if __name__ == "__main__":
     unittest.main()

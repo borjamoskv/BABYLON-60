@@ -10,6 +10,7 @@ import os
 import subprocess
 from typing import Any, Dict, Optional
 
+
 class ClaudeCodeBridge:
     """Transductor C5-REAL para orquestación síncrona/asíncrona con Claude Code CLI."""
 
@@ -112,6 +113,7 @@ class ClaudeCodeBridge:
                 "fallback_required": True,
             }
 
+
 def main() -> None:
     bridge = ClaudeCodeBridge()
     available = bridge.is_available()
@@ -120,6 +122,7 @@ def main() -> None:
         res = bridge.query("Ping test - respond status ok")
         print(f"[CLAUDE-BRIDGE RESULT] Status: {res.get('status')}")
         print(f"[CLAUDE-BRIDGE DETAILS] {res}")
+
 
 if __name__ == "__main__":
     main()

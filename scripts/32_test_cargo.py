@@ -12,6 +12,7 @@ import time
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+
 def run_test(name: str, manifest_path: str) -> bool:
     print(f"🧪 Running cargo test on {name}...")
     cmd = ["cargo", "test", "--manifest-path", manifest_path]
@@ -23,6 +24,7 @@ def run_test(name: str, manifest_path: str) -> bool:
     except subprocess.CalledProcessError as e:
         print(f"❌ cargo test failed on {name} (exit code {e.returncode})")
         return False
+
 
 def main() -> None:
     start_time = time.perf_counter()
@@ -40,6 +42,7 @@ def main() -> None:
     else:
         print(f"❌ Pruebas de Rust fallaron en {elapsed:.4f}s.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

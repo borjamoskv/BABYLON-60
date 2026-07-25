@@ -4,6 +4,7 @@ import re
 import sys
 from typing import Dict, Any, List
 
+
 def get_process_memory_map(pid: int) -> List[Dict[str, Any]]:
     """
     [C5-REAL] Extrae y filtra el mapa de memoria del proceso en macOS.
@@ -51,6 +52,7 @@ def get_process_memory_map(pid: int) -> List[Dict[str, Any]]:
                 )
 
     return filtered_regions
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

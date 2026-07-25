@@ -10,6 +10,7 @@ if PROJECT_ROOT not in sys.path:
 
 from cortex.c6_harness.capture import generate_state_fingerprint
 
+
 def test_canonical_schema_hashing() -> None:
     print("Running C6.1 Canonical Schema Hashing Test...")
     parent_hash = "0000000000000000000000000000000000000000000000000000000000000000"
@@ -23,6 +24,7 @@ def test_canonical_schema_hashing() -> None:
 
     assert cp_a.state_hash == cp_b.state_hash, "Hash diverges based on layout! (Anergía)"
     print("✓ Canonical Schema Hashing: PASS")
+
 
 if __name__ == "__main__":
     test_canonical_schema_hashing()

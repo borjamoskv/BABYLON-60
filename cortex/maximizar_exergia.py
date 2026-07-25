@@ -22,6 +22,7 @@ IGNORE_DIRS = {
     "scratch",
 }
 
+
 def get_comment_syntax(filename: str) -> str | None:
     ext = os.path.splitext(filename)[1].lower()
     if ext in {".py", ".sh", ".toml", ".yaml", ".yml", ".rb"}:
@@ -34,6 +35,7 @@ def get_comment_syntax(filename: str) -> str | None:
         return "/*"
     return None
 
+
 def close_comment_syntax(filename: str) -> str:
     ext = os.path.splitext(filename)[1].lower()
     if ext in {".html", ".xml", ".md", ".vtt", ".srt"}:
@@ -41,6 +43,7 @@ def close_comment_syntax(filename: str) -> str:
     elif ext in {".css", ".scss", ".less"}:
         return "*/"
     return ""
+
 
 def maximize_exergy(filepath: str) -> bool:
     try:
@@ -68,6 +71,7 @@ def maximize_exergy(filepath: str) -> bool:
             f.write(new_content)
         return True
     return False
+
 
 def main() -> None:
     print("Iniciando Transducción C5-REAL (A->Z)...")
@@ -98,6 +102,7 @@ def main() -> None:
         print(f"Ledger Hash: {res.stdout.strip()}")
     else:
         print("Cero entropía detectada. Exergía al máximo.")
+
 
 if __name__ == "__main__":
     main()

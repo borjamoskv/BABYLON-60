@@ -22,14 +22,18 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 def fail_fast(msg: str) -> None:
     raise EpistemicHalt(f"[FATAL] {msg}")
 
+
 def sha3_256_hash(data: str) -> str:
     return hashlib.sha3_256(data.encode("utf-8")).hexdigest()
+
 
 def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
     """Compose a unified post_draft.md from the 6 experiment files."""
@@ -74,6 +78,7 @@ def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
     lines.append("- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)\n")
 
     return "\n".join(lines)
+
 
 def scaffold_experiment(experiment_name: str, root_dir: str) -> Path:
     lab_dir = Path(root_dir) / "cortex" / "laboratory" / experiment_name
@@ -187,6 +192,7 @@ python3 03_codigo.py
 
     return lab_dir
 
+
 def run_validator(root_dir: str) -> int:
     """Run the laboratory validator script."""
     validator = Path(root_dir) / "scripts" / "56_laboratory_validator.py"
@@ -203,6 +209,7 @@ def run_validator(root_dir: str) -> int:
     except OSError as e:
         print(f"[ERROR] Failed to run validator: {e}", file=sys.stderr)
         return 1
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Substack Laboratory Compiler v2.0")
@@ -227,6 +234,7 @@ def main() -> None:
         parser.error("experiment_name is required when not using --validate-only")
 
     scaffold_experiment(args.experiment_name, args.root)
+
 
 if __name__ == "__main__":
     main()

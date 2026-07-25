@@ -21,6 +21,7 @@ CHAOS_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_chaos_entropy.db")
 ECON_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_economics.db")
 SUBSTANCE_DB = os.path.join(BASE_DIR, "ledgers", "escohotado_substance.db")
 
+
 def query_chaos_db() -> List[Dict[str, Any]]:
     if not os.path.exists(CHAOS_DB):
         return []
@@ -33,6 +34,7 @@ def query_chaos_db() -> List[Dict[str, Any]]:
     rows = [dict(r) for r in cursor.fetchall()]
     conn.close()
     return rows
+
 
 def query_econ_db() -> List[Dict[str, Any]]:
     if not os.path.exists(ECON_DB):
@@ -47,6 +49,7 @@ def query_econ_db() -> List[Dict[str, Any]]:
     conn.close()
     return rows
 
+
 def query_substance_db() -> List[Dict[str, Any]]:
     if not os.path.exists(SUBSTANCE_DB):
         return []
@@ -59,6 +62,7 @@ def query_substance_db() -> List[Dict[str, Any]]:
     rows = [dict(r) for r in cursor.fetchall()]
     conn.close()
     return rows
+
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="CORTEX Escohotado Unified CLI Transducer (C5-REAL)")
@@ -105,6 +109,7 @@ def main() -> None:
                     f"  Φ_pot={row['potentiality_phi']:.2f} | Φ_act={row['actuality_phi']:.2f} | Dual={row['dualism_index']:.2f} -> Exergy={row['substance_exergy_density']:.4f} | {row['ontological_regime']}"
                 )
         print("================================================================================")
+
 
 if __name__ == "__main__":
     main()

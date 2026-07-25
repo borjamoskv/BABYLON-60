@@ -6,6 +6,7 @@ Unit tests for C5-REAL CESL 1.0 Compiler.
 from pathlib import Path
 from cortex.cesl.compiler import CESLCompiler
 
+
 def test_cesl_compiler_end_to_end() -> None:
     spec_path = Path(__file__).parent / "kernel_v1.cesl"
     assert spec_path.exists()

@@ -6,6 +6,7 @@ Purges expired context, merges isomorphic knowledge nodes, invalidates unverifie
 
 from cortex.os.memory import MemoryHierarchy, MemoryTier
 
+
 class EpistemicGarbageCollector:
     def __init__(self, memory: MemoryHierarchy) -> None:
         self.memory = memory

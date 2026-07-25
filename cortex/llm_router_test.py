@@ -5,6 +5,7 @@ import json
 from typing import Any
 from cortex.llm_router import parse_yaml_routes, C5LLMRouter
 
+
 class TestLLMRouter(unittest.TestCase):
     def test_parse_yaml_routes(self) -> None:
         # Validar el parseador sin dependencias contra el archivo real de la ontología
@@ -24,6 +25,7 @@ class TestLLMRouter(unittest.TestCase):
         # deepseek-r1:8b es un modelo local registrado
         res = router.dispatch_inference("Test prompt", "deepseek-r1:8b")
         self.assertEqual(res, "Respuesta simulada de Ollama")
+
 
 if __name__ == "__main__":
     unittest.main()

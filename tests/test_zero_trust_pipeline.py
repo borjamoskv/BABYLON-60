@@ -3,9 +3,7 @@
 
 import json
 import subprocess
-import pytest
 from pathlib import Path
-from scripts.runtime_wrapper import main as runtime_main
 from scripts.verify_receipt import sha256_bytes
 
 
@@ -16,13 +14,8 @@ def test_zero_trust_pipeline_end_to_end(tmp_path, monkeypatch):
         "version": "1.0",
         "declared_targets": [target_file],
         "actions": [
-            {
-                "type": "write_file",
-                "path": target_file,
-                "mode": "write",
-                "content": "C5-REAL Zero Trust Test\n"
-            }
-        ]
+            {"type": "write_file", "path": target_file, "mode": "write", "content": "C5-REAL Zero Trust Test\n"}
+        ],
     }
     plan_path = tmp_path / "test_plan.json"
     plan_path.write_text(json.dumps(plan_data), encoding="utf-8")
@@ -50,12 +43,7 @@ def test_zero_trust_pipeline_end_to_end(tmp_path, monkeypatch):
 
 
 def test_verify_receipt_tamper_detection(tmp_path):
-    receipt_data = {
-        "version": "1.0",
-        "run_id": "test_run",
-        "file_hashes": {},
-        "undeclared_mutations": []
-    }
+    receipt_data = {"version": "1.0", "run_id": "test_run", "file_hashes": {}, "undeclared_mutations": []}
     # Calculate valid self_hash
     receipt_bytes = json.dumps(receipt_data, sort_keys=True).encode("utf-8")
     receipt_data["self_hash"] = sha256_bytes(receipt_bytes)

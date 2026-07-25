@@ -8,6 +8,7 @@ from cortex.aem.effects import EffectProgram
 from cortex.aem.isa import CapabilityError, ExecutionError, Handle, InstructionFamily, IntegrityError
 from cortex.aem.machine import AbstractEffectMachine
 
+
 def test_cam5_step_function_and_families() -> None:
     machine = AbstractEffectMachine()
     machine.grant_agent_capabilities(
@@ -31,6 +32,7 @@ def test_cam5_step_function_and_families() -> None:
     assert len(read_effects) == 1
     assert read_params["result_val"] == "Minimal State Object"
 
+
 def test_cam5_capability_denial() -> None:
     machine = AbstractEffectMachine()
     # Read-only agent
@@ -40,6 +42,7 @@ def test_cam5_capability_denial() -> None:
 
     with pytest.raises(CapabilityError, match="lacks instruction family WRITE"):
         machine.step("agent_read", prog_write)
+
 
 def test_cam5_control_assert_and_extension() -> None:
     machine = AbstractEffectMachine()
@@ -55,6 +58,7 @@ def test_cam5_control_assert_and_extension() -> None:
     _, effects = machine.step("agent_ctrl", prog_ext)
     assert len(effects) == 1
     assert "cesl://ledger" in machine.loaded_extensions
+
 
 def test_cam5_mutate_and_release_ops() -> None:
     machine = AbstractEffectMachine()

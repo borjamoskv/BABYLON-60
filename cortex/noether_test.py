@@ -3,6 +3,7 @@
 import unittest
 from cortex.noether import dispatch_noether, NoetherStateVector
 
+
 class TestNoetherKernel(unittest.TestCase):
     def test_noether_coverage(self) -> None:
         vec = NoetherStateVector()
@@ -15,6 +16,7 @@ class TestNoetherKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Noether Primitives.")
+
 
 if __name__ == "__main__":
     unittest.main()

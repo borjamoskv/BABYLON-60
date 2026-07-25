@@ -20,6 +20,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
+
 def calculate_hardware_entropy() -> tuple[float, np.ndarray[Any, Any], np.ndarray[Any, Any]]:
     """Calculates thermodynamic system entropy S = -sum(p * ln(p)) based on CPU per-core loads."""
     cpu_pcts = psutil.cpu_percent(interval=0.5, percpu=True)
@@ -34,6 +35,7 @@ def calculate_hardware_entropy() -> tuple[float, np.ndarray[Any, Any], np.ndarra
 
     # Return entropy score and raw arrays
     return s_cpu, p_cpu, np.array([mem_frac, mem.free / mem.total, mem.active / mem.total])
+
 
 def generate_thermodynamic_wallpaper(output_path: str) -> None:
     print("[ULTRATHINK] Sampling physical hardware entropy...")
@@ -96,6 +98,7 @@ def generate_thermodynamic_wallpaper(output_path: str) -> None:
 
     print(f"[ULTRATHINK] Synthesis complete. Tensor mapped to: {output_path}")
 
+
 def set_mac_wallpaper(image_path: str) -> None:
     print("[ULTRATHINK] Assumming control of OS WindowServer via AppleScript...")
     script = f'''
@@ -108,6 +111,7 @@ def set_mac_wallpaper(image_path: str) -> None:
     '''
     subprocess.run(["osascript", "-e", script], check=True)
     print("[ULTRATHINK] Wallpaper physically injected.")
+
 
 if __name__ == "__main__":
     out_img = os.path.abspath(os.path.expanduser("/tmp/c5_thermo_wallpaper_ultrathink.png"))

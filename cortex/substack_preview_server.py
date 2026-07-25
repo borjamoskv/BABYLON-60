@@ -68,6 +68,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 </html>
 """
 
+
 def render_post_html(post_filename: str) -> str:
     filepath = ARCHIVE_DIR / post_filename
     if not filepath.exists():
@@ -88,6 +89,7 @@ def render_post_html(post_filename: str) -> str:
     html = re.sub(r"\[(.*?)\]\((.*?)\)", r'<a href="\2" target="_blank">\1</a>', html)
 
     return HTML_TEMPLATE.format(body_content=html)
+
 
 class PreviewHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
@@ -110,10 +112,12 @@ class PreviewHandler(http.server.SimpleHTTPRequestHandler):
         else:
             self.send_error(404, "Not Found")
 
+
 def run_server(port: int = 8085) -> None:
     with socketserver.TCPServer(("", port), PreviewHandler) as httpd:
         print(f"CORTEX Substack Preview Server running at http://localhost:{port}/")
         httpd.serve_forever()
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CORTEX Substack Preview Server")

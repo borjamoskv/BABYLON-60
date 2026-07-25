@@ -40,6 +40,7 @@ MODIFIERS = {
     9: "BFT_CONSENSUS",
 }
 
+
 class StateVector:
     def __init__(self) -> None:
         self.states = [0.0] * 64
@@ -48,12 +49,14 @@ class StateVector:
         self.norm_error = 0.0
         self.execution_count = 0
 
+
 def resolve_observer_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"OBS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
+
 
 def dispatch_state_observer(d: int, p: int, m: int, vec: StateVector) -> Tuple[int, str, float]:
     code, name = resolve_observer_identity(d, p, m)

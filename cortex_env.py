@@ -2,6 +2,7 @@
 import os
 import sys
 
+
 def get_bft_key() -> str:
     """
     Recupera CORTEX_BFT_KEY del entorno en tiempo de ejecución.

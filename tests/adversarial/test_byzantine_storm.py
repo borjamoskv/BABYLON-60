@@ -18,6 +18,7 @@ from cortex.c6_harness.auditor import generate_attestation
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "byzantine_test.db")
 
+
 def init_ledger() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     if os.path.exists(DB_PATH):
@@ -45,6 +46,7 @@ def init_ledger() -> None:
     """)
     conn.commit()
     conn.close()
+
 
 def ledger_validator(tx: dict[str, Any]) -> None:
     """The strict C5-REAL core validator."""
@@ -89,6 +91,7 @@ def ledger_validator(tx: dict[str, Any]) -> None:
     finally:
         conn.close()
 
+
 def byzantine_worker(attack_type: str, count: int) -> None:
     """An isolated worker aggressively injecting malicious payload."""
     for i in range(count):
@@ -101,6 +104,7 @@ def byzantine_worker(attack_type: str, count: int) -> None:
             tx["nonce_collision"] = True
 
         ledger_validator(tx)
+
 
 def audit_byzantine_results() -> ByzantineResult:
     conn = sqlite3.connect(DB_PATH)
@@ -123,6 +127,7 @@ def audit_byzantine_results() -> ByzantineResult:
         attacks_isolated=rejected_count,
         history_preserved=rejected_count,
     )
+
 
 def run_c6_2_experiment() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -173,6 +178,7 @@ def run_c6_2_experiment() -> None:
     else:
         print("\n⚠ ANERGÍA DETECTADA: El Ledger ha sido comprometido o la historia borrada.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_c6_2_experiment()

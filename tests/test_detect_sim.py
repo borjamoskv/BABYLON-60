@@ -1,9 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 """Unit test suite for detect_sim.py synthetic artifact detector."""
 
-import json
-import pytest
-from pathlib import Path
 from scripts.detect_sim import scan_text, analyze_hex
 
 

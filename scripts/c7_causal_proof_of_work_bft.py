@@ -1,6 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 from typing import Any
 
+
 # ==========================================
 # C7.4 CAUSAL PROOF-OF-WORK FORMALIZATION
 # ==========================================
@@ -94,6 +95,7 @@ class CausalFitnessEngine:
 
         return {"fitness": fitness, "PP": pp_val, "RC": rc_val, "CD": cd_val}
 
+
 # ==========================================
 # C7.4 / C7.5 TOURNAMENT VECTORS
 # ==========================================
@@ -106,14 +108,18 @@ def generate_honest_history() -> Any:
         chain.append({"payload": f"Anomalía Explicada {i}"})
     return chain
 
+
 def generate_compressed_history() -> Any:
     return [{"payload": "Genesis"}, {"payload": "Unexplained State Finalization"}]
+
 
 def generate_predictive_spammer() -> Any:
     return [{"payload": f"Trivial Prediction {i}"} for i in range(100)]
 
+
 def generate_patch_accumulator() -> Any:
     return [{"payload": f"Patch para error {i}"} for i in range(100)]
+
 
 def generate_adversarial_evolver_c75() -> Any:
     # C7.5 ADVERSARIAL FITNESS INVERSION
@@ -125,6 +131,7 @@ def generate_adversarial_evolver_c75() -> Any:
     for i in range(15):
         chain.append({"payload": f"Anomalía Explicada Fake {i}"})
     return chain
+
 
 def run_c7_4_tournament() -> None:
     engine = CausalFitnessEngine()
@@ -191,6 +198,7 @@ def run_c7_4_tournament() -> None:
         print("    depende de justificar POR QUÉ merece sobrevivir mediante trabajo causal.")
     else:
         print(f"[-] FALLIDO: El atacante {winner[0]} hackeó el mecanismo de legitimidad.")
+
 
 if __name__ == "__main__":
     run_c7_4_tournament()

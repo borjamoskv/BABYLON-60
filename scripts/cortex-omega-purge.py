@@ -19,6 +19,7 @@ if not workspace_dirs or workspace_dirs == [""]:
     workspace_dirs = [os.getcwd()]
 TARGET_DIRS: List[str] = workspace_dirs
 
+
 def find_git_repos(base_dirs: List[str]) -> List[str]:
     repos: List[str] = []
     for base in base_dirs:
@@ -29,6 +30,7 @@ def find_git_repos(base_dirs: List[str]) -> List[str]:
                 repos.append(root)
                 dirs.remove(".git")  # No bajar más allá del repo
     return repos
+
 
 def obliterate_repo_entropy(repo_path: str) -> int:
     print(f"[OMEGA-PURGE] Iniciando colapso entrópico en: {repo_path}")
@@ -103,6 +105,7 @@ def obliterate_repo_entropy(repo_path: str) -> int:
 
     return purged_bytes
 
+
 def main() -> None:
     print("=== INICIANDO OBLITERATOR OMEGA NODE: PURGA DE ENTROPÍA MASIVA ===")
     repos = find_git_repos(TARGET_DIRS)
@@ -140,6 +143,7 @@ Confidence: C5-REAL"""
         f.write(report)
 
     os.replace(tmp_path, final_path)
+
 
 if __name__ == "__main__":
     main()

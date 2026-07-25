@@ -25,8 +25,10 @@ try:
 except ImportError:
     strike_rs = None
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 __all__ = [
     "BFTNode",
@@ -39,6 +41,7 @@ __all__ = [
 
 # DB Concurrency & Persist Configurations (R10)
 DB_PATH = ".cortex/cortex.db"
+
 
 def init_bft_database() -> None:
     """Initializes SQLite Master Ledger with WAL, busy_timeout, and write protection triggers (R10, Ω11)."""
@@ -80,6 +83,7 @@ def init_bft_database() -> None:
 
     conn.commit()
     conn.close()
+
 
 class BFTNode:
     """Represents a virtual Byzantine replica node holding its own Rust-backed states."""
@@ -158,6 +162,7 @@ class BFTNode:
         self.arm64_re_matrix.amfi_enforcement_level = source_node.arm64_re_matrix.amfi_enforcement_level
 
         self.is_healthy = True
+
 
 class BFTOrchestrator:
     """Asynchronous Orchestrator confined to queue routing and BFT Consensus Verification (R10, Ω11)."""

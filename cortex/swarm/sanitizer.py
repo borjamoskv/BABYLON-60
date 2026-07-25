@@ -20,6 +20,7 @@ MALICIOUS_PATTERNS: List[re.Pattern[str]] = [
     re.compile(r"\x1b\[[0-9;]*[mGKH]", re.IGNORECASE),  # Escape sequences ANSI
 ]
 
+
 class ZeroTrustSanitizer:
     """Sanitizador determinista multivector para insumos de usuarios externos."""
 

@@ -19,6 +19,7 @@ from typing import Dict, List, Any
 
 DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db")
 
+
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path, timeout=5.0)
@@ -39,6 +40,7 @@ def init_db(db_path: str = DB_PATH) -> None:
             );
         """)
     conn.close()
+
 
 def compute_substance_state(potentiality: float, actuality: float, dualism_separation: float) -> Dict[str, Any]:
     """
@@ -75,6 +77,7 @@ def compute_substance_state(potentiality: float, actuality: float, dualism_separ
         "ontological_regime": regime,
         "cortex_taint": f"borjamoskv:escohotado_substance:{cortex_taint[:16]}",
     }
+
 
 def run_substance_grid(
     pot_range: List[float],
@@ -114,6 +117,7 @@ def run_substance_grid(
 
     conn.close()
     return results
+
 
 if __name__ == "__main__":
     p_grid = [0.2, 0.8, 1.0]

@@ -40,6 +40,7 @@ MODIFIERS = {
     9: "EPIDEMIC_PURGE",
 }
 
+
 class TTSHarnessState:
     def __init__(self) -> None:
         self.mcts_budget_tokens = [0] * 64
@@ -49,12 +50,14 @@ class TTSHarnessState:
         self.pruning_rate = [0.0] * 64
         self.execution_count = 0
 
+
 def resolve_tts_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"TTS-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
+
 
 def dispatch_tts_harness(d: int, p: int, m: int, vec: TTSHarnessState) -> Tuple[int, str, List[float]]:
     code, name = resolve_tts_identity(d, p, m)

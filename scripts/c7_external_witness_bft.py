@@ -4,6 +4,7 @@ import hashlib
 import json
 import os
 
+
 # ==========================================
 # ENVIRONMENT A: THE PROVER (Internal State)
 # ==========================================
@@ -42,6 +43,7 @@ class Prover:
             json.dump(attestation, f, indent=4)
 
         return proof_path
+
 
 # ==========================================
 # ENVIRONMENT B: EXTERNAL WITNESS
@@ -94,6 +96,7 @@ class ExternalWitness:
 
         return True, "Attestation valid. Cryptographic history independently proven."
 
+
 # ==========================================
 # ORCHESTRATOR
 # ==========================================
@@ -131,6 +134,7 @@ def run_c7_1() -> None:
         )
     else:
         print("\n[-] C7.1 FALLIDO: El testigo rechazó la prueba.")
+
 
 if __name__ == "__main__":
     run_c7_1()

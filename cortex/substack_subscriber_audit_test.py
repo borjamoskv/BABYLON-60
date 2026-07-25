@@ -13,6 +13,7 @@ from cortex.substack_subscriber_audit import (
     SubstackSubscriberAuditor,
 )
 
+
 class TestSubstackSubscriberAuditor(unittest.TestCase):
     def setUp(self) -> None:
         self.test_dir = tempfile.TemporaryDirectory()
@@ -96,6 +97,7 @@ class TestSubstackSubscriberAuditor(unittest.TestCase):
         with open(exported_files["tier1_c5real_core"], "r", encoding="utf-8") as f:
             lines = [line.strip() for line in f.readlines()]
             self.assertEqual(len(lines), 3)  # Header + 2 VIP records
+
 
 if __name__ == "__main__":
     unittest.main()
