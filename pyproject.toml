@@ -130,3 +130,10 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = ["babylon60.extensions.*"]
 follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+module = ["tests.*", "scripts.*", "apex_trials.*", "babylon60_ide.*", "tests.apex.*"]
+disallow_untyped_defs = false
+disallow_untyped_decorators = false
+check_untyped_defs = false
+
