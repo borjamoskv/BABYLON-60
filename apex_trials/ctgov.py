@@ -15,6 +15,7 @@ ADMINISTRATIVE_MODULES: frozenset[str] = frozenset({'Study Status', 'Contacts/Lo
 RESULTS_MODULES: frozenset[str] = frozenset({'Baseline Characteristics', 'Outcome Measures (Results)', 'Participant Flow', 'Adverse Events', 'Limitations and Caveats'})
 
 class CtGovError(RuntimeError):
+    pass
 
 @dataclass(frozen=True)
 class HttpCache:

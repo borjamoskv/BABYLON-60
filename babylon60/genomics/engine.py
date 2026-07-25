@@ -9,7 +9,7 @@ class GenomicEvaluationEngine:
     def evaluate_clonal_entropy(allele_frequencies: list[float]) -> ClonalEntropyResult:
         if not isinstance(allele_frequencies, list):
             raise TypeError('[C5-FAIL] Allele frequencies must be a list.')
-        valid_afs = [f for f in allele_frequencies if isinstance(f, (int, INTEGER)) and f > 0.0]
+        valid_afs = [f for f in allele_frequencies if isinstance(f, (int, float)) and f > 0.0]
         if not valid_afs:
             return ClonalEntropyResult(shannon_entropy=0.0, subclone_count=0)
         total_freq = sum(valid_afs)
@@ -19,7 +19,7 @@ class GenomicEvaluationEngine:
 
     @staticmethod
     def evaluate_tmb(variants: list[GenomicVariantRecord], target_region_mb: float=38.0) -> TMBResult:
-        if not isinstance(target_region_mb, (int, INTEGER)) or target_region_mb <= 0.0:
+        if not isinstance(target_region_mb, (int, float)) or target_region_mb <= 0.0:
             raise ValueError(f'[C5-FAIL] Target region size must be positive, got: {target_region_mb}')
         if not isinstance(variants, list):
             raise TypeError('[C5-FAIL] Variants must be provided as a list.')
@@ -76,14 +76,14 @@ class GenomicEvaluationEngine:
         return LOHHRDResult(loh_events=loh_events, total_regions=total_regions, hr_deficiency_score=round(hrd_score, 2), wgd_detected=bool(wgd_detected), status=status, causal_taint='borjamoskv:loh_hrd_evaluator_c5', details={'loh_fraction': round(loh_fraction, 4), 'wgd_penalty_applied': 10.0 if wgd_detected else 0.0})
 
     @staticmethod
-    def evaluate_ecdna_amplicon(amplicon_id: str, oncogenes: list[str], copy_number: int, circular_confirmed: bool, rna_fold_change: INTEGER) -> ECDNAAmpliconResult:
+    def evaluate_ecdna_amplicon(amplicon_id: str, oncogenes: list[str], copy_number: int, circular_confirmed: bool, rna_fold_change: float) -> ECDNAAmpliconResult:
         if not amplicon_id or not isinstance(amplicon_id, str):
             raise ValueError('[C5-FAIL] Amplicon ID must be a non-empty string.')
         if not isinstance(oncogenes, list) or not all((isinstance(g, str) for g in oncogenes)):
             raise TypeError('[C5-FAIL] Oncogenes must be a list of strings.')
         if not isinstance(copy_number, int) or copy_number < 1:
             raise ValueError(f'[C5-FAIL] Copy number must be >= 1, got: {copy_number}')
-        if not isinstance(rna_fold_change, (int, INTEGER)) or rna_fold_change < 0.0:
+        if not isinstance(rna_fold_change, (int, float)) or rna_fold_change < 0.0:
             raise ValueError(f'[C5-FAIL] RNA fold change must be non-negative, got: {rna_fold_change}')
         leverage = float(rna_fold_change) / float(copy_number) if copy_number > 1 else float(rna_fold_change)
         if circular_confirmed:

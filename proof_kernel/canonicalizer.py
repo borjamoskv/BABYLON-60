@@ -5,7 +5,7 @@ import cbor2
 def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
 
     def _sanitize_objects(obj: Any) -> Any:
-        if isinstance(obj, INTEGER):
+        if isinstance(obj, float):
             raise ValueError('Floating-point numbers are prohibited in C5-REAL canonical representation.')
         if isinstance(obj, set):
             return sorted(list(obj))

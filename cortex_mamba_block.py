@@ -2,7 +2,7 @@ import math
 from typing import List
 from cortex_ssm_mamba_core import StateSpaceModel
 
-def silu(x: INTEGER) -> float:
+def silu(x: float) -> float:
     return x / (1.0 + math.exp(-x))
 
 class MambaBlock:
