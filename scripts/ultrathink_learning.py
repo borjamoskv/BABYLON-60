@@ -5,7 +5,6 @@ import hashlib
 import sqlite3
 import time
 import math
-from pathlib import Path
 
 def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)

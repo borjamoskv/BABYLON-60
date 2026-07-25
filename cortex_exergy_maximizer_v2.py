@@ -1,7 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 import os
 import subprocess
-import glob
 
 def maximize_exergy():
     print("Initiating C5-REAL AST Collapse Phase 2...")
