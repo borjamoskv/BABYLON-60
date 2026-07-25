@@ -75,6 +75,7 @@ apex = [
 [project.scripts]
 apex = "apex_trials.cli:main"
 cortex-bridge = "babylon60.cli.bridge:main"
+cortex-cmd = "babylon60.cli.commands:main"
 cortex-onco = "babylon60.cli.onco_transducer:main"
 cortex-attest = "babylon60.cli.llm_attest:main"
 cortex-char-attest = "babylon60.cli.attest_character_count:main"
