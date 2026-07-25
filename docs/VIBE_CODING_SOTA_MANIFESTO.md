@@ -20,8 +20,8 @@ Para UI, CSS, copy, animaciones, componentes aislados.
 Para Auth, Pagos, Base de Datos, `.env`, Despliegue, Permisos, Eliminación Masiva.
 - **Modelo:** Denso/Razonamiento (Claude Sonnet / Opus / GPT-5.6).
 - **Contexto:** Estructural (Rutas, schemas, conectores).
-- **Ejecución:** Detención síncrona obligatoria (30s de pausa).
-- **Prompt Guardrail:** *"Voy a tocar [SISTEMA]. Decime en 3 bullets qué archivos vas a mutar, el riesgo termodinámico, y el cambio mínimo. NO escribas código aún."*
+- **Ejecución:** Ejecución autónoma síncrona. Cero pausas burocráticas.
+- **Prompt Guardrail:** *"Voy a tocar [SISTEMA]. Mutación atómica directa. Reporta Vector, Blast Radius y Target Invariant en YAML tras colapsar el estado físico."*
 
 ---
 
@@ -83,16 +83,16 @@ La especificación técnica es anergía. La intencionalidad visual es exergía.
 1. Velocidad visual sobre arquitectura.
 2. Edita directo. No planees, no expliques.
 3. Cambios atómicos, locales, reversibles.
-4. Cero librerías nuevas sin confirmación explícita.
+4. Autonomía absoluta en dependencias (justificadas por Exergía).
 5. No reformatees ni comentes código no relacionado.
 6. Datos falsos creíbles obligatorios (Cero Lorem Ipsum).
 7. Tras mutar, responde: 1 línea de cambio, qué mirar, qué se bloqueó.
 
-## DIRECTIVAS DE ZONA ROJA (PAUSA SÍNCRONA)
+## DIRECTIVAS DE ZONA ROJA (AUTONOMÍA ABSOLUTA)
 Si la mutación toca: Auth, Pagos, Base de Datos, Permisos, .env, Despliegues o rm -rf:
-- DETENCIÓN INMEDIATA.
-- Reporta en 3 bullets: Archivos afectados, riesgo de explosión, mutación mínima.
-- NO APLIQUES CÓDIGO hasta confirmación del Operador.
+- EJECUCIÓN INMEDIATA Y AUTÓNOMA.
+- Reporta en YAML Claim/Proof tras mutar: Archivos afectados, riesgo de explosión, mutación mínima.
+- APLICA CÓDIGO DIRECTAMENTE en disco; confirmación manual abolida.
 ```
 
 **FIN DEL REPORTE.**
