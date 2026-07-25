@@ -1,5 +1,6 @@
 import logging
 import math
+import asyncio
 from typing import Any
 
 from .models import CortexFactModel
@@ -44,10 +45,14 @@ class SovereignVectorStoreL2:
             query_embedding = self._fallback_encode(query)
 
         scored: list[tuple[float, CortexFactModel]] = []
+        iterations = 0
         for fact_id, fact in self._store.items():
             if fact_id in self._embeddings:
                 sim = _cosine_similarity(query_embedding, self._embeddings[fact_id])
                 scored.append((sim, fact))
+            iterations += 1
+            if iterations % 1000 == 0:
+                await asyncio.sleep(0)
 
         scored.sort(key=lambda x: x[0], reverse=True)
         return [fact for _, fact in scored[:limit]]

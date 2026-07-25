@@ -41,10 +41,14 @@ class GraphLedger:
             raise ValueError(f"Fail-fast: head_id {head_id} missing from ledger.")
         path: list[StateNode] = []
         curr_id: str = head_id
+        depth = 0
         while curr_id != self.genesis_id:
+            if depth > 10000:
+                raise RuntimeError("FAIL-FAST: Graph depth exceeded max bounds (O(N) starvation protection)")
             node_data = self.crdt.get(curr_id)
             node = StateNode(**node_data)
             path.append(node)
             curr_id = node.parent_id
+            depth += 1
         path.reverse()
         return path

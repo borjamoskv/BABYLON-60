@@ -256,7 +256,7 @@ class BFTLedgerActor:
             await db.close()
 
     async def _worker(self) -> None:
-        self._start_time = time.time()
+        self._start_time = time.time_ns()
         db = await babylon60.database.core.connect(self._db_path)
         try:
             await db.create_function("c5_compute_hash", 12, _compute_entry_hash_wrapper, deterministic=True)
@@ -282,7 +282,7 @@ class BFTLedgerActor:
             await db.close()
 
     def get_throughput(self) -> float:
-        elapsed = time.time() - self._start_time
+        elapsed = (time.time_ns() - self._start_time) / 1_000_000_000.0
         if elapsed > 0:
             return self._events_processed / elapsed
         return 0.0
@@ -347,7 +347,7 @@ class BFTLedgerActor:
         if not event.cortex_taint or not isinstance(event.cortex_taint, str):
             raise ValueError("INV_BFT_03: cortex_taint must be a non-empty string representing the causal trace")
         payload_json = _canonical_json(event.payload)
-        created_at = event.created_at or int(time.time() * 1000)
+        created_at = event.created_at or (time.time_ns() // 1_000_000)
         idempotent_key = (
             f"{event.source_db}\x1f{event.source_table}\x1f{event.source_pk}\x1f{payload_json}\x1f{event.cortex_taint}"
         )

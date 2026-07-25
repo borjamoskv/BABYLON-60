@@ -63,7 +63,7 @@ class EnterpriseAPIKeyManager:
         data = keys[key_id]
         if not data.get("is_active", False):
             return None
-        if time.time() > data.get("expires_at", 0):
+        if int(time.time()) > data.get("expires_at", 0):
             return None
         return APIKeyMetaData(
             key_id=key_id,
