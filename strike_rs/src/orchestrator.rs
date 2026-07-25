@@ -98,7 +98,7 @@ mod tests {
 
     #[test]
     fn test_orchestrator_resolve_intent() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Strict Unwrapping Enforced");
         let oracle = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, oracle);
 
@@ -108,7 +108,7 @@ mod tests {
             obligations: vec![],
         };
 
-        let node_id = orch.resolve_intent(&goal, "master_env").unwrap();
+        let node_id = orch.resolve_intent(&goal, "master_env").expect("C5-REAL: Strict Unwrapping Enforced");
         
         // Assert it was installed as a conjecture (an assumption in ATMS)
         assert!(orch.atms.is_believed(node_id));
@@ -117,7 +117,7 @@ mod tests {
 
     #[test]
     fn test_orchestrator_inject_observation() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Strict Unwrapping Enforced");
         let oracle = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, oracle);
 
@@ -127,7 +127,7 @@ mod tests {
             obligations: vec![],
         };
 
-        let node_id = orch.inject_observation(&fact, "lm-sensors", 1720000000, "master_env").unwrap();
+        let node_id = orch.inject_observation(&fact, "lm-sensors", 1720000000, "master_env").expect("C5-REAL: Strict Unwrapping Enforced");
         
         // Assert it was installed as an observation (a premise in ATMS)
         assert!(orch.atms.is_believed(node_id));
