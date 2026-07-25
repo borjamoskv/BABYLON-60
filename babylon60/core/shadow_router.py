@@ -40,7 +40,7 @@ class ShadowRouter:
             reset_timeout=self.config.circuit_breaker_reset_seconds
         )
         self.rate_limiter = RateLimiter(rate_limit_rpm=self.config.rate_limit_rpm)
-        self._consumer_task = asyncio.create_task(self._consume_shadow_queue())
+        self._consumer_task = None
 
     async def _consume_shadow_queue(self) -> None:
         while True:
@@ -51,7 +51,7 @@ class ShadowRouter:
                 self.shadow_queue.task_done()
             except asyncio.CancelledError:
                 break
-            except Exception as e:
+            except asyncio.TimeoutError as e:
                 # log or ignore
                 pass
 
@@ -95,11 +95,13 @@ class ShadowRouter:
             self.circuit_breaker.record_success()
             
             return {'status': 'success', 'mode': 'simulation', 'ttft_ms': ttft_ms, 'total_latency_ms': total_latency_ms, 'input_tokens': 100, 'output_tokens': 50, 'cost_microusd': 4200, 'fallback_used': False, 'response_commitment': self._commit(b'response|' + prompt.encode('utf-8')), 'provider_receipt_hash': None}
-        except Exception:
+        except asyncio.CancelledError:
             self.circuit_breaker.record_failure()
             raise
 
     async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+        if self._consumer_task is None:
+            self._consumer_task = asyncio.create_task(self._consume_shadow_queue())
         request_id = f'req_{secrets.token_hex(8)}'
         candidate_set = sorted([self.config.primary_model, *self.config.shadow_models])
         decision_payload = {'request_commitment': self._commit(b'request|' + prompt.encode('utf-8')), 'policy_id': self.config.policy_id, 'policy_hash': self._sha256_of(self.config.policy_id.encode('utf-8')), 'candidate_set_hash': self._sha256_of(json.dumps(candidate_set, separators=(',', ':')).encode('utf-8')), 'mode': 'simulation', 'selected_route': {'provider': 'provider-x', 'model_alias': 'gemini-2.0-flash', 'model_version': 'gemini-2.0-flash-2026-07-01', 'region': 'eu-west'}, 'predictions': {'quality_lcb_basis_points': 8400, 'ttft_p95_ms': 3400, 'expected_cost_microusd': 4200, 'failure_probability_basis_points': 60}, 'selection_propensity_basis_points': 9200, 'route_confidence_basis_points': 8300, 'shadow_eligible': self._check_shadow_eligibility(context)}

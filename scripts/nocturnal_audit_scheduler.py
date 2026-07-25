@@ -29,19 +29,19 @@ def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
     print("==================================================")
 
     # Plane 1: Invariant Auto-alignment
-    align_ok = run_cmd(".venv/bin/python scripts/autodetect_invariants.py")
+    align_ok = run_cmd(f"{sys.executable} scripts/autodetect_invariants.py")
 
     # Plane 2: Memory Vault Synchronization
-    sync_ok = run_cmd(".venv/bin/python scripts/sync_vault_uuids.py")
+    sync_ok = run_cmd(f"{sys.executable} scripts/sync_vault_uuids.py")
 
     # Plane 3: GELABP Exergy Matrix Evaluation
-    exergy_ok = run_cmd(".venv/bin/python scripts/exergy_optimizer_agent.py")
+    exergy_ok = run_cmd(f"{sys.executable} scripts/exergy_optimizer_agent.py")
 
     # Plane 4: Complete Pytest Validation
-    pytest_ok = run_cmd(".venv/bin/pytest -v tests/ -k 'not test_nocturnal_audit_scheduler'")
+    pytest_ok = run_cmd(f"{sys.executable} -m pytest -v tests/ -k 'not test_nocturnal_audit_scheduler'")
 
     # Plane 5: Secret Swarm Audit
-    secret_ok = run_cmd(".venv/bin/python scripts/secret_swarm_auditor.py")
+    secret_ok = run_cmd(f"{sys.executable} scripts/secret_swarm_auditor.py")
 
     status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok and secret_ok) else "FAILED"
     
