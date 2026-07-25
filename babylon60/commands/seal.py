@@ -26,12 +26,12 @@ def run_seal(version_tag: str = "v1.0.0") -> None:
             subprocess.run(["sqlite3", db, "PRAGMA wal_checkpoint(TRUNCATE);"], check=False)
             
     # 2. Exergy Evaluation (INV_C5_14)
-    logger.info("Evaluating GELABP Exergy Matrix (Target: >= 700/1000)...")
+    logger.info("Evaluating GELABP Exergy Matrix (Target: >= 950/1000)...")
     exergy_script = "/Users/borjafernandezangulo/30_BABYLON-60/scripts/exergy_optimizer_agent.py"
     if os.path.exists(exergy_script):
         res = subprocess.run(["python3", exergy_script], check=False)
         if res.returncode != 0:
-            logger.error("FAIL-FAST: Exergy score < 700. Seal aborted.")
+            logger.error("FAIL-FAST: Exergy score < 950. Seal aborted.")
             return
             
     # 3. ZK Validation (Mocked)
