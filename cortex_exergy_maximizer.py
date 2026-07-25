@@ -13,14 +13,15 @@ def maximize_exergy():
     # Rust Exergy
     if os.path.exists("strike-rs"):
         subprocess.run(
-            ["cargo", "clippy", "--fix", "--allow-dirty", "--allow-no-vcs-quiet", "--workspace"],
+            ["cargo", "clippy", "--fix", "--allow-dirty", "--allow-no-vcs", "--workspace"],
             cwd="strike-rs",
             check=False,
         )
         subprocess.run(["cargo", "fmt", "--all"], cwd="strike-rs", check=False)
 
     # Frontend Exergy (TypeScript/React)
-    subprocess.run(["npm", "run", "lint", "--", "--fix"], check=False)
+    if os.path.exists("package.json"):
+        subprocess.run(["npm", "run", "lint", "--if-present", "--", "--fix"], check=False)
 
     # Git Sentinel (R4)
     subprocess.run(["git", "add", "."])
