@@ -21,7 +21,6 @@ import shutil
 import signal
 import sqlite3
 import subprocess
-import sys
 import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
@@ -68,15 +67,15 @@ def write_purge_to_ledger(payload: str, agent_id: str = "landauer_purge_c5") -> 
 
         cursor.execute("SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1")
         row = cursor.fetchone()
-        if row:
+        if row and row[0] is not None:
             prev_hash = row[0]
-            last_lamport = row[1]
+            last_lamport = row[1] if row[1] is not None else 0
         else:
             prev_hash = "0000000000000000000000000000000000000000000000000000000000000000"
             last_lamport = 0
 
-        new_lamport = last_lamport + 1
-        new_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
+        new_lamport = max((last_lamport or 0) + 1, int(time.time_ns()))
+        new_hash = hashlib.sha3_256((payload or "").encode("utf-8")).hexdigest()
         taint_signature = (
             f"CORTEX-TAINT:borjamoskv:landauer_purge:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{new_hash[:8]}"
         )
@@ -104,6 +103,13 @@ def audit_and_purge_orphans() -> Tuple[int, List[str]]:
     purged_count = 0
     payload_log = []
 
+    real_root = os.path.realpath(PROJECT_ROOT)
+    system_exclusions = (
+        "/system/", "/usr/libexec/", "/usr/sbin/", ".appex", ".app/",
+        "launchd", "windowserver", "dock", "finder", "kernel_task",
+        "/library/frameworks", "/system/library"
+    )
+
     for line in lines:
         parts = line.split(maxsplit=3)
         if len(parts) < 4:
@@ -114,6 +120,17 @@ def audit_and_purge_orphans() -> Tuple[int, List[str]]:
             ppid = int(ppid_str)
             pcpu = float(pcpu_str)
         except ValueError:
+            continue
+
+        cmd_lower = command.lower()
+        if any(ex in cmd_lower for ex in system_exclusions):
+            continue
+
+        if PROJECT_ROOT not in command and real_root not in command and "Teorema-Robinson-Moskv" not in command:
+            continue
+
+        target_keywords = ("pytest", "benchmark", "test_", "30_test_pytest", "cortex_purge", "legion_purge", "tdah_orphan")
+        if not any(kw in cmd_lower for kw in target_keywords):
             continue
 
         if ppid == 1 and pcpu > 50.0:
@@ -214,7 +231,36 @@ def obliterate_repo_entropy(repo_path: str) -> int:
 
     return purged_bytes
 
+def is_purgeable_zero_operator(rel_path: str) -> bool:
+    """
+    Safeguard: Verifies that a path is strictly a disposable temporary file, cache, or build artifact,
+    and NEVER a valid source code file or inside source directories.
+    """
+    norm_path = os.path.normpath(rel_path)
+    parts = norm_path.split(os.sep)
+
+    protected_dirs = {"strike-rs", "src-tauri", "cortex", "scripts", "src", "axioms"}
+    if any(p in protected_dirs for p in parts):
+        return False
+
+    protected_exts = {".rs", ".py", ".ts", ".js", ".go", ".json"}
+    _, ext = os.path.splitext(norm_path)
+    if ext.lower() in protected_exts:
+        return False
+
+    is_temp_c5 = norm_path.startswith("/tmp/c5_") or "/tmp/c5_" in norm_path or "tmp/c5_" in norm_path
+    is_cache = ".pytest_cache" in parts or "__pycache__" in parts or norm_path.endswith(".pyc")
+    is_scratch_temp = norm_path.startswith("scratch/temp_") or "scratch/temp_" in norm_path or "/scratch/temp_" in norm_path
+
+    if is_temp_c5 or is_cache or is_scratch_temp:
+        return True
+
+    return False
+
 def _obliterate_node_file(abs_path: str, rel_path: str) -> bool:
+    if not is_purgeable_zero_operator(rel_path):
+        logger.warning(f"[SWARM NODE] BLOCKED PURGE OF PROTECTED FILE: {rel_path}")
+        return False
     try:
         os.remove(abs_path)
         logger.info(f"[SWARM NODE] PURGED: {rel_path}")

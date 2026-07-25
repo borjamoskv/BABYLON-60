@@ -49,7 +49,7 @@ class ThermodynamicState:
 try:
     import strike_rs  # type: ignore
 
-    RUST_ENGINE_AVAILABLE = True
+    RUST_ENGINE_AVAILABLE = hasattr(strike_rs, "RustCategoricalEngine")
 except ImportError:
     RUST_ENGINE_AVAILABLE = False
 
@@ -77,7 +77,11 @@ class ThermodynamicEntropyEngine:
             return 0.0
 
         if self.rust_engine is not None:
-            return float(self.rust_engine.compute_shannon_entropy_fast(probabilities))
+            try:
+                return float(self.rust_engine.compute_shannon_entropy_fast(probabilities))
+            except Exception as e:
+                logger.warning(f"Rust engine compute_shannon_entropy_fast failed, falling back to Python: {e}")
+                self.rust_engine = None
 
         total_p = sum(probabilities)
         if total_p <= 0.0:
@@ -96,10 +100,16 @@ class ThermodynamicEntropyEngine:
             raise ValueError("Distributions P and Q must be non-empty and of equal length.")
 
         if self.rust_engine is not None:
-            val = float(self.rust_engine.compute_kl_divergence_fast(p_dist, q_dist))
-            if math.isnan(val):
-                raise ValueError("Distribution sums must be strictly positive.")
-            return val
+            try:
+                val = float(self.rust_engine.compute_kl_divergence_fast(p_dist, q_dist))
+                if math.isnan(val):
+                    raise ValueError("Distribution sums must be strictly positive.")
+                return val
+            except ValueError:
+                raise
+            except Exception as e:
+                logger.warning(f"Rust engine compute_kl_divergence_fast failed, falling back to Python: {e}")
+                self.rust_engine = None
 
         sum_p = sum(p_dist)
         sum_q = sum(q_dist)
@@ -138,7 +148,11 @@ class ThermodynamicEntropyEngine:
         efficiency = max(0.0, min(1.0, 1.0 - (s_nats / s_max))) if s_max > 0 else 1.0
 
         if self.rust_engine is not None:
-            landauer_joules = float(self.rust_engine.compute_landauer_limit_joules_fast(s_bits, self.temperature))
+            try:
+                landauer_joules = float(self.rust_engine.compute_landauer_limit_joules_fast(s_bits, self.temperature))
+            except Exception as e:
+                logger.warning(f"Rust engine compute_landauer_limit_joules_fast failed, falling back to Python: {e}")
+                landauer_joules = s_bits * K_B * self.temperature * LN_2
         else:
             landauer_joules = s_bits * K_B * self.temperature * LN_2
 
