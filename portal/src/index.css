@@ -1,23 +1,23 @@
 /* C5-REAL EXERGY CERTIFIED */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap");
 
 :root {
-  --bg-core: #0A0A0A;
+  --bg-core: #0a0a0a;
   --bg-surface: #121212;
-  --bg-elevated: #1A1A1A;
+  --bg-elevated: #1a1a1a;
 
-  --accent-primary: #2B3BE5; /* Electric Indigo */
-  --accent-secondary: #1A1F4E; /* Dark Indigo */
+  --accent-primary: #2b3be5; /* Electric Indigo */
+  --accent-secondary: #1a1f4e; /* Dark Indigo */
 
-  --text-primary: #E8E8E8;
-  --text-secondary: #8B8B9E;
+  --text-primary: #e8e8e8;
+  --text-secondary: #8b8b9e;
 
-  --status-exergy: #00FF88; /* Neon Green */
-  --status-warning: #FFB800; /* Amber */
-  --status-error: #FF3366; /* Hot Pink */
+  --status-exergy: #00ff88; /* Neon Green */
+  --status-warning: #ffb800; /* Amber */
+  --status-error: #ff3366; /* Hot Pink */
 
-  --font-sans: 'Inter', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
   --border-subtle: rgba(255, 255, 255, 0.05);
   --border-glow: rgba(43, 59, 229, 0.3);
@@ -43,13 +43,21 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -74,14 +82,26 @@ code {
 
 /* Animations */
 @keyframes pulseGlow {
-  0% { box-shadow: 0 0 10px var(--border-glow); }
-  50% { box-shadow: 0 0 20px var(--accent-primary); }
-  100% { box-shadow: 0 0 10px var(--border-glow); }
+  0% {
+    box-shadow: 0 0 10px var(--border-glow);
+  }
+  50% {
+    box-shadow: 0 0 20px var(--accent-primary);
+  }
+  100% {
+    box-shadow: 0 0 10px var(--border-glow);
+  }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in {

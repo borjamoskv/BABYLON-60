@@ -1,6 +1,9 @@
 {
   "version": "1.0",
-  "declared_targets": ["cortex/hypervisor/collision.py", "tests/test_collision_hypervisor.py"],
+  "declared_targets": [
+    "cortex/hypervisor/collision.py",
+    "tests/test_collision_hypervisor.py"
+  ],
   "actions": [
     {
       "type": "run_python_script",

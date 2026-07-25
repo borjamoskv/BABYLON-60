@@ -1,8 +1,7 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
-
 # Original User Request
 
-## Initial Request — 2026-07-25T20:37:47Z
+## 2026-07-25T20:37:47Z
 
 # C5-REAL Exergy Mission — Draft
 

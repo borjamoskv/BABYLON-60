@@ -53,7 +53,8 @@
   cursor: pointer;
 }
 
-.nav-item:hover, .nav-item.active {
+.nav-item:hover,
+.nav-item.active {
   background: var(--accent-secondary);
   color: var(--text-primary);
 }
@@ -95,7 +96,7 @@
 .hero-title {
   font-size: 4rem;
   line-height: 1.1;
-  background: linear-gradient(to right, #FFF, #8B8B9E);
+  background: linear-gradient(to right, #fff, #8b8b9e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -119,7 +120,9 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .card:hover {
@@ -232,7 +235,7 @@
 
 .domain-badge {
   background: rgba(43, 59, 229, 0.15);
-  color: #929EF5;
+  color: #929ef5;
   padding: 0.2rem 0.6rem;
   border-radius: 4px;
   font-size: 0.8rem;

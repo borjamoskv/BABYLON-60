@@ -18,11 +18,13 @@
 **Enunciado:** En ecosistemas estocásticos de caja negra (VLOPs como YouTube, X), el panel de moderación L1 actúa como un filtro de **responsabilidad legal (falsación estricta)**, no como un regulador de **ruido cultural (Anergía)**.
 
 **Mecanismo:** El usuario asume que el sistema de reportes persigue la "Desinformación C4-SIM" (clickbait, polarización política), cuando matemáticamente el clasificador prioriza el $Engagement$ y sólo aplica el `drop()` frente a infracciones directas ($Inauthentic\ Content$ automatizado masivo, o Suplantación/Delito explícito).
-* Eficiencia Epistémica ($\eta_D$) de usar la moderación interna contra el ruido cultural: $\approx 2.0\%$.
+
+- Eficiencia Epistémica ($\eta_D$) de usar la moderación interna contra el ruido cultural: $\approx 2.0\%$.
 
 **Resolución Física (Ruta DSA):** La única intervención termodinámica válida para extraer el ruido tóxico persistente exige escalar la jerarquía causal.
+
 1. **Control Local (Cliente):** Filtros AST o purga de historial (bloqueo de nodos).
-2. **Control Institucional (DSA):** Delegrar el empuje de exergía a *Trusted Flaggers* o al mecanismo *Out-of-Court* (Appeals Centre Europe / CNMC), quienes poseen prioridad $O(1)$ en el pipeline de la VLOP.
+2. **Control Institucional (DSA):** Delegrar el empuje de exergía a _Trusted Flaggers_ o al mecanismo _Out-of-Court_ (Appeals Centre Europe / CNMC), quienes poseen prioridad $O(1)$ en el pipeline de la VLOP.
 
 ---
 

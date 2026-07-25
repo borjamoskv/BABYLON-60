@@ -54,3 +54,4 @@ Repository_State: FISR_v13.0
 Recorded_Hypothesis: "Adjudicación de Colapso CAM 6.0 -> BSP+Schneider+Abadi-Lamport y transición formal a FISR Compat(Ω)"
 Governance: C5-REAL
 ```
+$$

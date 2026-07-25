@@ -251456,18 +251456,16 @@ async function Uf(t, e, a) {
       i === "exists" && (i = "unknown");
       let s;
       try {
-        s = await t
-          .api("/$batch")
-          .post({
-            requests: o.map((m, g) => ({
-              id: String(g),
-              method: "POST",
-              url: `/me/messages/${encodeURIComponent(m.id)}/move`,
-              headers: { "Content-Type": "application/json", Prefer: Dt[1] },
-              ...(g > 0 ? { dependsOn: [String(g - 1)] } : {}),
-              body: { destinationId: a },
-            })),
-          });
+        s = await t.api("/$batch").post({
+          requests: o.map((m, g) => ({
+            id: String(g),
+            method: "POST",
+            url: `/me/messages/${encodeURIComponent(m.id)}/move`,
+            headers: { "Content-Type": "application/json", Prefer: Dt[1] },
+            ...(g > 0 ? { dependsOn: [String(g - 1)] } : {}),
+            body: { destinationId: a },
+          })),
+        });
       } catch (m) {
         let g = [...o, ...e.slice(n + L_)];
         if (xu(m) || f6e(m)) {
@@ -251609,16 +251607,14 @@ async function tya(t, e) {
   let a = { found: [], notFound: [] };
   for (let r = 0; r < e.length; r += Kba) {
     let i = e.slice(r, r + Kba),
-      n = await t
-        .api("/$batch")
-        .post({
-          requests: i.map((s, u) => ({
-            id: String(u),
-            method: "GET",
-            url: `/me/messages/${encodeURIComponent(s)}?$select=id,parentFolderId`,
-            headers: { Prefer: Dt[1] },
-          })),
-        }),
+      n = await t.api("/$batch").post({
+        requests: i.map((s, u) => ({
+          id: String(u),
+          method: "GET",
+          url: `/me/messages/${encodeURIComponent(s)}?$select=id,parentFolderId`,
+          headers: { Prefer: Dt[1] },
+        })),
+      }),
       o = new Set();
     for (let s of n.responses ?? []) {
       let u = i[Number(s.id)];
@@ -251691,15 +251687,13 @@ async function iya(t) {
     a = new Set();
   for (let r = 0; r < e.length; r += aya) {
     let i = e.slice(r, r + aya),
-      n = await t
-        .api("/$batch")
-        .post({
-          requests: i.map((o, s) => ({
-            id: String(s),
-            method: "GET",
-            url: `/me/mailFolders/${o}?$select=id,parentFolderId`,
-          })),
-        });
+      n = await t.api("/$batch").post({
+        requests: i.map((o, s) => ({
+          id: String(s),
+          method: "GET",
+          url: `/me/mailFolders/${o}?$select=id,parentFolderId`,
+        })),
+      });
     for (let o of n.responses ?? [])
       if (o.status >= 200 && o.status < 300 && o.body?.id)
         (a.add(o.body.id),
@@ -254600,16 +254594,14 @@ async function Ere(t, e, a, r) {
     let u = e.slice(s, s + nb),
       c;
     try {
-      c = await t
-        .api("/$batch")
-        .post({
-          requests: u.map((m, g) => ({
-            id: String(g),
-            method: "GET",
-            url: `/me/messages/${encodeURIComponent(m)}?$select=categories`,
-            headers: { Prefer: Dt[1] },
-          })),
-        });
+      c = await t.api("/$batch").post({
+        requests: u.map((m, g) => ({
+          id: String(g),
+          method: "GET",
+          url: `/me/messages/${encodeURIComponent(m)}?$select=categories`,
+          headers: { Prefer: Dt[1] },
+        })),
+      });
     } catch (m) {
       let g = He(m).statusCode;
       if ((g != null && g >= 100) || !xu(m)) throw m;
@@ -254657,17 +254649,15 @@ async function Ere(t, e, a, r) {
     let u = o.slice(s, s + nb),
       c;
     try {
-      c = await t
-        .api("/$batch")
-        .post({
-          requests: u.map((g, h) => ({
-            id: String(h),
-            method: "PATCH",
-            url: `/me/messages/${encodeURIComponent(g.id)}`,
-            headers: { "Content-Type": "application/json", Prefer: Dt[1] },
-            body: { categories: g.next },
-          })),
-        });
+      c = await t.api("/$batch").post({
+        requests: u.map((g, h) => ({
+          id: String(h),
+          method: "PATCH",
+          url: `/me/messages/${encodeURIComponent(g.id)}`,
+          headers: { "Content-Type": "application/json", Prefer: Dt[1] },
+          body: { categories: g.next },
+        })),
+      });
     } catch (g) {
       if (xu(g) || f6e(g)) {
         i.mayHaveCommitted = !0;
@@ -255462,16 +255452,14 @@ var jre,
               let Q = i.slice(_, _ + nb),
                 J;
               try {
-                J = await u
-                  .api("/$batch")
-                  .post({
-                    requests: Q.map((X, L) => ({
-                      id: String(L),
-                      method: "GET",
-                      url: `/me/messages/${encodeURIComponent(X)}?$select=id,parentFolderId`,
-                      headers: { Prefer: Dt[1] },
-                    })),
-                  });
+                J = await u.api("/$batch").post({
+                  requests: Q.map((X, L) => ({
+                    id: String(L),
+                    method: "GET",
+                    url: `/me/messages/${encodeURIComponent(X)}?$select=id,parentFolderId`,
+                    headers: { Prefer: Dt[1] },
+                  })),
+                });
               } catch (X) {
                 let L = He(X).statusCode;
                 if (d === 0 && !A && ((L != null && L >= 100) || !xu(X)))
@@ -256144,14 +256132,11 @@ var kre,
           n = `/drives/${encodeURIComponent(e.driveId)}/items/${encodeURIComponent(e.parentItemId)}/children`,
           o;
         try {
-          o = await i
-            .api(n)
-            .middlewareOptions([ms])
-            .post({
-              name: e.name,
-              folder: {},
-              "@microsoft.graph.conflictBehavior": e.conflictBehavior,
-            });
+          o = await i.api(n).middlewareOptions([ms]).post({
+            name: e.name,
+            folder: {},
+            "@microsoft.graph.conflictBehavior": e.conflictBehavior,
+          });
         } catch (c) {
           if (Pf(c) && e.conflictBehavior === "fail")
             throw new E(
@@ -330746,16 +330731,14 @@ async function Ocs(t, e, a) {
     u = t.body?.id || null;
   if (!n) {
     (U.log("warn", "post_request_missing_authentication", r),
-      e
-        .status(401)
-        .json({
-          jsonrpc: "2.0",
-          error: {
-            code: -32600,
-            message: "Unauthorized: missing authentication",
-          },
-          id: u,
-        }));
+      e.status(401).json({
+        jsonrpc: "2.0",
+        error: {
+          code: -32600,
+          message: "Unauthorized: missing authentication",
+        },
+        id: u,
+      }));
     return;
   }
   let c = t.headers["x-mcp-claims-propagation"] === "1";
@@ -330794,16 +330777,14 @@ async function Ocs(t, e, a) {
       errorType: Me(d),
     }),
       e.headersSent ||
-        e
-          .status(500)
-          .json({
-            jsonrpc: "2.0",
-            error: {
-              code: -32603,
-              message: "Internal server error during POST handling",
-            },
-            id: u,
-          }));
+        e.status(500).json({
+          jsonrpc: "2.0",
+          error: {
+            code: -32603,
+            message: "Internal server error during POST handling",
+          },
+          id: u,
+        }));
   }
 }
 function xcs(t) {
@@ -330947,16 +330928,14 @@ async function wBr(t, e) {
       statusCode: V,
       errType: A,
     }),
-      g
-        .status(V)
-        .json({
-          error:
-            V >= 500
-              ? "internal_error"
-              : V === 413
-                ? "payload_too_large"
-                : "bad_request",
-        }));
+      g.status(V).json({
+        error:
+          V >= 500
+            ? "internal_error"
+            : V === 413
+              ? "payload_too_large"
+              : "bad_request",
+      }));
   }),
     U.log("info", "creating_http_server_instance", {
       operation: "startHttpTransport",
