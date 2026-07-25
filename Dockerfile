@@ -1,38 +1,14 @@
-FROM python:3.12-slim
-
-# C5-REAL Dockerfile for BABYLON-60 CORTEX
-
-ENV PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    CARGO_HOME=/opt/cargo \
-    RUSTUP_HOME=/opt/rustup \
-    PATH="/opt/cargo/bin:$PATH"
-
+# Stage 1: Builder
+FROM python:3.12-slim AS builder
 WORKDIR /app
-
-# Install system dependencies, Rust, and uv
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    curl \
-    && curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y \
-    && curl -LsSf https://astral.sh/uv/install.sh | sh \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-ENV PATH="/root/.local/bin:$PATH"
-
-# Copy Python manifests and Rust workspace
 COPY pyproject.toml uv.lock ./
-COPY strike_rs ./strike_rs
-
-# Build Rust extensions
-RUN cd strike_rs && cargo build --release
-
-# Install Python dependencies using uv
-RUN uv sync --frozen --no-dev
-
-# Copy application source
+RUN pip install uv && uv sync --frozen --no-dev
 COPY . .
 
-# Default ignition command
-CMD ["uv", "run", "python", "-m", "babylon60.cli.onco_transducer"]
+# Stage 2: Runtime
+FROM python:3.12-slim AS runtime
+WORKDIR /app
+COPY --from=builder /app/.venv /app/.venv
+COPY --from=builder /app/babylon60 /app/babylon60
+ENV PATH="/app/.venv/bin:$PATH"
+ENTRYPOINT ["python", "-m", "babylon60"]

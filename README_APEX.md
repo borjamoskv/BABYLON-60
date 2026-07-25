@@ -172,3 +172,7 @@ for m in res.module_risks:
 
 ---
 <sub>Titular Civil: Borja Fernández Angulo · AKA Borja Moskv (<code>borjamoskv</code>) · data © ClinicalTrials.gov (public domain)</sub>
+
+
+## State Update
+- Documentation overhauled.

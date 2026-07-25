@@ -119,3 +119,12 @@ cbor2      ──►  babylon60.ledger (binary encoding)
 ```
 
 Optional extensions wire in: `cryptography`, `pynacl`, `sqlite-vec`, `faster-whisper`, `mlx-lm`.
+
+## System Architecture & Data Flow
+
+```mermaid
+graph TD
+    A[Shadow Router] --> B[BFT Ledger]
+    B --> C[Crypto Key Lifecycle]
+    C --> D[Physical State]
+```
