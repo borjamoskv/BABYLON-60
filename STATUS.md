@@ -47,6 +47,7 @@
 - [x] **BABYLON60 IDE v1.1.0 operativo end-to-end** (2026-07-17): contrato frontend↔backend reparado y verificado con Playwright contra `master_ledger.db` real (consenso 2/2 VERIFIED, 0 errores JS en ambos modos cognitivos).
 - [x] **BABYLON60 IDE v1.2.0 — delegación REAL + CortexLedger propio** (2026-07-17): la delegación dejó de ser Teatro Verde (`localStorage`). Ahora `commit` ejecuta git de verdad (probado: commit real `53122e2` sellado por el motor) y `push/merge/ship/deploy` hacen **crash causal HTTP 423** mientras P0 esté abierto. El IDE lleva su propio CortexLedger append-only hash-chain SHA-256 (`babylon60_ide.db`, sidecar) y lo autoverifica. Nuevo eje DETERMINAR: analítica agregada + búsqueda Okapi BM25 léxica sobre payloads. E2E Playwright: 0 pageerrors en 7 rutas × 2 modos, search→detail OK, boot inmune a localStorage corrupto.
 - [x] IDE sidecar: añadir `babylon60_ide.db*` al `.gitignore` del repo real (es el ledger local del IDE, no debe subir).
+- [x] Swarm Intelligence: asimilación nativa del orquestador (MOSKV-SWARM) como submódulo anclado en `cortex/moskv-swarm` para coordinar el Agent Bus físico.
 - [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
 - [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — asimilación inicial: el kernel MOSKV-1 APEX ha sido clonado como submódulo nativo en `src-tauri` y `sqlite-vec` ha sido inyectado en `Cargo.toml`.
 

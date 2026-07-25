@@ -4,3 +4,6 @@
 [submodule "babylon60-ide/src-tauri/moskv-1-apex"]
 	path = babylon60-ide/src-tauri/moskv-1-apex
 	url = https://github.com/borjamoskv/moskv-1-apex.git
+[submodule "cortex/moskv-swarm"]
+	path = cortex/moskv-swarm
+	url = https://github.com/borjamoskv/moskv-swarm.git
