@@ -117,7 +117,7 @@ def test_inv_c5_22():
     assert True, 'Structural check passed'
 
 def test_inv_c5_23():
-    """(Semi-Formal Epistemic Grounding Invariant):** All structural claims, complexity assertions, or architectural diagnoses MUST be backed by a semi-formal verification certificate (YAML Claim/Proof block with exact SHA-256 hash or untruncated URL provenance). Prohibit labeling problems as NP-Hard/NP-Complete without an explicit polynomial-time reduction ($A \le_P B$)."""
+    r"""(Semi-Formal Epistemic Grounding Invariant):** All structural claims, complexity assertions, or architectural diagnoses MUST be backed by a semi-formal verification certificate (YAML Claim/Proof block with exact SHA-256 hash or untruncated URL provenance). Prohibit labeling problems as NP-Hard/NP-Complete without an explicit polynomial-time reduction ($A \le_P B$)."""
     # TODO: Implement physical assertion for this invariant
     assert True, 'Structural check passed'
 
