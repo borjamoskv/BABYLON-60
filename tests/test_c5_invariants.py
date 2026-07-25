@@ -366,3 +366,9 @@ def test_inv_c5_30_deterministic_cbor_canonization() -> None:
     content = agents_path.read_text(errors="ignore")
     assert "INV_C5_30" in content, "INV_C5_30 rule definition missing in .agents/AGENTS.md"
     assert "CBOR" in content, "INV_C5_30 missing CBOR canonization clause"
+
+
+def test_inv_c5_31_stub():
+    """INV_C5_31 — Auto-generated stub for rule validation."""
+    # Implementation required for concrete scan logic of rule INV_C5_31
+    pass

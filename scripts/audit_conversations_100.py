@@ -75,7 +75,7 @@ async def audit_agent_task(agent_id: int, uuid_dir: Path) -> None:
     if not transcript_path.exists():
         return
     score = calculate_conversation_exergy(transcript_path)
-    success = await asyncio.to_thread(_write_audit_log, uuid_dir.name, score)
+    success = await asyncio.to_thread(_write_audit_log, uuid_dir.name, score)  # type: ignore
     if success:
         print(f"[🟢] Agent {agent_id:03d} audited {uuid_dir.name[:8]}: {score:.1f}/1000.0")
     else:

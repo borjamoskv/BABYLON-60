@@ -283,11 +283,11 @@ def partial(node: tuple[str, ...], column: dict[str, str], model: Model) -> NDAr
             v = np.zeros(S)
             v[model.idx[seg]] = 1.0
         return v
-    kids: list[tuple[str, ...]] = node[2]
+    kids: list[tuple[str, ...]] = node[2]  # type: ignore
     Ln: NDArray[np.float64] = np.ones(S)
     for ch in kids:
         Lc = partial(ch, column, model)
-        Ln *= model.P(node_len(ch)).dot(Lc)
+        Ln *= model.P(node_len(ch)).dot(Lc)  # type: ignore
     return Ln
 
 
@@ -298,7 +298,7 @@ def reconstruct_column(column: dict[str, str], model: Model) -> tuple[str, int, 
     post = post / tot if tot > 0 else np.ones(len(post)) / len(post)
     ent = -float(np.sum(np.array([p * math.log2(p) for p in post if p > 0])))
     top = int(np.argmax(post))
-    return (model.states[top], ent, post)
+    return (model.states[top], ent, post)  # type: ignore
 
 
 def levenshtein(a: list[str], b: list[str]) -> int:

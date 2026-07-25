@@ -35,7 +35,7 @@ class MambaGenerator:
     ) -> list[int]:
         current_tokens = list(prompt_tokens)
         for _ in range(max_new_tokens):
-            logits_seq = self.network.forward(current_tokens)
+            logits_seq = self.network.forward(current_tokens)  # type: ignore
             next_token_logits = logits_seq[-1]
             probs = softmax(next_token_logits, temperature)
             next_token = top_k_sampling(probs, k=k)

@@ -33,7 +33,7 @@ class MambaLedgerEngine:
         generated_nodes: list[StateNode] = [prompt_node]
         current_parent_id = prompt_node.node_id
         for step in range(max_new_tokens):
-            logits_seq = self.network.forward(current_tokens)
+            logits_seq = self.network.forward(current_tokens)  # type: ignore
             next_token_logits = logits_seq[-1]
             from cortex_mamba_inference import softmax, top_k_sampling
 

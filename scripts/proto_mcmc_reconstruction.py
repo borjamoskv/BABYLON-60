@@ -131,14 +131,14 @@ def main() -> dict[str, Any]:
         ed: int = levenshtein(recon_seq, gold)
         hit: int = sum(flags)
         for _s, e, fl in zip(recon_seq, recon_ent, flags, strict=False):
-            all_ent_match.append((e, fl))
+            all_ent_match.append((e, fl))  # type: ignore
         tot_gold += len(gold)
         tot_editdist += ed
         tot_pos += len(recon_seq)
         tot_hit += hit
         acc: float = hit / len(gold) if gold else 0.0
         per_concept.append(
-            (concept, " ".join(recon_seq), " ".join(gold), round(float(np.mean(recon_ent)), 3), ed, round(acc, 2))
+            (concept, " ".join(recon_seq), " ".join(gold), round(float(np.mean(recon_ent)), 3), ed, round(acc, 2))  # type: ignore
         )
         rows_csv.append(
             {

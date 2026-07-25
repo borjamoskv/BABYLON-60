@@ -368,7 +368,7 @@ def main() -> int:
         for test_fn in tests:
             total += 1
             try:
-                test_fn()
+                test_fn()  # type: ignore
                 passed += 1
             except (AssertionError, RuntimeError, ValueError) as e:
                 failed += 1

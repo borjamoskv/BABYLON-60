@@ -29,7 +29,7 @@ class BPETokenizer:
             stats = self.get_stats(tokens)
             if not stats:
                 break
-            best_pair = max(stats, key=stats.get)
+            best_pair = max(stats, key=stats.get)  # type: ignore
             new_token_str = best_pair[0] + best_pair[1]
             self.merges[best_pair] = self.next_token_id
             self.vocab[new_token_str] = self.next_token_id

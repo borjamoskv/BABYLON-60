@@ -27,7 +27,7 @@ def test_compute_yuma_consensus_clipping_sybil() -> None:
 def test_simulate_subnet_emission_balance() -> None:
     ranks = [0.4, 0.3, 0.2, 0.1, 0.0]
     dividends = [0.5, 0.3, 0.2, 0.0]
-    emission = simulate_subnet_emission(10.0, ranks, dividends, subnet_owner_cut=0.18)
+    emission = simulate_subnet_emission(10.0, ranks, dividends, subnet_owner_cut=0.18)  # type: ignore
     total_distributed = emission["subnet_owner_tao"] + emission["total_miner_tao"] + emission["total_validator_tao"]
     assert abs(total_distributed - 10.0) < 1e-05, f"Emission leakage detected: {total_distributed} vs 10.0"
 

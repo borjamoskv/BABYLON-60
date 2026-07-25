@@ -13,7 +13,7 @@ def test_mamba_network_forward() -> None:
     seq_len = 10
     model = MambaNetwork(vocab_size=vocab_size, d_model=d_model, d_state=d_state, n_layers=n_layers)
     token_ids = [5, 12, 49, 0, 1, 8, 33, 2, 9, 10]
-    logits = model.forward(token_ids)
+    logits = model.forward(token_ids)  # type: ignore
     assert len(logits) == seq_len, "Pérdida de invariancia de longitud en el Stack."
     assert len(logits[0]) == vocab_size, "Colapso del LM Head. Dimensionalidad de vocabulario fallida."
 

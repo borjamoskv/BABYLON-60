@@ -59,7 +59,7 @@ def execute_pulse() -> dict[str, Any]:
     entropy_score = min(100, int(large_files * 2 + uncommitted * 1.5))
     status = '🟢 SOBERANO' if entropy_score < 20 else '🟡 DERIVA' if entropy_score < 40 else '🔴 COLAPSO'
     result: dict[str, Any] = {'entropy_score': entropy_score, 'status': status, 'large_files_count': large_files, 'uncommitted_drift': uncommitted, 'top_alarms': alarms}
-    log_event('PULSE', str(PROJECT_ROOT), float(-entropy_score))
+    log_event('PULSE', str(PROJECT_ROOT), float(-entropy_score))  # type: ignore
     return result
 
 def execute_crystallize(target_md_path: str | None=None) -> dict[str, Any]:
@@ -89,7 +89,7 @@ def execute_crystallize(target_md_path: str | None=None) -> dict[str, Any]:
             consolidated_files.append({'file': str(md), 'linear_injections_found': injections})
             print(f'  -> Found {injections} linear injections in {md.name}. Ready for semantic merge.')
     exergy_gained = float(total_injections * 50.0)
-    hash_id = log_event('CRYSTALLIZE', str(targets[0] if targets else 'global'), exergy_gained)
+    hash_id = log_event('CRYSTALLIZE', str(targets[0] if targets else 'global'), exergy_gained)  # type: ignore
     return {'status': 'CRISTALIZADO', 'files_scanned': len(targets), 'total_linear_injections_detected': total_injections, 'exergy_gained': exergy_gained, 'ledger_hash': hash_id, 'details': consolidated_files}
 
 def main() -> None:

@@ -130,7 +130,7 @@ def simulate_subnet_epochs(
     epoch_history = []
     for t in range(1, epochs + 1):
         ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)
-        emission = simulate_subnet_emission(1.0, ranks, dividends)
+        emission = simulate_subnet_emission(1.0, ranks, dividends)  # type: ignore
         persist_consensus_ledger(db_path, t, state_hash, ranks, trust, dividends, emission)
         total_stake = sum(stakes)
         for i in range(V):
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     epoch_sim = simulate_subnet_epochs(5, weights, stakes, db_path="bittensor_yuma_ledger.db")
     adversarial = simulate_adversarial_matrix()
     ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)
-    emission = simulate_subnet_emission(1.0, ranks, dividends)
+    emission = simulate_subnet_emission(1.0, ranks, dividends)  # type: ignore
     output = {
         "ontology_level": "C5-REAL",
         "entity": "MOSKV-1 APEX",

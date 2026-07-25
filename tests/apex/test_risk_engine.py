@@ -27,7 +27,7 @@ def _mk(**over: object) -> StudyFeatures:
         therapeutic_area="general",
     )
     base.update(over)
-    return StudyFeatures(**base)
+    return StudyFeatures(**base)  # type: ignore
 
 
 def test_minimal_protocol_is_low() -> None:

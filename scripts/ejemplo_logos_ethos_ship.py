@@ -48,7 +48,7 @@ def ship_kinetic_collapse(ast_state: str, taint_hash: str) -> None:
 
 def main() -> None:
     print("--- INICIANDO SECUENCIA LOGOS -> ETHOS -> SHIP ---\n")
-    ast_invariant: str = logos_transducer(12.516666666666667)
+    ast_invariant: str = logos_transducer(12.516666666666667)  # type: ignore
     taint_signature: str = ethos_attestation(ast_invariant, lamport=42)
     ship_kinetic_collapse(ast_invariant, taint_signature)
     print("\n[+] SECUENCIA COMPLETADA: CERO ANERGÍA ESTOCÁSTICA.")

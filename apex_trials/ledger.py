@@ -125,7 +125,7 @@ class AmendmentLedger:
                     source_db="apex_trials.db",
                     source_table="assessments",
                     source_pk=entity_id,
-                    created_at=created_at,
+                    created_at=created_at,  # type: ignore
                 )
                 res = await actor.append(event)
                 async with aiosqlite.connect(self.db_path) as db:

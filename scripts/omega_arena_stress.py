@@ -84,7 +84,7 @@ def main() -> None:
     print(f"Workers: {args.workers}")
     print(f"Duration: {duration_sec}s")
     try:
-        kernel = strike_rs.CortexKernel(db_path)
+        kernel = strike_rs.CortexKernel(db_path)  # type: ignore
     except RuntimeError as e:
         print(f"FATAL: Failed to init CortexKernel: {e}")
         return

@@ -31,13 +31,13 @@ def _mk(**over: object) -> StudyFeatures:
         therapeutic_area="general",
     )
     base.update(over)
-    return StudyFeatures(**base)
+    return StudyFeatures(**base)  # type: ignore
 
 
 def test_fitted_weights_are_valid_distribution() -> None:
     if not _HAS_FITTED:
         pytest.skip("no fitted_weights.json baked")
-    imp = _FITTED["importances"]
+    imp = _FITTED["importances"]  # type: ignore
     assert len(imp) == 9
     assert all(w >= 0 for w in imp)
     assert abs(sum(imp) - 1.0) < 0.001

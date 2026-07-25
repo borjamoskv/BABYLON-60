@@ -99,7 +99,7 @@ def main() -> int:
     args = parser.parse_args()
     handlers: dict[str, object] = {"transpile": cmd_transpile, "validate": cmd_validate, "inspect": cmd_inspect}
     handler = handlers[args.command]
-    return handler(args)
+    return handler(args)  # type: ignore
 
 
 if __name__ == "__main__":

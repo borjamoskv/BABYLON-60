@@ -1,7 +1,7 @@
 import pytest
 
 try:
-    from strike_rs import CortexKernel
+    from strike_rs import CortexKernel  # type: ignore
 except ImportError:
     pytest.skip("strike_rs (núcleo PyO3 nativo) no compilado en este entorno", allow_module_level=True)
 

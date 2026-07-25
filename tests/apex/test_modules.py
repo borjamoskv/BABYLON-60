@@ -31,13 +31,13 @@ def _mk(**over: object) -> StudyFeatures:
         therapeutic_area="Oncology",
     )
     base.update(over)
-    return StudyFeatures(**base)
+    return StudyFeatures(**base)  # type: ignore
 
 
 def test_models_present() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    assert set(_MODELS["modules"]) == {"elig", "design", "outcomes", "arms", "conditions", "descr"}
+    assert set(_MODELS["modules"]) == {"elig", "design", "outcomes", "arms", "conditions", "descr"}  # type: ignore
 
 
 def test_predictions_valid_and_sorted() -> None:
@@ -61,7 +61,7 @@ def test_deterministic() -> None:
 def test_leakage_mitigation_drops_self_features() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    mods = _MODELS["modules"]
+    mods = _MODELS["modules"]  # type: ignore
     assert "n_eligibility_criteria" not in mods["elig"]["used_features"]
     assert "n_endpoints" not in mods["outcomes"]["used_features"]
     assert "n_arms" not in mods["arms"]["used_features"]
@@ -74,7 +74,7 @@ def test_leakage_mitigation_drops_self_features() -> None:
 def test_models_beat_chance_on_record() -> None:
     if not _HAS:
         pytest.skip("no module_models.json baked")
-    for m in _MODELS["modules"].values():
+    for m in _MODELS["modules"].values():  # type: ignore
         assert m["auc"] > 0.55
 
 
@@ -112,7 +112,7 @@ def test_tfidf_pure_sklearn_equivalence() -> None:
 
     from apex_trials.modules import _transform_pure
 
-    elig_model = _MODELS["modules"]["elig"]
+    elig_model = _MODELS["modules"]["elig"]  # type: ignore
     vocab = elig_model["tfidf_vocab"]
     idf = elig_model["tfidf_idf"]
     sample_text = "This is a brief summary of a clinical trial for rare disease, focusing on oncology patients."

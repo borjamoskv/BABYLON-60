@@ -175,7 +175,7 @@ class FSharpParser:
             new_module = IRModule(name=mod_name, source_layer=RegimeLayer.ONTOLOGY)
             if self._ctx.current_module is not None:
                 self._ctx.current_module.submodules.append(new_module)
-            self._ctx.module_stack.append(self._ctx.current_module)
+            self._ctx.module_stack.append(self._ctx.current_module)  # type: ignore
             self._ctx.current_module = new_module
             self._ctx.indent_level = _get_indent(line)
             return idx

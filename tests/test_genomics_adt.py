@@ -44,10 +44,10 @@ def test_clonal_entropy_empty_and_invalid() -> None:
     assert res2.subclone_count == 1
     assert res2.shannon_entropy == 0.0
     with pytest.raises(TypeError):
-        GenomicEvaluationEngine.evaluate_clonal_entropy("illegal_type")
+        GenomicEvaluationEngine.evaluate_clonal_entropy("illegal_type")  # type: ignore
 
 
 def test_make_illegal_states_unrepresentable() -> None:
     with pytest.raises(RuntimeError) as exc:
-        make_illegal_states_unrepresentable("Some Rogue State")
+        make_illegal_states_unrepresentable("Some Rogue State")  # type: ignore
     assert "Reached unreachable algebraic state" in str(exc.value)
