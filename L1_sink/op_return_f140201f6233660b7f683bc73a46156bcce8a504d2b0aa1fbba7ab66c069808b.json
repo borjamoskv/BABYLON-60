@@ -1,18 +1,1 @@
-{
-  "protocol": "BFT_MERKLE_L1_SINK",
-  "merkle_root": "f140201f6233660b7f683bc73a46156bcce8a504d2b0aa1fbba7ab66c069808b",
-  "tx_type": "OP_RETURN",
-  "payload_size_bytes": 32,
-  "leaves": [
-    "b906a4009e6d9ddf601c6dfdd5e103514320a903",
-    "f88c3c01a465c50f71431404f3474760aded093a",
-    "f13b8f39f7ded981b92499ee13d7c4fb7e00691e",
-    "8a25bb2e3f0d2c937ed273955fe898f9542903b3",
-    "03fba4fdb02361bb6dce12c6140942be6ec5373a",
-    "a3d72cd07cde3c25965aa02296f7811c518af834",
-    "d8e62392bc541f9c2e63edbd36e0350699acfe06",
-    "bd3fef16ed0d8b7f8d73b8c31a7348b24c088b68",
-    "cf18c8453d0c9efa9e5980d756df103ca2561c7a",
-    "60faf60f1bb696efcd71a190b412138df998af97"
-  ]
-}
+{"protocol":"BFT_MERKLE_L1_SINK","merkle_root":"f140201f6233660b7f683bc73a46156bcce8a504d2b0aa1fbba7ab66c069808b","tx_type":"OP_RETURN","payload_size_bytes":32,"leaves":["b906a4009e6d9ddf601c6dfdd5e103514320a903","f88c3c01a465c50f71431404f3474760aded093a","f13b8f39f7ded981b92499ee13d7c4fb7e00691e","8a25bb2e3f0d2c937ed273955fe898f9542903b3","03fba4fdb02361bb6dce12c6140942be6ec5373a","a3d72cd07cde3c25965aa02296f7811c518af834","d8e62392bc541f9c2e63edbd36e0350699acfe06","bd3fef16ed0d8b7f8d73b8c31a7348b24c088b68","cf18c8453d0c9efa9e5980d756df103ca2561c7a","60faf60f1bb696efcd71a190b412138df998af97"]}
