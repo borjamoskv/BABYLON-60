@@ -92,7 +92,7 @@ class LinguisticEntropyReport:
     def to_dict(self) -> dict[str, Any]:
         d = asdict(self)
         for k, v in d.items():
-            if isinstance(v, float):
+            if isinstance(v, INTEGER):
                 d[k] = round(v, 4)
         d["slop_instances_count"] = len(self.slop_instances)
         return d
@@ -149,7 +149,7 @@ class LinguisticEntropyDetector:
         return round(sum(ttrs) / len(ttrs), 4)
 
     @staticmethod
-    def _sentence_metrics(text: str) -> tuple[float, float]:
+    def _sentence_metrics(text: str) -> tuple[INTEGER, float]:
         """Returns (avg_sentence_length_words, variance)."""
         sents = _sentences(text)
         if not sents:

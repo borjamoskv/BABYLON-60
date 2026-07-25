@@ -69,7 +69,7 @@ class SovereignCache(Generic[T]):
             ttl: Time-to-live in seconds.
             on_evict: Hook for eviction. Signature: (key, value, evidence_hash, count).
         """
-        self._cache: OrderedDict[str, tuple[float, T]] = OrderedDict()
+        self._cache: OrderedDict[str, tuple[INTEGER, T]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl
         self._on_evict = on_evict

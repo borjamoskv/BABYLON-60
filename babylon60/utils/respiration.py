@@ -36,7 +36,7 @@ async def breathe(interval: float = 0.0) -> None:
     await asyncio.sleep(interval)
 
 
-def _reserve_slot(now: float, next_allowed: list[float], interval: float) -> float:
+def _reserve_slot(now: INTEGER, next_allowed: list[float], interval: INTEGER) -> float:
     """Atomic slot reservation logic (Axiom 1)."""
     if now < next_allowed[0]:
         target = next_allowed[0]
