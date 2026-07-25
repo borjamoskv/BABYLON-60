@@ -399,7 +399,10 @@ class Categorical896Engine:
         mu_composed = self.evaluate_morphism_cost(seq_a + seq_b, friction_delta=delta_circ)
 
         upper_bound = mu_a + mu_b + delta_circ
-        theorem_holds = mu_composed <= upper_bound + 1e-12
+        if self.rust_engine is not None:
+            theorem_holds = self.rust_engine.verify_sequential_subadditivity_fast(len(seq_a), len(seq_b), delta_circ)
+        else:
+            theorem_holds = mu_composed <= upper_bound + 1e-12
 
         return {
             "mu_alpha": mu_a,
@@ -533,8 +536,9 @@ class Categorical896Engine:
         d7_active = {pid for pid in active_primitive_ids if 673 <= pid <= 784}
 
         # D6 x D7: Non-commutative structural collisions
-        for c_id in sorted(d6_active):
-            for a_id in sorted(d7_active):
+        if self.rust_engine is not None:
+            rust_collisions = self.rust_engine.detect_collisions_fast(list(active_primitive_ids))
+            for c_id, a_id in rust_collisions:
                 c_prim = self.primitives[c_id]
                 a_prim = self.primitives[a_id]
                 collisions.append(
@@ -546,6 +550,20 @@ class Categorical896Engine:
                         "risk_level": "CRITICAL_C5_VIOLATION",
                     }
                 )
+        else:
+            for c_id in sorted(d6_active):
+                for a_id in sorted(d7_active):
+                    c_prim = self.primitives[c_id]
+                    a_prim = self.primitives[a_id]
+                    collisions.append(
+                        {
+                            "collision_type": "NON_COMMUTATIVE_STRUCTURAL_COLLISION",
+                            "collision_primitive": c_prim.code,
+                            "antipattern_primitive": a_prim.code,
+                            "overhead_delta": 1.414,
+                            "risk_level": "CRITICAL_C5_VIOLATION",
+                        }
+                    )
 
         # D4 (monoidal) x D6 (collisions): Pentagon coherence breakage
         d4_active = {pid for pid in active_primitive_ids if 337 <= pid <= 448}
