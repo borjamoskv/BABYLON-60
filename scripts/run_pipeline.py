@@ -77,9 +77,7 @@ def run_script(script_name: str) -> bool:
         # Ejecutar script heredando el python environment
         cmd = [sys.executable, script_path]
         # Para iteraciones largas, dejamos que impriman en vivo
-        process = subprocess.Popen(
-            cmd, stdout=sys.stdout, stderr=sys.stderr, cwd=PROJECT_ROOT
-        )
+        process = subprocess.Popen(cmd, stdout=sys.stdout, stderr=sys.stderr, cwd=PROJECT_ROOT)
         exit_code = process.wait()
 
         elapsed = time.perf_counter() - start_time
@@ -87,9 +85,7 @@ def run_script(script_name: str) -> bool:
             print(f"✅ [SUCCESS] {script_name} completado con éxito en {elapsed:.4f}s.")
             return True
         else:
-            print(
-                f"❌ [FAILURE] {script_name} falló con código de salida {exit_code} después de {elapsed:.4f}s."
-            )
+            print(f"❌ [FAILURE] {script_name} falló con código de salida {exit_code} después de {elapsed:.4f}s.")
             return False
 
     except (OSError, ValueError, subprocess.SubprocessError) as e:
@@ -135,9 +131,7 @@ def run_scripts_parallel(scripts: list[str]) -> bool:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="Orquestador de Cascada de Fases C5-REAL."
-    )
+    parser = argparse.ArgumentParser(description="Orquestador de Cascada de Fases C5-REAL.")
     parser.add_argument(
         "--phase",
         type=int,
@@ -159,9 +153,7 @@ def main() -> None:
 
     if not (args.all or args.phase is not None or args.script):
         print("=== CORTEX-OMEGA: PIPELINE RUNNER ===")
-        print(
-            "Uso: python3 scripts/run_pipeline.py [--all] [--phase <0-5>] [--script <nombre>]"
-        )
+        print("Uso: python3 scripts/run_pipeline.py [--all] [--phase <0-5>] [--script <nombre>]")
         print("\nFases Disponibles:")
         for pid, phase in PHASES.items():
             print(f"  Fase {pid}: {phase['name']}")

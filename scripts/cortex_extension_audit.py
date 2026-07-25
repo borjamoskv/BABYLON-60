@@ -1,8 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-import os
-import sys
 import json
 from pathlib import Path
+
 
 def audit_files():
     root = Path(".")
@@ -35,12 +34,17 @@ def audit_files():
         if has_sleep:
             c4_anergy_detected += 1
 
-    print(json.dumps({
-        "total_files": total_files,
-        "c5_certified": c5_certified,
-        "c4_anergy": c4_anergy_detected,
-        "exergy_ratio": round(c5_certified / max(total_files, 1), 3)
-    }))
+    print(
+        json.dumps(
+            {
+                "total_files": total_files,
+                "c5_certified": c5_certified,
+                "c4_anergy": c4_anergy_detected,
+                "exergy_ratio": round(c5_certified / max(total_files, 1), 3),
+            }
+        )
+    )
+
 
 if __name__ == "__main__":
     audit_files()

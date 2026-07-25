@@ -42,9 +42,7 @@ class CallGraphVisitor(ast.NodeVisitor):
 
 
 def main() -> None:
-    target_dir = os.environ.get(
-        "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    )
+    target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not target_dir:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
 
@@ -67,27 +65,21 @@ def main() -> None:
                     visitor.visit(tree)
 
                     # Store as serializable dict
-                    serializable_cg = {
-                        k: list(v) for k, v in visitor.call_graph.items()
-                    }
+                    serializable_cg = {k: list(v) for k, v in visitor.call_graph.items()}
                     if serializable_cg or visitor.module_calls:
                         global_call_graph[rel_path] = {
                             "functions": serializable_cg,
                             "module_level_calls": list(visitor.module_calls),
                         }
                 except (OSError, ValueError, TypeError, SyntaxError) as e:
-                    raise EpistemicHalt(
-                        f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26)."
-                    )
+                    raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     # Extract specifically the path we care about (FastAPI -> strike_rs -> SQLite)
     # 1. Routes mapping
     # 2. TaintEngine / ledger calls
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_json = os.path.join(
-        project_root, "cortex", "artifacts", "reports", "BABYLON_60_CALL_GRAPH.json"
-    )
+    out_json = os.path.join(project_root, "cortex", "artifacts", "reports", "BABYLON_60_CALL_GRAPH.json")
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(global_call_graph, f, indent=2)

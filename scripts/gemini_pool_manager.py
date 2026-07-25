@@ -62,9 +62,7 @@ class GeminiProTelemetry:
             self.failures += 1
 
     def snapshot(self) -> dict[str, Any]:
-        avg_latency = (
-            self.latency_sum / self.total_requests if self.total_requests else 0.0
-        )
+        avg_latency = self.latency_sum / self.total_requests if self.total_requests else 0.0
         return {
             "total_requests": self.total_requests,
             "successes": self.successes,
@@ -132,9 +130,7 @@ class GeminiProPoolManager:
     def get_next_available_slot(self) -> GeminiAccountSlot:
         """Retorna el siguiente slot libre respetando round-robin y cooldowns."""
         if not self.slots:
-            raise EpistemicPoolHalt(
-                "No hay llaves de API de Gemini configuradas en el entorno (Ω25)."
-            )
+            raise EpistemicPoolHalt("No hay llaves de API de Gemini configuradas en el entorno (Ω25).")
 
         total_slots = len(self.slots)
         for _ in range(total_slots):
@@ -143,13 +139,9 @@ class GeminiProPoolManager:
             if slot.is_available:
                 return slot
 
-        raise EpistemicPoolHalt(
-            "Todas las cuentas de Gemini Pro están saturadas en Cooldown (429 Rate Limit)."
-        )
+        raise EpistemicPoolHalt("Todas las cuentas de Gemini Pro están saturadas en Cooldown (429 Rate Limit).")
 
-    def dispatch_generate_content(
-        self, prompt: str, model: str = "gemini-1.5-pro"
-    ) -> str:
+    def dispatch_generate_content(self, prompt: str, model: str = "gemini-1.5-pro") -> str:
         """Dispara una inferencia rotando entre las cuentas disponibles con tolerancia BFT."""
         attempts = 0
         max_attempts = len(self.slots) if self.slots else 1
@@ -162,9 +154,7 @@ class GeminiProPoolManager:
             slot.requests_count += 1
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={slot.api_key}"
 
-            payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode(
-                "utf-8"
-            )
+            payload = json.dumps({"contents": [{"parts": [{"text": prompt}]}]}).encode("utf-8")
 
             req = urllib.request.Request(
                 url,
@@ -193,12 +183,8 @@ class GeminiProPoolManager:
                     attempts += 1
                     continue
                 else:
-                    self.telemetry.record(
-                        slot.api_key[:8], False, time.perf_counter() - start_time
-                    )
-                    raise EpistemicPoolHalt(
-                        f"HTTPError Gemini API [{e.code}]: {e.reason}"
-                    )
+                    self.telemetry.record(slot.api_key[:8], False, time.perf_counter() - start_time)
+                    raise EpistemicPoolHalt(f"HTTPError Gemini API [{e.code}]: {e.reason}")
             except (urllib.error.URLError, TimeoutError, OSError) as e:
                 slot.set_cooldown(15.0)
                 last_error = e
@@ -206,13 +192,9 @@ class GeminiProPoolManager:
                 continue
 
         self.telemetry.record("pool_exhausted", False, time.perf_counter() - start_time)
-        raise EpistemicPoolHalt(
-            f"Agotadas todas las cuentas ({max_attempts}) del pool Gemini Pro. Error: {last_error}"
-        )
+        raise EpistemicPoolHalt(f"Agotadas todas las cuentas ({max_attempts}) del pool Gemini Pro. Error: {last_error}")
 
-    async def adispatch_generate_content(
-        self, prompt: str, model: str = "gemini-1.5-pro"
-    ) -> str:
+    async def adispatch_generate_content(self, prompt: str, model: str = "gemini-1.5-pro") -> str:
         """Versión asíncrona no bloqueante de dispatch_generate_content (Ω45/Ω27)."""
         import asyncio
 
@@ -232,9 +214,7 @@ class GeminiProPoolManager:
                     "requests_count": s.requests_count,
                     "errors_count": s.errors_count,
                     "is_available": s.is_available,
-                    "cooldown_remaining_sec": max(
-                        0.0, round(s.cooldown_until - now, 2)
-                    ),
+                    "cooldown_remaining_sec": max(0.0, round(s.cooldown_until - now, 2)),
                 }
                 for s in self.slots
             ],

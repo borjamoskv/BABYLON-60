@@ -23,9 +23,7 @@ def run_clippy(manifest_name: str, manifest_path: str) -> bool:
         subprocess.run(cmd, cwd=PROJECT_ROOT, check=True, env=env_vars)
         return True
     except subprocess.CalledProcessError as e:
-        print(
-            f"❌ Clippy warnings or compilation errors detected in {manifest_name} (exit code {e.returncode})."
-        )
+        print(f"❌ Clippy warnings or compilation errors detected in {manifest_name} (exit code {e.returncode}).")
         return False
 
 

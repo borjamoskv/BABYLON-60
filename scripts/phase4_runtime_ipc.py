@@ -69,57 +69,30 @@ def analyze_ipc_and_runtime(target_dir: str) -> None:
                 with open(filepath, "r", encoding="utf-8") as f:
                     source = f.read()
 
-                if (
-                    "FastAPI" in source
-                    or "APIRouter" in source
-                    or "@app." in source
-                    or "@router." in source
-                ):
-                    report["network_endpoints"].append(
-                        {"file": rel_path, "type": "FastAPI Router"}
-                    )
-                if (
-                    "urllib.request" in source
-                    or "requests." in source
-                    or "httpx." in source
-                ):
-                    report["network_endpoints"].append(
-                        {"file": rel_path, "type": "HTTP Client"}
-                    )
+                if "FastAPI" in source or "APIRouter" in source or "@app." in source or "@router." in source:
+                    report["network_endpoints"].append({"file": rel_path, "type": "FastAPI Router"})
+                if "urllib.request" in source or "requests." in source or "httpx." in source:
+                    report["network_endpoints"].append({"file": rel_path, "type": "HTTP Client"})
                 if "socket." in source:
-                    report["network_endpoints"].append(
-                        {"file": rel_path, "type": "Raw Socket"}
-                    )
+                    report["network_endpoints"].append({"file": rel_path, "type": "Raw Socket"})
 
                 if "ctypes" in source or "cffi" in source:
                     report["ffi_bindings"].append({"file": rel_path, "type": "C-FFI"})
                 if re.search(r"import\s+(strike_rs|moskv_core)", source):
-                    report["ffi_bindings"].append(
-                        {"file": rel_path, "type": "Rust PyO3"}
-                    )
+                    report["ffi_bindings"].append({"file": rel_path, "type": "Rust PyO3"})
 
                 if "busy_timeout" in source or "WAL" in source.upper():
-                    report["database_locks"].append(
-                        {"file": rel_path, "type": "SQLite WAL/Timeout"}
-                    )
+                    report["database_locks"].append({"file": rel_path, "type": "SQLite WAL/Timeout"})
 
-                if (
-                    "asyncio.Queue" in source
-                    or "multiprocessing" in source
-                    or "threading" in source
-                ):
-                    report["multiprocessing_ipc"].append(
-                        {"file": rel_path, "type": "Concurrency primitive"}
-                    )
+                if "asyncio.Queue" in source or "multiprocessing" in source or "threading" in source:
+                    report["multiprocessing_ipc"].append({"file": rel_path, "type": "Concurrency primitive"})
 
             except (OSError, ValueError, TypeError, UnicodeDecodeError) as e:
                 # Invariante Ω26: Fail-Fast. Cero pass mudo. Purga Inmediata.
                 raise EpistemicHalt(f"Error estructural parseando {rel_path}: {e}")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_json = os.path.join(
-        project_root, "cortex", "artifacts", "reports", "BABYLON_60_RUNTIME_IPC.json"
-    )
+    out_json = os.path.join(project_root, "cortex", "artifacts", "reports", "BABYLON_60_RUNTIME_IPC.json")
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
 
     payload_str = json.dumps(report, indent=2)
@@ -129,18 +102,14 @@ def analyze_ipc_and_runtime(target_dir: str) -> None:
     if os.path.exists(out_json):
         with open(out_json, "r", encoding="utf-8") as f:
             if f.read() == payload_str:
-                logging.info(
-                    f"Idempotency Lock (Ω15): Estado previo idéntico [{payload_hash[:8]}]. Ahorro de ATP."
-                )
+                logging.info(f"Idempotency Lock (Ω15): Estado previo idéntico [{payload_hash[:8]}]. Ahorro de ATP.")
                 return
 
     with open(out_json, "w", encoding="utf-8") as f:
         f.write(payload_str)
 
     # Invariante Ω11: Firma CORTEX-TAINT obligatoria
-    logging.info(
-        f"CORTEX-TAINT:borjamoskv:ipc_analysis:completed_on:{os.path.basename(out_json)}:{payload_hash}"
-    )
+    logging.info(f"CORTEX-TAINT:borjamoskv:ipc_analysis:completed_on:{os.path.basename(out_json)}:{payload_hash}")
 
 
 if __name__ == "__main__":

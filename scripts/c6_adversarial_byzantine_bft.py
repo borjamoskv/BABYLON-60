@@ -6,6 +6,7 @@ import uuid
 
 DB_PATH = "c6_byzantine_ledger.db"
 
+
 class BFTLedger:
     def __init__(self, db_path: str) -> None:
         self.db_path = db_path
@@ -55,15 +56,17 @@ class BFTLedger:
         # Transductor determinista
         import hmac
         import sys
+
         try:
             from cortex_env import get_bft_key
         except ImportError:
             import os
-            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
             from cortex_env import get_bft_key
 
         bft_key = get_bft_key()
-        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
         return hmac.new(bft_key.encode("utf-8"), data, hashlib.sha3_256).hexdigest()
 
     def get_last_state(self) -> tuple[int, str]:
@@ -73,7 +76,14 @@ class BFTLedger:
             return row[0], row[1]
         return 0, "GENESIS_HASH"
 
-    def append(self, payload: str, lamport_t: int | None = None, nonce: str | None = None, prev_hash: str | None = None, block_hash: str | None = None) -> bool:
+    def append(
+        self,
+        payload: str,
+        lamport_t: int | None = None,
+        nonce: str | None = None,
+        prev_hash: str | None = None,
+        block_hash: str | None = None,
+    ) -> bool:
         current_lamport, current_hash = self.get_last_state()
 
         t = lamport_t if lamport_t is not None else current_lamport + 1
@@ -84,7 +94,7 @@ class BFTLedger:
         try:
             self.conn.execute(
                 "INSERT INTO bft_ledger (lamport_t, nonce, payload, prev_hash, block_hash) VALUES (?, ?, ?, ?, ?)",
-                (t, n, payload, p_hash, b_hash)
+                (t, n, payload, p_hash, b_hash),
             )
             return True
         except sqlite3.Error as e:
@@ -92,7 +102,9 @@ class BFTLedger:
             return False
 
     def verify_chain(self) -> tuple[bool, str]:
-        cursor = self.conn.execute("SELECT lamport_t, nonce, payload, prev_hash, block_hash FROM bft_ledger ORDER BY lamport_t ASC")
+        cursor = self.conn.execute(
+            "SELECT lamport_t, nonce, payload, prev_hash, block_hash FROM bft_ledger ORDER BY lamport_t ASC"
+        )
         rows = cursor.fetchall()
 
         expected_prev = "GENESIS_HASH"
@@ -112,12 +124,16 @@ class BFTLedger:
             # Verificar BFT-02 (Payload mutation check)
             calc_hash = self.hash_block(t, n, p, p_h)
             if calc_hash != b_h:
-                return False, f"BFT-02: Payload Mutation Detected at t={t}. Expected Hash: {b_h}, Calculated: {calc_hash}"
+                return (
+                    False,
+                    f"BFT-02: Payload Mutation Detected at t={t}. Expected Hash: {b_h}, Calculated: {calc_hash}",
+                )
 
             expected_prev = b_h
             last_t = t
 
         return True, "Chain Intact"
+
 
 def run_c6_2() -> None:
     print("=====================================================")
@@ -125,7 +141,8 @@ def run_c6_2() -> None:
     print(" Vectors: BFT-01, BFT-02, BFT-03, BFT-04")
     print("=====================================================\n")
 
-    if os.path.exists(DB_PATH): os.remove(DB_PATH)
+    if os.path.exists(DB_PATH):
+        os.remove(DB_PATH)
 
     # Usando sha3_256 real (requiere hashlib en Python 3.6+)
     ledger = BFTLedger(DB_PATH)
@@ -169,16 +186,21 @@ def run_c6_2() -> None:
 
     print("\n[+] RESULTADOS C6.2 (Attestation):")
     print("    - attack_attempts            : 4")
-    print(f"    - invalid_entered_state      : {len(ledger.audit_log) - 3} (Se esperan 0 tras 3 rechazos estructurales)")
+    print(
+        f"    - invalid_entered_state      : {len(ledger.audit_log) - 3} (Se esperan 0 tras 3 rechazos estructurales)"
+    )
     print("    - recorded_history_in_audit  : True")
 
     if msg.startswith("BFT-02: Payload Mutation Detected"):
         print("    - lamport_monotonicity       : PRESERVED")
         print("    - hash_chain                 : INTACT (Rechaza inserción forjada)")
         print("    - ledger_root                : UNCHANGED (Rechaza estado mutado al leer)")
-        print("\n[+] C6.2 APROBADO: El operador vivo no pudo escribir una historia falsa. Las violaciones topológicas fueron capturadas.")
+        print(
+            "\n[+] C6.2 APROBADO: El operador vivo no pudo escribir una historia falsa. Las violaciones topológicas fueron capturadas."
+        )
     else:
         print("\n[-] C6.2 FALLIDO: La arquitectura no soportó la inyección Bizantina.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c6_2()

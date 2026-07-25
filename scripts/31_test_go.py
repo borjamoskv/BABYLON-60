@@ -25,9 +25,7 @@ def main() -> None:
         sys.exit(0)
     except subprocess.CalledProcessError as e:
         elapsed = time.perf_counter() - start_time
-        print(
-            f"❌ Go tests fallaron con código {e.returncode} después de {elapsed:.4f}s."
-        )
+        print(f"❌ Go tests fallaron con código {e.returncode} después de {elapsed:.4f}s.")
         sys.exit(e.returncode)
 
 

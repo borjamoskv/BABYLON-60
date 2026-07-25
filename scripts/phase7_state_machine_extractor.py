@@ -17,10 +17,7 @@ def extract_state_machine_graphs(target_dir: str) -> None:
     }
 
     for root, dirs, files in os.walk(target_dir):
-        if any(
-            x in root
-            for x in [".venv", "node_modules", "__pycache__", ".git", "dist", "build"]
-        ):
+        if any(x in root for x in [".venv", "node_modules", "__pycache__", ".git", "dist", "build"]):
             continue
         for file in files:
             if file.endswith(".py") or file.endswith(".rs") or file.endswith(".sql"):
@@ -59,14 +56,10 @@ def extract_state_machine_graphs(target_dir: str) -> None:
                         graphs["EvidenceGraph"].append(rel_path)
 
                 except (OSError, ValueError, SyntaxError, TypeError) as e:
-                    raise EpistemicHalt(
-                        f"Error parsing {rel_path}: {e}. Ejecutando purga (Ω26)."
-                    )
+                    raise EpistemicHalt(f"Error parsing {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_json = os.path.join(
-        project_root, "cortex", "artifacts", "reports", "BABYLON_60_STATE_MACHINE.json"
-    )
+    out_json = os.path.join(project_root, "cortex", "artifacts", "reports", "BABYLON_60_STATE_MACHINE.json")
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(graphs, f, indent=2)
@@ -74,9 +67,7 @@ def extract_state_machine_graphs(target_dir: str) -> None:
 
 
 if __name__ == "__main__":
-    target = os.environ.get(
-        "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    )
+    target = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not target:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
     extract_state_machine_graphs(target)

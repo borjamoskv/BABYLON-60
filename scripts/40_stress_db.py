@@ -16,9 +16,7 @@ def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
     try:
         memory = AgentMemory()
         start = time.perf_counter()
-        _ = memory.log(
-            issue_id=worker_id, agent_role="STRESS_TESTER", action="FIRE", result="OK"
-        )
+        _ = memory.log(issue_id=worker_id, agent_role="STRESS_TESTER", action="FIRE", result="OK")
         elapsed = time.perf_counter() - start
         return ("OK", worker_id, elapsed)
     except sqlite3.Error as e:
@@ -26,9 +24,7 @@ def worker(worker_id: int) -> tuple[str, int, Union[str, float]]:
 
 
 def run_stress_test(num_requests: int = 1000, max_workers: int = 100) -> None:
-    print(
-        f"Iniciando asedio C5-REAL SQLite WAL BFT | Requests: {num_requests} | Concurrency: {max_workers}"
-    )
+    print(f"Iniciando asedio C5-REAL SQLite WAL BFT | Requests: {num_requests} | Concurrency: {max_workers}")
 
     start_time = time.time()
 

@@ -85,9 +85,7 @@ def tarjan(graph: dict[str, list[str]]) -> list[list[str]]:
 
 
 def main() -> None:
-    target_dir = os.environ.get(
-        "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    )
+    target_dir = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     internal_namespaces = ["babylon60", "causal_isomorphism", "strike_rs", "cortex"]
 
     stats = {}
@@ -97,13 +95,7 @@ def main() -> None:
 
     # 1. Recorrer archivos y parsear AST
     for root, dirs, files in os.walk(target_dir):
-        if (
-            ".venv" in root
-            or "node_modules" in root
-            or "__pycache__" in root
-            or ".git" in root
-            or ".uv_python" in root
-        ):
+        if ".venv" in root or "node_modules" in root or "__pycache__" in root or ".git" in root or ".uv_python" in root:
             continue
         for file in files:
             if file.endswith(".py"):
@@ -127,9 +119,7 @@ def main() -> None:
                     internal_imports = set()
                     for imp in i_visitor.imports:
                         base = imp.split(".")[0]
-                        if base in internal_namespaces or any(
-                            imp.startswith(n) for n in internal_namespaces
-                        ):
+                        if base in internal_namespaces or any(imp.startswith(n) for n in internal_namespaces):
                             internal_imports.add(imp)
 
                     stats[rel_path] = {
@@ -143,9 +133,7 @@ def main() -> None:
                     fan_out[rel_path] = len(internal_imports)
 
                 except (SyntaxError, OSError, RuntimeError, ValueError, TypeError) as e:
-                    raise EpistemicHalt(
-                        f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26)."
-                    )
+                    raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     # 2. Calcular Fan-in
     for node, imports in import_graph.items():
@@ -165,23 +153,15 @@ def main() -> None:
     sccs = tarjan(module_graph)
 
     # 4. Generar reporte
-    top_loc = sorted(stats.items(), key=lambda x: int(str(x[1]["loc"])), reverse=True)[
-        :50
-    ]
-    top_complex = sorted(
-        stats.items(), key=lambda x: int(str(x[1]["complexity"])), reverse=True
-    )[:50]
+    top_loc = sorted(stats.items(), key=lambda x: int(str(x[1]["loc"])), reverse=True)[:50]
+    top_complex = sorted(stats.items(), key=lambda x: int(str(x[1]["complexity"])), reverse=True)[:50]
 
     # Hotspots: top_complex + top_fan_in + top_fan_out
     # Aproximamos calculando un "Hotspot Score"
     hotspots = []
     for rel_path, s in stats.items():
         base_module = rel_path.replace(".py", "").replace("/", ".")
-        score = (
-            int(str(s["complexity"]))
-            + fan_in.get(base_module, 0) * 2
-            + fan_out.get(rel_path, 0)
-        )
+        score = int(str(s["complexity"])) + fan_in.get(base_module, 0) * 2 + fan_out.get(rel_path, 0)
         hotspots.append(
             {
                 "file": rel_path,
@@ -198,9 +178,7 @@ def main() -> None:
         "files_analyzed": len(stats),
         "circular_dependencies": sccs,
         "hotspots": hotspots,
-        "top_50_complex": [
-            {"file": k, "complexity": v["complexity"]} for k, v in top_complex
-        ],
+        "top_50_complex": [{"file": k, "complexity": v["complexity"]} for k, v in top_complex],
         "top_50_loc": [{"file": k, "loc": v["loc"]} for k, v in top_loc],
     }
 

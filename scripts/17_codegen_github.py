@@ -110,12 +110,8 @@ def generate_centuria() -> list[PrimitiveDict]:
 def save_to_markdown(primitives: list[PrimitiveDict], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w") as f:
-        f.write(
-            "# █▄ CENTURIA MATRIX: 1000 GITHUB WEBHOOK/MCP PRIMITIVES (C5-REAL)\n\n"
-        )
-        f.write(
-            "Invariante: Mapeo ortogonal de 10 dominios de eventos GitHub contra 100 arquetipos APEX.\n\n"
-        )
+        f.write("# █▄ CENTURIA MATRIX: 1000 GITHUB WEBHOOK/MCP PRIMITIVES (C5-REAL)\n\n")
+        f.write("Invariante: Mapeo ortogonal de 10 dominios de eventos GitHub contra 100 arquetipos APEX.\n\n")
 
         current_domain = ""
         for p in primitives:

@@ -9,12 +9,15 @@ NUM_RUNS = 100
 
 from typing import Any
 
+
 def hash_block(lamport_t: int, nonce: str, payload: str, prev_hash: str) -> str:
-    data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+    data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
     return hashlib.sha3_256(data).hexdigest()
 
+
 def create_deterministic_ledger(db_path: str) -> sqlite3.Connection:
-    if os.path.exists(db_path): os.remove(db_path)
+    if os.path.exists(db_path):
+        os.remove(db_path)
     conn = sqlite3.connect(db_path, isolation_level=None)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
@@ -31,6 +34,7 @@ def create_deterministic_ledger(db_path: str) -> sqlite3.Connection:
     """)
     return conn
 
+
 def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str]:
     db_path = f"{DB_TEMPLATE}{run_id}.db"
     conn = create_deterministic_ledger(db_path)
@@ -38,7 +42,7 @@ def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str
     # 3. ORDENACIÓN CONCURRENTE: Tie-breaker determinista
     # Garantiza que si dos eventos ocurren en el mismo logical_time,
     # el orden de procesamiento será absoluto (por event_id lexicográfico).
-    sorted_events = sorted(event_log, key=lambda e: (e['logical_time'], e['event_id']))
+    sorted_events = sorted(event_log, key=lambda e: (e["logical_time"], e["event_id"]))
 
     history_hashes = []
     current_lamport = 0
@@ -48,17 +52,17 @@ def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str
         current_lamport += 1
 
         # 2. RNG INVISIBLE: Nonce derivado del ID de evento original en vez de random()
-        nonce = hashlib.sha256(event['event_id'].encode()).hexdigest()
+        nonce = hashlib.sha256(event["event_id"].encode()).hexdigest()
 
         # 1. TIMESTAMP LEAKAGE: Payload sin inyección de time.time() local.
-        payload = event['payload']
+        payload = event["payload"]
 
         # Generación Determinista de Estado Intermedio
         block_hash = hash_block(current_lamport, nonce, payload, current_hash)
 
         conn.execute(
             "INSERT INTO bft_ledger (lamport_t, nonce, payload, prev_hash, block_hash) VALUES (?, ?, ?, ?, ?)",
-            (current_lamport, nonce, payload, current_hash, block_hash)
+            (current_lamport, nonce, payload, current_hash, block_hash),
         )
 
         current_hash = block_hash
@@ -73,6 +77,7 @@ def execute_replay_run(run_id: int, event_log: list[dict[str, Any]]) -> list[str
 
     return history_hashes
 
+
 def generate_immutable_event_log(size: int = 500) -> list[dict[str, Any]]:
     events = []
     # Usamos random solo para fabricar el Event Log "desordenado" original
@@ -84,13 +89,16 @@ def generate_immutable_event_log(size: int = 500) -> list[dict[str, Any]]:
     random.shuffle(ids)
 
     for i in range(size):
-        events.append({
-            "event_id": ids[i],
-            # Colisiones forzadas en logical_time para validar el Tie-Breaker
-            "logical_time": random.randint(1, size // 10),
-            "payload": f"State Mutation Data {i}"
-        })
+        events.append(
+            {
+                "event_id": ids[i],
+                # Colisiones forzadas en logical_time para validar el Tie-Breaker
+                "logical_time": random.randint(1, size // 10),
+                "payload": f"State Mutation Data {i}",
+            }
+        )
     return events
+
 
 def run_c6_3() -> None:
     print("=====================================================")
@@ -143,5 +151,6 @@ def run_c6_3() -> None:
     else:
         print("\n[-] C6.3 FALLIDO: Desviación Estocástica Detectada en Reconstrucción.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c6_3()

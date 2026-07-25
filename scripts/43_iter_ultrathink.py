@@ -42,9 +42,7 @@ def run_itera_ultrathink(cycles: int = 16) -> None:
             # 1. Ejecutar compilación MCTS del Teorema físico (Ω31)
             print("[ITERA-ULTRATHINK] Ejecutando MCTS Physical Compiler...")
             engine = L3InferenceEnginePhysical(target_trajectories=1000)
-            theorem = engine.compile_theorem(
-                f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{cycle_num}_{time.time()}"
-            )
+            theorem = engine.compile_theorem(f"ULTRATHINK_PHYSICAL_COLLAPSE_ITER_{cycle_num}_{time.time()}")
 
             # Guardar el archivo compiled_theorem.py
             compiled_path = os.path.join("cortex", "compiled_theorem.py")
@@ -101,9 +99,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente o Desactivado por defecto
             validation_proc: subprocess.Popen[Any] | None = None
             if os.getenv("CORTEX_PARALLEL_VALIDATION") == "1":
-                print(
-                    "[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation..."
-                )
+                print("[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation...")
                 test_env = os.environ.copy()
                 validation_proc = subprocess.Popen(
                     [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
@@ -126,12 +122,8 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
             if validation_proc is not None:
                 exit_code = validation_proc.wait()
                 if exit_code != 0:
-                    raise RuntimeError(
-                        "OMEGA Node validation failed! Parallel AST state corrupted."
-                    )
-                print(
-                    "[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo completó con éxito. Aislamiento intacto."
-                )
+                    raise RuntimeError("OMEGA Node validation failed! Parallel AST state corrupted.")
+                print("[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo completó con éxito. Aislamiento intacto.")
 
             # 5. Git Sentinel: Guardar cambios en el ledger
             print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")
@@ -159,19 +151,13 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
 
             # 6. Purga de Entropía Periódica (Invariante 12)
             if cycle_num % 8 == 0:
-                print(
-                    "\n[ITERA-ULTRATHINK] [OCTAL PURGE] Ejecutando purga periódica de anergía (Regla 12)..."
-                )
+                print("\n[ITERA-ULTRATHINK] [OCTAL PURGE] Ejecutando purga periódica de anergía (Regla 12)...")
                 # Limpiar archivos temporales compilados
                 if os.path.exists(compiled_path):
                     os.remove(compiled_path)
                     # Sellar la purga en git
-                    subprocess.run(
-                        ["git", "add", "cortex/compiled_theorem.py"], check=True
-                    )
-                    purge_staged = subprocess.run(
-                        ["git", "diff", "--cached", "--quiet"]
-                    )
+                    subprocess.run(["git", "add", "cortex/compiled_theorem.py"], check=True)
+                    purge_staged = subprocess.run(["git", "diff", "--cached", "--quiet"])
                     if purge_staged.returncode != 0:
                         subprocess.run(
                             [
@@ -185,9 +171,7 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                             ],
                             check=True,
                         )
-                print(
-                    "[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado."
-                )
+                print("[ITERA-ULTRATHINK] [OCTAL PURGE] Purga completada. Espacio de trabajo ordenado.")
 
         except (RuntimeError, OSError, ValueError, subprocess.SubprocessError) as e:
             print(f"[ITERA-ULTRATHINK] FALLO ESTRUCTURAL EN CICLO {cycle_num}: {e}")

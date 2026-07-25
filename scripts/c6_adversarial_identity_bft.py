@@ -9,6 +9,7 @@ import uuid
 DB_PATH = "c6_adversarial_ledger.db"
 WAL_TARGET_SIZE_MB = 25  # Force a large WAL to widen the checkpoint window
 
+
 def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event) -> None:
     """
     Inyecta entropía masiva sin hacer checkpoint explícito para inflar el WAL.
@@ -17,7 +18,7 @@ def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event)
     conn = sqlite3.connect(db_path, timeout=10.0, isolation_level=None)
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=NORMAL")
-    conn.execute("PRAGMA wal_autocheckpoint=0") # Bloquea el checkpoint automático
+    conn.execute("PRAGMA wal_autocheckpoint=0")  # Bloquea el checkpoint automático
 
     conn.execute("""
         CREATE TABLE IF NOT EXISTS bft_ledger (
@@ -35,11 +36,12 @@ def writer_process(db_path: str, ready_event: multiprocessing.synchronize.Event)
             conn.execute("BEGIN TRANSACTION")
             for _ in range(500):
                 lamport += 1
-                payload = uuid.uuid4().hex * 10 # Payload artificialmente denso
+                payload = uuid.uuid4().hex * 10  # Payload artificialmente denso
                 conn.execute("INSERT INTO bft_ledger (lamport_t, payload) VALUES (?, ?)", (lamport, payload))
             conn.execute("COMMIT")
         except sqlite3.Error:
             pass
+
 
 def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.synchronize.Event) -> None:
     """
@@ -53,15 +55,18 @@ def checkpointer_process(db_path: str, start_checkpoint_event: multiprocessing.s
     except sqlite3.Error:
         pass
 
+
 def c6_adversarial_orchestrator() -> None:
     print("=====================================================")
     print(" C6 ADVERSARIAL IDENTITY VERIFICATION (BFT/WAL)")
     print(" Vector: kill_during_checkpoint")
     print("=====================================================\n")
 
-    if os.path.exists(DB_PATH): os.remove(DB_PATH)
+    if os.path.exists(DB_PATH):
+        os.remove(DB_PATH)
     wal_path = DB_PATH + "-wal"
-    if os.path.exists(wal_path): os.remove(wal_path)
+    if os.path.exists(wal_path):
+        os.remove(wal_path)
 
     ready_event = multiprocessing.Event()
     writer = multiprocessing.Process(target=writer_process, args=(DB_PATH, ready_event))
@@ -76,7 +81,7 @@ def c6_adversarial_orchestrator() -> None:
         if os.path.exists(wal_path):
             size = os.path.getsize(wal_path)
             if size > target_bytes:
-                print(f"[+] [T1] WAL alcanzó {size / (1024*1024):.2f} MB.")
+                print(f"[+] [T1] WAL alcanzó {size / (1024 * 1024):.2f} MB.")
                 break
         time.sleep(0.01)
 
@@ -128,14 +133,17 @@ def c6_adversarial_orchestrator() -> None:
         print(f"    - Lamport T Máximo       : {max_lamport}")
 
         if integrity == "ok" and count > 0:
-            print("\n[+] C6 RESULT: IDENTIDAD CONSERVADA. El WAL fue truncado violentamente pero SQLite restauró el Master Ledger sin corrupción de punteros.")
+            print(
+                "\n[+] C6 RESULT: IDENTIDAD CONSERVADA. El WAL fue truncado violentamente pero SQLite restauró el Master Ledger sin corrupción de punteros."
+            )
         else:
             print("\n[-] C6 RESULT: CORRUPCIÓN DETECTADA. La Base de Datos sufrió pérdida de identidad.")
 
     except sqlite3.DatabaseError as e:
         print(f"\n[-] C6 RESULT: ERROR ESTRUCTURAL CATASTRÓFICO. La base de datos es ilegible. Exception: {e}")
 
+
 if __name__ == "__main__":
     # Prevenimos fork issues en macOS activando explicit spawn
-    multiprocessing.set_start_method('spawn', force=True)
+    multiprocessing.set_start_method("spawn", force=True)
     c6_adversarial_orchestrator()

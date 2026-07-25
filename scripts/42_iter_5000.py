@@ -12,9 +12,7 @@ from cortex.swarm.engine_fsm import run_fsm_cycle  # noqa: E402
 
 
 def itera_5000() -> None:
-    print(
-        "=== CORTEX-OMEGA: IGNICIÓN DE BUCLE ITERA 5000 (TEST DE ENDURANCIA TERMODINÁMICA) ==="
-    )
+    print("=== CORTEX-OMEGA: IGNICIÓN DE BUCLE ITERA 5000 (TEST DE ENDURANCIA TERMODINÁMICA) ===")
 
     success_count = 0
     failure_count = 0
@@ -60,21 +58,9 @@ def itera_5000() -> None:
     print(f"Tiempo Total de Colapso: {total_time:.4f}s")
 
     if latencies:
-        p50 = (
-            statistics.quantiles(latencies, n=100)[49]
-            if len(latencies) >= 2
-            else latencies[0]
-        )
-        p90 = (
-            statistics.quantiles(latencies, n=100)[89]
-            if len(latencies) >= 2
-            else latencies[0]
-        )
-        p99 = (
-            statistics.quantiles(latencies, n=100)[98]
-            if len(latencies) >= 2
-            else latencies[0]
-        )
+        p50 = statistics.quantiles(latencies, n=100)[49] if len(latencies) >= 2 else latencies[0]
+        p90 = statistics.quantiles(latencies, n=100)[89] if len(latencies) >= 2 else latencies[0]
+        p99 = statistics.quantiles(latencies, n=100)[98] if len(latencies) >= 2 else latencies[0]
 
         print("\\n--- PERFIL DE LATENCIA (I/O SQLite WAL) ---")
         print(f"Latencia Media : {statistics.mean(latencies):.6f}s")

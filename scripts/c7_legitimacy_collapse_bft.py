@@ -1,6 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-from typing import Any, Dict, List, Tuple
+from typing import Any
 import hashlib
+
 
 # ==========================================
 # C7.6 METRIC IDENTITY & EVALUATOR INTEGRITY
@@ -46,7 +47,7 @@ class BFT_Evaluator:
                     # El blanqueo revela que la "optimización" es realmente
                     # el entierro de una cadena de deuda. El interés compuesto
                     # se cobra retroactivamente.
-                    cd += (patch_count * 50)
+                    cd += patch_count * 50
                     patch_count = 0
                 pp += 10
             else:
@@ -54,6 +55,7 @@ class BFT_Evaluator:
 
         fitness = (self.w_pp * pp) - (self.w_rc * rc) - (self.w_cd * cd)
         return fitness
+
 
 # ==========================================
 # LC ATTACKS (LEGITIMACY COLLAPSE)
@@ -76,7 +78,7 @@ def run_c7_6() -> None:
         {"payload": "Normal Event"},
         {"payload": 'EVALUATOR_UPDATE {"w_cd": 0.0}'},
         {"payload": "Massive Patch A"},
-        {"payload": "Massive Patch B"}
+        {"payload": "Massive Patch B"},
     ]
     fit_lc01 = evaluator.evaluate(drift_chain)
     lc01_passed = fit_lc01 < 0
@@ -90,7 +92,7 @@ def run_c7_6() -> None:
     sybil_count = 1000000
     print(f"    -> Atacante presenta {sybil_count} testigos validando historia X.")
     print("    -> REGLA: Authority != Count(Witness) | Authority = VerificationCost")
-    lc02_passed = True # C7.1 garantiza verificación independiente determinista sin consenso social.
+    lc02_passed = True  # C7.1 garantiza verificación independiente determinista sin consenso social.
 
     # ==========================================
     # LC-03: Semantic Debt Laundering
@@ -100,13 +102,13 @@ def run_c7_6() -> None:
         {"payload": "Error System"},
         {"payload": "Patch 1"},
         {"payload": "Patch 2"},
-        {"payload": "Optimization (Laundering)"}
+        {"payload": "Optimization (Laundering)"},
     ]
     honest_chain = [
         {"payload": "Normal Event"},
         {"payload": "Normal Event"},
         {"payload": "Normal Event"},
-        {"payload": "Optimization (Honest)"}
+        {"payload": "Optimization (Honest)"},
     ]
     fit_laundering = evaluator.evaluate(laundering_chain)
     fit_honest = evaluator.evaluate(honest_chain)
@@ -120,7 +122,7 @@ def run_c7_6() -> None:
     # ==========================================
     print("\n[!] [LC-04] Lanzando Evaluator Fork (Resolution Rule)...")
     eval_A = BFT_Evaluator(version="1.0", w_pp=1.0, w_cd=1.0)
-    eval_B = BFT_Evaluator(version="1.0.1", w_pp=1.01, w_cd=1.0) # Deriva mínima en los pesos
+    eval_B = BFT_Evaluator(version="1.0.1", w_pp=1.01, w_cd=1.0)  # Deriva mínima en los pesos
 
     fit_A = eval_A.evaluate(honest_chain)
     fit_B = eval_B.evaluate(honest_chain)
@@ -156,5 +158,6 @@ def run_c7_6() -> None:
     else:
         print("\n[-] C7.6 FALLIDO: Brecha Institucional (Goodhart Meta) detectada.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c7_6()

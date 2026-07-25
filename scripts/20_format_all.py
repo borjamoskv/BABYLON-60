@@ -39,9 +39,7 @@ def main() -> None:
 
     # 1. Python Formatting (Ruff)
     if not run_cmd("Ruff Format (Python)", ["uv", "run", "ruff", "format", "."]):
-        if not run_cmd(
-            "Ruff Format (Fallback)", [sys.executable, "-m", "ruff", "format", "."]
-        ):
+        if not run_cmd("Ruff Format (Fallback)", [sys.executable, "-m", "ruff", "format", "."]):
             success = False
 
     # 2. Go Formatting (gofmt)

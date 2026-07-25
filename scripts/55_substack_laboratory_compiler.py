@@ -64,11 +64,7 @@ def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
         lines.append(f"*{desc}*\n\n")
         if fpath.exists():
             content = fpath.read_text(encoding="utf-8").strip()
-            if (
-                filename.endswith(".py")
-                or filename.endswith(".sh")
-                or filename.endswith(".yml")
-            ):
+            if filename.endswith(".py") or filename.endswith(".sh") or filename.endswith(".yml"):
                 ext = filename.rsplit(".", 1)[-1]
                 lang = {"py": "python", "sh": "bash", "yml": "yaml"}.get(ext, ext)
                 lines.append(f"```{lang}\n{content}\n```\n")
@@ -79,9 +75,7 @@ def generate_post_draft(lab_dir: Path, experiment_name: str) -> str:
 
     lines.append("\n---\n")
     lines.append("\n⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):\n")
-    lines.append(
-        "- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)\n"
-    )
+    lines.append("- [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)\n")
 
     return "\n".join(lines)
 
@@ -171,9 +165,7 @@ python3 03_codigo.py
         filepath = lab_dir / filename
         try:
             filepath.write_text(content, encoding="utf-8")
-            manifest["files"].append(
-                {"name": filename, "sha3_256": sha3_256_hash(content)}
-            )
+            manifest["files"].append({"name": filename, "sha3_256": sha3_256_hash(content)})
         except OSError as e:
             fail_fast(f"Failed to write file {filepath}: {e}")
 
@@ -182,9 +174,7 @@ python3 03_codigo.py
     draft_path = lab_dir / "post_draft.md"
     try:
         draft_path.write_text(draft_content, encoding="utf-8")
-        manifest["files"].append(
-            {"name": "post_draft.md", "sha3_256": sha3_256_hash(draft_content)}
-        )
+        manifest["files"].append({"name": "post_draft.md", "sha3_256": sha3_256_hash(draft_content)})
     except OSError as e:
         fail_fast(f"Failed to write post draft: {e}")
 

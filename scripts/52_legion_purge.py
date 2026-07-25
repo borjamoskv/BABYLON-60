@@ -10,9 +10,7 @@ from typing import Any
 def run_ruff_fix() -> None:
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")
     try:
-        res = subprocess.run(
-            ["ruff", "check", ".", "--fix"], capture_output=True, text=True, check=True
-        )
+        res = subprocess.run(["ruff", "check", ".", "--fix"], capture_output=True, text=True, check=True)
         print(res.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix failed: {e.stdout}\n{e.stderr}")
@@ -80,9 +78,7 @@ def execute_swarm_audit() -> None:
                     "TypeName": "self" if b_idx > 0 else "research",
                     "Role": role,
                     "Prompt": prompt_str,
-                    "Workspace": "branch"
-                    if b_idx in [1, 2, 3, 5, 6]
-                    else ("inherit" if b_idx in [0, 7] else "share"),
+                    "Workspace": "branch" if b_idx in [1, 2, 3, 5, 6] else ("inherit" if b_idx in [0, 7] else "share"),
                 }
             )
             total_id += 1
@@ -96,9 +92,7 @@ def execute_swarm_audit() -> None:
         print(f"Warn: CORTEX_BRAIN_DIR '{brain_dir}' not found.")
         return
 
-    transcripts = glob.glob(
-        os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
-    )
+    transcripts = glob.glob(os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True)
     if transcripts:
         transcripts.sort(key=os.path.getmtime, reverse=True)
         transcript_path = transcripts[0]

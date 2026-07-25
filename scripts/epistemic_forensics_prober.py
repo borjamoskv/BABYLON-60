@@ -3,16 +3,12 @@ import os
 import re
 import json
 
-TARGET_DIR = os.environ.get(
-    "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-)
+TARGET_DIR = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 if not TARGET_DIR:
     raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUTPUT_JSON = os.path.join(
-    PROJECT_ROOT, "cortex", "artifacts", "reports", "BABYLON_60_EPISTEMOLOGY.json"
-)
+OUTPUT_JSON = os.path.join(PROJECT_ROOT, "cortex", "artifacts", "reports", "BABYLON_60_EPISTEMOLOGY.json")
 
 
 def scan_file(filepath: str) -> str:
@@ -51,9 +47,7 @@ def classify_files(target_dir: str) -> dict[str, list[str]]:
 
         for file in files:
             # Only care about source files
-            if not file.endswith(
-                (".py", ".rs", ".lean", ".ts", ".tsx", ".js", ".yaml", ".yml", ".sol")
-            ):
+            if not file.endswith((".py", ".rs", ".lean", ".ts", ".tsx", ".js", ".yaml", ".yml", ".sol")):
                 continue
 
             full_path = os.path.join(root, file)
@@ -65,11 +59,7 @@ def classify_files(target_dir: str) -> dict[str, list[str]]:
                 continue
 
             # Tests
-            if (
-                "tests/" in rel_path
-                or file.startswith("test_")
-                or file.endswith("_test.py")
-            ):
+            if "tests/" in rel_path or file.startswith("test_") or file.endswith("_test.py"):
                 classification["Verified_by_Tests"].append(rel_path)
                 continue
 

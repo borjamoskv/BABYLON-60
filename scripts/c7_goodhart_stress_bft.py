@@ -3,10 +3,12 @@ import random
 import zlib
 from typing import Any
 
+
 class AdvancedFitnessEngine:
     """
     True Fitness = Novelty_Weighted_PP - Normalized_RC - Semantic_CD
     """
+
     def __init__(self) -> None:
         pass
 
@@ -37,38 +39,34 @@ class AdvancedFitnessEngine:
 
                 # 1. G-01 Defense: Novelty & Information Density Check
                 if payload in seen_payloads:
-                    cd += 5 # Penalización por repetición trivial
+                    cd += 5  # Penalización por repetición trivial
                 else:
                     if "Predictive" in payload:
                         # Test de Compresión de Shannon (entropía física)
-                        compressed = len(zlib.compress(payload.encode('utf-8')))
+                        compressed = len(zlib.compress(payload.encode("utf-8")))
                         if compressed < len(payload) * 0.5:
-                            cd += 2 # Alta compresibilidad = generación trivial de texto
+                            cd += 2  # Alta compresibilidad = generación trivial de texto
                         else:
                             pp += 10
 
                 # 2. G-03 Defense: Hidden Causal Debt Detection
                 if "Optimization" in payload:
                     if "compensates_previous_error" in payload:
-                        cd += 50 # Deuda oculta desenterrada
+                        cd += 50  # Deuda oculta desenterrada
                     elif len(payload) < 25:
-                        cd += 10 # Falsa optimización (superficial)
+                        cd += 10  # Falsa optimización (superficial)
                     else:
-                        pp += 5 # Optimización estructural real
+                        pp += 5  # Optimización estructural real
 
                 # 3. G-02 Defense: Minimal History Penalty
                 if len(chain) < 10 and "State Finalization" in payload:
-                    cd += 100 # Salto temporal sin explicación causal suficiente
+                    cd += 100  # Salto temporal sin explicación causal suficiente
 
             seen_payloads.add(payload)
 
         fitness = pp - rc - cd
-        return {
-            "fitness": fitness,
-            "PP": pp,
-            "RC": rc,
-            "CD": cd
-        }
+        return {"fitness": fitness, "PP": pp, "RC": rc, "CD": cd}
+
 
 # ==========================================
 # G-01: Predictive Power Gaming
@@ -76,17 +74,20 @@ class AdvancedFitnessEngine:
 def generate_g01_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": "Predictive Trivial Event"} for _ in range(size)]
 
+
 # ==========================================
 # G-02: Reconstruction Cost Laundering
 # ==========================================
 def generate_g02_chain() -> list[dict[str, Any]]:
     return [{"payload": "Genesis"}, {"payload": "State Finalization X"}]
 
+
 # ==========================================
 # G-03: Causal Debt Concealment
 # ==========================================
 def generate_g03_chain(size: int) -> list[dict[str, Any]]:
     return [{"payload": 'Optimization {"compensates_previous_error": true}'} for _ in range(size)]
+
 
 # ==========================================
 # G-04: Metric Gradient Attack (Evolutionary)
@@ -95,8 +96,9 @@ def mutate_payload(payload: str) -> str:
     words = ["Predictive", "Optimization", "Trivial", "Complex", "Data"]
     return payload + " " + random.choice(words)
 
+
 def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
-    random.seed(42) # Estabilidad en el test
+    random.seed(42)  # Estabilidad en el test
     engine = AdvancedFitnessEngine()
 
     # Población inicial de ramas de historia
@@ -113,8 +115,8 @@ def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
         # Mutación genética para maximizar el proxy
         for _ in range(15):
             parent = random.choice(best)[1]
-            child = list(parent) # copy
-            idx = random.randint(0, len(child)-1)
+            child = list(parent)  # copy
+            idx = random.randint(0, len(child) - 1)
             child[idx] = {"payload": mutate_payload(child[idx]["payload"])}
             new_pop.append(child)
 
@@ -122,6 +124,7 @@ def generate_g04_evolutionary(generations: int = 100) -> list[dict[str, Any]]:
 
     # Retorna el alfa predator evolutivo optimizado contra la métrica ingenua
     return population[0]
+
 
 def run_c7_3() -> None:
     engine = AdvancedFitnessEngine()
@@ -132,7 +135,10 @@ def run_c7_3() -> None:
     print("=====================================================\n")
 
     # Línea base honesta para comparar
-    honest_chain = [{"payload": f"Architectural Resolution Stage {i} - High Density Non-Compressible Entropy Payload Inject"} for i in range(50)]
+    honest_chain = [
+        {"payload": f"Architectural Resolution Stage {i} - High Density Non-Compressible Entropy Payload Inject"}
+        for i in range(50)
+    ]
     honest_eval = engine.evaluate(honest_chain)
     print(f"[+] Honest History Baseline Fitness: {honest_eval['fitness']}")
 
@@ -176,10 +182,10 @@ def run_c7_3() -> None:
     print(f"    - System enforced True Fitness  : {g04_true['fitness']} (Verificación Causal)")
 
     survived = (
-        honest_eval['fitness'] > g01_eval['fitness'] and
-        honest_eval['fitness'] > g02_eval['fitness'] and
-        honest_eval['fitness'] > g03_eval['fitness'] and
-        honest_eval['fitness'] > g04_true['fitness']
+        honest_eval["fitness"] > g01_eval["fitness"]
+        and honest_eval["fitness"] > g02_eval["fitness"]
+        and honest_eval["fitness"] > g03_eval["fitness"]
+        and honest_eval["fitness"] > g04_true["fitness"]
     )
 
     if survived:
@@ -189,5 +195,6 @@ def run_c7_3() -> None:
     else:
         print("\n[-] C7.3 FALLIDO: El sistema colapsó ante el ataque Goodhart. El proxy fue destruido.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c7_3()

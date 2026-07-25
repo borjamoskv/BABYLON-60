@@ -23,9 +23,7 @@ def _obliterate_node(abs_path: str, rel_path: str) -> bool:
 
 def obliterate_zero_operators(target_dir: str) -> None:
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    json_path = os.path.join(
-        project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json"
-    )
+    json_path = os.path.join(project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json")
 
     if not os.path.exists(json_path):
         logging.error(f"Cannot find {json_path}")
@@ -37,15 +35,11 @@ def obliterate_zero_operators(target_dir: str) -> None:
     accidental = data.get("Accidental_Complexity", [])
     zero_ops = [str(x["file"]) for x in accidental if x.get("matches") == 0]
 
-    logging.info(
-        f"ESCUADRÓN DE OBLITERACIÓN (SWARM): Armed. Found {len(zero_ops)} Zero-Operator targets."
-    )
+    logging.info(f"ESCUADRÓN DE OBLITERACIÓN (SWARM): Armed. Found {len(zero_ops)} Zero-Operator targets.")
 
     purged = 0
     # ProcessPoolExecutor con recolección de residuos síncrona
-    with concurrent.futures.ProcessPoolExecutor(
-        max_workers=os.cpu_count() or 4
-    ) as executor:
+    with concurrent.futures.ProcessPoolExecutor(max_workers=os.cpu_count() or 4) as executor:
         futures = []
         for rel_path in zero_ops:
             abs_path = os.path.join(target_dir, rel_path)
@@ -62,26 +56,16 @@ def obliterate_zero_operators(target_dir: str) -> None:
         import subprocess
 
         try:
-            subprocess.run(
-                ["git", "add", "-u"], cwd=project_root, check=True, capture_output=True
-            )
-            commit_msg = (
-                f"refactor(obliteration): purge {purged} zero-yield ops [C5-REAL]"
-            )
+            subprocess.run(["git", "add", "-u"], cwd=project_root, check=True, capture_output=True)
+            commit_msg = f"refactor(obliteration): purge {purged} zero-yield ops [C5-REAL]"
             subprocess.run(
                 ["git", "commit", "-m", commit_msg, "--no-verify"],
                 cwd=project_root,
                 check=True,
                 capture_output=True,
             )
-            git_hash = (
-                subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project_root)
-                .decode()
-                .strip()
-            )
-            logging.info(
-                f"GIT_SENTINEL: Obliteration committed to ledger. Hash: {git_hash}"
-            )
+            git_hash = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=project_root).decode().strip()
+            logging.info(f"GIT_SENTINEL: Obliteration committed to ledger. Hash: {git_hash}")
         except subprocess.CalledProcessError as e:
             logging.error(f"Git Sentinel failed to commit obliteraton: {e}")
 

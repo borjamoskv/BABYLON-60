@@ -12,9 +12,7 @@ def get_process_memory_map(pid: int) -> List[Dict[str, Any]]:
     """
     try:
         # Require sudo/entitlements for task_for_pid
-        result = subprocess.run(
-            ["vmmap", str(pid)], capture_output=True, text=True, check=True
-        )
+        result = subprocess.run(["vmmap", str(pid)], capture_output=True, text=True, check=True)
     except subprocess.CalledProcessError as e:
         print(f"Error executing vmmap: {e.stderr}", file=sys.stderr)
         sys.exit(1)
@@ -40,10 +38,7 @@ def get_process_memory_map(pid: int) -> List[Dict[str, Any]]:
             # 3. Focus on heap, malloc, and anonymous memory
 
             is_rw = "r" in perms and "w" in perms
-            is_shared_cache = (
-                "shared" in region_data["details"].lower()
-                or "SM=SHM" in region_data["details"]
-            )
+            is_shared_cache = "shared" in region_data["details"].lower() or "SM=SHM" in region_data["details"]
 
             if is_rw and not is_shared_cache:
                 filtered_regions.append(
@@ -67,8 +62,6 @@ if __name__ == "__main__":
     pid = int(sys.argv[1])
     regions = get_process_memory_map(pid)
 
-    print(
-        f"[C5-REAL] Regiones R/W extraidas (Excluyendo Shared Cache) para PID {pid}: {len(regions)}"
-    )
+    print(f"[C5-REAL] Regiones R/W extraidas (Excluyendo Shared Cache) para PID {pid}: {len(regions)}")
     for r in regions:
         print(f"{r['start']} - {r['end']} | Size: {r['size']} | Type: {r['type']}")

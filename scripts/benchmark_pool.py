@@ -20,22 +20,15 @@ from scripts.gemini_pool_manager import GeminiProPoolManager, EpistemicPoolHalt 
 
 def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> None:
     print("============================================================")
-    print(
-        f"  BENCHMARK SIMULATION: {num_slots} CUENTAS PRO | {total_requests} PETICIONES"
-    )
+    print(f"  BENCHMARK SIMULATION: {num_slots} CUENTAS PRO | {total_requests} PETICIONES")
     print("============================================================")
 
     # Inyectar claves simuladas en el entorno
-    mock_env = {
-        f"GEMINI_API_KEY_{i:02d}": f"mock_key_slot_{i:02d}"
-        for i in range(1, num_slots + 1)
-    }
+    mock_env = {f"GEMINI_API_KEY_{i:02d}": f"mock_key_slot_{i:02d}" for i in range(1, num_slots + 1)}
 
     with patch.dict(os.environ, mock_env, clear=True):
         manager = GeminiProPoolManager()
-        print(
-            f"✅ Pool Inicializado: {len(manager.slots)} Slots de Cuentas PRO Cargados."
-        )
+        print(f"✅ Pool Inicializado: {len(manager.slots)} Slots de Cuentas PRO Cargados.")
 
         start_time = time.perf_counter()
         dispatched_counts = {slot.slot_id: 0 for slot in manager.slots}
@@ -49,7 +42,9 @@ def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> No
                 # Todos los slots en cooldown -> esperar a que expire el mas proximo
                 earliest = min(s.cooldown_until for s in manager.slots)
                 sleep_needed = max(0.0, earliest - time.time()) + 0.01
-                print(f" ⏳ Todos los slots en cooldown. Conmutando... Esperando {sleep_needed:.2f}s para recuperacion.")
+                print(
+                    f" ⏳ Todos los slots en cooldown. Conmutando... Esperando {sleep_needed:.2f}s para recuperacion."
+                )
                 time.sleep(sleep_needed)
                 slot = manager.get_next_available_slot()
 
@@ -63,9 +58,7 @@ def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> No
                     f" ⚠️  Request #{req_id:02d} -> Slot #{slot.slot_id:02d} | Inyectado 429 Rate-Limit -> Cooldown Activo"
                 )
             else:
-                print(
-                    f" ⚡ Request #{req_id:02d} -> Slot #{slot.slot_id:02d} ({slot.api_key[:12]}...) -> OK [200]"
-                )
+                print(f" ⚡ Request #{req_id:02d} -> Slot #{slot.slot_id:02d} ({slot.api_key[:12]}...) -> OK [200]")
 
         elapsed = time.perf_counter() - start_time
         ops_per_sec = total_requests / elapsed if elapsed > 0 else 0
@@ -74,9 +67,7 @@ def run_simulated_benchmark(num_slots: int = 10, total_requests: int = 80) -> No
         print("  RESULTADOS DEL BENCHMARK")
         print("============================================================")
         print(f"  Peticiones Totales:       {total_requests}")
-        print(
-            f"  Eventos 429 Interceptados: {rate_limits_simulated} (Recuperados sin fallo)"
-        )
+        print(f"  Eventos 429 Interceptados: {rate_limits_simulated} (Recuperados sin fallo)")
         print(f"  Tiempo Transcurrido:      {elapsed:.4f}s")
         print(f"  Throughput Estimado:       {ops_per_sec:.2f} req/s")
         print("------------------------------------------------------------")

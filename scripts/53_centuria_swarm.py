@@ -27,9 +27,7 @@ def run_ruff_fix() -> None:
             check=True,
             capture_output=True,
         )
-        subprocess.run(
-            ["ruff", "format", "."], cwd=PROJECT_ROOT, check=True, capture_output=True
-        )
+        subprocess.run(["ruff", "format", "."], cwd=PROJECT_ROOT, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix/format failed: {e.stderr.decode('utf-8', errors='ignore')}")
 
@@ -50,9 +48,7 @@ def deploy_centuria_swarm() -> None:
 
     total_agents = 0
     for cent_idx, (cent_name, cent_desc) in enumerate(centuria_definitions):
-        print(
-            f"  🌀 Inicializando Centuria {cent_idx + 1}/3: {cent_name} ({cent_desc})..."
-        )
+        print(f"  🌀 Inicializando Centuria {cent_idx + 1}/3: {cent_name} ({cent_desc})...")
         for agent_idx in range(111):
             agent_role = f"{cent_name}-{agent_idx + 1:03d}"
             # Causal seed based on centuria and index
@@ -72,9 +68,7 @@ def deploy_centuria_swarm() -> None:
                     "TypeName": "self" if cent_idx > 0 else "research",
                     "Role": agent_role,
                     "Prompt": prompt_str,
-                    "Workspace": "share"
-                    if cent_idx == 2
-                    else ("branch" if cent_idx == 1 else "inherit"),
+                    "Workspace": "share" if cent_idx == 2 else ("branch" if cent_idx == 1 else "inherit"),
                 }
             )
             total_agents += 1
@@ -88,9 +82,7 @@ def deploy_centuria_swarm() -> None:
 
     import glob
 
-    transcripts = glob.glob(
-        os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True
-    )
+    transcripts = glob.glob(os.path.join(brain_dir, "**", "transcript.jsonl"), recursive=True)
     if transcripts:
         transcripts.sort(key=os.path.getmtime, reverse=True)
         transcript_path = transcripts[0]

@@ -29,9 +29,7 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5") -> Non
     cursor.execute("PRAGMA journal_mode = WAL;")
     cursor.execute("PRAGMA busy_timeout = 5000;")
 
-    cursor.execute(
-        "SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1"
-    )
+    cursor.execute("SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1")
     row = cursor.fetchone()
     if row:
         prev_hash = row[0]
@@ -57,9 +55,7 @@ def write_to_ledger(payload: str, agent_id: str = "tdah_orphan_purge_c5") -> Non
 
 
 def audit_and_purge_orphans() -> None:
-    print(
-        f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)..."
-    )
+    print(f"[{time.strftime('%H:%M:%S')}] Iniciando TDAH Orphan Thread Purge (C5-REAL)...")
 
     # Extraer procesos con PPID = 1, %CPU > 10.0 (Thrashing)
     cmd = ["ps", "-eo", "pid,ppid,pcpu,command"]
@@ -89,9 +85,7 @@ def audit_and_purge_orphans() -> None:
 
         # Si es huerfano (PPID=1) y consume exergía excesiva (ej. > 50.0%)
         if ppid == 1 and pcpu > 50.0:
-            print(
-                f"[TDAH Detectado] Hilo huérfano consumiendo CPU: PID {pid} | {pcpu}% | {command}"
-            )
+            print(f"[TDAH Detectado] Hilo huérfano consumiendo CPU: PID {pid} | {pcpu}% | {command}")
             # Brutalismo Cinético
             try:
                 os.kill(pid, signal.SIGKILL)
@@ -109,13 +103,9 @@ def audit_and_purge_orphans() -> None:
     if purged_count > 0 or payload_log:
         full_payload = "\\n".join(payload_log)
         write_to_ledger(f"TDAH Purge Result:\\n{full_payload}")
-        print(
-            f"[{time.strftime('%H:%M:%S')}] Purga completada. {purged_count} vectores de entropía aniquilados."
-        )
+        print(f"[{time.strftime('%H:%M:%S')}] Purga completada. {purged_count} vectores de entropía aniquilados.")
     else:
-        print(
-            f"[{time.strftime('%H:%M:%S')}] Cero Anergía detectada. Homeostasis confirmada. Abortando JIT."
-        )
+        print(f"[{time.strftime('%H:%M:%S')}] Cero Anergía detectada. Homeostasis confirmada. Abortando JIT.")
 
 
 if __name__ == "__main__":

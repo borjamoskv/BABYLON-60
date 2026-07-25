@@ -87,9 +87,7 @@ pub fn get_generated_action(index: usize) -> Option<fn(&PrimitiveIdentity)> {{
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     with open(output_path, "w") as f:
         f.write(rust_code)
-    print(
-        f"Generated domain-routed transductor (10 domains, 10000 primitives O(1) space) in {output_path}"
-    )
+    print(f"Generated domain-routed transductor (10 domains, 10000 primitives O(1) space) in {output_path}")
 
 
 if __name__ == "__main__":

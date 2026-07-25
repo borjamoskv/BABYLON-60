@@ -35,9 +35,7 @@ def classify_omega_theorem(target_dir: str) -> None:
         ):
             continue
         for file in files:
-            if not (
-                file.endswith(".py") or file.endswith(".rs") or file.endswith(".sql")
-            ):
+            if not (file.endswith(".py") or file.endswith(".rs") or file.endswith(".sql")):
                 continue
 
             filepath = os.path.join(root, file)
@@ -87,24 +85,16 @@ def classify_omega_theorem(target_dir: str) -> None:
                         classification["Commit"].append(rel_path)
                 else:
                     # Entropic residue (0 matches or >1 match)
-                    reason = (
-                        "Overlapping Operators"
-                        if matches > 1
-                        else "No Logical Operator"
-                    )
+                    reason = "Overlapping Operators" if matches > 1 else "No Logical Operator"
                     classification["Accidental_Complexity"].append(
                         {"file": rel_path, "reason": reason, "matches": matches}
                     )
 
             except (OSError, ValueError, TypeError, SyntaxError) as e:
-                raise EpistemicHalt(
-                    f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26)."
-                )
+                raise EpistemicHalt(f"Error parseando {rel_path}: {e}. Ejecutando purga (Ω26).")
 
     project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    out_json = os.path.join(
-        project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json"
-    )
+    out_json = os.path.join(project_root, "cortex", "artifacts", "reports", "BABYLON_60_THEOREM_OMEGA.json")
     os.makedirs(os.path.dirname(out_json), exist_ok=True)
     with open(out_json, "w") as f:
         json.dump(classification, f, indent=2)
@@ -112,9 +102,7 @@ def classify_omega_theorem(target_dir: str) -> None:
 
 
 if __name__ == "__main__":
-    target = os.environ.get(
-        "CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    )
+    target = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     if not target:
         raise RuntimeError("CORTEX_TARGET_DIR env var is required (Ω23).")
     classify_omega_theorem(target)

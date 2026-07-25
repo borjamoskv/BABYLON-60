@@ -122,9 +122,7 @@ async def main() -> None:
 
     # Verify table physical existence before firing (Ω22)
     _verify_conn = sqlite3.connect(mesh_db, timeout=5.0)
-    _verify_cur = _verify_conn.execute(
-        "SELECT name FROM sqlite_master WHERE type='table' AND name='memristor_weights'"
-    )
+    _verify_cur = _verify_conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='memristor_weights'")
     assert _verify_cur.fetchone() is not None, "Ω22: memristor_weights table MUST exist before stress firing"
     _verify_conn.close()
 

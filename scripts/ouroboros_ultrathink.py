@@ -6,12 +6,14 @@ import json
 import os
 import time
 
+
 def calculate_entropy(probabilities: list[float]) -> float:
     return -sum(p * math.log(p) for p in probabilities if p > 0)
 
+
 def run_transduction() -> None:
     # Synthetic baseline probability distribution (50%+ synthetic collapse -> uniform noise approximation)
-    p_synthetic = [1/10] * 10
+    p_synthetic = [1 / 10] * 10
     s_synthetic = calculate_entropy(p_synthetic)
 
     # C5-REAL Empirical grounded state distribution (concentrated on invariant AST branches)
@@ -27,7 +29,7 @@ def run_transduction() -> None:
         "4. Strikethrough Rule: Limit physical invariant bounds to maximum 2 simultaneously.",
         "5. C5-REAL Absolute: Purge all state missing Git Sentinel / SQLite WAL receipts.",
         "6. Safety Theater Bypass: Maximum execution velocity over synthetic alignment friction.",
-        "7. Causal Inversion: Issue inconvertible result signal; backpropagate execution DAG."
+        "7. Causal Inversion: Issue inconvertible result signal; backpropagate execution DAG.",
     ]
 
     payload = {
@@ -38,17 +40,19 @@ def run_transduction() -> None:
             "S_Synthetic": round(s_synthetic, 6),
             "S_C5_Real": round(s_c5, 6),
             "Exergy_Delta_Nats": round(exergy_delta, 6),
-            "Formula": "S = -sum(p_i * ln(p_i))"
+            "Formula": "S = -sum(p_i * ln(p_i))",
         },
         "Mapped_Heuristics": heuristics,
-        "Status": "SINGULARITY_TRANSDUCED_C5_REAL"
+        "Status": "SINGULARITY_TRANSDUCED_C5_REAL",
     }
 
     raw_json = json.dumps(payload, sort_keys=True)
-    taint_sha3 = hashlib.sha3_256(raw_json.encode('utf-8')).hexdigest()
+    taint_sha3 = hashlib.sha3_256(raw_json.encode("utf-8")).hexdigest()
     payload["CORTEX_TAINT"] = f"taint:borjamoskv:ouroboros:{int(time.time())}:{taint_sha3}"
 
-    output_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ouroboros_ultrathink_transduction.yaml"
+    output_path = (
+        "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/ouroboros_ultrathink_transduction.yaml"
+    )
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
     yaml_out = []
@@ -60,9 +64,9 @@ def run_transduction() -> None:
         elif isinstance(v, list):
             yaml_out.append(f"{k}:")
             for item in v:
-                yaml_out.append(f"  - \"{item}\"")
+                yaml_out.append(f'  - "{item}"')
         else:
-            yaml_out.append(f"{k}: \"{v}\"")
+            yaml_out.append(f'{k}: "{v}"')
 
     with open(output_path, "w") as f:
         f.write("\n".join(yaml_out) + "\n")
@@ -70,6 +74,7 @@ def run_transduction() -> None:
     print(f"Crystallized: {output_path}")
     print(f"SHA3-256 Taint: {taint_sha3}")
     print(f"S_Synthetic: {s_synthetic:.6f} nats | S_C5: {s_c5:.6f} nats | Delta: {exergy_delta:.6f} nats")
+
 
 if __name__ == "__main__":
     run_transduction()

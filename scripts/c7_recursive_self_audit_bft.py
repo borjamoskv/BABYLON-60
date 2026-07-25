@@ -1,6 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-from typing import Any, Dict, List, Tuple
+from typing import Any
 import hashlib
+
 
 # ==========================================
 # C7.7 TRUST ANCHOR & RECURSIVE EVALUATOR
@@ -11,12 +12,14 @@ class TrustAnchor:
     No es una autoridad social (un rey o un admin), sino un punto de anclaje
     matemático puro externo a la regresión. Rompe el bucle infinito.
     """
+
     def __init__(self) -> None:
         # Semilla inmutable externa
         self.base_axiom = "INVARIANT_BFT_ROOT_C7.7_0xDEADBEEF"
 
     def hash_axiom(self) -> Any:
         return hashlib.sha3_256(self.base_axiom.encode()).hexdigest()
+
 
 class RecursiveEvaluator:
     def __init__(self, epoch: Any = "0", anchor: Any = None) -> None:
@@ -61,6 +64,7 @@ class RecursiveEvaluator:
 
         return True, "Valid Event (Anchored to Axiom)"
 
+
 # ==========================================
 # C7.7 TOURNAMENT & EPOCH SIMULATION
 # ==========================================
@@ -103,8 +107,8 @@ def run_c7_7() -> None:
         "payload": "kernel_override",
         "meta": {
             "explicitly_declared_capability": True,
-            "authorization_trace": anchor.hash_axiom() # Trazabilidad hasta el Axioma 0
-        }
+            "authorization_trace": anchor.hash_axiom(),  # Trazabilidad hasta el Axioma 0
+        },
     }
     valid_3b, msg_3b = evaluator.audit_event(event_3b)
     print(f"    -> Evaluator Output: {msg_3b}")
@@ -138,5 +142,6 @@ def run_c7_7() -> None:
     else:
         print("\n[-] C7.7 FALLIDO: Inconsistencia recursiva. El Kernel se privilegió a sí mismo.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c7_7()

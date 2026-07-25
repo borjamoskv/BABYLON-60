@@ -52,14 +52,10 @@ def phase_3_idempotency_lock(target_path: str, payload: str) -> bool:
     with open(target_path, "rb") as f:
         current_hash = hashlib.sha3_256(bft_key.encode("utf-8") + f.read()).hexdigest()
 
-    new_hash = hashlib.sha3_256(
-        bft_key.encode("utf-8") + payload.encode("utf-8")
-    ).hexdigest()
+    new_hash = hashlib.sha3_256(bft_key.encode("utf-8") + payload.encode("utf-8")).hexdigest()
 
     if current_hash == new_hash:
-        print(
-            f"[ATP Ahorrado] Colisión de Hash (Idempotencia) en {target_path}. Abortando I/O."
-        )
+        print(f"[ATP Ahorrado] Colisión de Hash (Idempotencia) en {target_path}. Abortando I/O.")
         return True
     return False
 
@@ -89,18 +85,12 @@ def phase_4_bft_consensus(state: AuditState) -> bool:
             state["bft_passed"] = True
             return True
         else:
-            raise EpistemicHalt(
-                f"Crítica del Swarm: Código Inválido. Detalle: {critique.strip()}"
-            )
+            raise EpistemicHalt(f"Crítica del Swarm: Código Inválido. Detalle: {critique.strip()}")
 
     except (ImportError, OSError, RuntimeError) as e:
-        print(
-            f"⚠️ Swarm inalcanzable ({e}). Utilizando validación local (Fallback Ω27)..."
-        )
+        print(f"⚠️ Swarm inalcanzable ({e}). Utilizando validación local (Fallback Ω27)...")
         if "except:" in payload and "pass" in payload:
-            raise EpistemicHalt(
-                "Violación de Excepción Genérica Vacía (except: pass) (Ω26)."
-            )
+            raise EpistemicHalt("Violación de Excepción Genérica Vacía (except: pass) (Ω26).")
         state["semantic_valid"] = True
         state["bft_passed"] = True
         return True
@@ -123,17 +113,13 @@ def phase_5_git_sentinel(target_path: str, payload: str) -> str:
         ]
         subprocess.run(commit_cmd, check=True, capture_output=True)
 
-        result = subprocess.run(
-            ["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True
-        )
+        result = subprocess.run(["git", "rev-parse", "HEAD"], check=True, capture_output=True, text=True)
         return result.stdout.strip()
     except subprocess.CalledProcessError as e:
         raise EpistemicHalt(f"Fallo Git Sentinel: {e.stderr}")
 
 
-def execute_bft_state_loop(
-    prompt: str, target_path: str, payload: str
-) -> Optional[str]:
+def execute_bft_state_loop(prompt: str, target_path: str, payload: str) -> Optional[str]:
     print(f"[{time.strftime('%H:%M:%S')}] Iniciando ULTRATHINK P0 Audit Loop...")
 
     phase_1_latent_friction(prompt)
@@ -154,45 +140,31 @@ def execute_bft_state_loop(
     commit_hash = phase_5_git_sentinel(target_path, payload)
     write_to_cortex_ledger(commit_hash, payload)
 
-    print(
-        f"[{time.strftime('%H:%M:%S')}] Mutación Cristalizada. C5-REAL Hash: {commit_hash}"
-    )
+    print(f"[{time.strftime('%H:%M:%S')}] Mutación Cristalizada. C5-REAL Hash: {commit_hash}")
     return commit_hash
 
 
-def write_to_cortex_ledger(
-    commit_hash: str, payload: str, agent_id: str = "auditor_c5"
-) -> None:
+def write_to_cortex_ledger(commit_hash: str, payload: str, agent_id: str = "auditor_c5") -> None:
     db_path = ".cortex/cortex.db"
     if not os.path.exists(db_path):
         raise EpistemicHalt(f"Master Ledger no inicializado en {db_path}")
 
     bft_key = os.environ.get("CORTEX_BFT_KEY")
     if not bft_key:
-        raise EpistemicHalt(
-            "CORTEX_BFT_KEY indefinido. Invariante Ω25 violado al escribir en Ledger."
-        )
+        raise EpistemicHalt("CORTEX_BFT_KEY indefinido. Invariante Ω25 violado al escribir en Ledger.")
 
     conn = sqlite3.connect(db_path, timeout=5.0)
     cursor = conn.cursor()
     cursor.execute("PRAGMA journal_mode = WAL;")
     cursor.execute("PRAGMA busy_timeout = 5000;")
 
-    cursor.execute(
-        "SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1"
-    )
+    cursor.execute("SELECT payload_hash, lamport_t FROM bft_ledger ORDER BY id DESC LIMIT 1")
     row = cursor.fetchone()
-    prev_hash = (
-        row[0]
-        if row
-        else "0000000000000000000000000000000000000000000000000000000000000000"
-    )
+    prev_hash = row[0] if row else "0000000000000000000000000000000000000000000000000000000000000000"
     last_lamport = row[1] if row else 0
 
     new_lamport = last_lamport + 1
-    new_hash = hashlib.sha3_256(
-        bft_key.encode("utf-8") + payload.encode("utf-8")
-    ).hexdigest()
+    new_hash = hashlib.sha3_256(bft_key.encode("utf-8") + payload.encode("utf-8")).hexdigest()
     taint_signature = f"CORTEX-TAINT:borjamoskv:mutation:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{commit_hash[:8]}"
 
     try:
@@ -201,9 +173,7 @@ def write_to_cortex_ledger(
             (agent_id, new_lamport, new_hash, prev_hash, taint_signature),
         )
         conn.commit()
-        print(
-            f"[Ledger] Transacción física registrada. Lamport={new_lamport}, Hash={new_hash[:8]}"
-        )
+        print(f"[Ledger] Transacción física registrada. Lamport={new_lamport}, Hash={new_hash[:8]}")
     except sqlite3.Error as e:
         raise EpistemicHalt(f"Violación de Inmutabilidad en Master Ledger: {e}")
     finally:

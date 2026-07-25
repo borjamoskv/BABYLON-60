@@ -93,9 +93,7 @@ def save_to_markdown(primitives: list[PlaywrightPrimitiveDict], filepath: str) -
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
         f.write("# █▄ PLAYWRIGHT MATRIX: 300 INTERNAL C5-REAL PRIMITIVES\n\n")
-        f.write(
-            "Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 operaciones APEX.\n\n"
-        )
+        f.write("Invariante: Mapeo ortogonal de 3 dominios de browser automation contra 100 operaciones APEX.\n\n")
 
         current_domain = ""
         for p in primitives:

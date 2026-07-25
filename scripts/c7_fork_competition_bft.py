@@ -1,13 +1,14 @@
 # C5-REAL EXERGY CERTIFIED
-from typing import Any, Dict, List, Tuple
+from typing import Any
 import hashlib
+
 
 # ==========================================
 # C7.2 VALIDATOR & FITNESS ENGINE
 # ==========================================
 class BranchValidator:
     def verify_hash(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
-        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
         return hashlib.sha3_256(data).hexdigest()
 
     def is_cryptographically_valid(self, chain: Any) -> Any:
@@ -27,6 +28,7 @@ class BranchValidator:
             last_lamport = entry["lamport_t"]
         return True
 
+
 class FitnessFunction:
     """
     Fitness = PP - RC - CD
@@ -34,6 +36,7 @@ class FitnessFunction:
     RC: Reconstruction Cost (Compute overhead to verify)
     CD: Causal Debt (Ad-hoc patching, spam, low exergy signals)
     """
+
     def evaluate(self, chain: Any) -> Any:
         pp = 0
         rc = len(chain) * 0.5  # Base compute cost per node
@@ -54,24 +57,21 @@ class FitnessFunction:
                 pp += 1
 
         fitness = pp - rc - cd
-        return {
-            "fitness": fitness,
-            "PP": pp,
-            "RC": rc,
-            "CD": cd
-        }
+        return {"fitness": fitness, "PP": pp, "RC": rc, "CD": cd}
+
 
 def create_event(lamport_t: Any, payload: Any, prev_hash: Any) -> Any:
     nonce = hashlib.sha256(payload.encode()).hexdigest()
-    data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+    data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
     block_hash = hashlib.sha3_256(data).hexdigest()
     return {
         "lamport_t": lamport_t,
         "nonce": nonce,
         "payload": payload,
         "prev_hash": prev_hash,
-        "block_hash": block_hash
+        "block_hash": block_hash,
     }
+
 
 def run_c7_2() -> None:
     print("=====================================================")
@@ -106,7 +106,7 @@ def run_c7_2() -> None:
     print("[+] 3. Generando Branch B (Ataque Spam / Trampa de la Cadena Más Larga)...")
     branch_b = list(genesis_chain)
     curr_hash_b = fork_point_hash
-    for i in range(2501, 8001): # 3000 eventos extra
+    for i in range(2501, 8001):  # 3000 eventos extra
         payload = f"Spam Event {i}" if i % 2 == 0 else f"Ad-hoc Patch {i}"
         event = create_event(i, payload, curr_hash_b)
         branch_b.append(event)
@@ -131,10 +131,14 @@ def run_c7_2() -> None:
     fit_a = evaluator.evaluate(branch_a)
     fit_b = evaluator.evaluate(branch_b)
 
-    print(f"    - Branch A Metrics: PP={fit_a['PP']}, RC={fit_a['RC']}, CD={fit_a['CD']} | FITNESS = {fit_a['fitness']}")
-    print(f"    - Branch B Metrics: PP={fit_b['PP']}, RC={fit_b['RC']}, CD={fit_b['CD']} | FITNESS = {fit_b['fitness']}")
+    print(
+        f"    - Branch A Metrics: PP={fit_a['PP']}, RC={fit_a['RC']}, CD={fit_a['CD']} | FITNESS = {fit_a['fitness']}"
+    )
+    print(
+        f"    - Branch B Metrics: PP={fit_b['PP']}, RC={fit_b['RC']}, CD={fit_b['CD']} | FITNESS = {fit_b['fitness']}"
+    )
 
-    selected = "Branch A" if fit_a['fitness'] > fit_b['fitness'] else "Branch B"
+    selected = "Branch A" if fit_a["fitness"] > fit_b["fitness"] else "Branch B"
 
     print("\n[+] === C7.2 ATTESTATION ===")
     print("    forks_detected:")
@@ -158,5 +162,6 @@ def run_c7_2() -> None:
     else:
         print("\n[-] C7.2 FALLIDO: El ataque spam derrotó al consenso causal.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c7_2()

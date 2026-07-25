@@ -1,8 +1,9 @@
 # C5-REAL EXERGY CERTIFIED
-from typing import Any, Dict, List, Tuple
+from typing import Any
 import hashlib
 import json
 import os
+
 
 # ==========================================
 # ENVIRONMENT A: THE PROVER (Internal State)
@@ -13,7 +14,7 @@ class Prover:
         self.current_hash = "GENESIS_HASH"
 
     def hash_block(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
-        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
         return hashlib.sha3_256(data).hexdigest()
 
     def generate_attestation(self, events: Any) -> Any:
@@ -25,13 +26,15 @@ class Prover:
 
             block_hash = self.hash_block(self.current_lamport, nonce, payload, self.current_hash)
 
-            attestation.append({
-                "lamport_t": self.current_lamport,
-                "nonce": nonce,
-                "payload": payload,
-                "prev_hash": self.current_hash,
-                "block_hash": block_hash
-            })
+            attestation.append(
+                {
+                    "lamport_t": self.current_lamport,
+                    "nonce": nonce,
+                    "payload": payload,
+                    "prev_hash": self.current_hash,
+                    "block_hash": block_hash,
+                }
+            )
             self.current_hash = block_hash
 
         # Exportamos la memoria a un archivo inerte (JSON plano)
@@ -41,6 +44,7 @@ class Prover:
 
         return proof_path
 
+
 # ==========================================
 # ENVIRONMENT B: EXTERNAL WITNESS
 # ==========================================
@@ -49,11 +53,12 @@ class ExternalWitness:
     El Testigo Hostil: Carece de motor de DB, no tiene la clase Prover importada en su espacio
     lógico. Su única regla es la función matemática pura de verificación.
     """
+
     def __init__(self) -> None:
         pass
 
     def verify_hash(self, lamport_t: Any, nonce: Any, payload: Any, prev_hash: Any) -> Any:
-        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode('utf-8')
+        data = f"{lamport_t}:{nonce}:{payload}:{prev_hash}".encode("utf-8")
         return hashlib.sha3_256(data).hexdigest()
 
     def audit_attestation(self, filepath: Any) -> Any:
@@ -91,6 +96,7 @@ class ExternalWitness:
 
         return True, "Attestation valid. Cryptographic history independently proven."
 
+
 # ==========================================
 # ORCHESTRATOR
 # ==========================================
@@ -123,9 +129,12 @@ def run_c7_1() -> None:
     print(f"    - Witness Logs                : {msg}")
 
     if valid:
-        print("\n[+] C7.1 APROBADO: La autoridad no emana de la confianza en el operador, sino de la verificabilidad matemática de la matriz de evidencia.")
+        print(
+            "\n[+] C7.1 APROBADO: La autoridad no emana de la confianza en el operador, sino de la verificabilidad matemática de la matriz de evidencia."
+        )
     else:
         print("\n[-] C7.1 FALLIDO: El testigo rechazó la prueba.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     run_c7_1()

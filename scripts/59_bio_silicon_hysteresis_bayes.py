@@ -14,8 +14,10 @@ import random
 import json
 import hashlib
 
+
 class GenericIRQChipL2:
     """Ω161: Abstraction layer between raw peripheral IRQs (L1) and Cortex decision unit (L3)."""
+
     def __init__(self, fixed_bandwidth: int = 100):
         self.fixed_bandwidth = fixed_bandwidth
         self.sample_buffer: list[float] = []
@@ -33,13 +35,14 @@ class GenericIRQChipL2:
         signature = {
             "mean_freq": round(mean_freq, 3),
             "variance": round(variance, 3),
-            "bounded_rate": min(mean_freq, self.fixed_bandwidth)
+            "bounded_rate": min(mean_freq, self.fixed_bandwidth),
         }
         return signature
 
 
 class StatefulHysteresisGateL1:
     """Ω160: Dual threshold hysteresis (V_high / V_low) with non-linear sigmoidal attenuation E(x) = x^eta / (1 + x^eta)."""
+
     def __init__(self, v_high: float = 80.0, v_low: float = 30.0, eta: float = 3.0):
         self.v_high = v_high
         self.v_low = v_low
@@ -56,7 +59,7 @@ class StatefulHysteresisGateL1:
         if self.is_shedding:
             # Non-linear attenuation E(x) = x^eta / (1 + x^eta)
             normalized_x = load_value / 100.0
-            attenuation = (normalized_x ** self.eta) / (1.0 + (normalized_x ** self.eta))
+            attenuation = (normalized_x**self.eta) / (1.0 + (normalized_x**self.eta))
             pass_through_ratio = 1.0 - attenuation
             passed_load = load_value * pass_through_ratio
             return passed_load, True
@@ -66,6 +69,7 @@ class StatefulHysteresisGateL1:
 
 class BayesianCortexL3:
     """Ω162: Bayesian Threat Inference on Belief State P(Threat | Evidence)."""
+
     def __init__(self, prior_threat: float = 0.05):
         self.prior_threat = prior_threat
         self.belief_state = prior_threat
@@ -130,7 +134,7 @@ def run_bio_silicon_verification() -> None:
             "bounded_rate": signature["bounded_rate"],
             "passed_load": round(passed_load, 2),
             "shedding_active": is_shedding,
-            "belief_state": round(belief, 4)
+            "belief_state": round(belief, 4),
         }
         simulation_results.append(record)
 
@@ -157,11 +161,11 @@ def run_bio_silicon_verification() -> None:
         "Peak_Passed_L2": peak_passed,
         "Shedding_Steps": shedding_count,
         "Final_Belief_L3": final_belief,
-        "Status": "C5_REAL_SUCCESS"
+        "Status": "C5_REAL_SUCCESS",
     }
 
     raw_json = json.dumps(payload, sort_keys=True)
-    digest = hashlib.sha3_256(raw_json.encode('utf-8')).hexdigest()
+    digest = hashlib.sha3_256(raw_json.encode("utf-8")).hexdigest()
 
     output_path = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/cortex/verification_omega_160_162.json"
     with open(output_path, "w") as f:
@@ -170,6 +174,7 @@ def run_bio_silicon_verification() -> None:
     print(f"✓ Attestation written to: {output_path}")
     print(f"  SHA3-256 Digest: {digest}")
     print("=" * 60)
+
 
 if __name__ == "__main__":
     run_bio_silicon_verification()

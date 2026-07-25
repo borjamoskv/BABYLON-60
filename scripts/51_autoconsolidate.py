@@ -18,9 +18,7 @@ def consolidate_conversations() -> None:
     print("[C5-REAL] Iniciando Autoconsolidación de Conversaciones-Ω...")
     os.makedirs(ARTIFACT_DIR, exist_ok=True)
 
-    transcripts = glob.glob(
-        os.path.join(BRAIN_DIR, "**", "transcript.jsonl"), recursive=True
-    )
+    transcripts = glob.glob(os.path.join(BRAIN_DIR, "**", "transcript.jsonl"), recursive=True)
     total_steps = 0
     anergy_purged = 0
     extracted_axioms = []
@@ -33,14 +31,8 @@ def consolidate_conversations() -> None:
                     data = json.loads(line)
                     total_steps += 1
                     content = data.get("content", "")
-                    if (
-                        "[ARTIFACT:" in content
-                        or "Claim:" in content
-                        or "C5-REAL" in content
-                    ):
-                        extracted_axioms.append(
-                            f"- [ {data.get('created_at')} ] {content[:150]}..."
-                        )
+                    if "[ARTIFACT:" in content or "Claim:" in content or "C5-REAL" in content:
+                        extracted_axioms.append(f"- [ {data.get('created_at')} ] {content[:150]}...")
                     if "Error" in content or "failed" in content:
                         anergy_purged += 1
         except (json.JSONDecodeError, OSError):

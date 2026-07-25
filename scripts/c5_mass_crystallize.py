@@ -1,8 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
-import os
-import sys
 from pathlib import Path
 import subprocess
+
 
 def get_comment_syntax(ext: str) -> str:
     if ext in {".py", ".yml"}:
@@ -10,6 +9,7 @@ def get_comment_syntax(ext: str) -> str:
     elif ext in {".js", ".ts", ".go", ".rs"}:
         return "// C5-REAL EXERGY CERTIFIED\n"
     return ""
+
 
 def crystallize_files():
     root = Path(".")
@@ -40,9 +40,20 @@ def crystallize_files():
 
     if mutated > 0:
         subprocess.run(["git", "add", "."], check=True)
-        subprocess.run(["git", "-c", "commit.gpgsign=false", "commit", "-m", "chore(C5-REAL): Mass crystallization of missing invariants"], check=True)
+        subprocess.run(
+            [
+                "git",
+                "-c",
+                "commit.gpgsign=false",
+                "commit",
+                "-m",
+                "chore(C5-REAL): Mass crystallization of missing invariants",
+            ],
+            check=True,
+        )
         res = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True)
         print(f"Commit Hash: {res.stdout.strip()}")
+
 
 if __name__ == "__main__":
     crystallize_files()

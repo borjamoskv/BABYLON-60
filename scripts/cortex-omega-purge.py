@@ -62,9 +62,7 @@ def obliterate_repo_entropy(repo_path: str) -> int:
                 branch_name = line.split()[0]
                 if branch_name.startswith("*"):
                     branch_name = branch_name[1:].strip()
-                print(
-                    f"  -> {repo_path}: Aniquilando rama huérfana local: {branch_name}"
-                )
+                print(f"  -> {repo_path}: Aniquilando rama huérfana local: {branch_name}")
                 subprocess.run(
                     ["git", "branch", "-D", branch_name],
                     cwd=repo_path,
@@ -111,17 +109,13 @@ def obliterate_repo_entropy(repo_path: str) -> int:
 def main() -> None:
     print("=== INICIANDO OBLITERATOR OMEGA NODE: PURGA DE ENTROPÍA MASIVA ===")
     repos = find_git_repos(TARGET_DIRS)
-    print(
-        f"Detectados {len(repos)} repositorios para aniquilación termodinámica paralela."
-    )
+    print(f"Detectados {len(repos)} repositorios para aniquilación termodinámica paralela.")
 
     total_purged_bytes = 0
 
     # Ejecución paralela con mitigación del GIL
     with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
-        future_to_repo = {
-            executor.submit(obliterate_repo_entropy, repo): repo for repo in repos
-        }
+        future_to_repo = {executor.submit(obliterate_repo_entropy, repo): repo for repo in repos}
         for future in concurrent.futures.as_completed(future_to_repo):
             try:
                 purged = future.result()
@@ -130,9 +124,7 @@ def main() -> None:
                 print(f"Error procesando un repositorio: {exc}")
 
     print("\n[RESULTADO C5-REAL] Operación completada.")
-    print(
-        f"Total de entropía (cachés) evaporada físicamente: {total_purged_bytes / (1024 * 1024):.2f} MB"
-    )
+    print(f"Total de entropía (cachés) evaporada físicamente: {total_purged_bytes / (1024 * 1024):.2f} MB")
 
     # Escribir reporte anclado con Atomic Write (Ω41)
     report = f"""Claim: Purga de entropía global completada de forma concurrente.
