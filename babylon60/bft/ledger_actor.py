@@ -15,6 +15,7 @@ if TYPE_CHECKING:
 import aiosqlite
 
 import babylon60.database.core
+from babylon60.core.crypto import _check_no_floats
 from babylon60.bft.payload_encryptor import PayloadEncryptor
 
 
@@ -40,7 +41,7 @@ INIT_TABLE_SQL = """
                 lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),
                 prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),
                 entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),
-                created_at TEXT NOT NULL,
+                created_at INTEGER NOT NULL,
                 agent_id TEXT NOT NULL DEFAULT '',
                 UNIQUE(lamport_t, agent_id)
             );
@@ -70,6 +71,7 @@ INSERT_TX_SQL = """INSERT INTO ledger_entries (
 
 
 def _canonical_json(data: Any) -> str:
+    _check_no_floats(data)
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
 
@@ -85,7 +87,7 @@ def _compute_entry_hash(
     cortex_taint: str,
     lamport_t: int,
     prev_hash: str,
-    created_at: str,
+    created_at: int,
 ) -> str:
     envelope = {
         "event_id": event_id,
@@ -114,7 +116,7 @@ class LedgerEvent:
     source_db: str
     source_table: str
     source_pk: str
-    created_at: str | None = None
+    created_at: int | None = None
 
 
 def _compute_entry_hash_wrapper(
@@ -129,7 +131,7 @@ def _compute_entry_hash_wrapper(
     cortex_taint: str,
     lamport_t: int,
     prev_hash: str,
-    created_at: str,
+    created_at: int,
 ) -> str:
     return _compute_entry_hash(
         event_id,
@@ -289,7 +291,7 @@ class BFTLedgerActor:
         event: LedgerEvent,
         semantic_hash: str,
         stored_payload: str,
-        created_at: str,
+        created_at: int,
     ) -> tuple[int, str]:
         await db.execute("BEGIN IMMEDIATE")
         cursor = await db.execute("SELECT seq, entry_hash FROM ledger_entries WHERE event_id = ?", (event_id,))
@@ -337,9 +339,7 @@ class BFTLedgerActor:
         if not event.cortex_taint or not isinstance(event.cortex_taint, str):
             raise ValueError("INV_BFT_03: cortex_taint must be a non-empty string representing the causal trace")
         payload_json = _canonical_json(event.payload)
-        created_at = event.created_at or datetime.now(timezone.utc).isoformat(timespec="microseconds").replace(
-            "+00:00", "Z"
-        )
+        created_at = event.created_at or int(time.time() * 1000)
         idempotent_key = (
             f"{event.source_db}\x1f{event.source_table}\x1f{event.source_pk}\x1f{payload_json}\x1f{event.cortex_taint}"
         )
