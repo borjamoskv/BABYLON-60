@@ -12,7 +12,9 @@ os.environ["CORTEX_BFT_KEY"] = "DUMMY_TEST_KEY"
 # We have to import 00_init_ledger using importlib because of the leading numbers
 import importlib.util
 
-spec = importlib.util.spec_from_file_location("init_ledger_mod", os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts', '00_init_ledger.py')))
+spec = importlib.util.spec_from_file_location(
+    "init_ledger_mod", os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "scripts", "00_init_ledger.py"))
+)
 if spec is None or spec.loader is None:
     raise RuntimeError("Failed to load spec for 00_init_ledger.py")
 
@@ -27,6 +29,7 @@ init_ledger_mod.DB_PATH = TEST_DB_PATH  # type: ignore[attr-defined]
 
 from typing import Any
 
+
 def setup_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
@@ -34,13 +37,16 @@ def setup_module(module: Any) -> None:
         os.makedirs(".cortex")
     init_ledger_mod.init_ledger()
 
+
 def teardown_module(module: Any) -> None:
     if os.path.exists(TEST_DB_PATH):
         os.remove(TEST_DB_PATH)
 
+
 def hash_payload(lamport_t: int, agent_id: str, prev_hash: str) -> str:
-    data = f"{lamport_t}:{agent_id}:{prev_hash}".encode('utf-8')
+    data = f"{lamport_t}:{agent_id}:{prev_hash}".encode("utf-8")
     return hashlib.sha3_256(data).hexdigest()
+
 
 class MasterLedgerWriter:
     def __init__(self) -> None:
@@ -58,7 +64,7 @@ class MasterLedgerWriter:
             try:
                 self.conn.execute(
                     "INSERT INTO bft_ledger (agent_id, lamport_t, payload_hash, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?)",
-                    (agent_id, lamport_t, payload_hash, prev_hash, taint)
+                    (agent_id, lamport_t, payload_hash, prev_hash, taint),
                 )
                 self.conn.commit()
             except sqlite3.Error as e:
@@ -68,6 +74,7 @@ class MasterLedgerWriter:
 
     def close(self) -> None:
         self.conn.close()
+
 
 def test_wal_contention() -> None:
     # Enforces Ω13: single writer, multiple producers
@@ -85,7 +92,7 @@ def test_wal_contention() -> None:
 
         for i in range(1, 101):
             lamport_t = i
-            agent_id = f"AGENT_{i%3}"
+            agent_id = f"AGENT_{i % 3}"
             phash = hash_payload(lamport_t, agent_id, prev)
             taint = f"CORTEX-TAINT:test:{i}"
 
@@ -103,10 +110,11 @@ def test_wal_contention() -> None:
         # Verify count
         c.execute("SELECT COUNT(*) FROM bft_ledger")
         count = c.fetchone()[0]
-        assert count == 101 # genesis + 100
+        assert count == 101  # genesis + 100
         writer.close()
 
     asyncio.run(run_contention())
+
 
 def test_chain_integrity() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)
@@ -120,7 +128,7 @@ def test_chain_integrity() -> None:
     assert rows[0][1] == "ROOT_OPERATOR_UID0"
 
     # Chain verification
-    prev_hash_expected = rows[0][2] # Genesis payload hash
+    prev_hash_expected = rows[0][2]  # Genesis payload hash
     for row in rows[1:]:
         lamport_t, agent_id, payload_hash, prev_hash = row
         assert prev_hash == prev_hash_expected
@@ -129,6 +137,7 @@ def test_chain_integrity() -> None:
         prev_hash_expected = payload_hash
 
     conn.close()
+
 
 def test_intentional_corruption_prevention() -> None:
     conn = sqlite3.connect(TEST_DB_PATH)

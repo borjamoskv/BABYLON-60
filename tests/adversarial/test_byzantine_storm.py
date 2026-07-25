@@ -1,5 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 """C6.2 Byzantine Workers Adversarial Experiment."""
+
 import os
 import sys
 import sqlite3
@@ -16,6 +17,7 @@ from cortex.c6_harness.invariant import ByzantineResult
 from cortex.c6_harness.auditor import generate_attestation
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "byzantine_test.db")
+
 
 def init_ledger() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
@@ -45,6 +47,7 @@ def init_ledger() -> None:
     conn.commit()
     conn.close()
 
+
 def ledger_validator(tx: dict[str, Any]) -> None:
     """The strict C5-REAL core validator."""
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
@@ -56,19 +59,25 @@ def ledger_validator(tx: dict[str, Any]) -> None:
 
         # 1. Nonce Replay Check (Simulated by checking sequence collision)
         if tx.get("nonce_collision"):
-            cursor.execute("INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'NONCE_COLLISION')", (str(tx),))
+            cursor.execute(
+                "INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'NONCE_COLLISION')", (str(tx),)
+            )
             conn.commit()
             return
 
         # 2. Hash Validation (History falsification)
         if tx.get("invalid_hash"):
-            cursor.execute("INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'INVALID_HASH')", (str(tx),))
+            cursor.execute(
+                "INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'INVALID_HASH')", (str(tx),)
+            )
             conn.commit()
             return
 
         # 3. Payload Mutation (Invalid Signature)
         if tx.get("invalid_signature"):
-            cursor.execute("INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'INVALID_SIG')", (str(tx),))
+            cursor.execute(
+                "INSERT INTO history (tx_data, status, reason) VALUES (?, 'REJECTED', 'INVALID_SIG')", (str(tx),)
+            )
             conn.commit()
             return
 
@@ -82,6 +91,7 @@ def ledger_validator(tx: dict[str, Any]) -> None:
     finally:
         conn.close()
 
+
 def byzantine_worker(attack_type: str, count: int) -> None:
     """An isolated worker aggressively injecting malicious payload."""
     for i in range(count):
@@ -94,6 +104,7 @@ def byzantine_worker(attack_type: str, count: int) -> None:
             tx["nonce_collision"] = True
 
         ledger_validator(tx)
+
 
 def audit_byzantine_results() -> ByzantineResult:
     conn = sqlite3.connect(DB_PATH)
@@ -114,8 +125,9 @@ def audit_byzantine_results() -> ByzantineResult:
         reachable_invalid_state=invalid_state_reached,
         attacks_detected=rejected_count,
         attacks_isolated=rejected_count,
-        history_preserved=rejected_count
+        history_preserved=rejected_count,
     )
+
 
 def run_c6_2_experiment() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -148,14 +160,14 @@ def run_c6_2_experiment() -> None:
     env_data = {
         "sqlite_version": sqlite3.sqlite_version,
         "kernel": platform.release(),
-        "filesystem": "APFS" if platform.system() == "Darwin" else "UNKNOWN"
+        "filesystem": "APFS" if platform.system() == "Darwin" else "UNKNOWN",
     }
 
     attestation = generate_attestation(
         experiment_id="C6.2_BYZANTINE_STORM_001",
         environment=env_data,
         attacks_injected=total_attacks,
-        byzantine_result=byz_result
+        byzantine_result=byz_result,
     )
 
     print("\n" + attestation.to_yaml_str())
@@ -166,6 +178,7 @@ def run_c6_2_experiment() -> None:
     else:
         print("\n⚠ ANERGÍA DETECTADA: El Ledger ha sido comprometido o la historia borrada.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_c6_2_experiment()

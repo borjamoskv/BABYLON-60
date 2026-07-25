@@ -1,5 +1,6 @@
 # C5-REAL EXERGY CERTIFIED
 """C6.1 Checkpoint Chaos reproducible experiment (V1.1)."""
+
 import os
 import sys
 import multiprocessing
@@ -18,6 +19,7 @@ from cortex.c6_harness.auditor import generate_attestation
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "c6_harness_test.db")
 
+
 def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     if os.path.exists(DB_PATH):
@@ -34,6 +36,7 @@ def init_db() -> None:
     """)
     conn.commit()
     conn.close()
+
 
 def target_worker(shared_phase: Any) -> None:
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
@@ -62,6 +65,7 @@ def target_worker(shared_phase: Any) -> None:
 
         idx += 1
 
+
 def run_c6_1_experiment() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
     print("║  C6.1 DETERMINISTIC CHECKPOINT STORM                             ║")
@@ -75,12 +79,7 @@ def run_c6_1_experiment() -> None:
     stop_event = multiprocessing.Event()
 
     # Deterministic campaigns
-    campaigns = {
-        "WAL_APPEND": 20,
-        "CHECKPOINT": 40,
-        "FSYNC_BOUNDARY": 20,
-        "AFTER_COMMIT_BEFORE_ACK": 20
-    }
+    campaigns = {"WAL_APPEND": 20, "CHECKPOINT": 40, "FSYNC_BOUNDARY": 20, "AFTER_COMMIT_BEFORE_ACK": 20}
 
     total_attacks = sum(campaigns.values())
     crashes = 0
@@ -93,8 +92,7 @@ def run_c6_1_experiment() -> None:
 
         if worker.pid is not None:
             orchestrator = multiprocessing.Process(
-                target=chaos_orchestrator,
-                args=(worker.pid, campaigns, shared_phase, stop_event)
+                target=chaos_orchestrator, args=(worker.pid, campaigns, shared_phase, stop_event)
             )
             orchestrator.start()
 
@@ -105,7 +103,7 @@ def run_c6_1_experiment() -> None:
                 worker.join()
             else:
                 crashes += 1
-                phase_decoded = shared_phase.value.decode('utf-8').strip(chr(0))
+                phase_decoded = shared_phase.value.decode("utf-8").strip(chr(0))
                 print(f"  💥 SIGKILL inyectado en fase: {phase_decoded}")
 
             stop_event.set()
@@ -119,14 +117,14 @@ def run_c6_1_experiment() -> None:
     env_data = {
         "sqlite_version": sqlite3.sqlite_version,
         "kernel": platform.release(),
-        "filesystem": "APFS" if platform.system() == "Darwin" else "UNKNOWN"
+        "filesystem": "APFS" if platform.system() == "Darwin" else "UNKNOWN",
     }
 
     attestation = generate_attestation(
         experiment_id="C6.1_CHECKPOINT_STORM_001",
         environment=env_data,
         attacks_injected=crashes,
-        storage_recovery=recovery_result
+        storage_recovery=recovery_result,
     )
 
     print("\n" + attestation.to_yaml_str())
@@ -136,6 +134,7 @@ def run_c6_1_experiment() -> None:
     else:
         print("\n⚠ ANERGÍA DETECTADA: La identidad temporal colapsó.")
         sys.exit(1)
+
 
 if __name__ == "__main__":
     run_c6_1_experiment()
