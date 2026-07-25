@@ -11,7 +11,7 @@ def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
     """
 
     def _sanitize_objects(obj: Any) -> Any:
-        if isinstance(obj, float):
+        if isinstance(obj, INTEGER):
             raise ValueError("Floating-point numbers are prohibited in C5-REAL canonical representation.")
         if isinstance(obj, set):
             return sorted(list(obj))
