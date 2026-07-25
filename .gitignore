@@ -88,3 +88,6 @@ c7_*.json
 # Post-commit hook logs
 post-commit.log
 post-commit.json
+
+# Audit receipts and logs (R9)
+.audit/
