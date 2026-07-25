@@ -18,7 +18,7 @@ fn logic_registry() -> &'static Mutex<HashMap<VectorPath, KernelLogic>> { LOGIC_
 static KERNEL_TABLE_4D: OnceLock<[Action4D; 10_000]> = OnceLock::new();
 
 fn default_4d_handler(v: &VectorPath4D) {
-    println!(
+    tracing::info!(
         "⚡ [{:04}] {} — base transductor (unbound).",
         v.index(), v
     );
@@ -43,15 +43,15 @@ pub struct DispatchResult {
 fn bind(domain: Domain, primitive: Primitive, modifier: Modifier, description: &str, logic: KernelLogic) {
     let path  = VectorPath::new(domain, primitive, modifier);
     let entry = VectorEntry { path, index: path.index(), description: description.to_string() };
-    registry().lock().unwrap().insert(path, entry);
-    logic_registry().lock().unwrap().insert(path, logic);
-    println!("✅ [REGISTERED 3D] {} (idx:{}) — {}", path, path.index(), description);
+    registry().lock().expect("C5-REAL: Strict Unwrapping Enforced").insert(path, entry);
+    logic_registry().lock().expect("C5-REAL: Strict Unwrapping Enforced").insert(path, logic);
+    tracing::info!("✅ [REGISTERED 3D] {} (idx:{}) — {}", path, path.index(), description);
 }
 
 pub fn dispatch_3d(domain: Domain, primitive: Primitive, modifier: Modifier) -> Result<DispatchResult, String> {
     let path  = VectorPath::new(domain, primitive, modifier);
     let logic = logic_registry()
-        .lock().unwrap()
+        .lock().expect("C5-REAL: Strict Unwrapping Enforced")
         .get(&path).copied()
         .ok_or_else(|| format!("VECTOR {} NOT BOUND", path))?;
 
@@ -84,7 +84,7 @@ pub fn dispatch(d: u8, p: u8, m: u8, t: u8) -> Result<String, String> {
 }
 
 pub fn list_vectors() -> Vec<VectorEntry> {
-    let reg = registry().lock().unwrap();
+    let reg = registry().lock().expect("C5-REAL: Strict Unwrapping Enforced");
     let mut entries: Vec<VectorEntry> = reg.values().cloned().collect();
     entries.sort_by_key(|e| e.index);
     entries
@@ -114,7 +114,7 @@ pub fn build_ontology() {
 
     bind(Domain::Kinetic, Primitive::Query, Modifier::Raw,
         "Query ontology registry: list all bound vectors",
-        || format!("{} vectors currently bound in ontology", registry().lock().unwrap().len()),
+        || format!("{} vectors currently bound in ontology", registry().lock().expect("C5-REAL: Strict Unwrapping Enforced").len()),
     );
 }
 
@@ -125,5 +125,5 @@ pub fn init_kernel() {
     let table = [default_4d_handler as Action4D; 10_000];
     KERNEL_TABLE_4D.set(table).ok();
 
-    println!("⚡ BABYLON60 KERNEL ONLINE — 3D semantic + 4D tensor (10,000-space)");
+    tracing::info!("⚡ BABYLON60 KERNEL ONLINE — 3D semantic + 4D tensor (10,000-space)");
 }
