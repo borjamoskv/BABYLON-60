@@ -1,13 +1,1 @@
-{
-  "mcpServers": {
-    "portal-ledger-explorer": {
-      "command": "python3",
-      "args": [
-        "babylon60-ide/backend/mcp_symbol_helper.py"
-      ],
-      "env": {
-        "PORTAL_PROJECT_ROOT": "/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/babylon60-ide/backend"
-      }
-    }
-  }
-}
+{"mcpServers":{"portal-ledger-explorer":{"command":"python3","args":["babylon60-ide/backend/mcp_symbol_helper.py"],"env":{"PORTAL_PROJECT_ROOT":"/Users/borjafernandezangulo/10_PROJECTS/Teorema-Robinson-Moskv/babylon60-ide/backend"}}}}
