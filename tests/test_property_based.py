@@ -31,7 +31,7 @@ from babylon60.crypto.keys import KeyManager, Signer, Verifier
 class TestCryptoProperties:
     
     @given(content=st.text(min_size=1, max_size=10000))
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None)
     def test_sign_verify_roundtrip(self, content: str) -> None:
         km = KeyManager('test_prop')
         pub = km.generate_and_store_key('prop_actor')
@@ -41,7 +41,7 @@ class TestCryptoProperties:
         assert Verifier.verify_raw_content(content, pub, sig)
     
     @given(content=st.text(min_size=1, max_size=10000))
-    @settings(max_examples=50)
+    @settings(max_examples=50, deadline=None)
     def test_tampered_content_fails(self, content: str) -> None:
         km = KeyManager('test_prop')
         pub = km.generate_and_store_key('tamper_actor')

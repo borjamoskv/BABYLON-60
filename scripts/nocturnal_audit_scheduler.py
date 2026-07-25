@@ -5,6 +5,7 @@ Executes continuous multi-plane auditing, BFT ledger verification,
 GELABP exergy attestation, and vault synchronization over long-horizon runs.
 """
 
+import shutil
 import subprocess
 import sys
 import time
@@ -15,11 +16,15 @@ REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "nocturnal_audit.log"
 
 def get_python_exe() -> str:
-    if Path(sys.executable).exists():
-        return sys.executable
-    local_venv = REPO_DIR / ".venv" / "bin" / "python3"
-    if local_venv.exists():
-        return str(local_venv)
+    for candidate in [sys.executable, str(REPO_DIR / ".venv" / "bin" / "python3"), "python3"]:
+        if not candidate or not (Path(candidate).exists() if "/" in candidate else shutil.which(candidate)):
+            continue
+        try:
+            res = subprocess.run([candidate, "-m", "pytest", "--version"], capture_output=True, text=True)
+            if res.returncode == 0:
+                return candidate
+        except (FileNotFoundError, PermissionError, subprocess.SubprocessError, OSError):
+            continue
     return sys.executable
 
 def run_cmd(cmd: str | list[str]) -> bool:
