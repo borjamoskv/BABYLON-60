@@ -59,9 +59,7 @@ def resolve_tts_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_tts_harness(
-    d: int, p: int, m: int, vec: TTSHarnessState
-) -> Tuple[int, str, List[float]]:
+def dispatch_tts_harness(d: int, p: int, m: int, vec: TTSHarnessState) -> Tuple[int, str, List[float]]:
     code, name = resolve_tts_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):

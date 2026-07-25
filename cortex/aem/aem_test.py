@@ -38,9 +38,7 @@ def test_cam5_capability_denial() -> None:
     # Read-only agent
     machine.grant_agent_capabilities("agent_read", {InstructionFamily.READ})
 
-    prog_write = EffectProgram(
-        operations=[(InstructionFamily.WRITE, {"op": "ALLOC", "payload": "fail"})]
-    )
+    prog_write = EffectProgram(operations=[(InstructionFamily.WRITE, {"op": "ALLOC", "payload": "fail"})])
 
     with pytest.raises(CapabilityError, match="lacks instruction family WRITE"):
         machine.step("agent_read", prog_write)
@@ -51,16 +49,12 @@ def test_cam5_control_assert_and_extension() -> None:
     machine.grant_agent_capabilities("agent_ctrl", {InstructionFamily.CONTROL})
 
     # Failed ASSERT
-    prog_fail_assert = EffectProgram(
-        operations=[(InstructionFamily.CONTROL, {"op": "ASSERT", "predicate": False})]
-    )
+    prog_fail_assert = EffectProgram(operations=[(InstructionFamily.CONTROL, {"op": "ASSERT", "predicate": False})])
     with pytest.raises(IntegrityError, match="ASSERT Predicate evaluation failed"):
         machine.step("agent_ctrl", prog_fail_assert)
 
     # Load extension
-    prog_ext = EffectProgram(
-        operations=[(InstructionFamily.CONTROL, {"op": "LOAD_EXTENSION", "uri": "cesl://ledger"})]
-    )
+    prog_ext = EffectProgram(operations=[(InstructionFamily.CONTROL, {"op": "LOAD_EXTENSION", "uri": "cesl://ledger"})])
     _, effects = machine.step("agent_ctrl", prog_ext)
     assert len(effects) == 1
     assert "cesl://ledger" in machine.loaded_extensions
@@ -91,4 +85,3 @@ def test_cam5_mutate_and_release_ops() -> None:
     with pytest.raises(ExecutionError, match="Invalid Handle"):
         read_p2 = {"handle": h}
         machine.step("agent_rw", EffectProgram(operations=[(InstructionFamily.READ, read_p2)]))
-

@@ -18,16 +18,12 @@ class VibeIDEEngine:
     """Motor C5-REAL para IDE Agéntico con degradación de agencia 4 -> 0 y memoria Dual-Tier."""
 
     def __init__(self) -> None:
-        self.agency_level: int = (
-            4  # 4: Full Auto, 3: Confirm, 2: Preview, 1: Lint, 0: Halt
-        )
+        self.agency_level: int = 4  # 4: Full Auto, 3: Confirm, 2: Preview, 1: Lint, 0: Halt
         self.memory = AgentMemory()
         self.sanitizer = ZeroTrustSanitizer()
         self.sandbox = VesicularSandbox(execution_timeout_ms=5000)
         self.tier_0: Dict[str, str] = {}  # Ground Truth (Humano / Compilado)
-        self.tier_1: Dict[
-            str, Tuple[str, float]
-        ] = {}  # Sintético en Cuarentena (Payload, Timestamp)
+        self.tier_1: Dict[str, Tuple[str, float]] = {}  # Sintético en Cuarentena (Payload, Timestamp)
         self.tier_1_ttl_seconds: float = 3600.0
 
     def check_kill_switch(self) -> bool:
@@ -53,20 +49,14 @@ class VibeIDEEngine:
     def purge_tier_1(self) -> int:
         """Principio P3: Weaponized Forgetting de TIER_1 expirable."""
         now = time.time()
-        expired = [
-            k
-            for k, (_, ts) in self.tier_1.items()
-            if now - ts > self.tier_1_ttl_seconds
-        ]
+        expired = [k for k, (_, ts) in self.tier_1.items() if now - ts > self.tier_1_ttl_seconds]
         for k in expired:
             del self.tier_1[k]
         if expired:
             self.memory.log(0, "vibe_ide", "tier_1_purged", f"Count={len(expired)}")
         return len(expired)
 
-    def process_intent(
-        self, user_intent: str, file_path: str, proposed_code: str
-    ) -> Tuple[bool, str]:
+    def process_intent(self, user_intent: str, file_path: str, proposed_code: str) -> Tuple[bool, str]:
         """Procesa una intención Vibe Code de forma determinista (Principio P1-P10)."""
         if self.check_kill_switch():
             return False, "HALTED_BY_KILL_SWITCH"
@@ -83,9 +73,7 @@ class VibeIDEEngine:
         existing_hash = hashlib.sha256(existing_code.encode("utf-8")).hexdigest()
 
         if payload_hash == existing_hash:
-            self.memory.log(
-                0, "vibe_ide", "idempotency_lock_hit", f"File={file_path}|ATP_Saved=1"
-            )
+            self.memory.log(0, "vibe_ide", "idempotency_lock_hit", f"File={file_path}|ATP_Saved=1")
             return True, "IDEMPOTENT_NO_CHANGE"
 
         # P3: TIER_1 Quarantine

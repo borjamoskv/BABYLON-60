@@ -15,9 +15,7 @@ from cortex.substack_publisher_tool import (
 def test_format_signature_block() -> None:
     sig = format_signature_block(count=3)
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in sig
-    assert (
-        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in sig
-    )
+    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in sig
     # Should contain 4 links total (1 mandatory + 3 random)
     assert sig.count("https://borjamoskv.substack.com/p/") >= 4
 

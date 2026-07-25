@@ -22,9 +22,7 @@ class TestSubstackSubscriberAuditor(unittest.TestCase):
         # Write dummy CSV for testing
         with open(self.csv_path, "w", encoding="utf-8", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(
-                ["Email", "Type", "Activity", "Name", "Start date", "Revenue"]
-            )
+            writer.writerow(["Email", "Type", "Activity", "Name", "Start date", "Revenue"])
             writer.writerow(
                 [
                     "clement@huggingface.co",
@@ -45,9 +43,7 @@ class TestSubstackSubscriberAuditor(unittest.TestCase):
                     "$0.00",
                 ]
             )
-            writer.writerow(
-                ["random_zombie@gmail.com", "Comp", "0", "", "2026-07-09", "$0.00"]
-            )
+            writer.writerow(["random_zombie@gmail.com", "Comp", "0", "", "2026-07-09", "$0.00"])
             writer.writerow(
                 [
                     "casual_reader@domain.com",

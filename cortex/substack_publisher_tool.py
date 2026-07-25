@@ -107,8 +107,7 @@ def convert_tables_to_lists(text: str) -> str:
             elif in_table:
                 # Data row
                 row_str = f"* **{parts[0]}:** " + ", ".join(
-                    f"{headers[i]}: {parts[i]}"
-                    for i in range(1, min(len(headers), len(parts)))
+                    f"{headers[i]}: {parts[i]}" for i in range(1, min(len(headers), len(parts)))
                 )
                 new_lines.append(row_str)
                 continue

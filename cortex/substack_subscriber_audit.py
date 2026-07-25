@@ -147,11 +147,7 @@ class SubstackSubscriberAuditor:
 
         vips = [s for s in self.subscribers if s.is_vip()]
         high_exergy = [s for s in self.subscribers if s.activity >= 3]
-        hazards = [
-            s
-            for s in self.subscribers
-            if s.activity == 0 and s.subscriber_type == "Comp"
-        ]
+        hazards = [s for s in self.subscribers if s.activity == 0 and s.subscriber_type == "Comp"]
 
         # Group by cohorts
         cohort_groups: dict[str, list[SubscriberRecord]] = {}
@@ -170,9 +166,7 @@ class SubstackSubscriberAuditor:
                 "comp": g_comp,
                 "active_ge_3": g_active,
                 "zombies_act_0": g_zombies,
-                "retention_rate": round((g_active / g_total) * 100, 2)
-                if g_total > 0
-                else 0.0,
+                "retention_rate": round((g_active / g_total) * 100, 2) if g_total > 0 else 0.0,
             }
 
         return AuditSummary(
@@ -220,14 +214,10 @@ class SubstackSubscriberAuditor:
         for tier_name, records in tiers.items():
             file_dest = out_path / f"{tier_name}.csv"
             # Atomic write via tempfile
-            with tempfile.NamedTemporaryFile(
-                "w", newline="", encoding="utf-8", dir=out_path, delete=False
-            ) as tf:
+            with tempfile.NamedTemporaryFile("w", newline="", encoding="utf-8", dir=out_path, delete=False) as tf:
                 tmp_name = tf.name
                 writer = csv.writer(tf)
-                writer.writerow(
-                    ["Email", "Type", "Activity", "Name", "StartDate", "Revenue"]
-                )
+                writer.writerow(["Email", "Type", "Activity", "Name", "StartDate", "Revenue"])
                 for r in records:
                     writer.writerow(
                         [

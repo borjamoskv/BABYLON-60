@@ -20,23 +20,17 @@ class AbstractEffectMachine:
         self.capabilities: dict[str, CapabilitySet] = {}
         self.loaded_extensions: set[str] = set()
 
-    def grant_agent_capabilities(
-        self, agent_id: str, allowed_families: set[InstructionFamily]
-    ) -> None:
+    def grant_agent_capabilities(self, agent_id: str, allowed_families: set[InstructionFamily]) -> None:
         self.capabilities[agent_id] = CapabilitySet(allowed_families=allowed_families)
 
-    def step(
-        self, agent_id: str, program: EffectProgram
-    ) -> tuple[ObjectSpace, list[AlgebraicEffect]]:
+    def step(self, agent_id: str, program: EffectProgram) -> tuple[ObjectSpace, list[AlgebraicEffect]]:
         observed_effects: list[AlgebraicEffect] = []
         caps = self.capabilities.get(agent_id)
 
         for family, params in program.operations:
             effect = AlgebraicEffect(family=family)
             if not caps or not caps.is_authorized(effect):
-                raise CapabilityError(
-                    f"Capability Denied: Agent '{agent_id}' lacks instruction family {family.value}"
-                )
+                raise CapabilityError(f"Capability Denied: Agent '{agent_id}' lacks instruction family {family.value}")
 
             if family == InstructionFamily.WRITE:
                 op_type = params.get("op", "ALLOC")
