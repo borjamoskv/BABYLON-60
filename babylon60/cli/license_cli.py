@@ -41,6 +41,31 @@ def buy_license(tier_name: str='pro'):
     except (OSError, RuntimeError):
         pass
 
+def print_purchases():
+    import json
+    from pathlib import Path
+    log_path = Path.home() / ".babylon60" / "purchase_notifications.json"
+    
+    print("\n💰 BABYLON-60 REVENUE & PURCHASES LEDGER")
+    print("=" * 48)
+    if not log_path.exists():
+        print("  Sin ventas registradas aún. Esperando primeras compras...\n")
+        return
+
+    try:
+        with open(log_path, "r", encoding="utf-8") as f:
+            purchases = json.load(f)
+        
+        total_eur = sum(p.get("amount_eur", 0) for p in purchases)
+        print(f"  Ventas Totales:    {len(purchases)}")
+        print(f"  Ingresos Totales:  €{total_eur} EUR\n")
+        print("  Detalle de Compras:")
+        for idx, p in enumerate(purchases[-10:], 1):
+            print(f"   {idx}. [{p.get('timestamp')}] {p.get('customer_email')} — €{p.get('amount_eur')} ({p.get('tier')})")
+        print("")
+    except (json.JSONDecodeError, OSError):
+        print("  Error al leer el registro de ventas.\n")
+
 def main(args: List[str]=None):
     if args is None:
         args = sys.argv[1:]
@@ -54,7 +79,9 @@ def main(args: List[str]=None):
     elif args[0] in ('buy', 'upgrade'):
         tier = args[1] if len(args) > 1 else 'pro'
         buy_license(tier)
+    elif args[0] in ('purchases', 'sales', 'revenue'):
+        print_purchases()
     else:
-        print('Usage: babylon60 [status | auth <KEY> | buy <tier>]')
+        print('Usage: babylon60 [status | auth <KEY> | buy <tier> | purchases]')
 if __name__ == '__main__':
     main()

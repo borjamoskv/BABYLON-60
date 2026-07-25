@@ -28,3 +28,8 @@ def test_cli_main_status(capsys):
     with patch('babylon60.cli.license_cli.print_status') as mock_print:
         main(['status'])
         mock_print.assert_called_once()
+
+def test_cli_purchases(capsys):
+    with patch('babylon60.cli.license_cli.print_purchases') as mock_purchased:
+        main(['purchases'])
+        mock_purchased.assert_called_once()
