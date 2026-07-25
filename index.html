@@ -759,6 +759,154 @@
   </div>
 </section>
 
+<!-- ============ PRICING SECTION ============ -->
+<section class="rule-top" id="pricing" style="padding: 6rem 0; background: rgba(10, 10, 10, 0.6);">
+  <div class="wrap">
+    <span class="eyebrow" style="color: #2B3BE5; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;">Monetization & License Tiers</span>
+    <h2 style="font-size: 2.5rem; font-weight: 800; margin-top: 0.5rem;">Sovereign BFT Memory Pricing</h2>
+    <p style="color: #888; max-width: 600px; margin-top: 0.5rem; font-size: 1.1rem;">
+      Scale your autonomous agent swarms with guaranteed zero-anergy BFT state persistence and cryptographic proof.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
+      
+      <!-- Developer Tier -->
+      <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.5rem; background: #111; display: flex; flex-direction: column; justify-space-between;">
+        <div>
+          <span style="font-size: 0.85rem; background: rgba(43, 59, 229, 0.15); color: #6E92FF; padding: 0.25rem 0.75rem; border-radius: 999px; font-weight: 600;">DEVELOPER</span>
+          <h3 style="font-size: 1.8rem; font-weight: 700; margin-top: 1rem;">€49 <span style="font-size: 1rem; color: #666;">/ mes</span></h3>
+          <p style="color: #aaa; margin-top: 0.5rem; font-size: 0.95rem;">Para desarrolladores e investigadores desplegando agentes individuales.</p>
+          <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #ccc; font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li>✓ Hasta 50,000 op/día de estado BFT</li>
+            <li>✓ Memoria vectorial persistente Mamba SSM</li>
+            <li>✓ Licencia criptográfica HMAC B60</li>
+            <li>✓ Soporte por Email prioritario</li>
+          </ul>
+        </div>
+        <button class="btn btn-primary" onclick="openCheckoutModal('DEVELOPER', 49)" style="margin-top: 2rem; width: 100%; text-align: center;">Adquirir Developer (€49)</button>
+      </div>
+
+      <!-- Pro Swarm Tier (Featured) -->
+      <div style="border: 2px solid #2B3BE5; border-radius: 12px; padding: 2.5rem; background: #141629; display: flex; flex-direction: column; justify-space-between; position: relative;">
+        <span style="position: absolute; top: -12px; right: 24px; background: #2B3BE5; color: #fff; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.8rem; border-radius: 999px; text-transform: uppercase;">Más Popular</span>
+        <div>
+          <span style="font-size: 0.85rem; background: rgba(43, 59, 229, 0.3); color: #94A8FF; padding: 0.25rem 0.75rem; border-radius: 999px; font-weight: 600;">PRO SWARM</span>
+          <h3 style="font-size: 1.8rem; font-weight: 700; margin-top: 1rem;">€199 <span style="font-size: 1rem; color: #888;">/ mes</span></h3>
+          <p style="color: #bbb; margin-top: 0.5rem; font-size: 0.95rem;">Para equipos y swarms de agentes autónomos distribuidos.</p>
+          <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #eee; font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li>✓ Hasta 1,000,000 op/día de estado BFT</li>
+            <li>✓ Consenso multi-nodo en tiempo real</li>
+            <li>✓ Git Sentinel Anchoring autónomo</li>
+            <li>✓ Webhooks & Telemetría industrial</li>
+          </ul>
+        </div>
+        <button class="btn btn-primary" onclick="openCheckoutModal('PRO_SWARM', 199)" style="margin-top: 2rem; width: 100%; text-align: center; background: #2B3BE5;">Adquirir Pro Swarm (€199)</button>
+      </div>
+
+      <!-- Enterprise Sovereign Tier -->
+      <div style="border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 2.5rem; background: #111; display: flex; flex-direction: column; justify-space-between;">
+        <div>
+          <span style="font-size: 0.85rem; background: rgba(200, 146, 46, 0.15); color: #C8922E; padding: 0.25rem 0.75rem; border-radius: 999px; font-weight: 600;">ENTERPRISE SOVEREIGN</span>
+          <h3 style="font-size: 1.8rem; font-weight: 700; margin-top: 1rem;">€999 <span style="font-size: 1rem; color: #666;">/ mes</span></h3>
+          <p style="color: #aaa; margin-top: 0.5rem; font-size: 0.95rem;">Infraestructura dedicada, SLA 99.99% y custodia física de claves.</p>
+          <ul style="list-style: none; padding: 0; margin-top: 1.5rem; color: #ccc; font-size: 0.95rem; display: flex; flex-direction: column; gap: 0.75rem;">
+            <li>✓ Operaciones Ilimitadas sin restricción</li>
+            <li>✓ Instancia Caddy C5 Reverse Proxy dedicada</li>
+            <li>✓ Pagos nativos Bitcoin Core / Schnorr</li>
+            <li>✓ Soporte directo 24/7 con Ingenieros CORTEX</li>
+          </ul>
+        </div>
+        <button class="btn btn-ghost" onclick="openCheckoutModal('ENTERPRISE', 999)" style="margin-top: 2rem; width: 100%; text-align: center; border-color: #C8922E; color: #C8922E;">Adquirir Enterprise (€999)</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CHECKOUT MODAL ============ -->
+<div id="checkout-modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center;">
+  <div style="background: #12131C; border: 1px solid #2B3BE5; border-radius: 16px; width: 90%; max-width: 480px; padding: 2rem; color: #fff; box-shadow: 0 20px 50px rgba(0,0,0,0.8);">
+    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1rem;">
+      <h3 id="modal-title" style="margin: 0; font-size: 1.3rem;">Adquirir Licencia B60</h3>
+      <button onclick="closeCheckoutModal()" style="background: transparent; border: none; color: #888; font-size: 1.5rem; cursor: pointer;">&times;</button>
+    </div>
+
+    <form id="checkout-form" onsubmit="processCheckout(event)" style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+      <input type="hidden" id="selected-tier" value="DEVELOPER">
+      
+      <div>
+        <label style="display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 0.4rem;">Correo Electrónico del Titular</label>
+        <input type="email" id="checkout-email" required placeholder="tu-email@empresa.com" style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #333; background: #0A0A0A; color: #fff; font-size: 0.95rem;">
+      </div>
+
+      <div>
+        <label style="display: block; font-size: 0.85rem; color: #aaa; margin-bottom: 0.4rem;">Método de Pago</label>
+        <select style="width: 100%; padding: 0.75rem; border-radius: 8px; border: 1px solid #333; background: #0A0A0A; color: #fff; font-size: 0.95rem;">
+          <option>Tarjeta de Crédito / Débito (Stripe)</option>
+          <option>Domiciliación Bancaria SEPA Direct Debit</option>
+          <option>Bitcoin Core (Firma Schnorr Directa)</option>
+        </select>
+      </div>
+
+      <div style="background: rgba(43, 59, 229, 0.1); border: 1px solid rgba(43, 59, 229, 0.3); padding: 1rem; border-radius: 8px; font-size: 0.85rem; color: #94A8FF; margin-top: 0.5rem;">
+        ⚡ Emisión instantánea de Clave Criptográfica HMAC B60 tras confirmación.
+      </div>
+
+      <button type="submit" id="submit-pay-btn" class="btn btn-primary" style="margin-top: 1rem; width: 100%; padding: 0.85rem; font-weight: 700;">Proceder al Pago Seguro</button>
+    </form>
+
+    <div id="checkout-success" style="display: none; margin-top: 1.5rem; text-align: center;">
+      <div style="font-size: 2.5rem; color: #4EFE84;">✓</div>
+      <h4 style="margin-top: 0.5rem; font-size: 1.2rem;">¡Licencia Emitida con Éxito!</h4>
+      <p style="font-size: 0.85rem; color: #aaa; margin-top: 0.3rem;">Copia tu clave de licencia e inyéctala en tu SDK o CLI:</p>
+      <div id="generated-key" style="font-family: monospace; background: #050505; border: 1px solid #333; padding: 0.75rem; border-radius: 6px; color: #C8922E; font-size: 0.8rem; word-break: break-all; margin-top: 0.8rem;"></div>
+      <button class="btn btn-primary" onclick="closeCheckoutModal()" style="margin-top: 1.2rem; width: 100%;">Cerrar y Comenzar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openCheckoutModal(tier, price) {
+  document.getElementById('selected-tier').value = tier;
+  document.getElementById('modal-title').innerText = 'Adquirir Licencia ' + tier + ' (€' + price + ')';
+  document.getElementById('checkout-form').style.display = 'flex';
+  document.getElementById('checkout-success').style.display = 'none';
+  document.getElementById('checkout-modal').style.display = 'flex';
+}
+
+function closeCheckoutModal() {
+  document.getElementById('checkout-modal').style.display = 'none';
+}
+
+async function processCheckout(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-pay-btn');
+  btn.innerText = 'Procesando Transducción C5...';
+  btn.disabled = true;
+
+  const tier = document.getElementById('selected-tier').value;
+  const email = document.getElementById('checkout-email').value;
+
+  try {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ tier: tier, email: email })
+    });
+    const data = await res.json();
+    
+    document.getElementById('checkout-form').style.display = 'none';
+    document.getElementById('generated-key').innerText = data.provisional_license_key || 'B60-PRO-MOCK-C5-KEY-2026';
+    document.getElementById('checkout-success').style.display = 'block';
+  } catch(err) {
+    alert('Error al conectar con la Pasarela CORTEX: ' + err.message);
+  } finally {
+    btn.innerText = 'Proceder al Pago Seguro';
+    btn.disabled = false;
+  }
+}
+</script>
+
 <!-- ============ FINAL CTA ============ -->
 <section class="rule-top final" id="start">
   <div class="wrap">

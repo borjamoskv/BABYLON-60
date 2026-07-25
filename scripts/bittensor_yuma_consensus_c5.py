@@ -93,7 +93,7 @@ def compute_yuma_consensus(
 
 
 def simulate_subnet_emission(
-    block_emission: INTEGER, ranks: List[float], dividends: List[float], subnet_owner_cut: float = 0.18
+    block_emission: int, ranks: List[float], dividends: List[float], subnet_owner_cut: float = 0.18
 ) -> Dict[str, Any]:
     """
     Computes exact TAO emission distribution for a Subnet at step t.
