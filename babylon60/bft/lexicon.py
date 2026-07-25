@@ -36,9 +36,27 @@ class BFTLexicon:
             row = cur.fetchone()
             return row[0] if row else None
 
+    async def resolve_hash_async(self, concept_hash: str) -> str | None:
+        from babylon60.database.core import connect
+
+        async with await connect(self.db_path, synchronous="NORMAL") as db:
+            async with db.execute("SELECT canonical_name FROM lexicon_nodes WHERE concept_hash = ?", (concept_hash,)) as cur:
+                row = await cur.fetchone()
+                return row[0] if row else None
+
     def trace_edges(self, concept_hash: str) -> list[tuple[str, str]]:
         with self._get_conn() as conn:
             cur = conn.execute(
                 "SELECT relation_type, target_hash FROM lexicon_edges WHERE source_hash = ?", (concept_hash,)
             )
             return [(row[0], row[1]) for row in cur.fetchall()]
+
+    async def trace_edges_async(self, concept_hash: str) -> list[tuple[str, str]]:
+        from babylon60.database.core import connect
+
+        async with await connect(self.db_path, synchronous="NORMAL") as db:
+            async with db.execute(
+                "SELECT relation_type, target_hash FROM lexicon_edges WHERE source_hash = ?", (concept_hash,)
+            ) as cur:
+                rows = await cur.fetchall()
+                return [(row[0], row[1]) for row in rows]
