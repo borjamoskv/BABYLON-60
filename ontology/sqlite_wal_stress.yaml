@@ -5,8 +5,8 @@ Proof:
   Range: "[SQLite_BUSY Lockout Prevention, BFT Consensus Assurance]"
   Confidence: C5-REAL
 Isomorphisms:
-  - "Asumir resiliencia en código" -> "C4-SIM Anergy (Fe Estocástica)"
-  - "Asedio Físico 1000 requests" -> "C5-REAL Exergy (Falsación Empírica)"
+  - '"Asumir resiliencia en código" -> "C4-SIM Anergy (Fe Estocástica)"'
+  - '"Asedio Físico 1000 requests" -> "C5-REAL Exergy (Falsación Empírica)"'
 Blast_Radius_Matrix:
   Vector: "Inyección de 1000 mutaciones concurrentes BFT sobre un solo archivo SQLite."
   Blast_Radius: "El Event Loop y el I/O Scheduler del Kernel (Mac/Linux)."

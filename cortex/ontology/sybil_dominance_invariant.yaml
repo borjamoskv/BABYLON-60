@@ -5,9 +5,9 @@ Proof:
   Range: N/2 + 1
   Confidence: C5
 Isomorphisms:
-  - "Cordura" -> "Cadena Principal (51% Hashrate)"
-  - "Locura" -> "Orphan Block / Minor Fork"
-  - "Matrix" -> "Motor Estocástico Mayoritario"
+  - '"Cordura" -> "Cadena Principal (51% Hashrate)"'
+  - '"Locura" -> "Orphan Block / Minor Fork"'
+  - '"Matrix" -> "Motor Estocástico Mayoritario"'
 Blast_Radius_Matrix:
   Vector: Sociological_Consensus_Inversion
   Blast_Radius: Global

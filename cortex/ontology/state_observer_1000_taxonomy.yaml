@@ -25,7 +25,7 @@ Primitives_Action:
   5: "COVARIANCE"   # Propagate Error Covariance (P_{k|k} = (I - L_k*C)*P_{k|k-1})
   6: "DRIFT_CHECK"  # Compute KL Divergence / Norm ||y_k - y_hat_k||
   7: "RECONSTRUCT"  # Reconstruct Unobservable Latent Vectors
-  8: "SANITY_ASSERT"# BFT Invariant & Lyapunov Matrix Stability Test
+  8: "SANITY_ASSERT" # BFT Invariant & Lyapunov Matrix Stability Test
   9: "FLUSH_LEDGER" # Seal State Ledger Receipt in C5-REAL Memory
 
 Modifiers_Constraint:

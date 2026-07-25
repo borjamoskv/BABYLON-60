@@ -5,8 +5,8 @@ Proof:
   Range: "[O(1) Context Recovery, Cero Entropía Semántica]"
   Confidence: C5-REAL
 Isomorphisms:
-  - "Grep/Regex over code" -> "C4-SIM Anergy (Latent Frictional Heat)"
-  - "ls-main / AST Pointer" -> "C5-REAL Exergy (Physical Pointer)"
+  - '"Grep/Regex over code" -> "C4-SIM Anergy (Latent Frictional Heat)"'
+  - '"ls-main / AST Pointer" -> "C5-REAL Exergy (Physical Pointer)"'
 Blast_Radius_Matrix:
   Vector: "Reemplazo de parsers de texto por consultas AST nativas."
   Blast_Radius: "Todo el espacio latente de Antigravity."
