@@ -2,7 +2,7 @@
 """Cortex Ontological Lexicon Transducer (cortex/lexicon.py)
 
 Executable transducer for loading, verifying, and programmatically querying the
-Sovereign Lexicon / Glosario (glosario.md) and Kernel Invariants (Ω0 - Ω181).
+Sovereign Lexicon / Glosario (glosario.md) and Kernel Invariants (Ω0 - Ω187).
 Converts natural language terms and invariant IDs into deterministic AST objects.
 """
 

@@ -20,6 +20,11 @@ def test_lexicon_load_invariants():
     assert inv_181 is not None
     assert "ULTRATHINK P0 HARNESS CONVERGENCE INVARIANT" in inv_181
 
+    # Test new Aximatiza Invariant Ω187
+    inv_187 = engine.get_invariant("Ω187")
+    assert inv_187 is not None
+    assert "KERNEL AXIOMATIZATION PROTOCOL" in inv_187
+
 
 def test_lookup_invariant_function():
     inv_178 = lookup_invariant("Ω178")

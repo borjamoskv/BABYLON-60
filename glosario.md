@@ -2,7 +2,7 @@
 
 # GLOSARIO SOBERANO — BABYLON-60 / C5-REAL / VIBE CODE
 
-Versión 3.5 CANÓNICA · Sesión 4092c01d · 2026-07-25
+Versión 3.6 CANÓNICA · Sesión 4092c01d · 2026-07-25
 
 SYS_ID: GLOSARIO_OMEGA_V3.4 | ESTADO: TIER_1 CRISTALIZADO
 **INVARIANTE GLOBAL:** Ningún término es una opinión. Ningún término es una metáfora. Todo término colapsa a una prueba física o matemática.
@@ -131,6 +131,12 @@ Tipo: Arquitectura de Memoria. Ω17
 | Zero-Trust Pipeline 🔐 | Arquitectura Trinitaria | Pipeline (detect_sim -> runtime_wrapper -> verify_receipt) con recibos auto-firmados via self_hash SHA-256 | Ω179 |
 | Tool Metadata Boundary 🔐 | Regla Anti-Necrosis | Prohibido inyectar ArtifactMetadata fuera del dir de artefactos | Ω180 |
 | ULTRATHINK P0 Convergence ⚙️ | Convergencia Física | Prohibidas exhortaciones narrativas; orquestación descargada en contratos físicos | Ω181 |
+| Hypervisor Determinism ⚙️ | Control Ring-3 | Monitor transicional estricto O(1) sin inferencia estocástica | Ω182 |
+| Data-Instruction Orthogonality 🔐 | Escudo RCE | Payload inyectado nace con privilegio nulo (taint=1) sin promoción semántica | Ω183 |
+| ULTRATHINK 9-Node Completeness ⚙️ | Autopoiesis | Enjambre cerrado con Poda Landauer y Compresión Kolmogorov | Ω184 |
+| Orchestration Asymmetry ⚙️ | Exergía Pipeline | Flujos asíncronos por defecto; barreras solo para deduplicación global | Ω185 |
+| Adversarial Verify 🧠 | Falsación Fuerte | Todo hallazgo crítico es adversarialmente refutado antes de asimilarse | Ω186 |
+| Aximatiza Protocol ⚙️ | Autopoiesis | Invariantes inyectadas desencadenan axiomatización termodinámica autónoma | Ω187 |
 
 ---
 
