@@ -19,3 +19,6 @@
 [submodule "proof_kernel/babylon-60-alpha"]
 	path = proof_kernel/babylon-60-alpha
 	url = https://github.com/borjamoskv/BABYLON-60-ALPHA.git
+[submodule "apps/FinMind"]
+	path = apps/FinMind
+	url = https://github.com/borjamoskv/FinMind.git
