@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <defs>
+    <filter id="glow-cyan" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-pink" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <filter id="glow-violet" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <g transform="translate(250, 150)">
+    <!-- Top Classic Saucer -->
+    <path d="M -60 0 C -40 -30, 40 -30, 60 0 C 80 15, -80 15, -60 0 Z" fill="none" stroke="#00F0FF" stroke-width="3" filter="url(#glow-cyan)"/>
+    <ellipse cx="0" cy="-10" rx="25" ry="15" fill="none" stroke="#00F0FF" stroke-width="2" filter="url(#glow-cyan)"/>
+    <!-- Beam -->
+    <path d="M -20 10 L -40 60 L 40 60 L 20 10 Z" fill="rgba(0, 240, 255, 0.1)" stroke="none"/>
+  </g>
+
+  <g transform="translate(250, 260)">
+    <!-- Middle Elongated Saucer -->
+    <path d="M -100 0 C -60 -20, 60 -20, 100 0 C 120 15, -120 15, -100 0 Z" fill="none" stroke="#FF007A" stroke-width="3" filter="url(#glow-pink)"/>
+    <!-- Windows -->
+    <circle cx="-40" cy="5" r="3" fill="#FF007A" filter="url(#glow-pink)"/>
+    <circle cx="-15" cy="8" r="3" fill="#FF007A" filter="url(#glow-pink)"/>
+    <circle cx="15" cy="8" r="3" fill="#FF007A" filter="url(#glow-pink)"/>
+    <circle cx="40" cy="5" r="3" fill="#FF007A" filter="url(#glow-pink)"/>
+  </g>
+
+  <g transform="translate(250, 370)">
+    <!-- Bottom Disc Saucer -->
+    <ellipse cx="0" cy="0" rx="140" ry="25" fill="none" stroke="#7B2CBF" stroke-width="3" filter="url(#glow-violet)"/>
+    <ellipse cx="0" cy="0" rx="90" ry="12" fill="none" stroke="#7B2CBF" stroke-width="2" filter="url(#glow-violet)"/>
+    <path d="M -50 0 L 50 0" stroke="#7B2CBF" stroke-width="2" filter="url(#glow-violet)"/>
+  </g>
+</svg>
