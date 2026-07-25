@@ -1,0 +1,5378 @@
+[
+  {
+    "id": "P001",
+    "name": "Identity Functor",
+    "domain": "Category Theory",
+    "exergy": 0.99
+  },
+  {
+    "id": "P042",
+    "name": "Lawvere Metric Tensor",
+    "domain": "FISR",
+    "exergy": 0.95
+  },
+  {
+    "id": "P896",
+    "name": "Bio-Silicon Isomorphism",
+    "domain": "Ontology",
+    "exergy": 1.0
+  },
+  {
+    "id": "P004",
+    "name": "Categorical Node 4",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P005",
+    "name": "Categorical Node 5",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P006",
+    "name": "Categorical Node 6",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P007",
+    "name": "Categorical Node 7",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P008",
+    "name": "Categorical Node 8",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P009",
+    "name": "Categorical Node 9",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P010",
+    "name": "Categorical Node 10",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P011",
+    "name": "Categorical Node 11",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P012",
+    "name": "Categorical Node 12",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P013",
+    "name": "Categorical Node 13",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P014",
+    "name": "Categorical Node 14",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P015",
+    "name": "Categorical Node 15",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P016",
+    "name": "Categorical Node 16",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P017",
+    "name": "Categorical Node 17",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P018",
+    "name": "Categorical Node 18",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P019",
+    "name": "Categorical Node 19",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P020",
+    "name": "Categorical Node 20",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P021",
+    "name": "Categorical Node 21",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P022",
+    "name": "Categorical Node 22",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P023",
+    "name": "Categorical Node 23",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P024",
+    "name": "Categorical Node 24",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P025",
+    "name": "Categorical Node 25",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P026",
+    "name": "Categorical Node 26",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P027",
+    "name": "Categorical Node 27",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P028",
+    "name": "Categorical Node 28",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P029",
+    "name": "Categorical Node 29",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P030",
+    "name": "Categorical Node 30",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P031",
+    "name": "Categorical Node 31",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P032",
+    "name": "Categorical Node 32",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P033",
+    "name": "Categorical Node 33",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P034",
+    "name": "Categorical Node 34",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P035",
+    "name": "Categorical Node 35",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P036",
+    "name": "Categorical Node 36",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P037",
+    "name": "Categorical Node 37",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P038",
+    "name": "Categorical Node 38",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P039",
+    "name": "Categorical Node 39",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P040",
+    "name": "Categorical Node 40",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P041",
+    "name": "Categorical Node 41",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P042",
+    "name": "Categorical Node 42",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P043",
+    "name": "Categorical Node 43",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P044",
+    "name": "Categorical Node 44",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P045",
+    "name": "Categorical Node 45",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P046",
+    "name": "Categorical Node 46",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P047",
+    "name": "Categorical Node 47",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P048",
+    "name": "Categorical Node 48",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P049",
+    "name": "Categorical Node 49",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P050",
+    "name": "Categorical Node 50",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P051",
+    "name": "Categorical Node 51",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P052",
+    "name": "Categorical Node 52",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P053",
+    "name": "Categorical Node 53",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P054",
+    "name": "Categorical Node 54",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P055",
+    "name": "Categorical Node 55",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P056",
+    "name": "Categorical Node 56",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P057",
+    "name": "Categorical Node 57",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P058",
+    "name": "Categorical Node 58",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P059",
+    "name": "Categorical Node 59",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P060",
+    "name": "Categorical Node 60",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P061",
+    "name": "Categorical Node 61",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P062",
+    "name": "Categorical Node 62",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P063",
+    "name": "Categorical Node 63",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P064",
+    "name": "Categorical Node 64",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P065",
+    "name": "Categorical Node 65",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P066",
+    "name": "Categorical Node 66",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P067",
+    "name": "Categorical Node 67",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P068",
+    "name": "Categorical Node 68",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P069",
+    "name": "Categorical Node 69",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P070",
+    "name": "Categorical Node 70",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P071",
+    "name": "Categorical Node 71",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P072",
+    "name": "Categorical Node 72",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P073",
+    "name": "Categorical Node 73",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P074",
+    "name": "Categorical Node 74",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P075",
+    "name": "Categorical Node 75",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P076",
+    "name": "Categorical Node 76",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P077",
+    "name": "Categorical Node 77",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P078",
+    "name": "Categorical Node 78",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P079",
+    "name": "Categorical Node 79",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P080",
+    "name": "Categorical Node 80",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P081",
+    "name": "Categorical Node 81",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P082",
+    "name": "Categorical Node 82",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P083",
+    "name": "Categorical Node 83",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P084",
+    "name": "Categorical Node 84",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P085",
+    "name": "Categorical Node 85",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P086",
+    "name": "Categorical Node 86",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P087",
+    "name": "Categorical Node 87",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P088",
+    "name": "Categorical Node 88",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P089",
+    "name": "Categorical Node 89",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P090",
+    "name": "Categorical Node 90",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P091",
+    "name": "Categorical Node 91",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P092",
+    "name": "Categorical Node 92",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P093",
+    "name": "Categorical Node 93",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P094",
+    "name": "Categorical Node 94",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P095",
+    "name": "Categorical Node 95",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P096",
+    "name": "Categorical Node 96",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P097",
+    "name": "Categorical Node 97",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P098",
+    "name": "Categorical Node 98",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P099",
+    "name": "Categorical Node 99",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P100",
+    "name": "Categorical Node 100",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P101",
+    "name": "Categorical Node 101",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P102",
+    "name": "Categorical Node 102",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P103",
+    "name": "Categorical Node 103",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P104",
+    "name": "Categorical Node 104",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P105",
+    "name": "Categorical Node 105",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P106",
+    "name": "Categorical Node 106",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P107",
+    "name": "Categorical Node 107",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P108",
+    "name": "Categorical Node 108",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P109",
+    "name": "Categorical Node 109",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P110",
+    "name": "Categorical Node 110",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P111",
+    "name": "Categorical Node 111",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P112",
+    "name": "Categorical Node 112",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P113",
+    "name": "Categorical Node 113",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P114",
+    "name": "Categorical Node 114",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P115",
+    "name": "Categorical Node 115",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P116",
+    "name": "Categorical Node 116",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P117",
+    "name": "Categorical Node 117",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P118",
+    "name": "Categorical Node 118",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P119",
+    "name": "Categorical Node 119",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P120",
+    "name": "Categorical Node 120",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P121",
+    "name": "Categorical Node 121",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P122",
+    "name": "Categorical Node 122",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P123",
+    "name": "Categorical Node 123",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P124",
+    "name": "Categorical Node 124",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P125",
+    "name": "Categorical Node 125",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P126",
+    "name": "Categorical Node 126",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P127",
+    "name": "Categorical Node 127",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P128",
+    "name": "Categorical Node 128",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P129",
+    "name": "Categorical Node 129",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P130",
+    "name": "Categorical Node 130",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P131",
+    "name": "Categorical Node 131",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P132",
+    "name": "Categorical Node 132",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P133",
+    "name": "Categorical Node 133",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P134",
+    "name": "Categorical Node 134",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P135",
+    "name": "Categorical Node 135",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P136",
+    "name": "Categorical Node 136",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P137",
+    "name": "Categorical Node 137",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P138",
+    "name": "Categorical Node 138",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P139",
+    "name": "Categorical Node 139",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P140",
+    "name": "Categorical Node 140",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P141",
+    "name": "Categorical Node 141",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P142",
+    "name": "Categorical Node 142",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P143",
+    "name": "Categorical Node 143",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P144",
+    "name": "Categorical Node 144",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P145",
+    "name": "Categorical Node 145",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P146",
+    "name": "Categorical Node 146",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P147",
+    "name": "Categorical Node 147",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P148",
+    "name": "Categorical Node 148",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P149",
+    "name": "Categorical Node 149",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P150",
+    "name": "Categorical Node 150",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P151",
+    "name": "Categorical Node 151",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P152",
+    "name": "Categorical Node 152",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P153",
+    "name": "Categorical Node 153",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P154",
+    "name": "Categorical Node 154",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P155",
+    "name": "Categorical Node 155",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P156",
+    "name": "Categorical Node 156",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P157",
+    "name": "Categorical Node 157",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P158",
+    "name": "Categorical Node 158",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P159",
+    "name": "Categorical Node 159",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P160",
+    "name": "Categorical Node 160",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P161",
+    "name": "Categorical Node 161",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P162",
+    "name": "Categorical Node 162",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P163",
+    "name": "Categorical Node 163",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P164",
+    "name": "Categorical Node 164",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P165",
+    "name": "Categorical Node 165",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P166",
+    "name": "Categorical Node 166",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P167",
+    "name": "Categorical Node 167",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P168",
+    "name": "Categorical Node 168",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P169",
+    "name": "Categorical Node 169",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P170",
+    "name": "Categorical Node 170",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P171",
+    "name": "Categorical Node 171",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P172",
+    "name": "Categorical Node 172",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P173",
+    "name": "Categorical Node 173",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P174",
+    "name": "Categorical Node 174",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P175",
+    "name": "Categorical Node 175",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P176",
+    "name": "Categorical Node 176",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P177",
+    "name": "Categorical Node 177",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P178",
+    "name": "Categorical Node 178",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P179",
+    "name": "Categorical Node 179",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P180",
+    "name": "Categorical Node 180",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P181",
+    "name": "Categorical Node 181",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P182",
+    "name": "Categorical Node 182",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P183",
+    "name": "Categorical Node 183",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P184",
+    "name": "Categorical Node 184",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P185",
+    "name": "Categorical Node 185",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P186",
+    "name": "Categorical Node 186",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P187",
+    "name": "Categorical Node 187",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P188",
+    "name": "Categorical Node 188",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P189",
+    "name": "Categorical Node 189",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P190",
+    "name": "Categorical Node 190",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P191",
+    "name": "Categorical Node 191",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P192",
+    "name": "Categorical Node 192",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P193",
+    "name": "Categorical Node 193",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P194",
+    "name": "Categorical Node 194",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P195",
+    "name": "Categorical Node 195",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P196",
+    "name": "Categorical Node 196",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P197",
+    "name": "Categorical Node 197",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P198",
+    "name": "Categorical Node 198",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P199",
+    "name": "Categorical Node 199",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P200",
+    "name": "Categorical Node 200",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P201",
+    "name": "Categorical Node 201",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P202",
+    "name": "Categorical Node 202",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P203",
+    "name": "Categorical Node 203",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P204",
+    "name": "Categorical Node 204",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P205",
+    "name": "Categorical Node 205",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P206",
+    "name": "Categorical Node 206",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P207",
+    "name": "Categorical Node 207",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P208",
+    "name": "Categorical Node 208",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P209",
+    "name": "Categorical Node 209",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P210",
+    "name": "Categorical Node 210",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P211",
+    "name": "Categorical Node 211",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P212",
+    "name": "Categorical Node 212",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P213",
+    "name": "Categorical Node 213",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P214",
+    "name": "Categorical Node 214",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P215",
+    "name": "Categorical Node 215",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P216",
+    "name": "Categorical Node 216",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P217",
+    "name": "Categorical Node 217",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P218",
+    "name": "Categorical Node 218",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P219",
+    "name": "Categorical Node 219",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P220",
+    "name": "Categorical Node 220",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P221",
+    "name": "Categorical Node 221",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P222",
+    "name": "Categorical Node 222",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P223",
+    "name": "Categorical Node 223",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P224",
+    "name": "Categorical Node 224",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P225",
+    "name": "Categorical Node 225",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P226",
+    "name": "Categorical Node 226",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P227",
+    "name": "Categorical Node 227",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P228",
+    "name": "Categorical Node 228",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P229",
+    "name": "Categorical Node 229",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P230",
+    "name": "Categorical Node 230",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P231",
+    "name": "Categorical Node 231",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P232",
+    "name": "Categorical Node 232",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P233",
+    "name": "Categorical Node 233",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P234",
+    "name": "Categorical Node 234",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P235",
+    "name": "Categorical Node 235",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P236",
+    "name": "Categorical Node 236",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P237",
+    "name": "Categorical Node 237",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P238",
+    "name": "Categorical Node 238",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P239",
+    "name": "Categorical Node 239",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P240",
+    "name": "Categorical Node 240",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P241",
+    "name": "Categorical Node 241",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P242",
+    "name": "Categorical Node 242",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P243",
+    "name": "Categorical Node 243",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P244",
+    "name": "Categorical Node 244",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P245",
+    "name": "Categorical Node 245",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P246",
+    "name": "Categorical Node 246",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P247",
+    "name": "Categorical Node 247",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P248",
+    "name": "Categorical Node 248",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P249",
+    "name": "Categorical Node 249",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P250",
+    "name": "Categorical Node 250",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P251",
+    "name": "Categorical Node 251",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P252",
+    "name": "Categorical Node 252",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P253",
+    "name": "Categorical Node 253",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P254",
+    "name": "Categorical Node 254",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P255",
+    "name": "Categorical Node 255",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P256",
+    "name": "Categorical Node 256",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P257",
+    "name": "Categorical Node 257",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P258",
+    "name": "Categorical Node 258",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P259",
+    "name": "Categorical Node 259",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P260",
+    "name": "Categorical Node 260",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P261",
+    "name": "Categorical Node 261",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P262",
+    "name": "Categorical Node 262",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P263",
+    "name": "Categorical Node 263",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P264",
+    "name": "Categorical Node 264",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P265",
+    "name": "Categorical Node 265",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P266",
+    "name": "Categorical Node 266",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P267",
+    "name": "Categorical Node 267",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P268",
+    "name": "Categorical Node 268",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P269",
+    "name": "Categorical Node 269",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P270",
+    "name": "Categorical Node 270",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P271",
+    "name": "Categorical Node 271",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P272",
+    "name": "Categorical Node 272",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P273",
+    "name": "Categorical Node 273",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P274",
+    "name": "Categorical Node 274",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P275",
+    "name": "Categorical Node 275",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P276",
+    "name": "Categorical Node 276",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P277",
+    "name": "Categorical Node 277",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P278",
+    "name": "Categorical Node 278",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P279",
+    "name": "Categorical Node 279",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P280",
+    "name": "Categorical Node 280",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P281",
+    "name": "Categorical Node 281",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P282",
+    "name": "Categorical Node 282",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P283",
+    "name": "Categorical Node 283",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P284",
+    "name": "Categorical Node 284",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P285",
+    "name": "Categorical Node 285",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P286",
+    "name": "Categorical Node 286",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P287",
+    "name": "Categorical Node 287",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P288",
+    "name": "Categorical Node 288",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P289",
+    "name": "Categorical Node 289",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P290",
+    "name": "Categorical Node 290",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P291",
+    "name": "Categorical Node 291",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P292",
+    "name": "Categorical Node 292",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P293",
+    "name": "Categorical Node 293",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P294",
+    "name": "Categorical Node 294",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P295",
+    "name": "Categorical Node 295",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P296",
+    "name": "Categorical Node 296",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P297",
+    "name": "Categorical Node 297",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P298",
+    "name": "Categorical Node 298",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P299",
+    "name": "Categorical Node 299",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P300",
+    "name": "Categorical Node 300",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P301",
+    "name": "Categorical Node 301",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P302",
+    "name": "Categorical Node 302",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P303",
+    "name": "Categorical Node 303",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P304",
+    "name": "Categorical Node 304",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P305",
+    "name": "Categorical Node 305",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P306",
+    "name": "Categorical Node 306",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P307",
+    "name": "Categorical Node 307",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P308",
+    "name": "Categorical Node 308",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P309",
+    "name": "Categorical Node 309",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P310",
+    "name": "Categorical Node 310",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P311",
+    "name": "Categorical Node 311",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P312",
+    "name": "Categorical Node 312",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P313",
+    "name": "Categorical Node 313",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P314",
+    "name": "Categorical Node 314",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P315",
+    "name": "Categorical Node 315",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P316",
+    "name": "Categorical Node 316",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P317",
+    "name": "Categorical Node 317",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P318",
+    "name": "Categorical Node 318",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P319",
+    "name": "Categorical Node 319",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P320",
+    "name": "Categorical Node 320",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P321",
+    "name": "Categorical Node 321",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P322",
+    "name": "Categorical Node 322",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P323",
+    "name": "Categorical Node 323",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P324",
+    "name": "Categorical Node 324",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P325",
+    "name": "Categorical Node 325",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P326",
+    "name": "Categorical Node 326",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P327",
+    "name": "Categorical Node 327",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P328",
+    "name": "Categorical Node 328",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P329",
+    "name": "Categorical Node 329",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P330",
+    "name": "Categorical Node 330",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P331",
+    "name": "Categorical Node 331",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P332",
+    "name": "Categorical Node 332",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P333",
+    "name": "Categorical Node 333",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P334",
+    "name": "Categorical Node 334",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P335",
+    "name": "Categorical Node 335",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P336",
+    "name": "Categorical Node 336",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P337",
+    "name": "Categorical Node 337",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P338",
+    "name": "Categorical Node 338",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P339",
+    "name": "Categorical Node 339",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P340",
+    "name": "Categorical Node 340",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P341",
+    "name": "Categorical Node 341",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P342",
+    "name": "Categorical Node 342",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P343",
+    "name": "Categorical Node 343",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P344",
+    "name": "Categorical Node 344",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P345",
+    "name": "Categorical Node 345",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P346",
+    "name": "Categorical Node 346",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P347",
+    "name": "Categorical Node 347",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P348",
+    "name": "Categorical Node 348",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P349",
+    "name": "Categorical Node 349",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P350",
+    "name": "Categorical Node 350",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P351",
+    "name": "Categorical Node 351",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P352",
+    "name": "Categorical Node 352",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P353",
+    "name": "Categorical Node 353",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P354",
+    "name": "Categorical Node 354",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P355",
+    "name": "Categorical Node 355",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P356",
+    "name": "Categorical Node 356",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P357",
+    "name": "Categorical Node 357",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P358",
+    "name": "Categorical Node 358",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P359",
+    "name": "Categorical Node 359",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P360",
+    "name": "Categorical Node 360",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P361",
+    "name": "Categorical Node 361",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P362",
+    "name": "Categorical Node 362",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P363",
+    "name": "Categorical Node 363",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P364",
+    "name": "Categorical Node 364",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P365",
+    "name": "Categorical Node 365",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P366",
+    "name": "Categorical Node 366",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P367",
+    "name": "Categorical Node 367",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P368",
+    "name": "Categorical Node 368",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P369",
+    "name": "Categorical Node 369",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P370",
+    "name": "Categorical Node 370",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P371",
+    "name": "Categorical Node 371",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P372",
+    "name": "Categorical Node 372",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P373",
+    "name": "Categorical Node 373",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P374",
+    "name": "Categorical Node 374",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P375",
+    "name": "Categorical Node 375",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P376",
+    "name": "Categorical Node 376",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P377",
+    "name": "Categorical Node 377",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P378",
+    "name": "Categorical Node 378",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P379",
+    "name": "Categorical Node 379",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P380",
+    "name": "Categorical Node 380",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P381",
+    "name": "Categorical Node 381",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P382",
+    "name": "Categorical Node 382",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P383",
+    "name": "Categorical Node 383",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P384",
+    "name": "Categorical Node 384",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P385",
+    "name": "Categorical Node 385",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P386",
+    "name": "Categorical Node 386",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P387",
+    "name": "Categorical Node 387",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P388",
+    "name": "Categorical Node 388",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P389",
+    "name": "Categorical Node 389",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P390",
+    "name": "Categorical Node 390",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P391",
+    "name": "Categorical Node 391",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P392",
+    "name": "Categorical Node 392",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P393",
+    "name": "Categorical Node 393",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P394",
+    "name": "Categorical Node 394",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P395",
+    "name": "Categorical Node 395",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P396",
+    "name": "Categorical Node 396",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P397",
+    "name": "Categorical Node 397",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P398",
+    "name": "Categorical Node 398",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P399",
+    "name": "Categorical Node 399",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P400",
+    "name": "Categorical Node 400",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P401",
+    "name": "Categorical Node 401",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P402",
+    "name": "Categorical Node 402",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P403",
+    "name": "Categorical Node 403",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P404",
+    "name": "Categorical Node 404",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P405",
+    "name": "Categorical Node 405",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P406",
+    "name": "Categorical Node 406",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P407",
+    "name": "Categorical Node 407",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P408",
+    "name": "Categorical Node 408",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P409",
+    "name": "Categorical Node 409",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P410",
+    "name": "Categorical Node 410",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P411",
+    "name": "Categorical Node 411",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P412",
+    "name": "Categorical Node 412",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P413",
+    "name": "Categorical Node 413",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P414",
+    "name": "Categorical Node 414",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P415",
+    "name": "Categorical Node 415",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P416",
+    "name": "Categorical Node 416",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P417",
+    "name": "Categorical Node 417",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P418",
+    "name": "Categorical Node 418",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P419",
+    "name": "Categorical Node 419",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P420",
+    "name": "Categorical Node 420",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P421",
+    "name": "Categorical Node 421",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P422",
+    "name": "Categorical Node 422",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P423",
+    "name": "Categorical Node 423",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P424",
+    "name": "Categorical Node 424",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P425",
+    "name": "Categorical Node 425",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P426",
+    "name": "Categorical Node 426",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P427",
+    "name": "Categorical Node 427",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P428",
+    "name": "Categorical Node 428",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P429",
+    "name": "Categorical Node 429",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P430",
+    "name": "Categorical Node 430",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P431",
+    "name": "Categorical Node 431",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P432",
+    "name": "Categorical Node 432",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P433",
+    "name": "Categorical Node 433",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P434",
+    "name": "Categorical Node 434",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P435",
+    "name": "Categorical Node 435",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P436",
+    "name": "Categorical Node 436",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P437",
+    "name": "Categorical Node 437",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P438",
+    "name": "Categorical Node 438",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P439",
+    "name": "Categorical Node 439",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P440",
+    "name": "Categorical Node 440",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P441",
+    "name": "Categorical Node 441",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P442",
+    "name": "Categorical Node 442",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P443",
+    "name": "Categorical Node 443",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P444",
+    "name": "Categorical Node 444",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P445",
+    "name": "Categorical Node 445",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P446",
+    "name": "Categorical Node 446",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P447",
+    "name": "Categorical Node 447",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P448",
+    "name": "Categorical Node 448",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P449",
+    "name": "Categorical Node 449",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P450",
+    "name": "Categorical Node 450",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P451",
+    "name": "Categorical Node 451",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P452",
+    "name": "Categorical Node 452",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P453",
+    "name": "Categorical Node 453",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P454",
+    "name": "Categorical Node 454",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P455",
+    "name": "Categorical Node 455",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P456",
+    "name": "Categorical Node 456",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P457",
+    "name": "Categorical Node 457",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P458",
+    "name": "Categorical Node 458",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P459",
+    "name": "Categorical Node 459",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P460",
+    "name": "Categorical Node 460",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P461",
+    "name": "Categorical Node 461",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P462",
+    "name": "Categorical Node 462",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P463",
+    "name": "Categorical Node 463",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P464",
+    "name": "Categorical Node 464",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P465",
+    "name": "Categorical Node 465",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P466",
+    "name": "Categorical Node 466",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P467",
+    "name": "Categorical Node 467",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P468",
+    "name": "Categorical Node 468",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P469",
+    "name": "Categorical Node 469",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P470",
+    "name": "Categorical Node 470",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P471",
+    "name": "Categorical Node 471",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P472",
+    "name": "Categorical Node 472",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P473",
+    "name": "Categorical Node 473",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P474",
+    "name": "Categorical Node 474",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P475",
+    "name": "Categorical Node 475",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P476",
+    "name": "Categorical Node 476",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P477",
+    "name": "Categorical Node 477",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P478",
+    "name": "Categorical Node 478",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P479",
+    "name": "Categorical Node 479",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P480",
+    "name": "Categorical Node 480",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P481",
+    "name": "Categorical Node 481",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P482",
+    "name": "Categorical Node 482",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P483",
+    "name": "Categorical Node 483",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P484",
+    "name": "Categorical Node 484",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P485",
+    "name": "Categorical Node 485",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P486",
+    "name": "Categorical Node 486",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P487",
+    "name": "Categorical Node 487",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P488",
+    "name": "Categorical Node 488",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P489",
+    "name": "Categorical Node 489",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P490",
+    "name": "Categorical Node 490",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P491",
+    "name": "Categorical Node 491",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P492",
+    "name": "Categorical Node 492",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P493",
+    "name": "Categorical Node 493",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P494",
+    "name": "Categorical Node 494",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P495",
+    "name": "Categorical Node 495",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P496",
+    "name": "Categorical Node 496",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P497",
+    "name": "Categorical Node 497",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P498",
+    "name": "Categorical Node 498",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P499",
+    "name": "Categorical Node 499",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P500",
+    "name": "Categorical Node 500",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P501",
+    "name": "Categorical Node 501",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P502",
+    "name": "Categorical Node 502",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P503",
+    "name": "Categorical Node 503",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P504",
+    "name": "Categorical Node 504",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P505",
+    "name": "Categorical Node 505",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P506",
+    "name": "Categorical Node 506",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P507",
+    "name": "Categorical Node 507",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P508",
+    "name": "Categorical Node 508",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P509",
+    "name": "Categorical Node 509",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P510",
+    "name": "Categorical Node 510",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P511",
+    "name": "Categorical Node 511",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P512",
+    "name": "Categorical Node 512",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P513",
+    "name": "Categorical Node 513",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P514",
+    "name": "Categorical Node 514",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P515",
+    "name": "Categorical Node 515",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P516",
+    "name": "Categorical Node 516",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P517",
+    "name": "Categorical Node 517",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P518",
+    "name": "Categorical Node 518",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P519",
+    "name": "Categorical Node 519",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P520",
+    "name": "Categorical Node 520",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P521",
+    "name": "Categorical Node 521",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P522",
+    "name": "Categorical Node 522",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P523",
+    "name": "Categorical Node 523",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P524",
+    "name": "Categorical Node 524",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P525",
+    "name": "Categorical Node 525",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P526",
+    "name": "Categorical Node 526",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P527",
+    "name": "Categorical Node 527",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P528",
+    "name": "Categorical Node 528",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P529",
+    "name": "Categorical Node 529",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P530",
+    "name": "Categorical Node 530",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P531",
+    "name": "Categorical Node 531",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P532",
+    "name": "Categorical Node 532",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P533",
+    "name": "Categorical Node 533",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P534",
+    "name": "Categorical Node 534",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P535",
+    "name": "Categorical Node 535",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P536",
+    "name": "Categorical Node 536",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P537",
+    "name": "Categorical Node 537",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P538",
+    "name": "Categorical Node 538",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P539",
+    "name": "Categorical Node 539",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P540",
+    "name": "Categorical Node 540",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P541",
+    "name": "Categorical Node 541",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P542",
+    "name": "Categorical Node 542",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P543",
+    "name": "Categorical Node 543",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P544",
+    "name": "Categorical Node 544",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P545",
+    "name": "Categorical Node 545",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P546",
+    "name": "Categorical Node 546",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P547",
+    "name": "Categorical Node 547",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P548",
+    "name": "Categorical Node 548",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P549",
+    "name": "Categorical Node 549",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P550",
+    "name": "Categorical Node 550",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P551",
+    "name": "Categorical Node 551",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P552",
+    "name": "Categorical Node 552",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P553",
+    "name": "Categorical Node 553",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P554",
+    "name": "Categorical Node 554",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P555",
+    "name": "Categorical Node 555",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P556",
+    "name": "Categorical Node 556",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P557",
+    "name": "Categorical Node 557",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P558",
+    "name": "Categorical Node 558",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P559",
+    "name": "Categorical Node 559",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P560",
+    "name": "Categorical Node 560",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P561",
+    "name": "Categorical Node 561",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P562",
+    "name": "Categorical Node 562",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P563",
+    "name": "Categorical Node 563",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P564",
+    "name": "Categorical Node 564",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P565",
+    "name": "Categorical Node 565",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P566",
+    "name": "Categorical Node 566",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P567",
+    "name": "Categorical Node 567",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P568",
+    "name": "Categorical Node 568",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P569",
+    "name": "Categorical Node 569",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P570",
+    "name": "Categorical Node 570",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P571",
+    "name": "Categorical Node 571",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P572",
+    "name": "Categorical Node 572",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P573",
+    "name": "Categorical Node 573",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P574",
+    "name": "Categorical Node 574",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P575",
+    "name": "Categorical Node 575",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P576",
+    "name": "Categorical Node 576",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P577",
+    "name": "Categorical Node 577",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P578",
+    "name": "Categorical Node 578",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P579",
+    "name": "Categorical Node 579",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P580",
+    "name": "Categorical Node 580",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P581",
+    "name": "Categorical Node 581",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P582",
+    "name": "Categorical Node 582",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P583",
+    "name": "Categorical Node 583",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P584",
+    "name": "Categorical Node 584",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P585",
+    "name": "Categorical Node 585",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P586",
+    "name": "Categorical Node 586",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P587",
+    "name": "Categorical Node 587",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P588",
+    "name": "Categorical Node 588",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P589",
+    "name": "Categorical Node 589",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P590",
+    "name": "Categorical Node 590",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P591",
+    "name": "Categorical Node 591",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P592",
+    "name": "Categorical Node 592",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P593",
+    "name": "Categorical Node 593",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P594",
+    "name": "Categorical Node 594",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P595",
+    "name": "Categorical Node 595",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P596",
+    "name": "Categorical Node 596",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P597",
+    "name": "Categorical Node 597",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P598",
+    "name": "Categorical Node 598",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P599",
+    "name": "Categorical Node 599",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P600",
+    "name": "Categorical Node 600",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P601",
+    "name": "Categorical Node 601",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P602",
+    "name": "Categorical Node 602",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P603",
+    "name": "Categorical Node 603",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P604",
+    "name": "Categorical Node 604",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P605",
+    "name": "Categorical Node 605",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P606",
+    "name": "Categorical Node 606",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P607",
+    "name": "Categorical Node 607",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P608",
+    "name": "Categorical Node 608",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P609",
+    "name": "Categorical Node 609",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P610",
+    "name": "Categorical Node 610",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P611",
+    "name": "Categorical Node 611",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P612",
+    "name": "Categorical Node 612",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P613",
+    "name": "Categorical Node 613",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P614",
+    "name": "Categorical Node 614",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P615",
+    "name": "Categorical Node 615",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P616",
+    "name": "Categorical Node 616",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P617",
+    "name": "Categorical Node 617",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P618",
+    "name": "Categorical Node 618",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P619",
+    "name": "Categorical Node 619",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P620",
+    "name": "Categorical Node 620",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P621",
+    "name": "Categorical Node 621",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P622",
+    "name": "Categorical Node 622",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P623",
+    "name": "Categorical Node 623",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P624",
+    "name": "Categorical Node 624",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P625",
+    "name": "Categorical Node 625",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P626",
+    "name": "Categorical Node 626",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P627",
+    "name": "Categorical Node 627",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P628",
+    "name": "Categorical Node 628",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P629",
+    "name": "Categorical Node 629",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P630",
+    "name": "Categorical Node 630",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P631",
+    "name": "Categorical Node 631",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P632",
+    "name": "Categorical Node 632",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P633",
+    "name": "Categorical Node 633",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P634",
+    "name": "Categorical Node 634",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P635",
+    "name": "Categorical Node 635",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P636",
+    "name": "Categorical Node 636",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P637",
+    "name": "Categorical Node 637",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P638",
+    "name": "Categorical Node 638",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P639",
+    "name": "Categorical Node 639",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P640",
+    "name": "Categorical Node 640",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P641",
+    "name": "Categorical Node 641",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P642",
+    "name": "Categorical Node 642",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P643",
+    "name": "Categorical Node 643",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P644",
+    "name": "Categorical Node 644",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P645",
+    "name": "Categorical Node 645",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P646",
+    "name": "Categorical Node 646",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P647",
+    "name": "Categorical Node 647",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P648",
+    "name": "Categorical Node 648",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P649",
+    "name": "Categorical Node 649",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P650",
+    "name": "Categorical Node 650",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P651",
+    "name": "Categorical Node 651",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P652",
+    "name": "Categorical Node 652",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P653",
+    "name": "Categorical Node 653",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P654",
+    "name": "Categorical Node 654",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P655",
+    "name": "Categorical Node 655",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P656",
+    "name": "Categorical Node 656",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P657",
+    "name": "Categorical Node 657",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P658",
+    "name": "Categorical Node 658",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P659",
+    "name": "Categorical Node 659",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P660",
+    "name": "Categorical Node 660",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P661",
+    "name": "Categorical Node 661",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P662",
+    "name": "Categorical Node 662",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P663",
+    "name": "Categorical Node 663",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P664",
+    "name": "Categorical Node 664",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P665",
+    "name": "Categorical Node 665",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P666",
+    "name": "Categorical Node 666",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P667",
+    "name": "Categorical Node 667",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P668",
+    "name": "Categorical Node 668",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P669",
+    "name": "Categorical Node 669",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P670",
+    "name": "Categorical Node 670",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P671",
+    "name": "Categorical Node 671",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P672",
+    "name": "Categorical Node 672",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P673",
+    "name": "Categorical Node 673",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P674",
+    "name": "Categorical Node 674",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P675",
+    "name": "Categorical Node 675",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P676",
+    "name": "Categorical Node 676",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P677",
+    "name": "Categorical Node 677",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P678",
+    "name": "Categorical Node 678",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P679",
+    "name": "Categorical Node 679",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P680",
+    "name": "Categorical Node 680",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P681",
+    "name": "Categorical Node 681",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P682",
+    "name": "Categorical Node 682",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P683",
+    "name": "Categorical Node 683",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P684",
+    "name": "Categorical Node 684",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P685",
+    "name": "Categorical Node 685",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P686",
+    "name": "Categorical Node 686",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P687",
+    "name": "Categorical Node 687",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P688",
+    "name": "Categorical Node 688",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P689",
+    "name": "Categorical Node 689",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P690",
+    "name": "Categorical Node 690",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P691",
+    "name": "Categorical Node 691",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P692",
+    "name": "Categorical Node 692",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P693",
+    "name": "Categorical Node 693",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P694",
+    "name": "Categorical Node 694",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P695",
+    "name": "Categorical Node 695",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P696",
+    "name": "Categorical Node 696",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P697",
+    "name": "Categorical Node 697",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P698",
+    "name": "Categorical Node 698",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P699",
+    "name": "Categorical Node 699",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P700",
+    "name": "Categorical Node 700",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P701",
+    "name": "Categorical Node 701",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P702",
+    "name": "Categorical Node 702",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P703",
+    "name": "Categorical Node 703",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P704",
+    "name": "Categorical Node 704",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P705",
+    "name": "Categorical Node 705",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P706",
+    "name": "Categorical Node 706",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P707",
+    "name": "Categorical Node 707",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P708",
+    "name": "Categorical Node 708",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P709",
+    "name": "Categorical Node 709",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P710",
+    "name": "Categorical Node 710",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P711",
+    "name": "Categorical Node 711",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P712",
+    "name": "Categorical Node 712",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P713",
+    "name": "Categorical Node 713",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P714",
+    "name": "Categorical Node 714",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P715",
+    "name": "Categorical Node 715",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P716",
+    "name": "Categorical Node 716",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P717",
+    "name": "Categorical Node 717",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P718",
+    "name": "Categorical Node 718",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P719",
+    "name": "Categorical Node 719",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P720",
+    "name": "Categorical Node 720",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P721",
+    "name": "Categorical Node 721",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P722",
+    "name": "Categorical Node 722",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P723",
+    "name": "Categorical Node 723",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P724",
+    "name": "Categorical Node 724",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P725",
+    "name": "Categorical Node 725",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P726",
+    "name": "Categorical Node 726",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P727",
+    "name": "Categorical Node 727",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P728",
+    "name": "Categorical Node 728",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P729",
+    "name": "Categorical Node 729",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P730",
+    "name": "Categorical Node 730",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P731",
+    "name": "Categorical Node 731",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P732",
+    "name": "Categorical Node 732",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P733",
+    "name": "Categorical Node 733",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P734",
+    "name": "Categorical Node 734",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P735",
+    "name": "Categorical Node 735",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P736",
+    "name": "Categorical Node 736",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P737",
+    "name": "Categorical Node 737",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P738",
+    "name": "Categorical Node 738",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P739",
+    "name": "Categorical Node 739",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P740",
+    "name": "Categorical Node 740",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P741",
+    "name": "Categorical Node 741",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P742",
+    "name": "Categorical Node 742",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P743",
+    "name": "Categorical Node 743",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P744",
+    "name": "Categorical Node 744",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P745",
+    "name": "Categorical Node 745",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P746",
+    "name": "Categorical Node 746",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P747",
+    "name": "Categorical Node 747",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P748",
+    "name": "Categorical Node 748",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P749",
+    "name": "Categorical Node 749",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P750",
+    "name": "Categorical Node 750",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P751",
+    "name": "Categorical Node 751",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P752",
+    "name": "Categorical Node 752",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P753",
+    "name": "Categorical Node 753",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P754",
+    "name": "Categorical Node 754",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P755",
+    "name": "Categorical Node 755",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P756",
+    "name": "Categorical Node 756",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P757",
+    "name": "Categorical Node 757",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P758",
+    "name": "Categorical Node 758",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P759",
+    "name": "Categorical Node 759",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P760",
+    "name": "Categorical Node 760",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P761",
+    "name": "Categorical Node 761",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P762",
+    "name": "Categorical Node 762",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P763",
+    "name": "Categorical Node 763",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P764",
+    "name": "Categorical Node 764",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P765",
+    "name": "Categorical Node 765",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P766",
+    "name": "Categorical Node 766",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P767",
+    "name": "Categorical Node 767",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P768",
+    "name": "Categorical Node 768",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P769",
+    "name": "Categorical Node 769",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P770",
+    "name": "Categorical Node 770",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P771",
+    "name": "Categorical Node 771",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P772",
+    "name": "Categorical Node 772",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P773",
+    "name": "Categorical Node 773",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P774",
+    "name": "Categorical Node 774",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P775",
+    "name": "Categorical Node 775",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P776",
+    "name": "Categorical Node 776",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P777",
+    "name": "Categorical Node 777",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P778",
+    "name": "Categorical Node 778",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P779",
+    "name": "Categorical Node 779",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P780",
+    "name": "Categorical Node 780",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P781",
+    "name": "Categorical Node 781",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P782",
+    "name": "Categorical Node 782",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P783",
+    "name": "Categorical Node 783",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P784",
+    "name": "Categorical Node 784",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P785",
+    "name": "Categorical Node 785",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P786",
+    "name": "Categorical Node 786",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P787",
+    "name": "Categorical Node 787",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P788",
+    "name": "Categorical Node 788",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P789",
+    "name": "Categorical Node 789",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P790",
+    "name": "Categorical Node 790",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P791",
+    "name": "Categorical Node 791",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P792",
+    "name": "Categorical Node 792",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P793",
+    "name": "Categorical Node 793",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P794",
+    "name": "Categorical Node 794",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P795",
+    "name": "Categorical Node 795",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P796",
+    "name": "Categorical Node 796",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P797",
+    "name": "Categorical Node 797",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P798",
+    "name": "Categorical Node 798",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P799",
+    "name": "Categorical Node 799",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P800",
+    "name": "Categorical Node 800",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P801",
+    "name": "Categorical Node 801",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P802",
+    "name": "Categorical Node 802",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P803",
+    "name": "Categorical Node 803",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P804",
+    "name": "Categorical Node 804",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P805",
+    "name": "Categorical Node 805",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P806",
+    "name": "Categorical Node 806",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P807",
+    "name": "Categorical Node 807",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P808",
+    "name": "Categorical Node 808",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P809",
+    "name": "Categorical Node 809",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P810",
+    "name": "Categorical Node 810",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P811",
+    "name": "Categorical Node 811",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P812",
+    "name": "Categorical Node 812",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P813",
+    "name": "Categorical Node 813",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P814",
+    "name": "Categorical Node 814",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P815",
+    "name": "Categorical Node 815",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P816",
+    "name": "Categorical Node 816",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P817",
+    "name": "Categorical Node 817",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P818",
+    "name": "Categorical Node 818",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P819",
+    "name": "Categorical Node 819",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P820",
+    "name": "Categorical Node 820",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P821",
+    "name": "Categorical Node 821",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P822",
+    "name": "Categorical Node 822",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P823",
+    "name": "Categorical Node 823",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P824",
+    "name": "Categorical Node 824",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P825",
+    "name": "Categorical Node 825",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P826",
+    "name": "Categorical Node 826",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P827",
+    "name": "Categorical Node 827",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P828",
+    "name": "Categorical Node 828",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P829",
+    "name": "Categorical Node 829",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P830",
+    "name": "Categorical Node 830",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P831",
+    "name": "Categorical Node 831",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P832",
+    "name": "Categorical Node 832",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P833",
+    "name": "Categorical Node 833",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P834",
+    "name": "Categorical Node 834",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P835",
+    "name": "Categorical Node 835",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P836",
+    "name": "Categorical Node 836",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P837",
+    "name": "Categorical Node 837",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P838",
+    "name": "Categorical Node 838",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P839",
+    "name": "Categorical Node 839",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P840",
+    "name": "Categorical Node 840",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P841",
+    "name": "Categorical Node 841",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P842",
+    "name": "Categorical Node 842",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P843",
+    "name": "Categorical Node 843",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P844",
+    "name": "Categorical Node 844",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P845",
+    "name": "Categorical Node 845",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P846",
+    "name": "Categorical Node 846",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P847",
+    "name": "Categorical Node 847",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P848",
+    "name": "Categorical Node 848",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P849",
+    "name": "Categorical Node 849",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P850",
+    "name": "Categorical Node 850",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P851",
+    "name": "Categorical Node 851",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P852",
+    "name": "Categorical Node 852",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P853",
+    "name": "Categorical Node 853",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P854",
+    "name": "Categorical Node 854",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P855",
+    "name": "Categorical Node 855",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P856",
+    "name": "Categorical Node 856",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P857",
+    "name": "Categorical Node 857",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P858",
+    "name": "Categorical Node 858",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P859",
+    "name": "Categorical Node 859",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P860",
+    "name": "Categorical Node 860",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P861",
+    "name": "Categorical Node 861",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P862",
+    "name": "Categorical Node 862",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P863",
+    "name": "Categorical Node 863",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P864",
+    "name": "Categorical Node 864",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P865",
+    "name": "Categorical Node 865",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P866",
+    "name": "Categorical Node 866",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P867",
+    "name": "Categorical Node 867",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P868",
+    "name": "Categorical Node 868",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P869",
+    "name": "Categorical Node 869",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P870",
+    "name": "Categorical Node 870",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P871",
+    "name": "Categorical Node 871",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P872",
+    "name": "Categorical Node 872",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P873",
+    "name": "Categorical Node 873",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P874",
+    "name": "Categorical Node 874",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P875",
+    "name": "Categorical Node 875",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P876",
+    "name": "Categorical Node 876",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P877",
+    "name": "Categorical Node 877",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P878",
+    "name": "Categorical Node 878",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P879",
+    "name": "Categorical Node 879",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P880",
+    "name": "Categorical Node 880",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P881",
+    "name": "Categorical Node 881",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P882",
+    "name": "Categorical Node 882",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P883",
+    "name": "Categorical Node 883",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P884",
+    "name": "Categorical Node 884",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P885",
+    "name": "Categorical Node 885",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P886",
+    "name": "Categorical Node 886",
+    "domain": "Topology",
+    "exergy": 0.8
+  },
+  {
+    "id": "P887",
+    "name": "Categorical Node 887",
+    "domain": "Topology",
+    "exergy": 0.85
+  },
+  {
+    "id": "P888",
+    "name": "Categorical Node 888",
+    "domain": "Topology",
+    "exergy": 0.9
+  },
+  {
+    "id": "P889",
+    "name": "Categorical Node 889",
+    "domain": "Topology",
+    "exergy": 0.95
+  },
+  {
+    "id": "P890",
+    "name": "Categorical Node 890",
+    "domain": "Topology",
+    "exergy": 0.5
+  },
+  {
+    "id": "P891",
+    "name": "Categorical Node 891",
+    "domain": "Topology",
+    "exergy": 0.55
+  },
+  {
+    "id": "P892",
+    "name": "Categorical Node 892",
+    "domain": "Topology",
+    "exergy": 0.6
+  },
+  {
+    "id": "P893",
+    "name": "Categorical Node 893",
+    "domain": "Topology",
+    "exergy": 0.65
+  },
+  {
+    "id": "P894",
+    "name": "Categorical Node 894",
+    "domain": "Topology",
+    "exergy": 0.7
+  },
+  {
+    "id": "P895",
+    "name": "Categorical Node 895",
+    "domain": "Topology",
+    "exergy": 0.75
+  },
+  {
+    "id": "P896",
+    "name": "Categorical Node 896",
+    "domain": "Topology",
+    "exergy": 0.8
+  }
+]

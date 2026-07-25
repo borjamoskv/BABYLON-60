@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Terminal,
   Activity,
@@ -11,13 +11,22 @@ import {
   Search
 } from 'lucide-react';
 import './App.css';
-import primitivesData from './data/primitives.json';
+import primitivesDataRaw from './data/primitives.json';
+
+interface Primitive {
+  id: string;
+  name: string;
+  domain: string;
+  exergy: number;
+}
+
+const primitivesData: Primitive[] = primitivesDataRaw as Primitive[];
 
 function App() {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredPrimitives = primitivesData.filter(p =>
+  const filteredPrimitives = primitivesData.filter((p: Primitive) =>
     p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
     p.domain.toLowerCase().includes(searchTerm.toLowerCase())
@@ -154,7 +163,7 @@ function App() {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredPrimitives.slice(0, 100).map((p) => (
+                  {filteredPrimitives.slice(0, 100).map((p: Primitive) => (
                     <tr key={p.id}>
                       <td className="mono">{p.id}</td>
                       <td>{p.name}</td>
