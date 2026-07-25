@@ -49,10 +49,8 @@ $$ \begin{array}{rll}
 ## 3. REGISTRO LEDGER DE HISTORIA DE ADJUDICACIÓN
 
 ```yaml
-Claim: Adjudicación de Colapso CAM 6.0 -> BSP+Schneider+Abadi-Lamport y transición formal a FISR Compat(Ω)
-Proof:
-  Base: 0xcd15dc7b06ff8f8101a0dbbd26ddac12595ca1d2
-  Range: [CAM_1.0, FISR_v13.0]
-  Confidence: C5-REAL
+Evidence: 0xcd15dc7b06ff8f8101a0dbbd26ddac12595ca1d2
+Repository_State: FISR_v13.0
+Recorded_Hypothesis: "Adjudicación de Colapso CAM 6.0 -> BSP+Schneider+Abadi-Lamport y transición formal a FISR Compat(Ω)"
+Governance: C5-REAL
 ```
-$$
