@@ -209,6 +209,7 @@ const SPINE_ROUTES = [
   { id: 'analytics', icon: '∿',  label: 'Analytics',  tip: 'Ledger Analytics — DETERMINAR (agregación + BM25)  ⌘7' },
   { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación real)  ⌘6' },
   { id: 'ideas',     icon: '💡', label: 'Ideas',      tip: 'Ideas Valuation & Exergy  ⌘8' },
+  { id: 'editor',    icon: '▤',  label: 'Editor',     tip: 'Zero Context-Switching AST Editor  ⌘9' },
 ];
 
 function setupSpine() {
@@ -795,7 +796,7 @@ async function showRestoreBanner(lastRoute) {
    KEYBOARD SHORTCUTS
    ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
-  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics', '8': 'ideas' };
+  const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics', '8': 'ideas', '9': 'editor' };
 
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
@@ -827,6 +828,7 @@ function setupRouter() {
   registerRoute('analytics', renderAnalyticsPage);
   registerRoute('sentinel',  renderSentinelPage);
   registerRoute('ideas',     renderIdeasPage);
+  registerRoute('editor',    renderEditorPage);
 
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash.replace('#', '');
