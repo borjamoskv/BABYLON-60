@@ -1,37 +1,37 @@
-import re
-from pathlib import Path
+#!/usr/bin/env python3
+import os
+import glob
+import json
+import shutil
 
-VAULT_DIR = Path("~/.gemini/config/.cortex/memory_vault").expanduser()
-BRAIN_DIR = Path("~/.gemini/antigravity/brain").expanduser()
+def main():
+    print("⚡ [C5-REAL] Memory Vault Session Synchronizer (INV_C5_15 / INV_C5_25)")
+    brain_dir = os.path.expanduser("~/.gemini/antigravity/brain")
+    vault_dir = os.path.expanduser("~/.gemini/config/.cortex/memory_vault")
+    
+    os.makedirs(vault_dir, exist_ok=True)
+    
+    if not os.path.exists(brain_dir):
+        print("⚠️ Brain directory not found, skipping sync.")
+        return
 
-
-def sync() -> None:
-    VAULT_DIR.mkdir(parents=True, exist_ok=True)
-    consolidated = set()
-    for f in VAULT_DIR.glob("*.md"):
+    transcripts = glob.glob(f"{brain_dir}/*/.system_generated/logs/transcript.jsonl")
+    synced_count = 0
+    
+    for transcript in transcripts:
+        conv_id = transcript.split("/")[-4]
         try:
-            content = f.read_text(encoding="utf-8")
-            m = re.search("conversation_id:\\s*[\"\\']?([0-9a-f\\-]+)[\"\\']?", content)
-            if m:
-                consolidated.add(m.group(1).strip())
-        except OSError:
-            pass
-    uuid_pattern = re.compile("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$")
-    synced = 0
-    for entry in BRAIN_DIR.iterdir():
-        if entry.is_dir() and uuid_pattern.match(entry.name):
-            cid = entry.name
-            if cid not in consolidated:
-                transcript = entry / ".system_generated/logs/transcript.jsonl"
-                if transcript.exists():
-                    vfile = VAULT_DIR / f"b60_crystallized_{cid}.md"
-                    vfile.write_text(
-                        f'---\nconversation_id: "{cid}"\nstatus: "crystallized"\n---\nCrystallized into memory vault.\n',
-                        encoding="utf-8",
-                    )
-                    synced += 1
-    print(f"[+] Synchronized {synced} session UUIDs into {VAULT_DIR}")
+            with open(transcript, "r") as f:
+                content = f.read()
+                # Dynamic scan for workspace relevance keywords (INV_C5_25)
+                if "belongs_to_babylon" in content or "BABYLON-60" in content:
+                    dest_file = os.path.join(vault_dir, f"{conv_id}.jsonl")
+                    shutil.copy2(transcript, dest_file)
+                    synced_count += 1
+        except Exception as e:
+            print(f"Error reading {transcript}: {e}")
 
+    print(f"🟢 Synchronized {synced_count} relevant session logs into Memory Vault.")
 
 if __name__ == "__main__":
-    sync()
+    main()
