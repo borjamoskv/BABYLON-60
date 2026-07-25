@@ -7,10 +7,11 @@ and dispatches sovereign license keys upon checkout session completion.
 
 import hashlib
 import hmac
-import sqlite3
-import time
 from pathlib import Path
 from typing import Any
+import time
+
+from babylon60.database import core as database_core
 
 DB_PATH = Path.home() / ".babylon60" / "receipts_ledger.db"
 
@@ -22,25 +23,19 @@ class StripeWebhookProcessor:
         self.db_path = db_path or DB_PATH
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.webhook_secret = webhook_secret
-        self._init_db()
 
-    def _init_db(self) -> None:
-        conn = sqlite3.connect(str(self.db_path), timeout=5.0)
-        try:
-            with conn:
-                conn.execute("PRAGMA journal_mode=WAL;")
-                conn.execute("""
-                    CREATE TABLE IF NOT EXISTS customer_receipts (
-                        session_id TEXT PRIMARY KEY,
-                        email TEXT NOT NULL,
-                        tier TEXT NOT NULL,
-                        amount_eur INTEGER NOT NULL,
-                        license_key TEXT NOT NULL,
-                        created_at INTEGER NOT NULL
-                    );
-                """)
-        finally:
-            conn.close()
+    async def setup(self) -> None:
+        async with database_core.get_connection(self.db_path, synchronous="NORMAL") as conn:
+            await conn.execute("""
+                CREATE TABLE IF NOT EXISTS customer_receipts (
+                    session_id TEXT PRIMARY KEY,
+                    email TEXT NOT NULL,
+                    tier TEXT NOT NULL,
+                    amount_eur INTEGER NOT NULL,
+                    license_key TEXT NOT NULL,
+                    created_at INTEGER NOT NULL
+                );
+            """)
 
     def verify_signature(self, payload_str: str, sig_header: str) -> bool:
         """Verify Stripe-Signature header timestamp & HMAC-SHA256 signature."""
@@ -57,11 +52,12 @@ class StripeWebhookProcessor:
         except (ValueError, KeyError):
             return False
 
-    def process_checkout_completed(self, session_data: dict[str, Any]) -> dict[str, Any]:
+    async def process_checkout_completed(self, session_data: dict[str, Any]) -> dict[str, Any]:
         """Process checkout.session.completed event and persist receipt to WAL SQLite."""
         from babylon60.core.license_gate import SovereignLicenseGate, Tier
 
-        session_id = session_data.get("id", f"cs_live_{int(time.time())}")
+        now = time.time_ns() // 1_000_000_000
+        session_id = session_data.get("id", f"cs_live_{now}")
         customer_email = session_data.get("customer_email") or session_data.get("email", "customer@cortex.dev")
         tier = session_data.get("tier", Tier.PRO_SWARM).upper()
         amount_eur = int(session_data.get("amount_total", 19900)) // 100
@@ -69,20 +65,15 @@ class StripeWebhookProcessor:
         gate = SovereignLicenseGate()
         license_key = gate.generate_license_key(owner=customer_email, tier=tier, valid_days=365)
 
-        now = int(time.time())
-        conn = sqlite3.connect(str(self.db_path), timeout=5.0)
-        try:
-            with conn:
-                conn.execute(
-                    """
-                    INSERT OR REPLACE INTO customer_receipts 
-                    (session_id, email, tier, amount_eur, license_key, created_at)
-                    VALUES (?, ?, ?, ?, ?, ?)
-                """,
-                    (session_id, customer_email, tier, amount_eur, license_key, now),
-                )
-        finally:
-            conn.close()
+        async with database_core.get_connection(self.db_path, synchronous="NORMAL") as conn:
+            await conn.execute(
+                """
+                INSERT OR REPLACE INTO customer_receipts 
+                (session_id, email, tier, amount_eur, license_key, created_at)
+                VALUES (?, ?, ?, ?, ?, ?)
+            """,
+                (session_id, customer_email, tier, amount_eur, license_key, now),
+            )
 
         # Trigger instant notification to Borjamoskv@gmail.com & workspace log
         try:
@@ -108,16 +99,16 @@ class StripeWebhookProcessor:
             "created_at": now,
         }
 
-    def get_receipt(self, session_id: str) -> dict[str, Any] | None:
+    async def get_receipt(self, session_id: str) -> dict[str, Any] | None:
         """Retrieve persisted customer receipt by session_id."""
-        conn = sqlite3.connect(str(self.db_path), timeout=5.0)
-        try:
-            conn.row_factory = sqlite3.Row
-            cursor = conn.cursor()
-            cursor.execute("SELECT * FROM customer_receipts WHERE session_id = ?", (session_id,))
-            row = cursor.fetchone()
-            if row:
-                return dict(row)
-        finally:
-            conn.close()
+        async with database_core.get_connection(self.db_path, synchronous="NORMAL") as conn:
+            conn.row_factory = dict_factory
+            async with conn.execute("SELECT * FROM customer_receipts WHERE session_id = ?", (session_id,)) as cursor:
+                row = await cursor.fetchone()
+                if row:
+                    return dict(row)
         return None
+
+def dict_factory(cursor: Any, row: Any) -> dict[str, Any]:
+    fields = [column[0] for column in cursor.description]
+    return {key: value for key, value in zip(fields, row)}

@@ -1,5 +1,6 @@
 import tempfile
 from pathlib import Path
+import pytest
 
 from cortex.infra.stripe_webhook_handler import StripeWebhookProcessor
 
@@ -10,10 +11,12 @@ def test_stripe_signature_verification():
     assert processor.verify_signature("{}", "") is True
 
 
-def test_process_checkout_and_receipt_retrieval():
+@pytest.mark.asyncio
+async def test_process_checkout_and_receipt_retrieval():
     with tempfile.TemporaryDirectory() as tmpdir:
         db_file = Path(tmpdir) / "receipts.db"
         processor = StripeWebhookProcessor(db_path=db_file)
+        await processor.setup()
 
         session_payload = {
             "id": "cs_test_session_999",
@@ -22,13 +25,13 @@ def test_process_checkout_and_receipt_retrieval():
             "amount_total": 99900,
         }
 
-        result = processor.process_checkout_completed(session_payload)
+        result = await processor.process_checkout_completed(session_payload)
         assert result["status"] == "LIQUIDATED"
         assert result["email"] == "finance@cyberdyne.com"
         assert result["tier"] == "ENTERPRISE"
         assert result["license_key"].startswith("B60-ENT-")
 
-        receipt = processor.get_receipt("cs_test_session_999")
+        receipt = await processor.get_receipt("cs_test_session_999")
         assert receipt is not None
         assert receipt["email"] == "finance@cyberdyne.com"
         assert receipt["amount_eur"] == 999
