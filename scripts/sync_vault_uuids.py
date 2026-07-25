@@ -21,7 +21,7 @@ def main() -> None:
     for transcript in transcripts:
         conv_id = transcript.split("/")[-4]
         try:
-            with open(transcript) as f:
+            with open(transcript, errors="replace") as f:
                 content = f.read()
                 # Dynamic scan for workspace relevance keywords (INV_C5_25)
                 if "belongs_to_babylon" in content or "BABYLON-60" in content:
