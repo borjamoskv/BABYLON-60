@@ -23,7 +23,7 @@ class TMBResult:
     target_region_mb: float
     tmb_score: float
     status: str
-    confidence_interval: tuple[INTEGER, float]
+    confidence_interval: tuple[int, float]
     causal_taint: str = "borjamoskv:tmb_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)
 

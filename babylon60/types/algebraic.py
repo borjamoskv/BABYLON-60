@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Generic, NoReturn, TypeVar, Union
+from typing import Generic, NoReturn, TypeVar
 
 T = TypeVar("T")
 E = TypeVar("E")
@@ -19,7 +19,7 @@ class Err(Generic[E]):
     causal_taint: str = "borjamoskv:adt_err_c5"
 
 
-Result = Union[Ok[T], Err[E]]
+Result = Ok[T] | Err[E]
 
 
 @dataclass(frozen=True)
@@ -33,7 +33,7 @@ class Nothing:
     causal_taint: str = "borjamoskv:adt_nothing_c5"
 
 
-Option = Union[Some[T], Nothing]
+Option = Some[T] | Nothing
 
 
 class AlgebraicCardinality:

@@ -49,6 +49,6 @@ if __name__ == "__main__":
     for f in args.files:
         try:
             transmute_file(f)
-        except (OSError, SyntaxError, ValueError, AttributeError, TypeError):
-            raise RuntimeError("FAIL-FAST: General Exception intercepted.")
+        except (OSError, SyntaxError, ValueError, AttributeError, TypeError) as e:
+            raise RuntimeError("FAIL-FAST: General Exception intercepted.") from e
     print(f"Successfully pruned {len(args.files)} files.")

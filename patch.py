@@ -1,3 +1,5 @@
+import re
+
 # lib.rs patch
 with open("babylon60-ide/src-tauri/src/lib.rs") as f:
     content = f.read()
@@ -19,7 +21,6 @@ with open("babylon60-ide/src-tauri/src/lib.rs", "w") as f:
 with open("babylon60-ide/src-tauri/src/ledger.rs") as f:
     ledger_content = f.read()
 
-import re
 
 old_struct = r"""#\[derive\(Debug, Clone, Serialize, Deserialize\)\]
 pub struct CortexEvent \{

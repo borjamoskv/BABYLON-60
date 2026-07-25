@@ -153,7 +153,7 @@ def _load_ed25519_private_key(private_key_b64: str) -> ed25519.Ed25519PrivateKey
     except ValueError:
         loaded_key = serialization.load_pem_private_key(priv_bytes, password=None)
         if not isinstance(loaded_key, ed25519.Ed25519PrivateKey):
-            raise ValueError("Key must be an Ed25519PrivateKey")
+            raise ValueError("Key must be an Ed25519PrivateKey") from None
         return loaded_key
 
 
@@ -164,7 +164,7 @@ def _load_ed25519_public_key(public_key_b64: str) -> ed25519.Ed25519PublicKey:
     except ValueError:
         loaded_key = serialization.load_ssh_public_key(pub_bytes)
         if not isinstance(loaded_key, ed25519.Ed25519PublicKey):
-            raise ValueError("Key must be an Ed25519PublicKey")
+            raise ValueError("Key must be an Ed25519PublicKey") from None
         return loaded_key
 
 

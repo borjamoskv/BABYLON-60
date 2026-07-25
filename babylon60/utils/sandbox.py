@@ -4,9 +4,9 @@ import ast
 import logging
 import signal
 import sys
+import typing
 from dataclasses import dataclass, field
 from io import StringIO
-import typing
 
 __all__ = ["ASTSandbox", "ExecResult", "SandboxVerdict"]
 logger = logging.getLogger("babylon60.sandbox")

@@ -49,7 +49,7 @@ def validate_ast_sandbox(source_code: str) -> bool:
     try:
         tree = ast.parse(source_code)
     except SyntaxError as e:
-        raise SecurityError(f"Syntax error (safe): {e}")
+        raise SecurityError(f"Syntax error (safe): {e}") from e
 
     for node in ast.walk(tree):
         # Rule 1: Prohibit dunder attribute access (e.g. .__class__, .__subclasses__)

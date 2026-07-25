@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Union
+from typing import Any
 
 from babylon60.types.algebraic import Option, Result
 
@@ -20,7 +20,7 @@ class VCF1Based:
     ref_len: int
 
 
-CoordinateSystem = Union[BED0Based, VCF1Based]
+CoordinateSystem = BED0Based | VCF1Based
 
 
 @dataclass(frozen=True)
@@ -48,7 +48,7 @@ class StructuralVariant:
     breakpoint_info: dict[str, Any]
 
 
-VariantType = Union[SNV, INDEL, CNV, StructuralVariant]
+VariantType = SNV | INDEL, CNV, StructuralVariant
 
 
 @dataclass(frozen=True)
@@ -63,14 +63,14 @@ class AlgebraicGenomicVariant:
 @dataclass(frozen=True)
 class TMBHigh:
     score: float
-    confidence_interval: tuple[INTEGER, float]
+    confidence_interval: tuple[int, float]
     details: dict[str, Any]
 
 
 @dataclass(frozen=True)
 class TMBLow:
     score: float
-    confidence_interval: tuple[INTEGER, float]
+    confidence_interval: tuple[int, float]
     details: dict[str, Any]
 
 
@@ -79,7 +79,7 @@ class TMBIndeterminate:
     reason: str
 
 
-TMBClassification = Union[TMBHigh, TMBLow, TMBIndeterminate]
+TMBClassification = TMBHigh | TMBLow, TMBIndeterminate
 
 
 @dataclass(frozen=True)
@@ -95,7 +95,7 @@ class APOBECBackground:
     enrichment_score: float
 
 
-APOBECStatus = Union[APOBECDriven, APOBECBackground]
+APOBECStatus = APOBECDriven | APOBECBackground
 
 
 @dataclass(frozen=True)
@@ -111,7 +111,7 @@ class HRDNegative:
     loh_events: int
 
 
-HRDStatus = Union[HRDPositive, HRDNegative]
+HRDStatus = HRDPositive | HRDNegative
 
 
 @dataclass(frozen=True)
@@ -142,5 +142,5 @@ class CoordinateMismatch:
     msg: str
 
 
-GenomicVerificationError = Union[SequenceCorruption, CoordinateMismatch]
+GenomicVerificationError = SequenceCorruption | CoordinateMismatch
 GenomicEvaluationResult = Result[GenomicProfileADT, GenomicVerificationError]

@@ -6,11 +6,11 @@ import logging
 import sqlite3
 import tempfile
 import time
+import typing
 from collections.abc import Awaitable, Callable
 from functools import wraps
 from pathlib import Path
 from typing import Any
-import typing
 
 import babylon60.database.core
 
@@ -18,8 +18,8 @@ logger = logging.getLogger("CORTEX.PULMONES")
 
 
 class PulmonesQueue:
-    def __init__(self, db_path: Path = Path.home() / ".cortex" / "pulmones.db"):
-        self.db_path = db_path
+    def __init__(self, db_path: Path | None = None):
+        self.db_path = db_path or Path.home() / '.cortex' / 'pulmones.db'
         self._fallback_path = Path(tempfile.gettempdir()) / "cortex_pulmones.db"
         self._available = True
         try:

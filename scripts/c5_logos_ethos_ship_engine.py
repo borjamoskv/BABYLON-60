@@ -112,7 +112,7 @@ def run_c5_verification_suite() -> int:
     print('[✓] PRIMITIVA-LOGOS-001: Base-60 Sexagesimal Exact Divisibility verified.')
     try:
         PhysicalMembraneState('C4_Simulated_Buffer', 'hash123', 1)
-        assert False, 'Should have rejected C4_Simulated_Buffer'
+        raise AssertionError('Should have rejected C4_Simulated_Buffer')
     except RuntimeError as e:
         assert 'rejected by C5-REAL' in str(e)
     print('[✓] PRIMITIVA-LOGOS-002: F# Algebraic Membrane / Illegal State rejection verified.')

@@ -30,4 +30,5 @@ __all__ = [
     "get_default_encrypter",
     "get_master_key",
 ]
+# noqa: E402
 from .rfc3161 import RFC3161Client

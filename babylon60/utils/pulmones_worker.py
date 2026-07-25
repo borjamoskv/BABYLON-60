@@ -3,9 +3,9 @@ import json
 import logging
 import sqlite3
 import time
+import typing
 from importlib import import_module
 from pathlib import Path
-import typing
 
 import babylon60.database.core
 
@@ -14,8 +14,8 @@ logger = logging.getLogger("CORTEX.PULMONES.WORKER")
 
 
 class PulmonesWorker:
-    def __init__(self, db_path: Path = Path.home() / ".cortex" / "pulmones.db"):
-        self.db_path = db_path
+    def __init__(self, db_path: Path | None = None):
+        self.db_path = db_path or Path.home() / '.cortex' / 'pulmones.db'
         self.running = False
         self.batch_size = 5
 

@@ -40,8 +40,8 @@ class Moskv1Kernel:
                     self._last_hash = row[1]
             finally:
                 conn.close()
-        except (sqlite3.DatabaseError, OSError, ValueError):
-            raise RuntimeError("FAIL-FAST: Fallo catastrófico en boot BFT.")
+        except (sqlite3.DatabaseError, OSError, ValueError) as e:
+            raise RuntimeError("FAIL-FAST: Fallo catastrófico en boot BFT.") from e
 
     async def ingest_entropy(self, payload: dict[str, Any], confidence: str = "C5") -> str:
         self._lamport_clock += 1
@@ -92,8 +92,8 @@ class Moskv1Kernel:
                         await db.close()
                 except sqlite3.IntegrityError:
                     print(f"[!] Idempotency Lock disparado para {claim.claim_id}. Entropía abortada.")
-                except sqlite3.DatabaseError:
-                    raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.")
+                except sqlite3.DatabaseError as e:
+                    raise RuntimeError("FAIL-FAST: BFT Ledger corrompido.") from e
                 self._write_queue.task_done()
         except asyncio.CancelledError:
             print("[MOSKV-1] KERNEL SHUTDOWN: SIGTERM RECIBIDO.")

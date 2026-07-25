@@ -1,16 +1,14 @@
-import sys
-from pathlib import Path
-
-import babylon60.database.core
-
 import hashlib
 import json
 import re
 import sqlite3
 import subprocess
+import sys
 import time
 from dataclasses import dataclass
-from typing import Union
+from pathlib import Path
+
+import babylon60.database.core
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
