@@ -28,3 +28,4 @@ rusqlite = { version = "0.40.1", features = ["bundled"] }
 chrono = { version = "0.4.45", features = ["serde"] }
 sha2 = "0.10.9"
 hex = "0.4.3"
+sqlite-vec = "0.1.1"

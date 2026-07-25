@@ -48,7 +48,7 @@
 - [x] **BABYLON60 IDE v1.2.0 — delegación REAL + CortexLedger propio** (2026-07-17): la delegación dejó de ser Teatro Verde (`localStorage`). Ahora `commit` ejecuta git de verdad (probado: commit real `53122e2` sellado por el motor) y `push/merge/ship/deploy` hacen **crash causal HTTP 423** mientras P0 esté abierto. El IDE lleva su propio CortexLedger append-only hash-chain SHA-256 (`babylon60_ide.db`, sidecar) y lo autoverifica. Nuevo eje DETERMINAR: analítica agregada + búsqueda Okapi BM25 léxica sobre payloads. E2E Playwright: 0 pageerrors en 7 rutas × 2 modos, search→detail OK, boot inmune a localStorage corrupto.
 - [x] IDE sidecar: añadir `babylon60_ide.db*` al `.gitignore` del repo real (es el ledger local del IDE, no debe subir).
 - [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
-- [ ] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — requiere capa Tauri v2/Rust (MOSKV-1-apex); fuera del runtime FastAPI actual. La búsqueda BM25 es el puente léxico determinista hasta entonces.
+- [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — asimilación inicial: el kernel MOSKV-1 APEX ha sido clonado como submódulo nativo en `src-tauri` y `sqlite-vec` ha sido inyectado en `Cargo.toml`.
 
 ## Registro de mutaciones de este colapso
 

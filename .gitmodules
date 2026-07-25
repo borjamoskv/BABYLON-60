@@ -1,3 +1,6 @@
 [submodule "docs/aie-book"]
 	path = docs/aie-book
 	url = https://github.com/chiphuyen/aie-book.git
+[submodule "babylon60-ide/src-tauri/moskv-1-apex"]
+	path = babylon60-ide/src-tauri/moskv-1-apex
+	url = https://github.com/borjamoskv/moskv-1-apex.git
