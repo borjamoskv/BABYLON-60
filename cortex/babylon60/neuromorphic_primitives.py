@@ -163,7 +163,6 @@ class SelfHealingMesh:
 
     def kill_node(self, node_id: str) -> None:
         """Simula fallo catastrófico (radiación térmica/kernel panic)."""
-        print(f"[SelfHealingMesh] FALLO FÍSICO DETECTADO en nodo {node_id}. Ejecutando Apoptosis.")
         self.dead_nodes.add(node_id)
 
     def find_surrogate_path(self, start_node: str, end_node: str) -> list[str]:
@@ -189,7 +188,6 @@ class SelfHealingMesh:
     async def route_pulse(self, start_node: str, end_node: str, energy: float) -> None:
         """Enrutamiento tolerante a fallos buscando atajos (Plasticidad Topológica)."""
         if start_node in self.dead_nodes or end_node in self.dead_nodes:
-            print(f"[SelfHealingMesh] Ruta {start_node}->{end_node} destruida. Abortando pulso.")
             return
 
         # Pre-spike
@@ -206,7 +204,6 @@ class SelfHealingMesh:
         """Enrutamiento con auto-sanación dinámica de Malla Neuromórfica en caso de bypass."""
         path = self.find_surrogate_path(start_node, end_node)
         if not path or len(path) < 2:
-            print(f"[SelfHealingMesh] Imposible reparar ruta {start_node}->{end_node}. Métrica Lawvere = inf.")
             return False
 
         current_energy = energy
