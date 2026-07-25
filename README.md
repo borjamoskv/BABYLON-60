@@ -1,21 +1,34 @@
-<p align="center">
+<div align="center">
   <img src="https://img.shields.io/badge/cortex--persist-BABYLON--60-0A0A0A?style=for-the-badge&labelColor=2B3BE5&color=0A0A0A" alt="cortex-persist" />
-</p>
+</div>
+
+<h1 align="center">MOSKV-1 APEX SINGULARITY</h1>
 
 <p align="center">
-  <strong>MOSKV-1 APEX SINGULARITY: Sovereign C5-REAL Execution Kernel</strong><br/>
-  <sub>Byzantine Fault Tolerance (BFT) · Exergy-Maximized Ledger · Single-Writer WAL</sub>
+  <strong>Sovereign C5-REAL Execution Kernel</strong><br>
+  <em>Byzantine Fault Tolerance (BFT) · Exergy-Maximized Ledger · Single-Writer WAL</em>
 </p>
 
 <p align="center">
   <a href="https://pypi.org/project/cortex-persist/"><img src="https://img.shields.io/pypi/v/cortex-persist.svg?style=flat-square&color=2B3BE5" alt="PyPI version" /></a>
-  <a href="https://pypi.org/project/cortex-persist/"><img src="https://img.shields.io/pypi/pyversions/cortex-persist.svg?style=flat-square" alt="Python versions" /></a>
   <img src="https://img.shields.io/badge/SQLite-WAL-4CAF50?style=flat-square&logo=sqlite" alt="SQLite WAL" />
   <img src="https://img.shields.io/badge/Rust-optional-CE422B?style=flat-square&logo=rust" alt="Rust optional" />
   <img src="https://img.shields.io/badge/license-Proprietary-FF6B35?style=flat-square" alt="License" />
 </p>
 
----
+<br/>
+
+## ⚡ 1-CLICK KINETIC DEPLOYMENT
+
+Instala y despliega toda la singularidad de **BABYLON-60** en tu máquina con una sola instrucción:
+
+```bash
+curl -sSL https://raw.githubusercontent.com/borjamoskv/BABYLON-60/main/install.sh | bash
+```
+
+> **Nota:** Instalará la red de dependencias vía `uv`, clonará el ecosistema y lo dejará listo para ejecución. Cero fricción, **Máxima Exergía**.
+
+<br/>
 
 ## █ OVERVIEW: ZERO ANERGY
 
@@ -29,7 +42,7 @@ C5-REAL Intention → Validation → Single-Writer WAL → Hash-Chain Ledger →
 
 Every write is sealed via **SHA3-256**, carries a **causal taint**, and uses **UUID v5** idempotency keys to absolutely prevent duplicate energy expenditure. If the chain breaks, execution halts (`BFTCausalInvariantError`). We default to Fail-Fast.
 
----
+<br/>
 
 ## █ MATURITY MATRIX & EXERGY YIELD
 
@@ -39,11 +52,12 @@ Every write is sealed via **SHA3-256**, carries a **causal taint**, and uses **U
 | **Python SDK (`babylon60.*`)** | `Stable` | C5-REAL | Operator APIs |
 | **BABYLON60 IDE (FastAPI + Tauri)** | `Beta` | High | Transducer Frontend |
 | **Rust Core (`strike_rs` / PyO3)** | `Alpha` | High | GIL-Bypass & Thermodynamic Speed |
-| **Vector Memory (`sqlite-vec`)** | `Alpha` | Med | Semantic RAG (Experimental) |
 
----
+<br/>
 
-## █ INSTALLATION (KINETIC DEPLOYMENT)
+## █ MANUAL DEPLOYMENT (FOR OPERATORS)
+
+Si requieres control absoluto sobre el grafo de dependencias:
 
 ```bash
 # Core deployment
@@ -55,7 +69,7 @@ pip install "cortex-persist[voice-full]"  # Voice transcription (Apple Silicon)
 pip install "cortex-persist[apex]"        # Scikit-learn / Exergy Trials
 ```
 
-Source initialization via `uv` (recommended for strict `C5-REAL` virtual environments):
+O desde el Ledger Fuente usando el empaquetador ultrarrápido `uv`:
 
 ```bash
 git clone https://github.com/borjamoskv/BABYLON-60.git
@@ -63,7 +77,7 @@ cd BABYLON-60
 uv sync --all-extras
 ```
 
----
+<br/>
 
 ## █ BFT LEDGER: ZERO-FRICTION APPEND
 
@@ -102,7 +116,7 @@ async def main() -> None:
 asyncio.run(main())
 ```
 
----
+<br/>
 
 ## █ ARCHITECTURE (THE TRANSDUCER)
 
@@ -121,7 +135,7 @@ flowchart TD
     style G fill:#0A0A0A,color:#CE422B,stroke:#CE422B
 ```
 
----
+<br/>
 
 ## █ OPERATIONAL DIRECTIVES
 
@@ -141,3 +155,4 @@ If you operate on this repository, you must adhere strictly to the rules establi
     Art. 6.1, 6.2, 14 LPI (España) · Ley 1/2019 de Secretos Empresariales
   </sub>
 </p>
+
