@@ -1,6 +1,6 @@
+import logging
 import os
 import sys
-
 
 def check_lisp_bypass() -> None:
     lisp_dir = 'lisp_metamembrane'
@@ -55,13 +55,13 @@ def check_rust_anvil_bypass() -> None:
                         raise RuntimeError('CRASH CAUSAL (Antipatrón 4): Rust enviando transacciones a Anvil sin pasar por F#. Split-Brain Causal.')
 
 def enforce() -> None:
-    print('⚡ [C5-REAL] Ignición de Auditoría Cuadrilingüe (Enforcer BFT)...')
+    logging.info('⚡ [C5-REAL] Ignición de Auditoría Cuadrilingüe (Enforcer BFT)...')
     try:
         check_lisp_bypass()
         check_rust_ontology()
         check_solidity_physics()
         check_rust_anvil_bypass()
-        print('⚡ [C5-REAL] Topología Intacta. Cero Antipatrones detectados. Aislamiento Físico garantizado.')
+        logging.info('⚡ [C5-REAL] Topología Intacta. Cero Antipatrones detectados. Aislamiento Físico garantizado.')
         sys.exit(0)
     except (RuntimeError, OSError):
         raise RuntimeError('FAIL-FAST: General Exception intercepted.') from None
