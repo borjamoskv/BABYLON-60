@@ -15,9 +15,11 @@ class KMSProvider(abc.ABC):
 
     @abc.abstractmethod
     def encrypt(self, plaintext: bytes) -> bytes:
+        pass
 
     @abc.abstractmethod
     def decrypt(self, ciphertext: bytes) -> bytes:
+        pass
 
 class AWSKMSProvider(KMSProvider):
 
