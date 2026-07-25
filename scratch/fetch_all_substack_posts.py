@@ -11,7 +11,7 @@ url = "https://borjamoskv.substack.com/api/v1/archive?sort=new&search=&offset=0&
 req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
 
 with urllib.request.urlopen(req) as resp:
-    data = json.loads(resp.read().decode('utf-8'))
+    data = json.loads(resp.read().decode("utf-8"))
 
 posts = []
 for p in data:
@@ -21,7 +21,7 @@ for p in data:
         "subtitle": p.get("subtitle", ""),
         "slug": p.get("slug"),
         "canonical_url": f"https://borjamoskv.substack.com/p/{p.get('slug')}",
-        "post_date": p.get("post_date")
+        "post_date": p.get("post_date"),
     }
     posts.append(post_info)
 

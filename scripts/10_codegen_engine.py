@@ -34,19 +34,13 @@ def generate_go(
         "const (",
     ]
     for i in range(10):
-        lines.append(
-            f"\t{prefix}Domain{domains[i].replace('_', '').capitalize()} {prefix}Domain = {i}"
-        )
+        lines.append(f"\t{prefix}Domain{domains[i].replace('_', '').capitalize()} {prefix}Domain = {i}")
     lines.append(f"\n\t// {prefix} Primitives")
     for i in range(10):
-        lines.append(
-            f"\t{prefix}Primitive{primitives[i].replace('_', '').capitalize()} {prefix}Primitive = {i}"
-        )
+        lines.append(f"\t{prefix}Primitive{primitives[i].replace('_', '').capitalize()} {prefix}Primitive = {i}")
     lines.append(f"\n\t// {prefix} Modifiers")
     for i in range(10):
-        lines.append(
-            f"\t{prefix}Modifier{modifiers[i].replace('_', '').capitalize()} {prefix}Modifier = {i}"
-        )
+        lines.append(f"\t{prefix}Modifier{modifiers[i].replace('_', '').capitalize()} {prefix}Modifier = {i}")
     lines.append(")\n")
 
     lines.extend([f"func (d {prefix}Domain) String() string {{", "\tswitch d {"])
@@ -328,9 +322,7 @@ def generate_go_test(domain_name: str, cfg: dict[str, Any], output_path: str) ->
         f.write("\n".join(lines))
 
 
-def generate_python_test(
-    domain_name: str, cfg: dict[str, Any], output_path: str
-) -> None:
+def generate_python_test(domain_name: str, cfg: dict[str, Any], output_path: str) -> None:
     module_name = domain_name.lower()
     if module_name == "constants":
         module_name = "fundamental_constants"

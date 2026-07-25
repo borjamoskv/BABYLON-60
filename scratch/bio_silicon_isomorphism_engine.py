@@ -23,8 +23,8 @@ import math
 import json
 import hashlib
 import threading
-import queue
 import platform
+
 
 def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> float:
     if not data_points:
@@ -45,8 +45,10 @@ def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> flo
             entropy -= p * math.log(p)
     return entropy
 
+
 class MicroglialAdaptiveGate:
     """Bio-inspired Stateful Adaptive Gate with Dual Threshold Hysteresis (Upper/Lower)"""
+
     def __init__(self, v_high: float = 0.75, v_low: float = 0.25):
         self.v_high = v_high
         self.v_low = v_low
@@ -61,14 +63,16 @@ class MicroglialAdaptiveGate:
             self.accumulated_charge += intensity * 0.1
 
             if not self.state_active and self.accumulated_charge >= self.v_high:
-                self.state_active = True # Microglial activation / Gating engaged
+                self.state_active = True  # Microglial activation / Gating engaged
             elif self.state_active and self.accumulated_charge <= self.v_low:
-                self.state_active = False # Resolution / De-escalation
+                self.state_active = False  # Resolution / De-escalation
 
-            return not self.state_active # True = Pass, False = Suppressed/Shed
+            return not self.state_active  # True = Pass, False = Suppressed/Shed
+
 
 class GICv4HardwareAPICGate:
     """Hardware APIC / GICv4.1 O(1) Invariant Saturation Dispatcher"""
+
     def __init__(self, max_rate_hz: int = 12000):
         self.max_rate = max_rate_hz
         self.period = 1.0 / max_rate_hz
@@ -81,7 +85,8 @@ class GICv4HardwareAPICGate:
             if now - self.last_dispatch >= self.period:
                 self.last_dispatch = now
                 return True
-            return False # O(1) hardware ring drop / mask bit set
+            return False  # O(1) hardware ring drop / mask bit set
+
 
 class BioSiliconBenchmark:
     def __init__(self, duration_seconds: float = 2.0):
@@ -105,7 +110,7 @@ class BioSiliconBenchmark:
             pass_flag = gate.process_signal(signal, dt)
             t1 = time.perf_counter()
 
-            latencies.append((t1 - t0) * 1e6) # microseconds
+            latencies.append((t1 - t0) * 1e6)  # microseconds
             if pass_flag:
                 passed += 1
             else:
@@ -121,11 +126,11 @@ class BioSiliconBenchmark:
             "throughput_hz": (passed + suppressed) / elapsed,
             "avg_latency_us": sum(latencies) / len(latencies) if latencies else 0.0,
             "max_latency_us": max(latencies) if latencies else 0.0,
-            "shannon_entropy": compute_shannon_entropy(latencies)
+            "shannon_entropy": compute_shannon_entropy(latencies),
         }
 
     def run_gicv4_apic_simulation(self):
-        gate = GICv4HardwareAPICGate(max_rate_hz=12000) # 12k IRQ/s storm
+        gate = GICv4HardwareAPICGate(max_rate_hz=12000)  # 12k IRQ/s storm
         latencies = []
         dispatched, dropped = 0, 0
         start = time.perf_counter()
@@ -140,7 +145,7 @@ class BioSiliconBenchmark:
                 dispatched += 1
             else:
                 dropped += 1
-            time.sleep(0.00005) # 20k IRQ/s generator attempt
+            time.sleep(0.00005)  # 20k IRQ/s generator attempt
 
         elapsed = time.perf_counter() - start
         return {
@@ -151,26 +156,26 @@ class BioSiliconBenchmark:
             "throughput_hz": (dispatched + dropped) / elapsed,
             "avg_latency_us": sum(latencies) / len(latencies) if latencies else 0.0,
             "max_latency_us": max(latencies) if latencies else 0.0,
-            "shannon_entropy": compute_shannon_entropy(latencies)
+            "shannon_entropy": compute_shannon_entropy(latencies),
         }
 
     def run_antipattern_divergence_test(self):
         """Measures non-linear biological scaling vs rigid linear algorithmic rate limiting"""
         linear_latencies = []
         nonlinear_latencies = []
-        start = time.perf_counter()
+        time.perf_counter()
 
         # Non-linear biological scaling model: E(x) = x^1.8 / (1 + x^1.8)
         # Linear algorithmic model: L(x) = min(x, cap)
         for i in range(1, 1000):
             x = i / 100.0
             t0 = time.perf_counter()
-            _ = min(x, 5.0) # linear cap
+            _ = min(x, 5.0)  # linear cap
             t1 = time.perf_counter()
             linear_latencies.append((t1 - t0) * 1e6)
 
             t2 = time.perf_counter()
-            _ = (x**1.8) / (1.0 + x**1.8) # non-linear sigmoidal homeostatic
+            _ = (x**1.8) / (1.0 + x**1.8)  # non-linear sigmoidal homeostatic
             t3 = time.perf_counter()
             nonlinear_latencies.append((t3 - t2) * 1e6)
 
@@ -179,23 +184,28 @@ class BioSiliconBenchmark:
             "linear_control_entropy": compute_shannon_entropy(linear_latencies),
             "nonlinear_bio_entropy": compute_shannon_entropy(nonlinear_latencies),
             "linear_avg_latency_us": sum(linear_latencies) / len(linear_latencies),
-            "nonlinear_avg_latency_us": sum(nonlinear_latencies) / len(nonlinear_latencies)
+            "nonlinear_avg_latency_us": sum(nonlinear_latencies) / len(nonlinear_latencies),
         }
+
 
 def main():
     print("=== BIO-SILICON ISOMORPHISM ENGINE (C5-REAL EMPIRICAL BENCHMARK) ===")
     print(f"Platform: {platform.system()} {platform.machine()} ({platform.processor()})")
 
     bench = BioSiliconBenchmark(duration_seconds=1.5)
-    
+
     print("\n[1/3] Benchmarking Microglial Adaptive Hysteresis Gating...")
     res_bio = bench.run_microglial_simulation()
-    print(f"  -> Total Events: {res_bio['total_events']}, Passed: {res_bio['passed']}, Suppressed: {res_bio['suppressed']}")
+    print(
+        f"  -> Total Events: {res_bio['total_events']}, Passed: {res_bio['passed']}, Suppressed: {res_bio['suppressed']}"
+    )
     print(f"  -> Avg Latency: {res_bio['avg_latency_us']:.4f} µs, Entropy S: {res_bio['shannon_entropy']:.4f}")
 
     print("\n[2/3] Benchmarking GICv4.1 / APIC O(1) Invariant Dispatch...")
     res_hw = bench.run_gicv4_apic_simulation()
-    print(f"  -> Total Events: {res_hw['total_events']}, Dispatched: {res_hw['dispatched']}, Dropped: {res_hw['dropped']}")
+    print(
+        f"  -> Total Events: {res_hw['total_events']}, Dispatched: {res_hw['dispatched']}, Dropped: {res_hw['dropped']}"
+    )
     print(f"  -> Avg Latency: {res_hw['avg_latency_us']:.4f} µs, Entropy S: {res_hw['shannon_entropy']:.4f}")
 
     print("\n[3/3] Benchmarking Antipattern Temporal Feedback Divergence...")
@@ -204,26 +214,24 @@ def main():
     print(f"  -> Non-Linear Bio Entropy: {res_div['nonlinear_bio_entropy']:.4f}")
 
     from typing import Any
+
     telemetry: dict[str, Any] = {
         "metadata": {
             "system": platform.system(),
             "architecture": platform.machine(),
             "python_version": sys.version.split()[0],
-            "timestamp_iso": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            "timestamp_iso": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         },
         "metrics": {
             "microglial_adaptive_gate": res_bio,
             "gicv4_apic_hardware_gate": res_hw,
-            "antipattern_divergence": res_div
-        }
+            "antipattern_divergence": res_div,
+        },
     }
 
-    raw_bytes = json.dumps(telemetry, indent=2).encode('utf-8')
+    raw_bytes = json.dumps(telemetry, indent=2).encode("utf-8")
     sha3_hash = hashlib.sha3_256(raw_bytes).hexdigest()
-    telemetry["cryptographic_attestation"] = {
-        "algorithm": "SHA3-256",
-        "hash": sha3_hash
-    }
+    telemetry["cryptographic_attestation"] = {"algorithm": "SHA3-256", "hash": sha3_hash}
 
     out_file = os.path.join(os.path.dirname(__file__), "bio_silicon_telemetry_results.json")
     with open(out_file, "w", encoding="utf-8") as f:
@@ -232,6 +240,7 @@ def main():
     print(f"\n[+] Bio-Silicon Telemetry exported to: {out_file}")
     print(f"[+] Cryptographic Attestation (SHA3-256): {sha3_hash}")
     print("\n=== BIO-SILICON ISOMORPHISM BENCHMARK COMPLETE ===")
+
 
 if __name__ == "__main__":
     main()

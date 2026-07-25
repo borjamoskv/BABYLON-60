@@ -4,7 +4,7 @@ import os
 import sys
 
 # Append root directory to path to import cortex_env
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 from cortex_env import get_bft_key
 
 CORTEX_DIR = ".cortex"
@@ -74,9 +74,7 @@ def init_ledger() -> None:
 
     conn.commit()
     conn.close()
-    print(
-        f"Master Ledger inicializado en {DB_PATH}. WAL activo. Inmutabilidad enforzada (Ω11)."
-    )
+    print(f"Master Ledger inicializado en {DB_PATH}. WAL activo. Inmutabilidad enforzada (Ω11).")
 
 
 if __name__ == "__main__":

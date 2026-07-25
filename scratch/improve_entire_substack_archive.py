@@ -8,7 +8,6 @@ Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy), Ω23 (Re
 import os
 import json
 import random
-import re
 import hashlib
 import datetime
 from pathlib import Path
@@ -17,36 +16,44 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CATALOG_FILE = BASE_DIR / "scratch" / "substack_archive_catalog.json"
 OUTPUT_DIR = BASE_DIR / "artifacts" / "substack_archive"
 
+
 def load_catalog() -> list:
     with open(CATALOG_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
+
 def generate_signature(catalog: list, current_slug: str, count: int = 4) -> str:
-    mandatory = ("Un hombre blanco y heterosexual", "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal")
-    candidates = [p for p in catalog if p["slug"] != "el-colapso-del-macho-alfa-de-cristal" and p["slug"] != current_slug]
+    mandatory = (
+        "Un hombre blanco y heterosexual",
+        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal",
+    )
+    candidates = [
+        p for p in catalog if p["slug"] != "el-colapso-del-macho-alfa-de-cristal" and p["slug"] != current_slug
+    ]
     selected = random.sample(candidates, min(count, len(candidates)))
-    
+
     block = "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):\n"
     block += f"- [{mandatory[0]}]({mandatory[1]})\n"
     for item in selected:
         block += f"- [{item['title'].strip()}]({item['canonical_url']})\n"
     return block
 
+
 def elevate_post(post: dict, catalog: list) -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     seed = f"{post['id']}:{post['slug']}:{timestamp}"
-    cortex_taint = hashlib.sha3_256(seed.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(seed.encode("utf-8")).hexdigest()
 
-    title = post['title'].strip()
-    subtitle = post.get('subtitle', '') or "Auditoría Causal e Invariantes de Estructura C5-REAL."
-    slug = post['slug']
-    url = post['canonical_url']
+    title = post["title"].strip()
+    subtitle = post.get("subtitle", "") or "Auditoría Causal e Invariantes de Estructura C5-REAL."
+    slug = post["slug"]
+    url = post["canonical_url"]
 
     md = f"""# [AUDITORÍA C5-REAL] {title}
 
 > **{subtitle}**  
 > *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*  
-> *Post ID:* `{post['id']}` | *CORTEX-TAINT:* `borjamoskv:archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`  
+> *Post ID:* `{post["id"]}` | *CORTEX-TAINT:* `borjamoskv:archive:{cortex_taint[:16]}` | *Realidad:* `#C5-REAL`  
 > *URL Canónica:* [{url}]({url})
 
 ---
@@ -98,6 +105,7 @@ Toda publicación en el canal CORTEX debe actuar como un transductor físico: ex
 """
     return md
 
+
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     catalog = load_catalog()
@@ -107,13 +115,14 @@ def main():
         filename = f"{i:02d}_{post['slug']}.md"
         filepath = OUTPUT_DIR / filename
         md_content = elevate_post(post, catalog)
-        
+
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(md_content)
-            
+
         print(f"  [{i:02d}/{len(catalog)}] Generated: {filename} (ID: {post['id']})")
 
     print(f"Completed transduction of ALL {len(catalog)} Substack publications into {OUTPUT_DIR}!")
+
 
 if __name__ == "__main__":
     main()

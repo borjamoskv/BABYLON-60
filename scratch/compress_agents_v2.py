@@ -19,6 +19,6 @@ content = """# C5-REAL EXERGY PROTOCOL (WORKSPACE)
 - **Ψ10 (No-Deadlock):** Prohibido `return` prematuro en `multiprocessing.Pool()`.
 - **Ψ11 (T&S Strike):** URLs 404 = `OFFLINE_REMOVED`. Paginación = 3 Nodos (Landauer). 0% colisión de operador.
 """
-with open('.agents/AGENTS.md', 'w') as f:
+with open(".agents/AGENTS.md", "w") as f:
     f.write(content)
 print("AGENTS.md V2 (Domain Sharding)")

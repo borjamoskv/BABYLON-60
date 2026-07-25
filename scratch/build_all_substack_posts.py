@@ -14,11 +14,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 
+
 # 1. Post: Neuromorphic Chips vs Quantum Computation
 def generate_neuromorphic_post() -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     seed = f"NEUROMORPHIC_SUBSTACK:{timestamp}"
-    cortex_taint = hashlib.sha3_256(seed.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(seed.encode("utf-8")).hexdigest()
 
     return f"""# [AUDITORÍA C5-REAL] Olvida la Computación Cuántica: La Superioridad Termodinámica del Chip Neuromórfico
 
@@ -89,11 +90,12 @@ La cuántica seguirá capturando subvenciones gubernamentales y titulares sensac
 - [Desmontando a David Domínguez: Autopsia Forense (de A a la Z)](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
 """
 
+
 # 2. Post: La Gran Necrosis Ontológica
 def generate_necrosis_post() -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     seed = f"NECROSIS_SUBSTACK:{timestamp}"
-    cortex_taint = hashlib.sha3_256(seed.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(seed.encode("utf-8")).hexdigest()
 
     return f"""# [AUDITORÍA C5-REAL] La Gran Necrosis Ontológica: La Epidemia del Slop Sintético
 
@@ -159,9 +161,10 @@ La única vacuna contra la necrosis ontológica es el anclaje físico determinis
 - [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 """
 
+
 if __name__ == "__main__":
     os.makedirs(ARTIFACTS_DIR, exist_ok=True)
-    
+
     p1 = generate_neuromorphic_post()
     with open(ARTIFACTS_DIR / "post_substack_neuromorphic_vs_quantum.md", "w", encoding="utf-8") as f:
         f.write(p1)

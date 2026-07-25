@@ -21,34 +21,36 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CATALOG_FILE = BASE_DIR / "scratch" / "substack_archive_catalog.json"
 OUTPUT_DIR = BASE_DIR / "artifacts" / "substack_archive"
 
+
 def clean_html_to_markdown(html_str: str) -> str:
     """Cleans Substack HTML into clean Markdown without tables or raw LaTeX."""
     # Convert headings
-    html_str = re.sub(r'<h1>(.*?)</h1>', r'# \1\n\n', html_str, flags=re.DOTALL)
-    html_str = re.sub(r'<h2>(.*?)</h2>', r'## \1\n\n', html_str, flags=re.DOTALL)
-    html_str = re.sub(r'<h3>(.*?)</h3>', r'### \1\n\n', html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<h1>(.*?)</h1>", r"# \1\n\n", html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<h2>(.*?)</h2>", r"## \1\n\n", html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<h3>(.*?)</h3>", r"### \1\n\n", html_str, flags=re.DOTALL)
 
     # Convert paragraphs & blockquotes
-    html_str = re.sub(r'<p>(.*?)</p>', r'\1\n\n', html_str, flags=re.DOTALL)
-    html_str = re.sub(r'<blockquote>(.*?)</blockquote>', r'> \1\n\n', html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<p>(.*?)</p>", r"\1\n\n", html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<blockquote>(.*?)</blockquote>", r"> \1\n\n", html_str, flags=re.DOTALL)
 
     # Convert list items
-    html_str = re.sub(r'<li>(.*?)</li>', r'* \1\n', html_str, flags=re.DOTALL)
+    html_str = re.sub(r"<li>(.*?)</li>", r"* \1\n", html_str, flags=re.DOTALL)
 
     # Strip remaining HTML tags except simple inline formatting
-    html_str = re.sub(r'<[^>]+>', '', html_str)
+    html_str = re.sub(r"<[^>]+>", "", html_str)
 
     # Unescape HTML entities
     text = unescape(html_str)
 
     # Clean multi-newlines
-    text = re.sub(r'\n{3,}', '\n\n', text)
-    
+    text = re.sub(r"\n{3,}", "\n\n", text)
+
     # Purge raw LaTeX $ if any
-    text = re.sub(r'\$S = -\\sum p_i \\ln p_i\$', 'S = -∑ p_i ln(p_i)', text)
-    text = re.sub(r'\$([a-zA-Z0-9_\-\+\*\/\=\<\>\(\)]+)\$', r'\1', text)
+    text = re.sub(r"\$S = -\\sum p_i \\ln p_i\$", "S = -∑ p_i ln(p_i)", text)
+    text = re.sub(r"\$([a-zA-Z0-9_\-\+\*\/\=\<\>\(\)]+)\$", r"\1", text)
 
     return text.strip()
+
 
 def load_rss_feed() -> dict:
     url = "https://borjamoskv.substack.com/feed"
@@ -64,16 +66,13 @@ def load_rss_feed() -> dict:
         link = item.find("link").text if item.find("link") is not None else ""
         encoded = item.find("{http://purl.org/rss/1.0/modules/content/}encoded")
         content_html = encoded.text if encoded is not None else ""
-        
+
         # Extract slug from link
         slug = link.split("/")[-1].split("?")[0]
-        feed_posts[slug] = {
-            "title": title,
-            "link": link,
-            "html": content_html
-        }
+        feed_posts[slug] = {"title": title, "link": link, "html": content_html}
 
     return feed_posts
+
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -93,7 +92,7 @@ def main():
 
         timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
         seed = f"{post_id}:{slug}:{timestamp}"
-        cortex_taint = hashlib.sha3_256(seed.encode('utf-8')).hexdigest()
+        cortex_taint = hashlib.sha3_256(seed.encode("utf-8")).hexdigest()
 
         # Check if full body exists in RSS feed
         if slug in feed_data:
@@ -104,8 +103,9 @@ def main():
         # Signature block
         candidates = [p for p in catalog if p["slug"] != "el-colapso-del-macho-alfa-de-cristal" and p["slug"] != slug]
         import random
+
         selected = random.sample(candidates, min(4, len(candidates)))
-        
+
         sig_block = "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):\n"
         sig_block += "- [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)\n"
         for item in selected:
@@ -148,10 +148,11 @@ def main():
         filepath = OUTPUT_DIR / filename
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(full_article)
-            
+
         print(f"  [{i:02d}/23] Ingested and elevated full article: {filename}")
 
     print("Complete RSS ingestion and transduction of ALL 23 Substack articles finished!")
+
 
 if __name__ == "__main__":
     main()

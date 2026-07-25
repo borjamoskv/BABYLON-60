@@ -22,6 +22,7 @@ import threading
 import queue
 import platform
 
+
 class TokenBucket:
     def __init__(self, capacity: int, refill_rate: float):
         self.capacity = float(capacity)
@@ -41,19 +42,20 @@ class TokenBucket:
                 return True
             return False
 
+
 def compute_shannon_entropy(data_points: list, num_bins: int = 20) -> float:
     if not data_points:
         return 0.0
     min_val, max_val = min(data_points), max(data_points)
     if min_val == max_val:
         return 0.0
-    
+
     bin_width = (max_val - min_val) / num_bins
     counts = [0] * num_bins
     for v in data_points:
         idx = min(int((v - min_val) / bin_width), num_bins - 1)
         counts[idx] += 1
-    
+
     total = len(data_points)
     entropy = 0.0
     for c in counts:
@@ -61,6 +63,7 @@ def compute_shannon_entropy(data_points: list, num_bins: int = 20) -> float:
             p = c / total
             entropy -= p * math.log(p)
     return entropy
+
 
 class IsomorphismSimulator:
     def __init__(self, duration_per_phase: float = 2.0):
@@ -79,9 +82,9 @@ class IsomorphismSimulator:
             # Simulate minimal work (handling normal tactile sensory / low IRQ)
             _ = math.sin(t0) * math.cos(t0)
             t1 = time.perf_counter()
-            latencies.append((t1 - t0) * 1e6) # microseconds
+            latencies.append((t1 - t0) * 1e6)  # microseconds
             processed += 1
-            time.sleep(0.005) # 200 Hz baseline
+            time.sleep(0.005)  # 200 Hz baseline
 
         elapsed = time.perf_counter() - start_time
         return {
@@ -91,7 +94,7 @@ class IsomorphismSimulator:
             "latencies_us": latencies,
             "avg_latency_us": sum(latencies) / len(latencies) if latencies else 0.0,
             "max_latency_us": max(latencies) if latencies else 0.0,
-            "shannon_entropy": compute_shannon_entropy(latencies)
+            "shannon_entropy": compute_shannon_entropy(latencies),
         }
 
     def run_phase_interrupt_storm(self):
@@ -129,14 +132,14 @@ class IsomorphismSimulator:
 
         prod_thread = threading.Thread(target=producer)
         cons_thread = threading.Thread(target=consumer)
-        
+
         start_time = time.perf_counter()
         prod_thread.start()
         cons_thread.start()
 
         time.sleep(self.duration)
         stop_event.set()
-        
+
         prod_thread.join()
         cons_thread.join()
         elapsed = time.perf_counter() - start_time
@@ -148,7 +151,7 @@ class IsomorphismSimulator:
             "latencies_us": latencies,
             "avg_latency_us": sum(latencies) / len(latencies) if latencies else 0.0,
             "max_latency_us": max(latencies) if latencies else 0.0,
-            "shannon_entropy": compute_shannon_entropy(latencies)
+            "shannon_entropy": compute_shannon_entropy(latencies),
         }
 
     def run_phase_anesthesia_napi(self):
@@ -156,7 +159,7 @@ class IsomorphismSimulator:
         latencies = []
         processed = 0
         dropped = 0
-        bucket = TokenBucket(capacity=500, refill_rate=5000) # Throttled budget
+        bucket = TokenBucket(capacity=500, refill_rate=5000)  # Throttled budget
         stop_event = threading.Event()
         irq_queue = queue.Queue(maxsize=100000)
 
@@ -217,15 +220,16 @@ class IsomorphismSimulator:
             "latencies_us": latencies,
             "avg_latency_us": sum(latencies) / len(latencies) if latencies else 0.0,
             "max_latency_us": max(latencies) if latencies else 0.0,
-            "shannon_entropy": compute_shannon_entropy(latencies)
+            "shannon_entropy": compute_shannon_entropy(latencies),
         }
+
 
 def main():
     print("=== KINETIC VECTOR: HARDWARE L1 / DISRUPTIVE NOCICEPTION ISOMORPHISM SIMULATOR ===")
     print(f"Platform: {platform.system()} {platform.machine()} ({platform.processor()})")
-    
+
     sim = IsomorphismSimulator(duration_per_phase=1.5)
-    
+
     print("\n[1/3] Executing Phase 1: Baseline Homeostasis (Normal Sensory / Low IRQ)...")
     res1 = sim.run_phase_baseline()
     print(f"  -> Processed: {res1['processed']}, Throughput: {res1['throughput_hz']:.1f} Hz")
@@ -234,11 +238,15 @@ def main():
     print("\n[2/3] Executing Phase 2: Chronic Pain / IRQ Storm (NaV1.7 Hyper-excitability / Receive Livelock)...")
     res2 = sim.run_phase_interrupt_storm()
     print(f"  -> Processed: {res2['processed']}, Throughput: {res2['throughput_hz']:.1f} Hz")
-    print(f"  -> Avg Latency: {res2['avg_latency_us']:.2f} µs, Max Latency: {res2['max_latency_us']:.2f} µs, Entropy S: {res2['shannon_entropy']:.4f}")
+    print(
+        f"  -> Avg Latency: {res2['avg_latency_us']:.2f} µs, Max Latency: {res2['max_latency_us']:.2f} µs, Entropy S: {res2['shannon_entropy']:.4f}"
+    )
 
     print("\n[3/3] Executing Phase 3: Anesthesia / NAPI Polling (Na+ Block / Token Bucket Throttling)...")
     res3 = sim.run_phase_anesthesia_napi()
-    print(f"  -> Processed: {res3['processed']}, Dropped: {res3['dropped']}, Throughput: {res3['throughput_hz']:.1f} Hz")
+    print(
+        f"  -> Processed: {res3['processed']}, Dropped: {res3['dropped']}, Throughput: {res3['throughput_hz']:.1f} Hz"
+    )
     print(f"  -> Avg Latency: {res3['avg_latency_us']:.2f} µs, Entropy S: {res3['shannon_entropy']:.4f}")
 
     # Payload summary
@@ -247,38 +255,35 @@ def main():
             "system": platform.system(),
             "architecture": platform.machine(),
             "python_version": sys.version.split()[0],
-            "timestamp_iso": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+            "timestamp_iso": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
         },
         "metrics": {
             "phase1_homeostasis": {
                 "processed": res1["processed"],
                 "throughput_hz": round(res1["throughput_hz"], 2),
                 "avg_latency_us": round(res1["avg_latency_us"], 2),
-                "shannon_entropy": round(res1["shannon_entropy"], 4)
+                "shannon_entropy": round(res1["shannon_entropy"], 4),
             },
             "phase2_chronic_pain_irq_storm": {
                 "processed": res2["processed"],
                 "throughput_hz": round(res2["throughput_hz"], 2),
                 "avg_latency_us": round(res2["avg_latency_us"], 2),
                 "max_latency_us": round(res2["max_latency_us"], 2),
-                "shannon_entropy": round(res2["shannon_entropy"], 4)
+                "shannon_entropy": round(res2["shannon_entropy"], 4),
             },
             "phase3_anesthesia_napi_gating": {
                 "processed": res3["processed"],
                 "dropped": res3["dropped"],
                 "throughput_hz": round(res3["throughput_hz"], 2),
                 "avg_latency_us": round(res3["avg_latency_us"], 2),
-                "shannon_entropy": round(res3["shannon_entropy"], 4)
-            }
-        }
+                "shannon_entropy": round(res3["shannon_entropy"], 4),
+            },
+        },
     }
 
-    payload_bytes = json.dumps(output_payload, indent=2).encode('utf-8')
+    payload_bytes = json.dumps(output_payload, indent=2).encode("utf-8")
     sha3_digest = hashlib.sha3_256(payload_bytes).hexdigest()
-    output_payload["cryptographic_attestation"] = {
-        "algorithm": "SHA3-256",
-        "hash": sha3_digest
-    }
+    output_payload["cryptographic_attestation"] = {"algorithm": "SHA3-256", "hash": sha3_digest}
 
     out_file = os.path.join(os.path.dirname(__file__), "isomorphism_telemetry_results.json")
     with open(out_file, "w", encoding="utf-8") as f:
@@ -287,6 +292,7 @@ def main():
     print(f"\n[+] Telemetry exported to: {out_file}")
     print(f"[+] Cryptographic Attestation (SHA3-256): {sha3_digest}")
     print("\n=== SIMULATION COMPLETE: C5-REAL EMPIRICAL ANCHOR VERIFIED ===")
+
 
 if __name__ == "__main__":
     main()

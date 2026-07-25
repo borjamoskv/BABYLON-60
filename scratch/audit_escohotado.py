@@ -1,10 +1,9 @@
 import os
 import hashlib
-import time
 import datetime
 import yaml
-import subprocess
 from pathlib import Path
+
 
 def generate_audit():
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -13,7 +12,7 @@ def generate_audit():
 
     # Compute dynamic CORTEX-TAINT
     seed_str = f"{agent_id}:{pid}:{timestamp}:ESCOHOTADO_ULTRATHINK_AUDIT"
-    cortex_taint = hashlib.sha3_256(seed_str.encode('utf-8')).hexdigest()
+    cortex_taint = hashlib.sha3_256(seed_str.encode("utf-8")).hexdigest()
 
     yaml_payload = {
         "Claim": "Antonio Escohotado Espinosa (Filósofo) MYTHOS Epistemic & Thermodynamic Audit",
@@ -22,96 +21,96 @@ def generate_audit():
                 "Exergy_Score": 0.887,
                 "Redundancy_Index": 0.142,
                 "Structural_Rigor": 0.865,
-                "Falsifiability_Ratio": 0.810
+                "Falsifiability_Ratio": 0.810,
             },
             "Range": [0.0, 1.0],
-            "Confidence": "C5-REAL"
+            "Confidence": "C5-REAL",
         },
         "CORTEX_TAINT": f"borjamoskv:escohotado_audit:{timestamp}:{cortex_taint[:16]}",
         "Reality_Level": "C5-REAL",
         "Subject": {
             "Name": "Antonio Escohotado Espinosa",
             "Dates": "1941-2021",
-            "Role": "Filósofo, Ensayista, Traductor, Catedrático de Filosofía y Metodología de las Ciencias Sociales (UNED)"
+            "Role": "Filósofo, Ensayista, Traductor, Catedrático de Filosofía y Metodología de las Ciencias Sociales (UNED)",
         },
         "MYTHOS_Epistemic_Matrix": {
             "Delta1_Antipatrones": [
                 {
                     "Target": "Caos y Orden (1999)",
                     "Type": "Tensión Metafórico-Física",
-                    "Description": "Extrapolación analógica de la termodinámica de sistemas no lineales (Prigogine, atractores extraños) a la teoría social y la libertad humana sin formalización diferencial estricta. Riesgo de homonimia conceptual (C4-SIM) al equiparar entropía física con indeterminación moral."
+                    "Description": "Extrapolación analógica de la termodinámica de sistemas no lineales (Prigogine, atractores extraños) a la teoría social y la libertad humana sin formalización diferencial estricta. Riesgo de homonimia conceptual (C4-SIM) al equiparar entropía física con indeterminación moral.",
                 },
                 {
                     "Target": "Los Enemigos del Comercio (2008-2016)",
                     "Type": "Sesgo Historiográfico de Inversión Pendular",
-                    "Description": "Tendencia a subsumir diversas corrientes colectivistas premodernas bajo una única línea soteriológica de resentimiento moral antipropiedad, atenuando matices institucionales intermedios."
+                    "Description": "Tendencia a subsumir diversas corrientes colectivistas premodernas bajo una única línea soteriológica de resentimiento moral antipropiedad, atenuando matices institucionales intermedios.",
                 },
                 {
                     "Target": "Historia General de las Drogas (1989)",
                     "Type": "Muestra Empírica Auto-Assay",
-                    "Description": "Inclusión de fenomenología propia en auto-ensayos farmacológicos. Aporta valor testimonial pero introduce variabilidad neuroquímica individual no falsable de forma universal."
-                }
+                    "Description": "Inclusión de fenomenología propia en auto-ensayos farmacológicos. Aporta valor testimonial pero introduce variabilidad neuroquímica individual no falsable de forma universal.",
+                },
             ],
             "Delta2_Redundancias": [
                 {
                     "Target": "Divulgación Mediática Tardía",
                     "Type": "Amplificación Retórica",
-                    "Description": "Inflatio verbal en intervenciones televisivas y entrevistas periodísticas en comparación con la alta densidad bibliográfica de sus tratados históricos."
+                    "Description": "Inflatio verbal en intervenciones televisivas y entrevistas periodísticas en comparación con la alta densidad bibliográfica de sus tratados históricos.",
                 },
                 {
                     "Target": "Exégesis Teológica de Enemigos del Comercio Vol. 1",
                     "Type": "Iteración Hermenéutica",
-                    "Description": "Reiteración de pasajes patrísticos sobre la usura y la pobreza que habrían alcanzado el mismo colapso epistémico con menor volumen expositivo."
-                }
+                    "Description": "Reiteración de pasajes patrísticos sobre la usura y la pobreza que habrían alcanzado el mismo colapso epistémico con menor volumen expositivo.",
+                },
             ],
             "Delta3_Exergia_Informacional": [
                 {
                     "Work": "Historia General de las Drogas",
                     "Exergy_Score": 0.94,
-                    "Causal_Impact": "Transducción documental masiva del marco farmacológico, legal y sociológico. Demostración de que la prohibición es un generador de renta de ilegalidad y violencia sistémica."
+                    "Causal_Impact": "Transducción documental masiva del marco farmacológico, legal y sociológico. Demostración de que la prohibición es un generador de renta de ilegalidad y violencia sistémica.",
                 },
                 {
                     "Work": "Los Enemigos del Comercio",
                     "Exergy_Score": 0.89,
-                    "Causal_Impact": "Arqueología del pensamiento económico-moral. Rastreo del origen de las ideas colectivistas y su impacto sobre la libertad individual y el comercio desde la Antigüedad hasta el Siglo XX."
+                    "Causal_Impact": "Arqueología del pensamiento económico-moral. Rastreo del origen de las ideas colectivistas y su impacto sobre la libertad individual y el comercio desde la Antigüedad hasta el Siglo XX.",
                 },
                 {
                     "Work": "Realidad y Substancia",
                     "Exergy_Score": 0.82,
-                    "Causal_Impact": "Ontología monista de la sustancia continua y el proceso (influencia aristotélica, spinoziana y hegeliana). Intento de superación de los dualismos cartesiano y kantiano."
+                    "Causal_Impact": "Ontología monista de la sustancia continua y el proceso (influencia aristotélica, spinoziana y hegeliana). Intento de superación de los dualismos cartesiano y kantiano.",
                 },
                 {
                     "Work": "Traducciones de Clásicos (Newton, Hobbes, Locke, Hegel)",
                     "Exergy_Score": 0.96,
-                    "Causal_Impact": "Transferencia directa de exergía filosófica e histórica al ámbito hispanohablante mediante traducciones rigurosas con aparatos críticos."
-                }
+                    "Causal_Impact": "Transferencia directa de exergía filosófica e histórica al ámbito hispanohablante mediante traducciones rigurosas con aparatos críticos.",
+                },
             ],
             "Delta4_Rigor_Estructural": {
                 "Isomorphism": "Continuidad Ontológica -> Auto-organización Compleja -> Soberanía Individual",
-                "Evaluation": "Existe una coherencia interna acíclica: la realidad como sustancia dinámica sin dualismo (Realidad y Substancia) fundamenta la emergencia espontánea del orden sin diseñador central (Caos y Orden), lo que justifica éticamente la autonomía individual sobre el propio cuerpo y los bienes (Historia de las Drogas / Enemigos del Comercio)."
-            }
+                "Evaluation": "Existe una coherencia interna acíclica: la realidad como sustancia dinámica sin dualismo (Realidad y Substancia) fundamenta la emergencia espontánea del orden sin diseñador central (Caos y Orden), lo que justifica éticamente la autonomía individual sobre el propio cuerpo y los bienes (Historia de las Drogas / Enemigos del Comercio).",
+            },
         },
         "Enfant_Sauvage_Quadripartite_Matrix": {
             "1_Hechos_Observables": [
                 "Publicación de 30+ volúmenes ensayísticos e historiográficos.",
                 "Traducción directa del latín e inglés de los Principia de Newton, Leviatán de Hobbes y Carta sobre la Tolerancia de Locke.",
                 "Recopilación de fuentes primarias en los archivos del Vaticano, Museo Británico y archivos nacionales soviéticos.",
-                "Docencia universitaria en la UNED como catedrático de Filosofía y Metodología de las Ciencias Sociales."
+                "Docencia universitaria en la UNED como catedrático de Filosofía y Metodología de las Ciencias Sociales.",
             ],
             "2_Interpretaciones_Causales": [
                 "La prohibición de las drogas no responde a criterios de salud pública sino a dinámicas de control burocrático y puritanismo moral.",
                 "El comunismo y el socialismo real son la culminación de un sentimiento religioso arcaico antipropiedad, no un resultado inevitable del desarrollo científico del capital.",
-                "La libertad humana no es una concesión del Estado, sino la condición ontológica de un sistema complejo auto-organizado."
+                "La libertad humana no es una concesión del Estado, sino la condición ontológica de un sistema complejo auto-organizado.",
             ],
             "3_Hipotesis_Falsables": [
                 "H1: La legalización y regulación transparente de sustancias psicoactivas reduce la mortalidad por adulteración y la criminalidad organizada en >80%.",
-                "H2: La supresión de los precios de mercado y la propiedad privada destruye la información requerida para la coordinación económica, derivando en escasez sistémica y autoritarismo."
+                "H2: La supresión de los precios de mercado y la propiedad privada destruye la información requerida para la coordinación económica, derivando en escasez sistémica y autoritarismo.",
             ],
             "4_Juicios_de_Valor_Anergia_Purga": [
                 "Se purgan calificativos encomiásticos ('héroe de la libertad', 'sabio infalible') y denigratorios ('apologista de las drogas', 'renegado').",
-                "Se reduce la figura histórica a su matriz de producción teórica y su grado de contrastación empírica con la realidad física e histórica."
-            ]
-        }
+                "Se reduce la figura histórica a su matriz de producción teórica y su grado de contrastación empírica con la realidad física e histórica.",
+            ],
+        },
     }
 
     # Write YAML output
@@ -124,7 +123,7 @@ def generate_audit():
     # Write Markdown Artifact
     md_path = str(base_dir / "artifacts" / "auditoria_escohotado_ultrathink.md")
     os.makedirs(os.path.dirname(md_path), exist_ok=True)
-    
+
     md_content = f"""# AUDITORÍA EPISTÉMICA Y TERMODINÁMICA C5-REAL: ANTONIO ESCOHOTADO (FILÓSOFO)
 
 ```yaml
@@ -137,7 +136,7 @@ Proof:
     Falsifiability_Ratio: 0.810
   Range: [0.0, 1.0]
   Confidence: C5-REAL
-CORTEX_TAINT: {yaml_payload['CORTEX_TAINT']}
+CORTEX_TAINT: {yaml_payload["CORTEX_TAINT"]}
 ```
 
 ---
@@ -205,6 +204,7 @@ CORTEX_TAINT: {yaml_payload['CORTEX_TAINT']}
     print(f"YAML generated at: {yaml_path}")
     print(f"MD generated at: {md_path}")
     print(f"CORTEX-TAINT: {cortex_taint}")
+
 
 if __name__ == "__main__":
     generate_audit()

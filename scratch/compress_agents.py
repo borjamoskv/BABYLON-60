@@ -27,6 +27,6 @@ content = """# C5-REAL Execution Protocol (Ultrathink Compressed)
 **25. MP Context Deadlock:** Prohibido return prematuro en `multiprocessing.Pool()`. Usar bucles seriales o `ProcessPoolExecutor`.
 **26. TS Matrix (Ψ8/Ψ9):** Takedown = OFFLINE_REMOVED inmediato. Paginación = Bloques de 3 nodos (Landauer). 0% colisión Operador.
 """
-with open('.agents/AGENTS.md', 'w') as f:
+with open(".agents/AGENTS.md", "w") as f:
     f.write(content)
 print("AGENTS.md compressed via Ultrathink")
