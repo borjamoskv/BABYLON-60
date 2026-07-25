@@ -73,11 +73,11 @@ Donde:
 
 Cuando $N_p \to 164$ tokens (reducción del 80%), el segundo término de divergencia $\text{KL} \to 0$. El modelo opera sobre su hiperplano de mínima fricción de optimización. Al mismo tiempo, la seguridad y el determinismo no se pierden porque la verificación se traslada al estrato gramatical ($N_t \to 4800$ tokens de esquemas JSON compilados una única vez al inicio del handshake).
 
-Como demuestra nuestro linter termodinámico (`scripts/verify_scaffolding_exergy.py`), el Coeficiente de Eficiencia Epistémica ($\eta_D \triangleq \frac{\Delta H_{\text{estable}}}{\Delta B_{\text{disipada}}}$) experimenta una aceleración de un orden de magnitud:
+Como demuestra nuestro linter termodinámico (`scripts/verify_scaffolding_exergy.py`), que modela rigurosamente el decaimiento cuadrático $O(N^2)$ de la auto-atención (FlashAttention), el Coeficiente de Eficiencia Epistémica ($\eta_D \triangleq \frac{\Delta H_{\text{estable}}}{\Delta B_{\text{disipada}}}$) experimenta una aceleración de más de un orden de magnitud:
 
-- **Claude 3.5 Sonnet (Legacy):** $\eta_D = 48.3333$
-- **Claude 4 Opus (Transitional):** $\eta_D = 128.7879$
-- **Claude 5 Opus/Fable (C5-REAL Target):** $\eta_D = 460.0000$
+- **Claude 3.5 Sonnet (Legacy):** $\eta_D = 39.4558$
+- **Claude 4 Opus (Transitional):** $\eta_D = 124.8852$
+- **Claude 5 Opus/Fable (C5-REAL Target):** $\eta_D = 416.2896$
 
 ---
 

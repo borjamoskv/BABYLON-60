@@ -32,11 +32,14 @@ def calculate_epistemic_efficiency(profile: ModelScaffoldingProfile, baseline_to
     Where delta_H_stable is proportional to coding eval score and RL density,
     and delta_B_dissipated is proportional to context window token entropy (system prompt + schema overhead).
     """
-    # Token dissipation cost (attention quadratic/linear decay model)
+    # Token dissipation cost (attention quadratic decay model O(N^2))
     total_active_tokens = profile.system_prompt_tokens + (
         profile.tool_schema_tokens * 0.15
     )  # schema is JIT compiled/loaded
-    dissipated_energy = (total_active_tokens / baseline_tokens) * profile.kv_cache_dissipation_rate
+
+    # Quadratic expansion of token entropy penalty
+    normalized_tokens = total_active_tokens / baseline_tokens
+    dissipated_energy = (normalized_tokens ** 2) * profile.kv_cache_dissipation_rate
 
     # Stable epistemic reduction (accuracy * alignment embedding)
     stable_knowledge = profile.coding_eval_score * (1.0 + profile.rl_post_training_density)
