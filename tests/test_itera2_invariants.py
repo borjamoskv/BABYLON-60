@@ -40,53 +40,77 @@ def test_database_core_rechaza_durabilidad_ilegal(tmp_path: Path) -> None:
         dbcore.connect_sync(tmp_path / "x.db", synchronous="OFF")
 
 
-def _quorum_fixture(tmp_path: Path, n: int = 4) -> tuple[Any, Any, str, dict[str, Ed25519Signer]]:
+async def _quorum_fixture(tmp_path: Path, n: int = 4) -> tuple[Any, Any, str, dict[str, Ed25519Signer]]:
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
     signers = {f"node_{i}": Ed25519Signer() for i in range(n)}
     node_keys = {nid: s.public_key_hex for nid, s in signers.items()}
     ledger = BFT_Ledger(str(tmp_path / "consensus.db"), node_keys=node_keys)
+    await ledger.setup()
     mutation = StateMutation(agent_id="legion", payload={"op": "advance", "n": 60}, timestamp=1000, signature="")
     m_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
     return (ledger, mutation, m_hash, signers)
 
 
-def test_consensus_quorum_con_firmas_reales(tmp_path: Path) -> None:
-    ledger, mutation, m_hash, signers = _quorum_fixture(tmp_path)
-    sigs = {nid: s.sign(m_hash) for nid, s in signers.items()}
-    assert ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs) is True
-    assert ledger.audit_integrity() is True
+@pytest.mark.asyncio
+async def test_consensus_quorum_con_firmas_reales(tmp_path: Path) -> None:
+    ledger, mutation, m_hash, signers = await _quorum_fixture(tmp_path)
+    try:
+        sigs = {nid: s.sign(m_hash) for nid, s in signers.items()}
+        assert await ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs) is True
+        assert await ledger.audit_integrity() is True
+    finally:
+        if ledger.conn:
+            await ledger.conn.close()
 
 
-def test_consensus_rechaza_voto_forjado_xfail(tmp_path: Path) -> None:
-    ledger, mutation, m_hash, signers = _quorum_fixture(tmp_path)
-    sigs = {nid: s.sign(m_hash) for nid, s in signers.items()}
-    intruso = Ed25519Signer()
-    sigs["node_2"] = intruso.sign(m_hash)
-    sigs["node_3"] = intruso.sign(m_hash)
-    with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
-        ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs)
+@pytest.mark.asyncio
+async def test_consensus_rechaza_voto_forjado_xfail(tmp_path: Path) -> None:
+    ledger, mutation, m_hash, signers = await _quorum_fixture(tmp_path)
+    try:
+        sigs = {nid: s.sign(m_hash) for nid, s in signers.items()}
+        intruso = Ed25519Signer()
+        sigs["node_2"] = intruso.sign(m_hash)
+        sigs["node_3"] = intruso.sign(m_hash)
+        with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
+            await ledger.invoke_subagent(mutation, f=1, swarm_signatures=sigs)
+    finally:
+        if ledger.conn:
+            await ledger.conn.close()
 
 
-def test_consensus_fail_closed_sin_registro_de_claves(tmp_path: Path) -> None:
+@pytest.mark.asyncio
+async def test_consensus_fail_closed_sin_registro_de_claves(tmp_path: Path) -> None:
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
     ledger = BFT_Ledger(str(tmp_path / "c2.db"))
-    mutation = StateMutation(agent_id="x", payload={"a": 1}, timestamp=1, signature="")
-    m_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
-    with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
-        ledger.invoke_subagent(mutation, f=0, swarm_signatures={"ghost": Ed25519Signer().sign(m_hash)})
+    await ledger.setup()
+    try:
+        mutation = StateMutation(agent_id="x", payload={"a": 1}, timestamp=1, signature="")
+        m_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
+        with pytest.raises(PermissionError, match="BFT_CONSENSUS_FAILURE"):
+            await ledger.invoke_subagent(mutation, f=0, swarm_signatures={"ghost": Ed25519Signer().sign(m_hash)})
+    finally:
+        if ledger.conn:
+            await ledger.conn.close()
 
 
-def test_audit_integrity_indecodificable_es_corrupcion(tmp_path: Path) -> None:
+@pytest.mark.asyncio
+async def test_audit_integrity_indecodificable_es_corrupcion(tmp_path: Path) -> None:
     from babylon60.bft.consensus_ledger import BFT_Ledger
 
     ledger = BFT_Ledger(str(tmp_path / "audit.db"))
-    ledger.conn.execute(
-        "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint, idempotency_key) VALUES (?, ?, ?, ?, ?, ?)",
-        ("deadbeef" * 8, "atacante", b"\xff\xfe\xfd garbage no-cbor no-json", 1, "test_corruption", "dummy-idemp-key"),
-    )
-    assert ledger.audit_integrity() is False
+    await ledger.setup()
+    try:
+        await ledger.conn.execute(
+            "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint, idempotency_key) VALUES (?, ?, ?, ?, ?, ?)",
+            ("deadbeef" * 8, "atacante", b"\xff\xfe\xfd garbage no-cbor no-json", 1, "test_corruption", "dummy-idemp-key"),
+        )
+        await ledger.conn.commit()
+        assert await ledger.audit_integrity() is False
+    finally:
+        if ledger.conn:
+            await ledger.conn.close()
 
 
 @pytest.mark.asyncio

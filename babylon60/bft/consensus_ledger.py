@@ -12,6 +12,7 @@ NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
 from babylon60.database import core as database_core
+import aiosqlite
 
 _UNDECODABLE = object()
 
@@ -27,16 +28,20 @@ class StateMutation:
 
 class BFT_Ledger:
     def __init__(self, db_path: str = "master_ledger.db", node_keys: dict[str, str] | None = None) -> None:
-        self.conn: sqlite3.Connection = database_core.connect_sync(db_path, synchronous="FULL")
+        self.db_path = db_path
         self._node_keys: dict[str, str] = dict(node_keys or {})
-        self._init_tables()
+        self.conn: aiosqlite.Connection | None = None
 
-    def _init_tables(self) -> None:
-        self.conn.execute(
+    async def setup(self) -> None:
+        self.conn = await database_core.connect(self.db_path, synchronous="FULL")
+        await self.conn.execute(
             "\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                idempotency_key TEXT UNIQUE NOT NULL,\n                mutation_hash TEXT NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts INTEGER NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            "
         )
 
-    def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: dict[str, str]) -> bool:
+    async def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: dict[str, str]) -> bool:
+        if self.conn is None:
+            raise RuntimeError("BFT_Ledger no inicializado. Llame a setup() primero.")
+            
         required_votes = 2 * f + 1
         mutation_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
         valid_votes = sum(
@@ -50,8 +55,8 @@ class BFT_Ledger:
         idempotency_key = str(uuid.uuid5(NAMESPACE_UUID, idempotent_str))
 
         try:
-            self.conn.execute("BEGIN IMMEDIATE")
-            self.conn.execute(
+            await self.conn.execute("BEGIN IMMEDIATE")
+            await self.conn.execute(
                 "INSERT OR IGNORE INTO state_log (idempotency_key, mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?, ?)",
                 (
                     idempotency_key,
@@ -62,9 +67,9 @@ class BFT_Ledger:
                     mutation.causal_taint,
                 ),
             )
-            self.conn.execute("COMMIT")
+            await self.conn.execute("COMMIT")
         except sqlite3.Error:
-            self.conn.execute("ROLLBACK")
+            await self.conn.execute("ROLLBACK")
             raise
         return True
 
@@ -88,11 +93,14 @@ class BFT_Ledger:
         except (json.JSONDecodeError, UnicodeDecodeError, TypeError, ValueError):
             return _UNDECODABLE
 
-    def audit_integrity(self) -> bool:
-        cursor = self.conn.cursor()
+    async def audit_integrity(self) -> bool:
+        if self.conn is None:
+            return False
+            
         try:
-            cursor.execute("SELECT id, mutation_hash, payload FROM state_log")
-            rows = cursor.fetchall()
+            async with self.conn.execute("SELECT id, mutation_hash, payload FROM state_log") as cursor:
+                rows = await cursor.fetchall()
+
         except sqlite3.OperationalError as e:
             print(f"[-] No state_log table found or database uninitialized: {e}")
             return False
@@ -115,16 +123,23 @@ class BFT_Ledger:
         return corrupted == 0
 
 
-if __name__ == "__main__":
-    import sys
+import asyncio
 
+async def _main_audit() -> None:
+    import sys
     db_path = "master_ledger.db"
     audit_mode = "--audit-mode" in sys.argv
     print(f"[*] [C5-REAL] BFT Ledger Audit: db_path={db_path}, audit_mode={audit_mode}")
     ledger = BFT_Ledger(db_path)
+    await ledger.setup()
     if audit_mode:
-        if ledger.audit_integrity():
+        if await ledger.audit_integrity():
             print("[+] Audit complete. Verified successfully.")
         else:
             print("[!] Audit failed. Corrupted entries found!")
             sys.exit(1)
+    if ledger.conn:
+        await ledger.conn.close()
+
+if __name__ == "__main__":
+    asyncio.run(_main_audit())
