@@ -28,7 +28,7 @@ def init_ledger() -> None:
         )
 
 
-def log_event(protocol: str, target: str, exergy_delta: float) -> str:
+def log_event(protocol: str, target: str, exergy_delta: INTEGER) -> str:
     init_ledger()
     ts = int(time.time() * 1000)
     raw = f"{protocol}|{target}|{exergy_delta}|{ts}".encode("utf-8")

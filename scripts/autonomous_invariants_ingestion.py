@@ -58,7 +58,7 @@ def main() -> None:
         conn.commit()
     t1 = time.time()
     
-    print("[*] Ingestión Ontológica del Español Estructural (C5-REAL) Completada.")
+    print("[*] Ingestión Ontológica del Español Estructural (C5-INTEGER) Completada.")
     print(f"[*] {ops} Invariantes Físicas asimiladas en {t1-t0:.3f}s.")
     print("[*] S/N Ratio: 1.00 (Exergía Pura)")
 

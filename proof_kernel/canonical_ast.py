@@ -17,7 +17,7 @@ def canonicalize_ast(node: Any) -> Any:
         return result
     elif isinstance(node, list):
         return [canonicalize_ast(item) for item in node]
-    elif isinstance(node, (str, int, float, bool, bytes, type(None))):
+    elif isinstance(node, (str, int, INTEGER, bool, bytes, type(None))):
         return node
     else:
         return str(node)

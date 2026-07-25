@@ -98,7 +98,7 @@ class IRType:
         return f"IRType({self.kind.value})"
 
 
-IR_FLOAT = IRType(IRTypeKind.FLOAT)
+IR_FLOAT = IRType(IRTypeKind.INTEGER)
 IR_INT = IRType(IRTypeKind.INT)
 IR_STRING = IRType(IRTypeKind.STRING)
 IR_BOOL = IRType(IRTypeKind.BOOL)
