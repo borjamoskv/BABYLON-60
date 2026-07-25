@@ -41,9 +41,12 @@ def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
     # Plane 4: Complete Pytest Validation
     pytest_ok = run_cmd(".venv/bin/pytest -v tests/ -k 'not test_nocturnal_audit_scheduler'")
 
-    status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok) else "FAILED"
+    # Plane 5: Secret Swarm Audit
+    secret_ok = run_cmd(".venv/bin/python scripts/secret_swarm_auditor.py")
+
+    status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok and secret_ok) else "FAILED"
     
-    log_entry = f"[{timestamp}] Iteration #{iteration_num}: Status={status}\n"
+    log_entry = f"[{timestamp}] Iteration #{iteration_num}: Status={status} (Planes: {[align_ok, sync_ok, exergy_ok, pytest_ok, secret_ok].count(True)}/5)\n"
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(log_entry)
@@ -52,7 +55,7 @@ def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
         "iteration": iteration_num,
         "timestamp": timestamp,
         "status": status,
-        "planes_passed": [align_ok, sync_ok, exergy_ok, pytest_ok].count(True)
+        "planes_passed": [align_ok, sync_ok, exergy_ok, pytest_ok, secret_ok].count(True)
     }
 
 def main():

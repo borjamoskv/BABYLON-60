@@ -10,7 +10,7 @@ EXCLUDE_DIRS = {'.git', '.venv', '__pycache__', 'node_modules', 'dist', 'build',
 EXCLUDE_EXTS = {'.csv', '.png', '.jpg', '.jpeg', '.gif', '.pdf', '.db', '.sqlite', '.sqlite3', '.npz', '.pyc', '.so', '.dylib', '.zip', '.tar', '.gz', '.db-shm', '.db-wal', '.lock', '.ipynb', '.patch', '.json', '.jsonl', '.rlib', '.rmeta'}
 PATTERNS = {'AWS_ACCESS_KEY': 'AKIA[0-9A-Z]{16}', 'RSA_PRIVATE_KEY': '-----BEGIN RSA PRIVATE KEY-----', 'GENERIC_PRIVATE_KEY': '-----BEGIN PRIVATE KEY-----', 'JWT_TOKEN': 'eyJ[a-zA-Z0-9_-]{5,}\\.eyJ[a-zA-Z0-9_-]{5,}\\.[a-zA-Z0-9_-]{5,}', 'GITHUB_TOKEN': 'ghp_[a-zA-Z0-9]{36}', 'GOOGLE_API': 'AIza[0-9A-Za-z-_]{35}', 'SLACK_TOKEN': 'xox[baprs]-[0-9]{12}-[0-9]{12}-[a-zA-Z0-9]{24}', 'GENERIC_SECRET': '(?i)(password|secret|api_key|access_token)[\\s:=]+[\\\'"]([^\\\'"]{8,})[\\\'"]'}
 WHITELIST_ENTROPY = ['0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwx', '0123456789abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz', 'docs\\.google\\.com/[^\\s]+', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuv', '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ']
-WHITELIST_VALUES = {'AKIAIOSFODNN7EXAMPLE', 'dummy_key_for_stress', 'dummy_key_for_steerability'}
+WHITELIST_VALUES = {'AKIAIOSFODNN7EXAMPLE', 'dummy_key_for_stress', 'dummy_key_for_steerability', 'whsec_test_secret_123'}
 
 def shannon_entropy(data: str) -> float:
     if not data:
