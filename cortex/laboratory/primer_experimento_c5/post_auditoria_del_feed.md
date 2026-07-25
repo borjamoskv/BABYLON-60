@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # [INFORME FORENSE] La Auditoría del Feed: Termodinámica de la Atención en un Mercado de Personalidades Recurrentes
 
 #C5-REAL #LAB_PRIMER_EXPERIMENTO
@@ -30,7 +31,7 @@
 
 El motor de auditoría segmentó 659 registros en cuatro tiers de exergía:
 
-- **Tier 1 — Núcleo C5-REAL:** ~30 cuentas VIP institucionales (dominios de OpenAI, HuggingFace, NinjaTune, Mixmag, Ostgut, Soho Radio, AudioShake, SecureBio, Audax Renovables, Berria, entre otros). Actividad ≥ 1 y dominio verificado. Son la audiencia que jamás se busca y que aparece por convergencia de *latent space*.
+- **Tier 1 — Núcleo C5-REAL:** ~30 cuentas VIP institucionales (dominios de OpenAI, HuggingFace, NinjaTune, Mixmag, Ostgut, Soho Radio, AudioShake, SecureBio, Audax Renovables, Berria, entre otros). Actividad ≥ 1 y dominio verificado. Son la audiencia que jamás se busca y que aparece por convergencia de _latent space_.
 - **Tier 2 — Alta exergía:** 185 lectores con Activity ≥ 3. Leen, abren, interactúan. Son el combustible operativo.
 - **Tier 3 — Baja actividad:** El tramo intermedio. Están ahí. No está claro por qué.
 - **Tier 4 — Riesgo de entregabilidad:** 410 registros con tipo Comp y Activity = 0. Nunca abrieron un correo. Nunca hicieron clic. Son peso muerto que daña la reputación del dominio del remitente ante los servidores de correo. Anergía pura.
@@ -41,17 +42,17 @@ El motor de auditoría segmentó 659 registros en cuatro tiers de exergía:
 
 Análisis de centenares de entradas del feed de Substack Home. Hallazgos brutos:
 
-- **Dominancia temática:** La *Creator Economy* ocupa ~60% del espacio visible. Newsletters sobre newsletters. Cursos sobre cómo vender cursos. Monetización de la monetización. Un bucle autorreferencial termodinámicamente insostenible.
+- **Dominancia temática:** La _Creator Economy_ ocupa ~60% del espacio visible. Newsletters sobre newsletters. Cursos sobre cómo vender cursos. Monetización de la monetización. Un bucle autorreferencial termodinámicamente insostenible.
 - **Longitud premiada:** Los micro-posts (20-80 palabras) dominan el engagement. La plataforma no premia la investigación larga. Premia la frecuencia y la brevedad emocional.
 - **Tipología del éxito algorítmico:**
   - Fotos personales (detrás de cámaras, procesos, vulnerabilidad manufacturada)
   - Confesiones empaquetadas como lecciones
   - Listas de herramientas con enlace de afiliado
   - El formato "lo que aprendí esta semana"
-- **Autores recurrentes con máxima tracción:** Ted Gioia (música + historia + nostalgia calibrada), Emily Sundberg (cultura de consumo + estética millennial), Rosie Birkett (comida + proceso + fotografía). Tres perfiles que no comparten tema pero sí comparten *persona recurrence*: el algoritmo les muestra porque siempre aparecen.
-- **El mensaje implícito del sistema:** "No publiques contenido. Construye un negocio." Substack es una infraestructura de monetización que usa la escritura como envoltorio. La capa editorial es el *packaging*. El producto real es la transacción recurrente de atención por suscripción.
+- **Autores recurrentes con máxima tracción:** Ted Gioia (música + historia + nostalgia calibrada), Emily Sundberg (cultura de consumo + estética millennial), Rosie Birkett (comida + proceso + fotografía). Tres perfiles que no comparten tema pero sí comparten _persona recurrence_: el algoritmo les muestra porque siempre aparecen.
+- **El mensaje implícito del sistema:** "No publiques contenido. Construye un negocio." Substack es una infraestructura de monetización que usa la escritura como envoltorio. La capa editorial es el _packaging_. El producto real es la transacción recurrente de atención por suscripción.
 
-**La intersección vacía.** Música + IA + investigación técnica + estética industrial. Ese cruce no existe en el feed. No hay competencia porque no hay mercado. O porque el mercado aún no ha colapsado en esa coordenada del *latent space*.
+**La intersección vacía.** Música + IA + investigación técnica + estética industrial. Ese cruce no existe en el feed. No hay competencia porque no hay mercado. O porque el mercado aún no ha colapsado en esa coordenada del _latent space_.
 
 ---
 
@@ -107,7 +108,7 @@ Tier segmentation exported:
 
 El output generativo de este experimento no es un fichero de audio. Es este post.
 
-El track es el propio registro del laboratorio público: un artefacto textual que funciona simultáneamente como análisis de datos, documentación de sistema, y primera emisión editorial de la persona *Telmo Dinámico de Moskv*.
+El track es el propio registro del laboratorio público: un artefacto textual que funciona simultáneamente como análisis de datos, documentación de sistema, y primera emisión editorial de la persona _Telmo Dinámico de Moskv_.
 
 El isomorfismo es exacto: la estructura del post (Experimento → Hallazgo → Código → Demo → Track → Reflexión) replica la estructura del directorio del laboratorio en disco:
 
@@ -118,7 +119,7 @@ El isomorfismo es exacto: la estructura del post (Experimento → Hallazgo → C
 - `05_track.md` → Output
 - `06_reflexion.md` → Consecuencia termodinámica
 
-El post no describe el laboratorio. El post *es* el laboratorio.
+El post no describe el laboratorio. El post _es_ el laboratorio.
 
 ---
 
@@ -128,11 +129,11 @@ La auditoría revela una asimetría fundamental en la termodinámica de Substack
 
 **El algoritmo no premia la calidad del texto. Premia la recurrencia de la persona.**
 
-Ted Gioia no aparece en tu feed porque escriba mejor que otros. Aparece porque aparece siempre. La frecuencia de publicación y la consistencia del avatar editorial generan un bucle de refuerzo positivo con el sistema de recomendación. El contenido es el pretexto. La *persona* es el activo.
+Ted Gioia no aparece en tu feed porque escriba mejor que otros. Aparece porque aparece siempre. La frecuencia de publicación y la consistencia del avatar editorial generan un bucle de refuerzo positivo con el sistema de recomendación. El contenido es el pretexto. La _persona_ es el activo.
 
 Esto tiene una consecuencia operativa directa para un proyecto como este: publicar artículos largos de investigación con baja frecuencia es termodinámicamente ineficiente dentro de las reglas de este sistema. La plataforma está diseñada para extraer exergía de la regularidad, no de la profundidad.
 
-Pero hay un dato que invierte la ecuación: la intersección música + IA + investigación técnica está vacía. Y 30 cuentas institucionales de primer nivel ya están suscritas sin que nadie les haya pedido que vengan. Eso no es marketing. Es convergencia espontánea en el *latent space*.
+Pero hay un dato que invierte la ecuación: la intersección música + IA + investigación técnica está vacía. Y 30 cuentas institucionales de primer nivel ya están suscritas sin que nadie les haya pedido que vengan. Eso no es marketing. Es convergencia espontánea en el _latent space_.
 
 La estrategia no es adaptarse al algoritmo. Es explotar el vacío.
 
@@ -145,6 +146,7 @@ El primer experimento confirma la hipótesis. La persona pesa más que la prosa.
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://substack.com/home/post/p-204785962)
 - [La Gran Necrosis Ontológica: Por qué lo llamas simulación cuando quieres decir Ciencia](../../../docs/la_gran_necrosis_ontologica.md)
 - Motor de auditoría de suscriptores: `cortex/substack_subscriber_audit.py`

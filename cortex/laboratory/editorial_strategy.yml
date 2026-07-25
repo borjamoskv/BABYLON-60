@@ -78,25 +78,50 @@ content_types:
 # Publication Calendar (Weekly Cycle)
 calendar:
   monday: "MICRO-POST: Behind-the-scenes del laboratorio (foto/captura)"
-  tuesday: null  # Silencio deliberado
+  tuesday: null # Silencio deliberado
   wednesday: "MICRO-POST: Fragmento de código o hallazgo técnico"
   thursday: "EXPERIMENTO: Post completo del Laboratorio (6-step loop)"
   friday: "MICRO-POST: Track/visual generado durante la semana"
-  saturday: null  # Silencio deliberado
-  sunday: null  # Silencio deliberado
+  saturday: null # Silencio deliberado
+  sunday: null # Silencio deliberado
 
 # Thematic Verticals (Disjoint Search Spaces)
 verticals:
   - name: "Termodinámica del Software"
-    topics: ["BFT consensus", "SQLite WAL", "Git as ledger", "Entropy in codebases"]
+    topics:
+      ["BFT consensus", "SQLite WAL", "Git as ledger", "Entropy in codebases"]
   - name: "Música Experimental + IA"
-    topics: ["PCM synthesis", "Markov chains in audio", "IDM production", "Generative composition"]
+    topics:
+      [
+        "PCM synthesis",
+        "Markov chains in audio",
+        "IDM production",
+        "Generative composition",
+      ]
   - name: "Arquitectura de Agentes"
-    topics: ["LLM orchestration", "Swarm intelligence", "MCTS", "Attention mechanisms"]
+    topics:
+      [
+        "LLM orchestration",
+        "Swarm intelligence",
+        "MCTS",
+        "Attention mechanisms",
+      ]
   - name: "Colisiones Culturales"
-    topics: ["Spain tech vs Silicon Valley", "SGAE vs crypto", "Institutional gatekeepers", "Creator economy forensics"]
+    topics:
+      [
+        "Spain tech vs Silicon Valley",
+        "SGAE vs crypto",
+        "Institutional gatekeepers",
+        "Creator economy forensics",
+      ]
   - name: "Arte Generativo"
-    topics: ["Procedural visuals", "Neural style", "Latent space exploration", "Computational aesthetics"]
+    topics:
+      [
+        "Procedural visuals",
+        "Neural style",
+        "Latent space exploration",
+        "Computational aesthetics",
+      ]
 
 # Anti-patterns to avoid
 antipatterns:

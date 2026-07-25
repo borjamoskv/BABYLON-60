@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # AUDITORÍA DE COLAPSO ISOMÓRFICO: CAM 6.0 $\longrightarrow$ TEORÍA FISR $\text{Compat}(\Omega)$
 
 **Kernel:** MOSKV-1 APEX
@@ -14,12 +15,14 @@ Sometido el formalismo CAM 6.0 al escrutinio adversarial del comité formal (Mil
 $$\text{CAM } 6.0 \;\cong\; \text{BSP}_{\text{static graph}} \;\oplus\; \text{SecurityAutomata}_{\text{Schneider}} \;\oplus\; \text{AuxiliaryHistory}_{\text{Abadi-Lamport}}$$
 
 ### 1.1 Mapeo Iso-Semántico
-1. **Tick Global:** Isomorfo al superpaso (*superstep*) de BSP (Valiant, 1990) y a la hipótesis síncrona de Esterel/Lustre (Berry, 1980s). Unifica la ejecución en tres fases ($local \to communication \to update$).
+
+1. **Tick Global:** Isomorfo al superpaso (_superstep_) de BSP (Valiant, 1990) y a la hipótesis síncrona de Esterel/Lustre (Berry, 1980s). Unifica la ejecución en tres fases ($local \to communication \to update$).
 2. **Capacidades ($\Delta \to \mathbb{B}$):** Isomorfas a autómatas de seguridad de 1 estado (Schneider, 2000). Son monitores de seguridad integrados, no primitivas de cómputo.
-3. **Estado como $fold(\Delta)$:** Isomorfo a variables de historia auxiliares (Abadi-Lamport, 1991) y semántica de trazas (*trace semantics*). El estado es derivado; el log es el invariante de verdad.
-4. **Membranas & Topología Estática:** Isomorfas a grafos de flujo de Milner (*flow graphs*, 1979) con restricción de nombres ($\nu$). Sin movilidad de nombres ($\pi$-cálculo).
+3. **Estado como $fold(\Delta)$:** Isomorfo a variables de historia auxiliares (Abadi-Lamport, 1991) y semántica de trazas (_trace semantics_). El estado es derivado; el log es el invariante de verdad.
+4. **Membranas & Topología Estática:** Isomorfas a grafos de flujo de Milner (_flow graphs_, 1979) con restricción de nombres ($\nu$). Sin movilidad de nombres ($\pi$-cálculo).
 
 ### 1.2 Puntuación de Novedad Ontológica
+
 $$\mathrm{Novedad} = \frac{\text{Axiomas Nuevos}}{\text{Axiomas Existentes} + \text{Axiomas Derivados}} = \frac{0}{7 + 5} = 0.000$$
 
 CAM 6.0 no es un cálculo computacional nuevo, sino un **Perfil Computacional Restringido** sobre modelos síncronos paralelizados conocidos.
@@ -34,7 +37,7 @@ $$\text{De: } \text{"Existe una nueva categoría/cálculo"} \quad \longrightarro
 
 ### 2.1 Principios Fundacionales de la Teoría FISR
 
-$$\begin{array}{rll}
+$$ \begin{array}{rll}
 \mathbf{P0 \; (Estratificación)} & \Sigma = (\otimes, I, \text{Pred}, \Box_t, \text{Cert}, \mu) & \text{Separación estricta en 4 niveles} \\
 \mathbf{P1 \; (Observable \; \mu)} & R_k(\alpha) \iff \mu(\alpha) \le k & \text{Auditabilidad como métrica en } \mathbb{N}_\infty \\
 \mathbf{P2 \; (Unificación \; \kappa)} & \kappa(M) = \inf \{ \mu(E) \mid E \text{ extensión de } M \} & \text{Coste de extensión derivado} \\
@@ -52,3 +55,4 @@ Proof:
   Range: [CAM_1.0, FISR_v13.0]
   Confidence: C5-REAL
 ```
+$$

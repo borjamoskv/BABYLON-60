@@ -1,13 +1,16 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Reverse Engineering Audit: WebStorm 2026.2
 
 ## Executive Summary
+
 This report documents the reverse engineering findings of `WebStorm-2026.2-aarch64.dmg`.
 WebStorm is a commercial JavaScript/TypeScript IDE built on the JetBrains IntelliJ platform. Static analysis shows native macOS Arm64 runtime integration (JetBrains Runtime - JBR) and, notably, a built-in MCP (Model Context Protocol) server.
 
 ---
 
 ## 1. Package Metadata & Signatures
+
 - **Application Name**: WebStorm
 - **Developer/Publisher**: JetBrains s.r.o.
 - **Code Signature Verification**:
@@ -21,6 +24,7 @@ WebStorm is a commercial JavaScript/TypeScript IDE built on the JetBrains Intell
 ---
 
 ## 2. Technology Stack & Launch Configuration
+
 - **Core Engine**: JVM (Java Virtual Machine), compiled with Kotlin and Java.
 - **Runtime Environment**: Bundled JetBrains Runtime (JBR), which is a customized OpenJDK build.
 - **Boot Classpath / Libraries**: Packages core JARs in `Contents/lib/` and plugins in `Contents/plugins/`.
@@ -32,7 +36,9 @@ WebStorm is a commercial JavaScript/TypeScript IDE built on the JetBrains Intell
 ---
 
 ## 3. Notable Bundled Plugins
+
 Analysis of the `Contents/plugins/` directory reveals:
+
 - **`mcpserver/`**:
   - **Purpose**: Implements a Model Context Protocol (MCP) server directly inside the IDE.
   - **Libraries**: Contains `io.modelcontextprotocol.kotlin.sdk.jar` (Kotlin SDK for MCP), `ktor-server-sse-jvm.jar` (Server-Sent Events server via Ktor), and `mcpserver.jar`.

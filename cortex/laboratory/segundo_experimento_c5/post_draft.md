@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # [Segundo Experimento C5] Registro de Laboratorio Público
 
 **Fecha:** 2026-07-21
@@ -7,11 +8,9 @@
 
 ---
 
-
 ## [ EXPERIMENTO ]
 
-*Condición inicial, hipótesis y restricciones.*
-
+_Condición inicial, hipótesis y restricciones._
 
 ```yaml
 claim_id: "LAB_SEGUNDO_EXPERIMENTO_C5"
@@ -24,11 +23,9 @@ constraints:
 vertical: "Select: software_thermo | music_ai | agent_arch | cultural_collisions | generative_art"
 ```
 
-
 ## [ HALLAZGO ]
 
-*Datos crudos y métricas extraídas.*
-
+_Datos crudos y métricas extraídas._
 
 # Hallazgos Empíricos
 
@@ -40,11 +37,9 @@ vertical: "Select: software_thermo | music_ai | agent_arch | cultural_collisions
 
 (Documentar qué rompió y por qué.)
 
-
 ## [ CÓDIGO ]
 
-*Implementación física.*
-
+_Implementación física._
 
 ```python
 #!/usr/bin/env python3
@@ -63,11 +58,9 @@ if __name__ == "__main__":
     execute()
 ```
 
-
 ## [ DEMO ]
 
-*Transcripción de ejecución.*
-
+_Transcripción de ejecución._
 
 ```bash
 #!/usr/bin/env bash
@@ -79,11 +72,9 @@ echo "Running experiment: segundo_experimento_c5"
 python3 03_codigo.py
 ```
 
-
 ## [ TRACK ]
 
-*Output acústico, visual o generativo.*
-
+_Output acústico, visual o generativo._
 
 # Registro Acústico / Visual / Generativo
 
@@ -95,11 +86,9 @@ python3 03_codigo.py
 
 (Documentar los parámetros usados para reproducibilidad.)
 
-
 ## [ REFLEXIÓN ]
 
-*Consecuencia termodinámica.*
-
+_Consecuencia termodinámica._
 
 # Repercusión Termodinámica
 
@@ -111,9 +100,7 @@ python3 03_codigo.py
 
 (Qué nueva hipótesis emerge de los hallazgos.)
 
-
 ---
-
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 

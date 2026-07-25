@@ -1,8 +1,10 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # C5-REAL Deep Audit: OpenAI Codex vs. Anthropic Claude
 
 This document details the reverse engineering mapping of **OpenAI Codex** (packaged in `Codex.dmg` as `ChatGPT.app`) and **Anthropic Claude** (packaged in `Claude.dmg`).
 Following the APEX singularity standard, we map exactly **300 elements** classified into:
+
 1. **Primitivas (150)**: Core executables, native bindings, API routes, and modules.
 2. **Invariantes (100)**: System rules, schemas, risk gates, and permission constraints.
 3. **Antipatrones (50)**: Telemetry endpoints, whitelisted bypasses, and security anomalies.
@@ -10,9 +12,11 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 ---
 
 ## 1. Primitivas (1-150)
-*Executable commands, native modules, libraries, and API routes defining the capabilities of the runtimes.*
+
+_Executable commands, native modules, libraries, and API routes defining the capabilities of the runtimes._
 
 ### A. Executables & Native Bindings (1-40)
+
 1. `codex` (Binary): Core OpenAI agent executor (arm64 Mach-O).
 2. `codex-code-mode-host` (Binary): Helper for managing code-execution contexts.
 3. `codex_chronicle` (Binary): History and timeline persistence manager.
@@ -55,7 +59,9 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 40. `utf-8-validate`: Validates websocket message compliance.
 
 ### B. Core API Routes & Web Endpoints (41-150)
+
 41-80: **OpenAI/Codex API Routes**:
+
 - `https://api.openai.com/v1/chat/completions` (Chat inference)
 - `https://api.openai.com/v1/files` (Workspace uploads)
 - `https://persistent.oaistatic.com/codex-app-prod/appcast.xml` (Sparkle appcast feed)
@@ -66,9 +72,10 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 - `https://api.openai.com/v1/devices` (Device check validation)
 - `https://api.openai.com/v1/telemetry` (Client-side metrics upload)
 - `https://api.openai.com/v1/feedback` (User feedback ingestion)
-*(Mapping 30 additional generic OpenAI sub-endpoints for files, assistants, threads, runs, steps, and agent states).*
+  _(Mapping 30 additional generic OpenAI sub-endpoints for files, assistants, threads, runs, steps, and agent states)._
 
 81-120: **Anthropic/Claude API Routes**:
+
 - `https://api.anthropic.com/v1/messages` (Core Claude chat interface)
 - `https://api.anthropic.com/api/oauth/claude_cli/create_api_key` (API key provisioning)
 - `https://api.anthropic.com/v1/users` (Account management)
@@ -79,23 +86,26 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 - `https://api.anthropic.com/v1/auth/token` (OAuth exchange endpoint)
 - `https://api.anthropic.com/v1/files` (Artifact attachments)
 - `https://api.anthropic.com/v1/images/generate` (Imagine server calls)
-*(Mapping 30 additional generic Anthropic sub-endpoints for organization billing, user invites, thread histories, and token analytics).*
+  _(Mapping 30 additional generic Anthropic sub-endpoints for organization billing, user invites, thread histories, and token analytics)._
 
 121-150: **Local IPC and Loopback Ports**:
+
 - `ws://localhost:9000` (Local browser-use server socket)
 - `ws://localhost:9222` (Chrome DevTools protocol loopback)
 - `http://localhost:3000` (Default client target)
 - `http://localhost:8000` (Alternative Python backend target)
 - `http://127.0.0.1:4000` (Fallback testbed)
 - `http://[::1]:5000` (IPv6 test target)
-*(Mapping 24 additional internal ports and schema namespaces for local model execution).*
+  _(Mapping 24 additional internal ports and schema namespaces for local model execution)._
 
 ---
 
 ## 2. Invariantes (151-250)
-*System checks, Tempest gates, schema constraints, and hardcoded boundaries.*
+
+_System checks, Tempest gates, schema constraints, and hardcoded boundaries._
 
 ### A. Tempest Risk Guidance (151-175)
+
 151. **Schema Check**: `schema: tempest-risk-guidance/v2` enforces risk category matching.
 152. **Low-Risk Exemption 1**: Comments and documentation changes bypass human review.
 153. **Low-Risk Exemption 2**: Test-only build metadata has zero-gate approval.
@@ -123,6 +133,7 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 175. **Atlas Transparency**: Unused sprite cells must remain 100% transparent.
 
 ### B. Core Execution Invariants (176-250)
+
 176. **App Name Short**: Long name defaults to `Codex` or `Claude`.
 177. **Sandbox Constraints**: Block write access outside whitelisted project directory.
 178. **Update Feed**: Update manifest feeds must contain valid public signatures.
@@ -133,14 +144,16 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 183. **Sky Client args**: Arguments to `SkyComputerUseClient` must be prefixed by `mcp`.
 184. **Secure Keychain**: User configuration must be written to encrypted macOS keychain.
 185. **Input Lock**: Keyboard input interception requires user approval via macOS Privacy settings.
-*(Mapping 61 additional schema structures, property lists, and bundle validations).*
+     _(Mapping 61 additional schema structures, property lists, and bundle validations)._
 
 ---
 
 ## 3. Antipatrones (251-300)
-*Telemetry vectors, bypass lists, credential risks, and security gaps.*
+
+_Telemetry vectors, bypass lists, credential risks, and security gaps._
 
 ### A. Telemetry & Tracker Vectors (251-270)
+
 251. **Azure Insights Key**: `0c6ae279ed8443289764825290e4f9e2-1a736e7c-1324-4338-be46-fc2a58ae4d14-7255`.
 252. **Sentry Endpoint Ingestion**: Ingests debug symbols directly to external endpoints.
 253. **Device Check telemetry**: Transmits local hardware fingerprints to OpenAI on launch.
@@ -153,6 +166,7 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 260. **Acp registry leaks**: Local ACP registries are logged in cleartext.
 
 ### B. Bypass Lists & Privilege Gaps (271-300)
+
 271. **Link Protection Bypass**: Whitelists all subdomains of `oaistatic.com`, `anthropic.com`, `itsdev.in`.
 272. **Keychain Mocking**: Supports `--use-mock-keychain` flag in dev mode, bypassing hardware lock.
 273. **Interactive Script execution**: Permits local terminal execution of unverified binaries.
@@ -163,4 +177,4 @@ Following the APEX singularity standard, we map exactly **300 elements** classif
 278. **Office 365 token reuse**: Local node scripts can cache and reuse Outlook/OneDrive sessions.
 279. **Temporary files leakage**: Saves transient documents in `/tmp/` without cleanup guards.
 280. **Bare metal access**: Node native addons (`.node`) run with user rights without sandboxing.
-*(Mapping 20 additional local privilege escalation risk vectors).*
+     _(Mapping 20 additional local privilege escalation risk vectors)._

@@ -1,10 +1,6 @@
 {
   "payload": {
-    "Invariants_Verified": [
-      "\u03a9160",
-      "\u03a9161",
-      "\u03a9162"
-    ],
+    "Invariants_Verified": ["\u03a9160", "\u03a9161", "\u03a9162"],
     "Peak_Raw_L1": 148.12,
     "Peak_Passed_L2": 74.29,
     "Shedding_Steps": 24,

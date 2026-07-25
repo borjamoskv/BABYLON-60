@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Repercusión Termodinámica
 
 ## Consecuencias estructurales

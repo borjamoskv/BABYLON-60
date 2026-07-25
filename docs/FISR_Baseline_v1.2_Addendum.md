@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # FISR Baseline v1.1 — Addendum v1.2 (Refined Baseline v18.5)
 
 **Autor:** borjamoskv
@@ -43,6 +44,7 @@ Se añade una función de coste:
 $$|\cdot|: \mathrm{Mor}(\mathcal P) \to \overline{\mathbb N} \qquad (\overline{\mathbb N} = \mathbb N \cup \{\infty\})$$
 
 Leyes de coste mínimas:
+
 1. **Identidad:** $|1_X^\mathcal{P}| = 0 \implies \mu(1_X^\mathcal{C}) = 0$
 2. **Composición secuencial:** $|q \circledast p| \leq |p| + |q| + \delta_\circ(\alpha, \beta)$ (con $\delta_\circ = 0$ en versión pura).
 3. **Composición paralela:** $|p \boxtimes q| \leq |p| + |q| + \delta_\otimes(\alpha, \beta)$ (con $\delta_\otimes = 0$ para transiciones aisladas).
@@ -55,7 +57,7 @@ Leyes de coste mínimas:
 
 > **Axioma Core-G:** En el núcleo FISR Certificate Calculus v0.1 toda evidencia perteneciente a $\mathcal P$ se considera, por definición, un certificado válido ($\mathsf{Good} = \mathcal P$).
 >
-> *Nota de Diseño:* Las extensiones podrán introducir una categoría más amplia $\mathcal P_{\mathrm{raw}}$ y un reflector o subcategoría plena $\mathcal P \hookrightarrow \mathcal P_{\mathrm{raw}}$, recuperando una noción de "certificado bruto" cuando sea necesario.
+> _Nota de Diseño:_ Las extensiones podrán introducir una categoría más amplia $\mathcal P_{\mathrm{raw}}$ y un reflector o subcategoría plena $\mathcal P \hookrightarrow \mathcal P_{\mathrm{raw}}$, recuperando una noción de "certificado bruto" cuando sea necesario.
 
 ---
 
@@ -80,6 +82,7 @@ Dada una familia distinguida de transiciones básicas $\mathcal{A}(M) \subseteq 
 $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le k$$
 
 ### 2.3. Monotonía y Sub-monotonía de $\kappa$ [Teoremas 2.1 & 2.2 - Probados]
+
 1. **Monotonía respecto a Predicados:** $R \implies R' \implies \kappa(\alpha, R') \le \kappa(\alpha, R)$.
 2. **Sub-monotonía Composicional:** $\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$.
 
@@ -122,13 +125,16 @@ Las teorías $T_F$, $T_I$ y $T_S$ pasan a ser **restricciones de compatibilidad*
 ## 4. PRF: Soundness y Completitud Relativa
 
 ### 4.1. PRF-S — Soundness Estructural [Teorema Principal]
+
 $$\text{Cert}_k \implies FISR_k^\mathcal{A} \qquad (\text{Certificación } k \implies M \models T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}})$$
 
 ### 4.2. PRF-C — Completitud Relativa [Conjetura Fuerte / Restringida]
+
 $$FISR_k^\mathcal{A} \cap \mathcal K \implies \text{Cert}_k$$
 donde $\mathcal K$ es la clase de modelos finitamente presentables con fibraciones coherentes.
 
 ### 4.3. Condición Causal de Satisfacibilidad Modelo-Nivel
+
 $$\mathcal{M} \models FISR_k^\mathcal{A} \iff \forall \alpha \in \mathcal{A}(M), \; \kappa(\alpha, R_k^\mathcal{A}) = 0$$
 
 ---
@@ -146,6 +152,3 @@ $$\mathcal{P} \xrightarrow{\pi (\mathrm{Id}_{\mathrm{Ob}})} \mathcal{C} \longrig
 ```yaml
 cortex_taint: "CORTEX-TAINT:borjamoskv:fisr_addendum_v1.2_refined_v18.5:2026-07-22T01:35:00Z"
 ```
-
-
-

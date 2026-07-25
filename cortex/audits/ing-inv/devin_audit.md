@@ -1,13 +1,16 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Reverse Engineering Audit: Devin (darwin-arm64-3.4.27)
 
 ## Executive Summary
+
 This report documents the reverse engineering findings of `Devin-darwin-arm64-3.4.27.dmg`.
 Our static analysis reveals that this distribution of Devin is built on top of **Codeium Windsurf** (version 3.4.27 / VS Code base version 1.110.1), rather than being a fully custom standalone native IDE. It integrates custom extensions, custom schema definitions, and packages a native CLI helper.
 
 ---
 
 ## 1. Package Metadata & Signatures
+
 - **Application Name**: Devin (represented internally in `product.json` as `devin-desktop`)
 - **Developer/Publisher**: Exafunction, Inc.
 - **Code Signature Verification**:
@@ -21,7 +24,9 @@ Our static analysis reveals that this distribution of Devin is built on top of *
 ---
 
 ## 2. Technology Stack & Core Layout
+
 The application is packaged as an Electron bundle following the typical VS Code distribution layout:
+
 - **Core Engine**: Electron/NodeJS (bundled with Chromium v126)
 - **App Entry point**: `Contents/Resources/app/out/main.js`
 - **Dependency base**: Copied directly from the Windsurf repository with custom overrides in `product.json` and `package.json`.
@@ -33,7 +38,9 @@ The application is packaged as an Electron bundle following the typical VS Code 
 ---
 
 ## 3. Bundled Extensions and Custom Features
+
 Within `Contents/Resources/app/extensions`, standard VS Code extensions are present, along with customized elements:
+
 - **`windsurf/` Extension**: Handles the primary connection to Codeium/Exafunction services, triggering the Cascade agent panel, microphone dictation, and local workspaces.
 - **`prompt-basics/` Extension**:
   - Registers custom editor files: `.prompt.md`, `copilot-instructions.md`, `.instructions.md`, `.agent.md`, `.chatmode.md`, and `SKILL.md`.
@@ -46,7 +53,9 @@ Within `Contents/Resources/app/extensions`, standard VS Code extensions are pres
 ---
 
 ## 4. Bundled Daemons and Native Binaries
+
 Under `Contents/Resources/app/extensions/windsurf/devin/bin`, the package includes a compiled native executable:
+
 - **Path**: `extensions/windsurf/devin/bin/devin`
 - **File Type**: Mach-O 64-bit executable arm64
 - **Purpose**: Serves as the Devin local Agent CLI, allowing external processes to interface with local system APIs and relay workspace state back to the agent coordinator.
@@ -54,7 +63,9 @@ Under `Contents/Resources/app/extensions/windsurf/devin/bin`, the package includ
 ---
 
 ## 5. Telemetry, Analytics, and API Endpoints
+
 During binary and JS bundle analysis, the following hostnames and API endpoints were identified:
+
 - **Devin Backend/Portal**:
   - `https://app.devin.ai`
   - `https://app.beta.devin.ai`

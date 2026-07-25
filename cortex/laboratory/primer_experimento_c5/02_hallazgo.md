@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Hallazgos Empíricos
 
 ## A. Mapa termodinámico de la audiencia (659 suscriptores)
@@ -28,7 +29,7 @@
   - Ted Gioia: música + historia + nostalgia calibrada
   - Emily Sundberg: cultura de consumo + estética millennial
   - Rosie Birkett: comida + proceso + fotografía
-  - Patrón común: no comparten tema, comparten *persona recurrence*
+  - Patrón común: no comparten tema, comparten _persona recurrence_
 - **Mensaje implícito del sistema:** "No publiques contenido. Construye un negocio."
 - **La intersección vacía:** Música + IA + investigación técnica + estética industrial. No existe en el feed. Cero competencia. Posible vacío explotable o mercado inexistente.
 

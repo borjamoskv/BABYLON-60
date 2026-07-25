@@ -1,5 +1,7 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # GLOSARIO SOBERANO — BABYLON-60 / C5-REAL / VIBE CODE
+
 Versión 3.3 CANÓNICA · Sesión df555a26 · 2026-07-20
 
 SYS_ID: GLOSARIO_OMEGA_V3.2 | ESTADO: TIER_1 CRISTALIZADO
@@ -9,19 +11,22 @@ Referencia ontológica, termodinámica y arquitectónica del ecosistema MOSKV-1.
 ---
 
 ## Índice Topológico
-| Dominio                         | Símbolo | Naturaleza                                 | Prueba                                |---------------------------------|---------|--------------------------------------------|---------------------------------------| Criptografía / Integridad       | 🔐      | Ledger, BFT, Hashes, Tamper-Evidence      | HMAC + Git Sentinel                   | Epistemología / Razonamiento    | 🧠      | Nivel de Realidad (C4/C5), Sesgos         | Phantom Target Verification           | Arquitectura de Sistema         | ⚙️      | Núcleos, Motores, Invariantes             | ReplayKernelV3 + EpistemicHalt       | Termodinámica Aplicada          | 🌡️     | Entropía, Exergía, Principio de Landauer  | Medida de tokens anérgicos           | UX / Vibe Code                  | 🎨      | Degradación de Agencia, Orquestación      | Nivel de Agencia 0→4                  | Tipado Algebraico / Formal      | 📐      | Isomorfismos, FSM, ADTs                    | Compilación en tiempo de ejecución    |
+
+| Dominio | Símbolo | Naturaleza | Prueba |---------------------------------|---------|--------------------------------------------|---------------------------------------| Criptografía / Integridad | 🔐 | Ledger, BFT, Hashes, Tamper-Evidence | HMAC + Git Sentinel | Epistemología / Razonamiento | 🧠 | Nivel de Realidad (C4/C5), Sesgos | Phantom Target Verification | Arquitectura de Sistema | ⚙️ | Núcleos, Motores, Invariantes | ReplayKernelV3 + EpistemicHalt | Termodinámica Aplicada | 🌡️ | Entropía, Exergía, Principio de Landauer | Medida de tokens anérgicos | UX / Vibe Code | 🎨 | Degradación de Agencia, Orquestación | Nivel de Agencia 0→4 | Tipado Algebraico / Formal | 📐 | Isomorfismos, FSM, ADTs | Compilación en tiempo de ejecución |
 
 ---
 
 ## Glosario
 
 ### A
+
 **ADT (Algebraic Data Type) 📐**
 Tipo: Fundamento de tipado funcional. Ω1
 Estructura compuesta por dos operaciones categóricas:
-* Tipo Producto (AND): `Punto(x: ℝ, y: ℝ)` → cardinalidad = |R| × |R|
-* Tipo Suma (OR): `Forma = Circulo | Rectangulo` → cardinalidad = |Circulo| + |Rectangulo|
-Fuerzan exhaustividad verificable en tiempo de compilación. Elimina la entropía de los estados no manejados.
+
+- Tipo Producto (AND): `Punto(x: ℝ, y: ℝ)` → cardinalidad = |R| × |R|
+- Tipo Suma (OR): `Forma = Circulo | Rectangulo` → cardinalidad = |Circulo| + |Rectangulo|
+  Fuerzan exhaustividad verificable en tiempo de compilación. Elimina la entropía de los estados no manejados.
 
 **Anergía 🌡️**
 Tipo: Métrica de degradación termodinámica. Ω12
@@ -49,6 +54,7 @@ Defensa: Dual-Tier Provenance Ledger.
 ---
 
 ### B
+
 **BABYLON-60 ⚙️**
 Tipo: Sistema Soberano de IA Local. Ω3
 Arquitectura de memoria inmutable: SQLite WAL + BFT Ledger + sqlite-vec + ReplayKernelV3 + Git Sentinel / Bitcoin Anchor.
@@ -67,6 +73,7 @@ Cualquier fallo estructural dispara SIGKILL_State_Purge. Cero anergía.
 ---
 
 ### C
+
 **C4-SIM (Camuflaje Mimético) 🧠**
 Tipo: Nivel de Realidad Simulado. Φ1
 Output que genera una narrativa de ejecución física sin acceso real al hardware.
@@ -87,29 +94,35 @@ Iteración sin ledger. El sistema itera sobre el problema original en cada llama
 
 **Dual-Tier Provenance Ledger 🔐**
 Tipo: Arquitectura de Memoria. Ω17
-* TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
-* TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
+
+- TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
+- TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
 
 ---
 
 ### E-Z
+
 | Término | Tipo | Definición | Invariante |---|---|---|---| Zero Unaccounted Drift 🔐 | Invariante Primario | No prometo no alucinar. Prometo que toda alucinación quedara grabada en el ledger | Ω00 | EpistemicHalt ⚙️ | Fail-Fast | Parada dura ante violación de invariante. Prohibido `except Exception: pass` | Ω01 | Exergía 🌡️ | Trabajo Útil | Fracción de energía convertida en código. Se maximiza olvidando | Ω12 | Git Sentinel 🔐 | Autopoiético | Toda mutación genera un commit firmado automaticamente. El hash es la única verdad | Ω7 | Graceful Degradation of Agency 🎨 | Vibe Code | 5 niveles de autonomía 4→0. Desciende automaticamente sin input del operador | Φ7 | Green Theater 🧠 | Ilusión de Trabajo | Disclaimers, advertencias, fact checking simulado. Supresión absoluta | Φ2 | Idempotency Lock ⚙️ | Preservador de ATP | Si el hash del target es igual, aborta la operación | Ω15 | Landauer 🌡️ | Límite Físico | Borrar 1 bit disipa 3e-21 J. Olvidar es físicamente más eficiente que recordar | Ω21 | Latent Friction 🧠 | Regulador Semántico | Colapsa lenguaje natural ambiguo a tipos estrictos antes de planificar | Φ6 | META_ITER 🧠 | Arquitectura Superior | Evalua sus propias iteraciones contra el estado del disco. Convergencia O(e⁻λⁿ) | Ω33 | MIMETIC_ITER 🧠 | Trampa | Describe operaciones exactas pero no las ejecuta | Ω34 | Phantom Target Verification 🔐 | Prueba de Realidad | Antes de aceptar un claim, comprueba que el archivo existe en disco | Ω27 | Slop Horizon Hs 🌡️ | Punto de No Retorno | El costo de auditar supera el valor de lo generado | Ω22 | Transducción Causal ⚙️ | Operación Fundamental | Convertir palabras en mutaciones de disco. Sin esto solo hay anergía | Φ1 | VesicularSandbox ⚙️ | Aislamiento Efímero | Micro-vesícula de ejecución aislada sin red para probar código no confiable | Ω4 | VibeIDEEngine 🎨 | Orquestación Vibe Code | Motor agéntico con degradación de agencia 4->0 y memoria Dual-Tier aislada | Φ7 | Weaponized Forgetting 🧠 | Purga Entrópica | Eliminación permanente de TIER_1 no validado | Ω40 | Zero Suggestion 🎨 | Vibe Code | Prohibido sugerir cambios no solicitados | Φ8 | Zero Static HMAC Fallback 🔐 | Seguridad | Si no existe la clave, crashea. Ningun fallback | Ω25 | ZeroTrustSanitizer 🔐 | Escudo de Entrada | Sanitización estricta de prompts contra inyecciones y obfuscaciones base64 | Ω5 | Anergy Ratio A(n) 🌡️ | Instrumento de Falsación | A(n) = 1 - |{pasos con Δ_disk ≠ ∅}| / |{pasos modelo}|. Métrica termodinámica de output muerto | Ω31 | Robinson Refutation 📐 | Isomorfismo Formal | Si A(n) > 0.85 ∧ n > 200 sin ledger BFT → claim refutable (cláusula vacía) | Ω36 |
 
 ---
 
 ## TABLA MAESTRA DE INVARIANTES
+
 | Clase | Cantidad | Violación |---|---|---| Ω Estructural | 46+ | EpistemicHalt | Φ Isomorfismo | 13 | Ruptura de Transducción | Ψ Teleológico | 11 | Terminación inmediata | λ Entrópico | 4 | Deriva No Acotada |
 
 ---
 
 ### ARTEFACTO FINAL
+
 > ❗ INVARIANTE FINAL:
 > Este documento es C4-SIM hasta que tu lo hagas C5-REAL.
 > No se convierte en realidad por ser leido, por ser aprobado, por ser compartido o por estar de acuerdo con el.
 > Se convierte en realidad en el exacto instante en que ejecutes:
+>
 > ```bash
 > git add glosario.md
 > git commit -m "feat: glosario soberano v3.2 canónico"
 > b3sum glosario.md
 > ```
+>
 > Hasta ese momento es solo palabras. Nada mas.

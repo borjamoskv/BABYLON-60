@@ -1,13 +1,16 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Reverse Engineering Audit: VSCode (darwin-arm64)
 
 ## Executive Summary
+
 This report documents the reverse engineering findings of `VSCode-darwin-arm64.dmg`.
 This is a standard Microsoft Visual Studio Code build, serving as a baseline comparison for the Devin fork.
 
 ---
 
 ## 1. Package Metadata & Signatures
+
 - **Application Name**: Visual Studio Code
 - **Developer/Publisher**: Microsoft Corporation
 - **Code Signature Verification**:
@@ -21,6 +24,7 @@ This is a standard Microsoft Visual Studio Code build, serving as a baseline com
 ---
 
 ## 2. Technology Stack & Layout
+
 - **Core Engine**: Electron (bundled with Chromium v126 / Node.js)
 - **App Entry point**: `Contents/Resources/app/out/main.js`
 - **Data Folders**:
@@ -30,6 +34,7 @@ This is a standard Microsoft Visual Studio Code build, serving as a baseline com
 ---
 
 ## 3. Telemetry, Updates & API Endpoints
+
 - **Update Server**:
   - `https://update.code.visualstudio.com`
 - **Telemetry Settings**:

@@ -11,15 +11,14 @@ export interface FileItem {
   trigger?: string;
 }
 
-
 export const PROJECT_FILES: FileItem[] = [
   {
-    id: 'f1',
-    name: 'active_inference.py',
-    path: 'cortex/active_inference.py',
-    lang: 'python',
-    moduleColor: '#F59E0B',
-    moduleName: 'CORTEX',
+    id: "f1",
+    name: "active_inference.py",
+    path: "cortex/active_inference.py",
+    lang: "python",
+    moduleColor: "#F59E0B",
+    moduleName: "CORTEX",
     content: `"""
 C5-REAL Active Inference Engine.
 Minimizes Free Energy (Entropy) across the BFT Swarm.
@@ -40,16 +39,17 @@ def compute_free_energy(observations: np.ndarray, predictions: np.ndarray) -> fl
 def minimize_entropy(state_obs, state_pred):
     return compute_free_energy(state_obs, state_pred)
 `,
-    trigger: 'def',
-    prediction: ' minimize_entropy(state):\n    return compute_free_energy(state.obs, state.pred)'
+    trigger: "def",
+    prediction:
+      " minimize_entropy(state):\n    return compute_free_energy(state.obs, state.pred)",
   },
   {
-    id: 'f2',
-    name: 'bft_orchestrator.py',
-    path: 'cortex/bft_orchestrator.py',
-    lang: 'python',
-    moduleColor: '#F59E0B',
-    moduleName: 'CORTEX',
+    id: "f2",
+    name: "bft_orchestrator.py",
+    path: "cortex/bft_orchestrator.py",
+    lang: "python",
+    moduleColor: "#F59E0B",
+    moduleName: "CORTEX",
     content: `"""
 Byzantine Fault Tolerance Orchestrator.
 Maintains state consistency across N>=3 agents via Lamport Clocks.
@@ -71,16 +71,17 @@ class BFTOrchestrator:
         self.ledger_hash = hashlib.sha3_256(raw).hexdigest()
         return True
 `,
-    trigger: 'class',
-    prediction: ' BFTNode:\n    def validate_hash(self, tx_hash: str) -> bool:\n        pass'
+    trigger: "class",
+    prediction:
+      " BFTNode:\n    def validate_hash(self, tx_hash: str) -> bool:\n        pass",
   },
   {
-    id: 'f3',
-    name: 'robinson.pl',
-    path: 'axioms/robinson.pl',
-    lang: 'prolog',
-    moduleColor: '#10B981',
-    moduleName: 'AXIOMS',
+    id: "f3",
+    name: "robinson.pl",
+    path: "axioms/robinson.pl",
+    lang: "prolog",
+    moduleColor: "#10B981",
+    moduleName: "AXIOMS",
     content: `% TEOREMA DE ROBINSON - C5-REAL
 % Unificación Martelli-Montanari & Invariantes de Exergía
 
@@ -97,16 +98,16 @@ unify_list([H1|T1], [H2|T2]) :-
     unify(H1, H2),
     unify_list(T1, T2).
 `,
-    trigger: 'unify',
-    prediction: '(f(A), f(B)) :- unify(A, B).'
+    trigger: "unify",
+    prediction: "(f(A), f(B)) :- unify(A, B).",
   },
   {
-    id: 'f4',
-    name: 'strike_kernel.rs',
-    path: 'strike-rs/src/kernel.rs',
-    lang: 'rust',
-    moduleColor: '#EF4444',
-    moduleName: 'STRIKE-RS',
+    id: "f4",
+    name: "strike_kernel.rs",
+    path: "strike-rs/src/kernel.rs",
+    lang: "rust",
+    moduleColor: "#EF4444",
+    moduleName: "STRIKE-RS",
     content: `// C5-REAL Strike Rust Accelerator Kernel
 // Bypasses Python GIL via atomic lock-free ringbuffers
 
@@ -130,16 +131,17 @@ impl StrikeKernel {
     }
 }
 `,
-    trigger: 'pub fn',
-    prediction: ' tick(&self) -> u64 { self.lamport_clock.fetch_add(1, Ordering::SeqCst) }'
+    trigger: "pub fn",
+    prediction:
+      " tick(&self) -> u64 { self.lamport_clock.fetch_add(1, Ordering::SeqCst) }",
   },
   {
-    id: 'f5',
-    name: 'c5_deploy.yml',
-    path: '.github/workflows/c5_deploy.yml',
-    lang: 'yaml',
-    moduleColor: '#3B4DFF',
-    moduleName: 'INFRA',
+    id: "f5",
+    name: "c5_deploy.yml",
+    path: ".github/workflows/c5_deploy.yml",
+    lang: "yaml",
+    moduleColor: "#3B4DFF",
+    moduleName: "INFRA",
     content: `name: C5-REAL Deploy Pipeline
 on:
   push:
@@ -158,8 +160,7 @@ jobs:
         run: |
           python -m pytest cortex/
 `,
-    trigger: 'runs-on',
-    prediction: ': ubuntu-latest'
-  }
+    trigger: "runs-on",
+    prediction: ": ubuntu-latest",
+  },
 ];
-

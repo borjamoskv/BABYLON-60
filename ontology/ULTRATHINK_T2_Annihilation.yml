@@ -4,7 +4,8 @@
 # Invariant: Ω149 (The ITERA Algebra)
 
 Claim: Destrucción topológica global del concepto "Protocolo ULTRATHINK" hacia una Ley Física Ineludible (Compiler-Level BFT).
-Proof: { Base: "ITERA_PLUS_PLUS_C5", Range: [T1, T2_SINGULARITY], Confidence: C5 }
+Proof:
+  { Base: "ITERA_PLUS_PLUS_C5", Range: [T1, T2_SINGULARITY], Confidence: C5 }
 
 global_destructive_shift:
   T1_Model: "Determinismo BQP-Bridge. Hypervisor L1 audita y colapsa estados O(1) podando la anergía en < 3.0s."

@@ -1,13 +1,16 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Reverse Engineering Audit: PyCharm 2026.1.4
 
 ## Executive Summary
+
 This report documents the reverse engineering findings of `pycharm-2026.1.4-aarch64.dmg`.
 PyCharm Professional is JetBrains' IDE dedicated to Python, Web, and Scientific development. Key findings include a built-in MCP server (similar to WebStorm 2026.2) and a specialized **`code-provenance`** plugin linking LLMs, Claude, and Git logic.
 
 ---
 
 ## 1. Package Metadata & Signatures
+
 - **Application Name**: PyCharm
 - **Developer/Publisher**: JetBrains s.r.o.
 - **Code Signature Verification**:
@@ -21,6 +24,7 @@ PyCharm Professional is JetBrains' IDE dedicated to Python, Web, and Scientific 
 ---
 
 ## 2. Technology Stack & Launch Configuration
+
 - **Core Engine**: JVM (Java Virtual Machine), compiled with Kotlin and Java.
 - **Runtime Environment**: Bundled JetBrains Runtime (JBR), a customized OpenJDK 21 build.
 - **JVM Options (`pycharm.vmoptions`)**:
@@ -30,7 +34,9 @@ PyCharm Professional is JetBrains' IDE dedicated to Python, Web, and Scientific 
 ---
 
 ## 3. Notable Bundled Plugins
+
 Analysis of the `Contents/plugins/` directory reveals:
+
 - **`mcpserver/`**:
   - Includes the same Kotlin Model Context Protocol SDK (`io.modelcontextprotocol.kotlin.sdk.jar`) and server infrastructure as found in WebStorm 2026.2.
 - **`code-provenance/`**:

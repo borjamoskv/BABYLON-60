@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # METRICS TRACKING: CONCURRENCY STRESS
 
 Se registran las métricas termodinámicas del experimento de concurrencia sobre SQLite:

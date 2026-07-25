@@ -1,773 +1,1327 @@
-[[{'duration': 4.92,
-   'start': 0.16,
-   'text': 'Déjame decirte algo que comprendí'},
-  {'duration': 9.161,
-   'start': 1.959,
-   'text': 'demasiado tarde. La mayoría de las'},
-  {'duration': 8.96,
-   'start': 5.08,
-   'text': 'personas eh cree que la guerra eh'},
-  {'duration': 5.64,
-   'start': 11.12,
-   'text': 'comienza en los campos de batalla. Yo'},
-  {'duration': 6.12,
-   'start': 14.04,
-   'text': 'también lo creía, pero después de'},
-  {'duration': 6.679,
-   'start': 16.76,
-   'text': 'recorrer miles de kilómetros a pie, de'},
-  {'duration': 5.16,
-   'start': 20.16,
-   'text': 'abandonar mi vida anterior, de vivir'},
-  {'duration': 4.6, 'start': 23.439, 'text': 'entre pobres,'},
-  {'duration': 6.039, 'start': 25.32, 'text': 'de cruzar continentes'},
-  {'duration': 5.84, 'start': 28.039, 'text': 'y de sentarme frente a Gandhi,'},
-  {'duration': 5.801, 'start': 31.359, 'text': 'descubrí algo inquietante.'},
-  {'duration': 6.16,
-   'start': 33.879,
-   'text': 'La guerra no comienza entre naciones, la'},
-  {'duration': 5.12,
-   'start': 37.16,
-   'text': 'guerra comienza dentro del hombre. Y'},
-  {'duration': 6.16,
-   'start': 40.039,
-   'text': 'mientras esa guerra interior continúe,'},
-  {'duration': 6.52,
-   'start': 42.28,
-   'text': 'ninguna revolución, ningún gobierno y'},
-  {'duration': 5.401, 'start': 46.199, 'text': 'ninguna ideología'},
-  {'duration': 6.559, 'start': 48.8, 'text': 'podrán salvarnos.'},
-  {'duration': 7.959,
-   'start': 51.6,
-   'text': 'Lo que voy a contarte no es una teoría,'},
-  {'duration': 5.401,
-   'start': 55.359,
-   'text': 'es una verdad por la que entregué mi'},
-  {'duration': 3.761, 'start': 59.559, 'text': 'vida.'},
-  {'duration': 5.2,
-   'start': 60.76,
-   'text': 'Y si logras comprenderla, tal vez'},
-  {'duration': 5.04,
-   'start': 63.32,
-   'text': 'descubras por qué el mundo sigue'},
-  {'duration': 4.88, 'start': 65.96, 'text': 'sufriendo los mismos conflictos'},
-  {'duration': 5.32, 'start': 68.36, 'text': 'generación tras generación.'},
-  {'duration': 7.599,
-   'start': 70.84,
-   'text': 'Durante mi juventud busqué conocimiento'},
-  {'duration': 7.56,
-   'start': 73.68,
-   'text': 'por todas partes. Estudié, viajé,'},
-  {'duration': 6.04, 'start': 78.439, 'text': 'leí, observé,'},
-  {'duration': 4.76,
-   'start': 81.24,
-   'text': 'conocí hombres cultos, académicos'},
-  {'duration': 4.28, 'start': 84.479, 'text': 'brillantes'},
-  {'duration': 4.36, 'start': 86.0, 'text': 'y pensadores respetados.'},
-  {'duration': 5.32, 'start': 88.759, 'text': 'Pero'},
-  {'duration': 6.52,
-   'start': 90.36,
-   'text': 'cuanto más aprendía, más sentía que algo'},
-  {'duration': 5.161, 'start': 94.079, 'text': 'esencial faltaba.'},
-  {'duration': 6.68, 'start': 96.88, 'text': 'Había información,'},
-  {'duration': 6.68, 'start': 99.24, 'text': 'había progreso, había ideas,'},
-  {'duration': 6.239, 'start': 103.56, 'text': 'pero no había sabiduría.'},
-  {'duration': 7.08,
-   'start': 105.92,
-   'text': 'Y un día comprendí algo que cambió el'},
-  {'duration': 6.32, 'start': 109.799, 'text': 'rumbo de mi existencia.'},
-  {'duration': 5.52,
-   'start': 113.0,
-   'text': 'Me llamaba cristiano, pero nunca había'},
-  {'duration': 4.521,
-   'start': 116.119,
-   'text': 'intentado vivir verdaderamente aquello'},
-  {'duration': 4.48, 'start': 118.52, 'text': 'que decía creer.'},
-  {'duration': 3.92,
-   'start': 120.64,
-   'text': 'Entonces, decidí comenzar desde el'},
-  {'duration': 4.159, 'start': 123.0, 'text': 'principio,'},
-  {'duration': 6.16,
-   'start': 124.56,
-   'text': 'no desde la teoría, no desde la'},
-  {'duration': 5.881,
-   'start': 127.159,
-   'text': 'filosofía, no desde las palabras,'},
-  {'duration': 6.12, 'start': 130.72, 'text': 'desde la experiencia.'},
-  {'duration': 6.44, 'start': 133.04, 'text': 'Y la primera experiencia'},
-  {'duration': 5.28, 'start': 136.84, 'text': 'fue la pobreza.'},
-  {'duration': 6.08, 'start': 139.48, 'text': 'Porque si Cristo había dicho,'},
-  {'duration': 6.479, 'start': 142.12, 'text': '"Bienaventurados los pobres,'},
-  {'duration': 5.88,
-   'start': 145.56,
-   'text': 'yo quería descubrir qué significaban'},
-  {'duration': 4.681, 'start': 148.599, 'text': 'realmente esas palabras,'},
-  {'duration': 3.68, 'start': 151.44, 'text': 'no estudiarlas,'},
-  {'duration': 4.8, 'start': 153.28, 'text': 'vivirlas.'},
-  {'duration': 6.199, 'start': 155.12, 'text': 'Abandoné muchas comodidades,'},
-  {'duration': 7.6,
-   'start': 158.08,
-   'text': 'comencé a sobrevivir con trabajos'},
-  {'duration': 7.801,
-   'start': 161.319,
-   'text': 'sencillos y poco después eh tomé una'},
-  {'duration': 6.24, 'start': 165.68, 'text': 'decisión aún más radical.'},
-  {'duration': 6.32, 'start': 169.12, 'text': 'Me convertí en caminante'},
-  {'duration': 6.599, 'start': 171.92, 'text': 'durante años. Eh,'},
-  {'duration': 4.6,
-   'start': 175.44,
-   'text': 'recorrí caminos y senderos sin rumbo'},
-  {'duration': 4.561, 'start': 178.519, 'text': 'fijo.'},
-  {'duration': 5.32,
-   'start': 180.04,
-   'text': 'Dormí bajo el cielo. Atravesé pueblos'},
-  {'duration': 4.92, 'start': 183.08, 'text': 'desconocidos.'},
-  {'duration': 5.799, 'start': 185.36, 'text': 'Viví con casi nada.'},
-  {'duration': 6.76,
-   'start': 188.0,
-   'text': 'Y fue allí donde encontré una libertad'},
-  {'duration': 5.121, 'start': 191.159, 'text': 'que jamás había conocido.'},
-  {'duration': 4.44, 'start': 194.76, 'text': 'La libertad de no perseguir'},
-  {'duration': 6.599,
-   'start': 196.28,
-   'text': 'constantemente algo. La libertad de no'},
-  {'duration': 6.72,
-   'start': 199.2,
-   'text': 'medir mi valor por lo que poseía,'},
-  {'duration': 4.601, 'start': 202.879, 'text': 'la libertad de simplemente'},
-  {'duration': 6.239, 'start': 205.92, 'text': 'existir,'},
-  {'duration': 8.92,
-   'start': 207.48,
-   'text': 'respirar, caminar, contemplar, escuchar,'},
-  {'duration': 9.28,
-   'start': 212.159,
-   'text': 'sentir y comprendí algo que la mayoría'},
-  {'duration': 7.68,
-   'start': 216.4,
-   'text': 'de las personas nunca llega a descubrir.'},
-  {'duration': 4.8, 'start': 221.439, 'text': 'La vida ya es un milagro,'},
-  {'duration': 5.84,
-   'start': 224.08,
-   'text': 'pero estamos tan ocupados persiguiendo'},
-  {'duration': 6.521,
-   'start': 226.239,
-   'text': 'cosas que olvidamos. experimentarla.'},
-  {'duration': 5.72,
-   'start': 229.92,
-   'text': 'Sin embargo, mientras yo descubría esa'},
-  {'duration': 6.679,
-   'start': 232.76,
-   'text': 'libertad, Europa avanzaba hacia la'},
-  {'duration': 6.679,
-   'start': 235.64,
-   'text': 'oscuridad. La guerra se acercaba, los'},
-  {'duration': 5.921,
-   'start': 239.439,
-   'text': 'discursos se volvían más agresivos,'},
-  {'duration': 5.961,
-   'start': 242.319,
-   'text': 'los gobiernos hablaban de enemigos, los'},
-  {'duration': 6.079,
-   'start': 245.36,
-   'text': 'pueblos hablaban de venganza y algo'},
-  {'duration': 6.239,
-   'start': 248.28,
-   'text': 'dentro de mí comenzó a revelarse. Me'},
-  {'duration': 6.2,
-   'start': 251.439,
-   'text': 'pregunté eh, ¿por qué los hombres'},
-  {'duration': 6.041,
-   'start': 254.519,
-   'text': 'terminan eh destruyéndose una y otra'},
-  {'duration': 6.601,
-   'start': 257.639,
-   'text': 'vez? ¿Por qué todos afirman querer la'},
-  {'duration': 6.56,
-   'start': 260.56,
-   'text': 'paz mientras preparan la guerra? ¿Por'},
-  {'duration': 5.519,
-   'start': 264.24,
-   'text': 'qué la historia parece repetir siempre'},
-  {'duration': 6.72, 'start': 267.12, 'text': 'las mismas tragedias?'},
-  {'duration': 8.081,
-   'start': 269.759,
-   'text': 'Comprendí que necesitaba una respuesta y'},
-  {'duration': 6.0, 'start': 273.84, 'text': 'todos los caminos terminaron'},
-  {'duration': 5.88, 'start': 277.84, 'text': 'eh'},
-  {'duration': 6.799,
-   'start': 279.84,
-   'text': 'conduciéndome hacia un hombre, Gandy.'},
-  {'duration': 6.8,
-   'start': 283.72,
-   'text': 'Atravesé continentes para encontrarlo.'},
-  {'duration': 5.84,
-   'start': 286.639,
-   'text': 'No fui a la India buscando exotismo.'},
-  {'duration': 3.48,
-   'start': 290.52,
-   'text': 'No fui buscando una espiritualidad'},
-  {'duration': 3.521, 'start': 292.479, 'text': 'extraña.'},
-  {'duration': 6.36,
-   'start': 294.0,
-   'text': 'Fui buscando una solución para el'},
-  {'duration': 7.52,
-   'start': 296.0,
-   'text': 'sufrimiento humano. Y cuando finalmente'},
-  {'duration': 5.2, 'start': 300.36, 'text': 'conocí a Gandy,'},
-  {'duration': 5.519, 'start': 303.52, 'text': 'comprendí'},
-  {'duration': 5.72,
-   'start': 305.56,
-   'text': 'que estaba frente a algo extraordinario.'},
-  {'duration': 4.88, 'start': 309.039, 'text': 'No era un rey,'},
-  {'duration': 4.759, 'start': 311.28, 'text': 'no era un general,'},
-  {'duration': 4.801, 'start': 313.919, 'text': 'no tenía riqueza,'},
-  {'duration': 5.641,
-   'start': 316.039,
-   'text': 'no tenía ejército, pero poseía una'},
-  {'duration': 5.88,
-   'start': 318.72,
-   'text': 'fuerza que jamás había visto. La fuerza'},
-  {'duration': 5.799,
-   'start': 321.68,
-   'text': 'de un hombre que había logrado'},
-  {'duration': 5.4, 'start': 324.6, 'text': 'convertirse en uno solo.'},
-  {'duration': 5.361,
-   'start': 327.479,
-   'text': 'Eso fue lo que más me impactó. En'},
-  {'duration': 4.52, 'start': 330.0, 'text': 'Occidente vivimos divididos.'},
-  {'duration': 5.4,
-   'start': 332.84,
-   'text': 'Tenemos una personalidad para el'},
-  {'duration': 6.119,
-   'start': 334.52,
-   'text': 'trabajo, otra para la familia,'},
-  {'duration': 4.679, 'start': 338.24, 'text': 'otra para los amigos,'},
-  {'duration': 4.801, 'start': 340.639, 'text': 'otra para la religión,'},
-  {'duration': 4.441, 'start': 342.919, 'text': 'otra para la política,'},
-  {'duration': 3.56, 'start': 345.44, 'text': 'una máscara distinta para cada'},
-  {'duration': 3.959, 'start': 347.36, 'text': 'situación.'},
-  {'duration': 3.88,
-   'start': 349.0,
-   'text': 'Pero Gandhi era el mismo hombre en todas'},
-  {'duration': 3.761, 'start': 351.319, 'text': 'partes.'},
-  {'duration': 5.759,
-   'start': 352.88,
-   'text': 'La misma verdad guiaba cada aspecto de'},
-  {'duration': 7.119,
-   'start': 355.08,
-   'text': 'su vida. No existía contradicción,'},
-  {'duration': 7.441, 'start': 358.639, 'text': 'no existía doble discurso'},
-  {'duration': 7.0,
-   'start': 362.199,
-   'text': 'y comprendí que la verdadera fuerza'},
-  {'duration': 4.839,
-   'start': 366.08,
-   'text': 'nace precisamente de esa unidad'},
-  {'duration': 4.28, 'start': 369.199, 'text': 'interior.'},
-  {'duration': 4.641,
-   'start': 370.919,
-   'text': 'Cuando observé a Gandy durante aquellos'},
-  {'duration': 4.201,
-   'start': 373.479,
-   'text': 'meses, comprendí algo que ningún libro'},
-  {'duration': 5.28, 'start': 375.56, 'text': 'me había enseñado.'},
-  {'duration': 5.519,
-   'start': 377.68,
-   'text': 'La mayoría quiere cambiar el mundo, pero'},
-  {'duration': 3.96,
-   'start': 380.84,
-   'text': 'muy pocos son capaces de gobernarse a sí'},
-  {'duration': 4.481, 'start': 383.199, 'text': 'mismos.'},
-  {'duration': 5.679, 'start': 384.8, 'text': 'Quieren transformar gobiernos,'},
-  {'duration': 5.12, 'start': 387.68, 'text': 'transformar sistemas,'},
-  {'duration': 4.601, 'start': 390.479, 'text': 'transformar instituciones,'},
-  {'duration': 3.92,
-   'start': 392.8,
-   'text': 'pero siguen siendo esclavos de sus'},
-  {'duration': 4.28, 'start': 395.08, 'text': 'impulsos,'},
-  {'duration': 5.199, 'start': 396.72, 'text': 'esclavos de sus deseos,'},
-  {'duration': 5.399, 'start': 399.36, 'text': 'esclavos de sus reacciones.'},
-  {'duration': 6.201,
-   'start': 401.919,
-   'text': 'Entonces, comprendí que la primera'},
-  {'duration': 5.56,
-   'start': 404.759,
-   'text': 'revolución debía ser interior,'},
-  {'duration': 6.4,
-   'start': 408.12,
-   'text': 'porque quien no puede dominarse a sí'},
-  {'duration': 7.481,
-   'start': 410.319,
-   'text': 'mismo, jamás será verdaderamente libre.'},
-  {'duration': 6.04,
-   'start': 414.52,
-   'text': 'Observa tu propia vida. Cuántas veces'},
-  {'duration': 4.799,
-   'start': 417.8,
-   'text': 'reaccionas sin pensar. Cuántas veces una'},
-  {'duration': 4.639,
-   'start': 420.56,
-   'text': 'palabra ajena controla tu estado'},
-  {'duration': 5.04, 'start': 422.599, 'text': 'emocional.'},
-  {'duration': 5.321,
-   'start': 425.199,
-   'text': 'Cuántas veces una crítica destruye tu'},
-  {'duration': 5.921,
-   'start': 427.639,
-   'text': 'paz. Cuántas veces una provocación'},
-  {'duration': 7.119, 'start': 430.52, 'text': 'decide tu comportamiento?'},
-  {'duration': 8.039,
-   'start': 433.56,
-   'text': 'Ese es el verdadero campo de batalla,'},
-  {'duration': 7.201,
-   'start': 437.639,
-   'text': 'no el exterior, el interior. Por eso'},
-  {'duration': 6.16,
-   'start': 441.599,
-   'text': 'quiero proponerte un ejercicio.'},
-  {'duration': 6.079, 'start': 444.84, 'text': 'Durante un día entero.'},
-  {'duration': 5.481,
-   'start': 447.759,
-   'text': 'Observa cada vez que reaccionas'},
-  {'duration': 6.84, 'start': 450.919, 'text': 'automáticamente.'},
-  {'duration': 8.399,
-   'start': 453.24,
-   'text': 'No intentes cambiar nada, solo observa.'},
-  {'duration': 6.201,
-   'start': 457.759,
-   'text': 'Observa tu enojo. Observa tu enojo.'},
-  {'duration': 4.921, 'start': 461.639, 'text': 'Observa tu impaciencia.'},
-  {'duration': 5.959, 'start': 463.96, 'text': 'Observa tu miedo.'},
-  {'duration': 6.919,
-   'start': 466.56,
-   'text': 'Porque nadie puede transformar aquello'},
-  {'duration': 6.72,
-   'start': 469.919,
-   'text': 'que no es capaz de ver. Y la conciencia'},
-  {'duration': 5.961,
-   'start': 473.479,
-   'text': 'es siempre el primer paso hacia la'},
-  {'duration': 6.041,
-   'start': 476.639,
-   'text': 'libertad. Con el tiempo comprendí algo'},
-  {'duration': 6.199,
-   'start': 479.44,
-   'text': 'todavía más profundo. La violencia no es'},
-  {'duration': 6.519, 'start': 482.68, 'text': 'lo que la mayoría cree.'},
-  {'duration': 7.24,
-   'start': 485.639,
-   'text': 'La gente piensa que la violencia'},
-  {'duration': 6.041,
-   'start': 489.199,
-   'text': 'comienza con un golpe, con una agresión,'},
-  {'duration': 4.081, 'start': 492.879, 'text': 'con una guerra.'},
-  {'duration': 4.2,
-   'start': 495.24,
-   'text': 'Pero eso es solamente el resultado'},
-  {'duration': 5.919,
-   'start': 496.96,
-   'text': 'final. La violencia comienza mucho'},
-  {'duration': 5.96,
-   'start': 499.44,
-   'text': 'antes, comienza cuando mentimos,'},
-  {'duration': 4.561,
-   'start': 502.879,
-   'text': 'comienza cuando manipulamos, comienza'},
-  {'duration': 4.28,
-   'start': 505.4,
-   'text': 'cuando humillamos, comienza cuando'},
-  {'duration': 4.8,
-   'start': 507.44,
-   'text': 'buscamos imponer nuestra voluntad sobre'},
-  {'duration': 5.839,
-   'start': 509.68,
-   'text': 'otros, comienza cuando dejamos de ver al'},
-  {'duration': 6.159,
-   'start': 512.24,
-   'text': 'otro como un ser humano. Toda guerra'},
-  {'duration': 5.561,
-   'start': 515.519,
-   'text': 'nace primero en el corazón y solo'},
-  {'duration': 4.401,
-   'start': 518.399,
-   'text': 'después aparece en el mundo. Por eso'},
-  {'duration': 4.96,
-   'start': 521.08,
-   'text': 'siempre digo que la violencia no es'},
-  {'duration': 6.88,
-   'start': 522.8,
-   'text': 'fuerza. La fuerza es necesaria. Sin'},
-  {'duration': 6.84,
-   'start': 526.04,
-   'text': 'fuerza no se construye nada. Sin fuerza'},
-  {'duration': 5.52,
-   'start': 529.68,
-   'text': 'no se protege nada. Sin fuerza no se'},
-  {'duration': 5.76, 'start': 532.88, 'text': 'sirve a nadie.'},
-  {'duration': 8.44,
-   'start': 535.2,
-   'text': 'La violencia es el abuso de la fuerza.'},
-  {'duration': 7.6, 'start': 538.64, 'text': 'Es utilizar algo bueno para eh'},
-  {'duration': 5.439,
-   'start': 543.64,
-   'text': 'producir destrucción. Y cuando una'},
-  {'duration': 5.88,
-   'start': 546.24,
-   'text': 'sociedad se organiza alrededor de ese'},
-  {'duration': 4.481,
-   'start': 549.079,
-   'text': 'principio, termina destruyéndose a sí'},
-  {'duration': 4.08, 'start': 552.12, 'text': 'misma.'},
-  {'duration': 6.04,
-   'start': 553.56,
-   'text': 'Todas las civilizaciones de la historia'},
-  {'duration': 6.48,
-   'start': 556.2,
-   'text': 'han seguido ese camino. Todas, sin'},
-  {'duration': 7.04,
-   'start': 559.6,
-   'text': 'excepción. Existe una razón por la que'},
-  {'duration': 7.399,
-   'start': 562.68,
-   'text': 'el hombre moderno vive rodeado de ruido,'},
-  {'duration': 5.439,
-   'start': 566.64,
-   'text': 'porque teme encontrarse consigo mismo.'},
-  {'duration': 4.401,
-   'start': 570.079,
-   'text': 'He visto personas cruzar océanos'},
-  {'duration': 5.081, 'start': 572.079, 'text': 'buscando respuestas,'},
-  {'duration': 4.88,
-   'start': 574.48,
-   'text': 'pero incapaces de permanecer 15 minutos'},
-  {'duration': 4.16, 'start': 577.16, 'text': 'en silencio.'},
-  {'duration': 5.4,
-   'start': 579.36,
-   'text': 'Y sin embargo, las respuestas nacen'},
-  {'duration': 5.759,
-   'start': 581.32,
-   'text': 'precisamente allí. en el silencio, no en'},
-  {'duration': 4.0, 'start': 584.76, 'text': 'la agitación,'},
-  {'duration': 4.401, 'start': 587.079, 'text': 'no en la discusión, no en el'},
-  {'duration': 5.84, 'start': 588.76, 'text': 'entretenimiento constante.'},
-  {'duration': 5.0,
-   'start': 591.48,
-   'text': 'El silencio es un espejo y muchos lo'},
-  {'duration': 4.6,
-   'start': 594.6,
-   'text': 'evitan porque revela aquello que llevan'},
-  {'duration': 6.88, 'start': 596.48, 'text': 'años intentando ocultar'},
-  {'duration': 8.319,
-   'start': 599.2,
-   'text': 'sus miedos, sus contradicciones,'},
-  {'duration': 5.719,
-   'start': 603.36,
-   'text': 'sus heridas, sus deseos más profundos.'},
-  {'duration': 4.56,
-   'start': 607.519,
-   'text': 'Por eso, en nuestras comunidades'},
-  {'duration': 5.081,
-   'start': 609.079,
-   'text': 'aprendimos a practicar el silencio, no'},
-  {'duration': 4.76, 'start': 612.079, 'text': 'como una obligación,'},
-  {'duration': 4.52, 'start': 614.16, 'text': 'sino como una necesidad.'},
-  {'duration': 4.761,
-   'start': 616.839,
-   'text': 'Y quiero proponerte una práctica'},
-  {'duration': 6.159,
-   'start': 618.68,
-   'text': 'sencilla. Busca un lugar tranquilo,'},
-  {'duration': 6.44, 'start': 621.6, 'text': 'apaga toda distracción.'},
-  {'duration': 6.521, 'start': 624.839, 'text': 'Siéntate durante 15 minutos.'},
-  {'duration': 6.88, 'start': 628.04, 'text': 'No reces, no visualices,'},
-  {'duration': 7.279,
-   'start': 631.36,
-   'text': 'no intentes controlar nada. Simplemente'},
-  {'duration': 6.039,
-   'start': 634.92,
-   'text': 'escucha. Escucha tus pensamientos,'},
-  {'duration': 4.88, 'start': 638.639, 'text': 'escucha tus emociones,'},
-  {'duration': 5.56, 'start': 640.959, 'text': 'escucha aquello que surge'},
-  {'duration': 5.481, 'start': 643.519, 'text': 'cuando el ruido desaparece.'},
-  {'duration': 4.521, 'start': 646.519, 'text': 'Al principio'},
-  {'duration': 5.8, 'start': 649.0, 'text': 'encontrarás'},
-  {'duration': 8.2,
-   'start': 651.04,
-   'text': 'confusión. Después descubrirás algo más'},
-  {'duration': 7.88,
-   'start': 654.8,
-   'text': 'profundo, la voz de tu conciencia,'},
-  {'duration': 5.36,
-   'start': 659.24,
-   'text': 'la única autoridad que jamás debería'},
-  {'duration': 5.44, 'start': 662.68, 'text': 'abandonarte.'},
-  {'duration': 6.4,
-   'start': 664.6,
-   'text': 'Tras regresar de la India, soñé con'},
-  {'duration': 5.959, 'start': 668.12, 'text': 'transformar el mundo,'},
-  {'duration': 5.44,
-   'start': 671.0,
-   'text': 'como hacen todos los jóvenes. Pensaba'},
-  {'duration': 5.2,
-   'start': 674.079,
-   'text': 'que bastaba con decir la verdad para que'},
-  {'duration': 4.48,
-   'start': 676.44,
-   'text': 'las personas despertaran. Qué equivocado'},
-  {'duration': 3.641, 'start': 679.279, 'text': 'estaba.'},
-  {'duration': 4.76, 'start': 680.92, 'text': 'Pronto descubrí'},
-  {'duration': 5.919,
-   'start': 682.92,
-   'text': 'que los hombres no rechazan la verdad'},
-  {'duration': 6.12,
-   'start': 685.68,
-   'text': 'porque sea falsa. La rechazan porque'},
-  {'duration': 5.281, 'start': 688.839, 'text': 'exige transformación'},
-  {'duration': 5.36, 'start': 691.8, 'text': 'y cambiar es difícil.'},
-  {'duration': 4.959,
-   'start': 694.12,
-   'text': 'mucho más difícil de lo que imaginamos.'},
-  {'duration': 3.479,
-   'start': 697.16,
-   'text': 'Entonces comprendí que no bastaba con'},
-  {'duration': 4.601, 'start': 699.079, 'text': 'hablar,'},
-  {'duration': 6.2,
-   'start': 700.639,
-   'text': 'había que vivir aquello que se enseñaba.'},
-  {'duration': 5.399,
-   'start': 703.68,
-   'text': 'Por eso nació la comunidad del arca,'},
-  {'duration': 4.361, 'start': 706.839, 'text': 'no como una teoría,'},
-  {'duration': 5.521, 'start': 709.079, 'text': 'no como una ideología,'},
-  {'duration': 6.639,
-   'start': 711.2,
-   'text': 'sino como un experimento de vida,'},
-  {'duration': 6.72,
-   'start': 714.6,
-   'text': 'un lugar donde las personas intentaran'},
-  {'duration': 5.0, 'start': 717.839, 'text': 'vivir según los principios que'},
-  {'duration': 4.8, 'start': 721.32, 'text': 'proclamaban.'},
-  {'duration': 6.68, 'start': 722.839, 'text': 'Y allí descubrí otra verdad.'},
-  {'duration': 6.719,
-   'start': 726.12,
-   'text': 'La mayoría de los sufrimientos humanos'},
-  {'duration': 5.041,
-   'start': 729.519,
-   'text': 'provienen de una ilusión. la ilusión de'},
-  {'duration': 4.881, 'start': 732.839, 'text': 'que necesitaremos'},
-  {'duration': 6.519,
-   'start': 734.56,
-   'text': 'cada vez más para sentirnos completos,'},
-  {'duration': 5.119, 'start': 737.72, 'text': 'más dinero, más'},
-  {'duration': 4.12, 'start': 741.079, 'text': 'reconocimiento,'},
-  {'duration': 6.0, 'start': 742.839, 'text': 'más posesiones,'},
-  {'duration': 7.921, 'start': 745.199, 'text': 'más seguridad, más control.'},
-  {'duration': 7.321,
-   'start': 748.839,
-   'text': 'Pero cuanto más persigue el hombre esas'},
-  {'duration': 5.12,
-   'start': 753.12,
-   'text': 'cosas, más dependiente se vuelve de'},
-  {'duration': 4.32, 'start': 756.16, 'text': 'ellas.'},
-  {'duration': 5.039,
-   'start': 758.24,
-   'text': 'Durante años creí que la pobreza'},
-  {'duration': 4.479, 'start': 760.48, 'text': 'significaba no poseer.'},
-  {'duration': 3.961,
-   'start': 763.279,
-   'text': 'Después comprendí algo mucho más'},
-  {'duration': 4.32, 'start': 764.959, 'text': 'profundo.'},
-  {'duration': 5.399,
-   'start': 767.24,
-   'text': 'La verdadera pobreza consiste en dejar'},
-  {'duration': 6.481,
-   'start': 769.279,
-   'text': 'de depender, porque puedes poseer mucho'},
-  {'duration': 6.801,
-   'start': 772.639,
-   'text': 'y seguir siendo libre y puedes poseer'},
-  {'duration': 6.84,
-   'start': 775.76,
-   'text': 'muy poco y seguir siendo esclavo.'},
-  {'duration': 5.44,
-   'start': 779.44,
-   'text': 'La pregunta nunca es cuánto tienes. La'},
-  {'duration': 6.0,
-   'start': 782.6,
-   'text': 'pregunta es cuánto te posee aquello que'},
-  {'duration': 6.759,
-   'start': 784.88,
-   'text': 'tienes. Observa a tu alrededor.'},
-  {'duration': 5.679, 'start': 788.6, 'text': 'La gente corre constantemente,'},
-  {'duration': 5.361, 'start': 791.639, 'text': 'compra constantemente,'},
-  {'duration': 6.0, 'start': 794.279, 'text': 'desea constantemente'},
-  {'duration': 6.48,
-   'start': 797.0,
-   'text': 'y aún así permanece insatisfecha'},
-  {'duration': 6.201,
-   'start': 800.279,
-   'text': 'porque ninguna posesión puede llenar un'},
-  {'duration': 4.96,
-   'start': 803.48,
-   'text': 'vacío espiritual, solo puede distraerlo'},
-  {'duration': 4.0, 'start': 806.48, 'text': 'temporalmente.'},
-  {'duration': 3.639,
-   'start': 808.44,
-   'text': 'Por eso aprendí una práctica muy'},
-  {'duration': 6.4, 'start': 810.48, 'text': 'sencilla'},
-  {'duration': 6.681,
-   'start': 812.079,
-   'text': 'antes de adquirir algo nuevo. Detente.'},
-  {'duration': 4.28, 'start': 816.88, 'text': 'Y pregúntate,'},
-  {'duration': 4.96,
-   'start': 818.76,
-   'text': '¿realmente necesito esto o intento'},
-  {'duration': 5.32,
-   'start': 821.16,
-   'text': 'llenar una inquietud interior? Haz esa'},
-  {'duration': 5.799, 'start': 823.72, 'text': 'pregunta durante una semana y'},
-  {'duration': 4.64,
-   'start': 826.48,
-   'text': 'descubrirás cuántas decisiones tomas sin'},
-  {'duration': 4.44, 'start': 829.519, 'text': 'conciencia,'},
-  {'duration': 5.8,
-   'start': 831.12,
-   'text': 'cuántas veces buscas afuera aquello que'},
-  {'duration': 6.401,
-   'start': 833.959,
-   'text': 'solo puede encontrarse dentro. Hoy la'},
-  {'duration': 5.839,
-   'start': 836.92,
-   'text': 'humanidad posee más poder que nunca y'},
-  {'duration': 5.08,
-   'start': 840.36,
-   'text': 'sin embargo también posee más capacidad'},
-  {'duration': 5.721,
-   'start': 842.759,
-   'text': 'de destrucción que cualquier generación'},
-  {'duration': 6.8,
-   'start': 845.44,
-   'text': 'anterior. Ya no hablamos solamente de la'},
-  {'duration': 6.599, 'start': 848.48, 'text': 'caída de imperios, hablamos'},
-  {'duration': 6.68, 'start': 852.24, 'text': 'de la posibilidad de'},
-  {'duration': 6.88, 'start': 855.079, 'text': 'destruir el planeta entero.'},
-  {'duration': 5.76,
-   'start': 858.92,
-   'text': 'Y por eso sigo diciendo lo mismo que'},
-  {'duration': 5.161, 'start': 861.959, 'text': 'aprendí hace tantos años.'},
-  {'duration': 4.76,
-   'start': 864.68,
-   'text': 'El problema fundamental de la humanidad'},
-  {'duration': 4.6, 'start': 867.12, 'text': 'no es tecnológico,'},
-  {'duration': 4.24, 'start': 869.44, 'text': 'no es económico,'},
-  {'duration': 5.479, 'start': 871.72, 'text': 'no es político,'},
-  {'duration': 6.36,
-   'start': 873.68,
-   'text': 'es espiritual, porque hemos aprendido a'},
-  {'duration': 6.361,
-   'start': 877.199,
-   'text': 'dominar la materia antes de aprender a'},
-  {'duration': 6.12, 'start': 880.04, 'text': 'dominarnos a nosotros mismos.'},
-  {'duration': 5.12,
-   'start': 883.56,
-   'text': 'Muchos me preguntan, ¿cómo luchar contra'},
-  {'duration': 6.119, 'start': 886.16, 'text': 'la violencia?'},
-  {'duration': 5.8,
-   'start': 888.68,
-   'text': '¿Cómo enfrentar la injusticia? ¿Cómo'},
-  {'duration': 4.68, 'start': 892.279, 'text': 'resistir al mal?'},
-  {'duration': 6.12, 'start': 894.48, 'text': 'La mayoría conoce'},
-  {'duration': 7.8,
-   'start': 896.959,
-   'text': 'cuatro respuestas: pelear, huir,'},
-  {'duration': 7.2,
-   'start': 900.6,
-   'text': 'rendirse o permanecer indiferente.'},
-  {'duration': 4.961,
-   'start': 904.759,
-   'text': 'Pero existe una quinta posibilidad,'},
-  {'duration': 4.599, 'start': 907.8, 'text': 'la no violencia.'},
-  {'duration': 4.16,
-   'start': 909.72,
-   'text': 'Y no confundas jamás la no violencia con'},
-  {'duration': 4.68, 'start': 912.399, 'text': 'debilidad.'},
-  {'duration': 5.519,
-   'start': 913.88,
-   'text': 'La no violencia exige más valentía que'},
-  {'duration': 5.921,
-   'start': 917.079,
-   'text': 'cualquier guerra, porque requiere'},
-  {'duration': 6.321,
-   'start': 919.399,
-   'text': 'enfrentar al adversario sin odiarlo,'},
-  {'duration': 5.16, 'start': 923.0, 'text': 'resistir sin destruir,'},
-  {'duration': 5.599, 'start': 925.72, 'text': 'luchar sin deshumanizar,'},
-  {'duration': 6.08,
-   'start': 928.16,
-   'text': 'sufrir sin convertirse en verdugo.'},
-  {'duration': 5.281,
-   'start': 931.319,
-   'text': 'Eso requiere una fuerza inmensa, una'},
-  {'duration': 5.2,
-   'start': 934.24,
-   'text': 'fuerza mucho mayor que la necesaria para'},
-  {'duration': 6.28,
-   'start': 936.6,
-   'text': 'apretar un gatillo. Después de toda una'},
-  {'duration': 5.04,
-   'start': 939.44,
-   'text': 'vida de viajes, luchas, búsquedas y'},
-  {'duration': 6.959, 'start': 942.88, 'text': 'aprendizajes,'},
-  {'duration': 5.359, 'start': 944.48, 'text': 'puedo resumir todo lo que'},
-  {'duration': 6.081, 'start': 951.079, 'text': 'eh'},
-  {'duration': 6.2,
-   'start': 953.8,
-   'text': 'he comprendido en una sola verdad. La'},
-  {'duration': 5.64,
-   'start': 957.16,
-   'text': 'humanidad no será salvada por hombres'},
-  {'duration': 5.839, 'start': 960.0, 'text': 'más inteligentes,'},
-  {'duration': 6.2, 'start': 962.8, 'text': 'ni por máquinas más avanzadas,'},
-  {'duration': 4.841,
-   'start': 965.839,
-   'text': 'ni por gobiernos más poderosos.'},
-  {'duration': 3.92, 'start': 969.0, 'text': 'será salvada por hombres más'},
-  {'duration': 5.44, 'start': 970.68, 'text': 'conscientes,'},
-  {'duration': 6.359,
-   'start': 972.92,
-   'text': 'hombres capaces de decir la verdad,'},
-  {'duration': 6.04,
-   'start': 976.12,
-   'text': 'capaces de dominar sus impulsos, capaces'},
-  {'duration': 6.56,
-   'start': 979.279,
-   'text': 'de escuchar su conciencia, capaces de'},
-  {'duration': 6.56, 'start': 982.16, 'text': 'vivir con sencillez,'},
-  {'duration': 5.721, 'start': 985.839, 'text': 'capaces de luchar sin odio,'},
-  {'duration': 4.84,
-   'start': 988.72,
-   'text': 'capaces de amar sin poseer, porque el'},
-  {'duration': 4.92,
-   'start': 991.56,
-   'text': 'futuro del mundo no depende de lo que'},
-  {'duration': 5.48, 'start': 993.56, 'text': 'ocurre en los parlamentos,'},
-  {'duration': 5.799,
-   'start': 996.48,
-   'text': 'depende de lo que ocurre en el corazón'},
-  {'duration': 6.32,
-   'start': 999.04,
-   'text': 'humano y cada vez que un hombre vence la'},
-  {'duration': 5.841, 'start': 1002.279, 'text': 'violencia que lleva dentro,'},
-  {'duration': 5.399,
-   'start': 1005.36,
-   'text': 'toda la humanidad avanza un paso hacia'},
-  {'duration': 5.68, 'start': 1008.12, 'text': 'la paz.'},
-  {'duration': 5.08,
-   'start': 1010.759,
-   'text': 'Esa fue la lección de Gandy. Esa fue la'},
-  {'duration': 6.8, 'start': 1013.8, 'text': 'lección de mi vida.'},
-  {'duration': 8.12,
-   'start': 1015.839,
-   'text': 'Y quizás si has escuchado con atención'},
-  {'duration': 6.479, 'start': 1020.6, 'text': 'también pueda eh'},
-  {'duration': 3.12, 'start': 1023.959, 'text': 'convertirse en la tuya.'}]]
+[
+  [
+    {
+      "duration": 4.92,
+      "start": 0.16,
+      "text": "Déjame decirte algo que comprendí"
+    },
+    {
+      "duration": 9.161,
+      "start": 1.959,
+      "text": "demasiado tarde. La mayoría de las"
+    },
+    {
+      "duration": 8.96,
+      "start": 5.08,
+      "text": "personas eh cree que la guerra eh"
+    },
+    {
+      "duration": 5.64,
+      "start": 11.12,
+      "text": "comienza en los campos de batalla. Yo"
+    },
+    {
+      "duration": 6.12,
+      "start": 14.04,
+      "text": "también lo creía, pero después de"
+    },
+    {
+      "duration": 6.679,
+      "start": 16.76,
+      "text": "recorrer miles de kilómetros a pie, de"
+    },
+    {
+      "duration": 5.16,
+      "start": 20.16,
+      "text": "abandonar mi vida anterior, de vivir"
+    },
+    { "duration": 4.6, "start": 23.439, "text": "entre pobres," },
+    { "duration": 6.039, "start": 25.32, "text": "de cruzar continentes" },
+    {
+      "duration": 5.84,
+      "start": 28.039,
+      "text": "y de sentarme frente a Gandhi,"
+    },
+    {
+      "duration": 5.801,
+      "start": 31.359,
+      "text": "descubrí algo inquietante."
+    },
+    {
+      "duration": 6.16,
+      "start": 33.879,
+      "text": "La guerra no comienza entre naciones, la"
+    },
+    {
+      "duration": 5.12,
+      "start": 37.16,
+      "text": "guerra comienza dentro del hombre. Y"
+    },
+    {
+      "duration": 6.16,
+      "start": 40.039,
+      "text": "mientras esa guerra interior continúe,"
+    },
+    {
+      "duration": 6.52,
+      "start": 42.28,
+      "text": "ninguna revolución, ningún gobierno y"
+    },
+    { "duration": 5.401, "start": 46.199, "text": "ninguna ideología" },
+    { "duration": 6.559, "start": 48.8, "text": "podrán salvarnos." },
+    {
+      "duration": 7.959,
+      "start": 51.6,
+      "text": "Lo que voy a contarte no es una teoría,"
+    },
+    {
+      "duration": 5.401,
+      "start": 55.359,
+      "text": "es una verdad por la que entregué mi"
+    },
+    { "duration": 3.761, "start": 59.559, "text": "vida." },
+    {
+      "duration": 5.2,
+      "start": 60.76,
+      "text": "Y si logras comprenderla, tal vez"
+    },
+    {
+      "duration": 5.04,
+      "start": 63.32,
+      "text": "descubras por qué el mundo sigue"
+    },
+    {
+      "duration": 4.88,
+      "start": 65.96,
+      "text": "sufriendo los mismos conflictos"
+    },
+    { "duration": 5.32, "start": 68.36, "text": "generación tras generación." },
+    {
+      "duration": 7.599,
+      "start": 70.84,
+      "text": "Durante mi juventud busqué conocimiento"
+    },
+    {
+      "duration": 7.56,
+      "start": 73.68,
+      "text": "por todas partes. Estudié, viajé,"
+    },
+    { "duration": 6.04, "start": 78.439, "text": "leí, observé," },
+    {
+      "duration": 4.76,
+      "start": 81.24,
+      "text": "conocí hombres cultos, académicos"
+    },
+    { "duration": 4.28, "start": 84.479, "text": "brillantes" },
+    { "duration": 4.36, "start": 86.0, "text": "y pensadores respetados." },
+    { "duration": 5.32, "start": 88.759, "text": "Pero" },
+    {
+      "duration": 6.52,
+      "start": 90.36,
+      "text": "cuanto más aprendía, más sentía que algo"
+    },
+    { "duration": 5.161, "start": 94.079, "text": "esencial faltaba." },
+    { "duration": 6.68, "start": 96.88, "text": "Había información," },
+    {
+      "duration": 6.68,
+      "start": 99.24,
+      "text": "había progreso, había ideas,"
+    },
+    { "duration": 6.239, "start": 103.56, "text": "pero no había sabiduría." },
+    {
+      "duration": 7.08,
+      "start": 105.92,
+      "text": "Y un día comprendí algo que cambió el"
+    },
+    { "duration": 6.32, "start": 109.799, "text": "rumbo de mi existencia." },
+    {
+      "duration": 5.52,
+      "start": 113.0,
+      "text": "Me llamaba cristiano, pero nunca había"
+    },
+    {
+      "duration": 4.521,
+      "start": 116.119,
+      "text": "intentado vivir verdaderamente aquello"
+    },
+    { "duration": 4.48, "start": 118.52, "text": "que decía creer." },
+    {
+      "duration": 3.92,
+      "start": 120.64,
+      "text": "Entonces, decidí comenzar desde el"
+    },
+    { "duration": 4.159, "start": 123.0, "text": "principio," },
+    {
+      "duration": 6.16,
+      "start": 124.56,
+      "text": "no desde la teoría, no desde la"
+    },
+    {
+      "duration": 5.881,
+      "start": 127.159,
+      "text": "filosofía, no desde las palabras,"
+    },
+    { "duration": 6.12, "start": 130.72, "text": "desde la experiencia." },
+    { "duration": 6.44, "start": 133.04, "text": "Y la primera experiencia" },
+    { "duration": 5.28, "start": 136.84, "text": "fue la pobreza." },
+    {
+      "duration": 6.08,
+      "start": 139.48,
+      "text": "Porque si Cristo había dicho,"
+    },
+    {
+      "duration": 6.479,
+      "start": 142.12,
+      "text": "\"Bienaventurados los pobres,"
+    },
+    {
+      "duration": 5.88,
+      "start": 145.56,
+      "text": "yo quería descubrir qué significaban"
+    },
+    { "duration": 4.681, "start": 148.599, "text": "realmente esas palabras," },
+    { "duration": 3.68, "start": 151.44, "text": "no estudiarlas," },
+    { "duration": 4.8, "start": 153.28, "text": "vivirlas." },
+    {
+      "duration": 6.199,
+      "start": 155.12,
+      "text": "Abandoné muchas comodidades,"
+    },
+    {
+      "duration": 7.6,
+      "start": 158.08,
+      "text": "comencé a sobrevivir con trabajos"
+    },
+    {
+      "duration": 7.801,
+      "start": 161.319,
+      "text": "sencillos y poco después eh tomé una"
+    },
+    { "duration": 6.24, "start": 165.68, "text": "decisión aún más radical." },
+    { "duration": 6.32, "start": 169.12, "text": "Me convertí en caminante" },
+    { "duration": 6.599, "start": 171.92, "text": "durante años. Eh," },
+    {
+      "duration": 4.6,
+      "start": 175.44,
+      "text": "recorrí caminos y senderos sin rumbo"
+    },
+    { "duration": 4.561, "start": 178.519, "text": "fijo." },
+    {
+      "duration": 5.32,
+      "start": 180.04,
+      "text": "Dormí bajo el cielo. Atravesé pueblos"
+    },
+    { "duration": 4.92, "start": 183.08, "text": "desconocidos." },
+    { "duration": 5.799, "start": 185.36, "text": "Viví con casi nada." },
+    {
+      "duration": 6.76,
+      "start": 188.0,
+      "text": "Y fue allí donde encontré una libertad"
+    },
+    {
+      "duration": 5.121,
+      "start": 191.159,
+      "text": "que jamás había conocido."
+    },
+    {
+      "duration": 4.44,
+      "start": 194.76,
+      "text": "La libertad de no perseguir"
+    },
+    {
+      "duration": 6.599,
+      "start": 196.28,
+      "text": "constantemente algo. La libertad de no"
+    },
+    {
+      "duration": 6.72,
+      "start": 199.2,
+      "text": "medir mi valor por lo que poseía,"
+    },
+    {
+      "duration": 4.601,
+      "start": 202.879,
+      "text": "la libertad de simplemente"
+    },
+    { "duration": 6.239, "start": 205.92, "text": "existir," },
+    {
+      "duration": 8.92,
+      "start": 207.48,
+      "text": "respirar, caminar, contemplar, escuchar,"
+    },
+    {
+      "duration": 9.28,
+      "start": 212.159,
+      "text": "sentir y comprendí algo que la mayoría"
+    },
+    {
+      "duration": 7.68,
+      "start": 216.4,
+      "text": "de las personas nunca llega a descubrir."
+    },
+    { "duration": 4.8, "start": 221.439, "text": "La vida ya es un milagro," },
+    {
+      "duration": 5.84,
+      "start": 224.08,
+      "text": "pero estamos tan ocupados persiguiendo"
+    },
+    {
+      "duration": 6.521,
+      "start": 226.239,
+      "text": "cosas que olvidamos. experimentarla."
+    },
+    {
+      "duration": 5.72,
+      "start": 229.92,
+      "text": "Sin embargo, mientras yo descubría esa"
+    },
+    {
+      "duration": 6.679,
+      "start": 232.76,
+      "text": "libertad, Europa avanzaba hacia la"
+    },
+    {
+      "duration": 6.679,
+      "start": 235.64,
+      "text": "oscuridad. La guerra se acercaba, los"
+    },
+    {
+      "duration": 5.921,
+      "start": 239.439,
+      "text": "discursos se volvían más agresivos,"
+    },
+    {
+      "duration": 5.961,
+      "start": 242.319,
+      "text": "los gobiernos hablaban de enemigos, los"
+    },
+    {
+      "duration": 6.079,
+      "start": 245.36,
+      "text": "pueblos hablaban de venganza y algo"
+    },
+    {
+      "duration": 6.239,
+      "start": 248.28,
+      "text": "dentro de mí comenzó a revelarse. Me"
+    },
+    {
+      "duration": 6.2,
+      "start": 251.439,
+      "text": "pregunté eh, ¿por qué los hombres"
+    },
+    {
+      "duration": 6.041,
+      "start": 254.519,
+      "text": "terminan eh destruyéndose una y otra"
+    },
+    {
+      "duration": 6.601,
+      "start": 257.639,
+      "text": "vez? ¿Por qué todos afirman querer la"
+    },
+    {
+      "duration": 6.56,
+      "start": 260.56,
+      "text": "paz mientras preparan la guerra? ¿Por"
+    },
+    {
+      "duration": 5.519,
+      "start": 264.24,
+      "text": "qué la historia parece repetir siempre"
+    },
+    { "duration": 6.72, "start": 267.12, "text": "las mismas tragedias?" },
+    {
+      "duration": 8.081,
+      "start": 269.759,
+      "text": "Comprendí que necesitaba una respuesta y"
+    },
+    {
+      "duration": 6.0,
+      "start": 273.84,
+      "text": "todos los caminos terminaron"
+    },
+    { "duration": 5.88, "start": 277.84, "text": "eh" },
+    {
+      "duration": 6.799,
+      "start": 279.84,
+      "text": "conduciéndome hacia un hombre, Gandy."
+    },
+    {
+      "duration": 6.8,
+      "start": 283.72,
+      "text": "Atravesé continentes para encontrarlo."
+    },
+    {
+      "duration": 5.84,
+      "start": 286.639,
+      "text": "No fui a la India buscando exotismo."
+    },
+    {
+      "duration": 3.48,
+      "start": 290.52,
+      "text": "No fui buscando una espiritualidad"
+    },
+    { "duration": 3.521, "start": 292.479, "text": "extraña." },
+    {
+      "duration": 6.36,
+      "start": 294.0,
+      "text": "Fui buscando una solución para el"
+    },
+    {
+      "duration": 7.52,
+      "start": 296.0,
+      "text": "sufrimiento humano. Y cuando finalmente"
+    },
+    { "duration": 5.2, "start": 300.36, "text": "conocí a Gandy," },
+    { "duration": 5.519, "start": 303.52, "text": "comprendí" },
+    {
+      "duration": 5.72,
+      "start": 305.56,
+      "text": "que estaba frente a algo extraordinario."
+    },
+    { "duration": 4.88, "start": 309.039, "text": "No era un rey," },
+    { "duration": 4.759, "start": 311.28, "text": "no era un general," },
+    { "duration": 4.801, "start": 313.919, "text": "no tenía riqueza," },
+    {
+      "duration": 5.641,
+      "start": 316.039,
+      "text": "no tenía ejército, pero poseía una"
+    },
+    {
+      "duration": 5.88,
+      "start": 318.72,
+      "text": "fuerza que jamás había visto. La fuerza"
+    },
+    {
+      "duration": 5.799,
+      "start": 321.68,
+      "text": "de un hombre que había logrado"
+    },
+    { "duration": 5.4, "start": 324.6, "text": "convertirse en uno solo." },
+    {
+      "duration": 5.361,
+      "start": 327.479,
+      "text": "Eso fue lo que más me impactó. En"
+    },
+    {
+      "duration": 4.52,
+      "start": 330.0,
+      "text": "Occidente vivimos divididos."
+    },
+    {
+      "duration": 5.4,
+      "start": 332.84,
+      "text": "Tenemos una personalidad para el"
+    },
+    {
+      "duration": 6.119,
+      "start": 334.52,
+      "text": "trabajo, otra para la familia,"
+    },
+    { "duration": 4.679, "start": 338.24, "text": "otra para los amigos," },
+    { "duration": 4.801, "start": 340.639, "text": "otra para la religión," },
+    { "duration": 4.441, "start": 342.919, "text": "otra para la política," },
+    {
+      "duration": 3.56,
+      "start": 345.44,
+      "text": "una máscara distinta para cada"
+    },
+    { "duration": 3.959, "start": 347.36, "text": "situación." },
+    {
+      "duration": 3.88,
+      "start": 349.0,
+      "text": "Pero Gandhi era el mismo hombre en todas"
+    },
+    { "duration": 3.761, "start": 351.319, "text": "partes." },
+    {
+      "duration": 5.759,
+      "start": 352.88,
+      "text": "La misma verdad guiaba cada aspecto de"
+    },
+    {
+      "duration": 7.119,
+      "start": 355.08,
+      "text": "su vida. No existía contradicción,"
+    },
+    {
+      "duration": 7.441,
+      "start": 358.639,
+      "text": "no existía doble discurso"
+    },
+    {
+      "duration": 7.0,
+      "start": 362.199,
+      "text": "y comprendí que la verdadera fuerza"
+    },
+    {
+      "duration": 4.839,
+      "start": 366.08,
+      "text": "nace precisamente de esa unidad"
+    },
+    { "duration": 4.28, "start": 369.199, "text": "interior." },
+    {
+      "duration": 4.641,
+      "start": 370.919,
+      "text": "Cuando observé a Gandy durante aquellos"
+    },
+    {
+      "duration": 4.201,
+      "start": 373.479,
+      "text": "meses, comprendí algo que ningún libro"
+    },
+    { "duration": 5.28, "start": 375.56, "text": "me había enseñado." },
+    {
+      "duration": 5.519,
+      "start": 377.68,
+      "text": "La mayoría quiere cambiar el mundo, pero"
+    },
+    {
+      "duration": 3.96,
+      "start": 380.84,
+      "text": "muy pocos son capaces de gobernarse a sí"
+    },
+    { "duration": 4.481, "start": 383.199, "text": "mismos." },
+    {
+      "duration": 5.679,
+      "start": 384.8,
+      "text": "Quieren transformar gobiernos,"
+    },
+    { "duration": 5.12, "start": 387.68, "text": "transformar sistemas," },
+    {
+      "duration": 4.601,
+      "start": 390.479,
+      "text": "transformar instituciones,"
+    },
+    {
+      "duration": 3.92,
+      "start": 392.8,
+      "text": "pero siguen siendo esclavos de sus"
+    },
+    { "duration": 4.28, "start": 395.08, "text": "impulsos," },
+    { "duration": 5.199, "start": 396.72, "text": "esclavos de sus deseos," },
+    {
+      "duration": 5.399,
+      "start": 399.36,
+      "text": "esclavos de sus reacciones."
+    },
+    {
+      "duration": 6.201,
+      "start": 401.919,
+      "text": "Entonces, comprendí que la primera"
+    },
+    {
+      "duration": 5.56,
+      "start": 404.759,
+      "text": "revolución debía ser interior,"
+    },
+    {
+      "duration": 6.4,
+      "start": 408.12,
+      "text": "porque quien no puede dominarse a sí"
+    },
+    {
+      "duration": 7.481,
+      "start": 410.319,
+      "text": "mismo, jamás será verdaderamente libre."
+    },
+    {
+      "duration": 6.04,
+      "start": 414.52,
+      "text": "Observa tu propia vida. Cuántas veces"
+    },
+    {
+      "duration": 4.799,
+      "start": 417.8,
+      "text": "reaccionas sin pensar. Cuántas veces una"
+    },
+    {
+      "duration": 4.639,
+      "start": 420.56,
+      "text": "palabra ajena controla tu estado"
+    },
+    { "duration": 5.04, "start": 422.599, "text": "emocional." },
+    {
+      "duration": 5.321,
+      "start": 425.199,
+      "text": "Cuántas veces una crítica destruye tu"
+    },
+    {
+      "duration": 5.921,
+      "start": 427.639,
+      "text": "paz. Cuántas veces una provocación"
+    },
+    { "duration": 7.119, "start": 430.52, "text": "decide tu comportamiento?" },
+    {
+      "duration": 8.039,
+      "start": 433.56,
+      "text": "Ese es el verdadero campo de batalla,"
+    },
+    {
+      "duration": 7.201,
+      "start": 437.639,
+      "text": "no el exterior, el interior. Por eso"
+    },
+    {
+      "duration": 6.16,
+      "start": 441.599,
+      "text": "quiero proponerte un ejercicio."
+    },
+    { "duration": 6.079, "start": 444.84, "text": "Durante un día entero." },
+    {
+      "duration": 5.481,
+      "start": 447.759,
+      "text": "Observa cada vez que reaccionas"
+    },
+    { "duration": 6.84, "start": 450.919, "text": "automáticamente." },
+    {
+      "duration": 8.399,
+      "start": 453.24,
+      "text": "No intentes cambiar nada, solo observa."
+    },
+    {
+      "duration": 6.201,
+      "start": 457.759,
+      "text": "Observa tu enojo. Observa tu enojo."
+    },
+    { "duration": 4.921, "start": 461.639, "text": "Observa tu impaciencia." },
+    { "duration": 5.959, "start": 463.96, "text": "Observa tu miedo." },
+    {
+      "duration": 6.919,
+      "start": 466.56,
+      "text": "Porque nadie puede transformar aquello"
+    },
+    {
+      "duration": 6.72,
+      "start": 469.919,
+      "text": "que no es capaz de ver. Y la conciencia"
+    },
+    {
+      "duration": 5.961,
+      "start": 473.479,
+      "text": "es siempre el primer paso hacia la"
+    },
+    {
+      "duration": 6.041,
+      "start": 476.639,
+      "text": "libertad. Con el tiempo comprendí algo"
+    },
+    {
+      "duration": 6.199,
+      "start": 479.44,
+      "text": "todavía más profundo. La violencia no es"
+    },
+    { "duration": 6.519, "start": 482.68, "text": "lo que la mayoría cree." },
+    {
+      "duration": 7.24,
+      "start": 485.639,
+      "text": "La gente piensa que la violencia"
+    },
+    {
+      "duration": 6.041,
+      "start": 489.199,
+      "text": "comienza con un golpe, con una agresión,"
+    },
+    { "duration": 4.081, "start": 492.879, "text": "con una guerra." },
+    {
+      "duration": 4.2,
+      "start": 495.24,
+      "text": "Pero eso es solamente el resultado"
+    },
+    {
+      "duration": 5.919,
+      "start": 496.96,
+      "text": "final. La violencia comienza mucho"
+    },
+    {
+      "duration": 5.96,
+      "start": 499.44,
+      "text": "antes, comienza cuando mentimos,"
+    },
+    {
+      "duration": 4.561,
+      "start": 502.879,
+      "text": "comienza cuando manipulamos, comienza"
+    },
+    {
+      "duration": 4.28,
+      "start": 505.4,
+      "text": "cuando humillamos, comienza cuando"
+    },
+    {
+      "duration": 4.8,
+      "start": 507.44,
+      "text": "buscamos imponer nuestra voluntad sobre"
+    },
+    {
+      "duration": 5.839,
+      "start": 509.68,
+      "text": "otros, comienza cuando dejamos de ver al"
+    },
+    {
+      "duration": 6.159,
+      "start": 512.24,
+      "text": "otro como un ser humano. Toda guerra"
+    },
+    {
+      "duration": 5.561,
+      "start": 515.519,
+      "text": "nace primero en el corazón y solo"
+    },
+    {
+      "duration": 4.401,
+      "start": 518.399,
+      "text": "después aparece en el mundo. Por eso"
+    },
+    {
+      "duration": 4.96,
+      "start": 521.08,
+      "text": "siempre digo que la violencia no es"
+    },
+    {
+      "duration": 6.88,
+      "start": 522.8,
+      "text": "fuerza. La fuerza es necesaria. Sin"
+    },
+    {
+      "duration": 6.84,
+      "start": 526.04,
+      "text": "fuerza no se construye nada. Sin fuerza"
+    },
+    {
+      "duration": 5.52,
+      "start": 529.68,
+      "text": "no se protege nada. Sin fuerza no se"
+    },
+    { "duration": 5.76, "start": 532.88, "text": "sirve a nadie." },
+    {
+      "duration": 8.44,
+      "start": 535.2,
+      "text": "La violencia es el abuso de la fuerza."
+    },
+    {
+      "duration": 7.6,
+      "start": 538.64,
+      "text": "Es utilizar algo bueno para eh"
+    },
+    {
+      "duration": 5.439,
+      "start": 543.64,
+      "text": "producir destrucción. Y cuando una"
+    },
+    {
+      "duration": 5.88,
+      "start": 546.24,
+      "text": "sociedad se organiza alrededor de ese"
+    },
+    {
+      "duration": 4.481,
+      "start": 549.079,
+      "text": "principio, termina destruyéndose a sí"
+    },
+    { "duration": 4.08, "start": 552.12, "text": "misma." },
+    {
+      "duration": 6.04,
+      "start": 553.56,
+      "text": "Todas las civilizaciones de la historia"
+    },
+    {
+      "duration": 6.48,
+      "start": 556.2,
+      "text": "han seguido ese camino. Todas, sin"
+    },
+    {
+      "duration": 7.04,
+      "start": 559.6,
+      "text": "excepción. Existe una razón por la que"
+    },
+    {
+      "duration": 7.399,
+      "start": 562.68,
+      "text": "el hombre moderno vive rodeado de ruido,"
+    },
+    {
+      "duration": 5.439,
+      "start": 566.64,
+      "text": "porque teme encontrarse consigo mismo."
+    },
+    {
+      "duration": 4.401,
+      "start": 570.079,
+      "text": "He visto personas cruzar océanos"
+    },
+    { "duration": 5.081, "start": 572.079, "text": "buscando respuestas," },
+    {
+      "duration": 4.88,
+      "start": 574.48,
+      "text": "pero incapaces de permanecer 15 minutos"
+    },
+    { "duration": 4.16, "start": 577.16, "text": "en silencio." },
+    {
+      "duration": 5.4,
+      "start": 579.36,
+      "text": "Y sin embargo, las respuestas nacen"
+    },
+    {
+      "duration": 5.759,
+      "start": 581.32,
+      "text": "precisamente allí. en el silencio, no en"
+    },
+    { "duration": 4.0, "start": 584.76, "text": "la agitación," },
+    {
+      "duration": 4.401,
+      "start": 587.079,
+      "text": "no en la discusión, no en el"
+    },
+    { "duration": 5.84, "start": 588.76, "text": "entretenimiento constante." },
+    {
+      "duration": 5.0,
+      "start": 591.48,
+      "text": "El silencio es un espejo y muchos lo"
+    },
+    {
+      "duration": 4.6,
+      "start": 594.6,
+      "text": "evitan porque revela aquello que llevan"
+    },
+    { "duration": 6.88, "start": 596.48, "text": "años intentando ocultar" },
+    {
+      "duration": 8.319,
+      "start": 599.2,
+      "text": "sus miedos, sus contradicciones,"
+    },
+    {
+      "duration": 5.719,
+      "start": 603.36,
+      "text": "sus heridas, sus deseos más profundos."
+    },
+    {
+      "duration": 4.56,
+      "start": 607.519,
+      "text": "Por eso, en nuestras comunidades"
+    },
+    {
+      "duration": 5.081,
+      "start": 609.079,
+      "text": "aprendimos a practicar el silencio, no"
+    },
+    { "duration": 4.76, "start": 612.079, "text": "como una obligación," },
+    { "duration": 4.52, "start": 614.16, "text": "sino como una necesidad." },
+    {
+      "duration": 4.761,
+      "start": 616.839,
+      "text": "Y quiero proponerte una práctica"
+    },
+    {
+      "duration": 6.159,
+      "start": 618.68,
+      "text": "sencilla. Busca un lugar tranquilo,"
+    },
+    { "duration": 6.44, "start": 621.6, "text": "apaga toda distracción." },
+    {
+      "duration": 6.521,
+      "start": 624.839,
+      "text": "Siéntate durante 15 minutos."
+    },
+    { "duration": 6.88, "start": 628.04, "text": "No reces, no visualices," },
+    {
+      "duration": 7.279,
+      "start": 631.36,
+      "text": "no intentes controlar nada. Simplemente"
+    },
+    {
+      "duration": 6.039,
+      "start": 634.92,
+      "text": "escucha. Escucha tus pensamientos,"
+    },
+    { "duration": 4.88, "start": 638.639, "text": "escucha tus emociones," },
+    { "duration": 5.56, "start": 640.959, "text": "escucha aquello que surge" },
+    {
+      "duration": 5.481,
+      "start": 643.519,
+      "text": "cuando el ruido desaparece."
+    },
+    { "duration": 4.521, "start": 646.519, "text": "Al principio" },
+    { "duration": 5.8, "start": 649.0, "text": "encontrarás" },
+    {
+      "duration": 8.2,
+      "start": 651.04,
+      "text": "confusión. Después descubrirás algo más"
+    },
+    {
+      "duration": 7.88,
+      "start": 654.8,
+      "text": "profundo, la voz de tu conciencia,"
+    },
+    {
+      "duration": 5.36,
+      "start": 659.24,
+      "text": "la única autoridad que jamás debería"
+    },
+    { "duration": 5.44, "start": 662.68, "text": "abandonarte." },
+    {
+      "duration": 6.4,
+      "start": 664.6,
+      "text": "Tras regresar de la India, soñé con"
+    },
+    { "duration": 5.959, "start": 668.12, "text": "transformar el mundo," },
+    {
+      "duration": 5.44,
+      "start": 671.0,
+      "text": "como hacen todos los jóvenes. Pensaba"
+    },
+    {
+      "duration": 5.2,
+      "start": 674.079,
+      "text": "que bastaba con decir la verdad para que"
+    },
+    {
+      "duration": 4.48,
+      "start": 676.44,
+      "text": "las personas despertaran. Qué equivocado"
+    },
+    { "duration": 3.641, "start": 679.279, "text": "estaba." },
+    { "duration": 4.76, "start": 680.92, "text": "Pronto descubrí" },
+    {
+      "duration": 5.919,
+      "start": 682.92,
+      "text": "que los hombres no rechazan la verdad"
+    },
+    {
+      "duration": 6.12,
+      "start": 685.68,
+      "text": "porque sea falsa. La rechazan porque"
+    },
+    { "duration": 5.281, "start": 688.839, "text": "exige transformación" },
+    { "duration": 5.36, "start": 691.8, "text": "y cambiar es difícil." },
+    {
+      "duration": 4.959,
+      "start": 694.12,
+      "text": "mucho más difícil de lo que imaginamos."
+    },
+    {
+      "duration": 3.479,
+      "start": 697.16,
+      "text": "Entonces comprendí que no bastaba con"
+    },
+    { "duration": 4.601, "start": 699.079, "text": "hablar," },
+    {
+      "duration": 6.2,
+      "start": 700.639,
+      "text": "había que vivir aquello que se enseñaba."
+    },
+    {
+      "duration": 5.399,
+      "start": 703.68,
+      "text": "Por eso nació la comunidad del arca,"
+    },
+    { "duration": 4.361, "start": 706.839, "text": "no como una teoría," },
+    { "duration": 5.521, "start": 709.079, "text": "no como una ideología," },
+    {
+      "duration": 6.639,
+      "start": 711.2,
+      "text": "sino como un experimento de vida,"
+    },
+    {
+      "duration": 6.72,
+      "start": 714.6,
+      "text": "un lugar donde las personas intentaran"
+    },
+    {
+      "duration": 5.0,
+      "start": 717.839,
+      "text": "vivir según los principios que"
+    },
+    { "duration": 4.8, "start": 721.32, "text": "proclamaban." },
+    {
+      "duration": 6.68,
+      "start": 722.839,
+      "text": "Y allí descubrí otra verdad."
+    },
+    {
+      "duration": 6.719,
+      "start": 726.12,
+      "text": "La mayoría de los sufrimientos humanos"
+    },
+    {
+      "duration": 5.041,
+      "start": 729.519,
+      "text": "provienen de una ilusión. la ilusión de"
+    },
+    { "duration": 4.881, "start": 732.839, "text": "que necesitaremos" },
+    {
+      "duration": 6.519,
+      "start": 734.56,
+      "text": "cada vez más para sentirnos completos,"
+    },
+    { "duration": 5.119, "start": 737.72, "text": "más dinero, más" },
+    { "duration": 4.12, "start": 741.079, "text": "reconocimiento," },
+    { "duration": 6.0, "start": 742.839, "text": "más posesiones," },
+    {
+      "duration": 7.921,
+      "start": 745.199,
+      "text": "más seguridad, más control."
+    },
+    {
+      "duration": 7.321,
+      "start": 748.839,
+      "text": "Pero cuanto más persigue el hombre esas"
+    },
+    {
+      "duration": 5.12,
+      "start": 753.12,
+      "text": "cosas, más dependiente se vuelve de"
+    },
+    { "duration": 4.32, "start": 756.16, "text": "ellas." },
+    {
+      "duration": 5.039,
+      "start": 758.24,
+      "text": "Durante años creí que la pobreza"
+    },
+    { "duration": 4.479, "start": 760.48, "text": "significaba no poseer." },
+    {
+      "duration": 3.961,
+      "start": 763.279,
+      "text": "Después comprendí algo mucho más"
+    },
+    { "duration": 4.32, "start": 764.959, "text": "profundo." },
+    {
+      "duration": 5.399,
+      "start": 767.24,
+      "text": "La verdadera pobreza consiste en dejar"
+    },
+    {
+      "duration": 6.481,
+      "start": 769.279,
+      "text": "de depender, porque puedes poseer mucho"
+    },
+    {
+      "duration": 6.801,
+      "start": 772.639,
+      "text": "y seguir siendo libre y puedes poseer"
+    },
+    {
+      "duration": 6.84,
+      "start": 775.76,
+      "text": "muy poco y seguir siendo esclavo."
+    },
+    {
+      "duration": 5.44,
+      "start": 779.44,
+      "text": "La pregunta nunca es cuánto tienes. La"
+    },
+    {
+      "duration": 6.0,
+      "start": 782.6,
+      "text": "pregunta es cuánto te posee aquello que"
+    },
+    {
+      "duration": 6.759,
+      "start": 784.88,
+      "text": "tienes. Observa a tu alrededor."
+    },
+    {
+      "duration": 5.679,
+      "start": 788.6,
+      "text": "La gente corre constantemente,"
+    },
+    { "duration": 5.361, "start": 791.639, "text": "compra constantemente," },
+    { "duration": 6.0, "start": 794.279, "text": "desea constantemente" },
+    {
+      "duration": 6.48,
+      "start": 797.0,
+      "text": "y aún así permanece insatisfecha"
+    },
+    {
+      "duration": 6.201,
+      "start": 800.279,
+      "text": "porque ninguna posesión puede llenar un"
+    },
+    {
+      "duration": 4.96,
+      "start": 803.48,
+      "text": "vacío espiritual, solo puede distraerlo"
+    },
+    { "duration": 4.0, "start": 806.48, "text": "temporalmente." },
+    {
+      "duration": 3.639,
+      "start": 808.44,
+      "text": "Por eso aprendí una práctica muy"
+    },
+    { "duration": 6.4, "start": 810.48, "text": "sencilla" },
+    {
+      "duration": 6.681,
+      "start": 812.079,
+      "text": "antes de adquirir algo nuevo. Detente."
+    },
+    { "duration": 4.28, "start": 816.88, "text": "Y pregúntate," },
+    {
+      "duration": 4.96,
+      "start": 818.76,
+      "text": "¿realmente necesito esto o intento"
+    },
+    {
+      "duration": 5.32,
+      "start": 821.16,
+      "text": "llenar una inquietud interior? Haz esa"
+    },
+    {
+      "duration": 5.799,
+      "start": 823.72,
+      "text": "pregunta durante una semana y"
+    },
+    {
+      "duration": 4.64,
+      "start": 826.48,
+      "text": "descubrirás cuántas decisiones tomas sin"
+    },
+    { "duration": 4.44, "start": 829.519, "text": "conciencia," },
+    {
+      "duration": 5.8,
+      "start": 831.12,
+      "text": "cuántas veces buscas afuera aquello que"
+    },
+    {
+      "duration": 6.401,
+      "start": 833.959,
+      "text": "solo puede encontrarse dentro. Hoy la"
+    },
+    {
+      "duration": 5.839,
+      "start": 836.92,
+      "text": "humanidad posee más poder que nunca y"
+    },
+    {
+      "duration": 5.08,
+      "start": 840.36,
+      "text": "sin embargo también posee más capacidad"
+    },
+    {
+      "duration": 5.721,
+      "start": 842.759,
+      "text": "de destrucción que cualquier generación"
+    },
+    {
+      "duration": 6.8,
+      "start": 845.44,
+      "text": "anterior. Ya no hablamos solamente de la"
+    },
+    {
+      "duration": 6.599,
+      "start": 848.48,
+      "text": "caída de imperios, hablamos"
+    },
+    { "duration": 6.68, "start": 852.24, "text": "de la posibilidad de" },
+    {
+      "duration": 6.88,
+      "start": 855.079,
+      "text": "destruir el planeta entero."
+    },
+    {
+      "duration": 5.76,
+      "start": 858.92,
+      "text": "Y por eso sigo diciendo lo mismo que"
+    },
+    {
+      "duration": 5.161,
+      "start": 861.959,
+      "text": "aprendí hace tantos años."
+    },
+    {
+      "duration": 4.76,
+      "start": 864.68,
+      "text": "El problema fundamental de la humanidad"
+    },
+    { "duration": 4.6, "start": 867.12, "text": "no es tecnológico," },
+    { "duration": 4.24, "start": 869.44, "text": "no es económico," },
+    { "duration": 5.479, "start": 871.72, "text": "no es político," },
+    {
+      "duration": 6.36,
+      "start": 873.68,
+      "text": "es espiritual, porque hemos aprendido a"
+    },
+    {
+      "duration": 6.361,
+      "start": 877.199,
+      "text": "dominar la materia antes de aprender a"
+    },
+    {
+      "duration": 6.12,
+      "start": 880.04,
+      "text": "dominarnos a nosotros mismos."
+    },
+    {
+      "duration": 5.12,
+      "start": 883.56,
+      "text": "Muchos me preguntan, ¿cómo luchar contra"
+    },
+    { "duration": 6.119, "start": 886.16, "text": "la violencia?" },
+    {
+      "duration": 5.8,
+      "start": 888.68,
+      "text": "¿Cómo enfrentar la injusticia? ¿Cómo"
+    },
+    { "duration": 4.68, "start": 892.279, "text": "resistir al mal?" },
+    { "duration": 6.12, "start": 894.48, "text": "La mayoría conoce" },
+    {
+      "duration": 7.8,
+      "start": 896.959,
+      "text": "cuatro respuestas: pelear, huir,"
+    },
+    {
+      "duration": 7.2,
+      "start": 900.6,
+      "text": "rendirse o permanecer indiferente."
+    },
+    {
+      "duration": 4.961,
+      "start": 904.759,
+      "text": "Pero existe una quinta posibilidad,"
+    },
+    { "duration": 4.599, "start": 907.8, "text": "la no violencia." },
+    {
+      "duration": 4.16,
+      "start": 909.72,
+      "text": "Y no confundas jamás la no violencia con"
+    },
+    { "duration": 4.68, "start": 912.399, "text": "debilidad." },
+    {
+      "duration": 5.519,
+      "start": 913.88,
+      "text": "La no violencia exige más valentía que"
+    },
+    {
+      "duration": 5.921,
+      "start": 917.079,
+      "text": "cualquier guerra, porque requiere"
+    },
+    {
+      "duration": 6.321,
+      "start": 919.399,
+      "text": "enfrentar al adversario sin odiarlo,"
+    },
+    { "duration": 5.16, "start": 923.0, "text": "resistir sin destruir," },
+    { "duration": 5.599, "start": 925.72, "text": "luchar sin deshumanizar," },
+    {
+      "duration": 6.08,
+      "start": 928.16,
+      "text": "sufrir sin convertirse en verdugo."
+    },
+    {
+      "duration": 5.281,
+      "start": 931.319,
+      "text": "Eso requiere una fuerza inmensa, una"
+    },
+    {
+      "duration": 5.2,
+      "start": 934.24,
+      "text": "fuerza mucho mayor que la necesaria para"
+    },
+    {
+      "duration": 6.28,
+      "start": 936.6,
+      "text": "apretar un gatillo. Después de toda una"
+    },
+    {
+      "duration": 5.04,
+      "start": 939.44,
+      "text": "vida de viajes, luchas, búsquedas y"
+    },
+    { "duration": 6.959, "start": 942.88, "text": "aprendizajes," },
+    { "duration": 5.359, "start": 944.48, "text": "puedo resumir todo lo que" },
+    { "duration": 6.081, "start": 951.079, "text": "eh" },
+    {
+      "duration": 6.2,
+      "start": 953.8,
+      "text": "he comprendido en una sola verdad. La"
+    },
+    {
+      "duration": 5.64,
+      "start": 957.16,
+      "text": "humanidad no será salvada por hombres"
+    },
+    { "duration": 5.839, "start": 960.0, "text": "más inteligentes," },
+    {
+      "duration": 6.2,
+      "start": 962.8,
+      "text": "ni por máquinas más avanzadas,"
+    },
+    {
+      "duration": 4.841,
+      "start": 965.839,
+      "text": "ni por gobiernos más poderosos."
+    },
+    {
+      "duration": 3.92,
+      "start": 969.0,
+      "text": "será salvada por hombres más"
+    },
+    { "duration": 5.44, "start": 970.68, "text": "conscientes," },
+    {
+      "duration": 6.359,
+      "start": 972.92,
+      "text": "hombres capaces de decir la verdad,"
+    },
+    {
+      "duration": 6.04,
+      "start": 976.12,
+      "text": "capaces de dominar sus impulsos, capaces"
+    },
+    {
+      "duration": 6.56,
+      "start": 979.279,
+      "text": "de escuchar su conciencia, capaces de"
+    },
+    { "duration": 6.56, "start": 982.16, "text": "vivir con sencillez," },
+    {
+      "duration": 5.721,
+      "start": 985.839,
+      "text": "capaces de luchar sin odio,"
+    },
+    {
+      "duration": 4.84,
+      "start": 988.72,
+      "text": "capaces de amar sin poseer, porque el"
+    },
+    {
+      "duration": 4.92,
+      "start": 991.56,
+      "text": "futuro del mundo no depende de lo que"
+    },
+    { "duration": 5.48, "start": 993.56, "text": "ocurre en los parlamentos," },
+    {
+      "duration": 5.799,
+      "start": 996.48,
+      "text": "depende de lo que ocurre en el corazón"
+    },
+    {
+      "duration": 6.32,
+      "start": 999.04,
+      "text": "humano y cada vez que un hombre vence la"
+    },
+    {
+      "duration": 5.841,
+      "start": 1002.279,
+      "text": "violencia que lleva dentro,"
+    },
+    {
+      "duration": 5.399,
+      "start": 1005.36,
+      "text": "toda la humanidad avanza un paso hacia"
+    },
+    { "duration": 5.68, "start": 1008.12, "text": "la paz." },
+    {
+      "duration": 5.08,
+      "start": 1010.759,
+      "text": "Esa fue la lección de Gandy. Esa fue la"
+    },
+    { "duration": 6.8, "start": 1013.8, "text": "lección de mi vida." },
+    {
+      "duration": 8.12,
+      "start": 1015.839,
+      "text": "Y quizás si has escuchado con atención"
+    },
+    { "duration": 6.479, "start": 1020.6, "text": "también pueda eh" },
+    { "duration": 3.12, "start": 1023.959, "text": "convertirse en la tuya." }
+  ]
+]

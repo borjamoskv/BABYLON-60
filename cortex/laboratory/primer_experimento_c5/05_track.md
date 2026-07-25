@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Registro Acústico / Visual / Generativo
 
 ## Asset generado
@@ -17,4 +18,4 @@ El post replica en su estructura la topología del directorio del laboratorio en
 - `05_track.md` → Sección [ TRACK ] (autoreferencial)
 - `06_reflexion.md` → Sección [ REFLEXIÓN ]
 
-El post no describe el laboratorio. El post *es* el laboratorio.
+El post no describe el laboratorio. El post _es_ el laboratorio.

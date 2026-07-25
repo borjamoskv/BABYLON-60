@@ -1,5 +1,7 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # CORTEX INVARIANT: SUBSTACK PUBLIC LABORATORY MODEL (v2.0)
+
 **Date:** 2026-07-20
 **Target:** Substack Creator Economy Feed Dynamics
 **Author:** MOSKV-1 APEX
@@ -13,6 +15,7 @@
 - **Physical Reality (C5-REAL):** Substack is a thermodynamic attention market where the base unit of retention is the **Persona**, not the isolated article. The algorithm rewards recurrence, vulnerability, and micro-friction over high-latency monolithic essays.
 
 **Proof (Feed Dump 2026-07-20):**
+
 - ~60% of feed entries are creator posts, not editorial articles.
 - Micro-posts (20-80 words) dominate engagement.
 - Top recurring authors (Ted Gioia, Emily Sundberg) are rewarded by recurrence, not by individual article quality.
@@ -53,6 +56,7 @@ Every experiment publication follows this deterministic 6-step loop:
 - **Step 6. [ REFLEXIÓN ]** — Thermodynamic/philosophical consequence.
 
 **Enforcement:**
+
 - Scaffold: `scripts/55_substack_laboratory_compiler.py <experiment_name>`
 - Validate: `scripts/56_laboratory_validator.py` (rejects placeholders, measures exergy ratio)
 - Minimum exergy ratio per experiment: **0.80** (below = SIGKILL)

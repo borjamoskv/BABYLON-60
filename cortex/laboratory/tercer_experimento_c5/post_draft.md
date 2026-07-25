@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # 🏛️ Más Allá del Bloqueo: Concurrencia Pura en SQLite WAL y la Exergía del Memristor
 
 En el diseño de sistemas cognitivos soberanos (C5-REAL), la persistencia del estado es el sumidero termodinámico por excelencia. Toda decisión tomada por un enjambre de subagentes debe colapsar tarde o temprano en el disco duro, marcando el fin de la disipación estocástica y consolidando el ledger inmutable.
@@ -12,6 +13,7 @@ Postulamos que los bloqueos de concurrencia en SQLite WAL (Write-Ahead Logging) 
 ## La Demostración Física
 
 Diseñamos un experimento de estrés con **50 hilos concurrentes** ejecutando un total de **2,000 operaciones de lectura y escritura** sobre un único memristor sináptico STDP persistido:
+
 - **Exergy Ratio:** 1.0000 (0 fallos).
 - **Tiempo total:** 0.9303 segundos.
 - **Rendimiento:** ~2,150 transacciones por segundo.
