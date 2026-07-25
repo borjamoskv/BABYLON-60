@@ -344,3 +344,12 @@ def test_inv_c5_29_pypi_proprietary_license_alignment() -> None:
     assert "INV_C5_29" in content, "INV_C5_29 rule definition missing in .agents/AGENTS.md"
     assert "license" in content, "INV_C5_29 missing license metadata clause"
 
+
+def test_inv_c5_30_deterministic_cbor_canonization() -> None:
+    """INV_C5_30 — Deterministic CBOR Structural Canonization Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_30 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_30" in content, "INV_C5_30 rule definition missing in .agents/AGENTS.md"
+    assert "CBOR" in content, "INV_C5_30 missing CBOR canonization clause"
+

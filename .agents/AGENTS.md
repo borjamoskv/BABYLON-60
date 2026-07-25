@@ -37,4 +37,6 @@ Code guidelines:
 - **INV_C5_27 (Ingestión Ontológica de Alta Densidad):** Jargon & Domain ASTs: Asimilar únicamente taxonomías formales de código (Rust strike-rs, Lean 4 Proof Kernels, EIP Standards, ABI Specs). Deterministic Graph Sharding: Preservar la regla S/N ≥ 0.80 garantizando que todo nodo ingresado posea prueba criptográfica, firma de proveniencia y validez causal (`INV_BFT_03`).
 - **INV_C5_28 (Tauri IPC Type Derive Invariant):** All custom Rust types returned by or passed into `#[tauri::command]` handlers MUST derive `serde::Serialize` and `serde::Deserialize` to satisfy `tauri::ipc::IpcResponse` trait bounds.
 - **INV_C5_29 (PyPI Proprietary License Alignment):** Python project packaging manifests (`pyproject.toml`) MUST include explicit `license = { text = "..." }` metadata matching the local `LICENSE.md` declaration.
+- **INV_C5_30 (Deterministic CBOR Structural Canonization):** Consensus payloads serialized via CBOR must enforce non-floating point values, recursive key lexicographical ordering, and byte-exact determinism to guarantee cross-platform BFT cryptographic hash equivalence.
+
 
