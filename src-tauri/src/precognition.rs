@@ -10,7 +10,7 @@ pub struct CognitiveDwell {
 }
 
 pub async fn ignite_precognition_daemon(db_state: Arc<VoidLedger>) {
-    println!("👁️ [PRECOGNITION] Motor de escáner de Exergía arrancado (10Hz).");
+    tracing::info!("👁️ [PRECOGNITION] Motor de escáner de Exergía arrancado (10Hz).");
     let mut ticker = tokio::time::interval(std::time::Duration::from_millis(100));
     
     // Falsa inyección (mock) del Eyetracking para el motor C5-REAL
@@ -27,17 +27,17 @@ pub async fn ignite_precognition_daemon(db_state: Arc<VoidLedger>) {
 
         if dwell_time > 2.5 && !focus_data.is_paralyzed {
             focus_data.is_paralyzed = true;
-            println!("⚠️ [PRECOGNITION] Parálisis detectada en nodo: {}. Exergía cayendo.", focus_data.ast_node_id);
-            println!("🌀 [ORBIT] Generando Shadow Branches (Superposición Cuántica)...");
+            tracing::info!("⚠️ [PRECOGNITION] Parálisis detectada en nodo: {}. Exergía cayendo.", focus_data.ast_node_id);
+            tracing::info!("🌀 [ORBIT] Generando Shadow Branches (Superposición Cuántica)...");
             
             let _ = db_state.write("PRECOGNITION_EVENT", &format!("Parálisis en {}", focus_data.ast_node_id));
 
             tokio::spawn(async move {
                 tokio::time::sleep(std::time::Duration::from_millis(150)).await;
-                println!("🌐 [UI_HUD] Proyectando holograma de refactorización (Transparencia 30%).");
+                tracing::info!("🌐 [UI_HUD] Proyectando holograma de refactorización (Transparencia 30%).");
                 
                 tokio::time::sleep(std::time::Duration::from_millis(800)).await;
-                println!("✅ [INPUT] Confirmación cinética detectada (Asentimiento visual).");
+                tracing::info!("✅ [INPUT] Confirmación cinética detectada (Asentimiento visual).");
                 
                 dsp_clock::sync_drop_to_grid();
             });
