@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # BRIEFING — 2026-07-25T22:40:00Z
 
 ## Mission

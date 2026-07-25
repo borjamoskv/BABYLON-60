@@ -1,41 +1,46 @@
 # C5-REAL EXERGY CERTIFIED
 Claim: "[STATE-OBSERVER-1000-SPACE] Generative Observer Taxonomy"
-Proof: { Base: "Combinatorial Observer Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+Proof:
+  {
+    Base: "Combinatorial Observer Matrix [10 D x 10 P x 10 M]",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formula: "[Domain][ObserverPrimitive][Modifier] = 1000 Unique State Observer Primitives"
 
 Domains_Context:
-  0: "SOURCE"    # Raw Sensor / Input Observability
-  1: "MATRIX"    # Internal Memory / State Graph Observability
-  2: "PULSE"     # Metrics / Heartbeat / Throughput Observability
-  3: "KINETIC"   # I/O Gesture / Hardware Motion Observability
-  4: "LOGIC"     # Invariant Rules / BFT Logic Observability
-  5: "VECTOR"    # Latent Space / Semantic Drift Observability
-  6: "STORAGE"   # Disk / WAL / Persistence Observability
-  7: "OSINT"     # Network / External Entropy Observability
-  8: "CLOCK"     # Temporal Phase / Time Jitter Observability
-  9: "COMPILER"  # AST Transduction / JIT Pipeline Observability
+  0: "SOURCE" # Raw Sensor / Input Observability
+  1: "MATRIX" # Internal Memory / State Graph Observability
+  2: "PULSE" # Metrics / Heartbeat / Throughput Observability
+  3: "KINETIC" # I/O Gesture / Hardware Motion Observability
+  4: "LOGIC" # Invariant Rules / BFT Logic Observability
+  5: "VECTOR" # Latent Space / Semantic Drift Observability
+  6: "STORAGE" # Disk / WAL / Persistence Observability
+  7: "OSINT" # Network / External Entropy Observability
+  8: "CLOCK" # Temporal Phase / Time Jitter Observability
+  9: "COMPILER" # AST Transduction / JIT Pipeline Observability
 
 Primitives_Action:
-  0: "INIT"         # Allocate Covariance P0 & Gain L0 Matrices
-  1: "PREDICT"      # A priori State Estimation (x_hat_{k|k-1} = A*x_hat_{k-1} + B*u_k)
-  2: "UPDATE"       # A posteriori Correction (x_hat_{k|k} = x_hat_{k|k-1} + L_k*(y_k - C*x_hat_{k|k-1}))
-  3: "INNOVATION"   # Compute Innovation Residual (nu_k = y_k - C*x_hat_{k|k-1})
-  4: "GAIN"         # Compute Optimal Gain (L_k = P_{k|k-1}*C^T * inv(C*P_{k|k-1}*C^T + R))
-  5: "COVARIANCE"   # Propagate Error Covariance (P_{k|k} = (I - L_k*C)*P_{k|k-1})
-  6: "DRIFT_CHECK"  # Compute KL Divergence / Norm ||y_k - y_hat_k||
-  7: "RECONSTRUCT"  # Reconstruct Unobservable Latent Vectors
+  0: "INIT" # Allocate Covariance P0 & Gain L0 Matrices
+  1: "PREDICT" # A priori State Estimation (x_hat_{k|k-1} = A*x_hat_{k-1} + B*u_k)
+  2: "UPDATE" # A posteriori Correction (x_hat_{k|k} = x_hat_{k|k-1} + L_k*(y_k - C*x_hat_{k|k-1}))
+  3: "INNOVATION" # Compute Innovation Residual (nu_k = y_k - C*x_hat_{k|k-1})
+  4: "GAIN" # Compute Optimal Gain (L_k = P_{k|k-1}*C^T * inv(C*P_{k|k-1}*C^T + R))
+  5: "COVARIANCE" # Propagate Error Covariance (P_{k|k} = (I - L_k*C)*P_{k|k-1})
+  6: "DRIFT_CHECK" # Compute KL Divergence / Norm ||y_k - y_hat_k||
+  7: "RECONSTRUCT" # Reconstruct Unobservable Latent Vectors
   8: "SANITY_ASSERT" # BFT Invariant & Lyapunov Matrix Stability Test
   9: "FLUSH_LEDGER" # Seal State Ledger Receipt in C5-REAL Memory
 
 Modifiers_Constraint:
-  0: "RAW"           # Direct Linear Pass-Through Observer
-  1: "ATOMIC"        # Lock-Free Isolated Thread Observer
-  2: "KALMAN_EXTENDED"# Non-Linear EKF Jacobians (grad_f, grad_h)
-  3: "LUENBERGER_RIGID"# Constant Gain Deterministic Luenberger Observer
-  4: "PARTICLE_PF"   # Sequential Monte Carlo (1000 Particle Filters)
-  5: "SLIDING_MODE"  # Discontinuous Sliding Surface Observer
-  6: "QUANTIZED"     # 60-bit Fixed Point Discrete Quantization
-  7: "ADAPTIVE_R"    # Noise Covariance R Online Estimation
+  0: "RAW" # Direct Linear Pass-Through Observer
+  1: "ATOMIC" # Lock-Free Isolated Thread Observer
+  2: "KALMAN_EXTENDED" # Non-Linear EKF Jacobians (grad_f, grad_h)
+  3: "LUENBERGER_RIGID" # Constant Gain Deterministic Luenberger Observer
+  4: "PARTICLE_PF" # Sequential Monte Carlo (1000 Particle Filters)
+  5: "SLIDING_MODE" # Discontinuous Sliding Surface Observer
+  6: "QUANTIZED" # 60-bit Fixed Point Discrete Quantization
+  7: "ADAPTIVE_R" # Noise Covariance R Online Estimation
   8: "NEURAL_LATENT" # VAE Latent Auto-Encoder State Reconstruction
   9: "BFT_CONSENSUS" # Multi-Node Byzantine Fault Tolerance Agreement

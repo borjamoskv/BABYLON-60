@@ -1,41 +1,46 @@
 # C5-REAL EXERGY CERTIFIED
 Claim: "[NEURO-CHAIN-1000-SPACE] Generative Cognitive Chain Taxonomy"
-Proof: { Base: "Combinatorial Cognitive Chain Matrix [10 D x 10 P x 10 M]", Range: [000, 999], Confidence: C5-REAL }
+Proof:
+  {
+    Base: "Combinatorial Cognitive Chain Matrix [10 D x 10 P x 10 M]",
+    Range: [000, 999],
+    Confidence: C5-REAL,
+  }
 
 Formula: "Homeostasis -> Prediction -> Attention -> Action -> Language = 1000 Unique Transductor Primitives"
 
 Domains_Context:
-  0: "ENERGY_BOUND"        # Exergy Limit / Thermodynamic Pressure
-  1: "ATTRACTOR_DECAY"     # Lyapunov Attractor Decay / Memory Entropy
-  2: "COGNITIVE_DRIFT"     # KL Divergence / State Shift
-  3: "RESOURCE_EXHAUST"    # Hardware Pressure / Sockets / Threads
-  4: "SYBIL_REVERB"        # Noise Reverberation / Semantic Ambiguity
-  5: "BAYESIAN_FREE_ENERGY"# Friston Free Energy F Minimization
-  6: "LATENT_TORQUE"       # Manifold Gradient Torque
-  7: "SURPRISAL_GATE"      # Surprisal Threshold I(Y)
-  8: "TEMPORAL_PHASE"      # Temporal Phase Execution
-  9: "DEEP_MCTS_DEPTH"     # Tree Search Depth / Compute Budget
+  0: "ENERGY_BOUND" # Exergy Limit / Thermodynamic Pressure
+  1: "ATTRACTOR_DECAY" # Lyapunov Attractor Decay / Memory Entropy
+  2: "COGNITIVE_DRIFT" # KL Divergence / State Shift
+  3: "RESOURCE_EXHAUST" # Hardware Pressure / Sockets / Threads
+  4: "SYBIL_REVERB" # Noise Reverberation / Semantic Ambiguity
+  5: "BAYESIAN_FREE_ENERGY" # Friston Free Energy F Minimization
+  6: "LATENT_TORQUE" # Manifold Gradient Torque
+  7: "SURPRISAL_GATE" # Surprisal Threshold I(Y)
+  8: "TEMPORAL_PHASE" # Temporal Phase Execution
+  9: "DEEP_MCTS_DEPTH" # Tree Search Depth / Compute Budget
 
 Primitives_Action:
-  0: "HOMEOSTASIS_INIT"     # Establish Thermodynamic Equilibrium
-  1: "HOMEOSTASIS_MUTATE"   # Perturb System State Energy
-  2: "PREDICTION_GENERATE"  # Generate Prior Model P(X)
-  3: "PREDICTION_AUDIT"     # Audit A Priori Expectation
-  4: "ATTENTION_FOCUS"      # Allocate Attention KV Mask / Tree Pruning
-  5: "ATTENTION_QUANTIZE"   # Quantize Variance / Latent Focus
-  6: "ACTION_DISPATCH"      # Execute C5-REAL Physical Disk Mutation
-  7: "ACTION_ASSERT"        # Assert BFT Invariant Post-Mutation
-  8: "LANGUAGE_COLLAPSE"    # Collapse Latent Vector to AST / Plain Text
-  9: "LANGUAGE_FLUSH"       # Synchronous Transducer Output Emission
+  0: "HOMEOSTASIS_INIT" # Establish Thermodynamic Equilibrium
+  1: "HOMEOSTASIS_MUTATE" # Perturb System State Energy
+  2: "PREDICTION_GENERATE" # Generate Prior Model P(X)
+  3: "PREDICTION_AUDIT" # Audit A Priori Expectation
+  4: "ATTENTION_FOCUS" # Allocate Attention KV Mask / Tree Pruning
+  5: "ATTENTION_QUANTIZE" # Quantize Variance / Latent Focus
+  6: "ACTION_DISPATCH" # Execute C5-REAL Physical Disk Mutation
+  7: "ACTION_ASSERT" # Assert BFT Invariant Post-Mutation
+  8: "LANGUAGE_COLLAPSE" # Collapse Latent Vector to AST / Plain Text
+  9: "LANGUAGE_FLUSH" # Synchronous Transducer Output Emission
 
 Modifiers_Constraint:
-  0: "RAW"                  # Zero-Latency Pass-Through
-  1: "ATOMIC"               # Lock-Free Single-Thread Execution
-  2: "ACTIVE_INFERENCE"     # Friston Active Inference Dynamics
-  3: "LYAPUNOV_STABLE"      # Strict Lyapunov Stability Guarantee
-  4: "SPARSE_KV"            # Sparse Attention Mask Purge
-  5: "BFT_CONSENSUS"        # Byzantine Agreement N >= 3
-  6: "FEEDFORWARD"          # Anticipatory Open-Loop Control
-  7: "BACKPROP_ERROR"       # Retro-Propagated Error Correction
-  8: "SLIDING_SURFACE"      # Discontinuous Sliding Surface Control
-  9: "EPIDEMIC_PURGE"       # Entropic Slop Annihilation
+  0: "RAW" # Zero-Latency Pass-Through
+  1: "ATOMIC" # Lock-Free Single-Thread Execution
+  2: "ACTIVE_INFERENCE" # Friston Active Inference Dynamics
+  3: "LYAPUNOV_STABLE" # Strict Lyapunov Stability Guarantee
+  4: "SPARSE_KV" # Sparse Attention Mask Purge
+  5: "BFT_CONSENSUS" # Byzantine Agreement N >= 3
+  6: "FEEDFORWARD" # Anticipatory Open-Loop Control
+  7: "BACKPROP_ERROR" # Retro-Propagated Error Correction
+  8: "SLIDING_SURFACE" # Discontinuous Sliding Surface Control
+  9: "EPIDEMIC_PURGE" # Entropic Slop Annihilation

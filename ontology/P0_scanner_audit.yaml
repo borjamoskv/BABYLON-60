@@ -5,8 +5,8 @@ Proof:
   Range: [0, 15]
   Confidence: C5-REAL
 Isomorphisms:
-  - "Starvation de WindowServer" -> "14 Procesos Fantasma (Brave/Electron) ejecutados en background con SIGKILL_State_Purge = TRUE"
-  - "Falla de AST Formatter" -> "oxfmt command not found -> anergía en CI/CD local"
+  - '"Starvation de WindowServer" -> "14 Procesos Fantasma (Brave/Electron) ejecutados en background con SIGKILL_State_Purge = TRUE"'
+  - '"Falla de AST Formatter" -> "oxfmt command not found -> anergía en CI/CD local"'
 Blast_Radius_Matrix:
   Vector: OS Level Zombie Starvation
   Blast_Radius: Global Workspace
