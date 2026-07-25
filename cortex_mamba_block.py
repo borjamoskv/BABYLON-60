@@ -1,9 +1,11 @@
 import math
 from typing import List
+import numpy as np
+import numpy.typing as npt
 from cortex_ssm_mamba_core import StateSpaceModel
 
-def silu(x: float) -> float:
-    return x / (1.0 + math.exp(-x))
+def silu(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+    return x / (1.0 + np.exp(-x))
 
 class MambaBlock:
 
@@ -13,43 +15,35 @@ class MambaBlock:
         self.d_state = d_state
         self.conv_kernel_size = conv_kernel_size
         self.ssm = StateSpaceModel(state_dim=d_state, input_dim=self.d_inner)
-        self.W_in: List[List[float]] = [[0.1 for _ in range(d_model)] for _ in range(self.d_inner)]
-        self.W_x: List[List[float]] = [[0.1 for _ in range(d_model)] for _ in range(self.d_inner)]
-        self.W_out: List[List[float]] = [[0.1 for _ in range(self.d_inner)] for _ in range(d_model)]
-        self.conv_weights: List[List[float]] = [[0.25 for _ in range(conv_kernel_size)] for _ in range(self.d_inner)]
+        
+        self.W_in: npt.NDArray[np.float64] = np.full((self.d_inner, d_model), 0.1, dtype=np.float64)
+        self.W_x: npt.NDArray[np.float64] = np.full((self.d_inner, d_model), 0.1, dtype=np.float64)
+        self.W_out: npt.NDArray[np.float64] = np.full((d_model, self.d_inner), 0.1, dtype=np.float64)
+        self.conv_weights: npt.NDArray[np.float64] = np.full((self.d_inner, conv_kernel_size), 0.25, dtype=np.float64)
 
-    def _linear_proj(self, W: List[List[float]], x: List[float]) -> List[float]:
-        res = [0.0] * len(W)
-        for i in range(len(W)):
-            res[i] = sum((W[i][j] * x[j] for j in range(len(x))))
-        return res
-
-    def _causal_conv1d(self, sequence: List[List[float]]) -> List[List[float]]:
-        seq_len = len(sequence)
-        out_seq = []
-        for t in range(seq_len):
-            out_t = [0.0] * self.d_inner
-            for d in range(self.d_inner):
-                conv_sum = 0.0
-                for k in range(self.conv_kernel_size):
-                    t_idx = t - k
-                    if t_idx >= 0:
-                        conv_sum += sequence[t_idx][d] * self.conv_weights[d][k]
-                out_t[d] = conv_sum
-            out_seq.append(out_t)
+    def _causal_conv1d(self, sequence: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+        seq_len = sequence.shape[0]
+        out_seq = np.zeros((seq_len, self.d_inner), dtype=np.float64)
+        
+        for d in range(self.d_inner):
+            kernel = self.conv_weights[d]
+            out_seq[:, d] = np.convolve(sequence[:, d], kernel, mode='full')[:seq_len]
+            
         return out_seq
 
-    def forward(self, sequence: List[List[float]]) -> List[List[float]]:
-        seq_len = len(sequence)
-        x_proj = [self._linear_proj(self.W_x, seq_t) for seq_t in sequence]
-        z_proj = [self._linear_proj(self.W_in, seq_t) for seq_t in sequence]
+    def forward(self, sequence: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
+        seq_len = sequence.shape[0]
+        
+        x_proj = sequence @ self.W_x.T
+        z_proj = sequence @ self.W_in.T
+        
         x_conv = self._causal_conv1d(x_proj)
-        x_act = [[silu(val) for val in step] for step in x_conv]
+        x_act = silu(x_conv)
+        
         ssm_out = self.ssm.forward(x_act)
-        output_seq = []
-        for t in range(seq_len):
-            gate_t = [silu(val) for val in z_proj[t]]
-            y_t = [ssm_out[t][i] * gate_t[i] for i in range(self.d_inner)]
-            final_out_t = self._linear_proj(self.W_out, y_t)
-            output_seq.append(final_out_t)
+        
+        gate = silu(z_proj)
+        y = ssm_out * gate
+        
+        output_seq = y @ self.W_out.T
         return output_seq

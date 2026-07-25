@@ -1,48 +1,44 @@
 import math
-from typing import List, Tuple
+from typing import Tuple
+import numpy as np
+import numpy.typing as npt
 
 class StateSpaceModel:
 
     def __init__(self, state_dim: int, input_dim: int) -> None:
         self.state_dim = state_dim
         self.input_dim = input_dim
-        self.A: List[List[float]] = [[-0.1 if i == j else 0.0 for j in range(state_dim)] for i in range(state_dim)]
-        self.B: List[List[float]] = [[0.1 for _ in range(input_dim)] for _ in range(state_dim)]
-        self.C: List[List[float]] = [[1.0 if i == j else 0.0 for j in range(state_dim)] for i in range(input_dim)]
-        self.D: List[List[float]] = [[0.0 for _ in range(input_dim)] for _ in range(input_dim)]
+        self.A: npt.NDArray[np.float64] = -0.1 * np.eye(state_dim, dtype=np.float64)
+        self.B: npt.NDArray[np.float64] = np.full((state_dim, input_dim), 0.1, dtype=np.float64)
+        self.C: npt.NDArray[np.float64] = np.eye(input_dim, state_dim, dtype=np.float64)
+        self.D: npt.NDArray[np.float64] = np.zeros((input_dim, input_dim), dtype=np.float64)
         self.delta: float = 0.01
 
-    def _matrix_vector_mul(self, mat: List[List[float]], vec: List[float]) -> List[float]:
-        res = [0.0] * len(mat)
-        for i in range(len(mat)):
-            res[i] = sum((mat[i][j] * vec[j] for j in range(len(vec))))
-        return res
+    def _discretize_zoh(self) -> Tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
+        A_bar = np.eye(self.state_dim, dtype=np.float64) + self.delta * self.A
+        B_bar = self.delta * self.B
+        return A_bar, B_bar
 
-    def _vector_add(self, v1: List[float], v2: List[float]) -> List[float]:
-        return [a + b for a, b in zip(v1, v2)]
-
-    def _discretize_zoh(self) -> Tuple[List[List[float]], List[List[float]]]:
-        A_bar = [[(1.0 if i == j else 0.0) + self.delta * self.A[i][j] for j in range(self.state_dim)] for i in range(self.state_dim)]
-        B_bar = [[self.delta * self.B[i][j] for j in range(self.input_dim)] for i in range(self.state_dim)]
-        return (A_bar, B_bar)
-
-    def forward(self, sequence: List[List[float]]) -> List[List[float]]:
+    def forward(self, sequence: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
         A_bar, B_bar = self._discretize_zoh()
-        h: List[float] = [0.0] * self.state_dim
-        output_seq: List[List[float]] = []
-        for x in sequence:
-            h_next = self._vector_add(self._matrix_vector_mul(A_bar, h), self._matrix_vector_mul(B_bar, x))
-            h = h_next
-            y = self._vector_add(self._matrix_vector_mul(self.C, h), self._matrix_vector_mul(self.D, x))
-            output_seq.append(y)
+        h: npt.NDArray[np.float64] = np.zeros(self.state_dim, dtype=np.float64)
+        
+        seq_len = sequence.shape[0]
+        output_seq: npt.NDArray[np.float64] = np.zeros((seq_len, self.input_dim), dtype=np.float64)
+        
+        for t in range(seq_len):
+            h = A_bar @ h + B_bar @ sequence[t]
+            output_seq[t] = self.C @ h + self.D @ sequence[t]
+            
         return output_seq
 
 def main() -> None:
     model = StateSpaceModel(state_dim=16, input_dim=4)
-    sequence: List[List[float]] = [[math.sin(i * 0.1), math.cos(i * 0.1), 0.5, -0.5] for i in range(1000)]
+    sequence: npt.NDArray[np.float64] = np.array([[math.sin(i * 0.1), math.cos(i * 0.1), 0.5, -0.5] for i in range(1000)], dtype=np.float64)
     out = model.forward(sequence)
-    assert len(out) == 1000
-    assert len(out[0]) == 4
-    print(f'[*] C5-REAL: SSM Primitive Processed 1000 tokens in O(N). Output shape: ({len(out)}, {len(out[0])})')
+    assert out.shape[0] == 1000
+    assert out.shape[1] == 4
+    print(f'[*] C5-REAL: SSM Primitive Processed 1000 tokens in O(N). Output shape: {out.shape}')
+
 if __name__ == '__main__':
     main()
