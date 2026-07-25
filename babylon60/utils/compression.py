@@ -3,6 +3,8 @@ from __future__ import annotations
 import logging
 import struct
 
+from typing import Any
+
 __all__ = ["compression_ratio", "dequantize_int8", "quantize_int8"]
 logger = logging.getLogger("babylon60.embeddings.compression")
 try:
@@ -32,7 +34,7 @@ def dequantize_int8(data: bytes) -> list[float]:
     return (quantized.astype(np.float32) * scale / 127.0).tolist()  # type: ignore[no-any-return]
 
 
-def compression_ratio(dim: int = 384) -> dict:  # type: ignore[type-arg]
+def compression_ratio(dim: int = 384) -> dict[str, Any]:
     original_float32 = dim * 4
     original_json = dim * 7
     compressed = 4 + dim

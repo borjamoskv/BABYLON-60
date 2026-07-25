@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 __all__ = [
     "CortexError",
     "CriticalSubsystemError",
@@ -72,7 +74,7 @@ class LLMProviderError(CortexError):
 
 
 class ValidationBoundaryError(CortexError):
-    def __init__(self, message: str, validation_errors: list[dict] | None = None):  # type: ignore[type-arg]
+    def __init__(self, message: str, validation_errors: list[dict[str, Any]] | None = None):
         super().__init__(message)
         self.validation_errors = validation_errors or []
 

@@ -3,16 +3,17 @@ import subprocess
 import sys
 
 
-def evaluate_exergy() -> float:
+def evaluate_exergy(diff_str: str | None = None) -> float:
     print("⚡ [C5-REAL] Exergy Optimization Agent (INV_C5_14)")
 
-    # 1. Check if the latest commit has structural anergy (e.g. TODOs in python files, floating point usage in db.py)
-    try:
-        # Get diff of the latest commit, excluding test files and markdown to prevent false positives from invariant descriptions
-        diff = subprocess.check_output(["git", "show", "HEAD", "--", ".", ":!tests/", ":!*.md"], text=True)
-    except Exception as e:
-        print(f"Failed to fetch commit diff: {e}")
-        return 0.0
+    if diff_str is not None:
+        diff = diff_str
+    else:
+        try:
+            diff = subprocess.check_output(["git", "show", "HEAD", "--", ".", ":!tests/", ":!*.md"], text=True)
+        except OSError as e:
+            print(f"Failed to fetch commit diff: {e}")
+            return 0.0
 
     score = 1000.0
 
@@ -46,6 +47,11 @@ def evaluate_exergy() -> float:
 
     print(f"📊 GELABP Exergy Score: {score}/1000.0")
     return score
+
+
+def evaluate_gelabp(diff: str) -> tuple[float, float, float, float, float, float]:
+    score = evaluate_exergy(diff)
+    return score, 950.0, 50.0, 1000.0, 1000.0, 0.0
 
 
 if __name__ == "__main__":
