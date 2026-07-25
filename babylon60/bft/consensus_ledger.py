@@ -10,9 +10,10 @@ import cbor2
 
 NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 
+import aiosqlite
+
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
 from babylon60.database import core as database_core
-import aiosqlite
 
 _UNDECODABLE = object()
 
@@ -124,6 +125,7 @@ class BFT_Ledger:
 
 
 import asyncio
+
 
 async def _main_audit() -> None:
     import sys

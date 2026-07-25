@@ -7,9 +7,9 @@ and dispatches sovereign license keys upon checkout session completion.
 
 import hashlib
 import hmac
+import time
 from pathlib import Path
 from typing import Any
-import time
 
 from babylon60.database import core as database_core
 
@@ -111,4 +111,4 @@ class StripeWebhookProcessor:
 
 def dict_factory(cursor: Any, row: Any) -> dict[str, Any]:
     fields = [column[0] for column in cursor.description]
-    return {key: value for key, value in zip(fields, row)}
+    return {key: value for key, value in zip(fields, row, strict=False)}
