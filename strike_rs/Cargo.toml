@@ -12,6 +12,7 @@ blake3 = "1.8.5"
 petgraph = "0.8.3"
 rusqlite = { version = "0.31.0", features = ["bundled"] }
 ring = "0.17.8"
+smallvec = { version = "1", features = ["union"] }
 
 signal-hook = "0.3.17"
 pyo3 = { version = "0.21.2" }

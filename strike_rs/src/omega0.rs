@@ -54,7 +54,7 @@ pub enum Justification {
         premises: Vec<String>,
     },
     StatisticalInference {
-        confidence: f64,
+        confidence_bp: u32,
         method: String,
     },
 
@@ -71,11 +71,11 @@ pub enum Justification {
     // === Social (agent-based, not content-based) ===
     ExpertConsensus {
         agents: Vec<String>,
-        quorum: f64,
+        quorum_bp: u32,
     },
     Citation {
         source: String,
-        reputation: f64,
+        reputation_bp: u32,
     },
 
     // === Provisional (without complete proof) ===
@@ -105,6 +105,18 @@ pub enum Omega0Error {
     /// No premises provided for derivation.
     EmptyPremises,
 }
+
+impl std::fmt::Display for Omega0Error {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            Omega0Error::HumeViolation => write!(f, "Hume's guillotine violation"),
+            Omega0Error::UnverifiedPremise(p) => write!(f, "Unverified premise: {}", p),
+            Omega0Error::EmptyPremises => write!(f, "Empty premises"),
+        }
+    }
+}
+
+impl std::error::Error for Omega0Error {}
 
 // ──────────────────────────────────────────────────────────
 // OPERATOR 1: verify — Type-checking
@@ -172,9 +184,9 @@ fn has_reproducibility(j: &Justification) -> bool {
 fn has_sufficient_confidence(j: &Justification) -> bool {
     match j {
         Justification::FormalProof { .. } => true, // Formal proofs have confidence = 1.0
-        Justification::StatisticalInference { confidence, .. } => *confidence >= 0.95,
-        Justification::ExpertConsensus { quorum, .. } => *quorum >= 0.67,
-        Justification::Citation { reputation, .. } => *reputation >= 0.8,
+        Justification::StatisticalInference { confidence_bp, .. } => *confidence_bp >= 9500,
+        Justification::ExpertConsensus { quorum_bp, .. } => *quorum_bp >= 6700,
+        Justification::Citation { reputation_bp, .. } => *reputation_bp >= 8000,
         Justification::Conjecture => false,
         _ => true,
     }
@@ -322,7 +334,7 @@ mod tests {
         let js = JustifiedStatement {
             statement: epistemic("Weak claim", vec![Obligation::Confidence]),
             justification: Justification::StatisticalInference {
-                confidence: 0.4,
+                confidence_bp: 4000,
                 method: "bootstrap".into(),
             },
         };
@@ -438,7 +450,7 @@ mod tests {
             statement: epistemic("SDM is an associative memory model", vec![]),
             justification: Justification::Citation {
                 source: "Kanerva 1988".into(),
-                reputation: 0.95,
+                reputation_bp: 9500,
             },
         };
         let p2 = JustifiedStatement {
@@ -447,7 +459,7 @@ mod tests {
                 vec![Obligation::Confidence],
             ),
             justification: Justification::StatisticalInference {
-                confidence: 0.97,
+                confidence_bp: 9700,
                 method: "Monte Carlo simulation".into(),
             },
         };
@@ -491,17 +503,17 @@ mod tests {
         fn any_justification() -> impl Strategy<Value = Justification> {
             prop_oneof![
                 Just(Justification::Conjecture),
-                any::<f64>().prop_map(|confidence| Justification::StatisticalInference {
-                    confidence: confidence.abs().min(1.0),
+                any::<u32>().prop_map(|confidence| Justification::StatisticalInference {
+                    confidence_bp: confidence.min(10000),
                     method: "proptest_gen".to_string(),
                 }),
-                any::<f64>().prop_map(|quorum| Justification::ExpertConsensus {
+                any::<u32>().prop_map(|quorum| Justification::ExpertConsensus {
                     agents: vec!["agent1".to_string()],
-                    quorum: quorum.abs().min(1.0),
+                    quorum_bp: quorum.min(10000),
                 }),
-                any::<f64>().prop_map(|reputation| Justification::Citation {
+                any::<u32>().prop_map(|reputation| Justification::Citation {
                     source: "citation_gen".to_string(),
-                    reputation: reputation.abs().min(1.0),
+                    reputation_bp: reputation.min(10000),
                 }),
                 Just(Justification::Axiom { domain: "math".to_string() }),
                 Just(Justification::FormalProof {

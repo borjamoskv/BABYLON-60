@@ -1,5 +1,5 @@
 use blake3::Hasher;
-use petgraph::algo::{is_cyclic_directed, toposort};
+use petgraph::algo::is_cyclic_directed;
 use petgraph::graph::DiGraph;
 
 pub mod omega0;
@@ -18,6 +18,16 @@ pub enum TaintError {
     CycleDetected,
     TopologicalSortFailed,
 }
+
+impl std::fmt::Display for TaintError {
+    fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+        match self {
+            TaintError::CycleDetected => write!(f, "Cycle detected in causal poset"),
+            TaintError::TopologicalSortFailed => write!(f, "Topological sort failed"),
+        }
+    }
+}
+impl std::error::Error for TaintError {}
 
 /// Nodo del Poset Causal (Owned para prevenir fugas de memoria por Box::leak en grafos dinámicos)
 #[derive(Debug, Clone)]
@@ -53,8 +63,11 @@ impl TaintEngine {
 
     /// Conecta dos nodos asegurando direccionalidad, con Rollback si se detecta un ciclo (OP-1).
     pub fn add_edge(&mut self, from: petgraph::graph::NodeIndex, to: petgraph::graph::NodeIndex) -> Result<(), TaintError> {
+        if from == to {
+            return Err(TaintError::CycleDetected);
+        }
         let edge_idx = self.graph.add_edge(from, to, ());
-        if is_cyclic_directed(&self.graph) {
+        if petgraph::algo::has_path_connecting(&self.graph, to, from, None) {
             self.graph.remove_edge(edge_idx);
             return Err(TaintError::CycleDetected);
         }
@@ -74,15 +87,39 @@ impl TaintEngine {
     pub fn compute_cortex_taint(&self) -> Result<String, TaintError> {
         self.verify_kahn_invariant()?;
 
-        let mut sorted_indices = match toposort(&self.graph, None) {
-            Ok(indices) => indices,
-            Err(_) => return Err(TaintError::TopologicalSortFailed),
-        };
+        let mut in_degree = std::collections::HashMap::new();
+        for node in self.graph.node_indices() {
+            in_degree.insert(node, 0);
+        }
+        for edge in self.graph.edge_indices() {
+            if let Some((_, target)) = self.graph.edge_endpoints(edge) {
+                *in_degree.entry(target).or_insert(0) += 1;
+            }
+        }
 
-        // Orden canónico (OP-2): entre nodos sin relación causal, ordenar por ID lexicográfico
-        sorted_indices.sort_by(|a, b| {
-            self.graph[*a].id.cmp(&self.graph[*b].id)
-        });
+        let mut zero_in_degree = std::collections::BTreeSet::new();
+        for (node, &deg) in &in_degree {
+            if deg == 0 {
+                zero_in_degree.insert((self.graph[*node].id.clone(), *node));
+            }
+        }
+
+        let mut sorted_indices = Vec::new();
+        while let Some((_, node)) = zero_in_degree.pop_first() {
+            sorted_indices.push(node);
+            let mut neighbors = self.graph.neighbors(node).detach();
+            while let Some(target) = neighbors.next_node(&self.graph) {
+                let deg = in_degree.get_mut(&target).unwrap();
+                *deg -= 1;
+                if *deg == 0 {
+                    zero_in_degree.insert((self.graph[target].id.clone(), target));
+                }
+            }
+        }
+
+        if sorted_indices.len() != self.graph.node_count() {
+            return Err(TaintError::TopologicalSortFailed);
+        }
 
         let mut hasher = Hasher::new();
         

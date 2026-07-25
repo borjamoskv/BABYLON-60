@@ -3,6 +3,7 @@ import asyncio
 import hashlib
 import json
 import os
+import time
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -11,13 +12,57 @@ from typing import Any, Dict, Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from babylon60.bft.lexicon import BFTLexicon
 import aiosqlite
-from cryptography.fernet import Fernet
 import babylon60.database.core
+from babylon60.bft.payload_encryptor import PayloadEncryptor
 
 class BFTCausalInvariantError(RuntimeError):
     pass
 NAMESPACE_UUID = uuid.UUID('9897d6fd-d6a7-4fe9-86bc-f0c312886d5d')
 ZERO_HASH = '0' * 64
+
+INIT_TABLE_SQL = """
+            CREATE TABLE IF NOT EXISTS ledger_entries (
+                seq INTEGER PRIMARY KEY AUTOINCREMENT,
+                event_id TEXT NOT NULL UNIQUE,
+                stream TEXT NOT NULL CHECK (length(stream) > 0),
+                entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),
+                event_type TEXT NOT NULL CHECK (length(event_type) > 0),
+                payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),
+                source_db TEXT NOT NULL CHECK (length(source_db) > 0),
+                source_table TEXT NOT NULL CHECK (length(source_table) > 0),
+                source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),
+                cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),
+                lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),
+                prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),
+                entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),
+                created_at TEXT NOT NULL,
+                agent_id TEXT NOT NULL DEFAULT '',
+                UNIQUE(lamport_t, agent_id)
+            );
+"""
+INIT_TRIG_UPDATE_SQL = """
+            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_update BEFORE UPDATE ON ledger_entries
+            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;
+"""
+INIT_TRIG_DELETE_SQL = """
+            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_delete BEFORE DELETE ON ledger_entries
+            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;
+"""
+
+INSERT_TX_SQL = """INSERT INTO ledger_entries (
+                event_id, stream, entity_id, event_type, payload_json,
+                source_db, source_table, source_pk, cortex_taint,
+                lamport_t, prev_hash, entry_hash, created_at
+            ) VALUES (
+                ?, ?, ?, ?, ?, ?, ?, ?, ?,
+                COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1,
+                COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'),
+                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1, COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'), ?),
+                ?
+            )
+            ON CONFLICT(event_id) DO NOTHING
+            RETURNING seq, entry_hash"""
+
 
 def _canonical_json(data: Any) -> str:
     return json.dumps(data, sort_keys=True, separators=(',', ':'), ensure_ascii=False, allow_nan=False)
@@ -43,10 +88,13 @@ def _compute_entry_hash_wrapper(event_id: str, stream: str, entity_id: str, even
 
 class BFTLedgerActor:
 
-    def __init__(self, db_path: Path, lexicon: Optional[BFTLexicon]=None) -> None:
+    def __init__(self, db_path: Path, lexicon: Optional[BFTLexicon]=None, queue_maxsize: int = 10000) -> None:
         self._db_path = db_path
-        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue()
+        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue(maxsize=queue_maxsize)
         self._task: Optional[asyncio.Task[None]] = None
+        self._encryptor = PayloadEncryptor()
+        self._events_processed = 0
+        self._start_time = 0.0
         if lexicon is None:
             from babylon60.bft.lexicon import BFTLexicon
             self.lexicon = BFTLexicon()
@@ -114,35 +162,41 @@ class BFTLedgerActor:
             await db.close()
 
     async def _worker(self) -> None:
+        self._start_time = time.time()
         db = await babylon60.database.core.connect(self._db_path)
         try:
             await db.create_function('c5_compute_hash', 12, _compute_entry_hash_wrapper, deterministic=True)
             await self._init_db(db)
             while True:
-                await asyncio.sleep(0)
-                get_res = await asyncio.gather(self._queue.get(), return_exceptions=True)
-                if isinstance(get_res[0], asyncio.CancelledError):
+                try:
+                    event, future = await self._queue.get()
+                except asyncio.CancelledError:
                     break
-                if isinstance(get_res[0], BaseException):
-                    raise RuntimeError('FAIL-FAST: General Exception intercepted on queue get.') from get_res[0]
-                event, future = get_res[0]
-                process_res = await asyncio.gather(self._process(db, event, future), return_exceptions=True)
-                if isinstance(process_res[0], ValueError):
+                try:
+                    await self._process(db, event, future)
+                    self._events_processed += 1
+                except ValueError as ve:
                     if not future.done():
-                        future.set_exception(process_res[0])
-                elif isinstance(process_res[0], BaseException):
+                        future.set_exception(ve)
+                except BaseException as exc:
                     if not future.done():
-                        future.set_exception(process_res[0])
+                        future.set_exception(exc)
                     self._queue.task_done()
-                    raise RuntimeError(f'FAIL-FAST: General Exception intercepted on process: {process_res[0]}') from process_res[0]
+                    raise RuntimeError(f'FAIL-FAST: {exc}') from exc
                 self._queue.task_done()
         finally:
             await db.close()
 
+    def get_throughput(self) -> float:
+        elapsed = time.time() - self._start_time
+        if elapsed > 0:
+            return self._events_processed / elapsed
+        return 0.0
+
     async def _init_db(self, db: aiosqlite.Connection) -> None:
-        await db.execute("\n            CREATE TABLE IF NOT EXISTS ledger_entries (\n                seq INTEGER PRIMARY KEY AUTOINCREMENT,\n                event_id TEXT NOT NULL UNIQUE,\n                stream TEXT NOT NULL CHECK (length(stream) > 0),\n                entity_id TEXT NOT NULL CHECK (length(entity_id) > 0),\n                event_type TEXT NOT NULL CHECK (length(event_type) > 0),\n                payload_json TEXT NOT NULL CHECK (length(payload_json) >= 2),\n                source_db TEXT NOT NULL CHECK (length(source_db) > 0),\n                source_table TEXT NOT NULL CHECK (length(source_table) > 0),\n                source_pk TEXT NOT NULL CHECK (length(source_pk) > 0),\n                cortex_taint TEXT NOT NULL CHECK (length(cortex_taint) > 0),\n                lamport_t INTEGER NOT NULL CHECK (lamport_t > 0),\n                prev_hash TEXT NOT NULL CHECK (length(prev_hash) = 64 AND prev_hash GLOB '[0-9a-f]*'),\n                entry_hash TEXT NOT NULL UNIQUE CHECK (length(entry_hash) = 64 AND entry_hash GLOB '[0-9a-f]*'),\n                created_at TEXT NOT NULL,\n                agent_id TEXT NOT NULL DEFAULT '',\n                UNIQUE(lamport_t, agent_id)\n            );\n        ")
-        await db.execute("\n            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_update BEFORE UPDATE ON ledger_entries\n            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;\n        ")
-        await db.execute("\n            CREATE TRIGGER IF NOT EXISTS trg_ledger_immutable_delete BEFORE DELETE ON ledger_entries\n            BEGIN SELECT RAISE(ABORT, 'C5 BFT: immutable master ledger'); END;\n        ")
+        await db.execute(INIT_TABLE_SQL)
+        await db.execute(INIT_TRIG_UPDATE_SQL)
+        await db.execute(INIT_TRIG_DELETE_SQL)
 
     async def _execute_insert_tx(self, db: aiosqlite.Connection, event_id: str, event: LedgerEvent, semantic_hash: str, stored_payload: str, created_at: str) -> tuple[int, str]:
         await db.execute('BEGIN IMMEDIATE')
@@ -151,7 +205,7 @@ class BFTLedgerActor:
         if row:
             await db.execute('COMMIT')
             return (int(row[0]), str(row[1]))
-        cursor = await db.execute("INSERT INTO ledger_entries (\n                event_id, stream, entity_id, event_type, payload_json,\n                source_db, source_table, source_pk, cortex_taint,\n                lamport_t, prev_hash, entry_hash, created_at\n            ) VALUES (\n                ?, ?, ?, ?, ?, ?, ?, ?, ?,\n                COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1,\n                COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'),\n                c5_compute_hash(?, ?, ?, ?, ?, ?, ?, ?, ?, COALESCE((SELECT MAX(lamport_t) FROM ledger_entries), 0) + 1, COALESCE((SELECT entry_hash FROM ledger_entries ORDER BY seq DESC LIMIT 1), '0000000000000000000000000000000000000000000000000000000000000000'), ?),\n                ?\n            )\n            ON CONFLICT(event_id) DO NOTHING\n            RETURNING seq, entry_hash", (event_id, event.stream, event.entity_id, semantic_hash, stored_payload, event.source_db, event.source_table, event.source_pk, event.cortex_taint, event_id, event.stream, event.entity_id, semantic_hash, stored_payload, event.source_db, event.source_table, event.source_pk, event.cortex_taint, created_at, created_at))
+        cursor = await db.execute(INSERT_TX_SQL, (event_id, event.stream, event.entity_id, semantic_hash, stored_payload, event.source_db, event.source_table, event.source_pk, event.cortex_taint, event_id, event.stream, event.entity_id, semantic_hash, stored_payload, event.source_db, event.source_table, event.source_pk, event.cortex_taint, created_at, created_at))
         db_row = await cursor.fetchone()
         if db_row is None:
             cursor = await db.execute('SELECT seq, entry_hash FROM ledger_entries WHERE event_id = ?', (event_id,))
@@ -168,13 +222,7 @@ class BFTLedgerActor:
         created_at = event.created_at or datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z')
         idempotent_key = f'{event.source_db}\x1f{event.source_table}\x1f{event.source_pk}\x1f{payload_json}\x1f{event.cortex_taint}'
         event_id = str(uuid.uuid5(NAMESPACE_UUID, idempotent_key))
-        vault_key = os.environ.get('CORTEX_VAULT_KEY')
-        if vault_key:
-            fernet = Fernet(vault_key.encode('utf-8'))
-            stored_payload = fernet.encrypt(payload_json.encode('utf-8')).decode('utf-8')
-            stored_payload = f'C5ENC:{stored_payload}'
-        else:
-            stored_payload = payload_json
+        stored_payload = self._encryptor.encrypt(payload_json)
         from babylon60.bft.lexicon import LEXICON_NAMESPACE
         if len(event.event_type) != 36:
             semantic_hash = str(uuid.uuid5(LEXICON_NAMESPACE, f'TYPE::{event.event_type}'))

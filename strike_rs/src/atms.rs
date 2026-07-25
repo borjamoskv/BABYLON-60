@@ -23,6 +23,7 @@
 //! rlib as the kernel and compiles anywhere the kernel does.
 
 use crate::omega0::{Justification, JustifiedStatement, verify};
+use smallvec::SmallVec;
 use std::collections::BTreeSet;
 
 #[derive(Debug, PartialEq, Eq)]
@@ -48,18 +49,18 @@ pub type NodeId = usize;
 /// Supports SIMD/POPCNT accelerated set operations (subset, union, popcount).
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
 pub struct Environment {
-    words: Vec<u64>,
+    words: SmallVec<[u64; 4]>,
 }
 
 impl Environment {
     pub fn empty() -> Self {
-        Environment { words: Vec::new() }
+        Environment { words: SmallVec::new() }
     }
 
     pub fn singleton(a: AssumptionId) -> Self {
         let word_idx = a / 64;
         let bit_idx = a % 64;
-        let mut words = vec![0u64; word_idx + 1];
+        let mut words = smallvec::smallvec![0u64; word_idx + 1];
         words[word_idx] |= 1u64 << bit_idx;
         Environment { words }
     }
@@ -108,7 +109,7 @@ impl Environment {
     #[inline]
     pub fn union(&self, other: &Environment) -> Environment {
         let max_len = self.words.len().max(other.words.len());
-        let mut words = vec![0u64; max_len];
+        let mut words = smallvec::smallvec![0u64; max_len];
         for i in 0..self.words.len() {
             words[i] |= self.words[i];
         }
