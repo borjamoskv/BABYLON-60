@@ -15,13 +15,8 @@ DEFAULT_CHROMA_PATH = os.path.join(os.path.dirname(__file__), "../../db/chroma_m
 
 
 class AgentMemory:
-    def __init__(
-        self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH
-    ) -> None:
-        is_test = (
-            "PYTEST_CURRENT_TEST" in os.environ
-            or os.environ.get("CORTEX_TEST_MODE") == "1"
-        )
+    def __init__(self, db_path: str = DEFAULT_DB_PATH, chroma_path: str = DEFAULT_CHROMA_PATH) -> None:
+        is_test = "PYTEST_CURRENT_TEST" in os.environ or os.environ.get("CORTEX_TEST_MODE") == "1"
         if is_test and db_path == DEFAULT_DB_PATH:
             db_path = ":memory:"
 
@@ -41,6 +36,7 @@ class AgentMemory:
 
             try:
                 import posthog  # pyright: ignore[reportMissingImports]
+
                 posthog.disabled = True
 
                 def _silent_capture(*args: Any, **kwargs: Any) -> None:
@@ -68,18 +64,11 @@ class AgentMemory:
 
             chroma_settings = Settings(anonymized_telemetry=False)
 
-            if (
-                "PYTEST_CURRENT_TEST" in os.environ
-                or os.environ.get("CORTEX_TEST_MODE") == "1"
-            ):
+            if "PYTEST_CURRENT_TEST" in os.environ or os.environ.get("CORTEX_TEST_MODE") == "1":
                 self.chroma_client = chromadb.EphemeralClient(settings=chroma_settings)
             else:
-                self.chroma_client = chromadb.PersistentClient(
-                    path=chroma_path, settings=chroma_settings
-                )
-            self.collection = self.chroma_client.get_or_create_collection(
-                name="agent_memory"
-            )
+                self.chroma_client = chromadb.PersistentClient(path=chroma_path, settings=chroma_settings)
+            self.collection = self.chroma_client.get_or_create_collection(name="agent_memory")
         except (ImportError, Exception):
             self.chroma_client = None
             self.collection = None
@@ -116,15 +105,9 @@ class AgentMemory:
         """)
 
     def _get_last_hash(self) -> str:
-        cursor = self.conn.execute(
-            "SELECT cortex_taint FROM decisions ORDER BY id DESC LIMIT 1"
-        )
+        cursor = self.conn.execute("SELECT cortex_taint FROM decisions ORDER BY id DESC LIMIT 1")
         row = cursor.fetchone()
-        return (
-            str(row[0])
-            if row
-            else "GENESIS_BLOCK_00000000000000000000000000000000000000000000000000"
-        )
+        return str(row[0]) if row else "GENESIS_BLOCK_00000000000000000000000000000000000000000000000000"
 
     def log(self, issue_id: int, agent_role: str, action: str, result: str) -> str:
         for attempt in range(5):
@@ -134,10 +117,10 @@ class AgentMemory:
 
                 timestamp_iso = datetime.now(timezone.utc).isoformat()
 
-                raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode(
-                    "utf-8"
+                raw_payload = f"{prev_hash}|{issue_id}|{agent_role}|{action}|{result}|{timestamp_iso}".encode("utf-8")
+                cortex_taint = (
+                    f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
                 )
-                cortex_taint = f"CORTEX-TAINT:borjamoskv:swarm_ledger:{timestamp_iso}:{hashlib.sha3_256(raw_payload).hexdigest()}"
 
                 self.conn.execute(
                     "INSERT INTO decisions (issue_id, agent_role, action, result, prev_hash, cortex_taint) VALUES (?, ?, ?, ?, ?, ?)",
@@ -170,7 +153,7 @@ class AgentMemory:
                 except sqlite3.Error:
                     pass
                 if "locked" in str(e).lower() and attempt < 9:
-                    time.sleep(0.05 * (1.5 ** attempt))
+                    time.sleep(0.05 * (1.5**attempt))
                     continue
                 raise
             except sqlite3.Error:

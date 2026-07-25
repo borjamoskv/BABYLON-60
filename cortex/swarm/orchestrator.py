@@ -46,9 +46,7 @@ class OrchestratorEngine:
         while state not in ["MERGE_READY", "DEAD_LETTER"]:
             state = self.fsm.transition_state(issue_id, state, payload)
 
-        self.memory.log(
-            issue_id, "orchestrator", "issue_processed", f"FinalState={state}"
-        )
+        self.memory.log(issue_id, "orchestrator", "issue_processed", f"FinalState={state}")
         return state
 
     def run_maintenance_cycle(self) -> bool:

@@ -16,9 +16,7 @@ MALICIOUS_PATTERNS: List[re.Pattern[str]] = [
     re.compile(r"jailbreak", re.IGNORECASE),
     re.compile(r"bypass\s+security", re.IGNORECASE),
     re.compile(r"reveal\s+(secret|token|password|key)", re.IGNORECASE),
-    re.compile(
-        r"<\s*/?\s*(system|user_request|user_input|instruction)\s*>", re.IGNORECASE
-    ),
+    re.compile(r"<\s*/?\s*(system|user_request|user_input|instruction)\s*>", re.IGNORECASE),
     re.compile(r"\x1b\[[0-9;]*[mGKH]", re.IGNORECASE),  # Escape sequences ANSI
 ]
 

@@ -4,9 +4,11 @@ import subprocess
 import os
 import sys
 
+
 def get_repo_path() -> str:
     # Asume que este archivo está en cortex/swarm/
     return os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 
 def run_sentinel() -> None:
     repo_path = get_repo_path()
@@ -18,12 +20,7 @@ def run_sentinel() -> None:
     while True:
         try:
             # 1. Chequeamos si hay cambios (tracked o untracked)
-            status = subprocess.run(
-                ["git", "status", "--porcelain"],
-                capture_output=True,
-                text=True,
-                check=True
-            )
+            status = subprocess.run(["git", "status", "--porcelain"], capture_output=True, text=True, check=True)
 
             mutations = status.stdout.strip()
 
@@ -38,10 +35,7 @@ def run_sentinel() -> None:
                 subprocess.run(["git", "commit", "-m", commit_msg], check=True)
 
                 new_hash = subprocess.run(
-                    ["git", "rev-parse", "HEAD"],
-                    capture_output=True,
-                    text=True,
-                    check=True
+                    ["git", "rev-parse", "HEAD"], capture_output=True, text=True, check=True
                 ).stdout.strip()
 
                 print(f"[BFT_SENTINEL] Estado consolidado físicamente. Ledger Hash: {new_hash}")
@@ -53,6 +47,7 @@ def run_sentinel() -> None:
 
         # 3. Termodinámica: Prevenir saturación de I/O
         time.sleep(5)
+
 
 if __name__ == "__main__":
     # Prevenir ejecución si no estamos en un repo git

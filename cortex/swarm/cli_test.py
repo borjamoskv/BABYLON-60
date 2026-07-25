@@ -9,6 +9,7 @@ import pytest
 from unittest.mock import patch, MagicMock
 from cortex.swarm.cli import main
 
+
 def test_swarm_cli_kill_unkill(capsys: pytest.CaptureFixture[str]) -> None:
     lock_file = "kill_switch.lock"
     if os.path.exists(lock_file):
@@ -34,6 +35,7 @@ def test_swarm_cli_kill_unkill(capsys: pytest.CaptureFixture[str]) -> None:
         if os.path.exists(lock_file):
             os.remove(lock_file)
 
+
 def test_swarm_cli_unkill_inactive(capsys: pytest.CaptureFixture[str]) -> None:
     lock_file = "kill_switch.lock"
     if os.path.exists(lock_file):
@@ -45,12 +47,14 @@ def test_swarm_cli_unkill_inactive(capsys: pytest.CaptureFixture[str]) -> None:
     captured = capsys.readouterr()
     assert "no estaba activo" in captured.out
 
+
 @patch("cortex.swarm.cli.run_fsm_cycle")
 def test_swarm_cli_run(mock_run_fsm: MagicMock) -> None:
     test_args = ["cortex/swarm/cli.py", "run"]
     with patch.object(sys, "argv", test_args):
         main()
     mock_run_fsm.assert_called_once()
+
 
 @patch("cortex.swarm.cli.ArchitectAgent")
 def test_swarm_cli_audit(mock_agent_cls: MagicMock) -> None:

@@ -11,9 +11,7 @@ from cortex.os.syscalls import SyscallRequest, SyscallType
 
 def test_cortex_microkernel_spawn_and_syscalls() -> None:
     kernel = CortexMicrokernel()
-    pid = kernel.spawn_process(
-        "AuditorAgent", capabilities={"Syscall_OBSERVE", "Syscall_VERIFY", "Syscall_AUDIT"}
-    )
+    pid = kernel.spawn_process("AuditorAgent", capabilities={"Syscall_OBSERVE", "Syscall_VERIFY", "Syscall_AUDIT"})
     assert pid == 1000
     assert str(pid) in kernel.execution_graph
 
@@ -31,7 +29,10 @@ def test_cortex_microkernel_spawn_and_syscalls() -> None:
     ver_req = SyscallRequest(
         syscall=SyscallType.VERIFY,
         caller_pid=pid,
-        payload={"claim_id": "CLM_001", "evidence_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"},
+        payload={
+            "claim_id": "CLM_001",
+            "evidence_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        },
     )
     res_ver = kernel.dispatch_syscall(ver_req)
     assert res_ver.success is True

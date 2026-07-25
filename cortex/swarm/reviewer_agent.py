@@ -36,9 +36,7 @@ ADVERSARIAL_PATTERNS: List[Tuple[re.Pattern[str], str]] = [
     ),
     (re.compile(r"sk-[A-Za-z0-9_-]{20,}"), "Fuga de Clave API de OpenAI/LLM detectada"),
     (
-        re.compile(
-            r"\b(password|secret|passwd|api_key)\s*=\s*['\"][^'\"]+['\"]", re.IGNORECASE
-        ),
+        re.compile(r"\b(password|secret|passwd|api_key)\s*=\s*['\"][^'\"]+['\"]", re.IGNORECASE),
         "Hardcoding de Credenciales detectado",
     ),
     (

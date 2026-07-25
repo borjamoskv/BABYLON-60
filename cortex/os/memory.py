@@ -34,9 +34,7 @@ class MemoryRecord:
 
 class MemoryHierarchy:
     def __init__(self) -> None:
-        self.tiers: dict[MemoryTier, dict[str, MemoryRecord]] = {
-            tier: {} for tier in MemoryTier
-        }
+        self.tiers: dict[MemoryTier, dict[str, MemoryRecord]] = {tier: {} for tier in MemoryTier}
 
     def store(
         self,
@@ -45,9 +43,7 @@ class MemoryHierarchy:
         tier: MemoryTier = MemoryTier.SENSORY,
         confidence: float = 0.5,
     ) -> MemoryRecord:
-        record = MemoryRecord(
-            key=key, content=content, tier=tier, confidence=confidence
-        )
+        record = MemoryRecord(key=key, content=content, tier=tier, confidence=confidence)
         self.tiers[tier][key] = record
         return record
 

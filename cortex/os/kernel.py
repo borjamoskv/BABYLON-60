@@ -28,9 +28,7 @@ class CortexMicrokernel:
         self.gc = EpistemicGarbageCollector(self.memory)
         self.next_pid = 1000
 
-    def spawn_process(
-        self, name: str, capabilities: set[str], priority_weight: float = 1.0
-    ) -> int:
+    def spawn_process(self, name: str, capabilities: set[str], priority_weight: float = 1.0) -> int:
         pid = self.next_pid
         self.next_pid += 1
         self.capability_graph[pid] = capabilities
@@ -68,9 +66,7 @@ class CortexMicrokernel:
             obs_id = hashlib.sha256(uri.encode("utf-8")).hexdigest()[:12]
             self.reality_graph[obs_id] = uri
             self.memory.store(obs_id, uri, MemoryTier.SENSORY, confidence=0.8)
-            return SyscallResponse(
-                success=True, data={"observation_id": obs_id, "target": uri}
-            )
+            return SyscallResponse(success=True, data={"observation_id": obs_id, "target": uri})
 
         elif req.syscall == SyscallType.VERIFY:
             claim_id = req.payload.get("claim_id", "")
@@ -78,9 +74,7 @@ class CortexMicrokernel:
             is_valid = bool(claim_id and evidence_hash)
             if is_valid:
                 self.evidence_graph[claim_id] = evidence_hash
-                self.memory.store(
-                    claim_id, evidence_hash, MemoryTier.VERIFIED, confidence=1.0
-                )
+                self.memory.store(claim_id, evidence_hash, MemoryTier.VERIFIED, confidence=1.0)
             return SyscallResponse(
                 success=is_valid,
                 data={"verified": is_valid, "claim_id": claim_id},
@@ -89,12 +83,8 @@ class CortexMicrokernel:
         elif req.syscall == SyscallType.PERSIST:
             obj_data = req.payload.get("data", "")
             sha256 = hashlib.sha256(str(obj_data).encode("utf-8")).hexdigest()
-            self.memory.store(
-                sha256, str(obj_data), MemoryTier.IMMUTABLE_LEDGER, confidence=1.0
-            )
-            return SyscallResponse(
-                success=True, data={"hash": sha256, "status": "PERSISTED"}
-            )
+            self.memory.store(sha256, str(obj_data), MemoryTier.IMMUTABLE_LEDGER, confidence=1.0)
+            return SyscallResponse(success=True, data={"hash": sha256, "status": "PERSISTED"})
 
         elif req.syscall == SyscallType.AUDIT:
             gc_stats = self.gc.collect()
@@ -103,9 +93,7 @@ class CortexMicrokernel:
                 data={
                     "gc_stats": gc_stats,
                     "process_count": len(self.execution_graph),
-                    "memory_items": sum(
-                        len(t) for t in self.memory.tiers.values()
-                    ),
+                    "memory_items": sum(len(t) for t in self.memory.tiers.values()),
                 },
             )
 

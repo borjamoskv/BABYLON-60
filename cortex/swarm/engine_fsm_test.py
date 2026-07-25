@@ -3,10 +3,12 @@ import pytest
 from unittest.mock import MagicMock
 from cortex.swarm.engine_fsm import SwarmFSM
 
+
 @pytest.fixture(autouse=True)
 def mock_agent_memory(monkeypatch: pytest.MonkeyPatch) -> None:
     # Evitar OOM por ChromaDB en xdist y deadlocks de SQLite
     monkeypatch.setattr("cortex.swarm.engine_fsm.AgentMemory", MagicMock)
+
 
 def test_fsm_normal_flow() -> None:
     fsm = SwarmFSM()

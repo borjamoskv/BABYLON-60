@@ -44,17 +44,11 @@ class SwarmFSM:
 
         return True
 
-    def transition_state(
-        self, issue_id: int, current_state: str, payload: dict[str, Any]
-    ) -> str:
+    def transition_state(self, issue_id: int, current_state: str, payload: dict[str, Any]) -> str:
         """Motor de transiciones de estado estricto (C5-REAL)."""
         if self.check_kill_switch():
-            self.memory.log(
-                issue_id, "fsm", "kill_switch_triggered", "ABORTED_BY_OPERATOR"
-            )
-            raise RuntimeError(
-                "CORTEX_KILL_SWITCH: Swarm execution physically halted by Operator."
-            )
+            self.memory.log(issue_id, "fsm", "kill_switch_triggered", "ABORTED_BY_OPERATOR")
+            raise RuntimeError("CORTEX_KILL_SWITCH: Swarm execution physically halted by Operator.")
 
         if not self.validate_epistemic_matrix(issue_id, payload):
             return "DEAD_LETTER"
@@ -81,9 +75,7 @@ class SwarmFSM:
 
         elif current_state == "TESTING":
             # Fuzzing adversarial en MicroVM/Docker
-            fuzz_result = self.sandbox.execute_safely(
-                payload.get("code", "print('fuzzing')")
-            )
+            fuzz_result = self.sandbox.execute_safely(payload.get("code", "print('fuzzing')"))
             if fuzz_result["status"] == "PASS":
                 self.memory.log(issue_id, "sandbox", "fuzzing_pass", "SUCCESS")
                 return "REVIEWING"

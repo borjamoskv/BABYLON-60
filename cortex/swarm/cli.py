@@ -19,9 +19,7 @@ def main() -> None:
     subparsers.add_parser("run", help="Ejecuta un ciclo FSM determinista completo.")
 
     # Subcomando audit
-    audit_parser = subparsers.add_parser(
-        "audit", help="Ejecuta una auditoría de complejidad ciclomática del AST."
-    )
+    audit_parser = subparsers.add_parser("audit", help="Ejecuta una auditoría de complejidad ciclomática del AST.")
     audit_parser.add_argument(
         "--threshold",
         type=int,
@@ -30,17 +28,11 @@ def main() -> None:
     )
 
     # Subcomando kill-switch
-    subparsers.add_parser(
-        "kill", help="Activa el Kill Switch físico local mediante kill_switch.lock."
-    )
-    subparsers.add_parser(
-        "unkill", help="Desactiva el Kill Switch físico eliminando kill_switch.lock."
-    )
+    subparsers.add_parser("kill", help="Activa el Kill Switch físico local mediante kill_switch.lock.")
+    subparsers.add_parser("unkill", help="Desactiva el Kill Switch físico eliminando kill_switch.lock.")
 
     # Subcomando logs
-    subparsers.add_parser(
-        "logs", help="Muestra los últimos registros de auditoría del Master Ledger."
-    )
+    subparsers.add_parser("logs", help="Muestra los últimos registros de auditoría del Master Ledger.")
 
     args = parser.parse_args()
 

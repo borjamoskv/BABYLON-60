@@ -13,9 +13,7 @@ import sqlite3
 from typing import Any
 from concurrent.futures import ThreadPoolExecutor
 
-PROJECT_ROOT = os.path.abspath(
-    os.path.join(os.path.dirname(__file__), "..", "..", "..")
-)
+PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
 sys.path.append(PROJECT_ROOT)
 
 from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
@@ -58,9 +56,12 @@ def execute() -> None:
     threads = 50
     ops_per_iter = 2
     n_iters = target_ops // (threads * ops_per_iter)
-    if n_iters == 0: n_iters = 1
+    if n_iters == 0:
+        n_iters = 1
 
-    print(f"[C5-REAL] Iniciando estrés de concurrencia en STDPMemristor ({threads} hilos, {target_ops} operaciones target)...")
+    print(
+        f"[C5-REAL] Iniciando estrés de concurrencia en STDPMemristor ({threads} hilos, {target_ops} operaciones target)..."
+    )
 
     # Limpiar base de datos previa
     for suffix in ["", "-wal", "-shm"]:
@@ -79,9 +80,7 @@ def execute() -> None:
 
     with ThreadPoolExecutor(max_workers=threads) as executor:
         futures = [
-            executor.submit(
-                run_single_thread, idx, DB_PATH, f"Sensor_{idx}", f"Motor_{idx}", n_iters
-            )
+            executor.submit(run_single_thread, idx, DB_PATH, f"Sensor_{idx}", f"Motor_{idx}", n_iters)
             for idx in range(threads)
         ]
         for fut in futures:
@@ -103,17 +102,13 @@ def execute() -> None:
         "total_operations": total_success + total_failures,
         "success_ops": total_success,
         "failed_ops": total_failures,
-        "exergy_ratio": round(
-            total_success / max(1, total_success + total_failures), 4
-        ),
+        "exergy_ratio": round(total_success / max(1, total_success + total_failures), 4),
         "elapsed_seconds": round(elapsed, 4),
         "errors": all_errors[:10],  # first 10 errors
     }
 
     # Persistir resultado localmente
-    out_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "synth_results.json"
-    )
+    out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "synth_results.json")
     with open(out_path, "w") as f:
         json.dump(report, f, indent=2)
 

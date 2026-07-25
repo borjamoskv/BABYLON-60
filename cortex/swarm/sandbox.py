@@ -15,9 +15,7 @@ class VesicularSandbox:
         self.timeout = execution_timeout_ms
         self.active_containers: list[str] = []
 
-    def execute_safely(
-        self, code_payload: str, language: str = "python"
-    ) -> Dict[str, Any]:
+    def execute_safely(self, code_payload: str, language: str = "python") -> Dict[str, Any]:
         """
         Inyecta el código en una vesícula aislada, bloquea acceso a red y rutas del host,
         y recupera la salida estándar o la señal SIGKILL.
@@ -41,9 +39,7 @@ class VesicularSandbox:
         ]
 
         try:
-            result = subprocess.run(
-                command, capture_output=True, text=True, timeout=self.timeout / 1000
-            )
+            result = subprocess.run(command, capture_output=True, text=True, timeout=self.timeout / 1000)
             return {
                 "status": "PASS" if result.returncode == 0 else "FAIL",
                 "stdout": result.stdout,
