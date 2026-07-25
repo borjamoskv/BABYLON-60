@@ -34,10 +34,8 @@ class SovereignCache(Generic[T]):
         "_ttl",
     )
 
-    def __init__(
-        self, maxsize: int = 1000, ttl: float = 3600.0, on_evict: Callable[[str, T, str, int], Any] | None = None
-    ) -> None:
-        self._cache: OrderedDict[str, tuple[INTEGER, T]] = OrderedDict()
+    def __init__(self, maxsize: int=1000, ttl: float=3600.0, on_evict: Callable[[str, T, str, int], Any] | None=None) -> None:
+        self._cache: OrderedDict[str, tuple[int, T]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl
         self._on_evict = on_evict

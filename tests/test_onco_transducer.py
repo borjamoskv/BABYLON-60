@@ -1,9 +1,9 @@
 import pytest
 
-np = pytest.importorskip("numpy")
-nx = pytest.importorskip("networkx")
-pytest.importorskip("pandas")
-from babylon60.cli.onco_transducer import construct_wgcna_graph, get_structural_driver_nodes, simulate_boolean_network
+np = pytest.importorskip('numpy')
+nx = pytest.importorskip('networkx')
+pytest.importorskip('pandas')
+from babylon60.cli.onco_transducer import construct_wgcna_graph, get_structural_driver_nodes, simulate_boolean_network  # noqa: E402
 
 
 def test_exergy_extraction() -> None:

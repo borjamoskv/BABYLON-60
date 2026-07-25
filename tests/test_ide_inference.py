@@ -4,7 +4,7 @@ from pathlib import Path
 backend_dir = str(Path(__file__).resolve().parent.parent / "babylon60-ide" / "backend")
 if backend_dir not in sys.path:
     sys.path.insert(0, backend_dir)
-from routes.inference import MambaInferenceRequest, generate_mamba
+from routes.inference import MambaInferenceRequest, generate_mamba  # noqa: E402
 
 
 def test_mamba_route_handler() -> None:
