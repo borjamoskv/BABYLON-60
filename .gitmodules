@@ -16,3 +16,6 @@
 [submodule "audit/uniswap-v4-eip1153-audit"]
 	path = audit/uniswap-v4-eip1153-audit
 	url = https://github.com/borjamoskv/uniswap-v4-eip1153-audit.git
+[submodule "proof_kernel/babylon-60-alpha"]
+	path = proof_kernel/babylon-60-alpha
+	url = https://github.com/borjamoskv/BABYLON-60-ALPHA.git
