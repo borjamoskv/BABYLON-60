@@ -6,6 +6,9 @@ from dataclasses import dataclass
 from typing import Any
 
 import cbor2
+import uuid
+
+NAMESPACE_UUID = uuid.UUID("9897d6fd-d6a7-4fe9-86bc-f0c312886d5d")
 
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
 from babylon60.database import core as database_core
@@ -30,7 +33,7 @@ class BFT_Ledger:
 
     def _init_tables(self) -> None:
         self.conn.execute(
-            "\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                mutation_hash TEXT UNIQUE NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts INTEGER NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            "
+            "\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                idempotency_key TEXT UNIQUE NOT NULL,\n                mutation_hash TEXT NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts INTEGER NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            "
         )
 
     def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: dict[str, str]) -> bool:
@@ -41,16 +44,28 @@ class BFT_Ledger:
         )
         if valid_votes < required_votes:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
-        self.conn.execute(
-            "INSERT OR IGNORE INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
-            (
-                mutation_hash,
-                mutation.agent_id,
-                canonicalize_cbor(mutation.payload),
-                mutation.timestamp,
-                mutation.causal_taint,
-            ),
-        )
+        
+        payload_bytes = canonicalize_cbor(mutation.payload)
+        idempotent_str = f"{mutation.agent_id}\x1f{mutation.timestamp}\x1f{mutation_hash}"
+        idempotency_key = str(uuid.uuid5(NAMESPACE_UUID, idempotent_str))
+        
+        try:
+            self.conn.execute("BEGIN IMMEDIATE")
+            self.conn.execute(
+                "INSERT OR IGNORE INTO state_log (idempotency_key, mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    idempotency_key,
+                    mutation_hash,
+                    mutation.agent_id,
+                    payload_bytes,
+                    mutation.timestamp,
+                    mutation.causal_taint,
+                ),
+            )
+            self.conn.execute("COMMIT")
+        except sqlite3.Error:
+            self.conn.execute("ROLLBACK")
+            raise
         return True
 
     def _verify_signature(self, node_id: str, data_hash: str, sig: str) -> bool:
