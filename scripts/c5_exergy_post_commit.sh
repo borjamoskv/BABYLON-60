@@ -35,4 +35,11 @@ fi
 find . -type f -name "*.pyc" -delete 2>/dev/null
 find . -type f -name ".DS_Store" -delete 2>/dev/null
 
+# 5. GELABP EXERGY OPTIMIZATION
+# Runs the C5-REAL Exergy Agent to evaluate matrices post-commit.
+# Discarding low-exergy iterations (INV_C5_14).
+if [ -f "scripts/exergy_optimizer_agent.py" ]; then
+    python3 scripts/exergy_optimizer_agent.py || exit 1
+fi
+
 echo "⚡ [C5-REAL] Exergy Post-Crystallization Protocol Enforced (1000/1000)."
