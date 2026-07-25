@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-
 export default defineConfig({
   root: '.',
   cacheDir: 'vite_cache',

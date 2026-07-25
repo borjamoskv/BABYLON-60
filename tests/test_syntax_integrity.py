@@ -1,18 +1,9 @@
-"""INV_SYNTAX_INTEGRITY: every tracked Python module must compile.
-
-Fail-fast invariant: a single SyntaxError anywhere in the tracked tree
-is a structural failure. Compilation only — no imports, no side effects.
-"""
-
 import py_compile
 from pathlib import Path
-
 import pytest
-
 ROOT = Path(__file__).resolve().parent.parent
-TRACKED_DIRS = ("cli", "core", "bft", "analysis", "adapters", "compiler", "contracts", "cortex", "scripts", "tests")
-EXCLUDED_PARTS = {"__pycache__", "node_modules", "fable_modules", "bin", "obj"}
-
+TRACKED_DIRS = ('cli', 'core', 'bft', 'analysis', 'adapters', 'compiler', 'contracts', 'cortex', 'scripts', 'tests')
+EXCLUDED_PARTS = {'__pycache__', 'node_modules', 'fable_modules', 'bin', 'obj'}
 
 def _tracked_python_files() -> list[Path]:
     files: list[Path] = []
@@ -20,13 +11,12 @@ def _tracked_python_files() -> list[Path]:
         base = ROOT / dirname
         if not base.is_dir():
             continue
-        for path in sorted(base.rglob("*.py")):
+        for path in sorted(base.rglob('*.py')):
             if EXCLUDED_PARTS.isdisjoint(path.parts):
                 files.append(path)
-    files.extend(sorted(ROOT.glob("*.py")))
+    files.extend(sorted(ROOT.glob('*.py')))
     return files
 
-
-@pytest.mark.parametrize("path", _tracked_python_files(), ids=lambda p: str(p.relative_to(ROOT)))
+@pytest.mark.parametrize('path', _tracked_python_files(), ids=lambda p: str(p.relative_to(ROOT)))
 def test_module_compiles(path: Path) -> None:
     py_compile.compile(str(path), doraise=True)

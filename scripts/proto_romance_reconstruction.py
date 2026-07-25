@@ -1,22 +1,9 @@
 import csv
 import os
 from typing import Any
-
 import numpy as np
 from numpy.typing import NDArray
-
-from scripts.romance_common import (
-    DATA,
-    GAP,
-    GOLD,
-    Model,
-    build_msa,
-    build_Q,
-    levenshtein,
-    nw_match_flags,
-    reconstruct_column,
-)
-
+from scripts.romance_common import DATA, GAP, GOLD, Model, build_msa, build_Q, levenshtein, nw_match_flags, reconstruct_column
 
 def main() -> dict[str, Any]:
     outdir = os.path.dirname(os.path.abspath(__file__))
@@ -65,19 +52,8 @@ def main() -> dict[str, Any]:
         tot_pos += len(recon_seq)
         tot_hit += hit
         acc: float = hit / len(gold) if gold else 0.0
-        per_concept.append(
-            (concept, " ".join(recon_seq), " ".join(gold), round(float(np.mean(recon_ent)), 3), ed, round(acc, 2))
-        )
-        rows_csv.append(
-            {
-                "concepto": concept,
-                "reconstruido": " ".join(recon_seq),
-                "latin_gold": " ".join(gold),
-                "entropia_media_bits": round(float(np.mean(recon_ent)), 3),
-                "edit_distance": ed,
-                "acierto_segmento": round(acc, 2),
-            }
-        )
+        per_concept.append((concept, ' '.join(recon_seq), ' '.join(gold), round(float(np.mean(recon_ent)), 3), ed, round(acc, 2)))
+        rows_csv.append({'concepto': concept, 'reconstruido': ' '.join(recon_seq), 'latin_gold': ' '.join(gold), 'entropia_media_bits': round(float(np.mean(recon_ent)), 3), 'edit_distance': ed, 'acierto_segmento': round(acc, 2)})
     seg_acc: float = tot_hit / tot_pos
     norm_ed: float = tot_editdist / tot_gold
     ent_hit: float = float(np.mean([e for e, f in all_ent_match if f]))
@@ -85,40 +61,30 @@ def main() -> dict[str, Any]:
     es: NDArray[np.float64] = np.array([e for e, _ in all_ent_match])
     fs: NDArray[np.float64] = np.array([0.0 if f else 1.0 for _, f in all_ent_match])
     corr: float = float(np.corrcoef(es, fs)[0, 1])
-    csv_path = os.path.join(outdir, "reconstruccion_resultados.csv")
-    with open(csv_path, "w", newline="", encoding="utf-8") as fh:
+    csv_path = os.path.join(outdir, 'reconstruccion_resultados.csv')
+    with open(csv_path, 'w', newline='', encoding='utf-8') as fh:
         w = csv.DictWriter(fh, fieldnames=list(rows_csv[0].keys()))
         w.writeheader()
         w.writerows(rows_csv)
-    print("=" * 78)
-    print("RECONSTRUCCIÓN PROTO-ROMANCE PROBABILÍSTICA — validación vs latín")
-    print("=" * 78)
+    print('=' * 78)
+    print('RECONSTRUCCIÓN PROTO-ROMANCE PROBABILÍSTICA — validación vs latín')
+    print('=' * 78)
     print(f"{'concepto':<10}{'reconstruido':<16}{'latín (gold)':<16}{'H̄bits':>7}{'ed':>4}{'acc':>6}")
-    print("-" * 78)
+    print('-' * 78)
     for concept, rec, gold_str, ent_val, ed_val, acc_val in per_concept:
-        print(f"{concept:<10}{rec:<16}{gold_str:<16}{ent_val:>7}{ed_val:>4}{acc_val:>6}")
-    print("-" * 78)
-    print(f"Acierto por segmento (vs latín) : {seg_acc:6.1%}")
-    print(f"Edit distance normalizado       : {norm_ed:6.3f}  (0=perfecto)")
-    print(f"Entropía media, aciertos        : {ent_hit:6.3f} bits")
-    print(f"Entropía media, errores         : {ent_miss:6.3f} bits")
-    print(f"corr(entropía, error)           : {corr:+.3f}")
+        print(f'{concept:<10}{rec:<16}{gold_str:<16}{ent_val:>7}{ed_val:>4}{acc_val:>6}')
+    print('-' * 78)
+    print(f'Acierto por segmento (vs latín) : {seg_acc:6.1%}')
+    print(f'Edit distance normalizado       : {norm_ed:6.3f}  (0=perfecto)')
+    print(f'Entropía media, aciertos        : {ent_hit:6.3f} bits')
+    print(f'Entropía media, errores         : {ent_miss:6.3f} bits')
+    print(f'corr(entropía, error)           : {corr:+.3f}')
     print()
-    print("LECTURA: la entropía es la incertidumbre irreducible por posición.")
-    print("Que sea MAYOR en los errores (y la correlación positiva) demuestra que")
+    print('LECTURA: la entropía es la incertidumbre irreducible por posición.')
+    print('Que sea MAYOR en los errores (y la correlación positiva) demuestra que')
     print("el modelo 'sabe lo que no sabe': donde el cambio fonético fusionó sonidos")
-    print("y borró información, no hay raíz única recuperable — solo una distribución.")
-    print(f"\nCSV escrito en: {csv_path}")
-    return dict(
-        seg_acc=seg_acc,
-        norm_ed=norm_ed,
-        ent_hit=float(ent_hit),
-        ent_miss=float(ent_miss),
-        corr=corr,
-        n_sets=len(per_concept),
-        n_states=len(states),
-    )
-
-
-if __name__ == "__main__":
+    print('y borró información, no hay raíz única recuperable — solo una distribución.')
+    print(f'\nCSV escrito en: {csv_path}')
+    return dict(seg_acc=seg_acc, norm_ed=norm_ed, ent_hit=float(ent_hit), ent_miss=float(ent_miss), corr=corr, n_sets=len(per_concept), n_states=len(states))
+if __name__ == '__main__':
     main()

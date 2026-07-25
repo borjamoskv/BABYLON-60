@@ -1,17 +1,8 @@
-/**
- * BABYLON·60 Alcove — popup controller.
- * Live, local-first panel over the BABYLON·60 backend (localhost:8060):
- * repo lineage (recalcado siempre), consensus verify, real delegation
- * (commit executes; push/deploy → causal crash), and BM25 ledger search.
- */
 const BASE = 'http://localhost:8060';
 const ALT = 'http://127.0.0.1:8060';
-
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-
 let HOST = BASE;
-
 async function api(path, opts) {
   for (const host of [HOST, HOST === BASE ? ALT : BASE]) {
     try {
@@ -29,7 +20,6 @@ async function api(path, opts) {
 }
 const get = (p) => api(p);
 const post = (p, b) => api(p, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(b || {}) });
-
 /* ── Cognitive mode (extension-local) ── */
 function applyMode(m) {
   document.body.classList.toggle('mode-nt', m === 'nt');
@@ -46,7 +36,6 @@ function initMode() {
     applyMode(next);
   });
 }
-
 /* ── Sentinel + stats ── */
 async function loadHead() {
   try {
@@ -70,7 +59,6 @@ async function loadHead() {
     $('warnings').innerHTML = `<div class="warn red"><span class="d"></span><span>${esc(e.message)}</span></div>`;
   }
 }
-
 /* ── Verify consensus ── */
 $('verify').addEventListener('click', async () => {
   const m = $('verify-msg');
@@ -81,7 +69,6 @@ $('verify').addEventListener('click', async () => {
     else { m.style.color = 'var(--break)'; m.textContent = `✗ ROTA en seq ${r.broken_at} (${r.verified_entries}/${r.total_entries})`; }
   } catch (e) { m.style.color = 'var(--break)'; m.textContent = e.message; }
 });
-
 /* ── Delegation ── */
 async function loadDelegations() {
   try {
@@ -121,7 +108,6 @@ $('dg').addEventListener('click', async () => {
     loadDelegations();
   } catch (e) { m.style.color = 'var(--break)'; m.textContent = e.message; }
 });
-
 /* ── Thought capture → CortexLedger (memoria de trabajo externalizada) ── */
 async function loadLastNote() {
   try {
@@ -148,7 +134,6 @@ async function sealThought() {
 }
 $('thought-btn').addEventListener('click', sealThought);
 $('thought').addEventListener('keydown', (e) => { if (e.key === 'Enter') sealThought(); });
-
 /* ── BM25 search ── */
 $('qb').addEventListener('click', runSearch);
 $('q').addEventListener('keydown', (e) => { if (e.key === 'Enter') runSearch(); });
@@ -164,10 +149,8 @@ async function runSearch() {
       : `<div style="color:var(--dust-ghost);font-size:10px;margin-top:4px">Sin coincidencias en ${d.corpus_size} eventos</div>`;
   } catch (e) { el.innerHTML = `<div style="color:var(--break);font-size:10px;margin-top:4px">${esc(e.message)}</div>`; }
 }
-
-/* ── Boot ── */
 initMode();
 loadHead();
 loadDelegations();
 loadLastNote();
-try { chrome.runtime?.sendMessage({ type: 'b60-refresh' }, () => void chrome.runtime?.lastError); } catch { /* noop */ }
+try { chrome.runtime?.sendMessage({ type: 'b60-refresh' }, () => void chrome.runtime?.lastError); } catch {  }

@@ -1,34 +1,24 @@
-/**
- * BABYLON·60 Alcove — service worker (MV3).
- * Polls the local backend, projects agent state into the toolbar badge and
- * chrome.storage.session so the popup and the content-script tachometer stay
- * in sync. Local-first: nothing leaves the machine (localhost:8060 only).
- */
 const BASE = 'http://localhost:8060';
 const ALT = 'http://127.0.0.1:8060';
 const POLL_ALARM = 'b60-pulse';
-
 async function fetchJSON(path) {
   for (const host of [BASE, ALT]) {
     try {
       const res = await fetch(`${host}${path}`, { cache: 'no-store' });
       if (res.ok) return await res.json();
-    } catch { /* try next host */ }
+    } catch {  }
   }
   return null;
 }
-
 async function pulse() {
   const [stats, sentinel] = await Promise.all([
     fetchJSON('/api/ledger/stats'),
     fetchJSON('/api/sentinel/status'),
   ]);
-
   const online = stats !== null || sentinel !== null;
   const reds = (sentinel?.warnings || []).filter((w) => w.level === 'red').length;
   const ambers = (sentinel?.warnings || []).filter((w) => w.level === 'amber').length;
-
-  let color = '#3E3B4F'; // offline
+  let color = '#3E3B4F'; 
   let text = '';
   if (online) {
     text = stats?.entries != null ? String(stats.entries) : '·';
@@ -37,8 +27,7 @@ async function pulse() {
   try {
     await chrome.action.setBadgeText({ text });
     await chrome.action.setBadgeBackgroundColor({ color });
-  } catch { /* badge API unavailable */ }
-
+  } catch {  }
   const snapshot = {
     online,
     ts: Date.now(),
@@ -49,10 +38,9 @@ async function pulse() {
   try {
     await chrome.storage.session.set({ b60snapshot: snapshot });
   } catch {
-    try { await chrome.storage.local.set({ b60snapshot: snapshot }); } catch { /* noop */ }
+    try { await chrome.storage.local.set({ b60snapshot: snapshot }); } catch {  }
   }
 }
-
 chrome.runtime.onInstalled.addListener(() => {
   chrome.alarms.create(POLL_ALARM, { periodInMinutes: 0.5 });
   pulse();
@@ -67,7 +55,7 @@ chrome.alarms.onAlarm.addListener((a) => {
 chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type === 'b60-refresh') {
     pulse().then(() => sendResponse({ ok: true }));
-    return true; // async response
+    return true; 
   }
   return false;
 });

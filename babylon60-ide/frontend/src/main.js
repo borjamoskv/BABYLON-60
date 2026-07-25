@@ -1,39 +1,5 @@
-/**
- * BABYLON60 IDE — Main Application Core
- * v1.4.0 · C5-REAL · Author: Borja Moskv (borjamoskv)
- *
- * Exergy doctrine: maximize both ABSTRAER (macro: see the whole system)
- * and DETERMINAR (micro: verify one causal fact to the hash).
- *
- * Dual Cognitive Architecture:
- *   MODE 2E — Doble Excepcionalidad (TDAH + AACC): ambient tachometer,
- *             loop guard, restore banner, micro-rewards, icon-only spine.
- *   MODE NT — Neurotípico: labeled navigation, standard density,
- *             no interventions, no ambient signals.
- *
- * Layout: SPINE | CONTEXT PANE (⌘B) | FOCUS ZONE
- *   + TACHOMETER (3px, 2E only) + PALETTE (⌘K) + SCRATCHPAD (⌘⇧Space)
- *   + AGENT MODAL + STATUS BAR (repo identity always visible)
- *
- * API contract (backend/routes — single source of truth):
- *   GET  /api/ledger/stats                → {exists, db_path, entries, latest:{entry_hash, lamport_t, created_at}}
- *   GET  /api/ledger/entries?limit&offset → {entries[], total, limit, offset}
- *   GET  /api/ledger/entry/{seq}          → full row (payload_json included)
- *   POST /api/ledger/verify               → {valid, total_entries, verified_entries, broken_at, entries[]}
- *   GET  /api/databases                   → [{name, path, size_bytes, size_human}]
- *   GET  /api/databases/{db}/tables       → [{name, row_count}]
- *   GET  /api/databases/{db}/schema/{t}   → [{cid, name, type, notnull, default, pk}]
- *   GET  /api/databases/{db}/tables/{t}   → {columns, rows, total, limit, offset}
- *   POST /api/query {database, sql}       → {columns, rows, row_count, elapsed_ms, database}
- *   GET  /api/sentinel/status             → repo identity + lineage warnings
- *   GET  /api/telemetry/snapshot · WS /ws/telemetry
- */
 import { get, post, connectWebSocket } from './api.js';
 import { registerRoute, navigate, rerender, getInitialRoute } from './router.js';
-
-/* ══════════════════════════════════════════════════════════
-   COGNITIVE MODES
-   ══════════════════════════════════════════════════════════ */
 const MODES = {
   '2e': {
     key: '2e',
@@ -56,19 +22,13 @@ const MODES = {
     spineLabels: true,
   },
 };
-
 function mode() { return MODES[S.cognitiveMode] || MODES['2e']; }
-
-/* ══════════════════════════════════════════════════════════
-   GLOBAL STATE
-   ══════════════════════════════════════════════════════════ */
 function safeParseArray(raw) {
   try {
     const v = JSON.parse(raw || '[]');
     return Array.isArray(v) ? v : [];
   } catch { return []; }
 }
-
 const S = {
   cognitiveMode: localStorage.getItem('b60-cogmode') || '2e',
   contextPaneOpen: true,
@@ -76,7 +36,7 @@ const S = {
   tachometerState: 'idle',
   paletteOpen: false,
   scratchpadOpen: false,
-  scratchpadItems: [],  // notas del CortexLedger (API), no de localStorage
+  scratchpadItems: [],  
   scratchpadOffline: safeParseArray(localStorage.getItem('b60-scratch-offline')),
   delegationQueue: safeParseArray(localStorage.getItem('b60-delegation')),
   databaseList: [],
@@ -93,10 +53,6 @@ const S = {
   canvasVB: { x: 80, y: 40, w: 720, h: 400 },
   canvasAbort: null,
 };
-
-/* ══════════════════════════════════════════════════════════
-   BOOT
-   ══════════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', async () => {
   applyCognitiveMode(S.cognitiveMode, { silent: true });
   setTachometer('indexing');
@@ -109,38 +65,28 @@ document.addEventListener('DOMContentLoaded', async () => {
   setupBifocal();
   setupCogModeButton();
   setupLoopDetector();
-
   await Promise.all([
     refreshDatabaseList(),
     refreshLedgerStats(),
     refreshSentinel(),
     refreshNotes(),
   ]);
-
   updateStatusBar();
   renderContextPaneContent();
   setTachometer('done');
-
   if (mode().restoreBanner) {
     showRestoreBanner(localStorage.getItem('b60-route') || 'ledger');
   }
-
   navigate(getInitialRoute());
   setTachometer('idle');
 });
-
-/* ══════════════════════════════════════════════════════════
-   COGNITIVE MODE SWITCH — NT ○ ↔ 2E ◐  (⌘⇧E)
-   ══════════════════════════════════════════════════════════ */
 function applyCognitiveMode(key, { silent = false } = {}) {
   S.cognitiveMode = MODES[key] ? key : '2e';
   localStorage.setItem('b60-cogmode', S.cognitiveMode);
   document.body.classList.toggle('mode-2e', S.cognitiveMode === '2e');
   document.body.classList.toggle('mode-nt', S.cognitiveMode === 'nt');
-
   const btn = document.getElementById('btn-cogmode');
   if (btn) { btn.textContent = mode().label; btn.title = `Modo cognitivo: ${mode().name} — click o ⌘⇧E para alternar`; }
-
   if (!silent) {
     setupSpine();
     rerender();
@@ -153,11 +99,9 @@ function applyCognitiveMode(key, { silent = false } = {}) {
     setTimeout(hideAgentModal, 3000);
   }
 }
-
 function toggleCognitiveMode() {
   applyCognitiveMode(S.cognitiveMode === '2e' ? 'nt' : '2e');
 }
-
 function setupCogModeButton() {
   let btn = document.getElementById('btn-cogmode');
   if (!btn) {
@@ -176,15 +120,10 @@ function setupCogModeButton() {
     btn.addEventListener('click', toggleCognitiveMode);
   }
 }
-
-/* ══════════════════════════════════════════════════════════
-   TACHOMETER — ambient workload (2E). Hidden by CSS in NT.
-   ══════════════════════════════════════════════════════════ */
 function setTachometer(state) {
   S.tachometerState = state;
   const el = document.getElementById('tachometer');
   if (el) el.className = `tachometer ${state !== 'idle' ? state : ''}`;
-
   const agentSeg = document.getElementById('status-agent-segment');
   if (!agentSeg) return;
   if (state === 'working' || state === 'indexing') {
@@ -195,10 +134,6 @@ function setTachometer(state) {
     agentSeg.style.display = 'none';
   }
 }
-
-/* ══════════════════════════════════════════════════════════
-   SPINE — icon-only (2E) or icon+label (NT)
-   ══════════════════════════════════════════════════════════ */
 const SPINE_ROUTES = [
   { id: 'canvas',    icon: '⬡',  label: 'Canvas',     tip: 'Architecture Canvas — ABSTRAER  ⌘5' },
   { id: 'ledger',    icon: '⧉',  label: 'Ledger',     tip: 'BFT Ledger — DETERMINAR  ⌘1' },
@@ -208,18 +143,15 @@ const SPINE_ROUTES = [
   { id: 'analytics', icon: '∿',  label: 'Analytics',  tip: 'Ledger Analytics — DETERMINAR (agregación + BM25)  ⌘7' },
   { id: 'sentinel',  icon: '⎇',  label: 'Sentinel',   tip: 'Git Sentinel (identidad de repo + delegación real)  ⌘6' },
 ];
-
 function setupSpine() {
   const spine = document.getElementById('spine');
   if (!spine) return;
   spine.innerHTML = '';
-
   const logo = document.createElement('div');
   logo.className = 'spine-logo';
   logo.title = 'BABYLON·60 v1.4.0';
   logo.innerHTML = '<div class="spine-logo-dot"></div>';
   spine.appendChild(logo);
-
   const withLabels = mode().spineLabels;
   SPINE_ROUTES.forEach((r, i) => {
     if (i === 1) {
@@ -240,21 +172,15 @@ function setupSpine() {
   });
   setActiveSpineIcon(S.activeRoute);
 }
-
 function setActiveSpineIcon(route) {
   document.querySelectorAll('.spine-icon').forEach(el => {
     el.classList.toggle('active', el.dataset.route === route);
   });
 }
-
-/* ══════════════════════════════════════════════════════════
-   CONTEXT PANE
-   ══════════════════════════════════════════════════════════ */
 function setupContextPane() {
   document.getElementById('btn-collapse-ctx')?.addEventListener('click', toggleContextPane);
   renderContextPaneContent();
 }
-
 function toggleContextPane() {
   S.contextPaneOpen = !S.contextPaneOpen;
   const pane = document.getElementById('context-pane');
@@ -263,11 +189,9 @@ function toggleContextPane() {
   pane.classList.toggle('collapsed', !S.contextPaneOpen);
   if (btn) btn.textContent = S.contextPaneOpen ? '⟨' : '⟩';
 }
-
 function renderContextPaneContent() {
   const body = document.getElementById('context-pane-body');
   if (!body) return;
-
   const dbItems = S.databaseList.slice(0, 5).map(db => `
     <div class="ctx-item depth-1" data-goto-db="${escapeHtml(db.name)}">
       <span class="ctx-item-icon" style="font-size:0.6rem">●</span>
@@ -275,11 +199,9 @@ function renderContextPaneContent() {
       <span class="ctx-item-badge">RO</span>
     </div>
   `).join('');
-
   const sentinelBadge = S.sentinel?.warnings?.some(w => w.level === 'red')
     ? '<span class="ctx-item-badge break">!</span>'
     : (S.sentinel?.warnings?.length ? '<span class="ctx-item-badge gold">△</span>' : '<span class="ctx-item-badge verify">ok</span>');
-
   body.innerHTML = `
     <div class="ctx-section">
       <div class="ctx-section-label">Inspector</div>
@@ -330,7 +252,6 @@ function renderContextPaneContent() {
       ${dbItems || '<div style="padding:4px 12px;font-size:0.62rem;color:var(--dust-ghost)">No .db discovered</div>'}
     </div>
   `;
-
   body.querySelectorAll('.ctx-item[data-route]').forEach(el => {
     el.addEventListener('click', () => navigate(el.dataset.route));
   });
@@ -338,30 +259,23 @@ function renderContextPaneContent() {
     el.addEventListener('click', () => navigate('databases'));
   });
 }
-
 function updateContextPaneCounts() {
   const dbCount = document.getElementById('ctx-db-count');
   if (dbCount) dbCount.textContent = S.databaseList.length || '—';
   const ledgerCount = document.getElementById('ctx-ledger-count');
   if (ledgerCount) ledgerCount.textContent = S.ledgerStats?.entries ?? '—';
 }
-
 function setActiveContextItem(route) {
   document.querySelectorAll('.ctx-item[data-route]').forEach(el => {
     el.classList.toggle('active', el.dataset.route === route);
   });
 }
-
-/* ══════════════════════════════════════════════════════════
-   STATUS BAR — repo identity ALWAYS visible
-   ══════════════════════════════════════════════════════════ */
 function updateStatusBar() {
   const connDot = document.getElementById('status-conn-dot');
   const connText = document.getElementById('status-conn-text');
   const dbCount = document.getElementById('status-db-count');
   const ledgerEntries = document.getElementById('status-ledger-entries');
   const lamport = document.getElementById('status-lamport');
-
   const online = S.ledgerStats !== null || S.databaseList.length > 0;
   if (connDot) connDot.className = online ? 'status-dot' : 'status-dot error';
   if (connText) connText.textContent = online ? 'CONNECTED' : 'OFFLINE';
@@ -372,8 +286,6 @@ function updateStatusBar() {
     : '—';
   updateRepoSegment();
 }
-
-/* ── Repo segment: RECALCAR siempre el repo actual ── */
 function updateRepoSegment() {
   let seg = document.getElementById('status-repo-segment');
   if (!seg) {
@@ -400,7 +312,6 @@ function updateRepoSegment() {
     ? 'LINAJE NO CANÓNICO — abre Git Sentinel'
     : amber ? 'Avisos de linaje — abre Git Sentinel' : `Linaje canónico verificado (${s.commit_count ?? '—'} commits)`;
 }
-
 async function refreshSentinel() {
   try {
     S.sentinel = await get('/api/sentinel/status');
@@ -417,16 +328,11 @@ async function refreshSentinel() {
         ],
       });
     }
-  } catch { /* offline */ }
+  } catch {  }
 }
-
-/* ══════════════════════════════════════════════════════════
-   BIFOCAL — ABSTRAER (macro) ↔ DETERMINAR (micro) · ⌘M
-   ══════════════════════════════════════════════════════════ */
 function setupBifocal() {
   document.getElementById('btn-bifocal')?.addEventListener('click', toggleBifocal);
 }
-
 function toggleBifocal() {
   S.bifocalMode = S.bifocalMode === 'micro' ? 'macro' : 'micro';
   document.body.classList.toggle('macro-mode', S.bifocalMode === 'macro');
@@ -435,10 +341,6 @@ function toggleBifocal() {
   if (btn) btn.textContent = S.bifocalMode === 'macro' ? 'MACRO ⊞' : 'MICRO ⊞';
   if (S.bifocalMode === 'macro') navigate('canvas');
 }
-
-/* ══════════════════════════════════════════════════════════
-   COMMAND PALETTE — ⌘K
-   ══════════════════════════════════════════════════════════ */
 const PALETTE_COMMANDS = [
   { icon: '⬡', label: 'Architecture Canvas', desc: 'ABSTRAER: ver el sistema completo', shortcut: '⌘5', action: () => navigate('canvas') },
   { icon: '⧉', label: 'BFT Ledger',          desc: 'DETERMINAR: inspector de cadena de hashes', shortcut: '⌘1', action: () => navigate('ledger') },
@@ -454,10 +356,8 @@ const PALETTE_COMMANDS = [
   { icon: '⊞', label: 'Toggle Macro / Micro', desc: 'Alternar vista bifocal', shortcut: '⌘M', action: toggleBifocal },
   { icon: '◎', label: 'Open Scratchpad',      desc: 'Volcar un pensamiento sin perder foco', shortcut: '⌘⇧Space', action: () => toggleScratchpad(true) },
 ];
-
 let paletteSelected = 0;
 let paletteFiltered = [...PALETTE_COMMANDS];
-
 function setupCommandPalette() {
   const overlay = document.getElementById('palette-overlay');
   const input = document.getElementById('palette-input');
@@ -466,7 +366,6 @@ function setupCommandPalette() {
   input.addEventListener('input', () => filterPalette(input.value));
   input.addEventListener('keydown', handlePaletteKey);
 }
-
 function openPalette() {
   S.paletteOpen = true;
   const overlay = document.getElementById('palette-overlay');
@@ -480,13 +379,11 @@ function openPalette() {
   renderPaletteResults();
   setTimeout(() => input.focus(), 50);
 }
-
 function closePalette() {
   S.paletteOpen = false;
   const overlay = document.getElementById('palette-overlay');
   if (overlay) { overlay.classList.remove('visible'); overlay.setAttribute('aria-hidden', 'true'); }
 }
-
 function filterPalette(query) {
   const q = query.toLowerCase().trim();
   paletteSelected = 0;
@@ -495,18 +392,14 @@ function filterPalette(query) {
   );
   renderPaletteResults(q);
 }
-
 function escapeRegExp(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
-
 function renderPaletteResults(query = '') {
   const container = document.getElementById('palette-results');
   if (!container) return;
-
   if (paletteFiltered.length === 0) {
     container.innerHTML = `<div class="palette-empty">No commands match "<strong>${escapeHtml(query)}</strong>"</div>`;
     return;
   }
-
   container.innerHTML = `
     <div class="palette-section-label">Commands</div>
     ${paletteFiltered.map((cmd, i) => {
@@ -526,7 +419,6 @@ function renderPaletteResults(query = '') {
       `;
     }).join('')}
   `;
-
   container.querySelectorAll('.palette-item').forEach(el => {
     el.addEventListener('click', () => {
       const idx = parseInt(el.dataset.index);
@@ -538,7 +430,6 @@ function renderPaletteResults(query = '') {
     });
   });
 }
-
 function handlePaletteKey(e) {
   if (e.key === 'Escape') { closePalette(); return; }
   if (e.key === 'ArrowDown') {
@@ -559,29 +450,18 @@ function handlePaletteKey(e) {
     }
   }
 }
-
-/* ══════════════════════════════════════════════════════════
-   SCRATCHPAD — ⌘⇧Space · event-sourced en el CortexLedger
-   Cada nota = evento COGNITIVE_NOTE (hash-chain, sobrevive sesiones,
-   auditable). Fin del teatro de localStorage: solo queda como buffer
-   offline que se re-sincroniza al volver el backend.
-   ══════════════════════════════════════════════════════════ */
 function setupScratchpad() {
   const modal = document.getElementById('scratchpad-modal');
   const input = document.getElementById('scratchpad-input');
   if (!modal || !input) return;
-
   document.getElementById('scratchpad-save')?.addEventListener('click', saveScratchpadItem);
   document.getElementById('scratchpad-close')?.addEventListener('click', () => toggleScratchpad(false));
-
   input.addEventListener('keydown', e => {
     if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); saveScratchpadItem(); }
     if (e.key === 'Escape') toggleScratchpad(false);
   });
-
   renderScratchpadItems();
 }
-
 function toggleScratchpad(force) {
   const modal = document.getElementById('scratchpad-modal');
   const input = document.getElementById('scratchpad-input');
@@ -591,31 +471,27 @@ function toggleScratchpad(force) {
   modal.setAttribute('aria-hidden', String(!S.scratchpadOpen));
   if (S.scratchpadOpen && input) setTimeout(() => input.focus(), 60);
 }
-
 async function refreshNotes() {
   const pending = [...S.scratchpadOffline];
   for (const item of pending) {
     try {
       await post('/api/cortex/notes', { text: item.text, route: item.route || '' });
       S.scratchpadOffline = S.scratchpadOffline.filter(i => i.id !== item.id);
-    } catch { break; /* backend caído: se reintenta en el próximo refresh */ }
+    } catch { break;  }
   }
   localStorage.setItem('b60-scratch-offline', JSON.stringify(S.scratchpadOffline));
-
   try {
     const data = await get('/api/cortex/notes?limit=50');
     S.scratchpadItems = data.notes || [];
-  } catch { /* offline: se muestran solo las locales */ }
+  } catch {  }
   renderScratchpadItems();
   renderContextPaneContent();
 }
-
 async function saveScratchpadItem() {
   const input = document.getElementById('scratchpad-input');
   if (!input || !input.value.trim()) return;
   const text = input.value.trim();
   input.value = '';
-
   try {
     await post('/api/cortex/notes', { text, route: S.activeRoute || '' });
     await refreshNotes();
@@ -626,22 +502,18 @@ async function saveScratchpadItem() {
     renderScratchpadItems();
     renderContextPaneContent();
   }
-
   if (mode().rewards) {
     setTachometer('done');
     setTimeout(() => setTachometer('idle'), 2000);
   }
 }
-
 function renderScratchpadItems() {
   const container = document.getElementById('scratchpad-items');
   if (!container) return;
   const off = S.scratchpadOffline;
   const srv = S.scratchpadItems;
   if (off.length === 0 && srv.length === 0) { container.innerHTML = ''; return; }
-
   const fmtTime = (ms) => new Date(ms).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-
   container.innerHTML = [
     ...off.map(item => `
       <div class="scratchpad-item">
@@ -656,7 +528,6 @@ function renderScratchpadItems() {
         <span class="scratchpad-item-del" data-del-ev="${escapeHtml(item.event_id)}" title="Tombstone (el ledger no olvida; la vista sí)">✕</span>
       </div>`),
   ].join('');
-
   container.querySelectorAll('[data-del-off]').forEach(el => {
     el.addEventListener('click', e => {
       e.stopPropagation();
@@ -670,51 +541,37 @@ function renderScratchpadItems() {
   container.querySelectorAll('[data-del-ev]').forEach(el => {
     el.addEventListener('click', async e => {
       e.stopPropagation();
-      try { await post(`/api/cortex/notes/${el.dataset.delEv}/delete`, {}); } catch { /* offline */ }
+      try { await post(`/api/cortex/notes/${el.dataset.delEv}/delete`, {}); } catch {  }
       await refreshNotes();
     });
   });
 }
-
-/* ══════════════════════════════════════════════════════════
-   AGENT MODAL — approvals (ambos modos) / loop guard (solo 2E)
-   ══════════════════════════════════════════════════════════ */
 function showAgentModal({ icon = '⬡', message, actions = [] }) {
   const modal = document.getElementById('agent-modal');
   const iconEl = document.getElementById('agent-modal-icon');
   const msgEl = document.getElementById('agent-modal-msg');
   const actionsEl = document.getElementById('agent-modal-actions');
   if (!modal || !msgEl || !actionsEl) return;
-
   if (iconEl) iconEl.textContent = icon;
   msgEl.textContent = message;
-
   const finalActions = actions.length > 0 ? actions : [
     { label: 'Got it', fn: hideAgentModal, primary: true },
   ];
-
   actionsEl.innerHTML = finalActions.map((a, i) =>
     `<button class="btn ${a.primary ? 'btn-primary' : ''}" style="font-size:0.65rem" data-action-idx="${i}">${escapeHtml(a.label)}</button>`
   ).join('');
-
   actionsEl.querySelectorAll('button').forEach(btn => {
     btn.addEventListener('click', () => finalActions[parseInt(btn.dataset.actionIdx)]?.fn?.());
   });
-
   modal.classList.add('visible');
   modal.setAttribute('aria-hidden', 'false');
   if (mode().tachometer) setTachometer('alert');
 }
-
 function hideAgentModal() {
   const modal = document.getElementById('agent-modal');
   if (modal) { modal.classList.remove('visible'); modal.setAttribute('aria-hidden', 'true'); }
   setTachometer('idle');
 }
-
-/* ══════════════════════════════════════════════════════════
-   LOOP DETECTOR — solo 2E (freno de hiperfoco, 25 min)
-   ══════════════════════════════════════════════════════════ */
 function setupLoopDetector() {
   setInterval(() => {
     if (!mode().loopGuard) return;
@@ -735,23 +592,17 @@ function setupLoopDetector() {
     }
   }, 2 * 60 * 1000);
 }
-
-/* ══════════════════════════════════════════════════════════
-   CONTEXT RESTORE BANNER — solo 2E
-   ══════════════════════════════════════════════════════════ */
 async function showRestoreBanner(lastRoute) {
   const banner = document.getElementById('restore-banner');
   const msg = document.getElementById('restore-msg');
   const points = document.getElementById('restore-points');
   const dismiss = document.getElementById('restore-dismiss');
   if (!banner || !msg) return;
-
   const routeLabels = {
     ledger: 'BFT Ledger', databases: 'Ontologies', query: 'SQL Console',
     swarm: 'Agent Swarm', canvas: 'Architecture Canvas', sentinel: 'Git Sentinel',
     analytics: 'Ledger Analytics',
   };
-
   let bullets = null;
   let jumpRoute = lastRoute;
   try {
@@ -759,8 +610,7 @@ async function showRestoreBanner(lastRoute) {
     bullets = r.bullets || null;
     if (r.suggested_route && routeLabels[r.suggested_route]) jumpRoute = r.suggested_route;
     if (bullets) bullets.push(`Retomar en ${routeLabels[jumpRoute] || jumpRoute} →`);
-  } catch { /* offline → fallback genérico */ }
-
+  } catch {  }
   if (!bullets) {
     bullets = [
       `Last active: ${routeLabels[lastRoute] || lastRoute}`,
@@ -769,7 +619,6 @@ async function showRestoreBanner(lastRoute) {
       S.sentinel ? `repo ${S.sentinel.repo_name}@${S.sentinel.branch ?? '—'}` : '',
     ].filter(Boolean);
   }
-
   msg.textContent = 'Contexto restaurado · ';
   if (points) {
     points.innerHTML = bullets.map((b, i) =>
@@ -780,28 +629,20 @@ async function showRestoreBanner(lastRoute) {
       banner.style.display = 'none';
     });
   }
-
   banner.style.display = 'flex';
   dismiss?.addEventListener('click', () => { banner.style.display = 'none'; });
   setTimeout(() => { banner.style.display = 'none'; }, 14000);
 }
-
-/* ══════════════════════════════════════════════════════════
-   KEYBOARD SHORTCUTS
-   ══════════════════════════════════════════════════════════ */
 function setupKeyboard() {
   const routeKeys = { '1': 'ledger', '2': 'databases', '3': 'query', '4': 'swarm', '5': 'canvas', '6': 'sentinel', '7': 'analytics' };
-
   window.addEventListener('keydown', e => {
     const mod = e.metaKey || e.ctrlKey;
-
     if (mod && e.key === 'k' && !e.shiftKey) { e.preventDefault(); S.paletteOpen ? closePalette() : openPalette(); return; }
     if (mod && e.shiftKey && e.code === 'Space') { e.preventDefault(); toggleScratchpad(); return; }
     if (mod && e.shiftKey && (e.key === 'e' || e.key === 'E')) { e.preventDefault(); toggleCognitiveMode(); return; }
     if (mod && e.key === 'b' && !e.shiftKey) { e.preventDefault(); toggleContextPane(); return; }
     if (mod && e.key === 'm' && !e.shiftKey) { e.preventDefault(); toggleBifocal(); return; }
     if (mod && routeKeys[e.key]) { e.preventDefault(); navigate(routeKeys[e.key]); return; }
-
     if (e.key === 'Escape') {
       if (S.paletteOpen) { closePalette(); return; }
       if (S.scratchpadOpen) { toggleScratchpad(false); return; }
@@ -809,10 +650,6 @@ function setupKeyboard() {
     }
   });
 }
-
-/* ══════════════════════════════════════════════════════════
-   ROUTER
-   ══════════════════════════════════════════════════════════ */
 function setupRouter() {
   registerRoute('canvas',    renderCanvasPage);
   registerRoute('ledger',    renderLedgerPage);
@@ -821,42 +658,31 @@ function setupRouter() {
   registerRoute('swarm',     renderSwarmPage);
   registerRoute('analytics', renderAnalyticsPage);
   registerRoute('sentinel',  renderSentinelPage);
-
   window.addEventListener('hashchange', () => {
     const rawHash = window.location.hash.replace('#', '');
     const hash = rawHash.replace(/[^a-zA-Z0-9_-]/g, '');
     if (hash) navigate(hash);
   });
 }
-
-/* ══════════════════════════════════════════════════════════
-   DATA FETCHING
-   ══════════════════════════════════════════════════════════ */
 async function refreshDatabaseList() {
   try {
     S.databaseList = await get('/api/databases');
     updateContextPaneCounts();
-  } catch { /* offline */ }
+  } catch {  }
 }
-
 async function refreshLedgerStats() {
   try {
     S.ledgerStats = await get('/api/ledger/stats');
     updateContextPaneCounts();
     updateStatusBar();
-  } catch { /* offline */ }
+  } catch {  }
 }
-
-/* ══════════════════════════════════════════════════════════
-   FOCUS ZONE HELPERS
-   ══════════════════════════════════════════════════════════ */
 function setFocusHeader({ breadcrumb = '', actions = '' } = {}) {
   const bc = document.getElementById('focus-breadcrumb');
   const fa = document.getElementById('focus-actions');
   if (bc) bc.innerHTML = breadcrumb;
   if (fa) fa.innerHTML = actions;
 }
-
 function setBreadcrumb(...parts) {
   return parts.map((p, i) =>
     i < parts.length - 1
@@ -864,30 +690,25 @@ function setBreadcrumb(...parts) {
       : `<span class="breadcrumb-item current">${escapeHtml(p)}</span>`
   ).join('');
 }
-
 function onRouteEnter(routeName) {
   S.activeRoute = routeName;
   localStorage.setItem('b60-route', routeName);
   setActiveSpineIcon(routeName);
   setActiveContextItem(routeName);
   closeEntryDetail();
-
   if (routeName !== 'swarm' && S.telemetrySocket) {
     S.telemetrySocket.close();
     S.telemetrySocket = null;
   }
-
   if (S.loopDetector.route !== routeName) {
     S.loopDetector.route = routeName;
     S.loopDetector.routeEnteredAt = Date.now();
     S.loopDetector.interventionFired = false;
   }
 }
-
 function escapeHtml(s) {
   return String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: CANVAS — ABSTRAER (macro con métricas reales)
    ══════════════════════════════════════════════════════════ */
@@ -897,9 +718,7 @@ async function renderCanvasPage(container) {
     breadcrumb: setBreadcrumb('BABYLON·60', 'Architecture — ABSTRAER (ver el todo antes que la parte)'),
     actions: `<span style="font-size:0.6rem;color:var(--dust-faint)">Scroll = zoom · Drag = pan</span>`,
   });
-
   try { S.telemetrySnapshot = await get('/api/telemetry/snapshot'); } catch { /* offline */ }
-
   const snap = S.telemetrySnapshot;
   const dbCount = S.databaseList.length;
   const ledgerEntries = S.ledgerStats?.entries ?? '—';
@@ -907,7 +726,6 @@ async function renderCanvasPage(container) {
   const sent = S.sentinel;
   const gitMeta = sent?.is_git ? `${sent.repo_name}@${sent.branch ?? '—'} · ${sent.head ?? '—'}` : 'no git';
   const gitStatus = sent?.warnings?.some(w => w.level === 'red') ? 'err' : sent?.warnings?.length ? 'warn' : 'ok';
-
   const nodes = [
     { id: 'frontend', x: 140, y: 350, type: 'FRONTEND',    name: 'BABYLON60 IDE',    meta: `Vite · modo ${mode().key.toUpperCase()}`, status: 'ok' },
     { id: 'fastapi',  x: 300, y: 120, type: 'BACKEND',     name: 'FastAPI',          meta: '14 endpoints · ASGI', status: 'ok' },
@@ -916,7 +734,6 @@ async function renderCanvasPage(container) {
     { id: 'telemetry',x: 620, y: 350, type: 'STREAM',      name: 'Telemetry Stream', meta: snap ? 'WS push 2s (sin polling)' : 'offline', status: snap ? 'ok' : 'warn', goto: 'swarm' },
     { id: 'git',      x: 140, y: 240, type: 'SENTINEL',    name: 'Git Sentinel',     meta: gitMeta, status: gitStatus, goto: 'sentinel' },
   ];
-
   const edges = [
     { from: 'frontend', to: 'fastapi' },
     { from: 'fastapi',  to: 'ledger' },
@@ -924,9 +741,7 @@ async function renderCanvasPage(container) {
     { from: 'fastapi',  to: 'telemetry' },
     { from: 'git',      to: 'fastapi' },
   ];
-
   const colors = { ok: 'var(--verify)', warn: 'var(--gold)', err: 'var(--break)', idle: 'var(--dust-ghost)' };
-
   container.innerHTML = `
     <div class="canvas-container" id="canvas-main">
       <svg class="canvas-svg" id="canvas-svg">
@@ -945,12 +760,10 @@ async function renderCanvasPage(container) {
       </div>
     </div>
   `;
-
   const svg = document.getElementById('canvas-svg');
   const edgesG = document.getElementById('canvas-edges');
   const nodesG = document.getElementById('canvas-nodes');
   if (!svg || !edgesG || !nodesG) return;
-
   edges.forEach(({ from, to }) => {
     const n1 = nodes.find(n => n.id === from);
     const n2 = nodes.find(n => n.id === to);
@@ -967,14 +780,12 @@ async function renderCanvasPage(container) {
     line.setAttribute('marker-end', 'url(#arrow)');
     edgesG.appendChild(line);
   });
-
   nodes.forEach(node => {
     const fo = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
     fo.setAttribute('x', node.x);
     fo.setAttribute('y', node.y);
     fo.setAttribute('width', '195');
     fo.setAttribute('height', '76');
-
     const div = document.createElement('div');
     div.className = 'canvas-node-card';
     div.style.position = 'relative';
@@ -988,11 +799,9 @@ async function renderCanvasPage(container) {
     fo.appendChild(div);
     nodesG.appendChild(fo);
   });
-
   const applyVB = () => svg.setAttribute('viewBox', `${S.canvasVB.x} ${S.canvasVB.y} ${S.canvasVB.w} ${S.canvasVB.h}`);
   const fit = () => { S.canvasVB = { x: 80, y: 40, w: 720, h: 400 }; applyVB(); };
   fit();
-
   const zoom = (factor) => {
     const vb = S.canvasVB;
     const cx = vb.x + vb.w / 2, cy = vb.y + vb.h / 2;
@@ -1001,20 +810,16 @@ async function renderCanvasPage(container) {
     vb.x = cx - vb.w / 2; vb.y = cy - vb.h / 2;
     applyVB();
   };
-
   document.getElementById('canvas-zoom-in')?.addEventListener('click', () => zoom(1 / 1.2));
   document.getElementById('canvas-zoom-out')?.addEventListener('click', () => zoom(1.2));
   document.getElementById('canvas-fit-btn')?.addEventListener('click', fit);
-
   svg.addEventListener('wheel', e => {
     e.preventDefault();
     zoom(e.deltaY > 0 ? 1.1 : 1 / 1.1);
   }, { passive: false });
-
   if (S.canvasAbort) S.canvasAbort.abort();
   S.canvasAbort = new AbortController();
   const sig = S.canvasAbort.signal;
-
   let dragging = false, lastX = 0, lastY = 0;
   svg.addEventListener('pointerdown', e => { dragging = true; lastX = e.clientX; lastY = e.clientY; });
   window.addEventListener('pointermove', e => {
@@ -1027,13 +832,11 @@ async function renderCanvasPage(container) {
   }, { signal: sig });
   window.addEventListener('pointerup', () => { dragging = false; }, { signal: sig });
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: LEDGER — DETERMINAR (verificación causal al hash)
    ══════════════════════════════════════════════════════════ */
 let ledgerPage = 1;
 const LEDGER_PAGE_SIZE = 50;
-
 async function renderLedgerPage(container) {
   onRouteEnter('ledger');
   setFocusHeader({
@@ -1041,7 +844,6 @@ async function renderLedgerPage(container) {
     actions: `<button class="btn btn-verify" id="btn-verify-chain">⚿ Verify Chain</button>`,
   });
   document.getElementById('btn-verify-chain')?.addEventListener('click', runChainVerification);
-
   container.innerHTML = `
     <div class="stats-grid slide-in" id="ledger-stats-grid">
       <div class="stat-card">
@@ -1060,7 +862,6 @@ async function renderLedgerPage(container) {
         <div class="stat-sub" id="stat-latest-lamport">Lamport (reloj lógico causal): —</div>
       </div>
     </div>
-
     <div class="card fade-in" style="margin-bottom:16px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div class="card-title">Hash Chain Verification</div>
@@ -1076,7 +877,6 @@ async function renderLedgerPage(container) {
         </div>
       </div>
     </div>
-
     <div class="card fade-in">
       <div class="card-title" style="margin-bottom:10px">Ledger Sequence</div>
       <div style="overflow-x:auto">
@@ -1104,10 +904,8 @@ async function renderLedgerPage(container) {
         <button class="btn" id="btn-ledger-next" disabled>Next ▶</button>
       </div>
     </div>
-
     <div id="entry-detail-panel" class="detail-panel" aria-hidden="true"></div>
   `;
-
   try {
     const stats = await get('/api/ledger/stats');
     S.ledgerStats = stats;
@@ -1122,13 +920,10 @@ async function renderLedgerPage(container) {
     updateStatusBar();
     updateContextPaneCounts();
   } catch { /* offline */ }
-
   await loadLedgerPage(1);
-
   document.getElementById('btn-ledger-prev')?.addEventListener('click', () => loadLedgerPage(ledgerPage - 1));
   document.getElementById('btn-ledger-next')?.addEventListener('click', () => loadLedgerPage(ledgerPage + 1));
 }
-
 async function loadLedgerPage(page) {
   if (page < 1) page = 1;
   ledgerPage = page;
@@ -1139,7 +934,6 @@ async function loadLedgerPage(page) {
     const data = await get(`/api/ledger/entries?limit=${LEDGER_PAGE_SIZE}&offset=${offset}`);
     const entries = data.entries || [];
     const total = data.total ?? entries.length;
-
     if (entries.length === 0) {
       tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:20px;color:var(--dust-ghost)">No entries</td></tr>`;
     } else {
@@ -1155,12 +949,10 @@ async function loadLedgerPage(page) {
           <td class="hash-cell" title="${escapeHtml(e.entry_hash)}">${(e.entry_hash || '—').slice(0, 12)}…</td>
         </tr>
       `).join('');
-
       tbody.querySelectorAll('tr[data-seq]').forEach(row => {
         row.addEventListener('click', () => openEntryDetail(parseInt(row.dataset.seq)));
       });
     }
-
     const totalPages = Math.max(1, Math.ceil(total / LEDGER_PAGE_SIZE));
     const info = document.getElementById('ledger-page-info');
     if (info) info.textContent = `Page ${page} / ${totalPages} · ${total} entries`;
@@ -1172,7 +964,6 @@ async function loadLedgerPage(page) {
     tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--break);padding:16px">Error: ${escapeHtml(err.message)}</td></tr>`;
   }
 }
-
 /* ── Entry detail (micro-túnel: una entrada, causa completa) ── */
 async function openEntryDetail(seq) {
   const panel = document.getElementById('entry-detail-panel');
@@ -1183,18 +974,15 @@ async function openEntryDetail(seq) {
     <button class="btn btn-icon" id="detail-close" aria-label="Close">✕</button></div>
     <div class="detail-body" style="color:var(--dust-faint)">Loading...</div>`;
   panel.querySelector('#detail-close')?.addEventListener('click', closeEntryDetail);
-
   try {
     const e = await get(`/api/ledger/entry/${seq}`);
     let payloadPretty = e.payload_json || '';
     try { payloadPretty = JSON.stringify(JSON.parse(e.payload_json), null, 2); } catch { /* raw */ }
-
     const field = (label, value, cls = '') => `
       <div class="detail-field">
         <div class="detail-field-label">${escapeHtml(label)}</div>
         <div class="detail-field-value ${cls}">${escapeHtml(value ?? '—')}</div>
       </div>`;
-
     panel.innerHTML = `
       <div class="detail-header">
         <span class="detail-title">⧉ Entry #${e.seq} · ${escapeHtml(e.event_type)}</span>
@@ -1221,12 +1009,10 @@ async function openEntryDetail(seq) {
     if (bodyEl) bodyEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
   }
 }
-
 function closeEntryDetail() {
   const panel = document.getElementById('entry-detail-panel');
   if (panel) { panel.classList.remove('open'); panel.setAttribute('aria-hidden', 'true'); }
 }
-
 /* ── Chain verification — POST /api/ledger/verify ── */
 async function runChainVerification() {
   const btn = document.getElementById('btn-verify-chain');
@@ -1236,27 +1022,22 @@ async function runChainVerification() {
   const integrityEl = document.getElementById('stat-integrity');
   const summaryEl = document.getElementById('verify-summary');
   if (!grid) return;
-
   if (btn) { btn.disabled = true; btn.textContent = '⚙ Verifying...'; }
   if (progressWrap) progressWrap.style.display = 'block';
   setTachometer('working');
-
   let progress = 0;
   const ticker = setInterval(() => {
     progress = Math.min(progress + 8, 90);
     if (progressBar) progressBar.style.width = `${progress}%`;
   }, 120);
-
   try {
     const result = await post('/api/ledger/verify', {});
     S.lastVerify = result;
     clearInterval(ticker);
     if (progressBar) progressBar.style.width = '100%';
-
     const total = result.total_entries ?? 0;
     const valid = result.verified_entries ?? 0;
     const broken = total - valid;
-
     grid.innerHTML = '';
     (result.entries || []).slice(0, 400).forEach(entry => {
       const block = document.createElement('div');
@@ -1268,7 +1049,6 @@ async function runChainVerification() {
     if (total === 0) {
       grid.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.7rem;padding:8px">Ledger vacío — nada que verificar.</div>`;
     }
-
     const hasBreakSeq = result.broken_at != null;
     if (integrityEl) {
       integrityEl.textContent = result.valid ? 'VERIFIED' : (hasBreakSeq ? `BROKEN (${broken})` : 'ERROR');
@@ -1284,7 +1064,6 @@ async function runChainVerification() {
     if (!result.valid && result.error && total === 0) {
       grid.innerHTML = `<div style="color:var(--break);font-size:0.7rem;padding:8px">${escapeHtml(result.error)}</div>`;
     }
-
     if (result.valid) {
       setTachometer('done');
       if (mode().rewards) {
@@ -1316,14 +1095,12 @@ async function runChainVerification() {
   if (btn) { btn.disabled = false; btn.textContent = '⚿ Verify Chain'; }
   if (progressWrap) setTimeout(() => { progressWrap.style.display = 'none'; }, 1500);
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: DATABASES — drill-down: db → tablas → schema + filas
    ══════════════════════════════════════════════════════════ */
 async function renderDatabasesPage(container) {
   onRouteEnter('databases');
   setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies') });
-
   container.innerHTML = `
     <div class="stats-grid slide-in">
       <div class="stat-card">
@@ -1357,12 +1134,10 @@ async function renderDatabasesPage(container) {
       <div id="db-rows-body" style="overflow-x:auto"></div>
     </div>
   `;
-
   try {
     const dbs = await get('/api/databases');
     S.databaseList = dbs;
     updateContextPaneCounts();
-
     const tbody = document.getElementById('db-table-body');
     const totalEl = document.getElementById('db-total-count');
     const sizeEl = document.getElementById('db-total-size');
@@ -1371,7 +1146,6 @@ async function renderDatabasesPage(container) {
       const totalBytes = dbs.reduce((a, d) => a + (d.size_bytes || 0), 0);
       sizeEl.textContent = totalBytes > 1e6 ? `${(totalBytes / 1e6).toFixed(1)} MB` : `${(totalBytes / 1024).toFixed(0)} KB`;
     }
-
     const typeOf = name => {
       if (name.includes('ledger')) return 'LEDGER';
       if (name.includes('ontology')) return 'ONTOLOGY';
@@ -1380,7 +1154,6 @@ async function renderDatabasesPage(container) {
       if (name.includes('nexus')) return 'NEXUS';
       return 'GENERAL';
     };
-
     if (tbody) tbody.innerHTML = dbs.map(db => `
       <tr style="cursor:pointer" data-db="${escapeHtml(db.name)}" title="Browse tables">
         <td class="stream-cell">${escapeHtml(db.name)}</td>
@@ -1388,7 +1161,6 @@ async function renderDatabasesPage(container) {
         <td><span style="font-size:0.58rem;padding:1px 5px;border-radius:2px;background:var(--tablet-2);color:var(--dust-faint)">${typeOf(db.name)}</span></td>
       </tr>
     `).join('');
-
     tbody?.querySelectorAll('tr[data-db]').forEach(row => {
       row.addEventListener('click', () => loadDbTables(row.dataset.db));
     });
@@ -1397,7 +1169,6 @@ async function renderDatabasesPage(container) {
     if (tbody) tbody.innerHTML = `<tr><td colspan="3" style="color:var(--break);text-align:center;padding:14px">${escapeHtml(err.message)}</td></tr>`;
   }
 }
-
 async function loadDbTables(dbName) {
   const panel = document.getElementById('db-tables-panel');
   const title = document.getElementById('db-tables-title');
@@ -1409,7 +1180,6 @@ async function loadDbTables(dbName) {
   if (title) title.textContent = `Tables — ${dbName}`;
   body.innerHTML = `<span style="color:var(--dust-faint);font-size:0.68rem">Loading...</span>`;
   setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies', dbName) });
-
   try {
     const tables = await get(`/api/databases/${encodeURIComponent(dbName)}/tables`);
     if (tables.length === 0) {
@@ -1428,7 +1198,6 @@ async function loadDbTables(dbName) {
     body.innerHTML = `<span style="color:var(--break);font-size:0.68rem">${escapeHtml(err.message)}</span>`;
   }
 }
-
 async function browseTable(dbName, table) {
   const panel = document.getElementById('db-browse-panel');
   const title = document.getElementById('db-browse-title');
@@ -1441,19 +1210,15 @@ async function browseTable(dbName, table) {
   if (schemaBody) schemaBody.textContent = 'Loading schema...';
   rowsBody.innerHTML = '';
   setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'Ontologies', dbName, table) });
-
   try {
     const [schema, data] = await Promise.all([
       get(`/api/databases/${encodeURIComponent(dbName)}/schema/${encodeURIComponent(table)}`),
       get(`/api/databases/${encodeURIComponent(dbName)}/tables/${encodeURIComponent(table)}?limit=25`),
     ]);
-
     if (schemaBody) schemaBody.innerHTML = schema.map(c =>
       `<span style="margin-right:12px;white-space:nowrap">${c.pk ? '⚿' : '·'} ${escapeHtml(c.name)} <span style="color:var(--dust-ghost)">${escapeHtml(c.type || '')}</span></span>`
     ).join('');
-
     if (meta) meta.textContent = `${data.total} rows total · showing ${data.rows.length}`;
-
     if (data.rows.length === 0) {
       rowsBody.innerHTML = `<div style="color:var(--dust-ghost);font-size:0.68rem;padding:8px">Empty table.</div>`;
     } else {
@@ -1476,16 +1241,13 @@ async function browseTable(dbName, table) {
     rowsBody.innerHTML = `<div style="color:var(--break);font-size:0.7rem;padding:8px">${escapeHtml(err.message)}</div>`;
   }
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: QUERY — SQL Console · POST /api/query {database, sql}
    ══════════════════════════════════════════════════════════ */
 async function renderQueryPage(container) {
   onRouteEnter('query');
   setFocusHeader({ breadcrumb: setBreadcrumb('BABYLON·60', 'SQL Console') });
-
   if (S.databaseList.length === 0) await refreshDatabaseList();
-
   container.innerHTML = `
     <div class="card slide-in" style="margin-bottom:14px">
       <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px">
@@ -1511,7 +1273,6 @@ async function renderQueryPage(container) {
       <div id="query-result-body" style="overflow-x:auto"></div>
     </div>
   `;
-
   const runQuery = async () => {
     const sql = document.getElementById('query-input')?.value?.trim();
     const database = document.getElementById('query-db-select')?.value;
@@ -1554,7 +1315,6 @@ async function renderQueryPage(container) {
       setTachometer('idle');
     }
   };
-
   document.getElementById('btn-run-query')?.addEventListener('click', runQuery);
   document.getElementById('btn-clear-query')?.addEventListener('click', () => {
     const input = document.getElementById('query-input');
@@ -1566,7 +1326,6 @@ async function renderQueryPage(container) {
     if (e.shiftKey && e.key === 'Enter') { e.preventDefault(); runQuery(); }
   });
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: SWARM — telemetría en vivo (push WS, sin polling)
    ══════════════════════════════════════════════════════════ */
@@ -1576,7 +1335,6 @@ async function renderSwarmPage(container) {
     breadcrumb: setBreadcrumb('BABYLON·60', 'Agent Swarm'),
     actions: `<span class="focus-badge live">LIVE</span>`,
   });
-
   container.innerHTML = `
     <div class="swarm-layout">
       <div class="swarm-terminal">
@@ -1594,9 +1352,7 @@ async function renderSwarmPage(container) {
       </div>
     </div>
   `;
-
   renderSwarmAgents();
-
   if (S.telemetrySocket) { try { S.telemetrySocket.close(); } catch { /* noop */ } }
   setTachometer('indexing');
   S.telemetrySocket = connectWebSocket('/ws/telemetry', (snap) => {
@@ -1605,7 +1361,6 @@ async function renderSwarmPage(container) {
     if (S.tachometerState === 'indexing') setTachometer('idle');
   }, () => { if (S.tachometerState === 'indexing') setTachometer('idle'); });
 }
-
 function renderSwarmAgents() {
   const el = document.getElementById('swarm-agents');
   if (!el) return;
@@ -1650,18 +1405,15 @@ function renderSwarmAgents() {
     </div>
   `).join('');
 }
-
 function appendSwarmSnapshot(snap) {
   const body = document.getElementById('swarm-log-body');
   if (!body) return;
   const now = new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-
   const dbs = snap.databases?.length ?? 0;
   const size = snap.total_db_size_mb != null ? `${snap.total_db_size_mb}MB` : '—';
   const wal = snap.wal_files?.length ?? 0;
   const rss = snap.process?.max_rss_mb != null ? `${snap.process.max_rss_mb}MB` : '—';
   const head = snap.git?.head ? snap.git.head.replace('ref: refs/heads/', '@') : '';
-
   const line = document.createElement('div');
   line.className = 'swarm-log-line';
   line.innerHTML = `
@@ -1675,7 +1427,6 @@ function appendSwarmSnapshot(snap) {
   S.swarmLog.push({ time: now, snap });
   if (S.swarmLog.length > 200) S.swarmLog.shift();
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: SENTINEL — identidad de repo + delegación 100% al agente
    ══════════════════════════════════════════════════════════ */
@@ -1685,21 +1436,17 @@ async function renderSentinelPage(container) {
     breadcrumb: setBreadcrumb('BABYLON·60', 'Git Sentinel'),
     actions: `<button class="btn" id="btn-sentinel-refresh">↺ Refresh</button>`,
   });
-
   container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⎇</div><div class="desc">Leyendo identidad del repo...</div></div>`;
-
   try { S.sentinel = await get('/api/sentinel/status'); } catch (err) {
     container.innerHTML = `<div class="empty-state" style="padding:30px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
     return;
   }
   updateRepoSegment();
   renderContextPaneContent();
-
   const s = S.sentinel;
   const reds = s.warnings.filter(w => w.level === 'red');
   const ambers = s.warnings.filter(w => w.level === 'amber');
   const lineageOk = reds.length === 0;
-
   const warningsHtml = s.warnings.length === 0
     ? `<div style="color:var(--verify);font-size:0.7rem">✓ Linaje canónico: repo, rama y política de remoto coinciden con STATUS.md</div>`
     : s.warnings.map(w => `
@@ -1708,11 +1455,9 @@ async function renderSentinelPage(container) {
           <span>${escapeHtml(w.msg)}</span>
         </div>
       `).join('');
-
   const remotesHtml = s.remotes.length === 0
     ? `<div style="color:var(--verify);font-size:0.66rem">✓ Sin remoto configurado (política P0 activa: nada sale a la nube hasta rotar claves)</div>`
     : s.remotes.map(r => `<div style="font-family:var(--font-mono);font-size:0.64rem;color:var(--dust-dim)">${escapeHtml(r.name)} → ${escapeHtml(r.url)}</div>`).join('');
-
   container.innerHTML = `
     <div class="stats-grid slide-in">
       <div class="stat-card" style="border-left:2px solid ${lineageOk ? 'var(--verify)' : 'var(--break)'}">
@@ -1731,7 +1476,6 @@ async function renderSentinelPage(container) {
         <div class="stat-sub">${escapeHtml(String(s.head_time || '—').slice(0, 19))}</div>
       </div>
     </div>
-
     <div class="card fade-in" style="margin-bottom:14px">
       <div class="card-title" style="margin-bottom:8px">Lineage Guard (intuición de repo incorrecto)</div>
       ${warningsHtml}
@@ -1740,7 +1484,6 @@ async function renderSentinelPage(container) {
         ${remotesHtml}
       </div>
     </div>
-
     <div class="card fade-in">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
         <div class="card-title">Delegación 100% al Agente <span style="color:var(--dust-ghost);font-weight:400;font-size:0.6rem">(sellada en CortexLedger real)</span></div>
@@ -1768,7 +1511,6 @@ async function renderSentinelPage(container) {
       <div id="delegation-list"><div style="color:var(--dust-ghost);font-size:0.64rem">Cargando cola…</div></div>
     </div>
   `;
-
   document.getElementById('btn-sentinel-refresh')?.addEventListener('click', () => rerender());
   document.getElementById('delegation-add')?.addEventListener('click', addDelegation);
   document.getElementById('delegation-input')?.addEventListener('keydown', e => {
@@ -1777,7 +1519,6 @@ async function renderSentinelPage(container) {
   document.getElementById('btn-verify-ide-ledger')?.addEventListener('click', verifyIdeLedger);
   await refreshDelegations();
 }
-
 async function refreshDelegations() {
   const el = document.getElementById('delegation-list');
   if (!el) return;
@@ -1788,7 +1529,6 @@ async function refreshDelegations() {
     el.innerHTML = `<div style="color:var(--break);font-size:0.64rem">${escapeHtml(err.message)}</div>`;
   }
 }
-
 async function addDelegation() {
   const input = document.getElementById('delegation-input');
   const kindSel = document.getElementById('delegation-kind');
@@ -1810,7 +1550,6 @@ async function addDelegation() {
     if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
   }
 }
-
 async function executeDelegation(id) {
   const statusEl = document.getElementById('delegation-status');
   if (statusEl) statusEl.innerHTML = `<span style="color:var(--dust-faint)">Ejecutando ${id}…</span>`;
@@ -1829,12 +1568,10 @@ async function executeDelegation(id) {
   }
   await refreshDelegations();
 }
-
 async function cancelDelegation(id) {
   try { await post(`/api/delegation/${id}/cancel`, {}); } catch { /* noop */ }
   await refreshDelegations();
 }
-
 async function verifyIdeLedger() {
   const statusEl = document.getElementById('delegation-status');
   try {
@@ -1846,12 +1583,10 @@ async function verifyIdeLedger() {
     if (statusEl) statusEl.innerHTML = `<span style="color:var(--break)">${escapeHtml(err.message)}</span>`;
   }
 }
-
 const STATE_COLORS = {
   QUEUED: 'var(--gold)', EXECUTED: 'var(--verify)', BLOCKED: 'var(--break)',
   FAILED: 'var(--break)', CANCELLED: 'var(--dust-ghost)',
 };
-
 function renderDelegationList(items) {
   const el = document.getElementById('delegation-list');
   if (!el) return;
@@ -1875,7 +1610,6 @@ function renderDelegationList(items) {
   el.querySelectorAll('[data-exec]').forEach(b => b.addEventListener('click', () => executeDelegation(b.dataset.exec)));
   el.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => cancelDelegation(b.dataset.del)));
 }
-
 /* ══════════════════════════════════════════════════════════
    ROUTE: ANALYTICS — DETERMINAR (agregación + búsqueda BM25)
    ══════════════════════════════════════════════════════════ */
@@ -1885,7 +1619,6 @@ async function renderAnalyticsPage(container) {
     breadcrumb: setBreadcrumb('BABYLON·60', 'Ledger Analytics — DETERMINAR'),
     actions: `<button class="btn" id="btn-analytics-refresh" style="font-size:0.62rem">↺ Refresh</button>`,
   });
-
   container.innerHTML = `
     <div class="card slide-in" style="margin-bottom:14px">
       <div class="card-title" style="margin-bottom:8px">Búsqueda semántico-léxica <span style="color:var(--dust-ghost);font-weight:400;font-size:0.6rem">(Okapi BM25 sobre payload+taint — el "por qué macro")</span></div>
@@ -1900,12 +1633,10 @@ async function renderAnalyticsPage(container) {
     </div>
     <div id="entry-detail-panel" class="detail-panel" aria-hidden="true"></div>
   `;
-
   document.getElementById('btn-analytics-refresh')?.addEventListener('click', () => rerender());
   const doSearch = () => runLedgerSearch(document.getElementById('ledger-search-input')?.value || '');
   document.getElementById('ledger-search-btn')?.addEventListener('click', doSearch);
   document.getElementById('ledger-search-input')?.addEventListener('keydown', e => { if (e.key === 'Enter') doSearch(); });
-
   const body = document.getElementById('analytics-body');
   try {
     const a = await get('/api/ledger/analytics');
@@ -1935,7 +1666,6 @@ async function renderAnalyticsPage(container) {
     body.innerHTML = `<div class="empty-state" style="padding:24px 0"><div class="icon">⚠</div><div class="desc" style="color:var(--break)">${escapeHtml(err.message)}</div></div>`;
   }
 }
-
 async function runLedgerSearch(q) {
   const el = document.getElementById('ledger-search-results');
   if (!el) return;
