@@ -175,7 +175,7 @@ fn init_db(db_path: &Path) -> Result<Connection, rusqlite::Error> {
 }
 
 fn main() {
-    println!("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Rust (strike-rs) sobre 896 Primitivas...");
+    tracing::info!("[C5-REAL] Iniciando Ejecución Empírica y Verificación Par-Par en Rust (strike-rs) sobre 896 Primitivas...");
     let start_time = SystemTime::now();
 
     // Resolve db path dynamically
@@ -267,14 +267,14 @@ fn main() {
     }
 
     let elapsed = start_time.elapsed().expect("[C5-REAL] FATAL: Start time exceeded").as_micros() as f64 / 1000.0;
-    println!("[C5-REAL] Barrido Empírico Rust Finalizado: {}/896 Primitivas Verificadas en {:.2} ms.", total_verified, elapsed);
-    println!("          Quorum 3/3 (Unanimidad): {} | Quorum 2/3 (Tolerancia Bizantina): {}", quorum_3of3, quorum_2of3);
+    tracing::info!("[C5-REAL] Barrido Empírico Rust Finalizado: {}/896 Primitivas Verificadas en {:.2} ms.", total_verified, elapsed);
+    tracing::info!("          Quorum 3/3 (Unanimidad): {} | Quorum 2/3 (Tolerancia Bizantina): {}", quorum_3of3, quorum_2of3);
 
     if total_verified == 896 {
-        println!("[PASS] 896/896 Primitivas Rust en Consenso Par-Par (Topología BFT 100% Validada en Silicio).");
+        tracing::info!("[PASS] 896/896 Primitivas Rust en Consenso Par-Par (Topología BFT 100% Validada en Silicio).");
         std::process::exit(0);
     } else {
-        eprintln!("[FAIL] Verificación Par-Par Rust Incompleta ({}/896). Abortando.", total_verified);
+        etracing::info!("[FAIL] Verificación Par-Par Rust Incompleta ({}/896). Abortando.", total_verified);
         std::process::exit(1);
     }
 }
