@@ -8,7 +8,7 @@ import contextlib
 import contextvars
 import typing
 from contextvars import ContextVar
-from typing import Any, Callable, Dict, TypeVar, FrozenSet, Optional
+from typing import Any, Callable, Dict, TypeVar, FrozenSet
 from babylon60.bft.lexicon import BFTLexicon
 
 T = TypeVar('T')

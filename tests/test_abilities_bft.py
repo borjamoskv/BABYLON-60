@@ -1,8 +1,7 @@
 import pytest
-import asyncio
 from typing import Tuple
 from babylon60.bft.lexicon import BFTLexicon
-from babylon60.bft.abilities import BFTAbilityHandler, AbilityViolation, _claimed_abilities
+from babylon60.bft.abilities import BFTAbilityHandler, AbilityViolation
 
 @pytest.fixture
 def bft_env() -> Tuple[BFTLexicon, BFTAbilityHandler]:

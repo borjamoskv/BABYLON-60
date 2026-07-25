@@ -1,5 +1,4 @@
 import uuid
-import sys
 import sqlite3
 import time
 from pathlib import Path
@@ -49,7 +48,7 @@ def main() -> None:
         conn.commit()
     t1 = time.time()
     
-    print(f"[*] Ingestión Ontológica (Unison Content-Addressed Primitives) Completada.")
+    print("[*] Ingestión Ontológica (Unison Content-Addressed Primitives) Completada.")
     print(f"[*] {ops} Tipos BFT asimilados en {t1-t0:.3f}s.")
     print("[*] S/N Ratio: 1.00 (Exergía Pura)")
 

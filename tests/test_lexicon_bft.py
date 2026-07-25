@@ -1,4 +1,3 @@
-import pytest
 from babylon60.bft.lexicon import BFTLexicon, LEXICON_NAMESPACE
 import uuid
 

@@ -8,7 +8,10 @@ import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from babylon60.bft.lexicon import BFTLexicon
 
 import aiosqlite
 from cryptography.fernet import Fernet
@@ -105,7 +108,7 @@ def _compute_entry_hash_wrapper(
 
 
 class BFTLedgerActor:
-    def __init__(self, db_path: Path, lexicon: Optional['babylon60.bft.lexicon.BFTLexicon'] = None) -> None:
+    def __init__(self, db_path: Path, lexicon: Optional[BFTLexicon] = None) -> None:
         self._db_path = db_path
         self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue()
         self._task: Optional[asyncio.Task[None]] = None
