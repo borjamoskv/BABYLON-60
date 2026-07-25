@@ -1,3 +1,4 @@
+import logging
 import argparse
 import hashlib
 import subprocess
@@ -5,9 +6,7 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-
 import yaml
-
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / 'cortex/ontology/babylon60_objectives.yaml'
 PROJECT_MD_PATH = WORKSPACE_DIR / 'PROJECT.md'
@@ -39,7 +38,7 @@ def run_git_sentinel(commit_msg: str) -> str:
                     continue
                 break
             if res.returncode != 0:
-                print(f'[!] Git commit falló. Stderr: {res.stderr} Stdout: {res.stdout}', file=sys.stderr)
+                logging.info(f'[!] Git commit falló. Stderr: {res.stderr} Stdout: {res.stdout}', file=sys.stderr)
                 sys.exit(res.returncode)
         hash_res = subprocess.run(['git', 'rev-parse', 'HEAD'], cwd=WORKSPACE_DIR, capture_output=True, text=True, check=True)
         return hash_res.stdout.strip()
@@ -48,7 +47,7 @@ def run_git_sentinel(commit_msg: str) -> str:
         stderr = getattr(e, 'stderr', '') or ''
         if 'nothing to commit' in stdout or 'nothing to commit' in stderr:
             return get_git_commit_hash()
-        print(f'[!] CalledProcessError: {e}\nStdout: {stdout}\nStderr: {stderr}', file=sys.stderr)
+        logging.info(f'[!] CalledProcessError: {e}\nStdout: {stdout}\nStderr: {stderr}', file=sys.stderr)
         raise e
 
 def load_state() -> dict[str, Any]:
@@ -117,10 +116,10 @@ def update_project_md(state: dict[str, Any]) -> bool:
 
 def cmd_list(args: argparse.Namespace) -> None:
     state = load_state()
-    print('Claim: Listado actual de objetivos y milestones extraído con éxito de la ontología.')
-    print(f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get('objectives', []))}]\n  Confidence: C5-REAL''')
-    print('\n---')
-    print(yaml.safe_dump(state, allow_unicode=True, sort_keys=False))
+    logging.info('Claim: Listado actual de objetivos y milestones extraído con éxito de la ontología.')
+    logging.info(f'''Proof:\n  Base: "{YAML_STATE_PATH.name}"\n  Range: [0, {len(state.get('objectives', []))}]\n  Confidence: C5-REAL''')
+    logging.info('\n---')
+    logging.info(yaml.safe_dump(state, allow_unicode=True, sort_keys=False))
 
 def cmd_add_objective(args: argparse.Namespace) -> None:
     state = load_state()
@@ -136,11 +135,11 @@ def cmd_add_objective(args: argparse.Namespace) -> None:
     mutated = save_state(state)
     if mutated:
         ledger_hash = run_git_sentinel(f'feat(cortex): add objective {obj_id} via ObjectivesAgent')
-        print(f'Claim: Objetivo {obj_id} añadido y registrado en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        logging.info(f'Claim: Objetivo {obj_id} añadido y registrado en Git Sentinel.')
+        logging.info(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
     else:
-        print('Claim: Idempotencia detectada. No se modificó el estado.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        logging.info('Claim: Idempotencia detectada. No se modificó el estado.')
+        logging.info(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
 def cmd_add_milestone(args: argparse.Namespace) -> None:
     state = load_state()
@@ -151,7 +150,7 @@ def cmd_add_milestone(args: argparse.Namespace) -> None:
             target_obj = o
             break
     if not target_obj:
-        print(f'Error: Objective {args.obj_id} not found.', file=sys.stderr)
+        logging.info(f'Error: Objective {args.obj_id} not found.', file=sys.stderr)
         sys.exit(1)
     milestones: list[Any] = target_obj.setdefault('milestones', [])
     all_ms_ids: list[int] = []
@@ -166,11 +165,11 @@ def cmd_add_milestone(args: argparse.Namespace) -> None:
     mutated = save_state(state)
     if mutated:
         ledger_hash = run_git_sentinel(f'feat(cortex): add milestone {ms_id} to objective {args.obj_id}')
-        print(f'Claim: Milestone {ms_id} añadido al objetivo {args.obj_id} y sellado en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        logging.info(f'Claim: Milestone {ms_id} añadido al objetivo {args.obj_id} y sellado en Git Sentinel.')
+        logging.info(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
     else:
-        print('Claim: Idempotencia detectada. No se requirieron mutaciones físicas.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        logging.info('Claim: Idempotencia detectada. No se requirieron mutaciones físicas.')
+        logging.info(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
 def cmd_update_status(args: argparse.Namespace) -> None:
     state = load_state()
@@ -189,16 +188,16 @@ def cmd_update_status(args: argparse.Namespace) -> None:
                     found = True
                     break
     if not found:
-        print(f'Error: {args.type} with ID {args.id} not found.', file=sys.stderr)
+        logging.info(f'Error: {args.type} with ID {args.id} not found.', file=sys.stderr)
         sys.exit(1)
     mutated = save_state(state)
     if mutated:
         ledger_hash = run_git_sentinel(f'chore(cortex): update status of {args.type} {args.id} to {args.status}')
-        print(f'Claim: Estado de {args.type} {args.id} actualizado a {args.status}.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        logging.info(f'Claim: Estado de {args.type} {args.id} actualizado a {args.status}.')
+        logging.info(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
     else:
-        print('Claim: Idempotencia detectada. El estado solicitado ya coincide con la ontología física.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        logging.info('Claim: Idempotencia detectada. El estado solicitado ya coincide con la ontología física.')
+        logging.info(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
 def cmd_iter(args: argparse.Namespace) -> None:
     state = load_state()
@@ -229,11 +228,11 @@ def cmd_iter(args: argparse.Namespace) -> None:
     state_mutated = save_state(state)
     if state_mutated or project_mutated:
         ledger_hash = run_git_sentinel('chore(cortex): ULTRAThink ITERA sync of objectives and milestones')
-        print('Claim: Consolidación ULTRAThink completada y registrada en Git Sentinel.')
-        print(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
+        logging.info('Claim: Consolidación ULTRAThink completada y registrada en Git Sentinel.')
+        logging.info(f'Proof:\n  Base: "{ledger_hash}"\n  Range: [1, 1]\n  Confidence: C5-REAL')
     else:
-        print('Claim: Idempotencia absoluta. El estado actual representa la máxima exergía del sistema.')
-        print(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
+        logging.info('Claim: Idempotencia absoluta. El estado actual representa la máxima exergía del sistema.')
+        logging.info(f'Proof:\n  Base: "{get_git_commit_hash()}"\n  Range: [0, 0]\n  Confidence: C5-REAL')
 
 def main() -> None:
     parser = argparse.ArgumentParser(description='MOSKV-1 Objectives & Milestones Agent')

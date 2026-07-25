@@ -1,6 +1,6 @@
+import logging
 from dataclasses import dataclass
 from typing import Final
-
 TOTAL_PRIMITIVES: Final[int] = 896
 D_MAX: Final[int] = 3
 F_MAX: Final[int] = 7
@@ -53,12 +53,12 @@ def verify_bijectivity() -> None:
             seen_indices.add(idx)
             seen_coords.add(coord)
         except ValueError as e:
-            print(f'[-] FATAL: Invariant violated during verification: {e}')
+            logging.info(f'[-] FATAL: Invariant violated during verification: {e}')
             raise RuntimeError(f'FAIL-FAST: {e}') from e
     if len(seen_indices) != TOTAL_PRIMITIVES or len(seen_coords) != TOTAL_PRIMITIVES:
-        print('[-] FATAL: Topological fracture. Missing mappings.')
+        logging.info('[-] FATAL: Topological fracture. Missing mappings.')
         raise RuntimeError('FAIL-FAST: Topological fracture. Missing mappings.')
-    print('[+] C5-REAL Verification SUCCESS: 896-Primitive algebra is strictly bijective.')
-    print(f'    - Invariants mapped: {len(seen_coords)}')
+    logging.info('[+] C5-REAL Verification SUCCESS: 896-Primitive algebra is strictly bijective.')
+    logging.info(f'    - Invariants mapped: {len(seen_coords)}')
 if __name__ == '__main__':
     verify_bijectivity()

@@ -1,3 +1,4 @@
+import logging
 import hashlib
 import json
 import re
@@ -7,12 +8,9 @@ import sys
 import time
 from dataclasses import dataclass
 from pathlib import Path
-
 import babylon60.database.core
-
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
-
 DB_PATH = Path.home() / '.babylon60/exergy_agent_ledger.db'
 VAULT_DIR = Path.home() / '.gemini/config/.cortex/memory_vault'
 BRAIN_DIR = Path.home() / '.gemini/antigravity/brain'
@@ -90,7 +88,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
             continue
         lines = file_diff.splitlines()
         header = lines[0] if lines else ''
-        is_excluded = any(x in header for x in ['demo_exergy_poc.py', 'exergy_optimizer_agent.py', 'autodetect_invariants.py']) or 'test_' in header or 'tests/' in header
+        is_excluded = any((x in header for x in ['demo_exergy_poc.py', 'exergy_optimizer_agent.py', 'autodetect_invariants.py'])) or 'test_' in header or 'tests/' in header
         added_lines = [line for line in lines if line.startswith('+') and (not line.startswith('+++'))]
         removed_lines = [line for line in lines if line.startswith('-') and (not line.startswith('---'))]
         added += len(added_lines)
@@ -98,7 +96,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
         if not is_excluded:
             for line in added_lines:
                 if re.search('except\\s+Exception\\b|except\\s*:', line) and "bare 'except:'" not in line.lower() and ('except exception' not in line.lower()) and ('check for broad excepts' not in line.lower()):
-                    print(f'DEBUG Match in {header}: {line}')
+                    logging.info(f'DEBUG Match in {header}: {line}')
                     e_points += 4.0
                     msg = 'Broad exception caught (INV_C5_07 violation).'
                     reasons_e.append(msg)
@@ -119,7 +117,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                 if 'readlink' in line or 'is_symlink' in line:
                     l_points += 2
                     reasons_l.append('Nexus package symlink validation (INV_C5_12).')
-        elif any('test' in ln or 'invariant' in ln for ln in added_lines):
+        elif any(('test' in ln or 'invariant' in ln for ln in added_lines)):
             a_points += 4
             reasons_a.append('Autopoietic alignment of invariants (INV_C5_13).')
     if added > 400 and removed < 10:
@@ -177,7 +175,7 @@ def check_consolidation_need() -> ConsolidationDecision:
                                 try:
                                     step = json.loads(line)
                                     text = f"{step.get('content', '')} {step.get('thinking', '')} {str(step.get('tool_calls', ''))}".lower()
-                                    if any(kw in text for kw in keywords):
+                                    if any((kw in text for kw in keywords)):
                                         belongs_to_babylon = True
                                         break
                                 except json.JSONDecodeError:
@@ -193,15 +191,15 @@ def check_consolidation_need() -> ConsolidationDecision:
     return Stable(last_timestamp=int(time.time() * 1000))
 
 def main() -> None:
-    print('🔋 Igniting C5-REAL Exergy Optimizer Agent...')
+    logging.info('🔋 Igniting C5-REAL Exergy Optimizer Agent...')
     init_db()
     diff = get_git_diff()
     if not diff:
         try:
             diff = subprocess.check_output(['git', 'diff', 'HEAD~1', 'HEAD'], text=True, stderr=subprocess.DEVNULL)
-            print('ℹ️ No active changes. Analyzing last commit delta.')
+            logging.info('ℹ️ No active changes. Analyzing last commit delta.')
         except subprocess.SubprocessError:
-            print('❌ Target error: Cannot load active or historical diff.')
+            logging.info('❌ Target error: Cannot load active or historical diff.')
             sys.exit(1)
     verdict = evaluate_gelabp(diff)
     try:
@@ -217,7 +215,7 @@ def main() -> None:
         verdict = ExergyPassed(score=verdict.score, gelabp=verdict.gelabp, prov_hash=prov_hash)
     consolidation = check_consolidation_need()
     verdict_yaml = f'''# GELABP MATRIX O-COLLAPSE\nTarget: "Teorema-Robinson-Moskv"\nConfidence: C5-REAL\nExergyScore: {verdict.score.value:.1f}/1000.0\n\nG_Gradient: |\n  {verdict.gelabp.gradient}\nE_Entropy: |\n  {verdict.gelabp.entropy}\nL_Leverage: |\n  {verdict.gelabp.leverage}\nA_AutoLoop: |\n  {verdict.gelabp.autoloop}\nB_Bottleneck: |\n  {verdict.gelabp.bottleneck}\nP_PostHoc: |\n  "Narrativa descriptiva sin código" -> [TACHADO - IGNORAR]\n\nConsolidationStatus: "{('REQUIRED' if isinstance(consolidation, TriggerConsolidation) else 'STABLE')}"\nConsolidationDetails: "{(consolidation.reason if isinstance(consolidation, TriggerConsolidation) else 'Vault is synchronized')}"\n\nTimestamp: {timestamp}\nCommitHash: "{commit_hash}"\nProvSignature: "{prov_hash}"\n'''
-    print(verdict_yaml)
+    logging.info(verdict_yaml)
     try:
         conn = babylon60.database.core.connect_sync(str(DB_PATH))
         conn.execute('PRAGMA journal_mode=WAL;')
@@ -225,15 +223,15 @@ def main() -> None:
         cursor.execute('\n            INSERT INTO ledger (timestamp, commit_hash, exergy_score, gradient, entropy, leverage, autoloop, bottleneck, verdict_yaml, prov_hash)\n            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)\n        ', (timestamp, commit_hash, verdict.score.value, verdict.gelabp.gradient, verdict.gelabp.entropy, verdict.gelabp.leverage, verdict.gelabp.autoloop, verdict.gelabp.bottleneck, verdict_yaml, prov_hash))
         conn.commit()
         conn.close()
-        print(f'✅ Exergy Attestation successfully written to Ledger: {DB_PATH.name}')
+        logging.info(f'✅ Exergy Attestation successfully written to Ledger: {DB_PATH.name}')
     except sqlite3.Error as err:
-        print(f'❌ Failed to persist ledger: {err}')
+        logging.info(f'❌ Failed to persist ledger: {err}')
     if isinstance(consolidation, TriggerConsolidation):
-        print(f'\n🚨 CONSOLIDATION REQUIRED: {consolidation.pending_count} unconsolidated sessions pending.')
-        print("💡 Suggestion: Run 'python3 scratch/prepare_and_crystallize.py' to crystallize sessions into the vault.")
+        logging.info(f'\n🚨 CONSOLIDATION REQUIRED: {consolidation.pending_count} unconsolidated sessions pending.')
+        logging.info("💡 Suggestion: Run 'python3 scratch/prepare_and_crystallize.py' to crystallize sessions into the vault.")
     if isinstance(verdict, ExergyFailed):
-        print(f'🚨 ALERT: Iteration Exergy too low ({verdict.score.value:.1f}/1000.0). Purge entropy before committing.')
-        print('Reasons:\n  - ' + '\n  - '.join(verdict.reasons))
+        logging.info(f'🚨 ALERT: Iteration Exergy too low ({verdict.score.value:.1f}/1000.0). Purge entropy before committing.')
+        logging.info('Reasons:\n  - ' + '\n  - '.join(verdict.reasons))
         sys.exit(1)
     sys.exit(0)
 if __name__ == '__main__':

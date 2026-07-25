@@ -1,3 +1,4 @@
+import logging
 import yaml
 import json
 import hashlib
@@ -38,9 +39,9 @@ def main():
         payload = json.dumps(report, sort_keys=True)
         v_hash = hashlib.sha3_256(payload.encode()).hexdigest()
         output = {'cortex_taint': f'borjamoskv:centuria_thermo:{v_hash[:16]}', 'state': 'COLLAPSED_ULTRATHIN_JSON', 'mapping': report, 'ledger_verification': {'sha3_256': v_hash, 'author': 'borjamoskv'}}
-        print(json.dumps(output, indent=2))
+        logging.info(json.dumps(output, indent=2))
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-        print(json.dumps({'error': str(e)}))
+        logging.info(json.dumps({'error': str(e)}))
         sys.exit(1)
 if __name__ == '__main__':
     main()
