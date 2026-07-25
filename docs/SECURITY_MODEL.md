@@ -1,8 +1,8 @@
-# SECURITY MODEL — cortex-persist
+# SECURITY MODEL — cortex-persist (SOTA 2026 Overhaul)
 
 ## Scope
 
-This document defines the **threat model**, **security boundaries**, and **explicit guarantees** of the cortex-persist ledger.
+This document defines the **threat model**, **security boundaries**, **SOTA vulnerability taxonomy**, and **explicit guarantees** of the cortex-persist and BABYLON-60 ledgers.
 
 ---
 
@@ -15,6 +15,11 @@ This document defines the **threat model**, **security boundaries**, and **expli
 | **Ordering** | Lamport clock + WAL journal | Writes are serialized and reproducible |
 | **Non-duplication** | UUID v5 idempotency key | Same logical write cannot be inserted twice |
 | **Temporal anchor** | Git Sentinel (local) | Entry existed before a given commit timestamp |
+| **Sandboxed AST Safety** | `babylon60.guards.ast_sandbox` | Code execution payloads are free of dunder traversal and introspection exploits |
+| **Smart Contract Locking** | EIP-1153 Transient Storage (`tstore`/`tload`) | EVM transactions are protected against reentrancy callbacks |
+| **BFT Determinism** | IEEE 754 Float Exclusion (`INV_C5_18`) | Ledger state payloads use exact integer/canonical CBOR types |
+
+---
 
 ## What the Ledger Does NOT Guarantee
 
@@ -22,51 +27,45 @@ This document defines the **threat model**, **security boundaries**, and **expli
 |:---|:---|
 | **Semantic correctness** | A hash proves content was not changed — not that it was true |
 | **Authorization** | The ledger records who wrote; it does not enforce who is allowed to write without an external auth layer |
-| **Tamper-proof storage** | An attacker with write access to the filesystem can delete or replace the entire database file. Hash-chains only detect this after the fact |
-| **Global consensus** | L1–L3 levels provide local consistency only. BFT (L4) is not production-ready |
-| **Regulatory compliance** | This is not a certified audit trail for GDPR, SOC2, or PCI-DSS |
+| **Tamper-proof storage** | An attacker with physical write access to the filesystem can replace the database file. Hash-chains detect this post-hoc |
+| **Global consensus** | L1–L3 levels provide local consistency. BFT (L4) requires multi-node validator consensus |
+| **Regulatory compliance** | This is a sovereign technical ledger, not a certified SOC2/GDPR compliance suite |
 
 ---
 
-## Threat Model
+## Enhanced SOTA 2026 Threat Model
 
-### In-Scope Threats
+### In-Scope Threats & Hardened Mitigations
 
-| Threat | Mitigation |
-|:---|:---|
-| Silent bit-rot or accidental modification of historical entries | BLAKE3 chain breaks on read — detected at verification time |
-| Duplicate write injection by a buggy agent | UUID v5 idempotency key rejects duplicates |
-| Race condition between concurrent writers | Single-writer `asyncio.Queue` + WAL journal serializes all writes |
-| SQLite lock contention | `busy_timeout=5000ms` + WAL mode prevents reader/writer deadlock |
-| Partial write on process kill | WAL journal rolls back automatically on restart |
-| Unattributed writes | `causal_taint` + `agent_id` mandatory on every entry |
-
-### Out-of-Scope Threats
-
-| Threat | Reason |
-|:---|:---|
-| Attacker with OS-level filesystem access | Full DB replacement bypasses hash-chain detection |
-| Compromised cryptographic primitives (BLAKE3 / SHA3-256) | Outside scope of this system |
-| Byzantine agents in distributed swarm | Requires L4 BFT — prototype only |
-| Supply-chain compromise of dependencies | Standard Python packaging risks apply |
-
----
-
-## Cryptographic Primitives
-
-| Use | Algorithm | Status |
+| Threat Vector | Mitigation Strategy | Physical Execution Invariant |
 |:---|:---|:---|
-| Entry hash-chain | BLAKE3 | Active (Python `blake3` or Rust `strike_rs`) |
-| Receipt / audit hash | SHA3-256 | Active |
-| Optional signing | Ed25519 via `pynacl` | Optional `[crypto]` extra |
-| Password / key derivation | Argon2 via `argon2-cffi` | Optional `[crypto]` extra |
-| Timestamp witness (external) | OpenTimestamps / BTC OP_RETURN | Research — not implemented |
+| Silent bit-rot or historical manipulation | BLAKE3 chain verification breaks on read | `INV_C5_01` (Cryptographic Truth) |
+| Duplicate write injection | UUID v5 idempotency key rejects duplicates silently | `INV_BFT_04` (Idempotency Key) |
+| Concurrent writer race conditions | Single-writer `asyncio.Queue` + WAL journal serialization | `INV_BFT_02` (Async WAL Mode) |
+| SQLite lock contention & deadlocks | `busy_timeout=5000ms` + WAL mode on all connections | `INV_BFT_02` |
+| AST Sandbox evasion & introspection | `babylon60.guards.ast_sandbox` static AST verification | AST Sandbox Guard |
+| EVM cross-function reentrancy | EIP-1153 `tload`/`tstore` transient locks | `INV_C5_08` (Transient Storage) |
+| PyNaCl key attribute leakage | Explicit byte serialization (`bytes(sk)`) | `INV_C5_10` (PyNaCl Serialization) |
+| Sandboxed Git commit failures | Autonomous `-c commit.gpgsign=false` fallback | `INV_C5_24` (Git Signature Fallback) |
+| Process reward hacking / LLM slop | GELABP Exergy Score evaluation ($S \ge 700.0/1000.0$) | `INV_C5_14` (Exergy Matrix) |
 
 ---
 
-## Integrity Verification
+## Cryptographic Primitives & Standards
 
-To verify the full chain from any stored ledger:
+| Purpose | Algorithm / Standard | Status / Implementation |
+|:---|:---|:---|
+| Entry Hash-Chain | BLAKE3 | Active (`blake3` / Rust `strike_rs`) |
+| Audit Verification | SHA3-256 | Active |
+| Signature Verification | Ed25519 via PyNaCl | Active (`bytes(sk)` serialized) |
+| Smart Contract Transient Locking | EIP-1153 (`tstore`/`tload`) | Active (`contracts/test/SecureHook.sol`) |
+| Static Vulnerability Interchange | SARIF 2.1.0 | Active (`secret_audit.sarif`) |
+
+---
+
+## Integrity Verification Protocol
+
+To verify ledger integrity programmatically:
 
 ```python
 from babylon60.bft.ledger_actor import verify_chain
@@ -75,18 +74,16 @@ result = verify_chain(db_path="master_ledger.db")
 print(result)  # {"valid": True, "entries": 4821, "broken_at": None}
 ```
 
-A broken chain returns the exact entry index and both the expected and actual hash values.
+---
+
+## Data & Vault Separation
+
+- Each workspace maintains an isolated `.db` file in sidecar mode.
+- Direct multi-threaded synchronous writes to `cortex.db` are strictly prohibited.
+- Mutations MUST route through `BFTLedgerActor` using WAL mode and `busy_timeout=5000ms`.
 
 ---
 
-## Data Separation
+## Reporting Vulnerabilities
 
-- Each tenant/workspace uses an isolated `.db` file.
-- No shared tables exist between tenants.
-- The central `cortex.db` (if present from BABYLON-60 legacy) is **read-only** and must not be written to by agent SDK calls. Use sidecar databases (`nexus_anchors.db`, `master_ledger.db`) for all mutations.
-
----
-
-## Reporting Security Issues
-
-Security vulnerabilities should be reported privately to the repository owner via the contact information in `SECURITY.md`. Do not open public issues for unpatched vulnerabilities.
+Security issues should be reported privately following the protocol specified in [SECURITY.md](file:///Users/borjafernandezangulo/30_BABYLON-60/SECURITY.md).
