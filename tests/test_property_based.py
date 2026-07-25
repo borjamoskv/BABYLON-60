@@ -13,10 +13,10 @@ except ImportError:
     HAS_HYPOTHESIS = False
     import functools
 
-    def given(*a: object, **kw: object) -> object:
-        def dec(fn):
-            @functools.wraps(fn)
-            def wrapper(*args, **kwargs):
+    def given(*a: object, **kw: object) -> object:  # type: ignore[no-redef]
+        def dec(fn: object) -> object:
+            @functools.wraps(fn)  # type: ignore[arg-type]
+            def wrapper(*args: object, **kwargs: object) -> None:
                 pytest.skip("hypothesis not installed")
 
             return wrapper
@@ -24,13 +24,13 @@ except ImportError:
         return dec
 
     class _St:
-        def __getattr__(self, name):
+        def __getattr__(self, name: str) -> object:
             return lambda *a, **kw: None
 
-    st = _St()
+    st = _St()  # type: ignore[assignment]
 
-    def settings(**kw: object) -> object:
-        def dec(fn):
+    def settings(**kw: object) -> object:  # type: ignore[no-redef]
+        def dec(fn: object) -> object:
             return fn
 
         return dec
