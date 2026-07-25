@@ -80,9 +80,7 @@ class UnifiedActiveInferenceEngine:
                 if det_sigma_q < 1e100:
                     det_sigma_q *= det_sigma_q_step
 
-        self.d_kl = 0.5 * (
-            tr_sigma_q + mahalanobis - 64.0 - math.log(max(1e-12, det_sigma_q))
-        )
+        self.d_kl = 0.5 * (tr_sigma_q + mahalanobis - 64.0 - math.log(max(1e-12, det_sigma_q)))
         if self.d_kl < 0:
             self.d_kl = 0.0
 
