@@ -56,9 +56,17 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
                 # Quitar comillas
                 if val.startswith('"') and val.endswith('"'):
                     val = val[1:-1]
-                elif val.startswith("[") and val.endswith("]"):
-                    # Parsear listas de strings simples
-                    models_list: list[str] = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
+                elif val.startswith("["):
+                    # Si el valor contiene ']', se parsea directamente
+                    raw_models = val
+                    if not raw_models.endswith("]"):
+                        # Seguir leyendo hasta el cierre ']'
+                        for next_line in f:
+                            raw_models += " " + next_line.strip()
+                            if "]" in next_line:
+                                break
+                    raw_content = raw_models[raw_models.find("[")+1:raw_models.rfind("]")]
+                    models_list: list[str] = [x.strip()[1:-1] if (x.strip().startswith('"') or x.strip().startswith("'")) else x.strip() for x in raw_content.split(",") if x.strip()]
                     current_route["models"] = models_list
                     continue
 
