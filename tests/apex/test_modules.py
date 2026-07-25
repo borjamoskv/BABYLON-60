@@ -78,7 +78,7 @@ def test_models_beat_chance_on_record() -> None:
         assert m["auc"] > 0.55
 
 
-def test_no_models_returns_empty(monkeypatch) -> None:
+def test_no_models_returns_empty(monkeypatch: pytest.MonkeyPatch) -> None:
     import apex_trials.modules as mod
 
     monkeypatch.setattr(mod, "_MODELS", None)

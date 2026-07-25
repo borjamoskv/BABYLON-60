@@ -2,14 +2,15 @@ import json
 import os
 import sqlite3
 import sys
+from typing import Any
 
 
-def get_db_path():
+def get_db_path() -> str:
     project_root = os.getenv("PORTAL_PROJECT_ROOT", os.getcwd())
     return os.path.join(project_root, "portal_reveng_ledger.db")
 
 
-def query_ledger(query_type, param):
+def query_ledger(query_type: str, param: str) -> list[dict[str, Any]] | dict[str, Any]:
     db_path = get_db_path()
     if not os.path.exists(db_path):
         return {"error": f"Ledger db not found at {db_path}"}
@@ -17,6 +18,7 @@ def query_ledger(query_type, param):
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         cursor.execute("PRAGMA busy_timeout=5000;")
+        results: list[dict[str, Any]] | dict[str, Any]
         if query_type == "search":
             cursor.execute(
                 "\n                SELECT class_name, module, superclass, ivars_count \n                FROM symbol_index \n                WHERE class_name LIKE ? OR module LIKE ?\n                LIMIT 15;\n            ",
@@ -40,7 +42,7 @@ def query_ledger(query_type, param):
         return {"error": str(e)}
 
 
-def main():
+def main() -> None:
     if len(sys.argv) < 3:
         print(json.dumps({"error": "Usage: mcp_symbol_helper.py [search|get_details] [param]"}))
         sys.exit(1)

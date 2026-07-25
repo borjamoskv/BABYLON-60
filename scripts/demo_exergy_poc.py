@@ -8,13 +8,13 @@ MOCK_DIFF_HIGH_ENTROPY = '\ndiff --git a/database/connection.py b/database/conne
 MOCK_DIFF_HIGH_EXERGY = '\ndiff --git a/tests/test_c5_invariants.py b/tests/test_c5_invariants.py\nindex e456f78..b890c12 100644\n--- a/tests/test_c5_invariants.py\n+++ b/tests/test_c5_invariants.py\n@@ -12,3 +12,8 @@\n+def test_inv_c5_10_pynacl_serialization():\n+    """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""\n+    hits = _scan({".py"}, r\'\\._seed\\b|\\._public_key\\b\')\n+    hits = [h for h in hits if "test_c5_invariants.py" not in h]\n+    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)\n'
 
 
-def print_banner(title: str):
+def print_banner(title: str) -> None:
     print("=" * 60)
     print(f"🔹 {title.upper()}")
     print("=" * 60)
 
 
-def run_poc():
+def run_poc() -> None:
     print_banner("C5-REAL Exergy Agent Proof of Concept")
     print_banner("Scenario 1: Code Mutation containing High Entropy")
     print(f"Mock Diff Content:\n{MOCK_DIFF_HIGH_ENTROPY.strip()}\n")

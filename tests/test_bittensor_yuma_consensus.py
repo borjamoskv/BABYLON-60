@@ -1,6 +1,8 @@
 import os
 import sqlite3
 
+from pathlib import Path
+
 from scripts.bittensor_yuma_consensus_c5 import (
     compute_yuma_consensus,
     simulate_adversarial_matrix,
@@ -32,7 +34,7 @@ def test_simulate_subnet_emission_balance() -> None:
     assert abs(total_distributed - 10.0) < 1e-05, f"Emission leakage detected: {total_distributed} vs 10.0"
 
 
-def test_multi_epoch_and_wal_persistence(tmp_path) -> None:
+def test_multi_epoch_and_wal_persistence(tmp_path: Path) -> None:
     db_file = str(tmp_path / "test_bittensor_ledger.db")
     stakes = [500000.0, 250000.0, 150000.0, 100000.0]
     weights = [

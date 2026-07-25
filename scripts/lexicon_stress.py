@@ -15,7 +15,7 @@ def get_lexicon_db_path() -> Path:
 class LexiconBFTActor:
     def __init__(self, db_path: Path):
         self.db_path = db_path
-        self.queue: queue.Queue = queue.Queue()
+        self.queue: queue.Queue[tuple[str, str]] = queue.Queue()
         self.running = True
         self.ops = 0
 

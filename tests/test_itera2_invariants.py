@@ -5,6 +5,7 @@ import importlib.util
 import json
 import sys
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -39,7 +40,7 @@ def test_database_core_rechaza_durabilidad_ilegal(tmp_path: Path) -> None:
         dbcore.connect_sync(tmp_path / "x.db", synchronous="OFF")
 
 
-def _quorum_fixture(tmp_path: Path, n: int = 4):
+def _quorum_fixture(tmp_path: Path, n: int = 4) -> tuple[Any, Any, str, dict[str, Ed25519Signer]]:
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
     signers = {f"node_{i}": Ed25519Signer() for i in range(n)}
@@ -116,7 +117,7 @@ async def test_master_ledger_queue_durabilidad_full(tmp_path: Path) -> None:
         await queue.shutdown()
 
 
-def _load_cli(name: str, filename: str):
+def _load_cli(name: str, filename: str) -> Any:
     path = Path(__file__).resolve().parent.parent / "babylon60" / "cli" / filename
     spec = importlib.util.spec_from_file_location(name, path)
     assert spec is not None and spec.loader is not None

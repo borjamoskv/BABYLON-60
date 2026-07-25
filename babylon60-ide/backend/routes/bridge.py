@@ -14,7 +14,7 @@ INV_BRIDGE_01: el sobre criptográfico es idéntico en ambos escritores
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 from urllib.parse import urlparse
 
 from fastapi import APIRouter, Depends, HTTPException, Request
@@ -69,7 +69,8 @@ def _root() -> Path:
 
 
 def _bus_events(limit: int = 1000) -> list[dict[str, Any]]:
-    return cortex_ledger.list_events(_root(), limit=limit, offset=0)["events"]
+    res = cortex_ledger.list_events(_root(), limit=limit, offset=0)
+    return cast(list[dict[str, Any]], res["events"])
 
 
 @router.get("/peers")

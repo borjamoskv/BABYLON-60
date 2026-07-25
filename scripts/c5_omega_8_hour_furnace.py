@@ -9,7 +9,7 @@ from pathlib import Path
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
 
 
-async def omega_furnace(duration_sec: int):
+async def omega_furnace(duration_sec: int) -> None:
     print(f"🔥 [C5-REAL] Initiating OMEGA FURNACE for {duration_sec} seconds...")
     start_time = time.time()
     end_time = start_time + duration_sec

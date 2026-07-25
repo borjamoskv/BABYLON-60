@@ -165,7 +165,7 @@ def get_target_files(root_dir: str, explicit_files: list[str] | None = None) -> 
     return targets
 
 
-def export_sarif(findings: list[dict[str, Any]], root: str, output_path: str):
+def export_sarif(findings: list[dict[str, Any]], root: str, output_path: str) -> None:
     sarif: dict[str, Any] = {
         "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
         "version": "2.1.0",
@@ -210,7 +210,7 @@ def export_sarif(findings: list[dict[str, Any]], root: str, output_path: str):
         json.dump(sarif, out_file, indent=2)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="C5-REAL Swarm Secret Auditor")
     parser.add_argument("--files", nargs="*", help="Delta mode: specific files to scan")
     parser.add_argument("--sarif", action="store_true", help="Generate SARIF report")

@@ -38,7 +38,7 @@ def _iter_files(exts: set[str]) -> Generator[pathlib.Path, None, None]:
 def _scan(exts: set[str], pattern: str, flags: int = 0) -> list[str]:
     rx = re.compile(pattern, flags)
     hits = []
-    for f in _iter_files(exts):  # type: ignore
+    for f in _iter_files(exts):
         text = f.read_text(errors="ignore")
         for i, line in enumerate(text.splitlines(), 1):
             if rx.search(line):
@@ -52,31 +52,31 @@ def _fail_msg(law: str, hits: list[str]) -> str:
 
 def test_inv_c5_02_no_hardcoded_keys() -> None:
     """INV_C5_02 — ninguna clave simétrica literal vive en el árbol (env/KMS o nada)."""
-    hits = _scan({".rs"}, r'Key::new\([^,]*,\s*b"')  # type: ignore
-    hits += _scan(  # type: ignore
+    hits = _scan({".rs"}, r'Key::new\([^,]*,\s*b"')
+    hits += _scan(
         {".py", ".rs", ".ts", ".js", ".sol", ".sh", ".yaml", ".yml", ".toml"},
         r'(SECRET|PRIVATE_KEY|MASTER_LEDGER_KEY|master_key|solana_keypair)\s*[:=]\s*["\']\w',
     )
     hits = [h for h in hits if "demo_exergy_poc.py" not in h]
-    assert not hits, _fail_msg("INV_C5_02 (clave soberana)", hits)  # type: ignore
+    assert not hits, _fail_msg("INV_C5_02 (clave soberana)", hits)
 
 
 def test_inv_c5_01_no_fake_commitments() -> None:
     """INV_C5_01 — un commitment/hash debe ligar al payload, no ser token aleatorio."""
-    hits = _scan({".py"}, r'(commitment|_hash)"\s*:\s*f"(sha256|hmac-sha256):\{.*token_hex')  # type: ignore
-    assert not hits, _fail_msg("INV_C5_01 (veracidad criptográfica)", hits)  # type: ignore
+    hits = _scan({".py"}, r'(commitment|_hash)"\s*:\s*f"(sha256|hmac-sha256):\{.*token_hex')
+    assert not hits, _fail_msg("INV_C5_01 (veracidad criptográfica)", hits)
 
 
 def test_inv_c5_03_no_weak_hashes() -> None:
     """INV_C5_03 — un solo primitivo fuerte (SHA3-256/BLAKE3); MD5/SHA-1 proscritos."""
-    hits = _scan({".py"}, r"hashlib\.(md5|sha1)\b")  # type: ignore
-    assert not hits, _fail_msg("INV_C5_03 (hash único)", hits)  # type: ignore
+    hits = _scan({".py"}, r"hashlib\.(md5|sha1)\b")
+    assert not hits, _fail_msg("INV_C5_03 (hash único)", hits)
 
 
 def test_inv_c5_04_no_mock_signatures() -> None:
     """INV_C5_04 — Ed25519 físico o el recibo no existe; ninguna firma 'mock'."""
-    hits = _scan({".py"}, r"mock_signature|ed25519:mock")  # type: ignore
-    assert not hits, _fail_msg("INV_C5_04 (firma int)", hits)  # type: ignore
+    hits = _scan({".py"}, r"mock_signature|ed25519:mock")
+    assert not hits, _fail_msg("INV_C5_04 (firma int)", hits)
 
 
 def test_inv_c5_07a_no_broad_except() -> None:
@@ -97,9 +97,9 @@ def test_inv_c5_07a_no_broad_except() -> None:
 
 def test_inv_c5_07b_no_global_sigkill() -> None:
     """INV_C5_07 — SIGKILL global en runtime de aplicación no es tolerancia bizantina, es auto-necrosis."""
-    hits = _scan({".py"}, r"signal\.SIGKILL")  # type: ignore
+    hits = _scan({".py"}, r"signal\.SIGKILL")
     hits = [h for h in hits if not h.startswith("scripts/")]
-    assert not hits, _fail_msg("INV_C5_07b (SIGKILL global)", hits)  # type: ignore
+    assert not hits, _fail_msg("INV_C5_07b (SIGKILL global)", hits)
 
 
 @pytest.mark.skip(
@@ -146,7 +146,7 @@ async def test_inv_c5_05_verify_chain_survives_encryption(
 
 def test_inv_c5_10_pynacl_serialization() -> None:
     """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""
-    hits = _scan({".py"}, r"\._seed\b|\._public_key\b")  # type: ignore
+    hits = _scan({".py"}, r"\._seed\b|\._public_key\b")
     hits = [
         h
         for h in hits
@@ -155,13 +155,13 @@ def test_inv_c5_10_pynacl_serialization() -> None:
         and "demo_exergy_poc.py" not in h
         and "exergy_mass_mutator.py" not in h
     ]
-    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)  # type: ignore
+    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)
 
 
 def test_inv_c5_11_gh_purge_constraints() -> None:
     """INV_C5_11 — Abort git push --mirror/mirror-rewrites if gh auth fails or Broken pipe detected."""
-    hits = _scan({".py", ".sh"}, r"git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B")  # type: ignore
-    assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)  # type: ignore
+    hits = _scan({".py", ".sh"}, r"git\s+push\s+--mirror.*retry|Broken\s+pipe.*Option\s+B")
+    assert not hits, _fail_msg("INV_C5_11 (Gh purge constraints)", hits)
 
 
 def test_inv_c5_12_nexus_symlinks() -> None:

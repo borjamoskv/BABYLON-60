@@ -1,7 +1,7 @@
 """
 BABYLON-60 C5-REAL Transducer API Client
 """
-from typing import Any
+from typing import Any, cast
 
 import httpx
 
@@ -14,4 +14,5 @@ class CortexClient:
         async with httpx.AsyncClient() as client:
             response = await client.get(f"{self.base_url}/health")
             response.raise_for_status()
-            return response.json()
+            return cast(dict[str, Any], response.json())
+

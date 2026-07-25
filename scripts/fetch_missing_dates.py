@@ -6,7 +6,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 V2 = "https://clinicaltrials.gov/api/v2/studies"
 USER_AGENT = "apex/0.1 (+moskv://cortex-persist)"
@@ -39,7 +39,7 @@ def _get_api(url: str) -> dict[str, Any]:
     for attempt in range(3):
         try:
             with urllib.request.urlopen(req, timeout=45) as r:
-                return json.loads(r.read().decode("utf-8"))
+                return cast(dict[str, Any], json.loads(r.read().decode("utf-8")))
         except (urllib.error.URLError, TimeoutError, OSError) as exc:
             last_err = exc
             time.sleep(1.0 * 2**attempt)

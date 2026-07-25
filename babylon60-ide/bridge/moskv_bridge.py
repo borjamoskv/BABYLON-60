@@ -35,6 +35,7 @@ import sys
 import time
 import uuid
 from pathlib import Path
+from typing import Any
 
 NS = uuid.UUID("6ba7b812-9dad-11d1-80b4-00c04fd430c8")
 ZERO = "0" * 64
@@ -59,7 +60,7 @@ HANDOFF = "AGENT_HANDOFF"
 ACK = "AGENT_ACK"
 
 
-def canonical(data) -> str:
+def canonical(data: Any) -> str:
     return json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
 
@@ -91,7 +92,7 @@ def connect(db: Path) -> sqlite3.Connection:
     return conn
 
 
-def append(db: Path, event_type: str, entity_ref: str, payload: dict, metadata: dict | None = None) -> dict:
+def append(db: Path, event_type: str, entity_ref: str, payload: dict[str, Any], metadata: dict[str, Any] | None = None) -> dict[str, Any]:
     """Append atómico (BEGIN IMMEDIATE): idéntico contrato que el backend."""
     conn = connect(db)
     try:
@@ -118,7 +119,7 @@ def append(db: Path, event_type: str, entity_ref: str, payload: dict, metadata: 
         conn.close()
 
 
-def events(db: Path, limit: int = 500) -> list[dict]:
+def events(db: Path, limit: int = 500) -> list[dict[str, Any]]:
     conn = connect(db)
     try:
         rows = conn.execute("SELECT * FROM cortex_events ORDER BY seq DESC LIMIT ?", (limit,)).fetchall()
@@ -135,7 +136,7 @@ def events(db: Path, limit: int = 500) -> list[dict]:
         conn.close()
 
 
-def git_ctx(repo: Path) -> dict:
+def git_ctx(repo: Path) -> dict[str, str | None]:
     """Contexto git del que escribe (rama+head), sin shell, sin fallo duro."""
     try:
         b = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=repo, capture_output=True, text=True, timeout=5)
@@ -184,7 +185,7 @@ def cmd_ack(db: Path, agent: str, handoff_id: str) -> None:
 
 
 def cmd_peers(db: Path) -> None:
-    seen: dict[str, dict] = {}
+    seen: dict[str, dict[str, Any]] = {}
     for e in events(db):  # newest first: primera aparición = último estado
         if e["event_type"] == STATUS:
             a = e["payload"].get("agent")

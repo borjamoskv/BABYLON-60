@@ -73,7 +73,7 @@ def orchestrate_100_agent_swarm(num_workers: int = 100) -> dict[str, Any]:
     return summary
 
 
-def main():
+def main() -> None:
     workers = int(sys.argv[1]) if len(sys.argv) > 1 else 100
     res = orchestrate_100_agent_swarm(workers)
     print(

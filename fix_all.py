@@ -2,12 +2,12 @@ import re
 from pathlib import Path
 
 
-def replace_in_file(path, old, new):
+def replace_in_file(path: str | Path, old: str, new: str) -> None:
     p = Path(path)
     if p.exists():
         p.write_text(p.read_text().replace(old, new))
 
-def regex_replace_in_file(path, pattern, repl):
+def regex_replace_in_file(path: str | Path, pattern: str, repl: str) -> None:
     p = Path(path)
     if p.exists():
         p.write_text(re.sub(pattern, repl, p.read_text()))

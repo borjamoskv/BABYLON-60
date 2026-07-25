@@ -15,7 +15,7 @@ from pathlib import Path
 
 
 class ExergyTransformer(ast.NodeTransformer):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.mutated = False
         self.exergy_gained = 0.0
@@ -202,7 +202,7 @@ def process_file(fpath: Path) -> tuple[Path, bool, float]:
         changed, gained = apply_polyglot_mutations(fpath)
     return fpath, changed, gained
 
-def main():
+def main() -> None:
     if len(sys.argv) < 2:
         print("Usage: exergy_mass_mutator.py <directory_or_file>...")
         sys.exit(1)

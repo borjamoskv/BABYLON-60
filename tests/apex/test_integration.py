@@ -3,6 +3,8 @@ from __future__ import annotations
 import urllib.error
 import urllib.request
 
+from pathlib import Path
+
 import pytest
 
 from apex_trials import AmendmentLedger, Copilot, CtGovClient, HttpCache
@@ -20,7 +22,7 @@ def _online() -> bool:
 pytestmark = pytest.mark.skipif(not _online(), reason="ClinicalTrials.gov unreachable")
 
 
-def test_end_to_end_score_and_ledger(tmp_path) -> None:
+def test_end_to_end_score_and_ledger(tmp_path: Path) -> None:
     client = CtGovClient(cache=HttpCache(str(tmp_path / "c.db")))
     with AmendmentLedger(tmp_path / "l.db") as ledger:
         result = Copilot(client, ledger).score("NCT00593697")
@@ -34,7 +36,7 @@ def test_end_to_end_score_and_ledger(tmp_path) -> None:
         assert html.startswith("<!DOCTYPE html>") and "APEX" in html and ("localStorage" not in html)
 
 
-def test_search_returns_ncts(tmp_path) -> None:
+def test_search_returns_ncts(tmp_path: Path) -> None:
     client = CtGovClient(cache=HttpCache(str(tmp_path / "c.db")))
     studies = client.search(condition="breast cancer", status="COMPLETED", page_size=5)
     assert studies

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 try:
@@ -6,7 +8,7 @@ except ImportError:
     pytest.skip("strike_rs (núcleo PyO3 nativo) no compilado en este entorno", allow_module_level=True)
 
 
-def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path) -> None:
+def test_python_cortex_kernel_atms_hardening_and_replay(tmp_path: Path) -> None:
     db_file = str(tmp_path / "cortex_atms_hardening.db")
     kernel1 = CortexKernel(db_file)
     id1 = kernel1.assert_knowledge("Water is H2O", "sensor_py", "env_py")

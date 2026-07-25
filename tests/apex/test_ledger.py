@@ -1,4 +1,5 @@
-from __future__ import annotations
+from pathlib import Path
+from typing import Any
 
 import sqlite3
 
@@ -11,7 +12,7 @@ def _payload(score: int) -> dict[str, object]:
     return {"nct_id": "NCT00000001", "score": score, "features": {"a": 1, "b": [1, 2, 3]}}
 
 
-def test_genesis_and_chain_linkage(tmp_path) -> None:
+def test_genesis_and_chain_linkage(tmp_path: Path) -> None:
     db = tmp_path / "l.db"
     with AmendmentLedger(db) as led:
         e0 = led.append(_payload(10), "agent:t0")
@@ -23,21 +24,21 @@ def test_genesis_and_chain_linkage(tmp_path) -> None:
         assert v.valid and v.entries == 2 and (v.broken_at is None)
 
 
-def test_determinism_same_inputs_same_hash(tmp_path) -> None:
+def test_determinism_same_inputs_same_hash(tmp_path: Path) -> None:
     with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
         ha = a.append(_payload(42), "agent:x").entry_hash
         hb = b.append(_payload(42), "agent:x").entry_hash
         assert ha == hb
 
 
-def test_key_order_independence(tmp_path) -> None:
+def test_key_order_independence(tmp_path: Path) -> None:
     with AmendmentLedger(tmp_path / "a.db") as a, AmendmentLedger(tmp_path / "b.db") as b:
         p1 = {"score": 5, "nct_id": "X", "z": 1}
         p2 = {"z": 1, "nct_id": "X", "score": 5}
         assert a.append(p1, "agent:x").entry_hash == b.append(p2, "agent:x").entry_hash
 
 
-def test_idempotency(tmp_path) -> None:
+def test_idempotency(tmp_path: Path) -> None:
     with AmendmentLedger(tmp_path / "l.db") as led:
         first = led.append(_payload(7), "agent:same")
         again = led.append(_payload(7), "agent:same")
@@ -45,7 +46,7 @@ def test_idempotency(tmp_path) -> None:
         assert led.count() == 1
 
 
-def test_causal_taint_mandatory(tmp_path) -> None:
+def test_causal_taint_mandatory(tmp_path: Path) -> None:
     with AmendmentLedger(tmp_path / "l.db") as led:
         with pytest.raises(ValueError):
             led.append(_payload(1), "")
@@ -53,7 +54,7 @@ def test_causal_taint_mandatory(tmp_path) -> None:
             led.append(_payload(1), "no-colon-here")
 
 
-def test_tamper_detection(tmp_path) -> None:
+def test_tamper_detection(tmp_path: Path) -> None:
     db = tmp_path / "l.db"
     with AmendmentLedger(db) as led:
         led.append(_payload(10), "agent:t0")
@@ -72,10 +73,10 @@ def test_tamper_detection(tmp_path) -> None:
 def test_babylon_bft_ledger_adapter() -> None:
 
     class MockActor:
-        def __init__(self):
-            self.events = []
+        def __init__(self) -> None:
+            self.events: list[Any] = []
 
-        def append(self, event):
+        def append(self, event: Any) -> str:
             self.events.append(event)
             return "mock-future"
 

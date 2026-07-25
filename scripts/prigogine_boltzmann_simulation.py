@@ -41,7 +41,7 @@ def run_prigogine_brusselator(
     return history
 
 
-def main():
+def main() -> None:
     random.seed(42)
     b_history = run_boltzmann_entropy_simulation()
     p_history = run_prigogine_brusselator()

@@ -78,7 +78,7 @@ def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
     }
 
 
-def main():
+def main() -> None:
     max_iterations = int(sys.argv[1]) if len(sys.argv) > 1 else 1
     interval_seconds = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 

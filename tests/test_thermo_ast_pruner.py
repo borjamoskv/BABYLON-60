@@ -1,4 +1,5 @@
 import ast
+from pathlib import Path
 
 from babylon60.core.thermo_ast_pruner import AnergiaPurger
 
@@ -13,7 +14,7 @@ def test_anergia_purger_removes_constants() -> None:
     assert "x = 10" in code_out
 
 
-def test_anergia_purger_injects_fail_fast(tmp_path) -> None:
+def test_anergia_purger_injects_fail_fast(tmp_path: Path) -> None:
     source = "\ntry:\n    x = 1 / 0\nexcept Exception:\n    pass\n"
     tree = ast.parse(source)
     purger = AnergiaPurger()
