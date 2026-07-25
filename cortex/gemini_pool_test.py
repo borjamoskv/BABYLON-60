@@ -8,7 +8,6 @@ from scripts.gemini_pool_manager import (
     GeminiProPoolManager,
 )
 
-
 class TestGeminiProPoolManager(unittest.TestCase):
     def setUp(self) -> None:
         self.env_patcher = patch.dict(
@@ -63,7 +62,6 @@ class TestGeminiProPoolManager(unittest.TestCase):
         with patch.object(manager, "dispatch_generate_content", return_value="async_mock_response"):
             res = asyncio.run(manager.adispatch_generate_content("test prompt", "gemini-1.5-pro"))
             self.assertEqual(res, "async_mock_response")
-
 
 if __name__ == "__main__":
     unittest.main()

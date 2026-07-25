@@ -3,13 +3,10 @@ import os
 import re
 import json
 
-
 from typing import Any
-
 
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
-
 
 def classify_omega_theorem(target_dir: str) -> None:
     classification: dict[str, list[Any]] = {
@@ -99,7 +96,6 @@ def classify_omega_theorem(target_dir: str) -> None:
     with open(out_json, "w") as f:
         json.dump(classification, f, indent=2)
     print(f"Omega Classification complete. Saved to {out_json}")
-
 
 if __name__ == "__main__":
     target = os.environ.get("CORTEX_TARGET_DIR", os.path.dirname(os.path.dirname(os.path.abspath(__file__))))

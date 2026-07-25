@@ -18,20 +18,17 @@ from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh  # noqa: E4
 from cortex.active_inference_engine import UnifiedActiveInferenceEngine  # noqa: E402
 import strike_rs  # type: ignore[import-untyped]  # noqa: E402
 
-
 async def run_neuromorphic_task(mesh: SelfHealingMesh, idx: int) -> float:
     t0 = time.perf_counter_ns()
     pulse_val = 5.0 + (idx % 20)
     await mesh.route_pulse("SensorA", "MotorB", pulse_val)
     return float(time.perf_counter_ns() - t0)
 
-
 def run_active_inference_task(engine: UnifiedActiveInferenceEngine, idx: int) -> float:
     t0 = time.perf_counter_ns()
     d, p, m = idx % 10, (idx // 10) % 10, (idx // 100) % 10
     fe, dkl, ell = engine.step(d, p, m)
     return float(time.perf_counter_ns() - t0)
-
 
 def run_rust_strike_task(
     sv: strike_rs.StateVector,
@@ -45,7 +42,6 @@ def run_rust_strike_task(
     strike_rs.dispatch_neuro_chain(d, p, m, cv)
     strike_rs.dispatch_tts_harness(d, p, m, ts)
     return float(time.perf_counter_ns() - t0)
-
 
 async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     t0 = time.perf_counter_ns()
@@ -66,7 +62,6 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
 
     await asyncio.to_thread(_db_op)
     return float(time.perf_counter_ns() - t0)
-
 
 async def main() -> None:
     print("╔══════════════════════════════════════════════════════════════╗")
@@ -173,7 +168,6 @@ async def main() -> None:
         os.remove(db_path)
     if os.path.exists(mesh_db):
         os.remove(mesh_db)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

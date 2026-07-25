@@ -21,20 +21,17 @@ import strike_rs  # type: ignore[import-untyped]  # noqa: E402
 N_TOTAL = 500_000
 N_PER_ENGINE = N_TOTAL // 5  # 100k per engine
 
-
 async def run_neuromorphic_task(mesh: SelfHealingMesh, idx: int) -> float:
     t0 = time.perf_counter_ns()
     pulse_val = 5.0 + (idx % 20)
     await mesh.route_pulse("SensorA", "MotorB", pulse_val)
     return float(time.perf_counter_ns() - t0)
 
-
 def run_active_inference_task(engine: UnifiedActiveInferenceEngine, idx: int) -> float:
     t0 = time.perf_counter_ns()
     d, p, m = idx % 10, (idx // 10) % 10, (idx // 100) % 10
     engine.step(d, p, m)
     return float(time.perf_counter_ns() - t0)
-
 
 def run_rust_strike_task(
     sv: strike_rs.StateVector,
@@ -48,7 +45,6 @@ def run_rust_strike_task(
     strike_rs.dispatch_neuro_chain(d, p, m, cv)
     strike_rs.dispatch_tts_harness(d, p, m, ts)
     return float(time.perf_counter_ns() - t0)
-
 
 async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     t0 = time.perf_counter_ns()
@@ -70,7 +66,6 @@ async def run_bft_sqlite_task(db_path: str, idx: int) -> float:
     await asyncio.to_thread(_db_op)
     return float(time.perf_counter_ns() - t0)
 
-
 async def run_categorical_engine_task(idx: int) -> float:
     """Stress the FISR categorical engine — morphism cost + collision detection."""
     t0 = time.perf_counter_ns()
@@ -87,9 +82,7 @@ async def run_categorical_engine_task(idx: int) -> float:
     await asyncio.to_thread(_cat_op)
     return float(time.perf_counter_ns() - t0)
 
-
 _cat_engine_instance = None
-
 
 def _get_cat_engine() -> Any:
     global _cat_engine_instance
@@ -98,7 +91,6 @@ def _get_cat_engine() -> Any:
             "cortex.categorical_896_engine", fromlist=["Categorical896Engine"]
         ).Categorical896Engine(yaml_path="primitives/896_categorical_logic_primitives.yml")
     return _cat_engine_instance
-
 
 async def main() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -253,7 +245,6 @@ async def main() -> None:
             wal_p = p + suffix
             if os.path.exists(wal_p):
                 os.remove(wal_p)
-
 
 if __name__ == "__main__":
     asyncio.run(main())

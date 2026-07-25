@@ -211,7 +211,6 @@ How thanks to Unstoppable Domains, I managed to sell over 1500 ENS domains
 Tu indignación musical no requiere oído, solo WiFi
 """
 
-
 def main():
     lines = [l.strip() for l in RAW_TEXT.split("\n") if l.strip()]
     unique_titles = sorted(list(set(lines)))
@@ -223,7 +222,6 @@ def main():
 
     archive_files = list(ARCHIVE_200_DIR.glob("*.md"))
     print(f"Substack archive directory contains {len(archive_files)} generated markdown files!")
-
 
 if __name__ == "__main__":
     main()

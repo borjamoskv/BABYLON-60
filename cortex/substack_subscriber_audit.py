@@ -13,7 +13,6 @@ import os
 import tempfile
 from typing import Any
 
-
 VIP_KEYWORDS: list[str] = [
     "openai",
     "huggingface",
@@ -52,7 +51,6 @@ INFLUENCER_KEYWORDS: list[str] = [
     "soyunapringadacontacto",
     "henaralvarezcontacto",
 ]
-
 
 @dataclass
 class SubscriberRecord:
@@ -100,7 +98,6 @@ class SubscriberRecord:
         email_lower = self.email.lower()
         return any(kw in email_lower for kw in INFLUENCER_KEYWORDS)
 
-
 @dataclass
 class AuditSummary:
     total_subscribers: int
@@ -113,7 +110,6 @@ class AuditSummary:
     high_exergy_count: int
     deliverability_hazard_count: int
     cohorts: dict[str, dict[str, Any]] = field(default_factory=dict)
-
 
 class SubstackSubscriberAuditor:
     """Engine for performing physical exergy audits and deliverability segmentation on Substack subscriber exports."""

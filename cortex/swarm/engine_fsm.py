@@ -11,7 +11,6 @@ from cortex.swarm.sandbox import VesicularSandbox
 from cortex.swarm.reviewer_agent import evaluate_diff
 from cortex.swarm.sanitizer import ZeroTrustSanitizer
 
-
 class SwarmFSM:
     def __init__(self) -> None:
         self.memory = AgentMemory()
@@ -96,7 +95,6 @@ class SwarmFSM:
 
         return "DEAD_LETTER"
 
-
 def run_fsm_cycle() -> None:
     fsm = SwarmFSM()
     issue_payload = {
@@ -119,7 +117,6 @@ def run_fsm_cycle() -> None:
         state = fsm.transition_state(42, state, issue_payload)
 
     print(f"Estado Final Colapsado: {state}")
-
 
 if __name__ == "__main__":
     run_fsm_cycle()

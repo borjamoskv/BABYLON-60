@@ -2,7 +2,6 @@
 import os
 import subprocess
 
-
 def maximize_exergy():
     print("Initiating C5-REAL AST Collapse...")
 
@@ -35,7 +34,6 @@ def maximize_exergy():
     else:
         hash_result = subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True)
         print(f"C5-REAL Hash: {hash_result.stdout.strip()}")
-
 
 if __name__ == "__main__":
     maximize_exergy()

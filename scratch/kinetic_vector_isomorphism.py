@@ -22,7 +22,6 @@ import threading
 import queue
 import platform
 
-
 class TokenBucket:
     def __init__(self, capacity: int, refill_rate: float):
         self.capacity = float(capacity)
@@ -41,7 +40,6 @@ class TokenBucket:
                 self.tokens -= amount
                 return True
             return False
-
 
 def compute_shannon_entropy(data_points: list, num_bins: int = 20) -> float:
     if not data_points:
@@ -63,7 +61,6 @@ def compute_shannon_entropy(data_points: list, num_bins: int = 20) -> float:
             p = c / total
             entropy -= p * math.log(p)
     return entropy
-
 
 class IsomorphismSimulator:
     def __init__(self, duration_per_phase: float = 2.0):
@@ -223,7 +220,6 @@ class IsomorphismSimulator:
             "shannon_entropy": compute_shannon_entropy(latencies),
         }
 
-
 def main():
     print("=== KINETIC VECTOR: HARDWARE L1 / DISRUPTIVE NOCICEPTION ISOMORPHISM SIMULATOR ===")
     print(f"Platform: {platform.system()} {platform.machine()} ({platform.processor()})")
@@ -292,7 +288,6 @@ def main():
     print(f"\n[+] Telemetry exported to: {out_file}")
     print(f"[+] Cryptographic Attestation (SHA3-256): {sha3_digest}")
     print("\n=== SIMULATION COMPLETE: C5-REAL EMPIRICAL ANCHOR VERIFIED ===")
-
 
 if __name__ == "__main__":
     main()

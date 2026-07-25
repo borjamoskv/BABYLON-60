@@ -4,7 +4,6 @@ import datetime
 import yaml
 from pathlib import Path
 
-
 def generate_audit():
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     pid = os.getpid()
@@ -204,7 +203,6 @@ CORTEX_TAINT: {yaml_payload["CORTEX_TAINT"]}
     print(f"YAML generated at: {yaml_path}")
     print(f"MD generated at: {md_path}")
     print(f"CORTEX-TAINT: {cortex_taint}")
-
 
 if __name__ == "__main__":
     generate_audit()

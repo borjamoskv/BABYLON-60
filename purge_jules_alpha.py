@@ -6,7 +6,6 @@ import glob
 target_dir = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv/artifacts/substack_archive/"
 md_files = glob.glob(os.path.join(target_dir, "**", "*.md"), recursive=True)
 
-
 def purge_taint(content):
     # Pattern for Substack metadata style
     content = re.sub(r"\|\s*\*CORTEX-TAINT:\*\s*`[^`]+`\s*", "", content)
@@ -15,7 +14,6 @@ def purge_taint(content):
     # Clean up any empty CORTEX_TAINT labels
     content = re.sub(r"^CORTEX_TAINT:\s*$", "", content, flags=re.MULTILINE)
     return content
-
 
 purged_count = 0
 for filepath in md_files:

@@ -9,7 +9,6 @@ import os
 from typing import Dict, List, Tuple
 from cortex.swarm.memory_store import AgentMemory
 
-
 class CyclomaticComplexityVisitor(ast.NodeVisitor):
     def __init__(self) -> None:
         self.complexity: int = 1  # Base complexity for any function is 1
@@ -38,7 +37,6 @@ class CyclomaticComplexityVisitor(ast.NodeVisitor):
         # Each boolean operator in (a and b and c) adds decision complexity
         self.complexity += len(node.values) - 1
         self.generic_visit(node)
-
 
 class ArchitectAgent:
     def __init__(self, target_dir: str = "cortex") -> None:
@@ -98,7 +96,6 @@ class ArchitectAgent:
         else:
             print("[Architect] Repositorio en equilibrio termodinámico (complejidad bajo umbral).")
             return False
-
 
 if __name__ == "__main__":
     agent = ArchitectAgent()

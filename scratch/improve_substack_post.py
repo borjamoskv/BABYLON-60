@@ -12,7 +12,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 POST_PATH = str(BASE_DIR / "artifacts" / "post_substack_escohotado_ultrathink.md")
 
-
 def build_improved_post() -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
     pid = os.getpid()
@@ -168,7 +167,6 @@ La lección de Antonio Escohotado es una lección de física de sistemas:
 - [Los Cinco Dólares de Kant: Minoría de Edad, Fugazi y el Meme del UNC](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 """
     return content
-
 
 if __name__ == "__main__":
     post = build_improved_post()

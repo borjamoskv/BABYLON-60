@@ -8,7 +8,6 @@ and compiles into Markdown documentation and Mermaid graph visualizers.
 from dataclasses import dataclass, field
 import enum
 
-
 class TokenType(enum.Enum):
     KEYWORD = "KEYWORD"
     IDENTIFIER = "IDENTIFIER"
@@ -20,7 +19,6 @@ class TokenType(enum.Enum):
     QUESTION = "QUESTION"
     EOF = "EOF"
 
-
 @dataclass
 class CESLToken:
     type: TokenType
@@ -28,19 +26,16 @@ class CESLToken:
     line: int
     column: int
 
-
 @dataclass
 class TypeField:
     name: str
     type_name: str
     optional: bool = False
 
-
 @dataclass
 class TypeDecl:
     name: str
     fields: list[TypeField] = field(default_factory=list)
-
 
 @dataclass
 class RelationDecl:
@@ -48,12 +43,10 @@ class RelationDecl:
     domain: str
     codomain: str
 
-
 @dataclass
 class InvariantDecl:
     name: str
     expression: str
-
 
 @dataclass
 class TransitionDecl:
@@ -63,11 +56,9 @@ class TransitionDecl:
     preconditions: str = ""
     postconditions: str = ""
 
-
 @dataclass
 class CapabilityDecl:
     name: str
-
 
 @dataclass
 class CESLAST:
@@ -77,7 +68,6 @@ class CESLAST:
     invariants: list[InvariantDecl] = field(default_factory=list)
     transitions: list[TransitionDecl] = field(default_factory=list)
     capabilities: list[CapabilityDecl] = field(default_factory=list)
-
 
 class CESLLexer:
     KEYWORDS = {
@@ -167,7 +157,6 @@ class CESLLexer:
 
     def _peek(self) -> str:
         return self.source[self.pos + 1] if self.pos + 1 < self.length else ""
-
 
 class CESLParser:
     def __init__(self, tokens: list[CESLToken]) -> None:
@@ -318,7 +307,6 @@ class CESLParser:
 
     def _is_at_end(self) -> bool:
         return self.tokens[self.pos].type == TokenType.EOF
-
 
 class CESLCompiler:
     def __init__(self, source: str) -> None:

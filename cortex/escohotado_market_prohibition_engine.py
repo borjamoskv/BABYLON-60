@@ -17,7 +17,6 @@ from typing import Dict, List, Any
 
 DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_economics.db")
 
-
 def init_db(db_path: str = DB_PATH) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
     conn = sqlite3.connect(db_path, timeout=5.0)
@@ -40,7 +39,6 @@ def init_db(db_path: str = DB_PATH) -> None:
             );
         """)
     conn.close()
-
 
 def simulate_prohibition_and_property(enforcement: float, property_rights: float) -> Dict[str, Any]:
     """
@@ -81,7 +79,6 @@ def simulate_prohibition_and_property(enforcement: float, property_rights: float
         "cortex_taint": f"borjamoskv:escohotado_econ:{cortex_taint[:16]}",
     }
 
-
 def run_economic_grid(
     enforcement_levels: List[float],
     property_indices: List[float],
@@ -121,7 +118,6 @@ def run_economic_grid(
 
     conn.close()
     return results
-
 
 if __name__ == "__main__":
     enf_grid = [0.0, 0.25, 0.50, 0.75, 1.0]

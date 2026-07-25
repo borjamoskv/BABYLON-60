@@ -9,7 +9,6 @@ import json
 from dataclasses import dataclass, asdict
 from typing import Dict, Any
 
-
 @dataclass
 class StateCheckpoint:
     sequence_id: int
@@ -20,7 +19,6 @@ class StateCheckpoint:
 
     def to_yaml_str(self) -> str:
         return json.dumps(asdict(self), indent=2)
-
 
 def generate_state_fingerprint(
     sequence_id: int, canonical_state: Dict[str, Any], event_offset: int, parent_hash: str, schema_version: int = 1

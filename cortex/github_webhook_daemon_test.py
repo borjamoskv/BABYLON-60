@@ -9,20 +9,16 @@ import pathlib
 from io import BytesIO
 from unittest.mock import patch, MagicMock
 
-
 # Patching DB path before importing module
 os.environ.setdefault("CORTEX_GITHUB_SECRET", "test-secret-key")
-
 
 class FakeHeaders(dict[str, str]):
     def get(self, key: str, default: str | None = None) -> str | None:  # type: ignore[override]
         return super().get(key, default)
 
-
 def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
     mac = hmac.new(secret.encode("utf-8"), payload, hashlib.sha3_256).hexdigest()
     return f"sha3-256={mac}"
-
 
 class TestInitPerceptionLedger:
     def test_creates_db_and_table(self, tmp_path: pathlib.Path) -> None:
@@ -36,7 +32,6 @@ class TestInitPerceptionLedger:
                 cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='github_events'")
                 assert cursor.fetchone() is not None
                 conn.close()
-
 
 class TestLogEvent:
     def test_log_event_new_payload(self, tmp_path: pathlib.Path) -> None:
@@ -72,7 +67,6 @@ class TestLogEvent:
             max_t = cur.fetchone()[0]
             conn.close()
             assert max_t == 2
-
 
 class TestGitHubWebhookHandler:
     def _make_handler(

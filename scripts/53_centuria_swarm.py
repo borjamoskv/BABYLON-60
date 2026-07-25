@@ -17,7 +17,6 @@ import hashlib
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
 
-
 def run_ruff_fix() -> None:
     print("⚡ [CENTURIA-SWARM] Running Ruff formatting check & fixes...")
     try:
@@ -30,7 +29,6 @@ def run_ruff_fix() -> None:
         subprocess.run(["ruff", "format", "."], cwd=PROJECT_ROOT, check=True, capture_output=True)
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix/format failed: {e.stderr.decode('utf-8', errors='ignore')}")
-
 
 def deploy_centuria_swarm() -> None:
     print("⚡ [CENTURIA-SWARM] Compilando División Paralela Centuria (333 Agentes)...")
@@ -160,7 +158,6 @@ CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:centuria_swarm_333:2026-07-18T18:35:00+02
     with open(report_path, "w", encoding="utf-8") as f:
         f.write(report_content)
     print(f"✅ Unified Centuria Swarm Report written to: {report_path}")
-
 
 if __name__ == "__main__":
     run_ruff_fix()

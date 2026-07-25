@@ -23,12 +23,10 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.append(PROJECT_ROOT)
 
-
 class EpistemicPoolHalt(Exception):
     """Exclusión rígida de excepciones mudas (Ω26)."""
 
     pass
-
 
 class GeminiProTelemetry:
     """Simple in‑memory telemetry singleton for the Gemini pool.
@@ -71,7 +69,6 @@ class GeminiProTelemetry:
             "per_key_counts": self.per_key_counts.copy(),
         }
 
-
 class GeminiAccountSlot:
     """Representa una cuenta física de Gemini Pro/Flash aislada."""
 
@@ -99,7 +96,6 @@ class GeminiAccountSlot:
         """Reinicia el contador de errores al completar exitosamente una petición."""
         if self.errors_count > 0:
             self.errors_count = 0
-
 
 class GeminiProPoolManager:
     """Manage a pool of Gemini Pro API keys with round‑robin dispatch and telemetry."""
@@ -220,7 +216,6 @@ class GeminiProPoolManager:
             ],
         }
         return stats
-
 
 if __name__ == "__main__":
     print("Gemini Pro Multi-Account Pool Manager (C5-REAL) cargado.")

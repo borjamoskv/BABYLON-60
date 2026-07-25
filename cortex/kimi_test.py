@@ -6,7 +6,6 @@ from cortex.kimi import (
     dispatch_kimi,
 )
 
-
 class TestKimiKernel(unittest.TestCase):
     def test_kimi_coverage(self) -> None:
         vec = KimiStateVector()
@@ -32,7 +31,6 @@ class TestKimiKernel(unittest.TestCase):
         evaluator = KimiK3TrajectoryEvaluator()
         with self.assertRaises(ValueError):
             evaluator.evaluate_trajectory("")
-
 
 if __name__ == "__main__":
     unittest.main()

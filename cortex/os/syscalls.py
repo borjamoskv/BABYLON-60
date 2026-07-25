@@ -8,7 +8,6 @@ from dataclasses import dataclass
 import enum
 from typing import Any
 
-
 class SyscallType(enum.Enum):
     OBSERVE = "OBSERVE"
     MEASURE = "MEASURE"
@@ -21,13 +20,11 @@ class SyscallType(enum.Enum):
     AUDIT = "AUDIT"
     LEARN = "LEARN"
 
-
 @dataclass
 class SyscallRequest:
     syscall: SyscallType
     caller_pid: int
     payload: dict[str, Any]
-
 
 @dataclass
 class SyscallResponse:

@@ -12,7 +12,6 @@ if not BRAIN_DIR:
 
 ARTIFACT_DIR = os.path.join(os.getcwd(), "artifacts")
 
-
 def consolidate_conversations() -> None:
     """Scans conversation transcripts in BRAIN_DIR and generates a consolidated markdown ledger."""
     print("[C5-REAL] Iniciando Autoconsolidación de Conversaciones-Ω...")
@@ -53,7 +52,6 @@ def consolidate_conversations() -> None:
             out.write(f"{ax}\n")
 
     print(f"[SUCCESS] Consolidación cristalizada en: {ledger_path}")
-
 
 if __name__ == "__main__":
     consolidate_conversations()

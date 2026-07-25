@@ -25,7 +25,6 @@ import hashlib
 import threading
 import platform
 
-
 def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> float:
     if not data_points:
         return 0.0
@@ -44,7 +43,6 @@ def compute_shannon_entropy(data_points: list[float], num_bins: int = 25) -> flo
             p = c / total
             entropy -= p * math.log(p)
     return entropy
-
 
 class MicroglialAdaptiveGate:
     """Bio-inspired Stateful Adaptive Gate with Dual Threshold Hysteresis (Upper/Lower)"""
@@ -69,7 +67,6 @@ class MicroglialAdaptiveGate:
 
             return not self.state_active  # True = Pass, False = Suppressed/Shed
 
-
 class GICv4HardwareAPICGate:
     """Hardware APIC / GICv4.1 O(1) Invariant Saturation Dispatcher"""
 
@@ -86,7 +83,6 @@ class GICv4HardwareAPICGate:
                 self.last_dispatch = now
                 return True
             return False  # O(1) hardware ring drop / mask bit set
-
 
 class BioSiliconBenchmark:
     def __init__(self, duration_seconds: float = 2.0):
@@ -187,7 +183,6 @@ class BioSiliconBenchmark:
             "nonlinear_avg_latency_us": sum(nonlinear_latencies) / len(nonlinear_latencies),
         }
 
-
 def main():
     print("=== BIO-SILICON ISOMORPHISM ENGINE (C5-REAL EMPIRICAL BENCHMARK) ===")
     print(f"Platform: {platform.system()} {platform.machine()} ({platform.processor()})")
@@ -240,7 +235,6 @@ def main():
     print(f"\n[+] Bio-Silicon Telemetry exported to: {out_file}")
     print(f"[+] Cryptographic Attestation (SHA3-256): {sha3_hash}")
     print("\n=== BIO-SILICON ISOMORPHISM BENCHMARK COMPLETE ===")
-
 
 if __name__ == "__main__":
     main()

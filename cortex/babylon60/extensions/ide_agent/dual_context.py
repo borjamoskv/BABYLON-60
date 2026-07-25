@@ -8,7 +8,6 @@ import os
 import json
 import signal
 
-
 class DualContextAgent:
     """
     C5-REAL: Agente de Contexto Dual (Agent Igor)
@@ -95,7 +94,6 @@ class DualContextAgent:
         async with server:
             await server.serve_forever()
 
-
 def cleanup_socket(signum: Any, frame: Any) -> None:
     """Ω43: Prevención de Zombie IPC (Desvinculado Atómico)."""
     sock: str = os.environ.get("CORTEX_IPC_SOCKET", "")
@@ -103,7 +101,6 @@ def cleanup_socket(signum: Any, frame: Any) -> None:
         os.remove(sock)
         logging.info("[C5-REAL] Socket unlinked atomically. Purging process.")
     os.kill(os.getpid(), signal.SIGKILL)
-
 
 if __name__ == "__main__":
     signal.signal(signal.SIGINT, cleanup_socket)

@@ -5,7 +5,6 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 import re
 
-
 def main() -> None:
     yaml_path = "cortex/ontology/10000_space_taxonomy.yaml"
     output_path = "src-tauri/src/primitives_generated.rs"
@@ -88,7 +87,6 @@ pub fn get_generated_action(index: usize) -> Option<fn(&PrimitiveIdentity)> {{
     with open(output_path, "w") as f:
         f.write(rust_code)
     print(f"Generated domain-routed transductor (10 domains, 10000 primitives O(1) space) in {output_path}")
-
 
 if __name__ == "__main__":
     main()

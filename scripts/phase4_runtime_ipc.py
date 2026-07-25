@@ -6,13 +6,10 @@ import logging
 import hashlib
 from typing import TypedDict
 
-
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
 
-
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
-
 
 class IPCReport(TypedDict):
     network_endpoints: list[dict[str, str]]
@@ -20,12 +17,10 @@ class IPCReport(TypedDict):
     database_locks: list[dict[str, str]]
     multiprocessing_ipc: list[dict[str, str]]
 
-
 def sha3_256_payload(payload: str) -> str:
     h = hashlib.sha3_256()
     h.update(payload.encode("utf-8"))
     return h.hexdigest()
-
 
 def analyze_ipc_and_runtime(target_dir: str) -> None:
     if not os.path.exists(target_dir):
@@ -110,7 +105,6 @@ def analyze_ipc_and_runtime(target_dir: str) -> None:
 
     # Invariante Ω11: Firma CORTEX-TAINT obligatoria
     logging.info(f"CORTEX-TAINT:borjamoskv:ipc_analysis:completed_on:{os.path.basename(out_json)}:{payload_hash}")
-
 
 if __name__ == "__main__":
     # Invariante Ω23: Cero rutas absolutas quemadas. Fallback a CWD.

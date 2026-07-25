@@ -14,7 +14,6 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
 from cortex.substack_subscriber_audit import SubstackSubscriberAuditor
 
-
 def execute() -> None:
     """Run the subscriber audit against the default export CSV."""
     default_csv = Path.home() / "Downloads" / "subscriber-export-2026-07-20-02-35-19.csv"
@@ -31,7 +30,6 @@ def execute() -> None:
     print(f"Deliverability hazards:     {summary.deliverability_hazard_count}")
     print(f"Exergy ratio:               {summary.high_exergy_count / summary.total_subscribers * 100:.1f}%")
     print(f"Anergy load:                {summary.deliverability_hazard_count / summary.total_subscribers * 100:.1f}%")
-
 
 if __name__ == "__main__":
     execute()

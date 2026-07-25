@@ -15,7 +15,6 @@ SUBSTACK_FILES = [
     ARTIFACTS_DIR / "post_substack_necrosis_ontologica.md",
 ]
 
-
 @pytest.mark.parametrize("filepath", SUBSTACK_FILES)
 def test_substack_publication_formatting_invariants(filepath: Path) -> None:
     assert filepath.exists(), f"Publication file missing: {filepath}"

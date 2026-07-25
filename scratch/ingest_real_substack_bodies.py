@@ -21,7 +21,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CATALOG_FILE = BASE_DIR / "scratch" / "substack_archive_catalog.json"
 OUTPUT_DIR = BASE_DIR / "artifacts" / "substack_archive"
 
-
 def clean_html_to_markdown(html_str: str) -> str:
     """Cleans Substack HTML into clean Markdown without tables or raw LaTeX."""
     # Convert headings
@@ -51,7 +50,6 @@ def clean_html_to_markdown(html_str: str) -> str:
 
     return text.strip()
 
-
 def load_rss_feed() -> dict:
     url = "https://borjamoskv.substack.com/feed"
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
@@ -72,7 +70,6 @@ def load_rss_feed() -> dict:
         feed_posts[slug] = {"title": title, "link": link, "html": content_html}
 
     return feed_posts
-
 
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -152,7 +149,6 @@ def main():
         print(f"  [{i:02d}/23] Ingested and elevated full article: {filename}")
 
     print("Complete RSS ingestion and transduction of ALL 23 Substack articles finished!")
-
 
 if __name__ == "__main__":
     main()

@@ -2,7 +2,6 @@
 import json
 from pathlib import Path
 
-
 def audit_files():
     root = Path(".")
     extensions = {".py", ".go", ".rs", ".js", ".ts", ".yml"}
@@ -44,7 +43,6 @@ def audit_files():
             }
         )
     )
-
 
 if __name__ == "__main__":
     audit_files()

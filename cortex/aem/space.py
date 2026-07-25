@@ -7,7 +7,6 @@ Provides allocation, lookup, and release over opaque Handles.
 from typing import Any
 from cortex.aem.isa import ExecutionError, Handle, ImplementationError
 
-
 class ObjectSpace:
     def __init__(self) -> None:
         self.objects: dict[Handle, Any] = {}

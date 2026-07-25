@@ -30,7 +30,6 @@
 %   - Missing test harness
 % ============================================================================
 
-
 % ----------------------------------------------------------------------------
 % SECTION 1: PROPOSITIONAL RESOLUTION (Robinson 1965)
 % Representación de cláusulas como listas de literales.
@@ -83,7 +82,6 @@ probar_inconsistencia(Clausulas, Clausulas) :-
 probar_inconsistencia(Clausulas, HistorialCompleto) :-
     resolucion_paso(Clausulas, NuevoResolvente),
     probar_inconsistencia([NuevoResolvente|Clausulas], HistorialCompleto).
-
 
 % ----------------------------------------------------------------------------
 % SECTION 2: FIRST-ORDER UNIFICATION — Martelli-Montanari (1982)
@@ -164,7 +162,6 @@ unify_list([H1|T1], [H2|T2]) :-
     unify(H1, H2),
     unify_list(T1, T2).
 
-
 % ----------------------------------------------------------------------------
 % SECTION 3: FIRST-ORDER RESOLUTION (resolve_fo/3)
 %
@@ -195,7 +192,6 @@ resolve_fo(C1, C2, Resolvente) :-
     fo_contrarios(L1, L2),          % unification-based complementarity
     append(Resto1, Resto2, Merged),
     list_to_set(Merged, Resolvente). % remove syntactically identical literals
-
 
 % ----------------------------------------------------------------------------
 % SECTION 4: TEST BLOCK (compiled-out; guarded by :- if(false).)
@@ -240,4 +236,3 @@ run_tests :-
     write('T5 PASS: resolve_fo result = '), write(R_fo), nl.
 
 :- endif.
-

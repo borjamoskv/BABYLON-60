@@ -20,7 +20,6 @@ from cortex.babylon60.neuromorphic_primitives import STDPMemristor  # noqa: E402
 
 DB_PATH = "memristor_stress_test.db"
 
-
 def run_single_thread(thread_id: int, db_path: str, pre: str, post: str, n_iters: int) -> dict[str, Any]:
     mem = STDPMemristor(db_path, pre, post)
     success = 0
@@ -46,7 +45,6 @@ def run_single_thread(thread_id: int, db_path: str, pre: str, post: str, n_iters
         "failures": failures,
         "errors": errors,
     }
-
 
 def execute() -> None:
     target_ops = 100000
@@ -122,7 +120,6 @@ def execute() -> None:
                 pass  # Clean-up fallback
 
     print(json.dumps(report, indent=2))
-
 
 if __name__ == "__main__":
     execute()

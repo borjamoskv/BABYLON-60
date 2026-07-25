@@ -16,14 +16,12 @@ os.chdir(PROJECT_ROOT)
 
 from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical  # noqa: E402
 
-
 def get_ledger_hash() -> str | None:
     try:
         with open("mundo_f_ledger.yml", "rb") as f:
             return hashlib.sha256(f.read()).hexdigest()
     except FileNotFoundError:
         return None
-
 
 def run_itera_ultrathink(cycles: int = 16) -> None:
     print(f"=== CORTEX-OMEGA: IGNICIÓN BUCLE ITERA ULTRATHINK ({cycles} CICLOS) ===")
@@ -186,7 +184,6 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
 
     if failure_count > 0:
         sys.exit(1)
-
 
 if __name__ == "__main__":
     import sys

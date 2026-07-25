@@ -20,22 +20,17 @@ from typing import Dict, Any, List
 
 DB_PATH = ".cortex/quad_pillar.db"
 
-
 class QuadPillarException(Exception):
     """Base exception for Quad-Pillar failures (Ω26)."""
-
 
 class RateLimitExhaustedError(QuadPillarException):
     """Triggered when subagent API rate limits are hit (429 / RESOURCE_EXHAUSTED)."""
 
-
 class CausalHierarchyError(QuadPillarException):
     """Triggered when causal hierarchy validation fails (Ω158)."""
 
-
 class QuadPillarIdempotencyError(QuadPillarException):
     """Triggered when a mutation violates the physical idempotency lock (Ω15)."""
-
 
 # ---------------------------------------------------------------------------
 # Pillar 1: Sistema (POSIX / Hardware Direct Control)
@@ -75,7 +70,6 @@ class SystemPillar:
                 f"Sovereignty Violation (Ω25): Required env key '{key_name}' is missing. Fallbacks prohibited."
             )
         return val
-
 
 # ---------------------------------------------------------------------------
 # Pillar 2: Orquestación (WAL Serialized State & Direct Fallback)
@@ -148,7 +142,6 @@ class OrchestrationPillar:
             )
             conn.commit()
 
-
 # ---------------------------------------------------------------------------
 # Pillar 3: Memoria (Active Sharding & 4-Tier Epistemic Schema)
 # ---------------------------------------------------------------------------
@@ -191,7 +184,6 @@ class MemoryPillar:
         self.ledger_entries.append(entry)
         return entry
 
-
 # ---------------------------------------------------------------------------
 # Pillar 4: Determinismo (Disk Attestation & Causal Hierarchy)
 # ---------------------------------------------------------------------------
@@ -233,7 +225,6 @@ class DeterminismPillar:
         if topology == mechanism or mechanism == etiology:
             raise CausalHierarchyError("Causal Hierarchy Violation (Ω158): Strata must not be collapsed or identical.")
         return True
-
 
 # ---------------------------------------------------------------------------
 # Unified Quad-Pillar Kernel Transductor

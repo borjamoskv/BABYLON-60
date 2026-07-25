@@ -6,7 +6,6 @@ import subprocess
 import time
 from typing import Any
 
-
 def run_ruff_fix() -> None:
     print("⚡ [LEA_OMEGA] Running Ruff cleanups...")
     try:
@@ -14,7 +13,6 @@ def run_ruff_fix() -> None:
         print(res.stdout)
     except subprocess.CalledProcessError as e:
         print(f"Ruff fix failed: {e.stdout}\n{e.stderr}")
-
 
 def execute_swarm_audit() -> None:
     skill_dir = os.environ.get("CORTEX_SKILLS_DIR", os.path.expanduser("~/.gemini/config/skills"))
@@ -176,7 +174,6 @@ CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:anergy_purge_100:2026-07-18T00:39:00+00:0
     with open(report_path, "w") as f:
         f.write(report_content)
     print(f"✅ Unified Report written to: {report_path}")
-
 
 if __name__ == "__main__":
     run_ruff_fix()

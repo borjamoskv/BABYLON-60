@@ -10,19 +10,16 @@ import sqlite3
 import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
-
 # C5-REAL Invariant: Zero External Dependencies for perception.
 CORTEX_DB_PATH = ".cortex/cortex.db"
 SECRET_KEY = os.environ.get("CORTEX_GITHUB_SECRET")
 TRIGGER_PATH = ".cortex/.trigger_swarm"
-
 
 def get_secret_key() -> str:
     key = os.environ.get("CORTEX_GITHUB_SECRET") or SECRET_KEY
     if not key:
         raise RuntimeError("CORTEX_GITHUB_SECRET env var is required (Ω25).")
     return key
-
 
 def init_perception_ledger() -> None:
     if not os.path.exists(".cortex"):
@@ -45,7 +42,6 @@ def init_perception_ledger() -> None:
     """)
     conn.commit()
     conn.close()
-
 
 def log_event(event_type: str, payload_bytes: bytes) -> bool:
     conn = sqlite3.connect(CORTEX_DB_PATH, timeout=5.0)
@@ -71,7 +67,6 @@ def log_event(event_type: str, payload_bytes: bytes) -> bool:
         return False
     finally:
         conn.close()
-
 
 class GitHubWebhookHandler(BaseHTTPRequestHandler):
     def do_POST(self) -> None:
@@ -117,7 +112,6 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({"status": "IDEMPOTENCY_LOCK_ABORTED"}).encode("utf-8"))
 
-
 def run_daemon(port: int = 8080) -> None:
     init_perception_ledger()
     server_address = ("", port)
@@ -129,7 +123,6 @@ def run_daemon(port: int = 8080) -> None:
         print("\n[C5-REAL] Purgando daemon.")
         httpd.server_close()
         sys.exit(0)
-
 
 if __name__ == "__main__":
     run_daemon()

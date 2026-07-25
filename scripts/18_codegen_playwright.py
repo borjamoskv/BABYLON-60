@@ -6,7 +6,6 @@ import sqlite3
 import datetime
 from typing import TypedDict
 
-
 class PlaywrightPrimitiveDict(TypedDict):
     id: str
     domain: str
@@ -16,7 +15,6 @@ class PlaywrightPrimitiveDict(TypedDict):
     description: str
     taint_hash: str
     timestamp: str
-
 
 PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
@@ -56,7 +54,6 @@ ACTION_VERBS = [
 
 # 3 Domains * 10 Categories * 10 Verbs = 300 base archetypes.
 
-
 def generate_playwright_primitives() -> list[PlaywrightPrimitiveDict]:
     primitives: list[PlaywrightPrimitiveDict] = []
     p_idx = 1
@@ -88,7 +85,6 @@ def generate_playwright_primitives() -> list[PlaywrightPrimitiveDict]:
 
     return primitives
 
-
 def save_to_markdown(primitives: list[PlaywrightPrimitiveDict], filepath: str) -> None:
     os.makedirs(os.path.dirname(filepath), exist_ok=True)
     with open(filepath, "w", encoding="utf-8") as f:
@@ -104,7 +100,6 @@ def save_to_markdown(primitives: list[PlaywrightPrimitiveDict], filepath: str) -
             f.write(f"### {p['name']}\n")
             f.write(f"- **Regla**: {p['description']}\n")
             f.write(f"- **CORTEX-TAINT**: `{p['taint_hash']}`\n\n")
-
 
 def save_to_sqlite(primitives: list[PlaywrightPrimitiveDict], db_path: str) -> None:
     os.makedirs(os.path.dirname(db_path), exist_ok=True)
@@ -150,7 +145,6 @@ def save_to_sqlite(primitives: list[PlaywrightPrimitiveDict], db_path: str) -> N
 
     conn.commit()
     conn.close()
-
 
 if __name__ == "__main__":
     primitives = generate_playwright_primitives()

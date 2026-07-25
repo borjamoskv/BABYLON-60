@@ -5,13 +5,11 @@ Ambos sistemas usan un esquema llamado "Procesamiento de Eventos de Prioridad Ad
 
 Aquí están los límites exactos donde ambas máquinas (la de silicio y la biológica) se rompen:
 
-
 1. El Livelock (Bloqueo por Saturación):
 
 En un servidor, si llegan paquetes de red cada 12 microsegundos, el procesador se bloquea intentando leerlos y el sistema se congela. No puede hacer nada más.
 
 En la neurobiología, si la estimulación de dolor repetitivo supera los 0.3 Hz, se detona un fenómeno llamado "wind-up". Las células se saturan de calcio y los receptores entran en un bucle de excitabilidad acumulativa.
-
 
 2. El Agotamiento de Batería (Inanición):
 
@@ -19,16 +17,13 @@ En Linux, si la cola de tareas diferidas supera los 5.000 eventos, el sistema de
 
 En la médula espinal, las células inmunes llamadas microglías están normalmente en suspensión (consumo cero). Pero si se agota más del 30% del ATP celular por sobrecarga, las microglías mutan, se hipertrofian y empiezan a liberar factores excitatorios de forma perpetua.
 
-
 3. La Trampa Predictiva (Por qué el dolor se vuelve crónico):
 
 El cerebro no reacciona al daño puro; calcula la PROBABILIDAD de daño basándose en lo que cree que está pasando (Inferencia Bayesiana). El dolor crónico (o la alodinia) ocurre cuando este modelo predictivo se desconecta de la realidad y se atasca en un bucle infinito de retroalimentación.
 
 En redes, esto se conoce formalmente como Colapso Congestivo (RFC 2914). El enrutador (el cerebro) se asusta tanto que se convierte él mismo en la fuente del problema, amplificando cualquier roce como si fuera letal.
 
-
 Para arreglar esto, las soluciones topológicas son exactamente las mismas en informática que en medicina, divididas en 3 capas:
-
 
 - Mitigación Capa 1 (Tirar el cable): En servidores, usas un mecanismo que borra los paquetes malos antes de que toquen la memoria (XDP Drop). En el cuerpo, usas anestésicos locales como una epidural para bloquear los canales de sodio de los nervios antes de que la señal suba.
 

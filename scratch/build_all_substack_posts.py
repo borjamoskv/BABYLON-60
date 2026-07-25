@@ -14,7 +14,6 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARTIFACTS_DIR = BASE_DIR / "artifacts"
 
-
 # 1. Post: Neuromorphic Chips vs Quantum Computation
 def generate_neuromorphic_post() -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -90,7 +89,6 @@ La cuántica seguirá capturando subvenciones gubernamentales y titulares sensac
 - [Desmontando a David Domínguez: Autopsia Forense (de A a la Z)](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
 """
 
-
 # 2. Post: La Gran Necrosis Ontológica
 def generate_necrosis_post() -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -160,7 +158,6 @@ La única vacuna contra la necrosis ontológica es el anclaje físico determinis
 - [Los Cinco Dólares de Kant: Minoría de Edad, Fugazi y el Meme del UNC](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 - [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 """
-
 
 if __name__ == "__main__":
     os.makedirs(ARTIFACTS_DIR, exist_ok=True)

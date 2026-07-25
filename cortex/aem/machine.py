@@ -13,7 +13,6 @@ from cortex.aem.isa import (
 )
 from cortex.aem.space import ObjectSpace
 
-
 class AbstractEffectMachine:
     def __init__(self) -> None:
         self.space = ObjectSpace()

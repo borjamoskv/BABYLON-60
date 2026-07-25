@@ -9,7 +9,6 @@ import math
 import time
 import uuid
 
-
 class EpistemicState(enum.Enum):
     UNDEFINED = "Undefined"
     UNKNOWN = "Unknown"
@@ -22,7 +21,6 @@ class EpistemicState(enum.Enum):
     IMPL_DEFINED = "ImplDefined"
     IMPOSSIBLE = "Impossible"
 
-
 class NodeType(enum.Enum):
     OBSERVATION = "Observation"
     EVIDENCE = "Evidence"
@@ -33,11 +31,9 @@ class NodeType(enum.Enum):
     INCIDENT = "Incident"
     POLICY = "Policy"
 
-
 class EdgeOrder(enum.Enum):
     FIRST_ORDER_CAUSAL = "1ST_ORDER_CAUSAL"
     SECOND_ORDER_FEEDBACK = "2ND_ORDER_FEEDBACK"
-
 
 class EdgeType(enum.Enum):
     SUPPORTS = "supports"
@@ -47,7 +43,6 @@ class EdgeType(enum.Enum):
     DEPENDS_ON = "depends_on"
     INVALIDATES = "invalidates"
     IMPLEMENTS = "implements"
-
 
 @dataclass
 class Epistemic5D:
@@ -67,7 +62,6 @@ class Epistemic5D:
         freshness = self.current_freshness(current_time)
         return self.truth * self.confidence * self.authority * self.relevance * freshness
 
-
 @dataclass
 class KGNode:
     id: str = field(default_factory=lambda: str(uuid.uuid4()))
@@ -78,7 +72,6 @@ class KGNode:
     content: str = ""
     created_at: float = field(default_factory=time.time)
 
-
 @dataclass
 class KGEdge:
     edge_type: EdgeType
@@ -86,7 +79,6 @@ class KGEdge:
     target_id: str
     order: EdgeOrder = EdgeOrder.FIRST_ORDER_CAUSAL
     created_at: float = field(default_factory=time.time)
-
 
 @dataclass
 class AdjudicationRecord:

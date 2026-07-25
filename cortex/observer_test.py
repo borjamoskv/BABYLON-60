@@ -3,7 +3,6 @@
 import unittest
 from cortex.observer import dispatch_state_observer, StateVector
 
-
 class TestObserverKernel(unittest.TestCase):
     def test_observer_coverage(self) -> None:
         vec = StateVector()
@@ -16,7 +15,6 @@ class TestObserverKernel(unittest.TestCase):
                     count += 1
         self.assertEqual(count, 1000)
         print("✅ Successfully verified 100% execution coverage for 1000 Python/Observer Primitives.")
-
 
 if __name__ == "__main__":
     unittest.main()

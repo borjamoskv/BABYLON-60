@@ -4,14 +4,12 @@ import yaml
 import hashlib
 from typing import TypedDict
 
-
 class DomainSpec(TypedDict):
     id: str
     name: str
     range: list[int]
     type: str
     categories: list[str]
-
 
 domains: list[DomainSpec] = [
     {

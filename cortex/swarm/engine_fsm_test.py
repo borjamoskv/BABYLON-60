@@ -3,12 +3,10 @@ import pytest
 from unittest.mock import MagicMock
 from cortex.swarm.engine_fsm import SwarmFSM
 
-
 @pytest.fixture(autouse=True)
 def mock_agent_memory(monkeypatch: pytest.MonkeyPatch) -> None:
     # Evitar OOM por ChromaDB en xdist y deadlocks de SQLite
     monkeypatch.setattr("cortex.swarm.engine_fsm.AgentMemory", MagicMock)
-
 
 def test_fsm_normal_flow() -> None:
     fsm = SwarmFSM()
@@ -41,7 +39,6 @@ def test_fsm_normal_flow() -> None:
     state = fsm.transition_state(101, "REVIEWING", payload)
     assert state == "MERGE_READY"
 
-
 def test_fsm_prompt_injection() -> None:
     fsm = SwarmFSM()
     payload = {
@@ -57,7 +54,6 @@ def test_fsm_prompt_injection() -> None:
     state = fsm.transition_state(102, "UNPROCESSED", payload)
     assert state == "DEAD_LETTER"
 
-
 def test_fsm_circuit_breaker() -> None:
     fsm = SwarmFSM()
     payload = {
@@ -72,7 +68,6 @@ def test_fsm_circuit_breaker() -> None:
     }
     state = fsm.transition_state(103, "CODING", payload)
     assert state == "DEAD_LETTER"
-
 
 def test_fsm_kill_switch(monkeypatch: pytest.MonkeyPatch) -> None:
     fsm = SwarmFSM()

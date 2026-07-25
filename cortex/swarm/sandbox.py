@@ -7,7 +7,6 @@ Encapsula la ejecución de código generado por el Swarm para evitar necrosis es
 import subprocess
 from typing import Dict, Any
 
-
 class VesicularSandbox:
     """Implementa aislamiento termodinámico mediante contenedores efímeros (eBPF / gVisor)."""
 

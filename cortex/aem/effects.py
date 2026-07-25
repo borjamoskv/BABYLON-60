@@ -7,12 +7,10 @@ from dataclasses import dataclass, field
 from typing import Any
 from cortex.aem.isa import InstructionFamily
 
-
 @dataclass(frozen=True)
 class AlgebraicEffect:
     family: InstructionFamily
     target: str = ""
-
 
 @dataclass
 class CapabilitySet:
@@ -20,7 +18,6 @@ class CapabilitySet:
 
     def is_authorized(self, effect: AlgebraicEffect) -> bool:
         return effect.family in self.allowed_families
-
 
 @dataclass
 class EffectProgram:

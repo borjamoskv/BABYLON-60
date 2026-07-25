@@ -7,10 +7,8 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
-
 
 def ultrathink_sweep() -> None:
     print("[ULTRATHINK P0] Iniciando Barrido Termodinámico Profundo (C5-REAL)...")
@@ -80,7 +78,6 @@ def ultrathink_sweep() -> None:
         raise EpistemicHalt(f"Falla en Motor MCTS Physical Compiler: {e}. Ejecutando purga (Ω26).")
 
     print("\n[ULTRATHINK P0] Barrido Termodinámico Completado. Estado: CERO ANERGÍA.")
-
 
 if __name__ == "__main__":
     ultrathink_sweep()

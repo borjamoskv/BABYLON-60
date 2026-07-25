@@ -6,7 +6,6 @@ import signal
 import time
 from typing import Dict, Any
 
-
 class DeterministicChaosMonkey:
     def __init__(self, target_campaigns: Dict[str, int]):
         """
@@ -26,7 +25,6 @@ class DeterministicChaosMonkey:
             except ProcessLookupError:
                 pass
         return False
-
 
 def chaos_orchestrator(target_pid: int, target_campaigns: Dict[str, int], shared_phase: Any, stop_event: Any) -> None:
     """Runs in a separate thread/process to assassinate the target deterministically."""

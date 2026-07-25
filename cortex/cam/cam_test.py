@@ -9,7 +9,6 @@ from cortex.cam.effects import EffectsAlgebra, EffectType
 from cortex.cam.machine import CAMAbstractMachine
 from cortex.cam.types import EdgeType, Epistemic5D, EpistemicState, KGNode, NodeType
 
-
 def test_cam_dag_acyclicity_and_states() -> None:
     dag = TypedDAGKnowledgeGraph()
     n1 = dag.add_node(KGNode(node_type=NodeType.EVIDENCE, state=EpistemicState.MEASURED))
@@ -27,7 +26,6 @@ def test_cam_dag_acyclicity_and_states() -> None:
     with pytest.raises(RuntimeError, match="Cycle detected"):
         dag.add_edge(EdgeType.SUPPORTS, n2, n1)
 
-
 def test_cam_effects_algebra_ub_prevention() -> None:
     effects = EffectsAlgebra(
         is_pure=False,
@@ -43,7 +41,6 @@ def test_cam_effects_algebra_ub_prevention() -> None:
     # Undeclared actual effect triggers UB exception
     with pytest.raises(RuntimeError, match="Undeclared effects executed"):
         effects.verify_actual_effects({EffectType.KNOWLEDGE_WRITE, EffectType.FILESYSTEM_WRITE})
-
 
 def test_cam_abstract_machine_verify_transition() -> None:
     machine = CAMAbstractMachine(profile="CAM Standard")

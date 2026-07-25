@@ -21,7 +21,6 @@ from cortex.quad_pillar_kernel import (
     QuadPillarIdempotencyError,
 )
 
-
 @pytest.fixture
 def temp_db() -> Any:
     with tempfile.NamedTemporaryFile(suffix=".db", delete=False) as tmp:
@@ -29,7 +28,6 @@ def temp_db() -> Any:
     yield db_path
     if os.path.exists(db_path):
         os.remove(db_path)
-
 
 def test_pillar_1_system() -> None:
     sys_p = SystemPillar()
@@ -40,24 +38,20 @@ def test_pillar_1_system() -> None:
     assert "rss_memory" in state
     assert isinstance(state["rss_memory"], int)
 
-
 def test_pillar_1_sovereignty_fail() -> None:
     sys_p = SystemPillar()
     with pytest.raises(QuadPillarException, match="Sovereignty Violation"):
         sys_p.verify_environment_sovereignty("NON_EXISTENT_C5_KEY_12345")
-
 
 def test_pillar_2_orchestration_async(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     hash_res = asyncio.run(orch.dispatch_task({"task_id": "test_async"}))
     assert len(hash_res) == 64  # SHA3-256 length
 
-
 def test_pillar_2_orchestration_fallback_on_429(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
     hash_res = asyncio.run(orch.dispatch_task({"task_id": "test_fallback"}, simulate_rate_limit=True))
     assert len(hash_res) == 64
-
 
 def test_pillar_3_memory_sharding() -> None:
     mem = MemoryPillar()
@@ -66,7 +60,6 @@ def test_pillar_3_memory_sharding() -> None:
     assert "Ω156" in shard_rules
     assert "Ω165" in shard_rules
     assert "Ω1" in shard_rules
-
 
 def test_pillar_3_memory_4tier_schema() -> None:
     mem = MemoryPillar()
@@ -78,7 +71,6 @@ def test_pillar_3_memory_4tier_schema() -> None:
     )
     assert entry["tier_1_evidence"]["measurement"] == 42.0
     assert entry["tier_2_repository_state"]["branch"] == "master"
-
 
 def test_pillar_4_determinism_disk_hash(temp_db: Any) -> None:
     det = DeterminismPillar(db_file=temp_db)
@@ -92,7 +84,6 @@ def test_pillar_4_determinism_disk_hash(temp_db: Any) -> None:
     finally:
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
-
 
 def test_pillar_4_idempotency_lock(temp_db: Any) -> None:
     orch = OrchestrationPillar(db_file=temp_db)
@@ -108,7 +99,6 @@ def test_pillar_4_idempotency_lock(temp_db: Any) -> None:
     # Checking an unknown hash should pass
     assert det.check_idempotency_lock("00000000000000000000000000") is True
 
-
 def test_pillar_4_causal_hierarchy(temp_db: Any) -> None:
     det = DeterminismPillar(db_file=temp_db)
     assert (
@@ -122,7 +112,6 @@ def test_pillar_4_causal_hierarchy(temp_db: Any) -> None:
 
     with pytest.raises(CausalHierarchyError):
         det.validate_causal_hierarchy(topology="same", mechanism="same", etiology="different")
-
 
 def test_unified_quad_pillar_kernel(temp_db: Any) -> None:
     kernel = QuadPillarKernel(db_file=temp_db)

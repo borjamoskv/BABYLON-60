@@ -12,7 +12,6 @@ from dataclasses import dataclass
 
 EMAIL_REGEX = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
 
-
 @dataclass
 class ValidationResult:
     email: str
@@ -20,7 +19,6 @@ class ValidationResult:
     domain: str
     has_mx_or_a_record: bool = False
     error_reason: str = ""
-
 
 class DeliverabilityValidator:
     """Engine for verifying email structural integrity and DNS/MX resolution."""

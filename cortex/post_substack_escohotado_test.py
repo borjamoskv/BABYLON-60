@@ -11,7 +11,6 @@ SUBSTACK_POST_PATH = str(
     Path(__file__).resolve().parent.parent / "artifacts" / "post_substack_escohotado_ultrathink.md"
 )
 
-
 def test_substack_post_formatting_invariants() -> None:
     assert os.path.exists(SUBSTACK_POST_PATH)
     with open(SUBSTACK_POST_PATH, "r", encoding="utf-8") as f:

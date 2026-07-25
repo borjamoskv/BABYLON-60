@@ -19,7 +19,6 @@ from cortex.c6_harness.auditor import generate_attestation
 
 DB_PATH = os.path.join(PROJECT_ROOT, ".cortex", "c6_harness_test.db")
 
-
 def init_db() -> None:
     os.makedirs(os.path.dirname(DB_PATH), exist_ok=True)
     if os.path.exists(DB_PATH):
@@ -36,7 +35,6 @@ def init_db() -> None:
     """)
     conn.commit()
     conn.close()
-
 
 def target_worker(shared_phase: Any) -> None:
     conn = sqlite3.connect(DB_PATH, timeout=10.0)
@@ -64,7 +62,6 @@ def target_worker(shared_phase: Any) -> None:
             pass
 
         idx += 1
-
 
 def run_c6_1_experiment() -> None:
     print("╔══════════════════════════════════════════════════════════════════╗")
@@ -134,7 +131,6 @@ def run_c6_1_experiment() -> None:
     else:
         print("\n⚠ ANERGÍA DETECTADA: La identidad temporal colapsó.")
         sys.exit(1)
-
 
 if __name__ == "__main__":
     run_c6_1_experiment()

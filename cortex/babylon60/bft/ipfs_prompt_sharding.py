@@ -10,7 +10,6 @@ from typing import Dict
 # El LLM utiliza herramientas (Tool calls) para hacer fetch JIT (Just-In-Time) de los invariantes,
 # o el Orquestador aprovecha el Context Caching si el CID coincide con la caché caliente de Gemini/Claude.
 
-
 class IPFS_Prompt_Ledger:
     def __init__(self, vault_path: str = ".cortex/ipfs_vault"):
         self.vault_path = vault_path
@@ -68,7 +67,6 @@ class IPFS_Prompt_Ledger:
             "Zero-Slop. Extrae la exergía requerida y ejecuta."
         )
         return prompt
-
 
 if __name__ == "__main__":
     ledger = IPFS_Prompt_Ledger()

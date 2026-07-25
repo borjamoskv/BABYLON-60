@@ -42,7 +42,6 @@ MODIFIERS = {
     9: "ASYNC_WAL",
 }
 
-
 class KimiStateVector:
     def __init__(self) -> None:
         self.daimon_latency: List[float] = [0.0] * 64
@@ -52,14 +51,12 @@ class KimiStateVector:
         self.bft_validation_count: List[int] = [0] * 64
         self.execution_count: int = 0
 
-
 def resolve_kimi_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     if not (0 <= d <= 9 and 0 <= p <= 9 and 0 <= m <= 9):
         raise ValueError("Index out of range [0-9]")
     code = d * 100 + p * 10 + m
     name = f"KIMI-{DOMAINS[d]}-{PRIMITIVES[p]}-{MODIFIERS[m]}"
     return code, name
-
 
 def dispatch_kimi(d: int, p: int, m: int, vec: KimiStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_kimi_identity(d, p, m)
@@ -72,7 +69,6 @@ def dispatch_kimi(d: int, p: int, m: int, vec: KimiStateVector) -> Tuple[int, st
         vec.bft_validation_count[i] += (code + i) % 5
     return code, name, vec.daimon_latency
 
-
 @dataclasses.dataclass(frozen=True)
 class KimiK3TrajectoryResult:
     trajectory_id: str
@@ -80,7 +76,6 @@ class KimiK3TrajectoryResult:
     reward: float
     shannon_entropy: float
     cortex_taint: str
-
 
 class KimiK3TrajectoryEvaluator:
     """Evaluates agent execution trajectories under Kimi K3 ground-truth RLAF paradigm."""

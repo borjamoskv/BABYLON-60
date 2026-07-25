@@ -16,11 +16,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 CATALOG_FILE = BASE_DIR / "scratch" / "substack_complete_200_catalog.json"
 OUTPUT_DIR = BASE_DIR / "artifacts" / "substack_archive_200"
 
-
 def load_200_catalog() -> list:
     with open(CATALOG_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
-
 
 def generate_signature_200(catalog: list, current_slug: str, count: int = 4) -> str:
     mandatory = (
@@ -37,7 +35,6 @@ def generate_signature_200(catalog: list, current_slug: str, count: int = 4) -> 
     for item in selected:
         block += f"- [{item['title'].strip()}]({item['canonical_url']})\n"
     return block
-
 
 def elevate_single_post(post: dict, catalog: list, index: int) -> str:
     timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -104,7 +101,6 @@ Toda publicación en el canal CORTEX debe actuar como un transductor físico: ex
 """
     return md
 
-
 def main():
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     catalog = load_200_catalog()
@@ -119,7 +115,6 @@ def main():
             f.write(md_content)
 
     print(f"SUCCESS: Transduced ALL {len(catalog)} Substack publications into {OUTPUT_DIR}!")
-
 
 if __name__ == "__main__":
     main()
