@@ -33,7 +33,9 @@ def run_git_sentinel(commit_msg: str) -> str:
         for _attempt in range(2):
             res = subprocess.run(["git", "commit", "-m", commit_msg], cwd=WORKSPACE_DIR, capture_output=True, text=True)
             if res.returncode != 0 and ("cannot lock ref" in res.stderr or "index.lock" in res.stderr):
-                subprocess.run("rm -f .git/*.lock .git/refs/heads/*.lock", shell=True, cwd=WORKSPACE_DIR)
+                import glob
+                for lock in glob.glob(str(WORKSPACE_DIR / ".git" / "*.lock")) + glob.glob(str(WORKSPACE_DIR / ".git" / "refs" / "heads" / "*.lock")):
+                    subprocess.run(["rm", "-f", lock], cwd=WORKSPACE_DIR)
                 continue
             break
         if res.returncode != 0:
@@ -45,7 +47,9 @@ def run_git_sentinel(commit_msg: str) -> str:
                     text=True,
                 )
                 if res.returncode != 0 and ("cannot lock ref" in res.stderr or "index.lock" in res.stderr):
-                    subprocess.run("rm -f .git/*.lock .git/refs/heads/*.lock", shell=True, cwd=WORKSPACE_DIR)
+                    import glob
+                    for lock in glob.glob(str(WORKSPACE_DIR / ".git" / "*.lock")) + glob.glob(str(WORKSPACE_DIR / ".git" / "refs" / "heads" / "*.lock")):
+                        subprocess.run(["rm", "-f", lock], cwd=WORKSPACE_DIR)
                     continue
                 break
             if res.returncode != 0:

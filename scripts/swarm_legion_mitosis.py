@@ -20,10 +20,9 @@ LOG_FILE = REPO_DIR / ".cortex" / "swarm_legion.log"
 def run_worker_task(worker_id: int, task_name: str) -> dict[str, Any]:
     """Simulates/executes isolated worker squad task on physical disk."""
     start_time = time.time()
-    # Execute actual system check
+    py_exe = str(REPO_DIR / ".venv" / "bin" / "python")
     res = subprocess.run(
-        ".venv/bin/python scripts/autodetect_invariants.py",
-        shell=True,
+        [py_exe, "scripts/autodetect_invariants.py"],
         cwd=str(REPO_DIR),
         capture_output=True,
         text=True,
@@ -52,7 +51,7 @@ def orchestrate_100_agent_swarm(num_workers: int = 100) -> dict[str, Any]:
             try:
                 res = future.result()
                 results.append(res)
-            except Exception as e:
+            except (OSError, subprocess.SubprocessError) as e:
                 results.append({"worker_id": futures[future], "status": "FAILED", "error": str(e)})
 
     passed_count = sum(1 for r in results if r.get("status") == "SUCCESS")

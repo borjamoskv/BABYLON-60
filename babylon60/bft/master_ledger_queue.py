@@ -57,7 +57,7 @@ class MasterLedgerQueue:
                 for query, params in batch:
                     await self.db.execute(query, params)
                 await self.db.execute("COMMIT")
-            except Exception as e:
+            except (aiosqlite.OperationalError, aiosqlite.IntegrityError) as e:
                 logger.critical(f"FAIL-FAST: BFT Batch Write Failed: {e}")
                 await self.db.execute("ROLLBACK")
                 raise

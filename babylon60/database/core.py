@@ -53,7 +53,7 @@ async def get_connection(db_path: str | Path, *, synchronous: str = "FULL"):  # 
     finally:
         try:
             await conn.execute("PRAGMA optimize")
-        except Exception as e:
+        except (sqlite3.OperationalError, aiosqlite.OperationalError) as e:
             logger.warning(f"Failed to optimize DB: {e}")
         await conn.close()
 

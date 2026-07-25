@@ -43,7 +43,9 @@ def _git(args: list[str]) -> str:
             ["git", "-c", "commit.gpgsign=false", *args], cwd=str(ROOT_DIR), capture_output=True, text=True
         )
         if result.returncode != 0 and ("cannot lock ref" in result.stderr or "index.lock" in result.stderr):
-            subprocess.run("rm -f .git/*.lock .git/refs/heads/*.lock", shell=True, cwd=str(ROOT_DIR))
+            import glob
+            for lock in glob.glob(str(ROOT_DIR / ".git" / "*.lock")) + glob.glob(str(ROOT_DIR / ".git" / "refs" / "heads" / "*.lock")):
+                subprocess.run(["rm", "-f", lock], cwd=str(ROOT_DIR))
             continue
         break
     return result.stdout.strip()
@@ -165,8 +167,9 @@ def git_sentinel_commit(status_hash: str) -> str:
 
 def kinetic_purge_protocol() -> None:
     print("[KINETIC PURGE] Ejecutando Brutalismo Cinético (INV_C5_20)...")
-    subprocess.run("osascript -e 'do shell script \"purge\"'", shell=True, capture_output=True)
-    subprocess.run("kill -9 $(pgrep studentd mediaanalysisd) 2>/dev/null || true", shell=True, capture_output=True)
+    subprocess.run(["osascript", "-e", 'do shell script "purge"'], capture_output=True)
+    subprocess.run(["pkill", "-9", "studentd"], capture_output=True)
+    subprocess.run(["pkill", "-9", "mediaanalysisd"], capture_output=True)
     subprocess.run(["rm", "-rf", "target", "__pycache__"], capture_output=True)
 
 

@@ -1,1 +1,0 @@
-✅ C5-REAL Mypy and Ruff configuration updated and verified

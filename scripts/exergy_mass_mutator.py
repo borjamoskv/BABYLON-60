@@ -121,7 +121,7 @@ def apply_ast_mutations(file_path: Path) -> tuple[bool, float]:
             return True, transformer.exergy_gained
     except SyntaxError:
         pass
-    except Exception:
+    except OSError:
         pass
     return False, 0.0
 
