@@ -44,53 +44,103 @@ impl std::error::Error for AtmsError {}
 pub type AssumptionId = usize;
 pub type NodeId = usize;
 
-/// An Environment: a conjunction of assumptions. Ordered & hashable so it can
-/// live in sets and be compared canonically.
+/// An Environment: a conjunction of assumptions represented as a fast bitset.
+/// Supports SIMD/POPCNT accelerated set operations (subset, union, popcount).
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Default)]
 pub struct Environment {
-    assumptions: BTreeSet<AssumptionId>,
+    words: Vec<u64>,
 }
 
 impl Environment {
     pub fn empty() -> Self {
-        Environment {
-            assumptions: BTreeSet::new(),
-        }
+        Environment { words: Vec::new() }
     }
 
     pub fn singleton(a: AssumptionId) -> Self {
-        let mut s = BTreeSet::new();
-        s.insert(a);
-        Environment { assumptions: s }
+        let word_idx = a / 64;
+        let bit_idx = a % 64;
+        let mut words = vec![0u64; word_idx + 1];
+        words[word_idx] |= 1u64 << bit_idx;
+        Environment { words }
     }
 
     pub fn from_assumptions<I: IntoIterator<Item = AssumptionId>>(it: I) -> Self {
-        Environment {
-            assumptions: it.into_iter().collect(),
+        let mut env = Environment::empty();
+        for a in it {
+            let word_idx = a / 64;
+            let bit_idx = a % 64;
+            if word_idx >= env.words.len() {
+                env.words.resize(word_idx + 1, 0);
+            }
+            env.words[word_idx] |= 1u64 << bit_idx;
+        }
+        env.trim();
+        env
+    }
+
+    fn trim(&mut self) {
+        while self.words.last() == Some(&0) {
+            self.words.pop();
         }
     }
 
     /// Self ⊆ other (self is at least as weak an assumption set).
+    /// SIMD/Bitwise accelerated subset check: (self & other) == self.
+    #[inline]
     pub fn is_subset(&self, other: &Environment) -> bool {
-        self.assumptions.is_subset(&other.assumptions)
-    }
-
-    pub fn union(&self, other: &Environment) -> Environment {
-        Environment {
-            assumptions: self.assumptions.union(&other.assumptions).copied().collect(),
+        if self.words.len() > other.words.len() {
+            for &w in &self.words[other.words.len()..] {
+                if w != 0 {
+                    return false;
+                }
+            }
         }
+        let check_len = self.words.len().min(other.words.len());
+        for i in 0..check_len {
+            if (self.words[i] & other.words[i]) != self.words[i] {
+                return false;
+            }
+        }
+        true
     }
 
+    /// Bitwise OR union (hardware vectorized SIMD operation).
+    #[inline]
+    pub fn union(&self, other: &Environment) -> Environment {
+        let max_len = self.words.len().max(other.words.len());
+        let mut words = vec![0u64; max_len];
+        for i in 0..self.words.len() {
+            words[i] |= self.words[i];
+        }
+        for i in 0..other.words.len() {
+            words[i] |= other.words[i];
+        }
+        let mut env = Environment { words };
+        env.trim();
+        env
+    }
+
+    /// Hardware native POPCNT (population count).
+    #[inline]
     pub fn len(&self) -> usize {
-        self.assumptions.len()
+        self.words.iter().map(|w| w.count_ones() as usize).sum()
     }
 
+    #[inline]
     pub fn is_empty(&self) -> bool {
-        self.assumptions.is_empty()
+        self.words.iter().all(|&w| w == 0)
     }
 
     pub fn assumptions(&self) -> impl Iterator<Item = AssumptionId> + '_ {
-        self.assumptions.iter().copied()
+        self.words.iter().enumerate().flat_map(|(w_idx, &word)| {
+            (0..64).filter_map(move |b_idx| {
+                if (word & (1u64 << b_idx)) != 0 {
+                    Some(w_idx * 64 + b_idx)
+                } else {
+                    None
+                }
+            })
+        })
     }
 }
 

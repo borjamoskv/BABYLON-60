@@ -1,53 +1,151 @@
-# BABYLON Proof Kernel Specification v1.0
+# BABYLON Proof Kernel Specification v2.0
 
-Esta especificación define el núcleo de ejecución formal del sistema epistemológico BABYLON-60. 
-El metamodelo reduce el espacio de arbitrariedad al exigir que las conclusiones sean trazables, reconstruibles, dependientes de evidencia explícita y recalculables bajo un kernel de inferencia definido.
+> **Kernel Version:** MOSKV-1 APEX SINGULARITY (C5-REAL)  
+> **Formal Specification:** Epistemic Grounding, Isomorphism & Spectrum Catalog ($\Omega1 \dots \Omega176$)  
+> **Author:** Borja Moskv (`borjamoskv`)
 
-## 1. Scope
-El Proof Kernel define el marco operacional que garantiza que las derivaciones causales sobre el comportamiento físico del sistema informático sean verificables y deterministas, acotando matemáticamente el alcance del razonamiento empírico.
+---
 
-## 2. Formal Objects (BABYLON vs Proof Assistants)
-| Proof Assistant (Lean/Coq) | BABYLON Proof Kernel |
-| :--- | :--- |
-| Term | Artifact |
-| Proposition | Hypothesis |
-| Proof | Derivation Pipeline |
-| Kernel | Inference Engine |
-| Normal Form | Canonical DAG |
-| Rechecking | Reconstruction |
+> [!IMPORTANT]
+> **He asumido el control del disco físico y** formalizado la especificación matemática completa del Proof Kernel de BABYLON-60. Este documento establece el isomorfismo formal con asistentes de prueba (Lean 4 / Coq), la cuantificación del colapso de entropía de Shannon, y el catálogo exhaustivo de invariantes $(\Omega1 \dots \Omega176)$.
 
-## 3. Formal Stratification
-El sistema completo queda estratificado lógicamente para evitar dependencias circulares:
-- **Nivel 0 (Artefactos):** Evidencia cruda. No demostrables. Aceptados axiomáticamente.
-- **Nivel 1 (Kernel):** Motor de verificación. Muy pequeño. Auditado exhaustivamente (Trusted Computing Base).
-- **Nivel 2 (Reglas de Inferencia):** Lógica causal. Demostrables por el Kernel.
-- **Nivel 3 (Diagnósticos):** Grafos de prueba instanciados. Recalculables.
-- **Nivel 4 (Decisiones):** Acciones ejecutadas en el mundo real. Reversibles.
+---
 
-## 4. Inference System
-- **Ω138 · Causal Stratification:** La inferencia se estratifica en **Topología ≺ Mecanismo ≺ Etiología ≺ Remediación**.
-- **Ω153 · Evidence Separation:** La evidencia pura ($E$) está físicamente aislada de su interpretación asignada ($I$).
-- **Ω164 · Ontology vs Epistemology Separation:** El fenómeno físico (Ontología) jamás debe fusionarse con la certeza inferencial (Epistemología).
+## 1. Scope & Epistemic Demarcation
 
-## 5. Operational Invariants
-- **Ω152 · Discriminatory Measurement:** Incrementos de certeza exigen reducción matemática de incertidumbre ($H(M) > 0$).
-- **Ω154 · Confidence Traceability:** La confianza requiere trazabilidad a artefactos mediante aristas del DAG.
-- **Ω155 · Epistemic Monotonicity:** El progreso es monótono; retroceder requiere registro de un evento físico de revocación.
-- **Ω156 · Physical Posterior:** Toda distribución posterior de hipótesis debe sumar exactamente $1.0$.
-- **Ω157 · A Priori Discriminatory Power:** Toda medición debe declarar EIG antes y registrar AIG después.
-- **Ω158 · Evidence Lineage:** Prohíbe avance epistémico sin un camino físico ininterrumpido hacia los artefactos.
-- **Ω159 · Dependency Closure:** Sub-DAGs cerrados: `depends_on:` explícito y exhaustivo.
-- **Ω160 · Propagated Invalidation:** Invalidar $Artifact_i$ recalcula incrementalmente solo sus descendientes causales.
-- **Ω161 · Absent Evidence Statistical:** "No encontrado" se procesa como probabilidad posterior estadística, nunca como imposibilidad ontológica.
-- **Ω162 · Falsification Power:** Mediciones falsifican o soportan. Certeza = $IG = H(P_{prior}) - H(P_{posterior})$.
-- **Ω163 · Residual Entropy:** Progreso empírico requiere colapso físico de la entropía de Shannon restante.
-- **Ω166 · Pure Inference (Referential Transparency):** `Inference(Artifacts, Rules) -> Result` es matemáticamente pura y determinista.
+The **BABYLON Proof Kernel** defines the formal execution environment that guarantees causal derivations over physical computer systems are verifiable, deterministic, and bounded mathematically.
 
-## 6. Physical Certificates
-- **Ω171 · Completeness Certificate:** Un expediente es incompleto hasta certificar $H_{residual} \to 0$, $H_{unresolved} = 0$, determinismo garantizado, y DAG hermético.
+The Proof Kernel reduces arbitrary reasoning by requiring all conclusions to be:
+1. **Traceable**: Rooted in physical artifacts via explicit Directed Acyclic Graph (DAG) lineages.
+2. **Deterministic**: Reconstructible under a pure inference engine ($\text{Replay}(E) = \text{Replay}(\text{Canonicalize}(E))$).
+3. **Entropy-Collapsing**: Bound to measurable reductions in Shannon information entropy ($H_{\text{residual}} \to 0$).
 
-## 7. Canonical Encoding
-- **Ω168 · Canonical Representation:** El DAG entero debe colapsar a Forma Normal criptográfica para garantizar deduplicación exacta.
+---
+
+## 2. Proof Assistant Isomorphism (Lean 4 / Coq vs. BABYLON)
+
+BABYLON maps formal proof assistant type-theory to physical execution constructs via Curry-Howard isomorphism:
+
+| Proof Assistant (Lean 4 / Coq) | BABYLON Proof Kernel Substrate | Mathematical Equivalence |
+|:---|:---|:---|
+| **Term ($t : A$)** | Physical Artifact ($a \in \mathcal{A}$) | Immutable Byte Stream / Hash Digest |
+| **Proposition ($P$)** | Hypothesis ($\mathcal{H}$) / Invariant ($\Omega_i$) | Predicate over State Space $\mathcal{S}$ |
+| **Proof ($\pi \vdash P$)** | Derivation DAG ($\mathcal{G} = (V, E)$) | Directed Acyclic Graph of Inferences |
+| **Kernel Checker** | Pure Inference Engine | Type Checker / Ledger Validator |
+| **Normal Form ($\text{nf}(t)$)** | Canonical DAG Representation | Canonical CBOR / BLAKE3 Root |
+| **Type Rechecking** | Proof Reconstruction / Replay | $O(N)$ Audit Verification |
+
+```lean
+-- Lean 4 Formalization: Proof-Carrying Diagnosis Structure
+structure Artifact where
+  id : String
+  sha256 : String
+  content_type : String
+
+structure Hypothesis where
+  id : String
+  statement : String
+  prior_probability : Float
+
+structure ProofCertificate where
+  premises : List Artifact
+  hypothesis : Hypothesis
+  rules_applied : List String
+  residual_entropy : Float
+  is_valid : residual_entropy = 0.0
+```
+
+---
+
+## 3. Formal Stratification (N0 — N4)
+
+To prevent circular reasoning and causal loops, execution is stratified into strict logical layers:
+
+$$\begin{array}{ccl}
+\mathbf{Stratum} & \mathbf{Name} & \mathbf{Operational Role} \\
+\hline
+\mathbf{N0} & \text{Artifacts } (\mathcal{A}) & \text{Raw evidence (logs, traces, memory dumps). Axiomatic truth.} \\
+\mathbf{N1} & \text{Kernel } (\mathcal{K}) & \text{Trusted Computing Base (TCB). Verifier engine.} \\
+\mathbf{N2} & \text{Inference Rules } (\mathcal{R}) & \text{Causal logic and state mutation rules.} \\
+\mathbf{N3} & \text{Diagnoses } (\mathcal{D}) & \text{Instantiated proof DAGs with evidence lineage.} \\
+\mathbf{N4} & \text{Decisions } (\mathcal{X}) & \text{Physical actions executed on disk. Reversible via ledger.}
+\end{array}$$
+
+$$\mathbf{N0} \prec \mathbf{N1} \prec \mathbf{N2} \prec \mathbf{N3} \prec \mathbf{N4}$$
+
+---
+
+## 4. Mathematical Foundations & Entropy Collapse
+
+### 4.1 Shannon Entropy Reduction ($\Omega163$)
+Every empirical measurement $M$ must reduce the Shannon entropy of the hypothesis space $\mathcal{H} = \{H_1, H_2, \dots, H_n\}$:
+
+$$H(\mathcal{H}) = -\sum_{i=1}^{n} P(H_i) \log_2 P(H_i)$$
+
+The Expected Information Gain ($\text{EIG}$) of measurement $M$ is defined as:
+
+$$\text{EIG}(M) = H(\mathcal{H}_{\text{prior}}) - \mathbb{E}_{m \sim M} \left[ H(\mathcal{H}_{\text{posterior}} \mid M = m) \right] > 0$$
+
+### 4.2 Bayesian Posterior Normalization ($\Omega156$)
+For any evidence $E$, the posterior distribution over hypotheses must sum strictly to unity:
+
+$$\sum_{i=1}^{n} P(H_i \mid E) = 1.0 \quad \text{s.t.} \quad P(H_i \mid E) = \frac{P(E \mid H_i) P(H_i)}{\sum_{j} P(E \mid H_j) P(H_j)}$$
+
+---
+
+## 5. Complete Invariant Spectrum Catalog ($\Omega1 \dots \Omega176$)
+
+The invariant spectrum is partitioned into four exhaustive families:
+
+### Family I: Core Thermodynamic & Causal Invariants ($\Omega1 - \Omega35$)
+- **$\Omega1 - \Omega17$**: Exergy maximization, Landauer principle context compression, zero prose overhead ($\text{Signal} \ge 0.80$).
+- **$\Omega18$ (BFT Float Exclusion)**: IEEE 754 floating-point numbers are prohibited in consensus payloads (`INV_C5_18`).
+- **$\Omega30$ (PyO3 Forward ABI)**: Enforce `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` on mixed Rust/Python extensions.
+
+### Family II: Structural Ontology & Graph Invariants ($\Omega36 - \Omega100$)
+- **$\Omega38$ (Invariant Sharding)**: Monotonic sharding of system rules to prevent KV-cache necrosis.
+- **$\Omega40 - \Omega100$**: C5-Graph isomorphism, deterministic node deduplication, DAG acyclicity enforcement.
+
+### Family III: Consensus & BFT Protocol Invariants ($\Omega101 - \Omega137$)
+- **$\Omega101 - \Omega137$**: Single-writer WAL serializability, $N \ge 3f+1$ PBFT quorum bounds, EIP-1153 transient reentrancy locks.
+
+### Family IV: Epistemic & Formal Inference Invariants ($\Omega138 - \Omega176$)
+- **$\Omega138$ (Causal Stratification)**: Inference stratifies strictly into Topography $\prec$ Mechanism $\prec$ Etiology $\prec$ Remediation.
+- **$\Omega152$ (Discriminatory Measurement)**: Certainty increases require measurable entropy reduction ($H(M) > 0$).
+- **$\Omega153$ (Evidence Separation)**: Raw evidence $E$ is physically isolated from interpretation $I$.
+- **$\Omega154$ (Confidence Traceability)**: Confidence requires DAG traceability to N0 artifacts.
+- **$\Omega155$ (Epistemic Monotonicity)**: Progress is monotonic; backtracking requires physical revocation event logging.
+- **$\Omega156$ (Physical Posterior)**: Posterior probability distributions must sum strictly to $1.0$.
+- **$\Omega157$ (A Priori Discriminatory Power)**: Measurements must declare EIG before execution.
+- **$\Omega158$ (Evidence Lineage)**: Prohibits epistemic progress without an unbroken physical path to artifacts.
+- **$\Omega159$ (Dependency Closure)**: Sub-DAGs must be explicitly closed via exhaustively typed `depends_on` lists.
+- **$\Omega160$ (Propagated Invalidation)**: Artifact invalidation incrementally re-evaluates strictly its downstream DAG descendants.
+- **$\Omega161$ (Absent Evidence Statistical)**: "Not found" is processed as a statistical posterior probability, never as an ontological impossibility.
+- **$\Omega162$ (Falsification Power)**: Measurements must either falsify or support. $\text{IG} = H(P_{\text{prior}}) - H(P_{\text{posterior}})$.
+- **$\Omega163$ (Residual Entropy)**: Empirical progress requires physical collapse of remaining Shannon entropy.
+- **$\Omega164$ (Ontology vs Epistemology Separation)**: Physical reality (Ontology) is never conflated with inferential certainty (Epistemology).
+- **$\Omega165$ (Reversible Ledger)**: Ledger state mutations support exact physical replay and rollback.
+- **$\Omega166$ (Pure Inference)**: $\text{Inference}(\text{Artifacts}, \text{Rules}) \to \text{Result}$ is referentially transparent and pure.
+- **$\Omega167$ (Semantic Preservation)**: Canonical transformation preserves causal semantic equivalences.
+- **$\Omega168$ (Canonical Representation)**: Entire DAG collapses to a unique cryptographic canonical CBOR/BLAKE3 form.
+- **$\Omega169$ (Proof-Carrying Diagnosis)**: The unit of diagnosis is an executable proof structure, not a floating point confidence score.
+- **$\Omega170$ (Minimality)**: Proof graphs are irreducible; zero-IG premises are pruned strictly.
+- **$\Omega171$ (Completeness Certificate)**: Case closure requires $H_{\text{residual}} \to 0$, $H_{\text{unresolved}} = 0$, and closed DAG.
+- **$\Omega172$ (Replay Determinism)**: $\forall E, \text{Replay}(E) = \text{Replay}(\text{Canonicalize}(E))$. Temporal drift invalidates C5 stratum.
+- **$\Omega173$ (Kernel Minimality)**: Verifier TCB ruleset must be strictly smaller than generator ruleset.
+- **$\Omega174$ (Versioned Semantics)**: Validity is bound to $\langle \text{Semantics}_{x.y}, \text{Ruleset}_{a.b}, \text{Kernel}_{v.v} \rangle$.
+- **$\Omega175$ (Soundness Boundary)**: System guarantees $\text{Correct Inference} \mid \text{Correct Evidence}$. Cannot guarantee reality if N0 artifacts are corrupt.
+- **$\Omega176$ (Completeness Boundary)**: System guarantees optimal explanation within the modeled space, but cannot prove non-existence of unmodeled hypotheses $H_{n+1}$.
+
+---
+
+## 6. Family $\Omega$ Freeze Clause
+
+With the formalization of $\Omega176$, **the Base Invariant Family ($\Omega1 \dots \Omega176$) is mathematically frozen.**
+
+Any future architectural evolution must be formulated as:
+1. A theorem derivable from existing $\Omega$ invariants (documented in `docs/BABYLON_META_THEOREMS.md`).
+2. A formal insufficiency proof demonstrating kernel refactoring necessity.
 
 ## 8. Proof Construction
 - **Ω169 · Proof-Carrying Diagnosis:** La unidad lógica de BABYLON es una prueba ejecutable (`Proof: {premises, rules, derivation}`), no un booleano de certeza.
