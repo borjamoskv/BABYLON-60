@@ -1,13 +1,1 @@
-{
-  "version": 1,
-  "isRoot": true,
-  "tools": {
-    "fable": {
-      "version": "5.8.0",
-      "commands": [
-        "fable"
-      ],
-      "rollForward": false
-    }
-  }
-}
+{"version":1,"isRoot":true,"tools":{"fable":{"version":"5.8.0","commands":["fable"],"rollForward":false}}}
