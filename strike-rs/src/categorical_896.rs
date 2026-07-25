@@ -56,7 +56,12 @@ impl RustCategoricalEngine {
     }
 
     /// Fast verification of Theorem 1.1 (Sequential Subadditivity)
-    pub fn verify_sequential_subadditivity_fast(&self, len_a: usize, len_b: usize, delta: f64) -> bool {
+    pub fn verify_sequential_subadditivity_fast(
+        &self,
+        len_a: usize,
+        len_b: usize,
+        delta: f64,
+    ) -> bool {
         if len_a == 0 || len_b == 0 {
             return true;
         }
