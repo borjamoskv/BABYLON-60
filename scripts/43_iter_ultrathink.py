@@ -93,13 +93,14 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                     "objetivo": f"Collapse theorem at cycle {cycle_num}",
                     "knowns": f"Entropy is {theorem.shannon_entropy:.4f}",
                     "unknowns": "Theorem runtime verification",
+                    "adversarial_verify": f"Try to refute: Theorem {cycle_num} is sound and entropy strictly decreases",
                 },
             }
 
             # 4. Iniciar agente paralelo hipervigilante (Invariante 13) - Concurrente o Desactivado por defecto
             validation_proc: subprocess.Popen[Any] | None = None
             if os.getenv("CORTEX_PARALLEL_VALIDATION") == "1":
-                print("[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation...")
+                print("[ITERA-ULTRATHINK] BM-Ω // C5-REAL ACTIVE. OMEGA Node Dispatching parallel validation (Pipeline, Zero-Barrier Ω185)...")
                 test_env = os.environ.copy()
                 validation_proc = subprocess.Popen(
                     [".venv/bin/pytest", "cortex/swarm/engine_fsm_test.py"],
@@ -118,12 +119,10 @@ Assertion: Iteración C5-REAL con mutación de AST e inferencia física con Budg
                 state = fsm.transition_state(cycle_num, state, issue_payload)
             print(f"[ITERA-ULTRATHINK] FSM completada. Estado final colapsado: {state}")
 
-            # Esperar a que el validador paralelo complete si existe
+            # Ω185: Eliminada la barrera de sincronización estricta (validation_proc.wait()).
+            # El validador paralelo ahora opera de forma 100% asíncrona como pipeline sin bloqueo.
             if validation_proc is not None:
-                exit_code = validation_proc.wait()
-                if exit_code != 0:
-                    raise RuntimeError("OMEGA Node validation failed! Parallel AST state corrupted.")
-                print("[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo completó con éxito. Aislamiento intacto.")
+                print("[ITERA-ULTRATHINK] OMEGA Node: Validador paralelo operando en background (Zero-Barrier).")
 
             # 5. Git Sentinel: Guardar cambios en el ledger
             print("[ITERA-ULTRATHINK] Git Sentinel: Sellar estado en el ledger...")

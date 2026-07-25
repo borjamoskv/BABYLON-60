@@ -24,7 +24,7 @@ El repositorio permite a ingenieros arquitectónicos estudiar cómo laboratorios
 El análisis previo en Reddit sobre una "reducción del 80% del system prompt" en la generación Claude 5 (de ~800 a 164 tokens) se reconcilia arquitectónicamente con la masiva extensión del archivo publicado en el repositorio de Ásgeir:
 
 1. **Purga de Teatralidad Conductual (C4-SIM $\to$ Pesos RL):** Las instrucciones en lenguaje natural sobre "cómo comportarse como un agente", recordatorios de formato y moralización discursiva han sido extirpadas del prompt de runtime e internalizadas en los pesos de la política mediante aprendizaje por refuerzo (*RL post-training*).
-2. **Expansión Asimétrica de la Superficie API:** Mientras el prompt conductual colapsa a lo mínimo indispensable, el *harness* despliega una infraestructura masiva de **33 herramientas tipadas con esquemas JSON rígidos** (`Workflow`, `Agent`, `DesignSync`, `Monitor`, `CronCreate`, `EnterWorktree`, etc.). 
+2. **Expansión Asimétrica de la Superficie API:** Mientras el prompt conductual colapsa a lo mínimo indispensable, el *harness* despliega una infraestructura masiva de **33 herramientas tipadas con esquemas JSON rígidos** (`Workflow`, `Agent`, `DesignSync`, `Monitor`, `CronCreate`, `EnterWorktree`, etc.).
 3. **Invariante [Scaffolding-Decoupling]:** El control del agente ya no se basa en exhortaciones conversacionales vulnerables al decaimiento de atención ($O(N)$ disipativo), sino en contratos de interfaz gramaticalmente forzados (JSON Schema) y compilación JIT de scripts de orquestación.
 
 ---
