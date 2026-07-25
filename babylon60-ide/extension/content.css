@@ -1,34 +1,63 @@
 /* BABYLON·60 Alcove — ambient notch tachometer (content script) */
 #b60-alcove-bar {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   height: 3px;
   z-index: 2147483647;
   pointer-events: none;
-  transition: background 240ms ease, opacity 240ms ease;
+  transition:
+    background 240ms ease,
+    opacity 240ms ease;
   opacity: 0.85;
 }
-#b60-alcove-bar[data-state="ok"]      { background: #86C79A; }        /* verde salvia */
-#b60-alcove-bar[data-state="warn"]    { background: #E5B567; }        /* ámbar cálido */
-#b60-alcove-bar[data-state="alert"]   { background: #E3877E; animation: b60-breathe 0.9s ease-in-out infinite; } /* terracota */
-#b60-alcove-bar[data-state="offline"] { background: #3E3B4F; opacity: 0.5; }
+#b60-alcove-bar[data-state="ok"] {
+  background: #86c79a;
+} /* verde salvia */
+#b60-alcove-bar[data-state="warn"] {
+  background: #e5b567;
+} /* ámbar cálido */
+#b60-alcove-bar[data-state="alert"] {
+  background: #e3877e;
+  animation: b60-breathe 0.9s ease-in-out infinite;
+} /* terracota */
+#b60-alcove-bar[data-state="offline"] {
+  background: #3e3b4f;
+  opacity: 0.5;
+}
 
-@keyframes b60-breathe { 0%,100% { opacity: 0.45; } 50% { opacity: 0.95; } }
+@keyframes b60-breathe {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
 
 #b60-alcove-readout {
   position: fixed;
-  top: 6px; right: 10px;
+  top: 6px;
+  right: 10px;
   z-index: 2147483647;
-  font: 500 11px/1.4 ui-monospace, 'SF Mono', Menlo, monospace;
-  color: #E6E4F0;
+  font:
+    500 11px/1.4 ui-monospace,
+    "SF Mono",
+    Menlo,
+    monospace;
+  color: #e6e4f0;
   background: rgba(20, 20, 31, 0.94);
-  border: 1px solid #2A2A3C;
+  border: 1px solid #2a2a3c;
   border-radius: 4px;
   padding: 3px 9px;
   pointer-events: none;
   opacity: 0;
   transform: translateY(-4px);
-  transition: opacity 160ms ease, transform 160ms ease;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
   max-width: 60vw;
   white-space: nowrap;
@@ -38,5 +67,10 @@
 /* Reveal the readout only when the pointer grazes the top edge — peripheral,
    never in the way. A 10px hot-zone at the very top of the viewport. */
 #b60-alcove-bar:hover ~ #b60-alcove-readout,
-#b60-alcove-readout:hover { opacity: 1; transform: translateY(0); }
-#b60-alcove-bar { pointer-events: auto; }
+#b60-alcove-readout:hover {
+  opacity: 1;
+  transform: translateY(0);
+}
+#b60-alcove-bar {
+  pointer-events: auto;
+}

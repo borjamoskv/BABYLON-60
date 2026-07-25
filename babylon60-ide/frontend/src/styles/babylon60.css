@@ -9,37 +9,37 @@
   /* ── Surfaces: warm-graphite + faint YInMn undertone.
      Brief TDAH/AACC: "grises cálidos o azules muy oscuros", nunca #000
      (halación). Base desaturada → menor carga sensorial que el azul frío. */
-  --bitumen: #0E0E16;      /* fondo — carbón cálido, no vacío azul clínico */
-  --kiln: #14141F;
-  --tablet: #1A1A28;
-  --tablet-2: #22222F;
-  --tablet-3: #2A2A3A;
-  --edge: #2A2A3C;
-  --edge-soft: #1F1F2C;
+  --bitumen: #0e0e16; /* fondo — carbón cálido, no vacío azul clínico */
+  --kiln: #14141f;
+  --tablet: #1a1a28;
+  --tablet-2: #22222f;
+  --tablet-3: #2a2a3a;
+  --edge: #2a2a3c;
+  --edge-soft: #1f1f2c;
 
   /* Text: off-white lavanda cálido (no #FFF puro: reduce glare/fatiga) */
-  --dust: #E6E4F0;
-  --dust-dim: #ABA8C0;
-  --dust-faint: #8C8AA4;   /* WCAG AA body ≥4.5 en superficies principales (audit) */
-  --dust-ghost: #66647E;   /* dim pero legible: large-text AA ≥3.0 (era #3E3B4F, 1.6) */
+  --dust: #e6e4f0;
+  --dust-dim: #aba8c0;
+  --dust-faint: #8c8aa4; /* WCAG AA body ≥4.5 en superficies principales (audit) */
+  --dust-ghost: #66647e; /* dim pero legible: large-text AA ≥3.0 (era #3E3B4F, 1.6) */
 
   /* YInMn accent, suavizado (menos neón → menos alerta del sistema nervioso) */
-  --lapis: #5A6CE0;
-  --lapis-bright: #8A98F5;
-  --lapis-dim: #3A44A0;
+  --lapis: #5a6ce0;
+  --lapis-bright: #8a98f5;
+  --lapis-dim: #3a44a0;
   --lapis-glow: rgba(90, 108, 224, 0.14);
 
   /* Semantic — apagados por diseño (brief: "naranja/rojo apagado") */
-  --gold: #E5B567;         /* ámbar cálido, no #F59E0B chillón */
+  --gold: #e5b567; /* ámbar cálido, no #F59E0B chillón */
   --gold-dim: rgba(229, 181, 103, 0.11);
-  --verify: #86C79A;       /* verde salvia, no neón */
+  --verify: #86c79a; /* verde salvia, no neón */
   --verify-dim: rgba(134, 199, 154, 0.11);
-  --break: #E3877E;        /* terracota — claramente error, sin agredir */
+  --break: #e3877e; /* terracota — claramente error, sin agredir */
   --break-dim: rgba(227, 135, 126, 0.11);
 
   /* Fonts */
-  --font-display: 'Archivo', system-ui, sans-serif;
-  --font-mono: 'Space Mono', ui-monospace, monospace;
+  --font-display: "Archivo", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
 
   /* Layout */
   --spine-width: 56px;
@@ -59,7 +59,9 @@
 }
 
 /* ─── 1. RESET + BODY ───────────────────────────────────────── */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -82,14 +84,22 @@ body {
 
 /* ─── 2. AMBIENT OVERLAY ────────────────────────────────────── */
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 100% 0%, rgba(90, 108, 224, 0.05) 0%, transparent 70%),
-    radial-gradient(ellipse 50% 40% at 0% 100%, rgba(229, 181, 103, 0.02) 0%, transparent 70%);
+    radial-gradient(
+      ellipse 60% 50% at 100% 0%,
+      rgba(90, 108, 224, 0.05) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 0% 100%,
+      rgba(229, 181, 103, 0.02) 0%,
+      transparent 70%
+    );
 }
 
 /* ─── 3. TACHOMETER ─────────────────────────────────────────── */
@@ -110,7 +120,12 @@ body::before {
 }
 
 .tachometer.working {
-  background: linear-gradient(90deg, var(--lapis), var(--lapis-bright), var(--lapis));
+  background: linear-gradient(
+    90deg,
+    var(--lapis),
+    var(--lapis-bright),
+    var(--lapis)
+  );
   background-size: 200% 100%;
   animation: tacho-scan 1.2s linear infinite;
 }
@@ -126,19 +141,36 @@ body::before {
 }
 
 @keyframes tacho-breathe {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 @keyframes tacho-scan {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 @keyframes tacho-out {
-  0% { opacity: 1; width: 100%; }
-  80% { opacity: 1; width: 100%; }
-  100% { opacity: 0; }
+  0% {
+    opacity: 1;
+    width: 100%;
+  }
+  80% {
+    opacity: 1;
+    width: 100%;
+  }
+  100% {
+    opacity: 0;
+  }
 }
 
 /* ─── 4. APP LAYOUT ─────────────────────────────────────────── */
@@ -176,18 +208,29 @@ body::before {
 }
 
 .spine-logo::after {
-  content: '';
+  content: "";
   width: 8px;
   height: 8px;
   border-radius: 50%;
   background: var(--lapis-bright);
-  box-shadow: 0 0 8px var(--lapis-bright), 0 0 16px rgba(138, 152, 245, 0.4);
+  box-shadow:
+    0 0 8px var(--lapis-bright),
+    0 0 16px rgba(138, 152, 245, 0.4);
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 0.6; box-shadow: 0 0 4px var(--lapis-bright); }
-  50% { opacity: 1; box-shadow: 0 0 10px var(--lapis-bright), 0 0 20px rgba(138, 152, 245, 0.5); }
+  0%,
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 4px var(--lapis-bright);
+  }
+  50% {
+    opacity: 1;
+    box-shadow:
+      0 0 10px var(--lapis-bright),
+      0 0 20px rgba(138, 152, 245, 0.5);
+  }
 }
 
 .spine-icon {
@@ -217,7 +260,7 @@ body::before {
 }
 
 .spine-icon.active::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -1px;
   top: 4px;
@@ -272,7 +315,10 @@ body::before {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: width var(--t-normal), min-width var(--t-normal), border-right-color var(--t-normal);
+  transition:
+    width var(--t-normal),
+    min-width var(--t-normal),
+    border-right-color var(--t-normal);
   flex-shrink: 0;
 }
 
@@ -376,9 +422,15 @@ body::before {
   color: var(--break);
 }
 
-.ctx-item.depth-1 { padding-left: 24px; }
-.ctx-item.depth-2 { padding-left: 36px; }
-.ctx-item.depth-3 { padding-left: 48px; }
+.ctx-item.depth-1 {
+  padding-left: 24px;
+}
+.ctx-item.depth-2 {
+  padding-left: 36px;
+}
+.ctx-item.depth-3 {
+  padding-left: 48px;
+}
 
 /* Blast Radius Indicator */
 .ctx-item.blast-affected {
@@ -386,8 +438,15 @@ body::before {
 }
 
 @keyframes blast-ctx-pulse {
-  0%, 100% { background: transparent; border-left-color: transparent; }
-  50% { background: rgba(229, 181, 103, 0.1); border-left-color: var(--gold); }
+  0%,
+  100% {
+    background: transparent;
+    border-left-color: transparent;
+  }
+  50% {
+    background: rgba(229, 181, 103, 0.1);
+    border-left-color: var(--gold);
+  }
 }
 
 /* ─── 7. FOCUS ZONE ─────────────────────────────────────────── */
@@ -529,12 +588,16 @@ body::before {
   min-width: 160px;
   cursor: pointer;
   position: relative;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
 }
 
 .canvas-node-card:hover {
   border-color: var(--lapis-dim);
-  box-shadow: 0 0 0 1px var(--lapis-glow), 0 8px 24px rgba(0, 0, 0, 0.4);
+  box-shadow:
+    0 0 0 1px var(--lapis-glow),
+    0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
 .canvas-node-card.active {
@@ -588,8 +651,14 @@ body::before {
 
 /* Blast Radius Ring Animation */
 @keyframes blast-ring-expand {
-  0% { r: 20; opacity: 0.8; }
-  100% { r: 70; opacity: 0; }
+  0% {
+    r: 20;
+    opacity: 0.8;
+  }
+  100% {
+    r: 70;
+    opacity: 0;
+  }
 }
 
 .blast-ring {
@@ -743,7 +812,9 @@ body::before {
   background: var(--kiln);
   border: 1px solid var(--edge);
   border-radius: var(--r-md);
-  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(90, 108, 224, 0.08);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(90, 108, 224, 0.08);
   overflow: hidden;
   transform: translateY(-10px);
   transition: transform var(--t-normal);
@@ -875,7 +946,9 @@ body::before {
   border: 1px solid var(--edge);
   border-radius: var(--r-md);
   z-index: 300;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(90, 108, 224, 0.06);
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(90, 108, 224, 0.06);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-12px);
@@ -997,7 +1070,9 @@ body::before {
   z-index: 500;
   padding: 16px 20px;
   transition: transform var(--t-slow);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(90, 108, 224, 0.05);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(90, 108, 224, 0.05);
 }
 
 .agent-modal.visible {
@@ -1401,7 +1476,9 @@ tr.row-invalid td:first-child {
   padding: 5px 10px;
   border-radius: var(--r-sm);
   outline: none;
-  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    box-shadow var(--t-fast);
   width: 100%;
 }
 
@@ -1416,7 +1493,9 @@ tr.row-invalid td:first-child {
 
 .select {
   appearance: none;
-  background: var(--tablet) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%234A5070'/%3E%3C/svg%3E") no-repeat right 8px center / 8px;
+  background: var(--tablet)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 5'%3E%3Cpath d='M0 0l4 5 4-5z' fill='%234A5070'/%3E%3C/svg%3E")
+    no-repeat right 8px center / 8px;
   border: 1px solid var(--edge);
   color: var(--dust);
   font-family: var(--font-mono);
@@ -1580,8 +1659,14 @@ tr.row-invalid td:first-child {
 }
 
 @keyframes break-flash {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; box-shadow: 0 0 6px var(--break); }
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 6px var(--break);
+  }
 }
 
 .verify-progress {
@@ -1665,8 +1750,12 @@ tr.row-invalid td:first-child {
 }
 
 @keyframes loading-slide {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(400%); }
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(400%);
+  }
 }
 
 .loading-text {
@@ -1733,10 +1822,14 @@ body.micro-mode .spine {
 }
 
 body.micro-mode .focus-zone::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 65% 75% at 50% 45%, transparent 55%, rgba(14, 14, 22, 0.75) 100%);
+  background: radial-gradient(
+    ellipse 65% 75% at 50% 45%,
+    transparent 55%,
+    rgba(14, 14, 22, 0.75) 100%
+  );
   pointer-events: none;
   z-index: 0;
 }
@@ -1748,9 +1841,15 @@ body.micro-mode .focus-zone::before {
 
 /* ─── 21. MICRO-REWARD ANIMATION ────────────────────────────── */
 @keyframes reward-flash {
-  0% { box-shadow: 0 0 0 0 rgba(134, 199, 154, 0); }
-  40% { box-shadow: 0 0 0 14px rgba(134, 199, 154, 0.18); }
-  100% { box-shadow: 0 0 0 0 rgba(134, 199, 154, 0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(134, 199, 154, 0);
+  }
+  40% {
+    box-shadow: 0 0 0 14px rgba(134, 199, 154, 0.18);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(134, 199, 154, 0);
+  }
 }
 
 .reward-active {
@@ -1812,8 +1911,14 @@ a:hover {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .fade-in {
@@ -1821,8 +1926,14 @@ a:hover {
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-8px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .slide-in {
@@ -1869,7 +1980,7 @@ a:hover {
 }
 
 .loop-indicator::before {
-  content: '';
+  content: "";
   width: 5px;
   height: 5px;
   border-radius: 50%;
@@ -1909,8 +2020,12 @@ a:hover {
 }
 
 @keyframes bft-row-appear {
-  from { background: rgba(90, 108, 224, 0.15); }
-  to { background: transparent; }
+  from {
+    background: rgba(90, 108, 224, 0.15);
+  }
+  to {
+    background: transparent;
+  }
 }
 
 /* Entropy gauge */
@@ -1933,12 +2048,20 @@ a:hover {
 .entropy-gauge-fill {
   height: 100%;
   border-radius: 2px;
-  transition: width var(--t-normal), background var(--t-normal);
+  transition:
+    width var(--t-normal),
+    background var(--t-normal);
 }
 
-.entropy-gauge-fill.low { background: var(--verify); }
-.entropy-gauge-fill.mid { background: var(--gold); }
-.entropy-gauge-fill.high { background: var(--break); }
+.entropy-gauge-fill.low {
+  background: var(--verify);
+}
+.entropy-gauge-fill.mid {
+  background: var(--gold);
+}
+.entropy-gauge-fill.high {
+  background: var(--break);
+}
 
 /* Tab strip for multi-panel focus */
 .tab-strip {
@@ -1950,7 +2073,9 @@ a:hover {
   flex-shrink: 0;
 }
 
-.tab-strip::-webkit-scrollbar { height: 2px; }
+.tab-strip::-webkit-scrollbar {
+  height: 2px;
+}
 
 .tab-item {
   display: flex;
@@ -1988,7 +2113,9 @@ a:hover {
   font-size: 0.6rem;
   color: var(--dust-ghost);
   opacity: 0;
-  transition: opacity var(--t-fast), background var(--t-fast);
+  transition:
+    opacity var(--t-fast),
+    background var(--t-fast);
 }
 
 .tab-item:hover .tab-item-close,
@@ -2009,80 +2136,284 @@ a:hover {
   flex-shrink: 0;
 }
 
-.tab-item .tab-dot.modified { background: var(--gold); }
-.tab-item .tab-dot.error { background: var(--break); }
-.tab-item .tab-dot.running { background: var(--lapis-bright); animation: tacho-breathe 1s infinite; }
+.tab-item .tab-dot.modified {
+  background: var(--gold);
+}
+.tab-item .tab-dot.error {
+  background: var(--break);
+}
+.tab-item .tab-dot.running {
+  background: var(--lapis-bright);
+  animation: tacho-breathe 1s infinite;
+}
 
 /* ─── 23. DUAL COGNITIVE MODE — NT ○ (neurotípico) / 2E ◐ (TDAH+AACC) ── */
-body.mode-nt .tachometer { display: none; }
-body.mode-nt .restore-banner { display: none !important; }
-body.mode-nt { --spine-width: 148px; }
-body.mode-nt .spine { align-items: stretch; padding: 12px 8px; }
-body.mode-nt .spine-logo { margin: 0 auto 6px; }
-body.mode-nt .spine-icon { width: 100%; justify-content: flex-start; gap: 8px; padding: 0 10px; font-size: 0.85rem; height: 32px; }
-body.mode-nt .spine-icon .spine-glyph { width: 18px; text-align: center; }
-body.mode-nt .spine-icon .spine-label { font-family: var(--font-display); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.04em; }
-body.mode-nt .spine-icon[data-tooltip]::after { display: none; }
-body.mode-nt .spine-separator { width: 100%; }
-body.mode-nt .data-table tbody td { padding: 4px 10px; }
-body.mode-nt .data-table thead th { padding: 5px 10px; }
+body.mode-nt .tachometer {
+  display: none;
+}
+body.mode-nt .restore-banner {
+  display: none !important;
+}
+body.mode-nt {
+  --spine-width: 148px;
+}
+body.mode-nt .spine {
+  align-items: stretch;
+  padding: 12px 8px;
+}
+body.mode-nt .spine-logo {
+  margin: 0 auto 6px;
+}
+body.mode-nt .spine-icon {
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 0 10px;
+  font-size: 0.85rem;
+  height: 32px;
+}
+body.mode-nt .spine-icon .spine-glyph {
+  width: 18px;
+  text-align: center;
+}
+body.mode-nt .spine-icon .spine-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+body.mode-nt .spine-icon[data-tooltip]::after {
+  display: none;
+}
+body.mode-nt .spine-separator {
+  width: 100%;
+}
+body.mode-nt .data-table tbody td {
+  padding: 4px 10px;
+}
+body.mode-nt .data-table thead th {
+  padding: 5px 10px;
+}
 
 /* ─── 24. ENTRY DETAIL PANEL (micro-túnel: una entrada, causa completa) ── */
-.detail-panel { position: fixed; top: var(--tachometer-height); right: 0; width: 460px; max-width: 92vw; height: calc(100vh - var(--status-bar-height) - var(--tachometer-height)); background: var(--kiln); border-left: 1px solid var(--edge); z-index: 40; transform: translateX(102%); transition: transform var(--t-slow); display: flex; flex-direction: column; box-shadow: -18px 0 40px rgba(0,0,0,0.45); }
-.detail-panel.open { transform: translateX(0); }
-.detail-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; border-bottom: 1px solid var(--edge); flex-shrink: 0; }
-.detail-title { font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.04em; color: var(--dust); }
-.detail-body { overflow-y: auto; padding: 12px 14px; flex: 1; }
-.detail-field { margin-bottom: 12px; }
-.detail-field-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--dust-faint); margin-bottom: 3px; }
-.detail-field-value { font-size: 0.7rem; color: var(--dust-dim); word-break: break-all; }
-.detail-field-value.mono { font-family: var(--font-mono); }
-.detail-field-value.hash { color: var(--lapis-bright); font-size: 0.62rem; }
-.detail-payload { font-family: var(--font-mono); font-size: 0.62rem; color: var(--dust-dim); background: var(--bitumen); border: 1px solid var(--edge-soft); border-radius: var(--r-md); padding: 10px; white-space: pre-wrap; word-break: break-word; max-height: 340px; overflow: auto; }
+.detail-panel {
+  position: fixed;
+  top: var(--tachometer-height);
+  right: 0;
+  width: 460px;
+  max-width: 92vw;
+  height: calc(100vh - var(--status-bar-height) - var(--tachometer-height));
+  background: var(--kiln);
+  border-left: 1px solid var(--edge);
+  z-index: 40;
+  transform: translateX(102%);
+  transition: transform var(--t-slow);
+  display: flex;
+  flex-direction: column;
+  box-shadow: -18px 0 40px rgba(0, 0, 0, 0.45);
+}
+.detail-panel.open {
+  transform: translateX(0);
+}
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--edge);
+  flex-shrink: 0;
+}
+.detail-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--dust);
+}
+.detail-body {
+  overflow-y: auto;
+  padding: 12px 14px;
+  flex: 1;
+}
+.detail-field {
+  margin-bottom: 12px;
+}
+.detail-field-label {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--dust-faint);
+  margin-bottom: 3px;
+}
+.detail-field-value {
+  font-size: 0.7rem;
+  color: var(--dust-dim);
+  word-break: break-all;
+}
+.detail-field-value.mono {
+  font-family: var(--font-mono);
+}
+.detail-field-value.hash {
+  color: var(--lapis-bright);
+  font-size: 0.62rem;
+}
+.detail-payload {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--dust-dim);
+  background: var(--bitumen);
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--r-md);
+  padding: 10px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  max-height: 340px;
+  overflow: auto;
+}
 
 /* ─── 25. GIT SENTINEL (identidad de repo + delegación) ── */
-.sentinel-warning { display: flex; gap: 8px; align-items: flex-start; font-size: 0.68rem; padding: 6px 8px; border-radius: var(--r-sm); margin-bottom: 6px; }
-.sentinel-warning.red { background: var(--break-dim); color: var(--break); }
-.sentinel-warning.amber { background: var(--gold-dim); color: var(--gold); }
-.sentinel-warning-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; margin-top: 4px; flex-shrink: 0; }
-.delegation-item { display: flex; align-items: center; gap: 10px; padding: 6px 8px; border: 1px solid var(--edge-soft); border-radius: var(--r-sm); margin-bottom: 6px; background: var(--tablet); }
-.delegation-state { font-size: 0.54rem; font-weight: 700; letter-spacing: 0.08em; color: var(--gold); background: var(--gold-dim); padding: 2px 6px; border-radius: 2px; flex-shrink: 0; }
-.delegation-text { font-size: 0.68rem; color: var(--dust-dim); flex: 1; }
-.delegation-time { font-family: var(--font-mono); font-size: 0.56rem; color: var(--dust-ghost); }
-.delegation-del { cursor: pointer; color: var(--dust-ghost); font-size: 0.66rem; }
-.delegation-del:hover { color: var(--break); }
+.sentinel-warning {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 0.68rem;
+  padding: 6px 8px;
+  border-radius: var(--r-sm);
+  margin-bottom: 6px;
+}
+.sentinel-warning.red {
+  background: var(--break-dim);
+  color: var(--break);
+}
+.sentinel-warning.amber {
+  background: var(--gold-dim);
+  color: var(--gold);
+}
+.sentinel-warning-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  margin-top: 4px;
+  flex-shrink: 0;
+}
+.delegation-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 8px;
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--r-sm);
+  margin-bottom: 6px;
+  background: var(--tablet);
+}
+.delegation-state {
+  font-size: 0.54rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  background: var(--gold-dim);
+  padding: 2px 6px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.delegation-text {
+  font-size: 0.68rem;
+  color: var(--dust-dim);
+  flex: 1;
+}
+.delegation-time {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  color: var(--dust-ghost);
+}
+.delegation-del {
+  cursor: pointer;
+  color: var(--dust-ghost);
+  font-size: 0.66rem;
+}
+.delegation-del:hover {
+  color: var(--break);
+}
 
 /* ─── 26. DELEGATION (real) + BM25 SEARCH (v1.2.0) ── */
-.delegation-kind-tag { font-family: var(--font-mono); font-size: 0.56rem; color: var(--lapis-bright); background: var(--lapis-glow); padding: 2px 6px; border-radius: 2px; flex-shrink: 0; }
-.delegation-exec { flex-shrink: 0; }
-.delegation-exec:hover { color: var(--verify); border-color: var(--verify); }
-.search-hit { display: flex; gap: 10px; align-items: center; padding: 6px 8px; border: 1px solid var(--edge-soft); border-radius: var(--r-sm); margin-bottom: 5px; cursor: pointer; transition: all var(--t-fast); }
-.search-hit:hover { border-color: var(--lapis); background: var(--tablet); }
-.search-score { font-family: var(--font-mono); font-size: 0.62rem; font-weight: 700; color: var(--gold); background: var(--gold-dim); padding: 3px 7px; border-radius: 2px; flex-shrink: 0; min-width: 42px; text-align: center; }
+.delegation-kind-tag {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  color: var(--lapis-bright);
+  background: var(--lapis-glow);
+  padding: 2px 6px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+.delegation-exec {
+  flex-shrink: 0;
+}
+.delegation-exec:hover {
+  color: var(--verify);
+  border-color: var(--verify);
+}
+.search-hit {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 6px 8px;
+  border: 1px solid var(--edge-soft);
+  border-radius: var(--r-sm);
+  margin-bottom: 5px;
+  cursor: pointer;
+  transition: all var(--t-fast);
+}
+.search-hit:hover {
+  border-color: var(--lapis);
+  background: var(--tablet);
+}
+.search-score {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--gold);
+  background: var(--gold-dim);
+  padding: 3px 7px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  min-width: 42px;
+  text-align: center;
+}
 
 /* ─── 27. PALETTE PER COGNITIVE MODE (v1.2.1) ──────────────────
    Base = calma (segura para 2E: TDAH+AACC, menor carga sensorial).
    NT sube contraste de texto y brillo de acento (nitidez estándar). */
 body.mode-nt {
-  --dust: #F1EFFA;
-  --dust-dim: #BAB7CE;
-  --lapis-bright: #9AA6FF;
+  --dust: #f1effa;
+  --dust-dim: #bab7ce;
+  --lapis-bright: #9aa6ff;
 }
 /* 2E: ablanda aún más el overlay ambiental (sin gradiente agresivo) */
-body.mode-2e::before { opacity: 0.7; }
+body.mode-2e::before {
+  opacity: 0.7;
+}
 
 /* ─── 28. PREFERS-REDUCED-MOTION (v1.2.2) ──────────────────────
    Brief TDAH/AACC: "animaciones suaves, sin parpadeos". Con movimiento
    reducido del SO se detienen los bucles (tachómetro, pulso, loading, blast)
    y las transiciones se vuelven casi instantáneas — cero alerta constante. */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .tachometer.indexing, .tachometer.working, .tachometer.alert,
-  .spine-logo::after { animation: none !important; }
-  .tachometer.indexing { opacity: 1; }
+  .tachometer.indexing,
+  .tachometer.working,
+  .tachometer.alert,
+  .spine-logo::after {
+    animation: none !important;
+  }
+  .tachometer.indexing {
+    opacity: 1;
+  }
 }
