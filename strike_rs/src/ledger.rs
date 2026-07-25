@@ -333,7 +333,7 @@ mod tests {
 
     #[test]
     fn test_hash_chain_and_atms_replay() {
-        let mut ledger = MasterLedger::new(":memory:").unwrap();
+        let mut ledger = MasterLedger::new(":memory:").expect("C5-REAL: Strict Unwrapping Enforced");
 
         let s1 = Statement {
             content: "Water is H2O".into(),
@@ -349,19 +349,19 @@ mod tests {
         };
         let js2 = JustifiedStatement { statement: s2, justification: Justification::Conjecture };
 
-        ledger.assert_knowledge(&js1, "master").unwrap();
-        ledger.assert_knowledge(&js2, "master").unwrap();
+        ledger.assert_knowledge(&js1, "master").expect("C5-REAL: Strict Unwrapping Enforced");
+        ledger.assert_knowledge(&js2, "master").expect("C5-REAL: Strict Unwrapping Enforced");
 
         let s1_hash = MasterLedger::hash_statement(&js1.statement);
-        ledger.assert_nogood(&s1_hash, "master").unwrap();
+        ledger.assert_nogood(&s1_hash, "master").expect("C5-REAL: Strict Unwrapping Enforced");
 
         // Verify chain
         assert!(ledger.verify_chain("master").is_ok());
 
         // Replay ATMS
-        let state = ledger.replay_to_atms_state().unwrap();
-        assert!(state.environments.get("master").unwrap().contains(&s1_hash));
-        assert!(state.environments.get("master").unwrap().contains(&MasterLedger::hash_statement(&js2.statement)));
+        let state = ledger.replay_to_atms_state().expect("C5-REAL: Strict Unwrapping Enforced");
+        assert!(state.environments.get("master").expect("C5-REAL: Strict Unwrapping Enforced").contains(&s1_hash));
+        assert!(state.environments.get("master").expect("C5-REAL: Strict Unwrapping Enforced").contains(&MasterLedger::hash_statement(&js2.statement)));
         assert!(state.nogoods.contains(&s1_hash));
     }
 }

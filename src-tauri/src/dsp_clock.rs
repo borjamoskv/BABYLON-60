@@ -24,12 +24,12 @@ impl DspClock {
 }
 
 pub fn sync_drop_to_grid() {
-    println!("⚡ [GRID_SYNC] Esperando al Downbeat (130 BPM)...");
+    tracing::info!("⚡ [GRID_SYNC] Esperando al Downbeat (130 BPM)...");
     let clock = DspClock::new(130.0);
     
     loop {
         if clock.is_downbeat() {
-            println!("💥 [DROP] AST Inyectado en el bombo. Fricción: 0.0");
+            tracing::info!("💥 [DROP] AST Inyectado en el bombo. Fricción: 0.0");
             break;
         }
         std::thread::sleep(Duration::from_millis(5));
