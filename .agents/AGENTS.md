@@ -70,3 +70,6 @@
 
 - **Ω162 · BAYESIAN THREAT INFERENCE INVARIANT (ANTI-RAW-SIGNAL FALLACY):** Queda estrictamente prohibido modelar la toma de decisiones del núcleo (L3 Córtex / Orquestador) como una respuesta puramente reactiva a la señalización L1. El sistema opera sobre un Estado de Creencias (Belief State) realizando inferencia bayesiana: $P(\text{Amenaza} \mid \text{Evidencia})$. Un colapso sistémico crónico (Dolor Neuropático / Thrashing) ocurre cuando la función de ganancia se desvincula de la evidencia física y escala de forma auto-referencial. Las intervenciones arquitectónicas deben atacar el modelo bayesiano previo de L3 (ej. Actuación sobre el Belief State), no censurar a ciegas el sensor L1.
 
+- **Ω166 · MONOREPO RELATIVE DEPENDENCY INVARIANT (ANTI-SSH-CI-NECROSIS):** En entornos de CI/CD automatizados (ej. GitHub Actions runners), queda estrictamente prohibido especificar paquetes o subdirectorios internos del propio monorepo mediante URLs SSH (`git+ssh://...`) o HTTPS con autenticación dentro de manifestos de dependencias (`requirements.txt`, `pyproject.toml`, `package.json`). Toda dependencia perteneciente al mismo repositorio DEBE declararse incondicionalmente mediante rutas relativas del sistema de archivos (ej. `-e ./strike-rs` o `file:./packages/...`) para prevenir la necrosis por denegación de clave SSH (`Permission denied (publickey)`).
+
+
