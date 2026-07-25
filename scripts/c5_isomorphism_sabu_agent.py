@@ -134,7 +134,7 @@ class IsomorphismAuditorC5:
         }
         trace_raw = json.dumps(gelabp_matrix, sort_keys=True) + str(deg_sabu)
         trace_hash = hashlib.sha3_256(trace_raw.encode("utf-8")).hexdigest()
-        attestation_time = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        attestation_time = datetime.datetime.now(datetime.UTC).isoformat()
         with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute(
                 "\n                INSERT INTO isomorphism_ledger (\n                    graph_a_id, graph_b_id, isomorphic, degree_sequence, gelabp_trace_hash, attestation_timestamp\n                ) VALUES (?, ?, ?, ?, ?, ?)\n            ",

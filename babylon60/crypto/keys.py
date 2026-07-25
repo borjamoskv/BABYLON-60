@@ -3,12 +3,13 @@ import hashlib
 import json
 import logging
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, NamedTuple, cast
 
 try:
     import keyring as _keyring
+
     keyring = None if os.environ.get("CORTEX_TESTING") else _keyring
 except ImportError:
     keyring = None
@@ -70,7 +71,7 @@ class KeyManager:
             if self.service_name not in self._fallback_keyring:
                 self._fallback_keyring[self.service_name] = {}
             self._fallback_keyring[self.service_name][actor_id] = private_bytes.decode("utf-8")
-        expires_at = (datetime.now(timezone.utc) + timedelta(days=expiration_days)).isoformat()
+        expires_at = (datetime.now(UTC) + timedelta(days=expiration_days)).isoformat()
         public_key_b64 = base64.b64encode(public_bytes).decode("ascii")
         self._metadata[actor_id] = {"public_key_b64": public_key_b64, "expires_at": expires_at, "revoked": False}
         self._save_metadata()
@@ -137,7 +138,7 @@ class KeyManager:
         if not expires_at_str:
             return False
         expires_at = datetime.fromisoformat(expires_at_str)
-        return datetime.now(timezone.utc) > expires_at
+        return datetime.now(UTC) > expires_at
 
     def rotate_key(self, actor_id: str) -> str:
         self.revoke_key(actor_id)

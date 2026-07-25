@@ -57,6 +57,7 @@ class Transducer:
             "fired_rules": [r.as_dict() for r in assessment.fired_rules],
             "contributions": list(assessment.contributions),
         }
+
         def _sanitize(d: Any) -> Any:
             if isinstance(d, float):
                 return str(d)

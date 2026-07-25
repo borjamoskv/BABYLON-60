@@ -69,6 +69,7 @@ async def _unhandled(request: Request, exc: Exception) -> JSONResponse:
     logger.exception("unhandled error on %s %s", request.method, request.url.path)
     return JSONResponse(status_code=500, content={"detail": "Error interno (ver log del servidor)"})
 
+
 # Mount API routes
 app.include_router(ledger.router)
 app.include_router(analytics.router)

@@ -61,7 +61,7 @@ class CenturiaMetaTransducer:
                 "primitives_executed": len(execution_records),
                 "domain_distribution": domain_stats,
                 "merkle_root": merkle_root,
-                "timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
             }
             payload_json = json.dumps(payload_dict, sort_keys=True)
             causal_taint = f"CENTURIA_META_TRANSDUCER:1000_PRIMITIVES:{merkle_root}"
@@ -96,7 +96,7 @@ class CenturiaMetaTransducer:
             "Cortex_Taint": new_cortex_taint,
             "Lamport_T": new_lamport,
             "Domain_Distribution": domain_stats,
-            "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+            "Timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
         }
         os.makedirs(os.path.dirname(self.audit_path), exist_ok=True)
         with open(self.audit_path, "w", encoding="utf-8") as f:

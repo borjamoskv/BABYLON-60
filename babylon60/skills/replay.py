@@ -67,7 +67,9 @@ class SkillReplayEngine:
 
         for idx, node in enumerate(skill.ast_nodes, 1):
             step_start = time.time()
-            effective_val = params.get(node.parameter_key, node.default_value) if node.parameter_key else node.default_value
+            effective_val = (
+                params.get(node.parameter_key, node.default_value) if node.parameter_key else node.default_value
+            )
 
             success, resolved_anchor, healed, err = self._execute_node_with_healing(
                 node=node,
@@ -121,7 +123,6 @@ class SkillReplayEngine:
         anchors = [a for a in anchors if a]
 
         if driver_mock is not None:
-
             try:
                 success, resolved_anchor, healed = driver_mock(node.action.value, anchors)
                 return success, resolved_anchor, healed, "" if success else "Mock driver rejected anchor"

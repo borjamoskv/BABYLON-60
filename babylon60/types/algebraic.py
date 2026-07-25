@@ -8,13 +8,13 @@ E = TypeVar("E")
 
 
 @dataclass(frozen=True)
-class Ok(Generic[T]):
+class Ok[T]:
     value: T
     causal_taint: str = "borjamoskv:adt_ok_c5"
 
 
 @dataclass(frozen=True)
-class Err(Generic[E]):
+class Err[E]:
     error: E
     causal_taint: str = "borjamoskv:adt_err_c5"
 
@@ -23,7 +23,7 @@ Result = Ok[T] | Err[E]
 
 
 @dataclass(frozen=True)
-class Some(Generic[T]):
+class Some[T]:
     value: T
     causal_taint: str = "borjamoskv:adt_some_c5"
 

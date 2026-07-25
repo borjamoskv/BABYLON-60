@@ -12,7 +12,7 @@ U = TypeVar("U")
 
 
 @dataclass(frozen=True)
-class Ok(Generic[T]):
+class Ok[T]:
     value: T
 
     def is_ok(self) -> bool:
@@ -41,7 +41,7 @@ class Ok(Generic[T]):
 
 
 @dataclass(frozen=True)
-class Err(Generic[E]):
+class Err[E]:
     error: E
 
     def is_ok(self) -> bool:
@@ -72,7 +72,7 @@ class Err(Generic[E]):
 Result = Ok[T] | Err[E]
 
 
-def safe(fn: Callable[..., T]) -> Callable[..., Result[T, str]]:
+def safe[T](fn: Callable[..., T]) -> Callable[..., Result[T, str]]:
 
     def wrapper(*args: Any, **kwargs: Any) -> Result[T, str]:
         try:

@@ -2,7 +2,7 @@ import json
 import os
 import sys
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -35,7 +35,7 @@ class CortexOntologyLedger:
                 raise RuntimeError("FAIL-FAST: Topología de memoria CORTEX ausente.")
 
     def _get_iso_now(self) -> str:
-        dt = datetime.now(timezone.utc)
+        dt = datetime.now(UTC)
         return dt.strftime("%Y-%m-%dT%H:%M:%S+02:00")
 
     def _read_json(self, path: str) -> dict[str, Any]:

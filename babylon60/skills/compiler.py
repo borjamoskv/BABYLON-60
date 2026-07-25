@@ -99,14 +99,14 @@ class SkillASTCompiler:
                 val_expr = f'"{node.default_value}"'
 
             lines.append(
-                f'    await driver.execute_action('
+                f"    await driver.execute_action("
                 f'action="{node.action.value}", '
                 f'selector="{node.target_selector}", '
                 f'target_text="{node.target_text}", '
-                f'value={val_expr}, '
-                f'anchors={node.self_healing_anchors})'
+                f"value={val_expr}, "
+                f"anchors={node.self_healing_anchors})"
             )
-            lines.append(f'    # Invariant: {node.assertion_invariant}')
+            lines.append(f"    # Invariant: {node.assertion_invariant}")
 
         lines.append("    return True")
         return "\n".join(lines)

@@ -11,7 +11,7 @@ __all__ = ["canonical_json", "compute_fact_hash", "compute_tx_hash", "compute_tx
 
 
 def now_iso() -> str:
-    return datetime.datetime.fromtimestamp(time.time(), tz=datetime.timezone.utc).isoformat()
+    return datetime.datetime.fromtimestamp(time.time(), tz=datetime.UTC).isoformat()
 
 
 def canonical_json(obj: Any) -> str:

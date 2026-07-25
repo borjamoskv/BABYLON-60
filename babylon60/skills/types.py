@@ -7,11 +7,11 @@ import hashlib
 import json
 import time
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import Enum, StrEnum
 from typing import Any
 
 
-class InteractionType(str, Enum):
+class InteractionType(StrEnum):
     CLICK = "CLICK"
     TYPE = "TYPE"
     KEY_PRESS = "KEY_PRESS"

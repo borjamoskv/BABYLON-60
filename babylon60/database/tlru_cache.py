@@ -13,7 +13,7 @@ T = TypeVar("T")
 
 
 @final
-class TLRUCache(Generic[T]):
+class TLRUCache[T]:
     __slots__ = ("_cache", "_maxsize", "_ttl", "_lock", "_hits", "_misses")
 
     def __init__(self, maxsize: int = _DEFAULT_MAXSIZE, ttl: float = _DEFAULT_TTL) -> None:

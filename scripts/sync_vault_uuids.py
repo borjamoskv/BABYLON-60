@@ -8,16 +8,16 @@ def main() -> None:
     print("⚡ [C5-REAL] Memory Vault Session Synchronizer (INV_C5_15 / INV_C5_25)")
     brain_dir = os.path.expanduser("~/.gemini/antigravity/brain")
     vault_dir = os.path.expanduser("~/.gemini/config/.cortex/memory_vault")
-    
+
     os.makedirs(vault_dir, exist_ok=True)
-    
+
     if not os.path.exists(brain_dir):
         print("⚠️ Brain directory not found, skipping sync.")
         return
 
     transcripts = glob.glob(f"{brain_dir}/*/.system_generated/logs/transcript.jsonl")
     synced_count = 0
-    
+
     for transcript in transcripts:
         conv_id = transcript.split("/")[-4]
         try:
@@ -32,6 +32,7 @@ def main() -> None:
             print(f"Error reading {transcript}: {e}")
 
     print(f"🟢 Synchronized {synced_count} relevant session logs into Memory Vault.")
+
 
 if __name__ == "__main__":
     main()

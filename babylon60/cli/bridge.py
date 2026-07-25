@@ -26,7 +26,9 @@ def handle_skill_cli(args: argparse.Namespace) -> None:
     if args.skill_action == "record":
         recorder = SkillSessionRecorder(name=args.name)
         recorder.start()
-        print(f"🟢 [SKILL-RECORDER] Iniciando grabación de sesión C5-REAL: '{args.name}' (Session ID: {recorder.session_id})")
+        print(
+            f"🟢 [SKILL-RECORDER] Iniciando grabación de sesión C5-REAL: '{args.name}' (Session ID: {recorder.session_id})"
+        )
         recorder.record_event(
             event_type=InteractionType.NAVIGATE,
             selector="window",
@@ -71,7 +73,9 @@ def handle_skill_cli(args: argparse.Namespace) -> None:
         engine = SkillReplayEngine()
         report = engine.execute(skill)
         print(f"🟢 [SKILL-REPLAY] Ejecución finalizada: Passed={report.passed}")
-        print(f"   Pasos exitosos: {report.successful_steps}/{report.total_steps} | Duración: {report.total_duration_ms}ms")
+        print(
+            f"   Pasos exitosos: {report.successful_steps}/{report.total_steps} | Duración: {report.total_duration_ms}ms"
+        )
 
     elif args.skill_action == "list":
         session_files = list(storage_dir.glob("session_*.json"))
@@ -141,4 +145,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

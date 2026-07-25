@@ -49,7 +49,9 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         "messages": [
             {
                 "role": "system",
-                "content": req.system_prompt if req.system_prompt else "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon.",
+                "content": req.system_prompt
+                if req.system_prompt
+                else "You are MOSKV-1 APEX, a sovereign C5-REAL execution kernel operating on local Apple Silicon.",
             },
             {"role": "user", "content": req.prompt},
         ],
@@ -68,7 +70,9 @@ def generate_local(req: InferenceRequest) -> dict[str, Any]:
         with urllib.request.urlopen(req_obj, timeout=30.0) as resp:
             resp_data = json.loads(resp.read().decode("utf-8"))
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-        raise HTTPException(status_code=503, detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}") from e
+        raise HTTPException(
+            status_code=503, detail=f"Local silicon inference socket failed at {endpoint}: {str(e)}"
+        ) from e
     latency_ms = int((time.perf_counter() - start_time) * 1000)
     try:
         text = resp_data["choices"][0]["message"]["content"]

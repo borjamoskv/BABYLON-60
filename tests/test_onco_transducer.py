@@ -1,8 +1,8 @@
 import pytest
 
-np = pytest.importorskip('numpy')
-nx = pytest.importorskip('networkx')
-pytest.importorskip('pandas')
+np = pytest.importorskip("numpy")
+nx = pytest.importorskip("networkx")
+pytest.importorskip("pandas")
 from babylon60.cli.onco_transducer import (  # noqa: E402
     construct_wgcna_graph,
     get_structural_driver_nodes,

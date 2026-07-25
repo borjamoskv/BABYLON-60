@@ -22,7 +22,7 @@ class EvictionReason(Enum):
 
 
 @final
-class SovereignCache(Generic[T]):
+class SovereignCache[T]:
     __slots__ = (
         "_cache",
         "_eviction_count",
@@ -34,7 +34,9 @@ class SovereignCache(Generic[T]):
         "_ttl",
     )
 
-    def __init__(self, maxsize: int=1000, ttl: float=3600.0, on_evict: Callable[[str, T, str, int], Any] | None=None) -> None:
+    def __init__(
+        self, maxsize: int = 1000, ttl: float = 3600.0, on_evict: Callable[[str, T, str, int], Any] | None = None
+    ) -> None:
         self._cache: OrderedDict[str, tuple[int, T]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl

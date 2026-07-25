@@ -8981,7 +8981,7 @@ def execute_primitive(primitive_id: str) -> dict[str, Any]:
     prim = get_primitive(primitive_id)
     if not prim:
         raise ValueError(f"Primitive {primitive_id} not found in Centuria registry.")
-    timestamp = datetime.datetime.now(datetime.timezone.utc).isoformat()
+    timestamp = datetime.datetime.now(datetime.UTC).isoformat()
     return {
         "status": "C5_REAL_EXECUTED",
         "primitive": primitive_id,

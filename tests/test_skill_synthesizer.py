@@ -3,7 +3,6 @@ Unit & Integration tests for BABYLON-60 Skill Synthesizer & Telemetry Engine.
 Author: Borja Moskv (borjamoskv)
 """
 
-
 from babylon60.skills.compiler import SkillASTCompiler
 from babylon60.skills.recorder import SkillSessionRecorder
 from babylon60.skills.replay import SkillReplayEngine

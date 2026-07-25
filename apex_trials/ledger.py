@@ -8,7 +8,7 @@ import re
 import sqlite3
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -114,7 +114,7 @@ class AmendmentLedger:
                 entity_id = str(payload.get("nct_id", uuid.uuid4()))
                 content_id = compute_entry_id(payload, causal_taint, agent_id)
                 h_val = int(hashlib.sha256(content_id.encode("utf-8")).hexdigest()[:8], 16)
-                dt = datetime.fromtimestamp(1771000000 + h_val % 1000000, tz=timezone.utc)
+                dt = datetime.fromtimestamp(1771000000 + h_val % 1000000, tz=UTC)
                 created_at = dt.isoformat(timespec="microseconds").replace("+00:00", "Z")
                 event = LedgerEvent(
                     stream="apex_trials",

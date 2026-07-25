@@ -3,7 +3,7 @@ import hashlib
 import json
 import sqlite3
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import Any
 
 from babylon60.database import core as dbcore
@@ -46,7 +46,7 @@ class Moskv1Kernel:
     async def ingest_entropy(self, payload: dict[str, Any], confidence: str = "C5") -> str:
         self._lamport_clock += 1
         claim = ApexClaim(
-            claim_id=f"evt_{self._lamport_clock}_{int(datetime.now(timezone.utc).timestamp())}",
+            claim_id=f"evt_{self._lamport_clock}_{int(datetime.now(UTC).timestamp())}",
             payload=payload,
             prev_hash=self._last_hash,
             confidence=confidence,
@@ -70,7 +70,7 @@ class Moskv1Kernel:
                     continue
                 current_hash = self._compute_hash(claim)
                 taint_signature = (
-                    f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(timezone.utc).isoformat()}:{current_hash[:16]}]"
+                    f"[CORTEX-TAINT:borjamoskv:bft_loop:{datetime.now(UTC).isoformat()}:{current_hash[:16]}]"
                 )
                 try:
                     db = await dbcore.connect(self.db_path, synchronous="FULL")

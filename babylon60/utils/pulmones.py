@@ -19,7 +19,7 @@ logger = logging.getLogger("CORTEX.PULMONES")
 
 class PulmonesQueue:
     def __init__(self, db_path: Path | None = None):
-        self.db_path = db_path or Path.home() / '.cortex' / 'pulmones.db'
+        self.db_path = db_path or Path.home() / ".cortex" / "pulmones.db"
         self._fallback_path = Path(tempfile.gettempdir()) / "cortex_pulmones.db"
         self._available = True
         try:
@@ -152,7 +152,7 @@ def sovereign_circuit_breaker(timeout: float = 10.0, max_retries: int = 2, thres
                     result = await asyncio.wait_for(func(*args, **kwargs), timeout=timeout)
                     cb.record_success()  # type: ignore[no-untyped-call]
                     return {"status": "success", "data": result}
-                except (asyncio.TimeoutError, ConnectionError) as e:
+                except (TimeoutError, ConnectionError) as e:
                     logger.error("⚡ [PULMONES] Intento %s fallido en %s: %s", attempt + 1, func.__name__, str(e))
                     if attempt == max_retries:
                         cb.record_failure()  # type: ignore[no-untyped-call]

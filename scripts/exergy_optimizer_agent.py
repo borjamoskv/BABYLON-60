@@ -5,7 +5,7 @@ import sys
 
 def evaluate_exergy() -> float:
     print("⚡ [C5-REAL] Exergy Optimization Agent (INV_C5_14)")
-    
+
     # 1. Check if the latest commit has structural anergy (e.g. TODOs in python files, floating point usage in db.py)
     try:
         # Get diff of the latest commit, excluding test files and markdown to prevent false positives from invariant descriptions
@@ -20,7 +20,7 @@ def evaluate_exergy() -> float:
     if "float" in diff.lower() and "database" in diff.lower():
         print("⚠️ [ANERGY] Detected floating-point in database layer (Violation of INV_C5_18).")
         score -= 500.0
-        
+
     if "import time" in diff and "time.sleep" in diff:
         print("⚠️ [ANERGY] Detected synchronous sleep (Violation of INV_BFT_02).")
         score -= 200.0
@@ -31,6 +31,7 @@ def evaluate_exergy() -> float:
 
     print(f"📊 GELABP Exergy Score: {score}/1000.0")
     return score
+
 
 if __name__ == "__main__":
     score = evaluate_exergy()

@@ -4,7 +4,7 @@ import logging
 import sqlite3
 import time
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
@@ -95,7 +95,7 @@ class CryptoShredder:
                 fact_id=fact_id, tenant_id=tenant_id, success=True, reason=reason, was_already_shredded=True
             )
         try:
-            ts = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
+            ts = datetime.fromtimestamp(time.time(), tz=UTC).isoformat()
             self._conn.execute(
                 "INSERT INTO shredded_keys (fact_id, tenant_id, reason, shredded_by, shredded_at) VALUES (?, ?, ?, ?, ?)",
                 (fact_id, tenant_id, reason, shredded_by, ts),
@@ -120,7 +120,7 @@ class CryptoShredder:
                 fact_id=fact_id, tenant_id=tenant_id, success=True, reason=reason, was_already_shredded=True
             )
         try:
-            ts = datetime.fromtimestamp(time.time(), tz=timezone.utc).isoformat()
+            ts = datetime.fromtimestamp(time.time(), tz=UTC).isoformat()
             await (
                 __import__("typing")
                 .cast(__import__("typing").Any, self._conn)
@@ -197,5 +197,5 @@ class CryptoShredder:
             "total_shredded": total,
             "by_reason": reasons,
             "compliant": True,
-            "audit_timestamp": datetime.fromtimestamp(time.monotonic(), tz=timezone.utc).isoformat(),
+            "audit_timestamp": datetime.fromtimestamp(time.monotonic(), tz=UTC).isoformat(),
         }

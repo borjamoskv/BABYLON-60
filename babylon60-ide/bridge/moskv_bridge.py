@@ -92,7 +92,9 @@ def connect(db: Path) -> sqlite3.Connection:
     return conn
 
 
-def append(db: Path, event_type: str, entity_ref: str, payload: dict[str, Any], metadata: dict[str, Any] | None = None) -> dict[str, Any]:
+def append(
+    db: Path, event_type: str, entity_ref: str, payload: dict[str, Any], metadata: dict[str, Any] | None = None
+) -> dict[str, Any]:
     """Append atómico (BEGIN IMMEDIATE): idéntico contrato que el backend."""
     conn = connect(db)
     try:
@@ -139,7 +141,9 @@ def events(db: Path, limit: int = 500) -> list[dict[str, Any]]:
 def git_ctx(repo: Path) -> dict[str, str | None]:
     """Contexto git del que escribe (rama+head), sin shell, sin fallo duro."""
     try:
-        b = subprocess.run(["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=repo, capture_output=True, text=True, timeout=5)
+        b = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"], cwd=repo, capture_output=True, text=True, timeout=5
+        )
         h = subprocess.run(["git", "rev-parse", "--short", "HEAD"], cwd=repo, capture_output=True, text=True, timeout=5)
         return {"branch": b.stdout.strip() or None, "head": h.stdout.strip() or None}
     except (OSError, subprocess.TimeoutExpired):
@@ -147,15 +151,20 @@ def git_ctx(repo: Path) -> dict[str, str | None]:
 
 
 def cmd_status(db: Path, repo: Path, agent: str, task: str) -> None:
-    ev = append(db, STATUS, "bridge/agent", {"agent": agent, "task": task, **git_ctx(repo)},
-                {"taint": f"{agent}:bridge-status"})
+    ev = append(
+        db, STATUS, "bridge/agent", {"agent": agent, "task": task, **git_ctx(repo)}, {"taint": f"{agent}:bridge-status"}
+    )
     print(f"⚡ STATUS sellado {ev.get('seq_hash')} — {agent}: {task}")
 
 
 def cmd_handoff(db: Path, repo: Path, src: str, dst: str, task: str, context: str) -> None:
-    ev = append(db, HANDOFF, "bridge/handoff",
-                {"from": src, "to": dst, "task": task, "context": context, **git_ctx(repo)},
-                {"taint": f"{src}:handoff"})
+    ev = append(
+        db,
+        HANDOFF,
+        "bridge/handoff",
+        {"from": src, "to": dst, "task": task, "context": context, **git_ctx(repo)},
+        {"taint": f"{src}:handoff"},
+    )
     print(f"⚡ HANDOFF sellado {ev.get('seq_hash')} — {src} → {dst}: {task}")
     print(f"   event_id (para ack): {ev.get('event_id')}")
 
@@ -179,8 +188,7 @@ def cmd_inbox(db: Path, agent: str) -> None:
 
 
 def cmd_ack(db: Path, agent: str, handoff_id: str) -> None:
-    ev = append(db, ACK, "bridge/handoff", {"handoff_event_id": handoff_id, "by": agent},
-                {"taint": f"{agent}:ack"})
+    ev = append(db, ACK, "bridge/handoff", {"handoff_event_id": handoff_id, "by": agent}, {"taint": f"{agent}:ack"})
     print(f"✓ ACK sellado {ev.get('seq_hash')}")
 
 
@@ -198,7 +206,7 @@ def cmd_peers(db: Path) -> None:
     for a, e in seen.items():
         p = e["payload"]
         mins = (now - e["created_at"]) // 60000
-        print(f"● {a} — {p.get('task','?')} · {p.get('branch','?')}@{p.get('head','?')} · hace {mins} min")
+        print(f"● {a} — {p.get('task', '?')} · {p.get('branch', '?')}@{p.get('head', '?')} · hace {mins} min")
 
 
 def cmd_verify(db: Path) -> None:
@@ -220,10 +228,19 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="MOSKV BRIDGE — bus de agentes sobre el CortexLedger")
     ap.add_argument("--db", default=None, help="ruta a babylon60_ide.db (default: <raíz repo>/babylon60_ide.db)")
     sub = ap.add_subparsers(dest="cmd", required=True)
-    s = sub.add_parser("status"); s.add_argument("agent"); s.add_argument("task")
-    h = sub.add_parser("handoff"); h.add_argument("src"); h.add_argument("dst"); h.add_argument("task"); h.add_argument("context", nargs="?", default="")
-    i = sub.add_parser("inbox"); i.add_argument("agent")
-    a = sub.add_parser("ack"); a.add_argument("agent"); a.add_argument("handoff_id")
+    s = sub.add_parser("status")
+    s.add_argument("agent")
+    s.add_argument("task")
+    h = sub.add_parser("handoff")
+    h.add_argument("src")
+    h.add_argument("dst")
+    h.add_argument("task")
+    h.add_argument("context", nargs="?", default="")
+    i = sub.add_parser("inbox")
+    i.add_argument("agent")
+    a = sub.add_parser("ack")
+    a.add_argument("agent")
+    a.add_argument("handoff_id")
     sub.add_parser("peers")
     sub.add_parser("verify")
     args = ap.parse_args()

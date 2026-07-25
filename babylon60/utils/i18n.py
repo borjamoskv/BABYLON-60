@@ -6,7 +6,7 @@ import logging
 import threading
 from collections.abc import Generator
 from contextlib import contextmanager
-from enum import Enum
+from enum import Enum, StrEnum
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Final, NamedTuple
@@ -17,7 +17,7 @@ TranslationMap = dict[str, str]
 LocaleData = dict[TranslationKey, TranslationMap]
 
 
-class Lang(str, Enum):
+class Lang(StrEnum):
     EN = "en"
     ES = "es"
     EU = "eu"

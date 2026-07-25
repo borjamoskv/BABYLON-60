@@ -48,7 +48,7 @@ def reconstruct_graph() -> None:
         except SyntaxError:
             continue
 
-        now = datetime.datetime.now(datetime.timezone.utc).isoformat()
+        now = datetime.datetime.now(datetime.UTC).isoformat()
         causal_taint = f"borjamoskv/{now}/ast_reconstruction"
 
         nodes_to_insert = []

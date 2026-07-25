@@ -1,6 +1,6 @@
 import math
 import secrets
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import Any
 
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
@@ -90,7 +90,7 @@ class EvaluatorT2:
         evaluation_receipt = {
             "schema": "proof-of-route/evaluation/v0.2",
             "receipt_id": f"ev_{secrets.token_hex(8)}",
-            "issued_at": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
+            "issued_at": datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z"),
             "payload": eval_payload,
             "payload_hash": eval_hash,
             "signature": {

@@ -15,7 +15,7 @@ logger = logging.getLogger("CORTEX.PULMONES.WORKER")
 
 class PulmonesWorker:
     def __init__(self, db_path: Path | None = None):
-        self.db_path = db_path or Path.home() / '.cortex' / 'pulmones.db'
+        self.db_path = db_path or Path.home() / ".cortex" / "pulmones.db"
         self.running = False
         self.batch_size = 5
 

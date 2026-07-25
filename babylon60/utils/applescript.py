@@ -18,7 +18,7 @@ async def run_applescript(script: str, timeout_seconds: int = 30) -> tuple[bool,
             if not success:
                 logger.warning("AppleScript execution failed: %s", stderr)
             return (success, stdout, stderr)
-        except asyncio.TimeoutError:
+        except TimeoutError:
             logger.error("AppleScript execution timed out.")
             process.kill()
             await process.communicate()

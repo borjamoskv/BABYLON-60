@@ -1,6 +1,6 @@
 import hashlib
 import os
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 
 DPO_REGISTRY = {
     "X_Twitter": "privacy@x.com",
@@ -20,7 +20,7 @@ GDPR_TEMPLATE = "DE: {operator_identity} <{operator_email}>\nPARA: DPO / Data Pr
 def generate_erasure_dossier(
     operator_identity: str = "Borja Moskv", operator_email: str = "operator@cortex.local"
 ) -> dict[str, str]:
-    now_str = datetime.now(timezone.utc).isoformat()
+    now_str = datetime.now(UTC).isoformat()
     dossiers = {}
     out_dir = os.path.join(os.path.dirname(__file__), "..", "gdpr_dossiers")
     os.makedirs(out_dir, exist_ok=True)

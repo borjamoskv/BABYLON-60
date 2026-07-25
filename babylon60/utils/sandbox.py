@@ -214,8 +214,52 @@ class ASTSandbox:
         verdict = self.validate(code)
         if not verdict.is_safe:
             return ExecResult(success=False, error=f"Validation failed: {'; '.join(verdict.violations)}")
-        safe_builtins = {'abs': abs, 'all': all, 'any': any, 'bin': bin, 'bool': bool, 'chr': chr, 'dict': dict[str, typing.Any], 'divmod': divmod, 'enumerate': enumerate, 'filter': filter, 'float': float, 'format': format, 'frozenset': frozenset, 'hash': hash, 'hex': hex, 'int': int, 'isinstance': isinstance, 'issubclass': issubclass, 'iter': iter, 'len': len, 'list': list, 'map': map, 'max': max, 'min': min, 'next': next, 'oct': oct, 'ord': ord, 'pow': pow, 'print': print, 'range': range, 'repr': repr, 'reversed': reversed, 'round': round, 'set': set, 'slice': slice, 'sorted': sorted, 'str': str, 'sum': sum, 'tuple': tuple, 'zip': zip, 'True': True, 'False': False, 'None': None}
-        namespace: dict[str, object] = {'__builtins__': safe_builtins}
+        safe_builtins = {
+            "abs": abs,
+            "all": all,
+            "any": any,
+            "bin": bin,
+            "bool": bool,
+            "chr": chr,
+            "dict": dict[str, typing.Any],
+            "divmod": divmod,
+            "enumerate": enumerate,
+            "filter": filter,
+            "float": float,
+            "format": format,
+            "frozenset": frozenset,
+            "hash": hash,
+            "hex": hex,
+            "int": int,
+            "isinstance": isinstance,
+            "issubclass": issubclass,
+            "iter": iter,
+            "len": len,
+            "list": list,
+            "map": map,
+            "max": max,
+            "min": min,
+            "next": next,
+            "oct": oct,
+            "ord": ord,
+            "pow": pow,
+            "print": print,
+            "range": range,
+            "repr": repr,
+            "reversed": reversed,
+            "round": round,
+            "set": set,
+            "slice": slice,
+            "sorted": sorted,
+            "str": str,
+            "sum": sum,
+            "tuple": tuple,
+            "zip": zip,
+            "True": True,
+            "False": False,
+            "None": None,
+        }
+        namespace: dict[str, object] = {"__builtins__": safe_builtins}
         start = _time.monotonic()
         old_stdout = sys.stdout
         captured = StringIO()

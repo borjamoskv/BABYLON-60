@@ -8,7 +8,7 @@ import os
 import secrets
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from typing import Any
 
 from babylon60.core.circuit_breaker import CircuitBreaker
@@ -28,7 +28,7 @@ class RouteConfig:
 
 
 def _utc_now_iso() -> str:
-    return datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
+    return datetime.now(UTC).isoformat(timespec="milliseconds").replace("+00:00", "Z")
 
 
 class ShadowRouter:
@@ -58,7 +58,7 @@ class ShadowRouter:
                 self.shadow_queue.task_done()
             except asyncio.CancelledError:
                 break
-            except asyncio.TimeoutError:
+            except TimeoutError:
                 # log or ignore
                 pass
 

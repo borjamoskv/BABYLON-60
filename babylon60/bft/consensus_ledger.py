@@ -44,11 +44,11 @@ class BFT_Ledger:
         )
         if valid_votes < required_votes:
             raise PermissionError(f"BFT_CONSENSUS_FAILURE: {valid_votes}/{required_votes} votes. State compromised.")
-        
+
         payload_bytes = canonicalize_cbor(mutation.payload)
         idempotent_str = f"{mutation.agent_id}\x1f{mutation.timestamp}\x1f{mutation_hash}"
         idempotency_key = str(uuid.uuid5(NAMESPACE_UUID, idempotent_str))
-        
+
         try:
             self.conn.execute("BEGIN IMMEDIATE")
             self.conn.execute(

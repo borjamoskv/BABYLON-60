@@ -5,7 +5,7 @@ import os
 import subprocess
 import sys
 import time
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 
 logger = logging.getLogger(__name__)
 
@@ -26,8 +26,8 @@ def get_snapshot_age():  # type: ignore[no-untyped-def]
     snapshot_path = CORTEX_DIR / "context-snapshot.md"
     if not snapshot_path.exists():
         return float("inf")
-    mtime = datetime.fromtimestamp(snapshot_path.stat().st_mtime, tz=timezone.utc)
-    age = (datetime.fromtimestamp(time.time(), tz=timezone.utc) - mtime).total_seconds() / 60
+    mtime = datetime.fromtimestamp(snapshot_path.stat().st_mtime, tz=UTC)
+    age = (datetime.fromtimestamp(time.time(), tz=UTC) - mtime).total_seconds() / 60
     return age
 
 

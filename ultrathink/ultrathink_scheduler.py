@@ -25,7 +25,7 @@ async def propose_with_backoff(engine: ConsensusEngineStub, payload: bytes, task
             engine.propose(payload)
             log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
             return True
-        except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
+        except (TimeoutError, OSError, RuntimeError) as exc:
             wait_ms: int = BASE_BACKOFF_MS * 2 ** (attempt - 1)
             log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait_ms}ms")
             await asyncio.sleep(wait_ms / 1000.0)

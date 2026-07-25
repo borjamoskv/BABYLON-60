@@ -100,7 +100,7 @@ def main() -> None:
         "Anergy_Files_Purged": count,
         "Anergy_Bytes_Purged": total_bytes,
         "Cortex_Taint": cortex_taint,
-        "Timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "Timestamp": datetime.datetime.now(datetime.UTC).isoformat(),
     }
     os.makedirs(os.path.dirname(AUDIT_YAML), exist_ok=True)
     with open(AUDIT_YAML, "w", encoding="utf-8") as f:

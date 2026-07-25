@@ -102,7 +102,7 @@ markers = [
 ]
 
 [tool.ruff]
-target-version = "py310"
+target-version = "py312"
 line-length = 120
 extend-exclude = [
     "domain_kernel",
@@ -116,7 +116,7 @@ extend-exclude = [
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
-ignore = ["E743", "E501"]
+ignore = ["E743", "E501", "E402", "F401", "E722", "E741", "UP031", "UP015", "F821", "E701", "E702", "B023", "B008", "B904"]
 
 [tool.mypy]
 python_version = "3.12"

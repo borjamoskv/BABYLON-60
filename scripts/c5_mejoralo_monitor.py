@@ -1,7 +1,7 @@
 import hashlib
 import sqlite3
 import subprocess
-from datetime import datetime, timezone
+from datetime import UTC, datetime, timezone
 from pathlib import Path
 
 import babylon60.database.core
@@ -150,7 +150,7 @@ def crystallize_status(report: dict[str, object]) -> str:
 
 
 def append_mutation(git_hash: str, status_hash: str) -> None:
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
     mutation_line = f"| {today} | C5-REAL MEJORALO: Transductor de Estado (SHA3: `{status_hash[:12]}`) | Git Sentinel `{git_hash}` |\n"
     with open(STATUS_FILE, "a") as f:
         f.write(mutation_line)
