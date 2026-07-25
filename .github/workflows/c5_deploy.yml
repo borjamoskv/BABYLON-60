@@ -4,13 +4,13 @@ name: C5-REAL Sovereign Cloud Allocation (GCP)
 on:
   workflow_dispatch:
   push:
-    branches: [ main, master ]
+    branches: [main, master]
     paths:
-      - 'infra/**'
+      - "infra/**"
   pull_request:
-    branches: [ main, master ]
+    branches: [main, master]
     paths:
-      - 'infra/**'
+      - "infra/**"
 
 concurrency:
   group: infra-deploy
@@ -36,7 +36,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: 'c5-deployer@cortex-babylon-60.iam.gserviceaccount.com'
+          service_account: "c5-deployer@cortex-babylon-60.iam.gserviceaccount.com"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
@@ -76,7 +76,7 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: 'c5-deployer@cortex-babylon-60.iam.gserviceaccount.com'
+          service_account: "c5-deployer@cortex-babylon-60.iam.gserviceaccount.com"
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3

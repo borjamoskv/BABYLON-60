@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Iq De Moskv 1 Mi Dulce Bot
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Índice Sitemap:* `87/200` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot](https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Índice Sitemap:_ `87/200` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot](https://borjamoskv.substack.com/p/iq-de-moskv-1-mi-dulce-bot)
 
 ---
 
@@ -25,11 +25,13 @@ En este análisis forense reducimos el ensayo al formalismo de máquina C5-REAL.
 ## 2. Matriz de Deconstrucción MYTHOS
 
 ### A. Parámetros de Exergía y Antipatrones
-* **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
-* **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
-* **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
+
+- **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
+- **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
+- **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
 
 ### B. Análisis de Invariantes
+
 ```
 ================================================================================
                   MATRIZ DE DECONSTRUCCIÓN C5-REAL #87
@@ -51,9 +53,9 @@ Toda publicación en el canal CORTEX debe actuar como un transductor físico: ex
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [La Mafia De La Ia Y El Fraude Substack 708](https://borjamoskv.substack.com/p/la-mafia-de-la-ia-y-el-fraude-substack-708)
 - [El Tema No Es Cuando La Va A Superar](https://borjamoskv.substack.com/p/el-tema-no-es-cuando-la-va-a-superar)
 - [Primitivas De Ia En Educacion Arquitectura](https://borjamoskv.substack.com/p/primitivas-de-ia-en-educacion-arquitectura)
 - [Bruce Lee](https://borjamoskv.substack.com/p/bruce-lee)
-

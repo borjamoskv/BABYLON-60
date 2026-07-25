@@ -15,8 +15,12 @@
   --color-orange-purge: #ff5500;
 
   /* Typography */
-  --font-family-sans: "Humanist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-family-mono: "Fira Code", "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+  --font-family-sans:
+    "Humanist Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  --font-family-mono:
+    "Fira Code", "JetBrains Mono", source-code-pro, Menlo, Monaco, Consolas,
+    "Courier New", monospace;
 
   /* Layout constraints */
   --border-radius-industrial: 2px; /* Sharp, rigid brutalist lines */

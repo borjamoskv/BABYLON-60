@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] EL MITO DE LA ACADEMIA: AUTO-ORGANIZACIÓN DESCENTRALIZADA
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `205136381` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `205136381` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
 
 ---
 
@@ -30,9 +30,9 @@ Análisis forense y transducción documental de la publicación 'EL MITO DE LA A
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Deep Research Report](https://borjamoskv.substack.com/p/el-xokas-paco-buyo)
 - [¿Sueñan los androides con la música de Aphex Twin?](https://borjamoskv.substack.com/p/borja-moskv-aphex-twin)
 - [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 - [¿POR QUÈ ERES TAN SENSIBLE?](https://borjamoskv.substack.com/p/por-que-eres-tan-sensible)
-

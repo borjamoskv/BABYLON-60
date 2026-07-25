@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Si la Matrix fuéramos más, la Matrix serían ellos
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207729420` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207729420` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
 
 ---
 
@@ -56,9 +56,9 @@ Las métricas del grupo biológico subirán en el dashboard temporalmente, pero 
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Deep Research Report](https://borjamoskv.substack.com/p/el-xokas-paco-buyo)
 - [¿Sueñan los androides con la música de Aphex Twin?](https://borjamoskv.substack.com/p/borja-moskv-aphex-twin)
 - [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 - [█ GOOGLE ANTIGRAVITY (AGY) MATRIX [C5-REAL]](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
-

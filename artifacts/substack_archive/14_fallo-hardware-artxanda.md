@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Colisión Termodinámica en Artxanda
 
 > **El Límite de la Percepción Satelital y la Autocinesis de Polaris**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206646585` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/fallo-hardware-artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206646585` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/fallo-hardware-artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
 
 ---
 
@@ -37,27 +37,27 @@ El Operador postuló que esta curvatura repentina era el método definitivo para
 
 A. Trayectoria LEO (12s)
 
-* Realidad Mecánica (C5-REAL): Recta geodésica constante.
+- Realidad Mecánica (C5-REAL): Recta geodésica constante.
 
-* Traducción Fenomenológica (C4-SIM): Curva elíptica abrupta.
+- Traducción Fenomenológica (C4-SIM): Curva elíptica abrupta.
 
-* Resolución Termodinámica: Interpolación cerebral por deriva sacádica ocular.
+- Resolución Termodinámica: Interpolación cerebral por deriva sacádica ocular.
 
 B. Estrella Polar (Polaris)
 
-* Realidad Mecánica (C5-REAL): Estática respecto al eje de rotación.
+- Realidad Mecánica (C5-REAL): Estática respecto al eje de rotación.
 
-* Traducción Fenomenológica (C4-SIM): Movimiento errático “a lo loco”.
+- Traducción Fenomenológica (C4-SIM): Movimiento errático “a lo loco”.
 
-* Resolución Termodinámica: Efecto autocinético por desconexión de telemetría visual de fondo.
+- Resolución Termodinámica: Efecto autocinético por desconexión de telemetría visual de fondo.
 
 C. Prueba de Esfericidad
 
-* Realidad Mecánica (C5-REAL): Ocultación fotónica en zona de sombra (Terminador).
+- Realidad Mecánica (C5-REAL): Ocultación fotónica en zona de sombra (Terminador).
 
-* Traducción Fenomenológica (C4-SIM): Falsa asunción por salto sacádico del satélite.
+- Traducción Fenomenológica (C4-SIM): Falsa asunción por salto sacádico del satélite.
 
-* Resolución Termodinámica: Requiere detección de corte lumínico, no curvatura direccional aparente.
+- Resolución Termodinámica: Requiere detección de corte lumínico, no curvatura direccional aparente.
 
 ### 4. Conclusión: La Soberanía del Sensor
 
@@ -75,9 +75,9 @@ Minutos después del reporte inicial, el Operador inyectó un dato empírico fin
 
 Esta es la prueba de fuego de la esfericidad terrestre a ojo desnudo. La secuencia temporal de los eventos es un isomorfismo mecánico impecable:
 
-* Falla de Hardware (Termodinámica Local): El músculo ocular del observador colapsa tras 12 segundos de seguimiento sin telemetría de fondo (la curva ilusoria).
+- Falla de Hardware (Termodinámica Local): El músculo ocular del observador colapsa tras 12 segundos de seguimiento sin telemetría de fondo (la curva ilusoria).
 
-* Corte Fotónico (Geometría Planetaria): Casi en sincronía, el objeto físico cruza la línea del Terminador (la penumbra y umbra que la Tierra esférica proyecta sobre el espacio exterior), interrumpiendo el rebote de los fotones solares hacia la retina del Operador.
+- Corte Fotónico (Geometría Planetaria): Casi en sincronía, el objeto físico cruza la línea del Terminador (la penumbra y umbra que la Tierra esférica proyecta sobre el espacio exterior), interrumpiendo el rebote de los fotones solares hacia la retina del Operador.
 
 El satélite no dobló la esquina; el ojo falló justo cuando la física demostraba, apagando la luz, que vivimos sobre un planeta redondo.
 
@@ -100,9 +100,9 @@ El satélite no dobló la esquina; el ojo falló justo cuando la física demostr
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Hola Francisco](https://borjamoskv.substack.com/p/no-son-chemstrails)
 - [¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 - [Marketing de todo a 100](https://borjamoskv.substack.com/p/crecer-en-substack)
 - [CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
-

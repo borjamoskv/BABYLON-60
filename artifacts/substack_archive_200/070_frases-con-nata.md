@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Frases Con Nata
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Índice Sitemap:* `70/200` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/frases-con-nata](https://borjamoskv.substack.com/p/frases-con-nata)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Índice Sitemap:_ `70/200` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/frases-con-nata](https://borjamoskv.substack.com/p/frases-con-nata)
 
 ---
 
@@ -25,11 +25,13 @@ En este análisis forense reducimos el ensayo al formalismo de máquina C5-REAL.
 ## 2. Matriz de Deconstrucción MYTHOS
 
 ### A. Parámetros de Exergía y Antipatrones
-* **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
-* **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
-* **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
+
+- **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
+- **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
+- **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
 
 ### B. Análisis de Invariantes
+
 ```
 ================================================================================
                   MATRIZ DE DECONSTRUCCIÓN C5-REAL #70
@@ -51,9 +53,9 @@ Toda publicación en el canal CORTEX debe actuar como un transductor físico: ex
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Master](https://borjamoskv.substack.com/p/master)
 - [Capacidad De Hiper Automatizacion](https://borjamoskv.substack.com/p/capacidad-de-hiper-automatizacion)
 - [Auditoria Estructural Camisa De Fuerza](https://borjamoskv.substack.com/p/auditoria-estructural-camisa-de-fuerza)
 - [Como Pase De 10 Dominios Ens A 2000](https://borjamoskv.substack.com/p/como-pase-de-10-dominios-ens-a-2000)
-

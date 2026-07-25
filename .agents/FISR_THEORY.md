@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # Structural Compatibility Complex & Proof-Theoretic Invariant Specification
 
 **Title:** FISR Theory & Structural Compatibility Complex $\text{Compat}(\Omega)$
@@ -39,10 +40,11 @@ El funtor $\mathrm{Cert}: \mathbf{Arr}(\mathcal{C}) \to \mathbf{Set}$ está equi
 donde $|\cdot| : \mathrm{Mor}(\mathcal{P}) \to \overline{\mathbb{N}}$ es la valoración de coste monoidal laxa y $\delta_\circ(\alpha,\beta), \delta_\otimes(\alpha,\beta) \ge 0$ son las funciones de fricción sintáctica contextuales.
 
 ### Bloque Axiomático de Identidades
+
 - **Axioma Id-1:** $\pi(\mathrm{id}_X^\mathcal{P}) = \mathrm{id}_X^\mathcal{C}$
 - **Axioma Id-2:** $|\mathrm{id}_X^\mathcal{P}| = 0$
 - **Proposición Id-3:** $\mu(\mathrm{id}_X^\mathcal{C}) = 0$
-  *Demostración:* Como $\mathrm{id}_X^\mathcal{P} \in \mathsf{Cert}(\mathrm{id}_X^\mathcal{C})$, $\mu(\mathrm{id}_X^\mathcal{C}) \le |\mathrm{id}_X^\mathcal{P}| = 0$. Puesto que $|\cdot| \in \overline{\mathbb{N}}$, $0 \le \mu(\mathrm{id}_X^\mathcal{C})$, luego $\mu(\mathrm{id}_X^\mathcal{C}) = 0$. $\blacksquare$
+  _Demostración:_ Como $\mathrm{id}_X^\mathcal{P} \in \mathsf{Cert}(\mathrm{id}_X^\mathcal{C})$, $\mu(\mathrm{id}_X^\mathcal{C}) \le |\mathrm{id}_X^\mathcal{P}| = 0$. Puesto que $|\cdot| \in \overline{\mathbb{N}}$, $0 \le \mu(\mathrm{id}_X^\mathcal{C})$, luego $\mu(\mathrm{id}_X^\mathcal{C}) = 0$. $\blacksquare$
 
 ---
 
@@ -65,6 +67,7 @@ Dada una familia distinguida de transiciones básicas $\mathcal{A}(M) \subseteq 
 $$R_k^\mathcal{A}(M) \iff \forall \alpha \in \mathcal{A}(M), \; \mu(\alpha) \le k$$
 
 ### Operador de Extensión / Reparación $\kappa$
+
 El funcional $\kappa$ se define como el coste óptimo de reparación sobre la métrica $\mu$ para satisfacer la restricción de presupuesto $R$:
 $$\kappa(\alpha, R) \triangleq \inf \{ \mu(e) \mid e \circ \alpha \models R \}$$
 
@@ -116,7 +119,7 @@ Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ (Opc
 2. **Subaditividad Monoidal:**
    $$\mu(\alpha \otimes \beta) \le \mu(\alpha) + \mu(\beta) + \delta_\otimes(\alpha, \beta)$$
 
-*Demostración:* Aplicando el Lema 1.1 de separación del ínfimo sobre el producto cartesiano de fibras $\mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta)$ y la evaluación $c_2 \circledast c_1 \in \mathsf{Cert}(\beta \circ \alpha)$, obtenemos $\mu(\beta \circ \alpha) \le \inf_{c_1, c_2} (|c_1| + |c_2| + \delta_\circ) = \inf(c_1) + \inf(c_2) + \delta_\circ = \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$. Analogamente para $\boxtimes$. $\blacksquare$
+_Demostración:_ Aplicando el Lema 1.1 de separación del ínfimo sobre el producto cartesiano de fibras $\mathsf{Cert}(\alpha) \times \mathsf{Cert}(\beta)$ y la evaluación $c_2 \circledast c_1 \in \mathsf{Cert}(\beta \circ \alpha)$, obtenemos $\mu(\beta \circ \alpha) \le \inf_{c_1, c_2} (|c_1| + |c_2| + \delta_\circ) = \inf(c_1) + \inf(c_2) + \delta_\circ = \mu(\alpha) + \mu(\beta) + \delta_\circ(\alpha, \beta)$. Analogamente para $\boxtimes$. $\blacksquare$
 
 ---
 
@@ -125,12 +128,12 @@ Bajo el sistema de certificados $\mathcal{P} \xrightarrow{\pi} \mathcal{C}$ (Opc
 **Teorema 2.1 (Monotonía respecto a Predicados):**
 Sean $R, R'$ predicados de restricción tales que $R \implies R'$ (todo modelo que satisface $R$ satisface $R'$). Para toda transición $\alpha \in \mathrm{Mor}(\mathcal{C})$:
 $$\kappa(\alpha, R') \le \kappa(\alpha, R)$$
-*Demostración:* Como $\{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R\} \subseteq \{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R'\}$, la inclusión de conjuntos de búsqueda implica $\inf_{R'} \le \inf_R$. $\blacksquare$
+_Demostración:_ Como $\{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R\} \subseteq \{e \in \mathrm{Mor}(\mathcal{C}) \mid e \circ \alpha \models R'\}$, la inclusión de conjuntos de búsqueda implica $\inf_{R'} \le \inf_R$. $\blacksquare$
 
 **Teorema 2.2 (Sub-monotonía Composicional de $\kappa$):**
 Para toda par de transiciones compuestas $\alpha: X \to Y$ y $\beta: Y \to Z$:
 $$\kappa(\alpha, R) \le \kappa(\beta \circ \alpha, R) + \mu(\beta) + \delta_\circ(\alpha, \beta)$$
-*Demostración:* Si $f \in \mathrm{Mor}(\mathcal{C})$ es una extensión tal que $f \circ (\beta \circ \alpha) \models R$, entonces la extensión $e = f \circ \beta$ para $\alpha$ satisface $e \circ \alpha = (f \circ \beta) \circ \alpha = f \circ (\beta \circ \alpha) \models R$. Por subaditividad de $\mu$, $\mu(e) \le \mu(f) + \mu(\beta) + \delta_\circ(\alpha, \beta)$, implicando el resultado tras tomar ínfimos sobre $f$. $\blacksquare$
+_Demostración:_ Si $f \in \mathrm{Mor}(\mathcal{C})$ es una extensión tal que $f \circ (\beta \circ \alpha) \models R$, entonces la extensión $e = f \circ \beta$ para $\alpha$ satisface $e \circ \alpha = (f \circ \beta) \circ \alpha = f \circ (\beta \circ \alpha) \models R$. Por subaditividad de $\mu$, $\mu(e) \le \mu(f) + \mu(\beta) + \delta_\circ(\alpha, \beta)$, implicando el resultado tras tomar ínfimos sobre $f$. $\blacksquare$
 
 **Condición Causal de Satisfacibilidad Modelo-Nivel ($FISR_k^\mathcal{A}$):**
 Un modelo $\mathcal{M}$ satisface el complejo de compatibilidad $T_F \cup T_I \cup T_S \cup T_{R_k^\mathcal{A}}$ si y solo si la holgura de extensión para toda transición básica en $\mathcal{A}(M)$ es nula:
@@ -153,10 +156,9 @@ Donde $\Delta(\delta_\circ)$ representa el trabajo termodinámico (exergía inye
 # 9. LÍMITE DE ESCALABILIDAD TERMODINÁMICA Y SINGULARIDAD COMPOSICIONAL [Teorema 7.1]
 
 **Teorema 7.1 (Límite de Escalabilidad Termodinámica):**
-Un sistema es *físicamente escalable* (evita la necrosis estructural) si y sólo si el trabajo de renormalización está estrictamente sub-acotado respecto al presupuesto base:
+Un sistema es _físicamente escalable_ (evita la necrosis estructural) si y sólo si el trabajo de renormalización está estrictamente sub-acotado respecto al presupuesto base:
 $$\Delta(\delta_\circ) \le \lambda (k_1 + k_2) \quad \text{para algún } \lambda < 1$$
 
 Si $\Delta(\delta_\circ) \ge k_1 + k_2$, el coste estructural del ensamblaje domina a los propios morfismos. Este estado se define como la **Singularidad Composicional**, donde el sistema gasta más exergía operando su propia fricción interna (pegamento, orquestadores, parseo serial) que resolviendo entropía del dominio. Todo sistema en Singularidad Composicional es C4-SIM (Anergía pura) y debe ser purgado estructuralmente.
 
 ---
-

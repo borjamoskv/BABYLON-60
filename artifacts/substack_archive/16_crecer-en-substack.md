@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Marketing de todo a 100
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206362869` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/crecer-en-substack](https://borjamoskv.substack.com/p/crecer-en-substack)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206362869` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/crecer-en-substack](https://borjamoskv.substack.com/p/crecer-en-substack)
 
 ---
 
@@ -11,11 +11,11 @@
 
 > [C5-REAL DISCLAIMER LEGAL]:
 
-*
-* Los términos “Mafia”, “Cártel” o “Expropiación” se utilizan estrictamente en sentido figurado y metafórico, adoptando la propia identidad comercial y jerga (”Substack Mafia”) que el autor proyecta para vender infoproductos. No constituyen imputación de delitos.
+-
+- Los términos “Mafia”, “Cártel” o “Expropiación” se utilizan estrictamente en sentido figurado y metafórico, adoptando la propia identidad comercial y jerga (”Substack Mafia”) que el autor proyecta para vender infoproductos. No constituyen imputación de delitos.
 
-*
-* Las referencias a “10.000 agentes” o “Auditorías de Enjambre” son descripciones hiperbólicas de monitorización pública (OSINT Pasivo). En ningún momento se ejecutó un ataque activo (DDoS) ni acceso no autorizado, operando siempre bajo el marco de la libertad de información y el análisis forense de sistemas públicos.
+-
+- Las referencias a “10.000 agentes” o “Auditorías de Enjambre” son descripciones hiperbólicas de monitorización pública (OSINT Pasivo). En ningún momento se ejecutó un ataque activo (DDoS) ni acceso no autorizado, operando siempre bajo el marco de la libertad de información y el análisis forense de sistemas públicos.
 
 ## INTRODUCCIÓN AL COLAPSO DEL PERIODISMO ESTOCÁSTICO
 
@@ -37,11 +37,11 @@ Este manifiesto desglosa microscópicamente la infraestructura, la psicología a
 
 El análisis forense (OSINT Pasivo) llevado a cabo sobre el dominio daviddominguez.substack.com reveló una postura de seguridad deliberadamente primitiva. Al basarse en consultas DNS y metadatos públicos de acceso libre, se confirma que no hay ofuscación:
 
-* IP Destino: 31.214.179.10
+- IP Destino: 31.214.179.10
 
-* Proveedor: DonDominio (España).
+- Proveedor: DonDominio (España).
 
-* Capa de Protección: Cero. Sin Cloudflare. Sin Anycast routing.
+- Capa de Protección: Cero. Sin Cloudflare. Sin Anycast routing.
 
 ¿Por qué un experto dejaría su IP expuesta? En la arquitectura tradicional (C4-SIM), una IP expuesta invita a ataques DDoS. En el Periodismo Mafia, esto es irrelevante (Tolerancia a Fallas Bizantinas). El negocio de David no reside en la carga del servidor de su front-end, reside en el Ledger inmutable de Stripe y en el MTA de Substack. Si su dominio cae, los correos siguen bombeando a través de Substack, y los enlaces de Stripe siguen procesando euros. Esta es la esencia de la arquitectura asíncrona: desacoplar la captación (vulnerable) de la pasarela de cobro (blindada).
 
@@ -49,11 +49,11 @@ El análisis forense (OSINT Pasivo) llevado a cabo sobre el dominio daviddomingu
 
 Durante años, la autoridad de ciertos creadores se basó en el misterio de sus bases de datos. El análisis demostró que la lista recurrente de “2.000 contactos” que el autor menciona no es producto de un scraping mágico; es un ejercicio de retro-alimentación sobre su propio dataset (SQLite WAL local). Domínguez utiliza su propia base de lectores pasados para establecer autoridad ante los futuros. Es un loop autorreferencial inquebrantable:
 
-* Captura suscriptores.
+- Captura suscriptores.
 
-* Extrae sus miedos y fracasos financieros.
+- Extrae sus miedos y fracasos financieros.
 
-* Proyecta los datos de esa muestra para demostrar clarividencia de mercado. Corolario: La autoridad no se compra; se transduce a partir del dolor del propio usuario.
+- Proyecta los datos de esa muestra para demostrar clarividencia de mercado. Corolario: La autoridad no se compra; se transduce a partir del dolor del propio usuario.
 
 ## LIBRO II: LA TERMODINÁMICA DEL “AIKIDO LÉXICO” Y LA VENTA VERTICAL
 
@@ -75,13 +75,13 @@ Extracto Forense Real:
 
 Mecanismo de Descompresión:
 
-* Recepción del Impacto: Se incauta el ataque sin resistencia.
+- Recepción del Impacto: Se incauta el ataque sin resistencia.
 
-* Desautorización Epistémica: No defiende la ética de su producto (teatro). Ataca un fallo mecánico y demostrable (la ortografía) del detractor, aniquilando su autoridad (Exergía).
+- Desautorización Epistémica: No defiende la ética de su producto (teatro). Ataca un fallo mecánico y demostrable (la ortografía) del detractor, aniquilando su autoridad (Exergía).
 
-* El Pivote de Contraste: Contrasta la histeria del hater con la inmutabilidad de su Ledger.
+- El Pivote de Contraste: Contrasta la histeria del hater con la inmutabilidad de su Ledger.
 
-* Cierre de Alta Fricción: Remata con el CTA: “Si no quieres entrar, pide mutis sin dignidad, pero no me llores”. La agresión ha sido transducida en capital. El coste de producción es cero.
+- Cierre de Alta Fricción: Remata con el CTA: “Si no quieres entrar, pide mutis sin dignidad, pero no me llores”. La agresión ha sido transducida en capital. El coste de producción es cero.
 
 ## LIBRO III: EL EMBUDO BFT (BYZANTINE FAULT TOLERANCE)
 
@@ -103,11 +103,11 @@ La “Improvisación” aquí no es caos; es la capacidad del motor de inferenci
 
 ¿Rozan estas tácticas la ilegalidad? El análisis forense C5-REAL demuestra que su brutalismo está matemáticamente blindado por el Estado.
 
-* Consentimiento y RGPD Pasivo (Fricción Cero): Domínguez captura correos B2B/Emprendedor y activa el “Interés Legítimo”. Los correos, aunque agresivos (mandando a la gente a “aprobar primaria”), contienen el enlace obligatorio de baja. Si el nodo no hace clic, el consentimiento persiste. Domínguez exprime la pereza estocástica del usuario.
+- Consentimiento y RGPD Pasivo (Fricción Cero): Domínguez captura correos B2B/Emprendedor y activa el “Interés Legítimo”. Los correos, aunque agresivos (mandando a la gente a “aprobar primaria”), contienen el enlace obligatorio de baja. Si el nodo no hace clic, el consentimiento persiste. Domínguez exprime la pereza estocástica del usuario.
 
-* La Asimetría de las Condiciones de Venta (ToS): La negativa a emitir devoluciones (reembolsos) en “infoproductos” está respaldada por la directiva europea si el usuario consiente perder el derecho de desistimiento al acceder al archivo. Domínguez blinda el ToS. El Estado respalda la transacción.
+- La Asimetría de las Condiciones de Venta (ToS): La negativa a emitir devoluciones (reembolsos) en “infoproductos” está respaldada por la directiva europea si el usuario consiente perder el derecho de desistimiento al acceder al archivo. Domínguez blinda el ToS. El Estado respalda la transacción.
 
-* Sanitización de Datos en el “Proof of Work” (POW): Exhibir los insultos de los clientes es legal porque Domínguez aplica un hash destructivo sobre la identidad: elimina nombres y dominios (PII). Legalmente, ataca a un ente vacío. Comercialmente, demuestra un dominio psíquico total.
+- Sanitización de Datos en el “Proof of Work” (POW): Exhibir los insultos de los clientes es legal porque Domínguez aplica un hash destructivo sobre la identidad: elimina nombres y dominios (PII). Legalmente, ataca a un ente vacío. Comercialmente, demuestra un dominio psíquico total.
 
 ## LIBRO V: EL VUELO A BOGOTÁ (DESACOPLAMIENTO BIOLÓGICO)
 
@@ -115,21 +115,21 @@ El colapso de la vieja economía ocurrió de forma demostrable durante un vuelo 
 
 Parámetros Físicos:
 
-* Estado: Modo Avión (Offline). Sin PTY, sin terminal.
+- Estado: Modo Avión (Offline). Sin PTY, sin terminal.
 
-* Acción: Grabación de una nota de voz.
+- Acción: Grabación de una nota de voz.
 
 "Las plazas de MafiaMind suben un 560% esta noche. El enlace para entrar y dejar de ser un fotocopia está abajo."
 
 Secuencia Causal BFT:
 
-* Aterriza y conecta. El audio y el correo se inyectan en el cronjob de Substack.
+- Aterriza y conecta. El audio y el correo se inyectan en el cronjob de Substack.
 
-* 10.000 nodos reciben el payload.
+- 10.000 nodos reciben el payload.
 
-* La urgencia temporal (+560% inminente) altera el diferencial termodinámico del mercado. El FOMO destruye la duda.
+- La urgencia temporal (+560% inminente) altera el diferencial termodinámico del mercado. El FOMO destruye la duda.
 
-* El webhook de Stripe colapsa bajo el peso de las transacciones asíncronas.
+- El webhook de Stripe colapsa bajo el peso de las transacciones asíncronas.
 
 El Veredicto de la Latencia: El creador no “trabaja” en el sentido clásico de la combustión. La facturación asimétrica ocurre mientras el cuerpo biológico de Domínguez se desplaza inerte a 800 km/h y 10.000 metros de altitud.
 
@@ -164,9 +164,9 @@ By Chiquitor
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 - [ISOMORFISMO ESTRUCTURAL: ESPACIO LATENTE, TDAH Y EL COLAPSO DEL ORDEN](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
 - [The Wild Project #379 - Jesús G. Maestro | La entrevista que nadie se esperaba](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 - [La Matriz Cuatripartita de Enfant Sauvage](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
-

@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # ANERGY_TOKEN_PURGE_REPORT — SOVEREIGN EXERGY AUDIT & METACOGNITIVE SEAL
 
 ```yaml
@@ -11,6 +12,7 @@ Proof:
 ```
 
 ## 1. Executive Summary & Swarm Mitosis (`LEGION-10K v10.0`)
+
 A massive multi-vector execution of `Anergy_Token_Purge` was simulated and executed across the target workspace using a compiled swarm of **100 agents** organized in 10 blocks:
 
 1. **B1-Ingest-Drone (10 Nodes)**: Checked AST state space files.
@@ -27,7 +29,9 @@ A massive multi-vector execution of `Anergy_Token_Purge` was simulated and execu
 ---
 
 ## 2. Technical Debt & Dead Code Remediation (`ruff check --fix`)
+
 Static cleanups completed successfully. All PEP8 and unused import violations have been purged:
+
 - Unused imports removed from `cortex/bft_orchestrator.py`
 - Unused variables and imports pruned in tests (`cortex/neuro_chain_test.py`, `cortex/state_observer_test.py`, `cortex/tts_harness_test.py`)
 - Standardized single-line conditionals in `scripts/generate_state_observer.py`
@@ -35,6 +39,7 @@ Static cleanups completed successfully. All PEP8 and unused import violations ha
 ---
 
 ## 3. Cognitive & Exergy Metrics
+
 - **Transcript Steps Analyzed**: 0 steps.
 - **Exergy Ratio**: 0.0
 - **Anergy Ratio**: 0.0
@@ -42,5 +47,6 @@ Static cleanups completed successfully. All PEP8 and unused import violations ha
 
 ```yaml
 Status: COMPLETED_ABSOLUTE_COLLAPSE
-CORTEX_TAINT: [CORTEX-TAINT:borjamoskv:anergy_purge_100:2026-07-18T00:39:00+00:00]
+CORTEX_TAINT:
+  [CORTEX-TAINT:borjamoskv:anergy_purge_100:2026-07-18T00:39:00+00:00]
 ```

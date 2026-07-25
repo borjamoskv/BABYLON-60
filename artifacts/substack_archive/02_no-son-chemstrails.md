@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Hola Francisco
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207760887` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/no-son-chemstrails](https://borjamoskv.substack.com/p/no-son-chemstrails)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207760887` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/no-son-chemstrails](https://borjamoskv.substack.com/p/no-son-chemstrails)
 
 ---
 
@@ -50,9 +50,9 @@ El cielo del País Vasco está situado justo debajo de algunos de los corredores
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [¿POR QUÈ ERES TAN SENSIBLE?](https://borjamoskv.substack.com/p/por-que-eres-tan-sensible)
 - [¿Sueñan los androides con la música de Aphex Twin?](https://borjamoskv.substack.com/p/borja-moskv-aphex-twin)
 - [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 - [Colisión Termodinámica en Artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
-

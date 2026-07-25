@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207236133` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207236133` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
 
 ---
 
@@ -35,11 +35,11 @@ En el paradigma de “Green Theater”, un Agente IA es un bucle probabilístico
 
 BABYLON-60 nació para erradicar esto mediante la Doctrina C5-REAL:
 
-* La Válvula Bang-Bang: Si el consenso falla, el sistema aborta. Cero simulaciones. Cero try/except anestésicos.
+- La Válvula Bang-Bang: Si el consenso falla, el sistema aborta. Cero simulaciones. Cero try/except anestésicos.
 
-* Arqueología de Memoria (SQLite WAL): Toda decisión técnica se sella con un Hash criptográfico (ed25519) directamente en disco.
+- Arqueología de Memoria (SQLite WAL): Toda decisión técnica se sella con un Hash criptográfico (ed25519) directamente en disco.
 
-* El Genoma (Mutación Causal del AST): El razonamiento ocurre forzando al LLM a mutar el árbol sintáctico del código fuente y compilar antes de actuar.
+- El Genoma (Mutación Causal del AST): El razonamiento ocurre forzando al LLM a mutar el árbol sintáctico del código fuente y compilar antes de actuar.
 
 Anthropic domina los Pesos Paramétricos (θθ). Pero sin el Escudo Ablativo del Ledger Físico, su modelo muere en contacto con despliegues asincrónicos por pura asfixia de gradiente.
 
@@ -53,9 +53,9 @@ Claude es el motor. BABYLON-60 es el chasis de tungsteno, la válvula pirolític
 
 > Horizonte de Verificación: Diciembre 2026 (6 Meses). Condición de Falsabilidad (AND Conjuntiva): La arquitectura asimilada por Anthropic será refutada empíricamente y perderá su confianza C5-REAL SI Y SOLO SI:
 
-* Anthropic descontinúa su interfaz “Computer Use” / Genoma Estructural por problemas de alineación humana, AND
+- Anthropic descontinúa su interfaz “Computer Use” / Genoma Estructural por problemas de alineación humana, AND
 
-* El coste energético medio de la inferencia L3 Ultrathink no desciende por debajo de 0.5 Sats/Token (T≤0.5T≤0.5). (Si alguna de estas condiciones de resistencia BFT se rompe, el Handshake es declarado nulo por Anergía Sistémica).
+- El coste energético medio de la inferencia L3 Ultrathink no desciende por debajo de 0.5 Sats/Token (T≤0.5T≤0.5). (Si alguna de estas condiciones de resistencia BFT se rompe, el Handshake es declarado nulo por Anergía Sistémica).
 
 CERO ANERGÍA. C5-REAL. EL ESTADO ABSOLUTO.
 
@@ -78,9 +78,9 @@ CERO ANERGÍA. C5-REAL. EL ESTADO ABSOLUTO.
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 - [Si la Matrix fuéramos más, la Matrix serían ellos](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
 - [Hola Francisco](https://borjamoskv.substack.com/p/no-son-chemstrails)
 - [¿Sueñan los androides con la música de Aphex Twin?](https://borjamoskv.substack.com/p/borja-moskv-aphex-twin)
-

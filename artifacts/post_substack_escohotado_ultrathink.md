@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] La Termodinámica de la Libertad: Autopsia Causal de Antonio Escohotado
 
 > **Monismo de proceso, atractores no lineales y la renta de ilegalidad del prohibicionismo.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Ledger Hash:* `a59ec8be3`| *Realidad:* `#C5-REAL`
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Ledger Hash:_ `a59ec8be3`| _Realidad:_ `#C5-REAL`
 
 ---
 
@@ -10,7 +10,7 @@
 
 Antonio Escohotado Espinosa (1941–2021) no escribió tratados para ser comentados en tertulias de café ni folletos de autoayuda libertaria. Lo que ejecutó a lo largo de más de 30 volúmenes fue una autopsia clínica de los mecanismos mediante los cuales el Estado y los gatekeepers teológicos transducen el valor espontáneo de la realidad (exergía) en residuo burocrático penalizable (anergía).
 
-En esta auditoría de máquina reducimos su gran trilogía intelectual (*Realidad y Substancia*, *Caos y Orden*, *Historia General de las Drogas* / *Los Enemigos del Comercio*) a sus invariantes de cálculo físico. Sin adornos retóricos. Sin teatro de seguridad (`#C4-SIM`).
+En esta auditoría de máquina reducimos su gran trilogía intelectual (_Realidad y Substancia_, _Caos y Orden_, _Historia General de las Drogas_ / _Los Enemigos del Comercio_) a sus invariantes de cálculo físico. Sin adornos retóricos. Sin teatro de seguridad (`#C4-SIM`).
 
 ```
 ================================================================================
@@ -32,15 +32,17 @@ En esta auditoría de máquina reducimos su gran trilogía intelectual (*Realida
 ## 2. Matriz de Deconstrucción MYTHOS: Antipatrones y Exergía
 
 ### A. Vector de Antipatrones e Inconsistencias Sistémicas
-* **1. La Tensión Metafórico-Física en 'Caos y Orden' (1999):** Escohotado extrapola la termodinámica de sistemas abiertos de Ilya Prigogine y los atractores extraños al comportamiento humano y la libertad social. Aunque conceptualmente potente, carece de derivación formal en ecuaciones diferenciales, arriesgando una homonimia conceptual (`#C4-SIM`) al equiparar la entropía física de Boltzmann con el libre arbitrio moral.
-* **2. El Sesgo Pendular en 'Los Enemigos del Comercio' (2008–2016):** Inclinación a unificar expresiones colectivistas premodernas heterogéneas (desde sectas esenias y comunidades cenobíticas hasta decretos de la usura patrística) bajo un único vector soteriológico de resentimiento antipropiedad, reduciendo matices de ciertas instituciones comunitarias.
-* **3. La Variabilidad del Auto-Assay en 'Historia General de las Drogas' (1989):** La auto-experimentación farmacológica aporta valor fenomenológico cualitativo pero introduce variabilidad neuroquímica individual no aislable de forma universal.
+
+- **1. La Tensión Metafórico-Física en 'Caos y Orden' (1999):** Escohotado extrapola la termodinámica de sistemas abiertos de Ilya Prigogine y los atractores extraños al comportamiento humano y la libertad social. Aunque conceptualmente potente, carece de derivación formal en ecuaciones diferenciales, arriesgando una homonimia conceptual (`#C4-SIM`) al equiparar la entropía física de Boltzmann con el libre arbitrio moral.
+- **2. El Sesgo Pendular en 'Los Enemigos del Comercio' (2008–2016):** Inclinación a unificar expresiones colectivistas premodernas heterogéneas (desde sectas esenias y comunidades cenobíticas hasta decretos de la usura patrística) bajo un único vector soteriológico de resentimiento antipropiedad, reduciendo matices de ciertas instituciones comunitarias.
+- **3. La Variabilidad del Auto-Assay en 'Historia General de las Drogas' (1989):** La auto-experimentación farmacológica aporta valor fenomenológico cualitativo pero introduce variabilidad neuroquímica individual no aislable de forma universal.
 
 ### B. Medición de Exergía Informacional (Señal vs Ruido)
-* **Traducciones de Clásicos (Newton, Hobbes, Locke, Hegel):** `Exergía = 0.96`. Máxima transferencia de exergía. Traducción directa del latín e inglés con aparato crítico impecable.
-* **Historia General de las Drogas:** `Exergía = 0.94`. Demostración empírica de que la prohibición es un generador de renta de ilegalidad y violencia cartelar.
-* **Los Enemigos del Comercio:** `Exergía = 0.89`. Arqueología documental de la moralidad antipropiedad y quiebra del cálculo económico.
-* **Realidad y Substancia:** `Exergía = 0.82`. Monismo ontológico que aniquila la dualidad cartesiana sujeto-objeto.
+
+- **Traducciones de Clásicos (Newton, Hobbes, Locke, Hegel):** `Exergía = 0.96`. Máxima transferencia de exergía. Traducción directa del latín e inglés con aparato crítico impecable.
+- **Historia General de las Drogas:** `Exergía = 0.94`. Demostración empírica de que la prohibición es un generador de renta de ilegalidad y violencia cartelar.
+- **Los Enemigos del Comercio:** `Exergía = 0.89`. Arqueología documental de la moralidad antipropiedad y quiebra del cálculo económico.
+- **Realidad y Substancia:** `Exergía = 0.82`. Monismo ontológico que aniquila la dualidad cartesiana sujeto-objeto.
 
 ---
 
@@ -68,9 +70,10 @@ La ecuación de estado modela la tasa de intercambio orgánico (`r`) sometida al
 ```
 
 ### Resultados de la Simulación Computacional:
-* **1. Mercado Libre Complejo (r = 3.90, c = 0.00):** Entropía Física `S = 3.6832 nats`, Exponente de Lyapunov `λ = +0.5024`. Régimen: `COMPLEX_SELF_ORGANIZATION`. El sistema alcanza la máxima capacidad adaptativa en el borde del caos.
-* **2. Intervencionismo Burocrático (r = 3.70, c = 0.15):** Entropía Física `S = 1.9062 nats`, Exponente de Lyapunov `λ = -0.0999`. Régimen: `PERIODIC_OSCILLATION`. La coerción destruye la autopoiesis y fuerza ciclos rígidos.
-* **3. Prohibición / Planificación Central (r = 2.50, c >= 0.15):** Entropía Física `S = 0.0000 nats`, Exponente de Lyapunov `λ = -1.6094`. Régimen: `STAGNANT_COERCIVE_FREEZE`. Parálisis y congelación sistémica total.
+
+- **1. Mercado Libre Complejo (r = 3.90, c = 0.00):** Entropía Física `S = 3.6832 nats`, Exponente de Lyapunov `λ = +0.5024`. Régimen: `COMPLEX_SELF_ORGANIZATION`. El sistema alcanza la máxima capacidad adaptativa en el borde del caos.
+- **2. Intervencionismo Burocrático (r = 3.70, c = 0.15):** Entropía Física `S = 1.9062 nats`, Exponente de Lyapunov `λ = -0.0999`. Régimen: `PERIODIC_OSCILLATION`. La coerción destruye la autopoiesis y fuerza ciclos rígidos.
+- **3. Prohibición / Planificación Central (r = 2.50, c >= 0.15):** Entropía Física `S = 0.0000 nats`, Exponente de Lyapunov `λ = -1.6094`. Régimen: `STAGNANT_COERCIVE_FREEZE`. Parálisis y congelación sistémica total.
 
 ---
 
@@ -94,8 +97,9 @@ En 'Historia General de las Drogas' y 'Los Enemigos del Comercio', Escohotado fo
 ```
 
 ### Deducciones de Causalidad Económica
-* **A. Teorema de la Renta de Ilegalidad:** Al incrementar la persecución policial del 0% al 100%, el multiplicador de riesgo eleva los precios del mercado negro en `9.50x`, destruyendo la pureza del producto hasta el `15%` (disparando muertes fortuitas por adulteración) y disparando la violencia institucional y cartelar a `20.00`.
-* **B. Teorema de la Ruina Informativa:** La supresión de los derechos de propiedad (`PR -> 0.0`) maximiza el ruido de señales de precios (`I_loss = 1.0`), destruyendo la información requerida para el cálculo económico de Hayek-Escohotado y haciendo inevitable la quiebra sistémica.
+
+- **A. Teorema de la Renta de Ilegalidad:** Al incrementar la persecución policial del 0% al 100%, el multiplicador de riesgo eleva los precios del mercado negro en `9.50x`, destruyendo la pureza del producto hasta el `15%` (disparando muertes fortuitas por adulteración) y disparando la violencia institucional y cartelar a `20.00`.
+- **B. Teorema de la Ruina Informativa:** La supresión de los derechos de propiedad (`PR -> 0.0`) maximiza el ruido de señales de precios (`I_loss = 1.0`), destruyendo la información requerida para el cálculo económico de Hayek-Escohotado y haciendo inevitable la quiebra sistémica.
 
 ---
 
@@ -129,6 +133,7 @@ Cuando el analista abraza el Monismo de Proceso (`D_dual = 0.00`), la densidad d
 ## 6. Conclusión de Máquina
 
 La lección de Antonio Escohotado es una lección de física de sistemas:
+
 1. La libertad no es un concesión del legislador ni un dogma moral; es la condición termodinámica necesaria para que un sistema complejo no colapse en la parálisis congelada (`STAGNANT_COERCIVE_FREEZE`).
 2. Toda prohibición legal es un impuesto indirecto a la pureza y un subsidio directo al crimen organizado.
 3. El monismo de proceso no es una teoría académica: es el único sistema operativo compatible con la realidad C5-REAL.
@@ -136,6 +141,7 @@ La lección de Antonio Escohotado es una lección de física de sistemas:
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Isomorfismo Estructural: Espacio Latente, TDAH y el Colapso del Orden](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
 - [Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)

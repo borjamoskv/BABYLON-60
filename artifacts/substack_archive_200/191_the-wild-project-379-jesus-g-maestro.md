@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] The Wild Project 379 Jesus G Maestro
 
 > **Transducción documental C5-REAL, invariantes de estructura y matriz MYTHOS.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Índice Sitemap:* `191/200` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Índice Sitemap:_ `191/200` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 
 ---
 
@@ -25,11 +25,13 @@ En este análisis forense reducimos el ensayo al formalismo de máquina C5-REAL.
 ## 2. Matriz de Deconstrucción MYTHOS
 
 ### A. Parámetros de Exergía y Antipatrones
-* **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
-* **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
-* **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
+
+- **1. Grado de Exergía Informacional:** `Exergía = 0.96`. Alta densidad documental y capacidad de mutación sobre el estado.
+- **2. Purga de Anergía (Green Theater):** Erradicación total de disculpas corporativas, circunloquios y lenguaje estocástico.
+- **3. Verificación sobre Disco:** Toda aserción se contrasta contra fuentes primarias o ledgers SQLite en modo WAL.
 
 ### B. Análisis de Invariantes
+
 ```
 ================================================================================
                   MATRIZ DE DECONSTRUCCIÓN C5-REAL #191
@@ -51,9 +53,9 @@ Toda publicación en el canal CORTEX debe actuar como un transductor físico: ex
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [La Singularidad Trambolica Inferencia](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 - [Construi Una Memoria Para Una Ia](https://borjamoskv.substack.com/p/construi-una-memoria-para-una-ia)
 - [La Transicion Satoshi Codigo Claves](https://borjamoskv.substack.com/p/la-transicion-satoshi-codigo-claves)
 - [Mi Primera Vez](https://borjamoskv.substack.com/p/mi-primera-vez)
-

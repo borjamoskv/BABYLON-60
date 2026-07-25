@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] ¿Qué sabes que no sabes?
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206485710` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/que-sabes-que-no-sabes](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206485710` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/que-sabes-que-no-sabes](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
 
 ---
 
@@ -64,9 +64,9 @@ Transmite alguien que mezcla AI infra, verificación, criptografía aplicada y e
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [The Wild Project #379 - Jesús G. Maestro | La entrevista que nadie se esperaba](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 - [Desmontando a David Domínguez: Autopsia Forense (de A a la Z)](https://borjamoskv.substack.com/p/desmontando-a-david-dominguez-autopsia)
 - [¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 - [█ GOOGLE ANTIGRAVITY (AGY) MATRIX [C5-REAL]](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
-

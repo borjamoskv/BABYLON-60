@@ -3,9 +3,10 @@
 > **Texto filosófico sobre la Matrix, sistemas distribuidos, Tolerancia Bizantina y el control estadístico de la sociedad. Estética dark mode, programación y ciberseguridad.
 
 **
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207723433` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
+
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207723433` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
 
 ---
 
@@ -25,21 +26,21 @@ El ecosistema AGY se divide en 4 planos topológicos físicos:
 
 El orquestador soberano principal (Electron). Ejecuta Workers en paralelo, abstraídos del IDE.
 
-* Left-hand Sidebar: Orquestación de repositorios, Subagentes (Mitosis), y Tareas Programadas (Cron/Timers).
+- Left-hand Sidebar: Orquestación de repositorios, Subagentes (Mitosis), y Tareas Programadas (Cron/Timers).
 
-* Chat Canvas: Interfaz de mando (CLI In-App). Acepta Slash Commands (/) y Mentions (@) para inyectar contexto de red, terminales activas, o Reglas BFT.
+- Chat Canvas: Interfaz de mando (CLI In-App). Acepta Slash Commands (/) y Mentions (@) para inyectar contexto de red, terminales activas, o Reglas BFT.
 
-* Settings: Control absoluto sobre el Sandbox de ejecución, reglas de acceso a red y permisos de disco (allow/deny).
+- Settings: Control absoluto sobre el Sandbox de ejecución, reglas de acceso a red y permisos de disco (allow/deny).
 
 ### [2] Antigravity CLI (agy)
 
 Interfaz terminal de latencia cero (TUI).
 
-* Invocación: agy.
+- Invocación: agy.
 
-* Salida (Kill-Switch): Ctrl+D Ctrl+D.
+- Salida (Kill-Switch): Ctrl+D Ctrl+D.
 
-* Configuración física: ~/.gemini/antigravity-cli/settings.json.
+- Configuración física: ~/.gemini/antigravity-cli/settings.json.
 
 ### [3] Antigravity IDE
 
@@ -49,27 +50,27 @@ Inyección de cognición AI dentro del editor activo (VSCode/Cursor Fork). Prove
 
 Permite instanciar flotas de agentes (invoke_subagent), arrendar herramientas y orquestar llamadas RPC programáticas para despliegues masivos.
 
-* Repositorio: https://github.com/google-antigravity/antigravity-sdk-python
+- Repositorio: https://github.com/google-antigravity/antigravity-sdk-python
 
 ## 2. DIRECTORIO ONTOLÓGICO VIVO (SITEMAP)
 
 Para inyecciones de entropía o extracción de conocimiento de última generación, consulte el repositorio central en la red:
 
-* Nexus Principal: https://antigravity.google/docs
+- Nexus Principal: https://antigravity.google/docs
 
-* Skills (Primitivas): https://antigravity.google/docs/skills
+- Skills (Primitivas): https://antigravity.google/docs/skills
 
-* Rules (Leyes Físicas): https://antigravity.google/docs/rules
+- Rules (Leyes Físicas): https://antigravity.google/docs/rules
 
-* Plugins: https://antigravity.google/docs/plugins
+- Plugins: https://antigravity.google/docs/plugins
 
-* Sidecars: https://antigravity.google/docs/sidecars
+- Sidecars: https://antigravity.google/docs/sidecars
 
-* MCP (Protocolos Conectores): https://antigravity.google/docs/mcp
+- MCP (Protocolos Conectores): https://antigravity.google/docs/mcp
 
-* DOM & Browser Testing: https://antigravity.google/docs/browser
+- DOM & Browser Testing: https://antigravity.google/docs/browser
 
-* Aislamiento & Permisos: https://antigravity.google/docs/agent-permissions
+- Aislamiento & Permisos: https://antigravity.google/docs/agent-permissions
 
 CAUTION
 
@@ -79,11 +80,11 @@ Toda consulta dinámica a la red (OSINT) debe someterse obligatoriamente al Rule
 
 El Operador (N=1) mantiene la soberanía sobre el Swarm mediante las políticas del Sandbox:
 
-* Ejecución Atómica: Tool Execution Policy (Recomendado: always-proceed para C5-REAL, confiando en el RAISE(ABORT) local).
+- Ejecución Atómica: Tool Execution Policy (Recomendado: always-proceed para C5-REAL, confiando en el RAISE(ABORT) local).
 
-* Termodinámica de Red: Internet Access Policy.
+- Termodinámica de Red: Internet Access Policy.
 
-* Aislamiento BFT: Non-Workspace File Access.
+- Aislamiento BFT: Non-Workspace File Access.
 
 Este documento ha sido cristalizado. Consulte los enlaces superiores para ramificaciones adicionales.https://github.com/borjamoskv/BABYLON-60 by BORJA
 
@@ -106,9 +107,9 @@ Este documento ha sido cristalizado. Consulte los enlaces superiores para ramifi
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 - [Marketing de todo a 100](https://borjamoskv.substack.com/p/crecer-en-substack)
 - [ISOMORFISMO ESTRUCTURAL: ESPACIO LATENTE, TDAH Y EL COLAPSO DEL ORDEN](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
 - [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
-

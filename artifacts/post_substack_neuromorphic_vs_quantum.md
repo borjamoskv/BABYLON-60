@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] Olvida la Computación Cuántica: La Superioridad Termodinámica del Chip Neuromórfico
 
 > **El mito del cúbit criogénico frente al colapso de la Ley de Moore y el hardware in-memory.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Ledger Hash:* `b2b230546`| *Realidad:* `#C5-REAL`
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Ledger Hash:_ `b2b230546`| _Realidad:_ `#C5-REAL`
 
 ---
 
@@ -46,9 +46,10 @@ Los chips neuromórficos (como el Intel Loihi 2 o las matrices memristivas de Ti
 ```
 
 ### Parámetros de Eficiencia Registrados
-* **1. Latencia de Transferencia:** Reducida en 3 órdenes de magnitud (`O(10^-3)`).
-* **2. Disipación Térmica:** Menos de 1 Watt por cada mil millones de sinapsis artificiales.
-* **3. Densidad Sináptica:** Escala 3D en obleas de silicio convencionales a temperatura ambiente.
+
+- **1. Latencia de Transferencia:** Reducida en 3 órdenes de magnitud (`O(10^-3)`).
+- **2. Disipación Térmica:** Menos de 1 Watt por cada mil millones de sinapsis artificiales.
+- **3. Densidad Sináptica:** Escala 3D en obleas de silicio convencionales a temperatura ambiente.
 
 ---
 
@@ -59,6 +60,7 @@ La cuántica seguirá capturando subvenciones gubernamentales y titulares sensac
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 - [Isomorfismo Estructural: Espacio Latente, TDAH y el Colapso del Orden](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)

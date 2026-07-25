@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] La Matriz Cuatripartita de Enfant Sauvage
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207954280` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207954280` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
 
 ---
 
@@ -29,9 +29,9 @@ Una conjetura o plan es falsable solo si puede ser sometida a la métrica Anergy
 
 El invariante Ω34 establece que un output que predica perfectamente una salida pero no la ejecuta es C4-SIM (no falsable discursivamente). La falsabilidad estricta (ULTRATHINK) exige la Confrontación con el Disco.
 
-* Ejemplo Falsable: “El hash de este archivo es 8a339ce...“ → Se falsa calculando sha3sum del archivo real en el disco.
+- Ejemplo Falsable: “El hash de este archivo es 8a339ce...“ → Se falsa calculando sha3sum del archivo real en el disco.
 
-* Ejemplo No Falsable: “Este código es más mantenible.” → Anergía emocional.
+- Ejemplo No Falsable: “Este código es más mantenible.” → Anergía emocional.
 
 ### 3. Falsación MCTS (Budget Forcing)
 
@@ -62,9 +62,9 @@ PD: Eres bueno Enfant Sauvage . . . eres bueno.
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [¿POR QUÈ ERES TAN SENSIBLE?](https://borjamoskv.substack.com/p/por-que-eres-tan-sensible)
 - [Colisión Termodinámica en Artxanda](https://borjamoskv.substack.com/p/fallo-hardware-artxanda)
 - [Deep Research Report](https://borjamoskv.substack.com/p/el-xokas-paco-buyo)
 - [Si la Matrix fuéramos más, la Matrix serían ellos](https://borjamoskv.substack.com/p/si-la-matrix-fueramos-mas-la-matrix)
-

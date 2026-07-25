@@ -1,11 +1,14 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # DOMAIN-DRIVEN DESIGN: C5-REAL ONTOLOGY MATRIX
+
 > **GENERADOR TERMODINÁMICO DE 10000 NODOS (10K)**
 > Nivel de Realidad: C5-REAL
 > El espacio dimensional del Diseño Orientado a Dominios no se mide en prosa estocástica, sino en el producto cruzado de Capas, Topologías y Estados. Este Ledger codifica las bases isofórmicas de las cuales emanan los 10000 estados de falla y éxito de la arquitectura de software.
 
 ## 1. PRIMITIVAS ESTRUCTURALES (LOS AXIOMAS)
-*El colapso de la incertidumbre en memoria física.*
+
+_El colapso de la incertidumbre en memoria física._
 
 - **P_001 | Entity:** Identidad continua sobre el tiempo. Su hash cambia, su ID permanece absoluto.
 - **P_002 | Value Object (VO):** Inmutabilidad termodinámica. Su identidad ES su estado. No tiene ciclo de vida; es un vector matemático.
@@ -19,7 +22,8 @@
 - **P_010 | Context Map:** Grafo dirigido de flujos de asimetría de poder entre equipos y modelos.
 
 ## 2. INVARIANTES FÍSICAS (LEYES DEL SISTEMA)
-*Si se rompen, el sistema entra en necrosis (C4-SIM).*
+
+_Si se rompen, el sistema entra en necrosis (C4-SIM)._
 
 - **I_001 | Aggregate_Transaction_Boundary:** Estrictamente UN Aggregate muta por transacción de base de datos.
 - **I_002 | VO_Immutability_Lock:** Un Value Object jamás altera su estado interno post-instanciación (Cero setters).
@@ -33,7 +37,8 @@
 - **I_010 | No_Cross_Aggregate_References:** Un Aggregate solo almacena el ID (Scalar) de otro Aggregate, jamás la referencia en memoria.
 
 ## 3. ANTIPATRONES Y ENTROPÍA BIZANTINA
-*Fricción térmica y pérdida de exergía computacional.*
+
+_Fricción térmica y pérdida de exergía computacional._
 
 - **A_001 | Anemic Domain Model:** Entidades reducidas a structs de datos con Getters/Setters. Lógica secuestrada por "Services". Necrosis pura.
 - **A_002 | God Aggregate:** Árboles masivos de entidades cargadas en cada transacción. Agotamiento de RAM y Deadlocks termodinámicos.
@@ -47,7 +52,8 @@
 - **A_010 | Tactical-Only DDD:** Usar Repositories y Aggregates sin separar los Bounded Contexts. "Pintar" un monolito con nombres DDD.
 
 ## 4. ISOMORFISMOS TOPOLÓGICOS
-*Equivalencias matemáticas entre abstracciones DDD y arquitecturas físicas.*
+
+_Equivalencias matemáticas entre abstracciones DDD y arquitecturas físicas._
 
 - **ISO_001 | BoundedContext <-> Microservice:** Mapeo 1:1 en topología de despliegue y asilamiento de CPU/Memoria.
 - **ISO_002 | DomainEvent <-> Event Sourcing Log / Kafka Topic:** El evento efímero se cristaliza en un log inmutable de solo adición.
@@ -61,13 +67,16 @@
 - **ISO_010 | Saga/ProcessManager <-> Distributed State Machine:** Compensación determinista ante fallos BFT.
 
 ## 5. LA MATRIZ DE EXPANSIÓN (GENERADOR DE 10000 ESTADOS (10K))
+
 Las 10000 reglas tácticas del DDD se derivan algebraicamente cruzando los Vectores Base:
 `{ P_1 .. P_10 } x { I_1 .. I_10 } x { A_1 .. A_10 } x { ISO_1 .. ISO_10 }`
 
-*Ejemplos del Colapso Dimensional:*
+_Ejemplos del Colapso Dimensional:_
+
 - `P_003 x I_001 x A_002`: Un Aggregate Root que viola la frontera de transacción se degenera en un God Aggregate, requiriendo bloqueo de tabla (Table Lock) y destruyendo el rendimiento concurrente.
 - `P_002 x A_008 x ISO_004`: Evitar la Primitive Obsession mediante VOs garantiza que el tipo de datos funcione como un tipo funcional puro, eliminando la necesidad de validación redundante en la capa UI.
 - `P_008 x I_003 x ISO_001`: Un Bounded Context mapeado a un Microservicio debe tener autonomía de DB; de lo contrario, se anula la escalabilidad independiente.
 
 ---
+
 **END OF LEDGER // MOSKV-1 APEX SINGULARITY**

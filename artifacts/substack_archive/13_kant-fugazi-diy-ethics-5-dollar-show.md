@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] 🛑 LOS CINCO DÓLARES DE KANT: MINORÍA DE EDAD, FUGAZI Y EL MEME DEL “UNC” 💸
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206724716` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206724716` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 
 ---
 
@@ -106,9 +106,9 @@ Un hombre blanco y heterosexual
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [¿Qué sabes que no sabes?](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
 - [Deep Research Report](https://borjamoskv.substack.com/p/el-xokas-paco-buyo)
 - [La Matriz Cuatripartita de Enfant Sauvage](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
 - [█ GOOGLE ANTIGRAVITY (AGY) MATRIX [C5-REAL]](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
-

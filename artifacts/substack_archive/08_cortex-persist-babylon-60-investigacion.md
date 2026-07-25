@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207570288` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207570288` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 
 ---
 
@@ -115,7 +115,7 @@ La lectura comparativa deja una conclusión nítida: el espacio que CORTEX Persi
 
 Hojas
 
-DimensiónCORTEX Persist / BABYLON-60Mem0 / Zep / Letta (memoria)immudb (ledger verificable)Problema que resuelveAuditoría tamper-evident de decisiones de agentesRecuerdo semántico y recuperación en contextoBD inmutable con prueba criptográfica generalTécnica centralHash-chain SHA3-256 + Lamport + UUID v5 sobre SQLite WALVectores/grafo temporal/memoria autoeditadaMerkle trees + pruebas de inclusión/consistenciaMadurez5 meses, Beta autodeclaradaProducción, financiadas, certificacionesProducción desde 2019, v1.11 (05-2026)Tracción1 estrella, ~93 descargas/mes23,6k–59,9k estrellas~9.000 estrellas, 157 M pulls DockerFit con agentes IAAlto (diseñado para ello, MCP en Alpha)Alto (categoría nativa)Medio (genérico, requiere integración)Revisión externaNingunaPapers, benchmarks públicos, disputa abierta Mem0↔ZepPaper técnico, adopción empresarial
+DimensiónCORTEX Persist / BABYLON-60Mem0 / Zep / Letta (memoria)immudb (ledger verificable)Problema que resuelveAuditoría tamper-evident de decisiones de agentesRecuerdo semántico y recuperación en contextoBD inmutable con prueba criptográfica generalTécnica centralHash-chain SHA3-256 + Lamport + UUID v5 sobre SQLite WALVectores/grafo temporal/memoria autoeditadaMerkle trees + pruebas de inclusión/consistenciaMadurez5 meses, Beta autodeclaradaProducción, financiadas, certificacionesProducción desde 2019, v1.11 (05-2026)Tracción1 estrella, ~~93 descargas/mes23,6k–59,9k estrellas~~9.000 estrellas, 157 M pulls DockerFit con agentes IAAlto (diseñado para ello, MCP en Alpha)Alto (categoría nativa)Medio (genérico, requiere integración)Revisión externaNingunaPapers, benchmarks públicos, disputa abierta Mem0↔ZepPaper técnico, adopción empresarial
 
 ## 7. Evaluación crítica
 
@@ -166,9 +166,9 @@ Nota metodológica: este informe combina (a) inspección directa del repositorio
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 - [EL MITO DE LA ACADEMIA: AUTO-ORGANIZACIÓN DESCENTRALIZADA](https://borjamoskv.substack.com/p/el-mito-de-la-academia-auto-organizacion)
 - [The Wild Project #379 - Jesús G. Maestro | La entrevista que nadie se esperaba](https://borjamoskv.substack.com/p/the-wild-project-379-jesus-g-maestro)
 - [Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
-

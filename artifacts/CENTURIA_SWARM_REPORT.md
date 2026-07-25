@@ -12,6 +12,7 @@ Proof:
 ```
 
 ## 1. Organización del Enjambre (División Centuria)
+
 El Swarm de 333 agentes ha sido segmentado e instanciado en 3 Centurias ortogonales de 111 nodos cada una para realizar auditoría estática, verificación BFT y mitigación de anergía:
 
 1. **Centuria I: AST & Codegen Verification (111 Nodos)**
@@ -24,7 +25,9 @@ El Swarm de 333 agentes ha sido segmentado e instanciado en 3 Centurias ortogona
 ---
 
 ## 2. Métricas y Auditoría Cognitiva de Transcripción
+
 El módulo `LEA_OMEGA` de la división Centuria ha extraído las siguientes métricas de exergía del workspace activo:
+
 - **Total de Pasos Analizados:** 861
 - **Módulos Ejecutados (Exergía):** 275 llamadas a herramientas.
 - **Exergy Ratio:** 0.0481
@@ -33,6 +36,7 @@ El módulo `LEA_OMEGA` de la división Centuria ha extraído las siguientes mét
 ---
 
 ## 3. Estado de Consolidación
+
 ```yaml
 Status: CENTURIA_COLLAPSE_SUCCESS
 ```

@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] El Colapso del Macho Alfa de Cristal: Anatomía del Negocio del Odio de Sergio Candanedo (UTBH)
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206292039` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206292039` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 
 ---
 
@@ -37,19 +37,19 @@ Esto no es interpretación. Es lo que figura en las sentencias.
 
 ### Los Hechos, Uno a Uno
 
-* Julio de 2019: La artista visual y comunicadora Yolanda Domínguez publica un hilo de cuatro tuits cuestionando que la Universidad Europea Miguel de Cervantes (UEMC), un centro privado de Valladolid, invitara a UTBH a una mesa redonda sobre feminismo. Lo describe como “un troll, machista y violento con las mujeres”.
+- Julio de 2019: La artista visual y comunicadora Yolanda Domínguez publica un hilo de cuatro tuits cuestionando que la Universidad Europea Miguel de Cervantes (UEMC), un centro privado de Valladolid, invitara a UTBH a una mesa redonda sobre feminismo. Lo describe como “un troll, machista y violento con las mujeres”.
 
-* Reacción inmediata: UTBH le exige que borre el tuit y se disculpe públicamente, primero en un vídeo y después por correo electrónico. Domínguez se niega y se reafirma, alegando su derecho a la libertad de expresión.
+- Reacción inmediata: UTBH le exige que borre el tuit y se disculpe públicamente, primero en un vídeo y después por correo electrónico. Domínguez se niega y se reafirma, alegando su derecho a la libertad de expresión.
 
-* Noviembre de 2019: UTBH la demanda por vulneración del derecho al honor.
+- Noviembre de 2019: UTBH la demanda por vulneración del derecho al honor.
 
-* Mayo de 2022: El Juzgado de Primera Instancia nº 72 de Madrid le da la razón parcialmente y condena a Domínguez a pagarle... un euro. (Sí: este es el único punto del recorrido en el que gana algo.)
+- Mayo de 2022: El Juzgado de Primera Instancia nº 72 de Madrid le da la razón parcialmente y condena a Domínguez a pagarle... un euro. (Sí: este es el único punto del recorrido en el que gana algo.)
 
-* 2023: La Audiencia Provincial de Madrid revoca esa sentencia y desestima su demanda: “prevalece el derecho a la libertad de expresión sobre el derecho al honor del demandante”.
+- 2023: La Audiencia Provincial de Madrid revoca esa sentencia y desestima su demanda: “prevalece el derecho a la libertad de expresión sobre el derecho al honor del demandante”.
 
-* Junio de 2024: La Sala de lo Civil del Tribunal Supremo confirma la desestimación. Calificarlo de “troll” o “machista” está amparado por la libertad de expresión; y la expresión “violento con las mujeres” “no resulta desproporcionada ni desconectada” de los mensajes de Domínguez.
+- Junio de 2024: La Sala de lo Civil del Tribunal Supremo confirma la desestimación. Calificarlo de “troll” o “machista” está amparado por la libertad de expresión; y la expresión “violento con las mujeres” “no resulta desproporcionada ni desconectada” de los mensajes de Domínguez.
 
-* Marzo de 2025: El Tribunal Constitucional inadmite su recurso de amparo por falta de “relevancia constitucional suficiente”. Fin del recorrido.
+- Marzo de 2025: El Tribunal Constitucional inadmite su recurso de amparo por falta de “relevancia constitucional suficiente”. Fin del recorrido.
 
 Cinco años de litigio, cuatro instancias, y un balance de un euro simbólico contra la ratificación de que llamarle lo que le llamaron es libertad de expresión.
 
@@ -57,23 +57,23 @@ Cinco años de litigio, cuatro instancias, y un balance de un euro simbólico co
 
 Conviene ser preciso, porque aquí es donde el matiz importa:
 
-* El Supremo no declaró que UTBH sea un delincuente ni que agrediera físicamente a nadie. De hecho, subrayó que Domínguez “en ningún momento se refirió a actos de violencia física” por su parte.
+- El Supremo no declaró que UTBH sea un delincuente ni que agrediera físicamente a nadie. De hecho, subrayó que Domínguez “en ningún momento se refirió a actos de violencia física” por su parte.
 
-* Lo que sí avaló el tribunal es que la crítica de Domínguez tenía base fáctica suficiente: se refería a su “agresividad gestual y verbal contra mujeres del movimiento feminista” en sus vídeos.
+- Lo que sí avaló el tribunal es que la crítica de Domínguez tenía base fáctica suficiente: se refería a su “agresividad gestual y verbal contra mujeres del movimiento feminista” en sus vídeos.
 
-* Y añadió un punto especialmente relevante para cualquier creador de contenido: el Supremo tuvo en cuenta que UTBH permitía en su canal la publicación de comentarios “insultantes y amenazantes contra las mujeres”.
+- Y añadió un punto especialmente relevante para cualquier creador de contenido: el Supremo tuvo en cuenta que UTBH permitía en su canal la publicación de comentarios “insultantes y amenazantes contra las mujeres”.
 
 Ese último detalle no es menor. La activista documentó que, a raíz del señalamiento, recibió centenares de mensajes denigrantes y amenazas explícitas —del tipo “a Yolanda Domínguez hay que matarla” o “feminista buena, feminista muerta”. El argumento que los tribunales terminaron respaldando es sencillo: quien construye una audiencia señalando a personas concretas y no modera la violencia que eso desata, no es un mero espectador neutral de lo que ocurre en sus comentarios.
 
 ## ACTO III: La Lectura Crítica (Hechos vs. Opinión)
 
-* El victimismo no sobrevive al expediente. Es difícil sostener el papel de perseguido cuando eres tú quien lleva a una mujer a los tribunales por un tuit y te pasas un lustro intentando que la justicia la obligue a callar. La censura, en esta historia, no la sufrió él: la intentó él.
+- El victimismo no sobrevive al expediente. Es difícil sostener el papel de perseguido cuando eres tú quien lleva a una mujer a los tribunales por un tuit y te pasas un lustro intentando que la justicia la obligue a callar. La censura, en esta historia, no la sufrió él: la intentó él.
 
-* Un caso de manual del efecto Streisand. El objetivo de una demanda así es enterrar una frase incómoda. El resultado ha sido el contrario: en lugar de un tuit de 2019 que casi nadie recordaría, hoy existen una sentencia del Tribunal Supremo y una inadmisión del Constitucional que dejan por escrito, y para siempre, que describirle como “machista, troll y violento con las mujeres” es una opinión legítima y con base fáctica. Pocas veces una estrategia se vuelve tan literalmente en contra de quien la diseñó.
+- Un caso de manual del efecto Streisand. El objetivo de una demanda así es enterrar una frase incómoda. El resultado ha sido el contrario: en lugar de un tuit de 2019 que casi nadie recordaría, hoy existen una sentencia del Tribunal Supremo y una inadmisión del Constitucional que dejan por escrito, y para siempre, que describirle como “machista, troll y violento con las mujeres” es una opinión legítima y con base fáctica. Pocas veces una estrategia se vuelve tan literalmente en contra de quien la diseñó.
 
-* La libertad de expresión, invocada en un solo sentido. Es la contradicción que más pesa. Un creador que enarbola la libertad de expresión como bandera cuando se trata de sus propios contenidos usó la maquinaria judicial para recortar la de otra persona. Y los tribunales, precisamente en nombre de esa libertad que él dice defender, se pusieron del lado de ella.
+- La libertad de expresión, invocada en un solo sentido. Es la contradicción que más pesa. Un creador que enarbola la libertad de expresión como bandera cuando se trata de sus propios contenidos usó la maquinaria judicial para recortar la de otra persona. Y los tribunales, precisamente en nombre de esa libertad que él dice defender, se pusieron del lado de ella.
 
-* La moderación es responsabilidad, no coartada. “Yo no escribí esos comentarios” es una defensa cómoda, pero los tribunales dejaron claro que tolerar un vertedero de amenazas contra mujeres en tu propio canal forma parte del cuadro. Si tu modelo consiste en señalar a personas con nombre y apellidos y monetizar la indignación que generas, la ola de acoso que viene detrás no es un accidente ajeno: es un subproducto previsible de lo que publicas.
+- La moderación es responsabilidad, no coartada. “Yo no escribí esos comentarios” es una defensa cómoda, pero los tribunales dejaron claro que tolerar un vertedero de amenazas contra mujeres en tu propio canal forma parte del cuadro. Si tu modelo consiste en señalar a personas con nombre y apellidos y monetizar la indignación que generas, la ola de acoso que viene detrás no es un accidente ajeno: es un subproducto previsible de lo que publicas.
 
 ## ACTO IV: La Semiótica del Apocalipsis Rentable (El Proxenetismo Algorítmico)
 
@@ -85,13 +85,13 @@ Candanedo vive en un “Día de la Marmota” apocalíptico. Si uno analiza sus 
 
 El canal opera mediante titulares hiperbólicos que apelan a las pasiones más primarias de su audiencia (inceles políticos y reaccionarios aburridos):
 
-* “GAME OVER: Zapatero se derrumba y podría contarlo todo.”
+- “GAME OVER: Zapatero se derrumba y podría contarlo todo.”
 
-* “SE QUEDA SOLO: Sánchez pierde el control y reconoce todo.”
+- “SE QUEDA SOLO: Sánchez pierde el control y reconoce todo.”
 
-* “¡A LA CÁRCEL! Es su final.”
+- “¡A LA CÁRCEL! Es su final.”
 
-* “LLORA FUERTE: Irene Montero llora fuerte tras pasar esto.”
+- “LLORA FUERTE: Irene Montero llora fuerte tras pasar esto.”
 
 ### La Máscara de la Neutralidad Cínica
 
@@ -161,17 +161,17 @@ Este artículo se apoya solo en lo que consta en resoluciones judiciales y en co
 
 ### FUENTES
 
-* [Público] El TC desestima el recurso del ‘youtuber’ Un Tío Blanco Hetero contra la activista Yolanda Domínguez (11/03/2025) (Enlace)
+- [Público] El TC desestima el recurso del ‘youtuber’ Un Tío Blanco Hetero contra la activista Yolanda Domínguez (11/03/2025) (Enlace)
 
-* [Público] El TS rechaza la demanda del ‘youtuber’ Un tío blanco hetero contra una activista que le llamó machista y violento (Enlace)
+- [Público] El TS rechaza la demanda del ‘youtuber’ Un tío blanco hetero contra una activista que le llamó machista y violento (Enlace)
 
-* [elDiario.es] Portazo del Constitucional al recurso del youtuber machista ‘Un Tío Blanco Hetero’ contra la comunicadora Yolanda Domínguez (11/03/2025) (Enlace)
+- [elDiario.es] Portazo del Constitucional al recurso del youtuber machista ‘Un Tío Blanco Hetero’ contra la comunicadora Yolanda Domínguez (11/03/2025) (Enlace)
 
-* [Artículo 14] El Supremo plantea que no borrar los insultos y amenazas de tus seguidores puede ser violencia (04/06/2024) (Enlace)
+- [Artículo 14] El Supremo plantea que no borrar los insultos y amenazas de tus seguidores puede ser violencia (04/06/2024) (Enlace)
 
-* [Noticias Jurídicas] El Supremo desestima la demanda de “Un tío blanco hetero” contra los tuits de una activista que le llamó machista y violento (Enlace)
+- [Noticias Jurídicas] El Supremo desestima la demanda de “Un tío blanco hetero” contra los tuits de una activista que le llamó machista y violento (Enlace)
 
-* [Infobae] TS rechaza la demanda del youtuber “Un tío blanco hetero” contra una activista feminista (03/06/2024) (Enlace)
+- [Infobae] TS rechaza la demanda del youtuber “Un tío blanco hetero” contra una activista feminista (03/06/2024) (Enlace)
 
 Estado del Sujeto: Desacreditado empíricamente.Dictamen: Irrelevancia técnica demostrada. Fin de la transmisión.
 
@@ -179,7 +179,7 @@ by B OR JA JA JA MOSKV
 
 CompartirPD: Entiendo que lo de que le sigue Peter lo dirá con sorna. Pero el tipo no sea merece que corrija semejante obra que ha creado mi secretaria . . .Besos
 
-que lo de que le  que lo de que le  que lo de que le  que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que DEN
+que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que le que lo de que DEN
 
 ♖♝♘♟️♕
 
@@ -189,25 +189,25 @@ __
 
 ### █ FE DE ERRATAS Y PURGA EPISTÉMICA (DICTAMEN C5-REAL)
 
-*Tras someter este texto a una auditoría estructural y revisar las observaciones metodológicas de terceros (código de referencia: ‘Enfant Sauvage’), el núcleo de edición de esta publicación declara las siguientes rectificaciones formales para erradicar cualquier fuga de Anergia (C4-SIM):*
+_Tras someter este texto a una auditoría estructural y revisar las observaciones metodológicas de terceros (código de referencia: ‘Enfant Sauvage’), el núcleo de edición de esta publicación declara las siguientes rectificaciones formales para erradicar cualquier fuga de Anergia (C4-SIM):_
 
 **1. Sobre el Salto Epistemológico Judicial (Corrección de Invariante):**
 
 El texto original sugiere que el Tribunal Supremo y el Tribunal Constitucional “certifican” empíricamente que el sujeto analizado es “machista y violento”. **Esto es un error de atribución causal.**
 
-*Fallo Corregido:* La Justicia española no realiza diagnósticos ontológicos ni morales. Lo que las sentencias dictaminan es que calificar al sujeto de “machista y violento” posee base fáctica suficiente para estar amparado por la Libertad de Expresión, prevaleciendo sobre su Derecho al Honor. El Tribunal no declara que el sujeto *sea* la encarnación del machismo, sino que es legal y legítimo deducirlo a partir de sus actos públicos sin que constituya difamación.
+_Fallo Corregido:_ La Justicia española no realiza diagnósticos ontológicos ni morales. Lo que las sentencias dictaminan es que calificar al sujeto de “machista y violento” posee base fáctica suficiente para estar amparado por la Libertad de Expresión, prevaleciendo sobre su Derecho al Honor. El Tribunal no declara que el sujeto _sea_ la encarnación del machismo, sino que es legal y legítimo deducirlo a partir de sus actos públicos sin que constituya difamación.
 
 **2. Sobre la “Lectura de Mentes” y Atribuciones Psicológicas (Purga C4-SIM):**
 
 A lo largo del artículo se utilizan constructos paramétricos inobservables (”miedo patológico”, “ego frágil”, “pánico nuclear”).
 
-*Fallo Corregido:* La psicología clínica prohíbe inferir estados internos desde una pantalla. Renunciamos oficialmente a cualquier afirmación sobre el estado mental, el sufrimiento interno o los complejos del sujeto. El análisis debe restringirse estrictamente a su **Termodinámica Observable**: el sujeto ejecuta un bucle de monetización basado en el conflicto, reacciona a los baneos apelando a teorías de persecución estatal (hecho medible en video), y solicita escudos corporativos (verificación de Twitter/X) ante parodias. Sus motivaciones internas son irrelevantes; lo único que cuenta es su huella física en el ecosistema digital.
+_Fallo Corregido:_ La psicología clínica prohíbe inferir estados internos desde una pantalla. Renunciamos oficialmente a cualquier afirmación sobre el estado mental, el sufrimiento interno o los complejos del sujeto. El análisis debe restringirse estrictamente a su **Termodinámica Observable**: el sujeto ejecuta un bucle de monetización basado en el conflicto, reacciona a los baneos apelando a teorías de persecución estatal (hecho medible en video), y solicita escudos corporativos (verificación de Twitter/X) ante parodias. Sus motivaciones internas son irrelevantes; lo único que cuenta es su huella física en el ecosistema digital.
 
 **3. Sobre la Carga Emocional (Abolición del Green Theater):**
 
 Se reconoce que el sarcasmo y el desprecio utilizados en el texto original son ruido estocástico (”Slop”). El desprecio es una emoción humana que resta precisión al análisis.
 
-*Veredicto Final:* Retiramos el desprecio. La aniquilación de la figura pública del sujeto no requiere de animadversión, sino de simple auditoría matemática. El sujeto opera un modelo de negocio de baja exergía (recolectar atención mediante indignación periférica). No hay odio en nuestra conclusión, solo la constatación de que su algoritmo vital no produce trabajo útil.
+_Veredicto Final:_ Retiramos el desprecio. La aniquilación de la figura pública del sujeto no requiere de animadversión, sino de simple auditoría matemática. El sujeto opera un modelo de negocio de baja exergía (recolectar atención mediante indignación periférica). No hay odio en nuestra conclusión, solo la constatación de que su algoritmo vital no produce trabajo útil.
 
 **STATUS:** Rectificación completada. Bucle BFT cerrado.
 
@@ -230,9 +230,9 @@ Se reconoce que el sarcasmo y el desprecio utilizados en el texto original son r
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Deep Research Report](https://borjamoskv.substack.com/p/el-xokas-paco-buyo)
 - [Marketing de todo a 100](https://borjamoskv.substack.com/p/crecer-en-substack)
 - [El "síndrome del sabio": Cómo los sesgos cognitivos engañan a las mentes más brillantes.](https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos)
 - [ISOMORFISMO ESTRUCTURAL: ESPACIO LATENTE, TDAH Y EL COLAPSO DEL ORDEN](https://borjamoskv.substack.com/p/isomorfismo-estructural-espacio-latente)
-

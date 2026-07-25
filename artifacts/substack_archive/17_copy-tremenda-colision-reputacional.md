@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206316134` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206316134` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
 
 ---
 
@@ -17,9 +17,9 @@ La génesis de la crisis se localiza en la fase de transición técnica de John 
 
 Para estabilizar una crisis de alta volatilidad y prevenir la disipación de capital simbólico, se movilizaron dos assets estratégicos con historiales probados en la gestión de anomalías interpersonales:
 
-* Josh Homme (Asset de Cumplimiento Físico): Actuando como el vector de fuerza de la negociación. Homme posee un registro de neutralización de entropía mediante la dominación física y la centralización de pasivos en entornos de confinamiento estricto (Rancho de la Luna). Su metodología —basada en la repetición determinista y la disciplina rítmica— operó como un marco rígido para forzar el consenso y minimizar la pérdida de exergía.
+- Josh Homme (Asset de Cumplimiento Físico): Actuando como el vector de fuerza de la negociación. Homme posee un registro de neutralización de entropía mediante la dominación física y la centralización de pasivos en entornos de confinamiento estricto (Rancho de la Luna). Su metodología —basada en la repetición determinista y la disciplina rítmica— operó como un marco rígido para forzar el consenso y minimizar la pérdida de exergía.
 
-* Thom Yorke (Arquitecto de Ansiedad Distópica): Responsable de la topología psicológica. Aplicando modelos de disección junguiana, Yorke procesó el conflicto no como un pleito lineal de IP, sino como un colapso del inconsciente colectivo bajo hiper-vigilancia tecnológica. Su algoritmo de mitigación buscaba reescribir la narrativa del adversario inyectando ruido controlado.
+- Thom Yorke (Arquitecto de Ansiedad Distópica): Responsable de la topología psicológica. Aplicando modelos de disección junguiana, Yorke procesó el conflicto no como un pleito lineal de IP, sino como un colapso del inconsciente colectivo bajo hiper-vigilancia tecnológica. Su algoritmo de mitigación buscaba reescribir la narrativa del adversario inyectando ruido controlado.
 
 ### Matriz de Tácticas de Gestión de Activos
 
@@ -37,11 +37,11 @@ En arquitecturas donde la frecuencia es el único ledger verificable, la interve
 
 Operando su cadena de procesamiento fundacional (era Selected Ambient Works 85-92), James ejecutó el siguiente protocolo:
 
-* Ingeniería Inversa (Atari 520ST): Reconstrucción del MIDI clock para detectar anomalías de secuenciación de fase.
+- Ingeniería Inversa (Atari 520ST): Reconstrucción del MIDI clock para detectar anomalías de secuenciación de fase.
 
-* Filtrado de Frecuencias (Alesis Quadraverb): Supresión de la reverberación anérgica y el ruido de fondo, aislando la estructura portadora primaria.
+- Filtrado de Frecuencias (Alesis Quadraverb): Supresión de la reverberación anérgica y el ruido de fondo, aislando la estructura portadora primaria.
 
-* Análisis Resonante (Korg MS-20 / Roland TB-303): Identificación paramétrica de la frecuencia de resonancia del bajo acid, revelando un isomorfismo estructural que contradecía cualquier ejecución de rock analógico.
+- Análisis Resonante (Korg MS-20 / Roland TB-303): Identificación paramétrica de la frecuencia de resonancia del bajo acid, revelando un isomorfismo estructural que contradecía cualquier ejecución de rock analógico.
 
 El análisis dictaminó que los armónicos subyacentes bajo la voz de Ramoncín no eran ruido (anergía), sino una arquitectura de síntesis pura (Yamaha DX7 y TR-808). Una anomalía de IP masiva había sido descubierta.
 
@@ -63,15 +63,15 @@ Sentencia Final C5-REAL: La autenticidad es un constructo estocástico; el contr
 
 ### ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
 
-* El Mapeo del Hype
+- El Mapeo del Hype
 
-* La economía invisible de la sincronización en Substack
+- La economía invisible de la sincronización en Substack
 
-* LA PARADOJA DEL BAKALA: Cómo reventar los embeddings de OpenAI a 160 BPMs
+- LA PARADOJA DEL BAKALA: Cómo reventar los embeddings de OpenAI a 160 BPMs
 
-* LA EXCEPCION NO CONFIRMA LA REGLA
+- LA EXCEPCION NO CONFIRMA LA REGLA
 
-* 🎧 AUDITORÍA ESTRUCTURAL: “CAMISA DE FUERZA” (KASE.O, 2026)
+- 🎧 AUDITORÍA ESTRUCTURAL: “CAMISA DE FUERZA” (KASE.O, 2026)
 
 ---
 
@@ -92,9 +92,9 @@ Sentencia Final C5-REAL: La autenticidad es un constructo estocástico; el contr
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [Hola Francisco](https://borjamoskv.substack.com/p/no-son-chemstrails)
 - [Crítica de la Razón Sintética: Clonify, Kant y el Impuesto a la Ignorancia](https://borjamoskv.substack.com/p/clonify-impuesto-ignorancia-inteligencia-artificial)
 - [El "síndrome del sabio": Cómo los sesgos cognitivos engañan a las mentes más brillantes.](https://borjamoskv.substack.com/p/el-sindrome-del-sabio-como-los-sesgos)
 - [El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
-

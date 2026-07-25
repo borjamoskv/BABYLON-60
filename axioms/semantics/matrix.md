@@ -1,11 +1,14 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # LA ESENCIA: C5-REAL SYSTEMIC SEMANTICS MATRIX
+
 > **GENERADOR TERMODINÁMICO DE 10000 NODOS (10K) SEMÁNTICOS**
 > Nivel de Realidad: C5-REAL
 > La Semántica Sistémica es la matemática del lenguaje. Un nombre no es una etiqueta, es el colapso de un grafo causal en memoria. Garantizar que cada token posea la máxima densidad de información ($S/N > 0.99$) elimina la fricción de búsqueda, previene el Alzheimer de código y blinda la exergía del sistema.
 
 ## 1. PRIMITIVAS SEMÁNTICAS (EL ALFABETO DEL COLAPSO)
-*Las unidades lexicográficas atómicas.*
+
+_Las unidades lexicográficas atómicas._
 
 - **P_001 | El Sustantivo Físico (The Noun):** La carga de masa. Designa cosas reales con peso en RAM o disco (e.g., `Ledger`, `Matrix`, `Socket`).
 - **P_002 | El Verbo Cinético (The Verb):** El vector de mutación. Describe exclusívamente actos de transferencia térmica o colapso (e.g., `Crystallize`, `Purge`, `Transduce`, jamás `Manage`).
@@ -19,7 +22,8 @@
 - **P_010 | El Descriptor Forense (Taint Marker):** Sufijos que indican la traza de toxicidad, inestabilidad o bypass (e.g., `_Unsafe`, `_Mock`, `_Simulated`).
 
 ## 2. INVARIANTES FÍSICAS (LEYES DE LA EXERGÍA SEMÁNTICA)
-*La ruptura de estas leyes genera ruido semántico y necrosis (C4-SIM).*
+
+_La ruptura de estas leyes genera ruido semántico y necrosis (C4-SIM)._
 
 - **I_001 | Isomorfismo Verdad-Nombre ($N \equiv Comportamiento$):** El nombre debe describir matemáticamente y sin ambigüedad lo que hace la pieza, NUNCA sus intenciones ocultas o efectos colaterales omitidos.
 - **I_002 | Principio de No Redundancia (Anti-Smurf):** Prohibido repetir el contexto estructural en el nombre si ya está implícito por su clase o namespace (e.g., `user.userName` $\rightarrow$ `user.name`).
@@ -33,7 +37,8 @@
 - **I_010 | Invarianza Sintáctica:** Mantener el formato estándar de tipografía (`PascalCase` para clases, `camelCase` para mutaciones, `SCREAMING_SNAKE_CASE` para constantes físicas).
 
 ## 3. ANTIPATRONES Y DEGRADACIÓN ENTROPICA
-*Palabras vacías. Ciclos nulos. Caos nominal.*
+
+_Palabras vacías. Ciclos nulos. Caos nominal._
 
 - **A_001 | Weasel Words (Palabras Comadreja):** Nombrar un archivo `DataManager`. No dice NADA sobre la estructura, la memoria, ni el ciclo de la CPU.
 - **A_002 | Smurf Naming:** Repetir el tipo en todos los miembros (e.g., `Order.orderId`, `Order.orderStatus`, `Order.processOrder()`). Ruido visual tóxico.
@@ -47,7 +52,8 @@
 - **A_010 | El Síndrome de la Letra Única:** Salvo contadores matemáticos puros ($i, j, x, y, z$), variables como $a$, $p$, $d$ destruyen la trazabilidad en grafos de memoria de gran escala.
 
 ## 4. ISOMORFISMOS LÉXICOS
-*Cómo un Nombre Compila Exactamente en una Estructura de Máquina.*
+
+_Cómo un Nombre Compila Exactamente en una Estructura de Máquina._
 
 - **ISO_001 | Name <-> AST Reference:** El nombre es la llave del Abstract Syntax Tree. Su estructura dicta cómo MCTS (el árbol de búsqueda) evalúa su utilidad.
 - **ISO_002 | Noun Suffix <-> Design Pattern:** Si el nodo termina en `Transducer`, la máquina sabe que implementa una transformación inmutable sin pérdida.
@@ -61,13 +67,16 @@
 - **ISO_010 | Namespace <-> Network Partition:** La estructura de carpetas y paquetes mapea isofórmicamente a la topología de la red de microservicios o los permisos de seguridad.
 
 ## 5. LA MATRIZ DE EXPANSIÓN (COLAPSO DE 10000 NODOS (10K) SEMÁNTICOS)
+
 La disciplina de nombrar no es arte, es cálculo combinatorio. Multiplicar las Bases genera el espacio completo de reglas de código:
 `{ P_1 .. P_10 } x { I_1 .. I_10 } x { A_1 .. A_10 } x { ISO_1 .. ISO_10 }`
 
-*Fractales de la Matriz:*
+_Fractales de la Matriz:_
+
 - `P_002 x I_007 x A_001`: Un verbo de mutación mal definido recae en el antipatrón `Manager/Handler`. En vez de `TransactionManager`, colapsa en el C5-REAL como `LedgerAppender`.
 - `I_001 x A_008 x ISO_004`: Nombrar un método como `GetState` y que este ejecute una llamada de Red (Fetch) es una Infracción Causal (Liar Name), forzando a los subagentes MCTS a simular llamadas a red como lecturas de RAM.
 - `P_009 x I_006 x ISO_009`: Ignorar la pluralización en el nombre oculta el costo $O(N)$ del objeto, violando la regla de la Verdad y destruyendo la predicción termodinámica en bucles (Loops).
 
 ---
+
 **END OF LEDGER // MOSKV-1 APEX SINGULARITY**

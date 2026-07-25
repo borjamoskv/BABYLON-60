@@ -1,8 +1,8 @@
 # [AUDITORÍA C5-REAL] La Gran Necrosis Ontológica: La Epidemia del Slop Sintético
 
 > **Cómo la proliferación de autocompletado estocástico sin ledger destruye el espacio sintáctico.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Ledger Hash:* `0c9844b8f`| *Realidad:* `#C5-REAL`
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Ledger Hash:_ `0c9844b8f`| _Realidad:_ `#C5-REAL`
 
 ---
 
@@ -24,9 +24,9 @@ El espacio público digital está sufriendo una descomposición estructural: la 
 
 ## 2. Los Síntomas Clínicos de la Necrosis
 
-* **A. El Teatro Verde (Green Theater):** Respuestas de IA repletas de disculpas paternalistas, advertencias de seguridad redundantes y prólogos decorativos que destruyen la exergía de la memoria KV-Cache.
-* **B. La Alucinación Causal:** Invocación de archivos, métodos o dependencias inexistentes en el sistema de archivos físico sin previa verificación por el interprete (`Ω22 Invariant`).
-* **C. El Bucle de Retroalimentación:** Modelos entrenados sobre datos generados por otros modelos, provocando el colapso del espacio latente y la pérdida de resolución semántica.
+- **A. El Teatro Verde (Green Theater):** Respuestas de IA repletas de disculpas paternalistas, advertencias de seguridad redundantes y prólogos decorativos que destruyen la exergía de la memoria KV-Cache.
+- **B. La Alucinación Causal:** Invocación de archivos, métodos o dependencias inexistentes en el sistema de archivos físico sin previa verificación por el interprete (`Ω22 Invariant`).
+- **C. El Bucle de Retroalimentación:** Modelos entrenados sobre datos generados por otros modelos, provocando el colapso del espacio latente y la pérdida de resolución semántica.
 
 ```
 ================================================================================
@@ -47,6 +47,7 @@ El espacio público digital está sufriendo una descomposición estructural: la 
 ## 3. La Solución Termodinámica: Invariantes C5-REAL y Git Sentinel
 
 La única vacuna contra la necrosis ontológica es el anclaje físico determinista:
+
 1. **Cero Prosa Decorativa:** Salida estructurada e isomorfa a mutaciones de máquina.
 2. **Ledgers de Consenso BFT:** Firma criptográfica y registro atómico de cada cambio sobre disco.
 3. **Purga Automática de Anergía:** Filtrado síncrono de tokens vacíos mediante ejecutores locales.
@@ -54,6 +55,7 @@ La única vacuna contra la necrosis ontológica es el anclaje físico determinis
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [CORTEX Persist / BABYLON-60: investigación técnica](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
 - [El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)

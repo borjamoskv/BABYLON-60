@@ -1,4 +1,5 @@
 <!-- C5-REAL EXERGY CERTIFIED -->
+
 # AXIOMA DE REDUCCIÓN A PRIMITIVAS (ARP)
 
 > **CORTEX-TAINT**: ``
@@ -49,7 +50,7 @@ $$\forall G \text{ generador de } D, \quad \exists! \; \iota: \mathcal{K}(D) \ho
 
 ## Conexión con el Golden Axiom
 
-El [Golden Axiom](../GOLDEN_AXIOM.md) declara: *"Si nombras bien, el código se escribe solo."*
+El [Golden Axiom](../GOLDEN_AXIOM.md) declara: _"Si nombras bien, el código se escribe solo."_
 
 El KRA lo formaliza: nombrar bien es identificar el kernel $\mathcal{K}(D)$. Una vez colapsado el objeto inicial, la estructura derivada se genera por la propiedad universal — el código "se escribe solo" porque los morfismos desde el objeto inicial son **únicos**.
 

@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica
 
 > **Auditoría Causal e Invariantes de Estructura C5-REAL.**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `206118789` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `206118789` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 
 ---
 
@@ -30,9 +30,9 @@ Análisis forense y transducción documental de la publicación 'La Singularidad
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60](https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic)
 - [Tremenda Colisión Reputacional y Artística en el Eje Homme-Yorke-Frusciante-Aphex-Ramoncín](https://borjamoskv.substack.com/p/copy-tremenda-colision-reputacional)
 - [🛑 LOS CINCO DÓLARES DE KANT: MINORÍA DE EDAD, FUGAZI Y EL MEME DEL “UNC” 💸](https://borjamoskv.substack.com/p/kant-fugazi-diy-ethics-5-dollar-show)
 - [█ GOOGLE ANTIGRAVITY (AGY) MATRIX [C5-REAL]](https://borjamoskv.substack.com/p/google-antigravity-agy-matrix-c5)
-

@@ -1,9 +1,9 @@
 # [AUDITORÍA C5-REAL] ¿Por qué lo llamas "simulación" cuando quieres decir Ciencia?
 
 > **La necrosis ontológica del juguete virtual en el silicio real AUDITORÍA C5-REAL | C4-SIM | Meta-Iteración 03**
-> *Por Telmo Dinámico de Moskv* | *CORTEX Sovereign Editorial Engine (Industrial Noir 2026)*
-> *Post ID:* `207672076` | *Realidad:* `#C5-REAL`
-> *URL Canónica:* [https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
+> _Por Telmo Dinámico de Moskv_ | _CORTEX Sovereign Editorial Engine (Industrial Noir 2026)_
+> _Post ID:_ `207672076` | _Realidad:_ `#C5-REAL`
+> _URL Canónica:_ [https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando](https://borjamoskv.substack.com/p/por-que-lo-llamas-simulacion-cuando)
 
 ---
 
@@ -79,9 +79,9 @@ Unas perculaeS?
 ---
 
 ⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):
+
 - [Un hombre blanco y heterosexual](https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal)
 - [¿Qué sabes que no sabes?](https://borjamoskv.substack.com/p/que-sabes-que-no-sabes)
 - [La Matriz Cuatripartita de Enfant Sauvage](https://borjamoskv.substack.com/p/la-matriz-cuatripartita-de-enfant)
 - [La Singularidad Trambólica: Inferencia Latente y el Fin de la Cortesía Termodinámica](https://borjamoskv.substack.com/p/la-singularidad-trambolica-inferencia)
 - [CORTEX Persist / BABYLON-60: investigación técnica y evaluación crítica](https://borjamoskv.substack.com/p/cortex-persist-babylon-60-investigacion)
-
