@@ -7,5 +7,6 @@ from .ultrathink import run_ultrathink
 from .autodidact import run_autodidact
 from .purge import run_purge
 from .seal import run_seal
+from .itera import run_itera
 
-__all__ = ["run_ultrathink", "run_autodidact", "run_purge", "run_seal"]
+__all__ = ["run_ultrathink", "run_autodidact", "run_purge", "run_seal", "run_itera"]
