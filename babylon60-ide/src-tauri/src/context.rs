@@ -65,6 +65,12 @@ pub struct ContextStateInner {
 
 pub struct ContextState(pub Mutex<ContextStateInner>);
 
+impl Default for CognitiveState {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl CognitiveState {
     pub fn new() -> Self {
         Self {
