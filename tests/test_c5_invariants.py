@@ -368,7 +368,37 @@ def test_inv_c5_30_deterministic_cbor_canonization() -> None:
     assert "CBOR" in content, "INV_C5_30 missing CBOR canonization clause"
 
 
-def test_inv_c5_31_stub():
-    """INV_C5_31 — Auto-generated stub for rule validation."""
-    # Implementation required for concrete scan logic of rule INV_C5_31
-    pass
+def test_inv_c5_31_keychain_bypass_test_env() -> None:
+    """INV_C5_31 — Keychain Bypass in Test Environments Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_31 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_31" in content, "INV_C5_31 rule definition missing in .agents/AGENTS.md"
+    assert "CORTEX_TESTING" in content, "INV_C5_31 missing CORTEX_TESTING clause"
+
+
+def test_inv_c5_32_hypothesis_deadline_exemption() -> None:
+    """INV_C5_32 — Hypothesis Deadline Exemption Under Load Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_32 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_32" in content, "INV_C5_32 rule definition missing in .agents/AGENTS.md"
+    assert "deadline=None" in content, "INV_C5_32 missing deadline=None clause"
+
+
+def test_inv_c5_33_safe_subprocess_vectorization() -> None:
+    """INV_C5_33 — Safe Subprocess Argument Vectorization Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_33 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_33" in content, "INV_C5_33 rule definition missing in .agents/AGENTS.md"
+    assert "shell=True" in content or "shell" in content, "INV_C5_33 missing shell=True restriction clause"
+
+
+def test_inv_c5_34_rootless_uv_docker() -> None:
+    """INV_C5_34 — Rootless UV Docker Multi-stage Invariant."""
+    agents_path = ROOT / ".agents" / "AGENTS.md"
+    assert agents_path.exists(), "INV_C5_34 violated: .agents/AGENTS.md missing"
+    content = agents_path.read_text(errors="ignore")
+    assert "INV_C5_34" in content, "INV_C5_34 rule definition missing in .agents/AGENTS.md"
+
