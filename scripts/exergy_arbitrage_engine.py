@@ -21,7 +21,7 @@ def get_bft_connection() -> sqlite3.Connection:
 def init_ledger() -> None:
     INCOMING_DIR.mkdir(parents=True, exist_ok=True)
     with get_bft_connection() as conn:
-        conn.execute('\n            CREATE TABLE IF NOT EXISTS exergy_arbitrage_ledger (\n                causal_hash TEXT PRIMARY KEY,\n                spec_hash TEXT NOT NULL,\n                target_filename TEXT NOT NULL,\n                loc_extracted INTEGER NOT NULL,\n                timestamp INTEGER NOT NULL,\n                verified_ast BOOLEAN NOT NULL\n            )\n        ')
+        conn.execute('\n            CREATE TABLE IF NOT EXISTS exergy_arbitrage_ledger (\n                causal_hash TEXT PRIMARY KEY,\n                spec_hash TEXT NOT NULL,\n                target_filename TEXT NOT NULL,\n                loc_extracted int NOT NULL,\n                timestamp int NOT NULL,\n                verified_ast BOOLEAN NOT NULL\n            )\n        ')
 
 def wrap_prompt(spec: str) -> str:
     return APEX_SINGULARITY_WRAPPER.format(spec=spec)

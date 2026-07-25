@@ -98,7 +98,7 @@ def run_autocognition_audit() -> None:
     conn.execute('PRAGMA journal_mode = WAL;')
     conn.execute('PRAGMA busy_timeout = 5000;')
     cursor = conn.cursor()
-    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L3_inference_cache (\n            query_hash TEXT PRIMARY KEY,\n            active_mode TEXT,\n            retrieved_nodes TEXT,\n            applied_isomorphisms TEXT,\n            trace_payload TEXT,\n            hits INTEGER DEFAULT 0\n        )\n    ')
+    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L3_inference_cache (\n            query_hash TEXT PRIMARY KEY,\n            active_mode TEXT,\n            retrieved_nodes TEXT,\n            applied_isomorphisms TEXT,\n            trace_payload TEXT,\n            hits int DEFAULT 0\n        )\n    ')
     cursor.execute('\n        INSERT OR REPLACE INTO L3_inference_cache (query_hash, active_mode, retrieved_nodes, applied_isomorphisms, trace_payload, hits)\n        VALUES (?, ?, ?, ?, ?, ?)\n    ', (sha3_seal, 'AUTOCOGNITION_OMEGA', 'LEA_OMEGA.C5_REAL', 'ZERO_ANERGY_PURGE', json.dumps({'exergy_ratio': exergy_ratio, 'anergy_ratio': anergy_ratio, 'cmd_repeat_index': cmd_repeat_index, 'seal': sha3_seal}), 1))
     conn.commit()
     conn.close()

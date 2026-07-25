@@ -64,7 +64,7 @@ def persist_consensus_ledger(db_path: str, epoch: int, state_hash: str, ranks: L
     try:
         conn.execute('PRAGMA journal_mode=WAL;')
         conn.execute('PRAGMA busy_busy_timeout=50000;')
-        conn.execute('\n            CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (\n                epoch INTEGER PRIMARY KEY,\n                state_hash TEXT UNIQUE NOT NULL,\n                ranks_json TEXT NOT NULL,\n                trust_json TEXT NOT NULL,\n                dividends_json TEXT NOT NULL,\n                emission_json TEXT NOT NULL,\n                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n            );\n        ')
+        conn.execute('\n            CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (\n                epoch int PRIMARY KEY,\n                state_hash TEXT UNIQUE NOT NULL,\n                ranks_json TEXT NOT NULL,\n                trust_json TEXT NOT NULL,\n                dividends_json TEXT NOT NULL,\n                emission_json TEXT NOT NULL,\n                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n            );\n        ')
         conn.execute('\n            INSERT OR REPLACE INTO yuma_consensus_ledger\n            (epoch, state_hash, ranks_json, trust_json, dividends_json, emission_json)\n            VALUES (?, ?, ?, ?, ?, ?);\n        ', (epoch, state_hash, json.dumps([round(r, 8) for r in ranks]), json.dumps([round(t, 8) for t in trust]), json.dumps([round(d, 8) for d in dividends]), json.dumps(emission)))
         conn.commit()
     finally:

@@ -7,7 +7,6 @@ and dispatches sovereign license keys upon checkout session completion.
 
 import hmac
 import hashlib
-import json
 import time
 import sqlite3
 from pathlib import Path

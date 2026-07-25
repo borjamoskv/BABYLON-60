@@ -15,7 +15,7 @@ class IsomorphismAuditorC5:
     def _init_db(self) -> None:
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         with babylon60.database.core.connect_sync(self.db_path) as conn:
-            conn.execute('\n                CREATE TABLE IF NOT EXISTS isomorphism_ledger (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    graph_a_id TEXT NOT NULL,\n                    graph_b_id TEXT NOT NULL,\n                    isomorphic INTEGER NOT NULL,\n                    degree_sequence TEXT NOT NULL,\n                    gelabp_trace_hash TEXT NOT NULL,\n                    attestation_timestamp TEXT NOT NULL\n                )\n            ')
+            conn.execute('\n                CREATE TABLE IF NOT EXISTS isomorphism_ledger (\n                    id int PRIMARY KEY AUTOINCREMENT,\n                    graph_a_id TEXT NOT NULL,\n                    graph_b_id TEXT NOT NULL,\n                    isomorphic int NOT NULL,\n                    degree_sequence TEXT NOT NULL,\n                    gelabp_trace_hash TEXT NOT NULL,\n                    attestation_timestamp TEXT NOT NULL\n                )\n            ')
             conn.commit()
 
     @staticmethod

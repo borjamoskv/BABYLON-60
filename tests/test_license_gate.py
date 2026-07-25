@@ -1,4 +1,3 @@
-import os
 import tempfile
 import pytest
 from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_LIMITS

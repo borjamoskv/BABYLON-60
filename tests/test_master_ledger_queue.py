@@ -8,7 +8,7 @@ async def test_master_ledger_queue_single_writer(tmp_path) -> None:
     queue = MasterLedgerQueue(db_file)
     await queue.initialize()
     try:
-        await queue.submit_transaction('CREATE TABLE IF NOT EXISTS test_items (id INTEGER PRIMARY KEY, val TEXT);', ())
+        await queue.submit_transaction('CREATE TABLE IF NOT EXISTS test_items (id int PRIMARY KEY, val TEXT);', ())
         for i in range(50):
             await queue.submit_transaction('INSERT INTO test_items (id, val) VALUES (?, ?);', (i, f'item_{i}'))
         await queue.queue.join()

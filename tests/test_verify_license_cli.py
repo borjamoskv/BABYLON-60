@@ -1,5 +1,4 @@
 import tempfile
-import pytest
 from babylon60.core.license_gate import SovereignLicenseGate, Tier
 from babylon60.cli.verify_license import verify_offline_key
 

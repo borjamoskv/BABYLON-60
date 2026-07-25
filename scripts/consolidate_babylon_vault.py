@@ -17,8 +17,8 @@ def consolidate_vault() -> None:
     conn.execute('PRAGMA journal_mode = WAL;')
     conn.execute('PRAGMA busy_timeout = 5000;')
     cursor = conn.cursor()
-    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L1_primitive_nodes (\n            id TEXT PRIMARY KEY,\n            theory TEXT,\n            dimension TEXT,\n            name TEXT,\n            access_count INTEGER DEFAULT 0,\n            last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )\n    ')
-    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L3_inference_cache (\n            query_hash TEXT PRIMARY KEY,\n            active_mode TEXT,\n            retrieved_nodes TEXT,\n            applied_isomorphisms TEXT,\n            trace_payload TEXT,\n            hits INTEGER DEFAULT 0\n        )\n    ')
+    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L1_primitive_nodes (\n            id TEXT PRIMARY KEY,\n            theory TEXT,\n            dimension TEXT,\n            name TEXT,\n            access_count int DEFAULT 0,\n            last_accessed TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )\n    ')
+    cursor.execute('\n        CREATE TABLE IF NOT EXISTS L3_inference_cache (\n            query_hash TEXT PRIMARY KEY,\n            active_mode TEXT,\n            retrieved_nodes TEXT,\n            applied_isomorphisms TEXT,\n            trace_payload TEXT,\n            hits int DEFAULT 0\n        )\n    ')
     cursor.execute('\n        CREATE TABLE IF NOT EXISTS vault_consolidations (\n            session_id TEXT PRIMARY KEY,\n            timestamp TEXT,\n            summary TEXT,\n            cortex_taint_hash TEXT,\n            consolidated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n        )\n    ')
     consolidated_count = 0
     for session_id, ts, summary in UNCONSOLIDATED_SESSIONS:

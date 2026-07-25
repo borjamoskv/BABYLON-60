@@ -110,7 +110,7 @@ def append_mutation(git_hash: str, status_hash: str) -> None:
 
 def git_sentinel_commit(status_hash: str) -> str:
     _git(['add', 'STATUS.md', 'scripts/c5_mejoralo_monitor.py'])
-    commit_msg = f'chore(c5-INTEGER): state monitor iteration [{status_hash[:8]}]'
+    commit_msg = f'chore(c5-int): state monitor iteration [{status_hash[:8]}]'
     _git(['commit', '-m', commit_msg, '--no-verify'])
     return _git(['rev-parse', '--short', 'HEAD'])
 

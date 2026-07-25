@@ -1,6 +1,5 @@
 import tempfile
 from pathlib import Path
-import pytest
 from cortex.infra.stripe_webhook_handler import StripeWebhookProcessor
 
 def test_stripe_signature_verification():

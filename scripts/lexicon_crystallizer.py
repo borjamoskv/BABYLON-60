@@ -11,8 +11,8 @@ def init_db(db_path: Path) -> None:
         conn.execute('PRAGMA journal_mode=WAL;')
         conn.execute('PRAGMA busy_timeout=5000;')
         conn.execute('PRAGMA synchronous=NORMAL;')
-        conn.execute('\n        CREATE TABLE IF NOT EXISTS lexicon_nodes (\n            concept_hash TEXT PRIMARY KEY,\n            canonical_name TEXT NOT NULL,\n            lamport_t INTEGER NOT NULL,\n            causal_taint TEXT NOT NULL\n        )\n        ')
-        conn.execute('\n        CREATE TABLE IF NOT EXISTS lexicon_edges (\n            edge_hash TEXT PRIMARY KEY,\n            source_hash TEXT NOT NULL,\n            target_hash TEXT NOT NULL,\n            relation_type TEXT NOT NULL,\n            lamport_t INTEGER NOT NULL,\n            causal_taint TEXT NOT NULL,\n            FOREIGN KEY(source_hash) REFERENCES lexicon_nodes(concept_hash),\n            FOREIGN KEY(target_hash) REFERENCES lexicon_nodes(concept_hash),\n            UNIQUE(source_hash, target_hash, relation_type)\n        )\n        ')
+        conn.execute('\n        CREATE TABLE IF NOT EXISTS lexicon_nodes (\n            concept_hash TEXT PRIMARY KEY,\n            canonical_name TEXT NOT NULL,\n            lamport_t int NOT NULL,\n            causal_taint TEXT NOT NULL\n        )\n        ')
+        conn.execute('\n        CREATE TABLE IF NOT EXISTS lexicon_edges (\n            edge_hash TEXT PRIMARY KEY,\n            source_hash TEXT NOT NULL,\n            target_hash TEXT NOT NULL,\n            relation_type TEXT NOT NULL,\n            lamport_t int NOT NULL,\n            causal_taint TEXT NOT NULL,\n            FOREIGN KEY(source_hash) REFERENCES lexicon_nodes(concept_hash),\n            FOREIGN KEY(target_hash) REFERENCES lexicon_nodes(concept_hash),\n            UNIQUE(source_hash, target_hash, relation_type)\n        )\n        ')
 
 def get_next_lamport(conn: sqlite3.Connection) -> int:
     cur = conn.cursor()

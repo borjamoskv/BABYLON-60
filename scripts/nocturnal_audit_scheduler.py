@@ -5,7 +5,6 @@ Executes continuous multi-plane auditing, BFT ledger verification,
 GELABP exergy attestation, and vault synchronization over long-horizon runs.
 """
 
-import os
 import sys
 import time
 import subprocess
@@ -25,9 +24,9 @@ def run_cmd(cmd: str) -> bool:
 
 def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
-    print(f"\n==================================================")
+    print("\n==================================================")
     print(f"⚡ NOCTURNAL AUDIT ITERATION #{iteration_num} | {timestamp}")
-    print(f"==================================================")
+    print("==================================================")
 
     # Plane 1: Invariant Auto-alignment
     align_ok = run_cmd(".venv/bin/python scripts/autodetect_invariants.py")

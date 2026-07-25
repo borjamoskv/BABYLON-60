@@ -2,8 +2,7 @@ import json
 import os
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import parse_qs, urlparse
-from typing import Dict, Any
+from urllib.parse import urlparse
 from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_PRICES
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY', 'sk_test_mock_c5_real')
 STRIPE_WEBHOOK_SECRET = os.environ.get('STRIPE_WEBHOOK_SECRET', 'whsec_mock_c5_real')

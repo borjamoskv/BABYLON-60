@@ -1,5 +1,4 @@
 import tempfile
-import pytest
 from babylon60.core.api_key_manager import EnterpriseAPIKeyManager
 
 def test_issue_and_validate_key():

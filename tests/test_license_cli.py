@@ -1,7 +1,6 @@
 import tempfile
-import pytest
 from unittest.mock import patch
-from babylon60.cli.license_cli import print_status, activate_license, buy_license, main
+from babylon60.cli.license_cli import print_status, activate_license, main
 from babylon60.core.license_gate import SovereignLicenseGate, Tier
 
 def test_cli_print_status(capsys):

@@ -59,7 +59,7 @@ def init_db() -> None:
     conn = babylon60.database.core.connect_sync(str(DB_PATH))
     conn.execute('PRAGMA journal_mode=WAL;')
     cursor = conn.cursor()
-    cursor.execute('\n        CREATE TABLE IF NOT EXISTS ledger (\n            id INTEGER PRIMARY KEY AUTOINCREMENT,\n            timestamp INTEGER NOT NULL,\n            commit_hash TEXT NOT NULL,\n            exergy_score INTEGER NOT NULL,\n            gradient TEXT NOT NULL,\n            entropy TEXT NOT NULL,\n            leverage TEXT NOT NULL,\n            autoloop TEXT NOT NULL,\n            bottleneck TEXT NOT NULL,\n            verdict_yaml TEXT NOT NULL,\n            prov_hash TEXT NOT NULL UNIQUE\n        )\n    ')
+    cursor.execute('\n        CREATE TABLE IF NOT EXISTS ledger (\n            id int PRIMARY KEY AUTOINCREMENT,\n            timestamp int NOT NULL,\n            commit_hash TEXT NOT NULL,\n            exergy_score int NOT NULL,\n            gradient TEXT NOT NULL,\n            entropy TEXT NOT NULL,\n            leverage TEXT NOT NULL,\n            autoloop TEXT NOT NULL,\n            bottleneck TEXT NOT NULL,\n            verdict_yaml TEXT NOT NULL,\n            prov_hash TEXT NOT NULL UNIQUE\n        )\n    ')
     conn.commit()
     conn.close()
 

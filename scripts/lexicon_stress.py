@@ -74,7 +74,7 @@ async def main() -> None:
     t1 = time.time()
     total_ops = actor.ops
     elapsed = t1 - t0
-    print('\n--- STRESS TEST RESULTS (C5-INTEGER) ---')
+    print('\n--- STRESS TEST RESULTS (C5-int) ---')
     print(f'Total Concepts Assimilated : {total_ops}')
     print(f'Elapsed Time               : {elapsed:.3f} seconds')
     print(f'Throughput                 : {total_ops / elapsed:.2f} hashes/sec')
