@@ -102,6 +102,9 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 - **INV_C5_35:** When the Kernel generates static analysis, exergy evaluation, or pre-commit scripts that scan for forbidden patterns (e.g., `float`, `time.sleep()`), it MUST NOT execute naive substring matches across raw file contents or raw `git diff` outputs. The Kernel MUST parse the diff to isolate ONLY the injected code (lines starting with `+` excluding `+++`), or utilize Python's `ast` module to prevent false positives.
 - **INV_C5_36:** If pre-commit hooks (e.g., Ruff) block an autonomous Git Sentinel commit due to non-critical ergonomic or stylistic linting errors (e.g., `F401`, `F841`, `E402`, `E701`), the Kernel should not solely rely on `--no-verify`. It MUST proactively evaluate injecting the violating rule codes into the `ignore` array of `[tool.ruff.lint]` in `pyproject.toml` to permanently eradicate the friction vector.
 - **INV_C5_37:** In alignment with INV_C5_19, the use of `except Exception:` is strictly forbidden. The Kernel must proactively route error boundaries to explicit, narrow structural anomalies (e.g., `OSError`, `UnicodeDecodeError`, `asyncio.TimeoutError`) during all code generation and refactoring.
+- **INV_C5_38:** Zero-Knowledge proofs and circuit verifications (e.g. `NUL-ZK`) MUST be integrated into `babylon60.crypto.zk_verifier` using safe subprocess argument vectorization (`INV_C5_33`) without `shell=True` and enforcing recursive IEEE 754 float exclusion (`INV_C5_18`).
+- **INV_C5_39:** Any database queries executing inside the BFT actor or async event loop MUST use async connections (`aiosqlite` with WAL mode) and provide `_async` methods to prevent blocking I/O on the main event loop thread (`INV_BFT_02`).
+
 
 ---
 

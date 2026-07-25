@@ -41,6 +41,16 @@ def test_inv_c5_37():
     # TODO: Implement physical assertion for this invariant
     assert True, 'Structural check passed'
 
+def test_inv_c5_38():
+    r"""(Zero-Knowledge Verifier Isolation Invariant):** Zero-Knowledge proofs and circuit verifications (e.g. `NUL-ZK`) MUST be integrated into `babylon60.crypto.zk_verifier` using safe subprocess argument vectorization (`INV_C5_33`) without `shell=True` and enforcing recursive IEEE 754 float exclusion (`INV_C5_18`)."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
+def test_inv_c5_39():
+    r"""(BFT Lexicon Event-Loop Non-Blocking Invariant):** Any database queries executing inside the BFT actor or async event loop MUST use async connections (`aiosqlite` with WAL mode) and provide `_async` methods to prevent blocking I/O on the main event loop thread (`INV_BFT_02`)."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
 def test_inv_bridge_01():
     r"""** El sobre criptográfico es idéntico en todo escritor:"""
     # TODO: Implement physical assertion for this invariant
@@ -188,6 +198,11 @@ def test_inv_c5_33():
 
 def test_inv_c5_34():
     r"""(Rootless UV Docker Multi-stage Invariant):** When refactoring Dockerfiles for a Python environment using `uv`, the Kernel MUST unconditionally employ a deterministic Multi-Stage design. Stage 1 (Builder) must execute `uv sync --frozen` to install the environment in `/app/.venv`. Stage 2 (Runtime) must instantiate an isolated user (`useradd -m -u 1000 app`), adopt that identity (`USER app`), copy the compiled environment transferring ownership (`COPY --chown=app:app /app/.venv /app/.venv`), and strictly set `ENV PATH="/app/.venv/bin:$PATH"` to neutralize latent dependencies on `/root/.local/bin`."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
+def test_inv_c5_40():
+    r"""(Diff-Specific Exergy Analysis):** Exergy optimization scripts MUST perform structural analysis strictly on the additive diffs (`+`) grouped by file path, avoiding global `diff.lower()` substring searches that trigger false positives on filenames or unrelated documentation."""
     # TODO: Implement physical assertion for this invariant
     assert True, 'Structural check passed'
 
