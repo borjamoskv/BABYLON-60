@@ -1,4 +1,4 @@
-const API_BASE = '';
+const API_BASE = "";
 export async function get(path) {
   const res = await fetch(`${API_BASE}${path}`);
   if (!res.ok) {
@@ -9,8 +9,8 @@ export async function get(path) {
 }
 export async function post(path, body) {
   const res = await fetch(`${API_BASE}${path}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
   });
   if (!res.ok) {
@@ -20,7 +20,7 @@ export async function post(path, body) {
   return res.json();
 }
 export function connectWebSocket(path, onMessage, onError) {
-  const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const protocol = location.protocol === "https:" ? "wss:" : "ws:";
   const controller = { closed: false, ws: null };
   const dial = () => {
     if (controller.closed) return;
@@ -28,7 +28,11 @@ export function connectWebSocket(path, onMessage, onError) {
     controller.ws = ws;
     ws.onmessage = (e) => {
       let data;
-      try { data = JSON.parse(e.data); } catch { return; }
+      try {
+        data = JSON.parse(e.data);
+      } catch {
+        return;
+      }
       onMessage(data);
     };
     ws.onerror = (e) => onError?.(e);
@@ -38,9 +42,15 @@ export function connectWebSocket(path, onMessage, onError) {
   };
   controller.close = () => {
     controller.closed = true;
-    try { controller.ws?.close(); } catch {  }
+    try {
+      controller.ws?.close();
+    } catch {}
   };
   dial();
   return controller;
 }
-export const isTauri = typeof window !== 'undefined' && (window.__TAURI__ !== undefined || window.__TAURI_INTERNALS__ !== undefined || window.__TAURI_METADATA__ !== undefined);
+export const isTauri =
+  typeof window !== "undefined" &&
+  (window.__TAURI__ !== undefined ||
+    window.__TAURI_INTERNALS__ !== undefined ||
+    window.__TAURI_METADATA__ !== undefined);

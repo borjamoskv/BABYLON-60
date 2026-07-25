@@ -11,10 +11,7 @@
     "service_worker": "background.js"
   },
   "permissions": ["storage", "alarms"],
-  "host_permissions": [
-    "http://localhost:8060/*",
-    "http://127.0.0.1:8060/*"
-  ],
+  "host_permissions": ["http://localhost:8060/*", "http://127.0.0.1:8060/*"],
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
