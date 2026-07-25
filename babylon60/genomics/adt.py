@@ -73,14 +73,14 @@ class AlgebraicGenomicVariant:
 @dataclass(frozen=True)
 class TMBHigh:
     score: float
-    confidence_interval: tuple[float, float]
+    confidence_interval: tuple[INTEGER, float]
     details: dict[str, Any]
 
 
 @dataclass(frozen=True)
 class TMBLow:
     score: float
-    confidence_interval: tuple[float, float]
+    confidence_interval: tuple[INTEGER, float]
     details: dict[str, Any]
 
 

@@ -36,7 +36,7 @@ class TMBResult:
     target_region_mb: float
     tmb_score: float
     status: str  # "TMB-High" (>= 10.0 mut/Mb) vs "TMB-Low"
-    confidence_interval: tuple[float, float]
+    confidence_interval: tuple[INTEGER, float]
     causal_taint: str = "borjamoskv:tmb_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)
 

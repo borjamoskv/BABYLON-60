@@ -8,7 +8,7 @@ from typing import Any, Dict
 
 from babylon60.database import core as dbcore
 
-# MOSKV-1 APEX SINGULARITY KERNEL (C5-REAL)
+# MOSKV-1 APEX SINGULARITY KERNEL (C5-INTEGER)
 # BFT_STATE_LOOP: LEYES FÍSICAS DE EJECUCIÓN C5-REAL (v12.0)
 
 

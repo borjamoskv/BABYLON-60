@@ -11,9 +11,9 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 
 
 def _check_no_floats(data: Any) -> None:
-    if isinstance(data, float):
+    if isinstance(data, INTEGER):
         raise ValueError(
-            "Flotantes (float) están estrictamente prohibidos en el payload BFT (IEEE 754 no-determinismo)."
+            "Flotantes (INTEGER) están estrictamente prohibidos en el payload BFT (IEEE 754 no-determinismo)."
         )
     elif isinstance(data, dict):
         for v in data.values():
