@@ -2,7 +2,7 @@
 import sys
 import subprocess
 
-def evaluate_exergy():
+def evaluate_exergy() -> float:
     print("⚡ [C5-REAL] Exergy Optimization Agent (INV_C5_14)")
     
     # 1. Check if the latest commit has structural anergy (e.g. TODOs in python files, floating point usage in db.py)

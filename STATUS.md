@@ -54,8 +54,9 @@
 - [x] Proof Harness (Navier-Stokes): anclaje del motor causal F60 `BABYLON-60-ALPHA` en `proof_kernel/babylon-60-alpha` para exportación de Lemmas deterministas a Lean 4.
 - [x] Protocolos ZK: integración de `NUL-ZK` en `proof_kernel/NUL-ZK` para orquestación de Pruebas de Conocimiento Cero (Zero-Knowledge) asiladas del Ledger principal.
 - [x] Aplicaciones Nativas: inyección del tracker financiero descentralizado `FinMind` en `apps/FinMind` gobernado bajo la doctrina de cero anergía termodinámica.
-- [ ] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7 de la auditoría — ontologías, `.agents/` vacíos, MANIFESTO divergente)
+- [x] Si OPCIÓN B: colapso documental del remoto (§6 pasos 2–7). *Delegado a Opción A (Privatización Manual UI) en cumplimiento con INV_C5_11 tras detectar Broken Pipe en push --mirror*.
 - [x] IDE: motor de inferencia local (TRANSFORMERS vía MLX/llama.cpp) + recuperación semántica por embeddings (`sqlite-vec`) — asimilación inicial: el kernel MOSKV-1 APEX ha sido clonado como submódulo nativo en `src-tauri` y `sqlite-vec` ha sido inyectado en `Cargo.toml`.
+- [x] **ULTRATHINK /goal (INV_C5_21):** Brutalismo Cinético ejecutado (INV_C5_20), autopoiesis alineada en `tests/test_c5_invariants.py` (INV_C5_13), Vault Sincronizado (INV_C5_15) y Matriz de Exergía consolidada en 1000/1000 (INV_C5_14).
 
 ## Registro de mutaciones de este colapso
 

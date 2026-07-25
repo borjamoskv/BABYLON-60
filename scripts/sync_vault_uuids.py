@@ -4,7 +4,7 @@ import glob
 import json
 import shutil
 
-def main():
+def main() -> None:
     print("⚡ [C5-REAL] Memory Vault Session Synchronizer (INV_C5_15 / INV_C5_25)")
     brain_dir = os.path.expanduser("~/.gemini/antigravity/brain")
     vault_dir = os.path.expanduser("~/.gemini/config/.cortex/memory_vault")
