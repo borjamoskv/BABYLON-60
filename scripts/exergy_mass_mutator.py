@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-[C5-REAL] Exergy Mass Mutator - SOTA Polyglot AST Edition (Tick 4: ThreadPool Concurrency).
-Incorporates real-time GELABP Exergy Delta scoring and ultra-parallel IO thread pooling.
+[C5-REAL] Exergy Mass Mutator - SOTA Polyglot AST Edition (Tick 5).
+Incorporates advanced structural eradications for Rust/TypeScript.
 """
 import ast
 import os
@@ -139,13 +139,21 @@ def apply_polyglot_mutations(file_path: Path) -> tuple[bool, float]:
         if 'println!' in content and 'tracing' not in content:
             content = content.replace('println!', 'tracing::info!')
             exergy_gained += 4.0
+        p = len(re.findall(r'panic!\(', content))
+        content = re.sub(r'panic!\([^)]*\)', 'panic!("C5-REAL: Termodinámica Abortada (INV_C5_07)")', content)
+        exergy_gained += p * 5.0
             
     elif file_path.suffix in (".ts", ".tsx"):
         n = len(re.findall(r':\s*any\b', content))
         content = re.sub(r':\s*any\b', ': unknown', content)
         m = len(re.findall(r'\bconsole\.log\b', content))
         content = re.sub(r'\bconsole\.log\b', 'console.info', content)
-        exergy_gained += (n * 2.0) + (m * 1.5)
+        # SOTA TS Constraints
+        v = len(re.findall(r'\bvar\s+', content))
+        content = re.sub(r'\bvar\s+', 'let ', content)
+        eq = len(re.findall(r'(?<![=!><])==(?![=])', content))
+        content = re.sub(r'(?<![=!><])==(?![=])', '===', content)
+        exergy_gained += (n * 2.0) + (m * 1.5) + (v * 3.0) + (eq * 5.0)
 
     if content != original:
         file_path.write_text(content, encoding="utf-8")
