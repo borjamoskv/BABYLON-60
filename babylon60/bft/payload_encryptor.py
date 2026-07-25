@@ -1,5 +1,7 @@
 import os
+
 from cryptography.fernet import Fernet
+
 
 class PayloadEncryptor:
     def __init__(self) -> None:

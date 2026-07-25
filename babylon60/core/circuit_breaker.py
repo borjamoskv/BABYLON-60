@@ -1,6 +1,7 @@
 import time
 from enum import Enum
 
+
 class CircuitState(Enum):
     CLOSED = 'closed'      # Normal operation
     OPEN = 'open'          # Failing, reject requests

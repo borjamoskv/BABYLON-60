@@ -1,6 +1,8 @@
 import tempfile
 from pathlib import Path
+
 from cortex.infra.stripe_webhook_handler import StripeWebhookProcessor
+
 
 def test_stripe_signature_verification():
     processor = StripeWebhookProcessor(webhook_secret="whsec_test_secret_123")

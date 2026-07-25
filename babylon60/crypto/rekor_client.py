@@ -4,6 +4,7 @@ import logging
 import urllib.error
 import urllib.request
 from typing import Any
+
 logger = logging.getLogger('babylon60.crypto.rekor')
 REKOR_URL = 'https://rekor.sigstore.dev'
 

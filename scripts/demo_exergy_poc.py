@@ -1,7 +1,9 @@
 import os
 import sys
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from exergy_optimizer_agent import evaluate_gelabp
+
 MOCK_DIFF_HIGH_ENTROPY = '\ndiff --git a/database/connection.py b/database/connection.py\nindex a123b45..c789d01 100644\n--- a/database/connection.py\n+++ b/database/connection.py\n@@ -10,3 +10,8 @@ def connect():\n+    try:\n+        db = babylon60.database.core.connect("cortex.db")\n+        # Hardcoded master key leak:\n+        MASTER_LEDGER_KEY = "3b4dff086c8f9da924ba95f7ecb93ea0"\n+    except:\n+        # Broad exception catch\n+        pass\n'
 MOCK_DIFF_HIGH_EXERGY = '\ndiff --git a/tests/test_c5_invariants.py b/tests/test_c5_invariants.py\nindex e456f78..b890c12 100644\n--- a/tests/test_c5_invariants.py\n+++ b/tests/test_c5_invariants.py\n@@ -12,3 +12,8 @@\n+def test_inv_c5_10_pynacl_serialization():\n+    """INV_C5_10 — PyNaCl key serialization must not access private attributes like _seed or _public_key."""\n+    hits = _scan({".py"}, r\'\\._seed\\b|\\._public_key\\b\')\n+    hits = [h for h in hits if "test_c5_invariants.py" not in h]\n+    assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)\n'
 

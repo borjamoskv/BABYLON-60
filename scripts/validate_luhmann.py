@@ -1,13 +1,14 @@
 import sys
 from pathlib import Path
 
+
 def validate_luhmann_post() -> None:
     project_root = Path(__file__).resolve().parent.parent
     target_file = project_root / 'docs' / 'substack_luhmann.md'
     if not target_file.exists():
         print(f'[-] Validation Failed: File {target_file} does not exist.')
         sys.exit(1)
-    with open(target_file, 'r', encoding='utf-8') as f:
+    with open(target_file, encoding='utf-8') as f:
         content = f.read()
     print(f'[🔍] Auditing: {target_file}')
     if '|' in content:

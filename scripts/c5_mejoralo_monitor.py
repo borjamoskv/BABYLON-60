@@ -3,7 +3,9 @@ import sqlite3
 import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
+
 import babylon60.database.core
+
 ROOT_DIR = Path(__file__).resolve().parent.parent
 STATUS_FILE = ROOT_DIR / 'STATUS.md'
 DB_TARGETS = ['master_ledger.db', 'apex_cortex.db', 'cortex.db', 'cortex_memory.db', 'cortex_ontology.db', 'cortex_voice_ledger.db', 'telemetry.db', 'ultrathink_ledger.db']
@@ -29,7 +31,7 @@ def audit_git_entropy() -> dict[str, str | int | list[str]]:
 
 def audit_databases() -> dict[str, dict[str, int]]:
     census: dict[str, dict[str, int]] = {}
-    db_paths = [p for p in ROOT_DIR.rglob('*.db') if not any((part in ('venv', '.venv', '.git', '__pycache__') for part in p.parts))]
+    db_paths = [p for p in ROOT_DIR.rglob('*.db') if not any(part in ('venv', '.venv', '.git', '__pycache__') for part in p.parts)]
     for db_path in sorted(db_paths):
         rel_name = str(db_path.relative_to(ROOT_DIR))
         try:
@@ -152,7 +154,7 @@ def c5_real_colapso() -> None:
     print('[GIT SENTINEL] Forzando colapso...')
     append_mutation('[PENDING]', status_hash)
     sentinel_hash = git_sentinel_commit(status_hash)
-    with open(STATUS_FILE, 'r') as file_in:
+    with open(STATUS_FILE) as file_in:
         content = file_in.read()
     content = content.replace('`[PENDING]`', f'`{sentinel_hash}`')
     with open(STATUS_FILE, 'w') as file_out:

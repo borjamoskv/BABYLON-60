@@ -1,5 +1,6 @@
 import asyncio
 import logging
+
 logger = logging.getLogger(__name__)
 
 async def run_applescript(script: str, timeout_seconds: int=30) -> tuple[bool, str, str]:

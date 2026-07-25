@@ -1,16 +1,19 @@
 import asyncio
-import inspect
 import contextlib
 import contextvars
+import inspect
 import typing
+from collections.abc import Callable
 from contextvars import ContextVar
-from typing import Any, Callable, Dict, TypeVar, FrozenSet
+from typing import Any, TypeVar
+
 from babylon60.bft.lexicon import BFTLexicon
+
 T = TypeVar('T')
 
 class AbilityViolation(Exception):
     pass
-_claimed_abilities: ContextVar[FrozenSet[str]] = ContextVar('_claimed_abilities', default=frozenset())
+_claimed_abilities: ContextVar[frozenset[str]] = ContextVar('_claimed_abilities', default=frozenset())
 
 class BFTAbilityHandler:
 
@@ -19,19 +22,19 @@ class BFTAbilityHandler:
         self.hash_io = lexicon.get_concept_hash('TYPE::Ability::IO')
         self.hash_state = lexicon.get_concept_hash('TYPE::Ability::State')
         self.hash_exception = lexicon.get_concept_hash('TYPE::Ability::Exception')
-        self.handlers: Dict[str, Callable[..., Any]] = {}
+        self.handlers: dict[str, Callable[..., Any]] = {}
 
     def register_handler(self, ability_hash: str, handler_fn: Callable[..., Any]) -> None:
         self.handlers[ability_hash] = handler_fn
 
-    def claim_abilities(self, abilities: FrozenSet[str]) -> contextvars.Token[FrozenSet[str]]:
+    def claim_abilities(self, abilities: frozenset[str]) -> contextvars.Token[frozenset[str]]:
         return _claimed_abilities.set(abilities)
 
-    def release_abilities(self, token: contextvars.Token[FrozenSet[str]]) -> None:
+    def release_abilities(self, token: contextvars.Token[frozenset[str]]) -> None:
         _claimed_abilities.reset(token)
 
     @contextlib.contextmanager
-    def abilities_scope(self, abilities: FrozenSet[str]) -> typing.Iterator[None]:
+    def abilities_scope(self, abilities: frozenset[str]) -> typing.Iterator[None]:
         token = self.claim_abilities(abilities)
         try:
             yield

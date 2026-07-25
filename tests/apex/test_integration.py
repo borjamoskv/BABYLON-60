@@ -1,9 +1,13 @@
 from __future__ import annotations
+
 import urllib.error
 import urllib.request
+
 import pytest
+
 from apex_trials import AmendmentLedger, Copilot, CtGovClient, HttpCache
 from apex_trials.report import render_report
+
 
 def _online() -> bool:
     try:

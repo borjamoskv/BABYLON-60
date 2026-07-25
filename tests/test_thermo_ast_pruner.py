@@ -1,5 +1,7 @@
 import ast
+
 from babylon60.core.thermo_ast_pruner import AnergiaPurger
+
 
 def test_anergia_purger_removes_constants() -> None:
     source = '\ndef example():\n    "Docstring that should be pruned"\n    x = 10\n    return x\n'

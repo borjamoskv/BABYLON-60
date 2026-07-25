@@ -2,6 +2,7 @@ import shutil
 import subprocess
 from pathlib import Path
 
+
 def run_cmd(cmd: list[str]) -> None:
     print(f"[*] Executing: {' '.join(cmd)}")
     subprocess.run(cmd, capture_output=True, text=True)

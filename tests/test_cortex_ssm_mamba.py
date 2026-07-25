@@ -2,8 +2,10 @@ import math
 import os
 import sys
 import time
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cortex_ssm_mamba_core import StateSpaceModel
+
 
 def test_ssm_causal_shape() -> None:
     state_dim = 16

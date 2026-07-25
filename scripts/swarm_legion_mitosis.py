@@ -6,18 +6,17 @@ monetization audit, GELABP exergy maximization, and vault convergence.
 """
 
 import json
-import os
+import subprocess
 import sys
 import time
-import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import Any
 
 REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "swarm_legion.log"
 
-def run_worker_task(worker_id: int, task_name: str) -> Dict[str, Any]:
+def run_worker_task(worker_id: int, task_name: str) -> dict[str, Any]:
     """Simulates/executes isolated worker squad task on physical disk."""
     start_time = time.time()
     # Execute actual system check
@@ -31,7 +30,7 @@ def run_worker_task(worker_id: int, task_name: str) -> Dict[str, Any]:
         "duration": round(duration, 3)
     }
 
-def orchestrate_100_agent_swarm(num_workers: int = 100) -> Dict[str, Any]:
+def orchestrate_100_agent_swarm(num_workers: int = 100) -> dict[str, Any]:
     """Execute 100 parallel agent worker checks across 5 specialized squads."""
     squads = [
         "SQUAD_ALPHA_BFT_CONSENSUS",
@@ -42,7 +41,7 @@ def orchestrate_100_agent_swarm(num_workers: int = 100) -> Dict[str, Any]:
     ]
     
     print(f"⚡ Launching {num_workers}-Agent Swarm Mitosis across 5 squads...")
-    results: List[Dict[str, Any]] = []
+    results: list[dict[str, Any]] = []
     
     with ThreadPoolExecutor(max_workers=20) as executor:
         futures = {

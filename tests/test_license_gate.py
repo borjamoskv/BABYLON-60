@@ -1,6 +1,9 @@
 import tempfile
+
 import pytest
-from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_LIMITS
+
+from babylon60.core.license_gate import TIER_LIMITS, SovereignLicenseGate, Tier
+
 
 def test_license_key_generation_and_verification():
     with tempfile.TemporaryDirectory() as tmpdir:

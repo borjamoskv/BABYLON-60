@@ -1,7 +1,19 @@
 import networkx as nx
 import pytest
+
 from babylon60.cli.onco_transducer import simulate_boolean_network
-from babylon60.genomics import APOBECEnrichmentResult, ECDNAAmpliconResult, FASTASequenceValidator, GenomeCoordinateHygiene, GenomicEvaluationEngine, GenomicStateTransducer, GenomicVariantRecord, LOHHRDResult, TMBResult
+from babylon60.genomics import (
+    APOBECEnrichmentResult,
+    ECDNAAmpliconResult,
+    FASTASequenceValidator,
+    GenomeCoordinateHygiene,
+    GenomicEvaluationEngine,
+    GenomicStateTransducer,
+    GenomicVariantRecord,
+    LOHHRDResult,
+    TMBResult,
+)
+
 
 def test_coordinate_hygiene_bed_vcf_conversions() -> None:
     chrom, start_1b, end_1b = GenomeCoordinateHygiene.bed_to_vcf('1', 100, 105)

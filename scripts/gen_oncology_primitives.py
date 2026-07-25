@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import os
 from typing import Any
+
 DISCLAIMER_ES = "AVISO. Esto es una ONTOLOGIA DE CONOCIMIENTO de biologia molecular del cancer y de sus dianas terapeuticas: los bloques fundamentales que la investigacion oncologica estudia y ataca. NO es una cura, NO es un protocolo de tratamiento y NO es consejo medico. Ninguna primitiva individual ni el conjunto 'curan el cancer'. El cancer no es una sola enfermedad sino mas de 200 enfermedades distintas; el diagnostico y el tratamiento son clinicos, individualizados y competencia de oncologos e investigadores. Cualquier decision medica debe tomarse con profesionales sanitarios."
 DISCLAIMER_EN = "NOTICE. This is a KNOWLEDGE ONTOLOGY of cancer molecular biology and its therapeutic targets. It is NOT a cure, NOT a treatment protocol and NOT medical advice. No single primitive nor the whole set 'cures cancer'. Cancer is 200+ distinct diseases; diagnosis and treatment are clinical and individualized. Consult qualified healthcare professionals."
 CATS = {'hallmark': ('Hallmarks del cancer', 'meta'), 'oncogene': ('Oncogenes', 'molecular'), 'suppressor': ('Genes supresores de tumores', 'molecular'), 'pathway': ('Vias de senalizacion', 'pathway'), 'cellcycle': ('Ciclo celular y checkpoints', 'cellular'), 'apoptosis': ('Apoptosis y muerte celular regulada', 'cellular'), 'ddr': ('Respuesta al dano y reparacion de ADN', 'molecular'), 'genome': ('Inestabilidad genomica y mutagenesis', 'molecular'), 'telomere': ('Telomeros, senescencia e inmortalidad', 'cellular'), 'angio': ('Angiogenesis', 'cellular'), 'metastasis': ('Invasion, EMT y metastasis', 'cellular'), 'metabolism': ('Metabolismo tumoral', 'molecular'), 'epigenetic': ('Epigenetica y cromatina', 'molecular'), 'tme': ('Microambiente tumoral (TME)', 'tissue'), 'immuno': ('Inmuno-oncologia y evasion inmune', 'tissue'), 'modality': ('Modalidades terapeuticas', 'therapy'), 'drug': ('Primitivas farmaco -> diana', 'therapy')}
@@ -27,7 +29,7 @@ def q(s: str) -> str:
 
 def write_if_changed(path: str, content: str) -> None:
     if os.path.exists(path):
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path, encoding='utf-8') as f:
             if f.read() == content:
                 return
     with open(path, 'w', encoding='utf-8') as f:
@@ -48,7 +50,7 @@ def emit_yaml(recs: list[dict[str, Any]], path: str) -> None:
     lines.append('  confidence_scale: C5-established')
     lines.append('  categories:')
     for k, (label, layer) in CATS.items():
-        n = sum((1 for r in recs if r['category'] == k))
+        n = sum(1 for r in recs if r['category'] == k)
         lines.append(f'    - key: {k}')
         lines.append(f'      label: {q(label)}')
         lines.append(f'      layer: {layer}')
@@ -108,7 +110,7 @@ def emit_markdown(recs: list[dict[str, Any]], path: str) -> None:
     L.append('| # | Categoria | Capa | Primitivas |')
     L.append('| :--- | :--- | :--- | :---: |')
     for idx, (k, (label, layer)) in enumerate(CATS.items(), start=1):
-        n = sum((1 for r in recs if r['category'] == k))
+        n = sum(1 for r in recs if r['category'] == k)
         anchor = label.lower().replace(' ', '-').replace('(', '').replace(')', '').replace('/', '').replace(',', '')
         L.append(f'| {idx} | [{label}](#{anchor}) | {layer} | {n} |')
     L.append(f'| | **TOTAL** | | **{len(recs)}** |')
@@ -150,7 +152,7 @@ def main() -> None:
     emit_python(recs, py_path)
     emit_markdown(recs, md_path)
     from collections import Counter
-    c = Counter((r['category'] for r in recs))
+    c = Counter(r['category'] for r in recs)
     print(f'OK -> {len(recs)} primitivas, IDs unicos, 3 formatos emitidos.')
     for k in CATS:
         print(f'  {k:12s} {c[k]:3d}')

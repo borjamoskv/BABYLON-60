@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from apex_trials.ctgov import classify_history
+
 
 def _hist(*versions: dict[str, object]) -> dict[str, object]:
     return {'changes': list(versions)}

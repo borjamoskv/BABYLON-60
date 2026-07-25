@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 import asyncio
 import json
 import logging
 from typing import Any
+
 logger = logging.getLogger('babylon60.http')
 _DEFAULT_MAX_RETRIES = 5
 _DEFAULT_BASE_DELAY = 2.0

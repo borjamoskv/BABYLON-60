@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 import ctypes
 import resource
 import sys
+
 
 def _kill_self() -> None:
     sys.exit(1)

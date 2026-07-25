@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import sqlite3
 from pathlib import Path
+
 import aiosqlite
+
 _ALLOWED_SYNCHRONOUS = frozenset({'FULL', 'NORMAL'})
 _BUSY_TIMEOUT_MS = 5000
 
@@ -11,8 +14,8 @@ def _validate_synchronous(synchronous: str) -> str:
     return synchronous
 
 import asyncio
-from contextlib import asynccontextmanager
 import logging
+from contextlib import asynccontextmanager
 
 logger = logging.getLogger(__name__)
 

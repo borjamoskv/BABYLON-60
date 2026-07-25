@@ -2,7 +2,9 @@ import asyncio
 import time
 from pathlib import Path
 from typing import Any
+
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+
 
 async def run_benchmark(iterations: int=10000) -> None:
     db_path: Path = Path('benchmark_temp.db')
@@ -26,7 +28,7 @@ async def run_benchmark(iterations: int=10000) -> None:
         shm.unlink()
     if wal.exists():
         wal.unlink()
-    success: int = sum((1 for r in results if not isinstance(r, BaseException)))
+    success: int = sum(1 for r in results if not isinstance(r, BaseException))
     errors: int = len(results) - success
     tps: float = success / total_time
     print('\n--- MOSKV-1 APEX METRICS ---')

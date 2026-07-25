@@ -1,6 +1,7 @@
 import asyncio
 from typing import Any
 
+
 def get_loop_lock(instance: Any, attr_prefix: str) -> asyncio.Lock:
     try:
         loop = asyncio.get_running_loop()

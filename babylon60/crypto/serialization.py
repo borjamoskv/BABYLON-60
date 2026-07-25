@@ -1,6 +1,7 @@
-import json
 from typing import Any
+
 import cbor2
+
 
 def canonical_serialize(payload: dict[str, Any]) -> bytes:
     def _clean_floats(obj: Any) -> Any:

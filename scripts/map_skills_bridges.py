@@ -1,10 +1,10 @@
 import logging
 import os
-from typing import List
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger('map_skills_bridges')
 
-def discover_plugins(plugin_dir: str) -> List[str]:
+def discover_plugins(plugin_dir: str) -> list[str]:
     plugins = []
     if os.path.exists(plugin_dir):
         for entry in os.scandir(plugin_dir):
@@ -14,7 +14,7 @@ def discover_plugins(plugin_dir: str) -> List[str]:
                     plugins.append(manifest)
     return plugins
 
-def discover_skills(base_dir: str) -> List[str]:
+def discover_skills(base_dir: str) -> list[str]:
     skills = []
     skills_dir = os.path.join(base_dir, 'skills')
     if os.path.exists(skills_dir):

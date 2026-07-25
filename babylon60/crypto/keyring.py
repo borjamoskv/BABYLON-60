@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 import base64
 import binascii
 import logging
 import os
+
 try:
     import keyring
 except ImportError:
@@ -10,6 +12,7 @@ except ImportError:
 from cryptography.exceptions import InvalidTag
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
+
 _AES_KEY_LENGTH = 32
 _SALT_LENGTH = 16
 _NONCE_LENGTH = 12

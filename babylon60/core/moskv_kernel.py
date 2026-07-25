@@ -4,13 +4,15 @@ import json
 import sqlite3
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict
+from typing import Any
+
 from babylon60.database import core as dbcore
+
 
 @dataclass
 class ApexClaim:
     claim_id: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     prev_hash: str
     confidence: str
     lamport_t: int
@@ -39,7 +41,7 @@ class Moskv1Kernel:
         except (sqlite3.DatabaseError, OSError, ValueError):
             raise RuntimeError('FAIL-FAST: Fallo catastrófico en boot BFT.')
 
-    async def ingest_entropy(self, payload: Dict[str, Any], confidence: str='C5') -> str:
+    async def ingest_entropy(self, payload: dict[str, Any], confidence: str='C5') -> str:
         self._lamport_clock += 1
         claim = ApexClaim(claim_id=f'evt_{self._lamport_clock}_{int(datetime.now(timezone.utc).timestamp())}', payload=payload, prev_hash=self._last_hash, confidence=confidence, lamport_t=self._lamport_clock)
         await self._write_queue.put(claim)

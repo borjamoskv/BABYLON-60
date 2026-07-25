@@ -1,10 +1,13 @@
 from __future__ import annotations
+
 import hashlib
-from typing import Any, Dict
+from typing import Any
+
 import cbor2
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
+
 
 def _check_no_floats(data: Any) -> None:
     if isinstance(data, float):
@@ -17,7 +20,7 @@ def _check_no_floats(data: Any) -> None:
         for v in data:
             _check_no_floats(v)
 
-def canonicalize_cbor(data: Dict[str, Any]) -> bytes:
+def canonicalize_cbor(data: dict[str, Any]) -> bytes:
     _check_no_floats(data)
     return cbor2.dumps(data, canonical=True)
 

@@ -2,11 +2,12 @@ import json
 import os
 import re
 import subprocess
+
 agents_md_path = '/Users/borjafernandezangulo/30_BABYLON-60/AGENTS.md'
 if not os.path.exists(agents_md_path):
     print('AGENTS.md no existe.')
     exit(1)
-with open(agents_md_path, 'r', encoding='utf-8') as f:
+with open(agents_md_path, encoding='utf-8') as f:
     content = f.read()
 pattern = re.compile('\\*\\*Ω(\\d+)\\s*·\\s*(.*?)\\*\\*\\s*:\\s*(.*)', re.MULTILINE)
 matches = pattern.findall(content)

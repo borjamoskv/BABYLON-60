@@ -1,7 +1,9 @@
 """Property-based tests for BABYLON-60 crypto primitives."""
 import pytest
+
 try:
-    from hypothesis import given, strategies as st, settings
+    from hypothesis import given, settings
+    from hypothesis import strategies as st
     HAS_HYPOTHESIS = True
 except ImportError:
     HAS_HYPOTHESIS = False
@@ -21,10 +23,8 @@ except ImportError:
         def dec(fn): return fn
         return dec
 
-from babylon60.crypto.keys import Signer, Verifier, KeyManager
-import hashlib
-import base64
-from datetime import datetime, timezone
+
+from babylon60.crypto.keys import KeyManager, Signer, Verifier
 
 
 @pytest.mark.skipif(not HAS_HYPOTHESIS, reason='hypothesis not installed')

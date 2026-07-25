@@ -1,7 +1,9 @@
 from __future__ import annotations
-import asyncio
+
 from pathlib import Path
+
 import aiosqlite
+
 
 async def apply_migrations(conn: aiosqlite.Connection, migrations_dir: str | Path) -> None:
     migrations_dir = Path(migrations_dir)

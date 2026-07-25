@@ -2,6 +2,7 @@ import hashlib
 import shutil
 from pathlib import Path
 from typing import Any
+
 REPO_ROOT: Path = Path(__file__).resolve().parent.parent
 EVIDENCE_DIR: Path = REPO_ROOT / 'cortex' / 'legal_dossier' / 'evidencias_capturas'
 SESSION_SUBDIR: Path = EVIDENCE_DIR / 'anexos_capturas_sesion'
@@ -10,7 +11,7 @@ MAPPINGS: list[tuple[str, str, str, str]] = [('Captura de pantalla 2026-07-14 a 
 
 def write_if_changed(path: Path, content: str) -> None:
     if path.exists():
-        with open(path, 'r', encoding='utf-8') as f:
+        with open(path, encoding='utf-8') as f:
             if f.read() == content:
                 return
     with open(path, 'w', encoding='utf-8') as f:

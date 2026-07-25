@@ -6,7 +6,9 @@ import re
 import sys
 from pathlib import Path
 from typing import Any
+
 import babylon60.database.core
+
 EXERGY_LEVEL: str = '1000/1000'
 BFT_MIN_CONSENSUS: int = 3
 TARGET_PATTERNS: dict[str, re.Pattern[str]] = {'PLAINTEXT_CREDIT_CARD': re.compile('\\b(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|6(?:011|5[0-9]{2})[0-9]{12}|(?:2131|1800|35\\d{3})\\d{11})\\b'), 'PRIVATE_KEY_HEADER': re.compile('-----BEGIN (?:RSA|OPENSSH|EC|DSA|PGP)?\\s*PRIVATE KEY-----'), 'UNENCRYPTED_IRC_PORT': re.compile(':(?:6667|6668|6669)\\b'), 'PLAIN_HTTP_C2': re.compile('http://[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}'), 'SQLI_ERROR_SIGNATURE': re.compile('(?:You have an error in your SQL syntax|Warning: mysql_connect|SQLSTATE\\[\\d+\\]|Unclosed quotation mark after the character string)', re.IGNORECASE)}

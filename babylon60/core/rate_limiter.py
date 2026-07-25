@@ -1,6 +1,6 @@
-import time
 import asyncio
-from typing import Optional
+import time
+
 
 class RateLimiter:
     def __init__(self, rate_limit_rpm: int = 100) -> None:

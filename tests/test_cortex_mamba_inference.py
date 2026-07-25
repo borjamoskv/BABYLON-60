@@ -1,8 +1,10 @@
 import os
 import sys
+
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from cortex_mamba_inference import MambaGenerator, softmax
 from cortex_mamba_network import MambaNetwork
+
 
 def test_softmax_invariants() -> None:
     logits = [2.0, 1.0, 0.1, -1.0, 5.0]

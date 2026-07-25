@@ -1,6 +1,8 @@
 import py_compile
 from pathlib import Path
+
 import pytest
+
 ROOT = Path(__file__).resolve().parent.parent
 TRACKED_DIRS = ('cli', 'core', 'bft', 'analysis', 'adapters', 'compiler', 'contracts', 'cortex', 'scripts', 'tests')
 EXCLUDED_PARTS = {'__pycache__', 'node_modules', 'fable_modules', 'bin', 'obj'}

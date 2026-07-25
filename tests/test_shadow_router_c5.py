@@ -1,7 +1,10 @@
 import asyncio
 import json
+
 import pytest
+
 from babylon60.core.crypto import Ed25519Signer
+
 
 def _route(prompt: str='Explain quantum gravity'):
     from babylon60.core.shadow_router import ShadowRouter

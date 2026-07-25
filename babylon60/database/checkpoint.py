@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 import aiosqlite
+
 
 async def checkpoint(conn: aiosqlite.Connection, mode: str = 'PASSIVE') -> dict[str, int]:
     """Execute WAL checkpoint. Modes: PASSIVE, FULL, RESTART, TRUNCATE."""

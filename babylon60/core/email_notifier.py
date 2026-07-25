@@ -8,10 +8,10 @@ import json
 import os
 import smtplib
 import time
-from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
 
 TARGET_NOTIFY_EMAIL = "Borjamoskv@gmail.com"
 NOTIFICATIONS_LOG = Path.home() / ".babylon60" / "purchase_notifications.json"
@@ -19,12 +19,12 @@ NOTIFICATIONS_LOG = Path.home() / ".babylon60" / "purchase_notifications.json"
 class PurchaseNotifier:
     """Instant Purchase Alert Dispatcher for Operator Borja Moskv."""
 
-    def __init__(self, log_path: Optional[Path] = None, target_email: str = TARGET_NOTIFY_EMAIL) -> None:
+    def __init__(self, log_path: Path | None = None, target_email: str = TARGET_NOTIFY_EMAIL) -> None:
         self.log_path = log_path or NOTIFICATIONS_LOG
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
         self.target_email = target_email
 
-    def notify_purchase(self, customer_email: str, tier: str, amount_eur: int, license_key: str, session_id: str) -> Dict[str, Any]:
+    def notify_purchase(self, customer_email: str, tier: str, amount_eur: int, license_key: str, session_id: str) -> dict[str, Any]:
         """Dispatch instant purchase notification to Borjamoskv@gmail.com and log alert."""
         now_str = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
         alert_data = {
@@ -54,11 +54,11 @@ class PurchaseNotifier:
 
         return alert_data
 
-    def _append_to_log(self, alert_data: Dict[str, Any]) -> None:
+    def _append_to_log(self, alert_data: dict[str, Any]) -> None:
         logs = []
         if self.log_path.exists():
             try:
-                with open(self.log_path, "r", encoding="utf-8") as f:
+                with open(self.log_path, encoding="utf-8") as f:
                     logs = json.load(f)
             except (json.JSONDecodeError, OSError):
                 logs = []
@@ -69,7 +69,7 @@ class PurchaseNotifier:
         except OSError:
             pass
 
-    def _send_smtp_email(self, data: Dict[str, Any], smtp_user: str, smtp_pass: str) -> bool:
+    def _send_smtp_email(self, data: dict[str, Any], smtp_user: str, smtp_pass: str) -> bool:
         try:
             msg = MIMEMultipart()
             msg["From"] = smtp_user

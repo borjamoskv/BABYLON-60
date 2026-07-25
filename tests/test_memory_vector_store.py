@@ -1,6 +1,8 @@
 import pytest
-from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2
+
 from babylon60.memory.models import CortexFactModel
+from babylon60.memory.sqlite_vec_store import SovereignVectorStoreL2
+
 
 @pytest.mark.asyncio
 async def test_memorize_and_recall():

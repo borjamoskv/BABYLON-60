@@ -2,6 +2,7 @@ import ast
 import glob
 import json
 import os
+
 WORKSPACE: str = os.environ.get('BABYLON_WORKSPACE', os.path.dirname(os.path.abspath(__file__)))
 SHARDS_FILE: str = os.path.join(WORKSPACE, 'shards.json')
 
@@ -11,7 +12,7 @@ def generate_100_vectors() -> list[dict[str, str]]:
     py_files = glob.glob(f'{WORKSPACE}/**/*.py', recursive=True)
     for fpath in py_files:
         try:
-            with open(fpath, 'r', encoding='utf-8') as f:
+            with open(fpath, encoding='utf-8') as f:
                 content = f.read()
             tree = ast.parse(content)
             for node in ast.walk(tree):

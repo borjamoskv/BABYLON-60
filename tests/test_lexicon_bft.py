@@ -1,5 +1,7 @@
-from babylon60.bft.lexicon import BFTLexicon, LEXICON_NAMESPACE
 import uuid
+
+from babylon60.bft.lexicon import LEXICON_NAMESPACE, BFTLexicon
+
 
 def test_lexicon_hashing_determinism() -> None:
     lexicon = BFTLexicon()

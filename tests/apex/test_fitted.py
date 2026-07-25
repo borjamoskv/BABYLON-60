@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import pytest
+
 from apex_trials.features import StudyFeatures
 from apex_trials.risk_engine import _FITTED, RAW_MAX, assess
+
 _HAS_FITTED = _FITTED is not None
 
 def _mk(**over: object) -> StudyFeatures:
@@ -14,7 +17,7 @@ def test_fitted_weights_are_valid_distribution() -> None:
         pytest.skip('no fitted_weights.json baked')
     imp = _FITTED['importances']
     assert len(imp) == 9
-    assert all((w >= 0 for w in imp))
+    assert all(w >= 0 for w in imp)
     assert abs(sum(imp) - 1.0) < 0.001
 
 def test_hand_mode_matches_raw_band_normalization() -> None:

@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import hashlib
 from enum import Enum
+
 from babylon60.utils.base60 import bytes_to_base60
+
 
 class HashAlgorithm(Enum):
     SHA256 = 'sha256'

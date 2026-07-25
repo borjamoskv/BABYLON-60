@@ -1,13 +1,13 @@
 import argparse
 import ast
-from typing import Optional
+
 
 class AnergiaPurger(ast.NodeTransformer):
 
     def __init__(self) -> None:
         self.injected_kill = False
 
-    def visit_Expr(self, node: ast.Expr) -> Optional[ast.AST]:
+    def visit_Expr(self, node: ast.Expr) -> ast.AST | None:
         if isinstance(node.value, ast.Constant):
             return None
         return self.generic_visit(node)
@@ -25,7 +25,7 @@ class AnergiaPurger(ast.NodeTransformer):
         return visited
 
 def transmute_file(filepath: str) -> None:
-    with open(filepath, 'r', encoding='utf-8') as f:
+    with open(filepath, encoding='utf-8') as f:
         content = f.read()
         tree = ast.parse(content)
     purger = AnergiaPurger()

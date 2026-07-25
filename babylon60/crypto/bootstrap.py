@@ -1,7 +1,9 @@
 import logging
 from typing import Any
+
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
+
 logger = logging.getLogger('babylon60.crypto.bootstrap')
 
 class IdentityBootstrap:
@@ -25,6 +27,7 @@ class IdentityBootstrap:
         await conn.execute('\n            CREATE TABLE IF NOT EXISTS cortex_identity (\n                tenant_id TEXT PRIMARY KEY,\n                public_key_pem TEXT NOT NULL,\n                private_key_enc TEXT\n            )\n        ')
         await conn.execute('INSERT INTO cortex_identity (tenant_id, public_key_pem, private_key_enc) VALUES (?, ?, ?)', (tenant_id, pub_pem, priv_pem))
         import time
+
         from babylon60.crypto.hash_registry import cortex_hash
         from babylon60.crypto.serialization import canonical_serialize
         timestamp = str(int(time.time()))

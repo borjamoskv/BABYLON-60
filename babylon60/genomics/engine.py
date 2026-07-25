@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import math
+
 from .adt import ClonalEntropyResult
 from .models import APOBECEnrichmentResult, ECDNAAmpliconResult, GenomicVariantRecord, LOHHRDResult, TMBResult
+
 
 class GenomicEvaluationEngine:
 
@@ -14,7 +17,7 @@ class GenomicEvaluationEngine:
             return ClonalEntropyResult(shannon_entropy=0.0, subclone_count=0)
         total_freq = sum(valid_afs)
         normalized_probs = [f / total_freq for f in valid_afs]
-        entropy = -sum((p * math.log(p) for p in normalized_probs))
+        entropy = -sum(p * math.log(p) for p in normalized_probs)
         return ClonalEntropyResult(shannon_entropy=round(entropy, 4), subclone_count=len(valid_afs))
 
     @staticmethod
@@ -30,7 +33,7 @@ class GenomicEvaluationEngine:
         std_err = math.sqrt(float(total_muts)) / float(target_region_mb) if total_muts > 0 else 0.0
         ci_low = max(0.0, tmb_score - 1.96 * std_err)
         ci_high = tmb_score + 1.96 * std_err
-        return TMBResult(total_mutations=total_muts, target_region_mb=float(target_region_mb), tmb_score=round(tmb_score, 4), status=status, confidence_interval=(round(ci_low, 4), round(ci_high, 4)), causal_taint='borjamoskv:tmb_evaluator_c5', details={'snv_count': sum((1 for v in coding_muts if v.variant_type == 'SNV')), 'indel_count': sum((1 for v in coding_muts if v.variant_type == 'INDEL'))})
+        return TMBResult(total_mutations=total_muts, target_region_mb=float(target_region_mb), tmb_score=round(tmb_score, 4), status=status, confidence_interval=(round(ci_low, 4), round(ci_high, 4)), causal_taint='borjamoskv:tmb_evaluator_c5', details={'snv_count': sum(1 for v in coding_muts if v.variant_type == 'SNV'), 'indel_count': sum(1 for v in coding_muts if v.variant_type == 'INDEL')})
 
     @staticmethod
     def evaluate_apobec_enrichment(variants: list[GenomicVariantRecord], trinucleotide_context: dict[str, str] | None=None) -> APOBECEnrichmentResult:
@@ -79,7 +82,7 @@ class GenomicEvaluationEngine:
     def evaluate_ecdna_amplicon(amplicon_id: str, oncogenes: list[str], copy_number: int, circular_confirmed: bool, rna_fold_change: float) -> ECDNAAmpliconResult:
         if not amplicon_id or not isinstance(amplicon_id, str):
             raise ValueError('[C5-FAIL] Amplicon ID must be a non-empty string.')
-        if not isinstance(oncogenes, list) or not all((isinstance(g, str) for g in oncogenes)):
+        if not isinstance(oncogenes, list) or not all(isinstance(g, str) for g in oncogenes):
             raise TypeError('[C5-FAIL] Oncogenes must be a list of strings.')
         if not isinstance(copy_number, int) or copy_number < 1:
             raise ValueError(f'[C5-FAIL] Copy number must be >= 1, got: {copy_number}')

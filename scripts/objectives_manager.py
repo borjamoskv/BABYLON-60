@@ -5,7 +5,9 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
 import yaml
+
 WORKSPACE_DIR = Path(__file__).resolve().parent.parent
 YAML_STATE_PATH = WORKSPACE_DIR / 'cortex/ontology/babylon60_objectives.yaml'
 PROJECT_MD_PATH = WORKSPACE_DIR / 'PROJECT.md'
@@ -52,7 +54,7 @@ def run_git_sentinel(commit_msg: str) -> str:
 def load_state() -> dict[str, Any]:
     if not YAML_STATE_PATH.exists():
         raise FileNotFoundError(f'State file not found at {YAML_STATE_PATH}')
-    with open(YAML_STATE_PATH, 'r', encoding='utf-8') as f:
+    with open(YAML_STATE_PATH, encoding='utf-8') as f:
         result: dict[str, Any] = yaml.safe_load(f)
         return result
 
@@ -61,7 +63,7 @@ def save_state(state: dict[str, Any]) -> bool:
     content_str: str = yaml.safe_dump(state, allow_unicode=True, sort_keys=False)
     existing_content = ''
     if YAML_STATE_PATH.exists():
-        with open(YAML_STATE_PATH, 'r', encoding='utf-8') as f:
+        with open(YAML_STATE_PATH, encoding='utf-8') as f:
             existing_content = f.read()
     taint_hash = calculate_sha256(content_str)
     state['CORTEX_TAINT'] = taint_hash
@@ -94,7 +96,7 @@ def generate_milestones_table(state: dict[str, Any]) -> str:
 def update_project_md(state: dict[str, Any]) -> bool:
     if not PROJECT_MD_PATH.exists():
         return False
-    with open(PROJECT_MD_PATH, 'r', encoding='utf-8') as f:
+    with open(PROJECT_MD_PATH, encoding='utf-8') as f:
         content = f.read()
     if '## Milestones' not in content:
         new_content = content + '\n' + generate_milestones_table(state)

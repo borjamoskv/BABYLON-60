@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import struct
 from collections.abc import Sequence
+
 __all__ = ['get_mih_shards', 'slice_void_bit']
 
 def slice_void_bit(packed: bytes, shard_count: int=16) -> list[int]:

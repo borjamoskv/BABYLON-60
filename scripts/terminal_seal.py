@@ -2,6 +2,7 @@ import sqlite3
 import subprocess
 from pathlib import Path
 
+
 def get_all_sqlite_dbs(root_dir: Path) -> list[Path]:
     return list(root_dir.rglob('*.db')) + list(root_dir.rglob('*.sqlite3'))
 

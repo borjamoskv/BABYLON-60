@@ -5,6 +5,7 @@ import subprocess
 import sys
 import zipfile
 
+
 def run_cmd(cmd: list[str], env: dict[str, str] | None=None) -> str:
     print(f"[RUN] {' '.join(cmd)}")
     result = subprocess.run(cmd, env=env, capture_output=True, text=True)
@@ -34,6 +35,7 @@ def check_wheel_contents() -> None:
 def create_crypto_vectors() -> None:
     print('\n--- Creating Cryptographic Vectors ---')
     import hashlib
+
     import cbor2
     vectors_dir = 'tests/conformance/vectors'
     os.makedirs(vectors_dir, exist_ok=True)

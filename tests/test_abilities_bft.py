@@ -1,16 +1,18 @@
+
 import pytest
-from typing import Tuple
+
+from babylon60.bft.abilities import AbilityViolation, BFTAbilityHandler
 from babylon60.bft.lexicon import BFTLexicon
-from babylon60.bft.abilities import BFTAbilityHandler, AbilityViolation
+
 
 @pytest.fixture
-def bft_env() -> Tuple[BFTLexicon, BFTAbilityHandler]:
+def bft_env() -> tuple[BFTLexicon, BFTAbilityHandler]:
     lex = BFTLexicon()
     handler = BFTAbilityHandler(lex)
     return (lex, handler)
 
 @pytest.mark.asyncio
-async def test_ability_isolation_context(bft_env: Tuple[BFTLexicon, BFTAbilityHandler]) -> None:
+async def test_ability_isolation_context(bft_env: tuple[BFTLexicon, BFTAbilityHandler]) -> None:
     lex, handler = bft_env
 
     async def mock_io_write(data: str) -> bool:

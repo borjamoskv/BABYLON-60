@@ -4,7 +4,8 @@ import math
 import random
 import sys
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
+
 project_root = Path(__file__).resolve().parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
@@ -20,12 +21,12 @@ class LuhmannAutopoiesisSimulation:
     def __init__(self, seed: int=42, steps: int=500) -> None:
         random.seed(seed)
         self.steps = steps
-        self.system_state: Dict[str, Any] = {'dossiers_db': {}, 'internal_queue': [], 'loops_run': 0}
-        self.env_state: Dict[str, Any] = {'citizens': [{'id': f'citizen_{i}', 'frustration': 0.0, 'has_cert': random.random() > 0.3} for i in range(100)], 'total_attempts': 0, 'dissipated_atp': 0.0}
+        self.system_state: dict[str, Any] = {'dossiers_db': {}, 'internal_queue': [], 'loops_run': 0}
+        self.env_state: dict[str, Any] = {'citizens': [{'id': f'citizen_{i}', 'frustration': 0.0, 'has_cert': random.random() > 0.3} for i in range(100)], 'total_attempts': 0, 'dissipated_atp': 0.0}
         self.successful_couplings = 0
         self.failed_couplings = 0
 
-    def run(self) -> Dict[str, Any]:
+    def run(self) -> dict[str, Any]:
         for step in range(self.steps):
             citizen = random.choice(self.env_state['citizens'])
             self.env_state['total_attempts'] += 1
@@ -55,9 +56,9 @@ class LuhmannAutopoiesisSimulation:
                 elif action == 'RESOLVE':
                     dossier['status'] = 'RESOLVED'
             self.system_state['internal_queue'] = next_queue
-        total_frustration = sum((c['frustration'] for c in self.env_state['citizens']))
+        total_frustration = sum(c['frustration'] for c in self.env_state['citizens'])
         avg_frustration = total_frustration / len(self.env_state['citizens'])
-        status_counts: Dict[str, int] = {}
+        status_counts: dict[str, int] = {}
         for d in self.system_state['dossiers_db'].values():
             status = d['status']
             status_counts[status] = status_counts.get(status, 0) + 1

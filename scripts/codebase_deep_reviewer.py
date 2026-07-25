@@ -1,18 +1,19 @@
 import ast
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
+
 REPO_ROOT = Path('/Users/borjafernandezangulo/30_BABYLON-60').resolve()
 EXCLUDE_DIRS = {'node_modules', '.venv', '.git', '.mypy_cache', '.pytest_cache', 'forge-std', 'fable-library-js.5.8.0', 'fable-compiler', 'dist', 'target', 'build'}
 
-def find_python_files(root: Path) -> List[Path]:
+def find_python_files(root: Path) -> list[Path]:
     py_files = []
     for path in root.rglob('*.py'):
-        if any((part in EXCLUDE_DIRS for part in path.parts)):
+        if any(part in EXCLUDE_DIRS for part in path.parts):
             continue
         py_files.append(path)
     return sorted(py_files)
 
-def audit_py_file(file_path: Path) -> Dict[str, Any]:
+def audit_py_file(file_path: Path) -> dict[str, Any]:
     rel_path = file_path.relative_to(REPO_ROOT)
     content = file_path.read_text(encoding='utf-8', errors='ignore')
     lines = content.splitlines()
@@ -42,7 +43,7 @@ def main() -> None:
     py_files = find_python_files(REPO_ROOT)
     results = [audit_py_file(f) for f in py_files]
     total_files = len(results)
-    total_lines = sum((r['lines'] for r in results))
+    total_lines = sum(r['lines'] for r in results)
     syntax_fails = [r for r in results if r['status'] == 'FAIL']
     warns = [r for r in results if r['issues']]
     print('=== CODEBASE DEEP REVIEW SUMMARY ===')

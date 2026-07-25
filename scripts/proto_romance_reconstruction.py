@@ -1,9 +1,22 @@
 import csv
 import os
 from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
-from scripts.romance_common import DATA, GAP, GOLD, Model, build_msa, build_Q, levenshtein, nw_match_flags, reconstruct_column
+
+from scripts.romance_common import (
+    DATA,
+    GAP,
+    GOLD,
+    Model,
+    build_msa,
+    build_Q,
+    levenshtein,
+    nw_match_flags,
+    reconstruct_column,
+)
+
 
 def main() -> dict[str, Any]:
     outdir = os.path.dirname(os.path.abspath(__file__))

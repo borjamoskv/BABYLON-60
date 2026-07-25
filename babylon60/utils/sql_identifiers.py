@@ -1,4 +1,5 @@
 import re
+
 _SAFE_IDENTIFIER = re.compile('^[a-zA-Z_][a-zA-Z0-9_]{0,63}\\Z')
 
 def is_safe_identifier(name: str) -> bool:

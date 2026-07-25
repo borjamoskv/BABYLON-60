@@ -1,6 +1,8 @@
 import sys
 from pathlib import Path
+
 import babylon60.database.core
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
 import hashlib
@@ -10,7 +12,8 @@ import sqlite3
 import subprocess
 import time
 from dataclasses import dataclass
-from typing import List, Set, Union
+from typing import Union
+
 DB_PATH = Path.home() / '.babylon60/exergy_agent_ledger.db'
 VAULT_DIR = Path.home() / '.gemini/config/.cortex/memory_vault'
 BRAIN_DIR = Path.home() / '.gemini/antigravity/brain'
@@ -41,7 +44,7 @@ class ExergyPassed:
 class ExergyFailed:
     score: ExergyScore
     gelabp: GELABP
-    reasons: List[str]
+    reasons: list[str]
 ExergyVerdict = Union[ExergyPassed, ExergyFailed]
 
 @dataclass(frozen=True)
@@ -88,7 +91,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
             continue
         lines = file_diff.splitlines()
         header = lines[0] if lines else ''
-        is_excluded = any((x in header for x in ['demo_exergy_poc.py', 'exergy_optimizer_agent.py', 'autodetect_invariants.py'])) or 'test_' in header or 'tests/' in header
+        is_excluded = any(x in header for x in ['demo_exergy_poc.py', 'exergy_optimizer_agent.py', 'autodetect_invariants.py']) or 'test_' in header or 'tests/' in header
         added_lines = [line for line in lines if line.startswith('+') and (not line.startswith('+++'))]
         removed_lines = [line for line in lines if line.startswith('-') and (not line.startswith('---'))]
         added += len(added_lines)
@@ -117,7 +120,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                 if 'readlink' in line or 'is_symlink' in line:
                     l_points += 2
                     reasons_l.append('Nexus package symlink validation (INV_C5_12).')
-        elif any(('test' in ln or 'invariant' in ln for ln in added_lines)):
+        elif any('test' in ln or 'invariant' in ln for ln in added_lines):
             a_points += 4
             reasons_a.append('Autopoietic alignment of invariants (INV_C5_13).')
     if added > 400 and removed < 10:
@@ -142,7 +145,7 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
 def check_consolidation_need() -> ConsolidationDecision:
     if not BRAIN_DIR.exists():
         return Stable(last_timestamp=int(time.time() * 1000))
-    consolidated_ids: Set[str] = set()
+    consolidated_ids: set[str] = set()
     if VAULT_DIR.exists():
         for f in VAULT_DIR.glob('*.md'):
             try:
@@ -168,14 +171,14 @@ def check_consolidation_need() -> ConsolidationDecision:
                     belongs_to_babylon = False
                     keywords = ['babylon', '30_babylon-60', 'babylon60', 'cortex-persist', 'cortex.db', 'teorema', 'robinson', 'moskv']
                     try:
-                        with open(transcript, 'r', encoding='utf-8') as tf:
+                        with open(transcript, encoding='utf-8') as tf:
                             for line in tf:
                                 if not line.strip():
                                     continue
                                 try:
                                     step = json.loads(line)
                                     text = f"{step.get('content', '')} {step.get('thinking', '')} {str(step.get('tool_calls', ''))}".lower()
-                                    if any((kw in text for kw in keywords)):
+                                    if any(kw in text for kw in keywords):
                                         belongs_to_babylon = True
                                         break
                                 except json.JSONDecodeError:
@@ -207,7 +210,7 @@ def main() -> None:
     except subprocess.SubprocessError:
         commit_hash = 'unknown'
     timestamp = int(time.time() * 1000)
-    prov_payload = f'{timestamp}:{commit_hash}:{verdict.score.value}'.encode('utf-8')
+    prov_payload = f'{timestamp}:{commit_hash}:{verdict.score.value}'.encode()
     digest = hashlib.sha3_256(prov_payload).digest()
     from babylon60.utils.base60 import bytes_to_base60
     prov_hash = bytes_to_base60(digest)

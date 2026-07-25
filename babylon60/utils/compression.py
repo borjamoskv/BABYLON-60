@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import logging
 import struct
+
 __all__ = ['compression_ratio', 'dequantize_int8', 'quantize_int8']
 logger = logging.getLogger('babylon60.embeddings.compression')
 try:

@@ -1,6 +1,8 @@
 import tempfile
 from pathlib import Path
+
 from babylon60.core.email_notifier import PurchaseNotifier
+
 
 def test_purchase_notifier_logging():
     with tempfile.TemporaryDirectory() as tmpdir:

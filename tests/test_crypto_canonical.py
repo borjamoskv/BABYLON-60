@@ -1,5 +1,6 @@
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 
+
 def test_canonicalize_cbor_ordering() -> None:
     data1 = {'z': 100, 'a': 'hello', 'm': [1, 2, 3]}
     data2 = {'a': 'hello', 'm': [1, 2, 3], 'z': 100}

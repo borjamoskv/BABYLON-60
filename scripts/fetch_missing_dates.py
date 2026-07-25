@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import json
 import time
 import urllib.error
@@ -6,6 +7,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any
+
 V2 = 'https://clinicaltrials.gov/api/v2/studies'
 USER_AGENT = 'apex/0.1 (+moskv://cortex-persist)'
 

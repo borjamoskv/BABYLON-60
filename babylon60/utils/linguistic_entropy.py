@@ -3,6 +3,7 @@ import statistics
 from collections import Counter
 from dataclasses import asdict, dataclass, field
 from typing import Any
+
 _SLOP_PATTERNS: list[tuple[str, float]] = [('Aquí tienes el código', 1.0), ('Espero que esto ayude', 1.0), ('Por supuesto[,.]?', 0.8), ('Entendido[,.]?', 0.6), ('Como modelo de lenguaje', 1.0), ('Here is the code', 1.0), ('I hope this helps', 1.0), ('Of course[,.]?', 0.8), ('Understood[,.]?', 0.6), ('As an AI language model', 1.0), ('Claro[,.]?\\s+aquí tienes', 0.9), ('No dudes en preguntar', 0.9), ('Feel free to ask', 0.9), ('Es importante (tener en cuenta|notar|recordar)', 0.8), ("It('s| is) important to (note|remember)", 0.8), ('Cabe destacar que', 0.7), ('¡(Claro|Por supuesto|Excelente)!', 0.8), ("Great[,!]?\\s+(let('s| us)|I('ll| will))", 0.7), ("I'd be happy to", 0.9), ("I('m| am) here to help", 0.9), ('Certainly[,!]?', 0.7), ('Absolutely[,!]?', 0.7), ('Definitivamente[,!]?', 0.6), ('Sin lugar a dudas[,!]?', 0.7), ('A continuación[,:]', 0.5), ("Below you('ll| will) find", 0.5), ('Espero que.*útil', 0.9), ('I hope.*helpful', 0.9)]
 
 def _tokenize(text: str) -> list[str]:
@@ -146,7 +147,7 @@ class LinguisticEntropyDetector:
         words = _tokenize(text)
         sents = _sentences(text)
         slop_instances = self.detect_slop(text)
-        slop_weight_total = sum((s['severity_weight'] for s in slop_instances))
+        slop_weight_total = sum(s['severity_weight'] for s in slop_instances)
         slop_density = round(slop_weight_total / max(len(words), 1), 4)
         avg_sl, var_sl = self._sentence_metrics(text)
         report = LinguisticEntropyReport(char_count=len(text), word_count=len(words), sentence_count=len(sents), unique_words=len(set(words)), char_entropy=self.calculate_char_entropy(text), word_entropy=self.calculate_word_entropy(text), bigram_entropy=self.calculate_bigram_entropy(text), trigram_entropy=self.calculate_trigram_entropy(text), ttr=self.calculate_ttr(words), mattr=self.calculate_mattr(words), avg_sentence_length=avg_sl, sentence_length_variance=var_sl, burstiness=self._burstiness(words), context_rot_score=self._context_rot(text), slop_weight_total=round(slop_weight_total, 4), slop_instances=slop_instances, slop_density=slop_density)

@@ -1,6 +1,8 @@
 from __future__ import annotations
+
 import hashlib
 import math
+
 __all__ = ['BASE60_ALPHABET', 'base60_check_to_bytes', 'base60_to_bytes', 'bytes_to_base60', 'bytes_to_base60_check', 'decode_base60', 'encode_base60', 'encoded_length']
 BASE60_ALPHABET = '0123456789abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ'
 BASE60_MAP = {char: idx for idx, char in enumerate(BASE60_ALPHABET)}
@@ -8,7 +10,7 @@ _LOG2_60 = 5.906890595608519
 _CHECKSUM_LEN = 2
 _CHUNK_BASE = 60 ** 8
 _PAIR_BASE = 60 * 60
-_DIGIT_PAIRS = tuple((hi + lo for hi in BASE60_ALPHABET for lo in BASE60_ALPHABET))
+_DIGIT_PAIRS = tuple(hi + lo for hi in BASE60_ALPHABET for lo in BASE60_ALPHABET)
 
 def _encode_positive(num: int) -> str:
     parts: list[str] = []

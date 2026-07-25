@@ -2,6 +2,7 @@ import os
 import sqlite3
 import subprocess
 import sys
+
 PROJECT_ROOT = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 DB_PATH = os.path.join(PROJECT_ROOT, 'cortex/agents/ontology/re_drm_bft_ledger.db')
 

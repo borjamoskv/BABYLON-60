@@ -1,9 +1,11 @@
 import time
-from typing import Any, Dict
+from typing import Any
+
 import networkx as nx
 from networkx.algorithms import isomorphism as iso
 
-def evaluate_c5_isomorphism(G1: nx.Graph, G2: nx.Graph) -> Dict[str, Any]:
+
+def evaluate_c5_isomorphism(G1: nx.Graph, G2: nx.Graph) -> dict[str, Any]:
     start_time = time.time()
     GM = iso.GraphMatcher(G1, G2)
     is_iso = GM.is_isomorphic()

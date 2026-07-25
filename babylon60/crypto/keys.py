@@ -6,6 +6,7 @@ import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, NamedTuple, cast
+
 try:
     if os.environ.get('CORTEX_TESTING'):
         keyring = None
@@ -16,7 +17,9 @@ except ImportError:
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
+
 from babylon60.crypto.vault import Vault
+
 logger = logging.getLogger('babylon60.crypto.keys')
 
 class AgentKeyPair(NamedTuple):

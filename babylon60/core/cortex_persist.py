@@ -4,15 +4,16 @@ import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
+
 
 @dataclass
 class SessionDelta:
     task_desc: str
     last_file: str
     conversation_id: str
-    changes: List[str]
-    decisions: List[str]
+    changes: list[str]
+    decisions: list[str]
     duration: str = '1h'
 
 class CortexOntologyLedger:
@@ -37,15 +38,15 @@ class CortexOntologyLedger:
         dt = datetime.now(timezone.utc)
         return dt.strftime('%Y-%m-%dT%H:%M:%S+02:00')
 
-    def _read_json(self, path: str) -> Dict[str, Any]:
+    def _read_json(self, path: str) -> dict[str, Any]:
         from typing import cast
         try:
-            with open(path, 'r', encoding='utf-8') as f:
-                return cast(Dict[str, Any], dict(json.load(f)))
+            with open(path, encoding='utf-8') as f:
+                return cast(dict[str, Any], dict(json.load(f)))
         except (json.JSONDecodeError, OSError):
             raise RuntimeError(f'FAIL-FAST: Corrupción en vector de memoria {path}')
 
-    def _write_json(self, path: str, data: Dict[str, Any]) -> None:
+    def _write_json(self, path: str, data: dict[str, Any]) -> None:
         try:
             payload = json.dumps(data, indent=2, ensure_ascii=False)
             json.loads(payload)
@@ -64,12 +65,12 @@ class CortexOntologyLedger:
         proj_data['ghost'] = {'last_task': delta.task_desc, 'last_file': delta.last_file, 'last_conversation': delta.conversation_id, 'timestamp': now}
         recent = list(proj_data.get('recent_changes', []))
         for ch in reversed(delta.changes):
-            if not any((isinstance(r, dict) and r.get('desc') == ch for r in recent[:5])):
+            if not any(isinstance(r, dict) and r.get('desc') == ch for r in recent[:5]):
                 recent.insert(0, {'ts': now, 'desc': ch})
         proj_data['recent_changes'] = recent[:10]
         decisions = list(proj_data.get('decisions', []))
         for d in delta.decisions:
-            if not any((isinstance(r, dict) and r.get('decision') == d for r in decisions[-5:])):
+            if not any(isinstance(r, dict) and r.get('decision') == d for r in decisions[-5:]):
                 decisions.append({'ts': now, 'decision': d})
         proj_data['decisions'] = decisions
         self._write_json(proj_file, proj_data)
@@ -79,7 +80,7 @@ class CortexOntologyLedger:
         ghosts_data[self.project_id].update({'last_task': delta.task_desc, 'last_file': delta.last_file, 'last_conversation': delta.conversation_id, 'timestamp': now, 'mood': f'C5-REAL Automatic Snapshot | {delta.task_desc[:30]}...'})
         self._write_json(self.ghosts_file, ghosts_data)
         system_data = self._read_json(self.system_file)
-        sessions: List[Dict[str, Any]] = list(system_data.get('sessions_log', []))
+        sessions: list[dict[str, Any]] = list(system_data.get('sessions_log', []))
         if sessions and sessions[0].get('conversation_id') == delta.conversation_id:
             sessions.pop(0)
         sessions.insert(0, {'date': now, 'project': self.project_id, 'focus': delta.task_desc, 'duration_approx': delta.duration, 'key_output': delta.last_file, 'conversation_id': delta.conversation_id})

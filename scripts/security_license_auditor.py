@@ -1,5 +1,6 @@
 import subprocess
 import sys
+
 APPROVED_LICENSES = {'MIT', 'Apache-2.0', 'BSD-3-Clause', 'BSD-2-Clause', 'ISC', 'Python-2.0', 'PSF-2.0'}
 
 def main() -> int:
@@ -15,7 +16,7 @@ def main() -> int:
         print(f'ℹ️ Skipping live pip audit execution: {e}')
     print('⚙️ Verifying repository license integrity...')
     try:
-        with open('pyproject.toml', 'r', encoding='utf-8') as f:
+        with open('pyproject.toml', encoding='utf-8') as f:
             content = f.read()
             if 'License ::' in content:
                 print('✅ License classifier present in pyproject.toml.')

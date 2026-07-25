@@ -1,8 +1,9 @@
 from __future__ import annotations
+
+import threading
 import time
 from collections import OrderedDict
-from typing import Final, final, TypeVar, Generic, Any
-import threading
+from typing import Any, Final, Generic, TypeVar, final
 
 __all__ = ['TLRUCache']
 _DEFAULT_MAXSIZE: Final[int] = 100000

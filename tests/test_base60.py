@@ -1,5 +1,7 @@
 import pytest
+
 from babylon60.utils import base60
+
 
 def test_base60_integer() -> None:
     assert base60.encode_base60(0) == '0'

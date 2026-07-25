@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Final, Set
+from typing import Final
+
 TOTAL_PRIMITIVES: Final[int] = 896
 D_MAX: Final[int] = 3
 F_MAX: Final[int] = 7
@@ -39,8 +40,8 @@ def map_index(coord: TensorCoordinate) -> int:
     return coord.domain * 224 + coord.family * 28 + coord.action * 4 + coord.modifier
 
 def verify_bijectivity() -> None:
-    seen_indices: Set[int] = set()
-    seen_coords: Set[TensorCoordinate] = set()
+    seen_indices: set[int] = set()
+    seen_coords: set[TensorCoordinate] = set()
     for idx in range(TOTAL_PRIMITIVES):
         try:
             coord: TensorCoordinate = map_coordinates(idx)

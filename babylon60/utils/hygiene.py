@@ -1,10 +1,12 @@
 from __future__ import annotations
+
 import logging
 import os
 import subprocess
 import sys
 import time
 from datetime import datetime, timezone
+
 logger = logging.getLogger(__name__)
 
 def get_orphaned_browsers():

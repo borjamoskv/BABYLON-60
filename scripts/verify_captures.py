@@ -3,6 +3,7 @@ import urllib.error
 import urllib.request
 from typing import Any
 
+
 def check_wayback(url: str) -> None:
     api_url: str = f'http://web.archive.org/cdx/search/cdx?url={url}&output=json&limit=5&fastLatest=true'
     try:

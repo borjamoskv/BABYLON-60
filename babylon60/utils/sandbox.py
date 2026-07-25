@@ -1,10 +1,12 @@
 from __future__ import annotations
+
 import ast
 import logging
 import signal
 import sys
 from dataclasses import dataclass, field
 from io import StringIO
+
 __all__ = ['ASTSandbox', 'ExecResult', 'SandboxVerdict']
 logger = logging.getLogger('babylon60.sandbox')
 _ALLOWED_NODES = frozenset({ast.Module, ast.Expression, ast.Interactive, ast.Constant, ast.FormattedValue, ast.JoinedStr, ast.List, ast.Tuple, ast.Set, ast.Dict, ast.Name, ast.Load, ast.Store, ast.Del, ast.Starred, ast.Expr, ast.UnaryOp, ast.UAdd, ast.USub, ast.Not, ast.Invert, ast.BinOp, ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv, ast.Mod, ast.Pow, ast.LShift, ast.RShift, ast.BitOr, ast.BitXor, ast.BitAnd, ast.MatMult, ast.BoolOp, ast.And, ast.Or, ast.Compare, ast.Eq, ast.NotEq, ast.Lt, ast.LtE, ast.Gt, ast.GtE, ast.Is, ast.IsNot, ast.In, ast.NotIn, ast.Subscript, ast.Slice, ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp, ast.comprehension, ast.Assign, ast.AugAssign, ast.AnnAssign, ast.Return, ast.Delete, ast.Pass, ast.Break, ast.Continue, ast.If, ast.IfExp, ast.For, ast.While, ast.FunctionDef, ast.arguments, ast.arg, ast.Lambda, ast.Call, ast.Attribute})
@@ -78,7 +80,7 @@ class ASTSandbox:
     def _collect_import_violations(tree: ast.AST, violations: list[str]) -> None:
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
-                module = ', '.join((a.name for a in node.names))
+                module = ', '.join(a.name for a in node.names)
                 violations.append(f"Import not allowed: '{module}'")
             elif isinstance(node, ast.ImportFrom):
                 module = node.module or ''

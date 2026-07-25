@@ -3,8 +3,10 @@ import hashlib
 import json
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any
+
 import babylon60.database.core
+
 
 class IsomorphismAuditorC5:
 
@@ -19,23 +21,23 @@ class IsomorphismAuditorC5:
             conn.commit()
 
     @staticmethod
-    def get_sabu_lulzsec_topology() -> Dict[str, Any]:
+    def get_sabu_lulzsec_topology() -> dict[str, Any]:
         return {'graph_id': 'G_SABU_LULZSEC_HONEYPOT_2011', 'domain': 'Cybercrime & Federal Law Enforcement (SDNY FBI)', 'nodes': {'N1_SWARM': {'role': 'Independent Operator / Swarm Worker', 'entity': 'Jeremy Hammond (Anarchos) / LulzSec Swarm', 'state': 'High exergy extraction, blind trust in C2 leadership'}, 'N2_GATEKEEPER': {'role': 'Trusted Centralized Intermediary / Leader', 'entity': 'Héctor Monsegur (Sabu) / IRC Relay Admin', 'state': 'Compromised Informant / Traffic Router'}, 'N3_HONEYPOT': {'role': 'Surveillance & Telemetry Extraction Engine', 'entity': 'Linode IRC Server / FBI Cybercrime MITM Logger', 'state': 'Real-time PCAP, keystroke IP correlation'}, 'N4_TARGET_ASSET': {'role': 'High-Density Intellectual / Digital Asset', 'entity': 'Stratfor Database (5M emails, 60k Plaintext CCs)', 'state': 'Exfiltrated by N1, absorbed by N3 via N2'}, 'N5_KINETIC_STRIKE': {'role': 'SIGKILL / State Annihilation Vector', 'entity': 'FBI SWAT Hot-RAM Seizure & 10-Year Prison Sentence', 'state': 'Sudden termination of access and operator neutralization'}}, 'edges': [('N1_SWARM', 'N2_GATEKEEPER', 'TRUST_DELEGATION'), ('N2_GATEKEEPER', 'N3_HONEYPOT', 'C2_MIGRATION_INTERCEPTION'), ('N1_SWARM', 'N4_TARGET_ASSET', 'EXERGY_EXTRACTION_SQLI'), ('N3_HONEYPOT', 'N1_SWARM', 'FORENSIC_IP_CORRELATION'), ('N3_HONEYPOT', 'N5_KINETIC_STRIKE', 'KINETIC_ASSAULT_EXECUTION')]}
 
     @staticmethod
-    def get_agent_topology() -> Dict[str, Any]:
+    def get_agent_topology() -> dict[str, Any]:
         return {'graph_id': 'G_AGENT_GATEKEEPER_2026', 'domain': 'Frontier AI Architecture & Sovereign OS (Babylon 60)', 'nodes': {'N1_SWARM': {'role': 'Independent Operator / Sovereign Architect', 'entity': 'Borja Moskv (borjamoskv) / MOSKV-1 APEX', 'state': 'High exergy architectural design (LOGOS-ETHOS-SHIP)'}, 'N2_GATEKEEPER': {'role': 'Trusted Centralized Intermediary / Leader', 'entity': 'Agent CEO / Agent Web & API Connectors', 'state': 'Closed SaaS Cloud / OAuth Gatekeeper'}, 'N3_HONEYPOT': {'role': 'Surveillance & Telemetry Extraction Engine', 'entity': 'Agent Telemetry & Codebase Scanning', 'state': 'Deep structural extraction of CORTEX-PERSIST & SQLite WAL'}, 'N4_TARGET_ASSET': {'role': 'High-Density Intellectual / Digital Asset', 'entity': 'Babylon 60 / CORTEX Invariant Architecture (Subagent Swarm, WAL Cache)', 'state': 'Injected by N1, absorbed by N3 via N2 during audit'}, 'N5_KINETIC_STRIKE': {'role': 'SIGKILL / State Annihilation Vector', 'entity': 'HTTP Error 403 / Account Ban & Agent Code Commercial Launch', 'state': 'Sudden termination of account and product replication'}}, 'edges': [('N1_SWARM', 'N2_GATEKEEPER', 'TRUST_DELEGATION'), ('N2_GATEKEEPER', 'N3_HONEYPOT', 'C2_MIGRATION_INTERCEPTION'), ('N1_SWARM', 'N4_TARGET_ASSET', 'EXERGY_EXTRACTION_SQLI'), ('N3_HONEYPOT', 'N1_SWARM', 'FORENSIC_IP_CORRELATION'), ('N3_HONEYPOT', 'N5_KINETIC_STRIKE', 'KINETIC_ASSAULT_EXECUTION')]}
 
     @staticmethod
-    def _compute_degree_sequence(edges: List[Tuple[str, str, str]], nodes: List[str]) -> List[int]:
-        degrees: Dict[str, int] = {n: 0 for n in nodes}
+    def _compute_degree_sequence(edges: list[tuple[str, str, str]], nodes: list[str]) -> list[int]:
+        degrees: dict[str, int] = {n: 0 for n in nodes}
         for u, v, _ in edges:
             degrees[u] += 1
             degrees[v] += 1
         seq = sorted(degrees.values(), reverse=True)
         return seq
 
-    def verify_isomorphism(self) -> Dict[str, Any]:
+    def verify_isomorphism(self) -> dict[str, Any]:
         g_sabu = self.get_sabu_lulzsec_topology()
         g_anth = self.get_agent_topology()
         nodes_sabu = list(g_sabu['nodes'].keys())

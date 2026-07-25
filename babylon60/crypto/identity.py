@@ -6,12 +6,15 @@ import os
 import sqlite3
 from pathlib import Path
 from typing import NamedTuple
+
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 from cryptography.hazmat.primitives.kdf.argon2 import Argon2id
+
 from babylon60.utils.base60 import bytes_to_base60
+
 logger = logging.getLogger('babylon60.crypto.identity')
 ARGON2_MEMORY_COST = 65536
 ARGON2_TIME_COST = 3

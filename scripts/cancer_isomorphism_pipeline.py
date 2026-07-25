@@ -1,7 +1,9 @@
 import warnings
-from typing import Any, Optional
+from typing import Any
+
 import networkx as nx
 import numpy as np
+
 warnings.filterwarnings('ignore')
 
 def get_structural_driver_nodes(G: nx.DiGraph) -> list[str]:
@@ -14,9 +16,9 @@ def get_structural_driver_nodes(G: nx.DiGraph) -> list[str]:
         B.add_edge((str(u), 'out'), (str(v), 'in'))
     matching = nx.bipartite.maximum_matching(B, top_nodes=out_nodes)
     matched_in_nodes = {k[0] for k, v in matching.items() if k[1] == 'in'} | {v[0] for k, v in matching.items() if v[1] == 'in'}
-    return list(set((str(n) for n in G.nodes())) - matched_in_nodes)
+    return list(set(str(n) for n in G.nodes()) - matched_in_nodes)
 
-def simulate_boolean_network(G: nx.DiGraph, initial_state: dict[str, int], steps: int=30, perturbed_nodes: Optional[dict[str, int]]=None) -> tuple[list[Any], list[str]]:
+def simulate_boolean_network(G: nx.DiGraph, initial_state: dict[str, int], steps: int=30, perturbed_nodes: dict[str, int] | None=None) -> tuple[list[Any], list[str]]:
     if perturbed_nodes is None:
         perturbed_nodes = {}
     current_state: dict[str, int] = initial_state.copy()

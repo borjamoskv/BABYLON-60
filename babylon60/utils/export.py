@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 import csv
 import io
 import json
 from typing import TYPE_CHECKING
+
 __all__ = ['export_facts']
 if TYPE_CHECKING:
     from babylon60.engine.cognitive.models import Fact

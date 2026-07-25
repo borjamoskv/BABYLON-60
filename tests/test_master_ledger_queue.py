@@ -1,6 +1,9 @@
 import os
+
 import pytest
+
 from babylon60.bft.master_ledger_queue import MasterLedgerQueue
+
 
 @pytest.mark.asyncio
 async def test_master_ledger_queue_single_writer(tmp_path) -> None:

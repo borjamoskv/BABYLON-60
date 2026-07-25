@@ -1,8 +1,9 @@
 import re
-import uuid
 import sqlite3
 import time
+import uuid
 from pathlib import Path
+
 LEXICON_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_DNS, 'babylon60.lexicon')
 
 def get_lexicon_db_path() -> Path:

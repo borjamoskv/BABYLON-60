@@ -1,7 +1,11 @@
 from __future__ import annotations
+
 import sqlite3
+
 import pytest
+
 from apex_trials.ledger import GENESIS_PREV_HASH, AmendmentLedger, BabylonBFTLedgerAdapter
+
 
 def _payload(score: int) -> dict[str, object]:
     return {'nct_id': 'NCT00000001', 'score': score, 'features': {'a': 1, 'b': [1, 2, 3]}}

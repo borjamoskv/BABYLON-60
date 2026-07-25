@@ -1,8 +1,11 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Any
+
 from .engine import GenomicEvaluationEngine
 from .models import APOBECEnrichmentResult, ECDNAAmpliconResult, GenomicVariantRecord, LOHHRDResult, TMBResult
+
 
 @dataclass
 class FullProfileParams:

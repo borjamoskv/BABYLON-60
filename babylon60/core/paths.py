@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 CORTEX_DIR = Path(os.getenv('CORTEX_DIR', '~/.babylon60')).expanduser()
 CORTEX_DB = Path(os.getenv('CORTEX_DB_PATH', CORTEX_DIR / 'cortex.db')).expanduser()

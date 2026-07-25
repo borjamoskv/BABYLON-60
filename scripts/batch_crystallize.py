@@ -4,6 +4,7 @@ import os
 import sys
 import time
 
+
 def batch_crystallize(matrices: list[dict[str, str]]) -> None:
     ontology_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'cortex', 'ontology')
     os.makedirs(ontology_dir, exist_ok=True)

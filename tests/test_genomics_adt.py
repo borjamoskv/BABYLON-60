@@ -1,7 +1,9 @@
 import pytest
+
 from babylon60.genomics.adt import SNV, AlgebraicGenomicVariant, CoordinateSystem, VCF1Based
 from babylon60.genomics.engine import GenomicEvaluationEngine
 from babylon60.types.algebraic import AlgebraicCardinality, Err, Ok, Result, make_illegal_states_unrepresentable
+
 
 def test_algebraic_cardinality() -> None:
     assert AlgebraicCardinality.sum_type_cardinality(1, 1) == 2

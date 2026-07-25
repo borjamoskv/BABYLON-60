@@ -7,9 +7,10 @@ to guarantee 100% precision without regex fragility, enforcing BFT invariants.
 import ast
 import os
 import re
-import sys
 import subprocess
+import sys
 from pathlib import Path
+
 
 class ExergyTransformer(ast.NodeTransformer):
     def __init__(self):

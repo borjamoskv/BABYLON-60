@@ -2,6 +2,7 @@ import ast
 import os
 from pathlib import Path
 
+
 class LandauerAnalyzer(ast.NodeVisitor):
 
     def __init__(self):

@@ -1,7 +1,9 @@
 import math
-from typing import Any, Tuple
+from typing import Any
+
 import numpy as np
 import numpy.typing as npt
+
 
 class StateSpaceModel:
 
@@ -14,7 +16,7 @@ class StateSpaceModel:
         self.D: npt.NDArray[np.float64] = np.zeros((input_dim, input_dim), dtype=np.float64)
         self.delta: float = 0.01
 
-    def _discretize_zoh(self) -> Tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
+    def _discretize_zoh(self) -> tuple[npt.NDArray[np.float64], npt.NDArray[np.float64]]:
         A_bar = np.eye(self.state_dim, dtype=np.float64) + self.delta * self.A
         B_bar = self.delta * self.B
         return A_bar, B_bar

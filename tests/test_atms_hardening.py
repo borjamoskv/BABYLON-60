@@ -1,4 +1,5 @@
 import pytest
+
 try:
     from strike_rs import CortexKernel
 except ImportError:

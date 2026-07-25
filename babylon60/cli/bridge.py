@@ -4,6 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
+
 def _find_tauri_root() -> Path | None:
     candidates = (Path.cwd() / 'src-tauri', Path(__file__).resolve().parent.parent.parent / 'src-tauri')
     for candidate in candidates:

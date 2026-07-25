@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import contextvars
 import json
 import logging
@@ -9,6 +10,7 @@ from enum import Enum
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Final, NamedTuple
+
 logger = logging.getLogger(__name__)
 TranslationKey = str
 TranslationMap = dict[str, str]

@@ -5,11 +5,11 @@ Executes continuous multi-plane auditing, BFT ledger verification,
 GELABP exergy attestation, and vault synchronization over long-horizon runs.
 """
 
+import subprocess
 import sys
 import time
-import subprocess
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
 
 REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "nocturnal_audit.log"
@@ -24,7 +24,7 @@ def run_cmd(cmd: str | list[str]) -> bool:
         return False
     return True
 
-def execute_audit_iteration(iteration_num: int) -> Dict[str, Any]:
+def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
     print("\n==================================================")
     print(f"⚡ NOCTURNAL AUDIT ITERATION #{iteration_num} | {timestamp}")

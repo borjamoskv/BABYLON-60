@@ -4,6 +4,7 @@ import time
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
+
 DB_PATH = Path.home() / '.babylon60/exergy_agent_ledger.db'
 
 @dataclass

@@ -1,7 +1,9 @@
 import tempfile
 from unittest.mock import patch
-from babylon60.cli.license_cli import print_status, activate_license, main
+
+from babylon60.cli.license_cli import activate_license, main, print_status
 from babylon60.core.license_gate import SovereignLicenseGate, Tier
+
 
 def test_cli_print_status(capsys):
     with tempfile.TemporaryDirectory() as tmpdir:

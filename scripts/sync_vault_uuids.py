@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+
 VAULT_DIR = Path('~/.gemini/config/.cortex/memory_vault').expanduser()
 BRAIN_DIR = Path('~/.gemini/antigravity/brain').expanduser()
 

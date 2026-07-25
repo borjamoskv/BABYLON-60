@@ -2,6 +2,7 @@ import subprocess
 from pathlib import Path
 from typing import Any
 
+
 def get_git_sentinel_hashes(repo_path: Path) -> set[str]:
     try:
         res = subprocess.run(['git', 'log', '--format=%H %s', '-n', '100'], cwd=str(repo_path), capture_output=True, text=True, check=True)
@@ -20,7 +21,7 @@ def verify_attestation(session_dir: Path, repo_path: Path) -> dict[str, Any]:
             return {'session_id': session_id, 'status': 'NO_TRANSCRIPT'}
     claimed_hashes = set()
     try:
-        with open(transcript_path, 'r', encoding='utf-8', errors='replace') as f:
+        with open(transcript_path, encoding='utf-8', errors='replace') as f:
             for line in f:
                 if 'git commit' in line and 'Hash:' in line:
                     parts = line.split('Hash:')

@@ -1,8 +1,11 @@
 from __future__ import annotations
+
 import json
 import logging
 from typing import Any
+
 from babylon60.crypto.hash_registry import cortex_hash
+
 logger = logging.getLogger('babylon60.heartbeat.semantic')
 
 class SemanticHeartbeat:

@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import asyncio
 import hashlib
 import hmac
@@ -8,10 +9,12 @@ import secrets
 import time
 from dataclasses import dataclass
 from datetime import datetime, timezone
-from typing import Any, Dict, Tuple
+from typing import Any
+
+from babylon60.core.circuit_breaker import CircuitBreaker
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
-from babylon60.core.circuit_breaker import CircuitBreaker, CircuitState
 from babylon60.core.rate_limiter import RateLimiter
+
 
 @dataclass(frozen=True)
 class RouteConfig:
@@ -34,7 +37,7 @@ class ShadowRouter:
             raise RuntimeError('FATAL: CORTEX_SHADOW_HMAC_KEY or CORTEX_MASTER_KEY env var required for proof-of-route commitments. Zero static fallback permitted.')
         self._commitment_key = key_material.encode('utf-8')
         self.signer = signer
-        self.shadow_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
+        self.shadow_queue: asyncio.Queue[dict[str, Any]] = asyncio.Queue()
         self.circuit_breaker = CircuitBreaker(
             failure_threshold=self.config.circuit_breaker_threshold,
             reset_timeout=self.config.circuit_breaker_reset_seconds
@@ -51,7 +54,7 @@ class ShadowRouter:
                 self.shadow_queue.task_done()
             except asyncio.CancelledError:
                 break
-            except asyncio.TimeoutError as e:
+            except asyncio.TimeoutError:
                 # log or ignore
                 pass
 
@@ -62,10 +65,10 @@ class ShadowRouter:
     def _sha256_of(data: bytes) -> str:
         return f'sha256:{hashlib.sha256(data).hexdigest()}'
 
-    def _jcs_hash(self, payload: Dict[str, Any]) -> str:
+    def _jcs_hash(self, payload: dict[str, Any]) -> str:
         return hash_sha3_256(canonicalize_cbor(payload))
 
-    def _check_shadow_eligibility(self, context: Dict[str, Any]) -> bool:
+    def _check_shadow_eligibility(self, context: dict[str, Any]) -> bool:
         if context.get('contains_pii', False):
             return False
         if context.get('contains_secrets', False):
@@ -74,7 +77,7 @@ class ShadowRouter:
             return False
         return True
 
-    async def _execute_route(self, model_id: str, prompt: str) -> Dict[str, Any]:
+    async def _execute_route(self, model_id: str, prompt: str) -> dict[str, Any]:
         start_ns = time.monotonic_ns()
         
         if not self.circuit_breaker.can_execute():
@@ -99,7 +102,7 @@ class ShadowRouter:
             self.circuit_breaker.record_failure()
             raise
 
-    async def route_request(self, prompt: str, context: Dict[str, Any]) -> Tuple[Dict[str, Any], Dict[str, Any]]:
+    async def route_request(self, prompt: str, context: dict[str, Any]) -> tuple[dict[str, Any], dict[str, Any]]:
         if self._consumer_task is None:
             self._consumer_task = asyncio.create_task(self._consume_shadow_queue())
         request_id = f'req_{secrets.token_hex(8)}'

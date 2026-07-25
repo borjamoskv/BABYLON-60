@@ -1,8 +1,11 @@
 import os
 import sys
+
 import yaml
 from cryptography.fernet import Fernet
+
 import babylon60.database.core
+
 _BASE = os.path.dirname(os.path.abspath(__file__))
 try:
     from dotenv import load_dotenv

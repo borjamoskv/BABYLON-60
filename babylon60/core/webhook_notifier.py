@@ -4,20 +4,20 @@ BABYLON-60 ENTERPRISE WEBHOOK NOTIFIER ENGINE (C5-REAL)
 Cryptographically signed webhook dispatcher for Enterprise BFT state events and billing notifications.
 """
 
-import hmac
 import hashlib
+import hmac
 import json
 import time
-import urllib.request
 import urllib.error
-from typing import Dict, Any, Optional
+import urllib.request
+from typing import Any
 
 WEBHOOK_SIGNING_SALT = "CORTEX_WEBHOOK_SIGNATURE_SALT_2026"
 
 class EnterpriseWebhookNotifier:
     """Dispatches cryptographically signed webhook notifications to Enterprise endpoints."""
 
-    def __init__(self, secret_salt: Optional[str] = None) -> None:
+    def __init__(self, secret_salt: str | None = None) -> None:
         self.secret_salt = secret_salt or WEBHOOK_SIGNING_SALT
 
     def sign_payload(self, payload_json: str, timestamp: int) -> str:
@@ -25,7 +25,7 @@ class EnterpriseWebhookNotifier:
         signed_data = f"{timestamp}.{payload_json}"
         return hmac.new(self.secret_salt.encode(), signed_data.encode(), hashlib.sha256).hexdigest()
 
-    def create_event(self, event_type: str, org_name: str, data: Dict[str, Any]) -> Dict[str, Any]:
+    def create_event(self, event_type: str, org_name: str, data: dict[str, Any]) -> dict[str, Any]:
         """Create structured BFT webhook event."""
         now = int(time.time())
         payload = {
@@ -46,7 +46,7 @@ class EnterpriseWebhookNotifier:
             }
         }
 
-    def dispatch(self, url: str, event_type: str, org_name: str, data: Dict[str, Any], timeout: float = 3.0) -> bool:
+    def dispatch(self, url: str, event_type: str, org_name: str, data: dict[str, Any], timeout: float = 3.0) -> bool:
         """Send HTTP POST webhook payload to target enterprise server."""
         event_dict = self.create_event(event_type, org_name, data)
         body_bytes = json.dumps(event_dict["payload"], sort_keys=True).encode('utf-8')

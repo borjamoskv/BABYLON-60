@@ -5,7 +5,8 @@ import math
 import os
 import re
 from concurrent.futures import ProcessPoolExecutor, as_completed
-from typing import Any, Dict, List
+from typing import Any
+
 EXCLUDE_DIRS = {'.git', '.venv', '__pycache__', 'node_modules', 'dist', 'build', '.cortex', '.babylon60', '.mypy_cache', '.pytest_cache', '.ruff_cache', 'c5_remotion_video', 'scratch', 'anvil_yung', 'BABYLON-60-fixes', 'target', 'claude_code_local_logs', 'audit'}
 EXCLUDE_EXTS = {'.csv', '.png', '.jpg', '.jpeg', '.gif', '.pdf', '.db', '.sqlite', '.sqlite3', '.npz', '.pyc', '.so', '.dylib', '.zip', '.tar', '.gz', '.db-shm', '.db-wal', '.lock', '.ipynb', '.patch', '.json', '.jsonl', '.rlib', '.rmeta'}
 PATTERNS = {'AWS_ACCESS_KEY': 'AKIA[0-9A-Z]{16}', 'RSA_PRIVATE_KEY': '-----BEGIN RSA PRIVATE KEY-----', 'GENERIC_PRIVATE_KEY': '-----BEGIN PRIVATE KEY-----', 'JWT_TOKEN': 'eyJ[a-zA-Z0-9_-]{5,}\\.eyJ[a-zA-Z0-9_-]{5,}\\.[a-zA-Z0-9_-]{5,}', 'GITHUB_TOKEN': 'ghp_[a-zA-Z0-9]{36}', 'GOOGLE_API': 'AIza[0-9A-Za-z-_]{35}', 'SLACK_TOKEN': 'xox[baprs]-[0-9]{12}-[0-9]{12}-[a-zA-Z0-9]{24}', 'GENERIC_SECRET': '(?i)(password|secret|api_key|access_token)[\\s:=]+[\\\'"]([^\\\'"]{8,})[\\\'"]'}
@@ -28,12 +29,12 @@ def is_whitelisted(line: str) -> bool:
             return True
     return False
 
-def scan_file(filepath: str) -> List[Dict[str, Any]]:
-    findings: List[Dict[str, Any]] = []
+def scan_file(filepath: str) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
     if 'secret_swarm_auditor.py' in filepath or not os.path.isfile(filepath):
         return findings
     try:
-        with open(filepath, 'r', encoding='utf-8', errors='ignore') as f:
+        with open(filepath, encoding='utf-8', errors='ignore') as f:
             lines = f.readlines()
         for i, line in enumerate(lines):
             for p_name, p_regex in PATTERNS.items():
@@ -58,7 +59,7 @@ def scan_file(filepath: str) -> List[Dict[str, Any]]:
         pass
     return findings
 
-def get_target_files(root_dir: str, explicit_files: List[str] | None=None) -> List[str]:
+def get_target_files(root_dir: str, explicit_files: list[str] | None=None) -> list[str]:
     targets = []
     if explicit_files:
         for f in explicit_files:
@@ -75,8 +76,8 @@ def get_target_files(root_dir: str, explicit_files: List[str] | None=None) -> Li
                 targets.append(os.path.join(dirpath, f))
     return targets
 
-def export_sarif(findings: List[Dict[str, Any]], root: str, output_path: str):
-    sarif: Dict[str, Any] = {'$schema': 'https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json', 'version': '2.1.0', 'runs': [{'tool': {'driver': {'name': 'MOSKV-1 Swarm Auditor', 'informationUri': 'https://github.com/borjamoskv', 'rules': [{'id': 'SECRET-01', 'name': 'HardcodedSecret', 'shortDescription': {'text': 'Hardcoded top secret string detected.'}, 'helpUri': 'https://github.com/borjamoskv'}]}}, 'results': []}]}
+def export_sarif(findings: list[dict[str, Any]], root: str, output_path: str):
+    sarif: dict[str, Any] = {'$schema': 'https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json', 'version': '2.1.0', 'runs': [{'tool': {'driver': {'name': 'MOSKV-1 Swarm Auditor', 'informationUri': 'https://github.com/borjamoskv', 'rules': [{'id': 'SECRET-01', 'name': 'HardcodedSecret', 'shortDescription': {'text': 'Hardcoded top secret string detected.'}, 'helpUri': 'https://github.com/borjamoskv'}]}}, 'results': []}]}
     for f in findings:
         rel_path = os.path.relpath(f['file'], root)
         msg = f"Detectado secreto tipo {f['type']} con hash {f['hash']}"

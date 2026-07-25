@@ -1,9 +1,12 @@
 from __future__ import annotations
+
 import asyncio
 from pathlib import Path
-from typing import Optional
+
 import aiosqlite
+
 from babylon60.database.core import connect
+
 
 class ConnectionPool:
     """Async SQLite connection pool with semaphore-based concurrency control.

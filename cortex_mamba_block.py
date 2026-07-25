@@ -1,8 +1,8 @@
-import math
-from typing import List
 import numpy as np
 import numpy.typing as npt
+
 from cortex_ssm_mamba_core import StateSpaceModel
+
 
 def silu(x: npt.NDArray[np.float64]) -> npt.NDArray[np.float64]:
     return x / (1.0 + np.exp(-x))
@@ -31,7 +31,7 @@ class MambaBlock:
             
         return out_seq
 
-    def forward(self, sequence: npt.NDArray[np.float64] | List[List[float]]) -> npt.NDArray[np.float64]:
+    def forward(self, sequence: npt.NDArray[np.float64] | list[list[float]]) -> npt.NDArray[np.float64]:
         seq_arr: npt.NDArray[np.float64] = np.asarray(sequence, dtype=np.float64)
         seq_len = seq_arr.shape[0]
         

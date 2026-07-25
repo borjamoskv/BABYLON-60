@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Any, Union
+
 from babylon60.types.algebraic import Option, Result
+
 
 @dataclass(frozen=True)
 class BED0Based:

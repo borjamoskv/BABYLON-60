@@ -1,12 +1,25 @@
 from __future__ import annotations
+
 import sys
 from pathlib import Path
+
 from causal_isomorphism.emitter_rust import RustEmitter, ir_type_to_rust
 from causal_isomorphism.emitter_solidity import SolidityEmitter, ir_type_to_solidity
-from causal_isomorphism.ir import IR_FLOAT, IR_STRING, FunctionClassification, IRDiscriminatedUnion, IRModule, IRType, IRTypeKind, IRUnionCase, RegimeLayer
+from causal_isomorphism.ir import (
+    IR_FLOAT,
+    IR_STRING,
+    FunctionClassification,
+    IRDiscriminatedUnion,
+    IRModule,
+    IRType,
+    IRTypeKind,
+    IRUnionCase,
+    RegimeLayer,
+)
 from causal_isomorphism.parser_fsharp import FSharpParser, resolve_fsharp_type
 from causal_isomorphism.regime_validator import RegimeValidator, ViolationSeverity
 from causal_isomorphism.transpiler import CausalIsomorphismTranspiler
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 def test_fsharp_type_resolution() -> None:

@@ -3,7 +3,8 @@ import base64
 import hashlib
 import json
 import sys
-from typing import Any, Dict, List
+from typing import Any
+
 try:
     from nacl.exceptions import BadSignatureError
     from nacl.signing import VerifyKey
@@ -11,7 +12,7 @@ try:
 except ImportError:
     NACL_AVAILABLE = False
 
-def jcs_canonicalize(data: Dict[str, Any]) -> bytes:
+def jcs_canonicalize(data: dict[str, Any]) -> bytes:
     return json.dumps(data, separators=(',', ':'), sort_keys=True, ensure_ascii=False).encode('utf-8')
 
 def hash_sha256(data: bytes) -> str:
@@ -55,7 +56,7 @@ def verify_merkle_node(left_hex: str, right_hex: str) -> str:
     node_bytes = b'\x01' + bytes.fromhex(left_hex) + bytes.fromhex(right_hex)
     return hashlib.sha256(node_bytes).hexdigest()
 
-def verify_merkle_proof(leaf_hash: str, proof: List[str], root: str, index: int) -> bool:
+def verify_merkle_proof(leaf_hash: str, proof: list[str], root: str, index: int) -> bool:
     if root is None or index is None:
         return False
     if not proof and leaf_hash != root:
@@ -69,8 +70,8 @@ def verify_merkle_proof(leaf_hash: str, proof: List[str], root: str, index: int)
             current = verify_merkle_node(sibling, current)
     return current == root
 
-def verify_receipt(receipt_path: str) -> Dict[str, Any]:
-    with open(receipt_path, 'r') as f:
+def verify_receipt(receipt_path: str) -> dict[str, Any]:
+    with open(receipt_path) as f:
         receipt = json.load(f)
     if 'payload' not in receipt or 'payload_hash' not in receipt or 'signature' not in receipt:
         print('ERROR: Receipt does not conform to v0.2 structure (payload, payload_hash, signature).')

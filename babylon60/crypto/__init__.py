@@ -3,6 +3,7 @@ from .hash_registry import HashAlgorithm, cortex_hash, cortex_hash_raw, cortex_h
 from .hash_registry import configure as configure_hash
 from .vault import Vault
 
+
 def get_master_key() -> bytes | None:
     from .keyring import get_master_key as _get_master_key
     return _get_master_key()

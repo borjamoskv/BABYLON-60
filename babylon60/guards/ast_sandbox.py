@@ -5,13 +5,13 @@ dunder attribute traversal, and unauthorized import statements within sandboxed 
 """
 
 import ast
-from typing import Set
+
 
 class SecurityError(Exception):
     """Raised when source code violates sandboxed AST execution rules."""
     pass
 
-PROHIBITED_FUNCTIONS: Set[str] = {
+PROHIBITED_FUNCTIONS: set[str] = {
     "getattr",
     "setattr",
     "delattr",

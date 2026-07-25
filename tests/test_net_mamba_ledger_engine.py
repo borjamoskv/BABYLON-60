@@ -3,6 +3,7 @@ from cortex_bpe_tokenizer import BPETokenizer
 from cortex_mamba_network import MambaNetwork
 from net_mamba_ledger_engine import MambaLedgerEngine
 
+
 def test_audited_generation_flow() -> None:
     tokenizer = BPETokenizer()
     tokenizer.train('hello world mamba exergy compute', num_merges=10)

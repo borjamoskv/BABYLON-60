@@ -2,9 +2,12 @@ import os
 import sqlite3
 import sys
 from typing import Any
+
 import babylon60.database.core
+
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from cortex_inference import CACHE_DB_PATH, CortexInferenceEngine
+
 VOCAB: list[str] = ['causar', 'provocar', 'generar', 'hacer', 'por qué', 'efecto', 'parte', 'sistema', 'estructura', 'composición', 'dividir', 'cambiar', 'evolucionar', 'fluir', 'transitar', 'dinámica', 'tiempo', 'podría', 'debería', 'sería', 'quizás', 'posible', 'mundo', 'mejorar', 'optimizar', 'aprender', 'entrenar', 'divergencia', 'entropía', 'significar', 'interpretar', 'leer', 'texto', 'signo', 'código', 'confianza', 'verdad', 'verificar', 'test', 'hash', 'isomorfismo', 'fuego', 'ruido', 'vórtice', 'colapso', 'oráculo', 'matriz']
 
 def main() -> None:

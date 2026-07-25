@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import resource
 import sys
+
 import pytest
+
 
 def test_enforce_no_coredump() -> None:
     from babylon60.core.c5_memory_shield import enforce_no_coredump

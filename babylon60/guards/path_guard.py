@@ -1,5 +1,7 @@
 from __future__ import annotations
+
 from pathlib import Path
+
 FORBIDDEN_PREFIXES = ('/private/var/db', '/System', '/Mobile Documents', '/colima')
 
 def is_safe_path(path: str | Path) -> bool:

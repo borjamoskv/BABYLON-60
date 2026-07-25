@@ -1,5 +1,7 @@
 import pytest
+
 from ultrathink.ultrathink_scheduler import ConsensusEngineStub, propose_with_backoff
+
 
 class FailingEngine(ConsensusEngineStub):
 

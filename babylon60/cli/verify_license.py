@@ -5,7 +5,9 @@ Embeddable zero-dependency CLI script for validating B60 license keys inside Doc
 """
 
 import sys
+
 from babylon60.core.license_gate import SovereignLicenseGate
+
 
 def verify_offline_key(key_str: str) -> bool:
     """Verify license key authenticity offline without network overhead."""

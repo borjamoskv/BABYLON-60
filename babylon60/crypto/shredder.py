@@ -1,10 +1,12 @@
 from __future__ import annotations
+
 import logging
 import sqlite3
 import time
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import TYPE_CHECKING, Any
+
 if TYPE_CHECKING:
     import aiosqlite
 logger = logging.getLogger('babylon60.crypto.shredder')

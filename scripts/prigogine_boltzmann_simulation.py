@@ -4,6 +4,7 @@ import math
 import random
 from typing import Any
 
+
 def run_boltzmann_entropy_simulation(steps: int=200, num_particles: int=1000) -> list[dict[str, Any]]:
     grid_size = 10
     particles = [[0, 0] for _ in range(num_particles)]
@@ -40,7 +41,7 @@ def main():
     random.seed(42)
     b_history = run_boltzmann_entropy_simulation()
     p_history = run_prigogine_brusselator()
-    results = {'boltzmann_entropy_final': b_history[-1]['entropy'], 'boltzmann_entropy_initial': b_history[0]['entropy'], 'prigogine_final_x': p_history[-1]['x'], 'prigogine_final_y': p_history[-1]['y'], 'brusselator_stable_orbit_detected': len(set((round(h['x'], 1) for h in p_history[-50:]))) <= 5}
+    results = {'boltzmann_entropy_final': b_history[-1]['entropy'], 'boltzmann_entropy_initial': b_history[0]['entropy'], 'prigogine_final_x': p_history[-1]['x'], 'prigogine_final_y': p_history[-1]['y'], 'brusselator_stable_orbit_detected': len(set(round(h['x'], 1) for h in p_history[-50:])) <= 5}
     payload = json.dumps(results, sort_keys=True)
     results_hash = hashlib.sha3_256(payload.encode()).hexdigest()
     output = {'metadata': {'author': 'borjamoskv', 'timestamp': '2026-07-17T19:25:00Z', 'cortex_taint': f'borjamoskv:prigogine_boltzmann:{results_hash[:16]}'}, 'results': results, 'results_hash': results_hash, 'boltzmann_sample': b_history[::40], 'prigogine_sample': p_history[::40]}

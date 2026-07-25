@@ -1,7 +1,9 @@
 import pytest
+
 from core_graph_ledger import GraphLedger
 from io_persist_ledger import LedgerPersist
 from proof_kernel.canonicalizer import hash_evidence
+
 
 def test_roundtrip_persist_and_reload(tmp_path: object) -> None:
     db_file = str(tmp_path) + '/test_ledger.db'

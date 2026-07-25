@@ -1,7 +1,10 @@
 from __future__ import annotations
+
 import pytest
+
 from apex_trials.features import StudyFeatures
 from apex_trials.modules import _MODELS, available, predict_module_risks
+
 _HAS = available()
 
 def _mk(**over: object) -> StudyFeatures:
@@ -19,7 +22,7 @@ def test_predictions_valid_and_sorted() -> None:
         pytest.skip('no module_models.json baked')
     risks = predict_module_risks(_mk())
     assert len(risks) == 6
-    assert all((0.0 <= r.probability <= 1.0 for r in risks))
+    assert all(0.0 <= r.probability <= 1.0 for r in risks)
     probs = [r.probability for r in risks]
     assert probs == sorted(probs, reverse=True)
 
@@ -69,6 +72,7 @@ def test_tfidf_pure_sklearn_equivalence() -> None:
     pytest.importorskip('sklearn', reason='sklearn no instalado — solo es oráculo de referencia para esta prueba, no una dependencia de runtime de apex_trials')
     import numpy as np
     from sklearn.feature_extraction.text import TfidfVectorizer
+
     from apex_trials.modules import _transform_pure
     elig_model = _MODELS['modules']['elig']
     vocab = elig_model['tfidf_vocab']

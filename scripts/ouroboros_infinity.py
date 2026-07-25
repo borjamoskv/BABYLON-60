@@ -6,7 +6,9 @@ import subprocess
 import time
 from pathlib import Path
 from typing import Any
+
 import babylon60.database.core
+
 PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
 DB_PATH: Path = PROJECT_ROOT / 'scripts' / 'cib_master_ledger.db'
 CORTEX_DB_PATH: Path = PROJECT_ROOT / 'cortex' / 'engine' / 'nexus_anchors.db'
@@ -24,7 +26,7 @@ def init_ledger() -> None:
 def log_event(protocol: str, target: str, exergy_delta: int) -> str:
     init_ledger()
     ts = int(time.time() * 1000)
-    raw = f'{protocol}|{target}|{exergy_delta}|{ts}'.encode('utf-8')
+    raw = f'{protocol}|{target}|{exergy_delta}|{ts}'.encode()
     causal_hash = hashlib.blake2b(raw, digest_size=16).hexdigest()
     event_id = f'ouro-{ts}'
     with get_db_connection() as conn:

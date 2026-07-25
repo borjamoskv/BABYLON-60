@@ -1,8 +1,11 @@
 from __future__ import annotations
+
 import logging
 from collections.abc import Sequence
+
 from babylon60.compat.optional import np
 from babylon60.utils import void_vec
+
 logger = logging.getLogger('babylon60.utils.turboquant')
 _ROTATION_CACHE: dict[int, np.ndarray] = {}
 

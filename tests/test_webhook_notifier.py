@@ -1,5 +1,7 @@
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock, patch
+
 from babylon60.core.webhook_notifier import EnterpriseWebhookNotifier
+
 
 def test_webhook_payload_creation_and_signing():
     notifier = EnterpriseWebhookNotifier(secret_salt="TEST_SALT_123")

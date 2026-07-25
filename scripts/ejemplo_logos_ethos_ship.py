@@ -1,7 +1,9 @@
 import hashlib
 import subprocess
 import time
+
 import babylon60.database.core
+
 
 def logos_transducer(raw_float_input: int) -> str:
     print('[1] LOGOS: Transduciendo entropía flotante a Invariante Base-60...')
@@ -14,7 +16,7 @@ def logos_transducer(raw_float_input: int) -> str:
 
 def ethos_attestation(ast_state: str, lamport: int) -> str:
     print('[2] ETHOS: Calculando CORTEX-TAINT SHA3-256 (Prueba de Trabajo)...')
-    raw_taint: bytes = f'{ast_state}||borjamoskv||{lamport}'.encode('utf-8')
+    raw_taint: bytes = f'{ast_state}||borjamoskv||{lamport}'.encode()
     taint_hash: str = hashlib.sha3_256(raw_taint).hexdigest()
     print(f'    --> Taint Criptográfico: {taint_hash}\n')
     return taint_hash

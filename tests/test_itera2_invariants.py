@@ -1,12 +1,16 @@
 from __future__ import annotations
+
 import asyncio
 import importlib.util
 import json
 import sys
 from pathlib import Path
+
 import pytest
+
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
 from babylon60.database import core as dbcore
+
 
 @pytest.mark.asyncio
 async def test_database_core_async_pragmas(tmp_path: Path) -> None:
@@ -117,6 +121,7 @@ def test_attest_pair_sha3_roundtrip(tmp_path: Path, monkeypatch: pytest.MonkeyPa
 def test_llm_attest_acepta_legacy_sha256_marcado(tmp_path: Path) -> None:
     import base64
     import hashlib
+
     from nacl.signing import SigningKey
     llm_attest = _load_cli('llm_attest2', 'llm_attest.py')
     payload = {'word': 'legacy', 'n': 1}

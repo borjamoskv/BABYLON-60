@@ -3,8 +3,10 @@ import hashlib
 import hmac
 import os
 from enum import Enum
+
 from babylon60.crypto.hash_registry import cortex_hash, cortex_hmac, get_active_algorithm
 from babylon60.utils.base60 import bytes_to_base60
+
 
 class SignatureAlgorithm(Enum):
     ED25519 = 'ed25519'

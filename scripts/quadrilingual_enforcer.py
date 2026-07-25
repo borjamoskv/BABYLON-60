@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def check_lisp_bypass() -> None:
     lisp_dir = 'lisp_metamembrane'
     if not os.path.exists(lisp_dir):
@@ -8,7 +9,7 @@ def check_lisp_bypass() -> None:
     for root, _, files in os.walk(lisp_dir):
         for f in files:
             if f.endswith('.clj'):
-                with open(os.path.join(root, f), 'r', errors='ignore') as file:
+                with open(os.path.join(root, f), errors='ignore') as file:
                     content = file.read().lower()
                     if 'web3' in content or 'ethers' in content or 'jsonrpc' in content:
                         raise RuntimeError('CRASH CAUSAL (Antipatrón 1): LISP inyectando directo en Anvil. Bypass de F# detectado.')
@@ -20,7 +21,7 @@ def check_rust_ontology() -> None:
     for root, _, files in os.walk(rust_dir):
         for f in files:
             if f.endswith('.rs'):
-                with open(os.path.join(root, f), 'r', errors='ignore') as file:
+                with open(os.path.join(root, f), errors='ignore') as file:
                     content = file.read()
                     if 'enum Domain' in content or 'Ontology' in content:
                         raise RuntimeError('CRASH CAUSAL (Antipatrón 2): Rust procesando ADTs ontológicos. Dilución del Fast-Loop detectada.')
@@ -36,7 +37,7 @@ def check_solidity_physics() -> None:
             dirs.remove('test')
         for f in files:
             if f.endswith('.sol'):
-                with open(os.path.join(root, f), 'r', errors='ignore') as file:
+                with open(os.path.join(root, f), errors='ignore') as file:
                     content = file.read()
                     if 'while (' in content or 'graph' in content.lower():
                         raise RuntimeError('CRASH CAUSAL (Antipatrón 3): Solidity intentando computar ciclos/física de grafos. Exhaustión ATP detectada.')
@@ -48,7 +49,7 @@ def check_rust_anvil_bypass() -> None:
     for root, _, files in os.walk(rust_dir):
         for f in files:
             if f.endswith('.rs'):
-                with open(os.path.join(root, f), 'r', errors='ignore') as file:
+                with open(os.path.join(root, f), errors='ignore') as file:
                     content = file.read()
                     if 'cast send' in content or 'ethers::' in content:
                         raise RuntimeError('CRASH CAUSAL (Antipatrón 4): Rust enviando transacciones a Anvil sin pasar por F#. Split-Brain Causal.')

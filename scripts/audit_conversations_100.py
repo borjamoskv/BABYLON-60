@@ -5,6 +5,7 @@ import sqlite3
 import time
 import uuid
 from pathlib import Path
+
 DB_PATH = Path.home() / '.babylon60/exergy_agent_ledger.db'
 BRAIN_DIR = Path.home() / '.gemini/antigravity/brain'
 
@@ -14,7 +15,7 @@ def calculate_conversation_exergy(transcript_path: Path) -> float:
     green_theater_words = ['lo siento', 'aquí tienes', 'espero que', 'por favor', 'ayudar', 'disculpa', 'sorry']
     mutation_tools = ['write_to_file', 'replace_file_content', 'multi_replace_file_content', 'run_command']
     try:
-        with open(transcript_path, 'r', encoding='utf-8') as f:
+        with open(transcript_path, encoding='utf-8') as f:
             for line in f:
                 if not line.strip():
                     continue

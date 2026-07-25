@@ -1,6 +1,8 @@
 import tempfile
-from babylon60.core.license_gate import SovereignLicenseGate, Tier
+
 from babylon60.cli.verify_license import verify_offline_key
+from babylon60.core.license_gate import SovereignLicenseGate, Tier
+
 
 def test_verify_offline_key_valid(capsys):
     with tempfile.TemporaryDirectory() as tmpdir:

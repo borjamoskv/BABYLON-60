@@ -30,7 +30,7 @@ def main() -> None:
     defined_invariants_set: set[int] = set()
     for rf in rule_files:
         if os.path.exists(rf):
-            with open(rf, "r") as f:
+            with open(rf) as f:
                 content = f.read()
             matches = re.findall(r"\bINV_C5_(\d+)\b", content)
             defined_invariants_set.update(int(x) for x in matches)
@@ -41,7 +41,7 @@ def main() -> None:
         f"🔍 Found {len(defined_invariants)} invariant definitions across rule files: {[f'INV_C5_{x:02d}' for x in defined_invariants]}"
     )
 
-    with open(test_file, "r") as f:
+    with open(test_file) as f:
         test_content = f.read()
 
     test_matches = re.findall(r"def\s+test_inv_c5_(\d+)", test_content)

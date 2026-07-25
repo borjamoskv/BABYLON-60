@@ -1,8 +1,10 @@
 from __future__ import annotations
+
 import traceback
 from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
+
 __all__ = ['Err', 'Ok', 'Result', 'safe', 'safe_async']
 T = TypeVar('T')
 E = TypeVar('E')
@@ -27,7 +29,7 @@ class Ok(Generic[T]):
     def map(self, fn: Callable[[T], U]) -> Result[U, Any]:
         return Ok(fn(self.value))
 
-    def flat_map(self, fn: 'Callable[[T], Result[U, Any]]') -> Result[U, Any]:
+    def flat_map(self, fn: Callable[[T], Result[U, Any]]) -> Result[U, Any]:
         return fn(self.value)
 
     def map_err(self, _fn: Callable[[Any], Any]) -> Ok[T]:
@@ -52,10 +54,10 @@ class Err(Generic[E]):
     def unwrap_or(self, default: Any) -> Any:
         return default
 
-    def map(self, _fn: 'Callable[..., Any]') -> Err[E]:
+    def map(self, _fn: Callable[..., Any]) -> Err[E]:
         return self
 
-    def flat_map(self, _fn: 'Callable[..., Any]') -> Err[E]:
+    def flat_map(self, _fn: Callable[..., Any]) -> Err[E]:
         return self
 
     def map_err(self, fn: Callable[[E], U]) -> Err[U]:

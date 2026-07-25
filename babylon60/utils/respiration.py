@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import asyncio
 import functools
 import inspect
@@ -7,6 +8,7 @@ import threading
 import time
 from collections.abc import Callable
 from typing import Any, TypeVar
+
 logger = logging.getLogger('babylon60.respiration')
 F = TypeVar('F', bound=Callable[..., Any])
 __all__ = ['breathe', 'oxygenate']

@@ -1,5 +1,7 @@
 from typing import Any
+
 import networkx as nx
+
 
 def c5_structural_isomorphism_test() -> None:
     print('--- IGNICIÓN C5-REAL: MATRIZ DE ISOMORFISMO DE GRAFOS ---')

@@ -2,10 +2,12 @@ import base64
 import hashlib
 import json
 import sys
-from typing import Any, Dict
+from typing import Any
+
 from nacl.signing import SigningKey
 
-def jcs_canonicalize(data: Dict[str, Any]) -> bytes:
+
+def jcs_canonicalize(data: dict[str, Any]) -> bytes:
     return json.dumps(data, separators=(',', ':'), sort_keys=True, ensure_ascii=False).encode('utf-8')
 
 def main() -> None:

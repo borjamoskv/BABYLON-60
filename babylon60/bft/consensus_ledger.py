@@ -1,32 +1,36 @@
 from __future__ import annotations
+
 import json
 import sqlite3
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any
+
 import cbor2
+
 from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256, verify_ed25519
 from babylon60.database import core as database_core
+
 _UNDECODABLE = object()
 
 @dataclass(frozen=True)
 class StateMutation:
     agent_id: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     timestamp: int
     signature: str
     causal_taint: str = 'BFT_Consensus_Init'
 
 class BFT_Ledger:
 
-    def __init__(self, db_path: str='master_ledger.db', node_keys: Optional[Dict[str, str]]=None) -> None:
+    def __init__(self, db_path: str='master_ledger.db', node_keys: dict[str, str] | None=None) -> None:
         self.conn: sqlite3.Connection = database_core.connect_sync(db_path, synchronous='FULL')
-        self._node_keys: Dict[str, str] = dict(node_keys or {})
+        self._node_keys: dict[str, str] = dict(node_keys or {})
         self._init_tables()
 
     def _init_tables(self) -> None:
         self.conn.execute("\n            CREATE TABLE IF NOT EXISTS state_log (\n                id INTEGER PRIMARY KEY AUTOINCREMENT,\n                mutation_hash TEXT UNIQUE NOT NULL,\n                agent_id TEXT NOT NULL,\n                payload BLOB NOT NULL,\n                ts INTEGER NOT NULL,\n                causal_taint TEXT NOT NULL DEFAULT 'untainted'\n            )\n            ")
 
-    def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: Dict[str, str]) -> bool:
+    def invoke_subagent(self, mutation: StateMutation, f: int, swarm_signatures: dict[str, str]) -> bool:
         required_votes = 2 * f + 1
         mutation_hash = hash_sha3_256(canonicalize_cbor(mutation.payload))
         valid_votes = sum((1 for node_id, sig in swarm_signatures.items() if self._verify_signature(node_id, mutation_hash, sig)))

@@ -1,6 +1,7 @@
-import time
 import subprocess
+import time
 from pathlib import Path
+
 WORKSPACE: Path = Path('/Users/borjafernandezangulo/30_BABYLON-60')
 MEMORY_THRESHOLD_PAGES: int = 128000
 POLL_INTERVAL: int = 15

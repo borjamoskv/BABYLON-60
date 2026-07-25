@@ -1,10 +1,14 @@
 from __future__ import annotations
+
 import asyncio
 from pathlib import Path
+
 import aiosqlite
 import pytest
 from cryptography.fernet import Fernet
+
 from babylon60.bft.ledger_actor import BFTCausalInvariantError, BFTLedgerActor, LedgerEvent
+
 
 def _event(i: int) -> LedgerEvent:
     return LedgerEvent(stream='vault', entity_id=f'e{i}', event_type='CREATED', payload={'count': i, 'secret': 'materia-cifrada'}, source_db='test', source_table='t', source_pk=str(i), cortex_taint=f'taint:test:{i}')

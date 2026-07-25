@@ -1,8 +1,11 @@
+from collections.abc import AsyncGenerator
 from pathlib import Path
-from typing import AsyncGenerator
+
 import aiosqlite
 import pytest
+
 from babylon60.bft.ledger_actor import BFTLedgerActor, LedgerEvent
+
 
 @pytest.fixture
 async def ephemeral_ledger(tmp_path: Path) -> AsyncGenerator[BFTLedgerActor, None]:

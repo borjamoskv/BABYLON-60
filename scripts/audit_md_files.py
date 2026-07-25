@@ -1,18 +1,19 @@
 import re
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
+
 REPO_ROOT = Path('/Users/borjafernandezangulo/30_BABYLON-60').resolve()
 EXCLUDE_DIRS = {'node_modules', '.venv', '.git', '.mypy_cache', '.pytest_cache', 'forge-std', 'fable-library-js.5.8.0', 'fable-compiler'}
 
-def find_md_files(root: Path) -> List[Path]:
+def find_md_files(root: Path) -> list[Path]:
     md_files = []
     for path in root.rglob('*.md'):
-        if any((part in EXCLUDE_DIRS for part in path.parts)):
+        if any(part in EXCLUDE_DIRS for part in path.parts):
             continue
         md_files.append(path)
     return sorted(md_files)
 
-def audit_file(file_path: Path) -> Dict[str, Any]:
+def audit_file(file_path: Path) -> dict[str, Any]:
     rel_path = file_path.relative_to(REPO_ROOT)
     content = file_path.read_text(encoding='utf-8', errors='ignore')
     lines = content.splitlines()
@@ -56,9 +57,9 @@ def main() -> None:
     md_files = find_md_files(REPO_ROOT)
     results = [audit_file(f) for f in md_files]
     total_files = len(results)
-    total_bytes = sum((r['size_bytes'] for r in results))
-    total_lines = sum((r['lines'] for r in results))
-    total_words = sum((r['words'] for r in results))
+    total_bytes = sum(r['size_bytes'] for r in results)
+    total_lines = sum(r['lines'] for r in results)
+    total_words = sum(r['words'] for r in results)
     empty_files = [r for r in results if r['status'] == 'EMPTY']
     warn_files = [r for r in results if len(r['issues']) > 0]
     print('=== MOSKV-1 APEX MD AUDIT SUMMARY ===')

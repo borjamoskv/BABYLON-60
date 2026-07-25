@@ -1,7 +1,6 @@
-import sys
 
 # lib.rs patch
-with open("babylon60-ide/src-tauri/src/lib.rs", "r") as f:
+with open("babylon60-ide/src-tauri/src/lib.rs") as f:
     content = f.read()
 
 content = content.replace("use std::sync::Mutex;", "use tokio::sync::Mutex;")
@@ -12,10 +11,11 @@ with open("babylon60-ide/src-tauri/src/lib.rs", "w") as f:
     f.write(content)
 
 # ledger.rs patch
-with open("babylon60-ide/src-tauri/src/ledger.rs", "r") as f:
+with open("babylon60-ide/src-tauri/src/ledger.rs") as f:
     ledger_content = f.read()
 
 import re
+
 old_struct = r"""#\[derive\(Debug, Clone, Serialize, Deserialize\)\]
 pub struct CortexEvent \{
     pub id: Option<i64>,

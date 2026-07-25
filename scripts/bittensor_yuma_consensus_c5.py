@@ -1,9 +1,11 @@
 import hashlib
 import json
-from typing import Any, Dict, List, Tuple
+from typing import Any
+
 import babylon60.database.core
 
-def compute_yuma_consensus(weights: List[List[float]], stake: List[float], clipping_quantile: float=0.5, trust_threshold: float=0.01) -> Tuple[List[float], List[float], List[float], List[float], str]:
+
+def compute_yuma_consensus(weights: list[list[float]], stake: list[float], clipping_quantile: float=0.5, trust_threshold: float=0.01) -> tuple[list[float], list[float], list[float], list[float], str]:
     V = len(weights)
     M = len(weights[0]) if V > 0 else 0
     total_stake = sum(stake)
@@ -35,15 +37,15 @@ def compute_yuma_consensus(weights: List[List[float]], stake: List[float], clipp
         w_row = [min(weights_norm[i][j], consensus[j]) for j in range(M)]
         W_clipped.append(w_row)
         S_clipped.append([w_row[j] * stake_norm[i] for j in range(M)])
-    ranks_raw = [sum((S_clipped[i][j] for i in range(V))) for j in range(M)]
+    ranks_raw = [sum(S_clipped[i][j] for i in range(V)) for j in range(M)]
     total_ranks = sum(ranks_raw)
     ranks = [r / total_ranks if total_ranks > 0 else 0.0 for r in ranks_raw]
     trust = [0.0] * M
     for j in range(M):
-        trust[j] = sum((stake_norm[i] for i in range(V) if weights_norm[i][j] > trust_threshold))
+        trust[j] = sum(stake_norm[i] for i in range(V) if weights_norm[i][j] > trust_threshold)
     dividends_raw = [0.0] * V
     for i in range(V):
-        align_sum = sum((weights_norm[i][j] * ranks[j] for j in range(M)))
+        align_sum = sum(weights_norm[i][j] * ranks[j] for j in range(M))
         dividends_raw[i] = align_sum * stake_norm[i]
     total_div = sum(dividends_raw)
     dividends = [d / total_div if total_div > 0 else 0.0 for d in dividends_raw]
@@ -51,7 +53,7 @@ def compute_yuma_consensus(weights: List[List[float]], stake: List[float], clipp
     state_hash = hashlib.sha3_256(state_payload).hexdigest()
     return (ranks, trust, consensus, dividends, state_hash)
 
-def simulate_subnet_emission(block_emission: int, ranks: List[float], dividends: List[float], subnet_owner_cut: float=0.18) -> Dict[str, Any]:
+def simulate_subnet_emission(block_emission: int, ranks: list[float], dividends: list[float], subnet_owner_cut: float=0.18) -> dict[str, Any]:
     validator_pool = block_emission * (1.0 - subnet_owner_cut) * 0.5
     miner_pool = block_emission * (1.0 - subnet_owner_cut) * 0.5
     subnet_owner_reward = block_emission * subnet_owner_cut
@@ -59,7 +61,7 @@ def simulate_subnet_emission(block_emission: int, ranks: List[float], dividends:
     validator_emissions = [d * validator_pool for d in dividends]
     return {'block_emission_tao': block_emission, 'subnet_owner_tao': round(subnet_owner_reward, 6), 'total_miner_tao': round(sum(miner_emissions), 6), 'total_validator_tao': round(sum(validator_emissions), 6), 'miner_distribution': [round(x, 6) for x in miner_emissions], 'validator_distribution': [round(x, 6) for x in validator_emissions]}
 
-def persist_consensus_ledger(db_path: str, epoch: int, state_hash: str, ranks: List[float], trust: List[float], dividends: List[float], emission: Dict[str, Any]) -> None:
+def persist_consensus_ledger(db_path: str, epoch: int, state_hash: str, ranks: list[float], trust: list[float], dividends: list[float], emission: dict[str, Any]) -> None:
     conn = babylon60.database.core.connect_sync(db_path)
     try:
         conn.execute('PRAGMA journal_mode=WAL;')
@@ -70,7 +72,7 @@ def persist_consensus_ledger(db_path: str, epoch: int, state_hash: str, ranks: L
     finally:
         conn.close()
 
-def simulate_subnet_epochs(epochs: int, initial_weights: List[List[float]], initial_stakes: List[float], ema_alpha: float=0.9, prune_threshold: float=0.05, db_path: str='bittensor_yuma_ledger.db') -> Dict[str, Any]:
+def simulate_subnet_epochs(epochs: int, initial_weights: list[list[float]], initial_stakes: list[float], ema_alpha: float=0.9, prune_threshold: float=0.05, db_path: str='bittensor_yuma_ledger.db') -> dict[str, Any]:
     V = len(initial_weights)
     M = len(initial_weights[0]) if V > 0 else 0
     stakes = list(initial_stakes)
@@ -91,8 +93,8 @@ def simulate_subnet_epochs(epochs: int, initial_weights: List[List[float]], init
         epoch_history.append({'epoch': t, 'state_hash': state_hash, 'ranks': [round(r, 6) for r in ranks], 'dividends': [round(d, 6) for d in dividends], 'total_staked': round(sum(stakes), 4)})
     return {'epochs_executed': epochs, 'final_ranks': [round(r, 6) for r in ranks], 'final_trust': [round(t, 6) for t in trust], 'final_dividends': [round(d, 6) for d in dividends], 'ema_bonds_matrix': [[round(val, 6) for val in row] for row in B], 'history': epoch_history}
 
-def simulate_adversarial_matrix() -> Dict[str, Any]:
-    results: Dict[str, Any] = {}
+def simulate_adversarial_matrix() -> dict[str, Any]:
+    results: dict[str, Any] = {}
     stakes_1 = [500000.0, 250000.0, 100000.0, 100000.0, 50000.0]
     weights_1 = [[0.4, 0.4, 0.2, 0.0], [0.5, 0.3, 0.2, 0.0], [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0, 1.0]]
     r1, t1, c1, d1, _ = compute_yuma_consensus(weights_1, stakes_1)

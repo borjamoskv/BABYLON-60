@@ -4,13 +4,13 @@ BABYLON-60 ENTERPRISE API KEY & BILLING MANAGEMENT ENGINE (C5-REAL)
 Cryptographically secure API key issuing, token revocation, and enterprise organization provisioning.
 """
 
-import hmac
 import hashlib
+import hmac
 import json
 import time
-from pathlib import Path
-from typing import Dict, Any, Optional
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
 
 API_SALT = "CORTEX_ENTERPRISE_API_KEY_SALT_2026"
 
@@ -26,7 +26,7 @@ class APIKeyMetaData:
 class EnterpriseAPIKeyManager:
     """Manages enterprise API keys for BFT cloud ledgers."""
 
-    def __init__(self, storage_dir: Optional[str] = None) -> None:
+    def __init__(self, storage_dir: str | None = None) -> None:
         if storage_dir:
             self.base_dir = Path(storage_dir)
         else:
@@ -53,7 +53,7 @@ class EnterpriseAPIKeyManager:
         self._save_key_meta(key_id, metadata)
         return key_id
 
-    def validate_key(self, key_id: str) -> Optional[APIKeyMetaData]:
+    def validate_key(self, key_id: str) -> APIKeyMetaData | None:
         """Validate API key status and expiration."""
         keys = self._load_all_keys()
         if key_id not in keys:
@@ -81,23 +81,23 @@ class EnterpriseAPIKeyManager:
             return True
         return False
 
-    def _load_all_keys(self) -> Dict[str, Any]:
+    def _load_all_keys(self) -> dict[str, Any]:
         if not self.db_file.exists():
             return {}
         try:
-            with open(self.db_file, "r", encoding="utf-8") as f:
+            with open(self.db_file, encoding="utf-8") as f:
                 return json.load(f)
         except (json.JSONDecodeError, OSError):
             return {}
 
-    def _save_all_keys(self, data: Dict[str, Any]) -> None:
+    def _save_all_keys(self, data: dict[str, Any]) -> None:
         try:
             with open(self.db_file, "w", encoding="utf-8") as f:
                 json.dump(data, f, indent=2)
         except OSError:
             raise RuntimeError("FAIL-FAST: Failed to write API key registry.")
 
-    def _save_key_meta(self, key_id: str, metadata: Dict[str, Any]) -> None:
+    def _save_key_meta(self, key_id: str, metadata: dict[str, Any]) -> None:
         keys = self._load_all_keys()
         keys[key_id] = metadata
         self._save_all_keys(keys)

@@ -1,6 +1,7 @@
 import hashlib
 import shutil
 from pathlib import Path
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SOURCE_AGENT_DIR = Path.home() / '.agent_persist' / 'projects'
 TARGET_LOGS_DIR = REPO_ROOT / 'cortex/legal_dossier/agent_code_local_logs'

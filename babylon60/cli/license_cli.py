@@ -1,7 +1,8 @@
 import sys
 import webbrowser
-from typing import List
-from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_PRICES
+
+from babylon60.core.license_gate import TIER_PRICES, SovereignLicenseGate, Tier
+
 
 def print_status():
     gate = SovereignLicenseGate()
@@ -53,7 +54,7 @@ def print_purchases():
         return
 
     try:
-        with open(log_path, "r", encoding="utf-8") as f:
+        with open(log_path, encoding="utf-8") as f:
             purchases = json.load(f)
         
         total_eur = sum(p.get("amount_eur", 0) for p in purchases)
@@ -66,7 +67,7 @@ def print_purchases():
     except (json.JSONDecodeError, OSError):
         print("  Error al leer el registro de ventas.\n")
 
-def main(args: List[str]=None):
+def main(args: list[str]=None):
     if args is None:
         args = sys.argv[1:]
     if not args or args[0] in ('status', '--status'):

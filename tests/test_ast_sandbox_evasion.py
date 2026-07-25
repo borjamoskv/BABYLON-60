@@ -4,7 +4,9 @@ Verifies prevention of introspection, dunder exploitation, subclass hunting, f-s
 """
 
 import pytest
-from babylon60.guards.ast_sandbox import validate_ast_sandbox, SecurityError
+
+from babylon60.guards.ast_sandbox import SecurityError, validate_ast_sandbox
+
 
 class TestASTSandboxEvasion:
 

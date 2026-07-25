@@ -1,8 +1,10 @@
 import math
 import secrets
 from datetime import datetime, timezone
-from typing import Any, Dict, List
+from typing import Any
+
 from babylon60.core.crypto import Ed25519Signer, canonicalize_cbor, hash_sha3_256
+
 
 class EvaluatorT2:
 
@@ -16,10 +18,10 @@ class EvaluatorT2:
         self.P_FAIL = 5000
         self.P_PRIVACY = 20000
 
-    def _jcs_hash(self, payload: Dict[str, Any]) -> str:
+    def _jcs_hash(self, payload: dict[str, Any]) -> str:
         return hash_sha3_256(canonicalize_cbor(payload))
 
-    def calculate_utility(self, quality_bp: int, execution_receipt: Dict[str, Any], privacy_violation: bool=False) -> float:
+    def calculate_utility(self, quality_bp: int, execution_receipt: dict[str, Any], privacy_violation: bool=False) -> float:
         status = execution_receipt.get('status', 'success')
         is_fail = 1 if status != 'success' else 0
         ttft_ms = float(execution_receipt.get('ttft_ms', self.MAX_TTFT_MS))
@@ -36,7 +38,7 @@ class EvaluatorT2:
             return min(10000.0, max(0.0, U_e))
         return max(0.0, U_e)
 
-    def compute_regret(self, decision_receipt: Dict[str, Any], primary_execution: Dict[str, Any], shadow_executions: List[Dict[str, Any]], quality_scores: Dict[str, int]) -> Dict[str, Any]:
+    def compute_regret(self, decision_receipt: dict[str, Any], primary_execution: dict[str, Any], shadow_executions: list[dict[str, Any]], quality_scores: dict[str, int]) -> dict[str, Any]:
         primary_quality = quality_scores.get(primary_execution['receipt_id'], 0)
         u_primary = self.calculate_utility(primary_quality, primary_execution['payload'])
         propensities = {s['model']: s['propensity_score'] for s in decision_receipt['payload'].get('shadow_selections', [])}

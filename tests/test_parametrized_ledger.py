@@ -1,8 +1,7 @@
 """Parametrized tests for BABYLON-60 BFT ledger boundaries."""
+
 import pytest
-import asyncio
-from datetime import datetime, timezone
-import json
+
 
 @pytest.mark.parametrize("event_type, payload_size", [
     ("INITIALIZE", 10),

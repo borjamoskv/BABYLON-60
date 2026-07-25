@@ -2,10 +2,11 @@ import json
 import re
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any
+
 BRAIN_DIR = Path.home() / '.gemini' / 'antigravity' / 'brain'
 
-def audit_single_session(session_dir: Path) -> Dict[str, Any]:
+def audit_single_session(session_dir: Path) -> dict[str, Any]:
     session_id = session_dir.name
     transcript_path = session_dir / '.system_generated' / 'logs' / 'transcript.jsonl'
     if not transcript_path.exists():
@@ -27,7 +28,7 @@ def audit_single_session(session_dir: Path) -> Dict[str, Any]:
     last_tool_signature = ''
     repeated_loops = 0
     try:
-        with open(transcript_path, 'r', encoding='utf-8', errors='replace') as f:
+        with open(transcript_path, encoding='utf-8', errors='replace') as f:
             for line in f:
                 if not line.strip():
                     continue
@@ -92,11 +93,11 @@ def main() -> None:
                 results.append({'session_id': futures[future].name, 'status': f'FAILED: {exc}'})
     valid_results = [r for r in results if r.get('status') == 'OK']
     valid_results.sort(key=lambda x: x.get('exergy_score', 0), reverse=True)
-    total_prompts = sum((r.get('user_prompts_count', 0) for r in valid_results))
-    total_turns = sum((r.get('model_turns', 0) for r in valid_results))
-    total_tool_calls = sum((r.get('tool_calls', 0) for r in valid_results))
-    total_code_edits = sum((r.get('code_edits', 0) for r in valid_results))
-    avg_exergy = round(sum((r.get('exergy_score', 0) for r in valid_results)) / max(1, len(valid_results)), 2)
+    total_prompts = sum(r.get('user_prompts_count', 0) for r in valid_results)
+    total_turns = sum(r.get('model_turns', 0) for r in valid_results)
+    total_tool_calls = sum(r.get('tool_calls', 0) for r in valid_results)
+    total_code_edits = sum(r.get('code_edits', 0) for r in valid_results)
+    avg_exergy = round(sum(r.get('exergy_score', 0) for r in valid_results) / max(1, len(valid_results)), 2)
     all_invariants = set()
     for r in valid_results:
         all_invariants.update(r.get('invariants', []))

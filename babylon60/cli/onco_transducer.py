@@ -1,10 +1,12 @@
 from __future__ import annotations
+
 import argparse
 import logging
 import sys
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Tuple
-_ONCO_IMPORT_ERROR: Optional[BaseException]
+from typing import Any
+
+_ONCO_IMPORT_ERROR: BaseException | None
 try:
     import networkx as nx
     import numpy as np
@@ -22,15 +24,15 @@ logger = logging.getLogger('OncoTransducer')
 @dataclass(frozen=True)
 class OncologySimulationResult:
     steps: int
-    history: List[Dict[str, int]]
-    initial_state: Dict[str, int]
-    final_state: Dict[str, int]
-    nodes: List[str]
+    history: list[dict[str, int]]
+    initial_state: dict[str, int]
+    final_state: dict[str, int]
+    nodes: list[str]
 
 class OncologyTransducer:
 
     @classmethod
-    def run_simulation(cls, initial_state: Dict[str, Any], steps: int=30, graph: Optional[nx.DiGraph]=None, perturbed_nodes: Optional[Dict[str, Any]]=None) -> OncologySimulationResult:
+    def run_simulation(cls, initial_state: dict[str, Any], steps: int=30, graph: nx.DiGraph | None=None, perturbed_nodes: dict[str, Any] | None=None) -> OncologySimulationResult:
         if graph is None:
             graph = nx.DiGraph()
             for k in initial_state.keys():
@@ -45,12 +47,12 @@ class OncologyTransducer:
             except (ImportError, AttributeError):
                 pass
         raw_history, nodes = simulate_boolean_network(graph, initial_state, steps=steps, perturbed_nodes=perturbed_nodes, early_stop=False)
-        history_dicts: List[Dict[str, int]] = []
+        history_dicts: list[dict[str, int]] = []
         for vec in raw_history:
             history_dicts.append({nodes[i]: int(vec[i]) for i in range(len(nodes))})
         return OncologySimulationResult(steps=len(history_dicts) - 1, history=history_dicts, initial_state=history_dicts[0] if history_dicts else {str(k): int(v) for k, v in initial_state.items()}, final_state=history_dicts[-1] if history_dicts else {str(k): int(v) for k, v in initial_state.items()}, nodes=nodes)
 
-def construct_wgcna_graph(X: np.ndarray, gene_names: List[str], beta: int=6, threshold: float=0.15) -> nx.DiGraph:
+def construct_wgcna_graph(X: np.ndarray, gene_names: list[str], beta: int=6, threshold: float=0.15) -> nx.DiGraph:
     logger.info('Calculando matriz de correlación de Pearson...')
     R = np.corrcoef(X, rowvar=False)
     S = np.abs(R)
@@ -62,7 +64,7 @@ def construct_wgcna_graph(X: np.ndarray, gene_names: List[str], beta: int=6, thr
     G = nx.relabel_nodes(G, {i: gene_names[i] for i in range(len(gene_names))})
     return G
 
-def get_structural_driver_nodes(G: nx.DiGraph) -> List[str]:
+def get_structural_driver_nodes(G: nx.DiGraph) -> list[str]:
     B: nx.Graph = nx.Graph()
     out_nodes = [(n, 'out') for n in G.nodes()]
     in_nodes = [(n, 'in') for n in G.nodes()]
@@ -74,7 +76,7 @@ def get_structural_driver_nodes(G: nx.DiGraph) -> List[str]:
     matched_in_nodes = {k[0] for k, v in matching.items() if k[1] == 'in'} | {v[0] for k, v in matching.items() if v[1] == 'in'}
     return list(set(G.nodes()) - matched_in_nodes)
 
-def simulate_boolean_network(G: nx.DiGraph, initial_state: Dict[str, Any], steps: int=30, perturbed_nodes: Optional[Dict[str, Any]]=None, early_stop: bool=True) -> Tuple[List[Any], List[Any]]:
+def simulate_boolean_network(G: nx.DiGraph, initial_state: dict[str, Any], steps: int=30, perturbed_nodes: dict[str, Any] | None=None, early_stop: bool=True) -> tuple[list[Any], list[Any]]:
     if perturbed_nodes is None:
         perturbed_nodes = {}
     current_state = initial_state.copy()

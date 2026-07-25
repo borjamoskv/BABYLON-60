@@ -2,10 +2,24 @@ import csv
 import math
 import os
 from typing import Any
+
 import numpy as np
 from numpy.typing import NDArray
-from scripts.romance_common import DATA, GAP, GOLD, Model, build_msa, build_Q, levenshtein, nw_match_flags, partial, reconstruct_column
+
+from scripts.romance_common import (
+    DATA,
+    GAP,
+    GOLD,
+    Model,
+    build_msa,
+    build_Q,
+    levenshtein,
+    nw_match_flags,
+    partial,
+    reconstruct_column,
+)
 from scripts.romance_common import TREE as _INITIAL_TREE
+
 
 def tree_log_likelihood(tree: Any, msas: dict[str, tuple[list[str], list[list[str]]]], model: Model) -> float:
     ll = 0.0
@@ -27,7 +41,7 @@ def tree_prior(node: Any, rate: float=10.0) -> float:
         return float(math.log(rate) - rate * float(node[2]))
     else:
         p: float = float(math.log(rate) - rate * float(node[1])) if float(node[1]) > 0 else 0.0
-        return float(p + sum((tree_prior(k, rate) for k in node[2])))
+        return float(p + sum(tree_prior(k, rate) for k in node[2]))
 
 def mutate_tree_local(node: Any, step: float=0.1) -> Any:
     if node[0] == 'L':

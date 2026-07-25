@@ -6,7 +6,9 @@ import sqlite3
 import time
 from pathlib import Path
 from typing import Any
+
 import babylon60.database.core
+
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = PROJECT_ROOT / 'cortex' / 'engine' / 'nexus_anchors.db'
 INCOMING_DIR = PROJECT_ROOT / 'cortex' / 'outbox' / '_incoming_forge'
@@ -64,7 +66,7 @@ def assimilate_payload(spec: str, raw_output: str, target_filename: str) -> dict
         raise SyntaxError('AST failed verification. Rejection threshold met.')
     ts = int(time.time() * 1000)
     spec_hash = hashlib.blake2s(spec.encode('utf-8'), digest_size=16).hexdigest()
-    raw_causal = f'{spec_hash}|{target_filename}|{code}|{ts}'.encode('utf-8')
+    raw_causal = f'{spec_hash}|{target_filename}|{code}|{ts}'.encode()
     causal_hash = hashlib.blake2b(raw_causal, digest_size=16).hexdigest()
     target_path = INCOMING_DIR / target_filename
     target_path.write_text(code, encoding='utf-8')

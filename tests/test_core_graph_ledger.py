@@ -1,6 +1,8 @@
 import pytest
+
 from core_graph_ledger import GraphLedger
 from proof_kernel.canonicalizer import hash_evidence
+
 
 def test_ledger_append_and_trace() -> None:
     ledger = GraphLedger()

@@ -6,7 +6,9 @@ import sys
 import time
 from decimal import getcontext
 from typing import Literal
+
 import babylon60.database.core
+
 StateKind = Literal['C5_Real_Atomic', 'C4_Simulated_Buffer']
 getcontext().prec = 38
 
@@ -41,7 +43,7 @@ class PhysicalMembraneState:
             raise TypeError(f'[SIGKILL_State_Purge] Illegal state unrepresentable: {state_type}')
         if state_type == 'C4_Simulated_Buffer':
             raise RuntimeError('[SIGKILL_State_Purge] C4-SIM state rejected by C5-REAL physical membrane during SHIP.')
-        if len(payload_hash) != 64 or not all((c in string.hexdigits for c in payload_hash)):
+        if len(payload_hash) != 64 or not all(c in string.hexdigits for c in payload_hash):
             raise ValueError(f'[SIGKILL_State_Purge] Invalid payload_hash: Must be 64-char SHA3-256 hex. Got: {payload_hash}')
         if lamport_clock <= 0:
             raise ValueError(f'[SIGKILL_State_Purge] lamport_clock must be strictly positive. Got: {lamport_clock}')
@@ -74,7 +76,7 @@ class BFTMasterLedgerWAL:
             cursor.execute('SELECT taint_hash FROM master_ledger ORDER BY sequence_id DESC LIMIT 1;')
             row = cursor.fetchone()
             prev_hash: str = row[0] if row else '0' * 64
-            raw_taint = f'{prev_hash}||{claim_payload}||{lamport_clock}||{agent_id}'.encode('utf-8')
+            raw_taint = f'{prev_hash}||{claim_payload}||{lamport_clock}||{agent_id}'.encode()
             taint_hash = hashlib.sha3_256(raw_taint).hexdigest()
             try:
                 cursor.execute('\n                    INSERT INTO master_ledger (prev_hash, claim_payload, lamport_clock, agent_id, taint_hash, created_at)\n                    VALUES (?, ?, ?, ?, ?, ?);\n                ', (prev_hash, claim_payload, lamport_clock, agent_id, taint_hash, time.time()))
@@ -95,7 +97,7 @@ class BFTMasterLedgerWAL:
             for prev_h, payload, clock, agent, taint_h in rows:
                 if prev_h != expected_prev:
                     raise AssertionError(f'[SIGKILL_State_Purge] Chain break detected! Expected prev {expected_prev}, got {prev_h}')
-                raw_t = f'{prev_h}||{payload}||{clock}||{agent}'.encode('utf-8')
+                raw_t = f'{prev_h}||{payload}||{clock}||{agent}'.encode()
                 calc_t = hashlib.sha3_256(raw_t).hexdigest()
                 if taint_h != calc_t:
                     raise AssertionError(f'[SIGKILL_State_Purge] Taint hash mismatch! Expected {calc_t}, got {taint_h}')

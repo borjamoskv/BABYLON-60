@@ -4,7 +4,9 @@ import os
 import re
 import time
 from pathlib import Path
+
 import babylon60.database.core
+
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = REPO_ROOT / 'cortex_memory.db'
 AUDIT_DIR = REPO_ROOT / 'cortex' / 'audits'
@@ -46,7 +48,7 @@ def run_autocognition_audit() -> None:
     repeat_commands = 0
     tool_errors = 0
     if TRANSCRIPT_PATH.exists():
-        with open(TRANSCRIPT_PATH, 'r', encoding='utf-8') as f:
+        with open(TRANSCRIPT_PATH, encoding='utf-8') as f:
             for line in f:
                 if not line.strip():
                     continue
@@ -66,7 +68,7 @@ def run_autocognition_audit() -> None:
                     code_blocks = re.findall('```[\\s\\S]*?```', content)
                     yaml_claims = re.findall('Claim:[\\s\\S]*?Proof:[\\s\\S]*?\\}', content)
                     table_rows = [r for r in content.splitlines() if r.strip().startswith('|')]
-                    struct_chars = sum((len(b) for b in code_blocks)) + sum((len(y) for y in yaml_claims)) + sum((len(t) for t in table_rows))
+                    struct_chars = sum(len(b) for b in code_blocks) + sum(len(y) for y in yaml_claims) + sum(len(t) for t in table_rows)
                     struct_words = struct_chars / 5.0
                     struct_tokens = min(approx_tokens, int(struct_words * 1.33))
                     structured_tokens += struct_tokens

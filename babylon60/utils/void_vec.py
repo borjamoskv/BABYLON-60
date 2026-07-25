@@ -1,16 +1,19 @@
 from __future__ import annotations
+
 import ctypes
 import math
 import os
+
 from babylon60.compat.optional import np
+
 __all__ = ['cosine_similarity', 'pack_void_bit', 'unpack_void_bit', 'void_hamming_dist', 'void_similarity']
 
 def cosine_similarity(a: list[float] | None, b: list[float] | None) -> float:
     if not a or not b or len(a) != len(b):
         return 0.0
     dot = sum((x * y for x, y in zip(a, b, strict=False)))
-    norm_a = math.sqrt(sum((x * x for x in a)))
-    norm_b = math.sqrt(sum((x * x for x in b)))
+    norm_a = math.sqrt(sum(x * x for x in a))
+    norm_b = math.sqrt(sum(x * x for x in b))
     if norm_a < 1e-12 or norm_b < 1e-12:
         return 0.0
     return dot / (norm_a * norm_b)

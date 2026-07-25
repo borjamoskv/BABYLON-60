@@ -4,19 +4,19 @@ import os
 import re
 import sys
 from pathlib import Path
-from typing import Dict, List
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger('c5_orchestrator')
 MAP_FILE = 'docs/C5_SKILLS_BRIDGES_MAP.md'
 
-def parse_map_file() -> Dict[str, List[str]]:
+def parse_map_file() -> dict[str, list[str]]:
     if not os.path.exists(MAP_FILE):
         logger.error(f'Mapping file not found: {MAP_FILE}')
         sys.exit(1)
-    components: Dict[str, List[str]] = {'SKILLS': [], 'ULTRATHINK': [], 'BRIDGES': [], 'SWARM_AGENTS': []}
+    components: dict[str, list[str]] = {'SKILLS': [], 'ULTRATHINK': [], 'BRIDGES': [], 'SWARM_AGENTS': []}
     current_category = None
     path_regex = re.compile('\\*\\*(.+)\\*\\*')
-    with open(MAP_FILE, 'r', encoding='utf-8') as f:
+    with open(MAP_FILE, encoding='utf-8') as f:
         for line in f:
             if line.startswith('## 1.'):
                 current_category = 'SKILLS'
@@ -32,7 +32,7 @@ def parse_map_file() -> Dict[str, List[str]]:
                     components[current_category].append(match.group(1))
     return components
 
-def verify_physical_components(components: Dict[str, List[str]]) -> None:
+def verify_physical_components(components: dict[str, list[str]]) -> None:
     logger.info('Verifying physical existence of mapped components...')
     missing = []
     for category, paths in components.items():
@@ -44,15 +44,15 @@ def verify_physical_components(components: Dict[str, List[str]]) -> None:
     if missing:
         logger.error(f'FAIL-FAST: Missing {len(missing)} mapped components: {missing}')
         sys.exit(1)
-    logger.info(f'Verified {sum((len(paths) for paths in components.values()))} physical components.')
+    logger.info(f'Verified {sum(len(paths) for paths in components.values())} physical components.')
 
-async def ignite_bridges(components: Dict[str, List[str]]) -> None:
+async def ignite_bridges(components: dict[str, list[str]]) -> None:
     logger.info('Igniting bridges...')
     for bridge in components['BRIDGES']:
         logger.info(f'Binding bridge: {bridge}')
         await asyncio.sleep(0.1)
 
-async def ignite_ultrathink(components: Dict[str, List[str]]) -> None:
+async def ignite_ultrathink(components: dict[str, list[str]]) -> None:
     logger.info('Igniting Ultrathink instances...')
     for u in components['ULTRATHINK']:
         logger.info(f'Loading Ultrathink vector: {u}')

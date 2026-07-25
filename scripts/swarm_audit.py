@@ -2,6 +2,7 @@ import asyncio
 import json
 from pathlib import Path
 
+
 async def audit_conversation(conv_id: str) -> str:
     log_file = Path(f'/Users/borjafernandezangulo/.gemini/antigravity/brain/{conv_id}/.system_generated/logs/transcript.jsonl')
     if not log_file.exists():
@@ -14,7 +15,7 @@ async def audit_conversation(conv_id: str) -> str:
         c4_sim_detected = 0
         commits = 0
         errors = 0
-        with open(log_file, 'r') as f:
+        with open(log_file) as f:
             for line in f:
                 try:
                     step = json.loads(line)
@@ -63,7 +64,7 @@ async def main() -> None:
     if not target_file.exists():
         print('target_conversations.txt not found')
         return
-    with open(target_file, 'r') as f:
+    with open(target_file) as f:
         conv_ids = [line.strip() for line in f if line.strip()]
     print(f'Spawning {len(conv_ids)} audit agents...')
     tasks = [audit_conversation(cid) for cid in conv_ids]

@@ -5,7 +5,9 @@ import sqlite3
 import time
 from importlib import import_module
 from pathlib import Path
+
 import babylon60.database.core
+
 logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
 logger = logging.getLogger('CORTEX.PULMONES.WORKER')
 

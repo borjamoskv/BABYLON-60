@@ -1,19 +1,22 @@
 from __future__ import annotations
+
 import asyncio
 import hashlib
 import json
-import os
 import time
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional, TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
+
 if TYPE_CHECKING:
     from babylon60.bft.lexicon import BFTLexicon
 import aiosqlite
+
 import babylon60.database.core
 from babylon60.bft.payload_encryptor import PayloadEncryptor
+
 
 class BFTCausalInvariantError(RuntimeError):
     pass
@@ -76,22 +79,22 @@ class LedgerEvent:
     stream: str
     entity_id: str
     event_type: str
-    payload: Dict[str, Any]
+    payload: dict[str, Any]
     cortex_taint: str
     source_db: str
     source_table: str
     source_pk: str
-    created_at: Optional[str] = None
+    created_at: str | None = None
 
 def _compute_entry_hash_wrapper(event_id: str, stream: str, entity_id: str, event_type: str, payload_json: str, source_db: str, source_table: str, source_pk: str, cortex_taint: str, lamport_t: int, prev_hash: str, created_at: str) -> str:
     return _compute_entry_hash(event_id, stream, entity_id, event_type, payload_json, source_db, source_table, source_pk, cortex_taint, lamport_t, prev_hash, created_at)
 
 class BFTLedgerActor:
 
-    def __init__(self, db_path: Path, lexicon: Optional[BFTLexicon]=None, queue_maxsize: int = 10000) -> None:
+    def __init__(self, db_path: Path, lexicon: BFTLexicon | None=None, queue_maxsize: int = 10000) -> None:
         self._db_path = db_path
-        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[Dict[str, Any]]]] = asyncio.Queue(maxsize=queue_maxsize)
-        self._task: Optional[asyncio.Task[None]] = None
+        self._queue: asyncio.Queue[tuple[LedgerEvent, asyncio.Future[dict[str, Any]]]] = asyncio.Queue(maxsize=queue_maxsize)
+        self._task: asyncio.Task[None] | None = None
         self._encryptor = PayloadEncryptor()
         self._events_processed = 0
         self._start_time = 0.0
@@ -110,14 +113,14 @@ class BFTLedgerActor:
             self._task.cancel()
             await asyncio.gather(self._task, return_exceptions=True)
 
-    def append(self, event: LedgerEvent) -> asyncio.Future[Dict[str, Any]]:
+    def append(self, event: LedgerEvent) -> asyncio.Future[dict[str, Any]]:
         if self._task is None:
             raise RuntimeError('BFTLedgerActor: actor not started')
         if self._task.done():
             exc = self._task.exception()
             raise RuntimeError(f'Zombie Actor Prevention triggered: worker task terminated unexpectedly. Exception: {exc}') from exc
         loop = asyncio.get_running_loop()
-        future: asyncio.Future[Dict[str, Any]] = loop.create_future()
+        future: asyncio.Future[dict[str, Any]] = loop.create_future()
         self._queue.put_nowait((event, future))
         return future
 
@@ -215,7 +218,7 @@ class BFTLedgerActor:
         await db.execute('COMMIT')
         return (int(db_row[0]), str(db_row[1]))
 
-    async def _process(self, db: aiosqlite.Connection, event: LedgerEvent, future: asyncio.Future[Dict[str, Any]]) -> None:
+    async def _process(self, db: aiosqlite.Connection, event: LedgerEvent, future: asyncio.Future[dict[str, Any]]) -> None:
         if not event.cortex_taint or not isinstance(event.cortex_taint, str):
             raise ValueError('INV_BFT_03: cortex_taint must be a non-empty string representing the causal trace')
         payload_json = _canonical_json(event.payload)

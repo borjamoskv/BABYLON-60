@@ -1,10 +1,11 @@
-import hmac
 import hashlib
+import hmac
 import json
 import time
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any
+
 SOVEREIGN_KEY_SALT = 'CORTEX_C5_REAL_PAYWALL_SALT_2026'
 
 class Tier:
@@ -12,8 +13,8 @@ class Tier:
     DEVELOPER = 'DEVELOPER'
     PRO_SWARM = 'PRO_SWARM'
     ENTERPRISE = 'ENTERPRISE'
-TIER_LIMITS: Dict[str, int] = {Tier.COMMUNITY: 1000, Tier.DEVELOPER: 50000, Tier.PRO_SWARM: 1000000, Tier.ENTERPRISE: 999999999}
-TIER_PRICES: Dict[str, int] = {Tier.DEVELOPER: 49, Tier.PRO_SWARM: 199, Tier.ENTERPRISE: 999}
+TIER_LIMITS: dict[str, int] = {Tier.COMMUNITY: 1000, Tier.DEVELOPER: 50000, Tier.PRO_SWARM: 1000000, Tier.ENTERPRISE: 999999999}
+TIER_PRICES: dict[str, int] = {Tier.DEVELOPER: 49, Tier.PRO_SWARM: 199, Tier.ENTERPRISE: 999}
 
 @dataclass
 class LicenseStatus:
@@ -27,7 +28,7 @@ class LicenseStatus:
 
 class SovereignLicenseGate:
 
-    def __init__(self, config_dir: Optional[str]=None) -> None:
+    def __init__(self, config_dir: str | None=None) -> None:
         if config_dir:
             self.base_dir = Path(config_dir)
         else:
@@ -44,7 +45,7 @@ class SovereignLicenseGate:
         encoded = json.dumps(key_dict).encode('utf-8').hex()
         return f'B60-{tier[:3]}-{encoded}'
 
-    def verify_license_key(self, key_str: str) -> Optional[Dict[str, Any]]:
+    def verify_license_key(self, key_str: str) -> dict[str, Any] | None:
         if not key_str.startswith('B60-'):
             return None
         try:
@@ -80,7 +81,7 @@ class SovereignLicenseGate:
         ops_today = self._get_daily_usage()
         if self.license_file.exists():
             try:
-                with open(self.license_file, 'r', encoding='utf-8') as f:
+                with open(self.license_file, encoding='utf-8') as f:
                     data = json.load(f)
                 key_str = data.get('key', '')
                 verified = self.verify_license_key(key_str)
@@ -104,7 +105,7 @@ class SovereignLicenseGate:
         if not self.meter_file.exists():
             return 0
         try:
-            with open(self.meter_file, 'r', encoding='utf-8') as f:
+            with open(self.meter_file, encoding='utf-8') as f:
                 data = json.load(f)
             if data.get('date') == today:
                 return int(data.get('ops', 0))

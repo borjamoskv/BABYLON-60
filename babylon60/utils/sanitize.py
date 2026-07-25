@@ -1,7 +1,9 @@
 from __future__ import annotations
+
 import re
 import unicodedata
 from typing import Final
+
 __all__ = ['sanitize_project_name', 'sanitize_query', 'sanitize_tenant_id', 'validate_fact_type', 'validate_pagination']
 _PROJECT_RE: Final = re.compile('^[a-zA-Z0-9][a-zA-Z0-9_\\-\\.]{0,127}$')
 _TENANT_RE: Final = re.compile('^[a-z0-9_\\-]{1,64}$', re.IGNORECASE)
@@ -13,7 +15,7 @@ def sanitize_project_name(project: str) -> str:
     if not project:
         raise ValueError('Project name cannot be empty')
     project = unicodedata.normalize('NFKC', project).strip()
-    if any((c in project for c in _DANGEROUS_CHARS)):
+    if any(c in project for c in _DANGEROUS_CHARS):
         raise ValueError('Project name contains forbidden characters')
     if not _PROJECT_RE.match(project):
         raise ValueError(f"Invalid project name: '{project}'. Must be 1-128 chars, alphanumeric with _-. allowed, starting with alphanumeric.")
@@ -31,7 +33,7 @@ def sanitize_query(query: str) -> str:
     if not query or not query.strip():
         raise ValueError('Search query cannot be empty')
     query = unicodedata.normalize('NFKC', query).strip()
-    query = ''.join((c for c in query if c not in _DANGEROUS_CHARS))
+    query = ''.join(c for c in query if c not in _DANGEROUS_CHARS)
     if len(query) > MAX_QUERY_LENGTH:
         raise ValueError(f'Query too long ({len(query)} chars, max {MAX_QUERY_LENGTH})')
     return query
