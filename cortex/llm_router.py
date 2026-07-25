@@ -19,64 +19,46 @@ class EpistemicHalt(Exception):
     pass
 
 def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
-    """Parseador lineal de YAML sin dependencias para conservar ATP (Ω15)."""
+    """Parseador de YAML para ontología de rutas (Ω15)."""
     if not os.path.exists(filepath):
         raise EpistemicHalt(f"Archivo de ontología de rutas no encontrado: {filepath}")
+
+    try:
+        import yaml
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = yaml.safe_load(f)
+            if isinstance(data, dict) and "routes" in data:
+                return data["routes"]
+    except ImportError:
+        pass
 
     routes = []
     current_route: Any = {}
 
     with open(filepath, "r", encoding="utf-8") as f:
-        for line in f:
-            line_str = line.strip()
-            # Ignorar cabecera y comentarios
-            if (
-                not line_str
-                or line_str.startswith("Claim")
-                or line_str.startswith("Proof")
-                or line_str.startswith("Base")
-                or line_str.startswith("Confidence")
-                or line_str.startswith("PrimaryVectors")
-                or line_str.startswith("routes:")
-            ):
-                continue
+        content = f.read()
 
-            if ":" in line_str:
-                parts = line_str.split(":", 1)
-                key = parts[0].strip()
-                val = parts[1].strip()
+    # Parse simple routes manually if PyYAML is not installed
+    import re
+    route_blocks = content.split("- name:")
+    for block in route_blocks[1:]:
+        lines = block.strip().splitlines()
+        name_line = lines[0].strip().strip('"').strip("'")
+        route_obj: Any = {"name": name_line}
 
-                # Manejar el caso de un nuevo elemento de la lista (ej: `- name: "GitHub Models"`)
-                if key.startswith("-"):
-                    if current_route:
-                        routes.append(current_route)
-                    current_route = {}
-                    key = key[1:].strip()
+        models_match = re.search(r"models:\s*\[(.*?)\]", block, re.DOTALL)
+        if models_match:
+            raw_models = models_match.group(1)
+            models = [m.strip().strip('"').strip("'") for m in raw_models.split(",") if m.strip()]
+            route_obj["models"] = models
 
-                # Quitar comillas
-                if val.startswith('"') and val.endswith('"'):
-                    val = val[1:-1]
-                elif val.startswith("["):
-                    # Si el valor contiene ']', se parsea directamente
-                    raw_models = val
-                    if not raw_models.endswith("]"):
-                        # Seguir leyendo hasta el cierre ']'
-                        for next_line in f:
-                            raw_models += " " + next_line.strip()
-                            if "]" in next_line:
-                                break
-                    raw_content = raw_models[raw_models.find("[")+1:raw_models.rfind("]")]
-                    models_list: list[str] = [x.strip()[1:-1] if (x.strip().startswith('"') or x.strip().startswith("'")) else x.strip() for x in raw_content.split(",") if x.strip()]
-                    current_route["models"] = models_list
-                    continue
+        url_match = re.search(r"url:\s*\"?(.*?)\"?\s*$", block, re.MULTILINE)
+        if url_match:
+            route_obj["url"] = url_match.group(1).strip('"')
 
-                current_route[key] = val
-
-    if current_route:
-        routes.append(current_route)
+        routes.append(route_obj)
 
     from typing import cast
-
     return cast(List[RouteConfig], routes)
 
 class C5LLMRouter:
