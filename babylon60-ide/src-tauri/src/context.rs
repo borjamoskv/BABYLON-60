@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 use std::sync::Mutex;
-use tauri::{State, command};
+use tauri::State;
 use rusqlite::{Connection, Result as SqlResult, params};
 use chrono::{DateTime, Utc};
 
