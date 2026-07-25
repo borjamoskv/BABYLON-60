@@ -6,7 +6,7 @@ Author: Borja Moskv (borjamoskv)
 import re
 import time
 import uuid
-from typing import Any, Optional
+from typing import Any
 
 from babylon60.skills.types import (
     InteractionEvent,
@@ -28,7 +28,7 @@ class SkillSessionRecorder:
     Lamport clock ordering, and cryptographic state hashing.
     """
 
-    def __init__(self, name: str, session_id: Optional[str] = None) -> None:
+    def __init__(self, name: str, session_id: str | None = None) -> None:
         self.name: str = name
         self.session_id: str = session_id or str(uuid.uuid4())
         self.lamport_t: int = 1
@@ -57,7 +57,7 @@ class SkillSessionRecorder:
         target_text: str = "",
         bounding_box: tuple[int, int, int, int] = (0, 0, 0, 0),
         value: str = "",
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
     ) -> InteractionEvent:
         if not self.is_recording:
             raise RuntimeError("Recorder is not active. Call start() before recording events.")

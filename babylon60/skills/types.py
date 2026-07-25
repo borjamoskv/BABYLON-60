@@ -3,11 +3,11 @@ Typed definitions and schemas for BABYLON-60 Skill Synthesizer.
 Author: Borja Moskv (borjamoskv)
 """
 
-from dataclasses import dataclass, field
-from enum import Enum
 import hashlib
 import json
 import time
+from dataclasses import dataclass, field
+from enum import Enum
 from typing import Any
 
 

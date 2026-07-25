@@ -3,9 +3,10 @@ Skill Replay Engine with self-healing locator resolution and BFT ledger assertio
 Author: Borja Moskv (borjamoskv)
 """
 
-from dataclasses import dataclass, field
 import time
-from typing import Any, Callable, Optional
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from typing import Any
 
 from babylon60.skills.types import (
     InteractionType,
@@ -46,14 +47,14 @@ class SkillReplayEngine:
     Replay Engine executing SkillDefinitions with self-healing fallback anchors.
     """
 
-    def __init__(self, driver: Optional[Any] = None) -> None:
+    def __init__(self, driver: Any | None = None) -> None:
         self.driver = driver
 
     def execute(
         self,
         skill: SkillDefinition,
-        override_params: Optional[dict[str, str]] = None,
-        driver_mock: Optional[Callable[[str, list[str]], tuple[bool, str, bool]]] = None,
+        override_params: dict[str, str] | None = None,
+        driver_mock: Callable[[str, list[str]], tuple[bool, str, bool]] | None = None,
     ) -> ReplayExecutionReport:
         start_time = time.time()
         params = dict(skill.parameters)
@@ -114,7 +115,7 @@ class SkillReplayEngine:
         self,
         node: SkillASTNode,
         value: str,
-        driver_mock: Optional[Callable[[str, list[str]], tuple[bool, str, bool]]] = None,
+        driver_mock: Callable[[str, list[str]], tuple[bool, str, bool]] | None = None,
     ) -> tuple[bool, str, bool, str]:
         anchors = [node.target_selector] + [a for a in node.self_healing_anchors if a != node.target_selector]
         anchors = [a for a in anchors if a]

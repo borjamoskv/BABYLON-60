@@ -4,7 +4,6 @@ Author: Borja Moskv (borjamoskv)
 """
 
 import uuid
-from typing import Any
 
 from babylon60.skills.types import (
     InteractionEvent,
@@ -87,7 +86,7 @@ class SkillASTCompiler:
             "import asyncio",
             "from typing import Any",
             "",
-            f"async def execute_skill(driver: Any, params: dict[str, str] | None = None) -> bool:",
+            "async def execute_skill(driver: Any, params: dict[str, str] | None = None) -> bool:",
             "    params = params or {}",
         ]
 

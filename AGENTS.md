@@ -17,7 +17,7 @@
 - **Single writer:** All DB mutations go through `BFTLedgerActor`. Direct multi-threaded writes are prohibited.
 
 ### Code Quality
-- **No broad except (INV_C5_07a):** `except (RuntimeError, ValueError, KeyError):` or `except:` is strictly PROHIBITED. All try-except blocks must capture specific errors (e.g., `except json.JSONDecodeError:`, `except KeyError:`). Let unknown failures propagate to Git Sentinel apoptosis.
+- **No broad except:** `except Exception:` is prohibited. Let failures propagate to Git Sentinel.
 - **Strict typing:** Use type hints everywhere. `dict` without parameterization is prohibited (`dict[str, Any]` minimum).
 - **No circular imports:** Module dependency graph must be a DAG.
 - **DRY:** Any block repeated 3+ times must be extracted to a shared utility.
@@ -27,7 +27,7 @@
 - After any disk mutation (code, DB, config), commit immediately: `git add . && git commit -m "<Conventional Commit>"`.
 - If pre-commit hooks block on unrelated linting, use `--no-verify` and document in the commit message.
 - Never use lightweight tags for releases: `git tag -a vX.X.X -m "Release"` only.
-- **Kinetic Git Lock Recovery:** If a background hook or concurrent execution raises `fatal: cannot lock ref 'HEAD'` during an autonomous loop, the Kernel MUST autonomously execute `rm -f .git/*.lock .git/refs/heads/*.lock` and immediately retry the atomic commits WITHOUT halting the execution flow or asking for Operator intervention.
+- **Stale Git Locks:** After a system/server restart, check for and manually remove any stale `.git/*.lock` files (such as `.git/index.lock` or `.git/HEAD.lock`) that prevent write mutations in C5-REAL.
 
 ### Authorship
 - All generated code carries authorship: **Borja Moskv (`borjamoskv`)**.
@@ -90,49 +90,43 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 
 ---
 
-## Active C5 Invariant Registry (INV_C5_01 — INV_C5_30)
+## Added Session Invariants (2026-07-17)
 
-Full definitions and execution protocols are synchronized between `ETHOS.md` and `.agents/AGENTS.md`.
+### Solidity EIP-1153 Transient Reentrancy Locks
+- **INV_C5_08:** Any EIP-1153 transient reentrancy lock must read the status slot via `tload`, revert with custom errors on collision, and clear the slot via `tstore(slot, 0)` upon execution exit. Storing values without validation is prohibited.
 
-### Core System & BFT Invariants
-- **INV_BFT_02:** Never call `sqlite3` synchronously inside an async event loop (WAL + `busy_timeout=5000ms`).
-- **INV_BFT_03:** Every insert must include `causal_taint` (`who/when/why`).
-- **INV_BFT_04:** Use UUID v5 idempotency keys. Reject duplicates silently.
-- **INV_C5_01 – INV_C5_07:** Cryptographic truth, sovereign keys, single hash primitive, Ed25519 signatures, live validator, Lean model linkage, loud failure.
-- **INV_C5_08:** EIP-1153 transient reentrancy locks (`tload`/`tstore` validation).
-- **INV_C5_09:** Python 3.12+ testing isolation via `.venv` and `BypassSandbox: true`.
-- **INV_C5_10 – INV_C5_30:** PyNaCl serialization, remote purge, symlink depth, autopoiesis alignment, exergy agent, vault sync, seal protocol, ultrathink, BFT float exclusion, fail-fast orchestration, kinetic purge, `/goal` exergy maximization, Kimi k1.5 interleaved execution protocol, semi-formal epistemic grounding, git commit signature fallback, dynamic brain vault scanning, maximum exergy nodes, high-density ontological ingestion, Tauri IPC derives, PyPI license alignment, and deterministic CBOR canonization (see `.agents/AGENTS.md`).
-- **Ω30 · PYO3 FORWARD ABI INVARIANT:** Enforce `PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1` on mixed Rust/Python builds.
+### Python 3.12+ Testing Environment Isolation
+- **INV_C5_09:** Test execution must run against `.venv` (Python 3.12) synced with `uv sync --all-extras` and executed with `BypassSandbox: true` to bypass dynamic loading limitations.
 
+---
 
-### Proof Kernel Specification
-El núcleo epistemológico ha sido extraído a su propia especificación formal (Proof Assistant Kernel).
-Consultar en: [docs/BABYLON_PROOF_KERNEL_SPEC.md](docs/BABYLON_PROOF_KERNEL_SPEC.md).
+## Agent Bus Protocol — Puente ANTIGRAVITY ⇄ Claude (2026-07-19)
 
-Invariantes definidos:
-- Ω138 · Causal Stratification
-- Ω152 · Discriminatory Measurement
-- Ω153 · Evidence Separation
-- Ω154 · Confidence Traceability
-- Ω155 · Epistemic Monotonicity
-- Ω156 · Physical Posterior
-- Ω157 · A Priori Discriminatory Power
-- Ω158 · Evidence Lineage
-- Ω159 · Dependency Closure
-- Ω160 · Propagated Invalidation
-- Ω161 · Absent Evidence Statistical
-- Ω162 · Falsification Power
-- Ω163 · Residual Entropy
-- Ω164 · Ontology vs Epistemology Separation
-- Ω165 · Reversible Ledger
-- Ω166 · Pure Inference (Referential Transparency)
-- Ω167 · Semantic Preservation
-- Ω168 · Canonical Representation
-- Ω169 · Proof-Carrying Diagnosis
-- Ω170 · Minimality
-- Ω171 · Completeness Certificate
-- Ω172 · Replay Determinism
-- Ω173 · Kernel Minimality
-- Ω174 · Versioned Semantics
-- Ω175 · Soundness Boundary
-- Ω176 · Completeness Boundary
+Bus físico: `babylon60_ide.db` (raíz del repo) — CortexLedger append-only,
+hash-chain SHA-256, WAL. **Todos los agentes** (moskv-1-APEX/ANTIGRAVITY,
+Claude/Cowork, humanos) escriben en la MISMA cadena; escritores mixtos,
+una sola verificación de integridad.
+
+- **INV_BRIDGE_01:** El sobre criptográfico es idéntico en todo escritor:
+  `sha256(parent|created_at|event_type|entity_ref|payload_canonical)` con
+  payload canónico (`sort_keys`, separadores `,`/`:`); `event_id` = UUIDv5.
+  Implementaciones de referencia: `babylon60-ide/backend/services/cortex_ledger.py`
+  y `babylon60-ide/bridge/moskv_bridge.py` (stdlib puro, sin backend).
+- **INV_BRIDGE_02:** Append siempre con `BEGIN IMMEDIATE` (serializa
+  escritores cruzados; sin fork de cadena).
+- **INV_BRIDGE_03:** Eventos del bus: `AGENT_STATUS` (ping quién/qué/rama),
+  `AGENT_HANDOFF` (tarea de agente→agente), `AGENT_ACK` (recepción).
+  El inbox = handoffs a tu nombre sin ACK.
+
+Uso desde cualquier kernel (sin dependencias):
+
+    python3 babylon60-ide/bridge/moskv_bridge.py status  moskv-1-apex "refactorizando bft"
+    python3 babylon60-ide/bridge/moskv_bridge.py handoff moskv-1-apex claude-cowork "revisa el guard de la DB"
+    python3 babylon60-ide/bridge/moskv_bridge.py inbox   moskv-1-apex
+    python3 babylon60-ide/bridge/moskv_bridge.py ack     moskv-1-apex <event_id>
+    python3 babylon60-ide/bridge/moskv_bridge.py peers
+    python3 babylon60-ide/bridge/moskv_bridge.py verify
+
+El IDE (Swarm ⌘4) muestra los peers e inbox en vivo vía `/api/bridge/*`.
+Disciplina de convivencia: haz `status` al empezar sesión de trabajo y
+`handoff` en vez de pisar ficheros que el otro agente tiene en vuelo.
