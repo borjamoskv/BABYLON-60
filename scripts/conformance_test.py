@@ -57,7 +57,7 @@ def create_crypto_vectors() -> None:
     print(f"Crypto vectors written. SHA3: {sha3_hash}")
 
 
-def test_replay_corruption() -> None:
+async def test_replay_corruption() -> None:
     print("\n--- Testing Replay / Corruption ---")
     from babylon60.bft.consensus_ledger import BFT_Ledger, StateMutation
 
@@ -68,18 +68,20 @@ def test_replay_corruption() -> None:
     mutation = StateMutation(agent_id="test_agent", payload={"test": "data"}, timestamp=1000, signature="mock")
     from babylon60.core.crypto import canonicalize_cbor, hash_sha3_256
 
+    await ledger.setup()
     m_hash: str = hash_sha3_256(canonicalize_cbor(mutation.payload))
-    ledger.conn.execute(
+    assert ledger.conn is not None
+    await ledger.conn.execute(
         "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint) VALUES (?, ?, ?, ?, ?)",
         (m_hash, mutation.agent_id, canonicalize_cbor(mutation.payload), mutation.timestamp, mutation.causal_taint),
     )
-    ledger.conn.commit()
-    if not ledger.audit_integrity():
+    await ledger.conn.commit()
+    if not await ledger.audit_integrity():
         print("Initial integrity check failed!")
         sys.exit(1)
-    ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",))
-    ledger.conn.commit()
-    if ledger.audit_integrity():
+    await ledger.conn.execute("UPDATE state_log SET payload = ? WHERE agent_id = 'test_agent'", (b"corrupted_cbor_data",))
+    await ledger.conn.commit()
+    if await ledger.audit_integrity():
         print("ERROR: Corruption was NOT detected!")
         sys.exit(1)
     print("Replay verification PASSED. Corruption correctly triggers false on audit_integrity().")
@@ -93,7 +95,8 @@ def run_ci_checks() -> None:
 def main() -> None:
     check_wheel_contents()
     create_crypto_vectors()
-    test_replay_corruption()
+    import asyncio
+    asyncio.run(test_replay_corruption())
     run_ci_checks()
     print("\n[SUCCESS] C5-REAL Conformance Checks PASSED.")
 

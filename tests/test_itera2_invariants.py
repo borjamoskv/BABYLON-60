@@ -102,6 +102,7 @@ async def test_audit_integrity_indecodificable_es_corrupcion(tmp_path: Path) -> 
     ledger = BFT_Ledger(str(tmp_path / "audit.db"))
     await ledger.setup()
     try:
+        assert ledger.conn is not None
         await ledger.conn.execute(
             "INSERT INTO state_log (mutation_hash, agent_id, payload, ts, causal_taint, idempotency_key) VALUES (?, ?, ?, ?, ?, ?)",
             ("deadbeef" * 8, "atacante", b"\xff\xfe\xfd garbage no-cbor no-json", 1, "test_corruption", "dummy-idemp-key"),
