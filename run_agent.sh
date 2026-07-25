@@ -1,7 +1,7 @@
 # C5-REAL EXERGY CERTIFIED
 #!/usr/bin/env bash
 # run_agent.sh — Single Zero-Trust Entrypoint for Kernel Operations
-# Usage: ./run_agent.sh [plan_path]
+# Pipeline: detect_sim.py -> runtime_wrapper.py -> verify_receipt.py
 
 set -euo pipefail
 
@@ -25,7 +25,8 @@ python3 -c "import json,sys; json.load(open('${PLAN}'))" 2>>"${LOG}" || {
   exit 1
 }
 
-echo "[run_agent.sh] scanning plan for synthetic artifacts..." | tee -a "${LOG}"
+# 1. Pre-Execution Gate: Scan plan for synthetic artifacts or unbacked claims
+echo "[run_agent.sh] Step 1: scanning plan via detect_sim.py..." | tee -a "${LOG}"
 python3 scripts/detect_sim.py "${PLAN}" --strict 2>&1 | tee -a "${LOG}"
 DETECT_EXIT="${PIPESTATUS[0]}"
 
@@ -34,15 +35,26 @@ if [ "${DETECT_EXIT}" -ne 0 ]; then
   exit 3
 fi
 
-echo "--- GIT STATE BEFORE ---" | tee -a "${LOG}"
-git rev-parse HEAD 2>/dev/null | tee -a "${LOG}" || echo "no commits" | tee -a "${LOG}"
-git diff --name-only 2>/dev/null | tee -a "${LOG}"
-echo "---" | tee -a "${LOG}"
+# 2. Execution Phase: Run runtime_wrapper.py
+echo "[run_agent.sh] Step 2: executing plan via runtime_wrapper.py..." | tee -a "${LOG}"
+python3 scripts/runtime_wrapper.py "${PLAN}" --outdir "${RECEIPTS_DIR}" 2>&1 | tee -a "${LOG}"
+WRAPPER_EXIT="${PIPESTATUS[0]}"
 
-echo "[run_agent.sh] executing runtime_wrapper..." | tee -a "${LOG}"
-python3 cortex/hypervisor/collision.py 2>&1 | tee -a "${LOG}" || true
+if [ "${WRAPPER_EXIT}" -ne 0 ]; then
+  echo "[ABORT] runtime_wrapper failed (rc=${WRAPPER_EXIT})." | tee -a "${LOG}"
+  exit "${WRAPPER_EXIT}"
+fi
 
-RECEIPT=$(ls -t "${RECEIPTS_DIR}"/run-*.json 2>/dev/null | head -1 || true)
+# 3. Verification Phase: Verify receipt vs disk state
+RECEIPT=$(ls -t "${RECEIPTS_DIR}"/run-*.json 2>/dev/null | head -1)
+echo "[run_agent.sh] Step 3: verifying receipt ${RECEIPT} via verify_receipt.py..." | tee -a "${LOG}"
+python3 scripts/verify_receipt.py "${RECEIPT}" 2>&1 | tee -a "${LOG}"
+VERIFIER_EXIT="${PIPESTATUS[0]}"
 
-echo "=== RUN AGENT PASS ===" | tee -a "${LOG}"
+if [ "${VERIFIER_EXIT}" -ne 0 ]; then
+  echo "[ABORT] verify_receipt failed (rc=${VERIFIER_EXIT})." | tee -a "${LOG}"
+  exit "${VERIFIER_EXIT}"
+fi
+
+echo "=== ZERO TRUST PIPELINE: PASS ===" | tee -a "${LOG}"
 exit 0
