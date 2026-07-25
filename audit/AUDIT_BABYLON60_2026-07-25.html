@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AUDITORÍA CAUSAL — BABYLON-60 / Teorema-Robinson-Moskv</title>
+<style>
+:root{
+  --bg:#0a0a0b; --panel:#111114; --panel2:#16161a; --line:#26262c;
+  --fg:#e8e8ea; --dim:#8d8d97; --dim2:#5f5f68;
+  --p0:#ff3b30; --p1:#ff9500; --p2:#ffd60a; --ok:#30d158; --acc:#5ac8fa;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font-family:var(--mono);font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding:40px 24px 80px}
+header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:32px}
+h1{font-size:22px;letter-spacing:-0.02em;margin:0 0 6px;font-weight:600}
+.sub{color:var(--dim);font-size:12.5px}
+.verdict{margin:28px 0;padding:20px 22px;background:var(--panel);
+  border:1px solid var(--line);border-left:3px solid var(--p0);border-radius:3px}
+.verdict .lbl{font-size:11px;letter-spacing:.12em;color:var(--p0);margin-bottom:8px}
+.verdict p{margin:0;font-size:14.5px;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:24px 0 36px}
+.m{background:var(--panel);border:1px solid var(--line);border-radius:3px;padding:14px 16px}
+.m .v{font-size:22px;font-weight:600;letter-spacing:-0.02em}
+.m .k{font-size:10.5px;color:var(--dim2);letter-spacing:.09em;margin-top:3px;text-transform:uppercase}
+.m.bad .v{color:var(--p0)} .m.warn .v{color:var(--p1)} .m.good .v{color:var(--ok)}
+h2{font-size:12px;letter-spacing:.14em;color:var(--dim);margin:44px 0 16px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);text-transform:uppercase;font-weight:600}
+.f{background:var(--panel);border:1px solid var(--line);border-radius:3px;
+  margin-bottom:14px;overflow:hidden}
+.f>.hd{padding:13px 16px;display:flex;gap:12px;align-items:baseline;
+  border-bottom:1px solid var(--line);background:var(--panel2)}
+.tag{font-size:10px;font-weight:700;letter-spacing:.08em;padding:3px 7px;border-radius:2px;
+  white-space:nowrap;color:#0a0a0b}
+.t0{background:var(--p0)} .t1{background:var(--p1)} .t2{background:var(--p2)} .tok{background:var(--ok)}
+.f .ti{font-size:14px;font-weight:600;flex:1}
+.f>.bd{padding:15px 16px}
+.f p{margin:0 0 11px}
+.f p:last-child{margin-bottom:0}
+code{background:#1d1d22;padding:1.5px 5px;border-radius:2px;font-size:12.5px;color:var(--acc)}
+pre{background:#08080a;border:1px solid var(--line);border-left:2px solid var(--dim2);
+  padding:11px 13px;border-radius:2px;overflow-x:auto;font-size:12px;
+  color:#c8c8d0;margin:11px 0;line-height:1.55}
+pre .err{color:var(--p0)}
+.pv{font-size:11px;letter-spacing:.08em;color:var(--ok);margin:11px 0 5px;font-weight:600}
+.im{font-size:11px;letter-spacing:.08em;color:var(--p1);margin:11px 0 5px;font-weight:600}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12.5px}
+th{text-align:left;color:var(--dim2);font-size:10.5px;letter-spacing:.09em;
+  padding:7px 10px;border-bottom:1px solid var(--line);text-transform:uppercase;font-weight:600}
+td{padding:8px 10px;border-bottom:1px solid #1c1c21;vertical-align:top}
+tr:last-child td{border-bottom:none}
+.n{color:var(--dim)}
+ol.plan{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+ol.plan li{counter-increment:s;position:relative;padding:12px 0 12px 44px;
+  border-bottom:1px solid #1c1c21}
+ol.plan li:last-child{border-bottom:none}
+ol.plan li::before{content:counter(s);position:absolute;left:0;top:12px;
+  width:26px;height:26px;background:var(--panel2);border:1px solid var(--line);
+  border-radius:2px;display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--dim);font-weight:700}
+.cost{float:right;font-size:10.5px;color:var(--dim2);letter-spacing:.06em}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);
+  color:var(--dim2);font-size:11px;line-height:1.8}
+.ok-list{margin:0;padding-left:18px;color:var(--dim)}
+.ok-list li{margin-bottom:6px}
+.ok-list strong{color:var(--fg);font-weight:600}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>AUDITORÍA CAUSAL — BABYLON-60</h1>
+  <div class="sub">
+    <code>~/10_PROJECTS/Teorema-Robinson-Moskv</code> → <code>github.com/borjamoskv/BABYLON-60</code> · rama <code>fix/ci-ronda3-limpia</code><br>
+    2026-07-25 · 40.620 LOC Python · 686 ficheros trackeados · verificación ejecutada, no inferida
+  </div>
+</header>
+
+<div class="verdict">
+  <div class="lbl">▬ VEREDICTO</div>
+  <p>El código núcleo es sólido y los tests son reales. Lo que falla es la <strong>frontera de reproducibilidad</strong>: el paquete publicable no importa, la suite solo pasa en tu portátil por un artefacto SQLite no versionado e irreconstruible, la imagen Docker no arranca, y hay transcripciones completas de sesiones de Claude Code vivas en un repositorio público. Tres defectos P0, todos verificados por ejecución. Ninguno requiere rediseño: son 4 líneas de <code>pyproject.toml</code>, un <code>__main__.py</code>, un <code>ALTER TABLE</code> y una purga de historial.</p>
+</div>
+
+<div class="grid">
+  <div class="m bad"><div class="v">3</div><div class="k">Defectos P0</div></div>
+  <div class="m bad"><div class="v">15</div><div class="k">Tests fallando</div></div>
+  <div class="m warn"><div class="v">44 / 31</div><div class="k">Ruff / Mypy</div></div>
+  <div class="m warn"><div class="v">−124.576</div><div class="k">Líneas sin publicar</div></div>
+  <div class="m good"><div class="v">0</div><div class="k">Secretos filtrados</div></div>
+  <div class="m good"><div class="v">344</div><div class="k">Tests pasando</div></div>
+</div>
+
+<h2>Topología — qué es cada cosa</h2>
+<table>
+<tr><th>Ruta</th><th>Rama</th><th>Estado</th></tr>
+<tr><td><code>~/10_PROJECTS/Teorema-Robinson-Moskv</code></td><td><code>fix/ci-ronda3-limpia</code></td>
+<td>Clon de trabajo activo. 3,0 GB en disco (<code>.git</code> = 1,1 GB). <span class="n">+285 / −10 commits vs <code>origin/main</code>.</span></td></tr>
+<tr><td><code>~/BABYLON-60</code></td><td><code>main</code> @ <code>930f8f91c</code></td>
+<td>Espejo exacto de <code>origin/main</code>, 0 cambios sin commitear. <strong>No es un proyecto distinto</strong> — es el mismo repo, sincronizado y limpio. Sirve de línea base.</td></tr>
+</table>
+<p class="n">Durante la auditoría el HEAD mutó de <code>34b2b0b913</code> a <code>51626adb0b</code>. Hay un proceso autónomo (<code>chore(furnace): omega iteration N [auto]</code>) escribiendo commits en el repo en este momento.</p>
+
+<h2>P0 — Rompe en producción</h2>
+
+<div class="f">
+  <div class="hd"><span class="tag t0">P0-1</span><span class="ti">Transcripciones de sesiones Claude Code publicadas en repo público</span></div>
+  <div class="bd">
+    <p>El repositorio es <strong>público</strong> (3 estrellas, accesible sin auth). <code>cortex/legal_dossier/claude_code_local_logs/</code> contiene 5 ficheros —uno de 851 KB— que están <strong>hoy en <code>origin/main</code></strong>, no solo en tu rama local.</p>
+    <div class="pv">▸ PRUEBA</div>
+<pre>$ git cat-file -e origin/main:cortex/legal_dossier/claude_code_local_logs/claude_local_log_01_....jsonl
+<span style="color:#ff3b30">SI, presente en origin/main</span>
+
+$ git show origin/main:&lt;fichero&gt; | grep -oF "/Users/borjafernandezangulo" | wc -l
+2073</pre>
+    <p>Introducidos por <code>9cd11a1377 feat(forensics): harvest and crystallize local Claude Code JSONL logs</code>. Son transcripciones completas: prompts, contenidos de ficheros y salidas de herramientas sin sanear. <span class="n">No detecté claves API con firma conocida (<code>sk-ant-</code>, <code>ghp_</code>, <code>AKIA</code>, <code>Bearer</code>) en el fichero grande, pero eso no cubre credenciales sin patrón.</span></p>
+    <div class="im">▸ IMPACTO</div>
+    <p>Exposición permanente de identidad, estructura de disco y contenido de trabajo. Borrar el fichero en un commit nuevo <strong>no lo elimina</strong> — sigue en el historial y en cualquier fork o caché de GitHub.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t0">P0-2</span><span class="ti">El wheel publicable no importa — <code>babylon60.utils</code> excluida del packaging</span></div>
+  <div class="bd">
+    <p><code>pyproject.toml</code> excluye <code>babylon60.utils</code> y <code>babylon60.utils.*</code> de <code>packages.find</code>. Pero 9 módulos la importan, entre ellos <code>babylon60/crypto/aes.py</code>, <code>identity.py</code>, <code>hash_registry.py</code> y <code>provider.py</code>.</p>
+    <div class="pv">▸ PRUEBA — wheel construido e instalado en venv limpio</div>
+<pre>$ python -m build --wheel   →  cortex_persist-1.1.1-py3-none-any.whl
+   109 ficheros · entradas 'utils': <span class="err">0</span>
+   subpaquetes: analysis, bft, cli, compat, compiler, core, crypto,
+                database, genomics, guards, memory, types
+
+$ /venv-limpio/bin/python -c "import babylon60.crypto.identity"
+  File ".../site-packages/babylon60/crypto/aes.py", line 16
+    from babylon60.utils.errors import DecryptionPolicyError
+<span class="err">ModuleNotFoundError: No module named 'babylon60.utils'</span></pre>
+    <div class="im">▸ IMPACTO</div>
+    <p><code>.github/workflows/pypi-publish.yml</code> publica en cada <em>release</em>. La próxima release sube a PyPI un paquete que revienta al importar el subsistema criptográfico. <code>import babylon60</code> a secas sí funciona — por eso pasa desapercibido.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t0">P0-3</span><span class="ti">Teatro Verde estructural — la suite solo pasa en tu máquina</span></div>
+  <div class="bd">
+    <p><code>BFTLexicon</code> apunta por defecto a <code>&lt;repo&gt;/cortex_lexicon.db</code>. Ese fichero <strong>no está en git</strong> (712 KB, 5.212 nodos, solo en tu disco). En cualquier clon limpio se crea vacío, <code>resolve_hash()</code> devuelve <code>None</code>, y el invariante estalla.</p>
+    <div class="pv">▸ PRUEBA — suite completa en Linux/py3.11 limpio</div>
+<pre><span class="err">15 failed</span>, 344 passed, 6 skipped in 76.66s
+
+babylon60.bft.ledger_actor.BFTCausalInvariantError:
+  INV_BFT_LEAN_05 (semantic_strict): event_type 'risk_score'
+  is not registered in Lexicon DAG.</pre>
+    <p>13 de los 15 fallos son ese mismo eslabón (<code>apex/test_ledger</code>, <code>test_ledger_resilience</code>, <code>test_ledger_vault_verify</code>, <code>test_lexicon_bft</code>, <code>test_c5_invariants</code>).</p>
+    <p>Y el agravante: <strong>hay deriva de esquema, así que el lexicon no se puede reconstruir</strong>. <code>_init_schema()</code> crea dos columnas; los sembradores insertan cuatro.</p>
+    <div class="pv">▸ PRUEBA — deriva creador ↔ sembrador</div>
+<pre>babylon60/bft/lexicon.py   crea:    [concept_hash, canonical_name]
+scripts/autonomous_invariants_ingestion.py inserta:
+                                   (concept_hash, canonical_name, lamport_t, causal_taint)
+
+<span class="err">OperationalError: table lexicon_nodes has no column named lamport_t</span>
+
+tu cortex_lexicon.db real: [concept_hash, canonical_name, lamport_t, causal_taint]
+                           5212 nodos · 4 aristas</pre>
+    <div class="im">▸ IMPACTO</div>
+    <p>Tu <code>.db</code> de 5.212 nodos es un artefacto <strong>irreproducible</strong>: se generó con un esquema que el código actual ya no crea. Si pierdes ese fichero, ningún script del repo lo regenera. La "verdad C5" del sistema vive en un fichero no versionado de tu portátil.</p>
+  </div>
+</div>
+
+<h2>P1 — Rompe al desplegar</h2>
+
+<div class="f">
+  <div class="hd"><span class="tag t1">P1-1</span><span class="ti">La imagen Docker no arranca — no existe <code>babylon60/__main__.py</code></span></div>
+  <div class="bd">
+    <p><code>Dockerfile</code> declara <code>ENTRYPOINT ["python","-m","babylon60"]</code>.</p>
+<pre>$ python -m babylon60
+<span class="err">No module named babylon60.__main__; 'babylon60' is a package and cannot be directly executed</span></pre>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t1">P1-2</span><span class="ti">Sin <code>.dockerignore</code> — el <code>COPY . .</code> pisa el venv con symlinks de macOS</span></div>
+  <div class="bd">
+    <p>El builder hace <code>uv sync</code> (crea <code>/app/.venv</code>) y acto seguido <code>COPY . .</code> copia encima tu <code>.venv</code> local. Ese venv apunta a un intérprete que no existe en la imagen:</p>
+<pre>.venv/bin/python: broken symbolic link to
+  /Users/borjafernandezangulo/.local/share/uv/python/cpython-3.12-macos-aarch64-none/bin/python3.12</pre>
+    <p>La etapa <em>runtime</em> copia ese venv roto. Además el contexto de build son 3,0 GB.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t1">P1-3</span><span class="ti"><code>NameError</code> en runtime en un entry point publicado</span></div>
+  <div class="bd">
+<pre>babylon60/cli/onco_transducer.py:183
+    parser.add_argument("--threshold", type=<span class="err">INTEGER</span>, default=40.0, ...)
+
+$ cortex-onco --help
+<span class="err">NameError: name 'INTEGER' is not defined</span></pre>
+    <p>Aborta en <em>cualquier</em> invocación, incluido <code>--help</code>. Mypy ya lo reporta como <code>name-defined</code>; nadie leyó la salida.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t1">P1-4</span><span class="ti">Los tres gates de <code>ci.yml</code> están rojos hoy</span></div>
+  <div class="bd">
+    <p><code>ci.yml</code> corre <code>ruff check .</code>, <code>mypy babylon60/</code> y <code>pytest -x</code> sin <code>continue-on-error</code>. Resultado medido:</p>
+    <table>
+      <tr><th>Gate</th><th>Resultado</th><th>Detalle</th></tr>
+      <tr><td><code>ruff check .</code></td><td style="color:var(--p0)">44 errores</td><td>10 auto-corregibles</td></tr>
+      <tr><td><code>mypy babylon60/</code></td><td style="color:var(--p0)">31 errores / 17 ficheros</td><td>incluye el <code>NameError</code> de P1-3</td></tr>
+      <tr><td><code>pytest -x</code></td><td style="color:var(--p0)">falla</td><td>15 fallos, causa P0-3</td></tr>
+    </table>
+    <p class="n">Matriz 3.10–3.13, pero <code>[tool.mypy] python_version = "3.12"</code> fija una sola versión para el análisis de tipos.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t1">P1-5</span><span class="ti">285 commits sin publicar que borran 124.576 líneas</span></div>
+  <div class="bd">
+<pre>$ git diff --stat main...HEAD
+  1135 ficheros · +10.312 / <span class="err">−124.576</span>
+  776 borrados (D) · 279 modificados (M) · 79 añadidos (A)
+
+$ git log --diff-filter=D -- babylon60/extensions/
+  768e71eef4 refactor(cortex): prune legacy extensions
+  → 772 ficheros, 1 inserción, <span class="err">108.708 borrados</span></pre>
+    <p>Se eliminó <code>babylon60/extensions/</code> completa: el subsistema <em>aether</em> (planner, executor, critic, redteam, daemon, queue) y ~100 definiciones YAML de agente. Buena parte llegó vía commits <code>chore(furnace): omega iteration N [auto]</code> — mutaciones automáticas no revisadas por humano.</p>
+    <div class="im">▸ IMPACTO</div>
+    <p>Ese trabajo existe en un solo sitio: el disco de tu portátil. <code>~/BABYLON-60</code> conserva los 557 ficheros que esta rama borró — es tu única copia de seguridad, y también es local.</p>
+  </div>
+</div>
+
+<h2>P2 — Fricción acumulada</h2>
+
+<div class="f">
+  <div class="hd"><span class="tag t2">P2-1</span><span class="ti">Contaminación del grafo git</span></div>
+  <div class="bd">
+    <p><strong>273 de 289 ramas</strong> son <code>subagent-*-self-*</code> efímeras. 8 worktrees marcados <code>prunable</code> apuntan a <code>~/.gemini/antigravity/brain/.../worktrees/</code>. <code>.git</code> pesa 1,1 GB para 26 MB de fuente.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t2">P2-2</span><span class="ti">Configuración fantasma</span></div>
+  <div class="bd">
+    <p><code>pyproject.toml</code> sigue excluyendo <code>babylon60/extensions</code> en <code>ruff</code>, <code>mypy</code> y <code>setuptools</code>, y el comentario "deuda registrada en el issue tracker" describe un árbol que ya no existe en esta rama. Config que protege código borrado.</p>
+  </div>
+</div>
+
+<div class="f">
+  <div class="hd"><span class="tag t2">P2-3</span><span class="ti"><code>shell=True</code> con borrado de locks de git</span></div>
+  <div class="bd">
+<pre>scripts/c5_mejoralo_monitor.py:46
+  subprocess.run("rm -f .git/*.lock .git/refs/heads/*.lock", shell=True, ...)
+scripts/objectives_manager.py:31, :38   — idéntico</pre>
+    <p>Borrar locks de git a ciegas mientras un proceso concurrente escribe es cómo se corrompe un <code>refs/heads</code>. Con el furnace corriendo en paralelo, no es hipotético. <span class="n">(También hay <code>kill -9 $(pgrep …)</code> y <code>osascript … purge</code> en el mismo fichero.)</span></p>
+  </div>
+</div>
+
+<h2>Lo que está bien — sin adornos</h2>
+<div class="f">
+  <div class="hd"><span class="tag tok">OK</span><span class="ti">Señal real medida</span></div>
+  <div class="bd">
+    <ul class="ok-list">
+      <li><strong>Cero secretos filtrados.</strong> Los únicos <em>matches</em> de patrones de credencial en todo el árbol trackeado son las firmas del propio <code>scripts/secret_swarm_auditor.py</code>. Sin <code>.env</code>, sin <code>.pem</code>, sin claves privadas.</li>
+      <li><strong>Los tests son tests.</strong> 364 recogidos, 81 ficheros bajo <code>tests/</code>, property-based con hypothesis. Solo 3 aserciones triviales (<code>assert True</code> en <code>test_parametrized_ledger.py:26</code>) y 4 <code>skip</code> declarados con razón explícita. No hay <code>continue-on-error</code> ni <code>|| true</code> en ningún workflow.</li>
+      <li><strong>Deuda declarada casi nula.</strong> 1 solo <code>TODO</code> en 40.620 LOC. Los 5 <code>NotImplementedError</code> están en contratos abstractos (<code>bft/abilities.py</code>, <code>crypto/provider.py</code>), que es su sitio.</li>
+      <li><strong><code>.gitignore</code> efectivo.</strong> 686 ficheros trackeados sobre 3,0 GB de árbol; 1 solo artefacto colado (<code>cortex/agents/ontology/centuria_bft_ledger.db</code>).</li>
+      <li><strong>Infraestructura seria.</strong> 14 workflows: CodeQL, OSSF scorecard, secret audit, conformance, verify_lean, verify_ledger, publicación OIDC. La intención de rigor está construida — le falta que los gates pasen.</li>
+      <li><strong>Los fallos son de frontera, no de núcleo.</strong> 344 tests pasan. Lo que rompe es empaquetado, arranque y siembra de datos: nada exige rediseñar la lógica BFT.</li>
+    </ul>
+  </div>
+</div>
+
+<h2>Plan de remediación por exergía</h2>
+<ol class="plan">
+  <li><span class="cost">~2 h</span><strong>Purgar los logs del historial público.</strong> <code>git filter-repo --path cortex/legal_dossier/claude_code_local_logs --invert-paths</code>, force-push a <code>main</code>, y pedir a GitHub Support que purgue la caché de forks. Añadir <code>cortex/legal_dossier/**/*.jsonl</code> a <code>.gitignore</code>. Hazlo antes que nada: cada hora que pasa es exposición.</li>
+  <li><span class="cost">2 líneas</span><strong>Desbloquear el wheel.</strong> Quitar <code>"babylon60.utils"</code> y <code>"babylon60.utils.*"</code> del <code>exclude</code> de <code>[tool.setuptools.packages.find]</code>. Añadir al CI un paso que instale el wheel en un venv limpio y ejecute <code>python -c "import babylon60.crypto.identity"</code> — así no vuelve a pasar.</li>
+  <li><span class="cost">~1 h</span><strong>Hacer reproducible el lexicon.</strong> Alinear <code>_init_schema()</code> con las 4 columnas reales (<code>lamport_t</code>, <code>causal_taint</code>), añadir un <code>scripts/seed_lexicon.py</code> determinista y una fixture de pytest que siembre en <code>tmp_path</code>. Versionar el <em>seed</em> (JSON/SQL), no el <code>.db</code>. Los 13 fallos caen juntos.</li>
+  <li><span class="cost">10 min</span><strong>Arrancar Docker.</strong> Crear <code>babylon60/__main__.py</code> y un <code>.dockerignore</code> con <code>.venv/</code>, <code>.git/</code>, <code>__pycache__/</code>, <code>*.db</code>, <code>.cortex/</code>.</li>
+  <li><span class="cost">1 línea</span><strong>Corregir <code>onco_transducer.py:183</code>:</strong> <code>type=INTEGER</code> → <code>type=float</code> (el <code>default</code> es <code>40.0</code>).</li>
+  <li><span class="cost">~1 h</span><strong>Poner los gates en verde.</strong> <code>ruff check --fix</code> resuelve 10 de 44; los 31 de mypy son casi todos <code>Optional</code> mal declarado y atributos asignados fuera de <code>__init__</code>.</li>
+  <li><span class="cost">~30 min</span><strong>Publicar o archivar los 285 commits.</strong> Abrir PR de <code>fix/ci-ronda3-limpia</code> a <code>main</code> con el borrado de <code>extensions/</code> separado en su propio commit revisable. Hasta entonces, 124.576 líneas de decisión viven sin réplica.</li>
+  <li><span class="cost">5 min</span><strong>Barrer el grafo.</strong> <code>git worktree prune</code> y borrar las 273 ramas <code>subagent-*</code>. Después, <code>git gc --aggressive</code> sobre 1,1 GB de <code>.git</code>.</li>
+  <li><span class="cost">~20 min</span><strong>Poner límites al furnace.</strong> Que <code>chore(furnace): omega iteration</code> escriba en una rama propia y abra PR, no que commitee directo. Y quitar los <code>rm -f .git/*.lock</code> con <code>shell=True</code> antes de que corrompan una ref.</li>
+</ol>
+
+<footer>
+  Metodología — todo hallazgo P0/P1 se verificó por ejecución, no por lectura: wheel construido e instalado en venv aislado; suite completa corrida en Linux/py3.11 (364 tests, 76,66 s); ruff y mypy ejecutados con la config del propio proyecto; deriva de esquema SQLite reproducida contra una DB nueva; visibilidad del repo comprobada sin autenticación.<br><br>
+  Salvedad — la suite se ejecutó en Linux/py3.11 mientras tu entorno es macOS/py3.12. Esa diferencia no explica los 15 fallos: 13 trazan a la ausencia de <code>cortex_lexicon.db</code>, que es exactamente el defecto. El <code>.venv</code> del repo no es ejecutable fuera de tu máquina (symlink roto a un intérprete de macOS), así que un venv limpio era la única medición posible — y es también la que ve el CI.<br><br>
+  Instantánea tomada sobre <code>34b2b0b913</code>; el HEAD avanzó a <code>51626adb0b</code> durante la auditoría.
+</footer>
+
+</div>
+</body>
+</html>
