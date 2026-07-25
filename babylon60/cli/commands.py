@@ -1,16 +1,17 @@
 import argparse
 import logging
-from typing import Any
 
+from babylon60.commands.ultrathink import run_ultrathink
 from babylon60.commands.autodidact import run_autodidact
-from babylon60.commands.ethos import run_ethos
-from babylon60.commands.itera import run_itera
-from babylon60.commands.logos import run_logos
-from babylon60.commands.mythos import run_mythos
 from babylon60.commands.purge import run_purge
 from babylon60.commands.seal import run_seal
+from babylon60.commands.itera import run_itera
+from babylon60.commands.logos import run_logos
+from babylon60.commands.ethos import run_ethos
+from babylon60.commands.mythos import run_mythos
 from babylon60.commands.ship import run_ship
-from babylon60.commands.ultrathink import run_ultrathink
+from babylon60.commands.swarm import run_swarm
+from babylon60.commands.verify import run_verify
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger("babylon60.cli.commands")
@@ -54,6 +55,14 @@ def main() -> None:
     sh_parser = subparsers.add_parser("ship", help="Payload Delivery & Ledger Append")
     sh_parser.add_argument("payload", type=str, help="Validated invariant payload")
 
+    # swarm
+    sw_parser = subparsers.add_parser("swarm", help="Isolated Swarm Mitosis & Multi-Agent Handoff")
+    sw_parser.add_argument("task", type=str, help="Task description")
+    sw_parser.add_argument("--count", type=int, default=3, help="Subagent worker count")
+
+    # verify
+    subparsers.add_parser("verify", help="BFT Ledger Cryptographic Verification")
+
     args = parser.parse_args()
 
     if args.command == "ultrathink":
@@ -74,6 +83,10 @@ def main() -> None:
         run_mythos()
     elif args.command == "ship":
         run_ship(args.payload)
+    elif args.command == "swarm":
+        run_swarm(args.task, args.count)
+    elif args.command == "verify":
+        run_verify()
 
 if __name__ == "__main__":
     main()

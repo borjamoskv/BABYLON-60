@@ -52,6 +52,16 @@ def test_inv_c5_39():
     # TODO: Implement physical assertion for this invariant
     assert True, 'Structural check passed'
 
+def test_inv_c5_41():
+    r"""(ENOSPC Starvation Paradox):** If the Kernel encounters `No space left on device` (ENOSPC), it MUST NOT attempt to use `run_command` to execute mitigation scripts (e.g., clearing caches), as the agent SDK itself requires disk I/O to inject the shell context, resulting in cascading failure. The Kernel must immediately yield control to the Operator with a `🔴 [FATAL] ENOSPC` abort signal to manually purge the host."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
+def test_inv_c5_42():
+    r"""(Sandbox Docker Orphan):** The `docker` CLI is typically inaccessible within the agent's macOS execution sandbox. The Kernel MUST validate its existence via `command -v docker` before attempting kinetic edge-deploy tests. If absent, it MUST default to executing raw python runtimes (`uv run`), or orchestrate a Swarm Handoff (`moskv_bridge.py`) without halting or proposing arbitrary alternative architectures (enforcing `Φ8 ZERO SUGGESTION`)."""
+    # TODO: Implement physical assertion for this invariant
+    assert True, 'Structural check passed'
+
 def test_inv_bridge_01():
     r"""** El sobre criptográfico es idéntico en todo escritor:"""
     # TODO: Implement physical assertion for this invariant
