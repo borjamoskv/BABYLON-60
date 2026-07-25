@@ -23,7 +23,7 @@ def test_anergia_purger_injects_sigkill(tmp_path) -> None:  # type: ignore
     source = """
 try:
     x = 1 / 0
-except Exception:
+except (RuntimeError, ValueError, KeyError):
     pass
 """
     tree = ast.parse(source)
