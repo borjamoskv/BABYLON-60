@@ -99,6 +99,32 @@ uv sync --all-extras
 
 <br/>
 
+## █ NATIVE SLASH COMMANDS & CLI (`cortex-cmd`)
+
+BABYLON-60 includes 11 native execution commands accessible via both the Antigravity IDE UI (`/`) and the system CLI (`cortex-cmd` / `uv run cortex-cmd`):
+
+| Command | Shortcode Alias | Purpose / Invariant |
+|:---|:---:|:---|
+| `/ultrathink` | `ut` / `apex` | Absolute Sovereignty & Nocturnal Orchestration |
+| `/autodidact` | `ad` / `omega` | Autopoiesis & AST Rewrite (Continuous Diagnostics) |
+| `/purge` | `p` / `brutalismo` | Kinetic Brutalism: Drops Mach VM caches & clears anergy |
+| `/seal` | `sl` / `collapse` | Terminal State Collapse (WAL Checkpoint + Tag + Exergy 950) |
+| `/itera` | `it` / `mejoralo` | Multi-Step Convergence Loop |
+| `/logos` | `lg` / `transduce` | Semantic Transduction to Invariant |
+| `/ethos` | `et` / `zk` | PyNaCl Ed25519 NUL-ZK Cryptographic Validation |
+| `/mythos` | `my` / `graph` | Narrative & Ledger Compression |
+| `/ship` | `sh` / `commit` | Payload Delivery to BFT Ledger & Git Sentinel |
+| `/swarm` | `sw` / `mitosis` | Multi-Agent Mitosis across Isolated Worktrees |
+| `/verify` | `vf` / `audit` | BFT Hash Chain Integrity Verification |
+
+```bash
+# Example CLI Invocation
+uv run cortex-cmd verify
+uv run cortex-cmd ut "Architecture refactor"
+```
+
+<br/>
+
 ## █ BFT LEDGER: ZERO-FRICTION APPEND
 
 Write structurally invariant data to disk. Direct SQL insertions are blocked at the SQLite Engine level (`UPDATE` and `DELETE` trigger `RAISE(ABORT)`).
