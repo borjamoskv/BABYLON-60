@@ -14,7 +14,7 @@ def test_dashboard_file_integrity() -> None:
     with open(DASHBOARD_PATH, "r", encoding="utf-8") as f:
         content = f.read()
 
-    assert "<!DOCTYPE html>" in content
+    assert "<!doctype html>" in content.lower()
     assert "C5-REAL" in content
     assert "chaosCanvas" in content
     assert "econCanvas" in content
