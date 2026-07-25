@@ -1,7 +1,7 @@
 import sys
 import webbrowser
 from typing import List
-from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_PRICES, TIER_LIMITS
+from babylon60.core.license_gate import SovereignLicenseGate, Tier, TIER_PRICES
 
 def print_status():
     gate = SovereignLicenseGate()

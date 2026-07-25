@@ -22,7 +22,7 @@ class OpsecSentinelC5:
         with babylon60.database.core.connect_sync(self.db_path) as conn:
             conn.execute('PRAGMA journal_mode=WAL;')
             conn.execute('PRAGMA busy_timeout=5000;')
-            conn.execute('\n                CREATE TABLE IF NOT EXISTS opsec_audit_log (\n                    id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    file_path TEXT NOT NULL,\n                    violation_type TEXT NOT NULL,\n                    snippet_hash TEXT NOT NULL,\n                    severity TEXT NOT NULL,\n                    timestamp TEXT NOT NULL\n                );\n            ')
+            conn.execute('\n                CREATE TABLE IF NOT EXISTS opsec_audit_log (\n                    id int PRIMARY KEY AUTOINCREMENT,\n                    file_path TEXT NOT NULL,\n                    violation_type TEXT NOT NULL,\n                    snippet_hash TEXT NOT NULL,\n                    severity TEXT NOT NULL,\n                    timestamp TEXT NOT NULL\n                );\n            ')
 
     def audit_file(self, filepath: Path) -> list[dict[str, str]]:
         violations: list[dict[str, str]] = []

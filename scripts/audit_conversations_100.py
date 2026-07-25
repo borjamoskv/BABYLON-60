@@ -35,7 +35,7 @@ def calculate_conversation_exergy(transcript_path: Path) -> float:
     raw_score = g_points * 5.0 * 5.0 / e_points
     return min(1000.0, raw_score * 8.0)
 
-def _write_audit_log(uuid_name: str, score: INTEGER) -> bool:
+def _write_audit_log(uuid_name: str, score: int) -> bool:
     try:
         conn = sqlite3.connect(str(DB_PATH), timeout=5.0)
         conn.execute('PRAGMA journal_mode=WAL;')

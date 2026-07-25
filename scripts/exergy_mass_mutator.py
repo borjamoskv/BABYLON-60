@@ -123,8 +123,8 @@ def apply_polyglot_mutations(file_path: Path) -> bool:
     original = content
     # INV_C5_18: Exclude floats in DB definitions
     if file_path.suffix == ".sql":
-        content = re.sub(r'\bREAL\b(?=\s*,|\s*\))', 'INTEGER', content, flags=re.IGNORECASE)
-        content = re.sub(r'\bFLOAT\b(?=\s*,|\s*\))', 'INTEGER', content, flags=re.IGNORECASE)
+        content = re.sub(r'\bREAL\b(?=\s*,|\s*\))', 'int', content, flags=re.IGNORECASE)
+        content = re.sub(r'\bFLOAT\b(?=\s*,|\s*\))', 'int', content, flags=re.IGNORECASE)
 
     if content != original:
         file_path.write_text(content, encoding="utf-8")

@@ -65,7 +65,7 @@ class BFTMasterLedgerWAL:
             conn.execute('PRAGMA journal_mode = WAL;')
             conn.execute('PRAGMA synchronous = NORMAL;')
             conn.execute('PRAGMA busy_timeout = 5000;')
-            conn.execute('\n                CREATE TABLE IF NOT EXISTS master_ledger (\n                    sequence_id INTEGER PRIMARY KEY AUTOINCREMENT,\n                    prev_hash TEXT NOT NULL UNIQUE,\n                    claim_payload TEXT NOT NULL,\n                    lamport_clock INTEGER NOT NULL,\n                    agent_id TEXT NOT NULL,\n                    taint_hash TEXT NOT NULL UNIQUE,\n                    created_at REAL NOT NULL\n                );\n            ')
+            conn.execute('\n                CREATE TABLE IF NOT EXISTS master_ledger (\n                    sequence_id int PRIMARY KEY AUTOINCREMENT,\n                    prev_hash TEXT NOT NULL UNIQUE,\n                    claim_payload TEXT NOT NULL,\n                    lamport_clock int NOT NULL,\n                    agent_id TEXT NOT NULL,\n                    taint_hash TEXT NOT NULL UNIQUE,\n                    created_at REAL NOT NULL\n                );\n            ')
             conn.commit()
 
     def append_c5_transaction(self, claim_payload: str, lamport_clock: int, agent_id: str) -> str:

@@ -76,7 +76,7 @@ def test_inv_c5_03_no_weak_hashes() -> None:
 def test_inv_c5_04_no_mock_signatures() -> None:
     """INV_C5_04 — Ed25519 físico o el recibo no existe; ninguna firma 'mock'."""
     hits = _scan({".py"}, r"mock_signature|ed25519:mock")  # type: ignore
-    assert not hits, _fail_msg("INV_C5_04 (firma INTEGER)", hits)  # type: ignore
+    assert not hits, _fail_msg("INV_C5_04 (firma int)", hits)  # type: ignore
 
 
 def test_inv_c5_07a_no_broad_except() -> None:

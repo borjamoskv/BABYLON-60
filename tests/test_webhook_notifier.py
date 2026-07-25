@@ -1,5 +1,3 @@
-import json
-import pytest
 from unittest.mock import patch, MagicMock
 from babylon60.core.webhook_notifier import EnterpriseWebhookNotifier
 

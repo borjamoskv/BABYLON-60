@@ -19,11 +19,8 @@ class BFTLexicon:
             conn.execute('\n                CREATE TABLE IF NOT EXISTS lexicon_edges (\n                    source_hash TEXT,\n                    relation_type TEXT,\n                    target_hash TEXT,\n                    PRIMARY KEY (source_hash, relation_type, target_hash)\n                )\n            ')
 
     def _get_conn(self) -> sqlite3.Connection:
-        conn = sqlite3.connect(self.db_path, timeout=5.0)
-        conn.execute('PRAGMA journal_mode=WAL;')
-        conn.execute('PRAGMA busy_timeout=5000;')
-        conn.execute('PRAGMA synchronous=NORMAL;')
-        return conn
+        from babylon60.database.core import connect_sync
+        return connect_sync(self.db_path, synchronous='NORMAL')
 
     def get_concept_hash(self, canonical_name: str) -> str:
         return str(uuid.uuid5(LEXICON_NAMESPACE, canonical_name))

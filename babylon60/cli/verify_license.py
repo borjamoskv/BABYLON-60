@@ -15,7 +15,7 @@ def verify_offline_key(key_str: str) -> bool:
         print(f"[+] VALID LICENSE: Owner='{verified['owner']}', Tier='{verified['tier']}', Expires={verified['expires_at']}")
         return True
     else:
-        print(f"[-] INVALID LICENSE: Signature tampered, key corrupted, or expired.")
+        print("[-] INVALID LICENSE: Signature tampered, key corrupted, or expired.")
         return False
 
 def main():
