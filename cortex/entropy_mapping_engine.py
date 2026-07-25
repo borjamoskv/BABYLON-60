@@ -95,6 +95,12 @@ class ThermodynamicEntropyEngine:
         if len(p_dist) != len(q_dist) or not p_dist:
             raise ValueError("Distributions P and Q must be non-empty and of equal length.")
 
+        if self.rust_engine is not None:
+            val = float(self.rust_engine.compute_kl_divergence_fast(p_dist, q_dist))
+            if math.isnan(val):
+                raise ValueError("Distribution sums must be strictly positive.")
+            return val
+
         sum_p = sum(p_dist)
         sum_q = sum(q_dist)
         if sum_p <= 0.0 or sum_q <= 0.0:
@@ -130,7 +136,11 @@ class ThermodynamicEntropyEngine:
         s_max = math.log(n_domains) if n_domains > 1 else 1.0
 
         efficiency = max(0.0, min(1.0, 1.0 - (s_nats / s_max))) if s_max > 0 else 1.0
-        landauer_joules = s_bits * K_B * self.temperature * LN_2
+
+        if self.rust_engine is not None:
+            landauer_joules = float(self.rust_engine.compute_landauer_limit_joules_fast(s_bits, self.temperature))
+        else:
+            landauer_joules = s_bits * K_B * self.temperature * LN_2
 
         raw_payload = f"total:{total}:s_nats:{s_nats:.6f}:eff:{efficiency:.6f}".encode("utf-8")
         h_val = hashlib.sha3_256(raw_payload).hexdigest()
