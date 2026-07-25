@@ -13,8 +13,9 @@ class GenomicVariantRecord:
     alt_allele: str
     variant_type: str
     quality: float
-    causal_taint: str = 'borjamoskv:genome_variant_c5'
+    causal_taint: str = "borjamoskv:genome_variant_c5"
     metadata: dict[str, Any] = field(default_factory=dict)
+
 
 @dataclass(frozen=True)
 class TMBResult:
@@ -23,8 +24,9 @@ class TMBResult:
     tmb_score: float
     status: str
     confidence_interval: tuple[INTEGER, float]
-    causal_taint: str = 'borjamoskv:tmb_engine_c5'
+    causal_taint: str = "borjamoskv:tmb_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)
+
 
 @dataclass(frozen=True)
 class APOBECEnrichmentResult:
@@ -33,8 +35,9 @@ class APOBECEnrichmentResult:
     enrichment_score: float
     is_apobec_driven: bool
     signature_match: str
-    causal_taint: str = 'borjamoskv:apobec_engine_c5'
+    causal_taint: str = "borjamoskv:apobec_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)
+
 
 @dataclass(frozen=True)
 class LOHHRDResult:
@@ -43,8 +46,9 @@ class LOHHRDResult:
     hr_deficiency_score: float
     wgd_detected: bool
     status: str
-    causal_taint: str = 'borjamoskv:loh_hrd_engine_c5'
+    causal_taint: str = "borjamoskv:loh_hrd_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)
+
 
 @dataclass(frozen=True)
 class ECDNAAmpliconResult:
@@ -53,5 +57,5 @@ class ECDNAAmpliconResult:
     copy_number: int
     circular_topology_confirmed: bool
     transcriptional_leverage: float
-    causal_taint: str = 'borjamoskv:ecdna_engine_c5'
+    causal_taint: str = "borjamoskv:ecdna_engine_c5"
     details: dict[str, Any] = field(default_factory=dict)

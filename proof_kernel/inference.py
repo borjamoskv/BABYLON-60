@@ -1,6 +1,8 @@
 from collections import deque
+
 from proof_kernel.ast_rule import ASTRule
 from proof_kernel.crdt import CRDTMap
+
 
 def topological_sort(dag: dict[str, list[str]]) -> list[str]:
     in_degree = {u: 0 for u in dag}
@@ -18,10 +20,13 @@ def topological_sort(dag: dict[str, list[str]]) -> list[str]:
             if in_degree[v] == 0:
                 queue.append(v)
     if len(order) != len(in_degree):
-        raise ValueError('Ω159 Violated: Graph has cycles, topological sort failed.')
+        raise ValueError("Ω159 Violated: Graph has cycles, topological sort failed.")
     return order
 
-def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict[str, ASTRule], max_entropy: int=1000000) -> tuple[CRDTMap, int]:
+
+def dag_inference(
+    initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict[str, ASTRule], max_entropy: int = 1000000
+) -> tuple[CRDTMap, int]:
     order = topological_sort(dag)
     node_states = {order[0]: initial_state}
     current_entropy = initial_state.measure_entropy(max_entropy)
@@ -48,7 +53,8 @@ def dag_inference(initial_state: CRDTMap, dag: dict[str, list[str]], rules: dict
     final_entropy = final_crdt.measure_entropy(max_entropy)
     return (final_crdt, final_entropy)
 
+
 def compute_information_gain(prior_microbits: int, posterior_microbits: int) -> int:
     if prior_microbits < posterior_microbits:
-        raise ValueError('Epistemic Monotonicity (Ω155) violated: entropy increased.')
+        raise ValueError("Epistemic Monotonicity (Ω155) violated: entropy increased.")
     return prior_microbits - posterior_microbits

@@ -1,9 +1,12 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Any
+
 from .ctgov import CtGovClient, CtGovError, classify_history
 from .features import extract_features
 from .risk_engine import assess
+
 
 @dataclass(frozen=True)
 class BacktestRow:
@@ -14,6 +17,7 @@ class BacktestRow:
     n_versions: int
     title: str
 
+
 @dataclass(frozen=True)
 class BacktestReport:
     rows: tuple[BacktestRow, ...]
@@ -22,7 +26,23 @@ class BacktestReport:
     n: int
 
     def as_dict(self) -> dict[str, Any]:
-        return {'n': self.n, 'spearman_score_vs_actual_amendments': round(self.spearman, 4), 'tier_means': self.tier_means, 'rows': [{'nct_id': r.nct_id, 'score': r.score, 'tier': r.tier, 'actual_substantive': r.actual_substantive, 'n_versions': r.n_versions, 'title': r.title} for r in self.rows]}
+        return {
+            "n": self.n,
+            "spearman_score_vs_actual_amendments": round(self.spearman, 4),
+            "tier_means": self.tier_means,
+            "rows": [
+                {
+                    "nct_id": r.nct_id,
+                    "score": r.score,
+                    "tier": r.tier,
+                    "actual_substantive": r.actual_substantive,
+                    "n_versions": r.n_versions,
+                    "title": r.title,
+                }
+                for r in self.rows
+            ],
+        }
+
 
 def _average_ranks(values: list[float]) -> list[float]:
     order = sorted(range(len(values)), key=lambda i: values[i])
@@ -38,30 +58,33 @@ def _average_ranks(values: list[float]) -> list[float]:
         i = j + 1
     return ranks
 
+
 def _pearson(xs: list[float], ys: list[float]) -> float:
     n = len(xs)
     if n < 2:
         return 0.0
     mx = sum(xs) / n
     my = sum(ys) / n
-    num = sum(((x - mx) * (y - my) for x, y in zip(xs, ys)))
-    dx = sum(((x - mx) ** 2 for x in xs)) ** 0.5
-    dy = sum(((y - my) ** 2 for y in ys)) ** 0.5
+    num = sum(((x - mx) * (y - my) for x, y in zip(xs, ys, strict=False)))
+    dx = sum((x - mx) ** 2 for x in xs) ** 0.5
+    dy = sum((y - my) ** 2 for y in ys) ** 0.5
     if dx == 0 or dy == 0:
         return 0.0
     return float(num / (dx * dy))
 
+
 def spearman(xs: list[float], ys: list[float]) -> float:
     return _pearson(_average_ranks(xs), _average_ranks(ys))
 
-def run_backtest(client: CtGovClient, condition: str, n: int=30, status: str='COMPLETED') -> BacktestReport:
+
+def run_backtest(client: CtGovClient, condition: str, n: int = 30, status: str = "COMPLETED") -> BacktestReport:
     studies = client.search(condition=condition, status=status, page_size=min(n * 2, 200))
     rows: list[BacktestRow] = []
     for study in studies:
         if len(rows) >= n:
             break
-        ident = study.get('protocolSection', {}).get('identificationModule', {})
-        nct = ident.get('nctId')
+        ident = study.get("protocolSection", {}).get("identificationModule", {})
+        nct = ident.get("nctId")
         if not nct:
             continue
         try:
@@ -70,13 +93,26 @@ def run_backtest(client: CtGovClient, condition: str, n: int=30, status: str='CO
             continue
         features = extract_features(study)
         assessment = assess(features)
-        rows.append(BacktestRow(nct_id=nct, score=assessment.score, tier=assessment.tier, actual_substantive=history.n_substantive, n_versions=history.n_versions, title=features.brief_title[:60]))
+        rows.append(
+            BacktestRow(
+                nct_id=nct,
+                score=assessment.score,
+                tier=assessment.tier,
+                actual_substantive=history.n_substantive,
+                n_versions=history.n_versions,
+                title=features.brief_title[:60],
+            )
+        )
     scores = [float(r.score) for r in rows]
     actuals = [float(r.actual_substantive) for r in rows]
     rho = spearman(scores, actuals) if len(rows) >= 2 else 0.0
     tier_means: dict[str, dict[str, float]] = {}
-    for tier in ('LOW', 'MODERATE', 'HIGH', 'CRITICAL'):
+    for tier in ("LOW", "MODERATE", "HIGH", "CRITICAL"):
         group = [r for r in rows if r.tier == tier]
         if group:
-            tier_means[tier] = {'n': float(len(group)), 'mean_actual_amendments': round(sum((r.actual_substantive for r in group)) / len(group), 2), 'mean_score': round(sum((r.score for r in group)) / len(group), 1)}
+            tier_means[tier] = {
+                "n": float(len(group)),
+                "mean_actual_amendments": round(sum(r.actual_substantive for r in group) / len(group), 2),
+                "mean_score": round(sum(r.score for r in group) / len(group), 1),
+            }
     return BacktestReport(rows=tuple(rows), spearman=rho, tier_means=tier_means, n=len(rows))

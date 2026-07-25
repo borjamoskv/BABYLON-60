@@ -14,6 +14,7 @@ from typing import Any
 
 API_SALT = "CORTEX_ENTERPRISE_API_KEY_SALT_2026"
 
+
 @dataclass
 class APIKeyMetaData:
     key_id: str
@@ -22,6 +23,7 @@ class APIKeyMetaData:
     created_at: int
     expires_at: int
     is_active: bool
+
 
 class EnterpriseAPIKeyManager:
     """Manages enterprise API keys for BFT cloud ledgers."""
@@ -40,7 +42,7 @@ class EnterpriseAPIKeyManager:
         expires_at = now + (valid_days * 86400)
         raw_token = f"{org_name}:{tier}:{now}:{expires_at}:{API_SALT}"
         signature = hmac.new(API_SALT.encode(), raw_token.encode(), hashlib.sha256).hexdigest()[:24]
-        
+
         key_id = f"b60_live_{signature}"
         metadata = {
             "key_id": key_id,
@@ -48,7 +50,7 @@ class EnterpriseAPIKeyManager:
             "tier": tier,
             "created_at": now,
             "expires_at": expires_at,
-            "is_active": True
+            "is_active": True,
         }
         self._save_key_meta(key_id, metadata)
         return key_id
@@ -69,7 +71,7 @@ class EnterpriseAPIKeyManager:
             tier=data["tier"],
             created_at=data["created_at"],
             expires_at=data["expires_at"],
-            is_active=data["is_active"]
+            is_active=data["is_active"],
         )
 
     def revoke_key(self, key_id: str) -> bool:

@@ -16,6 +16,7 @@ from typing import Any
 TARGET_NOTIFY_EMAIL = "Borjamoskv@gmail.com"
 NOTIFICATIONS_LOG = Path.home() / ".babylon60" / "purchase_notifications.json"
 
+
 class PurchaseNotifier:
     """Instant Purchase Alert Dispatcher for Operator Borja Moskv."""
 
@@ -24,7 +25,9 @@ class PurchaseNotifier:
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
         self.target_email = target_email
 
-    def notify_purchase(self, customer_email: str, tier: str, amount_eur: int, license_key: str, session_id: str) -> dict[str, Any]:
+    def notify_purchase(
+        self, customer_email: str, tier: str, amount_eur: int, license_key: str, session_id: str
+    ) -> dict[str, Any]:
         """Dispatch instant purchase notification to Borjamoskv@gmail.com and log alert."""
         now_str = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
         alert_data = {
@@ -75,7 +78,7 @@ class PurchaseNotifier:
             msg["From"] = smtp_user
             msg["To"] = self.target_email
             msg["Subject"] = f"⚡ ¡Nueva Compra BABYLON-60! €{data['amount_eur']} - {data['tier']}"
-            
+
             body = (
                 f"Hola Borja,\n\n"
                 f"Se ha completado una nueva compra en BABYLON-60:\n\n"
@@ -88,7 +91,7 @@ class PurchaseNotifier:
                 f"CORTEX Monetization Engine (C5-REAL)"
             )
             msg.attach(MIMEText(body, "plain"))
-            
+
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=5.0) as server:
                 server.login(smtp_user, smtp_pass)
                 server.send_message(msg)

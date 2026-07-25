@@ -15,24 +15,26 @@ from cryptography.hazmat.primitives.kdf.hkdf import HKDF
 
 from babylon60.utils.errors import DecryptionPolicyError
 
-logger = logging.getLogger('babylon60.crypto')
+logger = logging.getLogger("babylon60.crypto")
 _NONCE_LENGTH = 12
 _KEY_LENGTH = 32
 
-class CortexEncrypter:
-    PREFIX = 'v6_aesgcm:'
 
-    def __init__(self, master_key: bytes | None, strict_mode: bool=False, hkdf_salt: bytes | None=None) -> None:
+class CortexEncrypter:
+    PREFIX = "v6_aesgcm:"
+
+    def __init__(self, master_key: bytes | None, strict_mode: bool = False, hkdf_salt: bytes | None = None) -> None:
         if master_key is not None and len(master_key) != _KEY_LENGTH:
-            raise ValueError(f'AES-256 requires a {_KEY_LENGTH}-byte master key.')
+            raise ValueError(f"AES-256 requires a {_KEY_LENGTH}-byte master key.")
         self._master_key = master_key
         self.strict_mode = strict_mode
         if hkdf_salt is None:
             try:
                 import babylon60.core.config as config
-                self.hkdf_salt = config.HKDF_SALT.encode('utf-8')
+
+                self.hkdf_salt = config.HKDF_SALT.encode("utf-8")
             except (ImportError, AttributeError):
-                self.hkdf_salt = b'cortex_v6_tenant_isolation_salt'
+                self.hkdf_salt = b"cortex_v6_tenant_isolation_salt"
         else:
             self.hkdf_salt = hkdf_salt
         self._tenant_keys: dict[str, bytes] = {}
@@ -43,69 +45,75 @@ class CortexEncrypter:
 
     def _get_tenant_key(self, tenant_id: str) -> bytes:
         if not self.is_active:
-            raise RuntimeError('Cannot derive key without a Master Key.')
+            raise RuntimeError("Cannot derive key without a Master Key.")
         if tenant_id in self._tenant_keys:
             return self._tenant_keys[tenant_id]
-        hkdf = HKDF(algorithm=hashes.SHA256(), length=_KEY_LENGTH, salt=self.hkdf_salt, info=tenant_id.encode('utf-8'))
+        hkdf = HKDF(algorithm=hashes.SHA256(), length=_KEY_LENGTH, salt=self.hkdf_salt, info=tenant_id.encode("utf-8"))
         assert self._master_key is not None
         tenant_key = hkdf.derive(self._master_key)
         self._tenant_keys[tenant_id] = tenant_key
         return tenant_key
 
-    def encrypt_str(self, data: str | None, tenant_id: str='default') -> str | None:
+    def encrypt_str(self, data: str | None, tenant_id: str = "default") -> str | None:
         if not data:
             return data
         if not self.is_active:
             if self.strict_mode:
-                raise RuntimeError('Strict crypto mode active: cannot encrypt data without a loaded Master Key.')
+                raise RuntimeError("Strict crypto mode active: cannot encrypt data without a loaded Master Key.")
             return data
         key = self._get_tenant_key(tenant_id)
         aesgcm = AESGCM(key)
         nonce = os.urandom(_NONCE_LENGTH)
-        ciphertext = aesgcm.encrypt(nonce, data.encode('utf-8'), None)
+        ciphertext = aesgcm.encrypt(nonce, data.encode("utf-8"), None)
         combined = nonce + ciphertext
-        return self.PREFIX + base64.b64encode(combined).decode('utf-8')
+        return self.PREFIX + base64.b64encode(combined).decode("utf-8")
 
-    def decrypt_str(self, encrypted_data: str | None, tenant_id: str='default') -> str | None:
+    def decrypt_str(self, encrypted_data: str | None, tenant_id: str = "default") -> str | None:
         if not encrypted_data:
             return encrypted_data
         if not encrypted_data.startswith(self.PREFIX):
             if self.strict_mode:
-                raise DecryptionPolicyError('Strict crypto mode active: data lacks encryption prefix in strict mode')
+                raise DecryptionPolicyError("Strict crypto mode active: data lacks encryption prefix in strict mode")
             return encrypted_data
         if not self.is_active:
-            raise RuntimeError('Database contains encrypted data but no Master Key is loaded.')
+            raise RuntimeError("Database contains encrypted data but no Master Key is loaded.")
         try:
-            raw_b64 = encrypted_data[len(self.PREFIX):]
+            raw_b64 = encrypted_data[len(self.PREFIX) :]
             combined = base64.b64decode(raw_b64)
             nonce = combined[:_NONCE_LENGTH]
             ciphertext = combined[_NONCE_LENGTH:]
             key = self._get_tenant_key(tenant_id)
             aesgcm = AESGCM(key)
             plaintext = aesgcm.decrypt(nonce, ciphertext, None)
-            return plaintext.decode('utf-8')
+            return plaintext.decode("utf-8")
         except (InvalidKey, InvalidTag) as e:
-            raise ValueError(f"Decryption failed for tenant '{tenant_id}'. Possible cross-tenant access attempt or corrupted data.") from e
+            raise ValueError(
+                f"Decryption failed for tenant '{tenant_id}'. Possible cross-tenant access attempt or corrupted data."
+            ) from e
         except (ValueError, TypeError, binascii.Error) as e:
-            raise ValueError(f'AES-GCM Decryption Failed (Data tampered?): {e}') from e
+            raise ValueError(f"AES-GCM Decryption Failed (Data tampered?): {e}") from e
 
-    def encrypt_json(self, data: dict[str, Any] | None, tenant_id: str='default') -> str | None:
+    def encrypt_json(self, data: dict[str, Any] | None, tenant_id: str = "default") -> str | None:
         if not data:
             return None
         return self.encrypt_str(json.dumps(data), tenant_id=tenant_id)
 
-    def decrypt_json(self, encrypted_data: str | None, tenant_id: str='default') -> dict[str, Any] | None:
+    def decrypt_json(self, encrypted_data: str | None, tenant_id: str = "default") -> dict[str, Any] | None:
         plain = self.decrypt_str(encrypted_data, tenant_id=tenant_id)
         if not plain:
             return None
         try:
             from typing import cast
+
             return cast(dict[str, Any], json.loads(plain))
         except json.JSONDecodeError:
-            logger.warning('decrypt_json: invalid JSON after decryption, returning empty dict')
+            logger.warning("decrypt_json: invalid JSON after decryption, returning empty dict")
             return {}
+
+
 _default_encrypter_instance = None
 _encrypter_lock = threading.Lock()
+
 
 def get_default_encrypter() -> CortexEncrypter:
     global _default_encrypter_instance
@@ -113,8 +121,10 @@ def get_default_encrypter() -> CortexEncrypter:
         with _encrypter_lock:
             if _default_encrypter_instance is None:
                 from babylon60.crypto.keyring import get_master_key
+
                 _default_encrypter_instance = CortexEncrypter(get_master_key())
     return _default_encrypter_instance
+
 
 def reset_default_encrypter() -> None:
     global _default_encrypter_instance

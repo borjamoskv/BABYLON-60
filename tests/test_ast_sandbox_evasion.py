@@ -9,7 +9,6 @@ from babylon60.guards.ast_sandbox import SecurityError, validate_ast_sandbox
 
 
 class TestASTSandboxEvasion:
-
     def test_basic_dunder_blocking(self) -> None:
         with pytest.raises(SecurityError, match="Acceso a atributo dunder prohibido"):
             validate_ast_sandbox("().__class__")

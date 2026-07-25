@@ -8,12 +8,13 @@ def test_verify_offline_key_valid(capsys):
     with tempfile.TemporaryDirectory() as tmpdir:
         gate = SovereignLicenseGate(config_dir=tmpdir)
         key = gate.generate_license_key("ci_runner@github.dev", Tier.PRO_SWARM)
-        
+
         assert verify_offline_key(key) is True
         captured = capsys.readouterr()
         assert "VALID LICENSE" in captured.out
         assert "ci_runner@github.dev" in captured.out
         assert "PRO_SWARM" in captured.out
+
 
 def test_verify_offline_key_invalid(capsys):
     assert verify_offline_key("B60-PRO-invalid_hex_payload") is False

@@ -5,10 +5,11 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any, Generic, TypeVar
 
-__all__ = ['Err', 'Ok', 'Result', 'safe', 'safe_async']
-T = TypeVar('T')
-E = TypeVar('E')
-U = TypeVar('U')
+__all__ = ["Err", "Ok", "Result", "safe", "safe_async"]
+T = TypeVar("T")
+E = TypeVar("E")
+U = TypeVar("U")
+
 
 @dataclass(frozen=True)
 class Ok(Generic[T]):
@@ -36,7 +37,8 @@ class Ok(Generic[T]):
         return self
 
     def __repr__(self) -> str:
-        return f'Ok({self.value!r})'
+        return f"Ok({self.value!r})"
+
 
 @dataclass(frozen=True)
 class Err(Generic[E]):
@@ -49,7 +51,7 @@ class Err(Generic[E]):
         return True
 
     def unwrap(self) -> Any:
-        raise ValueError(f'Called unwrap() on Err: {self.error}')
+        raise ValueError(f"Called unwrap() on Err: {self.error}")
 
     def unwrap_or(self, default: Any) -> Any:
         return default
@@ -64,8 +66,11 @@ class Err(Generic[E]):
         return Err(fn(self.error))
 
     def __repr__(self) -> str:
-        return f'Err({self.error!r})'
+        return f"Err({self.error!r})"
+
+
 Result = Ok[T] | Err[E]
+
 
 def safe(fn: Callable[..., T]) -> Callable[..., Result[T, str]]:
 
@@ -75,9 +80,11 @@ def safe(fn: Callable[..., T]) -> Callable[..., Result[T, str]]:
         except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:
             tb = traceback.format_exception(type(exc), exc, exc.__traceback__)
             return Err(f"{type(exc).__name__}: {exc}\n{''.join(tb[-3:])}")
+
     wrapper.__name__ = fn.__name__
     wrapper.__doc__ = fn.__doc__
     return wrapper
+
 
 def safe_async(fn: Callable[..., Any]) -> Callable[..., Any]:
 
@@ -87,6 +94,7 @@ def safe_async(fn: Callable[..., Any]) -> Callable[..., Any]:
         except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as exc:
             tb = traceback.format_exception(type(exc), exc, exc.__traceback__)
             return Err(f"{type(exc).__name__}: {exc}\n{''.join(tb[-3:])}")
+
     wrapper.__name__ = fn.__name__
     wrapper.__doc__ = fn.__doc__
     return wrapper

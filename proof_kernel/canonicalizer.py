@@ -1,12 +1,14 @@
 import hashlib
 from typing import Any
+
 import cbor2
+
 
 def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
 
     def _sanitize_objects(obj: Any) -> Any:
         if isinstance(obj, float):
-            raise ValueError('Floating-point numbers are prohibited in C5-REAL canonical representation.')
+            raise ValueError("Floating-point numbers are prohibited in C5-REAL canonical representation.")
         if isinstance(obj, set):
             return sorted(list(obj))
         if isinstance(obj, dict):
@@ -14,8 +16,10 @@ def canonicalize_cbor(evidence: dict[str, Any]) -> bytes:
         if isinstance(obj, list):
             return [_sanitize_objects(i) for i in obj]
         return obj
+
     sanitized = _sanitize_objects(evidence)
     return cbor2.dumps(sanitized)
+
 
 def hash_evidence(evidence: dict[str, Any] | str | int | bytes | list[Any]) -> str:
     if isinstance(evidence, dict):
@@ -23,5 +27,5 @@ def hash_evidence(evidence: dict[str, Any] | str | int | bytes | list[Any]) -> s
     elif isinstance(evidence, bytes):
         payload = evidence
     else:
-        payload = str(evidence).encode('utf-8')
+        payload = str(evidence).encode("utf-8")
     return hashlib.sha256(payload).hexdigest()

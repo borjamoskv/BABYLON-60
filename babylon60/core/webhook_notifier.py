@@ -14,6 +14,7 @@ from typing import Any
 
 WEBHOOK_SIGNING_SALT = "CORTEX_WEBHOOK_SIGNATURE_SALT_2026"
 
+
 class EnterpriseWebhookNotifier:
     """Dispatches cryptographically signed webhook notifications to Enterprise endpoints."""
 
@@ -42,15 +43,15 @@ class EnterpriseWebhookNotifier:
                 "Content-Type": "application/json",
                 "X-B60-Timestamp": str(now),
                 "X-B60-Signature": signature,
-                "X-C5-REAL": "Verified"
-            }
+                "X-C5-REAL": "Verified",
+            },
         }
 
     def dispatch(self, url: str, event_type: str, org_name: str, data: dict[str, Any], timeout: float = 3.0) -> bool:
         """Send HTTP POST webhook payload to target enterprise server."""
         event_dict = self.create_event(event_type, org_name, data)
-        body_bytes = json.dumps(event_dict["payload"], sort_keys=True).encode('utf-8')
-        
+        body_bytes = json.dumps(event_dict["payload"], sort_keys=True).encode("utf-8")
+
         req = urllib.request.Request(url, data=body_bytes, headers=event_dict["headers"], method="POST")
         try:
             with urllib.request.urlopen(req, timeout=timeout) as response:

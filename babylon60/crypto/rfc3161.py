@@ -5,12 +5,12 @@ import urllib.error
 import urllib.request
 from typing import Any
 
-logger = logging.getLogger('babylon60.crypto.rfc3161')
-DEFAULT_TSA_URL = os.environ.get('CORTEX_TSA_URL', 'https://freetsa.org/tsr')
+logger = logging.getLogger("babylon60.crypto.rfc3161")
+DEFAULT_TSA_URL = os.environ.get("CORTEX_TSA_URL", "https://freetsa.org/tsr")
+
 
 class RFC3161Client:
-
-    def __init__(self, tsa_url: str=DEFAULT_TSA_URL):
+    def __init__(self, tsa_url: str = DEFAULT_TSA_URL):
         self.tsa_url = tsa_url
 
     def _build_tsq(self, payload_hash: bytes) -> bytes:
@@ -29,13 +29,19 @@ class RFC3161Client:
         try:
             payload_bytes = bytes.fromhex(hash_hex)
             tsq = self._build_tsq(payload_bytes)
-            req = urllib.request.Request(self.tsa_url, data=tsq, headers={'Content-Type': 'application/timestamp-query'}, method='POST')
+            req = urllib.request.Request(
+                self.tsa_url, data=tsq, headers={"Content-Type": "application/timestamp-query"}, method="POST"
+            )
             with urllib.request.urlopen(req, timeout=10) as response:
                 if response.status == 200:
                     tsr_bytes = response.read()
-                    return {'tsr_b64': base64.b64encode(tsr_bytes).decode('utf-8'), 'hash_hex': hash_hex, 'tsa_url': self.tsa_url}
+                    return {
+                        "tsr_b64": base64.b64encode(tsr_bytes).decode("utf-8"),
+                        "hash_hex": hash_hex,
+                        "tsa_url": self.tsa_url,
+                    }
         except urllib.error.HTTPError as e:
-            logger.error('HTTPError requesting timestamp from %s: %s', self.tsa_url, e.code)
+            logger.error("HTTPError requesting timestamp from %s: %s", self.tsa_url, e.code)
         except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-            logger.error('Failed to request timestamp: %s', e)
+            logger.error("Failed to request timestamp: %s", e)
         return None

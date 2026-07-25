@@ -3,55 +3,63 @@ import logging
 import os
 import re
 import time
-logging.basicConfig(level=logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
-log = logging.getLogger('ultrathink.scheduler')
+
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+log = logging.getLogger("ultrathink.scheduler")
 MAX_RETRIES: int = 5
 BASE_BACKOFF_MS: int = 50
 
-class ConsensusEngineStub:
 
+class ConsensusEngineStub:
     def propose(self, payload: bytes) -> None:
         pass
 
+
 def get_consensus_engine() -> ConsensusEngineStub:
     return ConsensusEngineStub()
+
 
 async def propose_with_backoff(engine: ConsensusEngineStub, payload: bytes, task_id: int) -> bool:
     for attempt in range(1, MAX_RETRIES + 1):
         try:
             engine.propose(payload)
-            log.info(f'task-{task_id}: proposed successfully on attempt {attempt}')
+            log.info(f"task-{task_id}: proposed successfully on attempt {attempt}")
             return True
         except (OSError, RuntimeError, asyncio.TimeoutError) as exc:
             wait_ms: int = BASE_BACKOFF_MS * 2 ** (attempt - 1)
-            log.warning(f'task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait_ms}ms')
+            log.warning(f"task-{task_id}: attempt {attempt} failed ({exc}), retrying in {wait_ms}ms")
             await asyncio.sleep(wait_ms / 1000.0)
-    log.error(f'task-{task_id}: exhausted {MAX_RETRIES} retries')
+    log.error(f"task-{task_id}: exhausted {MAX_RETRIES} retries")
     return False
+
 
 async def main() -> None:
     engine: ConsensusEngineStub = get_consensus_engine()
-    map_file = 'docs/C5_SKILLS_BRIDGES_MAP.md'
+    map_file = "docs/C5_SKILLS_BRIDGES_MAP.md"
     payloads = []
     if os.path.exists(map_file):
-        with open(map_file, 'r', encoding='utf-8') as f:
+        with open(map_file, encoding="utf-8") as f:
             for line in f:
-                match = re.search('\\*\\*(.+)\\*\\*', line)
+                match = re.search("\\*\\*(.+)\\*\\*", line)
                 if match:
-                    payloads.append(f'EXEC_VECTOR:{match.group(1)}'.encode('utf-8'))
+                    payloads.append(f"EXEC_VECTOR:{match.group(1)}".encode())
     if not payloads:
-        log.warning('No mapped vectors found, falling back to dummy tasks.')
-        payloads = [f'task-{i}'.encode('utf-8') for i in range(1000)]
+        log.warning("No mapped vectors found, falling back to dummy tasks.")
+        payloads = [f"task-{i}".encode() for i in range(1000)]
     total_tasks: int = len(payloads)
     successes: int = 0
     t0_ns: int = time.monotonic_ns()
-    tasks: list[asyncio.Task[bool]] = [asyncio.create_task(propose_with_backoff(engine, payloads[i], i)) for i in range(total_tasks)]
+    tasks: list[asyncio.Task[bool]] = [
+        asyncio.create_task(propose_with_backoff(engine, payloads[i], i)) for i in range(total_tasks)
+    ]
     results: list[bool] = await asyncio.gather(*tasks)
-    successes = sum((1 for r in results if r))
+    successes = sum(1 for r in results if r)
     elapsed_ns: int = time.monotonic_ns() - t0_ns
     elapsed_ms: int = elapsed_ns // 1000000
     throughput: int = successes * 1000 // elapsed_ms if elapsed_ms > 0 else 0
-    log.info(f'Completed: {successes}/{total_tasks} proposals in {elapsed_ms}ms')
-    log.info(f'Throughput: {throughput} proposals/s (integer floor)')
-if __name__ == '__main__':
+    log.info(f"Completed: {successes}/{total_tasks} proposals in {elapsed_ms}ms")
+    log.info(f"Throughput: {throughput} proposals/s (integer floor)")
+
+
+if __name__ == "__main__":
     asyncio.run(main())

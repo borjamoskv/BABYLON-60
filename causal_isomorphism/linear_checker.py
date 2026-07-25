@@ -1,6 +1,9 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
+
 from causal_isomorphism.ir import IRExpr, IRExprKind, IRFunction, IRModule
+
 
 @dataclass
 class LinearViolation:
@@ -8,8 +11,8 @@ class LinearViolation:
     parameter_name: str
     message: str
 
-class LinearTypeChecker:
 
+class LinearTypeChecker:
     def check_module(self, module: IRModule) -> list[LinearViolation]:
         violations: list[LinearViolation] = []
         for func in module.all_functions():
@@ -29,17 +32,29 @@ class LinearTypeChecker:
             if is_linear:
                 if usages != {1}:
                     if len(usages) == 1:
-                        found_str = f'{next(iter(usages))}'
+                        found_str = f"{next(iter(usages))}"
                     else:
-                        found_str = f'{sorted(list(usages))} across paths'
-                    violations.append(LinearViolation(function_name=func.name, parameter_name=param.name, message=f"Linear parameter '{param.name}' must be consumed exactly once. Found {found_str} usage(s)."))
+                        found_str = f"{sorted(list(usages))} across paths"
+                    violations.append(
+                        LinearViolation(
+                            function_name=func.name,
+                            parameter_name=param.name,
+                            message=f"Linear parameter '{param.name}' must be consumed exactly once. Found {found_str} usage(s).",
+                        )
+                    )
             elif is_affine:
-                if any((u > 1 for u in usages)):
+                if any(u > 1 for u in usages):
                     if len(usages) == 1:
-                        found_str = f'{next(iter(usages))}'
+                        found_str = f"{next(iter(usages))}"
                     else:
-                        found_str = f'{sorted(list(usages))} across paths'
-                    violations.append(LinearViolation(function_name=func.name, parameter_name=param.name, message=f"Affine parameter '{param.name}' must be consumed at most once. Found {found_str} usage(s)."))
+                        found_str = f"{sorted(list(usages))} across paths"
+                    violations.append(
+                        LinearViolation(
+                            function_name=func.name,
+                            parameter_name=param.name,
+                            message=f"Affine parameter '{param.name}' must be consumed at most once. Found {found_str} usage(s).",
+                        )
+                    )
         return violations
 
     def _add_sets(self, s1: set[int], s2: set[int]) -> set[int]:
@@ -75,7 +90,9 @@ class LinearTypeChecker:
                     current = self._add_sets(current, self._get_usage_paths(param_name, arg))
                 return current
             case IRExprKind.MATCH:
-                match_expr_usages = self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
+                match_expr_usages = (
+                    self._get_usage_paths(param_name, expr.match_expr) if expr.match_expr is not None else {0}
+                )
                 arm_usages: set[int] = set()
                 for arm in expr.match_arms:
                     if param_name in arm.pattern.bindings:

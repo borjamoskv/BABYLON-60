@@ -8,12 +8,13 @@ from pathlib import Path
 # C5-REAL Invariants: WAL mode, causal_taint, Lamport ordering, UUIDv5
 DB_PATH = Path("cib_ast_graph.db")
 
+
 def _init_db(conn: sqlite3.Connection) -> None:
     conn.execute("PRAGMA journal_mode=WAL")
     conn.execute("PRAGMA synchronous=FULL")
     conn.execute("PRAGMA foreign_keys=ON")
     conn.execute("PRAGMA busy_timeout=5000")
-    conn.execute('''
+    conn.execute("""
         CREATE TABLE IF NOT EXISTS ast_nodes (
             id TEXT PRIMARY KEY,
             file_path TEXT NOT NULL,
@@ -23,11 +24,13 @@ def _init_db(conn: sqlite3.Connection) -> None:
             causal_taint TEXT NOT NULL,
             lamport_t INTEGER NOT NULL UNIQUE
         )
-    ''')
+    """)
+
 
 def _get_next_lamport(conn: sqlite3.Connection) -> int:
     row = conn.execute("SELECT MAX(lamport_t) FROM ast_nodes").fetchone()
     return (row[0] or 0) + 1
+
 
 def reconstruct_graph() -> None:
     target_dir = Path("babylon60")
@@ -44,10 +47,10 @@ def reconstruct_graph() -> None:
             tree = ast.parse(content, filename=str(py_file))
         except SyntaxError:
             continue
-            
+
         now = datetime.datetime.now(datetime.timezone.utc).isoformat()
         causal_taint = f"borjamoskv/{now}/ast_reconstruction"
-        
+
         nodes_to_insert = []
         current_lamport = _get_next_lamport(conn)
 
@@ -55,27 +58,25 @@ def reconstruct_graph() -> None:
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
                 # UUIDv5 idempotency key (INV_BFT_04)
                 node_id = str(uuid.uuid5(uuid.NAMESPACE_URL, f"ast:{py_file}:{node.name}:{node.lineno}"))
-                nodes_to_insert.append((
-                    node_id,
-                    str(py_file),
-                    type(node).__name__,
-                    node.name,
-                    node.lineno,
-                    causal_taint,
-                    current_lamport
-                ))
+                nodes_to_insert.append(
+                    (node_id, str(py_file), type(node).__name__, node.name, node.lineno, causal_taint, current_lamport)
+                )
                 current_lamport += 1
 
         if nodes_to_insert:
-            conn.executemany('''
+            conn.executemany(
+                """
                 INSERT OR IGNORE INTO ast_nodes 
                 (id, file_path, node_type, name, lineno, causal_taint, lamport_t)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
-            ''', nodes_to_insert)
-            
+            """,
+                nodes_to_insert,
+            )
+
     # Force WAL Checkpoint to physical disk
     conn.execute("PRAGMA wal_checkpoint(TRUNCATE)")
     conn.close()
+
 
 if __name__ == "__main__":
     reconstruct_graph()

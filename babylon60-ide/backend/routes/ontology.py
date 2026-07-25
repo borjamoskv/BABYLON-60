@@ -1,51 +1,65 @@
 from __future__ import annotations
+
 import contextlib
 import sqlite3
 from pathlib import Path
 from typing import Any
+
 from fastapi import APIRouter, HTTPException, Query
+
 from ..services.db_pool import connect_readonly, get_table_list, get_table_rows, get_table_schema
-router = APIRouter(prefix='/api/databases', tags=['ontology'])
+
+router = APIRouter(prefix="/api/databases", tags=["ontology"])
+
 
 def _get_project_root() -> Path:
     return Path(__file__).resolve().parent.parent.parent.parent
 
+
 def _discover_databases() -> list[dict[str, Any]]:
     root = _get_project_root()
     databases = []
-    for db_file in sorted(root.glob('*.db')):
+    for db_file in sorted(root.glob("*.db")):
         try:
             size = db_file.stat().st_size
-            databases.append({'name': db_file.name, 'path': str(db_file), 'size_bytes': size, 'size_human': _human_size(size)})
+            databases.append(
+                {"name": db_file.name, "path": str(db_file), "size_bytes": size, "size_human": _human_size(size)}
+            )
         except OSError:
             continue
     return databases
 
+
 def _human_size(size: int) -> str:
-    for unit in ('B', 'KB', 'MB', 'GB'):
+    for unit in ("B", "KB", "MB", "GB"):
         if size < 1024:
-            return f'{size:.1f} {unit}'
+            return f"{size:.1f} {unit}"
         size //= 1024
-    return f'{size:.1f} TB'
+    return f"{size:.1f} TB"
+
 
 def _resolve_db(name: str) -> Path:
     root = _get_project_root().resolve()
     db_filename = Path(name).name
     db_path = (root / db_filename).resolve()
     if db_path.parent != root:
-        raise HTTPException(403, 'Path traversal denied')
-    if db_path.suffix != '.db':
-        raise HTTPException(400, 'Only .db files allowed')
+        raise HTTPException(403, "Path traversal denied")
+    if db_path.suffix != ".db":
+        raise HTTPException(400, "Only .db files allowed")
     if not db_path.exists():
         raise HTTPException(404, f"Database '{name}' not found")
     return db_path
 
-@router.get('')
+
+@router.get("")
 def list_databases() -> list[dict[str, Any]]:
     return _discover_databases()
-_DB_ERR = 'No se pudo leer la base (fichero corrupto o no es SQLite)'
 
-@router.get('/{name}/tables')
+
+_DB_ERR = "No se pudo leer la base (fichero corrupto o no es SQLite)"
+
+
+@router.get("/{name}/tables")
 def list_tables(name: str) -> list[dict[str, Any]]:
     db_path = _resolve_db(name)
     try:
@@ -54,7 +68,8 @@ def list_tables(name: str) -> list[dict[str, Any]]:
     except sqlite3.DatabaseError as e:
         raise HTTPException(500, _DB_ERR) from e
 
-@router.get('/{name}/schema/{table}')
+
+@router.get("/{name}/schema/{table}")
 def table_schema(name: str, table: str) -> list[dict[str, Any]]:
     db_path = _resolve_db(name)
     try:
@@ -66,12 +81,15 @@ def table_schema(name: str, table: str) -> list[dict[str, Any]]:
         raise HTTPException(404, f"Table '{table}' not found in '{name}'")
     return schema
 
-@router.get('/{name}/tables/{table}')
-def browse_table(name: str, table: str, limit: int=Query(50, ge=1, le=500), offset: int=Query(0, ge=0)) -> dict[str, Any]:
+
+@router.get("/{name}/tables/{table}")
+def browse_table(
+    name: str, table: str, limit: int = Query(50, ge=1, le=500), offset: int = Query(0, ge=0)
+) -> dict[str, Any]:
     db_path = _resolve_db(name)
     try:
         with contextlib.closing(connect_readonly(db_path)) as conn:
-            valid = {t['name'] for t in get_table_list(conn)}
+            valid = {t["name"] for t in get_table_list(conn)}
             if table not in valid:
                 raise HTTPException(404, f"Table '{table}' not found in '{name}'")
             return get_table_rows(conn, table, limit, offset)

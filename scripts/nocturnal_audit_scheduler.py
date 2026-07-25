@@ -1,7 +1,7 @@
 """
 BABYLON-60 8-HOUR NOCTURNAL CONTINUOUS AUDIT ENGINE (C5-REAL)
 ============================================================
-Executes continuous multi-plane auditing, BFT ledger verification, 
+Executes continuous multi-plane auditing, BFT ledger verification,
 GELABP exergy attestation, and vault synchronization over long-horizon runs.
 """
 
@@ -15,6 +15,7 @@ from typing import Any
 REPO_DIR = Path(__file__).resolve().parent.parent
 LOG_FILE = REPO_DIR / ".cortex" / "nocturnal_audit.log"
 
+
 def get_python_exe() -> str:
     for candidate in [sys.executable, str(REPO_DIR / ".venv" / "bin" / "python3"), "python3"]:
         if not candidate or not (Path(candidate).exists() if "/" in candidate else shutil.which(candidate)):
@@ -27,6 +28,7 @@ def get_python_exe() -> str:
             continue
     return sys.executable
 
+
 def run_cmd(cmd: str | list[str]) -> bool:
     cmd_str = cmd if isinstance(cmd, str) else " ".join(cmd)
     print(f"[*] Executing Audit Command: {cmd_str}")
@@ -36,6 +38,7 @@ def run_cmd(cmd: str | list[str]) -> bool:
         print(f"[-] ERROR in '{cmd_str}':\n{res.stderr}\n{res.stdout}")
         return False
     return True
+
 
 def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
     timestamp = time.strftime("%Y-%m-%d %H:%M:%S UTC", time.gmtime())
@@ -61,7 +64,7 @@ def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
     secret_ok = run_cmd([py_exe, "scripts/secret_swarm_auditor.py"])
 
     status = "SUCCESS" if (align_ok and sync_ok and exergy_ok and pytest_ok and secret_ok) else "FAILED"
-    
+
     log_entry = f"[{timestamp}] Iteration #{iteration_num}: Status={status} (Planes: {[align_ok, sync_ok, exergy_ok, pytest_ok, secret_ok].count(True)}/5)\n"
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(LOG_FILE, "a", encoding="utf-8") as f:
@@ -71,8 +74,9 @@ def execute_audit_iteration(iteration_num: int) -> dict[str, Any]:
         "iteration": iteration_num,
         "timestamp": timestamp,
         "status": status,
-        "planes_passed": [align_ok, sync_ok, exergy_ok, pytest_ok, secret_ok].count(True)
+        "planes_passed": [align_ok, sync_ok, exergy_ok, pytest_ok, secret_ok].count(True),
     }
+
 
 def main():
     max_iterations = int(sys.argv[1]) if len(sys.argv) > 1 else 1
@@ -87,6 +91,7 @@ def main():
             time.sleep(interval_seconds)
 
     print("\n✓ 8-HOUR NOCTURNAL AUDIT PROTOCOL COMPLETED SUCCESSFULLY (C5-REAL).")
+
 
 if __name__ == "__main__":
     main()

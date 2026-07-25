@@ -9,14 +9,15 @@ def test_anergia_purger_removes_constants() -> None:
     purger = AnergiaPurger()
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
-    assert 'Docstring that should be pruned' not in code_out
-    assert 'x = 10' in code_out
+    assert "Docstring that should be pruned" not in code_out
+    assert "x = 10" in code_out
+
 
 def test_anergia_purger_injects_fail_fast(tmp_path) -> None:
-    source = '\ntry:\n    x = 1 / 0\nexcept Exception:\n    pass\n'
+    source = "\ntry:\n    x = 1 / 0\nexcept Exception:\n    pass\n"
     tree = ast.parse(source)
     purger = AnergiaPurger()
     mutated = purger.visit(tree)
     code_out = ast.unparse(mutated)
-    assert 'raise RuntimeError' in code_out
-    assert 'FAIL-FAST: General Exception intercepted.' in code_out
+    assert "raise RuntimeError" in code_out
+    assert "FAIL-FAST: General Exception intercepted." in code_out

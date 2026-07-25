@@ -6,8 +6,9 @@ from collections.abc import Sequence
 from babylon60.compat.optional import np
 from babylon60.utils import void_vec
 
-logger = logging.getLogger('babylon60.utils.turboquant')
+logger = logging.getLogger("babylon60.utils.turboquant")
 _ROTATION_CACHE: dict[int, np.ndarray] = {}
+
 
 def _get_rotation_matrix(dim: int) -> np.ndarray:
     if dim not in _ROTATION_CACHE:
@@ -17,7 +18,10 @@ def _get_rotation_matrix(dim: int) -> np.ndarray:
         _ROTATION_CACHE[dim] = q
     return _ROTATION_CACHE[dim]
 
-def optimize_vector_qjl(vector: Sequence[float] | Sequence[int], bits: float=3.5, layer_depth_ratio: float=0.0) -> list[float] | bytes:
+
+def optimize_vector_qjl(
+    vector: Sequence[float] | Sequence[int], bits: float = 3.5, layer_depth_ratio: float = 0.0
+) -> list[float] | bytes:
     try:
         effective_bits = max(1.0, bits * (1.0 - layer_depth_ratio * 0.7))
         arr = np.array(vector, dtype=np.float32)
@@ -27,14 +31,15 @@ def optimize_vector_qjl(vector: Sequence[float] | Sequence[int], bits: float=3.5
         dim = arr.shape[1]
         try:
             from scipy.fft import fwht
-            rotated = fwht(arr, norm='ortho')
+
+            rotated = fwht(arr, norm="ortho")
         except ImportError:
             q = _get_rotation_matrix(dim)
             rotated = np.matmul(arr, q.T)
         if effective_bits <= 1.0:
             v_bits = void_vec.pack_void_bit(rotated[0] if not is_2d else rotated)
             return v_bits
-        levels = int(2 ** effective_bits)
+        levels = int(2**effective_bits)
         min_val = np.min(rotated, axis=1, keepdims=True)
         max_val = np.max(rotated, axis=1, keepdims=True)
         step = np.where(max_val == min_val, 1e-09, (max_val - min_val) / levels)
@@ -51,8 +56,9 @@ def optimize_vector_qjl(vector: Sequence[float] | Sequence[int], bits: float=3.5
             return [float(x) for x in int8_scaled[0]]
         return int8_scaled.tolist()
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-        logger.error('TurboQuant failure (Exergy Shield bypassed): %s', e)
+        logger.error("TurboQuant failure (Exergy Shield bypassed): %s", e)
         return [0.0] * len(vector)
+
 
 def encode_query_qjl(vector: list[float]) -> list[float]:
     try:
@@ -63,7 +69,8 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
         dim = arr.shape[1]
         try:
             from scipy.fft import fwht
-            rotated = fwht(arr, norm='ortho')
+
+            rotated = fwht(arr, norm="ortho")
         except ImportError:
             q = _get_rotation_matrix(dim)
             rotated = np.matmul(arr, q.T)
@@ -71,5 +78,5 @@ def encode_query_qjl(vector: list[float]) -> list[float]:
             return [float(x) for x in rotated[0]]
         return rotated.tolist()
     except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-        logger.error('TurboQuant query encoding failure: %s', e)
+        logger.error("TurboQuant query encoding failure: %s", e)
         return vector

@@ -9,7 +9,9 @@ import ast
 
 class SecurityError(Exception):
     """Raised when source code violates sandboxed AST execution rules."""
+
     pass
+
 
 PROHIBITED_FUNCTIONS: set[str] = {
     "getattr",
@@ -27,6 +29,7 @@ PROHIBITED_FUNCTIONS: set[str] = {
     "dir",
     "input",
 }
+
 
 def validate_ast_sandbox(source_code: str) -> bool:
     """

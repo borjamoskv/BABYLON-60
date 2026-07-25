@@ -5,19 +5,20 @@ Verifies Stripe webhook cryptographic signatures, records customer receipts,
 and dispatches sovereign license keys upon checkout session completion.
 """
 
-import hmac
 import hashlib
-import time
+import hmac
 import sqlite3
+import time
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Any
 
 DB_PATH = Path.home() / ".babylon60" / "receipts_ledger.db"
+
 
 class StripeWebhookProcessor:
     """Production Stripe Webhook & Customer Ledger Processor."""
 
-    def __init__(self, db_path: Optional[Path] = None, webhook_secret: str = "whsec_mock_c5_real") -> None:
+    def __init__(self, db_path: Path | None = None, webhook_secret: str = "whsec_mock_c5_real") -> None:
         self.db_path = db_path or DB_PATH
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self.webhook_secret = webhook_secret
@@ -49,14 +50,14 @@ class StripeWebhookProcessor:
             elements = dict(item.split("=", 1) for item in sig_header.split(","))
             timestamp = elements.get("t", "")
             signature = elements.get("v1", "")
-            
-            signed_payload = f"{timestamp}.{payload_str}".encode('utf-8')
+
+            signed_payload = f"{timestamp}.{payload_str}".encode()
             expected_sig = hmac.new(self.webhook_secret.encode(), signed_payload, hashlib.sha256).hexdigest()
             return hmac.compare_digest(signature, expected_sig)
         except (ValueError, KeyError):
             return False
 
-    def process_checkout_completed(self, session_data: Dict[str, Any]) -> Dict[str, Any]:
+    def process_checkout_completed(self, session_data: dict[str, Any]) -> dict[str, Any]:
         """Process checkout.session.completed event and persist receipt to WAL SQLite."""
         from babylon60.core.license_gate import SovereignLicenseGate, Tier
 
@@ -72,24 +73,28 @@ class StripeWebhookProcessor:
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         try:
             with conn:
-                conn.execute("""
+                conn.execute(
+                    """
                     INSERT OR REPLACE INTO customer_receipts 
                     (session_id, email, tier, amount_eur, license_key, created_at)
                     VALUES (?, ?, ?, ?, ?, ?)
-                """, (session_id, customer_email, tier, amount_eur, license_key, now))
+                """,
+                    (session_id, customer_email, tier, amount_eur, license_key, now),
+                )
         finally:
             conn.close()
 
         # Trigger instant notification to Borjamoskv@gmail.com & workspace log
         try:
             from babylon60.core.email_notifier import PurchaseNotifier
+
             notifier = PurchaseNotifier()
             notifier.notify_purchase(
                 customer_email=customer_email,
                 tier=tier,
                 amount_eur=amount_eur,
                 license_key=license_key,
-                session_id=session_id
+                session_id=session_id,
             )
         except (ImportError, KeyError, ValueError, OSError):
             pass
@@ -100,10 +105,10 @@ class StripeWebhookProcessor:
             "email": customer_email,
             "tier": tier,
             "license_key": license_key,
-            "created_at": now
+            "created_at": now,
         }
 
-    def get_receipt(self, session_id: str) -> Optional[Dict[str, Any]]:
+    def get_receipt(self, session_id: str) -> dict[str, Any] | None:
         """Retrieve persisted customer receipt by session_id."""
         conn = sqlite3.connect(str(self.db_path), timeout=5.0)
         try:

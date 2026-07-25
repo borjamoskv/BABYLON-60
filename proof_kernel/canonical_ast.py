@@ -1,11 +1,12 @@
 import ast
 from typing import Any
 
+
 def canonicalize_ast(node: Any) -> Any:
     if isinstance(node, ast.AST):
-        result = {'_type': node.__class__.__name__}
+        result = {"_type": node.__class__.__name__}
         for field, value in ast.iter_fields(node):
-            if field in ('lineno', 'col_offset', 'end_lineno', 'end_col_offset', 'ctx'):
+            if field in ("lineno", "col_offset", "end_lineno", "end_col_offset", "ctx"):
                 continue
             result[field] = canonicalize_ast(value)
         return result

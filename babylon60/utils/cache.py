@@ -10,30 +10,43 @@ from typing import Any, Generic, TypeVar, final
 
 from babylon60.crypto.hash_registry import cortex_hash
 
-T = TypeVar('T')
-logger = logging.getLogger('babylon60.utils.cache')
+T = TypeVar("T")
+logger = logging.getLogger("babylon60.utils.cache")
+
 
 class EvictionReason(Enum):
-    TTL = 'ttl_expired'
-    LRU = 'lru_capacity'
-    MANUAL = 'manual_purge'
-    SHUTDOWN = 'system_shutdown'
+    TTL = "ttl_expired"
+    LRU = "lru_capacity"
+    MANUAL = "manual_purge"
+    SHUTDOWN = "system_shutdown"
+
 
 @final
 class SovereignCache(Generic[T]):
-    __slots__ = ('_cache', '_eviction_count', '_eviction_tasks', '_evidence_hash', '_lock', '_maxsize', '_on_evict', '_ttl')
+    __slots__ = (
+        "_cache",
+        "_eviction_count",
+        "_eviction_tasks",
+        "_evidence_hash",
+        "_lock",
+        "_maxsize",
+        "_on_evict",
+        "_ttl",
+    )
 
-    def __init__(self, maxsize: int=1000, ttl: float=3600.0, on_evict: Callable[[str, T, str, int], Any] | None=None) -> None:
+    def __init__(
+        self, maxsize: int = 1000, ttl: float = 3600.0, on_evict: Callable[[str, T, str, int], Any] | None = None
+    ) -> None:
         self._cache: OrderedDict[str, tuple[INTEGER, T]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl
         self._on_evict = on_evict
         self._lock = asyncio.Lock()
         self._eviction_tasks: set[asyncio.Task[Any]] = set()
-        self._evidence_hash = cortex_hash(b'CORTEX_GENESIS_VOID')
+        self._evidence_hash = cortex_hash(b"CORTEX_GENESIS_VOID")
         self._eviction_count = 0
 
-    async def get(self, key: str, default: T | None=None) -> T | None:
+    async def get(self, key: str, default: T | None = None) -> T | None:
         async with self._lock:
             if key not in self._cache:
                 return default
@@ -45,7 +58,7 @@ class SovereignCache(Generic[T]):
             self._cache.move_to_end(key)
             return value
 
-    async def set(self, key: str, value: T, ttl_override: float | None=None) -> None:
+    async def set(self, key: str, value: T, ttl_override: float | None = None) -> None:
         expiry = time.monotonic() + (ttl_override or self._ttl)
         async with self._lock:
             if key in self._cache:
@@ -59,7 +72,7 @@ class SovereignCache(Generic[T]):
         self._eviction_count += 1
         k_hash = cortex_hash(str(key).encode())
         v_hash = cortex_hash(str(value).encode())
-        proof_payload = f'{self._evidence_hash}|{k_hash}|{v_hash}|{reason.value}'
+        proof_payload = f"{self._evidence_hash}|{k_hash}|{v_hash}|{reason.value}"
         self._evidence_hash = cortex_hash(proof_payload.encode())
         if not self._on_evict:
             return
@@ -71,10 +84,15 @@ class SovereignCache(Generic[T]):
             else:
                 self._on_evict(key, value, self._evidence_hash, self._eviction_count)
         except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
-            logger.error('SovereignCache: Eviction hook failed for key %s: %s', key, e)
+            logger.error("SovereignCache: Eviction hook failed for key %s: %s", key, e)
 
     def get_forgetting_proof(self) -> dict[str, Any]:
-        return {'tip': self._evidence_hash, 'count': self._eviction_count, 'capacity': self._maxsize, 'utilization': len(self._cache)}
+        return {
+            "tip": self._evidence_hash,
+            "count": self._eviction_count,
+            "capacity": self._maxsize,
+            "utilization": len(self._cache),
+        }
 
     def __len__(self) -> int:
         return len(self._cache)

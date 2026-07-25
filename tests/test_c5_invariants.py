@@ -82,8 +82,17 @@ def test_inv_c5_04_no_mock_signatures() -> None:
 def test_inv_c5_07a_no_broad_except() -> None:
     """INV_C5_07 — Loud Failure: except Exception is strictly prohibited."""
     hits = _scan({".py"}, r"except\s+Exception\s*\w*\s*:")
-    hits = [h for h in hits if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h and "exergy_mass_mutator.py" not in h]
-    assert not hits, _fail_msg("INV_C5_07a (Generic except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError): found)", hits)
+    hits = [
+        h
+        for h in hits
+        if "test_c5_invariants.py" not in h
+        and "autodetect_invariants.py" not in h
+        and "exergy_mass_mutator.py" not in h
+    ]
+    assert not hits, _fail_msg(
+        "INV_C5_07a (Generic except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError): found)",
+        hits,
+    )
 
 
 def test_inv_c5_07b_no_global_sigkill() -> None:
@@ -101,7 +110,9 @@ def test_inv_c5_06_lean_bound_to_system() -> None:
 
 
 @pytest.mark.asyncio
-async def test_inv_c5_05_verify_chain_survives_encryption(tmp_path: pathlib.Path, monkeypatch: pytest.MonkeyPatch) -> None:
+async def test_inv_c5_05_verify_chain_survives_encryption(
+    tmp_path: pathlib.Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     """INV_C5_05 — el verificador valida el estado que protege bajo cifrado.
     Hoy ROJO: el INSERT hashea el payload cifrado y verify_chain hashea el
     descifrado -> entry_hash != computed_hash -> False con CORTEX_VAULT_KEY activo.
@@ -139,7 +150,10 @@ def test_inv_c5_10_pynacl_serialization() -> None:
     hits = [
         h
         for h in hits
-        if "test_c5_invariants.py" not in h and "autodetect_invariants.py" not in h and "demo_exergy_poc.py" not in h and "exergy_mass_mutator.py" not in h
+        if "test_c5_invariants.py" not in h
+        and "autodetect_invariants.py" not in h
+        and "demo_exergy_poc.py" not in h
+        and "exergy_mass_mutator.py" not in h
     ]
     assert not hits, _fail_msg("INV_C5_10 (PyNaCl serialization)", hits)  # type: ignore
 
@@ -352,4 +366,3 @@ def test_inv_c5_30_deterministic_cbor_canonization() -> None:
     content = agents_path.read_text(errors="ignore")
     assert "INV_C5_30" in content, "INV_C5_30 rule definition missing in .agents/AGENTS.md"
     assert "CBOR" in content, "INV_C5_30 missing CBOR canonization clause"
-

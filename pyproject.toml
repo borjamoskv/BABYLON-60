@@ -116,7 +116,7 @@ extend-exclude = [
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
-ignore = ["E743"]
+ignore = ["E743", "E501"]
 
 [tool.mypy]
 python_version = "3.12"

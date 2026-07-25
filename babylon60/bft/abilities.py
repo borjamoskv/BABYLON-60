@@ -9,19 +9,22 @@ from typing import Any, TypeVar
 
 from babylon60.bft.lexicon import BFTLexicon
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 class AbilityViolation(Exception):
     pass
-_claimed_abilities: ContextVar[frozenset[str]] = ContextVar('_claimed_abilities', default=frozenset())
+
+
+_claimed_abilities: ContextVar[frozenset[str]] = ContextVar("_claimed_abilities", default=frozenset())
+
 
 class BFTAbilityHandler:
-
     def __init__(self, lexicon: BFTLexicon) -> None:
         self.lexicon = lexicon
-        self.hash_io = lexicon.get_concept_hash('TYPE::Ability::IO')
-        self.hash_state = lexicon.get_concept_hash('TYPE::Ability::State')
-        self.hash_exception = lexicon.get_concept_hash('TYPE::Ability::Exception')
+        self.hash_io = lexicon.get_concept_hash("TYPE::Ability::IO")
+        self.hash_state = lexicon.get_concept_hash("TYPE::Ability::State")
+        self.hash_exception = lexicon.get_concept_hash("TYPE::Ability::Exception")
         self.handlers: dict[str, Callable[..., Any]] = {}
 
     def register_handler(self, ability_hash: str, handler_fn: Callable[..., Any]) -> None:
@@ -45,13 +48,14 @@ class BFTAbilityHandler:
         active_claims = _claimed_abilities.get()
         if effect_hash not in active_claims:
             effect_name = self.lexicon.resolve_hash(effect_hash) or effect_hash
-            raise AbilityViolation(f'C5-REAL: Execution halted. Missing Ability: {effect_name}')
+            raise AbilityViolation(f"C5-REAL: Execution halted. Missing Ability: {effect_name}")
         if effect_hash not in self.handlers:
             effect_name = self.lexicon.resolve_hash(effect_hash) or effect_hash
-            raise NotImplementedError(f'C5-REAL: No physical handler registered for {effect_name}')
+            raise NotImplementedError(f"C5-REAL: No physical handler registered for {effect_name}")
         handler = self.handlers[effect_hash]
         if inspect.iscoroutinefunction(handler):
             return await handler(*args, **kwargs)
         import functools
+
         func = functools.partial(handler, *args, **kwargs)
         return await asyncio.to_thread(func)

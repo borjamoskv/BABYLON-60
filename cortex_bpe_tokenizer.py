@@ -1,20 +1,17 @@
-from typing import Dict, List, Tuple
-
 class BPETokenizer:
-
     def __init__(self) -> None:
-        self.vocab: Dict[str, int] = {chr(i): i for i in range(256)}
-        self.inverse_vocab: Dict[int, str] = {i: chr(i) for i in range(256)}
-        self.merges: Dict[Tuple[str, str], int] = {}
+        self.vocab: dict[str, int] = {chr(i): i for i in range(256)}
+        self.inverse_vocab: dict[int, str] = {i: chr(i) for i in range(256)}
+        self.merges: dict[tuple[str, str], int] = {}
         self.next_token_id = 256
 
-    def get_stats(self, tokens: List[str]) -> Dict[Tuple[str, str], int]:
-        counts: Dict[Tuple[str, str], int] = {}
-        for pair in zip(tokens, tokens[1:]):
+    def get_stats(self, tokens: list[str]) -> dict[tuple[str, str], int]:
+        counts: dict[tuple[str, str], int] = {}
+        for pair in zip(tokens, tokens[1:], strict=False):
             counts[pair] = counts.get(pair, 0) + 1
         return counts
 
-    def merge(self, tokens: List[str], pair: Tuple[str, str], new_token: str) -> List[str]:
+    def merge(self, tokens: list[str], pair: tuple[str, str], new_token: str) -> list[str]:
         new_tokens = []
         i = 0
         while i < len(tokens):
@@ -40,7 +37,7 @@ class BPETokenizer:
             self.next_token_id += 1
             tokens = self.merge(tokens, best_pair, new_token_str)
 
-    def encode(self, text: str) -> List[int]:
+    def encode(self, text: str) -> list[int]:
         tokens = list(text)
         while len(tokens) > 1:
             stats = self.get_stats(tokens)
@@ -55,5 +52,5 @@ class BPETokenizer:
             tokens = self.merge(tokens, pair_to_merge, new_token_str)
         return [self.vocab[t] for t in tokens]
 
-    def decode(self, token_ids: List[int]) -> str:
-        return ''.join((self.inverse_vocab[t] for t in token_ids))
+    def decode(self, token_ids: list[int]) -> str:
+        return "".join(self.inverse_vocab[t] for t in token_ids)

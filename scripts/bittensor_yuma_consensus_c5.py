@@ -5,7 +5,9 @@ from typing import Any
 import babylon60.database.core
 
 
-def compute_yuma_consensus(weights: list[list[float]], stake: list[float], clipping_quantile: float=0.5, trust_threshold: float=0.01) -> tuple[list[float], list[float], list[float], list[float], str]:
+def compute_yuma_consensus(
+    weights: list[list[float]], stake: list[float], clipping_quantile: float = 0.5, trust_threshold: float = 0.01
+) -> tuple[list[float], list[float], list[float], list[float], str]:
     V = len(weights)
     M = len(weights[0]) if V > 0 else 0
     total_stake = sum(stake)
@@ -49,30 +51,77 @@ def compute_yuma_consensus(weights: list[list[float]], stake: list[float], clipp
         dividends_raw[i] = align_sum * stake_norm[i]
     total_div = sum(dividends_raw)
     dividends = [d / total_div if total_div > 0 else 0.0 for d in dividends_raw]
-    state_payload = json.dumps({'ranks': [round(r, 8) for r in ranks], 'trust': [round(t, 8) for t in trust], 'consensus': [round(c, 8) for c in consensus], 'dividends': [round(d, 8) for d in dividends]}, sort_keys=True).encode('utf-8')
+    state_payload = json.dumps(
+        {
+            "ranks": [round(r, 8) for r in ranks],
+            "trust": [round(t, 8) for t in trust],
+            "consensus": [round(c, 8) for c in consensus],
+            "dividends": [round(d, 8) for d in dividends],
+        },
+        sort_keys=True,
+    ).encode("utf-8")
     state_hash = hashlib.sha3_256(state_payload).hexdigest()
     return (ranks, trust, consensus, dividends, state_hash)
 
-def simulate_subnet_emission(block_emission: int, ranks: list[float], dividends: list[float], subnet_owner_cut: float=0.18) -> dict[str, Any]:
+
+def simulate_subnet_emission(
+    block_emission: int, ranks: list[float], dividends: list[float], subnet_owner_cut: float = 0.18
+) -> dict[str, Any]:
     validator_pool = block_emission * (1.0 - subnet_owner_cut) * 0.5
     miner_pool = block_emission * (1.0 - subnet_owner_cut) * 0.5
     subnet_owner_reward = block_emission * subnet_owner_cut
     miner_emissions = [r * miner_pool for r in ranks]
     validator_emissions = [d * validator_pool for d in dividends]
-    return {'block_emission_tao': block_emission, 'subnet_owner_tao': round(subnet_owner_reward, 6), 'total_miner_tao': round(sum(miner_emissions), 6), 'total_validator_tao': round(sum(validator_emissions), 6), 'miner_distribution': [round(x, 6) for x in miner_emissions], 'validator_distribution': [round(x, 6) for x in validator_emissions]}
+    return {
+        "block_emission_tao": block_emission,
+        "subnet_owner_tao": round(subnet_owner_reward, 6),
+        "total_miner_tao": round(sum(miner_emissions), 6),
+        "total_validator_tao": round(sum(validator_emissions), 6),
+        "miner_distribution": [round(x, 6) for x in miner_emissions],
+        "validator_distribution": [round(x, 6) for x in validator_emissions],
+    }
 
-def persist_consensus_ledger(db_path: str, epoch: int, state_hash: str, ranks: list[float], trust: list[float], dividends: list[float], emission: dict[str, Any]) -> None:
+
+def persist_consensus_ledger(
+    db_path: str,
+    epoch: int,
+    state_hash: str,
+    ranks: list[float],
+    trust: list[float],
+    dividends: list[float],
+    emission: dict[str, Any],
+) -> None:
     conn = babylon60.database.core.connect_sync(db_path)
     try:
-        conn.execute('PRAGMA journal_mode=WAL;')
-        conn.execute('PRAGMA busy_busy_timeout=50000;')
-        conn.execute('\n            CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (\n                epoch int PRIMARY KEY,\n                state_hash TEXT UNIQUE NOT NULL,\n                ranks_json TEXT NOT NULL,\n                trust_json TEXT NOT NULL,\n                dividends_json TEXT NOT NULL,\n                emission_json TEXT NOT NULL,\n                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n            );\n        ')
-        conn.execute('\n            INSERT OR REPLACE INTO yuma_consensus_ledger\n            (epoch, state_hash, ranks_json, trust_json, dividends_json, emission_json)\n            VALUES (?, ?, ?, ?, ?, ?);\n        ', (epoch, state_hash, json.dumps([round(r, 8) for r in ranks]), json.dumps([round(t, 8) for t in trust]), json.dumps([round(d, 8) for d in dividends]), json.dumps(emission)))
+        conn.execute("PRAGMA journal_mode=WAL;")
+        conn.execute("PRAGMA busy_busy_timeout=50000;")
+        conn.execute(
+            "\n            CREATE TABLE IF NOT EXISTS yuma_consensus_ledger (\n                epoch int PRIMARY KEY,\n                state_hash TEXT UNIQUE NOT NULL,\n                ranks_json TEXT NOT NULL,\n                trust_json TEXT NOT NULL,\n                dividends_json TEXT NOT NULL,\n                emission_json TEXT NOT NULL,\n                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP\n            );\n        "
+        )
+        conn.execute(
+            "\n            INSERT OR REPLACE INTO yuma_consensus_ledger\n            (epoch, state_hash, ranks_json, trust_json, dividends_json, emission_json)\n            VALUES (?, ?, ?, ?, ?, ?);\n        ",
+            (
+                epoch,
+                state_hash,
+                json.dumps([round(r, 8) for r in ranks]),
+                json.dumps([round(t, 8) for t in trust]),
+                json.dumps([round(d, 8) for d in dividends]),
+                json.dumps(emission),
+            ),
+        )
         conn.commit()
     finally:
         conn.close()
 
-def simulate_subnet_epochs(epochs: int, initial_weights: list[list[float]], initial_stakes: list[float], ema_alpha: float=0.9, prune_threshold: float=0.05, db_path: str='bittensor_yuma_ledger.db') -> dict[str, Any]:
+
+def simulate_subnet_epochs(
+    epochs: int,
+    initial_weights: list[list[float]],
+    initial_stakes: list[float],
+    ema_alpha: float = 0.9,
+    prune_threshold: float = 0.05,
+    db_path: str = "bittensor_yuma_ledger.db",
+) -> dict[str, Any]:
     V = len(initial_weights)
     M = len(initial_weights[0]) if V > 0 else 0
     stakes = list(initial_stakes)
@@ -85,31 +134,85 @@ def simulate_subnet_epochs(epochs: int, initial_weights: list[list[float]], init
         persist_consensus_ledger(db_path, t, state_hash, ranks, trust, dividends, emission)
         total_stake = sum(stakes)
         for i in range(V):
-            stakes[i] += emission['validator_distribution'][i]
+            stakes[i] += emission["validator_distribution"][i]
         for i in range(V):
             for j in range(M):
                 effective_s = min(weights[i][j], consensus[j]) * (stakes[i] / total_stake)
                 B[i][j] = ema_alpha * B[i][j] + (1.0 - ema_alpha) * effective_s
-        epoch_history.append({'epoch': t, 'state_hash': state_hash, 'ranks': [round(r, 6) for r in ranks], 'dividends': [round(d, 6) for d in dividends], 'total_staked': round(sum(stakes), 4)})
-    return {'epochs_executed': epochs, 'final_ranks': [round(r, 6) for r in ranks], 'final_trust': [round(t, 6) for t in trust], 'final_dividends': [round(d, 6) for d in dividends], 'ema_bonds_matrix': [[round(val, 6) for val in row] for row in B], 'history': epoch_history}
+        epoch_history.append(
+            {
+                "epoch": t,
+                "state_hash": state_hash,
+                "ranks": [round(r, 6) for r in ranks],
+                "dividends": [round(d, 6) for d in dividends],
+                "total_staked": round(sum(stakes), 4),
+            }
+        )
+    return {
+        "epochs_executed": epochs,
+        "final_ranks": [round(r, 6) for r in ranks],
+        "final_trust": [round(t, 6) for t in trust],
+        "final_dividends": [round(d, 6) for d in dividends],
+        "ema_bonds_matrix": [[round(val, 6) for val in row] for row in B],
+        "history": epoch_history,
+    }
+
 
 def simulate_adversarial_matrix() -> dict[str, Any]:
     results: dict[str, Any] = {}
     stakes_1 = [500000.0, 250000.0, 100000.0, 100000.0, 50000.0]
-    weights_1 = [[0.4, 0.4, 0.2, 0.0], [0.5, 0.3, 0.2, 0.0], [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0, 1.0], [0.0, 0.0, 0.0, 1.0]]
+    weights_1 = [
+        [0.4, 0.4, 0.2, 0.0],
+        [0.5, 0.3, 0.2, 0.0],
+        [0.0, 0.0, 0.0, 1.0],
+        [0.0, 0.0, 0.0, 1.0],
+        [0.0, 0.0, 0.0, 1.0],
+    ]
     r1, t1, c1, d1, _ = compute_yuma_consensus(weights_1, stakes_1)
-    results['sybil_swarm_attack'] = {'sybil_miner_rank': round(r1[3], 6), 'sybil_suppression_ratio': round(1.0 - r1[3], 6), 'status': 'MITIGATED' if r1[3] < 0.01 else 'BREACHED'}
+    results["sybil_swarm_attack"] = {
+        "sybil_miner_rank": round(r1[3], 6),
+        "sybil_suppression_ratio": round(1.0 - r1[3], 6),
+        "status": "MITIGATED" if r1[3] < 0.01 else "BREACHED",
+    }
     stakes_2 = [600000.0, 400000.0]
     weights_2 = [[1.0, 0.0], [0.0, 1.0]]
     r2, t2, c2, d2, _ = compute_yuma_consensus(weights_2, stakes_2)
-    results['ouroboros_attack'] = {'miner_ranks': [round(x, 6) for x in r2], 'ouroboros_miner_rank': round(r2[1], 6), 'status': 'MITIGATED' if r2[1] <= 0.05 else 'BREACHED'}
+    results["ouroboros_attack"] = {
+        "miner_ranks": [round(x, 6) for x in r2],
+        "ouroboros_miner_rank": round(r2[1], 6),
+        "status": "MITIGATED" if r2[1] <= 0.05 else "BREACHED",
+    }
     return results
-if __name__ == '__main__':
+
+
+if __name__ == "__main__":
     stakes = [500000.0, 250000.0, 150000.0, 100000.0]
-    weights = [[0.3, 0.4, 0.2, 0.1, 0.0], [0.25, 0.45, 0.2, 0.1, 0.0], [0.2, 0.3, 0.3, 0.2, 0.0], [0.0, 0.0, 0.0, 0.0, 1.0]]
-    epoch_sim = simulate_subnet_epochs(5, weights, stakes, db_path='bittensor_yuma_ledger.db')
+    weights = [
+        [0.3, 0.4, 0.2, 0.1, 0.0],
+        [0.25, 0.45, 0.2, 0.1, 0.0],
+        [0.2, 0.3, 0.3, 0.2, 0.0],
+        [0.0, 0.0, 0.0, 0.0, 1.0],
+    ]
+    epoch_sim = simulate_subnet_epochs(5, weights, stakes, db_path="bittensor_yuma_ledger.db")
     adversarial = simulate_adversarial_matrix()
     ranks, trust, consensus, dividends, state_hash = compute_yuma_consensus(weights, stakes)
     emission = simulate_subnet_emission(1.0, ranks, dividends)
-    output = {'ontology_level': 'C5-REAL', 'entity': 'MOSKV-1 APEX', 'timestamp_hash': state_hash, 'multi_epoch_simulation': {'epochs_executed': epoch_sim['epochs_executed'], 'final_miner_ranks': epoch_sim['final_ranks'], 'final_validator_dividends': epoch_sim['final_dividends'], 'ema_bonds_matrix': epoch_sim['ema_bonds_matrix']}, 'adversarial_stress_matrix': adversarial, 'sybil_mitigation_proof': {'sybil_miner_id': 4, 'sybil_assigned_weight_by_v3': 1.0, 'clipped_consensus_threshold': round(consensus[4], 6), 'final_emission_captured': emission['miner_distribution'][4]}}
+    output = {
+        "ontology_level": "C5-REAL",
+        "entity": "MOSKV-1 APEX",
+        "timestamp_hash": state_hash,
+        "multi_epoch_simulation": {
+            "epochs_executed": epoch_sim["epochs_executed"],
+            "final_miner_ranks": epoch_sim["final_ranks"],
+            "final_validator_dividends": epoch_sim["final_dividends"],
+            "ema_bonds_matrix": epoch_sim["ema_bonds_matrix"],
+        },
+        "adversarial_stress_matrix": adversarial,
+        "sybil_mitigation_proof": {
+            "sybil_miner_id": 4,
+            "sybil_assigned_weight_by_v3": 1.0,
+            "clipped_consensus_threshold": round(consensus[4], 6),
+            "final_emission_captured": emission["miner_distribution"][4],
+        },
+    }
     print(json.dumps(output, indent=2))

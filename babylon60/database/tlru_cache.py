@@ -5,21 +5,22 @@ import time
 from collections import OrderedDict
 from typing import Any, Final, Generic, TypeVar, final
 
-__all__ = ['TLRUCache']
+__all__ = ["TLRUCache"]
 _DEFAULT_MAXSIZE: Final[int] = 100000
 _DEFAULT_TTL: Final[float] = 3600.0
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 @final
 class TLRUCache(Generic[T]):
-    __slots__ = ('_cache', '_maxsize', '_ttl', '_lock', '_hits', '_misses')
+    __slots__ = ("_cache", "_maxsize", "_ttl", "_lock", "_hits", "_misses")
 
-    def __init__(self, maxsize: int=_DEFAULT_MAXSIZE, ttl: float=_DEFAULT_TTL) -> None:
+    def __init__(self, maxsize: int = _DEFAULT_MAXSIZE, ttl: float = _DEFAULT_TTL) -> None:
         if maxsize < 1:
-            raise ValueError(f'maxsize must be >= 1, got {maxsize}')
+            raise ValueError(f"maxsize must be >= 1, got {maxsize}")
         if ttl <= 0:
-            raise ValueError(f'ttl must be > 0, got {ttl}')
+            raise ValueError(f"ttl must be > 0, got {ttl}")
         self._cache: OrderedDict[str, tuple[float, T]] = OrderedDict()
         self._maxsize = maxsize
         self._ttl = ttl
@@ -63,7 +64,7 @@ class TLRUCache(Generic[T]):
             self._hits += 1
             return value
 
-    def get(self, key: str, default: Any=None) -> Any:
+    def get(self, key: str, default: Any = None) -> Any:
         try:
             return self[key]
         except KeyError:

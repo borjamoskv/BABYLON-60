@@ -6,7 +6,7 @@ import cbor2
 def canonical_serialize(payload: dict[str, Any]) -> bytes:
     def _clean_floats(obj: Any) -> Any:
         if isinstance(obj, float):
-            raise ValueError('Floats are strictly prohibited in BFT consensus payloads.')
+            raise ValueError("Floats are strictly prohibited in BFT consensus payloads.")
         if isinstance(obj, dict):
             return {k: _clean_floats(v) for k, v in sorted(obj.items())}
         if isinstance(obj, list):

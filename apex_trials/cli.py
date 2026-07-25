@@ -1,13 +1,17 @@
 from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any
+
 import click
+
 from .backtest import run_backtest
 from .ctgov import CtGovClient, HttpCache
 from .ledger import AmendmentLedger
 from .report import render_report
 from .transducer import Transducer
+
 DEFAULT_DB = 'master_ledger.db'
 DEFAULT_CACHE = 'ctgov_cache.db'
 
@@ -23,6 +27,7 @@ def _get_ledger(db_path: str) -> Any:
 
 @click.group()
 def cli() -> None:
+    pass
 
 @cli.command()
 @click.argument('nct_id')

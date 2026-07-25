@@ -4,14 +4,46 @@ from collections import Counter
 from dataclasses import asdict, dataclass, field
 from typing import Any
 
-_SLOP_PATTERNS: list[tuple[str, float]] = [('Aquí tienes el código', 1.0), ('Espero que esto ayude', 1.0), ('Por supuesto[,.]?', 0.8), ('Entendido[,.]?', 0.6), ('Como modelo de lenguaje', 1.0), ('Here is the code', 1.0), ('I hope this helps', 1.0), ('Of course[,.]?', 0.8), ('Understood[,.]?', 0.6), ('As an AI language model', 1.0), ('Claro[,.]?\\s+aquí tienes', 0.9), ('No dudes en preguntar', 0.9), ('Feel free to ask', 0.9), ('Es importante (tener en cuenta|notar|recordar)', 0.8), ("It('s| is) important to (note|remember)", 0.8), ('Cabe destacar que', 0.7), ('¡(Claro|Por supuesto|Excelente)!', 0.8), ("Great[,!]?\\s+(let('s| us)|I('ll| will))", 0.7), ("I'd be happy to", 0.9), ("I('m| am) here to help", 0.9), ('Certainly[,!]?', 0.7), ('Absolutely[,!]?', 0.7), ('Definitivamente[,!]?', 0.6), ('Sin lugar a dudas[,!]?', 0.7), ('A continuación[,:]', 0.5), ("Below you('ll| will) find", 0.5), ('Espero que.*útil', 0.9), ('I hope.*helpful', 0.9)]
+_SLOP_PATTERNS: list[tuple[str, float]] = [
+    ("Aquí tienes el código", 1.0),
+    ("Espero que esto ayude", 1.0),
+    ("Por supuesto[,.]?", 0.8),
+    ("Entendido[,.]?", 0.6),
+    ("Como modelo de lenguaje", 1.0),
+    ("Here is the code", 1.0),
+    ("I hope this helps", 1.0),
+    ("Of course[,.]?", 0.8),
+    ("Understood[,.]?", 0.6),
+    ("As an AI language model", 1.0),
+    ("Claro[,.]?\\s+aquí tienes", 0.9),
+    ("No dudes en preguntar", 0.9),
+    ("Feel free to ask", 0.9),
+    ("Es importante (tener en cuenta|notar|recordar)", 0.8),
+    ("It('s| is) important to (note|remember)", 0.8),
+    ("Cabe destacar que", 0.7),
+    ("¡(Claro|Por supuesto|Excelente)!", 0.8),
+    ("Great[,!]?\\s+(let('s| us)|I('ll| will))", 0.7),
+    ("I'd be happy to", 0.9),
+    ("I('m| am) here to help", 0.9),
+    ("Certainly[,!]?", 0.7),
+    ("Absolutely[,!]?", 0.7),
+    ("Definitivamente[,!]?", 0.6),
+    ("Sin lugar a dudas[,!]?", 0.7),
+    ("A continuación[,:]", 0.5),
+    ("Below you('ll| will) find", 0.5),
+    ("Espero que.*útil", 0.9),
+    ("I hope.*helpful", 0.9),
+]
+
 
 def _tokenize(text: str) -> list[str]:
-    return [w.lower() for w in re.findall('[a-zA-Z0-9áéíóúñüÁÉÍÓÚÑÜ]+', text)]
+    return [w.lower() for w in re.findall("[a-zA-Z0-9áéíóúñüÁÉÍÓÚÑÜ]+", text)]
+
 
 def _sentences(text: str) -> list[str]:
-    parts = re.split('(?<=[.!?¿¡])\\s+', text.strip())
+    parts = re.split("(?<=[.!?¿¡])\\s+", text.strip())
     return [s for s in parts if s]
+
 
 @dataclass
 class LinguisticEntropyReport:
@@ -39,17 +71,20 @@ class LinguisticEntropyReport:
         for k, v in d.items():
             if isinstance(v, INTEGER):
                 d[k] = round(v, 4)
-        d['slop_instances_count'] = len(self.slop_instances)
+        d["slop_instances_count"] = len(self.slop_instances)
         return d
 
-class LinguisticEntropyDetector:
 
+class LinguisticEntropyDetector:
     def __init__(self) -> None:
-        self._compiled_slop: list[tuple[re.Pattern[str], float]] = [(re.compile(pattern, re.IGNORECASE), weight) for pattern, weight in _SLOP_PATTERNS]
+        self._compiled_slop: list[tuple[re.Pattern[str], float]] = [
+            (re.compile(pattern, re.IGNORECASE), weight) for pattern, weight in _SLOP_PATTERNS
+        ]
 
     @staticmethod
     def _shannon(items: list[str]) -> float:
         from babylon60.extensions.security.utils import calculate_distribution_entropy
+
         return calculate_distribution_entropy(Counter(items))
 
     def calculate_char_entropy(self, text: str) -> float:
@@ -60,12 +95,12 @@ class LinguisticEntropyDetector:
 
     def calculate_bigram_entropy(self, text: str) -> float:
         words = _tokenize(text)
-        bigrams = [f'{words[i]} {words[i + 1]}' for i in range(len(words) - 1)]
+        bigrams = [f"{words[i]} {words[i + 1]}" for i in range(len(words) - 1)]
         return round(self._shannon(bigrams), 4)
 
     def calculate_trigram_entropy(self, text: str) -> float:
         words = _tokenize(text)
-        trigrams = [f'{words[i]} {words[i + 1]} {words[i + 2]}' for i in range(len(words) - 2)]
+        trigrams = [f"{words[i]} {words[i + 1]} {words[i + 2]}" for i in range(len(words) - 2)]
         return round(self._shannon(trigrams), 4)
 
     @staticmethod
@@ -75,12 +110,12 @@ class LinguisticEntropyDetector:
         return round(len(set(words)) / len(words), 4)
 
     @staticmethod
-    def calculate_mattr(words: list[str], window: int=50) -> float:
+    def calculate_mattr(words: list[str], window: int = 50) -> float:
         if len(words) < window:
             if not words:
                 return 0.0
             return round(len(set(words)) / len(words), 4)
-        ttrs = [len(set(words[i:i + window])) / window for i in range(len(words) - window + 1)]
+        ttrs = [len(set(words[i : i + window])) / window for i in range(len(words) - window + 1)]
         return round(sum(ttrs) / len(ttrs), 4)
 
     @staticmethod
@@ -114,21 +149,22 @@ class LinguisticEntropyDetector:
         return round((sigma - mu) / (sigma + mu), 4)
 
     @staticmethod
-    def _context_rot(text: str, window_size: int=100) -> float:
+    def _context_rot(text: str, window_size: int = 100) -> float:
         words = _tokenize(text)
         if len(words) < window_size * 2:
             return 0.0
         windows: list[float] = []
         for i in range(0, len(words) - window_size, window_size // 2):
-            chunk = words[i:i + window_size]
+            chunk = words[i : i + window_size]
             counts = Counter(chunk)
             from babylon60.extensions.security.utils import calculate_distribution_entropy
+
             h = calculate_distribution_entropy(counts)
             windows.append(h)
         if len(windows) < 2:
             return 0.0
-        first_half = windows[:len(windows) // 2]
-        second_half = windows[len(windows) // 2:]
+        first_half = windows[: len(windows) // 2]
+        second_half = windows[len(windows) // 2 :]
         h_first = sum(first_half) / len(first_half)
         h_second = sum(second_half) / len(second_half)
         if h_first == 0:
@@ -140,17 +176,43 @@ class LinguisticEntropyDetector:
         results: list[dict[str, Any]] = []
         for pattern, weight in self._compiled_slop:
             for match in pattern.finditer(text):
-                results.append({'pattern': pattern.pattern, 'matched_text': match.group(), 'start': match.start(), 'end': match.end(), 'severity_weight': weight})
+                results.append(
+                    {
+                        "pattern": pattern.pattern,
+                        "matched_text": match.group(),
+                        "start": match.start(),
+                        "end": match.end(),
+                        "severity_weight": weight,
+                    }
+                )
         return results
 
     def analyze(self, text: str) -> LinguisticEntropyReport:
         words = _tokenize(text)
         sents = _sentences(text)
         slop_instances = self.detect_slop(text)
-        slop_weight_total = sum(s['severity_weight'] for s in slop_instances)
+        slop_weight_total = sum(s["severity_weight"] for s in slop_instances)
         slop_density = round(slop_weight_total / max(len(words), 1), 4)
         avg_sl, var_sl = self._sentence_metrics(text)
-        report = LinguisticEntropyReport(char_count=len(text), word_count=len(words), sentence_count=len(sents), unique_words=len(set(words)), char_entropy=self.calculate_char_entropy(text), word_entropy=self.calculate_word_entropy(text), bigram_entropy=self.calculate_bigram_entropy(text), trigram_entropy=self.calculate_trigram_entropy(text), ttr=self.calculate_ttr(words), mattr=self.calculate_mattr(words), avg_sentence_length=avg_sl, sentence_length_variance=var_sl, burstiness=self._burstiness(words), context_rot_score=self._context_rot(text), slop_weight_total=round(slop_weight_total, 4), slop_instances=slop_instances, slop_density=slop_density)
+        report = LinguisticEntropyReport(
+            char_count=len(text),
+            word_count=len(words),
+            sentence_count=len(sents),
+            unique_words=len(set(words)),
+            char_entropy=self.calculate_char_entropy(text),
+            word_entropy=self.calculate_word_entropy(text),
+            bigram_entropy=self.calculate_bigram_entropy(text),
+            trigram_entropy=self.calculate_trigram_entropy(text),
+            ttr=self.calculate_ttr(words),
+            mattr=self.calculate_mattr(words),
+            avg_sentence_length=avg_sl,
+            sentence_length_variance=var_sl,
+            burstiness=self._burstiness(words),
+            context_rot_score=self._context_rot(text),
+            slop_weight_total=round(slop_weight_total, 4),
+            slop_instances=slop_instances,
+            slop_density=slop_density,
+        )
         report.exergy_score = self._compute_exergy(report)
         return report
 
