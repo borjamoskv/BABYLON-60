@@ -69,7 +69,7 @@ class L0IdentityForge:
         try:
             seed = aesgcm.decrypt(nonce, ciphertext, None)
             return self._generate_keypair_from_seed(seed)
-        except (ValueError, TypeError, KeyError, RuntimeError, OSError, AssertionError) as e:
+        except (ValueError, TypeError, KeyError, InvalidSignature) as e:
             logger.error('Failed to decrypt master seed. Incorrect passphrase or corrupted file.')
             raise ValueError('Identity Decryption Failed') from e
 

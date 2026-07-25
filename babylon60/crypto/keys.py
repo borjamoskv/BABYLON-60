@@ -124,32 +124,38 @@ class KeyManager:
         self.revoke_key(actor_id)
         return self.generate_and_store_key(actor_id)
 
+def _load_ed25519_private_key(private_key_b64: str) -> ed25519.Ed25519PrivateKey:
+    priv_bytes = base64.b64decode(private_key_b64)
+    try:
+        return ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)
+    except ValueError:
+        loaded_key = serialization.load_pem_private_key(priv_bytes, password=None)
+        if not isinstance(loaded_key, ed25519.Ed25519PrivateKey):
+            raise ValueError('Key must be an Ed25519PrivateKey')
+        return loaded_key
+
+def _load_ed25519_public_key(public_key_b64: str) -> ed25519.Ed25519PublicKey:
+    pub_bytes = base64.b64decode(public_key_b64)
+    try:
+        return ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
+    except ValueError:
+        loaded_key = serialization.load_ssh_public_key(pub_bytes)
+        if not isinstance(loaded_key, ed25519.Ed25519PublicKey):
+            raise ValueError('Key must be an Ed25519PublicKey')
+        return loaded_key
+
 class Signer:
 
     @staticmethod
     def sign_payload(private_key_b64: str, payload_hash: str, timestamp: str) -> str:
-        priv_bytes = base64.b64decode(private_key_b64)
-        try:
-            priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)
-        except ValueError:
-            loaded_key = serialization.load_pem_private_key(priv_bytes, password=None)
-            if not isinstance(loaded_key, ed25519.Ed25519PrivateKey):
-                raise ValueError('Key must be an Ed25519PrivateKey')
-            priv_key = loaded_key
+        priv_key = _load_ed25519_private_key(private_key_b64)
         message = f'{payload_hash}:{timestamp}'.encode()
         sig_bytes = priv_key.sign(message)
         return base64.b64encode(sig_bytes).decode('ascii')
 
     @staticmethod
     def sign_raw_content(private_key_b64: str, content: str) -> str:
-        priv_bytes = base64.b64decode(private_key_b64)
-        try:
-            priv_key = ed25519.Ed25519PrivateKey.from_private_bytes(priv_bytes)
-        except ValueError:
-            loaded_key = serialization.load_pem_private_key(priv_bytes, password=None)
-            if not isinstance(loaded_key, ed25519.Ed25519PrivateKey):
-                raise ValueError('Key must be an Ed25519PrivateKey')
-            priv_key = loaded_key
+        priv_key = _load_ed25519_private_key(private_key_b64)
         content_hash = hashlib.sha256(content.encode('utf-8')).digest()
         sig_bytes = priv_key.sign(content_hash)
         return base64.b64encode(sig_bytes).decode('utf-8')
@@ -159,14 +165,7 @@ class Verifier:
     @staticmethod
     def verify_signature(public_key_b64: str, payload_hash: str, timestamp: str, signature_b64: str) -> bool:
         try:
-            pub_bytes = base64.b64decode(public_key_b64)
-            try:
-                public_key = ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
-            except ValueError:
-                loaded_key = serialization.load_ssh_public_key(pub_bytes)
-                if not isinstance(loaded_key, ed25519.Ed25519PublicKey):
-                    return False
-                public_key = loaded_key
+            public_key = _load_ed25519_public_key(public_key_b64)
             signature = base64.b64decode(signature_b64)
             if len(signature) != 64:
                 logger.error('Invalid signature length: %s bytes (expected 64)', len(signature))
@@ -185,14 +184,7 @@ class Verifier:
     @staticmethod
     def verify_raw_content(content: str, public_key_b64: str, signature_b64: str) -> bool:
         try:
-            pub_bytes = base64.b64decode(public_key_b64)
-            try:
-                public_key = ed25519.Ed25519PublicKey.from_public_bytes(pub_bytes)
-            except ValueError:
-                loaded_key = serialization.load_ssh_public_key(pub_bytes)
-                if not isinstance(loaded_key, ed25519.Ed25519PublicKey):
-                    return False
-                public_key = loaded_key
+            public_key = _load_ed25519_public_key(public_key_b64)
             signature = base64.b64decode(signature_b64)
             if len(signature) != 64:
                 return False
@@ -272,9 +264,14 @@ class KeyLifecycleManager:
 
     def __init__(self, storage_path: str | Path | None=None, vault: Vault | None=None):
         self.km = KeyManager()
+        self.vault = vault
 
     def get_or_create_identity(self) -> AgentKeyPair:
+        # TODO: Add vault persistence
         return ZKSwarmIdentity.generate_keypair()
 
     def rotate_keys(self) -> AgentKeyPair:
         return ZKSwarmIdentity.generate_keypair()
+    
+    def list_active_keys(self) -> list[str]:
+        return [k for k, v in self.km._metadata.items() if not v.get('revoked')]
