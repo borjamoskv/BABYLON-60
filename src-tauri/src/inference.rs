@@ -60,7 +60,7 @@ impl LocalInferenceMotor {
                 Ok(record)
             }
             Err(primary_err) => {
-                println!("⚠️ [INFERENCE_MOTOR] Fallo en modelo primario ({}): {}. Activando CascadeRouter fallback a {}...", primary_model, primary_err, self.fallback_model);
+                tracing::info!("⚠️ [INFERENCE_MOTOR] Fallo en modelo primario ({}): {}. Activando CascadeRouter fallback a {}...", primary_model, primary_err, self.fallback_model);
                 match self.send_raw_http_post(&self.fallback_model, prompt).await {
                     Ok(mut fallback_record) => {
                         fallback_record.status = format!("C5-REAL_FALLBACK_FROM_{}", primary_model);
