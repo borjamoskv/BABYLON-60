@@ -203,24 +203,24 @@ mod tests {
                     .expect("[C5-REAL] FATAL: assert_knowledge failed");
                 assert!(!id1.is_empty() && id1.contains('-'), "Expected UUID assertion ID");
 
-                assert!(kernel.is_believed(py, "Water is H2O".to_string()).unwrap());
-                assert!(kernel.contradiction_free(py, "Water is H2O".to_string()).unwrap());
+                assert!(kernel.is_believed(py, "Water is H2O".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"));
+                assert!(kernel.contradiction_free(py, "Water is H2O".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"));
 
                 let taint_nogood = kernel.contradict_knowledge(py, "Alien hypothesis X".to_string(), "env_master".to_string())
                     .expect("[C5-REAL] FATAL: contradict_knowledge failed");
                 assert!(taint_nogood.contains(":NOGOOD:"));
 
-                assert!(kernel.is_believed(py, "Water is H2O".to_string()).unwrap(), "Uncontradicted premise must remain believed");
-                assert!(!kernel.is_believed(py, "Alien hypothesis X".to_string()).unwrap(), "Contradicted hypothesis label must be pruned");
-                assert!(!kernel.contradiction_free(py, "Alien hypothesis X".to_string()).unwrap());
+                assert!(kernel.is_believed(py, "Water is H2O".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"), "Uncontradicted premise must remain believed");
+                assert!(!kernel.is_believed(py, "Alien hypothesis X".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"), "Contradicted hypothesis label must be pruned");
+                assert!(!kernel.contradiction_free(py, "Alien hypothesis X".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"));
             }
 
             {
                 let kernel_replayed = CortexKernel::new(db_path).expect("[C5-REAL] FATAL: Failed to reopen CortexKernel");
-                assert!(kernel_replayed.is_believed(py, "Water is H2O".to_string()).unwrap(), "Replayed uncontradicted premise must be believed");
-                assert!(kernel_replayed.contradiction_free(py, "Water is H2O".to_string()).unwrap());
-                assert!(!kernel_replayed.is_believed(py, "Alien hypothesis X".to_string()).unwrap(), "Replayed contradicted hypothesis must remain pruned");
-                assert!(!kernel_replayed.contradiction_free(py, "Alien hypothesis X".to_string()).unwrap(), "Replayed ATMS must preserve nogood state");
+                assert!(kernel_replayed.is_believed(py, "Water is H2O".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"), "Replayed uncontradicted premise must be believed");
+                assert!(kernel_replayed.contradiction_free(py, "Water is H2O".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"));
+                assert!(!kernel_replayed.is_believed(py, "Alien hypothesis X".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"), "Replayed contradicted hypothesis must remain pruned");
+                assert!(!kernel_replayed.contradiction_free(py, "Alien hypothesis X".to_string()).expect("C5-REAL: Strict Unwrapping Enforced"), "Replayed ATMS must preserve nogood state");
             }
         });
 

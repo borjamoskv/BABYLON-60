@@ -355,7 +355,7 @@ mod tests {
         let goal = epistemic("B holds", vec![]);
         let result = derive(&[premise], &goal);
         assert!(result.is_ok());
-        assert!(verify(&result.unwrap()));
+        assert!(verify(&result.expect("C5-REAL: Strict Unwrapping Enforced")));
     }
 
     #[test]

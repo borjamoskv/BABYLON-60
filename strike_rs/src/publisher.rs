@@ -88,7 +88,7 @@ mod tests {
 
     #[test]
     fn test_publish_markdown() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Strict Unwrapping Enforced");
         let oracle = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, oracle);
 
@@ -99,10 +99,10 @@ mod tests {
         };
 
         // Inject into ATMS and Ledger
-        orch.resolve_intent(&goal, "prod_env").unwrap();
+        orch.resolve_intent(&goal, "prod_env").expect("C5-REAL: Strict Unwrapping Enforced");
 
         let publisher = Publisher::new(&orch.ledger);
-        let markdown = publisher.publish("prod_env", ExportFormat::Markdown).unwrap();
+        let markdown = publisher.publish("prod_env", ExportFormat::Markdown).expect("C5-REAL: Strict Unwrapping Enforced");
         
         assert!(markdown.contains("# C5-REAL KNOWLEDGE ARTIFACT"));
         assert!(markdown.contains("prod_env"));
@@ -112,7 +112,7 @@ mod tests {
 
     #[test]
     fn test_publish_json() {
-        let ledger = MasterLedger::new(":memory:").unwrap();
+        let ledger = MasterLedger::new(":memory:").expect("C5-REAL: Strict Unwrapping Enforced");
         let oracle = Box::new(DummyOracle);
         let mut orch = Orchestrator::new(ledger, oracle);
 
@@ -122,13 +122,13 @@ mod tests {
             obligations: vec![],
         };
 
-        orch.resolve_intent(&goal, "json_env").unwrap();
+        orch.resolve_intent(&goal, "json_env").expect("C5-REAL: Strict Unwrapping Enforced");
 
         let publisher = Publisher::new(&orch.ledger);
-        let json = publisher.publish("json_env", ExportFormat::Json).unwrap();
+        let json = publisher.publish("json_env", ExportFormat::Json).expect("C5-REAL: Strict Unwrapping Enforced");
         
         // Assert valid JSON
-        let parsed: Vec<JustifiedStatement> = serde_json::from_str(&json).unwrap();
+        let parsed: Vec<JustifiedStatement> = serde_json::from_str(&json).expect("C5-REAL: Strict Unwrapping Enforced");
         assert_eq!(parsed.len(), 1);
         assert_eq!(parsed[0].statement.content, "Energy is conserved");
     }
