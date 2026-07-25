@@ -7,9 +7,7 @@ Rule Compliance: Ω11 (Rich-Text Compatibility), R12 (Substack Exergy), Ω23 (Re
 import pytest
 from pathlib import Path
 
-ARCHIVE_200_DIR = (
-    Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive_200"
-)
+ARCHIVE_200_DIR = Path(__file__).resolve().parent.parent / "artifacts" / "substack_archive_200"
 
 
 def get_200_archive_files() -> list[Path]:
@@ -41,10 +39,7 @@ def test_substack_200_article_invariants(filepath: Path) -> None:
 
     # Invariant 3: Mandatory Footer Block & UTBH Anchor URL
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert (
-        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal"
-        in content
-    )
+    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

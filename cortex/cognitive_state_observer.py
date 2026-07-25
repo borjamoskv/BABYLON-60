@@ -30,9 +30,7 @@ class CognitiveStateObserver:
     def __init__(self, dims: int = 10) -> None:
         self.dims = dims
         self.S_hat = [0.0] * dims  # Estimated state vector
-        self.P = [
-            [1.0 if i == j else 0.0 for j in range(dims)] for i in range(dims)
-        ]  # Covariance
+        self.P = [[1.0 if i == j else 0.0 for j in range(dims)] for i in range(dims)]  # Covariance
         self.landscape = AttractorLandscape(dims)
         self.model_shifts: List[Dict[str, Any]] = []
 
@@ -49,9 +47,7 @@ class CognitiveStateObserver:
             self.S_hat[i] -= dt * grad[i] - control_u[i] * dt
         return self.S_hat
 
-    def update(
-        self, Y_observed: List[float], L_gain: float = 0.5
-    ) -> Tuple[List[float], float]:
+    def update(self, Y_observed: List[float], L_gain: float = 0.5) -> Tuple[List[float], float]:
         """
         A posteriori correction step:
         S_hat_{k|k} = S_hat_{k|k-1} + L_k * (Y_observed - C * S_hat_{k|k-1})
@@ -62,15 +58,11 @@ class CognitiveStateObserver:
         # State update via innovation correction
         for i in range(self.dims):
             self.S_hat[i] += L_gain * innovation[i]
-            self.landscape.attractor[i] = (
-                0.9 * self.landscape.attractor[i] + 0.1 * Y_observed[i]
-            )
+            self.landscape.attractor[i] = 0.9 * self.landscape.attractor[i] + 0.1 * Y_observed[i]
 
         return self.S_hat, norm_divergence
 
-    def register_transformation(
-        self, hypothesis: str, experiment: str, observation: str
-    ) -> Dict[str, Any]:
+    def register_transformation(self, hypothesis: str, experiment: str, observation: str) -> Dict[str, Any]:
         """Registers a cognitive transformation unit (Model Shift)."""
         shift = {
             "step": len(self.model_shifts),

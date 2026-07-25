@@ -65,9 +65,7 @@ def query_substance_db() -> List[Dict[str, Any]]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="CORTEX Escohotado Unified CLI Transducer (C5-REAL)"
-    )
+    parser = argparse.ArgumentParser(description="CORTEX Escohotado Unified CLI Transducer (C5-REAL)")
     parser.add_argument(
         "--module",
         choices=["chaos", "econ", "substance", "all"],
@@ -89,15 +87,9 @@ def main() -> None:
     if args.json:
         print(json.dumps(payload, indent=2, ensure_ascii=False))
     else:
-        print(
-            "================================================================================"
-        )
-        print(
-            "            CORTEX ESCOHOTADO UNIFIED C5-REAL METRIC TRANSDUCER                "
-        )
-        print(
-            "================================================================================"
-        )
+        print("================================================================================")
+        print("            CORTEX ESCOHOTADO UNIFIED C5-REAL METRIC TRANSDUCER                ")
+        print("================================================================================")
         if "caos_y_orden" in payload:
             print("\n[1] CAOS Y ORDEN (Sistemas No Lineales & Entropía Física):")
             for row in payload["caos_y_orden"][:5]:
@@ -105,9 +97,7 @@ def main() -> None:
                     f"  r={row['growth_r']:.2f} | c={row['coercion_c']:.2f} -> S={row['entropy_s']:.4f} | λ={row['lyapunov_exp']:.4f} | Regime: {row['regime']}"
                 )
         if "drogas_y_comercio" in payload:
-            print(
-                "\n[2] HISTORIA DE LAS DROGAS Y ENEMIGOS DEL COMERCIO (Economía de Prohibición):"
-            )
+            print("\n[2] HISTORIA DE LAS DROGAS Y ENEMIGOS DEL COMERCIO (Economía de Prohibición):")
             for row in payload["drogas_y_comercio"][:5]:
                 print(
                     f"  Enf={row['enforcement_level']:.2f} | PR={row['property_rights_index']:.2f} -> Risk={row['risk_premium_multiplier']:.2f}x | Purity={row['purity_index']:.2f} | Violence={row['black_market_violence_index']:.2f}"
@@ -118,9 +108,7 @@ def main() -> None:
                 print(
                     f"  Φ_pot={row['potentiality_phi']:.2f} | Φ_act={row['actuality_phi']:.2f} | Dual={row['dualism_index']:.2f} -> Exergy={row['substance_exergy_density']:.4f} | {row['ontological_regime']}"
                 )
-        print(
-            "================================================================================"
-        )
+        print("================================================================================")
 
 
 if __name__ == "__main__":

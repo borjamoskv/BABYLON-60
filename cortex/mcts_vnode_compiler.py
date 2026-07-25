@@ -25,9 +25,7 @@ except ImportError:
 logger = logging.getLogger("mcts")
 if not logger.handlers:
     handler = logging.StreamHandler()
-    formatter = logging.Formatter(
-        "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-    )
+    formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     handler.setFormatter(formatter)
     logger.addHandler(handler)
     logger.setLevel(logging.INFO)
@@ -65,21 +63,13 @@ class ASTTheorem:
 
     def __post_init__(self) -> None:
         if not (0.0 <= self.shannon_entropy <= 8.0):
-            raise ValueError(
-                f"Shannon entropy out of theoretical bounds [0.0, 8.0]: {self.shannon_entropy}"
-            )
+            raise ValueError(f"Shannon entropy out of theoretical bounds [0.0, 8.0]: {self.shannon_entropy}")
         if not (0.0 <= self.exergy_ratio <= 10.0):
-            raise ValueError(
-                f"exergy_ratio out of theoretical bounds [0.0, 10.0]: {self.exergy_ratio}"
-            )
+            raise ValueError(f"exergy_ratio out of theoretical bounds [0.0, 10.0]: {self.exergy_ratio}")
         if self.pruned_branches < 0:
-            raise ValueError(
-                f"pruned_branches cannot be negative: {self.pruned_branches}"
-            )
+            raise ValueError(f"pruned_branches cannot be negative: {self.pruned_branches}")
         if len(self.code_hash) != 64:
-            raise ValueError(
-                f"code_hash must be 64-char hex SHA3-256 digest, got len={len(self.code_hash)}"
-            )
+            raise ValueError(f"code_hash must be 64-char hex SHA3-256 digest, got len={len(self.code_hash)}")
         if self.payload:
             computed_hash = hashlib.sha3_256(self.payload.encode("utf-8")).hexdigest()
             if computed_hash != self.code_hash:
@@ -187,9 +177,7 @@ class MCTSNode:
         if self.visits == 0:
             return float("inf")
         parent_visits = self.parent.visits if self.parent else 1
-        exploration = self.c_puct * math.sqrt(
-            math.log(max(1, parent_visits)) / self.visits
-        )
+        exploration = self.c_puct * math.sqrt(math.log(max(1, parent_visits)) / self.visits)
         return self.q_value + exploration
 
     def add_child(self, child_id: str) -> "MCTSNode":
@@ -255,9 +243,7 @@ class L3InferenceEnginePhysical:
 
     def __init__(self, target_trajectories: int = 10000, c_puct: float = 1.414) -> None:
         if target_trajectories <= 0:
-            raise ValueError(
-                f"target_trajectories must be positive, got {target_trajectories}"
-            )
+            raise ValueError(f"target_trajectories must be positive, got {target_trajectories}")
         self.target = target_trajectories
         self.c_puct = c_puct
         self.last_diagnostics: Dict[str, Any] = {}

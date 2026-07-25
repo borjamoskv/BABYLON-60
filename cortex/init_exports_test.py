@@ -17,6 +17,7 @@ from cortex import (
     UnifiedActiveInferenceEngine,
 )
 
+
 def test_cortex_top_level_exports() -> None:
     assert QuadPillarKernel is not None
     assert SystemPillar is not None

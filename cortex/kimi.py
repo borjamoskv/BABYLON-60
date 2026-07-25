@@ -61,18 +61,12 @@ def resolve_kimi_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_kimi(
-    d: int, p: int, m: int, vec: KimiStateVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_kimi(d: int, p: int, m: int, vec: KimiStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_kimi_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
-        vec.daimon_latency[i] = max(
-            0.001, vec.daimon_latency[i] * 0.95 + 0.05 * abs(math.sin(code + i))
-        )
-        vec.taint_score[i] = max(
-            0.0, min(100.0, vec.taint_score[i] + math.cos(code + i) * 5.0)
-        )
+        vec.daimon_latency[i] = max(0.001, vec.daimon_latency[i] * 0.95 + 0.05 * abs(math.sin(code + i)))
+        vec.taint_score[i] = max(0.0, min(100.0, vec.taint_score[i] + math.cos(code + i) * 5.0))
         vec.prompt_size[i] = max(0.0, vec.prompt_size[i] + ((code + i) % 50) - 25.0)
         vec.cache_hits[i] = vec.cache_hits[i] * 0.99 + 0.01 * ((code + i) % 2)
         vec.bft_validation_count[i] += (code + i) % 5
@@ -122,4 +116,3 @@ class KimiK3TrajectoryEvaluator:
             shannon_entropy=entropy,
             cortex_taint=cortex_taint,
         )
-

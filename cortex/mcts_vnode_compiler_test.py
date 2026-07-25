@@ -84,9 +84,7 @@ class TestCalculateShannonEntropy:
 class TestEphemeralVNodePhysical:
     def test_valid_python_code_passes(self) -> None:
         vnode = EphemeralVNodePhysical("vnode-test-01")
-        payload = (
-            "def synthesized_theorem_1():\n    # Intention: test\n    return 1 ** 2"
-        )
+        payload = "def synthesized_theorem_1():\n    # Intention: test\n    return 1 ** 2"
         is_valid, entropy, nodes = vnode.execute_physical_test(payload)
         assert is_valid is True
         assert entropy > 3.0
@@ -175,9 +173,7 @@ class TestASTTheoremAndInvariants:
     def test_invalid_entropy_raises_value_error(self) -> None:
         payload = "x = 1"
         code_hash = hashlib.sha3_256(payload.encode("utf-8")).hexdigest()
-        with pytest.raises(
-            ValueError, match="Shannon entropy out of theoretical bounds"
-        ):
+        with pytest.raises(ValueError, match="Shannon entropy out of theoretical bounds"):
             ASTTheorem(
                 code_hash=code_hash,
                 proven=True,
@@ -267,9 +263,7 @@ class TestL3InferenceEnginePhysical:
         old_worker = compiler_mod._mcts_expansion_worker
         try:
             compiler_mod._mcts_expansion_worker = lambda args: None
-            with pytest.raises(
-                MCTSTreeSearchError, match="Imposible colapsar un teorema"
-            ):
+            with pytest.raises(MCTSTreeSearchError, match="Imposible colapsar un teorema"):
                 engine.compile_theorem("impossible_intention")
             assert engine.last_diagnostics["status"] == "EXHAUSTED"
         finally:
@@ -282,9 +276,7 @@ class TestL3InferenceEnginePhysical:
 
 
 class TestCoverageEdgeCases:
-    def test_shannon_entropy_without_numpy_fallback(
-        self, monkeypatch: pytest.MonkeyPatch
-    ) -> None:
+    def test_shannon_entropy_without_numpy_fallback(self, monkeypatch: pytest.MonkeyPatch) -> None:
         import cortex.mcts_vnode_compiler as comp
 
         monkeypatch.setattr(comp, "_HAS_NUMPY", False)
@@ -307,9 +299,7 @@ class TestCoverageEdgeCases:
                 payload=payload,
             )
 
-    def test_enforce_ide_theorem_physical_execution(
-        self, tmp_path: pytest.TempPathFactory
-    ) -> None:
+    def test_enforce_ide_theorem_physical_execution(self, tmp_path: pytest.TempPathFactory) -> None:
         from cortex.mcts_vnode_compiler import enforce_ide_theorem_physical
 
         enforce_ide_theorem_physical("test_cli_execution_intention")

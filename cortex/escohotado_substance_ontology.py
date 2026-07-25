@@ -17,9 +17,7 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(
-    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db"
-)
+DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_substance.db")
 
 
 def init_db(db_path: str = DB_PATH) -> None:
@@ -44,9 +42,7 @@ def init_db(db_path: str = DB_PATH) -> None:
     conn.close()
 
 
-def compute_substance_state(
-    potentiality: float, actuality: float, dualism_separation: float
-) -> Dict[str, Any]:
+def compute_substance_state(potentiality: float, actuality: float, dualism_separation: float) -> Dict[str, Any]:
     """
     potentiality (0.0 to 1.0): Virtual state options (Dynamis)
     actuality (0.0 to 1.0): Manifested physical structure (Energeia)

@@ -60,12 +60,8 @@ class TestGeminiProPoolManager(unittest.TestCase):
         import asyncio
 
         manager = GeminiProPoolManager()
-        with patch.object(
-            manager, "dispatch_generate_content", return_value="async_mock_response"
-        ):
-            res = asyncio.run(
-                manager.adispatch_generate_content("test prompt", "gemini-1.5-pro")
-            )
+        with patch.object(manager, "dispatch_generate_content", return_value="async_mock_response"):
+            res = asyncio.run(manager.adispatch_generate_content("test prompt", "gemini-1.5-pro"))
             self.assertEqual(res, "async_mock_response")
 
 

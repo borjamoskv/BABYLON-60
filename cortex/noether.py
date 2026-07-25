@@ -59,21 +59,13 @@ def resolve_noether_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_noether(
-    d: int, p: int, m: int, vec: NoetherStateVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_noether(d: int, p: int, m: int, vec: NoetherStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_noether_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
         vec.action_variation[i] = math.sin(code + i) * 0.01
         vec.quantum_anomaly[i] = 0.05 * math.cos(code + i) if m == 8 else 0.0
-        vec.noether_current_div[i] = (
-            vec.action_variation[i] * 0.1 + vec.quantum_anomaly[i]
-        )
-        vec.conserved_charge[i] = max(
-            0.0, vec.conserved_charge[i] * 0.99 + 0.1 * math.sin(code + i)
-        )
-        vec.entropy_generation[i] = (
-            vec.noether_current_div[i] * vec.noether_current_div[i]
-        )
+        vec.noether_current_div[i] = vec.action_variation[i] * 0.1 + vec.quantum_anomaly[i]
+        vec.conserved_charge[i] = max(0.0, vec.conserved_charge[i] * 0.99 + 0.1 * math.sin(code + i))
+        vec.entropy_generation[i] = vec.noether_current_div[i] * vec.noether_current_div[i]
     return code, name, vec.conserved_charge

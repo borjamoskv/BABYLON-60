@@ -8,9 +8,7 @@ import os
 from pathlib import Path
 
 SUBSTACK_POST_PATH = str(
-    Path(__file__).resolve().parent.parent
-    / "artifacts"
-    / "post_substack_escohotado_ultrathink.md"
+    Path(__file__).resolve().parent.parent / "artifacts" / "post_substack_escohotado_ultrathink.md"
 )
 
 
@@ -30,10 +28,7 @@ def test_substack_post_formatting_invariants() -> None:
 
     # Invariant 3: Mandatory Footer Block
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert (
-        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal"
-        in content
-    )
+    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

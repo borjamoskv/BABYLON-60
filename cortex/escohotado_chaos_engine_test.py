@@ -13,9 +13,7 @@ from cortex.escohotado_chaos_engine import (
     run_simulation_grid,
 )
 
-TEST_DB = str(
-    Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_chaos.db"
-)
+TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_chaos.db")
 
 
 def test_entropy_computation() -> None:

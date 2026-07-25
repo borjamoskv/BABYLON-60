@@ -20,14 +20,18 @@ from typing import Dict, Any, List
 
 DB_PATH = ".cortex/quad_pillar.db"
 
+
 class QuadPillarException(Exception):
     """Base exception for Quad-Pillar failures (Ω26)."""
+
 
 class RateLimitExhaustedError(QuadPillarException):
     """Triggered when subagent API rate limits are hit (429 / RESOURCE_EXHAUSTED)."""
 
+
 class CausalHierarchyError(QuadPillarException):
     """Triggered when causal hierarchy validation fails (Ω158)."""
+
 
 class QuadPillarIdempotencyError(QuadPillarException):
     """Triggered when a mutation violates the physical idempotency lock (Ω15)."""
@@ -48,6 +52,7 @@ class SystemPillar:
         """Reads physical runtime state directly from OS kernel interfaces."""
         try:
             import resource
+
             usage = resource.getrusage(resource.RUSAGE_SELF)
             rss_memory = usage.ru_maxrss
         except ImportError:
@@ -226,9 +231,7 @@ class DeterminismPillar:
             )
         # Verify strict non-identity to prevent premature closure
         if topology == mechanism or mechanism == etiology:
-            raise CausalHierarchyError(
-                "Causal Hierarchy Violation (Ω158): Strata must not be collapsed or identical."
-            )
+            raise CausalHierarchyError("Causal Hierarchy Violation (Ω158): Strata must not be collapsed or identical.")
         return True
 
 

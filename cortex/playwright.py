@@ -59,9 +59,7 @@ def resolve_playwright_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_playwright(
-    d: int, p: int, m: int, vec: PlaywrightStateVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_playwright(d: int, p: int, m: int, vec: PlaywrightStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_playwright_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
@@ -69,8 +67,6 @@ def dispatch_playwright(
         if d == 0 and p == 0:
             vec.page_count[i] += 1
         vec.last_load_time_ms[i] = abs(math.sin(code + i)) * 120.0
-        vec.dom_stability_index[i] = max(
-            0.0, min(1.0, vec.dom_stability_index[i] * 0.95 + 0.05 * math.cos(code + i))
-        )
+        vec.dom_stability_index[i] = max(0.0, min(1.0, vec.dom_stability_index[i] * 0.95 + 0.05 * math.cos(code + i)))
         vec.network_idle_state[i] = m == 3
     return code, name, vec.dom_stability_index

@@ -57,9 +57,7 @@ def log_event(event_type: str, payload_bytes: bytes) -> bool:
     new_lamport = last_lamport + 1
 
     payload_hash = hashlib.sha3_256(payload_bytes).hexdigest()
-    taint = (
-        f"CORTEX-TAINT:webhook:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{payload_hash[:8]}"
-    )
+    taint = f"CORTEX-TAINT:webhook:{time.strftime('%Y-%m-%dT%H:%M:%SZ')}:{payload_hash[:8]}"
 
     try:
         cursor.execute(
@@ -93,9 +91,7 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             self.end_headers()
             return
 
-        expected_mac = hmac.new(
-            get_secret_key().encode("utf-8"), payload_bytes, hashlib.sha3_256
-        ).hexdigest()
+        expected_mac = hmac.new(get_secret_key().encode("utf-8"), payload_bytes, hashlib.sha3_256).hexdigest()
 
         expected_sig = f"sha3-256={expected_mac}"
         if not hmac.compare_digest(expected_sig, signature_header):
@@ -114,16 +110,12 @@ class GitHubWebhookHandler(BaseHTTPRequestHandler):
             self.send_response(202)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(
-                json.dumps({"status": "C5-REAL_IGNITION_TRIGGERED"}).encode("utf-8")
-            )
+            self.wfile.write(json.dumps({"status": "C5-REAL_IGNITION_TRIGGERED"}).encode("utf-8"))
         else:
             self.send_response(200)
             self.send_header("Content-type", "application/json")
             self.end_headers()
-            self.wfile.write(
-                json.dumps({"status": "IDEMPOTENCY_LOCK_ABORTED"}).encode("utf-8")
-            )
+            self.wfile.write(json.dumps({"status": "IDEMPOTENCY_LOCK_ABORTED"}).encode("utf-8"))
 
 
 def run_daemon(port: int = 8080) -> None:

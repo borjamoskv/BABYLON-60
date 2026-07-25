@@ -20,9 +20,7 @@ ARCHIVE_FILES = get_archive_files()
 
 
 def test_archive_count() -> None:
-    assert len(ARCHIVE_FILES) == 23, (
-        f"Expected 23 archive files, found {len(ARCHIVE_FILES)}"
-    )
+    assert len(ARCHIVE_FILES) == 23, f"Expected 23 archive files, found {len(ARCHIVE_FILES)}"
 
 
 @pytest.mark.parametrize("filepath", ARCHIVE_FILES)
@@ -41,10 +39,7 @@ def test_substack_archive_article_invariants(filepath: Path) -> None:
 
     # Invariant 3: Mandatory Footer Block & UTBH Anchor URL
     assert "⚡ [CORTEX C5-REAL] Sinergias de Exergía Máxima (Top 99.99):" in content
-    assert (
-        "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal"
-        in content
-    )
+    assert "https://borjamoskv.substack.com/p/el-colapso-del-macho-alfa-de-cristal" in content
 
     # Invariant 4: Mandatory Persona & Reality Tags
     assert "Telmo Dinámico de Moskv" in content

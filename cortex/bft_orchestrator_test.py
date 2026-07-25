@@ -7,9 +7,7 @@ import pytest
 from cortex.bft_orchestrator import BFTOrchestrator, DB_PATH, strike_rs
 
 
-@pytest.mark.skipif(
-    strike_rs is None, reason="strike_rs nativo no está disponible en este entorno."
-)
+@pytest.mark.skipif(strike_rs is None, reason="strike_rs nativo no está disponible en este entorno.")
 class TestBFTOrchestrator(unittest.TestCase):
     def setUp(self) -> None:
         # Remove DB before each test for isolation
@@ -111,9 +109,7 @@ class TestBFTOrchestrator(unittest.TestCase):
         # Try to modify ledger directly via SQL UPDATE
         conn = sqlite3.connect(DB_PATH)
         with self.assertRaises(sqlite3.IntegrityError) as ctx:
-            conn.execute(
-                "UPDATE bft_ledger SET current_hash = 'corrupted_hash' WHERE id = 1;"
-            )
+            conn.execute("UPDATE bft_ledger SET current_hash = 'corrupted_hash' WHERE id = 1;")
             conn.commit()
         self.assertIn("Ledger updates are forbidden", str(ctx.exception))
 

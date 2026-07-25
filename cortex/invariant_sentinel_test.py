@@ -27,17 +27,13 @@ class TestInvariantSentinel(unittest.TestCase):
         self.assertEqual(branch, "feature/bft-fix")
 
     @patch("subprocess.check_output")
-    def test_get_current_branch_called_process_error(
-        self, mock_check_output: MagicMock
-    ) -> None:
+    def test_get_current_branch_called_process_error(self, mock_check_output: MagicMock) -> None:
         mock_check_output.side_effect = subprocess.CalledProcessError(1, ["git"])
         branch = get_current_branch()
         self.assertEqual(branch, "master")
 
     @patch("subprocess.check_output")
-    def test_get_current_branch_file_not_found_error(
-        self, mock_check_output: MagicMock
-    ) -> None:
+    def test_get_current_branch_file_not_found_error(self, mock_check_output: MagicMock) -> None:
         mock_check_output.side_effect = FileNotFoundError()
         branch = get_current_branch()
         self.assertEqual(branch, "master")
@@ -96,9 +92,7 @@ class TestInvariantSentinel(unittest.TestCase):
             self.assertFalse(result)
 
     @patch("os.path.exists")
-    def test_audit_and_align_invariants_rules_file_os_error(
-        self, mock_exists: MagicMock
-    ) -> None:
+    def test_audit_and_align_invariants_rules_file_os_error(self, mock_exists: MagicMock) -> None:
         mock_exists.return_value = True
 
         def custom_open(file: Any, mode: str = "r", encoding: Any = None, **kwargs: Any) -> Any:

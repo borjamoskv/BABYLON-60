@@ -17,9 +17,7 @@ from cortex.categorical_896_engine import Categorical896Engine
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="C5-REAL Categorical Logic 896 Primitives Transducer CLI"
-    )
+    parser = argparse.ArgumentParser(description="C5-REAL Categorical Logic 896 Primitives Transducer CLI")
     subparsers = parser.add_subparsers(dest="command", help="Sub-commands")
 
     # Command: evaluate
@@ -42,12 +40,7 @@ def main() -> None:
 
     if args.command == "evaluate":
         cost = engine.evaluate_morphism_cost(args.ids, friction=args.friction)
-        res = {
-            "sequence": args.ids,
-            "friction": args.friction,
-            "morphism_cost_mu": cost,
-            "status": "VALIDATED_C5_REAL"
-        }
+        res = {"sequence": args.ids, "friction": args.friction, "morphism_cost_mu": cost, "status": "VALIDATED_C5_REAL"}
         print(json.dumps(res, indent=2))
 
     elif args.command == "collisions":
@@ -57,7 +50,7 @@ def main() -> None:
             "active_ids": args.active_ids,
             "collision_count": len(collisions),
             "collisions": collisions,
-            "status": "COLLISION_AUDIT_COMPLETE"
+            "status": "COLLISION_AUDIT_COMPLETE",
         }
         print(json.dumps(res, indent=2))
 

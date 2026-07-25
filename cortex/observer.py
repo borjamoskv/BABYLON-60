@@ -44,9 +44,7 @@ MODIFIERS = {
 class StateVector:
     def __init__(self) -> None:
         self.states = [0.0] * 64
-        self.covariance = [
-            [1.0 if i == j else 0.0 for j in range(64)] for i in range(64)
-        ]
+        self.covariance = [[1.0 if i == j else 0.0 for j in range(64)] for i in range(64)]
         self.innovation = [0.0] * 64
         self.norm_error = 0.0
         self.execution_count = 0
@@ -60,9 +58,7 @@ def resolve_observer_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_state_observer(
-    d: int, p: int, m: int, vec: StateVector
-) -> Tuple[int, str, float]:
+def dispatch_state_observer(d: int, p: int, m: int, vec: StateVector) -> Tuple[int, str, float]:
     code, name = resolve_observer_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):

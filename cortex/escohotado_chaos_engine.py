@@ -16,9 +16,7 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(
-    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db"
-)
+DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_chaos_entropy.db")
 
 
 def init_db(db_path: str = DB_PATH) -> None:
@@ -88,9 +86,7 @@ def compute_lyapunov(trajectory: List[float], r: float, c: float) -> float:
     return sum_log_deriv / valid_points if valid_points > 0 else 0.0
 
 
-def simulate_system(
-    r: float, c: float, x0: float = 0.4, steps: int = 2000, transient: int = 500
-) -> Dict[str, Any]:
+def simulate_system(r: float, c: float, x0: float = 0.4, steps: int = 2000, transient: int = 500) -> Dict[str, Any]:
     """
     Simulates x_{t+1} = max(0, r * x_t * (1 - x_t) - c * x_t)
     r: Spontaneous exchange growth rate
@@ -132,9 +128,7 @@ def simulate_system(
     }
 
 
-def run_simulation_grid(
-    r_values: List[float], c_values: List[float], db_path: str = DB_PATH
-) -> List[Dict[str, Any]]:
+def run_simulation_grid(r_values: List[float], c_values: List[float], db_path: str = DB_PATH) -> List[Dict[str, Any]]:
     init_db(db_path)
     results = []
 

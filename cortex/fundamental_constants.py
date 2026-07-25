@@ -59,20 +59,14 @@ def resolve_constants_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_constants(
-    d: int, p: int, m: int, vec: ConstantsStateVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_constants(d: int, p: int, m: int, vec: ConstantsStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_constants_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
         vec.planck_scale_ratio[i] = abs(math.sin(code + i)) * 1.616255e-35
         vec.gravitational_coupling[i] = 6.67430e-11 * (1.0 + 0.01 * math.cos(code + i))
-        vec.electromagnetic_shielding[i] = 1.602176634e-19 * (
-            float(code % 10) + i + 1.0
-        )
-        vec.quantum_entropy[i] = max(
-            0.0, vec.quantum_entropy[i] * 0.99 + 1.054571817e-34 * float(code + i)
-        )
+        vec.electromagnetic_shielding[i] = 1.602176634e-19 * (float(code % 10) + i + 1.0)
+        vec.quantum_entropy[i] = max(0.0, vec.quantum_entropy[i] * 0.99 + 1.054571817e-34 * float(code + i))
         vec.singularity_density[i] = vec.gravitational_coupling[i] / max(
             1e-100, vec.planck_scale_ratio[i] * vec.planck_scale_ratio[i]
         )

@@ -26,20 +26,14 @@ def make_sig(payload: bytes, secret: str = "test-secret-key") -> str:
 
 class TestInitPerceptionLedger:
     def test_creates_db_and_table(self, tmp_path: pathlib.Path) -> None:
-        with patch(
-            "cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")
-        ):
-            with patch(
-                "cortex.github_webhook_daemon.os.path.exists", return_value=True
-            ):
+        with patch("cortex.github_webhook_daemon.CORTEX_DB_PATH", str(tmp_path / "test.db")):
+            with patch("cortex.github_webhook_daemon.os.path.exists", return_value=True):
                 from cortex.github_webhook_daemon import init_perception_ledger
 
                 init_perception_ledger()
                 conn = sqlite3.connect(str(tmp_path / "test.db"))
                 cursor = conn.cursor()
-                cursor.execute(
-                    "SELECT name FROM sqlite_master WHERE type='table' AND name='github_events'"
-                )
+                cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='github_events'")
                 assert cursor.fetchone() is not None
                 conn.close()
 
@@ -179,9 +173,7 @@ class TestGitHubWebhookHandler:
             GitHubWebhookHandler.do_POST(handler)
         handler.send_response.assert_called_once_with(202)
 
-    def test_duplicate_event_returns_200_idempotency(
-        self, tmp_path: pathlib.Path
-    ) -> None:
+    def test_duplicate_event_returns_200_idempotency(self, tmp_path: pathlib.Path) -> None:
         from cortex.github_webhook_daemon import GitHubWebhookHandler
 
         payload = b'{"ref": "duplicate-ref"}'

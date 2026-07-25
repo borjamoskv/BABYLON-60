@@ -12,23 +12,17 @@ from cortex.escohotado_substance_ontology import (
     run_substance_grid,
 )
 
-TEST_DB = str(
-    Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_substance.db"
-)
+TEST_DB = str(Path(__file__).resolve().parent.parent / "scratch" / "test_escohotado_substance.db")
 
 
 def test_substance_state_monism() -> None:
     # C5-REAL Monistic Process Reality: Low dualism, high actuality and potentiality
-    res_c5 = compute_substance_state(
-        potentiality=1.0, actuality=1.0, dualism_separation=0.0
-    )
+    res_c5 = compute_substance_state(potentiality=1.0, actuality=1.0, dualism_separation=0.0)
     assert res_c5["substance_exergy_density"] == 1.0
     assert "MONISTIC_PROCESS_REALITY" in res_c5["ontological_regime"]
 
     # C4-SIM Cartesian/Kantian Split: High dualism separation
-    res_dual = compute_substance_state(
-        potentiality=1.0, actuality=1.0, dualism_separation=0.9
-    )
+    res_dual = compute_substance_state(potentiality=1.0, actuality=1.0, dualism_separation=0.9)
     assert res_dual["substance_exergy_density"] == 0.1
     assert "CARTESIAN_KANTIAN_DUALIST_SPLIT" in res_dual["ontological_regime"]
 

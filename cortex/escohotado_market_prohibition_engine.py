@@ -15,9 +15,7 @@ import datetime
 from pathlib import Path
 from typing import Dict, List, Any
 
-DB_PATH = str(
-    Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_economics.db"
-)
+DB_PATH = str(Path(__file__).resolve().parent.parent / "ledgers" / "escohotado_economics.db")
 
 
 def init_db(db_path: str = DB_PATH) -> None:
@@ -44,9 +42,7 @@ def init_db(db_path: str = DB_PATH) -> None:
     conn.close()
 
 
-def simulate_prohibition_and_property(
-    enforcement: float, property_rights: float
-) -> Dict[str, Any]:
+def simulate_prohibition_and_property(enforcement: float, property_rights: float) -> Dict[str, Any]:
     """
     enforcement (0.0 to 1.0): Legal Prohibition & Police Enforcement Level
     property_rights (0.0 to 1.0): Respect for Private Property Rights & Free Price Signals

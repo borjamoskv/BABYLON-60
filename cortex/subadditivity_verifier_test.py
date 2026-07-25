@@ -24,7 +24,7 @@ def test_infimum_empty_convention() -> None:
     alpha = Morphism("alpha_uncertified", "A", "B")
 
     mu_val = cat.compute_mu(alpha)
-    assert mu_val == float('inf')
+    assert mu_val == float("inf")
 
 
 def test_subadditivity_sequential_with_contextual_delta() -> None:
@@ -112,7 +112,7 @@ def test_prf_s_soundness_and_prf_c_completeness() -> None:
 
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
-    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
 )
 def test_property_sequential_subadditivity(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
@@ -126,7 +126,7 @@ def test_property_sequential_subadditivity(cost1: float, cost2: float) -> None:
 
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
-    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
 )
 def test_property_monoidal_subadditivity(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
@@ -140,7 +140,7 @@ def test_property_monoidal_subadditivity(cost1: float, cost2: float) -> None:
 
 @given(
     cost1=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
-    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False)
+    cost2=st.floats(min_value=0, max_value=1000, allow_nan=False, allow_infinity=False),
 )
 def test_property_lawvere_triangle_inequality(cost1: float, cost2: float) -> None:
     cat = CertificateCategoryP()
@@ -164,6 +164,7 @@ def test_property_identity_cost(dummy: int) -> None:
 # ========================================================================
 # THEOREM 3: LAWVERE PREMETRIC FORMAL VERIFICATION
 # ========================================================================
+
 
 def test_lawvere_premetric_reflexivity() -> None:
     """Thm 3 Part 1: mu(id_X) = 0 for all objects X."""
@@ -209,7 +210,7 @@ def test_lawvere_premetric_triangle_3chain() -> None:
 @given(
     cost1=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
     cost2=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
-    cost3=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False)
+    cost3=st.floats(min_value=0, max_value=500, allow_nan=False, allow_infinity=False),
 )
 def test_property_lawvere_transitivity(cost1: float, cost2: float, cost3: float) -> None:
     """Property-based: mu(gamma o beta o alpha) <= sum of individual mu's."""
@@ -236,6 +237,7 @@ def test_property_lawvere_transitivity(cost1: float, cost2: float, cost3: float)
 # ========================================================================
 # THEOREM 4: PRF-S SOUNDNESS VERIFICATION
 # ========================================================================
+
 
 def test_prf_s_soundness_structural() -> None:
     """Thm 4: If each alpha in A(M) has cert with cost <= k, then M |= FISR_k^A."""
@@ -280,6 +282,7 @@ def test_prf_s_soundness_fails_over_budget() -> None:
 # THEOREM 5: SEPARATION THEOREM VERIFICATION
 # ========================================================================
 
+
 def test_separation_empty_fiber() -> None:
     """Thm 5: Model with empty Cert(alpha) is non-FISR for all k."""
     cat = CertificateCategoryP()
@@ -287,7 +290,7 @@ def test_separation_empty_fiber() -> None:
     # Do NOT add any certificate for alpha
 
     # mu(alpha) = inf(empty) = infinity
-    assert cat.compute_mu(alpha) == float('inf')
+    assert cat.compute_mu(alpha) == float("inf")
 
     # R_k fails for any finite k
     for k in [0, 1, 10, 100, 1000, 10**6]:
@@ -296,8 +299,9 @@ def test_separation_empty_fiber() -> None:
     # kappa = infinity (no valid extension exists)
     def budget_any_k(m: Morphism, cost: float) -> bool:
         return cost <= 1000.0
+
     kappa = cat.compute_kappa_repair_operator(alpha, budget_any_k)
-    assert kappa == float('inf')
+    assert kappa == float("inf")
 
 
 def test_separation_boundary_nonempty_fiber() -> None:
@@ -312,5 +316,3 @@ def test_separation_boundary_nonempty_fiber() -> None:
 
     # But FISR_41 should fail
     assert cat.verify_prf_s_soundness([alpha], k=41.0) is False
-
-

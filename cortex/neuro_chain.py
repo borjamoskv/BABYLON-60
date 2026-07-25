@@ -59,18 +59,12 @@ def resolve_neuro_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_neuro_chain(
-    d: int, p: int, m: int, vec: CognitiveChainVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_neuro_chain(d: int, p: int, m: int, vec: CognitiveChainVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_neuro_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
-        vec.homeostasis_energy[i] = max(
-            0.01, vec.homeostasis_energy[i] * 0.98 + 0.02 * math.cos(code + i)
-        )
-        vec.prediction_error[i] = abs(
-            math.sin(code + i) * 0.1 - vec.homeostasis_energy[i] * 0.05
-        )
+        vec.homeostasis_energy[i] = max(0.01, vec.homeostasis_energy[i] * 0.98 + 0.02 * math.cos(code + i))
+        vec.prediction_error[i] = abs(math.sin(code + i) * 0.1 - vec.homeostasis_energy[i] * 0.05)
         vec.attention_weight[i] = 1.0 / (1.0 + vec.prediction_error[i])
         vec.action_torque[i] = vec.attention_weight[i] * (float((code + i) % 10) + 1.0)
         vec.language_entropy[i] = math.log2(1.0 + vec.action_torque[i])

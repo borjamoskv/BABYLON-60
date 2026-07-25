@@ -14,11 +14,7 @@ AGENTS_RULES = ".agents/auditor_c5_real.md"
 
 def get_current_branch() -> str:
     try:
-        branch = (
-            subprocess.check_output(["git", "branch", "--show-current"])
-            .decode()
-            .strip()
-        )
+        branch = subprocess.check_output(["git", "branch", "--show-current"]).decode().strip()
         return branch
     except (subprocess.CalledProcessError, FileNotFoundError, OSError):
         return "master"
@@ -70,12 +66,8 @@ def audit_and_align_invariants() -> bool:
                     user_home = os.path.expanduser("~")
                     with open(fpath, "r", encoding="utf-8") as f:
                         content = f.read()
-                        if user_home in content and fpath != os.path.join(
-                            ".", "cortex", "invariant_sentinel.py"
-                        ):
-                            print(
-                                f"[ALERT] Ruta absoluta detectada en {fpath} (Violación Ω23)."
-                            )
+                        if user_home in content and fpath != os.path.join(".", "cortex", "invariant_sentinel.py"):
+                            print(f"[ALERT] Ruta absoluta detectada en {fpath} (Violación Ω23).")
                 except (OSError, UnicodeDecodeError):
                     continue
 
@@ -88,9 +80,7 @@ def audit_and_align_invariants() -> bool:
         except OSError as e:
             print(f"[Error] Falló lectura de reglas: {e}")
 
-    print(
-        f"[C5-REAL] Finalizado. Invariantes alineados con el sustrato físico. Mutado: {mutated}"
-    )
+    print(f"[C5-REAL] Finalizado. Invariantes alineados con el sustrato físico. Mutado: {mutated}")
     return mutated
 
 

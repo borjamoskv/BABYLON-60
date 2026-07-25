@@ -61,9 +61,7 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
                     val = val[1:-1]
                 elif val.startswith("[") and val.endswith("]"):
                     # Parsear listas de strings simples
-                    models_list: list[str] = [
-                        x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()
-                    ]
+                    models_list: list[str] = [x.strip()[1:-1] for x in val[1:-1].split(",") if x.strip()]
                     current_route["models"] = models_list
                     continue
 
@@ -80,9 +78,7 @@ def parse_yaml_routes(filepath: str) -> List[RouteConfig]:
 class C5LLMRouter:
     """Enrutador de inferencia C5-REAL con tolerancia a fallos en cascada."""
 
-    def __init__(
-        self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml"
-    ) -> None:
+    def __init__(self, routes_path: str = "cortex/ontology/llms_gratuitos_front_routes.yaml") -> None:
         if not os.path.isabs(routes_path):
             project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
             routes_path = os.path.join(project_root, routes_path)
@@ -97,9 +93,7 @@ class C5LLMRouter:
         ollama_route = self.routes_by_name.get("Ollama Local Engine")
         if ollama_route and model in ollama_route.get("models", []):
             try:
-                return self._call_ollama(
-                    str(ollama_route.get("url", "")), model, prompt
-                )
+                return self._call_ollama(str(ollama_route.get("url", "")), model, prompt)
             except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"Ollama ({model}) falló: {e}")
 
@@ -117,17 +111,13 @@ class C5LLMRouter:
 
         # 3. Cascada a Gemini Pro Multi-Account Pool
         gemini_route = self.routes_by_name.get("Gemini Pro Multi-Account Cluster")
-        if gemini_route and (
-            model.startswith("gemini") or "GEMINI_API_KEY" in os.environ
-        ):
+        if gemini_route and (model.startswith("gemini") or "GEMINI_API_KEY" in os.environ):
             try:
                 from scripts.gemini_pool_manager import GeminiProPoolManager
 
                 pool = GeminiProPoolManager()
                 if pool.slots:
-                    target_model = (
-                        model if model.startswith("gemini") else "gemini-1.5-pro"
-                    )
+                    target_model = model if model.startswith("gemini") else "gemini-1.5-pro"
                     return pool.dispatch_generate_content(prompt, model=target_model)
             except (RuntimeError, OSError, ValueError) as e:
                 errors.append(f"Gemini Pro Multi-Account Pool falló: {e}")
@@ -140,22 +130,16 @@ class C5LLMRouter:
                 models = github_route.get("models", [])
                 actual_model = models[0] if models else "Llama-3-8B-Instruct"
                 url = "https://models.inference.ai.azure.com/chat/completions"
-                return self._call_openai_compatible(
-                    url, github_key, actual_model, prompt
-                )
+                return self._call_openai_compatible(url, github_key, actual_model, prompt)
             except (OSError, RuntimeError, ConnectionError, ValueError) as e:
                 errors.append(f"GitHub Models falló: {e}")
 
         # Si todas fallan, levantar pánico epistémico
         error_msg = " // ".join(errors)
-        raise EpistemicHalt(
-            f"Consenso de Inferencia fallido. Todas las rutas gratuitas fallaron. Errores: {error_msg}"
-        )
+        raise EpistemicHalt(f"Consenso de Inferencia fallido. Todas las rutas gratuitas fallaron. Errores: {error_msg}")
 
     def _call_ollama(self, url: str, model: str, prompt: str) -> str:
-        req_data = json.dumps(
-            {"model": model, "prompt": prompt, "stream": False}
-        ).encode("utf-8")
+        req_data = json.dumps({"model": model, "prompt": prompt, "stream": False}).encode("utf-8")
 
         req = urllib.request.Request(
             f"{url}/api/generate",
@@ -167,9 +151,7 @@ class C5LLMRouter:
             res_data = json.loads(response.read().decode("utf-8"))
             return str(res_data["response"])
 
-    def _call_openai_compatible(
-        self, url: str, token: str, model: str, prompt: str
-    ) -> str:
+    def _call_openai_compatible(self, url: str, token: str, model: str, prompt: str) -> str:
         req_data = json.dumps(
             {
                 "model": model,

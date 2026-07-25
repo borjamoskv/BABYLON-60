@@ -18,9 +18,7 @@ class TestLLMRouter(unittest.TestCase):
     def test_dispatch_inference_ollama_success(self, mock_urlopen: Any) -> None:
         # Mock de respuesta JSON de Ollama local
         mock_response = MagicMock()
-        mock_response.read.return_value = json.dumps(
-            {"response": "Respuesta simulada de Ollama"}
-        ).encode("utf-8")
+        mock_response.read.return_value = json.dumps({"response": "Respuesta simulada de Ollama"}).encode("utf-8")
         mock_urlopen.return_value.__enter__.return_value = mock_response
 
         router = C5LLMRouter()

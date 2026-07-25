@@ -27,16 +27,19 @@ AUDIO_BIT_DEPTH = 16  # 16-bit PCM
 
 class GeminiLiveProtocolError(Exception):
     """Base exception for Gemini Live API protocol errors."""
+
     pass
 
 
 class AudioFormatMismatchError(GeminiLiveProtocolError):
     """Raised when audio configuration violates 16kHz/24kHz PCM standards."""
+
     pass
 
 
 class EphemeralTokenExpiredError(GeminiLiveProtocolError):
     """Raised when an ephemeral key or auth token expires."""
+
     pass
 
 
@@ -49,21 +52,13 @@ class AudioStreamConfig:
 
     def __post_init__(self) -> None:
         if self.input_sample_rate != 16000:
-            raise AudioFormatMismatchError(
-                f"Input sample rate MUST be 16000 Hz, got {self.input_sample_rate}"
-            )
+            raise AudioFormatMismatchError(f"Input sample rate MUST be 16000 Hz, got {self.input_sample_rate}")
         if self.output_sample_rate != 24000:
-            raise AudioFormatMismatchError(
-                f"Output sample rate MUST be 24000 Hz, got {self.output_sample_rate}"
-            )
+            raise AudioFormatMismatchError(f"Output sample rate MUST be 24000 Hz, got {self.output_sample_rate}")
         if self.channels != 1:
-            raise AudioFormatMismatchError(
-                f"Audio channels MUST be 1 (Mono), got {self.channels}"
-            )
+            raise AudioFormatMismatchError(f"Audio channels MUST be 1 (Mono), got {self.channels}")
         if self.bit_depth != 16:
-            raise AudioFormatMismatchError(
-                f"Bit depth MUST be 16-bit PCM, got {self.bit_depth}"
-            )
+            raise AudioFormatMismatchError(f"Bit depth MUST be 16-bit PCM, got {self.bit_depth}")
 
 
 @dataclasses.dataclass
@@ -94,20 +89,14 @@ class GeminiLiveClient:
         self.model = model
         self.active_sessions: Dict[str, GeminiLiveSession] = {}
 
-    def create_session(
-        self, session_id: str, config: Optional[AudioStreamConfig] = None
-    ) -> GeminiLiveSession:
+    def create_session(self, session_id: str, config: Optional[AudioStreamConfig] = None) -> GeminiLiveSession:
         if not session_id:
             raise ValueError("session_id cannot be empty")
 
         stream_config = config or AudioStreamConfig()
-        session = GeminiLiveSession(
-            session_id=session_id, model_name=self.model, config=stream_config
-        )
+        session = GeminiLiveSession(session_id=session_id, model_name=self.model, config=stream_config)
         self.active_sessions[session_id] = session
-        logger.info(
-            f"Created Gemini Live Session {session_id} [Taint: {session.cortex_taint}]"
-        )
+        logger.info(f"Created Gemini Live Session {session_id} [Taint: {session.cortex_taint}]")
         return session
 
     def process_barge_in(self, session_id: str) -> int:
@@ -121,14 +110,10 @@ class GeminiLiveClient:
         session = self.active_sessions[session_id]
         purged_bytes = len(session.buffer_bytes)
         session.buffer_bytes = b""
-        logger.info(
-            f"Barge-in triggered for session {session_id}: purged {purged_bytes} bytes"
-        )
+        logger.info(f"Barge-in triggered for session {session_id}: purged {purged_bytes} bytes")
         return purged_bytes
 
-    def generate_websocket_url(
-        self, session_id: str, use_ephemeral_token: bool = True
-    ) -> str:
+    def generate_websocket_url(self, session_id: str, use_ephemeral_token: bool = True) -> str:
         """Constructs secure WSS endpoint URL for Live API."""
         if session_id not in self.active_sessions:
             raise KeyError(f"Session {session_id} not found")

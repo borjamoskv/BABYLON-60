@@ -29,9 +29,9 @@ if not logger.handlers:
     logger.setLevel(logging.INFO)
 
 # Fundamental Physical Constants (SI Units)
-K_B = 1.380649e-23     # Boltzmann constant (J/K)
-LN_2 = math.log(2.0)    # Natural log of 2
-T_REF = 298.15          # Standard Reference Temperature (K)
+K_B = 1.380649e-23  # Boltzmann constant (J/K)
+LN_2 = math.log(2.0)  # Natural log of 2
+T_REF = 298.15  # Standard Reference Temperature (K)
 LANDAUER_LIMIT = K_B * T_REF * LN_2  # ~2.853e-21 J/bit
 
 
@@ -39,17 +39,18 @@ LANDAUER_LIMIT = K_B * T_REF * LN_2  # ~2.853e-21 J/bit
 class ThermodynamicState:
     domain_counts: Dict[str, int]
     total_samples: int
-    shannon_entropy: float        # S in nats
-    shannon_entropy_bits: float   # S in bits
-    max_entropy: float            # S_max = ln(N)
-    exergy_efficiency: float      # eta = 1 - (S / S_max)
-    landauer_energy_joules: float # Minimum dissipation in Joules
+    shannon_entropy: float  # S in nats
+    shannon_entropy_bits: float  # S in bits
+    max_entropy: float  # S_max = ln(N)
+    exergy_efficiency: float  # eta = 1 - (S / S_max)
+    landauer_energy_joules: float  # Minimum dissipation in Joules
     blake3_hash: str
     cortex_taint: str
 
 
 try:
     import strike_rs  # type: ignore
+
     RUST_ENGINE_AVAILABLE = True
 except ImportError:
     RUST_ENGINE_AVAILABLE = False
@@ -157,4 +158,6 @@ if __name__ == "__main__":
     engine = ThermodynamicEntropyEngine()
     counts = {"D0": 112, "D1": 112, "D2": 112, "D3": 112, "D4": 112, "D5": 112, "D6": 112, "D7": 112}
     state = engine.map_domain_entropy(counts)
-    logger.info(f"ULTRATHINK Thermodynamic State Mapping: S = {state.shannon_entropy:.4f} nats, Eta = {state.exergy_efficiency:.4f}")
+    logger.info(
+        f"ULTRATHINK Thermodynamic State Mapping: S = {state.shannon_entropy:.4f} nats, Eta = {state.exergy_efficiency:.4f}"
+    )

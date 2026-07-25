@@ -59,15 +59,11 @@ def resolve_haskell_identity(d: int, p: int, m: int) -> Tuple[int, str]:
     return code, name
 
 
-def dispatch_haskell(
-    d: int, p: int, m: int, vec: HaskellStateVector
-) -> Tuple[int, str, List[float]]:
+def dispatch_haskell(d: int, p: int, m: int, vec: HaskellStateVector) -> Tuple[int, str, List[float]]:
     code, name = resolve_haskell_identity(d, p, m)
     vec.execution_count += 1
     for i in range(64):
-        vec.thunk_depth[i] = max(
-            0.01, vec.thunk_depth[i] * 0.98 + 0.02 * math.cos(code + i)
-        )
+        vec.thunk_depth[i] = max(0.01, vec.thunk_depth[i] * 0.98 + 0.02 * math.cos(code + i))
         vec.monadic_depth[i] = abs(math.sin(code + i) * 0.1 - vec.thunk_depth[i] * 0.05)
         vec.category_depth[i] = 1.0 / (1.0 + vec.monadic_depth[i])
         vec.concurrency[i] = vec.category_depth[i] * (float((code + i) % 10) + 1.0)

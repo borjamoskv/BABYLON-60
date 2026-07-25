@@ -84,9 +84,7 @@ def render_post_html(post_filename: str) -> str:
     html = re.sub(r"^# (.*?)$", r"<h1>\1</h1>", html, flags=re.MULTILINE)
     html = re.sub(r"^## (.*?)$", r"## \1", html, flags=re.MULTILINE)
     html = re.sub(r"^### (.*?)$", r"### \1", html, flags=re.MULTILINE)
-    html = re.sub(
-        r"^> (.*?)$", r"<blockquote>\1</blockquote>", html, flags=re.MULTILINE
-    )
+    html = re.sub(r"^> (.*?)$", r"<blockquote>\1</blockquote>", html, flags=re.MULTILINE)
     html = re.sub(r"```(.*?)```", r"<pre>\1</pre>", html, flags=re.DOTALL)
     html = re.sub(r"\[(.*?)\]\((.*?)\)", r'<a href="\2" target="_blank">\1</a>', html)
 
@@ -97,9 +95,7 @@ class PreviewHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self) -> None:
         if self.path == "/" or self.path == "/index.html":
             files = sorted(list(ARCHIVE_DIR.glob("*.md")))
-            list_items = "".join(
-                [f'<li><a href="/view/{f.name}">{f.name}</a></li>' for f in files]
-            )
+            list_items = "".join([f'<li><a href="/view/{f.name}">{f.name}</a></li>' for f in files])
             content = f"<h1>CORTEX Substack Archive Catalog (23 Posts)</h1><ul>{list_items}</ul>"
             rendered = HTML_TEMPLATE.format(body_content=content)
             self.send_response(200)

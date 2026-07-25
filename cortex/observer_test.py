@@ -15,9 +15,7 @@ class TestObserverKernel(unittest.TestCase):
                     self.assertEqual(code, d * 100 + p * 10 + m)
                     count += 1
         self.assertEqual(count, 1000)
-        print(
-            "✅ Successfully verified 100% execution coverage for 1000 Python/Observer Primitives."
-        )
+        print("✅ Successfully verified 100% execution coverage for 1000 Python/Observer Primitives.")
 
 
 if __name__ == "__main__":

@@ -25,8 +25,10 @@ try:
 except ImportError:
     strike_rs = None
 
+
 class EpistemicHalt(Exception):
     """C5-REAL structural failure. Replaces os.kill(SIGKILL) per Ω26."""
+
 
 __all__ = [
     "BFTNode",
@@ -104,7 +106,8 @@ class BFTNode:
             from cortex_env import get_bft_key
         except ImportError:
             import os
-            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
             from cortex_env import get_bft_key
 
         bft_key = get_bft_key()
@@ -131,62 +134,32 @@ class BFTNode:
         """Synchronizes the state from a healthy node to resolve a Byzantine fault."""
         # Synchronize StateVector
         self.state_vector.states = list(source_node.state_vector.states)
-        self.state_vector.covariance = [
-            list(row) for row in source_node.state_vector.covariance
-        ]
+        self.state_vector.covariance = [list(row) for row in source_node.state_vector.covariance]
         self.state_vector.innovation = list(source_node.state_vector.innovation)
         self.state_vector.norm_error = source_node.state_vector.norm_error
         self.state_vector.execution_count = source_node.state_vector.execution_count
 
         # Synchronize CognitiveChainVector
-        self.cognitive_chain_vector.homeostasis_energy = (
-            source_node.cognitive_chain_vector.homeostasis_energy
-        )
-        self.cognitive_chain_vector.prediction_error = (
-            source_node.cognitive_chain_vector.prediction_error
-        )
-        self.cognitive_chain_vector.attention_weight = (
-            source_node.cognitive_chain_vector.attention_weight
-        )
-        self.cognitive_chain_vector.action_torque = (
-            source_node.cognitive_chain_vector.action_torque
-        )
-        self.cognitive_chain_vector.language_entropy = (
-            source_node.cognitive_chain_vector.language_entropy
-        )
-        self.cognitive_chain_vector.execution_count = (
-            source_node.cognitive_chain_vector.execution_count
-        )
+        self.cognitive_chain_vector.homeostasis_energy = source_node.cognitive_chain_vector.homeostasis_energy
+        self.cognitive_chain_vector.prediction_error = source_node.cognitive_chain_vector.prediction_error
+        self.cognitive_chain_vector.attention_weight = source_node.cognitive_chain_vector.attention_weight
+        self.cognitive_chain_vector.action_torque = source_node.cognitive_chain_vector.action_torque
+        self.cognitive_chain_vector.language_entropy = source_node.cognitive_chain_vector.language_entropy
+        self.cognitive_chain_vector.execution_count = source_node.cognitive_chain_vector.execution_count
 
         # Synchronize TTSHarnessState
-        self.tts_harness_state.mcts_budget_tokens = (
-            source_node.tts_harness_state.mcts_budget_tokens
-        )
+        self.tts_harness_state.mcts_budget_tokens = source_node.tts_harness_state.mcts_budget_tokens
         self.tts_harness_state.latent_value = source_node.tts_harness_state.latent_value
-        self.tts_harness_state.harness_score = (
-            source_node.tts_harness_state.harness_score
-        )
-        self.tts_harness_state.kv_cache_efficiency = (
-            source_node.tts_harness_state.kv_cache_efficiency
-        )
+        self.tts_harness_state.harness_score = source_node.tts_harness_state.harness_score
+        self.tts_harness_state.kv_cache_efficiency = source_node.tts_harness_state.kv_cache_efficiency
         self.tts_harness_state.pruning_rate = source_node.tts_harness_state.pruning_rate
-        self.tts_harness_state.execution_count = (
-            source_node.tts_harness_state.execution_count
-        )
+        self.tts_harness_state.execution_count = source_node.tts_harness_state.execution_count
 
         # Synchronize Arm64ReMatrix
-        self.arm64_re_matrix.execution_count = (
-            source_node.arm64_re_matrix.execution_count
-        )
-        self.arm64_re_matrix.pac_bypass_entropy = (
-            source_node.arm64_re_matrix.pac_bypass_entropy
-        )
-        self.arm64_re_matrix.dyld_cache_hit_rate = (
-            source_node.arm64_re_matrix.dyld_cache_hit_rate
-        )
-        self.arm64_re_matrix.amfi_enforcement_level = (
-            source_node.arm64_re_matrix.amfi_enforcement_level
-        )
+        self.arm64_re_matrix.execution_count = source_node.arm64_re_matrix.execution_count
+        self.arm64_re_matrix.pac_bypass_entropy = source_node.arm64_re_matrix.pac_bypass_entropy
+        self.arm64_re_matrix.dyld_cache_hit_rate = source_node.arm64_re_matrix.dyld_cache_hit_rate
+        self.arm64_re_matrix.amfi_enforcement_level = source_node.arm64_re_matrix.amfi_enforcement_level
 
         self.is_healthy = True
 
@@ -201,9 +174,7 @@ class BFTOrchestrator:
         self.queue: asyncio.Queue[tuple[int, int, int]] = asyncio.Queue()
         self.nodes = [BFTNode(i) for i in range(num_nodes)]
         self.step_index = 0
-        self.last_committed_hash = (
-            "0000000000000000000000000000000000000000000000000000000000000000"
-        )
+        self.last_committed_hash = "0000000000000000000000000000000000000000000000000000000000000000"
         self.is_running = False
         self._conn: sqlite3.Connection | None = None
 
@@ -225,25 +196,17 @@ class BFTOrchestrator:
             ValueError: If any argument is not a non-negative integer.
         """
         if not isinstance(d, int) or d < 0:
-            raise ValueError(
-                f"enqueue_task: 'd' must be a non-negative integer, got {d!r}"
-            )
+            raise ValueError(f"enqueue_task: 'd' must be a non-negative integer, got {d!r}")
         if not isinstance(p, int) or p < 0:
-            raise ValueError(
-                f"enqueue_task: 'p' must be a non-negative integer, got {p!r}"
-            )
+            raise ValueError(f"enqueue_task: 'p' must be a non-negative integer, got {p!r}")
         if not isinstance(m, int) or m < 0:
-            raise ValueError(
-                f"enqueue_task: 'm' must be a non-negative integer, got {m!r}"
-            )
+            raise ValueError(f"enqueue_task: 'm' must be a non-negative integer, got {m!r}")
         await self.queue.put((d, p, m))
 
     async def start_loop(self, max_steps: int = -1) -> None:
         """Runs the main BFT State Loop, consuming tasks from the asyncio.Queue."""
         if not isinstance(max_steps, int) or (max_steps != -1 and max_steps < 1):
-            raise ValueError(
-                f"start_loop: 'max_steps' must be -1 or a positive integer, got {max_steps!r}"
-            )
+            raise ValueError(f"start_loop: 'max_steps' must be -1 or a positive integer, got {max_steps!r}")
         self.is_running = True
         steps_executed = 0
 
@@ -286,9 +249,7 @@ class BFTOrchestrator:
                 print(f"⚠️ Node {node.node_id} encountered fault during mutation: {e}")
         return hashes
 
-    def _evaluate_consensus(
-        self, d: int, p: int, m: int, hashes: dict[int, str]
-    ) -> None:
+    def _evaluate_consensus(self, d: int, p: int, m: int, hashes: dict[int, str]) -> None:
         """Evaluates consensus among nodes and commits to ledger if majority is reached."""
         hash_votes: dict[str, int] = {}
         for h in hashes.values():
@@ -308,19 +269,13 @@ class BFTOrchestrator:
 
             for node in self.nodes:
                 if node.node_id in hashes and hashes[node.node_id] != majority_hash:
-                    print(
-                        f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority."
-                    )
-                    leader_node = next(
-                        n for n in self.nodes if hashes.get(n.node_id) == majority_hash
-                    )
+                    print(f"🔧 Byzantine fault detected in Node {node.node_id}. Syncing state to majority.")
+                    leader_node = next(n for n in self.nodes if hashes.get(n.node_id) == majority_hash)
                     node.sync_from(leader_node)
         else:
             raise EpistemicHalt("BFT consensus could not be reached! Splitting or fault limit exceeded.")
 
-    def _write_to_ledger(
-        self, d: int, p: int, m: int, prev_hash: str, current_hash: str
-    ) -> None:
+    def _write_to_ledger(self, d: int, p: int, m: int, prev_hash: str, current_hash: str) -> None:
         """Writes BFT transaction to SQLite with CORTEX-TAINT signature (R10, Ω11, Ω113)."""
         import hmac
         import sys
@@ -331,13 +286,16 @@ class BFTOrchestrator:
             from cortex_env import get_bft_key
         except ImportError:
             import os
-            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+            sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
             from cortex_env import get_bft_key
 
         bft_key = get_bft_key()
 
         # Ω113 + Ω25: Dynamic Causal Taint seeded by Sovereign Key
-        raw_payload = f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
+        raw_payload = (
+            f"{d}:{p}:{m}:{prev_hash}:{current_hash}:{self.step_index}:{int(time.time())}:{os.getpid()}".encode("utf-8")
+        )
         dynamic_hash = hmac.new(bft_key.encode("utf-8"), raw_payload, hashlib.sha3_256).hexdigest()
         taint = f"CORTEX-TAINT:borjamoskv:bft_orchestrator:{self.step_index}:{dynamic_hash}"
 

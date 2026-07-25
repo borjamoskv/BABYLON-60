@@ -29,6 +29,7 @@ from cortex.entropy_mapping_engine import ThermodynamicEntropyEngine
 
 try:
     import strike_rs  # type: ignore
+
     RUST_ENGINE_AVAILABLE = True
 except ImportError:
     RUST_ENGINE_AVAILABLE = False
@@ -37,6 +38,7 @@ except ImportError:
 # ═══════════════════════════════════════════════════════════════
 # 1. DOMAIN TYPES & PRIMITIVE STRUCTURE
 # ═══════════════════════════════════════════════════════════════
+
 
 class DomainType(Enum):
     STRUCTURE = auto()
@@ -61,8 +63,14 @@ DOMAIN_TYPE_MAP: Dict[str, DomainType] = {
 }
 
 DOMAIN_RANGES: Dict[str, Tuple[int, int]] = {
-    "D1": (1, 112), "D2": (113, 224), "D3": (225, 336), "D4": (337, 448),
-    "D5": (449, 560), "D6": (561, 672), "D7": (673, 784), "D8": (785, 896),
+    "D1": (1, 112),
+    "D2": (113, 224),
+    "D3": (225, 336),
+    "D4": (337, 448),
+    "D5": (449, 560),
+    "D6": (561, 672),
+    "D7": (673, 784),
+    "D8": (785, 896),
 }
 
 
@@ -92,8 +100,10 @@ class CategoricalPrimitive:
     @property
     def is_structural(self) -> bool:
         return self.domain_type in (
-            DomainType.STRUCTURE, DomainType.LIMITS_COLIMITS,
-            DomainType.FUNCTORIAL_ADJUNCTIONS, DomainType.MONOIDAL_ENRICHED,
+            DomainType.STRUCTURE,
+            DomainType.LIMITS_COLIMITS,
+            DomainType.FUNCTORIAL_ADJUNCTIONS,
+            DomainType.MONOIDAL_ENRICHED,
         )
 
     @property
@@ -108,6 +118,7 @@ class CategoricalPrimitive:
 # 2. LAWVERE METRIC & COST ALGEBRA
 # ═══════════════════════════════════════════════════════════════
 
+
 @dataclass
 class CostValuation:
     """
@@ -118,6 +129,7 @@ class CostValuation:
       Sequential: |q ⊛ p| <= |p| + |q| + delta_circ(alpha, beta)
       Monoidal:   |p ⊠ q| <= |p| + |q| + delta_otimes(alpha, beta)
     """
+
     value: float = 0.0
 
     @property
@@ -148,6 +160,7 @@ class CostValuation:
 @dataclass
 class MorphismCert:
     """A certificate c in Cert(alpha) with cost |c|."""
+
     morphism_id: int
     cost: CostValuation
     domain_id: str
@@ -157,17 +170,20 @@ class MorphismCert:
 # 3. SIMPLICIAL COMPATIBILITY COMPLEX Compat(Omega)
 # ═══════════════════════════════════════════════════════════════
 
+
 class CompatProperty(Enum):
     """Vertices of Compat(Omega) = {F, I, S, R_k}"""
-    F = "Fibered"           # alpha* admits left adjoint exists_alpha
+
+    F = "Fibered"  # alpha* admits left adjoint exists_alpha
     I = "MonoidalInvariant"  # alpha*(P otimes Q) ~= alpha*(P) otimes alpha*(Q)  # noqa: E741
-    S = "Synchronous"        # alpha*(Box_t P) = Box_t(alpha* P)
-    R_k = "BudgetBound"     # forall alpha in A(M), mu(alpha) <= k
+    S = "Synchronous"  # alpha*(Box_t P) = Box_t(alpha* P)
+    R_k = "BudgetBound"  # forall alpha in A(M), mu(alpha) <= k
 
 
 @dataclass
 class CompatFace:
     """A face (simplex) in Compat(Omega)."""
+
     properties: frozenset[CompatProperty]
 
     @property
@@ -183,6 +199,7 @@ class CompatComplex:
     Simplicial complex Compat(Omega) subset P(Omega) \ {empty}.
     Down-set invariant: sigma in Compat and tau subset sigma => tau in Compat.
     """
+
     def __init__(self) -> None:
         self.vertices: Set[CompatProperty] = {CompatProperty.F, CompatProperty.I, CompatProperty.S, CompatProperty.R_k}
         self.faces: List[CompatFace] = []
@@ -191,10 +208,9 @@ class CompatComplex:
     def _build_default_complex(self) -> None:
         """Build the default compatibility complex from FISR theory (closed under non-empty subsets)."""
         from itertools import combinations
+
         # Maximal faces of the FISR simplicial complex
-        maximal_faces = [
-            frozenset({CompatProperty.F, CompatProperty.I, CompatProperty.S, CompatProperty.R_k})
-        ]
+        maximal_faces = [frozenset({CompatProperty.F, CompatProperty.I, CompatProperty.S, CompatProperty.R_k})]
         face_sets: set[frozenset[CompatProperty]] = set()
         for max_face in maximal_faces:
             props = list(max_face)
@@ -211,6 +227,7 @@ class CompatComplex:
             props = list(face.properties)
             for i in range(1, len(props) + 1):
                 from itertools import combinations
+
                 for subset in combinations(props, i):
                     if frozenset(subset) not in face_set:
                         return False
@@ -228,6 +245,7 @@ class CompatComplex:
 # ═══════════════════════════════════════════════════════════════
 # 4. MAIN ENGINE
 # ═══════════════════════════════════════════════════════════════
+
 
 class Categorical896Engine:
     """
@@ -278,10 +296,14 @@ class Categorical896Engine:
             h_val = hashlib.sha256(raw_payload).hexdigest()
 
             prim = CategoricalPrimitive(
-                id=p_id, code=p_code, domain_id=p_dom,
-                primitive_type=p_type, category=p_cat,
-                description=p_desc, formal_proof_invariant=p_proof,
-                blake3_hash=h_val
+                id=p_id,
+                code=p_code,
+                domain_id=p_dom,
+                primitive_type=p_type,
+                category=p_cat,
+                description=p_desc,
+                formal_proof_invariant=p_proof,
+                blake3_hash=h_val,
             )
 
             self.primitives[p_id] = prim
@@ -319,7 +341,8 @@ class Categorical896Engine:
         taint = "CORTEX-TAINT:borjamoskv:896_engine_v2:2026-07-22T01:34:00Z"
 
         for p in self.primitives.values():
-            cursor.execute("""
+            cursor.execute(
+                """
                 INSERT INTO primitives_896
                 (id, code, domain_id, primitive_type, category, description,
                  formal_proof_invariant, blake3_hash, cortex_taint)
@@ -328,9 +351,19 @@ class Categorical896Engine:
                     code=excluded.code,
                     blake3_hash=excluded.blake3_hash,
                     cortex_taint=excluded.cortex_taint
-            """, (p.id, p.code, p.domain_id, p.primitive_type,
-                  p.category, p.description, p.formal_proof_invariant,
-                  p.blake3_hash, taint))
+            """,
+                (
+                    p.id,
+                    p.code,
+                    p.domain_id,
+                    p.primitive_type,
+                    p.category,
+                    p.description,
+                    p.formal_proof_invariant,
+                    p.blake3_hash,
+                    taint,
+                ),
+            )
 
         conn.commit()
         conn.close()
@@ -517,37 +550,43 @@ class Categorical896Engine:
             for a_id in sorted(d7_active):
                 c_prim = self.primitives[c_id]
                 a_prim = self.primitives[a_id]
-                collisions.append({
-                    "collision_type": "NON_COMMUTATIVE_STRUCTURAL_COLLISION",
-                    "collision_primitive": c_prim.code,
-                    "antipattern_primitive": a_prim.code,
-                    "overhead_delta": 1.414,
-                    "risk_level": "CRITICAL_C5_VIOLATION",
-                })
+                collisions.append(
+                    {
+                        "collision_type": "NON_COMMUTATIVE_STRUCTURAL_COLLISION",
+                        "collision_primitive": c_prim.code,
+                        "antipattern_primitive": a_prim.code,
+                        "overhead_delta": 1.414,
+                        "risk_level": "CRITICAL_C5_VIOLATION",
+                    }
+                )
 
         # D4 (monoidal) x D6 (collisions): Pentagon coherence breakage
         d4_active = {pid for pid in active_primitive_ids if 337 <= pid <= 448}
         for m_id in sorted(d4_active):
             for c_id in sorted(d6_active):
-                collisions.append({
-                    "collision_type": "MONOIDAL_PENTAGON_COHERENCE_BREAKAGE",
-                    "monoidal_primitive": self.primitives[m_id].code,
-                    "obstruction_primitive": self.primitives[c_id].code,
-                    "overhead_delta": 2.236,
-                    "risk_level": "WARNING_COHERENCE_VIOLATION",
-                })
+                collisions.append(
+                    {
+                        "collision_type": "MONOIDAL_PENTAGON_COHERENCE_BREAKAGE",
+                        "monoidal_primitive": self.primitives[m_id].code,
+                        "obstruction_primitive": self.primitives[c_id].code,
+                        "overhead_delta": 2.236,
+                        "risk_level": "WARNING_COHERENCE_VIOLATION",
+                    }
+                )
 
         # D5 (topos logic) x D7 (antipatterns): Subobject classifier degradation
         d5_active = {pid for pid in active_primitive_ids if 449 <= pid <= 560}
         for l_id in sorted(d5_active):
             for a_id in sorted(d7_active):
-                collisions.append({
-                    "collision_type": "SUBOBJECT_CLASSIFIER_DEGRADATION",
-                    "logic_primitive": self.primitives[l_id].code,
-                    "antipattern_primitive": self.primitives[a_id].code,
-                    "overhead_delta": 1.732,
-                    "risk_level": "WARNING_LOGIC_INTEGRITY",
-                })
+                collisions.append(
+                    {
+                        "collision_type": "SUBOBJECT_CLASSIFIER_DEGRADATION",
+                        "logic_primitive": self.primitives[l_id].code,
+                        "antipattern_primitive": self.primitives[a_id].code,
+                        "overhead_delta": 1.732,
+                        "risk_level": "WARNING_LOGIC_INTEGRITY",
+                    }
+                )
 
         return collisions
 
@@ -613,6 +652,7 @@ class Categorical896Engine:
 
 if __name__ == "__main__":
     import json
+
     yaml_file = os.path.join(os.path.dirname(__file__), "..", "primitives", "896_categorical_logic_primitives.yml")
     engine = Categorical896Engine(yaml_path=os.path.abspath(yaml_file))
 
