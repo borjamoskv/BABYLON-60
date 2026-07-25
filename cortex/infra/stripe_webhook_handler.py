@@ -81,6 +81,20 @@ class StripeWebhookProcessor:
         finally:
             conn.close()
 
+        # Trigger instant notification to Borjamoskv@gmail.com & workspace log
+        try:
+            from babylon60.core.email_notifier import PurchaseNotifier
+            notifier = PurchaseNotifier()
+            notifier.notify_purchase(
+                customer_email=customer_email,
+                tier=tier,
+                amount_eur=amount_eur,
+                license_key=license_key,
+                session_id=session_id
+            )
+        except (ImportError, KeyError, ValueError, OSError):
+            pass
+
         return {
             "status": "LIQUIDATED",
             "session_id": session_id,
