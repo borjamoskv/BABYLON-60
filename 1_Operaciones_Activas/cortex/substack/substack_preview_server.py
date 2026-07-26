@@ -13,6 +13,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 ARCHIVE_DIR = BASE_DIR / "artifacts" / "substack_archive"
+if not ARCHIVE_DIR.exists():
+    ARCHIVE_DIR = BASE_DIR.parent / "artifacts" / "substack_archive"
 
 HTML_TEMPLATE = """<!DOCTYPE html>
 <html lang="es">
