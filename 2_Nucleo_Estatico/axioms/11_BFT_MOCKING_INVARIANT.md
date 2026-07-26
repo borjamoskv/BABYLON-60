@@ -4,18 +4,19 @@
 **Invariante Asignada:** Ω170
 
 ## 1. Postulado Termodinámico
-La manipulación en tiempo de ejecución (Monkey-Patching) de métodos encapsulados en clases optimizadas (`__slots__`) introduce fricción estocástica y colapso del intérprete (AttributeError: read-only). En arquitecturas de alta densidad (C5-REAL), la simulación de componentes estáticos exige el reemplazo topológico íntegro de la instancia (Sustitución Estructural), garantizando el determinismo del árbol de referencias y anulando la entropía de mutación parcial.
+La manipulación en tiempo de ejecución (Monkey-Patching) de métodos encapsulados en clases optimizadas con `__slots__` sobre la *instancia* provoca colapso inmediato (`AttributeError: read-only`). Aunque el parcheo global sobre la *clase* es sintácticamente posible, destruye el aislamiento epistémico (afectando a todos los nodos de la topología) e introduce entropía de estado cruzado. En arquitecturas C5-REAL, la simulación exige el reemplazo topológico íntegro de la instancia (Sustitución Estructural), garantizando el determinismo del árbol de referencias por nodo.
 
 ## 2. Formulación Algebraica
-Sea un orquestador $O$ dependiente de un coordinador BFT $C$ tal que $C \in \mathcal{S}$ (donde $\mathcal{S}$ es el conjunto de clases rígidamente acotadas por `__slots__`).
-El acoplamiento se define como $O(C)$.
+Sea un orquestador $O$ dependiente de un coordinador BFT $C$ de clase $\mathcal{S}$ (acotada por `__slots__`). El acoplamiento es $O(c)$ donde $c \in \mathcal{S}$.
 
-La operación de simulación mediante parcheo parcial $P$ sobre $C$ produce un estado indefinido (Anergía):
-$$P(C.m) \to \bot \quad (\text{AttributeError})$$
+La operación de simulación mediante parcheo local $P_{\text{local}}$ sobre la instancia $c$:
+$$P_{\text{local}}(c.m) \to \bot \quad (\text{AttributeError})$$
 
-La Sustitución Topológica Completa inyecta un isomorfismo funcional $C'$ tal que $C' \notin \mathcal{S}$ pero preserva las firmas (API) de $C$.
-$$O(C') \iff \text{Ejecución Determinista}$$
-$$\Delta S = 0 \quad (\text{Sin disipación estocástica})$$
+El parcheo global $P_{\text{global}}$ sobre la clase $\mathcal{S}$:
+$$P_{\text{global}}(\mathcal{S}.m) \implies \forall x \in \mathcal{S}, x.m \text{ es mutado} \quad (\text{Contaminación Epistémica} > 0)$$
+
+La Sustitución Topológica Completa inyecta un isomorfismo $c'$ donde $c' \notin \mathcal{S}$:
+$$O(c') \iff \text{Aislamiento } \Delta S = 0$$
 
 ## 3. Directiva de Transducción
-Queda terminantemente prohibido usar `unittest.mock.patch.object` o asignaciones directas sobre métodos de instancias protegidas. Toda prueba de colapso de consenso (L4/L5) DEBE sobrescribir el puntero en el orquestador padre inyectando una clase Mock soberana completa.
+Queda terminantemente prohibido usar `unittest.mock.patch` sobre clases con `__slots__` (por contaminación global) o instancias (por colapso `AttributeError`). Toda simulación (L4/L5) DEBE sobrescribir el puntero en el orquestador padre inyectando una clase Mock soberana completa.
