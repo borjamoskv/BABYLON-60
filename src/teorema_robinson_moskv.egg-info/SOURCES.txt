@@ -1,8 +1,0 @@
-# C5-REAL EXERGY CERTIFIED
-README.md
-pyproject.toml
-src/teorema_robinson_moskv.egg-info/PKG-INFO
-src/teorema_robinson_moskv.egg-info/SOURCES.txt
-src/teorema_robinson_moskv.egg-info/dependency_links.txt
-src/teorema_robinson_moskv.egg-info/requires.txt
-src/teorema_robinson_moskv.egg-info/top_level.txt
