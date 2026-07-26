@@ -4,7 +4,7 @@ import sys
 from hypothesis import given, settings, strategies as st
 
 sys.path.insert(0, os.path.abspath("."))
-from cortex.categorical_896_engine import Categorical896Engine
+from cortex.engines.categorical_896_engine import Categorical896Engine
 
 _engine_instance = None
 

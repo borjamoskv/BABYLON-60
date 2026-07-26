@@ -49,7 +49,7 @@ class CollisionPrimitive:
 
     def enforce_teleonomy(self, positions: List[Tuple[int, int]]) -> List[Tuple[int, int]]:
         """Full teleonomic pipeline: detect, ledger, resolve, return positions."""
-        from cortex.quad_pillar_kernel import QuadPillarKernel
+        from cortex.core.quad_pillar_kernel import QuadPillarKernel
 
         collisions = self.detect_collision(positions)
         if collisions:

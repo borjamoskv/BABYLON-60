@@ -11,7 +11,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from cortex.entropy_mapping_engine import ThermodynamicEntropyEngine
+from cortex.engines.entropy_mapping_engine import ThermodynamicEntropyEngine
 
 def compute_workspace_ast_domain_counts() -> dict[str, int]:
     domain_counts: dict[str, int] = {}

@@ -8,7 +8,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from cortex.mcts_vnode_compiler import (
+from cortex.engines.mcts_vnode_compiler import (
     EphemeralVNodePhysical,
     L3InferenceEnginePhysical,
     MCTSTreeSearchError,

@@ -8,7 +8,7 @@ PROJECT_ROOT = "/Users/borjafernandezangulo/borjamoskv/Teorema-Robinson-Moskv"
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from cortex.cortex_purge import is_purgeable_zero_operator, _obliterate_node_file
+from cortex.core.cortex_purge import is_purgeable_zero_operator, _obliterate_node_file
 
 def run_empirical_assertions():
     print("==================================================")

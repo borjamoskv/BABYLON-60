@@ -67,7 +67,7 @@ def ultrathink_sweep() -> None:
     # 4. Verificación Física del Motor MCTS y Exergía (ULTRATHINK P0)
     print("\n--- Fase 4: Auditoría MCTS Physical Compiler & Exergía ---")
     try:
-        from cortex.mcts_vnode_compiler import L3InferenceEnginePhysical
+        from cortex.engines.mcts_vnode_compiler import L3InferenceEnginePhysical
 
         engine = L3InferenceEnginePhysical(target_trajectories=20)
         theorem = engine.compile_theorem("ULTRATHINK_SWEEP_AUDIT")

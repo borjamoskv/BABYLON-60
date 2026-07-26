@@ -11,7 +11,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import yaml
-from cortex.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary
+from cortex.substack.substack_subscriber_audit import SubstackSubscriberAuditor, AuditSummary
 
 def main() -> None:
     if len(sys.argv) > 1:

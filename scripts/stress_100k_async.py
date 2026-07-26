@@ -15,7 +15,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from cortex.babylon60.neuromorphic_primitives import SelfHealingMesh  # noqa: E402
-from cortex.active_inference_engine import UnifiedActiveInferenceEngine  # noqa: E402
+from cortex.engines.active_inference_engine import UnifiedActiveInferenceEngine  # noqa: E402
 import strike_rs  # type: ignore[import-untyped]  # noqa: E402
 
 MICRO_BATCH = 500  # Concurrency cap per asyncio.gather to avoid WAL/FD saturation

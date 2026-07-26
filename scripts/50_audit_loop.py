@@ -13,7 +13,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_ROOT)
 os.chdir(PROJECT_ROOT)
 
-from cortex.llm_router import C5LLMRouter, EpistemicHalt  # noqa: E402
+from cortex.bridges.llm_router import C5LLMRouter, EpistemicHalt  # noqa: E402
 
 class AuditState(TypedDict):
     payload: str

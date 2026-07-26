@@ -24,14 +24,14 @@ if PROJECT_ROOT not in sys.path:
 
 os.environ["CORTEX_BFT_KEY"] = "c5_real_test_key_sovereign_2026"
 
-from cortex.cortex_purge import (
+from cortex.core.cortex_purge import (
     write_purge_to_ledger,
 )
-from cortex.mcts_vnode_compiler import (
+from cortex.engines.mcts_vnode_compiler import (
     ASTTheorem,
     L3InferenceEnginePhysical,
 )
-from cortex.bft_orchestrator import (
+from cortex.engines.bft_orchestrator import (
     BFTOrchestrator,
 )
 
@@ -84,7 +84,7 @@ class TestEmpiricalChallengerM1(unittest.TestCase):
         conn.commit()
         conn.close()
 
-        import cortex.cortex_purge as cp
+        import cortex.core.cortex_purge as cp
         original_db_path = cp.DB_PATH
         cp.DB_PATH = db_path
         try:
@@ -99,7 +99,7 @@ class TestEmpiricalChallengerM1(unittest.TestCase):
         EMPIRICAL TEST 2: Hardcoded relative path DB_PATH = ".cortex/cortex.db" in bft_orchestrator and ultrathink_learning.
         When executed from a non-root directory, they create a separate DB file in cwd instead of project root.
         """
-        from cortex import bft_orchestrator
+        from cortex.engines import bft_orchestrator
         self.assertEqual(bft_orchestrator.DB_PATH, ".cortex/cortex.db")
 
         bft_orchestrator.init_bft_database()

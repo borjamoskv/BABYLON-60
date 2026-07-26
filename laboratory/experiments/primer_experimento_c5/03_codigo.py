@@ -12,7 +12,7 @@ from pathlib import Path
 # Add project root to sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent.parent))
 
-from cortex.substack_subscriber_audit import SubstackSubscriberAuditor
+from cortex.substack.substack_subscriber_audit import SubstackSubscriberAuditor
 
 def execute() -> None:
     """Run the subscriber audit against the default export CSV."""
