@@ -22,7 +22,7 @@ class ViewChangeException(Exception):
     pass
 
 class HalGuard:
-    __slots__ = ("node_id", "sk", "db_path", "repo_path", "checkers", "scores", "lock", "coordinator")
+    __slots__ = ("node_id", "sk", "db_path", "repo_path", "checkers", "scores", "lock", "coordinator", "git_queue", "git_worker_task")
 
     def __init__(self, node_id: str, sk: nacl.signing.SigningKey, db_path: Path, openrouter_key: str):
         self.node_id: str = node_id
@@ -33,6 +33,9 @@ class HalGuard:
 
         self.checkers: Dict[str, Callable[[], Awaitable[bool]]] = {}
         self.scores: Dict[str, float] = {}
+
+        self.git_queue = asyncio.Queue()
+        self.git_worker_task = asyncio.create_task(self._git_worker())
 
         # Inicialización del oráculo asimétrico trinitario de bajo nivel (L4)
         self.coordinator = HeterogeneousBFTCoordinator(openrouter_key)
@@ -90,7 +93,7 @@ class HalGuard:
                     )
 
                 # Despliegue de barrera de no-repudio local inercial en Git Sentinel L3
-                asyncio.create_task(self._git_freeze(task_id, offender_id, sig_hex))
+                await self.git_queue.put((task_id, offender_id, sig_hex))
 
                 # Inyección reactiva y disparo del anclaje inerte universal en Capa L5 (OpenTimestamps)
                 try:
@@ -110,9 +113,32 @@ class HalGuard:
 
             return True
 
-    async def _git_freeze(self, task_id: str, offender_id: str, sig_hex: str):
-        msg = f"HAL_SHIELD [Ω9] | Task: {task_id} | Culprit: {offender_id} | Proof: {sig_hex[:16]}"
-        p1 = await asyncio.create_subprocess_exec("git", "-C", str(self.repo_path), "add", ".", stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-        await p1.wait()
-        p2 = await asyncio.create_subprocess_exec("git", "-C", str(self.repo_path), "commit", "--allow-empty", "-m", msg, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-        await p2.wait()
+    async def _git_worker(self):
+        """Actor asíncrono perpetuo que consolida múltiples eventos de fraude en un solo commit físico (Batch Aggregation)."""
+        while True:
+            # Espera activa termodinámica O(1) hasta recibir el primer fraude
+            task_id, offender_id, sig_hex = await self.git_queue.get()
+            batch = [(task_id, offender_id, sig_hex)]
+
+            # Drenaje de la cola: absorber cualquier otro fraude que haya llegado durante el ciclo
+            while not self.git_queue.empty():
+                batch.append(self.git_queue.get_nowait())
+
+            # Componer el mensaje consolidado
+            msgs = ["HAL_SHIELD [Ω9] | BATCH COLLAPSE"]
+            for t_id, o_id, s_hex in batch:
+                msgs.append(f" - Task: {t_id} | Culprit: {o_id} | Proof: {s_hex[:16]}")
+
+            commit_msg = "\n".join(msgs)
+
+            # Ejecutar el commit físico una sola vez para todo el lote
+            try:
+                p1 = await asyncio.create_subprocess_exec("git", "-C", str(self.repo_path), "add", ".", stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+                await p1.wait()
+                p2 = await asyncio.create_subprocess_exec("git", "-C", str(self.repo_path), "commit", "--allow-empty", "-m", commit_msg, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+                await p2.wait()
+            except Exception as e:
+                sys.stderr.write(f"[⚠️ GIT L3 ERROR] Fallo en la escritura inercial: {e}\n")
+            finally:
+                for _ in range(len(batch)):
+                    self.git_queue.task_done()
