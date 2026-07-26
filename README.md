@@ -14,7 +14,7 @@
   <a href="https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_ledger.yml"><img src="https://github.com/borjamoskv/BABYLON-60/actions/workflows/verify_ledger.yml/badge.svg?branch=main" alt="Verify Master Ledger Trailer" /></a>
   <img src="https://img.shields.io/badge/SQLite-WAL-4CAF50?style=flat-square&logo=sqlite" alt="SQLite WAL" />
   <img src="https://img.shields.io/badge/Rust-optional-CE422B?style=flat-square&logo=rust" alt="Rust optional" />
-  <img src="https://img.shields.io/badge/license-Proprietary-FF6B35?style=flat-square" alt="License" />
+  <img src="https://img.shields.io/badge/license-Sovereign%20Dual--License%20(Free%20for%20Community%20%2F%20Enterprise)-2B3BE5?style=flat-square" alt="License" />
 </p>
 
 <p align="center">
