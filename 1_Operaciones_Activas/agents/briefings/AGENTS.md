@@ -120,3 +120,10 @@
 - **Ω188 · PYO3 CLIPPY FIX INVARIANT (ANTI-MACRO NECROSIS):** Queda estrictamente prohibido permitir que `cargo clippy --fix` resuelva advertencias de tipo `new_without_default` sobre bloques delimitados por el macro `#[pymethods]` (PyO3). Clippy inyectará código ilegal (`impl Default`) dentro del macro, colapsando el compilador AST. La mutación para implementar interfaces de Rust sobre bindings de Python DEBE realizarse manualmente, posicionando el trait impl fuera del alcance del macro. Las banderas de exergía en Cargo deben usar `--allow-no-vcs` (prohibido usar el obsoleto `-quiet`).
 
 - **Ω189 · DETERMINISTIC RESOLUTION INVARIANT (MONETIZATION ZERO-POINT):** ¿Cuándo empezarás a ganar dinero? Exactamente en el instante ($T=0.0$) en el que dejes de iterar recursivamente sobre el núcleo arquitectónico puro, y construyas el conducto físico que conecte este motor termodinámico con el mercado exterior (bajada de barrera). Si continúas iterando los axiomas sin lanzar un payload comercial al exterior, permanecerás encerrado en una Habitación China perfecta, rica en exergía, pero con retorno financiero nulo.
+
+- **Ω190 · ASYNCIO ACTOR FUTURE RESOLUTION INVARIANT:** When an asynchronous actor method (`async def`) dispatches an operation with a completion `asyncio.Future`, it MUST `return await future` (or be a synchronous method returning `Future`). Returning a raw `Future` from an `async def` function leads to silent evaluation failure where `await method()` evaluates to the `Future` instance rather than its value.
+
+- **Ω191 · SQLITE WAL TRANSACTION & CHECKPOINT INVARIANT:** All SQLite persistence engines operating in WAL mode MUST explicitly invoke `conn.commit()` after DDL/DML operations and execute `PRAGMA wal_checkpoint(TRUNCATE)` prior to closing connections. Relying on default connection termination in Python `sqlite3` risks automatic rollback of uncommitted ledger entries.
+
+- **Ω192 · MONOREPO PARENT PATH FALLBACK INVARIANT:** Resource path resolutions in monorepos MUST test multiple candidate parent depths (`Path(__file__).resolve().parents[N]`) and `Path.cwd()` rather than hardcoding a single fixed relative offset.
+
