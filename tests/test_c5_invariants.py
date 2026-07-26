@@ -181,3 +181,10 @@ def test_inv_c5_16_stub():
     """INV_C5_16 — Auto-generated stub for rule validation."""
     # TODO: Implement concrete scan logic for rule INV_C5_16
     pass
+
+
+def test_inv_c5_17_sovereign_zero_cost():
+    """INV_C5_17 — Todo SIEMPRE 100% gratis, libre y auto-hospedado."""
+    hits = _scan({".py", ".ts", ".tsx", ".toml", ".yaml"}, r'(stripe_api_key|paywall|subscription_fee|api_billing_tier)')
+    assert not hits, _fail_msg("INV_C5_17 (Sovereign Zero-Cost)", hits)
+
