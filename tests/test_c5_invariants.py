@@ -188,3 +188,11 @@ def test_inv_c5_17_sovereign_zero_cost():
     hits = _scan({".py", ".ts", ".tsx", ".toml", ".yaml"}, r'(stripe_api_key|paywall|subscription_fee|api_billing_tier)')
     assert not hits, _fail_msg("INV_C5_17 (Sovereign Zero-Cost)", hits)
 
+
+def test_inv_c5_18_zero_worktree_swarm():
+    """INV_C5_18 — Swarms masivos en memoria sin crear worktrees fisicos masivos."""
+    hits = _scan({".py", ".sh"}, r'git\s+worktree\s+add.*agent_')
+    hits = [h for h in hits if "test_" not in h]
+    assert not hits, _fail_msg("INV_C5_18 (Zero-Worktree Swarm Scaling)", hits)
+
+

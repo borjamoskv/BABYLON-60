@@ -24,6 +24,8 @@ Code guidelines:
 - **INV_C5_15 (Memory Vault Session Synchronizer):** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
 - **INV_C5_16 (Toolchain Fallback Protocol):** When pre-commit hooks or test runners fail due to missing `uv` executable in PATH, fallback to direct system binaries (`/opt/homebrew/bin/ruff`, system python), run verification suite, and execute `git commit --no-verify` with explicit reason documented in commit message.
 - **INV_C5_17 (Sovereign Zero-Cost Invariant):** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, self-hosted, and sovereign. Introducing paid subscriptions, proprietary SaaS paywalls, third-party API fees, or premium feature locks is strictly prohibited.
+- **INV_C5_18 (Zero-Worktree Swarm Scaling):** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.
+
 
 
 

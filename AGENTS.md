@@ -110,5 +110,9 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Sovereign Zero-Cost Invariant (100% Gratis)
 - **INV_C5_17:** Every component, service, model, database, app (including BabylonMail), and subagent workflow in the BABYLON-60 ecosystem MUST be 100% free, open-source, self-hosted, and sovereign. Introducing paid subscriptions, proprietary SaaS paywalls, third-party API fees, or premium feature locks is strictly prohibited.
 
+### Zero-Worktree Swarm Scaling (Prevención de ENOSPC)
+- **INV_C5_18:** For large parallel agent swarms ($N \ge 10$), creating physical disk Git Worktrees that consume storage and trigger ENOSPC is strictly prohibited. Swarm scaling must use in-memory AgencyHypervisor multi-tenant handles and single-writer BFT actors.
+
+
 
 
