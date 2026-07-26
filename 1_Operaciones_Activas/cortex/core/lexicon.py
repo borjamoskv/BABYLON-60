@@ -98,9 +98,28 @@ class GitSentinel:
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL
                 )
                 await p2.wait()
+                if self.push_enabled:
+                    push_proc = await asyncio.create_subprocess_exec(
+                        "git", "-C", str(self.repo_path), "push", "origin", "master",
+                        stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL
+                    )
+                    await push_proc.wait()
                 return p2.returncode == 0
             except Exception:
                 return False
+
+    async def freeze_purged_leader_state(self, purged_node_id: str, last_stable_seq: int, terminal_hash: str):
+        """
+        [L3 SENTINEL] Amputa el árbol de ejecución del nodo degradado.
+        Sella el fin de la vista en el repositorio local de Git con carácter definitivo.
+        """
+        async with self.lock:
+            commit_msg = f"CRITICAL_PURGE [Ω_VCH] | Node: {purged_node_id} | Final_Seq: {last_stable_seq} | Root: {terminal_hash}"
+            process = await asyncio.create_subprocess_exec(
+                "git", "-C", str(self.repo_path), "commit", "--allow-empty", "-m", commit_msg,
+                stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL
+            )
+            await process.wait()
 
 # --- MOTOR AST PARA INVARIANTES ---
 class ASTNode:
