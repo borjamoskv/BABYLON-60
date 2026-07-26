@@ -21,6 +21,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, TypedDict, Union
 
+from .bft_swarm import BFTNode
+
 # --- CONSTANTES ONTOLÓGICAS DE ALTA VELOCIDAD ---
 RE_GLOSARIO = re.compile(
     r"\*\*(?P<term>[^\*\(\n]+)(?:\s*\((?P<symbol>[^\)]+)\))?\*\*\nTipo:\s*(?P<category>[^\n]+)\n(?P<desc>.*?)(?=\n\*\*|\n---|\Z)",
@@ -222,13 +224,18 @@ class SQLiteAppendOnlyStorage:
 
 # --- ACTOR CONCURRENTE SINGLE-WRITER BALANCED ---
 class LexiconLedgerActor:
-    def __init__(self, db_path: Path):
+    def __init__(self, db_path: Path, bft_node: Optional[BFTNode] = None):
         self.storage = SQLiteAppendOnlyStorage(db_path)
         self.vault = CortexVault()
         self.sentinel = GitSentinel(db_path.parent)
         self.queue: asyncio.Queue = asyncio.Queue()
         self._loop_task: Optional[asyncio.Task] = None
         self.is_running = False
+
+        # Inyección del nodo de red BFT L4
+        self.bft_node = bft_node
+        if self.bft_node:
+            self.bft_node.ledger_actor = self
 
         self.current_seq = 0
         self.lamport_clock = 0
@@ -280,29 +287,46 @@ class LexiconLedgerActor:
                     cursor.execute("SELECT * FROM master_ledger WHERE event_id = ?", (event_id,))
                     future.set_result(dict(cursor.fetchone()))
                 else:
-                    self.current_seq += 1
-                    self.lamport_clock += 1
+                    # Cálculo anticipado del sobre para validación criptográfica en la red
+                    temp_seq = self.current_seq + 1
+                    temp_lamport = self.lamport_clock + 1
                     created_at = datetime.now(timezone.utc).isoformat()
 
                     shielded_payload = self.vault.shield_payload(canonical_payload)
-                    envelope_data = f"{self.current_seq}|{event_id}|{shielded_payload}|{taint}|{self.lamport_clock}|{self.last_hash}|{created_at}"
+                    envelope_data = f"{temp_seq}|{event_id}|{shielded_payload}|{taint}|{temp_lamport}|{self.last_hash}|{created_at}"
                     entry_hash = hashlib.sha3_256(envelope_data.encode('utf-8')).hexdigest()
 
                     envelope: C5EnrichedEnvelope = {
-                        "seq": self.current_seq,
+                        "seq": temp_seq,
                         "event_id": event_id,
                         "stream": "cortex.ontology",
                         "payload_json": shielded_payload,
                         "cortex_taint": taint,
-                        "lamport_t": self.lamport_clock,
+                        "lamport_t": temp_lamport,
                         "prev_hash": self.last_hash,
                         "entry_hash": entry_hash,
                         "created_at": created_at
                     }
 
-                    self.storage.write_envelope(envelope)
+                    # --- INTERCEPCIÓN EXERGÉTICA CRÍTICA NIVEL L4 ---
+                    if self.bft_node:
+                        if self.bft_node.is_primary:
+                            network_future = asyncio.get_running_loop().create_future()
+                            await self.bft_node.propose_block(temp_seq, entry_hash, taint, network_future)
+                            await network_future
+                        else:
+                            # Los seguidores registran cuando su propia red alcance el COMMIT
+                            pass
+
+                    # Actualización de contadores locales
+                    self.current_seq = temp_seq
+                    self.lamport_clock = temp_lamport
                     self.last_hash = entry_hash
 
+                    # Consolidación física L2
+                    self.storage.write_envelope(envelope)
+
+                    # Testigo L3 asíncrono
                     asyncio.create_task(self.sentinel.commit_entry(self.current_seq, entry_hash, taint))
                     future.set_result(envelope)
             except Exception as e:
