@@ -74,7 +74,7 @@ class CortexVault:
 # --- TESTIGO EXTERNO: GIT SENTINEL ---
 class GitSentinel:
     """Automatiza el no-repudio atómico mediante commits firmados localmente (Nivel L3)."""
-    __slots__ = ("repo_path", "lock")
+    __slots__ = ("repo_path", "lock", "push_enabled")
 
     def __init__(self, repo_path: Path, push_enabled: bool = False):
         self.repo_path = repo_path
@@ -430,6 +430,16 @@ class LexiconEngine:
         scored_results.sort(key=lambda x: x[1], reverse=True)
         return scored_results[:limit]
 
+    def get_invariant(self, inv_id: str) -> Optional[str]:
+        if not self.invariants:
+            self._load_invariants()
+        val = self.invariants.get(inv_id.upper())
+        return val[0] if val else None
+
+    def search(self, query: str, limit: int = 5) -> List[LexiconEntry]:
+        scored = self.search_bm25(query, limit=limit)
+        return [entry for entry, score in scored]
+
     def verify_ledger_integrity(self) -> bool:
         records = self.actor.storage.load_all()
         expected_prev = "0" * 64
@@ -443,3 +453,8 @@ class LexiconEngine:
 
     async def close(self):
         await self.actor.stop()
+
+def lookup_invariant(inv_id: str) -> Optional[str]:
+    engine = LexiconEngine()
+    return engine.get_invariant(inv_id)
+
