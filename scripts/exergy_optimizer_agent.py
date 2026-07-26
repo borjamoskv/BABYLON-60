@@ -18,6 +18,24 @@ import sqlite3  # noqa: E402
 import hashlib  # noqa: E402
 import time  # noqa: E402
 import subprocess  # noqa: E402
+import ast  # noqa: E402
+
+class ComplexityVisitor(ast.NodeVisitor):
+    def __init__(self) -> None:
+        self.current_depth = 0
+        self.max_depth = 0
+
+    def visit(self, node: ast.AST) -> None:
+        is_control = isinstance(node, (ast.If, ast.For, ast.While, ast.Try, ast.With, ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+        if is_control:
+            self.current_depth += 1
+            if self.current_depth > self.max_depth:
+                self.max_depth = self.current_depth
+        
+        super().generic_visit(node)
+        
+        if is_control:
+            self.current_depth -= 1
 
 # Invariants
 DB_PATH = Path.home() / ".babylon60/exergy_agent_ledger.db"
@@ -172,6 +190,24 @@ def evaluate_gelabp(diff_text: str) -> ExergyVerdict:
                 if "readlink" in line or "is_symlink" in line:
                     l_points += 2
                     reasons_l.append("Nexus package symlink validation (INV_C5_12).")
+            
+            # AST Complexity Limit Check (Límites Algébricos y Complejidad)
+            m = re.search(r'b/([^\s]+)', header)
+            if m:
+                filepath = m.group(1)
+                if filepath.endswith('.py'):
+                    try:
+                        with open(filepath, 'r') as f:
+                            tree = ast.parse(f.read())
+                        visitor = ComplexityVisitor()
+                        visitor.visit(tree)
+                        if visitor.max_depth > 4:
+                            e_points += 500.0
+                            msg = f"CRITICAL: Algebraic Limit Exceeded (Nesting Depth = {visitor.max_depth} > 4) in {filepath}."
+                            reasons_failed.append(msg)
+                            reasons_e.append(msg)
+                    except Exception:
+                        pass  # Ignore parse errors for partial diffs or deleted files
         else:
             # If tests/checks are added, register autoloop credit
             if any("test" in ln or "invariant" in ln for ln in added_lines):
