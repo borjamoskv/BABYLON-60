@@ -108,8 +108,8 @@ class SwarmBattleJudge:
         # Enforcer Semántico
         self.lex_enforcer = LexicalConsistencyEnforcer(db_path.parent / "2_Nucleo_Estatico/docs/theory/glosario.md")
 
-        # Evaluador de Disipación de Atención Cuadrática (Ω149)
-        self.exergy_evaluator = PromptExergyEvaluator(max_allowed_tokens=300)
+        # Evaluador de Disipación de Atención Cuadrática (Ω149/Ω174)
+        self.exergy_evaluator = PromptExergyEvaluator(max_allowed_tokens=164)
 
     async def execute_battle(self, operator_task: str) -> str:
         """Dispara la malla distribuida de trabajadores en paralelo y dicta sentencia por consenso exergético."""
