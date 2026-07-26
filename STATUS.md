@@ -76,3 +76,4 @@
 | 2026-07-18 | **BABYLON60 IDE v1.2.3 — E2E Local Inference Dashboard**: (1) Integración y montaje del enrutador de inferencia local en FastAPI backend, soportando Ollama/MLX y Mamba SSM. (2) Registro de ruta de vista 'inference' y atajo físico de teclado '⌘8'. (3) Dashboard de generación local con telemetría de rendimiento (tps, latencia, integridad SHA256) y trazador visual de nodos GraphLedger de Mamba. (4) Compilación exitosa de Vite del frontend. | Confirmación de tests pytest (217/217) y exergy score 1000/1000 |
 | 2026-07-26 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `bb57df8fd380`) | Git Sentinel `2361310c3f` |
 | 2026-07-26 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `c2ba17fb9ec9`) | Git Sentinel `305436b536` |
+| 2026-07-26 | C5-REAL MEJORALO: Transductor de Estado (SHA3: `d8f4d7dac72a`) | Git Sentinel `e9e93613db` |
