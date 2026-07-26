@@ -55,7 +55,20 @@ ruff check
 
 ## STRUCTURE
 
-| Stratum     | Path             | Function                              | :---------- | :--------------- | :------------------------------------ | Python Core | `/cortex`        | BFT Orchestration & Cognitive Engines | Rust Core   | `/strike-rs`     | Systems-level Transduction            | Frontend    | `/babylon-60`    | TypeScript/Vite IDE Interface         | Desktop     | `/src-tauri`     | Rust/Tauri Integration                | Daemon      | `/cmd`           | Go Portal Daemon                      | Compute     | `/fsharp_kernel` | F# Algebraic Computations             | Infra       | `/infra`         | Terraform State                       | QA          | `/tests`         | Validation Suite                      |
+| Stratum     | Path             | Function                              |
+| :---------- | :--------------- | :------------------------------------ |
+| Python Core | `/cortex`        | BFT Orchestration & Cognitive Engines |
+| Rust Core   | `/strike-rs`     | Systems-level Transduction            |
+| UI / Logic  | `/src`           | TypeScript/Vite Frontend Core         |
+| Desktop     | `/src-tauri`     | Rust/Tauri OS Integration             |
+| Go Daemon   | `/cmd`           | Go Portal Daemon                      |
+| Computación | `/fsharp_kernel` | F# Algebraic Computations             |
+| Infra       | `/infra`         | Terraform State                       |
+| Teoría      | `/docs/theory`   | Invariantes y Cartografía Exergética  |
+| Axiomas     | `/axioms`        | Núcleo Categórico y Semántico         |
+| Utilidades  | `/scripts`       | Transductores y scripts de poda       |
+| Ledgers     | `/ledgers`       | SQLite DBs y colas BFT                |
+| QA          | `/tests`         | Validation Suite                      |
 
 ## LEGAL
 
