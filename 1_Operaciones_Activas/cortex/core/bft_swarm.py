@@ -1,157 +1,176 @@
 # C5-REAL EXERGY CERTIFIED
-"""Nivel L4: BFT Swarm Quorum (cortex/core/bft_swarm.py)
-
-Proporciona la topología de malla asíncrona para la validación PBFT.
-Garantiza que el consenso L4 alcance el umbral de 2f+1 antes de la persistencia L2/L3.
-"""
-
-import os
-import json
 import asyncio
+import json
 import hashlib
-from typing import Dict, List, Optional, Callable, Any
-from cryptography.fernet import Fernet
+from typing import Dict, List, Optional, Set
+import nacl.signing
+import nacl.encoding
 
 class BFTMessage:
-    __slots__ = ("phase", "seq", "envelope", "node_id", "signature")
+    """Estructura de datos para la serialización de transacciones PBFT L4."""
+    __slots__ = ("phase", "seq", "entry_hash", "taint", "sender_id", "signature")
 
-    def __init__(self, phase: str, seq: int, envelope: dict, node_id: str, signature: str = ""):
-        self.phase = phase
-        self.seq = seq
-        self.envelope = envelope
-        self.node_id = node_id
-        self.signature = signature
+    def __init__(self, phase: str, seq: int, entry_hash: str, taint: str, sender_id: str, signature: str):
+        self.phase: str = phase          # "PRE-PREPARE", "PREPARE", "COMMIT"
+        self.seq: int = seq
+        self.entry_hash: str = entry_hash
+        self.taint: str = taint
+        self.sender_id: str = sender_id
+        self.signature: str = signature  # Ed25519 Signature en Base64
 
-    def to_dict(self) -> dict:
-        return {
-            "phase": self.phase,
-            "seq": self.seq,
-            "envelope": self.envelope,
-            "node_id": self.node_id,
-            "signature": self.signature
-        }
+    def to_json(self) -> str:
+        d = {slot: getattr(self, slot) for slot in self.__slots__}
+        return json.dumps(d, sort_keys=True, separators=(',', ':'))
 
-    @staticmethod
-    def sign_payload(secret: str, data: dict) -> str:
-        """Firma simétrica del bloque BFT."""
-        canon = json.dumps(data, sort_keys=True, separators=(',', ':'))
-        return hashlib.sha3_256(f"{canon}_{secret}".encode('utf-8')).hexdigest()
+    @classmethod
+    def from_json(cls, json_str: str) -> 'BFTMessage':
+        data = json.loads(json_str)
+        return cls(**{slot: data[slot] for slot in cls.__slots__})
 
 class BFTNode:
-    """Nodo del enjambre L4 que ejecuta PBFT simplificado a través de sockets TCP."""
+    """Agente lógico L4 que opera un nodo de consenso distribuido TCP con autenticación Ed25519."""
+    __slots__ = ("node_id", "port", "peers", "f", "quorum", "server", "is_primary",
+                 "prepare_votes", "commit_votes", "consensus_futures", "ledger_actor",
+                 "private_key", "peer_pubkeys")
 
-    def __init__(self, host: str, port: int, peers: List[Tuple[str, int]], f_faults: int = 1):
-        self.host = host
-        self.port = port
-        self.node_id = f"{host}:{port}"
-        self.peers = peers
-        self.f_faults = f_faults
-        self.quorum_size = 2 * self.f_faults + 1
+    def __init__(self, node_id: str, port: int, peers: Dict[str, int],
+                 is_primary: bool = False,
+                 private_key_bytes: Optional[bytes] = None,
+                 peer_pubkeys: Optional[Dict[str, bytes]] = None):
+        self.node_id: str = node_id
+        self.port: int = port
+        self.peers: Dict[str, int] = peers # Dict[node_id, port]
+        self.is_primary: bool = is_primary
 
-        self.secret_key = os.getenv("CORTEX_VAULT_KEY", "bft_dev_secret")
-        self.server: Optional[asyncio.AbstractServer] = None
+        # Parámetros de tolerancia bizantina (N >= 3f + 1)
+        total_nodes = len(peers) + 1
+        self.f: int = (total_nodes - 1) // 3
+        self.quorum: int = 2 * self.f + 1
 
-        # Almacén de estado del consenso: seq -> phase -> Set(node_ids)
-        self.consensus_state: Dict[int, Dict[str, set]] = {}
-        # Promesas que esperan el consenso de una secuencia
-        self.pending_commits: Dict[int, asyncio.Future] = {}
+        self.server: Optional[asyncio.Server] = None
 
-        self.on_commit_callback: Optional[Callable[[dict], Any]] = None
+        # Tablas de votación en memoria
+        self.prepare_votes: Dict[str, Set[str]] = {}
+        self.commit_votes: Dict[str, Set[str]] = {}
+        self.consensus_futures: Dict[str, asyncio.Future] = {}
+        self.ledger_actor = None
+
+        # Criptografía Ed25519 Nativa (PyNaCl - INV_C5_10 Compliant)
+        if private_key_bytes:
+            self.private_key = nacl.signing.SigningKey(private_key_bytes)
+        else:
+            self.private_key = nacl.signing.SigningKey.generate()
+
+        self.peer_pubkeys: Dict[str, nacl.signing.VerifyKey] = {}
+        if peer_pubkeys:
+            for pid, pub_bytes in peer_pubkeys.items():
+                self.peer_pubkeys[pid] = nacl.signing.VerifyKey(pub_bytes)
+
+    def get_public_key_bytes(self) -> bytes:
+        """Devuelve los bytes de la clave pública (INV_C5_10)."""
+        return bytes(self.private_key.verify_key)
+
+    def _sign_message(self, phase: str, seq: int, entry_hash: str, taint: str) -> str:
+        """Firma el bloque utilizando Ed25519 nativo."""
+        raw = f"{phase}|{seq}|{entry_hash}|{taint}|{self.node_id}".encode('utf-8')
+        signed = self.private_key.sign(raw)
+        return nacl.encoding.Base64Encoder.encode(signed.signature).decode('utf-8')
+
+    def _verify_signature(self, msg: BFTMessage) -> bool:
+        """Verifica la firma Ed25519 del emisor usando la clave pública registrada."""
+        if msg.sender_id not in self.peer_pubkeys:
+            return False # Emisor desconocido
+
+        expected = f"{msg.phase}|{msg.seq}|{msg.entry_hash}|{msg.taint}|{msg.sender_id}".encode('utf-8')
+        signature_bytes = nacl.encoding.Base64Encoder.decode(msg.signature.encode('utf-8'))
+
+        verify_key = self.peer_pubkeys[msg.sender_id]
+        try:
+            verify_key.verify(expected, signature_bytes)
+            return True
+        except nacl.exceptions.BadSignatureError:
+            return False
 
     async def start(self):
-        """Inicia el servidor TCP del nodo L4."""
-        self.server = await asyncio.start_server(self._handle_client, self.host, self.port)
+        """Inicia el socket TCP asíncrono del nodo."""
+        self.server = await asyncio.start_server(self._handle_connection, "127.0.0.1", self.port)
+        await self.server.start_serving()
 
     async def stop(self):
         if self.server:
             self.server.close()
             await self.server.wait_closed()
 
-    async def _handle_client(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
-        try:
-            data = await reader.read(4096)
-            if not data:
-                return
-
-            payload = json.loads(data.decode('utf-8'))
-            msg = BFTMessage(**payload)
-
-            # Validación de firma
-            sign_data = {"phase": msg.phase, "seq": msg.seq, "envelope": msg.envelope, "node_id": msg.node_id}
-            expected_sig = BFTMessage.sign_payload(self.secret_key, sign_data)
-
-            if msg.signature != expected_sig:
-                # Falla Bizantina Detectada (Firma Inválida)
+    async def broadcast(self, msg: BFTMessage):
+        """Transmite el mensaje PBFT a todos los peers activos de la malla."""
+        for peer_id, peer_port in self.peers.items():
+            try:
+                reader, writer = await asyncio.open_connection("127.0.0.1", peer_port)
+                writer.write((msg.to_json() + "\n").encode('utf-8'))
+                await writer.drain()
                 writer.close()
                 await writer.wait_closed()
+            except Exception:
+                pass
+
+    async def propose_block(self, seq: int, entry_hash: str, taint: str, future: asyncio.Future):
+        """Punto de entrada invocado por el Líder (Primary) para iniciar el quórum L4."""
+        if not self.is_primary:
+            future.set_exception(RuntimeError("Only primary node can propose."))
+            return
+
+        self.consensus_futures[entry_hash] = future
+        sig = self._sign_message("PRE-PREPARE", seq, entry_hash, taint)
+        msg = BFTMessage("PRE-PREPARE", seq, entry_hash, taint, self.node_id, sig)
+
+        self.prepare_votes.setdefault(entry_hash, set()).add(self.node_id)
+        await self.broadcast(msg)
+
+    async def _handle_connection(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):
+        try:
+            data = await reader.readline()
+            if not data:
+                return
+            msg = BFTMessage.from_json(data.decode('utf-8').strip())
+
+            if not self._verify_signature(msg):
+                # Rechazo C5-REAL: Abortar silenciosamente firmas falsificadas
                 return
 
-            await self._process_message(msg)
-
-            writer.write(b'ACK')
-            await writer.drain()
+            await self._process_pbft_message(msg)
         except Exception:
             pass
         finally:
             writer.close()
-            await writer.wait_closed()
 
-    async def _broadcast(self, msg: BFTMessage):
-        """Emite el mensaje a todos los pares (y a sí mismo para avanzar estado)."""
-        await self._process_message(msg) # Auto-procesamiento
-
-        for peer_host, peer_port in self.peers:
-            try:
-                reader, writer = await asyncio.open_connection(peer_host, peer_port)
-                writer.write(json.dumps(msg.to_dict()).encode('utf-8'))
-                await writer.drain()
-                writer.close()
-                await writer.wait_closed()
-            except ConnectionRefusedError:
-                # Nodo caído, ignorar
-                pass
-
-    async def _process_message(self, msg: BFTMessage):
-        """Máquina de estados PBFT (Pre-Prepare -> Prepare -> Commit)."""
-        seq = msg.seq
-        if seq not in self.consensus_state:
-            self.consensus_state[seq] = {"PREPARE": set(), "COMMIT": set()}
+    async def _process_pbft_message(self, msg: BFTMessage):
+        h = msg.entry_hash
 
         if msg.phase == "PRE-PREPARE":
-            # Recibido del líder, procedemos a votar PREPARE
-            sign_data = {"phase": "PREPARE", "seq": seq, "envelope": msg.envelope, "node_id": self.node_id}
-            sig = BFTMessage.sign_payload(self.secret_key, sign_data)
-            prep_msg = BFTMessage("PREPARE", seq, msg.envelope, self.node_id, sig)
-            asyncio.create_task(self._broadcast(prep_msg))
+            # Fase 1: Los seguidores validan la propuesta del líder
+            self.prepare_votes.setdefault(h, set()).add(msg.sender_id)
+            if not self.is_primary:
+                sig = self._sign_message("PREPARE", msg.seq, h, msg.taint)
+                prepare_msg = BFTMessage("PREPARE", msg.seq, h, msg.taint, self.node_id, sig)
+                self.prepare_votes.setdefault(h, set()).add(self.node_id)
+                await self.broadcast(prepare_msg)
 
         elif msg.phase == "PREPARE":
-            self.consensus_state[seq]["PREPARE"].add(msg.node_id)
-            if len(self.consensus_state[seq]["PREPARE"]) >= self.quorum_size:
-                # Cuórum de Prepare alcanzado, emitir COMMIT
-                sign_data = {"phase": "COMMIT", "seq": seq, "envelope": msg.envelope, "node_id": self.node_id}
-                sig = BFTMessage.sign_payload(self.secret_key, sign_data)
-                com_msg = BFTMessage("COMMIT", seq, msg.envelope, self.node_id, sig)
-                # Emitimos commit solo si no lo hemos hecho ya
-                if self.node_id not in self.consensus_state[seq]["COMMIT"]:
-                    asyncio.create_task(self._broadcast(com_msg))
+            votes = self.prepare_votes.setdefault(h, set())
+            votes.add(msg.sender_id)
+
+            if len(votes) >= self.quorum and h not in self.commit_votes.get(h, set()):
+                sig = self._sign_message("COMMIT", msg.seq, h, msg.taint)
+                commit_msg = BFTMessage("COMMIT", msg.seq, h, msg.taint, self.node_id, sig)
+                self.commit_votes.setdefault(h, set()).add(self.node_id)
+                await self.broadcast(commit_msg)
 
         elif msg.phase == "COMMIT":
-            self.consensus_state[seq]["COMMIT"].add(msg.node_id)
-            if len(self.consensus_state[seq]["COMMIT"]) >= self.quorum_size:
-                # Cuórum absoluto. Resolver promesas de escritura
-                if seq in self.pending_commits and not self.pending_commits[seq].done():
-                    self.pending_commits[seq].set_result(msg.envelope)
-                    if self.on_commit_callback:
-                        self.on_commit_callback(msg.envelope)
+            votes = self.commit_votes.setdefault(h, set())
+            votes.add(msg.sender_id)
 
-    async def propose_mutation(self, seq: int, envelope: dict) -> dict:
-        """El líder local propone una mutación al enjambre. (Punto de entrada desde Lexicon)"""
-        future = asyncio.get_running_loop().create_future()
-        self.pending_commits[seq] = future
-
-        sign_data = {"phase": "PRE-PREPARE", "seq": seq, "envelope": envelope, "node_id": self.node_id}
-        sig = BFTMessage.sign_payload(self.secret_key, sign_data)
-        msg = BFTMessage("PRE-PREPARE", seq, envelope, self.node_id, sig)
-
-        await self._broadcast(msg)
-        return await future
+            if len(votes) >= self.quorum:
+                if h in self.consensus_futures:
+                    fut = self.consensus_futures.pop(h)
+                    if not fut.done():
+                        fut.set_result(True)
