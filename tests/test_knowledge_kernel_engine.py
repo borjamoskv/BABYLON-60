@@ -98,3 +98,33 @@ def test_fractal_memory_hierarchy_omega_5():
     assert "1_raw" in fractal["levels"]
     assert "7_prediction_graph" in fractal["levels"]
 
+
+def test_compute_pagerank():
+    engine = KnowledgeKernelEngine()
+    engine.register_node("node:1", "Article", [0.1], {})
+    engine.register_node("node:2", "Article", [0.2], {})
+    engine.register_node("node:3", "Article", [0.3], {})
+
+    # 1 -> 2, 1 -> 3, 2 -> 3
+    engine.add_edge("node:1", "node:2", "links_to", 1.0)
+    engine.add_edge("node:1", "node:3", "links_to", 1.0)
+    engine.add_edge("node:2", "node:3", "links_to", 1.0)
+
+    pr = engine.compute_pagerank(damping_factor=0.85, max_iterations=50)
+    assert len(pr) == 3
+    # Node 3 should have highest PageRank
+    assert pr["node:3"] > pr["node:1"]
+    assert pr["node:3"] > pr["node:2"]
+
+
+def test_compute_affinity_score():
+    engine = KnowledgeKernelEngine()
+    engine.register_node("target", "Person", [1.0, 0.0], {"name": "Telmo"})
+    engine.register_node("similar", "Person", [0.9, 0.1], {"name": "Clone"})
+    engine.register_node("orthogonal", "Person", [0.0, 1.0], {"name": "Orthogonal"})
+
+    aff = engine.compute_affinity_score("target")
+    assert "similar" in aff
+    assert "orthogonal" in aff
+    assert aff["similar"] > 0.8
+    assert aff["orthogonal"] < 0.1

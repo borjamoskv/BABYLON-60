@@ -116,6 +116,73 @@ class KnowledgeKernelEngine:
         self._events.append(evt)
         return evt
 
+    def compute_pagerank(self, damping_factor: float = 0.85, max_iterations: int = 100, tolerance: float = 1.0e-6) -> Dict[str, float]:
+        """
+        Calculates topological centrality (PageRank) over the Causal Graph.
+        Iterative convergence (META_ITER compliant).
+        """
+        num_nodes = len(self._nodes)
+        if num_nodes == 0:
+            return {}
+
+        pr = {node_id: 1.0 / num_nodes for node_id in self._nodes}
+        out_degree = {node_id: 0 for node_id in self._nodes}
+
+        for edge in self._edges:
+            if edge.source in out_degree:
+                out_degree[edge.source] += 1
+
+        for _ in range(max_iterations):
+            prev_pr = pr.copy()
+            diff = 0.0
+
+            # Distribute PageRank
+            for node_id in self._nodes:
+                pr[node_id] = (1.0 - damping_factor) / num_nodes
+
+            for edge in self._edges:
+                if edge.source in prev_pr and out_degree[edge.source] > 0 and edge.target in pr:
+                    pr[edge.target] += damping_factor * (prev_pr[edge.source] / out_degree[edge.source])
+
+            for node_id in self._nodes:
+                diff += abs(pr[node_id] - prev_pr.get(node_id, 0.0))
+
+            if diff < tolerance:
+                break
+
+        return pr
+
+    def compute_affinity_score(self, target_node_id: str) -> Dict[str, float]:
+        """
+        Calculates latent semantic affinity against a target node (e.g. @telmodinamico).
+        """
+        if target_node_id not in self._nodes:
+            raise KeyError(f"Target node {target_node_id} not in graph")
+
+        target_emb = self._nodes[target_node_id].embedding
+        if not target_emb:
+            return {}
+
+        affinities = {}
+        target_mag = math.sqrt(sum(a * a for a in target_emb))
+
+        if target_mag == 0.0:
+            return {n_id: 0.0 for n_id in self._nodes}
+
+        for node_id, node in self._nodes.items():
+            if node_id == target_node_id:
+                continue
+            emb = node.embedding
+            if not emb or len(emb) != len(target_emb):
+                continue
+
+            dot = sum(a * b for a, b in zip(emb, target_emb))
+            mag = math.sqrt(sum(a * a for a in emb))
+            aff = dot / (mag * target_mag) if mag > 0 else 0.0
+            affinities[node_id] = aff
+
+        return affinities
+
     def register_node(
         self,
         node_id: str,
