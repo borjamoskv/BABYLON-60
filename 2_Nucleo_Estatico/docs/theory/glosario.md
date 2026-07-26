@@ -84,6 +84,16 @@ Tipo: Nivel de Realidad Máximo. Φ5
 Colapso de la función de onda semántica en mutaciones verificables de disco.
 Requisito: Evidencia criptográfica. Cero prosa.
 
+**CausalClaim 🧠**
+Tipo: Proposición Epistémica Falsable. Ω2
+Aserción explícita de relación causa-efecto ($A \implies B$ dado $C$) respaldada por prueba formal o empírica.
+Estructura YAML obligatoria:
+```yaml
+Claim: [definición]
+Proof: { Base: [calc/hash], Range: [min,max], Confidence: [C1-C5] }
+```
+Invariante: Requiere consenso BFT ($N \ge 3$) o refutación adversarial antes de ser promovido a estado C5-REAL.
+
 **CTPR-3 🧠**
 Tipo: Protocolo de Razonamiento. Ω33
 El Kernel escribe y ejecuta 3 prompts secuenciales, cada uno más constreñido por el anterior. Concluye en un PROMPT_FINAL isomorfo, eliminando toda deriva del prompt original.
@@ -97,6 +107,26 @@ Tipo: Arquitectura de Memoria. Ω17
 
 - TIER_0 (Ground Truth): Origen humano/AST. Boost 100%
 - TIER_1 (Cuarentena): Output LLM. Boost 0% hasta validación
+
+---
+
+### K
+
+**KnowledgeEdge 📐**
+Tipo: Primitiva Relacional Directa. Ω17
+Conexión tipada y orientada entre dos nodos ($Node_A \xrightarrow{rel} Node_B$).
+Tipos canónicos: `DEPENDS_ON`, `TRANSFORMS`, `IMPLIES`, `REFUTES`, `CITES`, `MUTATES`.
+Invariante: El peso de la arista representa exergía termodinámica o fuerza causal ($w \in [0, 1]$). No puede existir huérfana sin nodos válidos en TIER_0/TIER_1.
+
+**KnowledgeEvent ⚙️**
+Tipo: Mutación Temporal Inmutable. Ω5
+Ocurrencia física en el espacio de ejecución que altera o instancia nodos y aristas en el Graph.
+Invariante: Se anexa de forma síncrona en el SQLite WAL BFT Master Ledger con marca de tiempo Lamport $t_{lamport}$, recibo criptográfico SHA3-256 / BLAKE3 y firma `CORTEX-TAINT`. Cero escrituras in-place.
+
+**KnowledgeNode 🧠**
+Tipo: Primitiva Entidad del Graph. Ω3
+Unidad estructural mínima de conocimiento (Concepto, Entidad, Repositorio, Documento, Componente o Agente).
+Invariante: Identificado inequívocamente por hash de contenido inmutable (SHA3-256 / BLAKE3) o URI. Posee etiqueta explícita de procedencia (TIER_0 Ground Truth / TIER_1 Cuarentena).
 
 ---
 
