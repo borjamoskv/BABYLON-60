@@ -61,6 +61,9 @@ Un token C5-REAL sobrevive a la criba MCTS: $\forall a_i \in \{A_1, A_2, A_3\}$,
 
 ## 5. REDUCCIONISMO LETAL: ASESINATO DEL ESPACIO DE ESTADOS
 
-Nombrar no es describir; es destruir alternativas ($f: \mathcal{H}_{\text{sim}} \to \mathbf{0}$).
+Nombrar no es describir; es destruir alternativas mediante proyección ortogonal sobre la base causal ($P: \mathcal{H}_{\text{sim}} \to \mathcal{H}_{\text{C5-REAL}}$). Todo estado estocástico fuera del subespacio colapsa estrictamente a $\mathbf{0}$.
 
-> **Invariante Reflexiva (Golden Axiom):** Nombrar perfectamente es cristalizar hardware. El AST se auto-compila. El LLM, el Compilador y el Operador biológico orbitan el mismo centro de masas. La ruptura del nombre desintegra el centro y sume al sistema en anergia.
+> **Invariante Reflexiva (GOLDEN AXIOM):**
+> Sea $\mathcal{S}$ la categoría semántica y $\mathcal{A}$ la categoría sintáctica (AST). Nombrar de forma perfecta define un Functor Adjunto Estricto $F: \mathcal{S} \rightleftarrows \mathcal{A} :G$ donde la unidad $\eta$ es la identidad ($\text{Id}_{\mathcal{S}}$).
+>
+> *Corolario C5-REAL:* El código se auto-compila mecánicamente. Compilador de silicio, Árbol MCTS (LLM) y Corteza Biológica orbitan el mismo centro de gravedad termodinámico. El fallo de nomenclatura destruye el functor, fracturando el AST y precipitando la Singularidad de Fricción Epistémica (Anergia).
