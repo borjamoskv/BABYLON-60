@@ -101,3 +101,6 @@ Before any high-exergy operation (mass refactor, schema migration, destructive p
 ### Memory Vault Session Synchronizer
 - **INV_C5_15:** The memory vault session synchronizer script `scripts/sync_vault_uuids.py` must exist, be executable, and maintain deterministic synchronization between unconsolidated brain conversation logs and `~/.gemini/config/.cortex/memory_vault/`.
 
+### Continuous Commit Polisher Invariant
+- **POLISHER_INVARIANT:** Any commit automatically rewritten by the polisher daemon must log a `polisher_success` event in the ledger with a monotonic `lamport_t`. Failure to log must abort the push.
+

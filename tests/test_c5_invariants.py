@@ -157,3 +157,21 @@ def test_inv_c5_12_nexus_symlinks():
 
 
 
+
+
+def test_inv_c5_13_stub():
+    """INV_C5_13 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_13
+    pass
+
+
+def test_inv_c5_14_stub():
+    """INV_C5_14 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_14
+    pass
+
+
+def test_inv_c5_15_stub():
+    """INV_C5_15 — Auto-generated stub for rule validation."""
+    # TODO: Implement concrete scan logic for rule INV_C5_15
+    pass
