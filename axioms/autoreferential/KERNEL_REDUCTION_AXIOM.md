@@ -2,7 +2,7 @@
 
 # AXIOMA DE REDUCCIÓN A PRIMITIVAS (ARP)
 
-> **CORTEX-TAINT**: ``
+> **CORTEX-TAINT**: `27ccfca97b86bce72646fa327498fb26ad7ecdea33a0fba4cbda08eaccf2ea81`
 > **Reality Level**: C5-REAL
 > **Classification**: Meta-Axiom (Axiom about axiomatization itself)
 > **Nomenclatura Soberana**: El Operador llama **Primitivas** a todo objeto inicial irreducible.
