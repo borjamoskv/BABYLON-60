@@ -312,15 +312,19 @@ class LexiconLedgerActor:
                     created_at = datetime.now(timezone.utc).isoformat()
 
                     shielded_payload = self.vault.shield_payload(canonical_payload)
-                    envelope_data = f"{temp_seq}|{event_id}|{shielded_payload}|{taint}|{temp_lamport}|{self.last_hash}|{created_at}"
+                    shielded_event_id = self.vault.shield_payload(event_id)
+                    shielded_stream = self.vault.shield_payload("cortex.ontology")
+                    shielded_taint = self.vault.shield_payload(taint)
+
+                    envelope_data = f"{temp_seq}|{shielded_event_id}|{shielded_payload}|{shielded_taint}|{temp_lamport}|{self.last_hash}|{created_at}"
                     entry_hash = hashlib.sha3_256(envelope_data.encode('utf-8')).hexdigest()
 
                     envelope: C5EnrichedEnvelope = {
                         "seq": temp_seq,
-                        "event_id": event_id,
-                        "stream": "cortex.ontology",
+                        "event_id": shielded_event_id,
+                        "stream": shielded_stream,
                         "payload_json": shielded_payload,
-                        "cortex_taint": taint,
+                        "cortex_taint": shielded_taint,
                         "lamport_t": temp_lamport,
                         "prev_hash": self.last_hash,
                         "entry_hash": entry_hash,
@@ -331,7 +335,7 @@ class LexiconLedgerActor:
                     if self.bft_node:
                         if self.bft_node.is_primary:
                             network_future = asyncio.get_running_loop().create_future()
-                            await self.bft_node.propose_block(temp_seq, entry_hash, taint, network_future)
+                            await self.bft_node.propose_block(temp_seq, entry_hash, shielded_taint, network_future)
                             await network_future
                         else:
                             # Los seguidores registran cuando su propia red alcance el COMMIT

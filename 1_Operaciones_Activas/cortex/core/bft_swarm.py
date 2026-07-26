@@ -31,7 +31,7 @@ class BFTNode:
     """Agente lógico L4 que opera un nodo de consenso distribuido TCP con autenticación Ed25519."""
     __slots__ = ("node_id", "port", "peers", "f", "quorum", "server", "is_primary",
                  "prepare_votes", "commit_votes", "consensus_futures", "ledger_actor",
-                 "private_key", "peer_pubkeys")
+                 "private_key", "peer_pubkeys", "l5_anchor")
 
     def __init__(self, node_id: str, port: int, peers: Dict[str, int],
                  is_primary: bool = False,
@@ -54,6 +54,7 @@ class BFTNode:
         self.commit_votes: Dict[str, Set[str]] = {}
         self.consensus_futures: Dict[str, asyncio.Future] = {}
         self.ledger_actor = None
+        self.l5_anchor = None
 
         # Criptografía Ed25519 Nativa (PyNaCl - INV_C5_10 Compliant)
         if private_key_bytes:
@@ -174,3 +175,7 @@ class BFTNode:
                     fut = self.consensus_futures.pop(h)
                     if not fut.done():
                         fut.set_result(True)
+
+                        # Transmutación L4 -> L5: Anclaje del hash consolidado en Bitcoin
+                        if self.is_primary and hasattr(self, 'l5_anchor') and self.l5_anchor:
+                            asyncio.create_task(self.l5_anchor.anchor_hash(h))
