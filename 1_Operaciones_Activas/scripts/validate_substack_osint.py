@@ -52,7 +52,7 @@ def validate_dataset():
 
     for idx, author in enumerate(authors, 1):
         author_id = author.get("author_id", f"INDEX_{idx}")
-        print(f"\n[RECORD {idx}/8] Verifying: {author_id} ({author.get('name')})")
+        print(f"\n[RECORD {idx}/{len(authors)}] Verifying: {author_id} ({author.get('name')})")
 
         # 1. Required fields check
         missing = [field for field in REQUIRED_FIELDS if field not in author]

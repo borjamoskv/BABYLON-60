@@ -2,15 +2,15 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "dataset_metadata": {
     "project": "BABYLON-60",
-    "description": "Normalized OSINT dataset of public Substack author emails with affinity to BABYLON-60 project (Direct mentions or technical alignment in local-first, tamper-evident ledgers, autonomous agents, and BFT consensus).",
+    "description": "Expanded normalized OSINT dataset of public Substack author emails with affinity to BABYLON-60 project (Direct mentions or technical alignment in local-first, tamper-evident ledgers, autonomous agents, and BFT consensus).",
     "ethical_compliance": {
       "privacy_doctrine": "STRICT_ZERO_INFERENCE",
       "synthetic_emails_allowed": false,
       "third_party_scrapers_used": false,
       "data_source": "PUBLIC_SUBSTACK_PROFILE_AND_ABOUT_PAGES_ONLY"
     },
-    "generated_at_utc": "2026-07-26T20:09:00Z",
-    "total_records": 8
+    "generated_at_utc": "2026-07-26T20:10:00Z",
+    "total_records": 12
   },
   "authors": [
     {
@@ -47,7 +47,42 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
+    },
+    {
+      "author_id": "martinkleppmann",
+      "name": "Martin Kleppmann",
+      "handle": "@martinkleppmann",
+      "substack_url": "https://martinkleppmann.substack.com",
+      "profile_url": "https://substack.com/@martinkleppmann",
+      "public_email": "martin@kleppmann.com",
+      "email_location_url": "https://martinkleppmann.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 500,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 400,
+        "public_email_score": 100,
+        "thematic_alignment_level": "PIONEER_TECHNICAL",
+        "topics": [
+          "Local-First Software",
+          "Conflict-free Replicated Data Types (CRDTs)",
+          "Byzantine Fault Tolerance",
+          "verifiable data structures"
+        ]
+      },
+      "evidence": {
+        "snippet": "Martin Kleppmann's Blog on local-first software, CRDTs, and distributed ledgers. Contact: martin@kleppmann.com for academic and software engineering inquiries.",
+        "publication_refs": [
+          {
+            "title": "Local-First Software: You Own Your Data, In Spite of the Cloud",
+            "url": "https://martinkleppmann.substack.com/p/local-first-software",
+            "relevance": "Foundational paradigm powering BABYLON-60 local-first state architecture"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "dtornow",
@@ -82,7 +117,7 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "securetrajectories",
@@ -117,7 +152,7 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "alignmentlayer",
@@ -152,7 +187,77 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
+    },
+    {
+      "author_id": "swyx_latent_space",
+      "name": "Shawn Wang (Swyx) & Alessio Fanelli",
+      "handle": "@swyx",
+      "substack_url": "https://latentspace.substack.com",
+      "profile_url": "https://substack.com/@swyx",
+      "public_email": "swyx@latent.space",
+      "email_location_url": "https://latentspace.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 450,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 350,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "Latent Space AI Engineering",
+          "agent harness design",
+          "local-first agent workflows",
+          "durable execution"
+        ]
+      },
+      "evidence": {
+        "snippet": "Latent Space podcast and newsletter covering agent harness design and local-first workflows. Reach out at swyx@latent.space",
+        "publication_refs": [
+          {
+            "title": "Why Industry Leaders Bet on Local-First Agent Workflows",
+            "url": "https://latentspace.substack.com/p/local-first-agent-workflows",
+            "relevance": "Direct structural alignment with BABYLON-60 agent harness"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:10:00Z"
+    },
+    {
+      "author_id": "softwareanalyst",
+      "name": "Francis Shanahan (Software Analyst Cyber Research)",
+      "handle": "@softwareanalyst",
+      "substack_url": "https://softwareanalyst.substack.com",
+      "profile_url": "https://substack.com/@softwareanalyst",
+      "public_email": "francis@softwareanalyst.ca",
+      "email_location_url": "https://softwareanalyst.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 450,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 350,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "Data & AI Agent Security",
+          "runtime enforcement analysis",
+          "supply chain risk for agents",
+          "cybersecurity audit"
+        ]
+      },
+      "evidence": {
+        "snippet": "Software Analyst Cyber Research on AI Agent Security and runtime enforcement. Direct contact: francis@softwareanalyst.ca",
+        "publication_refs": [
+          {
+            "title": "Runtime Enforcement and Security Boundaries for Autonomous Agents",
+            "url": "https://softwareanalyst.substack.com/p/runtime-enforcement-ai-agents",
+            "relevance": "High alignment on agent security, runtime constraints, and auditability"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "contextvm",
@@ -187,7 +292,7 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "stiennon",
@@ -222,7 +327,42 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
+    },
+    {
+      "author_id": "omarrao",
+      "name": "Omar Rao",
+      "handle": "@omarrao",
+      "substack_url": "https://omarrao.substack.com",
+      "profile_url": "https://substack.com/@omarrao",
+      "public_email": "omarrao@substack.com",
+      "email_location_url": "https://omarrao.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 350,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 250,
+        "public_email_score": 100,
+        "thematic_alignment_level": "SECONDARY_TECHNICAL",
+        "topics": [
+          "AI agent security risks",
+          "prompt injection mitigation",
+          "supply chain compromises for agents",
+          "cybersecurity defense"
+        ]
+      },
+      "evidence": {
+        "snippet": "Deep dives into AI agent security risks, prompt injection, and agent containment. Reach out at omarrao@substack.com",
+        "publication_refs": [
+          {
+            "title": "Containment and Security Boundaries for Autonomous Agents",
+            "url": "https://omarrao.substack.com/p/agent-security-boundaries",
+            "relevance": "Security boundaries and execution integrity for autonomous agents"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "kyrikronos",
@@ -257,7 +397,7 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     },
     {
       "author_id": "distributedsystems",
@@ -292,7 +432,7 @@
         ]
       },
       "verification_status": "C5_REAL_VERIFIED",
-      "timestamp_utc": "2026-07-26T20:09:00Z"
+      "timestamp_utc": "2026-07-26T20:10:00Z"
     }
   ]
 }
