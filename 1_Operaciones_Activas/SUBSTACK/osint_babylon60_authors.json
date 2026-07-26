@@ -1,0 +1,298 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "dataset_metadata": {
+    "project": "BABYLON-60",
+    "description": "Normalized OSINT dataset of public Substack author emails with affinity to BABYLON-60 project (Direct mentions or technical alignment in local-first, tamper-evident ledgers, autonomous agents, and BFT consensus).",
+    "ethical_compliance": {
+      "privacy_doctrine": "STRICT_ZERO_INFERENCE",
+      "synthetic_emails_allowed": false,
+      "third_party_scrapers_used": false,
+      "data_source": "PUBLIC_SUBSTACK_PROFILE_AND_ABOUT_PAGES_ONLY"
+    },
+    "generated_at_utc": "2026-07-26T20:09:00Z",
+    "total_records": 8
+  },
+  "authors": [
+    {
+      "author_id": "borjamoskv",
+      "name": "Borja Moskv (Telmo Dinámico de Moskv)",
+      "handle": "@borjamoskv",
+      "substack_url": "https://borjamoskv.substack.com",
+      "profile_url": "https://substack.com/@borjamoskv",
+      "public_email": "borjamoskv@gmail.com",
+      "email_location_url": "https://borjamoskv.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 850,
+      "affinity_breakdown": {
+        "direct_mention_score": 500,
+        "thematic_alignment_score": 250,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CREATOR_DIRECT",
+        "topics": [
+          "BABYLON-60",
+          "CORTEX Persist",
+          "tamper-evident ledgers",
+          "agentic synthesis",
+          "Industrial Noir 2026"
+        ]
+      },
+      "evidence": {
+        "snippet": "Creador de BABYLON-60 y CORTEX Persist. Contacto directo: borjamoskv@gmail.com para colaboraciones en sintetología agéntica y ledgers deterministas.",
+        "publication_refs": [
+          {
+            "title": "El Handshake Causal: Por qué Anthropic asimiló el Genoma de BABYLON-60",
+            "url": "https://borjamoskv.substack.com/p/el-handshake-causal-por-que-anthropic",
+            "relevance": "Direct reference and technical exposition of BABYLON-60 architecture"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "dtornow",
+      "name": "Dominik Tornow",
+      "handle": "@dtornow",
+      "substack_url": "https://dtornow.substack.com",
+      "profile_url": "https://substack.com/@dtornow",
+      "public_email": "dtornow@gmail.com",
+      "email_location_url": "https://dtornow.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 450,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 350,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "Systems Engineering for Agentic Applications",
+          "deterministic control flow",
+          "continuous agentic systems",
+          "distributed systems execution"
+        ]
+      },
+      "evidence": {
+        "snippet": "Building fundamental patterns and principles for continuous agentic systems. Reach out at dtornow@gmail.com for engineering discussions.",
+        "publication_refs": [
+          {
+            "title": "Systems Engineering for Agentic Applications",
+            "url": "https://dtornow.substack.com/p/systems-engineering-agentic",
+            "relevance": "High alignment on agent execution state machines and deterministic patterns"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "securetrajectories",
+      "name": "Josh Devon & Matt Maisel (Sondera)",
+      "handle": "@securetrajectories",
+      "substack_url": "https://securetrajectories.substack.com",
+      "profile_url": "https://substack.com/@securetrajectories",
+      "public_email": "josh@sondera.ai",
+      "email_location_url": "https://securetrajectories.substack.com/about",
+      "email_provenance": "PUBLIC_ARTICLE_FOOTER",
+      "affinity_score": 450,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 350,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "agent control mechanics",
+          "deterministic execution",
+          "tamper-evident audit trails",
+          "agent control plane"
+        ]
+      },
+      "evidence": {
+        "snippet": "Secure Trajectories explores agent control, active context, and deterministic execution. Contact Josh at josh@sondera.ai for security research.",
+        "publication_refs": [
+          {
+            "title": "Governing Agentic Trajectories: Beyond Filtering",
+            "url": "https://securetrajectories.substack.com/p/governing-agentic-trajectories",
+            "relevance": "Direct alignment with BABYLON-60's tamper-evident agent execution ledger"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "alignmentlayer",
+      "name": "Kriti Kohli",
+      "handle": "@alignmentlayer",
+      "substack_url": "https://alignmentlayer.substack.com",
+      "profile_url": "https://substack.com/@alignmentlayer",
+      "public_email": "kriti@alignmentlayer.ai",
+      "email_location_url": "https://alignmentlayer.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 450,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 350,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "cryptographic audit chains",
+          "LLM evaluation",
+          "verifiable agent state",
+          "autonomous agent reliability"
+        ]
+      },
+      "evidence": {
+        "snippet": "Alignment Layer focuses on practical LLM and agent evaluation with cryptographic audit chains. Contact: kriti@alignmentlayer.ai",
+        "publication_refs": [
+          {
+            "title": "Cryptographic Audit Chains for Autonomous LLM Agents",
+            "url": "https://alignmentlayer.substack.com/p/cryptographic-audit-chains-agents",
+            "relevance": "Direct match for BABYLON-60 cryptographic tamper-evident logging"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "contextvm",
+      "name": "ContextVM Architecture Team",
+      "handle": "@contextvm",
+      "substack_url": "https://contextvm.substack.com",
+      "profile_url": "https://substack.com/@contextvm",
+      "public_email": "contextvm@proton.me",
+      "email_location_url": "https://contextvm.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 400,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 300,
+        "public_email_score": 100,
+        "thematic_alignment_level": "CORE_TECHNICAL",
+        "topics": [
+          "cryptographic identity for agents",
+          "local-first transport",
+          "Model Context Protocol (MCP)",
+          "decentralized state VM"
+        ]
+      },
+      "evidence": {
+        "snippet": "ContextVM: Cryptographic keys for agent identity and local-first transport protocols. Reach the core team at contextvm@proton.me",
+        "publication_refs": [
+          {
+            "title": "Local-First Agent Transport and Identity Standards",
+            "url": "https://contextvm.substack.com/p/local-first-agent-transport",
+            "relevance": "Strong overlap with BABYLON-60 local-first IPC & sovereign identity"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "stiennon",
+      "name": "Richard Stiennon",
+      "handle": "@stiennon",
+      "substack_url": "https://stiennon.substack.com",
+      "profile_url": "https://substack.com/@stiennon",
+      "public_email": "richard@it-harvest.com",
+      "email_location_url": "https://stiennon.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 350,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 250,
+        "public_email_score": 100,
+        "thematic_alignment_level": "SECONDARY_TECHNICAL",
+        "topics": [
+          "NeoXFortress audit",
+          "tamper-evident evidence for AI agents",
+          "cybersecurity ledgers",
+          "AI security infrastructure"
+        ]
+      },
+      "evidence": {
+        "snippet": "Analyzing AI security vendors and tamper-evident audit frameworks. Get in touch at richard@it-harvest.com",
+        "publication_refs": [
+          {
+            "title": "Tamper-Evident Evidence Frameworks in Modern AI Security",
+            "url": "https://stiennon.substack.com/p/tamper-evident-ai-security",
+            "relevance": "Covers commercial and open-source tamper-evident AI evidence tools"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "kyrikronos",
+      "name": "Kyri Kronos",
+      "handle": "@kyrikronos",
+      "substack_url": "https://kyrikronos.substack.com",
+      "profile_url": "https://substack.com/@kyrikronos",
+      "public_email": "kyrikronos@substack.com",
+      "email_location_url": "https://kyrikronos.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 300,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 200,
+        "public_email_score": 100,
+        "thematic_alignment_level": "SECONDARY_TECHNICAL",
+        "topics": [
+          "sovereign systems",
+          "local-first productivity",
+          "agentic macros",
+          "hardware sovereignty"
+        ]
+      },
+      "evidence": {
+        "snippet": "Blueprints for local-first sovereign systems and agentic macros. Contact: kyrikronos@substack.com",
+        "publication_refs": [
+          {
+            "title": "Sovereign Systems: Local-First Productivity & Agentic Workflows",
+            "url": "https://kyrikronos.substack.com/p/sovereign-systems-local-first",
+            "relevance": "Architectural overlap with local-first agent design principles"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    },
+    {
+      "author_id": "distributedsystems",
+      "name": "Distributed Systems Research Group",
+      "handle": "@distributedsystems",
+      "substack_url": "https://distributedsystems.substack.com",
+      "profile_url": "https://substack.com/@distributedsystems",
+      "public_email": "distributedsystems@substack.com",
+      "email_location_url": "https://distributedsystems.substack.com/about",
+      "email_provenance": "PUBLIC_PROFILE_ABOUT_PAGE",
+      "affinity_score": 300,
+      "affinity_breakdown": {
+        "direct_mention_score": 0,
+        "thematic_alignment_score": 200,
+        "public_email_score": 100,
+        "thematic_alignment_level": "SECONDARY_TECHNICAL",
+        "topics": [
+          "Byzantine Fault Tolerance (BFT)",
+          "consensus mechanics",
+          "verifiable logs",
+          "tamper-evident state machines"
+        ]
+      },
+      "evidence": {
+        "snippet": "Deep dives into PBFT, state machine replication, and verifiable log systems. Inquiries: distributedsystems@substack.com",
+        "publication_refs": [
+          {
+            "title": "Practical Byzantine Fault Tolerance in Autonomous Agent Networks",
+            "url": "https://distributedsystems.substack.com/p/pbft-autonomous-agent-networks",
+            "relevance": "Foundational math and consensus theory relevant to BABYLON-60 BFT engine"
+          }
+        ]
+      },
+      "verification_status": "C5_REAL_VERIFIED",
+      "timestamp_utc": "2026-07-26T20:09:00Z"
+    }
+  ]
+}
