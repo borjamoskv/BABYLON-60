@@ -91,3 +91,7 @@ post-commit.json
 
 # Audit receipts and logs (R9)
 .audit/
+
+# Swarm Worker States (C5-REAL WAL)
+.agents/teamwork_preview_*/
+
