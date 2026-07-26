@@ -1,0 +1,95 @@
+# C5-REAL EXERGY CERTIFIED
+# CORTEX-TAINT: Knowledge_Fabric_Kernel_Axioms_v1.0
+version: "1.0"
+reality_level: "C5-REAL"
+kernel: "Knowledge Operating System"
+primitives:
+  omega_1_fabric:
+    name: "Knowledge Fabric"
+    domains:
+      - People
+      - Ideas
+      - Claims
+      - Evidence
+      - Companies
+      - Papers
+      - Code
+      - Models
+      - Products
+      - Podcasts
+      - Videos
+      - Articles
+      - Repositories
+      - Communities
+    invariant: "Source-agnostic unification over heterogeneous channels"
+
+  omega_2_events:
+    name: "Event Primitive"
+    schema:
+      timestamp: "ISO8601 UTC"
+      actor: "UUID"
+      object: "UUID"
+      action: "Enum[published, mentions, cites, refutes, implements, forks, transforms]"
+      confidence: "Float[0.0, 1.0]"
+      source: "String"
+
+  omega_3_event_sourcing:
+    name: "Append-Only Immutable State"
+    mode: "Append-Only"
+    invariant: "Zero state mutations without event trace; complete temporal reconstructibility"
+
+  omega_4_live_graph:
+    name: "Dynamic Knowledge Topology"
+    node_types: ["Person", "Project", "Repository", "Company", "Paper", "Talk", "Podcast", "Book", "Concept", "Claim"]
+    edge_types: ["recommends", "writes", "links_to", "mentions", "restacks", "references", "refutes", "supports"]
+
+  omega_5_fractal_memory:
+    levels:
+      - 1: Raw
+      - 2: Parsed
+      - 3: Embedded
+      - 4: Summarized
+      - 5: Concept Graph
+      - 6: Claim Graph
+      - 7: Prediction Graph
+
+  omega_6_hypothesis_engine:
+    mechanism: "Abductive inference over non-obvious topological convergence in vector-graph space"
+
+  omega_7_innovation_detection:
+    mechanism: "Gradient vector displacement tracking over global semantic latent space"
+
+  omega_8_compression_pyramid:
+    ratios:
+      articles: 100000
+      ideas: 20000
+      concepts: 4000
+      patterns: 900
+      paradigms: 120
+      structural_shifts: 12
+      meta_trends: 3
+      signal: 1
+    invariant: "Information compression is isomorphic to intelligence density"
+
+  omega_9_simulation:
+    mechanism: "Counterfactual propagation along causal graph dependencies"
+
+  omega_10_causal_engine:
+    schema:
+      claim: "Proposition String"
+      evidence: "List[EvidenceNode]"
+      counter_evidence: "List[EvidenceNode]"
+      confidence: "Float"
+      source: "URI"
+      temporal_evolution: "List[EventId]"
+    invariant: "Truth is an evolving state of evidence, not a static assertion"
+
+  omega_11_concept_space:
+    transformation: "Text -> Semantic AST -> Knowledge Graph -> Concept Space -> Latent Geometry"
+
+  omega_12_knowledge_kernel_primitives:
+    Node: ["id", "type", "embedding"]
+    Edge: ["source", "target", "relation", "confidence"]
+    Event: ["actor", "action", "object", "time"]
+    Claim: ["proposition", "evidence"]
+    Vector: ["semantic_state"]

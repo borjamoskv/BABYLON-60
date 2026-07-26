@@ -1,0 +1,8 @@
+{
+  "crypto_proof": "BTC_OP_RETURN_PENDING_BFT_V_89",
+  "hash_type": "SHA3_256",
+  "header": "OPENTIMESTAMPS",
+  "merkle_root": "1cf9f275ab147e7d206a79c5462d809d23daa747c8a63dcccee86b8b140d4ef1",
+  "serialized_timestamp": 1785087037,
+  "version": 1
+}
