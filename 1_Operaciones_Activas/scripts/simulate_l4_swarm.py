@@ -23,7 +23,12 @@ async def massive_stress_test():
     if db_path.exists():
         db_path.unlink()
 
-    guard = hal_guard.HalGuard("NODE_FOLLOWER_01", sk, db_path)
+    guard = hal_guard.HalGuard("NODE_FOLLOWER_01", sk, db_path, "DUMMY_KEY")
+
+    class MockCoordinator:
+        async def audit_task_completion(self, task_description: str, agent_evidence: str) -> bool:
+            return False
+    guard.coordinator = MockCoordinator()
 
     # Invariante que siempre falla (simulando alucinación continua del líder)
     async def always_fail_checker():
