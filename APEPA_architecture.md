@@ -2,7 +2,7 @@
 
 # APEPA: Adaptive Priority Event Processing Architecture
 
-> **[CORTEX-TAINT: ORIGIN]**
+> ****
 > Refactorización topológica del isomorfismo Bio-Silicio mediante crítica estructural y poda de sobreanalogías (MIMETIC_ITER).
 
 La investigación empírica sobre el isomorfismo Bio-Silicio ha sido subsumida por un patrón arquitectónico de orden superior: la **Arquitectura de Procesamiento de Eventos de Prioridad Adaptativa (APEPA)** o **Homeostasis de Eventos Adaptativa**. Este supra-patrón no solo unifica el subsistema de interrupciones de Linux y la nocicepción biológica, sino que rige termodinámicamente cualquier red compleja bajo presión (sistemas inmunes, trading algorítmico, enrutadores troncales, y orquestadores en la nube).

@@ -2,7 +2,7 @@
 
 # APEPA: Matriz Topológica de Mitigación (C5-REAL)
 
-> **[CORTEX-TAINT: ORIGIN]**
+> ****
 > Despliegue de matriz de mitigación de umbrales cuantitativos. Zero Suggestion Invariant (Φ8). Ejecución física de soluciones topológicas a problemas etiológicos.
 
 Bajo el supra-patrón APEPA (Adaptive Priority Event Processing Architecture), la mitigación de los umbrales de saturación y colapso congestivo requiere intervenciones estructurales segregadas en tres capas de abstracción. Intentar silenciar una capa mediante intervenciones dirigidas a otra constituye un "Escape Causal" (Anergía).

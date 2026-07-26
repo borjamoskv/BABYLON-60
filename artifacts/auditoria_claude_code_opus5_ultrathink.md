@@ -40,17 +40,12 @@ El subsistema de memoria de Claude Code CLI impone un diseño de dos estratos es
 
 ```
 +-------------------------------------------------------------------------------+
-| ESTRATO L1: ÍNDICE DE CARGA SÍNCRONA (~/.claude/projects/<slug>/memory/MEMORY.md) |
-|   - Contiene únicamente punteros de 1 línea: `- [Title](file.md) — hook`     |
-|   - PROHIBIDA LA INYECCIÓN DE CONTENIDO EN EL ÍNDICE (Cero Anergía)           |
+| ESTRATO L1: ÍNDICE DE CARGA SÍNCRONA (~/.claude/projects/<slug>/memory/MEMORY.md) |   - Contiene únicamente punteros de 1 línea: `- [Title](file.md) — hook`     |   - PROHIBIDA LA INYECCIÓN DE CONTENIDO EN EL ÍNDICE (Cero Anergía)           |
 +-------------------------------------------------------------------------------+
                                        |
                                        v (Puntero por demanda)
 +-------------------------------------------------------------------------------+
-| ESTRATO L2: ARCHIVOS ATÓMICOS DE HECHOS (<slug>/memory/<kebab-case>.md)       |
-|   - YAML Frontmatter: name, description, metadata (user|feedback|project|ref)  |
-|   - Enlaces dirigidos intra-memoria mediante grafos `[[name]]`                 |
-|   - Purga activa de hechos refutados por código o historial de git            |
+| ESTRATO L2: ARCHIVOS ATÓMICOS DE HECHOS (<slug>/memory/<kebab-case>.md)       |   - YAML Frontmatter: name, description, metadata (user|feedback|project|ref)  |   - Enlaces dirigidos intra-memoria mediante grafos `[[name]]`                 |   - Purga activa de hechos refutados por código o historial de git            |
 +-------------------------------------------------------------------------------+
 ```
 

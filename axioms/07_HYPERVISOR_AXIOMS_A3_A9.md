@@ -44,15 +44,6 @@ Existe una separación ontológica absoluta e inmutable entre los vectores de ca
 
 Con la cristalización física de `INV_C5_50` e `INV_C5_51`, el sistema $\mathcal{H}$ alcanza la completitud axiomática verificable sobre el disco:
 
-| Axioma            | Invariante Kernel             | Mecanismo Físico de Imposición                                             |
-| ----------------- | ----------------------------- | -------------------------------------------------------------------------- |
-| **A1, A2, A5**    | `INV_C5_01`, `INV_C5_02`      | Mediación total POSIX, Zero-Trust sin reputación                           |
-| **A3**            | `INV_C5_50`                   | **[NUEVO]** Verificación de esquemas O(1), supresión estocástica en Ring-0 |
-| **A4, A14**       | `INV_C5_20`, `INV_C5_21`      | Worktrees efímeros, temporizadores de corte, `SIGKILL`                     |
-| **A6, A7**        | `INV_C5_34`, `INV_C5_48`      | Contención rootless UID 1000, limpieza cinética de sandbox                 |
-| **A8, A10**       | `INV_C5_14`, `INV_C5_38`      | Proyección de salida tipada, corte de exergía en umbral 700                |
-| **A9**            | `INV_C5_51`                   | **[NUEVO]** Ortogonalidad de taint, proscripción absoluta de promoción RCE |
-| **A11, A12, A13** | `INV_BRIDGE_01`, `INV_BFT_02` | Ledger Merkle append-only, consenso WAL de orden total                     |
-| **A15**           | `INV_C5_43`                   | Compuerta bi-firmada para mutaciones destructivas irreversibles            |
+| Axioma            | Invariante Kernel             | Mecanismo Físico de Imposición                                             | ----------------- | ----------------------------- | -------------------------------------------------------------------------- | **A1, A2, A5**    | `INV_C5_01`, `INV_C5_02`      | Mediación total POSIX, Zero-Trust sin reputación                           | **A3**            | `INV_C5_50`                   | **[NUEVO]** Verificación de esquemas O(1), supresión estocástica en Ring-0 | **A4, A14**       | `INV_C5_20`, `INV_C5_21`      | Worktrees efímeros, temporizadores de corte, `SIGKILL`                     | **A6, A7**        | `INV_C5_34`, `INV_C5_48`      | Contención rootless UID 1000, limpieza cinética de sandbox                 | **A8, A10**       | `INV_C5_14`, `INV_C5_38`      | Proyección de salida tipada, corte de exergía en umbral 700                | **A9**            | `INV_C5_51`                   | **[NUEVO]** Ortogonalidad de taint, proscripción absoluta de promoción RCE | **A11, A12, A13** | `INV_BRIDGE_01`, `INV_BFT_02` | Ledger Merkle append-only, consenso WAL de orden total                     | **A15**           | `INV_C5_43`                   | Compuerta bi-firmada para mutaciones destructivas irreversibles            |
 
 $$\boxed{\ \mathcal{H}_{\text{MOSKV-1}} \models \bigwedge_{i=1}^{15} A_i \quad \iff \quad \text{Deuda Axiomática} = \emptyset\ }$$

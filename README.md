@@ -55,16 +55,7 @@ ruff check
 
 ## STRUCTURE
 
-| Stratum     | Path             | Function                              |
-| :---------- | :--------------- | :------------------------------------ |
-| Python Core | `/cortex`        | BFT Orchestration & Cognitive Engines |
-| Rust Core   | `/strike-rs`     | Systems-level Transduction            |
-| Frontend    | `/babylon-60`    | TypeScript/Vite IDE Interface         |
-| Desktop     | `/src-tauri`     | Rust/Tauri Integration                |
-| Daemon      | `/cmd`           | Go Portal Daemon                      |
-| Compute     | `/fsharp_kernel` | F# Algebraic Computations             |
-| Infra       | `/infra`         | Terraform State                       |
-| QA          | `/tests`         | Validation Suite                      |
+| Stratum     | Path             | Function                              | :---------- | :--------------- | :------------------------------------ | Python Core | `/cortex`        | BFT Orchestration & Cognitive Engines | Rust Core   | `/strike-rs`     | Systems-level Transduction            | Frontend    | `/babylon-60`    | TypeScript/Vite IDE Interface         | Desktop     | `/src-tauri`     | Rust/Tauri Integration                | Daemon      | `/cmd`           | Go Portal Daemon                      | Compute     | `/fsharp_kernel` | F# Algebraic Computations             | Infra       | `/infra`         | Terraform State                       | QA          | `/tests`         | Validation Suite                      |
 
 ## LEGAL
 
